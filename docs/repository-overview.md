@@ -84,12 +84,14 @@ baselineから枝分かれした改良案です。番号順が単純な親子で
 
 ### release（4件）と本体反映状況
 
-| release（由来候補） | 状態 | 本体反映 |
-| --- | --- | --- |
-| Candidate34 | `cancelled` | なし（`cancelled`。不採用・artifact削除ではない） |
-| Candidate41 | `projected / approved` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)）。直前の投影履歴・C43の巻き戻し先として維持 |
-| **Candidate43** | `projected / approved` | **反映済み**（THE-CAPTION [PR #335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335)） |
-| **Candidate71** | `projected / approved` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)） |
+正本`prompts/releases/README.md`はrelease status / approval / runtime projectionを別軸で保持する。ここでも同じ3軸に分けて示す。
+
+| release（由来候補） | release status | approval | runtime projection | 本体反映 |
+| --- | --- | --- | --- | --- |
+| Candidate34 | `cancelled` | `cancelled` | `not_authorized` | なし（不採用・artifact削除ではない） |
+| Candidate41 | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)、実変更8 path）。直前の投影履歴・C43の巻き戻し先として維持 |
+| **Candidate43** | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335)、直前投影からroot `AGENTS.md`一つ） |
+| **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
 
 現在の本体投影は、Candidate41 → Candidate43 → Candidate71の順に積み上げたreleaseで、直近の投影は`VALIDATION_CLOSURE`一labelを足した **C71** です。C41・C43は過去の投影履歴かつ巻き戻し先として保持しており、`cancelled`にはしていません。C71は後述のとおり評価上は品質gateを通過していませんが、**トークン効率を優先する別の採用判断**として2026-07-23に本体適用されました。ここが「評価（stopped）と採用（本体適用）は別レイヤー」という原則の実例です。
 
