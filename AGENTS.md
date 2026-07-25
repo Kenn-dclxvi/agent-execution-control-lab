@@ -4,9 +4,9 @@
 
 ## Repository scope
 
-- このリポジトリは、THE-CAPTION向けpromptの構築、比較、評価、release準備を扱う。
-- THE-CAPTION本体のruntime変更は通常作業範囲に含めない。
-- THE-CAPTION本体への変更、push、PR、merge、runtime有効化は、明示的に依頼された別作業とする。
+- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。現在の登録instanceは`the-caption`（THE-CAPTION）だけである。instanceの登録と境界は`evaluations/targets/README.md`を正本とする。
+- target本体のruntime変更は通常作業範囲に含めない。
+- target本体への変更、push、PR、merge、runtime有効化は、明示的に依頼された別作業とする。
 
 ## 共通のartifact境界
 

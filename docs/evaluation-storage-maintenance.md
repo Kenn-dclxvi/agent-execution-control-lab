@@ -32,7 +32,7 @@
 ```bash
 python3 scripts/evaluation_storage.py audit \
   --root /Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement \
-  --repository /Users/kenn/repos/THE-CAPTION-PROMPT
+  --repository /Users/kenn/repos/agent-execution-control-lab
 ```
 
 reportはrun別のallocated bytes、最終更新からの日数、repository参照、外部からのsymlink、`layer4/result-registration.json`、Git pack重複量を出す。標準値は次のとおり。
@@ -79,7 +79,7 @@ pathとbyte内容は維持され、置換後の各packは独立に変更でき�
 ```bash
 python3 scripts/evaluation_storage.py gc \
   --root /Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement \
-  --repository /Users/kenn/repos/THE-CAPTION-PROMPT \
+  --repository /Users/kenn/repos/agent-execution-control-lab \
   --manifest /tmp/evaluation-storage-gc-manifest.json
 ```
 
@@ -88,7 +88,7 @@ manifestには対象path、allocated bytes、file数、全contentのSHA-256を�
 ```bash
 python3 scripts/evaluation_storage.py gc \
   --root /Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement \
-  --repository /Users/kenn/repos/THE-CAPTION-PROMPT \
+  --repository /Users/kenn/repos/agent-execution-control-lab \
   --manifest /tmp/evaluation-storage-gc-manifest.json \
   --apply \
   --receipt /tmp/evaluation-storage-gc-receipt.json

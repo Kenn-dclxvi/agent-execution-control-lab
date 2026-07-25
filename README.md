@@ -1,8 +1,10 @@
-# THE-CAPTION-PROMPT
+# agent-execution-control-lab
 
-THE-CAPTION向けプロンプトを設計、比較、評価し、反映可能な形へまとめるための専用リポジトリです。
+AIエージェントの実行制御が成果品質・token・所要時間・実行経路へ与える影響を、再現可能に測る研究基盤です。
 
-より広くは、AIエージェントの実行制御が成果品質・token・所要時間・実行経路へ与える影響を、再現可能に測る研究基盤として位置づけます。
+計測は評価対象repository（target）ごとのinstanceとして管理します。現在の登録instanceはTHE-CAPTION（`the-caption`）で、そのプロンプトを設計、比較、評価し、反映可能な形へまとめます。instance台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
+
+このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から改名しました。schema名prefix `the-caption-prompt.*`と既存bundle manifestの`construction_repository`は、保存済みresultへbindしたimmutableなidentityのため旧名のまま固定します（[`docs/repository-overview.md`](docs/repository-overview.md)）。
 
 ## 目的
 
