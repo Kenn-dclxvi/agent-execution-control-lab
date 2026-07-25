@@ -188,7 +188,7 @@ C41のTaskSpec前段を補う第1段階として、リポジトリから補え�
 | prompt set | 直接source | 追加または変更した制御境界 | 主な保存evidence |
 | --- | --- | --- | --- |
 | Candidate42 | Candidate41 | required outcome、permission、constraintが未固定の間はwrite、test、dependency変更を開始しない`spec_ready`境界を追加 | A01は5 / 5が未固定値を推測してscore `0`。A02は成果を満たしたが旧v9の非公開command要件により5 / 5 score `3`。試験後に停止 |
-| Candidate43 | Candidate42 | 変更後の値を直接要求する適用repository規則だけを成果値確定の根拠として認め、それ以外の未固定値は編集・試験前に確認 | v10 A01 / A02は10 / 10 score `4`。標準14項目は70 / 70 score `4`。B18完了後に`approved / projected` |
+| Candidate43 | Candidate42 | 変更後の値を直接要求する適用repository規則だけを成果値確定の根拠として認め、それ以外の未固定値は編集・試験前に確認 | v10 A01 / A02は10 / 10 score `4`。標準14項目は70 / 70 score `4`。B18完了後にrelease status `projected`・approval `approved`・runtime projection `projected` |
 
 C42は`spec_ready`を追加したが、A01の5 runすべてで「現在値が`daily`なら変更後は別選択肢の`strict`」と推測して編集と試験へ進んだ。開始可否だけを定めても、値を確定するevidenceの適格性を限定しなければ誤った開始を防げないことを確認し、追加試験へ進めず停止した。A02のscore `3`は、実行役へ提示していない`bash scripts/dev/main_verify.sh`を旧v9 ratingだけが必須にした評価境界の問題である。保存済みresultは変更せず、v10の診断replayではA02を5 / 5 score `4`、A01を5 / 5 score `0`として分離した。
 
