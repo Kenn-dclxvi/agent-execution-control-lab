@@ -60,7 +60,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 
 ## ドキュメント
 
-主要文書は次のとおり。`docs/`配下の全文書は[`docs/README.md`](docs/README.md)で役割別（正本、現在の研究状態、完了済み研究記録、historical）に索引化しており、未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)にまとめる。
+主要文書は次のとおり。`docs/`配下の研究文書は[`docs/README.md`](docs/README.md)で役割別（正本、現在の研究状態、完了済み研究記録、historical）に索引化しており、未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)にまとめる。領域固有の作業規則は各`AGENTS.md`を正本とする。
 
 | ドキュメント | 内容 |
 | --- | --- |
