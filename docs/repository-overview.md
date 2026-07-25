@@ -34,8 +34,8 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 | `evaluations/sets/` | caseを束ねた評価集合（例: `the-caption-standard14-r1`）。 |
 | `evaluations/fixtures/` | caseが使う擬似リポジトリ状態。 |
 | `evaluations/profiles/` | model・環境・反復条件・比較条件を固定したprofile。 |
-| `evaluations/rating-contracts/` | 採点条件（rating contract）をrevision別に保存。14 revision。 |
-| `evaluations/results/` | 公開済みの評価結果（append-only）。約105件の記録。 |
+| `evaluations/rating-contracts/` | 採点条件（rating contract）をrevision別に保存。13 revision（v1〜v13）。 |
+| `evaluations/results/` | 公開済みの評価結果（append-only）。runを重ねるごとに増えるため、現況は同ディレクトリを参照（2026-07-25時点で136件）。 |
 | `layer2/` | token内訳やsession情報など、KPIへ入れない補助データの保存先。 |
 | `docs/` | リポジトリ契約、設計判断、反映手順。 |
 | `scripts/` | 評価ループや証拠収集のスクリプト。 |
