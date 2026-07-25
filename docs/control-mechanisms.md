@@ -40,7 +40,7 @@
 - **rating v13による現在の解釈**: このうちA02の3件だけが「実行役へ提示していない特定コマンドを採点側が必須化した要求と採点のずれ」として本物の品質低下と区別されます。A01の1件はv13でも品質上の問題として残ります。
 - **Candidate71の採用状態**: `stopped`は評価状態であり、これとは別の採用判断で2026-07-23に`approved / projected`となりました（評価と採用は別レイヤー）。
 
-停止理由と採用状態の正本は[`candidate-history.md`](candidate-history.md)、rating v13契約は[`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)、A02採点の整理は[`a02-rating-divergence.md`](a02-rating-divergence.md)を参照。
+正本はlifecycle軸ごとに分かれる。評価状態と停止理由は各candidateの独立したevaluation / diagnostic result（系譜と観測の整理は[`candidate-history.md`](candidate-history.md)、一覧と導線は[`prompts/candidates/README.md`](../prompts/candidates/README.md)）、release status・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)と各release READMEを正本とする。rating v13契約は[`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)、A02採点の整理は[`a02-rating-divergence.md`](a02-rating-divergence.md)を参照。
 
 **4. read経路を事前に確定し、一括化・最短化する**
 

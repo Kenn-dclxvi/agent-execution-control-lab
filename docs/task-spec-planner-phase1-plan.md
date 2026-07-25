@@ -1,7 +1,7 @@
 # TaskSpec確認 第1段階の実施記録
 
 > [!NOTE]
-> **完了済みの実施記録である**（file名は`...-phase1-plan.md`だが、現在進行中の作業計画ではない。既存リンクを保つため名称は変更していない）。第1段階の実装と対象試験は完了し、由来するCandidate43はその後の標準14項目・18回継続試験を経てrelease `approved / projected`、THE-CAPTION本体へ投影済みである（正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release README）。以降の記述は実施当時のものとして保持する。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。
+> **完了済みの実施記録である**（file名は`...-phase1-plan.md`だが、現在進行中の作業計画ではない。既存リンクを保つため名称は変更していない）。第1段階の実装と対象試験は完了し、由来するCandidate43はその後の標準14項目・18回継続試験を経てreleaseへ進んだ。Candidate43 releaseの状態は3軸で別に保持されており、release status `projected`、approval `approved`、runtime projection `projected`である（正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と[当該release README](../prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)）。release作成だけでは承認や本体反映を意味しない。以降の記述は実施当時のものとして保持する。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。
 
 ## 結論
 
