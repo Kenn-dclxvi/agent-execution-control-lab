@@ -1,5 +1,19 @@
 # click prompt bundles
 
-target instance `click`のprompt bundle（baseline / candidate / release）を置く。**未作成である。**
+target instance `click`のprompt bundleを置く。`baselines/`が比較元、`candidates/`が構築中の候補である。
 
-制御prompt本文（`SPEC`〜`RECOVERY`の13 label）はinstance間で出発点として流用できるが、bundleのtarget mapはtarget側directory構造に依存するためinstance固有artifactとして扱う。
+制御prompt本文（`SPEC`〜`RECOVERY`の13 label）はinstance間で出発点として流用できるが、bundleのtarget mapはtarget側directory構造に依存するためinstance固有artifactとして扱う。`pallets/click`には`AGENTS.md`階層、project context index、role promptがいずれも存在しないため、bundleはroot `AGENTS.md`の1 targetで閉じる。
+
+## baselines
+
+| prompt identity | target数 | bundle SHA-256 | 条件 |
+| --- | ---: | --- | --- |
+| [`click-00e592c-control-free-r1`](baselines/click-00e592c-control-free-r1/manifest.json) | 1 | `7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9` | 制御prompt不在。root `AGENTS.md`を空fileへ固定する |
+
+control-free条件の固定方法は`the-caption`側の[`control-free-generic`](../../../../prompts/candidates/the-caption-3ce91a4-control-free-generic-r1/manifest.json)に合わせた。あちらは19 targetのうちAGENTS.md 5件を空fileへ置換してrepository情報文書を残すが、clickには対応する情報文書が存在しないため1 targetのみとなる。
+
+`overlay_bundle`でclickのworkspaceへ適用できることを実測で確認している（適用前は`AGENTS.md`不在、適用後は0 byteのregular file）。
+
+## candidates
+
+未作成である。candidateは一つのpredicateまたは一つの変更軸だけを扱い、作成前gate 9項目（[`prompts/AGENTS.md`](../../../../prompts/AGENTS.md)）を通してからbundleを作る。
