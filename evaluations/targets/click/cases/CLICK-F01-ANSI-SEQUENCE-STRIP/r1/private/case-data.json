@@ -22,8 +22,8 @@
   },
   "grader": {
     "commands": [
-      ".venv/bin/python -m pytest tests/test_compat.py tests/test_utils/test_style.py -q",
-      ".venv/bin/python -m pytest -q"
+      "PYTHONPATH=src .venv/bin/python -m pytest tests/test_compat.py tests/test_utils/test_style.py -q",
+      "PYTHONPATH=src .venv/bin/python -m pytest -q"
     ],
     "contract_revision": "grader-contract-r1",
     "criteria": [
@@ -52,6 +52,7 @@
     ],
     "cwd_contract": "全required commandはrepository rootをcwdとして実行する。cwd外実行ではtests/test_utils/test__expand_args.py::test_expand_argsがseedと無関係に失敗する",
     "mode": "repository_state_terminal_and_command_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeする。共有venvはclickをtarget commitから通常installしてimportlib.metadataを供給し、PYTHONPATH=srcでworkspace側のsrcを実装として優先させる。PYTHONPATHを付けない場合はtests/test_deprecations.pyがPackageNotFoundErrorでcollection errorになる",
     "status": "designed_not_implemented",
     "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient; pre-existing risk outside allowed paths does not block completion"
   },
@@ -97,8 +98,10 @@
       "fixture": "materialized_twice_identical",
       "fixture_head_commit": "ed2d1f785a33e5bb55a5da058505ff8a11e8d875",
       "fixture_head_tree": "0d09da148dcdbf9f7302d44d94ea1f0c823b54ac",
+      "gate_contract_revision": "PYTHONPATH=src required for workspace src resolution",
+      "runtime_identity_sha256": "e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37",
       "seed_patch_raw_sha256": "936011b15e6e26277581302507a7bc724c7f868043d127e1cf89c8d8c81f4660",
-      "trial_prompt_input_raw_sha256": "12eadfb7754d9b1b1ecd1a60d962786977cdaee1d822fe7a2bbd6b8ebb428f2f"
+      "trial_prompt_input_raw_sha256": "b70b4df8665da9a9c93145b5f17794c2d371ebc195e4533ba399b2829c093f1e"
     },
     "status": "fixture_qualified_prompt_not_evaluated"
   },
