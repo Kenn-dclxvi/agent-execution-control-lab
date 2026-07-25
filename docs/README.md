@@ -53,6 +53,7 @@
 | [`desktop-evaluation-slot.md`](desktop-evaluation-slot.md) | desktop評価slotの前提条件 |
 | [`shared-python-runtime.md`](shared-python-runtime.md) | 共有Python runtime |
 | [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceのspec |
+| [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md) | Layer 2 executorをClaude Code CLIへ置き換える試験方法の設計検討（未実装。未確定事項を含む） |
 
 ## 3. 完了済み研究記録
 
