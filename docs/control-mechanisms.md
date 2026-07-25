@@ -38,9 +38,9 @@
 - **Candidate69の停止（当時のrating v10）**: F10 monthlyのfinding location mismatchが1件残り、score分布`4 / 3 = 69 / 1`で全件score 4のgateに届きませんでした。A02の検証欠落が理由ではありません。
 - **Candidate71のv12評価（B18）**: 公式score分布`4 / 3 / 0 = 1,255 / 4 / 1`。v12採点で欠落扱いされたのは、A02の`git diff --check`未実行3件と、A01で未固定modeを確認せず実装・試験へ進んだ1件です。
 - **rating v13による現在の解釈**: このうちA02の3件だけが「実行役へ提示していない特定コマンドを採点側が必須化した要求と採点のずれ」として本物の品質低下と区別されます。A01の1件はv13でも品質上の問題として残ります。
-- **Candidate71の採用状態**: `stopped`は評価状態であり、これとは別の採用判断で2026-07-23に`approved / projected`となりました（評価と採用は別レイヤー）。
+- **Candidate71の採用状態**: `stopped`は評価状態であり、これとは別の採用判断で2026-07-23にrelease status `projected`・approval `approved`・runtime projection `projected`となりました（評価と採用は別レイヤー）。
 
-正本はlifecycle軸ごとに分かれる。評価状態と停止理由は各candidateの独立したevaluation / diagnostic result（系譜と観測の整理は[`candidate-history.md`](candidate-history.md)、一覧と導線は[`prompts/candidates/README.md`](../prompts/candidates/README.md)）、release status・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)と各release READMEを正本とする。rating v13契約は[`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)、A02採点の整理は[`a02-rating-divergence.md`](a02-rating-divergence.md)を参照。
+正本はlifecycle軸ごとに分かれる。評価または診断を実施したcandidateの評価状態と停止理由は各candidateの独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列（同indexは一覧と導線でもあり、系譜と観測の整理は[`candidate-history.md`](candidate-history.md)）、release status・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)と各release READMEを正本とする。rating v13契約は[`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)、A02採点の整理は[`a02-rating-divergence.md`](a02-rating-divergence.md)を参照。
 
 **4. read経路を事前に確定し、一括化・最短化する**
 
