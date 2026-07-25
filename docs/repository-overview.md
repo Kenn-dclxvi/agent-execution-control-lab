@@ -82,7 +82,18 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
 
-bundle 75件のうち、candidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載されているのは69件です。残る6件（C45〜C48の`diagnostic_only`枝、C72、C73）は表に未掲載ですが、bundleと`manifest.json`は実在します。これらのidentityは各`manifest.json`、評価状態は各評価resultを正本とします（[`docs/candidate-history.md`](candidate-history.md)に系譜と観測を記載）。
+bundle 75件のうち、candidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載されているのは69件です。残る6件は表に未掲載ですが、bundleと`manifest.json`は実在します。identityの正本は各`manifest.json`で、評価状態の正本は群ごとに異なります。系譜と観測は[`docs/candidate-history.md`](candidate-history.md)に記載します。
+
+| 未掲載bundle | identity正本 | 評価状態と正本 |
+| --- | --- | --- |
+| C45 | [manifest](../prompts/candidates/the-caption-3ce91a4-judgment-authority-boundary-r1/manifest.json) | `diagnostic_observed_… / draft`（manifestと[設計記録](candidate45-judgment-authority-boundary-design.md)。blind quality rating未実施で`evaluations/results/`に登録resultなし） |
+| C46 | [manifest](../prompts/candidates/the-caption-3ce91a4-resolved-premise-input-boundary-r1/manifest.json) | 同上（[設計記録](candidate46-resolved-premise-input-boundary-design.md)） |
+| C47 | [manifest](../prompts/candidates/the-caption-3ce91a4-applicability-domain-boundary-r1/manifest.json) | 同上（[設計記録](candidate47-applicability-domain-boundary-design.md)） |
+| C48 | [manifest](../prompts/candidates/the-caption-3ce91a4-premise-dependency-boundary-r1/manifest.json) | 同上（[設計記録](candidate48-premise-dependency-boundary-design.md)） |
+| C72 | [manifest](../prompts/candidates/the-caption-3ce91a4-closed-validation-state-r1/manifest.json) | `targeted_evaluated / stopped`（[targeted result](../evaluations/results/candidate71-candidate72-closed-validation-state-v12-targeted4-n5_2026-07-23.md)） |
+| C73 | [manifest](../prompts/candidates/the-caption-3ce91a4-terminal-closure-preserving-compression-r1/manifest.json) | `targeted_evaluated / stopped`（[targeted result](../evaluations/results/candidate71-candidate73-terminal-closure-preserving-compression-v12-targeted4-n5_2026-07-23.md)） |
+
+C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only`枝で、標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で評価済みですが、いずれも停止しています。
 
 ### release（4件）と本体反映状況
 
