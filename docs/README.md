@@ -32,8 +32,9 @@
 | 文書 | 役割 |
 |---|---|
 | [`repository-overview.md`](repository-overview.md) | 初見向けの全体像（入口） |
-| [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向 |
-| [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜・評価状態の正本は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
+| [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向（恒久的な方針のみ） |
+| [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
+| [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜と現在状態の一覧は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
 
 ### 2b. 横断知見・現行frontier
 
@@ -58,9 +59,9 @@
 
 各Candidateの制御軸を記録した成果artifact。当時のresult・scoreは遡及変更しない。
 
-正本はlifecycle軸ごとに分かれる。**系譜とcandidate評価状態の正本は[`prompts/candidates/README.md`](../prompts/candidates/README.md)**、**release・approval・runtime projectionの正本は[`prompts/releases/README.md`](../prompts/releases/README.md)**とする。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
+正本はlifecycle軸ごとに分かれる。**identityは各bundleの`manifest.json`**、**評価状態は評価・診断を実施済みなら独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列**、**release・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)**を正本とする。系譜と現在状態の一覧はcandidate indexにある。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
 
-> **本体投影と評価状態は別軸**: 本体へ投影済みなのはCandidate43とCandidate71で、いずれもroot `AGENTS.md`だけを変更対象とする（release `approved / projected`、正本は[`prompts/releases/README.md`](../prompts/releases/README.md)）。ただしこれは採用判断側の状態であり、candidate評価状態とは一致しない。特にCandidate71のcandidate評価状態は`standard14_b18_evaluated / stopped`（[`candidate71-validation-closure-design.md`](candidate71-validation-closure-design.md)）であり、効率削減を根拠とする別の採用判断でreleaseがprojectedになった。評価停止は取り消されていない。
+> **本体投影と評価状態は別軸**: 本体へ投影済みなのはCandidate41・Candidate43・Candidate71で、この順に積み上げた投影の直近はCandidate71である（release `approved / projected`、実変更範囲はCandidate41が8 path、Candidate43とCandidate71は各々直前投影からroot `AGENTS.md`一つ。正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release README）。ただしこれは採用判断側の状態であり、candidate評価状態とは一致しない。特にCandidate71のcandidate評価状態は`standard14_b18_evaluated / stopped`（[`candidate71-validation-closure-design.md`](candidate71-validation-closure-design.md)）であり、効率削減を根拠とする別の採用判断でreleaseがprojectedになった。評価停止は取り消されていない。
 
 | Candidate | 文書 | 制御軸 |
 |---|---|---|

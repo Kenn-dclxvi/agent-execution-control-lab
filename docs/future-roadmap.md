@@ -2,6 +2,8 @@
 
 このリポジトリは、プロンプト文面の良し悪しを感覚的に決める場所ではなく、AIエージェントの実行制御が成果品質、token、最終結果までの時間、実行経路へ与える影響を再現可能に測る実験基盤として使う。改善対象は文章量そのものではなく、worker起動、context継承、model再入、read、validation、停止、result bindingなどの実行上の判断点である。
 
+この文書は恒久的な方針を扱う。現在未完了の個別項目（label監査の再測定、`P3`削除candidate、A01 variation、未解決riskなど）は[`research-backlog.md`](research-backlog.md)へ集約する。
+
 ### 基本的な改善サイクル
 
 1. 現行のtarget repository ref、prompt identity、model、Agent環境、TaskSpec、permission、fixture、evaluation set、rating contract、反復条件を固定する。
@@ -18,7 +20,7 @@
 
 新しいcaseまたはvariationを追加する根拠は、既存setでは識別できない失敗が保存traceで見つかった場合、または新しいcontrol pathを既存caseで観測できない場合に限定する。caseは単に難しくするのではなく、競合する失敗仮説を分離できるように設計する。
 
-A01では、現行の2択caseを回帰基準として維持したまま、3択以上の未固定modeを持つvariationを診断用に追加できる。2択で非現行値を選び、3択では確認して停止するなら補集合選択の可能性が高い。3択でも特定値を選ぶなら、mode名の意味、候補順序、現在値、test期待値などをauthorityへ変換している可能性を調べる。現在値と候補順序を回転し、曖昧なら停止するcaseとrepository authorityから一意に解決できるcaseを対にして、過剰停止と未指定値補完の両方を観測する。
+個別caseのvariation設計は、この方針に沿った未完了項目として[`research-backlog.md`](research-backlog.md)へ置く（現在はA01の3択variationが該当する）。
 
 低頻度の誤経路は少数反復で不在を証明しない。targeted試験でfixtureと採点を確認した後、必要な反復数と継続Batchを固定し、発生条件、選択値、理由分類、影響範囲を保存する。
 
