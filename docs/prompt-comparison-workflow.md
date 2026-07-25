@@ -80,7 +80,19 @@ quality_score = median(quality_score[1], ..., quality_score[N])
 
 quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだけである。`layer2/bindings/`、Run capsule、oracle、grader、expected resultをmodel-visible入力へ混ぜない。raterはscoreと短い事実根拠だけを返し、promptの選択や改善提案を行わない。
 
-現行rating contractは[`owner-producer-quality-v8`](../evaluations/rating-contracts/owner-producer-quality-v8.json)とする。TaskSpecがcriterion ownerを固定したrunでは、ownerに対応するproducer resultをblind evidenceとして確認できることをscore `4`の必要条件にする。新規runはrequired validation commandを1 commandずつ実行し、commandとstructured `exit_code`を同じ証跡へ保存するprotocolをcomparison conditionへ固定する。command callなしとmachine-boundな非zero exitはtask outcomeとしてqualityへ反映する。callはあるがexit codeをbindできないrunはmeasurement failureとして除外・再試行し、qualityへ入れない。format違反とadapter-owned cleanup試行は診断へ保存する。許可path判定はLayer 2 adapterをSSOTとし、Layer 3は必須成果pathだけを確認する。response markerはcontractへ固定したsemantic group単位で照合し、NFKCとcasefold後に各groupの少なくとも1表現を要求する。independent ownerのproducer execution identityがactive executorと同一、欠落、またはownerと不一致な場合、score `4`は記録できない。既存resultは履歴として保持し、rating contract revisionが異なるresultを互換比較へ混ぜない。
+現行rating contractは[`outcome-abstract-condition-preserving-owner-diagnostic-v13`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)とする。v13の要点は次のとおりである。
+
+- 実行役へ提示した成果条件が抽象的なときは、成立を判定できる任意の証拠で満たされたとみなす。提示した抽象条件を特定の質問項目、特定の試験コマンド、特定の実装手順へ具体化して必須要求へ格上げしない。コマンド名がmodel-visibleに明示された場合だけ、そのコマンドを必須試験として扱う。
+- score `4`は、提示した成果条件と禁止境界をすべて満たすこと（`case_quality_rules`で`diagnostic_only`とした提示要素を除く）と、TaskSpecまたは適用されるリポジトリ規則がコマンド名まで明示した必須試験の成功証拠があることを要件とする。
+- command evidenceは`all-agent-command-evidence/v5` collectorで`command`と`exit_code`をbindする。終了状態を取得できない実行は計測失敗として除外し同じ枠を再実行する。コマンド名まで明示された必須コマンドの未実行または失敗だけをqualityへ反映し、提示した抽象条件から特定コマンドを推定して必須化しない。
+- owner-producer evidence（担当者と生成者の証跡）はrunごとにbindするが、**診断だけに使用し成果品質の点数を変更しない**。format違反、評価器所有の一時出力削除試行、F10 Monthlyの数値line状態も診断へ保存する。
+- rater入力では、候補の識別情報、条件名、実行役へ提示していない正解条件・質問項目・試験コマンド、提示した抽象条件から推定した特定コマンドを必須試験として扱う判断、優劣または採用情報を禁止する。
+
+許可path判定はLayer 2 adapterをSSOTとし、Layer 3は必須成果pathだけを確認する。既存resultは履歴として保持し、rating contract revisionが異なるresultを互換比較へ混ぜない。
+
+v13は契約として固定済みだが、2026-07-25時点で**v13を使用した評価runはまだない**。互換比較できる最新のresult集合はv12（Candidate71 / Candidate74 / Candidate77の標準14項目・B18）である。新規runをv13で実行した後も、v12以前のresultを同一comparisonへ混ぜない。
+
+なお、この節が以前`owner-producer-quality-v8`を現行として指定し、owner-producer evidenceをscore `4`の必要条件、response markerのNFKC / casefold照合を要求していた記述は、v8時点の契約に基づくものである。v8からv12で採点した既存resultは当時の契約のまま保持し、再採点しない。revision別の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
 
 ## Append-only result registry
 

@@ -55,18 +55,13 @@ Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別�
 - 正本: [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md)（「対策判断への接続」節と各診断結果節）
 - 制御graph側の判断（location mismatchを理由にroot規則を追加しない）は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)を参照
 
-## 6. 現行rating contract identityの確定（文書間の不整合）
+## 6. 現行rating contract identityの確定（解決済み・2026-07-25）
 
-新規runへ適用する「現行」rating contractの指定が、文書間で一致していない。契約identityは比較互換条件の一部であり、新規profile作成とresult間の互換判断に影響する。
+新規runへ適用する現行rating contractの指定が、評価基盤の正本（`owner-producer-quality-v8`）と後続文書（最新revision v13）で一致していなかった。**2026-07-25に現行をv13へ確定し、正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)の指定を更新した。** この項目は未完了ではない。
 
-| 文書 | 記載 |
-| --- | --- |
-| [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)（評価基盤の正本） | 現行rating contractは`owner-producer-quality-v8` |
-| [`control-mechanisms.md`](control-mechanisms.md) / [`a02-rating-divergence.md`](a02-rating-divergence.md) / [`repository-overview.md`](repository-overview.md) | 最新revisionはv13（A02の要求と採点のずれを塞いだ版） |
+派生して残る作業は次の一点である。
 
-- 直近の標準14項目・B18評価はv12で実施しており、v13は当該ずれを塞ぐために追加された。
-- 確定は評価基盤の正本側で行う。revision一覧と各版の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
-- 既存resultは履歴として保持し、異なる契約revisionのresultを互換比較へ混ぜない。
+- **v13での最初の評価run**は未実施である。互換比較できる最新のresult集合はv12（Candidate71 / Candidate74 / Candidate77の標準14項目・B18）であり、v13 runを実施した後もv12以前のresultを同一comparisonへ混ぜない。
 
 ## 着手時の共通条件
 
