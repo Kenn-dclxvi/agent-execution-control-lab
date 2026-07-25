@@ -78,9 +78,11 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 
 現行プロンプトの固定スナップショット。`the-caption-3ce91a4-current-r1` と `-r2`。すべての候補はここから派生します。
 
-### candidate（C1〜C77、bundle 22件保存）
+### candidate（C1〜C77、bundle 75件保存）
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
+
+bundle 75件のうち、candidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載されているのは69件です。残る6件（C45〜C48の`diagnostic_only`枝、C72、C73）は表に未掲載ですが、bundleと`manifest.json`は実在します。これらのidentityは各`manifest.json`、評価状態は各評価resultを正本とします（[`docs/candidate-history.md`](candidate-history.md)に系譜と観測を記載）。
 
 ### release（4件）と本体反映状況
 
