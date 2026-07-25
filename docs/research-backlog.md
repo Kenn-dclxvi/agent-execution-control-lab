@@ -145,7 +145,7 @@ repository非依存な層とtarget固有な層は次のとおりである。
 
 ### 段階計画
 
-1. **Phase 0**: gate 1〜4で候補を2〜3件へ絞り、実測値を記録する。
+1. **Phase 0**（2026-07-26に実施済み）: gate 1〜4で候補を絞り、`pallets/click`をPhase 1候補とした。実測値と判定の正本は[`public-target-selection-phase0.md`](public-target-selection-phase0.md)とする。gate 9（言語分布）はPython単一のため不足が残る。
 2. **Phase 1**: 各候補で最小1 case（F01型: 単一fileへseed patch + focused gate）をfixture qualificationする。
 3. **Phase 2**: bit-identical bundleで`N=10`のnull calibrationを行う（[`TC-F01 r2 N=10`](../evaluations/results/TC-F01-r2_identical-bundle-n10_2026-07-15.md)と同じ手順）。flakyとtoken分散から感度の下限を確認する。
 4. **Phase 3**: nullが通った1 repositoryだけで、F02型（cross-layer）とF10-R型（非破壊review）へ拡張する。制御差が観測されるのはこの2型である。

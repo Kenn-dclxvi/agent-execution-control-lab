@@ -35,6 +35,7 @@
 | [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向（恒久的な方針のみ） |
 | [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
 | [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜と現在状態の一覧は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
+| [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開target選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
 
 ### 2b. 横断知見・現行frontier
 
