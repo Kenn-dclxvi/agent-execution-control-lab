@@ -207,7 +207,7 @@ def materialize_route(
         manifest["bundle_sha256"] = bundle_sha256(entries)
         manifest["provenance"] = {
             "construction_repository": (
-                "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git"
+                "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git"
             ),
             "construction_state": "uncommitted_working_tree",
             "design_inputs": [

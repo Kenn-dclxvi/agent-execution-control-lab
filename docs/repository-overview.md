@@ -1,15 +1,29 @@
 # リポジトリ概要（初見の人向け）
 
-このドキュメントは、THE-CAPTION-PROMPTリポジトリを初めて見る人が、全体像・作成済みプロンプト・評価の仕組み・採点条件の考え方を一通り把握できるようにまとめたものです。詳細な正本は各節末尾のリンク先を参照してください。個別の研究事例は別文書へ分離しています（例: A02の採点ずれは[`a02-rating-divergence.md`](a02-rating-divergence.md)）。
+このドキュメントは、`agent-execution-control-lab`リポジトリを初めて見る人が、全体像・作成済みプロンプト・評価の仕組み・採点条件の考え方を一通り把握できるようにまとめたものです。詳細な正本は各節末尾のリンク先を参照してください。個別の研究事例は別文書へ分離しています（例: A02の採点ずれは[`a02-rating-divergence.md`](a02-rating-divergence.md)）。
 
 ## 1. このリポジトリは何をする場所か
 
-THE-CAPTION（別リポジトリの本体システム）に与える**プロンプト（AIへの指示書）を設計・比較・評価し、反映可能な形へまとめる**ための専用リポジトリです。
+AIエージェントの実行制御を与える**プロンプト（AIへの指示書）を設計・比較・評価し、反映可能な形へまとめる**ための計測基盤です。計測は評価対象repository（target）ごとのinstanceとして管理し、現在の登録instanceはTHE-CAPTION（`the-caption`、別リポジトリの本体システム）だけです。instance台帳と境界は[`evaluations/targets/README.md`](../evaluations/targets/README.md)を正本とします。
 
 - **やること**: 現行プロンプトの固定、候補プロンプトの構築、同一条件での評価、評価済み候補のrelease化。
-- **やらないこと（スコープ外）**: THE-CAPTION本体のruntime（実行時の挙動）そのものの変更。本体への反映・PR・マージ・有効化は、**明示的に依頼されたときだけの別作業**として扱います。
+- **やらないこと（スコープ外）**: target本体のruntime（実行時の挙動）そのものの変更。本体への反映・PR・マージ・有効化は、**明示的に依頼されたときだけの別作業**として扱います。
 
 重要な区別として、このリポジトリは **「artifactが存在すること」と「評価済み・採用済み・本体反映済みであること」を混同しません**。評価はあくまで観測で、採用や本体適用は人が別途下す判断です。
+
+### 1.1 リポジトリ名と識別子の名前空間
+
+このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から`agent-execution-control-lab`へ改名しました。計測対象を単一targetから複数instanceへ広げる方針に合わせた変更で、評価基盤の境界、KPI、compatibility条件は変えていません。
+
+次の識別子は保存済みresultへbindしたimmutableなidentityであり、**改名しても旧名のまま固定します**。
+
+| 識別子 | 状態 | 理由 |
+| --- | --- | --- |
+| schema名prefix `the-caption-prompt.*` | 旧名で固定 | 20種類以上のschemaで使用し、保存済みresultとprofileへbind済み。[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)のImmutable historyが上書きを禁じる |
+| 既存bundle manifestの`construction_repository` | 旧名で固定 | 構築時provenanceであり、in-place変更しない。GitHubのrename redirectで解決できる |
+| prompt set identity（`the-caption-*`） | 旧名で固定 | target instance `the-caption`の名前空間であり、改名の対象ではない |
+
+新しく生成するbundleの`construction_repository`は新しいURLを記録します。過去の記述を当時のまま残す文書（historical／superseded分類）は旧pathのまま保持します。
 
 ## 2. 基本用語
 

@@ -183,7 +183,7 @@ excluded attemptはraw artifactを保持するが、採点とKPIへ入力せず�
 以下ではpathを次のように表す。
 
 ```bash
-CLI=/Users/kenn/repos/THE-CAPTION-PROMPT/scripts/evaluation_loop.py
+CLI=/Users/kenn/repos/agent-execution-control-lab/scripts/evaluation_loop.py
 CYCLE=/tmp/prompt-set-baseline-r3
 REGISTRY=/tmp/the-caption-prompt-result-registry
 ```
@@ -391,7 +391,7 @@ v1の`decide`、`decision.json`、`winner`と、v2の固定A / B `compare`、`co
 ## 14. Self-test
 
 ```bash
-cd /Users/kenn/repos/THE-CAPTION-PROMPT
+cd /Users/kenn/repos/agent-execution-control-lab
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v \
   tests/test_evaluation_loop.py \
   tests/test_evaluation_storage.py \

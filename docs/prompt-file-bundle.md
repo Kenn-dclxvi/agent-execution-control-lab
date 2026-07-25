@@ -38,7 +38,7 @@ oracle、grader、expected result、quality score、保存resultとKPI比較view
 baseline、candidate、releaseは既存の別pathを維持する。評価へ投入するbaselineとcandidateは、どちらも解決済みのfull bundleとして保存する。
 
 ```text
-THE-CAPTION-PROMPT/
+agent-execution-control-lab/
 └── prompts/
     ├── baselines/
     │   └── <baseline-id>/
