@@ -4,6 +4,8 @@
 
 このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
+Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
+
 Candidate71の実行制御を型付き状態機械へ全面改訂したCandidate74は、[`第12版採点の標準14項目各N=5`](candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だった。互換なCandidate71 Batch 1比ではall-agent token中央値`+58.88%`、elapsed中央値`+9.28%`だった。構造testと今回の品質維持を状態機械全体のruntime採用証明へ読み替えず、Candidate74は`standard14_evaluated`、採用・release・本体反映は未実施とする。
 
 Candidate74の独立validationを同一waveへ戻したCandidate75と、最終target versionの観測だけを後続waveへ分離したCandidate76は、[`F06 targeted N=5とCandidate76標準14項目N=5`](candidate74-candidate75-candidate76-validation-wave-v12_2026-07-23.md)を登録した。Candidate75はfocused / full同一waveを5 / 5へ回復したがfinal-state依存を4 / 5で失い停止した。Candidate76はtargeted behavior gateを通過し、Candidate74比でtoken中央値`-13.82%`、elapsed中央値`-3.63%`だったが、標準14項目はA02の`git diff --check`成功証拠欠落によりscore `4 = 69 / 3 = 1`となった。Candidate76も停止し、採用・release・本体反映へ進めていない。

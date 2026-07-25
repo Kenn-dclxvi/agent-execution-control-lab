@@ -104,7 +104,7 @@ caseは、実行役へ提示する情報（model-visible）と、採点用の正
 | release bundle | 4 |
 | 評価case | 20 |
 | 評価集合 | 7 |
-| evaluation profile | 142 |
+| evaluation profile | 147 |
 | rating contract revision | 13（v1〜v13） |
 | 公開評価result（append-only） | 137 |
 | 評価基盤のtest | 60ファイル |
@@ -332,7 +332,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 
 ### 4.4 一般的な含意
 
-この事例は本論文の外部比較にも及ぶ。ベンダ公式指針が報告する「eval scoreが10〜15%改善」のような主張は、その採点契約がmodel-visible境界を守っているかに依存する。抽象的な成果条件を採点側で特定手段へ具体化すれば、手段を変えた条件は実体のない減点を受ける。**効率化の測定では、効率化された側が「省略した」ように見えやすいため、この偏りは方向性を持つ。** 現行契約はv13だが、v13を使用した評価runはまだなく、互換比較できる最新のresult集合はv12である。
+この事例は本論文の外部比較にも及ぶ。ベンダ公式指針が報告する「eval scoreが10〜15%改善」のような主張は、その採点契約がmodel-visible境界を守っているかに依存する。抽象的な成果条件を採点側で特定手段へ具体化すれば、手段を変えた条件は実体のない減点を受ける。**効率化の測定では、効率化された側が「省略した」ように見えやすいため、この偏りは方向性を持つ。** 2026-07-26に6条件・計420件の最初のv13互換resultを登録した。v12以前のresultは同一comparisonへ混ぜない。
 
 ---
 
@@ -446,7 +446,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 1. **単一model / 単一runtime。** modelを明示する122件のresultすべてが`gpt-5.6-sol` / `high`であり、他のmodel名を明示したresultは存在しない。他model、他reasoning設定、他CLIでの再現は未確認。
 2. **単一target repository。** THE-CAPTION commit `3ce91a4`のみ。他のコードベース、他の言語、他のtask分布への一般化は行っていない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
-4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13だが、**v13での評価runは未実施**であり、互換比較できる最新のresult集合はv12である。
+4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultを登録したが、v12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。
 6. **効かなかった制御の方が多い。** 効率で明確に効いたのは4メカニズムのうち実質2系統（worker抑制、再入削減）であり、うち再入削減系（C69・C71）は品質gateを通過していない。context削減系（C33）は品質を`-6.250`割った。read経路系（C50）はcase横断で不安定だった。
 7. **未評価・診断限定のartifactが残る。** candidate bundle 75件のうち`not_evaluated`が2件。C45〜C48はblind quality ratingを持たない`diagnostic_only`枝であり、標準14項目やB18と互換な品質比較ではない。bundleの存在は評価済みを意味しない。
@@ -496,6 +496,7 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 
 - 主対照実験: [`Baseline / ControlFreeRepository / C35 / C41 expanded12 N=5`](../evaluations/results/baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md)
 - 最大規模の継続試験: [`C69 / C71 validation closure v12 標準14項目 B18`](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)
+- 現行契約の互換比較: [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 v13 標準14項目 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)
 - 再入境界: [`C43 / C69 model reentry decision boundary v10 標準14項目 N=5`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)
 - 成果値境界: [`C43 outcome authority boundary v10 標準14項目 B18`](../evaluations/results/candidate43-outcome-authority-boundary-v10-standard14-continuous-n5-b18_2026-07-20.md)
 - all-agent token再集計: [`v3 all-agent token reaccounting`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md)

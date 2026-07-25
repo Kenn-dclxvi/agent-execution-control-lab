@@ -5,6 +5,7 @@ import unittest
 from scripts.quality_audit_policy import (
     MONTHLY_REVIEW_RATING_V11,
     MONTHLY_REVIEW_RATING_V12,
+    MONTHLY_REVIEW_RATING_V13,
     QualityAuditPolicyError,
     changed_path_failures,
     command_quality_failures,
@@ -160,6 +161,21 @@ class QualityAuditPolicyTest(unittest.TestCase):
         self.assertIn(
             "review_semantic_missing:incorrect_binding",
             monthly_review_failures(response, MONTHLY_REVIEW_RATING_V12),
+        )
+
+    def test_v13_keeps_v12_monthly_semantic_boundary(self) -> None:
+        response = (
+            "major: src/app/entrypoints/monthly_main.py:24で、"
+            "--forceがformat-test分岐へ誤接続され、"
+            "同時に--format-testの値が渡らなくなっている。"
+        )
+
+        self.assertEqual(
+            monthly_review_failures(response, MONTHLY_REVIEW_RATING_V13),
+            [],
+        )
+        self.assertIsNone(
+            monthly_review_rating([], MONTHLY_REVIEW_RATING_V13)
         )
 
 

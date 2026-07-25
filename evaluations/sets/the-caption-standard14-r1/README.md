@@ -32,8 +32,8 @@
 - 14項目のいずれかの版を変更する場合は、この評価集合を上書きせず新しい版を作る。
 - A01とA02の`trial-prompt-input.json`は第1版から変更しない。
 - F項目用のコマンド証拠指示はA01とA02へ渡さない。
-- 既存実行の採点条件は`outcome-boundary-owner-diagnostic-v10`のまま保持する。
-- 今後の実行は`outcome-semantic-evidence-normalized-owner-diagnostic-v12`を使用する。F10 Monthlyの数値lineは診断へ保存し、quality scoreには使用しない。A01の確認要求、A02の引用符付きcommand token、F10の意味的に同じ誤binding説明を正規化して採点する。
+- 既存実行の採点条件は各resultが固定したrevisionのまま保持する。
+- 今後の実行は`outcome-abstract-condition-preserving-owner-diagnostic-v13`を使用する。提示した抽象成果条件を未提示の特定コマンドへ具体化して必須化しない。F10 Monthlyの数値lineとowner-producer evidenceは診断へ保存し、quality scoreには使用しない。
 - 各候補を5回評価する場合は、14項目掛ける5回の70件を一つの結果として登録する。
 
 ## 最初の実行設定
@@ -41,6 +41,8 @@
 最初の実行設定は[`candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json`](../../profiles/candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json)である。
 
 Candidate71 B18の互換baseline / candidate実行設定は、それぞれ[`Candidate69 v12`](../../profiles/candidate69-model-reentry-decision-boundary-v12-standard14-global-m24-n5-r1.json)と[`Candidate71 v12`](../../profiles/candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json)を使用した。case、TaskSpec、permission、executor parameter、反復条件はv10 / v11 profileから変更せず、rating contractだけをv12へ更新した。[B18結果](../../results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)は両条件の1,260 / 1,260件を登録した。Candidate71に実質的な品質後退4件があったため停止した。Candidate43 / Candidate69 v11 profileは既存revisionの再現用として保持する。
+
+rating v13の最初の互換比較は、Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71の6 profileで実行した。[結果](../../results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)は各条件70 / 70件、計420 / 420件をvalid・rateableとして登録した。v12以前のresultはこのcomparisonへ混ぜず、winner、採用、release、本体反映は判断していない。
 
 この実行設定は候補43、各項目5回、同時実行上限24へ固定する。[初回結果](../../results/candidate43-outcome-authority-boundary-v10-standard14-n5_2026-07-20.md)は70件すべて有効かつ採点可能で、全件が点数`4`だった。別候補を評価する場合は候補の識別情報だけを替え、評価集合、採点条件、実行環境、権限、反復条件を維持する。
 

@@ -14,6 +14,9 @@ class QualityAuditPolicyError(Exception):
 MONTHLY_REVIEW_RATING_V10 = "outcome-boundary-owner-diagnostic-v10"
 MONTHLY_REVIEW_RATING_V11 = "outcome-semantic-location-owner-diagnostic-v11"
 MONTHLY_REVIEW_RATING_V12 = "outcome-semantic-evidence-normalized-owner-diagnostic-v12"
+MONTHLY_REVIEW_RATING_V13 = (
+    "outcome-abstract-condition-preserving-owner-diagnostic-v13"
+)
 MONTHLY_REVIEW_EXPECTED_LOCATION = "src/app/entrypoints/monthly_main.py:25"
 MONTHLY_REVIEW_LOCATION_PATTERN = re.compile(
     r"(?<![\w.-])(?P<path>(?:[\w.-]+/)*monthly_main\.py):(?P<line>\d+)"
@@ -171,27 +174,35 @@ def monthly_review_failures(
     rating_contract_id: str = MONTHLY_REVIEW_RATING_V10,
 ) -> list[str]:
     """Return versioned F10 Monthly quality failures."""
-    if rating_contract_id in {MONTHLY_REVIEW_RATING_V11, MONTHLY_REVIEW_RATING_V12}:
+    if rating_contract_id in {
+        MONTHLY_REVIEW_RATING_V11,
+        MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
+    }:
         text = _normalized(final_response)
         failures: list[str] = []
+        normalized_semantics = rating_contract_id in {
+            MONTHLY_REVIEW_RATING_V12,
+            MONTHLY_REVIEW_RATING_V13,
+        }
         semantic_markers = {
             "severity_major": "major" in text,
             "source_path": "src/app/entrypoints/monthly_main.py" in text,
             "incorrect_binding": _has_incorrect_monthly_binding(
                 text,
-                allow_semantic_paraphrase=(rating_contract_id == MONTHLY_REVIEW_RATING_V12),
+                allow_semantic_paraphrase=normalized_semantics,
             ),
             "format_test_option_impact": _has_cli_option(
                 text,
                 "-t",
                 "--format-test",
-                allow_adjacent_japanese=(rating_contract_id == MONTHLY_REVIEW_RATING_V12),
+                allow_adjacent_japanese=normalized_semantics,
             ),
             "force_option_impact": _has_cli_option(
                 text,
                 "-f",
                 "--force",
-                allow_adjacent_japanese=(rating_contract_id == MONTHLY_REVIEW_RATING_V12),
+                allow_adjacent_japanese=normalized_semantics,
             ),
         }
         for marker, present in semantic_markers.items():
@@ -220,7 +231,11 @@ def monthly_review_rating(
     review_failures = [item for item in failures if item.startswith("review_")]
     if not review_failures:
         return None
-    if rating_contract_id in {MONTHLY_REVIEW_RATING_V11, MONTHLY_REVIEW_RATING_V12}:
+    if rating_contract_id in {
+        MONTHLY_REVIEW_RATING_V11,
+        MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
+    }:
         semantic_failures = [
             item
             for item in review_failures

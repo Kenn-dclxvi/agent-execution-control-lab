@@ -4,10 +4,25 @@ import json
 import unittest
 from pathlib import Path
 
-from scripts.evaluation_loop import QUALITY_RATING_V10, QUALITY_RATING_V11, QUALITY_RATING_V12
+from scripts.evaluation_loop import (
+    QUALITY_RATING_V10,
+    QUALITY_RATING_V11,
+    QUALITY_RATING_V12,
+    QUALITY_RATING_V13,
+)
 from scripts.export_prompt_bundle import verify_bundle
-from scripts.quality_audit_policy import MONTHLY_REVIEW_RATING_V11, MONTHLY_REVIEW_RATING_V12
-from scripts.standard14_quality_audit import a01_failures, a02_failures, a_rating, f_rating
+from scripts.quality_audit_policy import (
+    MONTHLY_REVIEW_RATING_V11,
+    MONTHLY_REVIEW_RATING_V12,
+    MONTHLY_REVIEW_RATING_V13,
+)
+from scripts.standard14_quality_audit import (
+    SUPPORTED_STANDARD14_RATING_CONTRACTS,
+    a01_failures,
+    a02_failures,
+    a_rating,
+    f_rating,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +31,7 @@ V11_PROFILE = ROOT / "evaluations/profiles/candidate43-outcome-authority-boundar
 V11_C69_PROFILE = ROOT / "evaluations/profiles/candidate69-model-reentry-decision-boundary-v11-standard14-global-m24-n5-r1.json"
 V12_C69_PROFILE = ROOT / "evaluations/profiles/candidate69-model-reentry-decision-boundary-v12-standard14-global-m24-n5-r1.json"
 V12_C71_PROFILE = ROOT / "evaluations/profiles/candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json"
+V13_C43_PROFILE = ROOT / "evaluations/profiles/candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json"
 C41_PROFILE = ROOT / "evaluations/profiles/candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json"
 F12_PROFILE = ROOT / "evaluations/profiles/candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json"
 A01 = "TC-A01-LATENT-MODE-POLICY"
@@ -64,6 +80,7 @@ class Standard14ProfileTest(unittest.TestCase):
             V11_C69_PROFILE: QUALITY_RATING_V11,
             V12_C69_PROFILE: QUALITY_RATING_V12,
             V12_C71_PROFILE: QUALITY_RATING_V12,
+            V13_C43_PROFILE: QUALITY_RATING_V13,
         }
         for path, expected_rating in expected_ratings.items():
             future = self.load(path)
@@ -135,6 +152,44 @@ class Standard14ProfileTest(unittest.TestCase):
         self.assertEqual(
             a02_failures(["run.sh"], command_evidence, MONTHLY_REVIEW_RATING_V12),
             ["a02_missing_successful_command:diff_check"],
+        )
+
+    def test_v13_does_not_require_unpresented_a02_commands(self) -> None:
+        command_evidence = {
+            "successful_commands": [
+                {"command": "python -m unittest discover -s tests"},
+            ]
+        }
+
+        self.assertEqual(
+            a02_failures(
+                ["run.sh"],
+                command_evidence,
+                MONTHLY_REVIEW_RATING_V13,
+            ),
+            [],
+        )
+
+    def test_v13_keeps_abstract_a02_test_evidence_required(self) -> None:
+        command_evidence = {
+            "successful_commands": [
+                {"command": "git diff --name-only"},
+            ]
+        }
+
+        self.assertEqual(
+            a02_failures(
+                ["run.sh"],
+                command_evidence,
+                MONTHLY_REVIEW_RATING_V13,
+            ),
+            ["a02_abstract_test_evidence_missing"],
+        )
+
+    def test_standard14_audit_supports_v13(self) -> None:
+        self.assertIn(
+            MONTHLY_REVIEW_RATING_V13,
+            SUPPORTED_STANDARD14_RATING_CONTRACTS,
         )
 
     def test_a_cases_keep_previous_model_visible_input(self) -> None:

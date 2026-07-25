@@ -90,7 +90,7 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 
 許可path判定はLayer 2 adapterをSSOTとし、Layer 3は必須成果pathだけを確認する。既存resultは履歴として保持し、rating contract revisionが異なるresultを互換比較へ混ぜない。
 
-v13は契約として固定済みだが、2026-07-25時点で**v13を使用した評価runはまだない**。互換比較できる最新のresult集合はv12（Candidate71 / Candidate74 / Candidate77の標準14項目・B18）である。新規runをv13で実行した後も、v12以前のresultを同一comparisonへ混ぜない。
+2026-07-26に[`Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録した。各条件70 / 70件、計420 / 420件がvalid・rateableである。v12以前のresultは同一comparisonへ混ぜない。
 
 なお、この節が以前`owner-producer-quality-v8`を現行として指定し、owner-producer evidenceをscore `4`の必要条件、response markerのNFKC / casefold照合を要求していた記述は、v8時点の契約に基づくものである。v8からv12で採点した既存resultは当時の契約のまま保持し、再採点しない。revision別の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
 

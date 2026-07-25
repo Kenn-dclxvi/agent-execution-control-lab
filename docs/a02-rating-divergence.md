@@ -48,7 +48,7 @@ Candidate71 release artifactに保存された当時の未解決risk 2件（A02�
 
 上記のA02のずれを塞いだのが第13版 [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json) である。C71のB18評価自体はv12で実施しており、既存のv12契約とB18結果はそのまま履歴として保持する。過去resultを新しいcontractで再採点したようには扱わない。
 
-新規runへ適用する現行rating contractは**v13**である（2026-07-25に評価基盤の正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)へ指定を更新した。それ以前は同節がv8時代の記述のまま`owner-producer-quality-v8`を現行としていた）。ただしv13を使用した評価runはまだなく、互換比較できる最新のresult集合はv12である。契約identityは比較互換条件の一部であるため、新規profile作成時は同正本と[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を確認する。
+新規runへ適用する現行rating contractは**v13**である（2026-07-25に評価基盤の正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)へ指定を更新した。それ以前は同節がv8時代の記述のまま`owner-producer-quality-v8`を現行としていた）。2026-07-26に[`6条件の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録した。契約identityは比較互換条件の一部であるため、v12以前のresultを同一comparisonへ混ぜない。
 
 ## 正本
 
