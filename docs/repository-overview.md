@@ -20,7 +20,7 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 - **token（トークン）**: AIが入出力を処理する量の単位。多いほど時間と費用が増えます。
 - **all-agent `total_tokens`**: 統括役のroot agentと、そこから起動された全ての下位セッション（SA session＝worker）の使用量を合算した値。workerが増えると合計は大きく膨らみます。
 - **case（評価case）**: プロンプトの挙動を測るための、症状・対象・成功条件を定めたテスト課題。`TC-F01`〜`TC-A06`など。
-- **model-visible / private（model-invisible）**: 実行役のAIに提示する情報（model-visible）と、採点用の正解・期待diff・必須コマンド等の隠す情報（private）を厳密に分けます。
+- **model-visible / private（model-invisible）**: 実行役のAIに提示する情報（model-visible）と、採点用の正解・期待diff・oracleが参照する確認コマンド等の隠す情報（private）を厳密に分けます。privateに確認コマンドがあっても、それは実行役へ課された必須試験ではありません（必須試験はTaskSpecまたは適用されるリポジトリ規則が要求するものだけ）。
 
 ## 3. ディレクトリ構成
 
