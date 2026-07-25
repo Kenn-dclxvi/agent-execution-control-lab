@@ -113,7 +113,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 採点条件はrevision別に固定し、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。最新revisionは**v13**で、提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁じ、コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映します。既存のv12契約とB18結果は履歴として保持します。
 
-新規runへどのrevisionを適用するかの「現行」指定は、[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)を正本とします（同文書は`owner-producer-quality-v8`と記載しており、v13との関係は未確定です）。
+新規runへ適用する「現行」契約も**v13**です（指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。ただしv13を使用した評価runはまだなく、互換比較できる最新のresult集合はv12です。
 
 この論点の具体例（A02で実際に起きた「要求と採点のずれ」3件、v10〜v13の変遷）は、個別事例として[`a02-rating-divergence.md`](a02-rating-divergence.md)へ分離しています。
 
@@ -124,7 +124,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 - 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
 - baselineから多数の候補（C77まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
-- 採点条件の最新revisionは **v13**（A02の「要求と採点のずれ」を塞いだ版）。新規runへの「現行」指定は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)を正本とします。
+- 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。v13でのrunは未実施で、互換比較できる最新resultはv12です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 
 ## 8. どこから読むとよいか

@@ -55,18 +55,21 @@ Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別�
 - 正本: [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md)（「対策判断への接続」節と各診断結果節）
 - 制御graph側の判断（location mismatchを理由にroot規則を追加しない）は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)を参照
 
-## 6. 現行rating contract identityの確定（文書間の不整合）
+## 6. 現行rating contract identityの確定（解決済み・2026-07-25）
 
-新規runへ適用する「現行」rating contractの指定が、文書間で一致していない。契約identityは比較互換条件の一部であり、新規profile作成とresult間の互換判断に影響する。
+新規runへ適用する現行rating contractの指定が、評価基盤の正本（`owner-producer-quality-v8`）と後続文書（最新revision v13）で一致していなかった。**2026-07-25に現行をv13へ確定した。** 正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)の指定、評価実行手順[`evaluation-loop-manual.md`](evaluation-loop-manual.md)のLayer 3、契約台帳[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)、および`scripts/evaluation_loop.py`の`SUPPORTED_QUALITY_RATINGS`をv13へ追従させ、v13 capsuleが受理されることをunit testで確認済みである。この項目は未完了ではない。
 
-| 文書 | 記載 |
-| --- | --- |
-| [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)（評価基盤の正本） | 現行rating contractは`owner-producer-quality-v8` |
-| [`control-mechanisms.md`](control-mechanisms.md) / [`a02-rating-divergence.md`](a02-rating-divergence.md) / [`repository-overview.md`](repository-overview.md) | 最新revisionはv13（A02の要求と採点のずれを塞いだ版） |
+派生して残る作業は次の一点である。
 
-- 直近の標準14項目・B18評価はv12で実施しており、v13は当該ずれを塞ぐために追加された。
-- 確定は評価基盤の正本側で行う。revision一覧と各版の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
-- 既存resultは履歴として保持し、異なる契約revisionのresultを互換比較へ混ぜない。
+- **v13での最初の評価run**は未実施である。互換比較できる最新のresult集合はv12（Candidate71 / Candidate74 / Candidate77の標準14項目・B18）であり、v13 runを実施した後もv12以前のresultを同一comparisonへ混ぜない。
+
+## 7. `QUALITY_RATING`という汎用名がv8を指している（保守上の誤認risk）
+
+`scripts/evaluation_loop.py`では現行契約が`QUALITY_RATING_V13`として登録されている一方、revision名を持たない汎用定数`QUALITY_RATING`は`owner-producer-quality-v8`を指し続けている。integration testの既定`quality_rating`もこの定数を使う。
+
+- **実行上の不具合ではない**。run capsuleは`quality_rating`の明示指定を必須とし、v13は`SUPPORTED_QUALITY_RATINGS`へ登録済みで、v13の実挙動はunit testで検証している。
+- 残るのは保守上のriskで、汎用名が現行契約を表すように見えるため、将来の変更時にv8を現行と誤認し得る。
+- 解消するにはv8定数の改名（例: `QUALITY_RATING_V8`）とtest既定値の見直しが必要で、複数testの既定経路へ波及する。現行identityの確定（項目6）とは別の判断単位として扱う。
 
 ## 着手時の共通条件
 
