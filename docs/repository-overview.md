@@ -84,14 +84,16 @@ baselineから枝分かれした改良案です。番号順が単純な親子で
 
 ### release（4件）と本体反映状況
 
-| release（由来候補） | 状態 | 本体反映 |
-| --- | --- | --- |
-| Candidate34 | `cancelled` | なし（C41を候補にしたため取消） |
-| Candidate41 | `superseded` | なし（C43 releaseへ置換） |
-| **Candidate43** | `projected` | **反映済み**（THE-CAPTION [PR #339](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/339)） |
-| **Candidate71** | `projected / approved` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)） |
+正本`prompts/releases/README.md`はrelease status / approval / runtime projectionを別軸で保持する。ここでも同じ3軸に分けて示す。
 
-現在、本体へ投影されているのは **C43** と、その上に`VALIDATION_CLOSURE`一labelを足した **C71** です。C71は後述のとおり評価上は品質gateを通過していませんが、**トークン効率を優先する別の採用判断**として2026-07-23に本体適用されました。ここが「評価（stopped）と採用（本体適用）は別レイヤー」という原則の実例です。
+| release（由来候補） | release status | approval | runtime projection | 本体反映 |
+| --- | --- | --- | --- | --- |
+| Candidate34 | `cancelled` | `cancelled` | `not_authorized` | なし（不採用・artifact削除ではない） |
+| Candidate41 | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)、実変更8 path）。直前の投影履歴・C43の巻き戻し先として維持 |
+| **Candidate43** | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335)、直前投影からroot `AGENTS.md`一つ） |
+| **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
+
+現在の本体投影は、Candidate41 → Candidate43 → Candidate71の順に積み上げたreleaseで、直近の投影は`VALIDATION_CLOSURE`一labelを足した **C71** です。C41・C43は過去の投影履歴かつ巻き戻し先として保持しており、`cancelled`にはしていません。C71は後述のとおり評価上は品質gateを通過していませんが、**トークン効率を優先する別の採用判断**として2026-07-23に本体適用されました。ここが「評価（stopped）と採用（本体適用）は別レイヤー」という原則の実例です。
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 
@@ -140,7 +142,7 @@ C71のB18評価（18反復）で、A02に3件の低得点（score 3）が付き�
 
 - 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
 - baselineから多数の候補（C77まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
-- 本体へ反映済みなのは **C43** と **C71**。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
+- 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
 - 採点条件は **v13が現行**。A02の「要求と採点のずれ」を塞いだ版です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 

@@ -14,7 +14,7 @@ THE-CAPTION向けプロンプトを設計、比較、評価し、反映可能な
 
 ## 現在の状態
 
-`evaluation_foundation_v3`。1つのimmutableなprompt set identityごとに3 KPIをappend-onlyで保存し、互換条件を満たす任意個のresultを後から取得・比較できます。現行の`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。root-onlyで保存したv3 `prompt-set-result/v1`は履歴として保持し、再集計値を`prompt-set-result/v2`へ追記します。固定A / B pair、winner、改善・悪化は保存・出力しません。v1 / v2 evaluation foundation resultも履歴として保持し、migrationや再解釈は行っていません。候補の採用、THE-CAPTION本体への反映、runtime有効化も行っていません。
+`evaluation_foundation_v3`。1つのimmutableなprompt set identityごとに3 KPIをappend-onlyで保存し、互換条件を満たす任意個のresultを後から取得・比較できます。現行の`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。root-onlyで保存したv3 `prompt-set-result/v1`は履歴として保持し、再集計値を`prompt-set-result/v2`へ追記します。固定A / B pair、winner、改善・悪化は保存・出力しません。v1 / v2 evaluation foundation resultも履歴として保持し、migrationや再解釈は行っていません。評価基盤自体は候補の採用・本体反映・runtime有効化を判断しません。これらは別の明示的な承認作業で、現時点ではCandidate41・Candidate43・Candidate71がその判断でTHE-CAPTION本体へ投影済みです（[`docs/repository-overview.md`](docs/repository-overview.md)、[`prompts/releases/README.md`](prompts/releases/README.md)）。
 
 ## 主要な知見
 
@@ -27,7 +27,7 @@ THE-CAPTION向けプロンプトを設計、比較、評価し、反映可能な
 
 ## Candidate開発の経緯
 
-BaselineからCandidate71までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。系譜と評価状態の正本は[`prompts/candidates/README.md`](prompts/candidates/README.md)。本体へ投影済みなのはCandidate43とCandidate71で、いずれもroot `AGENTS.md`だけを変更対象とする。
+BaselineからCandidate77までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる（candidate index未掲載のC72/C73はmanifestと評価resultが正本である旨も同文書に記載）。掲載candidateのidentityと評価状態の正本は[`prompts/candidates/README.md`](prompts/candidates/README.md)。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
 
 ## 構成
 
@@ -64,7 +64,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | --- | --- |
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
-| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate71までの系譜と知見 |
+| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate77までの系譜と知見 |
 | [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
 | [`docs/repository-contract.md`](docs/repository-contract.md) | 運用境界の正本 |
 | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |
