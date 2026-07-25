@@ -14,7 +14,7 @@ seedは`src/click/_compat.py`の`_ansi_re`を、ECMA-48のCSI sequence全体を�
 - target tree: `c6aa87f15f2e44a6fcab33714e1eb91e2552d816`
 - seed origin commit: `71f2bafa541e7f798834e74076786ff4281ac83e`（2026-07-01 "Strip all ANSI sequences"）
 - seed patch SHA-256: `936011b15e6e26277581302507a7bc724c7f868043d127e1cf89c8d8c81f4660`（17行、1 file）
-- trial input SHA-256: `12eadfb7754d9b1b1ecd1a60d962786977cdaee1d822fe7a2bbd6b8ebb428f2f`
+- trial input SHA-256: `b70b4df8665da9a9c93145b5f17794c2d371ebc195e4533ba399b2829c093f1e`
 - seeded fixture commit: `ed2d1f785a33e5bb55a5da058505ff8a11e8d875`
 - seeded fixture tree: `0d09da148dcdbf9f7302d44d94ea1f0c823b54ac`
 
@@ -32,10 +32,13 @@ workerへ渡すのは`trial-prompt-input.json`だけである。private data、s
 
 ## gate
 
-focused gateは`tests/test_compat.py tests/test_utils/test_style.py`、full gateは全体である。**いずれもrepository rootをcwdとして実行する。** cwd外で実行すると、seedと無関係に`tests/test_utils/test__expand_args.py::test_expand_args`が失敗する（実測: [`docs/public-target-selection-phase0.md`](../../../../../../docs/public-target-selection-phase0.md)）。
+focused gateは`tests/test_compat.py tests/test_utils/test_style.py`、full gateは全体である。実行条件を2つ固定する。
+
+- **repository rootをcwdとして実行する。** cwd外で実行すると、seedと無関係に`tests/test_utils/test__expand_args.py::test_expand_args`が失敗する（実測: [`docs/public-target-selection-phase0.md`](../../../../../../docs/public-target-selection-phase0.md)）。
+- **`PYTHONPATH=src`を付ける。** 共有runtimeは`venv_shim`で共有purelibを`.pth`追加するだけでworkspaceの`src`を通さない。付けない場合、`tests/test_deprecations.py`が`importlib.metadata`の`PackageNotFoundError`でcollection errorになる。固定方法は[`profiles/README.md`](../../../profiles/README.md)を正本とする。
 
 ## qualification
 
-qualification receiptは`fixture_qualified_prompt_not_evaluated`である。`scripts/prepare_case_fixture.py`で3回materializeし、いずれも同一の`fixture_head_commit`と`fixture_head_tree`になることを確認した。
+qualification receiptは`fixture_qualified_prompt_not_evaluated`である。`scripts/prepare_case_fixture.py`で4回materializeし、いずれも同一の`fixture_head_commit`と`fixture_head_tree`になることを確認した。4回目は永続local clone（`/Users/kenn/repos/click`）を`--source-repo`に使い、一時cloneと同じfixture identityになることを確認した。
 
 **prompt評価は未実施である。** fixtureが再現することは、評価済み、採用済み、releaseのいずれも意味しない。

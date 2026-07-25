@@ -101,6 +101,17 @@ class ClickF01CaseTest(unittest.TestCase):
             self.data["qualification"]["status"], "fixture_qualified_prompt_not_evaluated"
         )
 
+    def test_readme_records_current_hashes(self) -> None:
+        readme = (CASE / "README.md").read_text(encoding="utf-8")
+        receipt = self.data["qualification"]["receipt"]
+        for value in (
+            receipt["trial_prompt_input_raw_sha256"],
+            receipt["seed_patch_raw_sha256"],
+            receipt["fixture_head_commit"],
+            receipt["fixture_head_tree"],
+        ):
+            self.assertIn(value, readme, "README記載のhashがcase-dataとdriftしている")
+
 
 if __name__ == "__main__":
     unittest.main()
