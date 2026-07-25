@@ -1,0 +1,35 @@
+{
+  "artifact_roots": {
+    "cases": "evaluations/targets/click/cases",
+    "profiles": "evaluations/targets/click/profiles",
+    "prompt_bundles": "evaluations/targets/click/prompts",
+    "published_results": "evaluations/targets/click/results",
+    "rating_contracts": "evaluations/targets/click/rating-contracts",
+    "sets": "evaluations/targets/click/sets"
+  },
+  "authority_notes": {
+    "bundle_target_map": "click向けprompt bundleは未作成である。作成時はmanifest.jsonを正本とし、target側directory構造への依存をbundleごとに固定する",
+    "gate_commands": "各case revisionのtrial-prompt-input.jsonを正本とする。gate commandはrepository rootをcwdとして実行する（cwd外実行ではtests/test_utils/test__expand_args.py::test_expand_argsが失敗する。実測: docs/public-target-selection-phase0.md）",
+    "runtime": "Python 3.14.5、`python3 -m venv` + `pip install -e . pytest`で依存7 packageが揃う。F07-P相当のcaseでは`pip install uv`で導入した`uv lock --check --offline`を使用する",
+    "selection_evidence": "gate 1〜9の判定と14項目coverage対応はdocs/public-target-selection-phase0.mdを正本とする"
+  },
+  "current_rating_contract": null,
+  "executor": "codex",
+  "layout": "namespaced",
+  "naming_prefix": "click",
+  "schema_version": "the-caption-prompt.evaluation-target/v1",
+  "target_id": "click",
+  "target_license": "BSD-3-Clause",
+  "target_repository": {
+    "additional_refs": [],
+    "primary_ref": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "ref_authority": "各case revisionのprivate/case-data.jsonのfixture.target_identityと、各profileのcomparison_conditions.target_repository_ref",
+    "repository": "https://github.com/pallets/click.git"
+  },
+  "target_specific_modules": [],
+  "third_party_reproducible": true,
+  "visibility": "public"
+}
