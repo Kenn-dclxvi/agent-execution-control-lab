@@ -81,6 +81,20 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - **既存Codex resultとの互換比較は成立しない**。注入時点の差とtoken accountingの意味の差によりcompatibility keyが一致しないため、Claude Code条件はbaselineから再測定する独立系列として扱う（[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)のCompatibility）。
 - model名を明示したresultはすべて`gpt-5.6-sol`で、Claude系modelでの測定は0件である（[`execution-control-research-paper.md`](execution-control-research-paper.md)の限界節）。この項目はその限界に接するが、この項目自体はmodel比較を目的としない。executor置換の成立条件だけを扱う。
 
+## 9. root `AGENTS.md`へのrepository index参照追加の効果（未着手）
+
+**未実施。** 投影済みの現行root `AGENTS.md`は13行の実行制御label（`SPEC`〜`RECOVERY`）だけで構成され、repository indexである`docs/reference/project-contexts/the-caption.txt`への参照を持たない（2026-07-25にgrep 0件で実測）。このindexは90行・5,868 bytes（`sha256:12155b2c…`）の静的project事実（project / commands / architecture / environment / testing）で、Candidate71 releaseのbundle manifest 19 targetに含まれ、THE-CAPTION本体側の現行版とcontent identicalである。
+
+試験するのは、root `AGENTS.md`へこのindexへの参照導線を追加した場合の効果である。
+
+- 変更単位: root `AGENTS.md`への参照追加1軸のみ。index本文はbundle targetとして既に固定済みのため、残り18 targetはcontent identicalなcandidate bundleになる。
+- 観測: 3 KPI（`quality_score` / all-agent `total_tokens` / `elapsed_seconds`）を評価対象とし、target探索readとworker起動はdiagnosticへ置く。境界の正本は[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)。
+- 事前に両方向の仮説を置く。静的事実の参照でrepository探索readが減る方向と、root promptへの追加がcontextを増やすだけで動的tokenが増える方向の両方である。表面的なprompt短縮がall-agent tokenをほとんど動かさなかった既存知見（正本: [`control-mechanisms.md`](control-mechanisms.md)）から、静的byteの増減で効果を推定しない。
+- read boundary / read route系candidate（C50、C56〜C59、C62、C63など）と論点が接近する。着手前に系譜を確認し、既存軸の再実行にならないことを確かめる。正本は[`prompts/candidates/README.md`](../prompts/candidates/README.md)と[`candidate-history.md`](candidate-history.md)。
+- 比較条件: 既存Codex executor、標準14項目、rating v13で測れる軸である。ただしv13での最初の評価runが未実施のため（項目6）、比較対象baselineもv13で取得する必要がある。
+- 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
+- candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
+
 ## 着手時の共通条件
 
 - 一つのcandidateで一つのpredicateまたは一つの変更軸だけを扱う（[`prompts/AGENTS.md`](../prompts/AGENTS.md)のcandidate作成前gate9項目）
