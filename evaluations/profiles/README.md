@@ -6,6 +6,8 @@
 
 v3の現行token仕様は[`token-accounting-all-agents-v1`](token-accounting-all-agents-v1.json)である。`total_tokens`はroot agentと全descendant SA sessionの最終usageを合算する。新しいRun capsuleはこのprofileの`accounting` objectを`comparison_conditions.executor_parameters.token_accounting`へ固定する。root-onlyで実行した既存profileは履歴として保持し、all-agentへの再集計をin-place変更として扱わない。
 
+rating v13の最初の互換比較は、[`Baseline`](baseline-current-r2-v13-standard14-global-m24-n5-r1.json)、[`ControlFreeRepository`](control-free-repository-v13-standard14-global-m24-n5-r1.json)、[`Candidate5`](candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)、[`Candidate35`](candidate35-root-control-only-v13-standard14-global-m24-n5-r1.json)、[`Candidate43`](candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json)、[`Candidate71`](candidate71-validation-closure-v13-standard14-global-m24-n5-r1.json)を使用した。6 profileはprompt identity以外の標準14項目、各`N=5`、`M=24`、model、environment、permission、executor parameter、rating contractを同一に固定した。[`result`](../results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)は計420 / 420件を登録した。
+
 [`candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1`](candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1.json)はCandidate17のpromptを変更せず、実行adapterのtyped boundary evidenceを独立したcompatibility条件として検証するF10限定profileである。既存のraw shell outputをAgentが対応付けるresultとは互換比較しない。
 
 [`candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1`](candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json)はCandidate17をexpanded 12 case、`1..5`、`M=24`、all-agent token accountingへ固定する。adapter、quality audit、Evaluation set、fixture、TaskSpec、permissionをCandidate15連続試験時点から変更せず、prompt identityだけをC17へ替える。

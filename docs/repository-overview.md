@@ -47,9 +47,9 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 | `evaluations/cases/` | 評価case（20件）とmodel-visible / private境界。 |
 | `evaluations/sets/` | caseを束ねた評価集合（例: `the-caption-standard14-r1`）。 |
 | `evaluations/fixtures/` | caseが使う擬似リポジトリ状態。 |
-| `evaluations/profiles/` | model・環境・反復条件・比較条件を固定したprofile。 |
+| `evaluations/profiles/` | model・環境・反復条件・比較条件を固定したprofile。147件。 |
 | `evaluations/rating-contracts/` | 採点条件（rating contract）をrevision別に保存。13 revision（v1〜v13）。 |
-| `evaluations/results/` | 公開済みの評価結果（append-only）。runを重ねるごとに増えるため、現況は同ディレクトリを参照（2026-07-25時点で136件）。 |
+| `evaluations/results/` | 公開済みの評価結果（append-only）。runを重ねるごとに増えるため、現況は同ディレクトリを参照（2026-07-26時点で137件、READMEを除く）。 |
 | `layer2/` | token内訳やsession情報など、KPIへ入れない補助データの保存先。 |
 | `docs/` | リポジトリ契約、設計判断、反映手順。 |
 | `scripts/` | 評価ループや証拠収集のスクリプト。 |
@@ -127,7 +127,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 採点条件はrevision別に固定し、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。最新revisionは**v13**で、提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁じ、コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映します。既存のv12契約とB18結果は履歴として保持します。
 
-新規runへ適用する「現行」契約も**v13**です（指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。ただしv13を使用した評価runはまだなく、互換比較できる最新のresult集合はv12です。
+新規runへ適用する「現行」契約も**v13**です（指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。2026-07-26に[`6条件の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録しました。v12以前のresultは同一comparisonへ混ぜません。
 
 この論点の具体例（A02で実際に起きた「要求と採点のずれ」3件、v10〜v13の変遷）は、個別事例として[`a02-rating-divergence.md`](a02-rating-divergence.md)へ分離しています。
 
@@ -138,7 +138,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 - 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
 - baselineから多数の候補（C77まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
-- 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。v13でのrunは未実施で、互換比較できる最新resultはv12です。
+- 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。最初のv13互換resultは6条件・計420件です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 
 ## 8. どこから読むとよいか

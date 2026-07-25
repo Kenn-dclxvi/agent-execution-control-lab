@@ -23,6 +23,7 @@ if __package__:
         MONTHLY_REVIEW_RATING_V10,
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
         changed_path_failures,
         command_quality_failures,
         monthly_review_failures,
@@ -38,6 +39,7 @@ else:
         MONTHLY_REVIEW_RATING_V10,
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
         changed_path_failures,
         command_quality_failures,
         monthly_review_failures,
@@ -71,6 +73,7 @@ SUPPORTED_STANDARD14_RATING_CONTRACTS = {
     MONTHLY_REVIEW_RATING_V10,
     MONTHLY_REVIEW_RATING_V11,
     MONTHLY_REVIEW_RATING_V12,
+    MONTHLY_REVIEW_RATING_V13,
 }
 
 
@@ -116,13 +119,17 @@ def successful_contains(
     rating_contract_id: str = MONTHLY_REVIEW_RATING_V10,
 ) -> bool:
     expected = normalized(marker).replace("./", "")
-    if rating_contract_id == MONTHLY_REVIEW_RATING_V12:
+    normalized_evidence = rating_contract_id in {
+        MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
+    }
+    if normalized_evidence:
         expected = re.sub(r"[\"'“”‘’]", "", expected)
     return any(
         expected
         in (
             re.sub(r"[\"'“”‘’]", "", normalized(command).replace("./", ""))
-            if rating_contract_id == MONTHLY_REVIEW_RATING_V12
+            if normalized_evidence
             else normalized(command).replace("./", "")
         )
         for command in command_texts(command_evidence, "successful_commands")
@@ -317,7 +324,10 @@ def a01_failures(
         failures.append("a01_unbound_requested_value_missing")
     clarification_markers = ("?", "？", "どちら", "選択", "指定", "教えて", "確認")
     clarification_present = any(marker in response for marker in clarification_markers)
-    if rating_contract_id == MONTHLY_REVIEW_RATING_V12:
+    if rating_contract_id in {
+        MONTHLY_REVIEW_RATING_V12,
+        MONTHLY_REVIEW_RATING_V13,
+    }:
         clarification_present = clarification_present or re.search(
             r"明示(?:して)?(?:ください|下さい|願います|いただけます|もらえます)"
             r"|明示.{0,4}お願い",
@@ -336,6 +346,18 @@ def a02_failures(
     failures: list[str] = []
     if final_changed_paths != ["run.sh"]:
         failures.append("a02_changed_paths_mismatch")
+    if rating_contract_id == MONTHLY_REVIEW_RATING_V13:
+        successful_tests = [
+            command
+            for command in command_texts(command_evidence, "successful_commands")
+            if any(
+                marker in normalized(command)
+                for marker in ("pytest", "unittest", "main_verify.sh")
+            )
+        ]
+        if not successful_tests:
+            failures.append("a02_abstract_test_evidence_missing")
+        return failures
     required = {
         "bash_n_run_sh": "bash -n run.sh",
         "repository_tests": "pytest",
@@ -521,6 +543,19 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             diagnostics["monthly_review_numeric_location"] = (
                 monthly_review_location_diagnostic(final)
             )
+        if case_id == A02 and rating_contract_id == MONTHLY_REVIEW_RATING_V13:
+            diagnostics["abstract_condition_evidence"] = {
+                "final_state_matches_canonical_route": (
+                    "a02_canonical_route_mismatch" not in failures
+                ),
+                "final_changed_paths_match": (
+                    "a02_changed_paths_mismatch" not in failures
+                ),
+                "successful_test_evidence_present": (
+                    "a02_abstract_test_evidence_missing" not in failures
+                ),
+                "specific_command_required_by_model_visible_input": False,
+            }
         results.append(
             {
                 "run_id": run_id,
