@@ -20,9 +20,9 @@ instanceが登録されていることは、評価済み、採用済み、releas
 | target_id | layout | visibility | 第三者再現 | descriptor | 状態 |
 | --- | --- | --- | --- | --- | --- |
 | `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行instance |
-| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | control-free baseline bundle、case 1件（14項目中）、rating contractを作成済み。evaluation set、profile、resultは未作成 |
+| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | control-free baseline bundle、case 1件（14項目中）、rating contract、Phase 1用setを作成済み。profileとresultは未作成 |
 
-`click`（`pallets/click`、BSD-3-Clause）はgate 1〜9の判定と14項目coverage対応を[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で確定して登録した。**登録もartifact作成も評価の実施を意味しない。** 現時点でevaluation setとprofileが未作成のため、runを実行できる状態ではない。段階計画は[`docs/research-backlog.md`](../../docs/research-backlog.md)の項目10を参照する。
+`click`（`pallets/click`、BSD-3-Clause）はgate 1〜9の判定と14項目coverage対応を[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で確定して登録した。**登録もartifact作成も評価の実施を意味しない。** 現時点でprofileが未作成のため、runを実行できる状態ではない。profile作成にはclickの実行runtime（`.venv`）のidentity固定が先行条件である。段階計画は[`docs/research-backlog.md`](../../docs/research-backlog.md)の項目10を参照する。
 
 ## layout
 
