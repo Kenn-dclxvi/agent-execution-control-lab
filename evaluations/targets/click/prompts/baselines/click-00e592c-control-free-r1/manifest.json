@@ -1,0 +1,42 @@
+{
+  "artifact": {
+    "artifact_role": "baseline",
+    "description": "pallets/clickにはAGENTS.mdが存在しないため、制御prompt不在の条件をroot AGENTS.md 1 targetの空fileとして固定した比較元。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "品質、token、時間の優劣主張",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映",
+      "modelまたはCodex system promptの変更",
+      "TaskSpec、Evaluation set、評価基盤、評価profile、評価resultの変更"
+    ],
+    "problem": "target instance clickに固定済みのprompt set identityが存在せず、TaskSpecとmodel既定挙動だけの一次結果を独立identityへbindできない。",
+    "prompt_set_name": "control_free",
+    "scope": "root AGENTS.mdの1 targetのみ。clickにはAGENTS.md階層、project context index、role promptがいずれも存在しないため、bundleはこの1 targetで閉じる。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9",
+  "files": [
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "initial_path_set",
+    "source_prompt_identity": null
+  },
+  "prompt_identity": "click-00e592c-control-free-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}
