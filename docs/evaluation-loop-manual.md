@@ -214,10 +214,12 @@ quality raterへ渡すのは次だけである。
 
 - `$CYCLE/layer1/set.json`の該当caseにあるmodel-visible情報
 - `$CYCLE/layer2/evidence/<run_id>/`の必要なblind evidence
-- `owner-producer-quality-v8`が要求するall-agent command evidence view
-- `owner-producer-quality-v8`が要求するowner-producer evidence view
+- 現行契約`outcome-abstract-condition-preserving-owner-diagnostic-v13`が要求するall-agent command evidence view（collector schemaは`all-agent-command-evidence/v5`）
+- 同契約が要求するowner-producer evidence view（`owner-producer-evidence/v1`）
 
-`layer2/bindings/`、Run capsule、oracle、grader、expected result、prompt identityは渡さない。
+`layer2/bindings/`、Run capsule、oracle、grader、expected result、prompt identityは渡さない。v13では加えて、実行役へ提示していない正解条件・質問項目・試験コマンドと、提示した抽象条件から推定した特定コマンドを必須試験として扱う判断も渡さない。
+
+v13のscore `4`は、実行役へ提示した成果条件と禁止境界の充足（`case_quality_rules`で`diagnostic_only`とした提示要素を除く）と、コマンド名までmodel-visibleに明示された必須試験の成功証拠を要件とする。**owner-producer evidenceは診断だけに使用し、成果品質の点数を変更しない**（`owner_producer_evidence_policy`は`diagnostic_only`）。v8時代の「owner-producer evidenceが不一致ならscore `4`を記録できない」手順は、v1〜v8で採点した既存resultの条件として保持し、v9以降の新規runへ適用しない。
 
 TaskSpecがcriterion ownerを固定したrunは、採点前に次を実行する。
 

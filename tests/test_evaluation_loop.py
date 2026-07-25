@@ -15,6 +15,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_V10,
     QUALITY_RATING_V11,
     QUALITY_RATING_V12,
+    QUALITY_RATING_V13,
     identity_sha256,
     kpi_difference,
     validate_comparison_conditions,
@@ -48,6 +49,20 @@ class EvaluationLoopTest(unittest.TestCase):
         self.assertEqual(
             validate_comparison_conditions(conditions)["quality_rating"],
             QUALITY_RATING_V12,
+        )
+
+    def test_abstract_condition_preserving_quality_rating_v13_is_supported(self) -> None:
+        conditions = self.conditions(1)
+        conditions["quality_rating"] = QUALITY_RATING_V13
+        self.assertEqual(
+            validate_comparison_conditions(conditions)["quality_rating"],
+            QUALITY_RATING_V13,
+        )
+
+    def test_quality_rating_v13_keeps_owner_producer_evidence_diagnostic(self) -> None:
+        self.assertEqual(
+            QUALITY_RATING_V13["owner_producer_evidence_policy"],
+            "diagnostic_only",
         )
 
     def test_kpi_difference_names_no_winner(self) -> None:

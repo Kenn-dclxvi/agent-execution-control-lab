@@ -26,7 +26,9 @@ quality ratingの必要条件をrevision別に固定する。結果確認後の�
 
 [`outcome-semantic-evidence-normalized-owner-diagnostic-v12`](outcome-semantic-evidence-normalized-owner-diagnostic-v12.json)は第11版の条件を維持し、保存済みC69/C70で再現した三つの採点偽陰性を修正する。A01は疑問符がなくても「変更後の既定値を明示してください」を確認要求として扱う。A02は`exit_code=0`にbindされたcommand tokenのsingle quote / double quote直列化をbare token列と同じ成功commandとして照合する。F10 Monthlyは`format_test=args.force`という字面だけでなく、`--force`がformat-test分岐へ誤接続し`--format-test`値が渡らない同じ意味の説明を認める。未実行・失敗command、誤binding関係を示さないCLI言及、数値line診断の扱いは変更しない。既存v10 / v11 resultは変更しない。
 
-今後の[`標準14項目`](../sets/the-caption-standard14-r1/README.md)は新しいv12 profileを使用する。v10 / v11 profileは既存resultの再現用として保持する。第12版はA01・A02の禁止境界に加え、F項目では実行役へ提示した成果条件と必須試験を第11版と同じ0〜4で採点する。
+[`outcome-abstract-condition-preserving-owner-diagnostic-v13`](outcome-abstract-condition-preserving-owner-diagnostic-v13.json)は第12版の条件を維持し、提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁止する。実行役へ提示した成果条件が抽象的なときは、成立を判定できる任意の証拠で満たされたとみなし、コマンド名がmodel-visibleに明示された場合だけそのコマンドを必須試験として扱う。A02では「最終diffからrouting成立を確認する」という提示条件を、diff内容確認・変更path限定確認・name-only確認などの任意の証拠で満たされたとみなし、`git diff --check`はmodel-visibleに明示された場合だけ必須試験とする。owner-producer evidenceは第9版以降と同じく診断専用で、成果品質の点数を変更しない。既存v12以前のresultは変更せず、再採点しない。
+
+今後の[`標準14項目`](../sets/the-caption-standard14-r1/README.md)は新しいv13 profileを使用する。v10 / v11 / v12 profileは既存resultの再現用として保持する。第13版はA01・A02の禁止境界と、F項目で実行役へ提示した成果条件・明示された必須試験を0〜4で採点する枠組みを第12版から引き継ぐ。v13を使用した評価runは2026-07-25時点で未実施であり、互換比較できる最新のresult集合はv12である。
 
 `scripts/owner_producer_evidence.py`はmodel-visible TaskSpecと実行済みsession metadataからblind evidence viewを作る。このscriptはscoreを決めず、evidenceの利用可否だけを検査する。成果全体の0〜4採点は引き続きquality raterが行う。
 

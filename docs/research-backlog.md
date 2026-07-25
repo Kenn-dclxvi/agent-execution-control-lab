@@ -57,7 +57,7 @@ Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別�
 
 ## 6. 現行rating contract identityの確定（解決済み・2026-07-25）
 
-新規runへ適用する現行rating contractの指定が、評価基盤の正本（`owner-producer-quality-v8`）と後続文書（最新revision v13）で一致していなかった。**2026-07-25に現行をv13へ確定し、正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)の指定を更新した。** この項目は未完了ではない。
+新規runへ適用する現行rating contractの指定が、評価基盤の正本（`owner-producer-quality-v8`）と後続文書（最新revision v13）で一致していなかった。**2026-07-25に現行をv13へ確定した。** 正本[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)の指定、評価実行手順[`evaluation-loop-manual.md`](evaluation-loop-manual.md)のLayer 3、契約台帳[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)、および`scripts/evaluation_loop.py`の`SUPPORTED_QUALITY_RATINGS`をv13へ追従させ、v13 capsuleが受理されることをunit testで確認済みである。この項目は未完了ではない。
 
 派生して残る作業は次の一点である。
 
