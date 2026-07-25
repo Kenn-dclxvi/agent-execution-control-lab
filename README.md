@@ -27,7 +27,7 @@ THE-CAPTION向けプロンプトを設計、比較、評価し、反映可能な
 
 ## Candidate開発の経緯
 
-BaselineからCandidate77までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる（candidate index未掲載のC72/C73はmanifestと評価resultが正本である旨も同文書に記載）。掲載candidateのidentityと評価状態の正本は[`prompts/candidates/README.md`](prompts/candidates/README.md)。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
+BaselineからCandidate77までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。candidate bundle 75件すべてのidentityと評価状態の正本は[`prompts/candidates/README.md`](prompts/candidates/README.md)。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
 
 ## 構成
 
