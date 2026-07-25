@@ -72,9 +72,21 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
         for directory, descriptor in descriptors():
             contract = descriptor["current_rating_contract"]
             with self.subTest(target=directory):
+                self.assertIn("current_rating_contract", descriptor)
+                if contract is None:
+                    continue
                 self.assertIn(contract, supported)
                 roots = descriptor["artifact_roots"]["rating_contracts"]
                 self.assertTrue((ROOT / roots / f"{contract}.json").is_file())
+
+    def test_null_rating_contract_has_no_registered_results(self) -> None:
+        for directory, descriptor in descriptors():
+            if descriptor["current_rating_contract"] is not None:
+                continue
+            results = ROOT / descriptor["artifact_roots"]["published_results"]
+            registered = [p for p in results.glob("*.md") if p.name != "README.md"]
+            with self.subTest(target=directory):
+                self.assertEqual(registered, [], "rating contract未確定のinstanceにresultがある")
 
     def test_the_caption_refs_match_profiles(self) -> None:
         descriptor = json.loads((TARGETS / LEGACY_ROOT_TARGET_ID / "target.json").read_text(encoding="utf-8"))
