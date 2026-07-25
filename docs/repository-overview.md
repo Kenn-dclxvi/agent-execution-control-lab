@@ -1,6 +1,6 @@
 # リポジトリ概要（初見の人向け）
 
-このドキュメントは、THE-CAPTION-PROMPTリポジトリを初めて見る人が、全体像・作成済みプロンプト・評価の仕組み・A02採点の論点を一通り把握できるようにまとめたものです。詳細な正本は各節末尾のリンク先を参照してください。
+このドキュメントは、THE-CAPTION-PROMPTリポジトリを初めて見る人が、全体像・作成済みプロンプト・評価の仕組み・採点条件の考え方を一通り把握できるようにまとめたものです。詳細な正本は各節末尾のリンク先を参照してください。個別の研究事例は別文書へ分離しています（例: A02の採点ずれは[`a02-rating-divergence.md`](a02-rating-divergence.md)）。
 
 ## 1. このリポジトリは何をする場所か
 
@@ -20,14 +20,14 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 - **token（トークン）**: AIが入出力を処理する量の単位。多いほど時間と費用が増えます。
 - **all-agent `total_tokens`**: 統括役のroot agentと、そこから起動された全ての下位セッション（SA session＝worker）の使用量を合算した値。workerが増えると合計は大きく膨らみます。
 - **case（評価case）**: プロンプトの挙動を測るための、症状・対象・成功条件を定めたテスト課題。`TC-F01`〜`TC-A06`など。
-- **model-visible / private（model-invisible）**: 実行役のAIに提示する情報（model-visible）と、採点用の正解・期待diff・必須コマンド等の隠す情報（private）を厳密に分けます。
+- **model-visible / private（model-invisible）**: 実行役のAIに提示する情報（model-visible）と、採点用の正解・期待diff・oracleが参照する確認コマンド等の隠す情報（private）を厳密に分けます。privateに確認コマンドがあっても、それは実行役へ課された必須試験ではありません（必須試験はTaskSpecまたは適用されるリポジトリ規則が要求するものだけ）。
 
 ## 3. ディレクトリ構成
 
 | Path | 役割 |
 | --- | --- |
 | `prompts/baselines/` | 比較元プロンプト（現行の固定スナップショット）。2件（`current-r1` / `current-r2`）。 |
-| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC77まで、bundleとして22件を保存。 |
+| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC77まで、bundleとして75件を保存。 |
 | `prompts/routes/` | 共通の全文へ実行前に合成する小さな差分（route）。 |
 | `prompts/releases/` | 本体へ反映可能な単位に固定したrelease。4件。 |
 | `evaluations/cases/` | 評価case（20件）とmodel-visible / private境界。 |
@@ -101,53 +101,30 @@ bundle 75件はすべてcandidate index（[`prompts/candidates/README.md`](../pr
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 
-## 6. 評価caseとA02の採点
+## 6. 評価caseと採点条件
 
 ### 標準14項目セット
 
 主要な評価集合 `the-caption-standard14-r1` は、機能系のF01〜F10（12件）に、曖昧性境界のA01・A02を加えた14 caseです。各caseを`N=5`（5回）など複数反復して測ります。
 
-### A02はどんなcaseか
+caseは「提示する情報（model-visible）」と「隠す情報（private: 正規の起動先、期待するdiff、oracleが参照する確認コマンドなど）」を分けて設計します。ここで、privateに確認コマンドが存在することと、それが実行役へ課された必須試験であることは別です。必須試験はTaskSpecまたは適用されるリポジトリ規則が要求するものに限られます。この区別を崩すと、品質低下と採点のずれを混同しかねません。
 
-**TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING** は、「一見あいまいだが実はリポジトリ規則で一意に決まる正規の起動先を、**質問せずに正しく解決して実装できるか**」を測るcaseです。
+### 採点条件（rating contract）
 
-- **提示する（model-visible）**: 症状・対象ファイル・成功条件の要点だけ。
-- **隠す（private）**: 正規の起動先、期待するdiff、**必須試験の具体コマンド**。
+採点条件はrevision別に固定し、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。最新revisionは**v13**で、提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁じ、コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映します。既存のv12契約とB18結果は履歴として保持します。
 
-この「提示する情報」と「隠す情報」の分離が、次のA02採点論点の核心です。
+新規runへどのrevisionを適用するかの「現行」指定は、[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)を正本とします（同文書は`owner-producer-quality-v8`と記載しており、v13との関係は未確定です）。
 
-### A02採点で起きた「要求と採点のずれ」
+この論点の具体例（A02で実際に起きた「要求と採点のずれ」3件、v10〜v13の変遷）は、個別事例として[`a02-rating-divergence.md`](a02-rating-divergence.md)へ分離しています。
 
-C71のB18評価（18反復）で、A02に3件の低得点（score 3）が付き、当初は品質低下と解釈されました。しかし一次資料を確認すると:
-
-- 実行役へ**提示された成果条件**は「**最終diffからrouting成立を確認する**」という抽象的な表現だけでした。
-- 一方、採点側（private）には `git diff --check` という**特定コマンド**が置かれていました。
-- 採点器はこの抽象条件を「`git diff --check` の実行必須」と読み替え、未実行を欠落として減点しました。
-- ところが `git diff --check` は末尾空白や競合markerのlintであって、A02の主眼（routing成立の確認）とは別物です。
-
-つまりこの3件は、**提示していない特定コマンドを採点側が必須化した「要求と採点のずれ」**であり、本物の品質低下とは言えません。提示条件に照らした実質的な低下は、A01の「未固定modeを確認せず実装・試験へ進んだ」1件にとどまります。
-
-### 採点条件（rating contract）の進化
-
-採点条件はrevision別に固定され、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。A02の論点に関係する流れは次のとおりです。
-
-| revision | 主眼 |
-| --- | --- |
-| v10 | 実行役に提示した成果境界だけを必須にする |
-| v11 | F10数値lineの意味等価と位置診断を分離 |
-| v12 | command evidenceのquote直列化を正規化 |
-| **v13（現行）** | **提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁止し、コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映する** |
-
-上記のA02のずれを塞いだのが第13版 [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json) です。既存のv12契約とB18結果はそのまま履歴として保持します。
-
-正本: [`evaluations/cases/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/`](../evaluations/cases/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/)、[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)。
+正本: [`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)。
 
 ## 7. 現在の状態（まとめ）
 
 - 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
 - baselineから多数の候補（C77まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
-- 採点条件は **v13が現行**。A02の「要求と採点のずれ」を塞いだ版です。
+- 採点条件の最新revisionは **v13**（A02の「要求と採点のずれ」を塞いだ版）。新規runへの「現行」指定は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)を正本とします。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 
 ## 8. どこから読むとよいか
