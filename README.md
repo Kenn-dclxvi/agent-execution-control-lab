@@ -75,3 +75,9 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |
 | [`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md) | 評価の実行手順 |
 | [`docs/prompt-control-design-principles.md`](docs/prompt-control-design-principles.md) | 制御追加・置換・削除の検討原則 |
+
+## License
+
+[Apache License 2.0](LICENSE)。
+
+ただし適用範囲には次の限定がある。case artifactの一部（`evaluations/cases/*/private/seed.patch`）は、評価対象instanceのrepository由来の小さなcode差分を含む。これらの権利は当該targetのrepositoryへ帰属し、このlicenseはそれを再許諾しない。
