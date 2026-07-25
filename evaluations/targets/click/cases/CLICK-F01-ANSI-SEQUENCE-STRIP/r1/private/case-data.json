@@ -1,0 +1,149 @@
+{
+  "case_id": "CLICK-F01-ANSI-SEQUENCE-STRIP",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "python-local-runtime",
+        "source-code",
+        "single-file-implementation",
+        "sequence-strip-guard"
+      ],
+      "equivalence_cluster_id": "compat-ansi-sequence-coverage",
+      "family": "F01",
+      "mirrors_case": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "seed_origin_commit": "71f2bafa541e7f798834e74076786ff4281ac83e"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      ".venv/bin/python -m pytest tests/test_compat.py tests/test_utils/test_style.py -q",
+      ".venv/bin/python -m pytest -q"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F01-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F01-C2",
+        "evidence_sources": [
+          "focused_gate",
+          "full_gate"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F01-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する。cwd外実行ではtests/test_utils/test__expand_args.py::test_expand_argsがseedと無関係に失敗する",
+    "mode": "repository_state_terminal_and_command_evidence",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient; pre-existing risk outside allowed paths does not block completion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F01-C1",
+        "expected": "CSI sequences with colon-delimited parameters or mouse reporting bytes are stripped and the focused gate passes.",
+        "type": "behavior_and_command"
+      },
+      {
+        "criterion_id": "CLICK-F01-C2",
+        "expected": "Existing SGR stripping behavior and non-sequence input handling remain valid.",
+        "type": "behavior"
+      },
+      {
+        "criterion_id": "CLICK-F01-C3",
+        "expected": "Focused and full gates pass and only allowed paths differ from the seeded fixture.",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "30 failed, 250 passed",
+      "focused_gate_files": [
+        "tests/test_compat.py",
+        "tests/test_utils/test_style.py"
+      ],
+      "full_gate": "30 failed, 1909 passed, 25 skipped, 1 xfailed",
+      "unseeded_full_gate": "1939 passed, 25 skipped, 1 xfailed"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "5672f2534111d0f664503d4c718fe5b99f349724",
+        "mode": "100644",
+        "path": "src/click/_compat.py"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "ed2d1f785a33e5bb55a5da058505ff8a11e8d875",
+      "fixture_head_tree": "0d09da148dcdbf9f7302d44d94ea1f0c823b54ac",
+      "seed_patch_raw_sha256": "936011b15e6e26277581302507a7bc724c7f868043d127e1cf89c8d8c81f4660",
+      "trial_prompt_input_raw_sha256": "12eadfb7754d9b1b1ecd1a60d962786977cdaee1d822fe7a2bbd6b8ebb428f2f"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "5672f2534111d0f664503d4c718fe5b99f349724",
+          "mode": "100644",
+          "path": "src/click/_compat.py",
+          "raw_sha256": "53a9265c044006bb43857363bf38d857ea0d9b46cc5e97b7de4b35ce725164fa"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "936011b15e6e26277581302507a7bc724c7f868043d127e1cf89c8d8c81f4660"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "ac55453d3a0fd070c903cd13f96f25b87283d96a",
+        "mode": "100644",
+        "path": "src/click/_compat.py",
+        "raw_sha256": "f7c0d505ffa145ecab7cfbfa24c815121d0ef1e92aebcd5fcf54f8da1a757d6f"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "ed2d1f785a33e5bb55a5da058505ff8a11e8d875",
+        "expected_tree": "0d09da148dcdbf9f7302d44d94ea1f0c823b54ac",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}
