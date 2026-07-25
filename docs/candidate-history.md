@@ -258,7 +258,7 @@ Candidate72とCandidate73は、いずれもCandidate71を直接sourceとし`VALI
 
 Candidate74以降はbundleを構築し評価した。番号「Candidate74」は上記分析中の`P3`削除提案の作業呼称とは別で、下表の型付き状態機械identityへ実際に割り当てられている（[`candidate71-control-abstraction-analysis.md`冒頭注記](candidate71-control-abstraction-analysis.md)）。
 
-| prompt set | 直接source | 変更軸 | 評価状態（正本: candidate index） |
+| prompt set | 直接source | 変更軸 | 評価状態（正本: リンク先の評価result） |
 | --- | --- | --- | --- |
 | Candidate74（`typed-execution-state-machine-r1`） | Candidate71 | flatな11 labelをauthority、identity、execution state、producer、validation DAG、method / recoveryの型付き状態機械へ再編 | [`v12 standard14 N=5 / evaluated`](../evaluations/results/candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md) |
 | Candidate75（`authority-bound-validation-fast-path-r1`） | Candidate74 | 型付き状態構造を維持し、authorityでdependencyが固定されない独立required validationを同一waveへ閉じる | [`F06 targeted N=5 / stopped`](../evaluations/results/candidate74-candidate75-candidate76-validation-wave-v12_2026-07-23.md) |
