@@ -1,0 +1,47 @@
+{
+  "artifact_roots": {
+    "cases": "evaluations/cases",
+    "profiles": "evaluations/profiles",
+    "prompt_baselines": "prompts/baselines",
+    "prompt_candidates": "prompts/candidates",
+    "prompt_releases": "prompts/releases",
+    "prompt_routes": "prompts/routes",
+    "published_results": "evaluations/results",
+    "rating_contracts": "evaluations/rating-contracts",
+    "sets": "evaluations/sets"
+  },
+  "authority_notes": {
+    "bundle_target_map": "各prompt bundleのmanifest.jsonを正本とする。target側directory構造への依存はbundleごとに固定する",
+    "gate_commands": "focused gateとfull gateは各case revisionのtrial-prompt-input.jsonを正本とし、このdescriptorへ複製しない",
+    "verification_root": "検証cloneのrootと容量維持はdocs/evaluation-storage-maintenance.mdを正本とする"
+  },
+  "current_rating_contract": "outcome-abstract-condition-preserving-owner-diagnostic-v13",
+  "executor": "codex",
+  "layout": "legacy_root",
+  "naming_prefix": "the-caption",
+  "schema_version": "the-caption-prompt.evaluation-target/v1",
+  "target_id": "the-caption",
+  "target_repository": {
+    "additional_refs": [
+      {
+        "commit": "eebc1c6c106f504978482238fd760fb73f5fff36",
+        "tree": "6366adbb7eaf9db55763e39797b5e070905ede16",
+        "used_by": [
+          "TC-A06-BROAD-CONFORMANCE-AUDIT-CONTEXT-BOUNDARY/r1"
+        ]
+      }
+    ],
+    "primary_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "ref_authority": "各case revisionのprivate/case-data.jsonのfixture.target_identityと、各profileのcomparison_conditions.target_repository_ref",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git"
+  },
+  "target_specific_modules": [
+    "scripts/quality_audit_policy.py",
+    "scripts/standard14_quality_audit.py"
+  ],
+  "third_party_reproducible": false,
+  "visibility": "private"
+}

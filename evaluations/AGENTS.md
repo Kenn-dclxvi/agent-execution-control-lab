@@ -2,6 +2,17 @@
 
 `evaluations/`の指示は、evaluation foundation v3の境界を扱う。root `AGENTS.md`の共通規則に加えて、この領域規則を適用する。評価基盤のLayerと境界は`docs/prompt-comparison-workflow.md`、実行方法は`docs/evaluation-loop-manual.md`を正本とする。
 
+## Target instance
+
+計測系列は評価対象repositoryごとのinstanceとして別管理する。instanceの登録、layout、境界の正本は`evaluations/targets/README.md`とする。
+
+- target非依存のkernel（`scripts/`のfixture固定と4 Layer実行、`layer2/`）へ、target固有のpath、case ID、分岐を追加しない。
+- target固有の採点補助はinstance側のmoduleとして分け、既存instanceのmoduleを新instanceの都合で変更しない。
+- 既存instance `the-caption`のartifact path（`evaluations/cases`、`evaluations/profiles`、`evaluations/sets`、`evaluations/rating-contracts`、`evaluations/results`、`prompts/`配下）を移動しない。
+- 新instanceのartifactは`evaluations/targets/<target_id>/`配下へ閉じる。
+- 別instanceのresultを同一比較へ入れない。rating contractがinstance単位である以上、`quality_score`の絶対値をinstance間で比較しない。
+- instanceのdescriptorは参照とtarget固有identityだけを持ち、gate command、bundle target map、resultの実体を複製しない。
+
 ## 4 Layer
 
 評価は次の4 Layerに限定する。

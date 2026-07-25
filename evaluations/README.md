@@ -2,6 +2,7 @@
 
 prompt比較用のcase、execution profile、再現可能なresultを管理する。
 
+- `targets/`: 評価対象repositoryごとのinstance台帳とdescriptor
 - `cases/`: task入力、fixture contract、oracle / grader境界
 - `profiles/`: model、Agent、environment、反復、順序、比較条件
 - `rating-contracts/`: quality scoreのrevisionとscore `4`の必要evidence条件

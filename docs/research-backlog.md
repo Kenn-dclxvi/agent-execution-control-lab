@@ -95,6 +95,64 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
 - candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
 
+## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（未着手）
+
+**未実施。** 現行の計測系列は非公開repository `Kenn-dclxvi/THE-CAPTION`をtargetにbindしており、第三者は同一caseを取得しても実行できない。この項目が扱うのは、公開repositoryを対象とする計測系列を独立に立ち上げ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
+
+### 現在の依存範囲（2026-07-26に実測）
+
+repository非依存な層とtarget固有な層は次のとおりである。
+
+| 層 | artifact | 実測した状態 |
+| --- | --- | --- |
+| Layer 1 fixture | `scripts/prepare_case_fixture.py` | CLI引数は`--case` / `--source-repo` / `--output`のみで、target repositoryはparameter。固有pathのhard-codeなし |
+| Layer 2〜4実行 | `scripts/evaluation_loop.py` | set / cycle / capsule / registry単位で動作し、target固有pathを持たない。`scripts/`と`layer2/`の`.py`に現れる固有語はschema名prefix `the-caption-prompt`（94件）、環境変数名、git author名、set idなどの識別子・記述文字列で、target repositoryによる実行分岐は持たない |
+| 制御prompt本文 | [Candidate71 release](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)の`AGENTS.md.txt` | `SPEC`〜`RECOVERY`の13 labelは見出し語を除きproject固有語彙を持たない |
+| bundle target map | 同releaseのmanifest 19 target | `src/` `tests/` `scripts/` `docs/`階層のauthority fileと`docs/reference/project-contexts/the-caption.txt`という**target側のdirectory構造に依存**する |
+| case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | `fixture.target_identity`へrepository / commit / treeをbindし、gate commandに`.venv/bin/python -m pytest ...`と`bash scripts/dev/main_verify.sh`を含む |
+| rating contract | `evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json` | `boundary_rules`と`case_quality_rules`を**case ID単位**（`TC-A01` / `TC-A02` / `TC-F10`等）で内包する |
+| 採点補助 | `scripts/quality_audit_policy.py`、`scripts/standard14_quality_audit.py` | `src/domain/market_units_snapshot.py`、`src/domain/collection_history_updater.py`、`main_verify.sh`をhard-codeする |
+
+したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。この4つをtarget単位で差し替え可能な単位として分離できるかが、他repositoryでの計測成立条件になる。制御prompt本文と3 KPI、compatibility key、append-only registryは現状のまま流用できる見込みだが、実測は未実施である。
+
+この分離の境界とinstance台帳は[`evaluations/targets/README.md`](../evaluations/targets/README.md)で確定した。既存の計測系列はtarget instance `the-caption`（`layout: legacy_root`）として登録し、artifact pathを移動していない。
+
+### target選定gate（この順で判定する）
+
+1〜4は候補の機械的な絞り込み、5〜7は測定が成立するかの判定である。
+
+1. **license**: seed patch、fixture条件、evidenceをこのrepositoryへ保存し公開するため、再配布可能なlicense（Apache-2.0 / MIT / BSD等）に限定する。
+2. **offline再現性**: 依存を事前materializeした状態で、network遮断のまま全required gateがpassする。permissionは`approval_policy: never` / `sandbox: workspace-write`である（[profile実測](../evaluations/profiles/candidate1-expanded12-global-m24-n5-r1.json)）。
+3. **容量**: self-contained fixtureをrun数ぶんmaterializeするため、soft 3 GiB / hard 5 GiBの運用値（[`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md)）に収まる。
+4. **gate所要時間**: 標準14項目 × A / B × `N=5`で140 run規模になるため、1 runのfull gateがこの規模で回る長さである。
+5. **測定感度**: 複数subsystemへ跨る変更、2階層以上のdirectory構造、worker委譲が意味を持つ広さを持つ。単一責務のlibraryでは`CONTEXT` / `OWNER_ROLE` / `INDEPENDENCE`の差がKPIへ出ない。
+6. **天井効果の回避**: 既存setでもF05 out-of-scopeとF07 dependency pairは全runが`quality_score` 100である（[`cases/README.md`](../evaluations/cases/README.md)）。modelが解法を記憶しているseedはこれを悪化させるため、seed diffの取得元commitの新しさで制御する。
+7. **prompt target collision**: target側が既に`AGENTS.md`等のauthority fileを持つと、bundle overlayでcase条件やtarget側規則が消える。F09が`prompt_target_collision`でexecution blockedになったのと同型のriskである。
+8. **case供給**: 公開issue / PR履歴からreal taskを取得でき、case追加根拠自体を第三者が検証できる。
+9. **言語分布**: 既存setはPython中心にReact / TypeScript（F04）、shell runner（F07）、docs-only（F08）を含む。1 repositoryで満たせない場合は初期setを縮小する判断が必要になる。
+
+### 独立系列としての扱い
+
+- `target_repository_ref`はcompatibility keyの一項目である（[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)）。**公開target系列を既存result集合と同一比較へ混ぜない。** baselineから再取得する。
+- 項目8（Claude Code CLI executor置換）と同一比較単位へ入れない。executor変更とtarget変更を同時に入れると効果を切り分けられない。
+- rating contractをcase単位で作り直す以上、`quality_score`の絶対値をTHE-CAPTION系列と比較しない。観察できるのは各系列内の差と、方向の一致だけである。
+
+### 未確定事項
+
+- 候補repositoryの容量、gate所要時間、flaky率はいずれも未実測である。候補を固定してから実測する。
+- `.venv`を含むknown-good実行環境（[`cases/README.md`](../evaluations/cases/README.md)のself-contained fixture）を、第三者へどう再現させるかが未決である。lockfileからの再構築手順で足りるか、fixture条件として固定する必要があるかを判定していない。
+- instance境界、layout、descriptorは[`evaluations/targets/README.md`](../evaluations/targets/README.md)で確定した。残る未設計は**target固有採点補助のadapter化**であり、既存`scripts/quality_audit_policy.py`と`scripts/standard14_quality_audit.py`を変更せずに新instance用moduleをどう追加するかを決めていない（[`scripts/AGENTS.md`](../scripts/AGENTS.md)）。
+
+### 段階計画
+
+1. **Phase 0**: gate 1〜4で候補を2〜3件へ絞り、実測値を記録する。
+2. **Phase 1**: 各候補で最小1 case（F01型: 単一fileへseed patch + focused gate）をfixture qualificationする。
+3. **Phase 2**: bit-identical bundleで`N=10`のnull calibrationを行う（[`TC-F01 r2 N=10`](../evaluations/results/TC-F01-r2_identical-bundle-n10_2026-07-15.md)と同じ手順）。flakyとtoken分散から感度の下限を確認する。
+4. **Phase 3**: nullが通った1 repositoryだけで、F02型（cross-layer）とF10-R型（非破壊review）へ拡張する。制御差が観測されるのはこの2型である。
+5. **Phase 4**: case pack一式と縮小setを公開単位として固定する。
+
+candidate bundleを作る段階ではcandidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通す。
+
 ## 着手時の共通条件
 
 - 一つのcandidateで一つのpredicateまたは一つの変更軸だけを扱う（[`prompts/AGENTS.md`](../prompts/AGENTS.md)のcandidate作成前gate9項目）
