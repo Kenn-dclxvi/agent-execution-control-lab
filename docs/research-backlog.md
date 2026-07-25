@@ -24,28 +24,35 @@
 
 ## 3. A01の3択variation診断
 
-A01の現行2択caseを回帰基準として維持したまま、3択以上の未固定modeを持つvariationを診断用に追加できる。補集合選択か、mode名・候補順序・現在値・test期待値のauthority化かを切り分ける目的。
+**未実施。** A01の現行2択caseを回帰基準として維持したまま、3択以上の未固定modeを持つvariationを診断用に追加する。設計条件は次のとおり。
 
-- 正本: [`future-roadmap.md`](future-roadmap.md)の「評価setの役割と育て方」節（設計条件を記載）
-- 未実施。追加の根拠・対にするcase設計・反復条件は同節に従う
+- 2択で非現行値を選び、3択では確認して停止するなら、補集合選択の可能性が高い。
+- 3択でも特定値を選ぶなら、mode名の意味、候補順序、現在値、test期待値などをauthorityへ変換している可能性を調べる。
+- 現在値と候補順序を回転し、曖昧なら停止するcaseとrepository authorityから一意に解決できるcaseを対にして、過剰停止と未指定値補完の両方を観測する。
 
-## 4. 投影済みCandidate71に残る未解決risk
+case追加の一般規則（追加根拠の限定、既存revisionを上書きしないこと、反復数の固定）は[`future-roadmap.md`](future-roadmap.md)の「評価setの役割と育て方」節を正本とする。
 
-Candidate71は評価上`stopped`（品質gate不通過）のまま、別の採用判断でTHE-CAPTION本体へ投影済みである。次の2件は取り消されていない。
+## 4. 投影済みCandidate71のrisk（当時の記録と現在解釈を分離）
 
-| 未解決risk | 観測 |
-| --- | --- |
-| A02で`git diff --check`欠落 | 3 / 90件 |
-| A01で未固定modeを確認せず実装・試験へ進んだ誤実行 | 1 / 90件 |
+Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別の採用判断でTHE-CAPTION本体へ投影済みである。当時のrelease artifactに保存された未解決riskは2件で、これはimmutableな記録として取り消さない。一方、rating v13による現在解釈では、この2件の位置づけが分かれる。
 
-- 正本: [`Candidate71 release / projection`](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)
-- A02の「要求と採点のずれ」自体はrating v13で整理済み。整理の経緯は[`repository-overview.md`](repository-overview.md)のA02採点節、rating契約は[`control-mechanisms.md`](control-mechanisms.md)の参照先を正本とする
+| 当時のrelease risk（v12時点） | 観測 | rating v13後の現在解釈 |
+| --- | --- | --- |
+| A02で`git diff --check`欠落 | 3 / 90件 | **現在の未完了研究項目ではない。** 実行役へ提示していない特定コマンドを採点側が必須化した「要求と採点のずれ」であり、本物の品質低下と区別される。v13でこのずれを塞いだ |
+| A01で未固定modeを確認せず実装・試験へ進んだ誤実行 | 1 / 90件 | **現在も残る品質上のrisk。** v13でも品質上の問題として扱う |
 
-## 5. F10 location mismatchの原因診断
+- 当時の未解決riskの正本: [`Candidate71 release / projection`](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)（v12結果は履歴として保持）
+- 現在解釈の正本: [`control-mechanisms.md`](control-mechanisms.md)のrating v13節と[`repository-overview.md`](repository-overview.md)のA02採点節
+- したがって研究項目として残るのはA01側の挙動である。A01の未固定mode確認は上記「3. A01の3択variation診断」と同じ論点に接続する
 
-Candidate41 B18などで観測したF10のfinding location誤差は、prompt境界へ直ちに変換せず、誤差の発生段階を識別する診断を先に置く方針。診断の最初の対象はprompt規則ではなく、model-visible入力を変えない記録`CLAIM_PROVENANCE`である。
+## 5. F10 location mismatch: exact coordinateのevidence interface（別軸）
 
-- 正本: [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md)
+**原因診断そのものは実施済みで、prompt側の変更は停止している。** `CLAIM_PROVENANCE` collectorと90件backfillの後、30件checkpoint診断（`max_30_diagnostic_valid_without_location_mismatch`で停止）、追加105件、coordinate representation診断、delayed reconstruction診断、implicit coordinate passive case-control、real-Agent representation recency診断、recorded-state collision受動監査まで到達した。
+
+正本の現在判断は、repository-wideに削除できるprompt判断点を確認できないため、**prompt変更と追加model runをここで止める**ことである。残る未完了項目は次の一点。
+
+- exact coordinateがhard requirementである場合に限り、modelが選んだexact line textをdeterministicなsource indexでone-based coordinateへ変換する**evidence interface要件を別軸で検討**する。prompt制御の変更軸としては扱わない。
+- 正本: [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md)（「対策判断への接続」節と各診断結果節）
 - 制御graph側の判断（location mismatchを理由にroot規則を追加しない）は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)を参照
 
 ## 着手時の共通条件
