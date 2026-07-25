@@ -1,5 +1,8 @@
 # Candidate43制御要素の目的別分別
 
+> [!NOTE]
+> **正本の範囲**: 本書はCandidate43時点の**目的別分別**（A / F / D / M / R系の区分と記号体系、labelから目的領域への対応）を正本とする。その後Candidate71では11 labelを句単位で監査し、labelごとの**Candidate作成根拠と監査状態**を別軸で判定した。各labelを変更してよいかの現在判定は[`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md)の「監査状況の分類」表を正とし、本書の分類と混同しない。未完了の再測定項目は[`research-backlog.md`](research-backlog.md)にある。
+
 ## 結論
 
 Candidate43の9 labelは、九つの独立した規則ではない。A系、F系、明示委譲、手段選択、回復上限という五つの目的が、`SPEC`、`PRODUCER`、`OWNER_ROLE`を介して相互参照している。
