@@ -2,6 +2,8 @@
 
 このリポジトリは、プロンプト文面の良し悪しを感覚的に決める場所ではなく、AIエージェントの実行制御が成果品質、token、最終結果までの時間、実行経路へ与える影響を再現可能に測る実験基盤として使う。改善対象は文章量そのものではなく、worker起動、context継承、model再入、read、validation、停止、result bindingなどの実行上の判断点である。
 
+この文書は恒久的な方針を扱う。現在未完了の個別項目（label監査の再測定、`P3`削除candidate、A01 variation、未解決riskなど）は[`research-backlog.md`](research-backlog.md)へ集約する。
+
 ### 基本的な改善サイクル
 
 1. 現行のtarget repository ref、prompt identity、model、Agent環境、TaskSpec、permission、fixture、evaluation set、rating contract、反復条件を固定する。
