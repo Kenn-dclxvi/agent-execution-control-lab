@@ -41,6 +41,7 @@
 | 文書 | 役割 |
 |---|---|
 | [`control-mechanisms.md`](control-mechanisms.md) | 横断的な制御メカニズムの知見 |
+| [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ### 2c. 運用・評価infra spec
