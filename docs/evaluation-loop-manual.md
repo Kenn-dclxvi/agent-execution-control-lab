@@ -246,7 +246,9 @@ python3 scripts/owner_producer_evidence.py \
   --output "$CYCLE/layer3/owner-producer-evidence.json"
 ```
 
-`owner_producer_evidence.py`のexit `0`は全valid runがscore `4`のowner-evidence必要条件を満たすこと、exit `1`は1件以上で欠落または不一致があることを示す。exit `1`でもrunを自動で失格または除外せず、quality raterが成果全体を0〜3で採点する。
+`owner_producer_evidence.py`のexit `0`は全valid runでowner-producer evidenceがbindできたこと、exit `1`は1件以上で欠落または不一致があることを示す。**現行のv13ではこのexit codeをscoreの上限へ変換しない。** owner-producer evidenceは`diagnostic_only`であり、exit `1`のrunも診断として記録したうえで、提示した成果条件・禁止境界・コマンド名まで明示された必須試験の充足だけで0〜4を採点する（充足していればscore `4`を記録する）。実装も`owner_producer_evidence_policy`が`score_4_gate`のrevisionだけscore `4`を拒否する。
+
+v1〜v8では同じexit `1`がscore `4`の拒否条件だった。この扱いはv8以前で採点した既存resultの条件として保持し、v9以降の新規runへ適用しない。
 
 ```bash
 python3 "$CLI" rate \

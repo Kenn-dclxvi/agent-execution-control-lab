@@ -320,6 +320,64 @@ class OwnerProducerEvidenceTests(unittest.TestCase):
                 "outcome-quality-owner-diagnostic-v9",
             )
 
+    def test_rating_v13_records_missing_owner_as_diagnostic_without_lowering_score(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            cycle = self.make_cycle(
+                Path(temp),
+                with_child=False,
+                quality_rating=QUALITY_RATING_V13,
+            )
+            evidence = cycle / "layer2" / "evidence" / "run-1"
+            (evidence / "execution.json").write_text(
+                json.dumps({"status": "valid"}), encoding="utf-8"
+            )
+            report_path = cycle / "layer3" / "owner-producer-evidence.json"
+            report_path.parent.mkdir(parents=True)
+            report_path.write_text(json.dumps(collect(cycle)), encoding="utf-8")
+            command_path = (
+                cycle
+                / "layer2"
+                / "extensions"
+                / "run-1"
+                / "all-agent-command-evidence"
+                / "evidence.json"
+            )
+            command_path.parent.mkdir(parents=True)
+            command_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": QUALITY_RATING_V13[
+                            "command_evidence_schema_version"
+                        ],
+                        "run_id": "run-1",
+                        "attempted_commands": [],
+                        "successful_commands": [],
+                        "failed_commands": [],
+                        "protocol_violations": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            layer3_rate(
+                Namespace(
+                    cycle=str(cycle),
+                    reason="outcome is correct; owner route is diagnostic",
+                    run_id="run-1",
+                    score=4,
+                )
+            )
+
+            rating = json.loads(
+                (cycle / "layer3" / "ratings" / "run-1.json").read_text()
+            )
+            self.assertEqual(rating["score"], 4)
+            self.assertEqual(rating["owner_producer_evidence_status"], "failed")
+            self.assertEqual(
+                rating["quality_rating_contract"],
+                "outcome-abstract-condition-preserving-owner-diagnostic-v13",
+            )
+
     def test_rating_v4_requires_bound_command_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             cycle = self.make_cycle(Path(temp), with_child=True)
