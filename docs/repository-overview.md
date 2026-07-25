@@ -82,9 +82,9 @@ THE-CAPTION（別リポジトリの本体システム）に与える**プロン�
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
 
-bundle 75件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。identityの正本は各`manifest.json`、評価状態の正本はindexの「状態」列がリンクする評価resultまたは設計記録です。系譜と観測は[`docs/candidate-history.md`](candidate-history.md)に記載します。
+bundle 75件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、評価状態は独立したevaluation / diagnostic result、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。indexはこれらへの一覧と導線です。
 
-掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / draft`枝で、blind quality ratingを実施しておらず`evaluations/results/`に登録resultがありません（評価状態は`manifest.json`と各設計記録が正本）。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
+掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 
 ### release（4件）と本体反映状況
 
