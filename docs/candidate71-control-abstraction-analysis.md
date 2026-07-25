@@ -3,6 +3,14 @@
 > [!IMPORTANT]
 > **番号「Candidate74」の帰属に注意**: 本文が`P3`削除提案の作業名として繰り返す「Candidate74」は、本分析時点で作成前gateだけを定義しbundle・profile・評価が未着手の提案呼称である。その後、番号「Candidate74」は別軸の`the-caption-3ce91a4-typed-execution-state-machine-r1`（`standard14_evaluated`）へ実際に割り当てられた。Candidate番号とlineageの正本は[`prompts/candidates/README.md`](../prompts/candidates/README.md)、release・projectionの正本は[`prompts/releases/README.md`](../prompts/releases/README.md)とする。`P3`削除提案を「Candidate74」として新規作成せず、着手時は正本で現行の番号割当てを確認する。以下の各判定は当時の記述として保持する。
 
+> [!NOTE]
+> **この文書の読み方**（追補）: 本文は「現在の総括」「label別の監査台帳」「監査初期の履歴」が同居する。目的別の入口は次のとおり。
+>
+> - **現在の総括を知る**: [監査状況の分類](#監査状況の分類完了と再測定要の分離)（11 labelの最終判定と、再測定が必要な項目）。文書末尾にある。
+> - **個別labelの根拠を読む**: 各`<label>監査結果`節（`OWNER_ROLE`、`SPEC`、`CONTEXT`、`PRODUCER`、`INDEPENDENCE`、`TERMINAL`、`ROOT`、`DECISION_BOUNDARY`、`METHOD`、`RECOVERY`の10節。`VALIDATION_CLOSURE`は凍結のため独立節を持たない）。
+> - **未完了項目の着手判断**: [`research-backlog.md`](research-backlog.md)（`CONTEXT` X1、`INDEPENDENCE` I1、`RECOVERY` R1・R2、`P3`削除candidateを索引化）。
+> - **履歴として読む**: 直下の`結論`に続く`五つの制御機能`から`現在の判定`までは監査初期（`OWNER_ROLE`→`SPEC`着手時点）の記述である。現在の判定として読まない。
+
 ## 結論
 
 Candidate71のKPI差から確認できる因果は、11 label全体ではなく、Candidate69へ追加した`VALIDATION_CLOSURE`一行の効果に限定される。
