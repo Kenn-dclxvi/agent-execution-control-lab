@@ -65,6 +65,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | ドキュメント | 内容 |
 | --- | --- |
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
+| [`docs/execution-control-research-paper.md`](docs/execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針との対照 |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
 | [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate77までの系譜と知見 |
 | [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
