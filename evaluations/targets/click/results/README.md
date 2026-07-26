@@ -9,5 +9,6 @@ target instance `click`の公開済み履歴評価結果を置く。
 | [`click control-free F01-only P1-c N=5 B=3`](click-control-free-f01-only-p1c-n5-b3_2026-07-26.md) | `click-f01-only-r1` | 15 | 同一Bundle Aのbatch間基準線 |
 | [`click control-free F02-only N=3`](click-control-free-f02-only-n3_2026-07-26.md) | `click-f02-only-r1` | 3 | Bundle Aの追加case成立確認 |
 | [`click control-free Std14 N=5`](click-control-free-standard14-n5_2026-07-26.md) | `click-standard14-r1` | 70 | Bundle AのClick標準14 baseline |
+| [`click Control-Free / C81全文 Std14 N=5`](click-control-free-c81-full-standard14-n5_2026-07-26.md) | `click-standard14-r1` | 70 + 70 | Bundle A / Bundle B水平比較。品質差0、token中央値-23.96%、elapsed中央値+2.86% |
 
-resultはwrite-onceで、revisionによる上書きをしない。別instanceのresultを同一比較へ入れない。F01、F02、各追加caseのtargeted resultはset / rating revisionが異なるため同一comparisonへ混ぜない。Std14 resultはBundle A自身のbaselineであり、Bundle間比較、採用、release、runtime projectionを示さない。
+resultはwrite-onceで、revisionによる上書きをしない。別instanceのresultを同一比較へ入れない。F01、F02、各追加caseのtargeted resultはset / rating revisionが異なるため同一comparisonへ混ぜない。Std14のBundle A / B比較は評価結果であり、採用、release、runtime projectionを示さない。

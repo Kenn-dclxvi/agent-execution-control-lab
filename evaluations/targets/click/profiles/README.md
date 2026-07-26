@@ -17,6 +17,7 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | [`click-control-free-f07-p-only-global-m24-n3-r3`](click-control-free-f07-p-only-global-m24-n3-r3.json) | `click-f07-p-only-r3` | 1 | 3 | 1 | 24 | 完了（3 / 3 score 4） |
 | F08 / F10 / F10-R / A01 / A02の各`only-global-m24-n3-r1` | 対応するonly set | 各1 | 3 | 1 | 24 | 完了（各3 / 3、全件score 4） |
 | [`click-control-free-standard14-global-m24-n5-r1`](click-control-free-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
+| [`click-c81-full-standard14-global-m24-n5-r1`](click-c81-full-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
 
 `B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
 

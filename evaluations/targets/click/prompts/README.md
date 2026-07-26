@@ -16,4 +16,8 @@ control-free条件の固定方法は`the-caption`側の[`control-free-generic`](
 
 ## candidates
 
-未作成である。candidateは一つのpredicateまたは一つの変更軸だけを扱い、作成前gate 9項目（[`prompts/AGENTS.md`](../../../../prompts/AGENTS.md)）を通してからbundleを作る。
+| prompt identity | target数 | bundle SHA-256 | 条件 |
+| --- | ---: | --- | --- |
+| [`click-00e592c-validation-wrapper-precedence-r1`](candidates/click-00e592c-validation-wrapper-precedence-r1/manifest.json) | 1 | `4cf14889a07da0ede098bf813a005e0cda224916f7bafa32b8cdf2fc4a99b91a` | Bundle B。THE-CAPTION Candidate81のroot本文をbyte-identicalに水平適用。Std14評価済み |
+
+Candidateは一つのpredicateまたは一つの変更軸だけを扱い、作成前gate 9項目（[`prompts/AGENTS.md`](../../../../prompts/AGENTS.md)）を通してからbundleを作る。Bundle Bは個別predicateを分離せず、固定済みC81全文の有無を一つの構成軸として扱う。設計境界は[`Click C81全文水平適用`](../../../../docs/click-c81-full-portability-design.md)を正本とする。
