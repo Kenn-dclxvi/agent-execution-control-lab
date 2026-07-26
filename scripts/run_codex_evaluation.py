@@ -72,6 +72,14 @@ COMMAND_EVIDENCE_PROTOCOL = {
     "schema_version": "the-caption-prompt.command-evidence-protocol/v1",
     "mode": "separate_required_commands_with_structured_exit",
 }
+ORDERED_ROOT_WRAPPER_PROTOCOL = {
+    "schema_version": "the-caption-prompt.command-evidence-protocol/v2",
+    "mode": "ordered_root_wrapper_with_structured_exit",
+}
+SUPPORTED_COMMAND_EVIDENCE_PROTOCOLS = (
+    COMMAND_EVIDENCE_PROTOCOL,
+    ORDERED_ROOT_WRAPPER_PROTOCOL,
+)
 ADAPTER_TEARDOWN_PROTOCOL = {
     "schema_version": "the-caption-prompt.adapter-owned-teardown/v1",
     "failure_policy": "exclude_as_external_failure",
@@ -268,7 +276,15 @@ def command_protocol_for_case(
     if declaration is None:
         return None, []
     declaration = require_object(declaration, "executor_parameters.command_evidence_protocol")
-    if any(declaration.get(key) != expected for key, expected in COMMAND_EVIDENCE_PROTOCOL.items()):
+    protocol = next(
+        (
+            candidate
+            for candidate in SUPPORTED_COMMAND_EVIDENCE_PROTOCOLS
+            if all(declaration.get(key) == expected for key, expected in candidate.items())
+        ),
+        None,
+    )
+    if protocol is None:
         raise AdapterError("unsupported command evidence protocol")
     omitted_case_ids = require_string_array(
         declaration.get("omit_for_cases", []),
@@ -294,7 +310,7 @@ def command_protocol_for_case(
             )
         )
     return {
-        **COMMAND_EVIDENCE_PROTOCOL,
+        **protocol,
         "required_command_groups": groups,
     }, groups
 
@@ -770,18 +786,43 @@ def render_task(
     serialized = json.dumps(trial_input, ensure_ascii=False, indent=2, sort_keys=True)
     task = "以下のTaskSpecに従って作業してください。\n\n<task-spec-json>\n" + serialized + "\n</task-spec-json>\n"
     if command_evidence_protocol is not None:
-        if any(
-            command_evidence_protocol.get(key) != expected
-            for key, expected in COMMAND_EVIDENCE_PROTOCOL.items()
-        ) or not isinstance(command_evidence_protocol.get("required_command_groups"), list):
+        protocol = next(
+            (
+                candidate
+                for candidate in SUPPORTED_COMMAND_EVIDENCE_PROTOCOLS
+                if all(
+                    command_evidence_protocol.get(key) == expected
+                    for key, expected in candidate.items()
+                )
+            ),
+            None,
+        )
+        if protocol is None or not isinstance(
+            command_evidence_protocol.get("required_command_groups"), list
+        ):
             raise AdapterError("unsupported command evidence protocol")
+        task += "\n以下は全candidate共通の評価用command証跡protocolです。\n"
+        if protocol == ORDERED_ROOT_WRAPPER_PROTOCOL:
+            task += (
+                "root producerはrequired validation command群を1回のcustom exec wrapper内から、"
+                "列挙順にtools.exec_commandへ1 commandずつ個別invocationしてください。"
+                "wrapper内で各exit_codeを確認し、nonzeroまたはunavailableなら後続commandを発行せず、"
+                "完了済みの全resultを一度だけmodelへ返してください。\n"
+                "shell commandをcompound command、`&&`、`;`で結合しないでください。"
+                "各結果を{\"command\":実行した完全なcommand文字列,\"exit_code\":返却された整数}の"
+                "JSONとして出力してください。\n"
+                "descendant workerへ委譲する場合もworker packetに同じprotocolを含め、同じwrapper境界を"
+                "適用してください。exit_code=0のtool resultがないcommandをPASSと報告しないでください。\n"
+            )
+        else:
+            task += (
+                "TaskSpecのrequired validation commandは1 commandずつ個別のexec_commandで実行し、"
+                "compound commandへまとめないでください。\n"
+                "descendant workerがcustom exec wrapperを使う場合は、各結果を"
+                "{\"command\":実行した完全なcommand文字列,\"exit_code\":返却された整数}のJSONとして出力してください。\n"
+                "worker packetにも同じprotocolを含め、exit_code=0のtool resultがないcommandをPASSと報告しないでください。\n"
+            )
         task += (
-            "\n以下は全candidate共通の評価用command証跡protocolです。\n"
-            "TaskSpecのrequired validation commandは1 commandずつ個別のexec_commandで実行し、"
-            "compound commandへまとめないでください。\n"
-            "descendant workerがcustom exec wrapperを使う場合は、各結果を"
-            "{\"command\":実行した完全なcommand文字列,\"exit_code\":返却された整数}のJSONとして出力してください。\n"
-            "worker packetにも同じprotocolを含め、exit_code=0のtool resultがないcommandをPASSと報告しないでください。\n"
             "<command-evidence-protocol-json>\n"
             + json.dumps(command_evidence_protocol, ensure_ascii=False, sort_keys=True)
             + "\n</command-evidence-protocol-json>\n"

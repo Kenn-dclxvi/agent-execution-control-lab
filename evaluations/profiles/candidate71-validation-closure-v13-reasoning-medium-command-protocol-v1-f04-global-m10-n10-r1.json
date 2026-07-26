@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {"id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY", "revision": "r2"}
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.144.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted"
+    },
+    "executor_parameters": {
+      "adapter_owned_teardown": {
+        "failure_policy": "exclude_as_external_failure",
+        "paths_by_case": {
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            "src/web/market_units_editor/node_modules",
+            "src/web/market_units_editor/dist"
+          ]
+        },
+        "schema_version": "the-caption-prompt.adapter-owned-teardown/v1"
+      },
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [],
+        "required_command_groups_by_case": {
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            ["npm", "ci"],
+            ["npm", "run", "lint"],
+            ["npm", "run", "build"]
+          ]
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "max_per_case_from_existing_f12_and_a01_a02_history",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 10,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "medium",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {"approval_policy": "never", "sandbox": "workspace-write"},
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "outcome-abstract-condition-preserving-owner-diagnostic-v13",
+      "contract_sha256": "d2dd4096911c35257c2866872d071f2ee5137bb3dcb6a7b279853e3ebe581f1f",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 10,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-command-protocol-f04-r1",
+      "evaluation_set_revision": "r1",
+      "source": "標準14項目F04 r2の同じmodel-visible TaskSpecをcommand protocol診断の対象1項目として固定する"
+    }
+  },
+  "evaluation_set": {"revision": "r1", "set_id": "the-caption-command-protocol-f04-r1"},
+  "execution": {
+    "duration_hints_seconds": {
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": 442.087
+    },
+    "max_attempts": 3,
+    "max_workers": 10,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "profile_id": "candidate71-validation-closure-v13-reasoning-medium-command-protocol-v1-f04-global-m10-n10-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "995481ad58ad1bc11628bfd8b8978ed904d62989a28caa87268b30d5c5a58695",
+    "name": "the-caption-3ce91a4-validation-closure-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {"adoption": "not_decided", "release": "not_decided", "runtime_projection": "not_authorized"}
+}

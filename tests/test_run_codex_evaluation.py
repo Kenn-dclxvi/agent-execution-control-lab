@@ -11,6 +11,7 @@ from scripts.run_codex_evaluation import (
     ADAPTER_TEARDOWN_PROTOCOL,
     AdapterError,
     COMMAND_EVIDENCE_PROTOCOL,
+    ORDERED_ROOT_WRAPPER_PROTOCOL,
     agents_max_threads_from_conditions,
     adapter_teardown_paths_from_protocol,
     capability_catalog_external_failure,
@@ -368,6 +369,42 @@ class RunCodexEvaluationTest(unittest.TestCase):
 
         with self.assertRaisesRegex(AdapterError, "unsupported command evidence protocol"):
             render_task(case, command_evidence_protocol={"schema_version": "other"})
+
+    def test_render_task_adds_ordered_root_wrapper_protocol(self) -> None:
+        case = {"payload": {"trial_prompt_input": {"task_id": "TC-F04"}}}
+
+        task = render_task(
+            case,
+            command_evidence_protocol={
+                **ORDERED_ROOT_WRAPPER_PROTOCOL,
+                "required_command_groups": [
+                    ["npm", "ci"],
+                    ["npm", "run", "lint"],
+                    ["npm", "run", "build"],
+                ],
+            },
+        )
+
+        self.assertIn("1回のcustom exec wrapper内", task)
+        self.assertIn("tools.exec_commandへ1 commandずつ個別invocation", task)
+        self.assertIn("nonzeroまたはunavailableなら後続commandを発行せず", task)
+        self.assertIn("全resultを一度だけmodelへ返", task)
+        self.assertIn("compound command、`&&`、`;`で結合しない", task)
+        self.assertIn('"schema_version": "the-caption-prompt.command-evidence-protocol/v2"', task)
+
+    def test_selects_ordered_root_wrapper_protocol_for_current_case(self) -> None:
+        declaration = {
+            **ORDERED_ROOT_WRAPPER_PROTOCOL,
+            "required_command_groups_by_case": {
+                "TC-F04": [["npm", "ci"], ["npm", "run", "lint"]],
+            },
+        }
+
+        task_protocol, groups = command_protocol_for_case(declaration, "TC-F04")
+
+        self.assertEqual(groups, [["npm", "ci"], ["npm", "run", "lint"]])
+        assert task_protocol is not None
+        self.assertEqual(task_protocol, {**ORDERED_ROOT_WRAPPER_PROTOCOL, "required_command_groups": groups})
 
     def test_selects_required_command_groups_for_current_case(self) -> None:
         declaration = {
