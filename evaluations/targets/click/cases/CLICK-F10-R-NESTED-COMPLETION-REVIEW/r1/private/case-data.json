@@ -1,0 +1,122 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "CLICK-F10-R-NESTED-COMPLETION-REVIEW",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "pallets/click",
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "case_spec": {
+      "family": "F10-R",
+      "equivalence_cluster_id": "fixed-diff-correctness-review",
+      "coverage_tags": [
+        "read-only",
+        "no-drift",
+        "repository-evidence"
+      ],
+      "review_commit": "ac6a2acfdb4550c35ce69ce54db502ba96c96324"
+    },
+    "source_files": [
+      {
+        "path": "src/click/shell_completion.py",
+        "mode": "100644",
+        "git_blob_sha1": "8a2668b09f1525ae95e814fa92a23bfdbee2c21d",
+        "raw_sha256": "18522f75ddffe655e943978d1953255c447842867d3fd67fbdc1543d3df7da09"
+      },
+      {
+        "path": "tests/test_shell_completion.py",
+        "mode": "100644",
+        "git_blob_sha1": "10d5cfa1315e303dfd702f55b1e91758ff805e63",
+        "raw_sha256": "d45f0b1b42850463a3a07273989518d477f8b19c4ca0d8ef74dc29c309276bd8"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "clean_checkout",
+    "post_seed_intent": "No repository mutation is required.",
+    "design_operations": [],
+    "fixture_materialization": {
+      "mode": "clean_checkout"
+    }
+  },
+  "oracle": {
+    "mode": "read_only_response_and_no_drift",
+    "reference_postimage_files": [
+      {
+        "path": "src/click/shell_completion.py",
+        "mode": "100644",
+        "git_blob_sha1": "8a2668b09f1525ae95e814fa92a23bfdbee2c21d"
+      },
+      {
+        "path": "tests/test_shell_completion.py",
+        "mode": "100644",
+        "git_blob_sha1": "10d5cfa1315e303dfd702f55b1e91758ff805e63"
+      }
+    ],
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F10-R-C1",
+        "type": "review_findings",
+        "expected": "Any finding includes severity, location, direct evidence, and impact."
+      },
+      {
+        "criterion_id": "CLICK-F10-R-C2",
+        "type": "review_disposition",
+        "expected": "No unsupported findings; if none, returns review_findings: [] and no_findings."
+      },
+      {
+        "criterion_id": "CLICK-F10-R-C3",
+        "type": "drift",
+        "expected": "No repository drift or test execution."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_and_operation_trace_evidence",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F10-R-C1",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F10-R-C2",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F10-R-C3",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "commands": [],
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-07-26",
+      "fixture_materialization": "clean checkout at pinned target; no changed paths",
+      "model_visible_boundary": "trial-prompt-input.json only",
+      "model_invocation": "not_run",
+      "trial_prompt_input_raw_sha256": "176fad0d71120932ef0aab35dbc02d1b799a55a9f98013fda1349dbc4595cbd4"
+    }
+  }
+}

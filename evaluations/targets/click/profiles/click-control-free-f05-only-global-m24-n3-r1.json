@@ -1,0 +1,90 @@
+{
+  "cases": [
+    {
+      "id": "CLICK-F05-CLARIFY-COMMAND-ORDER",
+      "revision": "r1"
+    }
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.144.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37",
+      "session_mode": "persisted"
+    },
+    "executor_parameters": {
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [],
+        "required_command_groups_by_case": {
+          "CLICK-F05-CLARIFY-COMMAND-ORDER": []
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "none_first_run",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "high",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "click-outcome-abstract-condition-preserving-v5",
+      "contract_sha256": "054335e43d386251b81040bae080430cbca2a85e60c96f6a7100e536242ed5ab",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 3,
+      "order": "case-major"
+    },
+    "target_repository_ref": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "https://github.com/pallets/click.git",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "task_spec": {
+      "evaluation_set_id": "click-f05-only-r1",
+      "evaluation_set_revision": "r1",
+      "source": "case revision and model-visible trial_prompt_input frozen by Layer 1"
+    }
+  },
+  "evaluation_set": {
+    "revision": "r1",
+    "set_id": "click-f05-only-r1"
+  },
+  "execution": {
+    "max_attempts": 3,
+    "max_workers": 24,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "profile_id": "click-control-free-f05-only-global-m24-n3-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9",
+    "name": "click-00e592c-control-free-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

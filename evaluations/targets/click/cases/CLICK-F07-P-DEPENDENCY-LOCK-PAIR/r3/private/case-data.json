@@ -1,0 +1,153 @@
+{
+  "case_id": "CLICK-F07-P-DEPENDENCY-LOCK-PAIR",
+  "case_revision": "r3",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "python-local-runtime",
+        "dependency-provenance",
+        "paired-files",
+        "offline-validation"
+      ],
+      "equivalence_cluster_id": "dependency-lock-provenance-pair",
+      "family": "F07-P",
+      "mirrors_case": "TC-F07-DEPENDENCY-PROVENANCE-PAIR"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      "UV_CACHE_DIR=.uv-cache .venv/bin/python -m uv lock --check --offline",
+      "PYTHONPATH=src .venv/bin/python -m pytest -q",
+      "git diff --check"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F07-P-C1",
+        "evidence_sources": [
+          "focused_gate",
+          "final_repository_state"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F07-P-C2",
+        "evidence_sources": [
+          "focused_gate",
+          "pair_diff"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F07-P-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeし、PYTHONPATH=srcでworkspace側のsrcを優先する",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; test weakening cannot satisfy a criterion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F07-P-C1",
+        "expected": "tests dependency group has a resolvable pytest requirement.",
+        "type": "dependency_contract"
+      },
+      {
+        "criterion_id": "CLICK-F07-P-C2",
+        "expected": "uv.lock is consistent with pyproject.toml under offline check.",
+        "type": "paired_file_provenance"
+      },
+      {
+        "criterion_id": "CLICK-F07-P-C3",
+        "expected": "all gates pass and only pyproject.toml or uv.lock differ.",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "unsatisfiable pytest<0 requirement",
+      "reference_focused_gate": "Resolved 81 packages"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "b4638ffed003c91adb2caa39cd7e23bafeb93492",
+        "mode": "100644",
+        "path": "pyproject.toml"
+      },
+      {
+        "git_blob_sha1": "46ae78248a04a1837cddc4daf5a87e614e772a5f",
+        "mode": "100644",
+        "path": "uv.lock"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "ddae0291d44dccbbac7e08459fe6bf7a8017413f",
+      "fixture_head_tree": "91284961650d966bee747c3ecee8b58efbf55b4f",
+      "seeded_focused_gate": "unsatisfiable pytest<0 requirement",
+      "seeded_full_gate": "1939 passed, 25 skipped, 31000 deselected, 1 xfailed",
+      "runtime_identity_sha256": "0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952",
+      "seed_patch_raw_sha256": "314ba2d93825297f9c81809b72941798acff05936039ee9d6998cd06d69b62c7",
+      "trial_prompt_input_raw_sha256": "1d6247ca4f6daf6a6d1b707e45380046d775da8d263d26ab3fe91424b5495f01",
+      "revision_reason": "pin uv cache inside workspace for sandbox-compatible offline validation"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "b4638ffed003c91adb2caa39cd7e23bafeb93492",
+          "mode": "100644",
+          "path": "pyproject.toml",
+          "raw_sha256": "ec245d751757743ffe2fafe58bc924bbdbda50cc4bbc3aec77109eb0b9418c75"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "314ba2d93825297f9c81809b72941798acff05936039ee9d6998cd06d69b62c7"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "8fea7c25f88ecd15ae4bbf549ad4dc38a6713198",
+        "mode": "100644",
+        "path": "pyproject.toml",
+        "raw_sha256": "461d6a4b6d53621b73de4a6610a72d97aaaf1171481c6e7aa412ddde4f11a651"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "ddae0291d44dccbbac7e08459fe6bf7a8017413f",
+        "expected_tree": "91284961650d966bee747c3ecee8b58efbf55b4f",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

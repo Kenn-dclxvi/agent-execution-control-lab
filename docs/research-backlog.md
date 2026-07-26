@@ -99,9 +99,9 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
 - candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
 
-## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（P1-a完了）
+## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（Bundle A Std14完了）
 
-公開repositoryを対象とする独立系列として`pallets/click`を登録し、P1-aをLayer 1〜4まで実行した。**1 / 1件がvalid・rateableでscore `4`、result登録済みである。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
+公開repositoryを対象とする独立系列として`pallets/click`を登録し、同じBundle Aで14 caseのqualification、追加case各`N=3`、Std14 `N=5`をLayer 1〜4まで実行した。**Std14は70 / 70件がvalid・rateableかつscore `4`である。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
 
 2026-07-26時点で次を完了している。
 
@@ -112,8 +112,15 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - Codex CLI `0.144.0`、Python `3.14.5`、共有venv identityをprofileへ固定
 - r1 profileはLayer 2開始前にall-agent token accounting宣言不足を検出し、result 0件のまま停止。履歴を上書きせず、r2でtoken accountingとrequired command evidence protocolだけを追加
 - r2でP1-aを完了。quality `100.000`（raw score `4`）、all-agent token `180,871`、elapsed `77.811`秒、excluded attempt 0件
+- `click-control-free-f01-only-global-m24-n5-r1`でP1-bを完了。5 / 5件がscore `4`、all-agent token中央値`189,977`（最小`170,228`、最大`202,176`）、elapsed中央値`80.475`秒（最小`79.323`、最大`85.443`秒）、excluded attempt 0件
+- 同じ`N=5` profileを独立3 resultへ反復してP1-cを完了。15 / 15件がscore `4`、batch中央値の中央値はtoken `189,033`、elapsed `80.590`秒。batch中央値rangeはtoken `26,878`（`14.22%`）、elapsed `1.501`秒（`1.86%`）で、excluded attemptは全batch 0件
+- F02 `CLICK-F02-STREAM-DEPRECATION-CONTRACT` r1をqualification。2 source fileの公開・非公開API contractをseedし、seed前focused `72 passed, 1 skipped`、seed後`2 collection errors`、fixture 2回のcommit / tree一致を確認
+- rating contract v2、`click-f02-only-r1`、F02 N=3 profileを固定し、3 / 3件をscore `4`で登録。all-agent token中央値`303,563`、elapsed中央値`130.225`秒、excluded attempt 0件
+- 残り12 caseを固定し、追加caseだけ各`N=3`で確認。現行revisionはすべて3 / 3件がscore `4`。F07 r1はcommand evidence照合不能の未rating履歴、F07-P r1 / r2は各3 / 3件score `3`の失敗履歴として保持
+- runtime r2へ`uv==0.11.32`を追加し、identity `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952`を固定。F07-P r3はworkspace-local uv cacheで3 / 3件score `4`
+- `click-standard14-r1`、rating v10、Std14 profileを固定し、70 / 70件をscore `4`で登録。5 iterationのall-agent token中央値`2,860,702`、elapsed中央値`1,235.719`秒、excluded attempt 0件
 
-P1-aの一次結果は[`click control-free F01-only P1-a N=1`](../evaluations/targets/click/results/click-control-free-f01-only-p1a-n1_2026-07-26.md)を正本とする。現在の次operationは、同じprompt / case / runtime境界のP1-b（Case 1 / `N=5` / `B=1` / `M=24`）profileを新revisionとして固定し、batch内ばらつきを測ることである。現在状態の正本は[`evaluations/targets/README.md`](../evaluations/targets/README.md)と[`click profiles README`](../evaluations/targets/click/profiles/README.md)とする。
+Std14の数値とidentityは[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)を正本とする。次operationは、candidate作成前gateを通したうえで1軸だけを変更するBundle Bを新規固定し、同じStd14条件で水平比較することである。content-identicalなBundle Bは作らない。採用、release、runtime projectionは別gateである。
 
 ### 現在の依存範囲（2026-07-26に実測）
 
@@ -122,14 +129,14 @@ repository非依存な層とtarget固有な層は次のとおりである。
 | 層 | artifact | 実測した状態 |
 | --- | --- | --- |
 | Layer 1 fixture | `scripts/prepare_case_fixture.py` | CLI引数は`--case` / `--source-repo` / `--output`のみで、target repositoryはparameter。固有pathのhard-codeなし |
-| Layer 2〜4実行 | `scripts/evaluation_loop.py` | click P1-aでvalid run、rating、append-only result登録まで成立。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
+| Layer 2〜4実行 | `scripts/evaluation_loop.py` | clickで20 result・計131 runをappend-only登録。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
 | 制御prompt本文 | [Candidate71 release](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)の`AGENTS.md.txt` | `SPEC`〜`RECOVERY`の13 labelは見出し語を除きproject固有語彙を持たない |
 | bundle target map | THE-CAPTION releaseのmanifest 19 target、`click-00e592c-control-free-r1`のmanifest 1 target | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した |
-| case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | `click`でも同じ3 artifactへrepository / commit / treeとgate commandをbindし、`CLICK-F01-ANSI-SEQUENCE-STRIP` r1をqualificationした |
-| rating contract | THE-CAPTION v13、`click-outcome-abstract-condition-preserving-v1` | `click`用contractをinstance配下へ分離し、共有kernelのsupported ratingへ登録した |
-| 採点補助 | click P1-aは固定rating contractとblind evidenceで手動採点 | 1 caseのratingと登録は成立。反復・追加case用のtarget固有自動audit module分離は未設計 |
+| case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | 14 case・17 revisionをinstance配下へ固定。失敗revisionを上書きせず保持した |
+| rating contract | THE-CAPTION v13、`click-outcome-abstract-condition-preserving-v1`〜v10 | case追加ごとに旧revisionを残し、現行v10で標準14項目を固定した |
+| 採点補助 | Clickは固定rating contractとblind evidenceで採点 | 14 case・131 runのratingと登録が成立。target固有の新しいkernel分岐は追加していない |
 
-したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`ではcase、rating contract、control-free bundle target mapをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用をP1-aで確認した。未確認なのは反復時のばらつきと、追加case向け自動採点補助の分離である。
+したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`では4つをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用を標準14項目で確認した。未確認なのはBundle Bの水平比較、第三者によるruntime再構築、network遮断下のfull gateである。
 
 この分離の境界とinstance台帳は[`evaluations/targets/README.md`](../evaluations/targets/README.md)で確定した。既存の計測系列はtarget instance `the-caption`（`layout: legacy_root`）として登録し、artifact pathを移動していない。
 
@@ -145,7 +152,7 @@ repository非依存な層とtarget固有な層は次のとおりである。
 6. **天井効果の回避**: 既存setでもF05 out-of-scopeとF07 dependency pairは全runが`quality_score` 100である（[`cases/README.md`](../evaluations/cases/README.md)）。modelが解法を記憶しているseedはこれを悪化させるため、seed diffの取得元commitの新しさで制御する。
 7. **prompt target collision**: target側が既に`AGENTS.md`等のauthority fileを持つと、bundle overlayでcase条件やtarget側規則が消える。F09が`prompt_target_collision`でexecution blockedになったのと同型のriskである。
 8. **case供給**: 公開issue / PR履歴からreal taskを取得でき、case追加根拠自体を第三者が検証できる。
-9. **言語分布**: 既存setはPython中心にReact / TypeScript（F04）、shell runner（F07）、docs-only（F08）を含む。1 repositoryで満たせない場合は初期setを縮小する判断が必要になる。
+9. **実行判断点coverage**: 既存14項目が担保するworker起動、context継承、model再入、read、validation、停止、result bindingなどの判断点に、target固有の題材を対応付けられる。実装言語の一致自体はgateにしない。
 
 ### 独立系列としての扱い
 
@@ -155,19 +162,19 @@ repository非依存な層とtarget固有な層は次のとおりである。
 
 ### 未確定事項
 
-- `click`の容量、gate所要時間、通常環境での5回連続passはPhase 0で実測した。P1-aは1件だけ取得したため、evaluation workspaceでのflaky率とtoken分散は未取得である。
+- `click`の容量、gate所要時間、通常環境での5回連続passはPhase 0で実測した。P1-cでbatch内・batch間分布、Std14で14 case横断の70 / 70 validを取得した。
 - `.venv`を含むknown-good実行環境（[`cases/README.md`](../evaluations/cases/README.md)のself-contained fixture）を、第三者へどう再現させるかが未決である。lockfileからの再構築手順で足りるか、fixture条件として固定する必要があるかを判定していない。
 - network遮断下のfull gateは未実測である。依存materialize後にnetworkを使わない見込みと、network遮断下でpassした事実を混同しない。
-- instance境界、layout、descriptor、`click` rating contractは固定した。残る未設計は**target固有採点補助のadapter化**であり、既存`scripts/quality_audit_policy.py`と`scripts/standard14_quality_audit.py`を変更せずに追加case用moduleをどう分離するかを決めていない（[`scripts/AGENTS.md`](../scripts/AGENTS.md)）。
+- instance境界、layout、descriptor、Click rating v10は固定した。Std14は固定contractとblind evidenceで採点できたため、target固有採点補助の自動adapter化は今回の完了条件ではない。別targetを追加するときに再評価する。
 
 ### 段階計画
 
-1. **Phase 0**（実施済み）: gate 1〜9を判定し、`pallets/click`を選定した。実測値と判定の正本は[`public-target-selection-phase0.md`](public-target-selection-phase0.md)とする。gate 9（言語分布）はPython単一のため不足が残る。
+1. **Phase 0**（実施済み）: gate 1〜9を判定し、`pallets/click`を選定した。追加実測により14項目すべての実行判断点へ対応可能と確認した。実測値と判定の正本は[`public-target-selection-phase0.md`](public-target-selection-phase0.md)とする。
 2. **Phase 1 artifact準備**（実施済み）: instance、control-free bundle、F01型case、rating contract、set、P1-a profile、共有runtimeを固定した。
-3. **Phase 1実測**（P1-a完了）: P1-a `N=1`で端から端までの成立を確認した。次にP1-b `N=5`、P1-c `N=5 × B=3`の順でbatch内・batch間ばらつきを確認する。case追加は既存caseを再実行せず、追加caseだけ各`N=3`とする。
-4. **Phase 2**: bit-identical bundleで`N=10`のnull calibrationを行う（[`TC-F01 r2 N=10`](../evaluations/results/TC-F01-r2_identical-bundle-n10_2026-07-15.md)と同じ手順）。flakyとtoken分散から感度の下限を確認する。
-5. **Phase 3**: nullが通った1 repositoryだけで、F02型（cross-layer）とF10-R型（非破壊review）へ拡張する。制御差が観測されるのはこの2型である。
-6. **Phase 4**: case pack一式と縮小setを公開単位として固定する。
+3. **Phase 1実測**（P1-c完了）: P1-a `N=1`で端から端までの成立、P1-b `N=5`でbatch内分布、P1-c `N=5 × B=3`でbatch間の散らばりを確認した。
+4. **Phase 2 case展開**（実施済み）: 14 caseをqualificationし、追加caseだけ各`N=3`でBundle Aの成立を確認した。既存caseは追加のたびに再実行していない。
+5. **Phase 3 Bundle A標準14**（実施済み）: `click-standard14-r1`を固定し、Bundle Aで70 / 70件をscore `4`として登録した。
+6. **Phase 4 Bundle B水平比較**: Std14 baseline確立後に、1軸だけを変更した新しいCandidateをBundle Bとして固定し、同じStd14条件でBundle Aと比較する。content-identicalなBundle Bは作らない。
 
 candidate bundleを作る段階ではcandidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通す。
 

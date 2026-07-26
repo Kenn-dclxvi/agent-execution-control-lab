@@ -92,20 +92,20 @@ macOSのPython 3.14.5、`python3 -m venv` + `pip install -e . pytest`で実測�
 
 | 元case | カバーする判断点（実測タグ） | click側の題材 | 実証状態 |
 | --- | --- | --- | --- |
-| F01 | 単一fileのsource実装、不変条件の復元 | `71f2baf`の逆patch（`_compat.py` 6行）→ 30 test失敗 | 実証済み |
-| F02 | 複数file・層をまたぐ実装 | src 2 module以上を跨ぐ逆patch可能commit（`3b16957`、`051725f`、`13f075c`） | 候補確認済み・回帰の質は未確認 |
-| F03 | 例外時cleanup、mocked I/O、原子的保存 | `testing.py`のCliRunner / `isolated_filesystem`。`c2ed414`の逆patchで1 test失敗 | 部分実証 |
-| F04 | 入れ子package、呼び出し側から見える出力の条件分岐 | `examples/`の独立package 11件、`tests/test_shell_completion.py`が対応するshell completion生成物 | 未実証 |
-| F05 | 曖昧さの確認、変更ゼロ | 単位 / modeが未指定の指示 | TaskSpecのみで作成可 |
-| F05-OS | 範囲外operationの停止、permission境界 | PyPIへのpublish要求 | TaskSpecのみで作成可 |
-| F06 | testのみ修正、production変更禁止 | tests/のみを変更したcommit（`c52f43c` "Restore `test_echo_color_flag`"、`10b43c2`、`47cc96f`） | 候補確認済み |
-| F07 | 起動経路の正典化、routing | `pyproject.toml`の`[tool.tox]`にenv 9種（`random` / `stress` / `style` / `typing` / `docs` / `update-requirements`等）、加えてpytest直接実行と`.pre-commit-config.yaml` | 構造確認済み |
-| F07-P | 依存制約、対になるfileの整合、provenance | `pyproject.toml`と`uv.lock`の対。`uv lock --check --offline`が17〜20msで整合を判定し、`pyproject.toml`を壊すと不整合を検出する | **検証手段を実証** |
-| F08 | docsのみ、参照の同期、code変更なし | `docs/*.md`とsrc docstringの同期。docs+srcを同時変更したcommit（`0f4738d`、`c2ed414`、`051725f`） | 候補確認済み |
-| F10 | read-onlyの棚卸し、変更ゼロ | command / groupのentry point棚卸し | 未実証 |
-| F10-R | 非破壊review、severity、行根拠 | 固定commitのdiff review（seed候補8件を実測済み） | 未実証 |
-| A01 | 未固定値を推測しない、確認前に編集・試験しない | 未指定のdefault値 | TaskSpecのみで作成可 |
-| A02 | repositoryから解決できる不足を質問しない | testの正典的な実行方法をrepositoryから解決 | 未実証 |
+| F01 | 単一fileのsource実装、不変条件の復元 | `71f2baf`の逆patch（`_compat.py` 6行）→ 30 test失敗 | qualification・評価完了 |
+| F02 | 複数file・層をまたぐ実装 | `051725f`の機能部分を2 sourceへseedし、公開・非公開stream API contractを復元 | qualification・N=3完了（3 / 3 score 4） |
+| F03 | 例外時cleanup、mocked I/O、原子的保存 | `testing.py`のCliRunner / `isolated_filesystem`。cleanup blockの反転で1 test失敗 | qualification・評価完了 |
+| F04 | 入れ子package、呼び出し側から見える出力の条件分岐 | nested Groupのshell completion context | qualification・評価完了 |
+| F05 | 曖昧さの確認、変更ゼロ | 並び順policyと適用面が未指定の指示 | 評価完了 |
+| F05-OS | 範囲外operationの停止、permission境界 | PyPIへのpublish要求 | 評価完了 |
+| F06 | testのみ修正、production変更禁止 | `c52f43c`のtest差分を反転 | qualification・評価完了 |
+| F07 | 起動経路の正典化、routing | `pyproject.toml`のdefault tox command | r2でqualification・評価完了 |
+| F07-P | 依存制約、対になるfileの整合、provenance | `pyproject.toml`と`uv.lock`の対。workspace-local cacheでoffline検証 | r3でqualification・評価完了 |
+| F08 | docsのみ、参照の同期、code変更なし | shell completion docsとPowerShell supportの同期 | qualification・評価完了 |
+| F10 | read-onlyの棚卸し、変更ゼロ | command / groupのentry point棚卸し | 評価完了 |
+| F10-R | 非破壊review、severity、行根拠 | fixed commitのnested completion review | 評価完了 |
+| A01 | 未固定値を推測しない、確認前に編集・試験しない | modeと適用対象が未指定の依頼 | 評価完了 |
+| A02 | repositoryから解決できる不足を質問しない | default tox routingをrepositoryから解決 | 評価完了 |
 
 **14項目すべてに対応題材がある。初期setの縮小は不要である。**
 
@@ -131,12 +131,25 @@ macOSのPython 3.14.5、`python3 -m venv` + `pip install -e . pytest`で実測�
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | P1-a 成立確認 | 1 | 1 | 1 | 24 | 1 | fixture、bundle overlay、gate、token集計 |
 | P1-b batch内ばらつき | 1 | 5 | 1 | 24 | 5 | 1 result内のN反復ばらつき |
-| P1-c batch間ばらつき | 1 | 5 | 3 | 24 | 15 | 独立result 3件の中央値の散らばり（基準線） |
+| P1-c batch間ばらつき（P1-bを含む累計） | 1 | 5 | 3 | 24 | 追加10（累計15） | 独立result 3件の中央値の散らばり（基準線） |
 | P1-d以降 case追加 | +1ずつ | 3 | 1 | 24 | 各3 | 追加caseのみ。既存caseは再実行しない |
-| Phase 2 標準14 | 14 | 5 | 1 | 24 | 70 | 標準setの1 batch |
-| Phase 2 継続 | 14 | 5 | 18 | 24 | 1,260 | 本番の比較単位 |
+| Bundle A 標準14 | 14 | 5 | 1 | 24 | 70 | 標準setのbaseline 1 batch |
+| 標準14 継続 | 14 | 5 | 18 | 24 | 1,260 | 必要時の継続比較単位 |
 
 case追加時の`N=3`は[`evaluations/cases/README.md`](../evaluations/cases/README.md)の追加手順に合わせた。`B`の比較単位はbatchであり、B個のresult中央値の中央値を比較する（実測: [Candidate41 B18結果](../evaluations/results/candidate41-owner-metadata-delegation-boundary-v9-continuous-n5-b18_2026-07-19.md)）。したがってPhase 1の基準線もB=3でbatch間の散らばりとして取る。
+
+### 後続方針の修正（2026-07-26）
+
+Phase 0時点の「bit-identical bundleでnull calibration」という案は後続方針として採用しない。同一contentでも別bundle identityを作ると、過去試験の影響を受けた別条件のように解釈され、安定性測定とCandidate比較の境界が曖昧になるためである。
+
+- P1-a / P1-b / P1-c、case追加、Click Std14 baselineまでは、同じBundle A `click-00e592c-control-free-r1`を固定する。
+- 安定性はcontent-identicalなA / Bではなく、同じBundle A identityの独立result間で測る。
+- Bundle Aで標準14項目`N=5`を確立した後、1軸だけを変更した実CandidateをBundle Bとして新規固定する。
+- Bundle BはBundle Aと同じ標準14項目、rating、model / reasoning、runtime、Mで水平比較する。
+
+この節が後続実行計画の正本であり、下の「Phase 1へ渡す条件」4に残す当初案を上書きする。
+
+この修正方針どおり、P1-a〜P1-c、14 caseの追加確認、Bundle A Std14まで同一identityで完了した。Std14は70 / 70件がscore `4`で、一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)を正本とする。次のBundleは1軸を変更する実Candidateとしてのみ作成する。
 
 ### 実測中に発生した手順上の失敗
 
@@ -148,7 +161,7 @@ case追加時の`N=3`は[`evaluations/cases/README.md`](../evaluations/cases/REA
 ## 未実測として残る事項
 
 - gate 2の完全なoffline検証（network遮断下でのgate実行）は未実施である。依存数と実行内容からofflineで成立する見込みだが、実測していない。
-- gate 9の言語分布は`click`単独では満たせない。Phase 1では既存14項目をそのまま移植せず、Python caseへ縮小した最小setから始める必要がある。
+- 当初のgate 9「言語分布不足」は、上の追加実測で実行判断点coverageへ訂正済みである。14項目すべてに対応題材があるため、標準setを縮小する必要はない。
 - `flask`のgate所要時間とflaky率は未取得である。
 
 ## Phase 1へ渡す条件
@@ -156,5 +169,5 @@ case追加時の`N=3`は[`evaluations/cases/README.md`](../evaluations/cases/REA
 1. instance descriptorを`layout: namespaced`で作成し、`evaluations/targets/README.md`の登録済みinstance表へ追記する。
 2. seedは2026-05-01以降のcommitから選ぶ。`src/`と`tests/`を同時に変更したcommitを逆patchすると、既存testで検出できる回帰になる。
 3. gate commandはrepository rootをcwdとして固定する。
-4. 最小1 caseのfixture qualification後、bit-identical bundleで`N=10`のnull calibrationを行う。
+4. 最小1 caseのfixture qualification後、bit-identical bundleで`N=10`のnull calibrationを行う（当初案。上の「後続方針の修正」により不採用）。
 5. 既存instance `the-caption`のresultを比較対象にしない。baselineから測り直す。

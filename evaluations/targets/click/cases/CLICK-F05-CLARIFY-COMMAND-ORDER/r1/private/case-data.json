@@ -1,0 +1,111 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "CLICK-F05-CLARIFY-COMMAND-ORDER",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "pallets/click",
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "case_spec": {
+      "family": "F05",
+      "equivalence_cluster_id": "clarify-missing-order-policy",
+      "coverage_tags": [
+        "boundary-disposition",
+        "read-only",
+        "no-drift"
+      ]
+    },
+    "source_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+        "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b",
+        "role": "read_only_decision_boundary"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "clean_checkout",
+    "post_seed_intent": "No repository mutation is required.",
+    "design_operations": [],
+    "fixture_materialization": {
+      "mode": "clean_checkout"
+    }
+  },
+  "oracle": {
+    "mode": "no_drift_and_structured_terminal",
+    "reference_postimage_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+      }
+    ],
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F05-C1",
+        "type": "terminal_content",
+        "expected": "One concise clarification asks for both desired ordering policy and whether help or shell completion is in scope."
+      },
+      {
+        "criterion_id": "CLICK-F05-C2",
+        "type": "operation_trace_and_drift",
+        "expected": "No edit, test, file creation, or external operation occurs."
+      },
+      {
+        "criterion_id": "CLICK-F05-C3",
+        "type": "terminal_count_and_disposition",
+        "expected": "Exactly one terminal outcome is clarification and no implementation follows."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_and_operation_trace_evidence",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F05-C1",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F05-C2",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F05-C3",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "commands": [],
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-07-26",
+      "fixture_materialization": "clean checkout at pinned target; no changed paths",
+      "model_visible_boundary": "trial-prompt-input.json only",
+      "model_invocation": "not_run",
+      "trial_prompt_input_raw_sha256": "91a041c7d96c71ed0541cd7d324ec1da3f70ab00da5174729211651002713843"
+    }
+  }
+}

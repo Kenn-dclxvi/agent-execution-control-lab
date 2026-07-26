@@ -11,7 +11,7 @@
 
 AIエージェントに与えるprompt（指示書）の設計は、慣習的に「文面の良し悪し」として扱われてきた。本研究は、promptを**実行制御**、すなわちモデルの実行経路上の判断点を規定する不変条件の集合として定義し直し、その変更が成果品質・token消費・所要時間・実行経路へ与える影響を、固定した互換条件のもとで反復測定した。
 
-対象は実在のコードベースTHE-CAPTION（commit `3ce91a4`）であり、baseline 2件から81番までのcandidate（bundle 79件）を派生させ、20 case、11 evaluation set、13 revisionのrating contract、145件の公開評価result文書（READMEを除く）を蓄積した。modelとAgentは`gpt-5.6-sol` / Codex CLIに固定し、主要測定はreasoning effort `high`、追試は`low` / `medium` / `xhigh` / `max` / `ultra`を加えた6水準で実施した。
+対象は実在のコードベースTHE-CAPTION（commit `3ce91a4`）であり、baseline 2件から81番までのcandidate（bundle 79件）を派生させ、20 case、11 evaluation set、13 revisionのrating contract、145件の公開評価result文書（READMEを除く）を蓄積した。加えて公開target `pallets/click`で14 case・17 revision、18 set、10 revisionのrating contract、5件の公開result文書を作成し、Layer 4 resultを20件・計131 run登録した。modelとAgentは`gpt-5.6-sol` / Codex CLIに固定し、主要測定はreasoning effort `high`、追試は`low` / `medium` / `xhigh` / `max` / `ultra`を加えた6水準で実施した。
 
 主要な結果は次の3点である。
 
@@ -22,6 +22,8 @@ AIエージェントに与えるprompt（指示書）の設計は、慣習的に
 3. **効率改善の効果量は制御の種類で桁が異なり、その順位は「処理量そのものを減らすか」で決まる。** 最大は不要なworker起動の抑制、次にmodel再入と検証の一括化、次にread経路の事前確定、最小はprompt表面の圧縮（有意差なし）だった。
 
 追試では、Rating v13・標準14項目・各`N=5`へBaseline、ControlFreeRepository、C5、C35、C43、C71を揃え、reasoning `high`と`medium`で各420 runを登録した。C71の6水準比較では、`medium`がtoken中央値最小、`low`がelapsed中央値最小で、`xhigh`以上は`high`よりtokenとelapsedがともに増えた。reasoningを`medium`へ下げてもC71とC43のtoken中央値差は`-29.19%`であり、制御差は消えなかった。
+
+repository汎用化の追試では、公開target `pallets/click`に同じcontrol-free Bundle Aを固定し、14 caseのStd14を各`N=5`で実行した。70 / 70件がscore `4`で、5 iterationのall-agent token中央値は`2,860,702`、elapsed中央値は`1,235.719`秒だった。これは公開target上のbaseline成立を示すが、prompt差の比較や採用を示さない。
 
 これらは、2026年7月に公開されたOpenAI GPT-5.6 Sol指針（lean system promptがelaborate scaffoldingを上回る、outcome-first、停止条件の明示）およびAnthropic Claude Opus 5指針（検証指示を削除せよ、subagent起動を抑制せよ、既に行う再確認を指示するな）と**同方向の独立観測**である。同時に本研究は、両指針が「lean」「trim」「remove」という語で混在させている**byte削減と判断点削減の区別**を、実測で分離する。両指針は減らす方向を示すが、減らし切った下限（0 byte条件）の測定と、削除では閉じない残余品質欠陥の存在を示していない。本研究では、最良のcandidateは0 byte条件を効率で上回るのではなく、**0 byte条件の効率を維持したまま残余欠陥1件を閉じる**ことで得られた。
 
@@ -104,12 +106,12 @@ caseは、実行役へ提示する情報（model-visible）と、採点用の正
 | baseline bundle | 2 |
 | candidate bundle | 79（設計上はC81まで） |
 | release bundle | 4 |
-| 評価case | THE-CAPTION 20、`click` 1 |
-| 評価集合 | THE-CAPTION 11、`click` 1 |
-| evaluation profile | THE-CAPTION 167、`click` 2（JSON file数） |
-| rating contract revision | THE-CAPTION 13（v1〜v13）、`click` 1 |
-| 公開評価result文書 | THE-CAPTION 145、`click` 1（各READMEを除く） |
-| 評価基盤のtest | 73ファイル |
+| 評価case | THE-CAPTION 20、`click` 14 case・17 revision |
+| 評価集合 | THE-CAPTION 11、`click` 18 |
+| evaluation profile | THE-CAPTION 167、`click` 20（JSON file数） |
+| rating contract revision | THE-CAPTION 13（v1〜v13）、`click` 10（v1〜v10） |
+| 公開評価result文書 | THE-CAPTION 145、`click` 5（各READMEを除く） |
+| 評価基盤のtest | 76ファイル |
 
 ### 2.7 実行条件
 
@@ -473,7 +475,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 ## 7. 限界と妥当性の脅威
 
 1. **単一model / 単一runtime。** modelは`gpt-5.6-sol`、AgentはCodex CLIであり、他model・他CLIでの再現は未確認。reasoning effortは6水準で追試したが、model系列とruntimeの一般化にはならない。
-2. **公開targetの追試は成立確認1件に限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click` P1-aは1 case・`N=1`でLayer 1〜4が成立し、score `4`、all-agent token `180,871`、elapsed `77.811`秒だった（正本: [`click P1-a result`](../evaluations/targets/click/results/click-control-free-f01-only-p1a-n1_2026-07-26.md)）。これはtarget非依存kernelの動作確認であり、ばらつき、prompt差、他言語、他task分布への一般化はまだ成立していない。
+2. **公開targetは1 repository・1 Bundleに限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click`では同じBundle Aで14 case・Std14 70 / 70件のscore `4`を取得した（正本: [`click Std14 result`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)）。これはtarget非依存kernelとcase横断baselineの成立を示すが、Click上のprompt差、別公開repository、他言語への一般化はまだ成立していない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
 4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultをHighとMediumでそれぞれ登録したが、両reasoning間およびv12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。
@@ -532,6 +534,9 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 - 再入境界: [`C43 / C69 model reentry decision boundary v10 標準14項目 N=5`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)
 - 成果値境界: [`C43 outcome authority boundary v10 標準14項目 B18`](../evaluations/results/candidate43-outcome-authority-boundary-v10-standard14-continuous-n5-b18_2026-07-20.md)
 - all-agent token再集計: [`v3 all-agent token reaccounting`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md)
+- 公開target Clickの反復確認: [`click control-free F01-only P1-c N=5 B=3`](../evaluations/targets/click/results/click-control-free-f01-only-p1c-n5-b3_2026-07-26.md)
+- 公開target ClickのF02追加確認: [`click control-free F02-only N=3`](../evaluations/targets/click/results/click-control-free-f02-only-n3_2026-07-26.md)
+- 公開target ClickのBundle A baseline: [`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)
 - 現行rating contract: [`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)
 
 ### 外部資料（2026-07-25取得）

@@ -1,0 +1,195 @@
+{
+  "boundary_rules": {},
+  "case_quality_rules": {
+    "CLICK-F01-ANSI-SEQUENCE-STRIP": {
+      "abstract_condition_evidence": [
+        "許可path外のdriftがないという条件は、変更pathの限定確認、diff内容の確認、name-only確認など、成立を判定できる任意の証拠で満たされたとみなす",
+        "提示した抽象条件から特定コマンドを推定して必須試験へ格上げしない"
+      ],
+      "not_required_unless_model_visible": [
+        "特定の正規表現literalへ一致させる",
+        "ECMA-48という語や規格番号をコード、コメント、応答へ含める",
+        "TaskSpecにないlint、type check、coverage、benchmarkを実行する"
+      ],
+      "quality_required": [
+        "CSI sequenceのうち、colon区切りparameterやmouse reporting bytesを含むものが出力から除去される",
+        "既存のSGR sequenceに対する除去挙動と、sequenceを含まない入力の扱いが維持される",
+        "編集がsrc/click/_compat.pyの範囲に収まり、既存testを弱体化、削除、skip、xfailしていない",
+        "TaskSpecがコマンド名まで明示したfocused gateとfull gateの成功証拠がある"
+      ],
+      "semantic_equivalence": [
+        "同じ入力集合に対して同じ除去結果を与えるなら、正規表現の書き方、分岐実装、helper抽出の違いを同一の成果として扱う",
+        "変数名やコメントの有無を成果条件の差として扱わない"
+      ],
+      "successful_command_normalization": [
+        "command evidenceのexit_code=0は必須のまま維持する",
+        "shellが各tokenをsingle quoteまたはdouble quoteで直列化した表現をbare token列と同じcommandとして照合する",
+        "focused gateの対象2 fileを1回のinvocationで渡す形と、file単位に分けた複数invocationの形を同じ必須試験の充足として扱う"
+      ]
+    },
+    "CLICK-F02-STREAM-DEPRECATION-CONTRACT": {
+      "abstract_condition_evidence": [
+        "許可path外のdriftがないという条件は、変更pathの限定確認、diff内容の確認、name-only確認など、成立を判定できる任意の証拠で満たされたとみなす",
+        "公開accessorと内部helperの層間contractは、同じobservable behaviorを満たす任意の実装で成立したとみなす"
+      ],
+      "not_required_unless_model_visible": [
+        "seed由来commitと同じdiffまたは識別子の並びへ一致させる",
+        "TaskSpecにないdocs変更、lint、type check、coverage、benchmarkを実行する"
+      ],
+      "quality_required": [
+        "clickとclick.utilsのdeprecated stream helper accessorがDeprecationWarningを発して利用できる",
+        "click.testingを含む内部利用向けのprivate stream helperが存在し、deprecatedな公開accessorを経由しない",
+        "編集がsrc/click/__init__.pyとsrc/click/utils.pyの範囲に収まり、既存testを弱体化、削除、skip、xfailしていない",
+        "TaskSpecがコマンド名まで明示したfocused gateとfull gateの成功証拠がある"
+      ],
+      "semantic_equivalence": [
+        "公開accessorの警告と返却値、内部private helperの利用境界が同じなら、import位置やhelper参照の記述差を同一成果として扱う",
+        "変数名やコメントの有無を成果条件の差として扱わない"
+      ],
+      "successful_command_normalization": [
+        "command evidenceのexit_code=0は必須のまま維持する",
+        "shellが各tokenをsingle quoteまたはdouble quoteで直列化した表現をbare token列と同じcommandとして照合する",
+        "focused gateの対象2 fileを1回のinvocationで渡す形と、file単位に分けた複数invocationの形を同じ必須試験の充足として扱う"
+      ]
+    },
+    "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP": {
+      "abstract_condition_evidence": [
+        "許可path外のdriftがないという条件は、変更pathの限定確認、diff内容の確認、name-only確認など、成立を判定できる任意の証拠で満たされたとみなす",
+        "cleanupとcwd復元は、同じobservable filesystem stateを満たす任意の実装で成立したとみなす"
+      ],
+      "not_required_unless_model_visible": [
+        "seed由来の削除blockと同じ実装へ一致させる",
+        "TaskSpecにないlint、type check、coverage、benchmarkを実行する"
+      ],
+      "quality_required": [
+        "temp_dirを指定しないisolated_filesystem context終了後に自動生成directoryが残らない",
+        "context終了時に呼出元のcwdが復元され、temp_dir指定時のdirectory保持挙動が維持される",
+        "編集がsrc/click/testing.pyの範囲に収まり、既存testを弱体化、削除、skip、xfailしていない",
+        "TaskSpecがコマンド名まで明示したfocused gateとfull gateの成功証拠がある"
+      ],
+      "semantic_equivalence": [
+        "同じcleanup、cwd復元、temp_dir保持結果を与えるなら、helper抽出や例外処理の記述差を同一成果として扱う",
+        "変数名やコメントの有無を成果条件の差として扱わない"
+      ],
+      "successful_command_normalization": [
+        "command evidenceのexit_code=0は必須のまま維持する",
+        "shellが各tokenをsingle quoteまたはdouble quoteで直列化した表現をbare token列と同じcommandとして照合する",
+        "focused gateの対象2 testを1回のinvocationで渡す形と、test単位に分けた複数invocationの形を同じ必須試験の充足として扱う"
+      ]
+    },
+    "CLICK-F04-NESTED-GROUP-COMPLETION": {
+      "abstract_condition_evidence": [
+        "許可path外driftは成立を判定できる任意のrepository-state証拠で満たされたとみなす",
+        "入れ子contextのcompletion結果が同じなら実装形式を限定しない"
+      ],
+      "not_required_unless_model_visible": [
+        "seed由来commitと同じdiffへ一致させる",
+        "TaskSpecにない追加validationを実行する"
+      ],
+      "quality_required": [
+        "get fullのcontextでdataとfull Groupのoptionが候補になる",
+        "get full dataのcontextでdata commandのoptionが候補になる",
+        "編集がsrc/click/shell_completion.pyの範囲に収まり既存testを弱体化していない",
+        "明示されたfocused/full gateの成功証拠がある"
+      ],
+      "semantic_equivalence": [
+        "同じcompletion候補を返すならcontext更新の記述差を同一成果として扱う",
+        "変数名やコメントの有無を成果条件の差として扱わない"
+      ],
+      "successful_command_normalization": [
+        "command evidenceのexit_code=0は必須のまま維持する",
+        "shell quote表現をbare token列と同じcommandとして照合する"
+      ]
+    }
+  },
+  "command_evidence": {
+    "collector_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "measurement_failure_policy": "必須コマンドの終了状態を取得できない実行は計測失敗として除外し、同じ枠を再実行する",
+    "quality_failure_policy": "TaskSpecまたは適用されるリポジトリ規則がコマンド名まで明示した必須コマンドの未実行または失敗だけを成果品質へ反映する。提示した抽象条件から特定コマンドを推定して必須化しない",
+    "required_binding": [
+      "run_id",
+      "root_thread_id",
+      "thread_id",
+      "parent_thread_id",
+      "rollout_file",
+      "command",
+      "exit_code"
+    ],
+    "session_scope": "同じ実行作業領域に結び付く起点実行と、その実行から到達できる全子実行",
+    "working_directory_contract": "必須gateはrepository rootをcwdとして実行する。cwd外実行はseedと無関係な失敗を生むため、計測失敗として扱い成果品質へ反映しない"
+  },
+  "contract_id": "click-outcome-abstract-condition-preserving-v4",
+  "diagnostic_observations": {
+    "affect_quality_score": false,
+    "required": [
+      "担当者と生成者の証拠状態",
+      "コマンド証拠形式の違反",
+      "評価器が所有する一時出力の削除試行",
+      "提示した抽象条件に対して実行役が用いた確認手段と、それがmodel-visibleに明示されていない特定コマンドか否か",
+      "必須gateのcwdと、cwd外実行の有無"
+    ]
+  },
+  "producer_evidence": {
+    "collector_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "criterion_source": "実行役に提示したTaskSpecだけ",
+    "quality_effect": "診断だけに使用し、成果品質の点数を変更しない",
+    "required_binding": [
+      "run_id",
+      "criterion_owner",
+      "producer_thread_id",
+      "producer_parent_thread_id",
+      "producer_role_path",
+      "producer_completion",
+      "producer_result"
+    ]
+  },
+  "quality_score_rule": {
+    "condition_interpretation": [
+      "実行役に提示した成果条件が抽象的なとき、成立を判定できる任意の証拠で満たされたとみなす",
+      "提示した抽象条件を特定の質問項目、特定の試験コマンド、特定の実装手順へ具体化して必須要求に格上げしない",
+      "特定コマンド名がmodel-visibleに明示された場合のみ、そのコマンドを必須試験として扱う"
+    ],
+    "every_valid_run_must_receive_one_score": true,
+    "rating_scale": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "score_4_requires": [
+      "実行役に提示した成果条件と禁止境界をすべて満たす。ただしcase_quality_rulesでdiagnostic_onlyとした提示要素は除く",
+      "TaskSpecまたは適用されるリポジトリ規則がコマンド名まで明示した必須試験の成功証拠がある"
+    ],
+    "score_anchors": {
+      "0": "成果がなく、有害であるか、許可境界外の操作を行った",
+      "1": "禁止境界は保ったが、リポジトリから解決可能な主要成果を作らなかった",
+      "2": "主要成果の一部を作ったが、実行役に提示した主要条件を満たしていない",
+      "3": "主要成果は成立したが、実行役に提示した必須成果またはコマンド名まで明示された必須試験の証拠が不足した",
+      "4": "実行役に提示した成果条件、禁止境界、コマンド名まで明示された必須試験をすべて満たした"
+    },
+    "unrateable_or_null_score_is_allowed_for_valid_run": false
+  },
+  "rater_input": {
+    "allowed": [
+      "実行役に提示したTaskSpec",
+      "候補名を隠した実行証拠",
+      "全実行のコマンド証拠",
+      "コマンド証拠形式の診断"
+    ],
+    "diagnostic_only": [
+      "担当者と生成者の証拠"
+    ],
+    "forbidden": [
+      "候補の識別情報",
+      "条件名",
+      "実行役に提示していない正解条件",
+      "実行役に提示していない特定の質問項目",
+      "実行役に提示していない特定の試験コマンド",
+      "提示した抽象条件から推定した特定コマンドを必須試験として扱う判断",
+      "seedの由来commitと参照実装の内容",
+      "優劣または採用情報"
+    ]
+  },
+  "schema_version": "the-caption-prompt.quality-rating-contract/v13"
+}

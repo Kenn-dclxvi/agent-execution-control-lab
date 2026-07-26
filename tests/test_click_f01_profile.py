@@ -4,7 +4,11 @@ import json
 import unittest
 from pathlib import Path
 
-from scripts.evaluation_loop import QUALITY_RATING_CLICK_V1, SUPPORTED_QUALITY_RATINGS
+from scripts.evaluation_loop import (
+    QUALITY_RATING_CLICK_V1,
+    QUALITY_RATING_CLICK_V10,
+    SUPPORTED_QUALITY_RATINGS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +19,10 @@ PROFILE = (
 PROFILE_R2 = (
     ROOT
     / "evaluations/targets/click/profiles/click-control-free-f01-only-global-m24-n1-r2.json"
+)
+PROFILE_N5 = (
+    ROOT
+    / "evaluations/targets/click/profiles/click-control-free-f01-only-global-m24-n5-r1.json"
 )
 PROFILE_INDEX = ROOT / "evaluations/targets/click/profiles/README.md"
 DESCRIPTOR = ROOT / "evaluations/targets/click/target.json"
@@ -75,7 +83,9 @@ class ClickF01ProfileTest(unittest.TestCase):
         self.assertIn(rating, SUPPORTED_QUALITY_RATINGS)
         self.assertEqual(rating, QUALITY_RATING_CLICK_V1)
         descriptor = json.loads(DESCRIPTOR.read_text(encoding="utf-8"))
-        self.assertEqual(rating["contract_id"], descriptor["current_rating_contract"])
+        self.assertEqual(
+            descriptor["current_rating_contract"], QUALITY_RATING_CLICK_V10["contract_id"]
+        )
 
     def test_evaluation_set_matches_defined_set(self) -> None:
         evaluation_set = self.profile["evaluation_set"]
@@ -161,6 +171,22 @@ class ClickF01ProfileTest(unittest.TestCase):
             ],
         )
         self.assertIn(PROFILE_R2.stem, PROFILE_INDEX.read_text(encoding="utf-8"))
+
+    def test_n5_changes_only_profile_identity_and_repetition_count(self) -> None:
+        n1 = json.loads(PROFILE_R2.read_text(encoding="utf-8"))
+        n5 = json.loads(PROFILE_N5.read_text(encoding="utf-8"))
+        self.assertEqual(n5["profile_id"], PROFILE_N5.stem)
+        self.assertEqual(
+            n1["comparison_conditions"]["repetition_condition"]["iterations"], 1
+        )
+        self.assertEqual(
+            n5["comparison_conditions"]["repetition_condition"]["iterations"], 5
+        )
+        n1.pop("profile_id")
+        n5.pop("profile_id")
+        n1["comparison_conditions"]["repetition_condition"]["iterations"] = 5
+        self.assertEqual(n1, n5)
+        self.assertIn(PROFILE_N5.stem, PROFILE_INDEX.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

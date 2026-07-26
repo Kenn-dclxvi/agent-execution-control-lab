@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index b4638ff..8fea7c2 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -46,7 +46,7 @@ pre-commit = [
+     "pre-commit-uv",
+ ]
+ tests = [
+-    "pytest",
++    "pytest<0",
+ ]
+ tests-random = [
+     "pytest",

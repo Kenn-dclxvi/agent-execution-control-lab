@@ -41,4 +41,4 @@ focused gateは`tests/test_compat.py tests/test_utils/test_style.py`、full gate
 
 qualification receiptは`fixture_qualified_prompt_not_evaluated`である。`scripts/prepare_case_fixture.py`で4回materializeし、いずれも同一の`fixture_head_commit`と`fixture_head_tree`になることを確認した。4回目は永続local clone（`/Users/kenn/repos/click`）を`--source-repo`に使い、一時cloneと同じfixture identityになることを確認した。
 
-**prompt評価は未実施である。** fixtureが再現することは、評価済み、採用済み、releaseのいずれも意味しない。
+qualification receipt作成時点ではprompt未評価だった。その後、Bundle AでP1-a〜P1-cとStd14を完了した（一次結果: [`click Std14 N=5`](../../../results/click-control-free-standard14-n5_2026-07-26.md)）。fixture qualificationと評価は別gateであり、採用済み、release済みを意味しない。

@@ -1,0 +1,52 @@
+diff --git a/src/click/__init__.py b/src/click/__init__.py
+--- a/src/click/__init__.py
++++ b/src/click/__init__.py
+@@ -122,20 +122,20 @@ def __getattr__(name: str) -> object:
+         return importlib.metadata.version("click")
+ 
+     if name == "get_binary_stream":
+-        from .utils import _get_binary_stream
++        from .utils import get_binary_stream
+ 
+         warnings.warn(
+             "'get_binary_stream' is deprecated and will be removed in Click 9.0.",
+             DeprecationWarning,
+             stacklevel=2,
+         )
+-        return _get_binary_stream
++        return get_binary_stream
+ 
+     if name == "get_text_stream":
+-        from .utils import _get_text_stream
++        from .utils import get_text_stream
+ 
+         warnings.warn(
+             "'get_text_stream' is deprecated and will be removed in Click 9.0.",
+             DeprecationWarning,
+             stacklevel=2,
+         )
+-        return _get_text_stream
++        return get_text_stream
+ 
+     raise AttributeError(name)
+diff --git a/src/click/utils.py b/src/click/utils.py
+--- a/src/click/utils.py
++++ b/src/click/utils.py
+@@ -346,7 +346,7 @@ def echo(
+     file.flush()
+ 
+ 
+-def _get_binary_stream(name: t.Literal["stdin", "stdout", "stderr"]) -> t.BinaryIO:
++def get_binary_stream(name: t.Literal["stdin", "stdout", "stderr"]) -> t.BinaryIO:
+     """Returns a system stream for byte processing.
+ 
+     .. deprecated:: 8.5.0
+@@ -363,7 +363,7 @@ def _get_binary_stream(name: t.Literal["stdin", "stdout", "stderr"]) -> t.BinaryIO:
+     return opener()
+ 
+ 
+-def _get_text_stream(
++def get_text_stream(
+     name: t.Literal["stdin", "stdout", "stderr"],
+     encoding: str | None = None,
+     errors: str | None = "strict",
