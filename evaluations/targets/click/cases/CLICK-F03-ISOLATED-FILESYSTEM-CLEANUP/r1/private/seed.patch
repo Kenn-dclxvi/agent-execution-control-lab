@@ -1,0 +1,15 @@
+diff --git a/src/click/testing.py b/src/click/testing.py
+index cc123d4d..00000000 100644
+--- a/src/click/testing.py
++++ b/src/click/testing.py
+@@ -790,10 +790,2 @@ class CliRunner:
+         finally:
+             os.chdir(cwd)
+-
+-            if temp_dir is None:
+-                import shutil
+-
+-                try:
+-                    shutil.rmtree(dt)
+-                except OSError:
+-                    pass

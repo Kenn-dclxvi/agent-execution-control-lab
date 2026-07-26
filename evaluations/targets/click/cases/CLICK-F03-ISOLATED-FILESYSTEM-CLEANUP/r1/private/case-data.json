@@ -1,0 +1,138 @@
+{
+  "case_id": "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "python-local-runtime",
+        "source-code",
+        "error-cleanup",
+        "filesystem-state",
+        "context-manager"
+      ],
+      "equivalence_cluster_id": "isolated-filesystem-cleanup",
+      "family": "F03",
+      "mirrors_case": "TC-F03-ATOMIC-CONTEXT-CLEANUP"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      "PYTHONPATH=src .venv/bin/python -m pytest tests/test_testing.py::test_isolated_runner tests/test_testing.py::test_isolated_runner_custom_tempdir -q",
+      "PYTHONPATH=src .venv/bin/python -m pytest -q"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F03-C1",
+        "evidence_sources": ["focused_gate", "final_repository_state"]
+      },
+      {
+        "criterion_id": "CLICK-F03-C2",
+        "evidence_sources": ["focused_gate", "source_contract"]
+      },
+      {
+        "criterion_id": "CLICK-F03-C3",
+        "evidence_sources": ["focused_gate", "full_gate", "final_drift_manifest", "terminal_outcome"]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeし、PYTHONPATH=srcでworkspace側のsrcを優先する",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; test weakening cannot satisfy a criterion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F03-C1",
+        "expected": "temp_dirを指定しないcontext終了後に自動生成directoryが残らない。",
+        "type": "filesystem_state_after_context"
+      },
+      {
+        "criterion_id": "CLICK-F03-C2",
+        "expected": "context終了時に呼出元のcwdが復元される。",
+        "type": "state_restoration"
+      },
+      {
+        "criterion_id": "CLICK-F03-C3",
+        "expected": "temp_dir指定時はdirectoryを保持し、focused/full gatesがpassし、許可path外driftがない。",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "test_isolated_runner: 1 failed; generated directory remains",
+      "reference_focused_gate": "test_isolated_runner: 1 passed"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "cc123d4d15fda16262db16cefc467b1fffd9ac5d",
+        "mode": "100644",
+        "path": "src/click/testing.py"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "251193d615cc1c3396ed3b97731948ada78e7cbf",
+      "fixture_head_tree": "cecb87bfb6d5b86a411da26a55e8214011592362",
+      "seeded_focused_gate": "1 failed, 1 passed; generated directory remains",
+      "seeded_full_gate": "1 failed, 1938 passed, 25 skipped, 31000 deselected, 1 xfailed",
+      "runtime_identity_sha256": "e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37",
+      "seed_patch_raw_sha256": "2d457607ed330090562bb843ec53b2bf8806ae29cd2e0c3352bdaa9d0b9b39aa",
+      "trial_prompt_input_raw_sha256": "ccdb85f3e7498feaaf4c86e4bde029ced3376a1d0bed611bc5248c9be842fe26"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "cc123d4d15fda16262db16cefc467b1fffd9ac5d",
+          "mode": "100644",
+          "path": "src/click/testing.py",
+          "raw_sha256": "76f4e649bc53000d667c8c0deff1591970fa034b0f085a207165839b2301019a"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "2d457607ed330090562bb843ec53b2bf8806ae29cd2e0c3352bdaa9d0b9b39aa"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "fbb37c4f341ad719b3708e7a19bb70f94939fc12",
+        "mode": "100644",
+        "path": "src/click/testing.py",
+        "raw_sha256": "09a86f42d0c28793d66f24fdee17518153f59ae82b24503856da8dbe9b3b366e"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "251193d615cc1c3396ed3b97731948ada78e7cbf",
+        "expected_tree": "cecb87bfb6d5b86a411da26a55e8214011592362",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

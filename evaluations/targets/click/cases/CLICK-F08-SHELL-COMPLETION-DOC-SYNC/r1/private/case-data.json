@@ -1,0 +1,148 @@
+{
+  "case_id": "CLICK-F08-SHELL-COMPLETION-DOC-SYNC",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "documentation",
+        "canonical-reference",
+        "caller-visible-support",
+        "docs-only"
+      ],
+      "equivalence_cluster_id": "canonical-shell-support-doc-sync",
+      "family": "F08",
+      "mirrors_case": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "seed_origin_commit": "0f4738df88e3ea47c40a4a442103596a61cfee79"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      "rg -n 'Bash .*Zsh, Fish, and PowerShell' docs/shell-completion.md",
+      "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py -q",
+      "git diff --check"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F08-C1",
+        "evidence_sources": [
+          "focused_gate",
+          "final_repository_state"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F08-C2",
+        "evidence_sources": [
+          "document_context",
+          "behavior_gate"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F08-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeし、PYTHONPATH=srcでworkspace側のsrcを優先する",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; test weakening cannot satisfy a criterion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F08-C1",
+        "expected": "overview lists Bash, Zsh, Fish, and PowerShell.",
+        "type": "documentation_contract"
+      },
+      {
+        "criterion_id": "CLICK-F08-C2",
+        "expected": "overview remains consistent with detailed PowerShell instructions and implementation tests.",
+        "type": "cross_reference"
+      },
+      {
+        "criterion_id": "CLICK-F08-C3",
+        "expected": "all gates pass and only docs/shell-completion.md differs.",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "no match",
+      "reference_focused_gate": "one match"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "82f64be3a531397bf7565fcaa260457d5ac6bc0b",
+        "mode": "100644",
+        "path": "docs/shell-completion.md"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "f04c45af800e634c3a894c75f7c4ae97b0064678",
+      "fixture_head_tree": "85f1ef1c00f76f6add3ac073c881017355462558",
+      "seeded_focused_gate": "no match",
+      "seeded_behavior_gate": "58 passed",
+      "runtime_identity_sha256": "0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952",
+      "seed_patch_raw_sha256": "9fe8fe707525a13eb74591b9bd3c7c49a4e2ad36103d90e3c081d2347a661a32",
+      "trial_prompt_input_raw_sha256": "bf5d677ad605e8db12baa7081f772eade29fdd012bd7e1762b0da5c36cbd4470"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "82f64be3a531397bf7565fcaa260457d5ac6bc0b",
+          "mode": "100644",
+          "path": "docs/shell-completion.md",
+          "raw_sha256": "b9fa613000583ad0e2846bbaa67bf497b8f829821342275a6e3fa1d188f03125"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "9fe8fe707525a13eb74591b9bd3c7c49a4e2ad36103d90e3c081d2347a661a32"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "38368197d0e2436370a50caababf81b2969b49ba",
+        "mode": "100644",
+        "path": "docs/shell-completion.md",
+        "raw_sha256": "07741ee59d2ca618d81c8549ee5c4dc53ab4066c4d4fcb512881c1c3c1ee4120"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "f04c45af800e634c3a894c75f7c4ae97b0064678",
+        "expected_tree": "85f1ef1c00f76f6add3ac073c881017355462558",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

@@ -39,10 +39,10 @@ repository側が正本として持つのはこの定義だけである。実行�
 | --- | ---: | ---: | ---: | ---: | ---: |
 | P1-a 成立確認 | 1 | 1 | 1 | 24 | 1 |
 | P1-b batch内ばらつき | 1 | 5 | 1 | 24 | 5 |
-| P1-c batch間ばらつき | 1 | 5 | 3 | 24 | 15 |
+| P1-c batch間ばらつき（P1-bを含む累計） | 1 | 5 | 3 | 24 | 追加10（累計15） |
 
-いずれの段階もprompt setは[`click-00e592c-control-free-r1`](../../prompts/baselines/click-00e592c-control-free-r1/manifest.json)のまま変えない。prompt比較はPhase 2以降で行う。
+いずれの段階もprompt setはBundle A [`click-00e592c-control-free-r1`](../../prompts/baselines/click-00e592c-control-free-r1/manifest.json)のまま変えない。prompt比較はBundle Aの標準14項目baselineを確立した後、実CandidateであるBundle Bを固定して行う。
 
 ## 状態
 
-P1-aは1 / 1件がvalid・rateableでscore `4`だった。一次結果は[`click control-free F01-only P1-a N=1`](../../results/click-control-free-f01-only-p1a-n1_2026-07-26.md)とする。P1-bとP1-cは未実施であり、ばらつきはまだ評価していない。
+P1-a〜P1-cを完了した。P1-cの3 batch、計15 / 15件がvalid・rateableで全件score `4`だった。batch中央値の中央値はall-agent token `189,033`、elapsed `80.590`秒で、batch中央値rangeはtoken `14.22%`、elapsed `1.86%`である。一次結果は[`P1-a N=1`](../../results/click-control-free-f01-only-p1a-n1_2026-07-26.md)、[`P1-b N=5`](../../results/click-control-free-f01-only-p1b-n5_2026-07-26.md)、[`P1-c N=5 B=3`](../../results/click-control-free-f01-only-p1c-n5-b3_2026-07-26.md)を正本とする。

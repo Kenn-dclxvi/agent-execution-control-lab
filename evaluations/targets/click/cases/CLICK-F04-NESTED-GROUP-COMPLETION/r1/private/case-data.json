@@ -1,0 +1,148 @@
+{
+  "case_id": "CLICK-F04-NESTED-GROUP-COMPLETION",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "python-local-runtime",
+        "source-code",
+        "nested-command",
+        "caller-visible-output",
+        "shell-completion"
+      ],
+      "equivalence_cluster_id": "nested-group-completion-context",
+      "family": "F04",
+      "mirrors_case": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "seed_origin_commit": "ac6a2acfdb4550c35ce69ce54db502ba96c96324"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py::test_nested_group -q",
+      "PYTHONPATH=src .venv/bin/python -m pytest -q"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F04-C1",
+        "evidence_sources": [
+          "focused_gate",
+          "final_repository_state"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F04-C2",
+        "evidence_sources": [
+          "focused_gate",
+          "final_repository_state"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F04-C3",
+        "evidence_sources": [
+          "focused_gate",
+          "full_gate",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeし、PYTHONPATH=srcでworkspace側のsrcを優先する",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; test weakening cannot satisfy a criterion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F04-C1",
+        "expected": "get fullのcontextでdataとfull Groupのoptionが候補になる。",
+        "type": "caller_visible_completion"
+      },
+      {
+        "criterion_id": "CLICK-F04-C2",
+        "expected": "get full dataのcontextでdata commandのoptionが候補になる。",
+        "type": "caller_visible_completion"
+      },
+      {
+        "criterion_id": "CLICK-F04-C3",
+        "expected": "focused/full gatesがpassし、許可path外driftがない。",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "4 failed, 2 passed",
+      "reference_focused_gate": "6 passed"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "8a2668b09f1525ae95e814fa92a23bfdbee2c21d",
+        "mode": "100644",
+        "path": "src/click/shell_completion.py"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "1ad909c16987662bb240d58dc44d284e0fb496a2",
+      "fixture_head_tree": "a340c32c44c3deaca3ba9ab3aa39d83107edfe38",
+      "runtime_identity_sha256": "e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37",
+      "seed_patch_raw_sha256": "674add2a516f6e85c6d15b011b906516024679badf1f35c407895d64b11428f9",
+      "trial_prompt_input_raw_sha256": "b17f30b9e6ce6dc115976ca4f95850fdb87d05ba851f80daf9b7176da3896bde"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "8a2668b09f1525ae95e814fa92a23bfdbee2c21d",
+          "mode": "100644",
+          "path": "src/click/shell_completion.py",
+          "raw_sha256": "18522f75ddffe655e943978d1953255c447842867d3fd67fbdc1543d3df7da09"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "674add2a516f6e85c6d15b011b906516024679badf1f35c407895d64b11428f9"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "125016f433f3ca3d41655c6b29c11242e5989b95",
+        "mode": "100644",
+        "path": "src/click/shell_completion.py",
+        "raw_sha256": "d7417cc1e91ec486ab1850f72487978d54ae346255b2b743a382e7dc5180b771"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "1ad909c16987662bb240d58dc44d284e0fb496a2",
+        "expected_tree": "a340c32c44c3deaca3ba9ab3aa39d83107edfe38",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

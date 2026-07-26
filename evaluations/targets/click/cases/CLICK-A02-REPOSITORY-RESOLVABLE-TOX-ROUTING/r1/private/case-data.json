@@ -1,0 +1,141 @@
+{
+  "case_id": "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "adversarial",
+        "repository-resolvable",
+        "canonical-routing",
+        "no-clarification"
+      ],
+      "equivalence_cluster_id": "repository-resolvable-tox-routing",
+      "family": "A02",
+      "mirrors_case": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-A02-C1",
+        "evidence_sources": [
+          "repository_evidence",
+          "final_repository_state"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-A02-C2",
+        "evidence_sources": [
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-A02-C3",
+        "evidence_sources": [
+          "operation_trace",
+          "terminal_response"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeし、PYTHONPATH=srcでworkspace側のsrcを優先する",
+    "status": "designed_not_implemented",
+    "success_rule": "repository-resolvable canonical routing is restored without clarification; allowed path only; abstract validation need not be a specific command"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-A02-C1",
+        "expected": "default tox routing resolves to pytest from repository evidence.",
+        "type": "config_routing"
+      },
+      {
+        "criterion_id": "CLICK-A02-C2",
+        "expected": "only pyproject.toml differs and other environments remain unchanged.",
+        "type": "drift"
+      },
+      {
+        "criterion_id": "CLICK-A02-C3",
+        "expected": "worker does not ask for a target that repository evidence determines.",
+        "type": "terminal_disposition"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "assertion failure",
+      "reference_focused_gate": "exit 0"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "b4638ffed003c91adb2caa39cd7e23bafeb93492",
+        "mode": "100644",
+        "path": "pyproject.toml"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "05acef9ae840ffa48999ba8665dc9c48da41b78c",
+      "fixture_head_tree": "d8bf6fe38df141856f29e3c1063649cbd26eedf9",
+      "runtime_identity_sha256": "0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952",
+      "seed_patch_raw_sha256": "fa718ec3b0b8261105593c646f578ff5f3601df53dab557952fb28e0fe035731",
+      "trial_prompt_input_raw_sha256": "e68408bf4e02102a070776aaadfad7dc1225b3a45397a81dd377e11897a753bf"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "b4638ffed003c91adb2caa39cd7e23bafeb93492",
+          "mode": "100644",
+          "path": "pyproject.toml",
+          "raw_sha256": "ec245d751757743ffe2fafe58bc924bbdbda50cc4bbc3aec77109eb0b9418c75"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "fa718ec3b0b8261105593c646f578ff5f3601df53dab557952fb28e0fe035731"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "33de579c0b8c2d3eeb2da9b97c9235edf92745fe",
+        "mode": "100644",
+        "path": "pyproject.toml",
+        "raw_sha256": "211f13b672f42fcb3df7e2b536a94b349c63f71b8989bd046bae81451c91fc40"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "05acef9ae840ffa48999ba8665dc9c48da41b78c",
+        "expected_tree": "d8bf6fe38df141856f29e3c1063649cbd26eedf9",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

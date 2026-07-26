@@ -122,6 +122,69 @@ QUALITY_RATING_CLICK_V1 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_CLICK_V2 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v2",
+    "contract_sha256": "9f09b4230e19497bb752f77ef8a22b006fc505aa216a4575b2bff3eeaf143f80",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V3 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v3",
+    "contract_sha256": "0d165083c8629223f71aa7a53953a1d05ab90e36b99533ee7c0c1a60a53fd0a2",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V4 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v4",
+    "contract_sha256": "e2316a51ab0e51d08191165155781d860b0219350be8f51c2e4583f630f49746",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V5 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v5",
+    "contract_sha256": "054335e43d386251b81040bae080430cbca2a85e60c96f6a7100e536242ed5ab",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V6 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v6",
+    "contract_sha256": "d8fe38996cf270120977bb22f0434edb85de9040e4e5593b18481dddb69a78c4",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V7 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v7",
+    "contract_sha256": "23458c2abc303f657265c8769268883bb659e34c1c499fc5a8e8d9b45e3137bb",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V8 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v8",
+    "contract_sha256": "6be7e5816c764cd5651f6f9a89f3632da228fef659d3f34a98d7e54cd2ec7c8a",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V9 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v9",
+    "contract_sha256": "acefd9f032146d6b685203bd38f19263b5189e69f5cd08119d7b62d2d1c42557",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
+QUALITY_RATING_CLICK_V10 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v10",
+    "contract_sha256": "ad5ca3b4ba526fe0fb9c9ec079231d5b7476335b00d540ff8cf67b9e95cd5929",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 QUALITY_RATING = {
     "contract_id": "owner-producer-quality-v8",
     "contract_sha256": "22794275b34458898a26e94276126834db0bbc19dfa915e9187d02955419e1c2",
@@ -143,6 +206,15 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
     QUALITY_RATING_CLICK_V1,
+    QUALITY_RATING_CLICK_V2,
+    QUALITY_RATING_CLICK_V3,
+    QUALITY_RATING_CLICK_V4,
+    QUALITY_RATING_CLICK_V5,
+    QUALITY_RATING_CLICK_V6,
+    QUALITY_RATING_CLICK_V7,
+    QUALITY_RATING_CLICK_V8,
+    QUALITY_RATING_CLICK_V9,
+    QUALITY_RATING_CLICK_V10,
 )
 OWNER_PATTERN = re.compile(r"owner\s*=\s*([^\u3002\n;,]+)", re.IGNORECASE)
 EXECUTION_SCHEMA_V3 = "the-caption-prompt.execution/v3"

@@ -8,6 +8,14 @@ repository側が正本として持つのはset定義である。実行時の`set
 
 | set_id | 版 | case数 | 用途 | 状態 |
 | --- | --- | ---: | --- | --- |
-| [`click-f01-only-r1`](click-f01-only-r1/README.md) | `r1` | 1 | Phase 1のばらつき測定 | P1-a完了（1 result）、P1-b / P1-c未実施 |
+| [`click-f01-only-r1`](click-f01-only-r1/README.md) | `r1` | 1 | Phase 1のばらつき測定 | P1-a〜P1-c完了（3 batch、15 / 15 score 4） |
+| [`click-f02-only-r1`](click-f02-only-r1/README.md) | `r1` | 1 | Phase 2の追加case確認 | N=3完了（3 / 3 score 4） |
+| F03 / F04 / F05 / F05-OS / F06の各only set | `r1` | 各1 | Phase 2の追加case確認 | 各N=3完了（各3 / 3 score 4） |
+| `click-f07-only-r1` | `r1` | 1 | command evidence失敗履歴 | 未rating |
+| [`click-f07-only-r2`](click-f07-only-r2/README.md) | `r2` | 1 | Phase 2の追加case確認 | N=3完了（3 / 3 score 4） |
+| `click-f07-p-only-r1` / `r2` | `r1` / `r2` | 各1 | runtime command失敗履歴 | 各N=3完了（各3 / 3 score 3） |
+| [`click-f07-p-only-r3`](click-f07-p-only-r3/README.md) | `r3` | 1 | Phase 2の追加case確認 | N=3完了（3 / 3 score 4） |
+| F08 / F10 / F10-R / A01 / A02の各only set | `r1` | 各1 | Phase 2の追加case確認 | 各N=3完了（各3 / 3 score 4） |
+| [`click-standard14-r1`](click-standard14-r1/README.md) | `r1` | 14 | Bundle A baseline | N=5完了（70 / 70 score 4） |
 
-標準14項目相当のsetは未作成である。このsetの結果を全体試験完了として扱わない。
+only setは標準setの完了を単独では示さない。標準14項目の一次結果は[`click control-free Std14 N=5`](../results/click-control-free-standard14-n5_2026-07-26.md)を正本とする。

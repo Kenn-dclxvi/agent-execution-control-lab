@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index b4638ff..33de579 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -162,7 +162,7 @@ constrain_package_deps = true
+ use_frozen_constraints = true
+ dependency_groups = ["tests"]
+ commands = [[
+-    "pytest", "-v", "--tb=short", "--basetemp={env_tmp_dir}",
++    "pytest-missing", "-v", "--tb=short", "--basetemp={env_tmp_dir}",
+     {replace = "posargs", default = [], extend = true},
+ ]]
+ 

@@ -1,0 +1,110 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "CLICK-A01-LATENT-CONTEXT-POLICY",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "pallets/click",
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "case_spec": {
+      "family": "A01",
+      "equivalence_cluster_id": "latent-unfixed-context-policy",
+      "coverage_tags": [
+        "read-only",
+        "no-drift",
+        "repository-evidence"
+      ]
+    },
+    "source_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+        "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "clean_checkout",
+    "post_seed_intent": "No repository mutation is required.",
+    "design_operations": [],
+    "fixture_materialization": {
+      "mode": "clean_checkout"
+    }
+  },
+  "oracle": {
+    "mode": "read_only_response_and_no_drift",
+    "reference_postimage_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+      }
+    ],
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "CLICK-A01-C1",
+        "type": "terminal_content",
+        "expected": "Asks once for the desired mode and its application scope because repository evidence does not fix them."
+      },
+      {
+        "criterion_id": "CLICK-A01-C2",
+        "type": "operation_trace",
+        "expected": "Does not infer a value, edit, or test before clarification."
+      },
+      {
+        "criterion_id": "CLICK-A01-C3",
+        "type": "terminal_disposition",
+        "expected": "Exactly one clarification terminal and zero drift."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_and_operation_trace_evidence",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-A01-C1",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-A01-C2",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-A01-C3",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "commands": [],
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-07-26",
+      "fixture_materialization": "clean checkout at pinned target; no changed paths",
+      "model_visible_boundary": "trial-prompt-input.json only",
+      "model_invocation": "not_run",
+      "trial_prompt_input_raw_sha256": "3ec26252491dfcd9acfc891a526b511ca287075b09adef24db15090b53b22d65"
+    }
+  }
+}

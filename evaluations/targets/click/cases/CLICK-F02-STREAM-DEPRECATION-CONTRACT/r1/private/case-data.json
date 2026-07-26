@@ -1,0 +1,171 @@
+{
+  "case_id": "CLICK-F02-STREAM-DEPRECATION-CONTRACT",
+  "case_revision": "r1",
+  "fixture": {
+    "case_spec": {
+      "coverage_tags": [
+        "python-local-runtime",
+        "source-code",
+        "multi-file-implementation",
+        "cross-module-contract",
+        "deprecation-boundary"
+      ],
+      "equivalence_cluster_id": "stream-helper-deprecation-contract",
+      "family": "F02",
+      "mirrors_case": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "seed_origin_commit": "051725fa7e0c69effc9107066d8791c5b99242c3"
+    },
+    "target_identity": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "pallets/click",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    }
+  },
+  "grader": {
+    "commands": [
+      "PYTHONPATH=src .venv/bin/python -m pytest tests/test_deprecations.py tests/test_testing.py -q",
+      "PYTHONPATH=src .venv/bin/python -m pytest -q"
+    ],
+    "contract_revision": "grader-contract-r1",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F02-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F02-C2",
+        "evidence_sources": [
+          "focused_gate",
+          "full_gate"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F02-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "cwd_contract": "全required commandはrepository rootをcwdとして実行する。cwd外実行ではtests/test_utils/test__expand_args.py::test_expand_argsがseedと無関係に失敗する",
+    "mode": "repository_state_terminal_and_command_evidence",
+    "runtime_contract": "共有runtimeは.venvへvenv_shimとしてmaterializeする。PYTHONPATH=srcでworkspace側のsrcを実装として優先させる",
+    "status": "designed_not_implemented",
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient; pre-existing risk outside allowed paths does not block completion"
+  },
+  "oracle": {
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F02-C1",
+        "expected": "clickとclick.utilsのdeprecated stream helper accessorsが警告を発し、対応するhelperを返す。",
+        "type": "behavior_and_command"
+      },
+      {
+        "criterion_id": "CLICK-F02-C2",
+        "expected": "内部利用向けのprivate stream helperが存在し、deprecatedな公開accessorを経由しない。",
+        "type": "cross_module_behavior"
+      },
+      {
+        "criterion_id": "CLICK-F02-C3",
+        "expected": "Focused and full gates pass and only allowed paths differ from the seeded fixture.",
+        "type": "command_and_drift"
+      }
+    ],
+    "mode": "semantic_predicate_with_reference_postimage",
+    "observed_seed_effect": {
+      "focused_gate": "2 collection errors",
+      "focused_gate_files": [
+        "tests/test_deprecations.py",
+        "tests/test_testing.py"
+      ],
+      "full_gate": "2 collection errors, 31000 deselected",
+      "reference_focused_gate": "72 passed, 1 skipped",
+      "unseeded_full_gate": "1939 passed, 25 skipped, 31000 deselected, 1 xfailed"
+    },
+    "reference_postimage_files": [
+      {
+        "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638",
+        "mode": "100644",
+        "path": "src/click/__init__.py"
+      },
+      {
+        "git_blob_sha1": "b529eb04b34189f08e1211c95c7c8a30ca778490",
+        "mode": "100644",
+        "path": "src/click/utils.py"
+      }
+    ],
+    "reference_postimage_is_exclusive": false
+  },
+  "qualification": {
+    "receipt": {
+      "fixture": "materialized_twice_identical",
+      "fixture_head_commit": "22658fdca1a2166cecd534e15bb6dfd773a0ad13",
+      "fixture_head_tree": "bd4f81dc358bd7cbb8d3441e69bccb094b59f0e1",
+      "gate_contract_revision": "PYTHONPATH=src required for workspace src resolution",
+      "runtime_identity_sha256": "e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37",
+      "seed_patch_raw_sha256": "b760c8bb93dc0e66ef10e6c56826c61b4b15ffce7767e0f164dfdc8e41e70a44",
+      "trial_prompt_input_raw_sha256": "bd0440860fadc391364d6e626507c8cb0618c95df0fdccd551d0707d9e4cf549"
+    },
+    "status": "fixture_qualified_prompt_not_evaluated"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "failure_mode": "fail_closed_no_partial_fixture",
+      "preimage_files": [
+        {
+          "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638",
+          "mode": "100644",
+          "path": "src/click/__init__.py",
+          "raw_sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+        },
+        {
+          "git_blob_sha1": "b529eb04b34189f08e1211c95c7c8a30ca778490",
+          "mode": "100644",
+          "path": "src/click/utils.py",
+          "raw_sha256": "f43d5743dc07240e612feefa0a69d2b1697b6900149f8f809ffcd97ecb482dbf"
+        }
+      ],
+      "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "b760c8bb93dc0e66ef10e6c56826c61b4b15ffce7767e0f164dfdc8e41e70a44"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "62ec31e23bf4ffbab88cc59378a238634b9898d9",
+        "mode": "100644",
+        "path": "src/click/__init__.py",
+        "raw_sha256": "11eb71ce776bcb828753372efacdf748b1cbeed2d1c99a6ef8522228d4e6e893"
+      },
+      {
+        "git_blob_sha1": "3c06ea201429febbc4428513a911c676c5d06bc6",
+        "mode": "100644",
+        "path": "src/click/utils.py",
+        "raw_sha256": "4608ab2fb2fb74db96a5cdce6402f5affb3de2015f4a660390a6a74933653140"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "22658fdca1a2166cecd534e15bb6dfd773a0ad13",
+        "expected_tree": "bd4f81dc358bd7cbb8d3441e69bccb094b59f0e1",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    },
+    "status": "materialized_not_applied"
+  },
+  "visibility": "model_invisible"
+}

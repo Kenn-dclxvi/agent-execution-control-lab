@@ -8,10 +8,19 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | --- | --- | ---: | ---: | ---: | ---: | --- |
 | [`click-control-free-f01-only-global-m24-n1-r1`](click-control-free-f01-only-global-m24-n1-r1.json) | `click-f01-only-r1` | 1 | 1 | 1 | 24 | execution前停止（token accounting宣言不足、result 0件） |
 | [`click-control-free-f01-only-global-m24-n1-r2`](click-control-free-f01-only-global-m24-n1-r2.json) | `click-f01-only-r1` | 1 | 1 | 1 | 24 | P1-a完了（valid 1 / 1、score 4） |
+| [`click-control-free-f01-only-global-m24-n5-r1`](click-control-free-f01-only-global-m24-n5-r1.json) | `click-f01-only-r1` | 1 | 5 | 3 | 24 | P1-b / P1-c完了（3 result、valid 15 / 15、全件score 4） |
+| [`click-control-free-f02-only-global-m24-n3-r1`](click-control-free-f02-only-global-m24-n3-r1.json) | `click-f02-only-r1` | 1 | 3 | 1 | 24 | 完了（valid 3 / 3、全件score 4） |
+| F03 / F04 / F05 / F05-OS / F06の各`only-global-m24-n3-r1` | 対応するonly set | 各1 | 3 | 1 | 24 | 完了（各3 / 3、全件score 4） |
+| `click-control-free-f07-only-global-m24-n3-r1` | `click-f07-only-r1` | 1 | 3 | 1 | 24 | 実行済み・未rating（command evidence照合不能） |
+| [`click-control-free-f07-only-global-m24-n3-r2`](click-control-free-f07-only-global-m24-n3-r2.json) | `click-f07-only-r2` | 1 | 3 | 1 | 24 | 完了（3 / 3 score 4） |
+| `click-control-free-f07-p-only-global-m24-n3-r1` / `r2` | 対応するonly set | 各1 | 3 | 1 | 24 | 完了（各3 / 3 score 3） |
+| [`click-control-free-f07-p-only-global-m24-n3-r3`](click-control-free-f07-p-only-global-m24-n3-r3.json) | `click-f07-p-only-r3` | 1 | 3 | 1 | 24 | 完了（3 / 3 score 4） |
+| F08 / F10 / F10-R / A01 / A02の各`only-global-m24-n3-r1` | 対応するonly set | 各1 | 3 | 1 | 24 | 完了（各3 / 3、全件score 4） |
+| [`click-control-free-standard14-global-m24-n5-r1`](click-control-free-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
 
-`B`はprofileのfieldではなく、同一profileを変更せず反復した回数である。P1-b（`N=5`）とP1-c（`N=5`を`B=3`）は別revisionのprofileとして固定する。
+`B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
 
-r1はLayer 2開始前に必須のall-agent token accounting宣言がないことを検出し、runを生成せず停止した。履歴を上書きせず、r2で`token_accounting`とrequired commandのcommand evidence protocolだけを追加した。P1-aの一次結果は[`click results`](../results/click-control-free-f01-only-p1a-n1_2026-07-26.md)を正本とする。
+F01 profile r1はLayer 2開始前に必須のall-agent token accounting宣言がないことを検出し、runを生成せず停止した。履歴を上書きせず、r2で`token_accounting`とrequired commandのcommand evidence protocolだけを追加した。各profileの一次結果とClick Std14の集約値は[`click results`](../results/README.md)を正本とする。
 
 ## 実行環境の固定
 
@@ -21,13 +30,14 @@ r1はLayer 2開始前に必須のall-agent token accounting宣言がないこと
 | --- | --- | --- |
 | `codex_cli` | `0.144.0` | `codex --version`の実測値 |
 | `python_version` | `3.14.5` | 共有runtimeの`platform.python_version()` |
-| `runtime_identity_sha256` | `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` | 共有venvの`pip freeze --all`出力のSHA-256 |
+| `runtime_identity_sha256` | r1 `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` / r2 `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952` | 共有venvの`pip freeze --all`出力のSHA-256。r2は`uv==0.11.32`を追加 |
 
 共有runtimeは`/Users/kenn/repos/_verification/click-prompt-ab-measurement/environment/.venv`に置き、`runtime_links`の`venv_shim`としてworkspaceの`.venv`へmaterializeする。fixture生成元のlocal cloneは`/Users/kenn/repos/click`（target commitでdetach）である。
 
 - 共有venvは`pytest`と、target commitから通常installした`click`を持つ。`click`を入れるのは`importlib.metadata`へversion metadataを供給するためで、実装はgate実行時に`PYTHONPATH=src`でworkspace側の`src`から解決させる。
 - `pip install .`は`direct_url.json`を残し、`pip freeze`が`click @ file:///...`という環境依存の行を出す。identityをpath非依存にするため、install後に`direct_url.json`を削除してから`pip freeze --all`を取得した。結果は`click==8.5.0.dev0`である。
 - `PYTHONPATH=src`を付けない場合、`tests/test_deprecations.py`が`PackageNotFoundError`でcollection errorになる。`venv_shim`は共有purelibを`.pth`で追加するだけでworkspaceの`src`を通さないため、gate commandへ明示する。
+- F07-Pではconsole scriptに依存せず、`UV_CACHE_DIR=.uv-cache .venv/bin/python -m uv lock --check --offline`を使う。Std14の全runはruntime r2へ固定した。
 
 ## 実測したgateの挙動
 
