@@ -23,7 +23,7 @@ AIエージェントに与えるprompt（指示書）の設計は、慣習的に
 
 追試では、Rating v13・標準14項目・各`N=5`へBaseline、ControlFreeRepository、C5、C35、C43、C71を揃え、reasoning `high`と`medium`で各420 runを登録した。C71の6水準比較では、`medium`がtoken中央値最小、`low`がelapsed中央値最小で、`xhigh`以上は`high`よりtokenとelapsedがともに増えた。reasoningを`medium`へ下げてもC71とC43のtoken中央値差は`-29.19%`であり、制御差は消えなかった。
 
-repository汎用化の追試では、公開target `pallets/click`に同じcontrol-free Bundle Aを固定し、14 caseのStd14を各`N=5`で実行した。70 / 70件がscore `4`で、5 iterationのall-agent token中央値は`2,860,702`、elapsed中央値は`1,235.719`秒だった。これは公開target上のbaseline成立を示すが、prompt差の比較や採用を示さない。
+repository汎用化の追試では、公開target `pallets/click`にcontrol-free Bundle AとC81全文のBundle Bを固定し、14 caseのStd14を各`N=5`で実行した。両条件とも70 / 70件がscore `4`で、Bundle BはBundle A比でall-agent token中央値`-23.96%`、elapsed中央値`+2.86%`だった。trace診断ではmodel stepが`-32.27%`、shell commandが`+12.15%`で、input token削減量の`97.98%`をcached inputが占めた。すなわちtoken削減はcommand削減ではなくmodel再入とcontext再計上の削減に整合した。一方、確認系のelapsed `-283.485`秒を実装系の`+324.899`秒が相殺し、安定した時間短縮は実証できなかった。これは公開target上でC81全文のtoken削減方向を再現した結果であり、個別predicateの因果効果や採用を示さない。
 
 これらは、2026年7月に公開されたOpenAI GPT-5.6 Sol指針（lean system promptがelaborate scaffoldingを上回る、outcome-first、停止条件の明示）およびAnthropic Claude Opus 5指針（検証指示を削除せよ、subagent起動を抑制せよ、既に行う再確認を指示するな）と**同方向の独立観測**である。同時に本研究は、両指針が「lean」「trim」「remove」という語で混在させている**byte削減と判断点削減の区別**を、実測で分離する。両指針は減らす方向を示すが、減らし切った下限（0 byte条件）の測定と、削除では閉じない残余品質欠陥の存在を示していない。本研究では、最良のcandidateは0 byte条件を効率で上回るのではなく、**0 byte条件の効率を維持したまま残余欠陥1件を閉じる**ことで得られた。
 
@@ -475,7 +475,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 ## 7. 限界と妥当性の脅威
 
 1. **単一model / 単一runtime。** modelは`gpt-5.6-sol`、AgentはCodex CLIであり、他model・他CLIでの再現は未確認。reasoning effortは6水準で追試したが、model系列とruntimeの一般化にはならない。
-2. **公開targetは1 repository・1 Bundleに限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click`では同じBundle Aで14 case・Std14 70 / 70件のscore `4`を取得した（正本: [`click Std14 result`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)）。これはtarget非依存kernelとcase横断baselineの成立を示すが、Click上のprompt差、別公開repository、他言語への一般化はまだ成立していない。
+2. **公開targetは1 repository・2 Bundleに限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click`ではBundle AとC81全文のBundle Bを同じStd14条件で各70 run評価した。Bundle Bは70 / 70件のscore `4`を維持し、Bundle A比token中央値`-23.96%`、elapsed中央値`+2.86%`だった（正本: [`Click Bundle A / B result`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)）。token削減方向は再現したがelapsed短縮は再現せず、別公開repository、他言語、個別predicateへの一般化はまだ成立していない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
 4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultをHighとMediumでそれぞれ登録したが、両reasoning間およびv12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。
@@ -537,6 +537,7 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 - 公開target Clickの反復確認: [`click control-free F01-only P1-c N=5 B=3`](../evaluations/targets/click/results/click-control-free-f01-only-p1c-n5-b3_2026-07-26.md)
 - 公開target ClickのF02追加確認: [`click control-free F02-only N=3`](../evaluations/targets/click/results/click-control-free-f02-only-n3_2026-07-26.md)
 - 公開target ClickのBundle A baseline: [`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)
+- 公開target ClickのBundle A / C81全文比較: [`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)
 - 現行rating contract: [`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)
 
 ### 外部資料（2026-07-25取得）

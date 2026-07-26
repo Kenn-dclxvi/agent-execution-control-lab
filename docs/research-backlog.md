@@ -99,7 +99,7 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
 - candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
 
-## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（Bundle A Std14完了）
+## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（Bundle A / B Std14完了）
 
 公開repositoryを対象とする独立系列として`pallets/click`を登録し、同じBundle Aで14 caseのqualification、追加case各`N=3`、Std14 `N=5`をLayer 1〜4まで実行した。**Std14は70 / 70件がvalid・rateableかつscore `4`である。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
 
@@ -119,8 +119,10 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 残り12 caseを固定し、追加caseだけ各`N=3`で確認。現行revisionはすべて3 / 3件がscore `4`。F07 r1はcommand evidence照合不能の未rating履歴、F07-P r1 / r2は各3 / 3件score `3`の失敗履歴として保持
 - runtime r2へ`uv==0.11.32`を追加し、identity `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952`を固定。F07-P r3はworkspace-local uv cacheで3 / 3件score `4`
 - `click-standard14-r1`、rating v10、Std14 profileを固定し、70 / 70件をscore `4`で登録。5 iterationのall-agent token中央値`2,860,702`、elapsed中央値`1,235.719`秒、excluded attempt 0件
+- THE-CAPTION Candidate81のroot本文をbyte-identicalに1 targetへ適用したBundle Bを固定し、同じStd14条件で70 / 70件をscore `4`として登録
+- Bundle AからBundle Bはquality中央値差`0.000`、all-agent token中央値`-685,546`（`-23.96%`）、elapsed中央値`+35.384`秒（`+2.86%`）。THE-CAPTIONでのtoken削減方向は再現したが、elapsed短縮は再現しなかった
 
-Std14の数値とidentityは[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)を正本とする。次operationは、candidate作成前gateを通したうえで1軸だけを変更するBundle Bを新規固定し、同じStd14条件で水平比較することである。content-identicalなBundle Bは作らない。採用、release、runtime projectionは別gateである。
+Bundle Aの一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Bundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)を正本とする。次operationは、Click traceからTHE-CAPTION既存制御で説明できない反復的誤経路を抽出する新規制御探索と、評価済み制御を組み合わせるClick向け最適化を別系列で進めることである。採用、release、runtime projectionは別gateである。
 
 ### 現在の依存範囲（2026-07-26に実測）
 
@@ -129,14 +131,14 @@ repository非依存な層とtarget固有な層は次のとおりである。
 | 層 | artifact | 実測した状態 |
 | --- | --- | --- |
 | Layer 1 fixture | `scripts/prepare_case_fixture.py` | CLI引数は`--case` / `--source-repo` / `--output`のみで、target repositoryはparameter。固有pathのhard-codeなし |
-| Layer 2〜4実行 | `scripts/evaluation_loop.py` | clickで20 result・計131 runをappend-only登録。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
+| Layer 2〜4実行 | `scripts/evaluation_loop.py` | clickで21 result・計201 runをappend-only登録。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
 | 制御prompt本文 | [Candidate71 release](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)の`AGENTS.md.txt` | `SPEC`〜`RECOVERY`の13 labelは見出し語を除きproject固有語彙を持たない |
-| bundle target map | THE-CAPTION releaseのmanifest 19 target、`click-00e592c-control-free-r1`のmanifest 1 target | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した |
+| bundle target map | THE-CAPTION releaseのmanifest 19 target、Click Bundle A / Bのmanifest各1 target | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した。C81 root本文のbyte-identicalな水平適用も1 targetで成立した |
 | case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | 14 case・17 revisionをinstance配下へ固定。失敗revisionを上書きせず保持した |
 | rating contract | THE-CAPTION v13、`click-outcome-abstract-condition-preserving-v1`〜v10 | case追加ごとに旧revisionを残し、現行v10で標準14項目を固定した |
-| 採点補助 | Clickは固定rating contractとblind evidenceで採点 | 14 case・131 runのratingと登録が成立。target固有の新しいkernel分岐は追加していない |
+| 採点補助 | Clickは固定rating contractとblind evidenceで採点 | 14 case・201 runのratingと登録が成立。target固有の新しいkernel分岐は追加していない |
 
-したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`では4つをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用を標準14項目で確認した。未確認なのはBundle Bの水平比較、第三者によるruntime再構築、network遮断下のfull gateである。
+したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`では4つをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用をBundle A / Bの標準14項目で確認した。未確認なのは第三者によるruntime再構築とnetwork遮断下のfull gateである。
 
 この分離の境界とinstance台帳は[`evaluations/targets/README.md`](../evaluations/targets/README.md)で確定した。既存の計測系列はtarget instance `the-caption`（`layout: legacy_root`）として登録し、artifact pathを移動していない。
 
