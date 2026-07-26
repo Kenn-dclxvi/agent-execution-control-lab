@@ -18,8 +18,22 @@
       "異なるcommand evidence protocolまたはruntimeへの安定化結果の一般化"
     ],
     "prompt_set_name": "validation_wrapper_precedence_release",
+    "projection_evidence": {
+      "baseline_commit": "2f550a88dfa5b7b24ff653b8fab8cd2ef150d360",
+      "effective_path_count": 1,
+      "manifest_target_count": 19,
+      "matched_manifest_target_count": 18,
+      "merge_commit": "592e73aae4f5cf71964efea0d49836e8c894cbbc",
+      "preserved_target_drift": [
+        "docs/how-to/index.md"
+      ],
+      "projection_record": "projection.json",
+      "pull_request": "https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343",
+      "rollback_identity": "2f550a88dfa5b7b24ff653b8fab8cd2ef150d360",
+      "validation": "bash ./scripts/dev/verify_change_set.sh: 401 passed in 6.75s"
+    },
     "release_identity": "the-caption-3ce91a4-validation-wrapper-precedence-release-r1",
-    "release_status": "approved_for_projection",
+    "release_status": "projected",
     "scope": "評価済みCandidate81の19 path full bundleを内容変更なしで固定し、THE-CAPTIONへ投影する。",
     "unresolved_risks": [
       "Rating v13 Medium標準14項目N=5の70 / 70件ではscore 4だったが、評価範囲外へ一般化しない。",
@@ -193,7 +207,7 @@
     ],
     "design_status": "release_candidate",
     "evaluation_status": "standard14_evaluated_quality_gate_passed_prompt_stability_gate_passed",
-    "runtime_projection_status": "not_projected",
+    "runtime_projection_status": "projected",
     "source_interpretation": "This release is a content-identical snapshot of Candidate81. The explicit user request on 2026-07-27 separately authorizes adoption and projection while retaining the Rating v13 Medium evaluation scope and unresolved runtime generalization risks."
   },
   "schema_version": "the-caption-prompt.bundle/v1",

@@ -2,9 +2,9 @@
 
 ## 結論
 
-候補81の19対象完全一式を、内容変更なしでTHE-CAPTIONへ投影するリリースとして承認した。
+候補81の実効変更を、THE-CAPTIONへ投影した。
 
-リリース状態は`approved_for_projection`、承認状態は`approved`である。
+リリース状態は`projected`、承認状態は`approved`である。
 
 候補81はRating v13、reasoning effort `medium`、標準14項目N=5でquality gateとprompt stability gateを通過した。今回の承認は、2026-07-27の明示的な本体適用依頼に基づく。
 
@@ -41,13 +41,27 @@
 ## 承認状態
 
 - リリース準備: `complete`
-- リリース状態: `approved_for_projection`
+- リリース状態: `projected`
 - 採用承認: `approved`
-- 本体反映: `not_projected`
+- 本体反映: `projected`。`main`へのmergeで有効化済み
 - 承認根拠: 2026-07-27の明示的な本体適用依頼
+
+## 投影結果
+
+- 投影前commit / 巻き戻し先: `2f550a88dfa5b7b24ff653b8fab8cd2ef150d360`
+- 投影した実変更対象: root `AGENTS.md`一つ
+- 検証: `git diff --check`、`bash ./scripts/dev/verify_change_set.sh`、`401 passed in 6.75s`
+- 統合後release対象一致: `18 / 19`
+- 一致しない対象: `docs/how-to/index.md`一つ
+- 不一致理由: C43投影後のTHE-CAPTION本体更新であり、C81の変更対象外のため現行内容を保持
+- THE-CAPTION PR: [#343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)
+- 統合commit: `592e73aae4f5cf71964efea0d49836e8c894cbbc`
+- 投影記録: [`projection.json`](projection.json)
 
 ## 根拠
 
+- [投影記録](projection.json)
+- [THE-CAPTION PR #343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)
 - [候補81 標準14項目N=5](../../../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
 - [候補81 F04 N=10](../../../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-f04-n10_2026-07-26.md)
 - [候補81設計記録](../../../docs/candidate81-validation-wrapper-precedence-design.md)
