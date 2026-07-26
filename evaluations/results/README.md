@@ -6,7 +6,21 @@
 
 Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
 
+Candidate71のreasoning 6水準は、[`Rating v13標準14項目各N=5`](candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)として記録した。新規のLow、Medium、XHigh、Max、Ultraは各70 / 70件がvalid・rateableで、既存Highを含めた6水準の品質中央値は`100.000`だった。公式scoreはUltraだけ`4 / 0 = 69 / 1`だが、score `0`はsearch patternの`pytest.fixture`をtest実行と誤認したRating v13偽陽性だった。Mediumはtoken中央値`1,923,688`、Lowはelapsed中央値`901.850秒`で各KPIの最小値が分かれた。Ultraは14 / 70 runがchild sessionを起動し、他の5水準はすべてroot-onlyだった。reasoningの異なるresultは別compatibility keyとし、Layer 4の互換comparison、winner、採用、release、本体反映は判断しない。
+
+Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43をMediumで再計測し、既存Candidate71 Mediumと[`同一互換条件のRating v13標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)へ登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。Candidate43とCandidate71はscore `4 = 70`かつ品質中央値`100.000`だった。Candidate71はCandidate43比でtoken中央値`-29.19%`、elapsed中央値`-10.59%`だった。6条件とも既存High比で品質中央値を維持し、token中央値とelapsed中央値が小さかったが、reasoningが異なるHighとの数値は記述差として扱う。
+
 Candidate71へ条件付きproject index導線だけを追加したCandidate78は、[`第13版採点の標準14項目各N=5`](candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だったが、Candidate71比でall-agent token中央値は`+8.66%`、elapsed中央値は`+4.38%`だった。A02の広域探索が減らず、F10 Entryに不要なindex readが増えたため、事前条件どおり`stopped`とした。採用、release、本体反映は行っていない。
+
+Candidate71の順序依存validationを明確化したCandidate79は、[`Rating v13、Medium、F04各N=5`](candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md)を互換条件で新規実行した。両条件とも5 / 5件がvalid・rateableかつscore `4`だった。一方、1-step closureはCandidate71の3 / 5から0 / 5へ悪化し、Candidate79のall-agent token中央値は`+16.88%`、elapsed中央値は`+2.48%`だった。事前停止条件どおりCandidate79は`stopped`とし、Candidate71へ還元せず、標準14項目、採用、release、本体反映へ進めていない。
+
+Candidate71のroot validation wrapper方法をpromptへ固定したCandidate80は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate80-root-validation-wrapper-v13-medium-f04-n10_2026-07-26.md)を互換条件で新規実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`だった。1-step closureはCandidate71の5 / 10から9 / 10へ改善したが、strict gateの10 / 10未達によりCandidate80は`stopped`とした。tokenとelapsedは診断値として保存し、prompt安定性の合否には使っていない。
+
+Candidate80で残った逐次解釈を解消したCandidate81は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-f04-n10_2026-07-26.md)を互換条件で実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`で、1-step closureはCandidate71の5 / 10に対してCandidate81が10 / 10だった。Candidate81は`prompt_stability_gate_passed`とし、標準14項目、採用、release、本体反映は未実施である。今後、互換条件を変えない候補試験では既存C71 resultを固定参照し、C71を毎回再実行しない。
+
+Candidate81の[`Rating v13、Medium、標準14項目N=5`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)は70 / 70件がvalid・rateable・score `4`だった。既存Candidate71は再実行せず、同じcompatibility keyの登録済みresultを固定参照した。複数required command caseの1-step closureはCandidate71の30 / 35からCandidate81の35 / 35となり、差はF04の0 / 5から5 / 5だった。Candidate81は`standard14_evaluated / quality_gate_passed / prompt_stability_gate_passed`とし、採用、release、本体反映は未実施である。
+
+Candidate71を変更せずcommand evidence protocolだけをv1 / v2へ分けた[`Rating v13、Medium、F04各N=10診断`](candidate71-command-protocol-v1-v2-v13-medium-f04-n10_2026-07-26.md)は、両条件10 / 10件がvalid・rateableかつscore `4`だった。root ordered wrapperを明示したv2は1-step closureを`5 / 10 -> 10 / 10`へ増やした。一方、token中央値は`-0.13%`、elapsed中央値は`+0.34%`、token合計は`+6.63%`、elapsed合計は`+2.69%`だった。protocol revisionが異なるため数値はdiagnosticな記述差とし、v2は`behavior_gate_passed / efficiency_gate_not_passed`、標準profile未採用とする。
 
 Candidate71の実行制御を型付き状態機械へ全面改訂したCandidate74は、[`第12版採点の標準14項目各N=5`](candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だった。互換なCandidate71 Batch 1比ではall-agent token中央値`+58.88%`、elapsed中央値`+9.28%`だった。構造testと今回の品質維持を状態機械全体のruntime採用証明へ読み替えず、Candidate74は`standard14_evaluated`、採用・release・本体反映は未実施とする。
 
