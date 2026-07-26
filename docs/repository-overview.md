@@ -29,7 +29,7 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 - **プロンプト（prompt）/ bundle**: AIへ渡す指示書一式。`AGENTS.md`等のファイル群をまとめた単位を bundle と呼びます。
 - **baseline**: 比較の起点となる、現行プロンプトの固定スナップショット。
-- **candidate（候補）**: baselineから派生させた改良案。`C1`〜`C77`のように番号で呼びます。
+- **candidate（候補）**: baselineから派生させた改良案。`C1`〜`C78`のように番号で呼びます。
 - **release**: 評価を経て、本体へ反映可能な単位として固定した候補。
 - **token（トークン）**: AIが入出力を処理する量の単位。多いほど時間と費用が増えます。
 - **all-agent `total_tokens`**: 統括役のroot agentと、そこから起動された全ての下位セッション（SA session＝worker）の使用量を合算した値。workerが増えると合計は大きく膨らみます。
@@ -41,15 +41,15 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 | Path | 役割 |
 | --- | --- |
 | `prompts/baselines/` | 比較元プロンプト（現行の固定スナップショット）。2件（`current-r1` / `current-r2`）。 |
-| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC77まで、bundleとして75件を保存。 |
+| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC78まで、bundleとして76件を保存。 |
 | `prompts/routes/` | 共通の全文へ実行前に合成する小さな差分（route）。 |
 | `prompts/releases/` | 本体へ反映可能な単位に固定したrelease。4件。 |
 | `evaluations/cases/` | 評価case（20件）とmodel-visible / private境界。 |
 | `evaluations/sets/` | caseを束ねた評価集合（例: `the-caption-standard14-r1`）。 |
 | `evaluations/fixtures/` | caseが使う擬似リポジトリ状態。 |
-| `evaluations/profiles/` | model・環境・反復条件・比較条件を固定したprofile。147件。 |
+| `evaluations/profiles/` | model・環境・反復条件・比較条件を固定したprofile。148件。 |
 | `evaluations/rating-contracts/` | 採点条件（rating contract）をrevision別に保存。13 revision（v1〜v13）。 |
-| `evaluations/results/` | 公開済みの評価結果（append-only）。runを重ねるごとに増えるため、現況は同ディレクトリを参照（2026-07-26時点で137件、READMEを除く）。 |
+| `evaluations/results/` | 公開済みの評価結果（append-only）。runを重ねるごとに増えるため、現況は同ディレクトリを参照（2026-07-26時点で138件、READMEを除く）。 |
 | `layer2/` | token内訳やsession情報など、KPIへ入れない補助データの保存先。 |
 | `docs/` | リポジトリ契約、設計判断、反映手順。 |
 | `scripts/` | 評価ループや証拠収集のスクリプト。 |
@@ -92,11 +92,11 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 現行プロンプトの固定スナップショット。`the-caption-3ce91a4-current-r1` と `-r2`。すべての候補はここから派生します。
 
-### candidate（C1〜C77、bundle 75件保存）
+### candidate（C1〜C78、bundle 76件保存）
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
 
-bundle 75件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`（現在2件）はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
+bundle 76件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`（現在2件）はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
 
 掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 
@@ -136,7 +136,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 ## 7. 現在の状態（まとめ）
 
 - 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
-- baselineから多数の候補（C77まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
+- baselineから多数の候補（C78まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
 - 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。最初のv13互換resultは6条件・計420件です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。

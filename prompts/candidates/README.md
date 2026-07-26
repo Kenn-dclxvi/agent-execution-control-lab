@@ -79,6 +79,7 @@
 | `the-caption-3ce91a4-authority-bound-validation-fast-path-r1`（Candidate75） | `the-caption-3ce91a4-typed-execution-state-machine-r1` | 型付き状態構造を維持し、authorityでdependencyが固定されない独立required validationを同一waveへ閉じる | [`F06 targeted N=5 / stopped`](../../evaluations/results/candidate74-candidate75-candidate76-validation-wave-v12_2026-07-23.md) |
 | `the-caption-3ce91a4-final-state-validation-wave-r1`（Candidate76） | `the-caption-3ce91a4-authority-bound-validation-fast-path-r1` | potential mutator後の最終target versionを観測するvalidationだけを後続waveへ固定 | [`F06 targeted pass、standard14 69 / 70 score 4 / stopped`](../../evaluations/results/candidate74-candidate75-candidate76-validation-wave-v12_2026-07-23.md) |
 | `the-caption-3ce91a4-triggered-exception-transition-r1`（Candidate77） | `the-caption-3ce91a4-validation-closure-r1` | C71の11 labelを維持し、型付き状態仕様を例外triggerが成立したoperationだけへ適用 | [`v12 standard14 70 / 70 score 4 / stopped`](../../evaluations/results/candidate71-candidate77-triggered-exception-transition-v12-standard14-n5_2026-07-23.md) |
+| `the-caption-3ce91a4-project-index-navigation-r1`（Candidate78） | `the-caption-3ce91a4-validation-closure-r1` | TaskSpecで未解決の静的project事実が必要な場合だけ、repository-wide探索の前に既存project indexを参照する1 label追加 | [`v13 standard14 70 / 70 score 4 / stopped`](../../evaluations/results/candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md) |
 
 candidate bundleのmanifestは構築時provenanceとしてimmutableに保持する。評価状態の更新はmanifestをin-place変更せず、このindexと独立したevaluation resultで表す。
 
