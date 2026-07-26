@@ -100,7 +100,7 @@ bundle 76件はすべてcandidate index（[`prompts/candidates/README.md`](../pr
 
 掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 
-### release（4件）と本体反映状況
+### release（5件）と本体反映状況
 
 正本`prompts/releases/README.md`はrelease status / approval / runtime projectionを別軸で保持する。ここでも同じ3軸に分けて示す。
 
@@ -110,8 +110,9 @@ bundle 76件はすべてcandidate index（[`prompts/candidates/README.md`](../pr
 | Candidate41 | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)、実変更8 path）。直前の投影履歴・C43の巻き戻し先として維持 |
 | **Candidate43** | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
+| **Candidate81** | `approved_for_projection` | `approved` | `not_projected` | **投影待ち**。Rating v13 Medium標準14項目N=5でquality / prompt stability gate通過 |
 
-現在の本体投影は、Candidate41 → Candidate43 → Candidate71の順に積み上げたreleaseで、直近の投影は`VALIDATION_CLOSURE`一labelを足した **C71** です。C41・C43は過去の投影履歴かつ巻き戻し先として保持しており、`cancelled`にはしていません。C71は後述のとおり評価上は品質gateを通過していませんが、**トークン効率を優先する別の採用判断**として2026-07-23に本体適用されました。ここが「評価（stopped）と採用（本体適用）は別レイヤー」という原則の実例です。
+現在の本体投影は、Candidate41 → Candidate43 → Candidate71の順に積み上げたreleaseで、直近の投影は`VALIDATION_CLOSURE`一labelを足した **C71** です。Candidate81は、root producerの複数required validationを一つのcustom wrapper内で順に発行するprecedence ruleへ同labelを置換するreleaseとして承認済みで、投影待ちです。C41・C43・C71は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 
