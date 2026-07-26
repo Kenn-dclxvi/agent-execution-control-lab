@@ -3,7 +3,7 @@
 ## 成果品質を保ったままall-agent tokenを削減する制御メカニズムの実測、および2026年7月のベンダ公式指針との対照
 
 > [!IMPORTANT]
-> **位置付け**: この文書は本リポジトリの研究成果を一つの論文形式へまとめた**総説**である。いずれの契約・原則・状態についても正本ではない。数値・件数・status・identityの正本は各節に示す一次artifactとし、この文書は参照と解釈だけを担う。記述は**2026-07-25時点**の状態に依存する。外部指針の引用は同日に取得した公開文書に基づく。
+> **位置付け**: この文書は本リポジトリの研究成果を一つの論文形式へまとめた**総説**である。いずれの契約・原則・状態についても正本ではない。数値・件数・status・identityの正本は各節に示す一次artifactとし、この文書は参照と解釈だけを担う。研究状態の記述は**2026-07-26時点**、外部指針の引用は2026-07-25に取得した公開文書に基づく。
 
 ---
 
@@ -11,7 +11,7 @@
 
 AIエージェントに与えるprompt（指示書）の設計は、慣習的に「文面の良し悪し」として扱われてきた。本研究は、promptを**実行制御**、すなわちモデルの実行経路上の判断点を規定する不変条件の集合として定義し直し、その変更が成果品質・token消費・所要時間・実行経路へ与える影響を、固定した互換条件のもとで反復測定した。
 
-対象は実在のコードベースTHE-CAPTION（commit `3ce91a4`）であり、baseline 2件から77番までのcandidate（bundle 75件）を派生させ、20 caseの評価集合、13 revisionのrating contract、137件のappend-only評価resultを蓄積した。全測定は`gpt-5.6-sol`（reasoning effort `high`）とCodex CLIの単一条件で実施した。
+対象は実在のコードベースTHE-CAPTION（commit `3ce91a4`）であり、baseline 2件から81番までのcandidate（bundle 79件）を派生させ、20 case、11 evaluation set、13 revisionのrating contract、145件の公開評価result文書（READMEを除く）を蓄積した。modelとAgentは`gpt-5.6-sol` / Codex CLIに固定し、主要測定はreasoning effort `high`、追試は`low` / `medium` / `xhigh` / `max` / `ultra`を加えた6水準で実施した。
 
 主要な結果は次の3点である。
 
@@ -21,9 +21,11 @@ AIエージェントに与えるprompt（指示書）の設計は、慣習的に
 
 3. **効率改善の効果量は制御の種類で桁が異なり、その順位は「処理量そのものを減らすか」で決まる。** 最大は不要なworker起動の抑制、次にmodel再入と検証の一括化、次にread経路の事前確定、最小はprompt表面の圧縮（有意差なし）だった。
 
+追試では、Rating v13・標準14項目・各`N=5`へBaseline、ControlFreeRepository、C5、C35、C43、C71を揃え、reasoning `high`と`medium`で各420 runを登録した。C71の6水準比較では、`medium`がtoken中央値最小、`low`がelapsed中央値最小で、`xhigh`以上は`high`よりtokenとelapsedがともに増えた。reasoningを`medium`へ下げてもC71とC43のtoken中央値差は`-29.19%`であり、制御差は消えなかった。
+
 これらは、2026年7月に公開されたOpenAI GPT-5.6 Sol指針（lean system promptがelaborate scaffoldingを上回る、outcome-first、停止条件の明示）およびAnthropic Claude Opus 5指針（検証指示を削除せよ、subagent起動を抑制せよ、既に行う再確認を指示するな）と**同方向の独立観測**である。同時に本研究は、両指針が「lean」「trim」「remove」という語で混在させている**byte削減と判断点削減の区別**を、実測で分離する。両指針は減らす方向を示すが、減らし切った下限（0 byte条件）の測定と、削除では閉じない残余品質欠陥の存在を示していない。本研究では、最良のcandidateは0 byte条件を効率で上回るのではなく、**0 byte条件の効率を維持したまま残余欠陥1件を閉じる**ことで得られた。
 
-重要な限界として、本研究の全測定は`gpt-5.6-sol`単一条件であり、Claude Opus 5上での再測定は0件である。したがってOpus 5指針との一致は同方向の独立観測にとどまり、Opus 5上での再現は未確認である。
+重要な限界として、本研究のmodelは`gpt-5.6-sol`、AgentはCodex CLIの単一条件であり、Claude Opus 5上での再測定は0件である。reasoning effortは6水準へ広げたが、Opus 5指針との一致は同方向の独立観測にとどまり、別model / 別CLIでの再現は未確認である。
 
 ---
 
@@ -63,7 +65,7 @@ promptの改善は通常、出力文の読みやすさや網羅性で評価さ�
 | --- | --- |
 | prompt set / bundle | エージェントへ渡す指示書一式を1単位へ固定したもの |
 | baseline | 比較起点となる現行promptの固定スナップショット |
-| candidate | baselineから派生させた候補。`C1`〜`C77` |
+| candidate | baselineから派生させた候補。`C1`〜`C81` |
 | label / predicate | 1つのlabel（見出し付き制御単位）が1つのpredicate（条件付き振る舞いの判定文）を持つ |
 | worker（SA session） | モデルが作業を分担するために起動する下位セッション |
 | all-agent `total_tokens` | root agentと全descendant workerの最終usageの合算値 |
@@ -95,25 +97,26 @@ caseは、実行役へ提示する情報（model-visible）と、採点用の正
 
 評価基盤は`winner`、改善・悪化の断定、KPIの優先順位、採用可否、release判断、projection判断を出力しない。数値を並べるだけであり、採否は人が別に判断する。この分離は本論文の解釈全体に及ぶ。
 
-### 2.6 実測した基盤規模（2026-07-25時点）
+### 2.6 実測した基盤規模（2026-07-26時点）
 
 | 項目 | 件数 |
 | --- | ---: |
 | baseline bundle | 2 |
-| candidate bundle | 75（設計上はC77まで） |
+| candidate bundle | 79（設計上はC81まで） |
 | release bundle | 4 |
-| 評価case | 20 |
-| 評価集合 | 7 |
-| evaluation profile | 147 |
-| rating contract revision | 13（v1〜v13） |
-| 公開評価result（append-only） | 137 |
-| 評価基盤のtest | 60ファイル |
+| 評価case | THE-CAPTION 20、`click` 1 |
+| 評価集合 | THE-CAPTION 11、`click` 1 |
+| evaluation profile | THE-CAPTION 167、`click` 1（JSON file数） |
+| rating contract revision | THE-CAPTION 13（v1〜v13）、`click` 1 |
+| 公開評価result文書 | THE-CAPTION 145、`click` 0（各READMEを除く） |
+| 評価基盤のtest | 73ファイル |
 
 ### 2.7 実行条件
 
-全評価resultで単一である。
+modelとAgentは全評価resultで単一であり、reasoning effortだけを追試で変数化した。
 
-- model / reasoning: `gpt-5.6-sol` / `high`。137件のresultのうち122件がmodelを明示し、そのすべてが`gpt-5.6-sol`である。残る15件はREADME、保存evidenceの再解析文書、および2026-07-15の基盤負荷確認runで、model行を持たない。**他のmodel名を明示したresultは0件であり、Claude系modelでの測定は存在しない。**
+- model: `gpt-5.6-sol`。**他のmodel名を明示したresultは0件であり、Claude系modelでの測定は存在しない。**
+- reasoning: 主要測定は`high`。2026-07-26の追試でC71を`low` / `medium` / `high` / `xhigh` / `max` / `ultra`の6水準へ広げ、6条件の互換比較を`medium`でも取得した。
 - Agent: Codex CLI、memories disabled、permission `workspace-write`、approval `never`
 - 対象repository: THE-CAPTION commit `3ce91a403f9e0c83f29d56bbe9e7b449b713445d`
 - 反復: caseごと`N=5`を基本、継続試験は`N=5 × 18 Batch`（条件あたり1,260 run）
@@ -289,6 +292,32 @@ C41・C43は過去の投影履歴かつ巻き戻し先として保持され、`c
 
 これは方法論上の主張でもある。**評価は観測であり、採用は判断である。** 有限回の試験で将来挙動を100%保証することを採用条件にせず、残余riskは観測頻度だけでなく実利用での影響、検出可能性、回復可能性、rollback identityと合わせて扱う（[`future-roadmap.md`](future-roadmap.md)）。
 
+### 3.8 Rating v13一律比較とreasoning effort追試
+
+採点契約revisionを跨いだ過去resultを連結せず、Rating v13・標準14項目・各`N=5`・global queue `M=24`へBaseline、ControlFreeRepository、C5、C35、C43、C71の6条件を揃えた。reasoning `high`と`medium`はそれぞれ6条件 × 70 run = 420 runで、全件がvalidかつrateableだった。
+
+| reasoning | C43 quality中央値 | C71 quality中央値 | C71 − C43 token中央値 | C71 − C43 elapsed中央値 |
+| --- | ---: | ---: | ---: | ---: |
+| `high` | 100.000 | 100.000 | `-978,840`（`-31.47%`） | `-66.453秒`（`-5.63%`） |
+| `medium` | 100.000 | 100.000 | `-793,181`（`-29.19%`） | `-112.335秒`（`-10.59%`） |
+
+正本は[`High 6条件result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)と[`Medium 6条件result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)である。reasoning effortはcompatibility conditionであるため、HighとMediumを同一のLayer 4 comparisonへ混ぜない。ここで示せるのは、各reasoning水準内の互換比較でC71とC43の品質中央値が同値で、C71のtoken中央値が約29〜31%小さかったことまでである。
+
+C71単独では6水準、各70 runを取得した。
+
+| reasoning | score分布 | quality中央値 | token中央値 | elapsed中央値 |
+| --- | ---: | ---: | ---: | ---: |
+| `low` | `4 = 70` | 100.000 | 2,000,274 | 901.850秒 |
+| `medium` | `4 = 70` | 100.000 | **1,923,688** | 948.869秒 |
+| `high` | `4 = 70` | 100.000 | 2,131,059 | 1,114.525秒 |
+| `xhigh` | `4 = 70` | 100.000 | 2,263,485 | 1,382.917秒 |
+| `max` | `4 = 70` | 100.000 | 2,382,990 | 1,851.930秒 |
+| `ultra` | `4 / 0 = 69 / 1` | 100.000 | 3,407,392 | 2,188.151秒 |
+
+`medium`は`high`比でtoken中央値`-9.73%`、elapsed中央値`-14.86%`、`low`はelapsed中央値`-19.08%`だった。`xhigh`以上はtokenとelapsedがともに`high`より増えた。`ultra`のscore `0` 1件は、search pattern内の文字列をtest実行と誤認したRating v13の採点偽陽性であり、immutableなresultは変更していない。正本は[`C71 reasoning 6水準result`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)である。
+
+後続のCandidate81は、MediumのF04で残った逐次model再入を対象に`VALIDATION_CLOSURE`一行だけを置換した。標準14項目70 / 70件でscore `4`を維持し、複数required command caseの1-step closureをC71の30 / 35から35 / 35へ上げた。一方、token合計は`+0.28%`、elapsed中央値は`+5.78%`であり、効率上の優位は示していない。これはprompt動作安定性の対象結果であり、採用、release、runtime projectionを意味しない（正本: [`C71 / C81標準14項目result`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)）。
+
 ---
 
 ## 4. 測定装置の妥当性
@@ -387,11 +416,11 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 
 ### 5.5 相違点・未検証点
 
-**(a) 単一model条件。** 本研究の全評価resultは`gpt-5.6-sol` / reasoning `high` / Codex CLIの単一条件である。Claude Opus 5での測定は**0件**。したがって5.3節の一致は「異なるmodel系列で同方向の結論が独立に得られた」ことを示すにとどまり、本研究の制御がOpus 5上で同じ効果量を持つ保証はない。本リポジトリ自身の方針は、model / reasoning設定 / Agent / CLI / runtimeが変わる場合は新しいprofile revisionとして評価し、異なるmodelのresultを同一compatibility comparisonへ混ぜないことである（[`future-roadmap.md`](future-roadmap.md)）。Opus 5でのprofile revisionは未実施である。
+**(a) 単一model / 単一Agent条件。** 本研究の全評価resultは`gpt-5.6-sol` / Codex CLIの単一条件である。reasoning effortは6水準へ広げたが、Claude Opus 5での測定は**0件**である。したがって5.3節の一致は「異なるmodel系列で同方向の結論が独立に得られた」ことを示すにとどまり、本研究の制御がOpus 5上で同じ効果量を持つ保証はない。本リポジトリ自身の方針は、model / reasoning設定 / Agent / CLI / runtimeが変わる場合は新しいprofile revisionとして評価し、異なるmodelまたはruntimeのresultを同一compatibility comparisonへ混ぜないことである（[`future-roadmap.md`](future-roadmap.md)）。別model / 別CLIのprofile revisionは未実施である。
 
-**(b) reasoning effortを変数化していない。** 全測定は`high`固定である。Opus 5指針はeffortを「token costと応答時間の第一の制御手段」とし、`low` / `medium`の積極利用を推奨する。本研究が制御で得た`26`〜`30%`の削減幅の一部が、effort低下で代替可能かは**未検証**である。これは効果量の帰属に関わる重要な未解決点である。
+**(b) reasoning effort追試。** C71の6水準追試では、品質中央値を維持した範囲で`medium`がtoken中央値最小、`low`がelapsed中央値最小だった。`medium`は`high`比でtoken中央値`-9.73%`、elapsed中央値`-14.86%`である。一方、同じRating v13・標準14項目で測ったC71とC43のtoken中央値差は`high`で`-31.47%`、`medium`で`-29.19%`だった。少なくともこの2水準・`N=5`では、effort低下だけでC71の相対的な制御差は消えていない。ただしreasoningごとにcompatibility keyが異なるため、水準間の差は記述的比較であり、制御効果とeffort効果の加法性や因果分解までは主張しない。
 
-**(c) API層の統制は範囲外。** `text.verbosity`、Programmatic Tool Calling、effortはprompt層の外にある。本研究の3 KPI設計はprompt差分だけを変数とするため、これらは比較に含まれない。ただし本リポジトリのroadmapは「安定して効果が確認された機械的な制御は自然言語promptへ積み増さず、型付きTaskSpec、permission gate、scheduler、validation DAG、producer identity、terminal stateなどのruntime機構へ移す」方針を持ち、ベンダがAPI parameterへ移した動きと同方向である。
+**(c) API層の統制。** `text.verbosity`とProgrammatic Tool Callingはprompt層の外にあり、本研究では未測定である。reasoning effortは2026-07-26の追試で新しいprofile revisionのcomparison conditionとして変数化したが、prompt差分と同一comparisonへ混ぜていない。本リポジトリのroadmapは「安定して効果が確認された機械的な制御は自然言語promptへ積み増さず、型付きTaskSpec、permission gate、scheduler、validation DAG、producer identity、terminal stateなどのruntime機構へ移す」方針を持ち、ベンダがAPI parameterへ移した動きと同方向である。
 
 **(d) 指針は単一runの推奨、本研究は反復測定。** 公式指針は推奨文とその内部eval結果を示すが、case別分布、反復間の方向一致、失敗形の分類は公開されていない。本研究は18 Batchでの方向一致（18 / 18）と、case別（13 / 14）、対別（935 / 1,260）まで開示している。効果量の比較ではなく、**検証可能性の粒度**が異なる。
 
@@ -443,13 +472,13 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 
 ## 7. 限界と妥当性の脅威
 
-1. **単一model / 単一runtime。** modelを明示する122件のresultすべてが`gpt-5.6-sol` / `high`であり、他のmodel名を明示したresultは存在しない。他model、他reasoning設定、他CLIでの再現は未確認。
-2. **単一target repository。** THE-CAPTION commit `3ce91a4`のみ。他のコードベース、他の言語、他のtask分布への一般化は行っていない。
+1. **単一model / 単一runtime。** modelは`gpt-5.6-sol`、AgentはCodex CLIであり、他model・他CLIでの再現は未確認。reasoning effortは6水準で追試したが、model系列とruntimeの一般化にはならない。
+2. **評価済みtarget repositoryは一つ。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`のみである。公開target `pallets/click`はinstance、control-free bundle、case 1件、rating contract、set、P1-a profileまで作成したが、resultは0件である。他のコードベース、他の言語、他のtask分布への一般化はまだ成立していない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
-4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultを登録したが、v12以前のresultとは互換比較できない。
+4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultをHighとMediumでそれぞれ登録したが、両reasoning間およびv12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。
 6. **効かなかった制御の方が多い。** 効率で明確に効いたのは4メカニズムのうち実質2系統（worker抑制、再入削減）であり、うち再入削減系（C69・C71）は品質gateを通過していない。context削減系（C33）は品質を`-6.250`割った。read経路系（C50）はcase横断で不安定だった。
-7. **未評価・診断限定のartifactが残る。** candidate bundle 75件のうち`not_evaluated`が2件。C45〜C48はblind quality ratingを持たない`diagnostic_only`枝であり、標準14項目やB18と互換な品質比較ではない。bundleの存在は評価済みを意味しない。
+7. **未評価・診断限定のartifactが残る。** candidate bundle 79件のうち`not_evaluated`が2件。C45〜C48はblind quality ratingを持たない`diagnostic_only`枝であり、標準14項目やB18と互換な品質比較ではない。bundleの存在は評価済みを意味しない。
 8. **未完了の研究項目が残る。** C71の11 label監査のうち3件（`CONTEXT` / `INDEPENDENCE` / `RECOVERY`）は「根拠なし」判定が暫定であり、既存の保存データでは決着しない。A01の3択variation診断は未実施。F10 location mismatchはprompt側の変更を停止し、evidence interface要件として別軸へ移した。索引は[`research-backlog.md`](research-backlog.md)。
 9. **投影済みcandidateの残余risk。** C71は品質gate不通過のまま本体へ投影されている。当時のrelease artifactに保存された未解決risk 2件は取り消されていない。うちA01側は現在も品質上のriskとして残る。
 10. **本論文自体の位置。** この文書は総説であり、いずれの状態についても正本ではない。
@@ -468,7 +497,7 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 6. 効率改善の代償は分布の裾に現れ、中央値では見えない。1,260 runで4件の実質欠落が採用gateを分けた。
 7. 採点契約そのものが結論を歪め得る。抽象的な成果条件を採点側で特定コマンドへ具体化する欠陥を検出し、v13で塞いだ。この偏りは効率化された側を不利にする方向を持つ。
 
-これらは2026年7月のOpenAI GPT-5.6 Sol指針およびAnthropic Claude Opus 5指針と同方向であり、両指針が語で混在させているbyte削減と判断点削減の区別、下限条件の測定、削除では閉じない残余欠陥、効率向上の代償の定量、測定装置の妥当性要件を追加する。一方で本研究は単一model条件であり、Opus 5上での再測定とreasoning effortの変数化は未実施である。
+これらは2026年7月のOpenAI GPT-5.6 Sol指針およびAnthropic Claude Opus 5指針と同方向であり、両指針が語で混在させているbyte削減と判断点削減の区別、下限条件の測定、削除では閉じない残余欠陥、効率向上の代償の定量、測定装置の妥当性要件を追加する。reasoning effortは6水準で追試し、`medium` / `low`が`high`より低いtokenまたはelapsedを示しても、C71とC43の相対差は消えなかった。一方、modelとAgentは`gpt-5.6-sol` / Codex CLIの単一条件であり、Opus 5を含む別model・別CLIでの再測定は未実施である。
 
 最後に、本基盤が一貫して分離してきた区別を再掲する。**評価は観測であり、採用は判断である。** 本基盤は`winner`も採否も出力しない。C71が評価上`stopped`のまま本体へ投影されている事実は、この分離が運用上も維持されていることを示す。
 
@@ -497,6 +526,9 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 - 主対照実験: [`Baseline / ControlFreeRepository / C35 / C41 expanded12 N=5`](../evaluations/results/baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md)
 - 最大規模の継続試験: [`C69 / C71 validation closure v12 標準14項目 B18`](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)
 - 現行契約の互換比較: [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 v13 標準14項目 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)
+- 現行契約・Mediumの互換比較: [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 v13 Medium 標準14項目 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)
+- reasoning effort追試: [`C71 reasoning 6水準 v13 標準14項目 N=5`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)
+- Mediumでのvalidation closure安定化: [`C71 / C81 v13 Medium 標準14項目 N=5`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
 - 再入境界: [`C43 / C69 model reentry decision boundary v10 標準14項目 N=5`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)
 - 成果値境界: [`C43 outcome authority boundary v10 標準14項目 B18`](../evaluations/results/candidate43-outcome-authority-boundary-v10-standard14-continuous-n5-b18_2026-07-20.md)
 - all-agent token再集計: [`v3 all-agent token reaccounting`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md)
