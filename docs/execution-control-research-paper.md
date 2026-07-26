@@ -106,9 +106,9 @@ caseは、実行役へ提示する情報（model-visible）と、採点用の正
 | release bundle | 4 |
 | 評価case | THE-CAPTION 20、`click` 1 |
 | 評価集合 | THE-CAPTION 11、`click` 1 |
-| evaluation profile | THE-CAPTION 167、`click` 1（JSON file数） |
+| evaluation profile | THE-CAPTION 167、`click` 2（JSON file数） |
 | rating contract revision | THE-CAPTION 13（v1〜v13）、`click` 1 |
-| 公開評価result文書 | THE-CAPTION 145、`click` 0（各READMEを除く） |
+| 公開評価result文書 | THE-CAPTION 145、`click` 1（各READMEを除く） |
 | 評価基盤のtest | 73ファイル |
 
 ### 2.7 実行条件
@@ -473,7 +473,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 ## 7. 限界と妥当性の脅威
 
 1. **単一model / 単一runtime。** modelは`gpt-5.6-sol`、AgentはCodex CLIであり、他model・他CLIでの再現は未確認。reasoning effortは6水準で追試したが、model系列とruntimeの一般化にはならない。
-2. **評価済みtarget repositoryは一つ。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`のみである。公開target `pallets/click`はinstance、control-free bundle、case 1件、rating contract、set、P1-a profileまで作成したが、resultは0件である。他のコードベース、他の言語、他のtask分布への一般化はまだ成立していない。
+2. **公開targetの追試は成立確認1件に限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click` P1-aは1 case・`N=1`でLayer 1〜4が成立し、score `4`、all-agent token `180,871`、elapsed `77.811`秒だった（正本: [`click P1-a result`](../evaluations/targets/click/results/click-control-free-f01-only-p1a-n1_2026-07-26.md)）。これはtarget非依存kernelの動作確認であり、ばらつき、prompt差、他言語、他task分布への一般化はまだ成立していない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
 4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultをHighとMediumでそれぞれ登録したが、両reasoning間およびv12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。

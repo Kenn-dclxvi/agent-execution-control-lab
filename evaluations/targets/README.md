@@ -20,9 +20,9 @@ instanceが登録されていることは、評価済み、採用済み、releas
 | target_id | layout | visibility | 第三者再現 | descriptor | 状態 |
 | --- | --- | --- | --- | --- | --- |
 | `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行instance |
-| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | control-free baseline bundle、case 1件（14項目中）、rating contract、Phase 1用set、P1-a profileを作成済み。resultは未作成 |
+| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | P1-aを1 / 1 valid・score 4で完了。P1-b / P1-cと標準setは未実施 |
 
-`click`（`pallets/click`、BSD-3-Clause）はgate 1〜9の判定と14項目coverage対応を[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で確定して登録した。**登録もartifact作成も評価の実施を意味しない。** P1-a（Case=1 / N=1 / B=1 / M=24）のartifactは揃っており、runは1件も実行していない。共有runtimeとlocal cloneはrepository外（`/Users/kenn/repos/_verification/click-prompt-ab-measurement/environment/.venv`と`/Users/kenn/repos/click`）に置く。段階計画は[`docs/research-backlog.md`](../../docs/research-backlog.md)の項目10を参照する。
+`click`（`pallets/click`、BSD-3-Clause）はgate 1〜9の判定と14項目coverage対応を[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で確定して登録した。P1-a（Case=1 / N=1 / B=1 / M=24）はLayer 1〜4を端から端で完了し、1 / 1件がvalid・score `4`だった（正本: [`click P1-a result`](click/results/click-control-free-f01-only-p1a-n1_2026-07-26.md)）。**この1件は標準set完了、ばらつき、採用、release、本体反映を意味しない。** 共有runtimeとlocal cloneはrepository外（`/Users/kenn/repos/_verification/click-prompt-ab-measurement/environment/.venv`と`/Users/kenn/repos/click`）に置く。段階計画は[`docs/research-backlog.md`](../../docs/research-backlog.md)の項目10を参照する。
 
 ## layout
 

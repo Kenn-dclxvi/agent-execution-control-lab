@@ -8,6 +8,6 @@ repository側が正本として持つのはset定義である。実行時の`set
 
 | set_id | 版 | case数 | 用途 | 状態 |
 | --- | --- | ---: | --- | --- |
-| [`click-f01-only-r1`](click-f01-only-r1/README.md) | `r1` | 1 | Phase 1のばらつき測定 | 未実行 |
+| [`click-f01-only-r1`](click-f01-only-r1/README.md) | `r1` | 1 | Phase 1のばらつき測定 | P1-a完了（1 result）、P1-b / P1-c未実施 |
 
 標準14項目相当のsetは未作成である。このsetの結果を全体試験完了として扱わない。

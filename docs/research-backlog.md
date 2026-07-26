@@ -99,19 +99,21 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
 - candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
 
-## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（P1-a実行準備済み）
+## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（P1-a完了）
 
-公開repositoryを対象とする独立系列として`pallets/click`を登録し、P1-a実行に必要なartifactまで作成した。**評価resultはまだ0件である。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
+公開repositoryを対象とする独立系列として`pallets/click`を登録し、P1-aをLayer 1〜4まで実行した。**1 / 1件がvalid・rateableでscore `4`、result登録済みである。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
 
 2026-07-26時点で次を完了している。
 
 - target instance `click`を`layout: namespaced`、公開・第三者再現可能として登録
 - control-free baseline bundle `click-00e592c-control-free-r1`を固定
 - `CLICK-F01-ANSI-SEQUENCE-STRIP` r1を作成し、seed適用前後のfocused / full gateでfixtureをqualification
-- `click-outcome-abstract-condition-preserving-v1`、`click-f01-only-r1`、P1-a profileを固定
+- `click-outcome-abstract-condition-preserving-v1`、`click-f01-only-r1`、P1-a profile r1 / r2を固定
 - Codex CLI `0.144.0`、Python `3.14.5`、共有venv identityをprofileへ固定
+- r1 profileはLayer 2開始前にall-agent token accounting宣言不足を検出し、result 0件のまま停止。履歴を上書きせず、r2でtoken accountingとrequired command evidence protocolだけを追加
+- r2でP1-aを完了。quality `100.000`（raw score `4`）、all-agent token `180,871`、elapsed `77.811`秒、excluded attempt 0件
 
-現在の次operationは、[`click-control-free-f01-only-global-m24-n1-r1`](../evaluations/targets/click/profiles/click-control-free-f01-only-global-m24-n1-r1.json)を変更せず、P1-a（Case 1 / `N=1` / `B=1` / `M=24`）として1 run実行し、fixture、bundle overlay、gate、all-agent token集計、rating、result登録が端から端まで成立するか確認することである。現在状態の正本は[`evaluations/targets/README.md`](../evaluations/targets/README.md)と[`click profiles README`](../evaluations/targets/click/profiles/README.md)とする。
+P1-aの一次結果は[`click control-free F01-only P1-a N=1`](../evaluations/targets/click/results/click-control-free-f01-only-p1a-n1_2026-07-26.md)を正本とする。現在の次operationは、同じprompt / case / runtime境界のP1-b（Case 1 / `N=5` / `B=1` / `M=24`）profileを新revisionとして固定し、batch内ばらつきを測ることである。現在状態の正本は[`evaluations/targets/README.md`](../evaluations/targets/README.md)と[`click profiles README`](../evaluations/targets/click/profiles/README.md)とする。
 
 ### 現在の依存範囲（2026-07-26に実測）
 
@@ -120,14 +122,14 @@ repository非依存な層とtarget固有な層は次のとおりである。
 | 層 | artifact | 実測した状態 |
 | --- | --- | --- |
 | Layer 1 fixture | `scripts/prepare_case_fixture.py` | CLI引数は`--case` / `--source-repo` / `--output`のみで、target repositoryはparameter。固有pathのhard-codeなし |
-| Layer 2〜4実行 | `scripts/evaluation_loop.py` | set / cycle / capsule / registry単位で動作し、target固有pathを持たない。`scripts/`と`layer2/`の`.py`に現れる固有語はschema名prefix `the-caption-prompt`（94件）、環境変数名、git author名、set idなどの識別子・記述文字列で、target repositoryによる実行分岐は持たない |
+| Layer 2〜4実行 | `scripts/evaluation_loop.py` | click P1-aでvalid run、rating、append-only result登録まで成立。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
 | 制御prompt本文 | [Candidate71 release](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)の`AGENTS.md.txt` | `SPEC`〜`RECOVERY`の13 labelは見出し語を除きproject固有語彙を持たない |
 | bundle target map | THE-CAPTION releaseのmanifest 19 target、`click-00e592c-control-free-r1`のmanifest 1 target | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した |
 | case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | `click`でも同じ3 artifactへrepository / commit / treeとgate commandをbindし、`CLICK-F01-ANSI-SEQUENCE-STRIP` r1をqualificationした |
 | rating contract | THE-CAPTION v13、`click-outcome-abstract-condition-preserving-v1` | `click`用contractをinstance配下へ分離し、共有kernelのsupported ratingへ登録した |
-| 採点補助 | `scripts/quality_audit_policy.py`、`scripts/standard14_quality_audit.py` | 既存moduleはTHE-CAPTION固有pathを持つ。`click`の追加case用module分離は未設計で、P1-aの端から端までのrating成立も未実測 |
+| 採点補助 | click P1-aは固定rating contractとblind evidenceで手動採点 | 1 caseのratingと登録は成立。反復・追加case用のtarget固有自動audit module分離は未設計 |
 
-したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`ではcase、rating contract、control-free bundle target mapをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せずP1-a artifactを構成できた。3 KPI、compatibility key、append-only registryを含む端から端までの流用可否は、P1-a result未作成のため未確認である。
+したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`ではcase、rating contract、control-free bundle target mapをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用をP1-aで確認した。未確認なのは反復時のばらつきと、追加case向け自動採点補助の分離である。
 
 この分離の境界とinstance台帳は[`evaluations/targets/README.md`](../evaluations/targets/README.md)で確定した。既存の計測系列はtarget instance `the-caption`（`layout: legacy_root`）として登録し、artifact pathを移動していない。
 
@@ -153,7 +155,7 @@ repository非依存な層とtarget固有な層は次のとおりである。
 
 ### 未確定事項
 
-- `click`の容量、gate所要時間、通常環境での5回連続passはPhase 0で実測した。P1-a以降のevaluation workspaceでのflaky率とtoken分散は未取得である。
+- `click`の容量、gate所要時間、通常環境での5回連続passはPhase 0で実測した。P1-aは1件だけ取得したため、evaluation workspaceでのflaky率とtoken分散は未取得である。
 - `.venv`を含むknown-good実行環境（[`cases/README.md`](../evaluations/cases/README.md)のself-contained fixture）を、第三者へどう再現させるかが未決である。lockfileからの再構築手順で足りるか、fixture条件として固定する必要があるかを判定していない。
 - network遮断下のfull gateは未実測である。依存materialize後にnetworkを使わない見込みと、network遮断下でpassした事実を混同しない。
 - instance境界、layout、descriptor、`click` rating contractは固定した。残る未設計は**target固有採点補助のadapter化**であり、既存`scripts/quality_audit_policy.py`と`scripts/standard14_quality_audit.py`を変更せずに追加case用moduleをどう分離するかを決めていない（[`scripts/AGENTS.md`](../scripts/AGENTS.md)）。
@@ -162,7 +164,7 @@ repository非依存な層とtarget固有な層は次のとおりである。
 
 1. **Phase 0**（実施済み）: gate 1〜9を判定し、`pallets/click`を選定した。実測値と判定の正本は[`public-target-selection-phase0.md`](public-target-selection-phase0.md)とする。gate 9（言語分布）はPython単一のため不足が残る。
 2. **Phase 1 artifact準備**（実施済み）: instance、control-free bundle、F01型case、rating contract、set、P1-a profile、共有runtimeを固定した。
-3. **Phase 1実測**（未実施）: P1-a `N=1`、P1-b `N=5`、P1-c `N=5 × B=3`の順で、端から端までの成立とbatch内・batch間ばらつきを確認する。case追加は既存caseを再実行せず、追加caseだけ各`N=3`とする。
+3. **Phase 1実測**（P1-a完了）: P1-a `N=1`で端から端までの成立を確認した。次にP1-b `N=5`、P1-c `N=5 × B=3`の順でbatch内・batch間ばらつきを確認する。case追加は既存caseを再実行せず、追加caseだけ各`N=3`とする。
 4. **Phase 2**: bit-identical bundleで`N=10`のnull calibrationを行う（[`TC-F01 r2 N=10`](../evaluations/results/TC-F01-r2_identical-bundle-n10_2026-07-15.md)と同じ手順）。flakyとtoken分散から感度の下限を確認する。
 5. **Phase 3**: nullが通った1 repositoryだけで、F02型（cross-layer）とF10-R型（非破壊review）へ拡張する。制御差が観測されるのはこの2型である。
 6. **Phase 4**: case pack一式と縮小setを公開単位として固定する。

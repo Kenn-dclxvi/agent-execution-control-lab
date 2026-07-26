@@ -6,9 +6,12 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 
 | profile_id | set | Case | N | B | M | 状態 |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| [`click-control-free-f01-only-global-m24-n1-r1`](click-control-free-f01-only-global-m24-n1-r1.json) | `click-f01-only-r1` | 1 | 1 | 1 | 24 | 未実行（P1-a成立確認用） |
+| [`click-control-free-f01-only-global-m24-n1-r1`](click-control-free-f01-only-global-m24-n1-r1.json) | `click-f01-only-r1` | 1 | 1 | 1 | 24 | execution前停止（token accounting宣言不足、result 0件） |
+| [`click-control-free-f01-only-global-m24-n1-r2`](click-control-free-f01-only-global-m24-n1-r2.json) | `click-f01-only-r1` | 1 | 1 | 1 | 24 | P1-a完了（valid 1 / 1、score 4） |
 
 `B`はprofileのfieldではなく、同一profileを変更せず反復した回数である。P1-b（`N=5`）とP1-c（`N=5`を`B=3`）は別revisionのprofileとして固定する。
+
+r1はLayer 2開始前に必須のall-agent token accounting宣言がないことを検出し、runを生成せず停止した。履歴を上書きせず、r2で`token_accounting`とrequired commandのcommand evidence protocolだけを追加した。P1-aの一次結果は[`click results`](../results/click-control-free-f01-only-p1a-n1_2026-07-26.md)を正本とする。
 
 ## 実行環境の固定
 

@@ -45,4 +45,4 @@ repository側が正本として持つのはこの定義だけである。実行�
 
 ## 状態
 
-**未実行である。** profileが未作成のため、このsetでのrunは1件もない。
+P1-aは1 / 1件がvalid・rateableでscore `4`だった。一次結果は[`click control-free F01-only P1-a N=1`](../../results/click-control-free-f01-only-p1a-n1_2026-07-26.md)とする。P1-bとP1-cは未実施であり、ばらつきはまだ評価していない。
