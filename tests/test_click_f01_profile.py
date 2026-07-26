@@ -12,6 +12,10 @@ PROFILE = (
     ROOT
     / "evaluations/targets/click/profiles/click-control-free-f01-only-global-m24-n1-r1.json"
 )
+PROFILE_R2 = (
+    ROOT
+    / "evaluations/targets/click/profiles/click-control-free-f01-only-global-m24-n1-r2.json"
+)
 PROFILE_INDEX = ROOT / "evaluations/targets/click/profiles/README.md"
 DESCRIPTOR = ROOT / "evaluations/targets/click/target.json"
 BUNDLE = (
@@ -119,6 +123,44 @@ class ClickF01ProfileTest(unittest.TestCase):
         self.assertIn(
             self.conditions["agent_environment"]["runtime_identity_sha256"], index
         )
+
+    def test_r2_adds_required_measurement_contract_without_changing_p1a_scope(self) -> None:
+        r1 = json.loads(PROFILE.read_text(encoding="utf-8"))
+        r2 = json.loads(PROFILE_R2.read_text(encoding="utf-8"))
+        self.assertEqual(r2["profile_id"], PROFILE_R2.stem)
+        r1_parameters = r1["comparison_conditions"]["executor_parameters"]
+        r2_parameters = r2["comparison_conditions"]["executor_parameters"]
+        protocol = r2_parameters.pop("command_evidence_protocol")
+        token_accounting = r2_parameters.pop("token_accounting")
+        self.assertEqual(r1_parameters, r2_parameters)
+        r1["comparison_conditions"]["executor_parameters"] = r1_parameters
+        r2["comparison_conditions"]["executor_parameters"] = r2_parameters
+        r1.pop("profile_id")
+        r2.pop("profile_id")
+        self.assertEqual(r1, r2)
+        self.assertEqual(
+            token_accounting,
+            {
+                "revision": "v1",
+                "scope": "all_agents",
+                "source": "codex_rollout_final_usage_by_workspace",
+            },
+        )
+        self.assertEqual(
+            protocol["schema_version"],
+            "the-caption-prompt.command-evidence-protocol/v1",
+        )
+        self.assertEqual(
+            protocol["required_command_groups_by_case"]["CLICK-F01-ANSI-SEQUENCE-STRIP"],
+            [
+                [
+                    "PYTHONPATH=src .venv/bin/python -m pytest "
+                    "tests/test_compat.py tests/test_utils/test_style.py -q"
+                ],
+                ["PYTHONPATH=src .venv/bin/python -m pytest -q"],
+            ],
+        )
+        self.assertIn(PROFILE_R2.stem, PROFILE_INDEX.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
