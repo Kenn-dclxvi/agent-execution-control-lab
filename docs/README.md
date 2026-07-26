@@ -103,6 +103,7 @@
 | C75 | [`candidate75-authority-bound-validation-fast-path-design.md`](candidate75-authority-bound-validation-fast-path-design.md) | authority-bound validation fast path |
 | C76 | [`candidate76-final-state-validation-wave-design.md`](candidate76-final-state-validation-wave-design.md) | final-state validation wave |
 | C77 | [`candidate77-triggered-exception-transition-design.md`](candidate77-triggered-exception-transition-design.md) | triggered exception transition |
+| C78 | [`candidate78-project-index-navigation-design.md`](candidate78-project-index-navigation-design.md) | project index navigation |
 
 ### 3b. 比較・診断・段階記録
 

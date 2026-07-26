@@ -29,7 +29,7 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 ## Candidate開発の経緯
 
-BaselineからCandidate77までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。candidate bundle 75件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
+BaselineからCandidate78までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。candidate bundle 76件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
 
 ## 構成
 
@@ -69,7 +69,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
 | [`docs/execution-control-research-paper.md`](docs/execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針との対照 |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
-| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate77までの系譜と知見 |
+| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate78までの系譜と知見 |
 | [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
 | [`docs/repository-contract.md`](docs/repository-contract.md) | 運用境界の正本 |
 | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |

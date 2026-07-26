@@ -81,11 +81,13 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - **既存Codex resultとの互換比較は成立しない**。注入時点の差とtoken accountingの意味の差によりcompatibility keyが一致しないため、Claude Code条件はbaselineから再測定する独立系列として扱う（[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)のCompatibility）。
 - model名を明示したresultはすべて`gpt-5.6-sol`で、Claude系modelでの測定は0件である（[`execution-control-research-paper.md`](execution-control-research-paper.md)の限界節）。この項目はその限界に接するが、この項目自体はmodel比較を目的としない。executor置換の成立条件だけを扱う。
 
-## 9. root `AGENTS.md`へのrepository index参照追加の効果（未着手）
+## 9. root `AGENTS.md`へのrepository index参照追加の効果（実施済み・停止）
 
-**未実施。** 投影済みの現行root `AGENTS.md`は13行の実行制御label（`SPEC`〜`RECOVERY`）だけで構成され、repository indexである`docs/reference/project-contexts/the-caption.txt`への参照を持たない（2026-07-25にgrep 0件で実測）。このindexは90行・5,868 bytes（`sha256:12155b2c…`）の静的project事実（project / commands / architecture / environment / testing）で、Candidate71 releaseのbundle manifest 19 targetに含まれ、THE-CAPTION本体側の現行版とcontent identicalである。
+**2026-07-26にCandidate78として実施し、停止した。** 投影済みCandidate71を直接sourceとし、root `AGENTS.md`へ条件付き`PROJECT_INDEX`一labelだけを追加した。index本文、残り18 target、評価条件は変更していない。
 
-試験するのは、root `AGENTS.md`へこのindexへの参照導線を追加した場合の効果である。
+標準14項目各`N=5`は70 / 70件がscore `4`だったが、Candidate71比でall-agent token中央値は`+8.66%`、elapsed中央値は`+4.38%`だった。A02はindexを5 / 5で先に読んでもrepository-wide探索が5 / 5で残り、F10 Entryでは不要なindex readが2 / 5に増えた。事前停止条件に従い、追加改訂、採用、release、本体反映へ進めない。数値とidentityの正本は[`Candidate71 / Candidate78標準14結果`](../evaluations/results/candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md)とする。
+
+以下は着手前に固定した試験境界である。
 
 - 変更単位: root `AGENTS.md`への参照追加1軸のみ。index本文はbundle targetとして既に固定済みのため、残り18 targetはcontent identicalなcandidate bundleになる。
 - 観測: 3 KPI（`quality_score` / all-agent `total_tokens` / `elapsed_seconds`）を評価対象とし、target探索readとworker起動はdiagnosticへ置く。境界の正本は[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)。
