@@ -8,7 +8,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.export_prompt_bundle import duplicate_candidate, export_baseline, verify_bundle
+from scripts.export_prompt_bundle import (
+    bundle_sha256,
+    duplicate_candidate,
+    export_baseline,
+    verify_bundle,
+)
 from scripts.run_codex_evaluation import parse_usage, prepare_runtime_links, render_task
 
 
@@ -24,6 +29,34 @@ def git(root: Path, *args: str) -> str:
 
 
 class ExportPromptBundleTest(unittest.TestCase):
+    def test_exports_and_verifies_empty_baseline(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            git(source, "init", "-q")
+            git(source, "config", "user.name", "Bundle Test")
+            git(source, "config", "user.email", "bundle@example.invalid")
+            (source / "tracked.txt").write_text("fixture\n", encoding="utf-8")
+            git(source, "add", "tracked.txt")
+            git(source, "commit", "-qm", "source")
+            commit = git(source, "rev-parse", "HEAD")
+
+            bundle_path = root / "empty-baseline"
+            manifest = export_baseline(
+                source,
+                commit,
+                "https://example.invalid/source.git",
+                bundle_path,
+                "no-prompt-files-r1",
+                [],
+            )
+
+            self.assertEqual(manifest["files"], [])
+            self.assertEqual(manifest["bundle_sha256"], bundle_sha256([]))
+            self.assertEqual(list((bundle_path / "files").iterdir()), [])
+            self.assertEqual(verify_bundle(bundle_path)["prompt_identity"], "no-prompt-files-r1")
+
     def test_exports_baseline_and_bit_identical_candidate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

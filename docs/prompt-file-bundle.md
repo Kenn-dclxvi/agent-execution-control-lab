@@ -64,6 +64,8 @@ agent-execution-control-lab/
 
 `files/`以下は、THE-CAPTIONへ配置するときの相対pathをそのまま表す。ただし`AGENTS.md`と`CLAUDE.md`は、at-rest格納時に`.txt`を付けた名前で保存し、実行workspaceへのoverlay時に本来のtarget名へ復元する。
 
+対象commitにprompt fileが存在しないこと自体を比較条件として固定する場合は、`files`を空配列としたempty bundleを使う。格納対象がないため`files/`は存在しなくてもよい。Layer 2ではtargetを変更せず、同一の固定metadataでempty overlay commitだけを作る。空の`AGENTS.md`を配置する条件とはprompt identityを分ける。
+
 ```text
 bundle内(at-rest格納)                  実行workspace内(overlay後)
 files/AGENTS.md.txt                ->  AGENTS.md
@@ -124,7 +126,7 @@ candidate作成中にdiffを利用してもよいが、`evaluation_ready`へ進�
 }
 ```
 
-`files`は`target`で昇順に並べる。現在のexporterは、schema versionと順序を固定した各entry全体をcanonical JSONへ変換して`bundle_sha256`を計算する。通常fileのentryにはtarget、type、mode、Git blob SHA-1、content SHA-256を含め、symlinkのentryにはtarget、type、mode、Git blob SHA-1、link targetを含める。`target`は常に実行workspaceでの実体名(`AGENTS.md`など)であり、at-restの`.txt`格納名ではない。
+`files`は空配列またはfile entryの配列とし、entryがある場合は`target`で昇順に並べる。現在のexporterは、schema versionと順序を固定した各entry全体をcanonical JSONへ変換して`bundle_sha256`を計算する。通常fileのentryにはtarget、type、mode、Git blob SHA-1、content SHA-256を含め、symlinkのentryにはtarget、type、mode、Git blob SHA-1、link targetを含める。`target`は常に実行workspaceでの実体名(`AGENTS.md`など)であり、at-restの`.txt`格納名ではない。
 
 `storage_format`はat-rest格納形式を表す。
 
