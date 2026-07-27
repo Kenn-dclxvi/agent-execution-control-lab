@@ -41,7 +41,7 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 | Path | 役割 |
 | --- | --- |
 | `prompts/baselines/` | 比較元プロンプト（現行の固定スナップショット）。2件（`current-r1` / `current-r2`）。 |
-| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC78まで、bundleとして76件を保存。 |
+| `prompts/candidates/` | 構築中の候補プロンプト。設計上はC81まで、bundleとして79件を保存。 |
 | `prompts/routes/` | 共通の全文へ実行前に合成する小さな差分（route）。 |
 | `prompts/releases/` | 本体へ反映可能な単位に固定したrelease。4件。 |
 | `evaluations/cases/` | 評価case（20件）とmodel-visible / private境界。 |
@@ -92,11 +92,11 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 現行プロンプトの固定スナップショット。`the-caption-3ce91a4-current-r1` と `-r2`。すべての候補はここから派生します。
 
-### candidate（C1〜C78、bundle 76件保存）
+### candidate（C1〜C81、bundle 79件保存）
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
 
-bundle 76件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`（現在2件）はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
+bundle 79件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`（現在2件）はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
 
 掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 

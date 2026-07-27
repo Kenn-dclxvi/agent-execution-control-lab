@@ -64,7 +64,7 @@
 
 正本はlifecycle軸ごとに分かれる。**identityは各bundleの`manifest.json`**、**評価状態は評価・診断を実施済みなら独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列**、**release・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)**を正本とする。系譜と現在状態の一覧はcandidate indexにある。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
 
-> **本体投影と評価状態は別軸**: 本体へ投影済みなのはCandidate41・Candidate43・Candidate71で、この順に積み上げた投影の直近はCandidate71である（3件いずれもrelease status `projected` / approval `approved` / runtime projection `projected`。実変更範囲はCandidate41が8 path、Candidate43とCandidate71は各々直前投影からroot `AGENTS.md`一つ。正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release README）。ただしこれは採用判断側の状態であり、candidate評価状態とは一致しない。特にCandidate71のcandidate評価状態は`standard14_b18_evaluated / stopped`（[`candidate71-validation-closure-design.md`](candidate71-validation-closure-design.md)）であり、効率削減を根拠とする別の採用判断でreleaseがprojectedになった。評価停止は取り消されていない。
+> **本体投影と評価状態は別軸**: 本体へ投影済みなのはCandidate41・Candidate43・Candidate71・Candidate81で、この順に積み上げた投影の直近はCandidate81である（4件ともrelease status `projected` / approval `approved` / runtime projection `projected`。実変更範囲はCandidate41が8 path、残る3件は各々直前投影からroot `AGENTS.md`一つ。正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release README）。Candidate81はRating v13 Medium標準14項目でquality / prompt stability gateを通過した後、別の明示承認でprojectedになった。Candidate71のcandidate評価状態は`standard14_b18_evaluated / stopped`のままで、過去の評価停止を取り消していない。
 
 | Candidate | 文書 | 制御軸 |
 |---|---|---|
@@ -104,6 +104,9 @@
 | C76 | [`candidate76-final-state-validation-wave-design.md`](candidate76-final-state-validation-wave-design.md) | final-state validation wave |
 | C77 | [`candidate77-triggered-exception-transition-design.md`](candidate77-triggered-exception-transition-design.md) | triggered exception transition |
 | C78 | [`candidate78-project-index-navigation-design.md`](candidate78-project-index-navigation-design.md) | project index navigation |
+| C79 | [`candidate79-ordered-validation-wave-design.md`](candidate79-ordered-validation-wave-design.md) | ordered validation wave |
+| C80 | [`candidate80-root-validation-wrapper-design.md`](candidate80-root-validation-wrapper-design.md) | root validation wrapper |
+| C81 | [`candidate81-validation-wrapper-precedence-design.md`](candidate81-validation-wrapper-precedence-design.md) | validation wrapper precedence |
 
 ### 3b. 比較・診断・段階記録
 

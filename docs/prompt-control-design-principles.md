@@ -132,7 +132,7 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 ## 現時点の検討方針
 
 > [!IMPORTANT]
-> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate78まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（`not_evaluated`が現在2件ある。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜8とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
+> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate81まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（`not_evaluated`が現在2件ある。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜8とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
 
 - ControlFreeRepositoryの自然な最短経路を比較基準に含める。
 - C35からC40までに追加されたlabelとpredicateを、必要性、重複、参照関係で棚卸しする。
