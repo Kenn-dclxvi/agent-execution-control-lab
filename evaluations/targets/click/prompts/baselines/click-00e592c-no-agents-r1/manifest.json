@@ -1,0 +1,25 @@
+{
+  "artifact": {
+    "artifact_role": "baseline",
+    "description": "pallets/clickの固定target treeを変更せず、rootと配下のAGENTS.mdが存在しない条件をempty bundleとして固定した比較元。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "空のroot AGENTS.mdを配置する既存Control-Free resultの再解釈",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "62570c22091a0e5c3431c5be416222987c6d4251fa634d633c6c6ebcee8ab82c",
+  "files": [],
+  "prompt_identity": "click-00e592c-no-agents-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "storage_format": "instruction-suffixed/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  }
+}

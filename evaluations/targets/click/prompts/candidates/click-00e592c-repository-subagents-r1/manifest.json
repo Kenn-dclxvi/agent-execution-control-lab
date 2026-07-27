@@ -1,0 +1,51 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-no-agents-r1",
+    "change_reason": "root制御promptを追加せず、Clickの実在領域へrepository固有の階層別instructionだけを追加した構成差を測る。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "C81全文との組合せ",
+      "sub instruction単位の因果推定",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "problem": "Clickにはrootと配下のAGENTS.mdがなく、領域ごとのrepository conventionを各taskで再探索する必要がある。",
+    "scope": "root AGENTS.mdを置かず、docs、src、testsの3領域だけへpath-scoped instructionを配置する。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "7f2c7f336ebcbbbfcd04ea7b25bd08840f31da73daadf404b5ac4a73d00b23cd",
+  "files": [
+    {
+      "git_blob_sha1": "ef20f6370b5fddabd7f7c4a65d182e864ee8c8f9",
+      "mode": "100644",
+      "sha256": "92b5aa5211df9e19e360048d8a2038e05a725530fb067fb377f09c701ffc4fcf",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4ef86a8b0a36a83e4f998a007b886cd9eb5fcf16",
+      "mode": "100644",
+      "sha256": "5bfcf854daf6e43c90e052660d23faf43eca5a6f19255d4721ce2c32825f74d4",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "03c7f6858ecd27fdebd9d02c636573d66c65529f",
+      "mode": "100644",
+      "sha256": "4d906eed527e0162f49383a100634d4ce5abbbcdd93e41f7264223904256299b",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "click-00e592c-repository-subagents-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "storage_format": "instruction-suffixed/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  }
+}
