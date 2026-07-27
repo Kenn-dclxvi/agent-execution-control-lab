@@ -70,6 +70,12 @@ capsuleへsecretやcredentialを直接保存しない。非公開のraw run evid
 
 `freeze-set`はcase別fixture identityとset content identityを計算する。fixture identityは`.git`内部を除くpath、type、mode、file content、symlink targetに結び付く。
 
+### reasoning effortの運用基準
+
+2026-07-27以降に新規作成する通常のprompt比較profileは、reasoning effortを`medium`へ固定する。例外は、reasoning effort自体を比較変数にする試験と、既存`high` resultの互換条件をそのまま再現する追試だけである。
+
+reasoning effortはcomparison conditionである。既存`high` profileとresultは履歴として変更せず、`medium` profileを新しいidentityで追加する。`high`と`medium`のresultを同一のLayer 4 comparisonへ混ぜない。
+
 ## 5. Run capsule v2
 
 1 prompt set、1 case、1 iterationにつき1つ用意する。
@@ -98,7 +104,7 @@ capsuleへsecretやcredentialを直接保存しない。非公開のraw run evid
     },
     "permission": "workspace-write/never",
     "executor_parameters": {
-      "reasoning_effort": "high",
+      "reasoning_effort": "medium",
       "token_accounting": {
         "scope": "all_agents",
         "revision": "v1",

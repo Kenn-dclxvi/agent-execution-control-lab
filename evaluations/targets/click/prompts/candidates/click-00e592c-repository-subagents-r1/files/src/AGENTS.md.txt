@@ -1,0 +1,7 @@
+# src rules
+
+- Production package code belongs under `src/click/`.
+- Preserve the existing public API and exports when changing implementation details.
+- Prefer the standard library. Do not add an external dependency when it is unnecessary.
+- Avoid ternary expressions. Use an explicit `if` / `else` block so coverage can observe both branches.
+- Keep a change focused and add or update the closest relevant regression test under `tests/`.

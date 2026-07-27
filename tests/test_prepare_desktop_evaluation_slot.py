@@ -115,6 +115,40 @@ class PrepareDesktopEvaluationSlotTest(unittest.TestCase):
                 ["codex", "app", str(workspace.resolve())],
             )
 
+    def test_prepares_empty_bundle_as_an_empty_overlay_commit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source, _, _ = self.source_repo(root)
+            (source / "AGENTS.md").unlink()
+            git(source, "add", "AGENTS.md")
+            git(source, "commit", "-qm", "remove repository instructions")
+            target_commit = git(source, "rev-parse", "HEAD")
+            target_tree = git(source, "rev-parse", "HEAD^{tree}")
+            bundle_path = root / "empty-bundle"
+            manifest = export_baseline(
+                source,
+                target_commit,
+                "https://example.invalid/click.git",
+                bundle_path,
+                "no-agents-r1",
+                [],
+            )
+
+            receipt = prepare_desktop_slot(
+                source_repo=source,
+                workspace=root / "desktop-slot-01",
+                target_commit=target_commit,
+                target_tree=target_tree,
+                prompt_bundle=bundle_path,
+                bundle_sha256=manifest["bundle_sha256"],
+            )
+            workspace = Path(receipt["workspace"])
+
+            self.assertFalse((workspace / "AGENTS.md").exists())
+            self.assertEqual(git(workspace, "rev-parse", "HEAD^"), target_commit)
+            self.assertEqual(git(workspace, "rev-parse", "HEAD^{tree}"), target_tree)
+            self.assertEqual(git(workspace, "status", "--short"), "")
+
     def test_refuses_to_reuse_a_dirty_managed_workspace(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

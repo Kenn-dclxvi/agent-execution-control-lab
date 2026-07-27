@@ -64,6 +64,7 @@ Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別�
 - [`Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71のHigh標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録した。6条件 × 70件 = 420件で、v12以前のresultは同一comparisonへ混ぜない。
 - [`Candidate71のreasoning 6水準`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)を、`low` / `medium` / `high` / `xhigh` / `max` / `ultra`、標準14項目各`N=5`で記録した。`medium`がtoken中央値最小、`low`がelapsed中央値最小だった。
 - [`6条件のMedium一律比較`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)も420 / 420件を登録した。C71とC43のtoken中央値差はHigh `-31.47%`、Medium `-29.19%`であり、少なくともこの2水準ではeffort低下によって相対的な制御差は消えなかった。
+- 2026-07-27以降の新規通常比較は`medium`を運用基準とする。既存`high` resultは履歴として保持し、reasoning effort自体の比較または既存互換条件の再現だけを例外とする。運用正本は[`evaluation-loop-manual.md`](evaluation-loop-manual.md)である。
 
 ## 7. `QUALITY_RATING`という汎用名がv8を指している（保守上の誤認risk）
 
@@ -121,8 +122,17 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - `click-standard14-r1`、rating v10、Std14 profileを固定し、70 / 70件をscore `4`で登録。5 iterationのall-agent token中央値`2,860,702`、elapsed中央値`1,235.719`秒、excluded attempt 0件
 - THE-CAPTION Candidate81のroot本文をbyte-identicalに1 targetへ適用したBundle Bを固定し、同じStd14条件で70 / 70件をscore `4`として登録
 - Bundle AからBundle Bはquality中央値差`0.000`、all-agent token中央値`-685,546`（`-23.96%`）、elapsed中央値`+35.384`秒（`+2.86%`）。THE-CAPTIONでのtoken削減方向は再現したが、elapsed短縮は再現しなかった
+- 今後の運用基準を`medium`へ切り替え、Bundle AとC81全文のMedium Std14を各70 / 70件・全件score `4`で登録した。C81全文はBundle A比でtoken中央値`-28.79%`、elapsed中央値`-12.62%`となり、5 / 5 iterationでelapsedが短縮した
+- THE-CAPTION ControlFreeRepositoryとの構成差を分離するため、Clickでtarget-local No-AGENTSとrootなしRepository sub-AGENTSをMedium Std14 N=5で比較した。両条件70 / 70件がscore `4`で、sub-AGENTS側はtoken中央値`+3.74%`、elapsed中央値`+7.90%`だった。ただしsub本文の初期context注入は0 / 70で、本文をreadしたA01 5 / 5だけがtoken中央値`+80.47%`となった。配置だけでは全caseへ水平適用されないため、Std14全体の本文効果とは扱わない
+- THE-CAPTIONと同質のauthority availabilityを測れているかClick Std14全14 caseを見直した。F01〜F08、F10-R、A01、A02は元の実行判断点を維持し、回帰setとして変更不要だった。F10 r1だけはsource-onlyで完結していたため、`src/AGENTS.md`を明示authorityとするF10 r2をMedium N=5で追試した。No-AGENTSは5 / 5件がscore `1`でauthority不足停止、Repository Authorityは5 / 5件がscore `4`でinventoryを完了した。全10件がvalid・rateable、zero drift、excluded attempt 0件で、THE-CAPTION F10と同じavailability方向を再現した
+- 見直し後の`click-standard14-r2`をNo-AGENTS / Repository Authority、Medium、N=5、M=24で全件再実施した。F10以外は両条件65 / 65件がscore `4`、F10だけがscore `1` × 5 / score `4` × 5へ分離した。全140件がvalid・rateable、excluded attemptとunexpected driftは0件で、14実行判断点の比較setとして互換性を達成した。quality中央値は94.643対100.000、tokenは`+5.57%`、elapsedは`+3.96%`だが、後二者はF10の完了作業量差とM=24の変動を含むため効率差とは扱わない
+- C81 / C81 + Repository Authorityも同じStd14 r2、Medium、N=5、M=24で各70件実施した。C81はscore `4` × 65 / score `1` × 5、C81 + Authorityはscore `4` × 70で、F10以外のquality回帰は0件だった。同じauthority状態のC81差は、authorityなしでtoken `-27.35%`・elapsed `-17.04%`、authorityありでtoken `-25.08%`・elapsed `-10.98%`となり、C81の削減方向はsub authority追加後も維持された
 
-Bundle Aの一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Bundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)を正本とする。次operationは、Click traceからTHE-CAPTION既存制御で説明できない反復的誤経路を抽出する新規制御探索と、評価済み制御を組み合わせるClick向け最適化を別系列で進めることである。採用、release、runtime projectionは別gateである。
+Bundle AのHigh一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Medium一次結果は[`click control-free Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md)、HighでのBundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)、Medium比較は[`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)、sub instruction配置比較は[`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)、authority availability追試は[`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)を正本とする。High / MediumのBundle A traceとTHE-CAPTION ControlFreeRepository Mediumを使った[`baseline分析`](click-control-free-medium-baseline-analysis.md)では、Clickの軽さはreasoning量だけでなく、tool出力量`-50.46%`と小さいrepository contextに強く対応した。sub instruction配置追試により、THE-CAPTION側の4つのsub本文が常にmodel contextへ入っていたという仮定は置けなくなった。F10 targeted追試ではauthority availabilityの効果を再現したが、1 caseからStd14全体へ一般化しない。C81 MediumによりA02 / F06は大きく改善した。後続の[`残余経路分析`](click-c81-medium-residual-analysis.md)では、F01のtoken増加はpaired差中央値`-970`で安定悪化ではないと判定した。F04はC81でgit history探索がHigh / Medium合計`4 / 10`、Control-freeで`0 / 10`となり、両reasoningでelapsed合計が約16〜18%増えた。C81新規制御探索の次operationはC81全文へ`PRECHANGE_EVIDENCE_SCOPE`一文だけを追加したClick CandidateのF04 Medium N=5 targeted gateである。Click向け文言最適化、採用、release、runtime projectionは別gateとする。
+
+見直し後Std14全体の正本は[`Click No-AGENTS / Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)である。
+
+C81との組合せ結果の正本は[`Click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)である。
 
 ### 現在の依存範囲（2026-07-26に実測）
 
@@ -131,12 +141,12 @@ repository非依存な層とtarget固有な層は次のとおりである。
 | 層 | artifact | 実測した状態 |
 | --- | --- | --- |
 | Layer 1 fixture | `scripts/prepare_case_fixture.py` | CLI引数は`--case` / `--source-repo` / `--output`のみで、target repositoryはparameter。固有pathのhard-codeなし |
-| Layer 2〜4実行 | `scripts/evaluation_loop.py` | clickで21 result・計201 runをappend-only登録。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
+| Layer 2〜4実行 | `scripts/evaluation_loop.py` | clickで25 result・計481 runをappend-only登録。set / cycle / capsule / registry単位で動作し、target repositoryによる実行分岐を持たない |
 | 制御prompt本文 | [Candidate71 release](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)の`AGENTS.md.txt` | `SPEC`〜`RECOVERY`の13 labelは見出し語を除きproject固有語彙を持たない |
-| bundle target map | THE-CAPTION releaseのmanifest 19 target、Click Bundle A / Bのmanifest各1 target | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した。C81 root本文のbyte-identicalな水平適用も1 targetで成立した |
+| bundle target map | THE-CAPTION releaseのmanifest 19 target、Clickは0 / 1 / 3 targetの4 prompt set | THE-CAPTIONのtarget側directory構造へ依存するmapを変更せず、`click`用mapをinstance配下の別bundleとして固定した。C81 root本文のbyte-identicalな水平適用、empty bundle、3つのsub instructionをそれぞれ独立identityで表現した |
 | case artifact | 各case revisionの`trial-prompt-input.json`、`private/seed.patch`、`private/case-data.json` | 14 case・17 revisionをinstance配下へ固定。失敗revisionを上書きせず保持した |
 | rating contract | THE-CAPTION v13、`click-outcome-abstract-condition-preserving-v1`〜v10 | case追加ごとに旧revisionを残し、現行v10で標準14項目を固定した |
-| 採点補助 | Clickは固定rating contractとblind evidenceで採点 | 14 case・201 runのratingと登録が成立。target固有の新しいkernel分岐は追加していない |
+| 採点補助 | Clickは固定rating contractとblind evidenceで採点 | 14 case・481 runのratingと登録が成立。target固有の新しいkernel分岐は追加していない |
 
 したがって汎用化の対象は実行基盤ではなく、**case artifact / rating contract revision / 採点補助 / bundle target mapの4つ**である。`click`では4つをinstance配下へ分離し、共有kernelへtarget repositoryによる実行分岐を追加せず、3 KPI、compatibility key、append-only registryを含む端から端までの流用をBundle A / Bの標準14項目で確認した。未確認なのは第三者によるruntime再構築とnetwork遮断下のfull gateである。
 

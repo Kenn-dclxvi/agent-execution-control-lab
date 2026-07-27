@@ -612,7 +612,8 @@ def adapter_teardown_paths_from_protocol(
 
 
 def prompt_overlay_commit(workspace: Path, targets: list[str]) -> tuple[str, str]:
-    run(["git", "add", "--", *targets], workspace)
+    if targets:
+        run(["git", "add", "--", *targets], workspace)
     env = os.environ.copy()
     env.update(
         {

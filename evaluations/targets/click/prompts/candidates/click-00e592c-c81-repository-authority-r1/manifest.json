@@ -1,0 +1,85 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-validation-wrapper-precedence-r1",
+    "change_reason": "C81全文を固定したまま、評価済みClick repository authority 3 fileを追加し、C81存在下のauthority availabilityと他caseへの干渉を確認する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "C81本文の変更",
+      "repository authority本文の変更",
+      "個別predicateへの因果帰属",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "problem": "No-AGENTS / Repository AuthorityではF10 authority availabilityを再現したが、C81 root制御と組み合わせた場合の経路維持とStd14回帰は未確認である。",
+    "scope": "既存C81 root AGENTS.mdへ、固定済みdocs、src、testsのrepository authorityをbyte-identicalに追加する一つの構成軸。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "e3aa97e5417fdcf75cf93480136537fa2f31fda6bb6611b59e97de3e2cc6d277",
+  "content_relation": {
+    "added_targets": [
+      "docs/AGENTS.md",
+      "src/AGENTS.md",
+      "tests/AGENTS.md"
+    ],
+    "kind": "direct_child_additive_bundle",
+    "source_prompt_identity": "click-00e592c-validation-wrapper-precedence-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "0d2797b154b6de303bf8a79f6a477cf2ecda43a4",
+      "mode": "100644",
+      "sha256": "6d96267fdf8d210e667aecc34885449c9ab8ca7c026c2b1830f636028eb512d5",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "ef20f6370b5fddabd7f7c4a65d182e864ee8c8f9",
+      "mode": "100644",
+      "sha256": "92b5aa5211df9e19e360048d8a2038e05a725530fb067fb377f09c701ffc4fcf",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "f02e8e8c0bdfed2ef0a3adfae63c63b21dce221e",
+      "mode": "100644",
+      "sha256": "2469c41fe7d7f6bca7bdd44c5080d661b7c9eed61fa3d64b4bd17399c3f29250",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "03c7f6858ecd27fdebd9d02c636573d66c65529f",
+      "mode": "100644",
+      "sha256": "4d906eed527e0162f49383a100634d4ce5abbbcdd93e41f7264223904256299b",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "superset_path_set",
+    "source_prompt_identity": "click-00e592c-validation-wrapper-precedence-r1"
+  },
+  "prompt_identity": "click-00e592c-c81-repository-authority-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "design_inputs": [
+      "docs/click-c81-repository-authority-standard14-r2-design.md",
+      "evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md"
+    ],
+    "design_status": "complete",
+    "evaluation_status": "not_evaluated",
+    "root_donor_prompt_identity": "click-00e592c-validation-wrapper-precedence-r1",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "root C81本文と3つのrepository authority本文を各donorからbyte-identicalに合成する。",
+    "sub_donor_prompt_identity": "click-00e592c-repository-authority-r1"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

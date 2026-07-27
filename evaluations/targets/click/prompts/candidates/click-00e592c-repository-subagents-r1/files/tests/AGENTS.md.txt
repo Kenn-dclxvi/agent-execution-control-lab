@@ -1,0 +1,8 @@
+# tests rules
+
+- Keep regression tests under `tests/` and place them in the closest existing test module.
+- Keep static typing cases under `tests/typing/`.
+- Use pytest for the test suite. The default configuration excludes tests marked `stress`.
+- Do not run concurrent `CliRunner.invoke` calls in threads because they replace process-global state. Use process isolation for parallel CLI tests.
+- Run the focused tests for the changed behavior, then every additional validation command required by the TaskSpec.
+- Do not delete, skip, or weaken an existing test to make a change pass.

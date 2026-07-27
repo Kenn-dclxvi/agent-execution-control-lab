@@ -1,0 +1,7 @@
+# docs rules
+
+- Keep public behavior changes synchronized with the corresponding documentation under `docs/`.
+- Follow the structure and MyST syntax used by the closest existing document.
+- Wrap Markdown prose at 80 characters.
+- Keep examples consistent with the public `click` API and the behavior covered by tests.
+- For documentation changes, run the focused check required by the TaskSpec. Use the `docs` tox environment when a full documentation build is required.

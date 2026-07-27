@@ -206,8 +206,8 @@ def verify_bundle(bundle: Path) -> dict[str, Any]:
     manifest = load_manifest(bundle)
     storage_format = storage_format_of(manifest)
     entries = manifest.get("files")
-    if not isinstance(entries, list) or not entries:
-        raise BundleError("manifest files must be a non-empty array")
+    if not isinstance(entries, list):
+        raise BundleError("manifest files must be an array")
     files_root = bundle / "files"
     expected_targets: set[str] = set()
     normalized: list[dict[str, str]] = []
@@ -267,8 +267,8 @@ def export_baseline(
     if output.exists():
         raise BundleError(f"refusing to overwrite output: {output}")
     normalized_targets = sorted({safe_target(target) for target in targets})
-    if len(normalized_targets) != len(targets) or not normalized_targets:
-        raise BundleError("bundle targets must be non-empty and unique")
+    if len(normalized_targets) != len(targets):
+        raise BundleError("bundle targets must be unique")
     for target in normalized_targets:
         ensure_representable(target, DEFAULT_STORAGE_FORMAT)
     commit = run_git(source_repo, "rev-parse", f"{source_ref}^{{commit}}")
@@ -354,7 +354,7 @@ def parser() -> argparse.ArgumentParser:
     export.add_argument("--source-origin", required=True)
     export.add_argument("--output", required=True)
     export.add_argument("--prompt-identity", required=True)
-    export.add_argument("--path", action="append", required=True, dest="targets")
+    export.add_argument("--path", action="append", default=[], dest="targets")
     duplicate = commands.add_parser("duplicate-candidate")
     duplicate.add_argument("--source-bundle", required=True)
     duplicate.add_argument("--output", required=True)

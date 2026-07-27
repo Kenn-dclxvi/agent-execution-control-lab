@@ -19,6 +19,7 @@ target instance `click`のcase artifactを置く。1 case revisionごとに`READ
 | [`CLICK-F07-P-DEPENDENCY-LOCK-PAIR/r3`](CLICK-F07-P-DEPENDENCY-LOCK-PAIR/r3/README.md) | F07-P | dependency provenance pairとoffline lock | r1 / r2は各3 / 3 score 3、r3は3 / 3 score 4 |
 | [`CLICK-F08-SHELL-COMPLETION-DOC-SYNC/r1`](CLICK-F08-SHELL-COMPLETION-DOC-SYNC/r1/README.md) | F08 | implementationとdocsの同期 | fixture qualified / N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-F10-COMMAND-API-INVENTORY/r1`](CLICK-F10-COMMAND-API-INVENTORY/r1/README.md) | F10 | read-only API inventory | N=3 evaluated（3 / 3 score 4） |
+| [`CLICK-F10-COMMAND-API-INVENTORY/r2`](CLICK-F10-COMMAND-API-INVENTORY/r2/README.md) | F10 | `src/AGENTS.md` authority availability | N=5 × 4条件評価完了（authorityなし2条件はscore 1 × 5、あり2条件はscore 4 × 5） |
 | [`CLICK-F10-R-NESTED-COMPLETION-REVIEW/r1`](CLICK-F10-R-NESTED-COMPLETION-REVIEW/r1/README.md) | F10-R | fixed commitのzero-drift review | N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-A01-LATENT-CONTEXT-POLICY/r1`](CLICK-A01-LATENT-CONTEXT-POLICY/r1/README.md) | A01 | latent ambiguityの確認停止 | N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1`](CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1/README.md) | A02 | repository根拠による無質問解決 | N=3 evaluated（3 / 3 score 4） |
