@@ -282,15 +282,16 @@ C71の実質欠落4件の内訳:
 
 C71は評価上`stopped`のまま、**別の明示判断**で2026-07-23にrelease status `projected`・approval `approved`・runtime projection `projected`となり、THE-CAPTION本体へ適用された（PR [#340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、統合commit `326fdd343a50522629592d67b0f028fb66e94eb3`、変更対象はroot `AGENTS.md`のみ、`bash ./scripts/dev/verify_change_set.sh`は`362 passed / 3 skipped`）。品質gate不通過と未解決riskは取り消していない。
 
-本体投影済みのreleaseは3件で、この順に積み上げられている。
+本体投影済みのreleaseは4件で、この順に積み上げられている。
 
 | release（由来candidate） | 本体反映 | 実変更範囲 |
 | --- | --- | --- |
 | Candidate41 | PR [#334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334) | 8 path |
 | Candidate43 | PR [#335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335) | 直前投影からroot `AGENTS.md`一つ |
 | Candidate71 | PR [#340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340) | 直前投影からroot `AGENTS.md`一つ |
+| Candidate81 | PR [#343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343) | 直前投影からroot `AGENTS.md`一つ |
 
-C41・C43は過去の投影履歴かつ巻き戻し先として保持され、`cancelled`にしていない。正本: [`prompts/releases/README.md`](../prompts/releases/README.md)と各release README。
+C41・C43・C71は過去の投影履歴かつ巻き戻し先として保持され、`cancelled`にしていない。正本: [`prompts/releases/README.md`](../prompts/releases/README.md)と各release README。
 
 これは方法論上の主張でもある。**評価は観測であり、採用は判断である。** 有限回の試験で将来挙動を100%保証することを採用条件にせず、残余riskは観測頻度だけでなく実利用での影響、検出可能性、回復可能性、rollback identityと合わせて扱う（[`future-roadmap.md`](future-roadmap.md)）。
 
@@ -318,7 +319,7 @@ C71単独では6水準、各70 runを取得した。
 
 `medium`は`high`比でtoken中央値`-9.73%`、elapsed中央値`-14.86%`、`low`はelapsed中央値`-19.08%`だった。`xhigh`以上はtokenとelapsedがともに`high`より増えた。`ultra`のscore `0` 1件は、search pattern内の文字列をtest実行と誤認したRating v13の採点偽陽性であり、immutableなresultは変更していない。正本は[`C71 reasoning 6水準result`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)である。
 
-後続のCandidate81は、MediumのF04で残った逐次model再入を対象に`VALIDATION_CLOSURE`一行だけを置換した。標準14項目70 / 70件でscore `4`を維持し、複数required command caseの1-step closureをC71の30 / 35から35 / 35へ上げた。一方、token合計は`+0.28%`、elapsed中央値は`+5.78%`であり、効率上の優位は示していない。これはprompt動作安定性の対象結果であり、採用、release、runtime projectionを意味しない（正本: [`C71 / C81標準14項目result`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)）。
+後続のCandidate81は、MediumのF04で残った逐次model再入を対象に`VALIDATION_CLOSURE`一行だけを置換した。標準14項目70 / 70件でscore `4`を維持し、複数required command caseの1-step closureをC71の30 / 35から35 / 35へ上げた。一方、token合計は`+0.28%`、elapsed中央値は`+5.78%`であり、効率上の優位は示していない。この評価結果自体は採用、release、runtime projectionを意味しないが、その後の2026-07-27の明示判断でrelease status `projected`・approval `approved`・runtime projection `projected`となった。THE-CAPTION PR [#343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)の実効変更はroot `AGENTS.md`一つで、統合commitは`592e73aae4f5cf71964efea0d49836e8c894cbbc`、本体検証は`401 passed`だった（評価正本: [`C71 / C81標準14項目result`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)、projection正本: [`Candidate81 release`](../prompts/releases/the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md)）。
 
 ---
 

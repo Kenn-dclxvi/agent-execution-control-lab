@@ -16,7 +16,7 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 ## 現在の状態
 
-`evaluation_foundation_v3`。1つのimmutableなprompt set identityごとに3 KPIをappend-onlyで保存し、互換条件を満たす任意個のresultを後から取得・比較できます。現行の`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。root-onlyで保存したv3 `prompt-set-result/v1`は履歴として保持し、再集計値を`prompt-set-result/v2`へ追記します。固定A / B pair、winner、改善・悪化は保存・出力しません。v1 / v2 evaluation foundation resultも履歴として保持し、migrationや再解釈は行っていません。評価基盤自体は候補の採用・本体反映・runtime有効化を判断しません。これらは別の明示的な承認作業で、現時点ではCandidate41・Candidate43・Candidate71がその判断でTHE-CAPTION本体へ投影済みです（[`docs/repository-overview.md`](docs/repository-overview.md)、[`prompts/releases/README.md`](prompts/releases/README.md)）。
+`evaluation_foundation_v3`。1つのimmutableなprompt set identityごとに3 KPIをappend-onlyで保存し、互換条件を満たす任意個のresultを後から取得・比較できます。現行の`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。root-onlyで保存したv3 `prompt-set-result/v1`は履歴として保持し、再集計値を`prompt-set-result/v2`へ追記します。固定A / B pair、winner、改善・悪化は保存・出力しません。v1 / v2 evaluation foundation resultも履歴として保持し、migrationや再解釈は行っていません。評価基盤自体は候補の採用・本体反映・runtime有効化を判断しません。これらは別の明示的な承認作業で、現時点ではCandidate41・Candidate43・Candidate71・Candidate81がその判断でTHE-CAPTION本体へ投影済みです（[`docs/repository-overview.md`](docs/repository-overview.md)、[`prompts/releases/README.md`](prompts/releases/README.md)）。
 
 ## 主要な知見
 
@@ -29,7 +29,7 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 ## Candidate開発の経緯
 
-BaselineからCandidate78までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。candidate bundle 76件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71（この順に積み上げた投影で直近はCandidate71）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)と[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
+BaselineからCandidate81までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。candidate bundle 79件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71・Candidate81（この順に積み上げた投影で直近はCandidate81）。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)、[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)、[Candidate81](prompts/releases/the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
 
 ## 構成
 
@@ -69,7 +69,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
 | [`docs/execution-control-research-paper.md`](docs/execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針との対照 |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
-| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate78までの系譜と知見 |
+| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate81までの系譜と知見 |
 | [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
 | [`docs/repository-contract.md`](docs/repository-contract.md) | 運用境界の正本 |
 | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |
