@@ -13,6 +13,8 @@ CLICK = ROOT / "evaluations/targets/click"
 PROFILE = CLICK / "profiles/click-control-free-standard14-global-m24-n5-r1.json"
 SET = CLICK / "sets/click-standard14-r1/README.md"
 RESULT = CLICK / "results/click-control-free-standard14-n5_2026-07-26.md"
+MEDIUM_RESULT = CLICK / "results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md"
+MEDIUM_ANALYSIS = ROOT / "docs/click-control-free-medium-baseline-analysis.md"
 
 
 class ClickStandard14Test(unittest.TestCase):
@@ -72,6 +74,22 @@ class ClickStandard14Test(unittest.TestCase):
         self.assertIn("70 / 70", result_text)
         self.assertIn("2,860,702", result_text)
         self.assertIn("Bundle Bとの比較", result_text)
+
+    def test_medium_result_records_separate_completed_baseline(self) -> None:
+        result_text = MEDIUM_RESULT.read_text(encoding="utf-8")
+        self.assertIn("aefb39616fb84c5785ec40b673195a0f", result_text)
+        self.assertIn("ab324fc854989f27b51bb1e312bc6bb4881a17fe6cb07e06128c2d3b112c4039", result_text)
+        self.assertIn("2,607,894", result_text)
+        self.assertIn("1,073.024", result_text)
+        self.assertIn("70 / 70", result_text)
+        self.assertIn("異なるcompatibility key", result_text)
+
+    def test_medium_analysis_preserves_cross_repository_boundary(self) -> None:
+        analysis = MEDIUM_ANALYSIS.read_text(encoding="utf-8")
+        self.assertIn("tool出力文字数が`50.46%`少ない", analysis)
+        self.assertIn("A02はTHE-CAPTION対応caseより重く", analysis)
+        self.assertIn("因果効果の推定には使わない", analysis)
+        self.assertIn("C81全文 Medium Std14", analysis)
 
 
 if __name__ == "__main__":

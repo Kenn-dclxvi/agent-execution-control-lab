@@ -14,6 +14,18 @@ CANDIDATE = CLICK / "prompts/candidates/click-00e592c-validation-wrapper-precede
 DONOR = ROOT / "prompts/candidates/the-caption-3ce91a4-validation-wrapper-precedence-r1"
 BASELINE_PROFILE = CLICK / "profiles/click-control-free-standard14-global-m24-n5-r1.json"
 CANDIDATE_PROFILE = CLICK / "profiles/click-c81-full-standard14-global-m24-n5-r1.json"
+BASELINE_MEDIUM_PROFILE = (
+    CLICK
+    / "profiles/click-control-free-reasoning-medium-standard14-global-m24-n5-r1.json"
+)
+CANDIDATE_MEDIUM_PROFILE = (
+    CLICK / "profiles/click-c81-full-reasoning-medium-standard14-global-m24-n5-r1.json"
+)
+MEDIUM_RESULT = (
+    CLICK
+    / "results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md"
+)
+MEDIUM_RESIDUAL_ANALYSIS = ROOT / "docs/click-c81-medium-residual-analysis.md"
 
 
 class ClickC81FullCandidateTest(unittest.TestCase):
@@ -56,6 +68,51 @@ class ClickC81FullCandidateTest(unittest.TestCase):
         )
         self.assertEqual(manifest["artifact"]["evaluation_status"], "not_evaluated")
         self.assertEqual(manifest["artifact"]["state"], "draft")
+
+    def test_medium_profiles_change_only_reasoning_and_profile_identity(self) -> None:
+        for high_path, medium_path in (
+            (BASELINE_PROFILE, BASELINE_MEDIUM_PROFILE),
+            (CANDIDATE_PROFILE, CANDIDATE_MEDIUM_PROFILE),
+        ):
+            high = json.loads(high_path.read_text(encoding="utf-8"))
+            medium = json.loads(medium_path.read_text(encoding="utf-8"))
+            expected = copy.deepcopy(high)
+            expected["profile_id"] = medium_path.stem
+            expected["comparison_conditions"]["executor_parameters"][
+                "reasoning_effort"
+            ] = "medium"
+            self.assertEqual(medium, expected)
+
+    def test_medium_profiles_are_prompt_only_peers(self) -> None:
+        baseline = json.loads(BASELINE_MEDIUM_PROFILE.read_text(encoding="utf-8"))
+        candidate = json.loads(CANDIDATE_MEDIUM_PROFILE.read_text(encoding="utf-8"))
+        for value in (baseline, candidate):
+            self.assertEqual(
+                value["comparison_conditions"]["executor_parameters"][
+                    "reasoning_effort"
+                ],
+                "medium",
+            )
+            value.pop("profile_id")
+            value.pop("prompt_set_identity")
+        self.assertEqual(candidate, baseline)
+
+    def test_medium_result_records_compatible_completed_comparison(self) -> None:
+        result = MEDIUM_RESULT.read_text(encoding="utf-8")
+        self.assertIn("ade5719ca1484443bfc3c1d9af4daac6", result)
+        self.assertIn("ab324fc854989f27b51bb1e312bc6bb4881a17fe6cb07e06128c2d3b112c4039", result)
+        self.assertIn("-28.79%", result)
+        self.assertIn("-12.62%", result)
+        self.assertIn("70 / 70", result)
+        self.assertIn("5 iterationすべて", result)
+
+    def test_medium_residual_analysis_separates_observation_and_candidate_gate(self) -> None:
+        analysis = MEDIUM_RESIDUAL_ANALYSIS.read_text(encoding="utf-8")
+        self.assertIn("paired差の中央値は`-970 token`", analysis)
+        self.assertIn("Control-freeはHigh / Medium合計`0 / 10`件", analysis)
+        self.assertIn("`PRECHANGE_EVIDENCE_SCOPE`", analysis)
+        self.assertIn("これは提案であり、Candidate、採用、releaseではない", analysis)
+        self.assertIn("F04 Medium `N=5`", analysis)
 
 
 if __name__ == "__main__":

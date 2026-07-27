@@ -19,6 +19,10 @@ SUBAGENTS_PROFILE = (
     CLICK
     / "profiles/click-repository-subagents-reasoning-medium-standard14-global-m24-n5-r1.json"
 )
+RESULT = (
+    CLICK
+    / "results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md"
+)
 
 
 class ClickRepositorySubagentsTest(unittest.TestCase):
@@ -73,6 +77,16 @@ class ClickRepositorySubagentsTest(unittest.TestCase):
             value.pop("profile_id")
             value.pop("prompt_set_identity")
         self.assertEqual(comparable_no_agents, comparable_subagents)
+
+    def test_result_records_completed_comparison_and_exposure_boundary(self) -> None:
+        result = RESULT.read_text(encoding="utf-8")
+        self.assertIn("c8c1092f445f4c8ca67bd1fbe409e999", result)
+        self.assertIn("00194b3331524a0c8b0e4895e6885aa9", result)
+        self.assertIn("+3.74%", result)
+        self.assertIn("+7.90%", result)
+        self.assertIn("初期contextへ入ったrunは`0 / 70`", result)
+        self.assertIn("A01の5 / 5件", result)
+        self.assertIn("本文のStd14全体効果", result)
 
 
 if __name__ == "__main__":

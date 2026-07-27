@@ -2,6 +2,8 @@
 
 target instance `click`のevaluation profileを置く。`M`は指定がない限り24へ固定する。段階ごとのCase / N / B / Mは[`docs/public-target-selection-phase0.md`](../../../../docs/public-target-selection-phase0.md)の「Phase 1の実行設定」を正本とする。
 
+2026-07-27以降の新規通常比較はreasoning effort `medium`を運用基準とする。既存`high` profileとresultは履歴として保持し、reasoningが異なるresultを同一comparisonへ混ぜない。
+
 ## 現在のprofile
 
 | profile_id | set | Case | N | B | M | 状態 |
@@ -18,6 +20,10 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | F08 / F10 / F10-R / A01 / A02の各`only-global-m24-n3-r1` | 対応するonly set | 各1 | 3 | 1 | 24 | 完了（各3 / 3、全件score 4） |
 | [`click-control-free-standard14-global-m24-n5-r1`](click-control-free-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
 | [`click-c81-full-standard14-global-m24-n5-r1`](click-c81-full-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
+| [`click-control-free-reasoning-medium-standard14-global-m24-n5-r1`](click-control-free-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | Medium基準完了（70 / 70、全件score 4） |
+| [`click-c81-full-reasoning-medium-standard14-global-m24-n5-r1`](click-c81-full-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | Medium水平比較完了（70 / 70、全件score 4） |
+| [`click-no-agents-reasoning-medium-standard14-global-m24-n5-r1`](click-no-agents-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
+| [`click-repository-subagents-reasoning-medium-standard14-global-m24-n5-r1`](click-repository-subagents-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
 
 `B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
 

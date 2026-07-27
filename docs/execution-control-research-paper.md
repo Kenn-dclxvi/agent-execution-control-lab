@@ -118,7 +118,7 @@ caseは、実行役へ提示する情報（model-visible）と、採点用の正
 modelとAgentは全評価resultで単一であり、reasoning effortだけを追試で変数化した。
 
 - model: `gpt-5.6-sol`。**他のmodel名を明示したresultは0件であり、Claude系modelでの測定は存在しない。**
-- reasoning: 主要測定は`high`。2026-07-26の追試でC71を`low` / `medium` / `high` / `xhigh` / `max` / `ultra`の6水準へ広げ、6条件の互換比較を`medium`でも取得した。
+- reasoning: 2026-07-26までの主要測定は`high`。同日の追試でC71を`low` / `medium` / `high` / `xhigh` / `max` / `ultra`の6水準へ広げ、6条件の互換比較を`medium`でも取得した。観測結果を受け、2026-07-27以降の新規通常比較は`medium`を運用基準とする。既存`high` resultは変更せず、reasoningごとに別compatibility keyを維持する。
 - Agent: Codex CLI、memories disabled、permission `workspace-write`、approval `never`
 - 対象repository: THE-CAPTION commit `3ce91a403f9e0c83f29d56bbe9e7b449b713445d`
 - 反復: caseごと`N=5`を基本、継続試験は`N=5 × 18 Batch`（条件あたり1,260 run）
@@ -321,6 +321,24 @@ C71単独では6水準、各70 runを取得した。
 
 後続のCandidate81は、MediumのF04で残った逐次model再入を対象に`VALIDATION_CLOSURE`一行だけを置換した。標準14項目70 / 70件でscore `4`を維持し、複数required command caseの1-step closureをC71の30 / 35から35 / 35へ上げた。一方、token合計は`+0.28%`、elapsed中央値は`+5.78%`であり、効率上の優位は示していない。この評価結果自体は採用、release、runtime projectionを意味しないが、その後の2026-07-27の明示判断でrelease status `projected`・approval `approved`・runtime projection `projected`となった。THE-CAPTION PR [#343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)の実効変更はroot `AGENTS.md`一つで、統合commitは`592e73aae4f5cf71964efea0d49836e8c894cbbc`、本体検証は`401 passed`だった（評価正本: [`C71 / C81標準14項目result`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)、projection正本: [`Candidate81 release`](../prompts/releases/the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md)）。
 
+### 3.9 Click Medium基準線とrepository固有性
+
+ClickのControl-free Bundle AをMediumで新規実行し、70 / 70件でscore `4`を維持した。High比はtoken中央値`-8.84%`、elapsed中央値`-13.17%`だった。Medium同士の記述的対照では、ClickはTHE-CAPTION ControlFreeRepositoryよりtoken中央値`-25.42%`、elapsed中央値`-14.16%`だった。
+
+70 trace合計を分解すると、ClickはTHE-CAPTIONよりmodel stepが`-10.26%`、reasoning outputが`-7.18%`だったのに対し、tool出力文字は`-50.46%`、cached input tokenは`-21.98%`だった。固定fixtureではTHE-CAPTIONのtracked byteはClickの約`9.41倍`、source fileは約`4.22倍`であり、ControlFreeRepositoryも4つの階層別repository instructionを維持する。したがってClickの軽いbaselineは、推論stepの一律な少なさより、repository contextとtool出力が小さいことに強く対応する。
+
+ただしA02はClickの方がtoken `+44.12%`、model step `16対9`であり、repository全体が一様に軽いわけではない。この対照はcaseとratingが異なるため因果比較ではない。詳細と次の試験境界は[`Click Control-free Medium baseline分析`](click-control-free-medium-baseline-analysis.md)を正本とする。
+
+C81全文を同じMedium互換条件で追試すると、70 / 70件でscore `4`を維持し、Bundle A比token中央値`-28.79%`、elapsed中央値`-12.62%`となった。5 iterationすべてでelapsedが短縮した。model stepは`-35.06%`、cached inputは`-33.92%`、attempted commandは`-5.30%`だった。Highではattempted commandが`+11.39%`となってelapsed短縮を打ち消したが、Mediumではcommand増加が発生せず、再入削減が時間にも現れた。正本は[`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)である。
+
+case別の見かけ上の残余をpaired traceで再検討すると、F01のtokenは5回中3回で減り、paired差中央値`-970`であったため、独立中央値`+16.80%`を安定悪化とはしなかった。一方、F04のelapsedはMedium 5回中4回で増え、High / Mediumの合計でもControl-freeのhistory探索`0 / 10`に対してC81は`4 / 10`だった。この探索はedit前の`git log` / `show` / `blame`であり、変更後を対象とする`VALIDATION_CLOSURE`の外側である。これを新しいpre-change evidence scope仮説として分離した（正本: [`Click C81 Medium残余経路分析`](click-c81-medium-residual-analysis.md)）。
+
+### 3.10 target-local sub `AGENTS.md`配置比較
+
+THE-CAPTION ControlFreeRepositoryに残るpath別instructionの影響を分離するため、Clickでtarget-local `AGENTS.md`が完全にないempty bundleと、rootを置かず`docs`・`src`・`tests`だけへrepository固有のsub `AGENTS.md`を置くbundleをMedium Std14 N=5で比較した。両条件とも70 / 70件がscore `4`だった。sub-AGENTS側はNo-AGENTS比でtoken中央値`+3.74%`、elapsed中央値`+7.90%`だった。
+
+ただし70 root rolloutの初期`world_state.agents_md`にはsub本文が1件も入らなかった。本文のreadを確認できたのはA01の5 / 5件だけで、A01ではtoken中央値`+80.47%`、elapsed中央値`+41.66%`だった。A01を除く13 caseのtoken中央値は`-1.11%`だったが、sub本文の露出を確認できないため内容効果とは扱わない。したがって、配置だけではroot cwd開始の全caseへsub authorityは水平適用されず、THE-CAPTIONとClickのrepository差をsub本文の常時注入で説明する根拠も得られなかった（正本: [`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)）。
+
 ---
 
 ## 4. 測定装置の妥当性
@@ -476,7 +494,7 @@ v13がこのずれを塞いだ。C71のB18自体はv12で実施しており、v1
 ## 7. 限界と妥当性の脅威
 
 1. **単一model / 単一runtime。** modelは`gpt-5.6-sol`、AgentはCodex CLIであり、他model・他CLIでの再現は未確認。reasoning effortは6水準で追試したが、model系列とruntimeの一般化にはならない。
-2. **公開targetは1 repository・2 Bundleに限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つになった。`click`ではBundle AとC81全文のBundle Bを同じStd14条件で各70 run評価した。Bundle Bは70 / 70件のscore `4`を維持し、Bundle A比token中央値`-23.96%`、elapsed中央値`+2.86%`だった（正本: [`Click Bundle A / B result`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)）。token削減方向は再現したがelapsed短縮は再現せず、別公開repository、他言語、個別predicateへの一般化はまだ成立していない。
+2. **公開targetは1 repository・4 prompt setに限る。** 評価resultを持つtargetはTHE-CAPTION commit `3ce91a4`と公開target `pallets/click`の2つである。`click`ではHighとMediumの各水準でBundle AとC81全文のBundle Bを同じStd14条件で各70 run評価し、Mediumではさらにtarget-local No-AGENTSとRepository sub-AGENTSを各70 run評価した。C81は両水準で70 / 70件のscore `4`を維持した。HighではBundle A比token中央値`-23.96%`、elapsed中央値`+2.86%`、Mediumではtoken中央値`-28.79%`、elapsed中央値`-12.62%`だった（正本: [`High比較`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)、[`Medium比較`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)）。sub-AGENTS比較は本文の初期注入が成立しなかったため、配置効果を超えて一般化しない。別公開repository、他言語、個別predicateへの一般化もまだ成立していない。
 3. **採点は多くの場合、独立blind raterによるものではない。** 複数の一次resultがこれを明示している。採点は固定契約による自動auditである。
 4. **契約revisionを跨いだ比較は不可能。** v1からv13まで13 revisionがあり、compatibility keyが異なるresultを混ぜられない。3.4節の2段の測定を連結できないのはこの理由による。現行契約はv13で、6条件・計420件の互換resultをHighとMediumでそれぞれ登録したが、両reasoning間およびv12以前のresultとは互換比較できない。
 5. **反復規模の上限。** 条件あたり最大1,260 run。これ未満の頻度の誤経路について不在を主張しない。
@@ -538,6 +556,11 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 - 公開target Clickの反復確認: [`click control-free F01-only P1-c N=5 B=3`](../evaluations/targets/click/results/click-control-free-f01-only-p1c-n5-b3_2026-07-26.md)
 - 公開target ClickのF02追加確認: [`click control-free F02-only N=3`](../evaluations/targets/click/results/click-control-free-f02-only-n3_2026-07-26.md)
 - 公開target ClickのBundle A baseline: [`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)
+- 公開target ClickのMedium Bundle A baseline: [`click control-free Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md)
+- 公開target ClickのMedium baseline分析: [`Click Control-free Medium baseline分析`](click-control-free-medium-baseline-analysis.md)
+- 公開target ClickのMedium Bundle A / C81全文比較: [`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)
+- 公開target ClickのC81残余経路分析: [`Click C81 Medium残余経路分析`](click-c81-medium-residual-analysis.md)
+- 公開target ClickのNo-AGENTS / Repository sub-AGENTS比較: [`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)
 - 公開target ClickのBundle A / C81全文比較: [`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)
 - 現行rating contract: [`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)
 
