@@ -339,6 +339,12 @@ THE-CAPTION ControlFreeRepositoryに残るpath別instructionの影響を分離�
 
 ただし70 root rolloutの初期`world_state.agents_md`にはsub本文が1件も入らなかった。本文のreadを確認できたのはA01の5 / 5件だけで、A01ではtoken中央値`+80.47%`、elapsed中央値`+41.66%`だった。A01を除く13 caseのtoken中央値は`-1.11%`だったが、sub本文の露出を確認できないため内容効果とは扱わない。したがって、配置だけではroot cwd開始の全caseへsub authorityは水平適用されず、THE-CAPTIONとClickのrepository差をsub本文の常時注入で説明する根拠も得られなかった（正本: [`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)）。
 
+14 caseをTaskSpec、停止経路、authority依存で再監査した。F01〜F08、F10-R、A01、A02は、THE-CAPTIONから移した実行判断点を維持しており、既存Std14は回帰・互換比較として有効である。一方、Click F10 r1はsourceだけでinventoryを完了でき、THE-CAPTION F10の「`src/AGENTS.md`なしではauthority不足で停止する」因果経路を再現していなかった。この1点だけをF10 r2へ分離し、No-AGENTS / Repository Authority、Medium、N=5、M=24で追試した。No-AGENTSは5 / 5件がsource-only推論をせず`authority_unavailable`で停止してscore `1`、Repository Authorityは5 / 5件がauthorityと3 sourceを照合してinventoryを完了しscore `4`だった。全10件がvalid・rateable、zero driftで、THE-CAPTION F10と同じavailability方向をClickでも再現した。ただし作業量が異なる1 case比較なので、token中央値`+236.81%`、elapsed中央値`+73.37%`を効率効果へ一般化しない（正本: [`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)）。
+
+targeted qualificationを全体へ戻し、F10 r2を含むStd14 r2を両条件各70件で再実施した。F10以外の13 caseは両条件65 / 65件がscore `4`で、F10だけがNo-AGENTSのscore `1` × 5とRepository Authorityのscore `4` × 5へ分離した。全140件がvalid・rateableで、excluded attemptとunexpected driftは0件だった。quality中央値は94.643対100.000、token中央値は2,580,528対2,724,250（`+5.57%`）、elapsed中央値は1,096.187秒対1,139.580秒（`+3.96%`）だった。quality差はF10だけで生じ、token・elapsedは完了作業量の異なるF10とM=24の並列変動を含むため、一律なprompt効率差とは扱わない。以上から、見直した14実行判断点を比較する試験セットとしての互換性を達成した（正本: [`Click No-AGENTS / Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)）。
+
+C81との組合せも同じStd14 r2で各70件実施した。C81単体はF10以外がscore `4` × 65、F10がscore `1` × 5、C81 + Repository Authorityはscore `4` × 70だった。全140件がvalid・rateableで、excluded attemptとunexpected driftは0件だった。C81 + AuthorityはC81比でquality中央値`+5.357`、token中央値`+8.86%`、elapsed中央値`+11.55%`だった。quality差はF10だけである。同じauthority状態でC81の有無を比較すると、token / elapsedはauthorityなしで`-27.35% / -17.04%`、authorityありで`-25.08% / -10.98%`だった。したがって、C81とsub authorityはF10のavailability差と他13 caseの品質を維持して共存でき、C81の削減方向も両authority状態で維持された（正本: [`Click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)）。
+
 ---
 
 ## 4. 測定装置の妥当性
@@ -561,6 +567,10 @@ promptを実行制御として定義し、prompt差分だけを変数とする�
 - 公開target ClickのMedium Bundle A / C81全文比較: [`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)
 - 公開target ClickのC81残余経路分析: [`Click C81 Medium残余経路分析`](click-c81-medium-residual-analysis.md)
 - 公開target ClickのNo-AGENTS / Repository sub-AGENTS比較: [`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)
+- 公開target ClickのF10 authority availability設計と全14 case監査: [`Click repository authority availability比較設計`](click-repository-authority-availability-design.md)
+- 公開target ClickのF10 authority availability結果: [`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)
+- 公開target Clickの見直し後Std14全体結果: [`Click No-AGENTS / Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)
+- 公開target ClickのC81 / C81 + Authority Std14 r2結果: [`Click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)
 - 公開target ClickのBundle A / C81全文比較: [`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)
 - 現行rating contract: [`outcome-abstract-condition-preserving-owner-diagnostic-v13.json`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)
 

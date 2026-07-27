@@ -1,0 +1,51 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-no-agents-r1",
+    "change_reason": "root制御promptを追加せず、Clickの実在領域へrepository固有instructionとF10が明示的に参照するcommand API authorityを追加し、authority availabilityを測る。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "既存sub-AGENTS配置・露出resultの再解釈",
+      "C81全文との組合せ",
+      "個別instructionの採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "problem": "既存Click Std14ではsub AGENTS.md本文がA01以外へ露出せず、THE-CAPTION F10で測ったrepository authority availabilityの因果経路を再現できなかった。",
+    "scope": "root AGENTS.mdを置かず、docs、src、testsの3領域へpath-scoped instructionを配置し、src instructionへcommand construction API authorityを固定する。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "fc81314aec37546950daf623509e8b423db32bcff696ee6f7d33bc6342458c3f",
+  "files": [
+    {
+      "git_blob_sha1": "ef20f6370b5fddabd7f7c4a65d182e864ee8c8f9",
+      "mode": "100644",
+      "sha256": "92b5aa5211df9e19e360048d8a2038e05a725530fb067fb377f09c701ffc4fcf",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "f02e8e8c0bdfed2ef0a3adfae63c63b21dce221e",
+      "mode": "100644",
+      "sha256": "2469c41fe7d7f6bca7bdd44c5080d661b7c9eed61fa3d64b4bd17399c3f29250",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "03c7f6858ecd27fdebd9d02c636573d66c65529f",
+      "mode": "100644",
+      "sha256": "4d906eed527e0162f49383a100634d4ce5abbbcdd93e41f7264223904256299b",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "click-00e592c-repository-authority-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "storage_format": "instruction-suffixed/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  }
+}

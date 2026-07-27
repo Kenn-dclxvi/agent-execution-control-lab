@@ -13,6 +13,19 @@ root制御promptとは分離して確認する。比較するのは次の2条件
 Control-Free Bundle Aは0 byteのroot `AGENTS.md`を配置する別identityなので、
 No-AGENTSの結果として流用しない。
 
+## 実測後の位置づけ
+
+両条件70 / 70件がscore `4`だったが、sub本文の初期context注入は0 / 70、
+明示readはA01の5 / 5だけだった。このため、この比較が直接示すのは3つの
+sub `AGENTS.md`を配置したときの露出経路と回帰であり、本文内容のStd14全体効果
+ではない。
+
+THE-CAPTION F10と同じauthority availabilityは、既存Std14を書き換えず、
+[`CLICK-F10-COMMAND-API-INVENTORY/r2`](../evaluations/targets/click/cases/CLICK-F10-COMMAND-API-INVENTORY/r2/README.md)
+のtargeted比較へ分離した。全14 caseの見直しと後続条件は
+[`Click repository authority availability比較設計`](click-repository-authority-availability-design.md)
+を正本とする。
+
 ## 作成前gate
 
 1. 基準prompt setは`click-00e592c-no-agents-r1`とする。最短正常経路は、固定

@@ -1,0 +1,14 @@
+# src rules
+
+- Production package code belongs under `src/click/`.
+- Preserve the existing public API and exports when changing implementation details.
+- Prefer the standard library. Do not add an external dependency when it is unnecessary.
+- Avoid ternary expressions. Use an explicit `if` / `else` block so coverage can observe both branches.
+- Keep a change focused and add or update the closest relevant regression test under `tests/`.
+
+## Command construction API authority
+
+- The canonical public command decorators are `click.command` and `click.group`; their implementations are `command` and `group` in `src/click/decorators.py`.
+- The canonical command classes are `Command`, `Group`, and `CommandCollection` in `src/click/core.py`.
+- These decorators and classes are public exports from `src/click/__init__.py`.
+- Inventory work must confirm these declarations against the named source files. Do not substitute an undocumented alias or infer a different canonical API from search results alone.

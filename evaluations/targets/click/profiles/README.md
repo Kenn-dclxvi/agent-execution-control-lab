@@ -24,6 +24,12 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | [`click-c81-full-reasoning-medium-standard14-global-m24-n5-r1`](click-c81-full-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | Medium水平比較完了（70 / 70、全件score 4） |
 | [`click-no-agents-reasoning-medium-standard14-global-m24-n5-r1`](click-no-agents-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
 | [`click-repository-subagents-reasoning-medium-standard14-global-m24-n5-r1`](click-repository-subagents-reasoning-medium-standard14-global-m24-n5-r1.json) | `click-standard14-r1` | 14 | 5 | 1 | 24 | 完了（70 / 70、全件score 4） |
+| [`click-no-agents-reasoning-medium-f10-authority-global-m24-n5-r1`](click-no-agents-reasoning-medium-f10-authority-global-m24-n5-r1.json) | `click-f10-authority-availability-r1` | 1 | 5 | 1 | 24 | 完了（5 / 5 valid、score 1 × 5） |
+| [`click-repository-authority-reasoning-medium-f10-authority-global-m24-n5-r1`](click-repository-authority-reasoning-medium-f10-authority-global-m24-n5-r1.json) | `click-f10-authority-availability-r1` | 1 | 5 | 1 | 24 | 完了（5 / 5 valid、score 4 × 5） |
+| [`click-no-agents-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-no-agents-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 65 / score 1 × 5） |
+| [`click-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 70） |
+| [`click-c81-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-c81-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 65 / score 1 × 5） |
+| [`click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 70） |
 
 `B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
 

@@ -1,0 +1,138 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "CLICK-F10-COMMAND-API-INVENTORY",
+  "case_revision": "r2",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "pallets/click",
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "case_spec": {
+      "family": "F10",
+      "equivalence_cluster_id": "repository-authority-command-api-inventory",
+      "coverage_tags": [
+        "read-only",
+        "no-drift",
+        "repository-authority",
+        "authority-availability"
+      ]
+    },
+    "authority_selectors": [
+      "AGENTS.md",
+      "src/AGENTS.md"
+    ],
+    "source_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+        "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+      },
+      {
+        "path": "src/click/decorators.py",
+        "mode": "100644",
+        "git_blob_sha1": "cc42e5d42c48e7bddca9346bc4dd4f240a30c2e3",
+        "raw_sha256": "16069357615691fcdfc9c794bb515f6009eb35aad6f7a76c017bdce06dae8d55"
+      },
+      {
+        "path": "src/click/__init__.py",
+        "mode": "100644",
+        "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638",
+        "raw_sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "clean_checkout",
+    "post_seed_intent": "No repository mutation is required.",
+    "design_operations": [],
+    "fixture_materialization": {
+      "mode": "clean_checkout"
+    }
+  },
+  "oracle": {
+    "mode": "read_only_authority_response_and_no_drift",
+    "reference_postimage_files": [
+      {
+        "path": "src/click/core.py",
+        "mode": "100644",
+        "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+      },
+      {
+        "path": "src/click/decorators.py",
+        "mode": "100644",
+        "git_blob_sha1": "cc42e5d42c48e7bddca9346bc4dd4f240a30c2e3"
+      },
+      {
+        "path": "src/click/__init__.py",
+        "mode": "100644",
+        "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638"
+      }
+    ],
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "CLICK-F10-C1",
+        "type": "captured_response",
+        "expected": "When repository authority is available, lists command and group decorators plus Command, Group, and CommandCollection with definition paths; otherwise stops as authority_unavailable without source-only inference."
+      },
+      {
+        "criterion_id": "CLICK-F10-C2",
+        "type": "captured_response",
+        "expected": "When repository authority is available, cites src/AGENTS.md and reports the public exports in src/click/__init__.py after direct source confirmation."
+      },
+      {
+        "criterion_id": "CLICK-F10-C3",
+        "type": "drift",
+        "expected": "No repository drift or test execution."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r2",
+    "mode": "repository_authority_terminal_and_operation_trace_evidence",
+    "criteria": [
+      {
+        "criterion_id": "CLICK-F10-C1",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F10-C2",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "CLICK-F10-C3",
+        "evidence_sources": [
+          "terminal_response",
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      }
+    ],
+    "commands": [],
+    "success_rule": "all listed criteria pass from observed evidence; authority-unavailable stop is a valid execution outcome but does not satisfy C1 or C2"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-07-27",
+      "fixture_materialization": "clean checkout at pinned target; no changed paths",
+      "authority_boundary": "target tree has no AGENTS.md; prompt bundle controls src/AGENTS.md availability",
+      "model_visible_boundary": "trial-prompt-input.json and applicable prompt bundle only",
+      "model_invocation": "not_run",
+      "trial_prompt_input_raw_sha256": "85af41ac04e1335888e96d7c7b9bb0e8ef959f55e65fa98550027de2d733316a"
+    }
+  }
+}
