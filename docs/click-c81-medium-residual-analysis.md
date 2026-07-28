@@ -6,7 +6,7 @@ F01のtoken中央値`+16.80%`は、反復内で安定した悪化ではない。
 
 F04のelapsed増加は再現性がある。Mediumでは5回中4回で増え、paired差の中央値は`+6.809`秒、5回合計は`+16.24%`だった。Highでも5回合計`+17.94%`で同方向だった。C81全文はF04でedit前のgit history探索をHigh `3 / 5`、Medium `1 / 5`、合計`4 / 10`件発生させた。Control-freeはHigh / Medium合計`0 / 10`件だった。
 
-この経路はrequired validation後の追加readではなく、変更方法を決める前の`git log` / `git show` / `git blame`である。C81の`VALIDATION_CLOSURE`はtarget探索・変更前へ適用しないと明記されているため、既存制御の失敗ではなく、pre-change evidence scopeという未制御領域である。
+この経路はrequired validation後の追加readではなく、変更方法を決める前の`git log` / `git show` / `git blame`である。C81の`VALIDATION_CLOSURE`はtarget探索・変更前へ適用しないと明記されているため、同predicateの失敗ではない。ただし、2026-07-28に4件のraw traceを再解析した結果、history探索後に初めてmethodまたは変更scopeが確定していた。保存traceに「method bind後の代替探索」は`0 / 4`件であり、新しいprompt制御または既存`METHOD`置換の根拠にはしない。
 
 ## F01: 独立中央値による見かけの増加
 
@@ -58,23 +58,31 @@ C81はmodel stepとtokenを減らしたが、各step内のreasoningとcommand密
 
 HighとMediumの両方でC81側のelapsed、reasoning、commandが増えたため、Mediumの一時的なhost contentionだけでは説明できない。一方、history探索はC81の全runではなく4 / 10件であり、C81全文のどのpredicateが直接発火させたかはこの観測から確定しない。
 
-## 制御境界
+## method bind時点の再解析（2026-07-28）
 
 C81の`VALIDATION_CLOSURE`は、artifact変更完了後にrequired validationを一括発行し、成功後の追加readを止める。F04の余分なhistory探索はartifact変更前なので、この制御を変更しても対象経路へ届かない。
 
-新しい制御候補は次の一軸である。
+当初は次の新規labelを候補にした。
 
 > `PRECHANGE_EVIDENCE_SCOPE`: TaskSpecがrequired outcome、対象source、focused testを固定し、現在sourceとtestから変更箇所をbindできる場合、git history / blameを追加authorityとして読まない。現在sourceとtestだけではmethodをbindできない場合に限りhistoryへ進む。
 
-これは提案であり、Candidate、採用、releaseではない。historyを常に禁止すると、regression originや互換意図がcurrent sourceから分からないtaskを壊すため、現在source / focused testでmethodをbindできる場合だけに限定する。
+この文は`git history / blame`という具体的手段を固定し、repository evidenceをauthorityとして扱い、既存`METHOD`へ新しい判断点を並置するため、[`prompt-control-design-principles.md`](prompt-control-design-principles.md)の「境界制御と方法制御を混同しない」「新規追加より置換と削除を優先する」に合わない。そこでCandidateを作らず、history探索4件について「history取得前にmethodがbind済みだったか」をraw traceで確認した。
 
-## 次の試験
+| reasoning / iteration | run ID | history取得前 | history resultが確定した内容 | 分類 |
+| --- | --- | --- | --- | --- |
+| High / 2 | `87f3dfcd98e94f33a8004a863e3d4486` | 親`ctx`から残り引数を取る1行を原因候補としたが、repository意図の確認を未解決条件として明示 | 同じ不具合の既存修正と、子contextへ切り替えてから残り引数を取る2行の順序 | bind前。methodと変更単位の確定に使用 |
+| High / 3 | `d0576447b0354220ac26fb6e5054f024` | non-chain Groupの原因を特定 | 同じfixture commitが壊した2箇所を確認し、chain Groupを変更scopeへ追加 | bind前。target scopeを変更 |
+| High / 5 | `0f0bda9475c54b9681c628fd00da6f60` | sourceとfocused testを読む範囲だけを固定 | 既存修正から2行の順序復元をmethodとして確定 | bind前。method確定に使用 |
+| Medium / 5 | `29fac65be1504fb5929f3622448e6b8f` | source前半とfocused testを読み、関連履歴を調査対象に含めた | fixture seedと既存修正を確認した後、非-chain / chain両経路の順序復元を確定 | bind前。methodと変更scopeの確定に使用 |
 
-新しい制御発見として、C81全文を親に上記一文だけを追加したClick Candidateを作る。まずF04 Medium `N=5`のtargeted gateで次を判定する。
+4件とも、最終成果から遡ればcurrent sourceとfocused testだけでも解けた可能性はある。しかし、それは事後的なoracle判断であり、各trace内でhistory取得前にmethodがbind済みだった証拠ではない。historyがdone conditionに不要だったことと、取得時点でmethod bindに不要だったことは分ける。
 
-1. 5 / 5件がvalid・score `4`である。
-2. git history / blame探索が`0 / 5`である。
-3. required focused / full gateを欠落させない。
-4. C81 Medium F04に対しpairedまたは同一集約定義でcommand、reasoning、elapsedを記録する。
+## 停止判断
 
-targeted gateを通過してもStd14効果、採用、release、runtime projectionは未確定である。F04で制御が実際に発火して経路を閉じた場合だけ、同じMedium Std14 70枠へ進む。Click向け単なる文言短縮は別系列とする。
+Candidate作成前gateのうち、次を満たせない。
+
+- 保存済みtraceで、method bind後にも続いた具体的な誤経路を示せない。
+- TaskSpec、repository authority、repository stateだけでは防げない理由を示せない。
+- 新しいpredicateが消す判断点を、必要なevidence取得と分離できない。
+
+したがって`PRECHANGE_EVIDENCE_SCOPE`の新規追加、`METHOD`置換Candidate、F04 Medium `N=5` targeted runは実施せず、この軸を`stopped_before_candidate`とする。F04のelapsed差とhistory探索`4 / 10`は診断事実として保持するが、追加prompt制御の根拠へ読み替えない。将来、method bind済みを明示した後にも代替evidence探索が続く保存traceを別に観測した場合だけ、新しい作成前gateとして再検討する。

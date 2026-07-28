@@ -83,6 +83,7 @@
 | `the-caption-3ce91a4-ordered-validation-wave-r1`（Candidate79） | `the-caption-3ce91a4-validation-closure-r1` | 順序依存required validationをfail-stopの順序付き個別invocation群として同一model stepへ閉じる1 predicate置換 | [`v13 Medium F04 N=5 / stopped`](../../evaluations/results/candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md) |
 | `the-caption-3ce91a4-root-validation-wrapper-r1`（Candidate80） | `the-caption-3ce91a4-validation-closure-r1` | root producerのrequired validationを1回のcustom exec wrapper内の順序付き個別commandへ固定する1 predicate置換 | [`v13 Medium F04 N=10 / stopped`](../../evaluations/results/candidate71-candidate80-root-validation-wrapper-v13-medium-f04-n10_2026-07-26.md) |
 | `the-caption-3ce91a4-validation-wrapper-precedence-r1`（Candidate81） | `the-caption-3ce91a4-validation-closure-r1` | 後段の「順に」「1 commandずつ個別」をroot wrapper内の発行順・invocation単位へ固定する1 predicate置換 | [`v13 Medium standard14 N=5 / quality and prompt stability gates passed`](../../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md) |
+| `the-caption-3ce91a4-producer-gate-deduplication-r1`（Candidate82） | `the-caption-3ce91a4-validation-wrapper-precedence-r1` | `OWNER_ROLE`に完全な正本がある明示producer gateの短い再記述P3だけを`PRODUCER`から削除 | [`v13 Medium standard14 N=5 / quality gate passed`](../../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md) |
 
 candidate bundleのmanifestは構築時provenanceとしてimmutableに保持する。評価状態の更新はmanifestをin-place変更せず、このindexと独立したevaluation resultで表す。
 

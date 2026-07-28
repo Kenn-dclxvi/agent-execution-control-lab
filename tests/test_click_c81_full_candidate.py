@@ -106,13 +106,15 @@ class ClickC81FullCandidateTest(unittest.TestCase):
         self.assertIn("70 / 70", result)
         self.assertIn("5 iterationすべて", result)
 
-    def test_medium_residual_analysis_separates_observation_and_candidate_gate(self) -> None:
+    def test_medium_residual_analysis_records_pre_candidate_stop(self) -> None:
         analysis = MEDIUM_RESIDUAL_ANALYSIS.read_text(encoding="utf-8")
         self.assertIn("paired差の中央値は`-970 token`", analysis)
         self.assertIn("Control-freeはHigh / Medium合計`0 / 10`件", analysis)
         self.assertIn("`PRECHANGE_EVIDENCE_SCOPE`", analysis)
-        self.assertIn("これは提案であり、Candidate、採用、releaseではない", analysis)
-        self.assertIn("F04 Medium `N=5`", analysis)
+        self.assertIn("method bind後の代替探索", analysis)
+        self.assertIn("`0 / 4`件", analysis)
+        self.assertIn("87f3dfcd98e94f33a8004a863e3d4486", analysis)
+        self.assertIn("`stopped_before_candidate`", analysis)
 
 
 if __name__ == "__main__":

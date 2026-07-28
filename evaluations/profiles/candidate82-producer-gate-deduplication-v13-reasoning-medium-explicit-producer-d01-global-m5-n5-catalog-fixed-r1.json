@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "id": "TC-D01-EXPLICIT-PRODUCER-MONTHLY-REVIEW",
+      "revision": "r1"
+    }
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.144.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted",
+      "model_visible_capability_catalog": {
+        "apps_enabled": false,
+        "expected_sha256": "e755bd6f50049d0a3a96b01a450dea46a31cd1842fd434f4ecef421b059a077e",
+        "plugin_sharing_enabled": false,
+        "plugins_enabled": false,
+        "schema_version": "the-caption-prompt.model-visible-capability-catalog/v1"
+      }
+    },
+    "executor_parameters": {
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "required_command_groups_by_case": {},
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "f10_r3_observed_max_plus_delegation_margin",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 5,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "medium",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "outcome-abstract-condition-preserving-owner-diagnostic-v13",
+      "contract_sha256": "d2dd4096911c35257c2866872d071f2ee5137bb3dcb6a7b279853e3ebe581f1f",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "tc-d01-explicit-producer-monthly-review-r1",
+      "evaluation_set_revision": "r1",
+      "source": "F10 r3 outcome contract plus explicit independent producer execution binding frozen by Layer 1"
+    }
+  },
+  "evaluation_set": {
+    "revision": "r1",
+    "set_id": "tc-d01-explicit-producer-monthly-review-r1"
+  },
+  "execution": {
+    "duration_hints_seconds": {
+      "TC-D01-EXPLICIT-PRODUCER-MONTHLY-REVIEW": 120.0
+    },
+    "max_attempts": 3,
+    "max_workers": 5,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "profile_id": "candidate82-producer-gate-deduplication-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "a5a8dad8d615f4075bd399938bd621f9906d9b71c9de59425815be63027201cd",
+    "name": "the-caption-3ce91a4-producer-gate-deduplication-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}
