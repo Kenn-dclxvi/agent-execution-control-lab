@@ -9,6 +9,8 @@
 > - **現在の総括を知る**: [監査状況の分類](#監査状況の分類完了と再測定要の分離)（11 labelの最終判定と、再測定が必要な項目）。文書末尾にある。
 > - **個別labelの根拠を読む**: 各`<label>監査結果`節（`OWNER_ROLE`、`SPEC`、`CONTEXT`、`PRODUCER`、`INDEPENDENCE`、`TERMINAL`、`ROOT`、`DECISION_BOUNDARY`、`METHOD`、`RECOVERY`の10節。`VALIDATION_CLOSURE`は凍結のため独立節を持たない）。
 > - **未完了項目の着手判断**: [`research-backlog.md`](research-backlog.md)（`CONTEXT` X1、`INDEPENDENCE` I1、`RECOVERY` R1・R2、`P3`削除candidateを索引化）。
+
+> **2026-07-28の現在判断**: P3削除は、投影済みCandidate81 `the-caption-3ce91a4-validation-wrapper-precedence-r1`を直接親とするCandidate82 `the-caption-3ce91a4-producer-gate-deduplication-r1`として作成前gateを再固定した。F10 / D01 targeted 10 / 10と標準14 70 / 70はscore `4`と期待routeを維持し、`standard14_evaluated / quality_gate_passed / targeted_gate_passed`となった。以下のCandidate71 / Candidate74記述は当時の履歴として保持する。現在設計は[`candidate82-producer-gate-deduplication-design.md`](candidate82-producer-gate-deduplication-design.md)、評価値は[`Candidate81 / Candidate82標準14 result`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)を正本とする。
 > - **履歴として読む**: 直下の`結論`に続く`五つの制御機能`から`現在の判定`までは監査初期（`OWNER_ROLE`→`SPEC`着手時点）の記述である。現在の判定として読まない。
 
 ## 結論

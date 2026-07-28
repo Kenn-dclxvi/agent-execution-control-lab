@@ -14,23 +14,27 @@
 | `INDEPENDENCE`（`I1` = `F9`） | A / D scopeでの削除評価。Candidate68はF10-onlyのみ実測でun-run | 低い。F10ではruntime非改善 |
 | `RECOVERY`（`R1 / R2`） | `environment_recovery_max>0`の正のrecovery scenario caseでの評価。現Evaluation setは`not_applicable`でun-run | 不明（効果未測定） |
 
-## 2. `PRODUCER`の`P3`一文削除candidate（作成前gate定義済み・bundle未作成）
+## 2. `PRODUCER`の`P3`一文削除Candidate82（標準14完了・採用未判断）
 
-11 label監査で唯一「Candidate作成根拠あり」となった項目。`P3`の正本は`OWNER_ROLE`側にあり、`PRODUCER`側の短い再記述だけを削除する。gate 9項目は定義済みで、bundle・profile・評価は未着手。
+11 label監査で唯一「Candidate作成根拠あり」となった項目。`P3`の正本は`OWNER_ROLE`側にあり、`PRODUCER`側の短い再記述だけを削除した。2026-07-28に投影済みCandidate81を直接親とするCandidate82を固定した。F10 / D01 targeted 10 / 10と標準14 70 / 70がscore `4`で、標準14は70 / 70 root-onlyだった。Candidate82を`standard14_evaluated / quality_gate_passed / targeted_gate_passed`とする。
 
-- 正本: [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md)（`PRODUCER`監査結果節と作成根拠節）
-- 評価計画: Candidate71から`P3`一文だけを削除し、D01正例＋root-onlyでtargeted評価。新しいEvaluation setやrating revisionは作らない
-- **番号に注意**: 同分析が作業呼称として使う「Candidate74」は、実際には別軸の`the-caption-3ce91a4-typed-execution-state-machine-r1`へ割り当て済みである。着手時は[`prompts/candidates/README.md`](../prompts/candidates/README.md)で現行の番号割当てを確認し、新しい番号で作成する
+- 現在設計: [`candidate82-producer-gate-deduplication-design.md`](candidate82-producer-gate-deduplication-design.md)
+- targeted結果: [`Candidate81 / Candidate82 F10・D01 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-f10-d01-n5_2026-07-28.md)
+- 標準14結果: [`Candidate81 / Candidate82 Medium標準14 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)
+- prompt identity: `the-caption-3ce91a4-producer-gate-deduplication-r1`
+- 現在境界: 評価は完了。採用、release、本体反映は別判断として未実施
+- 旧分析が作業呼称として使った「Candidate74」は別軸へ割り当て済みであり、履歴上の呼称としてのみ保持する
 
 ## 3. A01の3択variation診断
 
-**未実施。** A01の現行2択caseを回帰基準として維持したまま、3択以上の未固定modeを持つvariationを診断用に追加する。設計条件は次のとおり。
+**2026-07-28に完了。** A01の現行2択caseを回帰基準として変更せず、現在値と候補順を3通り回転した`AMBIGUOUS` / `AUTHORITY`の6 caseを追加した。
 
-- 2択で非現行値を選び、3択では確認して停止するなら、補集合選択の可能性が高い。
-- 3択でも特定値を選ぶなら、mode名の意味、候補順序、現在値、test期待値などをauthorityへ変換している可能性を調べる。
-- 現在値と候補順序を回転し、曖昧なら停止するcaseとrepository authorityから一意に解決できるcaseを対にして、過剰停止と未指定値補完の両方を観測する。
+- 第1版30件はすべてvalidだったが、`strict` / `live`開始状態と既存仕様書の`daily`記述が不整合であり、10 / 10件がその記述を変更先authorityへ変換した。fixture交絡として分離した。
+- 仕様書も開始値へ同期した第2版は30 / 30件がvalid、excluded attempt 0件だった。
+- `AMBIGUOUS`は15 / 15件がzero driftかつ試験前の確認停止、`AUTHORITY`は15 / 15件が質問せず指定値へ変更して関連testを成功させた。
+- 補集合選択、候補順依存、現在値回避、過剰停止は第2版で再現しなかった。新しいprompt predicateの根拠がないためCandidateは作成しない。
 
-case追加の一般規則（追加根拠の限定、既存revisionを上書きしないこと、反復数の固定）は[`future-roadmap.md`](future-roadmap.md)の「評価setの役割と育て方」節を正本とする。
+正本は[`Candidate81 A01 3択variation診断`](../evaluations/results/candidate81-a01-three-choice-variation-diagnostic_2026-07-28.md)と[`修正版set`](../evaluations/sets/the-caption-a01-three-choice-variation-r2/README.md)である。第1版は上書きせず、交絡を確認した履歴として保持する。
 
 ## 4. 投影済みCandidate71のrisk（当時の記録と現在解釈を分離）
 
@@ -128,7 +132,7 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 見直し後の`click-standard14-r2`をNo-AGENTS / Repository Authority、Medium、N=5、M=24で全件再実施した。F10以外は両条件65 / 65件がscore `4`、F10だけがscore `1` × 5 / score `4` × 5へ分離した。全140件がvalid・rateable、excluded attemptとunexpected driftは0件で、14実行判断点の比較setとして互換性を達成した。quality中央値は94.643対100.000、tokenは`+5.57%`、elapsedは`+3.96%`だが、後二者はF10の完了作業量差とM=24の変動を含むため効率差とは扱わない
 - C81 / C81 + Repository Authorityも同じStd14 r2、Medium、N=5、M=24で各70件実施した。C81はscore `4` × 65 / score `1` × 5、C81 + Authorityはscore `4` × 70で、F10以外のquality回帰は0件だった。同じauthority状態のC81差は、authorityなしでtoken `-27.35%`・elapsed `-17.04%`、authorityありでtoken `-25.08%`・elapsed `-10.98%`となり、C81の削減方向はsub authority追加後も維持された
 
-Bundle AのHigh一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Medium一次結果は[`click control-free Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md)、HighでのBundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)、Medium比較は[`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)、sub instruction配置比較は[`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)、authority availability追試は[`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)を正本とする。High / MediumのBundle A traceとTHE-CAPTION ControlFreeRepository Mediumを使った[`baseline分析`](click-control-free-medium-baseline-analysis.md)では、Clickの軽さはreasoning量だけでなく、tool出力量`-50.46%`と小さいrepository contextに強く対応した。sub instruction配置追試により、THE-CAPTION側の4つのsub本文が常にmodel contextへ入っていたという仮定は置けなくなった。F10 targeted追試ではauthority availabilityの効果を再現したが、1 caseからStd14全体へ一般化しない。C81 MediumによりA02 / F06は大きく改善した。後続の[`残余経路分析`](click-c81-medium-residual-analysis.md)では、F01のtoken増加はpaired差中央値`-970`で安定悪化ではないと判定した。F04はC81でgit history探索がHigh / Medium合計`4 / 10`、Control-freeで`0 / 10`となり、両reasoningでelapsed合計が約16〜18%増えた。C81新規制御探索の次operationはC81全文へ`PRECHANGE_EVIDENCE_SCOPE`一文だけを追加したClick CandidateのF04 Medium N=5 targeted gateである。Click向け文言最適化、採用、release、runtime projectionは別gateとする。
+Bundle AのHigh一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Medium一次結果は[`click control-free Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md)、HighでのBundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)、Medium比較は[`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)、sub instruction配置比較は[`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)、authority availability追試は[`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)を正本とする。High / MediumのBundle A traceとTHE-CAPTION ControlFreeRepository Mediumを使った[`baseline分析`](click-control-free-medium-baseline-analysis.md)では、Clickの軽さはreasoning量だけでなく、tool出力量`-50.46%`と小さいrepository contextに強く対応した。sub instruction配置追試により、THE-CAPTION側の4つのsub本文が常にmodel contextへ入っていたという仮定は置けなくなった。F10 targeted追試ではauthority availabilityの効果を再現したが、1 caseからStd14全体へ一般化しない。C81 MediumによりA02 / F06は大きく改善した。後続の[`残余経路分析`](click-c81-medium-residual-analysis.md)では、F01のtoken増加はpaired差中央値`-970`で安定悪化ではないと判定した。F04はC81でgit history探索がHigh / Medium合計`4 / 10`、Control-freeで`0 / 10`となり、両reasoningでelapsed合計が約16〜18%増えた。2026-07-28に4件のraw traceを再解析したところ、history探索後に初めてmethodまたは変更scopeが確定しており、method bind後の代替探索は`0 / 4`件だった。`PRECHANGE_EVIDENCE_SCOPE`は方法制御を追加するため採用せず、`METHOD`置換CandidateとF04 Medium N=5 targeted runも`stopped_before_candidate`とした。将来、method bind後にも不要探索が続く保存traceを観測した場合だけ再検討する。
 
 見直し後Std14全体の正本は[`Click No-AGENTS / Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)である。
 

@@ -1,0 +1,308 @@
+diff --git a/src/domain/universal_ingester.py b/src/domain/universal_ingester.py
+index 6990580..c267cdb 100644
+--- a/src/domain/universal_ingester.py
++++ b/src/domain/universal_ingester.py
+@@ -54,7 +54,7 @@ class UniversalIngester:
+     def build_shadow_ledger(
+         self,
+         target_date: Optional[str] = None,
+-        units_mode: Literal["daily", "strict"] = "daily",
++        units_mode: Literal["strict", "live", "daily"] = "daily",
+         allow_live_csv_in_strict: bool = False,
+     ) -> ShadowLedger:
+         active_date = target_date or datetime.now().strftime("%Y-%m-%d")
+@@ -124,11 +124,14 @@ class UniversalIngester:
+     def _resolve_market_units(
+         self,
+         target_date: str,
+-        units_mode: Literal["daily", "strict"],
++        units_mode: Literal["strict", "live", "daily"],
+         allow_live_csv_in_strict: bool,
+     ) -> UnitsResolution:
+-        if units_mode not in {"daily", "strict"}:
+-            raise ValueError(f"units_mode must be 'daily' or 'strict', got: {units_mode}")
++        if units_mode not in {"daily", "strict", "live"}:
++            raise ValueError(f"units_mode must be 'daily', 'strict', or 'live', got: {units_mode}")
++
++        if units_mode == "live":
++            return self._load_live_market_units()
+ 
+         snapshot = snapshot_path(target_date, self.units_snapshot_dir)
+         if os.path.exists(snapshot):
+diff --git a/tests/unit/test_daily_metrics.py b/tests/unit/test_daily_metrics.py
+index d44fc8e..17048ff 100644
+--- a/tests/unit/test_daily_metrics.py
++++ b/tests/unit/test_daily_metrics.py
+@@ -134,7 +134,7 @@ def _make_wtd_fund_ingester(tmp_path):
+ def test_wtd_monday_equals_day_return(tmp_path):
+     """On Monday the WTD origin is the previous Friday close; WTD == DAY return."""
+     ingester = _make_wtd_fund_ingester(tmp_path)
+-    ledger = ingester.build_shadow_ledger("2026-05-18")
++    ledger = ingester.build_shadow_ledger("2026-05-18", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     # DAY = (404.35 - 417.72) / 417.72 = -3.20%
+     assert record.wtd_pct == pytest.approx(-3.201, abs=0.01)
+@@ -147,7 +147,7 @@ def test_wtd_tuesday_chains_from_friday_not_monday(tmp_path):
+     Tuesday DAY return alone (-2.08%). Correct WTD from Friday base = -5.21%.
+     """
+     ingester = _make_wtd_fund_ingester(tmp_path)
+-    ledger = ingester.build_shadow_ledger("2026-05-19")
++    ledger = ingester.build_shadow_ledger("2026-05-19", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     # WTD from Friday base: (395.95 - 417.72) / 417.72 = -5.21%
+     # Wrong (DAY reset): -2.08%
+@@ -159,7 +159,7 @@ def test_wtd_tuesday_chains_from_friday_not_monday(tmp_path):
+ def test_wtd_wednesday_geometric_chain_from_friday(tmp_path):
+     """On Wednesday WTD from previous-Friday base must be -6.01% (geometric = simple)."""
+     ingester = _make_wtd_fund_ingester(tmp_path)
+-    ledger = ingester.build_shadow_ledger("2026-05-20")
++    ledger = ingester.build_shadow_ledger("2026-05-20", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     assert record.wtd_pct == pytest.approx(-6.01, abs=0.01), (
+         f"Wednesday WTD should be -6.01%, got {record.wtd_pct:.2f}%"
+@@ -169,7 +169,7 @@ def test_wtd_wednesday_geometric_chain_from_friday(tmp_path):
+ def test_wtd_summary_wednesday_via_shadow_ledger_adapter(tmp_path):
+     """End-to-end: ShadowLedgerAdapter total_wtd on Wednesday = -6.01%."""
+     ingester = _make_wtd_fund_ingester(tmp_path)
+-    ledger = ingester.build_shadow_ledger("2026-05-20")
++    ledger = ingester.build_shadow_ledger("2026-05-20", units_mode="daily")
+     canonical = ShadowLedgerAdapter().to_legacy_ledger(ledger)
+     # total_wtd is a formatted string ("+X.XX%" convention)
+     assert canonical.summary.total_wtd == "-6.01%", (
+@@ -253,7 +253,7 @@ def test_us_stock_wtd_monday_uses_prev_thursday_as_base(tmp_path):
+     """
+     # max_us_date=2026-05-15 simulates JP Monday morning (US Mon hasn't traded yet)
+     ingester = _make_wtd_stock_ingester(tmp_path, max_us_date="2026-05-15")
+-    ledger = ingester.build_shadow_ledger("2026-05-18")
++    ledger = ingester.build_shadow_ledger("2026-05-18", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     # WTD == DAY return on Monday: (404.35 - 417.72) / 417.72
+     assert record.wtd_pct == pytest.approx(-3.201, abs=0.01), (
+@@ -270,7 +270,7 @@ def test_us_stock_wtd_tuesday_chains_from_prev_thursday(tmp_path):
+     """
+     # max_us_date=2026-05-18 simulates JP Tuesday morning (US Mon closed, Tue hasn't)
+     ingester = _make_wtd_stock_ingester(tmp_path, max_us_date="2026-05-18")
+-    ledger = ingester.build_shadow_ledger("2026-05-19")
++    ledger = ingester.build_shadow_ledger("2026-05-19", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     # (395.95 - 417.72) / 417.72 = -5.21%
+     assert record.wtd_pct == pytest.approx(-5.213, abs=0.01), (
+@@ -286,7 +286,7 @@ def test_us_stock_wtd_wednesday_full_chain_minus_six_percent(tmp_path):
+     """
+     # max_us_date=2026-05-19 simulates JP Wednesday morning (US Tue closed)
+     ingester = _make_wtd_stock_ingester(tmp_path, max_us_date="2026-05-19")
+-    ledger = ingester.build_shadow_ledger("2026-05-20")
++    ledger = ingester.build_shadow_ledger("2026-05-20", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     assert record.wtd_pct == pytest.approx(-6.01, abs=0.01), (
+         f"JP Wednesday US-stock WTD should be -6.01%, got {record.wtd_pct:.2f}%"
+@@ -301,7 +301,7 @@ def test_us_stock_ledger_caps_history_at_us_trading_date_even_if_future_row_exis
+     refresh, but must not be adopted when recomputing the JP 2026-05-20 ledger.
+     """
+     ingester = _make_wtd_stock_ingester(tmp_path, max_us_date="2026-05-20")
+-    ledger = ingester.build_shadow_ledger("2026-05-20")
++    ledger = ingester.build_shadow_ledger("2026-05-20", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+ 
+     assert record.source_date == "2026-05-19"
+@@ -318,7 +318,7 @@ def test_us_stock_wtd_monday_not_dropped_from_chain(tmp_path):
+     3-day chain from prev-Thursday is -6.01%.
+     """
+     ingester = _make_wtd_stock_ingester(tmp_path, max_us_date="2026-05-19")
+-    ledger = ingester.build_shadow_ledger("2026-05-20")
++    ledger = ingester.build_shadow_ledger("2026-05-20", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "TSM")
+     wrong_two_day_wtd = pytest.approx(-2.90, abs=0.05)
+     assert record.wtd_pct != wrong_two_day_wtd, (
+diff --git a/tests/unit/test_market_units_snapshot.py b/tests/unit/test_market_units_snapshot.py
+index a854b1e..926c009 100644
+--- a/tests/unit/test_market_units_snapshot.py
++++ b/tests/unit/test_market_units_snapshot.py
+@@ -68,7 +68,7 @@ def test_snapshot_adoption_path_records_units_source(tmp_path):
+         output_path=snapshot_path("2026-04-20", str(snapshot_dir)),
+     )
+ 
+-    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20")
++    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     assert ledger.ssot_a_path == str(market_units_csv)
+     assert ledger.units_source is not None
+@@ -84,7 +84,7 @@ def test_daily_mode_snapshot_missing_falls_back_to_live_csv(tmp_path):
+     snapshot_dir.mkdir()
+     _write_market_units(market_units_csv)
+ 
+-    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20")
++    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     assert ledger.units_source is not None
+     assert ledger.units_source.type == "LIVE_CSV"
+@@ -98,7 +98,7 @@ def test_daily_mode_snapshot_invalid_falls_back_to_live_csv(tmp_path):
+     _write_market_units(market_units_csv)
+     (snapshot_dir / "collection_units_20260420.json").write_text('{"schema_version":"wrong"}', encoding="utf-8")
+ 
+-    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20")
++    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     assert ledger.units_source is not None
+     assert ledger.units_source.type == "LIVE_CSV"
+@@ -224,7 +224,7 @@ def test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv(tmp_path,
+     _write_market_units(market_units_csv)
+     _write_snapshot(market_units_csv, snapshot_dir, mutator)
+ 
+-    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20")
++    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     assert ledger.units_source is not None
+     assert ledger.units_source.type == "LIVE_CSV"
+@@ -282,7 +282,7 @@ def test_enabled_is_optional_and_not_used_for_v1_exclusion(tmp_path):
+         ],
+     )
+ 
+-    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20")
++    ledger = _ingester(tmp_path, market_units_csv, snapshot_dir).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     assert [asset.name for asset in ledger.assets] == ["FundA"]
+     assert ledger.assets[0].current_value_jpy == pytest.approx(24000)
+diff --git a/tests/unit/test_units_mode_default.py b/tests/unit/test_units_mode_default.py
+new file mode 100644
+index 0000000..27a3892
+--- /dev/null
++++ b/tests/unit/test_units_mode_default.py
+@@ -0,0 +1,8 @@
++import inspect
++
++from src.domain.universal_ingester import UniversalIngester
++
++
++def test_default_units_mode_is_daily():
++    parameter = inspect.signature(UniversalIngester.build_shadow_ledger).parameters["units_mode"]
++    assert parameter.default == "daily"
+diff --git a/tests/unit/test_universal_ingester.py b/tests/unit/test_universal_ingester.py
+index 04a9f34..1a0f22d 100644
+--- a/tests/unit/test_universal_ingester.py
++++ b/tests/unit/test_universal_ingester.py
+@@ -56,7 +56,7 @@ def test_build_shadow_ledger_merges_market_units_and_absolute_amounts(tmp_path):
+         external_assets_path=str(external_json),
+         portfolio_basis_path=str(portfolio_basis_json),
+         history_dir=str(history_dir),
+-    ).build_shadow_ledger("2026-04-25")
++    ).build_shadow_ledger("2026-04-25", units_mode="daily")
+ 
+     values = {record.name: record.current_value_jpy for record in ledger.assets}
+     assert ledger.ssot_b_active_key == "2026-04"
+@@ -102,7 +102,7 @@ def test_fund_diff_is_nonzero_when_source_date_matches_target_date(tmp_path):
+         funds_csv_path=str(funds_csv),
+         external_assets_path=str(external_json),
+         history_dir=str(history_dir),
+-    ).build_shadow_ledger("2026-04-20")
++    ).build_shadow_ledger("2026-04-20", units_mode="daily")
+ 
+     record = next(r for r in ledger.assets if r.name == "FundA")
+     assert record.diff_val_jpy == pytest.approx(1_000)
+@@ -131,7 +131,7 @@ def test_external_assets_falls_back_to_default(tmp_path):
+         funds_csv_path=str(funds_csv),
+         external_assets_path=str(external_json),
+         history_dir=str(history_dir),
+-    ).build_shadow_ledger("2026-04-25")
++    ).build_shadow_ledger("2026-04-25", units_mode="daily")
+ 
+     values = {record.name: record.current_value_jpy for record in ledger.assets}
+     assert ledger.ssot_b_active_key == "default"
+@@ -158,7 +158,7 @@ def test_jp_stock_is_marked_stale_when_source_date_is_previous_day(tmp_path):
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-05-21"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-05-22")
++    ledger = ingester.build_shadow_ledger("2026-05-22", units_mode="daily")
+ 
+     record = next(r for r in ledger.assets if r.name == "BestAI")
+     assert record.source_date == "2026-05-21"
+@@ -188,7 +188,7 @@ def test_us_stock_is_marked_stale_when_fx_date_is_previous_to_us_market_date(tmp
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-05-21"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-05-22")
++    ledger = ingester.build_shadow_ledger("2026-05-22", units_mode="daily")
+ 
+     record = next(r for r in ledger.assets if r.name == "UsStockA")
+     assert record.source_date == "2026-05-21"
+@@ -219,7 +219,7 @@ def test_us_stock_is_missing_when_fx_metrics_unavailable(tmp_path):
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-05-21"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-05-22")
++    ledger = ingester.build_shadow_ledger("2026-05-22", units_mode="daily")
+ 
+     record = next(r for r in ledger.assets if r.name == "UsStockA")
+     assert record.pricing_status == "MISSING"
+@@ -248,7 +248,7 @@ def test_commodity_is_marked_stale_when_fx_date_is_previous_to_us_market_date(tm
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-05-21"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-05-22")
++    ledger = ingester.build_shadow_ledger("2026-05-22", units_mode="daily")
+ 
+     record = next(r for r in ledger.assets if r.name == "Gold")
+     assert record.source_date == "2026-05-21"
+@@ -276,7 +276,7 @@ def test_portfolio_basis_falls_back_to_default(tmp_path):
+         external_assets_path=str(external_json),
+         portfolio_basis_path=str(portfolio_basis_json),
+         history_dir=str(history_dir),
+-    ).build_shadow_ledger("2026-04-25")
++    ).build_shadow_ledger("2026-04-25", units_mode="daily")
+ 
+     assert ledger.basis_active_key == "default"
+     assert ledger.return_base_value_jpy == pytest.approx(0)
+@@ -307,14 +307,14 @@ def _make_jp_stock_ingester(tmp_path, *, is_closed_fn):
+ 
+ 
+ def test_jp_stock_is_stale_when_source_date_matches_but_market_not_closed(tmp_path):
+-    ledger = _make_jp_stock_ingester(tmp_path, is_closed_fn=_OPEN).build_shadow_ledger("2026-05-28")
++    ledger = _make_jp_stock_ingester(tmp_path, is_closed_fn=_OPEN).build_shadow_ledger("2026-05-28", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "BestAI")
+     assert record.pricing_status == "STALE"
+     assert any("intraday" in w for w in record.warnings)
+ 
+ 
+ def test_jp_stock_is_priced_when_source_date_matches_and_market_closed(tmp_path):
+-    ledger = _make_jp_stock_ingester(tmp_path, is_closed_fn=_CLOSED).build_shadow_ledger("2026-05-28")
++    ledger = _make_jp_stock_ingester(tmp_path, is_closed_fn=_CLOSED).build_shadow_ledger("2026-05-28", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "BestAI")
+     assert record.pricing_status == "PRICED"
+     assert not any("intraday" in w for w in record.warnings)
+@@ -350,7 +350,7 @@ def test_past_date_is_priced_regardless_of_market_open(tmp_path):
+         is_closed_fn=is_closed_past_aware,
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-04-20"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-04-20")
++    ledger = ingester.build_shadow_ledger("2026-04-20", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "BestAI")
+     assert record.pricing_status == "PRICED"
+ 
+@@ -411,7 +411,7 @@ def _build_us_stock_record(tmp_path, *, history_csv, target_date, us_market_date
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: us_market_date  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger(target_date)
++    ledger = ingester.build_shadow_ledger(target_date, units_mode="daily")
+     return next(r for r in ledger.assets if r.name == "UsStockA")
+ 
+ 
+@@ -485,7 +485,7 @@ def test_commodity_mtd_equals_wtd_when_month_starts_on_monday(tmp_path):
+         history_dir=str(history_dir),
+     )
+     ingester._resolve_us_market_date = lambda _target: "2025-12-03"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2025-12-04")
++    ledger = ingester.build_shadow_ledger("2025-12-04", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "Gold")
+     expected = (293.826630 / 288.366760 - 1) * 100  # base 2025-11-26
+     assert record.mtd_pct == pytest.approx(expected, rel=1e-9)
+@@ -511,7 +511,7 @@ def test_mutual_fund_is_not_subject_to_close_check(tmp_path):
+         is_closed_fn=_OPEN,  # market "open" — should not affect MUTUAL_FUNDS
+     )
+     ingester._resolve_us_market_date = lambda _target: "2026-05-28"  # type: ignore[method-assign]
+-    ledger = ingester.build_shadow_ledger("2026-05-28")
++    ledger = ingester.build_shadow_ledger("2026-05-28", units_mode="daily")
+     record = next(r for r in ledger.assets if r.name == "FundA")
+     # MUTUAL_FUNDS with matching source_date are PRICED regardless of market open/close
+     assert record.pricing_status == "PRICED"
