@@ -185,7 +185,7 @@ QUALITY_RATING_CLICK_V10 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
-QUALITY_RATING = {
+QUALITY_RATING_V8 = {
     "contract_id": "owner-producer-quality-v8",
     "contract_sha256": "22794275b34458898a26e94276126834db0bbc19dfa915e9187d02955419e1c2",
     "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
@@ -199,7 +199,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V5,
     QUALITY_RATING_V6,
     QUALITY_RATING_V7,
-    QUALITY_RATING,
+    QUALITY_RATING_V8,
     QUALITY_RATING_V9,
     QUALITY_RATING_V10,
     QUALITY_RATING_V11,

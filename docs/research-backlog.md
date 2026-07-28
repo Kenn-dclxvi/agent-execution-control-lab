@@ -36,26 +36,27 @@
 
 正本は[`Candidate81 A01 3択variation診断`](../evaluations/results/candidate81-a01-three-choice-variation-diagnostic_2026-07-28.md)と[`修正版set`](../evaluations/sets/the-caption-a01-three-choice-variation-r2/README.md)である。第1版は上書きせず、交絡を確認した履歴として保持する。
 
-## 4. 投影済みCandidate71のrisk（当時の記録と現在解釈を分離）
+## 4. 投影済みCandidate71のrisk（現在解釈の整理完了・監視へ移行）
 
-Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別の採用判断でTHE-CAPTION本体へ投影済みである。当時のrelease artifactに保存された未解決riskは2件で、これはimmutableな記録として取り消さない。一方、rating v13による現在解釈では、この2件の位置づけが分かれる。
+**2026-07-28に現在解釈の整理を完了した。** Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別の採用判断でTHE-CAPTION本体へ投影済みである。当時のrelease artifactに保存された未解決riskは2件で、これはimmutableな記録として取り消さない。一方、rating v13と投影済みCandidate81の追加診断による現在解釈では、この2件の位置づけが分かれる。
 
 | 当時のrelease risk（v12時点） | 観測 | rating v13後の現在解釈 |
 | --- | --- | --- |
 | A02で`git diff --check`欠落 | 3 / 90件 | **現在の未完了研究項目ではない。** 実行役へ提示していない特定コマンドを採点側が必須化した「要求と採点のずれ」であり、本物の品質低下と区別される。v13でこのずれを塞いだ |
-| A01で未固定modeを確認せず実装・試験へ進んだ誤実行 | 1 / 90件 | **現在も残る品質上のrisk。** v13でも品質上の問題として扱う |
+| A01で未固定modeを確認せず実装・試験へ進んだ誤実行 | 1 / 90件 | **当時の品質上の問題として保持する。** v13でも当該runの評価は変えない。一方、現在のCandidate81では3択variation r2の曖昧条件15 / 15件が確認停止し、authority条件15 / 15件が指定値へ正しく変更したため、追加制御を作らず監視項目へ移す |
 
 - 当時の未解決riskの正本: [`Candidate71 release / projection`](../prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)（v12結果は履歴として保持）
 - 現在解釈の正本: [`control-mechanisms.md`](control-mechanisms.md)のrating v13節と[`a02-rating-divergence.md`](a02-rating-divergence.md)
-- したがって研究項目として残るのはA01側の挙動である。A01の未固定mode確認は上記「3. A01の3択variation診断」と同じ論点に接続する
+- 現在挙動の正本: 上記「3. A01の3択variation診断」と[`Candidate81 A01 3択variation診断`](../evaluations/results/candidate81-a01-three-choice-variation-diagnostic_2026-07-28.md)
+- 完了判断: 過去の1件を取り消さず、現在は非再現の監視項目とする。新しいprompt predicate、Candidate、常設gate、追加model runは作らない。今後、未固定値を確認せず変更したfresh traceを再観測した場合だけ、同じ診断setで再開する
 
-## 5. F10 location mismatch: exact coordinateのevidence interface（別軸）
+## 5. F10 location mismatch: exact coordinateのevidence interface（対応なしで完了）
 
-**原因診断そのものは実施済みで、prompt側の変更は停止している。** `CLAIM_PROVENANCE` collectorと90件backfillの後、30件checkpoint診断（`max_30_diagnostic_valid_without_location_mismatch`で停止）、追加105件、coordinate representation診断、delayed reconstruction診断、implicit coordinate passive case-control、real-Agent representation recency診断、recorded-state collision受動監査まで到達した。
+**2026-07-28に対応しないと判断して完了した。** 原因診断そのものは実施済みで、prompt側の変更は停止している。`CLAIM_PROVENANCE` collectorと90件backfillの後、30件checkpoint診断（`max_30_diagnostic_valid_without_location_mismatch`で停止）、追加105件、coordinate representation診断、delayed reconstruction診断、implicit coordinate passive case-control、real-Agent representation recency診断、recorded-state collision受動監査まで到達した。
 
-正本の現在判断は、repository-wideに削除できるprompt判断点を確認できないため、**prompt変更と追加model runをここで止める**ことである。残る未完了項目は次の一点。
+正本の現在判断は、repository-wideに削除できるprompt判断点を確認できないため、**prompt変更と追加model runをここで止める**ことである。exact coordinateはこの基盤のhard requirementにしないため、modelが選んだexact line textをone-based coordinateへ変換するevidence interfaceも実装しない。
 
-- exact coordinateがhard requirementである場合に限り、modelが選んだexact line textをdeterministicなsource indexでone-based coordinateへ変換する**evidence interface要件を別軸で検討**する。prompt制御の変更軸としては扱わない。
+- 完了境界: 過去のlocation mismatchと診断結果は保持する。evidence interface、prompt制御、Candidate、追加model runは作らない。将来exact coordinateをhard requirementへ変更する明示判断があった場合だけ、別の判断単位として再開する。
 - 正本: [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md)（「対策判断への接続」節と各診断結果節）
 - 制御graph側の判断（location mismatchを理由にroot規則を追加しない）は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)を参照
 
@@ -70,23 +71,24 @@ Candidate71は評価上`stopped`（v12の品質gate不通過）のまま、別�
 - [`6条件のMedium一律比較`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)も420 / 420件を登録した。C71とC43のtoken中央値差はHigh `-31.47%`、Medium `-29.19%`であり、少なくともこの2水準ではeffort低下によって相対的な制御差は消えなかった。
 - 2026-07-27以降の新規通常比較は`medium`を運用基準とする。既存`high` resultは履歴として保持し、reasoning effort自体の比較または既存互換条件の再現だけを例外とする。運用正本は[`evaluation-loop-manual.md`](evaluation-loop-manual.md)である。
 
-## 7. `QUALITY_RATING`という汎用名がv8を指している（保守上の誤認risk）
+## 7. `QUALITY_RATING`という汎用名がv8を指している（解決済み・2026-07-28）
 
-`scripts/evaluation_loop.py`では現行契約が`QUALITY_RATING_V13`として登録されている一方、revision名を持たない汎用定数`QUALITY_RATING`は`owner-producer-quality-v8`を指し続けている。integration testの既定`quality_rating`もこの定数を使う。
+**2026-07-28に解決した。** `scripts/evaluation_loop.py`で`owner-producer-quality-v8`を指していた汎用定数`QUALITY_RATING`を`QUALITY_RATING_V8`へ改名した。v8互換経路を使うintegration testとowner-producer evidence testも同じrevision名へ追従させた。
 
-- **実行上の不具合ではない**。run capsuleは`quality_rating`の明示指定を必須とし、v13は`SUPPORTED_QUALITY_RATINGS`へ登録済みで、v13の実挙動はunit testで検証している。
-- 残るのは保守上のriskで、汎用名が現行契約を表すように見えるため、将来の変更時にv8を現行と誤認し得る。
-- 解消するにはv8定数の改名（例: `QUALITY_RATING_V8`）とtest既定値の見直しが必要で、複数testの既定経路へ波及する。現行identityの確定（項目6）とは別の判断単位として扱う。
+- 変更前から実行上の不具合はなく、run capsuleが`quality_rating`を明示する契約、v13の現行identity、各rating contractの内容とSHA-256は変更していない。
+- `SUPPORTED_QUALITY_RATINGS`では同じv8辞書を`QUALITY_RATING_V8`として保持する。v8互換性を検証するtestの既定値もv8のままであり、v13へ暗黙変更していない。
+- 完了境界は名前によるrevision分離だけである。過去result、rating contract artifact、schema、採点挙動は変更しない。
 
-## 8. Layer 2 executorのClaude Code CLI置換（設計検討済み・実装未着手）
+## 8. Layer 2 executorのClaude Code CLI置換（保留）
 
-Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p`）へ置き換える試験方法。2026-07-25に設計検討と前提のprobe実測を行い、**実装、pilot、本測定はいずれも未着手**である。
+Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p`）へ置き換える試験方法。2026-07-25に設計検討と前提のprobe実測を行ったが、2026-07-28の判断で**一旦保留**とした。実装、pilot、本測定はいずれも未着手であり、保留中は追加probeも行わない。
 
 - 正本: [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md)（実測値、adapter対応表、新設schema revision、未確定事項6件、段階計画Phase 0〜4）
 - **Phase 0が先行条件**: 認証方式（API key + `CLAUDE_CONFIG_DIR`隔離、またはsubscriptionのまま開始gateで確認）が未決で、環境identityの固定方法がこの決定に依存する。決まるまでPhase 1のprobe設計を固定できない。
 - 実装対象は新規adapterと新規collectorであり、既存の`scripts/run_codex_evaluation.py`、既存collector、既存registry resultは変更しない（[`scripts/AGENTS.md`](../scripts/AGENTS.md)）。
 - **既存Codex resultとの互換比較は成立しない**。注入時点の差とtoken accountingの意味の差によりcompatibility keyが一致しないため、Claude Code条件はbaselineから再測定する独立系列として扱う（[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)のCompatibility）。
 - model名を明示したresultはすべて`gpt-5.6-sol`で、Claude系modelでの測定は0件である（[`execution-control-research-paper.md`](execution-control-research-paper.md)の限界節）。この項目はその限界に接するが、この項目自体はmodel比較を目的としない。executor置換の成立条件だけを扱う。
+- 再開条件: Claude Code系列へ着手する明示判断と、Phase 0で採用する認証方式の選択が揃った場合だけ再開する。
 
 ## 9. root `AGENTS.md`へのrepository index参照追加の効果（実施済み・停止）
 
@@ -104,7 +106,7 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ混ぜない。executor変更とprompt変更を同じ比較単位へ入れない（root [`AGENTS.md`](../AGENTS.md)の共通変更規律）。
 - candidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通してからbundleを作る。
 
-## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（Bundle A / B Std14完了）
+## 10. 公開target repositoryでの計測系列と評価基盤のrepository汎用化（runtime再現性まで完了）
 
 公開repositoryを対象とする独立系列として`pallets/click`を登録し、同じBundle Aで14 caseのqualification、追加case各`N=3`、Std14 `N=5`をLayer 1〜4まで実行した。**Std14は70 / 70件がvalid・rateableかつscore `4`である。** この項目が扱うのは、公開repositoryで計測系列を成立させ、その過程で「任意のtarget repositoryへ同じ手順を適用できる分離」を確定することである。prompt制御の新しい変更軸ではなく、計測条件側の軸である。
 
@@ -131,6 +133,7 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - THE-CAPTIONと同質のauthority availabilityを測れているかClick Std14全14 caseを見直した。F01〜F08、F10-R、A01、A02は元の実行判断点を維持し、回帰setとして変更不要だった。F10 r1だけはsource-onlyで完結していたため、`src/AGENTS.md`を明示authorityとするF10 r2をMedium N=5で追試した。No-AGENTSは5 / 5件がscore `1`でauthority不足停止、Repository Authorityは5 / 5件がscore `4`でinventoryを完了した。全10件がvalid・rateable、zero drift、excluded attempt 0件で、THE-CAPTION F10と同じavailability方向を再現した
 - 見直し後の`click-standard14-r2`をNo-AGENTS / Repository Authority、Medium、N=5、M=24で全件再実施した。F10以外は両条件65 / 65件がscore `4`、F10だけがscore `1` × 5 / score `4` × 5へ分離した。全140件がvalid・rateable、excluded attemptとunexpected driftは0件で、14実行判断点の比較setとして互換性を達成した。quality中央値は94.643対100.000、tokenは`+5.57%`、elapsedは`+3.96%`だが、後二者はF10の完了作業量差とM=24の変動を含むため効率差とは扱わない
 - C81 / C81 + Repository Authorityも同じStd14 r2、Medium、N=5、M=24で各70件実施した。C81はscore `4` × 65 / score `1` × 5、C81 + Authorityはscore `4` × 70で、F10以外のquality回帰は0件だった。同じauthority状態のC81差は、authorityなしでtoken `-27.35%`・elapsed `-17.04%`、authorityありでtoken `-25.08%`・elapsed `-10.98%`となり、C81の削減方向はsub authority追加後も維持された
+- 2026-07-28に既存共有venvを使わない空環境から、固定Click commitと固定package versionでknown-good 8 package identityをbyte単位で再構築した。通常条件とprocess単位のnetwork遮断条件でfull gateが同じ`1939 passed, 25 skipped, 31000 deselected, 1 xfailed`となり、`uv lock --check --offline`も`Resolved 81 packages`で成功した。手順とplatform境界の正本は[`Click runtime再構築とoffline full gate`](click-runtime-reproducibility.md)とする
 
 Bundle AのHigh一次結果は[`click control-free Std14 N=5`](../evaluations/targets/click/results/click-control-free-standard14-n5_2026-07-26.md)、Medium一次結果は[`click control-free Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-reasoning-medium-standard14-n5_2026-07-27.md)、HighでのBundle A / B比較は[`Click Control-Free / C81全文 Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-standard14-n5_2026-07-26.md)、Medium比較は[`Click Control-Free / C81全文 Medium Std14 N=5`](../evaluations/targets/click/results/click-control-free-c81-full-reasoning-medium-standard14-n5_2026-07-27.md)、sub instruction配置比較は[`Click No-AGENTS / Repository sub-AGENTS Medium Std14 N=5`](../evaluations/targets/click/results/click-no-agents-repository-subagents-reasoning-medium-standard14-n5_2026-07-27.md)、authority availability追試は[`Click No-AGENTS / Repository Authority Medium F10 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-f10-authority-n5_2026-07-27.md)を正本とする。High / MediumのBundle A traceとTHE-CAPTION ControlFreeRepository Mediumを使った[`baseline分析`](click-control-free-medium-baseline-analysis.md)では、Clickの軽さはreasoning量だけでなく、tool出力量`-50.46%`と小さいrepository contextに強く対応した。sub instruction配置追試により、THE-CAPTION側の4つのsub本文が常にmodel contextへ入っていたという仮定は置けなくなった。F10 targeted追試ではauthority availabilityの効果を再現したが、1 caseからStd14全体へ一般化しない。C81 MediumによりA02 / F06は大きく改善した。後続の[`残余経路分析`](click-c81-medium-residual-analysis.md)では、F01のtoken増加はpaired差中央値`-970`で安定悪化ではないと判定した。F04はC81でgit history探索がHigh / Medium合計`4 / 10`、Control-freeで`0 / 10`となり、両reasoningでelapsed合計が約16〜18%増えた。2026-07-28に4件のraw traceを再解析したところ、history探索後に初めてmethodまたは変更scopeが確定しており、method bind後の代替探索は`0 / 4`件だった。`PRECHANGE_EVIDENCE_SCOPE`は方法制御を追加するため採用せず、`METHOD`置換CandidateとF04 Medium N=5 targeted runも`stopped_before_candidate`とした。将来、method bind後にも不要探索が続く保存traceを観測した場合だけ再検討する。
 
@@ -176,11 +179,12 @@ repository非依存な層とtarget固有な層は次のとおりである。
 - 項目8（Claude Code CLI executor置換）と同一比較単位へ入れない。executor変更とtarget変更を同時に入れると効果を切り分けられない。
 - rating contractをcase単位で作り直す以上、`quality_score`の絶対値をTHE-CAPTION系列と比較しない。観察できるのは各系列内の差と、方向の一致だけである。
 
-### 未確定事項
+### runtime再現性の完了境界
 
 - `click`の容量、gate所要時間、通常環境での5回連続passはPhase 0で実測した。P1-cでbatch内・batch間分布、Std14で14 case横断の70 / 70 validを取得した。
-- `.venv`を含むknown-good実行環境（[`cases/README.md`](../evaluations/cases/README.md)のself-contained fixture）を、第三者へどう再現させるかが未決である。lockfileからの再構築手順で足りるか、fixture条件として固定する必要があるかを判定していない。
-- network遮断下のfull gateは未実測である。依存materialize後にnetworkを使わない見込みと、network遮断下でpassした事実を混同しない。
+- known-good実行環境は、固定target commitからwheelを作り、固定package versionを空venvへinstallする手順で再構築できた。既存共有venvは使用していない。
+- network遮断下のfull gateと`uv lock --check --offline`を実測した。見込みではなく成功事実として記録する。
+- 実測platformはmacOS arm64 / Python 3.14.5である。別OS / architectureは同じidentityと推定せず、新しいruntime identityとして扱う。
 - instance境界、layout、descriptor、Click rating v10は固定した。Std14は固定contractとblind evidenceで採点できたため、target固有採点補助の自動adapter化は今回の完了条件ではない。別targetを追加するときに再評価する。
 
 ### 段階計画

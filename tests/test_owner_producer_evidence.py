@@ -6,7 +6,7 @@ from argparse import Namespace
 from pathlib import Path
 
 from scripts.evaluation_loop import (
-    QUALITY_RATING,
+    QUALITY_RATING_V8,
     QUALITY_RATING_V2,
     QUALITY_RATING_V3,
     QUALITY_RATING_V5,
@@ -23,7 +23,7 @@ from scripts.owner_producer_evidence import collect
 
 
 class OwnerProducerEvidenceTests(unittest.TestCase):
-    def test_rating_contract_hash_matches_current_configuration(self) -> None:
+    def test_rating_v8_contract_hash_remains_supported(self) -> None:
         contract = (
             Path(__file__).resolve().parents[1]
             / "evaluations"
@@ -32,7 +32,7 @@ class OwnerProducerEvidenceTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(contract.read_bytes()).hexdigest(),
-            QUALITY_RATING["contract_sha256"],
+            QUALITY_RATING_V8["contract_sha256"],
         )
 
     def test_rating_v5_contract_hash_remains_supported(self) -> None:
@@ -147,7 +147,7 @@ class OwnerProducerEvidenceTests(unittest.TestCase):
         self,
         root: Path,
         with_child: bool,
-        quality_rating: dict[str, str] = QUALITY_RATING,
+        quality_rating: dict[str, str] = QUALITY_RATING_V8,
     ) -> Path:
         cycle = root / "cycle"
         run_id = "run-1"
@@ -410,7 +410,9 @@ class OwnerProducerEvidenceTests(unittest.TestCase):
             command_path.write_text(
                 json.dumps(
                     {
-                        "schema_version": QUALITY_RATING["command_evidence_schema_version"],
+                        "schema_version": QUALITY_RATING_V8[
+                            "command_evidence_schema_version"
+                        ],
                         "run_id": "run-1",
                         "attempted_commands": [],
                         "successful_commands": [],
