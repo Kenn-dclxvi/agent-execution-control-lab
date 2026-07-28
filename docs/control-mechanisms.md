@@ -37,7 +37,8 @@
 
 - **Candidate69の停止（当時のrating v10）**: F10 monthlyのfinding location mismatchが1件残り、score分布`4 / 3 = 69 / 1`で全件score 4のgateに届きませんでした。A02の検証欠落が理由ではありません。
 - **Candidate71のv12評価（B18）**: 公式score分布`4 / 3 / 0 = 1,255 / 4 / 1`。v12採点で欠落扱いされたのは、A02の`git diff --check`未実行3件と、A01で未固定modeを確認せず実装・試験へ進んだ1件です。
-- **rating v13による現在の解釈**: このうちA02の3件だけが「実行役へ提示していない特定コマンドを採点側が必須化した要求と採点のずれ」として本物の品質低下と区別されます。A01の1件はv13でも品質上の問題として残ります。
+- **rating v13による当時のrunの現在解釈**: このうちA02の3件だけが「実行役へ提示していない特定コマンドを採点側が必須化した要求と採点のずれ」として本物の品質低下と区別されます。A01の1件はv13でも当該runの品質上の問題として残り、過去scoreやrelease riskは変更しません。
+- **A01の現在運用上の位置づけ**: 投影済みCandidate81を使い、現在値と候補順を回転した3択variation r2を追加診断しました。曖昧条件15 / 15件は変更と試験の前に確認停止し、authority条件15 / 15件は指定値へ正しく変更して関連testを成功させました。過去の1件は取り消さず、現在は非再現の監視項目とします。未固定値を確認せず変更したfresh traceを再観測した場合だけ診断を再開し、現時点では新しいprompt predicateや常設gateを追加しません。
 - **Candidate71の採用状態**: `stopped`は評価状態であり、これとは別の採用判断で2026-07-23にrelease status `projected`・approval `approved`・runtime projection `projected`となりました（評価と採用は別レイヤー）。
 - **Candidate81の安定化と採用状態**: Rating v13 Medium標準14項目は70 / 70 score `4`で、複数required commandの1-step closureはCandidate71の30 / 35から35 / 35へ改善しました。token中央値は`-0.30%`、elapsed中央値は`+5.78%`であり、効率改善ではなくprompt動作安定性の結果です。その後の2026-07-27の明示判断でrelease status `projected`・approval `approved`・runtime projection `projected`となりました。
 

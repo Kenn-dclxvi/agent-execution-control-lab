@@ -10,7 +10,7 @@ from pathlib import Path
 from scripts.all_agent_usage import TOKEN_ACCOUNTING
 from scripts.evaluation_loop import (
     LEGACY_QUALITY_RATING,
-    QUALITY_RATING,
+    QUALITY_RATING_V8,
     QUALITY_RATING_V2,
     QUALITY_RATING_V10,
     QUALITY_RATING_V11,
@@ -131,7 +131,7 @@ class EvaluationLoopTest(unittest.TestCase):
                 "reasoning_effort": "high",
                 "token_accounting": TOKEN_ACCOUNTING,
             },
-            "quality_rating": QUALITY_RATING,
+            "quality_rating": QUALITY_RATING_V8,
             "repetition_condition": {"iterations": iterations, "order": "case-major"},
         }
 
@@ -148,7 +148,9 @@ class EvaluationLoopTest(unittest.TestCase):
         artifact.write_text(
             json.dumps(
                 {
-                    "schema_version": QUALITY_RATING["command_evidence_schema_version"],
+                    "schema_version": QUALITY_RATING_V8[
+                        "command_evidence_schema_version"
+                    ],
                     "run_id": run_id,
                     "attempted_commands": [],
                     "successful_commands": [],
@@ -159,7 +161,7 @@ class EvaluationLoopTest(unittest.TestCase):
             encoding="utf-8",
         )
 
-    def test_current_quality_rating_is_required(self) -> None:
+    def test_explicit_quality_rating_is_required(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             cycle = root / "cycle"
