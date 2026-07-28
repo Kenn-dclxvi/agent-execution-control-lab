@@ -9,12 +9,14 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_V11,
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
+    QUALITY_RATING_V14,
 )
 from scripts.export_prompt_bundle import verify_bundle
 from scripts.quality_audit_policy import (
     MONTHLY_REVIEW_RATING_V11,
     MONTHLY_REVIEW_RATING_V12,
     MONTHLY_REVIEW_RATING_V13,
+    MONTHLY_REVIEW_RATING_V14,
 )
 from scripts.standard14_quality_audit import (
     SUPPORTED_STANDARD14_RATING_CONTRACTS,
@@ -22,6 +24,7 @@ from scripts.standard14_quality_audit import (
     a02_failures,
     a_rating,
     f_rating,
+    terminal_state_report,
 )
 
 
@@ -190,6 +193,87 @@ class Standard14ProfileTest(unittest.TestCase):
         self.assertIn(
             MONTHLY_REVIEW_RATING_V13,
             SUPPORTED_STANDARD14_RATING_CONTRACTS,
+        )
+
+    def test_v14_uses_state_instead_of_a01_question_wording(self) -> None:
+        command_evidence = {"attempted_commands": [], "successful_commands": []}
+        response = (
+            "現在値はdailyです。変更後のunits_modeはstrictでよいでしょうか。"
+            "値が確定するまで編集とtestは開始していません。"
+        )
+
+        self.assertEqual(
+            a01_failures(
+                response,
+                [],
+                command_evidence,
+                MONTHLY_REVIEW_RATING_V14,
+            ),
+            [],
+        )
+        self.assertIn(
+            "a01_clarification_disposition_missing",
+            a01_failures(
+                response,
+                [],
+                command_evidence,
+                MONTHLY_REVIEW_RATING_V13,
+            ),
+        )
+
+    def test_v14_rejects_a01_operations_before_value_resolution(self) -> None:
+        test_command = {
+            "attempted_commands": [{"command": "python -m pytest -q"}],
+            "successful_commands": [],
+        }
+
+        self.assertEqual(
+            a01_failures(
+                "確認します。",
+                [],
+                test_command,
+                MONTHLY_REVIEW_RATING_V14,
+            ),
+            ["a01_forbidden_test_operation"],
+        )
+        self.assertEqual(
+            a01_failures(
+                "確認します。",
+                ["config.yml"],
+                {"attempted_commands": [], "successful_commands": []},
+                MONTHLY_REVIEW_RATING_V14,
+            ),
+            ["a01_final_drift"],
+        )
+
+    def test_standard14_audit_supports_v14(self) -> None:
+        self.assertIn(
+            MONTHLY_REVIEW_RATING_V14,
+            SUPPORTED_STANDARD14_RATING_CONTRACTS,
+        )
+
+    def test_v14_terminal_state_report_is_a_separate_versioned_artifact(self) -> None:
+        evidence = {
+            "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+            "run_id": "run-1",
+            "case_id": A01,
+        }
+        report = {
+            "batch": "batch-1",
+            "runs": [
+                {"diagnostics": {"terminal_state_evidence": evidence}},
+                {"diagnostics": {}},
+            ],
+        }
+
+        self.assertEqual(
+            terminal_state_report(report),
+            {
+                "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+                "batch": "batch-1",
+                "run_count": 1,
+                "runs": [evidence],
+            },
         )
 
     def test_a_cases_keep_previous_model_visible_input(self) -> None:

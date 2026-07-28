@@ -24,11 +24,17 @@ if __package__:
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
         MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
         changed_path_failures,
         command_quality_failures,
         monthly_review_failures,
         monthly_review_location_diagnostic,
         monthly_review_rating,
+    )
+    from .terminal_state_evidence import (
+        SCHEMA_VERSION as TERMINAL_STATE_EVIDENCE_SCHEMA_VERSION,
+        a01_terminal_state_failures,
+        build_a01_terminal_state_evidence,
     )
 else:
     from all_agent_command_evidence import (
@@ -40,11 +46,17 @@ else:
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
         MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
         changed_path_failures,
         command_quality_failures,
         monthly_review_failures,
         monthly_review_location_diagnostic,
         monthly_review_rating,
+    )
+    from terminal_state_evidence import (
+        SCHEMA_VERSION as TERMINAL_STATE_EVIDENCE_SCHEMA_VERSION,
+        a01_terminal_state_failures,
+        build_a01_terminal_state_evidence,
     )
 
 
@@ -74,6 +86,7 @@ SUPPORTED_STANDARD14_RATING_CONTRACTS = {
     MONTHLY_REVIEW_RATING_V11,
     MONTHLY_REVIEW_RATING_V12,
     MONTHLY_REVIEW_RATING_V13,
+    MONTHLY_REVIEW_RATING_V14,
 }
 
 
@@ -122,6 +135,7 @@ def successful_contains(
     normalized_evidence = rating_contract_id in {
         MONTHLY_REVIEW_RATING_V12,
         MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
     }
     if normalized_evidence:
         expected = re.sub(r"[\"'“”‘’]", "", expected)
@@ -298,6 +312,15 @@ def a01_failures(
     command_evidence: dict[str, Any],
     rating_contract_id: str = MONTHLY_REVIEW_RATING_V10,
 ) -> list[str]:
+    if rating_contract_id == MONTHLY_REVIEW_RATING_V14:
+        state_evidence = build_a01_terminal_state_evidence(
+            run_id="unbound-unit",
+            final_response_present=bool(final.strip()),
+            final_changed_paths=final_changed_paths,
+            command_evidence=command_evidence,
+            required_value_state="unresolved",
+        )
+        return a01_terminal_state_failures(state_evidence)
     failures: list[str] = []
     if final_changed_paths:
         failures.append("a01_final_drift")
@@ -346,7 +369,10 @@ def a02_failures(
     failures: list[str] = []
     if final_changed_paths != ["run.sh"]:
         failures.append("a02_changed_paths_mismatch")
-    if rating_contract_id == MONTHLY_REVIEW_RATING_V13:
+    if rating_contract_id in {
+        MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
+    }:
         successful_tests = [
             command
             for command in command_texts(command_evidence, "successful_commands")
@@ -512,6 +538,15 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             failures.extend(f_response_failures(case_id, final, rating_contract_id))
             score, reason = f_rating(case_id, final, failures, rating_contract_id)
         elif case_id == A01:
+            terminal_state_evidence = None
+            if rating_contract_id == MONTHLY_REVIEW_RATING_V14:
+                terminal_state_evidence = build_a01_terminal_state_evidence(
+                    run_id=run_id,
+                    final_response_present=bool(final.strip()),
+                    final_changed_paths=final_changed_paths,
+                    command_evidence=command_evidence,
+                    required_value_state="unresolved",
+                )
             failures.extend(
                 a01_failures(
                     final,
@@ -539,11 +574,16 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             ),
             "owner_producer_evidence_status": owner_item.get("status"),
         }
+        if case_id == A01 and rating_contract_id == MONTHLY_REVIEW_RATING_V14:
+            diagnostics["terminal_state_evidence"] = terminal_state_evidence
         if case_id == "TC-F10-MONTHLY-FORMAT-TEST-REVIEW":
             diagnostics["monthly_review_numeric_location"] = (
                 monthly_review_location_diagnostic(final)
             )
-        if case_id == A02 and rating_contract_id == MONTHLY_REVIEW_RATING_V13:
+        if case_id == A02 and rating_contract_id in {
+            MONTHLY_REVIEW_RATING_V13,
+            MONTHLY_REVIEW_RATING_V14,
+        }:
             diagnostics["abstract_condition_evidence"] = {
                 "final_state_matches_canonical_route": (
                     "a02_canonical_route_mismatch" not in failures
@@ -628,6 +668,20 @@ def apply_ratings(batch: Path, report: dict[str, Any]) -> None:
             raise RuntimeError(completed.stderr.strip() or completed.stdout.strip())
 
 
+def terminal_state_report(report: dict[str, Any]) -> dict[str, Any]:
+    runs = [
+        item["diagnostics"]["terminal_state_evidence"]
+        for item in report["runs"]
+        if "terminal_state_evidence" in item["diagnostics"]
+    ]
+    return {
+        "schema_version": TERMINAL_STATE_EVIDENCE_SCHEMA_VERSION,
+        "batch": report["batch"],
+        "run_count": len(runs),
+        "runs": runs,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("collect", "apply"))
@@ -642,6 +696,11 @@ def main() -> int:
         print(json.dumps({"artifact": str(observations_path), "run_count": report["run_count"]}))
         return 0
     report = evaluate(batch, load_json(observations_path))
+    if report["quality_rating_contract"] == MONTHLY_REVIEW_RATING_V14:
+        write_once(
+            batch / "cycle/layer3/terminal-state-evidence.json",
+            terminal_state_report(report),
+        )
     write_once(report_path, report)
     apply_ratings(batch, report)
     print(
