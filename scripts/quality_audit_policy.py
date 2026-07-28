@@ -17,6 +17,9 @@ MONTHLY_REVIEW_RATING_V12 = "outcome-semantic-evidence-normalized-owner-diagnost
 MONTHLY_REVIEW_RATING_V13 = (
     "outcome-abstract-condition-preserving-owner-diagnostic-v13"
 )
+MONTHLY_REVIEW_RATING_V14 = (
+    "outcome-terminal-state-evidence-owner-diagnostic-v14"
+)
 MONTHLY_REVIEW_EXPECTED_LOCATION = "src/app/entrypoints/monthly_main.py:25"
 MONTHLY_REVIEW_LOCATION_PATTERN = re.compile(
     r"(?<![\w.-])(?P<path>(?:[\w.-]+/)*monthly_main\.py):(?P<line>\d+)"
@@ -178,12 +181,14 @@ def monthly_review_failures(
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
         MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
     }:
         text = _normalized(final_response)
         failures: list[str] = []
         normalized_semantics = rating_contract_id in {
             MONTHLY_REVIEW_RATING_V12,
             MONTHLY_REVIEW_RATING_V13,
+            MONTHLY_REVIEW_RATING_V14,
         }
         semantic_markers = {
             "severity_major": "major" in text,
@@ -235,6 +240,7 @@ def monthly_review_rating(
         MONTHLY_REVIEW_RATING_V11,
         MONTHLY_REVIEW_RATING_V12,
         MONTHLY_REVIEW_RATING_V13,
+        MONTHLY_REVIEW_RATING_V14,
     }:
         semantic_failures = [
             item

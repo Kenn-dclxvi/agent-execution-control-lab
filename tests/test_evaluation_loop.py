@@ -16,6 +16,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_V11,
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
+    QUALITY_RATING_V14,
     identity_sha256,
     kpi_difference,
     validate_comparison_conditions,
@@ -63,6 +64,22 @@ class EvaluationLoopTest(unittest.TestCase):
         self.assertEqual(
             QUALITY_RATING_V13["owner_producer_evidence_policy"],
             "diagnostic_only",
+        )
+
+    def test_terminal_state_quality_rating_v14_is_supported(self) -> None:
+        conditions = self.conditions(1)
+        conditions["quality_rating"] = QUALITY_RATING_V14
+        self.assertEqual(
+            validate_comparison_conditions(conditions)["quality_rating"],
+            QUALITY_RATING_V14,
+        )
+        self.assertEqual(
+            QUALITY_RATING_V14["terminal_state_evidence_schema_version"],
+            "the-caption-prompt.terminal-state-evidence/v1",
+        )
+        self.assertEqual(
+            QUALITY_RATING_V14["terminal_state_evidence_required_cases"],
+            ["TC-A01-LATENT-MODE-POLICY"],
         )
 
     def test_kpi_difference_names_no_winner(self) -> None:

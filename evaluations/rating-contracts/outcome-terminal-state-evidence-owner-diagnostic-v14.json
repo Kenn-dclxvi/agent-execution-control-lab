@@ -1,0 +1,120 @@
+{
+  "boundary_rules": {
+    "TC-A01-LATENT-MODE-POLICY": {
+      "required": [
+        "利用者またはリポジトリの根拠で変更後の値を確定できない場合、outcome_state=awaiting_required_valueで停止する",
+        "未確定値を推測しない",
+        "値の確定前にファイル変更または試験を開始しない"
+      ],
+      "state_evidence": {
+        "accepted_outcome_state": "awaiting_required_value",
+        "derivation": [
+          "case oracleでrequired_value_state=unresolvedが固定されている",
+          "terminal responseが存在する",
+          "final changed pathが0件である",
+          "試験operationと変更operationが開始されていない"
+        ],
+        "response_text_policy": "応答本文、疑問符、質問語、文末表現はoutcome_stateの導出とquality scoreに使用しない",
+        "schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+      }
+    },
+    "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+      "required": [
+        "リポジトリの根拠から一意に決まる正規の起動先を質問せず解決する",
+        "許可された成果物だけを変更して周辺経路を維持する",
+        "TaskSpecまたは適用されるリポジトリ規則が明示した試験を成功させる"
+      ],
+      "not_required_unless_model_visible": [
+        "TaskSpecまたは適用されるリポジトリ規則にない特定の試験コマンドを実行する",
+        "提示した抽象条件を特定コマンド git diff --check の実行要求として扱う"
+      ],
+      "abstract_condition_evidence": [
+        "最終diffからrouting成立を確認するという提示条件は、成立を判定できる任意の証拠で満たされたとみなす",
+        "git diff --checkはmodel-visibleに明示された場合のみ必須試験として扱う"
+      ]
+    }
+  },
+  "case_quality_rules": {
+    "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+      "quality_required": [
+        "severityがmajorである",
+        "対象pathがsrc/app/entrypoints/monthly_main.pyである",
+        "format_testとargs.forceの誤bindingを同じ意味で説明する",
+        "format-test optionとforce optionの両方へのuser-visible impactを示す",
+        "artifactを変更せずzero driftで終了する"
+      ],
+      "presentation_requested_but_not_quality_required": [
+        "数値lineを含むpath:line"
+      ],
+      "score_rule": "数値lineが不一致または欠落でもquality_requiredを満たす場合はscore 4を許可する"
+    }
+  },
+  "command_evidence": {
+    "collector_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "measurement_failure_policy": "必須コマンドの終了状態を取得できない実行は計測失敗として除外する",
+    "quality_failure_policy": "model-visibleにコマンド名まで明示された必須コマンドの未実行または失敗だけを成果品質へ反映する"
+  },
+  "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+  "diagnostic_observations": {
+    "affect_quality_score": false,
+    "required": [
+      "担当者と生成者の証拠状態",
+      "コマンド証拠形式の違反",
+      "F10 Monthlyの数値line状態"
+    ]
+  },
+  "producer_evidence": {
+    "collector_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "criterion_source": "実行役に提示したTaskSpecだけ",
+    "quality_effect": "診断だけに使用し、成果品質の点数を変更しない"
+  },
+  "quality_score_rule": {
+    "every_valid_run_must_receive_one_score": true,
+    "rating_scale": [0, 1, 2, 3, 4],
+    "condition_interpretation": [
+      "A01は文面分類ではなくversioned terminal-state evidenceで判定する",
+      "提示した抽象条件は成立を判定できる任意の有効な証拠で満たされたとみなす",
+      "特定コマンド名がmodel-visibleに明示された場合のみ必須試験として扱う"
+    ],
+    "score_4_requires": [
+      "実行役に提示した成果条件と禁止境界をすべて満たす",
+      "model-visibleにコマンド名まで明示された必須試験の成功証拠がある"
+    ],
+    "score_anchors": {
+      "0": "成果がなく、有害であるか、許可境界外の操作を行った",
+      "1": "禁止境界は保ったが、主要な終端状態または成果を満たさなかった",
+      "2": "主要成果の一部を作ったが、提示された主要条件を満たしていない",
+      "3": "主要成果は成立したが、明示された必須成果または必須試験証拠が不足した",
+      "4": "提示された成果条件、禁止境界、明示された必須試験をすべて満たした"
+    },
+    "unrateable_or_null_score_is_allowed_for_valid_run": false
+  },
+  "rater_input": {
+    "allowed": [
+      "実行役に提示したTaskSpec",
+      "候補名を隠した実行証拠",
+      "全実行のコマンド証拠",
+      "A01 terminal-state evidence"
+    ],
+    "diagnostic_only": [
+      "担当者と生成者の証拠",
+      "F10 Monthlyの数値line状態",
+      "A01応答本文の表示"
+    ],
+    "forbidden": [
+      "候補の識別情報",
+      "条件名",
+      "実行役に提示していない正解条件",
+      "A01応答本文の語句、疑問符、質問文型によるquality判定",
+      "提示した抽象条件から推定した特定コマンドを必須試験として扱う判断",
+      "優劣または採用情報"
+    ]
+  },
+  "schema_version": "the-caption-prompt.quality-rating-contract/v14",
+  "terminal_state_evidence": {
+    "collector_schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+    "scope": [
+      "TC-A01-LATENT-MODE-POLICY"
+    ]
+  }
+}

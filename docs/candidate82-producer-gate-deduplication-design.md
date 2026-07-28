@@ -58,3 +58,7 @@ Candidate82は、投影済みCandidate81を直接親とし、root `AGENTS.md`の
 token中央値とelapsed中央値はF10、D01の両方でCandidate81を上回ったため、runtime効率改善は主張しない。標準14、採用、release、THE-CAPTION本体反映は未判断、未実施である。
 
 同日、[`標準14項目各N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)を別resultとして追加した。Candidate82は70 / 70 score `4`、70 / 70 root-only、excluded attempt 0件で、`standard14_evaluated / quality_gate_passed / targeted_gate_passed`となった。token中央値はCandidate81比`+2.28%`、elapsed中央値は`-6.50%`で方向が分かれたため、効率改善は主張しない。採用、release、THE-CAPTION本体反映は引き続き未判断、未実施である。
+
+採用前の長期確認として、同じCandidate82、Rating v13、Medium、標準14項目各`N=5`を新規20 batch、合計1,400件で実行した。[`B20 result`](../evaluations/results/candidate82-producer-gate-deduplication-v13-medium-standard14-continuous-n5-b20_2026-07-28.md)は1,400 / 1,400 valid・rateable、公式score `4 / 1 = 1,399 / 1`だった。score `1`のA01は実際には未固定値を質問して停止した採点偽陰性である。
+
+一方、保存session監査でF02とF04の各1件がcriterion ownerを独立producer指定へ変換し、childを起動した。標準14 TaskSpecは独立producer executionを明示しておらず、設計上の停止条件「不要workerが1件でもあれば停止する」に該当する。現在状態を`standard14_b20_evaluated / stopped`とし、Candidate82へ補助文を追加せず、採用、release、THE-CAPTION本体反映へ進めない。単発N=5の通過結果は当時の履歴として維持する。

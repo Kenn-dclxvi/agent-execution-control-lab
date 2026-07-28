@@ -14,15 +14,18 @@
 | `INDEPENDENCE`（`I1` = `F9`） | A / D scopeでの削除評価。Candidate68はF10-onlyのみ実測でun-run | 低い。F10ではruntime非改善 |
 | `RECOVERY`（`R1 / R2`） | `environment_recovery_max>0`の正のrecovery scenario caseでの評価。現Evaluation setは`not_applicable`でun-run | 不明（効果未測定） |
 
-## 2. `PRODUCER`の`P3`一文削除Candidate82（標準14完了・採用未判断）
+## 2. `PRODUCER`の`P3`一文削除Candidate82（B20完了・停止）
 
-11 label監査で唯一「Candidate作成根拠あり」となった項目。`P3`の正本は`OWNER_ROLE`側にあり、`PRODUCER`側の短い再記述だけを削除した。2026-07-28に投影済みCandidate81を直接親とするCandidate82を固定した。F10 / D01 targeted 10 / 10と標準14 70 / 70がscore `4`で、標準14は70 / 70 root-onlyだった。Candidate82を`standard14_evaluated / quality_gate_passed / targeted_gate_passed`とする。
+11 label監査で唯一「Candidate作成根拠あり」となった項目。`P3`の正本は`OWNER_ROLE`側にあり、`PRODUCER`側の短い再記述だけを削除した。F10 / D01 targeted 10 / 10と単発標準14 70 / 70はscore `4`だったが、採用前B20で低頻度route非安定性を観測した。20 result、1,400 / 1,400件はvalid・rateable、公式score `4 / 1 = 1,399 / 1`である。score `1`は採点偽陰性だった。一方、F02とF04の各1件がcriterion ownerを独立producer指定へ変換し、不要childを起動したため、Candidate82を`standard14_b20_evaluated / stopped`とする。
 
 - 現在設計: [`candidate82-producer-gate-deduplication-design.md`](candidate82-producer-gate-deduplication-design.md)
 - targeted結果: [`Candidate81 / Candidate82 F10・D01 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-f10-d01-n5_2026-07-28.md)
 - 標準14結果: [`Candidate81 / Candidate82 Medium標準14 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)
+- 採用前B20結果: [`Candidate82 Medium標準14 N=5 B20`](../evaluations/results/candidate82-producer-gate-deduplication-v13-medium-standard14-continuous-n5-b20_2026-07-28.md)
 - prompt identity: `the-caption-3ce91a4-producer-gate-deduplication-r1`
-- 現在境界: 評価は完了。採用、release、本体反映は別判断として未実施
+- 現在境界: B20まで評価完了。設計の停止条件により採用、release、本体反映へ進めない
+
+A01のscore `1`で確認した文面依存の偽陰性には、Rating v14を追加して対応した。v14は疑問符や質問語を採点せず、未固定値、terminal response、zero drift、試験・変更operation未開始から`awaiting_required_value`状態を作る。v13のB20公式scoreはimmutableなまま保持し、v14の新規model runや再採点resultはまだ作成していない。
 - 旧分析が作業呼称として使った「Candidate74」は別軸へ割り当て済みであり、履歴上の呼称としてのみ保持する
 
 ## 3. A01の3択variation診断

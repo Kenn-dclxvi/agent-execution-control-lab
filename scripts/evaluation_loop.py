@@ -115,6 +115,15 @@ QUALITY_RATING_V13 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_V14 = {
+    "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+    "contract_sha256": "9d01b7ee77bbc7b6e5bde23f57bafbcf304f4a82020da5c3150b7ffb129011b1",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+    "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 QUALITY_RATING_CLICK_V1 = {
     "contract_id": "click-outcome-abstract-condition-preserving-v1",
     "contract_sha256": "7057dd0790a62a636f7de4b389d2f3e8526c4b578819842472d92ff49a93747d",
@@ -205,6 +214,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V11,
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
+    QUALITY_RATING_V14,
     QUALITY_RATING_CLICK_V1,
     QUALITY_RATING_CLICK_V2,
     QUALITY_RATING_CLICK_V3,
@@ -720,6 +730,27 @@ def layer3_rate(args: argparse.Namespace) -> dict[str, Any]:
         ):
             raise EvaluationError("all-agent command evidence v5 lacks diagnostic arrays")
         command_evidence_status = "available"
+    terminal_state_schema = rating_contract.get(
+        "terminal_state_evidence_schema_version"
+    )
+    terminal_state_cases = rating_contract.get(
+        "terminal_state_evidence_required_cases", []
+    )
+    if binding.get("case_id") in terminal_state_cases:
+        terminal_state_report = load_json(
+            cycle / "layer3" / "terminal-state-evidence.json"
+        )
+        matches = [
+            item
+            for item in terminal_state_report.get("runs", [])
+            if isinstance(item, dict) and item.get("run_id") == args.run_id
+        ]
+        if (
+            terminal_state_report.get("schema_version") != terminal_state_schema
+            or len(matches) != 1
+            or matches[0].get("case_id") != binding.get("case_id")
+        ):
+            raise EvaluationError("terminal state evidence is invalid")
     rating = {
         "schema_version": "the-caption-prompt.quality-rating/v1",
         "run_id": args.run_id,
