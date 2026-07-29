@@ -58,6 +58,14 @@ Candidate番号は単一の直線的な親子関係ではない。途中には�
 
 本版はC1〜C81の全Candidateを同じ表へ並べない。比較条件の一致を優先し、最新のRating v13・Medium・標準14項目resultを持つ7条件を代表点として選ぶ。
 
+7条件の選定には、次の3基準をすべて使った。compatibilityの一致は必要条件だが、それだけで主表へ追加しない。
+
+| 選定基準 | 内容 |
+| --- | --- |
+| 互換性 | Rating v13、Medium、標準14項目、`N=5`、`M=24`、runtime、TaskSpec、compatibility keyが一致する |
+| 比較上の役割 | 事前に固定した6条件比較のanchor、または同じkeyへ接続されたC81 endpointである |
+| 解釈上の役割 | Baseline、0 byte対照、初期完了制御、root-only構造、quality境界、cost境界、安定性境界のいずれかを重複なく表す |
+
 | 条件 | この比較で表す制御段階 | root `AGENTS.md` |
 | --- | --- | ---: |
 | Baseline | 比較起点となる固定済み指示書 | 5,980 bytes |
@@ -68,7 +76,9 @@ Candidate番号は単一の直線的な親子関係ではない。途中には�
 | Candidate71 | decision boundaryとrequired-validation closureでmodel再入を抑制 | 4,987 bytes |
 | Candidate81 | 「順に」「個別」を一つのroot wrapper内の発行順へ固定 | 5,525 bytes |
 
-C41やC69は重要な中間成果だが、この7条件と同じRating v13・Medium・標準14項目resultを持たない。異なるcompatibility keyの過去数値を主表へ混ぜないため、本版の定量比較から除外する。系譜の詳細は[`candidate-history.md`](candidate-history.md)を参照する。
+C41やC69は重要な中間成果だが、この7条件と同じRating v13・Medium・標準14項目resultを持たないため、互換性基準を満たさない。C78は互換な標準14 resultを持つが、project-index仮説を検証して停止した別枝であり、事前固定した6 anchorまたはC81 endpointではない。したがって主表へ加えない。
+
+この選定はC41、C69、C78の評価価値を否定しない。**第2版の一つの表で何を比較するか**だけを限定する。系譜と各枝の状態は[`candidate-history.md`](candidate-history.md)を正本とする。
 
 ### 1.3 比較しないもの
 
@@ -103,7 +113,17 @@ C41やC69は重要な中間成果だが、この7条件と同じRating v13・Med
 
 7条件の意図した差はprompt set identityである。case、TaskSpec、fixture、oracle、required validation、rating、runtime、M/Nは一致する。
 
-### 2.2 評価課題
+### 2.2 `high`から`medium`への移行
+
+前版が参照した主要な過去比較はreasoning `high`を中心としていた。第2版の7条件比較は、2026-07-26以降の通常Candidate比較で採用した`medium`へ全条件を揃えた**新しい実行result**である。`high` resultのtokenやelapsedを換算して作った表ではない。
+
+C71の6水準追試では、`medium`と`high`はいずれも70 / 70件がscore `4`だった。`medium`は`high`比でtoken中央値`-9.73%`、elapsed中央値`-14.86%`だった。さらにBaseline、ControlFreeRepository、C5、C35、C43、C71の6条件では、High / Mediumのtoken・elapsed順序がどちらも`C71 → C43 → ControlFreeRepository → C35 → C5 → Baseline`だった。この観測を受け、通常比較を`medium`へ移した。
+
+ただしreasoning effortはcompatibility conditionである。HighとMediumは別compatibility keyであり、水準間の差は記述的な診断にとどまる。C81の同一条件resultはMediumであり、**第2版の7条件表はHigh上のC81挙動や、HighからMediumへの因果効果を示さない。**
+
+正本は[`C71 reasoning 6水準 result`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)、[`High 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)、[`Medium 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)である。
+
+### 2.3 評価課題
 
 標準14項目は、実装、レビュー、確認停止、repository authorityからの仕様解決を含む。
 
@@ -114,7 +134,7 @@ C41やC69は重要な中間成果だが、この7条件と同じRating v13・Med
 
 各条件を14 case × 5回実行した。valid runはすべて0〜4で採点し、unrateableを許可しない。
 
-### 2.3 7条件resultの接続
+### 2.4 7条件resultの接続
 
 BaselineからC71までの6条件は一つの比較resultへ登録されている。C81はC71との別result文書だが、同じcompatibility keyへ登録され、C71の既存resultを固定参照している。
 
@@ -209,6 +229,10 @@ C43は成果値を確定できるauthority境界を閉じた。C71はその品�
 | token合計 | 9,475,504 | 9,502,252 | `+26,748`（`+0.28%`） |
 | elapsed合計 | 4,754.179秒 | 4,993.269秒 | `+239.090`秒（`+5.03%`） |
 
+この差は、C81の安定化と同時に観測されたcostとして保持する。採用判断では、1-step closure `+5 / 35`に対し、elapsed中央値`+54.875`秒、elapsed合計`+239.090`秒というtrade-offがある。
+
+一方、N=5の一つのcampaignだけから、1-step closureの安定化がelapsed増加を**引き起こした**とは確定できない。独立反復による分布幅の推定や、wrapper precedenceだけのelapsed因果分解は行っていない。したがって本版は「安定化の代償としてelapsedを支払った」と断定せず、**安定化とelapsed増加を同時に観測した**と記述する。
+
 C81の主成果は3 KPIの改善ではない。複数required commandを持つ7 caseで、全commandを一つのcustom wrapperから個別invocationとして発行する1-step closureを安定させたことである。
 
 | 複数required command case | C71 | C81 |
@@ -267,13 +291,13 @@ C35までの3条件とControlFreeRepositoryは、いずれもA01の5件を閉じ
 
 ただし、N=5で欠陥が0件だったことを将来の完全保証へ一般化しない。
 
-### 4.4 C71はcostの転換点、C81は安定性の終点である
+### 4.4 C71はcostの転換点、C81は安定性とelapsed trade-offを残した終点である
 
 C71はC43と同じscore分布を維持し、token中央値を`-29.19%`、elapsed中央値を`-10.59%`下げた。最新互換比較では、qualityを維持した明確なcost差はここにある。
 
-C81はC71比のtoken中央値が`-0.30%`だが、token合計とelapsedは増えた。したがってC81を追加の効率改善として扱わない。
+C81はC71比のtoken中央値が`-0.30%`だが、token合計`+0.28%`、elapsed中央値`+5.78%`、elapsed合計`+5.03%`だった。したがってC81を追加の効率改善として扱わない。
 
-C81の採用理由になり得るのは、F04を含む複数required commandの発行経路が`35 / 35`へ安定したことである。quality、cost、prompt stabilityは別の判断軸である。
+C81の採用判断では、F04を含む発行経路の`35 / 35`安定化と、このelapsed増加を別の判断軸として同時に扱う必要がある。両者の同時観測はtrade-offだが、因果関係は未分離である。quality、cost、prompt stabilityを一つのwinner判定へ畳み込まない。
 
 ---
 
@@ -301,9 +325,10 @@ C81には次の状態が別々に存在する。
 3. **反復は各case `N=5`である。** 低頻度の誤経路が存在しないとは主張しない。
 4. **7条件は代表点であり、単一直系ではない。** 表中の隣接差を個別predicateの単独因果効果へ変換しない。
 5. **Rating v13に固定した比較である。** v14を含む別ratingのresultを再採点または混合していない。
-6. **中央値だけでは分布を表せない。** score分布と70件合計を併記し、C71とC81のような中央値・合計・elapsedの方向差を隠さない。
-7. **採点は独立blind raterではなく固定契約によるauditである。** contractとcollectorの欠陥が結論へ影響し得る。
-8. **C81の1-step closureはdiagnosticである。** 3 KPIへ追加せず、未測定caseの安定性へ一般化しない。
+6. **HighからMediumへの連続性は限定的である。** 6条件の順序は両水準で一致したが、reasoningごとにcompatibility keyが異なる。C81のHigh互換resultは本版の7条件表に存在しない。
+7. **中央値だけでは分布を表せない。** score分布と70件合計を併記し、C71とC81のような中央値・合計・elapsedの方向差を隠さない。
+8. **採点は独立blind raterではなく固定契約によるauditである。** contractとcollectorの欠陥が結論へ影響し得る。
+9. **C81の1-step closureはdiagnosticである。** 3 KPIへ追加せず、未測定caseの安定性へ一般化しない。elapsed増加との因果関係も確定していない。
 
 ---
 
@@ -316,7 +341,7 @@ C81には次の状態が別々に存在する。
 3. Candidate43は未固定値のauthority境界を閉じ、70 / 70件のscore `4`へ到達した。
 4. Candidate71は同じscore分布を維持し、C43比でtoken中央値`-29.19%`、elapsed中央値`-10.59%`だった。
 5. Candidate81は70 / 70件のscore `4`を維持し、1-step closureを`30 / 35 → 35 / 35`へ改善した。
-6. C81はC71比でtoken中央値`-0.30%`だが、elapsed中央値`+5.78%`、token合計`+0.28%`である。追加の効率改善とは判断しない。
+6. C81はC71比でtoken中央値`-0.30%`だが、elapsed中央値`+5.78%`、elapsed合計`+5.03%`、token合計`+0.28%`である。安定化とcost増加を同時に観測したが、因果関係は未分離であり、追加の効率改善とは判断しない。
 7. Baseline比でC81はquality中央値`+7.143`、token中央値`-83.99%`、elapsed中央値`-71.87%`だった。
 
 この結果を一文でまとめる。
@@ -331,6 +356,8 @@ C81には次の状態が別々に存在する。
 
 - [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 Medium Rating v13 標準14 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)
 - [`C71 / C81 validation wrapper precedence Rating v13 Medium 標準14 N=5`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
+- [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 High Rating v13 標準14 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)
+- [`C71 reasoning 6水準 Rating v13 標準14 N=5`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)
 
 ### 設計・状態の正本
 
