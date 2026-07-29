@@ -76,7 +76,7 @@ Candidate番号は単一の直線的な親子関係ではない。途中には�
 | Candidate71 | decision boundaryとrequired-validation closureでmodel再入を抑制 | 4,987 bytes |
 | Candidate81 | 「順に」「個別」を一つのroot wrapper内の発行順へ固定 | 5,525 bytes |
 
-C41やC69は重要な中間成果だが、この7条件と同じRating v13・Medium・標準14項目resultを持たないため、互換性基準を満たさない。C78は互換な標準14 resultを持つが、project-index仮説を検証して停止した別枝であり、事前固定した6 anchorまたはC81 endpointではない。したがって主表へ加えない。
+C41、C69、C78は重要な中間成果だが、この7条件と同じRating v13・Medium・標準14項目resultを持たないため、互換性基準を満たさない。C78の保存済み標準14 resultはreasoning `High`、compatibility key `7426ecd03421590549c30a4e16373722153ceefc00280bc305eedb1aa0955633`であり、High 6条件とは互換だが、主表のMedium key `79ed04a45971db8ffc2287aea064af8b448008da510d27ceefd70862e0ad40d8`とは互換でない。したがってC78は最初の互換性gateで主表の比較対象外となる。project-index仮説を検証して停止した別枝であることは、その評価状態を説明する補足であり、主表から外す根拠ではない。
 
 この選定はC41、C69、C78の評価価値を否定しない。**第2版の一つの表で何を比較するか**だけを限定する。系譜と各枝の状態は[`candidate-history.md`](candidate-history.md)を正本とする。
 
@@ -357,6 +357,7 @@ C81には次の状態が別々に存在する。
 - [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 Medium Rating v13 標準14 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)
 - [`C71 / C81 validation wrapper precedence Rating v13 Medium 標準14 N=5`](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
 - [`Baseline / ControlFreeRepository / C5 / C35 / C43 / C71 High Rating v13 標準14 N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)
+- [`C71 / C78 project index navigation Rating v13 High 標準14 N=5`](../evaluations/results/candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md)
 - [`C71 reasoning 6水準 Rating v13 標準14 N=5`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)
 
 ### 設計・状態の正本
