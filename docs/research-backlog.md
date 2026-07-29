@@ -12,7 +12,6 @@
 | --- | --- | --- |
 | `CONTEXT`（`X1`） | ペンディング | A06はUltra制御用。Ultra条件で再検討する明示判断があった場合だけ再開 |
 | `RECOVERY`（`R1 / R2`） | 未完了・効果未測定 | `environment_recovery_max>0`の正のrecovery scenarioを評価するか判断 |
-| [`Candidate87`](candidate87-producer-local-invocation-wave-design.md) | 標準14品質通過・集約cost両方悪化・採用未判断 | C81比token中央値`+6.09%`、elapsed中央値`+1.35%`を許容して採用するか、停止するか判断。releaseと本体反映は別gate |
 | [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 保留・実装／pilot／本測定未着手 | 系列へ着手する明示判断とPhase 0の認証方式選択が揃った場合だけ再開 |
 
 ### 完了・停止
@@ -25,6 +24,7 @@
 | [`Candidate84`](candidate84-delegation-marginal-value-boundary-design.md) | `targeted_f02_evaluated / stopped` | 品質通過、cost control mixed。追加評価以降へ進めない |
 | [`Candidate85`](candidate85-planning-first-producer-selection-design.md) | `targeted_f02_f04_evaluated / stopped` | F04でtoken・elapsedがともに悪化。D01以降へ進めない |
 | [`Candidate86`](candidate86-producer-plan-fast-path-design.md) | `targeted_f02_f04_d01_evaluated / stopped` | D01でtoken・elapsedがともに悪化。標準14以降へ進めない |
+| [`Candidate87`](candidate87-adoption-decision.md) | `standard14_evaluated / not_adopted / stopped` | 品質差なし、集約token・elapsedともに増加。C81を維持し、release・本体反映へ進めない |
 | [`Candidate88`](candidate88-parallel-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | 逐次Workerを観測し、token・elapsedもともに悪化。F04以降へ進めない |
 | [`Candidate89`](candidate89-dispatch-time-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | dispatch gateが実発行順を制約できず、token・elapsedもともに悪化。F04以降へ進めない |
 | C81・C87・C88・C89 F02 control graph診断 | 完了・新Candidateなし | 保存trace診断で上流のoperation誤分解を特定。fresh C81互換traceで再観測した場合だけ再開 |
@@ -58,6 +58,7 @@
 - targeted結果: [`Candidate81 / Candidate82 F10・D01 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-f10-d01-n5_2026-07-28.md)
 - 標準14結果: [`Candidate81 / Candidate82 Medium標準14 N=5`](../evaluations/results/candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)
 - 採用前B20結果: [`Candidate82 Medium標準14 N=5 B20`](../evaluations/results/candidate82-producer-gate-deduplication-v13-medium-standard14-continuous-n5-b20_2026-07-28.md)
+- C81 B20とC82の記述比較: [`Candidate81 Medium標準14 N=5 B20`](../evaluations/results/candidate81-validation-wrapper-precedence-v13-medium-standard14-continuous-n5-b20_2026-07-29.md)。C81は1,400 / 1,400 root-onlyだったが、fixture mode差によりcompatibility keyが一致しないためwinnerまたは採用判断へ使わない
 - prompt identity: `the-caption-3ce91a4-producer-gate-deduplication-r1`
 - 現在境界: B20まで評価完了。設計の停止条件により採用、release、本体反映へ進めない
 
@@ -136,7 +137,8 @@ C86 D01のコスト悪化を、Worker起動判断ではなくbind済みproducer�
 - F02結果: [`Rating v14 Medium F02 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f02-n5_2026-07-29.md)。5 / 5 score `4`、C81比のtoken中央値`-5.26%`、elapsed中央値`-10.63%`でgate通過。token合計は`+16.06%`で分布はmixed
 - F04結果: [`Rating v14 Medium F04 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)。5 / 5 score `4`、C81比のtoken中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoff。両KPI悪化の停止条件には非該当
 - 標準14結果: [`Rating v14 Medium標準14 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)。C81 / C87とも70 / 70 score `4`。C87はtoken中央値`+6.09%`、elapsed中央値`+1.35%`で、集約コストは両方大きい
-- 現在境界: `standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`。採用、release、本体反映は未実施・未判断
+- 評価境界: `standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`。一次resultに保存した当時の状態は変更しない
+- 後続の採用判断: [`Candidate87採用判断`](candidate87-adoption-decision.md)で`not_adopted / stopped`。releaseは作成せず、本体反映は承認しない。現在の採用・投影済み基準はC81のまま
 
 ### C81・C87・C88・C89 F02 control graph診断（完了・新Candidateなし）
 
@@ -150,6 +152,7 @@ C86 D01のコスト悪化を、Worker起動判断ではなくbind済みproducer�
 - 診断正本: [`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)の「C81・C87・C88・C89 F02保存traceのcontrol graph診断」
 - 完了境界: C81 F02では同じ誤分解が0 / 5であり、観測されたC81失敗がない。`wave_commit`、executor変更、C81直接child、bundle、profile、追加model runは作成しない
 - 再開条件: fresh C81互換traceで同じoperation誤分解を再観測するか、別operation identityまたは別execution identityをrequired outcomeにする明示要件が追加された場合だけ、`operation_identity_ready`一軸の作成前gateへ戻る
+- 系列境界: C87の不採用判断を含め、Candidate82〜Candidate89のサブエージェント制御系列を完了・停止とする
 
 ## 3. A01の3択variation診断
 
