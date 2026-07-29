@@ -1,0 +1,196 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "the-caption-3ce91a4-validation-wrapper-precedence-r1",
+    "change_reason": "producer選択を実行前に行う原則を維持しつつ、単一operationの不要なplan維持を除く。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "Worker起動の一律禁止または起動数の固定",
+      "tokenまたはelapsedの事前数値予測",
+      "TaskSpec、Evaluation set、fixture、oracle、rating contractの変更",
+      "評価前の改善の主張",
+      "採用判断",
+      "release判断",
+      "THE-CAPTION本体への反映"
+    ],
+    "problem": "Candidate85はroot-onlyの単一producer作業でも完全なoperation graphと明示planを維持し、F04でtokenとelapsedをともに増加させた。",
+    "scope": "Candidate81の19 path full bundle。変更targetはroot AGENTS.mdだけで、producer planningの適用範囲を一つの変更軸とする。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "053b23c2a51ed58e7cc1e2bc6c6e973b72f04f1e1058dcbed22d0e7fc6e93a51",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "the-caption-3ce91a4-validation-wrapper-precedence-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "c6a58a3c0d81d3943e2455d4e8a7913721804ea7",
+      "mode": "100644",
+      "sha256": "50c3ea4130583998efb8a17797c9b6fe0ea6760ff75ea28b1d5bb26a109e67e9",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "the-caption-3ce91a4-current-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-producer-plan-fast-path-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git",
+    "construction_state": "uncommitted_working_tree",
+    "design_inputs": [
+      "docs/candidate86-producer-plan-fast-path-design.md",
+      "docs/prompt-control-design-principles.md",
+      "docs/planning-first-route-diagnostic.md",
+      "evaluations/results/candidate81-candidate85-planning-first-v14-medium-f02-n5_2026-07-28.md",
+      "evaluations/results/candidate81-candidate85-planning-first-v14-medium-f04-n5_2026-07-28.md",
+      "docs/prompt-file-bundle.md"
+    ],
+    "design_status": "complete",
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "source_prompt_identity identifies Candidate81 as the direct prompt parent. Candidate86 changes only root AGENTS.md and embeds producer planning into existing control with a root fast path for simple single-operation work and topology expansion only when needed."
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

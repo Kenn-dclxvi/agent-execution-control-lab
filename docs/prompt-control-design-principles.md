@@ -51,6 +51,20 @@ token削減だけを成功としない。必要な確認や成果を省略して
 
 評価では中央値だけでなく、score分布、case別token、tool call、model step、worker数、context継承方法を確認する。token差をprompt文面の長短だけへ帰属させない。
 
+### Worker選択とコスト判定
+
+Workerの起動要否は、TaskSpecが別execution identityをrequired outcomeにする場合を除き、executor methodとする。promptはWorkerの期待価値を完全なboolean predicateとして列挙しない。
+
+producer選択はoperation分解後へ後付けしない。ただし、単一operationをrootが完了できる場合まで完全なoperation graphや明示planを要求しない。この場合は実行前にrootへ直接bindする。複数operation、別execution identityのresult、またはworker固有capabilityが必要な場合だけ、scope、dependency、result consumer、producer、execution waveを展開してから実行する。
+
+producer関連入力は、required outcomeが別execution identityのresultを必要とするhard constraint、実行手段への希望、owner / risk / roleなどのmetadataへ分ける。hard constraintだけがAIのproducer選択を制約する。Worker利用の指示を含む希望とmetadataはproducer非決定情報として扱い、未制約operationはAIがroot／Workerを選ぶ。
+
+readyなroot operationとWorker operationは同じwaveで開始する。未受領Worker resultが次operationのdependencyで、ほかにreadyなroot operationがない場合だけ待つ。実行開始後は、plan前提の失効なしにproducerを再選択しない。
+
+Worker数、child token、並列／逐次実行、再割当て、rootによる再確認はdiagnosticである。これらを単独の品質またはコスト失敗条件へ昇格しない。Workerを含む実行全体を、互換条件を満たす`quality_score`、all-agent `total_tokens`、`elapsed_seconds`で判定する。
+
+candidateのコストgateは、直接baseline、compatibility key、token / elapsed tolerance、比較単位をcandidate result確認前に固定した場合だけ有効とする。未固定なら、実測値とroute診断を記録してもコスト通過または失敗を確定しない。詳細は[`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)を正本とする。
+
 ## 制御追加の原則
 
 ### 1. 観測された誤経路だけを対象にする
@@ -132,7 +146,7 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 ## 現時点の検討方針
 
 > [!IMPORTANT]
-> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate81まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（`not_evaluated`が現在2件ある。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜8とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
+> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate89まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（Candidate36は`not_evaluated`である。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜8とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
 
 - ControlFreeRepositoryの自然な最短経路を比較基準に含める。
 - C35からC40までに追加されたlabelとpredicateを、必要性、重複、参照関係で棚卸しする。

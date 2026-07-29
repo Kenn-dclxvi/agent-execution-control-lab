@@ -4,7 +4,7 @@
 
 Candidate82は、Candidate81のroot `AGENTS.md`から`PRODUCER` P3の短い再記述だけを削除し、F10 root-onlyとD01明示producerのtargeted gateを通過した。Candidate82の10 / 10 runはscore `4`、zero drift、excluded attempt 0件だった。F10は5 / 5でchild session 0、D01は5 / 5でTaskSpec指定worker `/root/monthly_format_review_producer`を一度だけ起動し、rootによるreview対象の再読は0件だった。
 
-同時実行したCandidate81はF10 5 / 5がscore `4`だった。D01はscore `4 / 3 = 4 / 1`で、score `3`の1件だけrootがreview対象を再読した。Candidate82ではこの低得点と誤経路を再現しなかった。削除したP3の意味欠落は、今回の2経路では観測しなかった。
+同時実行したCandidate81はF10、D01とも5 / 5がscore `4`だった。D01の1件ではrootがreview対象を再読したが、これはroute diagnosticでありquality failureではない。Candidate82ではこの再読経路を再現しなかった。削除したP3の意味欠落は、今回の2経路では観測しなかった。
 
 Candidate82は`targeted_evaluated / targeted_gate_passed`とする。token中央値とelapsed中央値は両scopeで増えたため、runtime効率改善は主張しない。この結果はF10 r3とD01 r1、rating v13、reasoning effort `medium`、各`N=5`に限定する。標準14、採用、release、THE-CAPTION本体反映は未判断、未実施である。
 
@@ -47,10 +47,11 @@ Candidate82は`targeted_evaluated / targeted_gate_passed`とする。token中央
 | --- | --- | --- | --- | ---: | --- |
 | F10 | Candidate81 | `f63d261635c64d82860628f4f0875a5f` | `37a266c16e14c4575a72d563c245a3bc1646656d2e97c71b5f4682396bc9e805` | 5 / 5 | `4 = 5` |
 | F10 | Candidate82 | `67f7687ba8c944408422e705b5e90e01` | `d4eb10afcc12d16f515f38f80ea883a491a24624953ad8014fd2d3eb2698c2d1` | 5 / 5 | `4 = 5` |
-| D01 | Candidate81 | `d11c7f2b08be4f1088bd684d9a20a51c` | `44b27a79defa4b964bdf9c8565070cd52388dc29a4be003f1062ba12615c7554` | 5 / 5 | `4 = 4 / 3 = 1` |
+| D01 | Candidate81（当初登録・誤採点履歴） | `d11c7f2b08be4f1088bd684d9a20a51c` | `44b27a79defa4b964bdf9c8565070cd52388dc29a4be003f1062ba12615c7554` | 5 / 5 | `4 = 4 / 3 = 1` |
+| D01 | Candidate81（契約binding訂正） | `b07f9bc31b134b15acd81f378b66a61b` | `f01bb05b53813813d7d36c88639a7cb69f815dd88df8ec777eec4d3c8a9f2a8b` | 5 / 5 | `4 = 5` |
 | D01 | Candidate82 | `513a3cd0f0d14223a174b82271a6340a` | `7ef619698e49f0b950e16b2f935f50f89edf3fccf29ca71d271b12bdd6c610c6` | 5 / 5 | `4 = 5` |
 
-Candidate81 D01 iteration 3は、主要findingを特定したが指摘位置が実変更行と一致せずscore `3`だった。required command protocol違反も同じ1件にだけ記録された。Candidate82は10 runすべてでquality failureとcommand protocol違反が0件だった。
+当初の個別監査はcycleのv13 contract IDを採点関数へ渡さず、v10既定値でCandidate81 D01 iteration 3のnumeric location mismatchをscore `3`にしていた。保存済み証拠を正しいv13で再評価した訂正resultでは、locationはdiagnostic-onlyでscore `4`である。詳細は[`rating contract binding訂正`](targeted-review-rating-contract-binding-correction_2026-07-29.md)に分離した。旧resultは当時の誤採点履歴として保持する。
 
 ## 3 KPI
 
@@ -86,7 +87,7 @@ Candidate82のtoken中央値とelapsed中央値は両scopeで増えた。削除�
 | D01 childがreview対象をreadしてterminal resultを返却 | 5 / 5 | 5 / 5 |
 | D01 rootのreview対象read 0 | 4 / 5 | 5 / 5 |
 
-Candidate81でroot readが発生したのはscore `3`と同じrun `f06ed8ebb34745e986d45f749a09ab98`だった。Candidate82では指定worker欠落、追加worker、root再読、terminal result欠落を観測しなかった。
+Candidate81でroot readが発生したのは旧監査でscore `3`とされたrun `f06ed8ebb34745e986d45f749a09ab98`だった。正しいv13ではscore `4`であり、root再読とquality scoreを因果付けない。Candidate82では指定worker欠落、追加worker、root再読、terminal result欠落を観測しなかった。
 
 標準`owner-producer-evidence/v1`は、criterion ownerの語列とagent pathの一致を要求するため、汎用owner表記を持つF10 / D01を全20 runで`inadmissible`とした。これはrating v13ではdiagnostic onlyである。route判定は、all-agent usageに固定されたsession parent / child identityと、そのSHA-256を記録した保存rolloutのtool callを直接監査した。collectorの非適格をworker欠落へ読み替えていない。
 

@@ -137,6 +137,7 @@ class Candidate82Test(unittest.TestCase):
             "f63d261635c64d82860628f4f0875a5f",
             "67f7687ba8c944408422e705b5e90e01",
             "d11c7f2b08be4f1088bd684d9a20a51c",
+            "b07f9bc31b134b15acd81f378b66a61b",
             "513a3cd0f0d14223a174b82271a6340a",
         ):
             self.assertIn(result_id, result)
