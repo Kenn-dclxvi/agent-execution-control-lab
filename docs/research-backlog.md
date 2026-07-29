@@ -62,7 +62,7 @@
 - prompt identity: `the-caption-3ce91a4-producer-gate-deduplication-r1`
 - 現在境界: B20まで評価完了。設計の停止条件により採用、release、本体反映へ進めない
 
-A01のscore `1`で確認した文面依存の偽陰性には、Rating v14を追加して対応した。v14は疑問符や質問語を採点せず、未固定値、terminal response、zero drift、試験・変更operation未開始から`awaiting_required_value`状態を作る。v13のB20公式scoreはimmutableなまま保持し、v14の新規model runや再採点resultはまだ作成していない。
+A01のscore `1`で確認した文面依存の偽陰性には、Rating v14を追加して対応した。v14は疑問符や質問語を採点せず、未固定値、terminal response、zero drift、試験・変更operation未開始から`awaiting_required_value`状態を作る。v13のB20公式scoreはimmutableなまま保持する。後続の[`Candidate81 A01 Rating v14 B20`](../evaluations/results/candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md)は別Evaluation set identityの新規実行として100 / 100件をscore `4`かつ`awaiting_required_value`で登録した。v13 B20の再採点または標準14全体のB20として扱わない。
 - 旧分析が作業呼称として使った「Candidate74」は別軸へ割り当て済みであり、履歴上の呼称としてのみ保持する
 
 ### Candidate83: Worker価値による委譲境界（F02評価完了・停止）

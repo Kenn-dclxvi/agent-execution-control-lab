@@ -283,6 +283,8 @@ Candidate74は`standard14_evaluated`である。Candidate75・Candidate76・Cand
 
 現在の採用・投影済み基準はCandidate81である。Candidate82〜Candidate89のbundle、設計、profile、resultは、Candidate81を置き換えた成果ではなく、将来の制御設計に使う評価証拠である。Candidate87の別stateの[`採用判断`](candidate87-adoption-decision.md)も`not_adopted / stopped`であり、Candidate82〜Candidate89のサブエージェント制御系列は完了・停止した。
 
+Candidate81の後続[`Rating v14 A01限定B20`](../evaluations/results/candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md)は、20 result、100 / 100件をvalid・rateable・score `4`として登録した。全件が`awaiting_required_value`、artifact unchanged、read-only、試験・変更operation未開始、root-onlyだった。このresultはA01のrating長期診断であり、標準14全体のB20、v13 B20の再採点、Candidate81の新しい採用・release・projection stateではない。
+
 得られた成果は三つある。第一に、producer指定の重複を一文削除するだけでは低頻度のowner語列変換を防げない。第二に、Workerの期待価値、同一wave、dispatch済み状態を個別predicateとして追加しても、実際のoperation分解と発行順を安定して制御できない。第三に、Worker起動そのものではなく、rootとWorkerを含むproducer内部のinvocation分割が大きなコスト差を作り得る。
 
 再開時の未解決問題は「Workerをいつ許可するか」だけではない。C81のprompt全体を基準に、TaskSpecからoperation identityをどう導出し、どのoperationをrootまたはWorkerへbindし、非依存invocationをどのwaveへまとめ、resultをどの後続operationが消費するかというcontrol graph全体を再検討する必要がある。fresh C81互換traceで同じoperation誤分解を再観測するか、TaskSpecへ別resultまたは別producer identityの明示要件が追加されるまでは、次candidateを作成しない。再開してもC82・C83・C87・C88・C89の文面を継ぎ足さず、変更軸と事前gateを固定してからC81の直接childとして設計する。
