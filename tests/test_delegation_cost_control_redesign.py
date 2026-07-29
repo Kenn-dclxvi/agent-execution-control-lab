@@ -81,6 +81,20 @@ class DelegationCostControlRedesignTest(unittest.TestCase):
             self.assertIn(state, backlog)
         self.assertIn("immutable評価state", backlog)
 
+    def test_f02_control_graph_diagnostic_stops_unjustified_next_candidate(self) -> None:
+        redesign = REDESIGN.read_text(encoding="utf-8")
+        backlog = BACKLOG.read_text(encoding="utf-8")
+        for fact in (
+            "C87からC89までのWorker 11件",
+            "11件のchild token合計は`820,380`",
+            "criterion metadataを、独立したoperation identityへ昇格",
+            "operation_identity_ready :=",
+            "この診断だけを根拠にC81直接childの新Candidate、bundle、profile、model runを作成しない",
+        ):
+            self.assertIn(fact, redesign)
+        self.assertIn("C81・C87・C88・C89 F02 control graph診断（完了・新Candidateなし）", backlog)
+        self.assertIn("`wave_commit`、executor変更、C81直接child、bundle、profile、追加model runは作成しない", backlog)
+
 
 if __name__ == "__main__":
     unittest.main()

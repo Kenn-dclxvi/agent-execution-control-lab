@@ -21,7 +21,7 @@ Candidate71のKPI差から確認できる因果は、11 label全体ではなく�
 
 ただしCandidate72とCandidate73は、抽象名だけを残すことと、tool実行だけを閉じることでは不十分だと示した。保持が必要なのは、入口の完全性、同時発行、result有効性、成功後のtool closure、成功後のresponse closureである。Candidate71の全単語が必要だとは確認していない。
 
-その後、11 labelすべてを句単位で監査した(下記各`監査結果`節)。現時点の総括は[監査状況の分類](#監査状況の分類完了と再測定要の分離)にある。結果として、Candidate作成根拠が立つのは`PRODUCER`の`P3`一文削除だけで、他10 labelは根拠なし(完了6・暫定未完了3・凍結1)である。`P3`削除Candidate74はgate 9項目を定義済みだが、bundle / profile /評価は未着手であり、`PRODUCER`以外の不変更方針を維持する。
+その後、11 labelすべてを句単位で監査した(下記各`監査結果`節)。現在の総括は[監査状況の分類](#監査状況の分類完了と再測定要の分離)にある。Candidate作成根拠が立ったのは`PRODUCER`の`P3`一文削除だけである。他10 labelの現在分類は、完了7・ペンディング1・暫定未完了1・凍結1であり、`PRODUCER`以外の不変更方針を維持する。
 
 この冒頭以降の`五つの制御機能`〜`OWNER_ROLE監査結果`〜`現在の判定`は監査初期(OWNER_ROLE→SPEC着手時点)の記述で、履歴として保持する。最新の判定は各label `監査結果`節と`監査状況の分類`表を正とする。
 
@@ -317,7 +317,7 @@ Candidate74を作る場合は、上記九項目を独立した設計記録へ固
 
 ### 結論
 
-`INDEPENDENCE`の二句は`I1`(=`F9`)と`I2`(=`F4`)で、いずれも保存済み測定がある。`I2`はPRODUCER `P2`の重複でC67検証済み、`I1`はC68でF10-only削除を実測し品質中立だがruntime非改善でgate不通過。Candidate作成根拠なし。ただし`I1`のA / D scopeでの削除は未測定で、この点で監査は未完了。
+`INDEPENDENCE`の二句は`I1`(=`F9`)と`I2`(=`F4`)で、いずれも保存済み測定がある。`I2`はPRODUCER `P2`の重複でC67検証済み、`I1`はC68でF10-only削除を実測し品質中立だがruntime非改善でgate不通過。Candidate作成根拠なし。`I1`のA / D scopeでの削除は未測定であり、当初監査ではこの点を未完了とした。
 
 ### identity確認
 
@@ -338,9 +338,13 @@ Candidate74を作る場合は、上記九項目を独立した設計記録へ固
 
 `I2`はPRODUCER `P2`の重複でC67検証済み(中立)。`I1`はC68がF10で削除を実測し、品質は中立だがtool cycleを短縮せずruntimeを改善しなかったため、削除の効率根拠がない。C68自身が「F9を一般に削除可能とは判断しない」とし、次はF9でなく`F5`を対象にと記録している。したがって現時点で削除・置換predicateを導けない。
 
-### 監査状態: 未完了(I1のA / D未測定)
+### 当初監査状態: 未完了(I1のA / D未測定)
 
 `I1`削除はF10-onlyでしか測っておらず、A系・D系での品質と経路は未測定である。分類の`F9`判定「常時制御からの削除可能性はF10内に限定して保持する」と一致する。この未測定を埋めるにはA / D caseでのF9削除評価(fresh run)が要る。ただしF10で既にruntime非改善が出ており、C68も次対象をF5へ移しているため、flip見込みは低い。
+
+### 2026-07-29現在判断: 対応なしで完了
+
+A / D未測定の事実は保持するが、監査表を埋めることだけを目的とした追加評価は実施しない。Candidate68のF10でruntime改善がなく、その後も`I1`を原因とする観測誤経路がないため、Candidate、profile、追加model runを作成しない。`I1`が原因となる不要なoperation分割をfresh traceで観測した場合だけ、別の判断単位として再開する。
 
 ## `TERMINAL`監査結果
 
@@ -450,14 +454,15 @@ Candidate74を作る場合は、上記九項目を独立した設計記録へ固
 | `ROOT` | なし | 完了 | — | — (D5はC28誤経路対応。F3統合は中立relocation) |
 | `DECISION_BOUNDARY` | なし | 完了 | — | — (C69で効率lever実測、品質中立。削除は再入増) |
 | `METHOD` | なし | 完了 | — | — (M1..M4はC23早期停止誤経路対応。単一目的) |
-| `CONTEXT` | なし(暫定) | **未完了** | `X1`: A06 paired diagnostic。新規A06 case variant + bundle + gate + fresh run。既存archiveでは事前sizingも不可 | **あり**。拡張方向(packet resolved premiseで再読削減)は未検証で、削減可能なら根拠になり得る |
+| `CONTEXT` | なし(暫定) | **ペンディング** | A06はUltra制御用のため追加runを開始しない。Ultra条件で再検討する明示判断があった場合だけ再開 | **あり**。拡張方向(packet resolved premiseで再読削減)は未検証で、削減可能なら根拠になり得る |
 | `PRODUCER` | **あり(P3のみ)** | 作成前gate定義済み・bundle未作成 | Candidate74で`P3`一文だけをC71から削除し、D01正例 + root-onlyでtargeted評価(未実施)。詳細は上記`PRODUCER`監査結果節 | — (P5は別途`review`保留、正のproducer変更case前に削除しない) |
-| `INDEPENDENCE` | なし | **未完了(I1のみ)** | `I1`(=`F9`): A / D scopeでの削除評価。C68はF10-onlyのみ実測でun-run | 低い。F10で既にruntime非改善、C68も次対象をF5へ移した |
+| `INDEPENDENCE` | なし | **対応なしで完了** | A / D未測定の事実は保持するが追加評価しない。`I1`起因の不要なoperation分割をfresh traceで観測した場合だけ再開 | 低い。F10で既にruntime非改善、C68も次対象をF5へ移した |
 | `RECOVERY` | なし | **未完了** | `R1 / R2`: `environment_recovery_max>0`の正のrecovery scenario caseでの評価。現Evaluation setは`not_applicable`でun-run | 不明(効果未測定) |
 | `VALIDATION_CLOSURE` | — | 凍結 | — | — |
 
-- 完了(根拠なし・再測定不要): `OWNER_ROLE`、`SPEC`、`TERMINAL`、`ROOT`、`DECISION_BOUNDARY`、`METHOD`(6)。
+- 完了(根拠なし・再測定不要): `OWNER_ROLE`、`SPEC`、`INDEPENDENCE`、`TERMINAL`、`ROOT`、`DECISION_BOUNDARY`、`METHOD`(7)。
 - 作成根拠あり: `PRODUCER`(`P3`一文削除のCandidate74作成前gate定義済み、bundle未作成)(1)。
-- 未完了(根拠なし判定は暫定、再測定が残る): `CONTEXT`(結論をflipし得る)、`INDEPENDENCE`(I1句のみ、flip低)、`RECOVERY`(効果未測定、flip不明)(3)。
+- ペンディング: `CONTEXT`(A06はUltra制御用。明示判断があるまで追加runなし)(1)。
+- 未完了(根拠なし判定は暫定、再測定が残る): `RECOVERY`(効果未測定、flip不明)(1)。
 - 凍結: `VALIDATION_CLOSURE`(1)。11 labelすべてを分類した。
-- 11 label中、Candidate作成根拠があるのは`PRODUCER`の`P3`一文削除だけである。他10 labelは根拠なし(完了6・暫定未完了3・凍結1)。未完了3 labelの再測定はいずれもfresh runを要し既存データでは決着しない。`PRODUCER`以外の不変更方針を維持し、`P3`削除Candidate74はbundle・profile・評価を別段階とする。
+- 11 label中、Candidate作成根拠があるのは`PRODUCER`の`P3`一文削除だけである。他10 labelは根拠なし(完了7・ペンディング1・暫定未完了1・凍結1)。`PRODUCER`以外の不変更方針を維持する。
