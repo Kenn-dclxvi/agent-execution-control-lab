@@ -55,3 +55,7 @@ bundleとprofileの作成は`draft / not_evaluated`から開始した。targeted
 続く[`F04 result`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)も5 / 5 score `4`だった。C81比の中央値はtoken`+15.48%`、elapsed`-12.62%`のtradeoffで、両KPI悪化の停止条件には該当しない。D01 / F02 / F04のtargeted gateを通過した。
 
 別stateの[`標準14 result`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)は、互換なC81 / C87 v14を新規実行し、両条件70 / 70 score `4`だった。C87比の集約中央値はtoken`+6.09%`、elapsed`+1.35%`である。標準14の採否thresholdは事前固定していないため、品質通過と集約コスト悪化を分離し、現在状態を`standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`とする。release、本体反映も未実施・未判断である。
+
+## 後続の採用判断
+
+上記の一次評価状態は変更しない。2026-07-29の別stateの[`採用判断`](candidate87-adoption-decision.md)で、Candidate87を`not_adopted / stopped`とした。releaseは作成せず、runtime projectionも承認しない。現在の採用・投影済み基準はCandidate81のままである。

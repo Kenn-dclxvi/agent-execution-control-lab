@@ -241,4 +241,6 @@ operation_identity_ready :=
 
 criterion、required validation、non-machine riskは、TaskSpecが別resultまたは別execution identityをrequired outcomeとして明示しない限り、対象成果を作る既存operationへbindする。`operation_identity_ready=true`のoperation集合を固定した後だけproducerとwaveを選ぶ。
 
-ただしC81 F02は5 / 5 root-onlyでこの最短経路を既に成立させている。C81の保存traceにoperation誤分解は観測されていないため、この診断だけを根拠にC81直接childの新Candidate、bundle、profile、model runを作成しない。fresh C81互換traceで同じ誤分解を再観測するか、別operation identityを必要とする新しい明示要件が追加された場合だけ、`operation_identity_ready`一軸の作成前gateへ戻る。
+ただしC81 F02は既存N=5の5 / 5に加え、2026-07-29のB20でも100 / 100がroot-onlyで、この最短経路を成立させた。B20全体も1,400 / 1,400 root-onlyだった。一方、B20はfixture mode差によりC82とcompatibility keyが一致しないため、C82との正式な互換比較には使わない。C81の保存traceにoperation誤分解は観測されていないため、この診断だけを根拠にC81直接childの新Candidate、bundle、profile、model runを作成しない。fresh C81互換traceで同じ誤分解を再観測するか、別operation identityを必要とする新しい明示要件が追加された場合だけ、`operation_identity_ready`一軸の作成前gateへ戻る。
+
+後続の別stateの[`Candidate87採用判断`](candidate87-adoption-decision.md)は`not_adopted / stopped`である。C81を採用・投影済み基準として維持し、C87のreleaseとruntime projectionは作成・承認しない。この判断をもってCandidate82〜Candidate89のサブエージェント制御系列を完了・停止とする。

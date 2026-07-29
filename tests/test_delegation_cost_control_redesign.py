@@ -94,6 +94,8 @@ class DelegationCostControlRedesignTest(unittest.TestCase):
             self.assertIn(fact, redesign)
         self.assertIn("C81・C87・C88・C89 F02 control graph診断（完了・新Candidateなし）", backlog)
         self.assertIn("`wave_commit`、executor変更、C81直接child、bundle、profile、追加model runは作成しない", backlog)
+        self.assertIn("B20でも100 / 100がroot-only", redesign)
+        self.assertIn("fixture mode差によりC82とcompatibility keyが一致しない", redesign)
 
 
 if __name__ == "__main__":
