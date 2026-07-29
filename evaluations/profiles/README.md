@@ -26,6 +26,8 @@ Candidate81のstandard14試験は、[`Candidate81 Medium`](candidate81-validatio
 
 Candidate81のA01 3択variation診断は、[`r1`](candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-global-m24-n5-r1.json)と[`r2`](candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json)を各6 case、各`N=5`、Medium、global queue `M=24`へ固定した。r1は既存仕様書との開始不整合を観測した履歴、r2はその交絡だけを除いた修正版である。[`診断結果`](../results/candidate81-a01-three-choice-variation-diagnostic_2026-07-28.md)はr2の30 / 30 validと期待disposition成立を記録する。Layer 3 / 4、Candidate、採用、release、本体反映は作成していない。
 
+Candidate81の[`Rating v14 A01限定profile`](candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1.json)は、標準14のA01 r2だけを`the-caption-a01-terminal-state-r1`へ分離し、prompt、TaskSpec、fixture、target、model、Medium、runtime、permission、all-agent accountingを維持する。各`N=5`を20個のappend-only resultとして実行した[`B20結果`](../results/candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md)は100 / 100件がscore `4`かつ`awaiting_required_value`だった。標準14全体の完了またはv13 resultの再採点として扱わない。
+
 [`candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1`](candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1.json)はCandidate17のpromptを変更せず、実行adapterのtyped boundary evidenceを独立したcompatibility条件として検証するF10限定profileである。既存のraw shell outputをAgentが対応付けるresultとは互換比較しない。
 
 [`candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1`](candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json)はCandidate17をexpanded 12 case、`1..5`、`M=24`、all-agent token accountingへ固定する。adapter、quality audit、Evaluation set、fixture、TaskSpec、permissionをCandidate15連続試験時点から変更せず、prompt identityだけをC17へ替える。
