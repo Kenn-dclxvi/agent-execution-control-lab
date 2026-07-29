@@ -15,7 +15,8 @@
 3. Layer 2を実行し、全slotをterminalにする。
 4. `seal-batch`でvalid runのall-agent usageとrating viewを検証する。
 5. 完全なworkspaceとLayer 1 fixtureを含むseal archiveをstreaming生成し、圧縮後の全member hash検証後にだけworkspaceのlive copyを削除する。Layer 1 fixtureは次batchのclone元として保持する。
-6. Layer 3採点とLayer 4 result登録後に`compact-batch`を実行する。
+6. 削除記録に含まれるworkspaceと完全一致するCodexの`projects`設定だけを削除する。
+7. Layer 3採点とLayer 4 result登録後に`compact-batch`を実行する。
 
 前batchの`cycle/layer1`を通常copyするcontrollerは使わない。clonefileを利用できない場合はbatchを開始せず停止する。
 
@@ -49,6 +50,10 @@ python3 layer2/extensions/long_run_storage/long_run_storage.py materialize-layer
 python3 layer2/extensions/long_run_storage/long_run_storage.py seal-batch \
   --batch /absolute/path/to/batch-001
 ```
+
+標準では`$CODEX_HOME/config.toml`、未設定時は`~/.codex/config.toml`も保守する。対象は、このbatchの`execution-prune-receipt.json`に記録されたworkspace pathとの完全一致だけである。別評価や通常projectの存在しないpathは削除しない。設定は有効なTOMLであることを更新前後に確認し、同時更新を検出した場合は最大3回再試行する。結果は`compact/codex-project-config-prune-receipt.json`へwrite-onceで記録する。この保守に失敗してもexecution sealと評価結果は失効させず、command結果へ`warning`を返す。
+
+一時的に保守を無効化する場合だけ`--skip-codex-config-cleanup`を指定する。別の設定を使う検証では`--codex-config /absolute/path/to/config.toml`を指定できる。
 
 valid runごとに次を確認する。
 
