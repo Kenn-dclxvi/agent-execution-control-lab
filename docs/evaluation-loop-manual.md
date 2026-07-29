@@ -184,6 +184,39 @@ promptまたはtask behaviorではない外部要因を客観的証跡から検�
 
 excluded attemptはraw artifactを保持するが、採点とKPIへ入力せず、有効なcase / iteration slotを占有しない。同じcapsuleを再実行する。Agentの自己申告や最終応答だけを除外根拠にしない。
 
+### Observation delivery実験条件
+
+Codex adapterは、`comparison_conditions.executor_parameters.observation_delivery`が次の完全一致objectである場合だけ、code mode限定のbuffered executionを有効にする。
+
+```json
+{
+  "schema_version": "the-caption-prompt.observation-delivery/v1",
+  "mode": "code_mode_only_buffered_exec",
+  "direct_tool_result_delivery": "disabled",
+  "nested_tool_result_delivery": "code_local_until_return"
+}
+```
+
+この値はexecutor comparison conditionであり、compatibility keyへ含まれる。指定なしのcontrol resultと通常のprompt比較へ混ぜない。adapterは有効時だけ`layer2/extensions/<run_id>/observation-delivery/audit.json`へ経路監査を保存する。現行機構は直接tool resultを閉じるが、外側code callのreturn回数を制約しない。[F02 N=5 executor A/B](../evaluations/results/candidate81-observation-delivery-executor-ab-v14-medium-f02-n5_2026-07-29.md)では直接result 0件を確認した一方、model再入削減は確認できなかった。
+
+成功したrequired validationのraw outputを配送しない実験では、上記`observation_delivery`に加えて`executor_parameters.success_delivery`を次へ完全一致させる。
+
+```json
+{
+  "schema_version": "the-caption-prompt.success-delivery/v1",
+  "mode": "success_silent_failure_unchanged",
+  "deterministic_success_delivery": "command_and_exit_code_only",
+  "failure_delivery": "unchanged_tool_result",
+  "intermediate_status_delivery": "start_blocking_or_60s_only"
+}
+```
+
+required validationは一つのcode call内で個別発行する。全成功時は完全なcommand文字列とexit codeだけを返し、stdout / stderrをmodelへ配送しない。raw command evidenceはlocal rolloutへ保持する。nonzero、unknown、permission要求時は後続を止め、tool resultを変更せず返す。[F02 N=5](../evaluations/results/candidate81-success-silent-delivery-v14-medium-f02-n5_2026-07-29.md)ではsuccess mechanism 5 / 5とtoken中央値`-17.86%`を確認したが、失敗経路と別caseへの一般化は未確認である。
+
+`success-delivery/v2`はinstruction-based v1から、対象commandの実行、成功raw保存、成功receipt生成、失敗raw返却をexecutor wrapperへ移す。profileはcaseごとのexact argvとrequired command group indexを一対一で固定する。直接pytestと、script path / SHA-256を固定したpytest-only wrapperだけを許可する。compound commandとallowlist外argvは実行前に拒否する。
+
+成功時のstdout / stderrは`layer2/extensions/<run_id>/success-delivery/raw-command-evidence/`へbyte数とSHA-256付きで保存し、modelへはreceiptだけを返す。通常のnonzero exitとsignal終了はstdout / stderrと終了状態を維持する。auditはv2ではrequired tokenの部分一致を使わず、wrapper markerとruntime policyのexact argvでvalidation callを同定する。[F02](../evaluations/results/candidate81-pytest-allowlist-success-delivery-v14-medium-f02-n5_2026-07-29.md)と[F06](../evaluations/results/candidate81-pytest-allowlist-success-delivery-v14-medium-f06-n5_2026-07-29.md)は各5 / 5 score `4`、mechanism 5 / 5だった。後続の[F06 matched A/B](../evaluations/results/candidate81-success-delivery-executor-ab-v14-medium-f06-n5_2026-07-29.md)ではoutput合計`-64.47%`に対しtoken合計`+22.29%`、elapsed合計`+7.63%`だったため、model-visible wrapper方式を停止しStd14へ進めない。
+
 ## 7. 1 prompt set resultの登録
 
 以下ではpathを次のように表す。
