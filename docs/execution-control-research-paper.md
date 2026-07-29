@@ -115,13 +115,28 @@ C41、C69、C78は重要な中間成果だが、この7条件と同じRating v13
 
 ### 2.2 `high`から`medium`への移行
 
-前版が参照した主要な過去比較はreasoning `high`を中心としていた。第2版の7条件比較は、2026-07-26以降の通常Candidate比較で採用した`medium`へ全条件を揃えた**新しい実行result**である。`high` resultのtokenやelapsedを換算して作った表ではない。
+前版が参照した主要な過去比較はreasoning `high`を中心としていた。第2版の7条件比較は、C79以降の通常Candidate比較で採用した`medium`へ全条件を揃えた**新しい実行result**である。`high` resultのtokenやelapsedを換算して作った表ではない。
+
+C71以降の保存済みprofileとresultを推論レベルで整理すると、次の境界になる。modelは全期間で`gpt-5.6-sol`である。表の「主な評価」は完了した保存済みresultの範囲を示し、profileだけを作成して停止後に実行しなかった課題は含めない。
+
+| Candidate | rating | reasoning effort | 主な評価 | 本版との関係 |
+| --- | --- | --- | --- | --- |
+| C71 | v10〜v13 | `high` | targeted、標準14 | High系列の基準。v13 HighはC78と互換 |
+| C71 reasoning追試 | v13 | `low` / `medium` / `high` / `xhigh` / `max` / `ultra` | 各標準14、`N=5` | 水準移行の診断。水準ごとに別compatibility key |
+| C72〜C77 | v12 | `high` | targetedまたは標準14 | High系列。rating v12のため本版主表と非互換 |
+| C78 | v13 | `high` | 標準14 | High 6条件と互換。Medium主表とは非互換 |
+| C79〜C80 | v13 | `medium` | F04 targeted | 通常Candidate比較をMediumへ移した最初の枝 |
+| C81 | v13 / v14 | `medium` | F04、標準14、A01、F10、D01、B20 | v13 Medium標準14だけを本版主表へ接続 |
+| C82 | v13 | `medium` | F10、D01、標準14、B20 | C81より後の別Candidateであり、本版主表の範囲外 |
+| C83〜C93 | v14 | `medium` | F02を中心とするtargeted、C87のみ標準14まで実施 | rating v14かつC81より後であり、本版主表の範囲外 |
+
+したがって切替点はC71そのものではない。C71にはHighを含む複数水準のresultがあり、C78まではHigh系列のCandidate評価が続いた。**新しいCandidate評価をMediumへ固定した最初の条件はC79**である。以後のC79〜C93の保存済み実行resultはMediumであり、Highへ戻していない。
 
 C71の6水準追試では、`medium`と`high`はいずれも70 / 70件がscore `4`だった。`medium`は`high`比でtoken中央値`-9.73%`、elapsed中央値`-14.86%`だった。さらにBaseline、ControlFreeRepository、C5、C35、C43、C71の6条件では、High / Mediumのtoken・elapsed順序がどちらも`C71 → C43 → ControlFreeRepository → C35 → C5 → Baseline`だった。この観測を受け、通常比較を`medium`へ移した。
 
 ただしreasoning effortはcompatibility conditionである。HighとMediumは別compatibility keyであり、水準間の差は記述的な診断にとどまる。C81の同一条件resultはMediumであり、**第2版の7条件表はHigh上のC81挙動や、HighからMediumへの因果効果を示さない。**
 
-正本は[`C71 reasoning 6水準 result`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)、[`High 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)、[`Medium 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)である。
+正本は[`C71 reasoning 6水準 result`](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)、[`High 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)、[`Medium 6条件 result`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)、および[`Candidate系譜`](candidate-history.md)である。
 
 ### 2.3 評価課題
 
