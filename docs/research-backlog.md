@@ -1,18 +1,54 @@
-# 研究バックログ（未完了項目の索引）
+# 研究バックログ（状況索引）
 
-現在**未完了**の研究項目を、着手判断のために一箇所へ集める索引。長期方針は[`future-roadmap.md`](future-roadmap.md)、系譜と観測は[`candidate-history.md`](candidate-history.md)を参照する。
+研究項目を**未完了・保留**と**完了・停止**へ分け、着手判断と履歴確認のために一箇所へ集める索引。長期方針は[`future-roadmap.md`](future-roadmap.md)、系譜と観測は[`candidate-history.md`](candidate-history.md)を参照する。
 
 この文書は索引であり、判定の正本ではない。各項目の状態・数値・停止理由は「正本」列のartifactを正とする。ここに載っていることは、着手済み・評価済み・採用予定のいずれでもない。
 
-## 1. label監査の未完了（再測定にfresh runが必要）
+## 状況サマリー
 
-`Candidate71`の11 label監査で「根拠なし」判定が**暫定**のまま残る3件。いずれも既存の保存データでは決着しない。正本は[`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md)の「監査状況の分類」表。
+### 未完了・保留
+
+| 項目 | 現在状態 | 次の判断または再開条件 |
+| --- | --- | --- |
+| `CONTEXT`（`X1`） | ペンディング | A06はUltra制御用。Ultra条件で再検討する明示判断があった場合だけ再開 |
+| `RECOVERY`（`R1 / R2`） | 未完了・効果未測定 | `environment_recovery_max>0`の正のrecovery scenarioを評価するか判断 |
+| [`Candidate87`](candidate87-producer-local-invocation-wave-design.md) | 標準14品質通過・集約cost両方悪化・採用未判断 | C81比token中央値`+6.09%`、elapsed中央値`+1.35%`を許容して採用するか、停止するか判断。releaseと本体反映は別gate |
+| [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 保留・実装／pilot／本測定未着手 | 系列へ着手する明示判断とPhase 0の認証方式選択が揃った場合だけ再開 |
+
+### 完了・停止
+
+| 項目 | 最終状態 | 完了・停止境界 |
+| --- | --- | --- |
+| `INDEPENDENCE`（`I1` = `F9`） | 対応なしで完了 | A / D追加runは行わない。`I1`起因の不要なoperation分割をfresh traceで観測した場合だけ別判断として再開 |
+| [`Candidate82`](candidate82-producer-gate-deduplication-design.md) | `standard14_b20_evaluated / stopped` | B20で低頻度route非安定性を観測。採用以降へ進めない |
+| [`Candidate83`](candidate83-delegation-value-boundary-design.md) | `targeted_f02_evaluated / stopped` | 品質通過、cost control未実証。追加評価以降へ進めない |
+| [`Candidate84`](candidate84-delegation-marginal-value-boundary-design.md) | `targeted_f02_evaluated / stopped` | 品質通過、cost control mixed。追加評価以降へ進めない |
+| [`Candidate85`](candidate85-planning-first-producer-selection-design.md) | `targeted_f02_f04_evaluated / stopped` | F04でtoken・elapsedがともに悪化。D01以降へ進めない |
+| [`Candidate86`](candidate86-producer-plan-fast-path-design.md) | `targeted_f02_f04_d01_evaluated / stopped` | D01でtoken・elapsedがともに悪化。標準14以降へ進めない |
+| [`Candidate88`](candidate88-parallel-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | 逐次Workerを観測し、token・elapsedもともに悪化。F04以降へ進めない |
+| [`Candidate89`](candidate89-dispatch-time-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | dispatch gateが実発行順を制約できず、token・elapsedもともに悪化。F04以降へ進めない |
+| C81・C87・C88・C89 F02 control graph診断 | 完了・新Candidateなし | 保存trace診断で上流のoperation誤分解を特定。fresh C81互換traceで再観測した場合だけ再開 |
+| A01の3択variation診断 | 完了・新Candidateなし | 修正版30 / 30 valid。補集合選択、候補順依存、過剰停止を再現せず終了 |
+| 投影済みCandidate71のrisk整理 | 完了・監視 | 現在は非再現。fresh traceで未固定値の誤実行を再観測した場合だけ再開 |
+| F10 exact coordinate evidence interface | 対応なしで完了 | exact coordinateをhard requirementにしないため実装・追加runを行わない |
+| rating contract identity・一律比較・reasoning追試 | 解決済み | 現行v13を確定し、High／Medium比較とreasoning 6水準を完了 |
+| `QUALITY_RATING_V8`への改名 | 解決済み | identity・schema・採点挙動を変えずrevision名を明示化 |
+| [`Candidate78`](candidate78-project-index-navigation-design.md) | `standard14_evaluated / stopped` | token中央値`+8.66%`、elapsed中央値`+4.38%`。追加改訂以降へ進めない |
+| 公開target repository系列・runtime再現性 | 完了 | Click標準14、空環境再構築、network遮断full gate、offline lock確認まで完了 |
+
+## 1. label監査の残件
+
+`Candidate71`の11 label監査で再測定候補として残った3件の現在判断。正本は[`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md)の「監査状況の分類」表。
 
 | 項目 | 必要な再測定 | 結論をflipし得るか |
 | --- | --- | --- |
-| `CONTEXT`（`X1`） | A06 paired diagnostic。新規A06 case variant、bundle、gate、fresh runが必要。既存archiveでは事前sizingも不可 | **あり**。拡張方向（packet resolved premiseによる再読削減）が未検証 |
-| `INDEPENDENCE`（`I1` = `F9`） | A / D scopeでの削除評価。Candidate68はF10-onlyのみ実測でun-run | 低い。F10ではruntime非改善 |
+| `CONTEXT`（`X1`） | **ペンディング。** A06はUltra制御用のため、case variant、bundle、gate、fresh runを開始しない | **あり**。拡張方向（packet resolved premiseによる再読削減）が未検証 |
+| `INDEPENDENCE`（`I1` = `F9`） | **対応なしで完了。** A / D scopeの追加評価を実施しない | 低い。Candidate68のF10ではruntime非改善 |
 | `RECOVERY`（`R1 / R2`） | `environment_recovery_max>0`の正のrecovery scenario caseでの評価。現Evaluation setは`not_applicable`でun-run | 不明（効果未測定） |
+
+`CONTEXT`（`X1`）は、Ultra条件でA06制御を再検討する明示判断があった場合だけ再開する。保留中はCandidate、probe、追加model runを作成しない。
+
+`INDEPENDENCE`（`I1`）は、未測定範囲を埋めること自体を目的とした追加runを行わない。`I1`が原因となる不要なoperation分割をfresh traceで観測した場合だけ、別の判断単位として再開する。
 
 ## 2. `PRODUCER`の`P3`一文削除Candidate82（B20完了・停止）
 
@@ -101,6 +137,19 @@ C86 D01のコスト悪化を、Worker起動判断ではなくbind済みproducer�
 - F04結果: [`Rating v14 Medium F04 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)。5 / 5 score `4`、C81比のtoken中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoff。両KPI悪化の停止条件には非該当
 - 標準14結果: [`Rating v14 Medium標準14 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)。C81 / C87とも70 / 70 score `4`。C87はtoken中央値`+6.09%`、elapsed中央値`+1.35%`で、集約コストは両方大きい
 - 現在境界: `standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`。採用、release、本体反映は未実施・未判断
+
+### C81・C87・C88・C89 F02 control graph診断（完了・新Candidateなし）
+
+**2026-07-29に保存traceだけで診断を完了した。** C81、C87、C88、C89の既存F02 r1各`N=5`を再確認し、一次result、score、candidate stateは変更していない。
+
+- C81は5 / 5 root-onlyだった。implementation、test-contract、required validationを一つのroot operationへbindした
+- C87 / C88 / C89は合計11件で`/root/independent_contract_check`を起動し、child token合計は`820,380`だった
+- 11件のWorker resultはF02-C3の再確認だけで、rootもscoped diff、test、required validation、最終done判定で同じpredicateを扱った
+- C87とC88には同時進行経路があるため、executorのsame-wave capability欠落は確認できない
+- 誤経路はdispatch順ではなく、criterion metadataを別operation identityへ昇格した上流のoperation分解で成立した
+- 診断正本: [`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)の「C81・C87・C88・C89 F02保存traceのcontrol graph診断」
+- 完了境界: C81 F02では同じ誤分解が0 / 5であり、観測されたC81失敗がない。`wave_commit`、executor変更、C81直接child、bundle、profile、追加model runは作成しない
+- 再開条件: fresh C81互換traceで同じoperation誤分解を再観測するか、別operation identityまたは別execution identityをrequired outcomeにする明示要件が追加された場合だけ、`operation_identity_ready`一軸の作成前gateへ戻る
 
 ## 3. A01の3択variation診断
 

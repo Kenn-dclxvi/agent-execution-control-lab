@@ -209,3 +209,36 @@ C87はこの一軸を`DECISION_BOUNDARY`だけの置換として実装した。D
 F04も5 / 5 score `4`で、C81比のtoken中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoffだった。両KPI悪化ではないため、D01 / F02 / F04のtargeted gateは通過した。現在状態は`targeted_d01_f02_f04_evaluated / targeted_gate_passed`である。数値とcommand evidence診断は[`F04 result`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)に置く。
 
 別stateの標準14はC81 / C87とも70 / 70 score `4`だった。一方、C87の集約中央値はtoken`+6.09%`、elapsed`+1.35%`で、両方大きい。C81は70 / 70 root-only、C87は65 / 70 root-only、5 / 70で独立contract / source check Workerを使い、child token合計は`343,692`だった。標準14用の採否thresholdは事前固定していないため、品質通過と集約コスト悪化を分離する。正本は[`標準14 result`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)に置く。
+
+## C81・C87・C88・C89 F02保存traceのcontrol graph診断
+
+2026-07-29に、既存F02 r1のC81、C87、C88、C89各`N=5`について、保存済みroot event、child rollout、all-agent usageをread-onlyで再確認した。一次result、score、candidate stateは変更していない。
+
+| 条件 | Workerあり | child token合計 | 保存trace上のoperation解釈 |
+| --- | ---: | ---: | --- |
+| C81 | 0 / 5 | `0` | implementation、test-contract、required validationを一つのroot operationへbind |
+| C87 | 3 / 5 | `170,964` | implementationをroot、F02-C3 test-contract確認を別Workerへ分離 |
+| C88 | 4 / 5 | `366,081` | C87と同じ分離。2件はroot validationと同時進行、2件はWorker完了後にvalidation開始 |
+| C89 | 4 / 5 | `283,335` | C87と同じ分離。4件ともWorkerがroot validationより先行 |
+
+C87からC89までのWorker 11件は、すべて`/root/independent_contract_check`だった。Workerはscoped diffと選定済みtestを読み、date-bound assertionの削除、緩和、skip、xfailがないというF02-C3のPASSを返した。artifact変更、required validation、Worker固有capabilityによる成果生成は行っていない。11件のchild token合計は`820,380`である。
+
+同じ11件でrootはsource変更、scoped diffまたはtest確認、focused gate、full gateを担当し、最終応答でもF02-C3を自ら成立と判定した。Worker resultのconsumerはrootの最終done判定だけであり、別artifact、rework、未発行invocationのtarget、permission、method、stop conditionへbindされなかった。
+
+したがって誤経路は、正しく分解済みの二つのoperationを誤った順序でdispatchしたものではない。`non_machine_risk=test-contract, owner=independent contract check`というcriterion metadataを、独立したoperation identityへ昇格した時点で、rootとWorkerへ同じF02-C3 predicateを重複bindしたものである。C88のsame-wave条件とC89のdispatch-time条件は、この上流の誤分解を保持したまま発行順だけを制御したため、重複operationを除けなかった。
+
+保存traceにはC87の3件とC88の2件で、Workerとroot validationが同時進行した経路がある。したがって、現時点では「executorがroot / Workerを同じwaveへ発行できない」というcapability欠落は確認できない。新しいexecutorまたはscheduler制御の根拠にも使わない。
+
+今後operation graphを再開する場合は、producer選択より前に次を満たす必要がある。
+
+```text
+operation_identity_ready :=
+  TaskSpecが要求するdistinct terminal resultがある
+  ∧ そのresultのconsumerまたはtask terminal条件が固定済み
+  ∧ criterion / validation / risk / owner / roleというmetadataだけから別operationを作っていない
+  ∧ rootまたは別producerの既存operationとpredicateが重複しない
+```
+
+criterion、required validation、non-machine riskは、TaskSpecが別resultまたは別execution identityをrequired outcomeとして明示しない限り、対象成果を作る既存operationへbindする。`operation_identity_ready=true`のoperation集合を固定した後だけproducerとwaveを選ぶ。
+
+ただしC81 F02は5 / 5 root-onlyでこの最短経路を既に成立させている。C81の保存traceにoperation誤分解は観測されていないため、この診断だけを根拠にC81直接childの新Candidate、bundle、profile、model runを作成しない。fresh C81互換traceで同じ誤分解を再観測するか、別operation identityを必要とする新しい明示要件が追加された場合だけ、`operation_identity_ready`一軸の作成前gateへ戻る。
