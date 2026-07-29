@@ -7,10 +7,12 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -36,6 +38,8 @@ try:
         collect_workspace_usage,
         parse_root_thread_id,
     )
+    from observation_delivery_audit import audit as audit_observation_delivery
+    from success_silent_delivery_audit import audit as audit_success_silent_delivery
 except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests.
     from scripts.export_prompt_bundle import (
         BundleError,
@@ -56,6 +60,8 @@ except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests
         collect_workspace_usage,
         parse_root_thread_id,
     )
+    from scripts.observation_delivery_audit import audit as audit_observation_delivery
+    from scripts.success_silent_delivery_audit import audit as audit_success_silent_delivery
 
 
 class AdapterError(Exception):
@@ -92,6 +98,34 @@ MODEL_VISIBLE_CAPABILITY_TAGS = (
     "apps_instructions",
     "plugins_instructions",
 )
+SEALED_OBSERVATION_DELIVERY = {
+    "schema_version": "the-caption-prompt.observation-delivery/v1",
+    "mode": "code_mode_only_buffered_exec",
+    "direct_tool_result_delivery": "disabled",
+    "nested_tool_result_delivery": "code_local_until_return",
+}
+SEALED_OBSERVATION_DELIVERY_FEATURES = (
+    "code_mode",
+    "code_mode_buffered_exec",
+    "code_mode_only",
+)
+SUCCESS_SILENT_DELIVERY = {
+    "schema_version": "the-caption-prompt.success-delivery/v1",
+    "mode": "success_silent_failure_unchanged",
+    "deterministic_success_delivery": "command_and_exit_code_only",
+    "failure_delivery": "unchanged_tool_result",
+    "intermediate_status_delivery": "start_blocking_or_60s_only",
+}
+PYTEST_ALLOWLIST_SUCCESS_DELIVERY = {
+    "schema_version": "the-caption-prompt.success-delivery/v2",
+    "mode": "allowlisted_success_silent_failure_unchanged",
+    "deterministic_success_delivery": "wrapper_receipt_only",
+    "failure_delivery": "unchanged_stdout_stderr_and_exit_code",
+    "intermediate_status_delivery": "start_blocking_or_60s_only",
+    "eligibility": "exact_argv_by_case",
+    "raw_evidence": "adapter_local_full_bytes",
+    "compound_commands": "ineligible",
+}
 BOUNDARY_OBSERVATION_SOURCES: dict[str, list[str]] = {
     "workspace.path": ["pwd", "-P"],
     "workspace.git.branch": ["git", "branch", "--show-current"],
@@ -99,6 +133,170 @@ BOUNDARY_OBSERVATION_SOURCES: dict[str, list[str]] = {
     "workspace.git.parent_commit": ["git", "rev-parse", "HEAD^1"],
     "workspace.git.status_short": ["git", "status", "--short"],
 }
+
+
+def observation_delivery_policy_from_parameters(
+    executor_parameters: dict[str, Any],
+) -> dict[str, str] | None:
+    policy = executor_parameters.get("observation_delivery")
+    if policy is None:
+        return None
+    if policy != SEALED_OBSERVATION_DELIVERY:
+        raise AdapterError("unsupported observation delivery policy")
+    return policy
+
+
+def observation_delivery_codex_args(policy: dict[str, str] | None) -> list[str]:
+    if policy is None:
+        return []
+    return [
+        argument
+        for feature in SEALED_OBSERVATION_DELIVERY_FEATURES
+        for argument in ("--enable", feature)
+    ] + ["-c", "suppress_unstable_features_warning=true"]
+
+
+def success_delivery_policy_from_parameters(
+    executor_parameters: dict[str, Any],
+    observation_delivery_policy: dict[str, str] | None,
+) -> dict[str, Any] | None:
+    policy = executor_parameters.get("success_delivery")
+    if policy is None:
+        return None
+    supported = policy == SUCCESS_SILENT_DELIVERY
+    if isinstance(policy, dict) and all(
+        policy.get(key) == value
+        for key, value in PYTEST_ALLOWLIST_SUCCESS_DELIVERY.items()
+    ):
+        if set(policy) != set(PYTEST_ALLOWLIST_SUCCESS_DELIVERY) | {"commands_by_case"}:
+            raise AdapterError("success delivery v2 has unsupported fields")
+        commands_by_case = policy.get("commands_by_case")
+        if not isinstance(commands_by_case, dict):
+            raise AdapterError("success delivery v2 requires commands_by_case")
+        for case_id, entries in commands_by_case.items():
+            if not isinstance(case_id, str) or not case_id or not isinstance(entries, list):
+                raise AdapterError("success delivery v2 has invalid case command entries")
+            for entry in entries:
+                validate_success_delivery_command_entry(entry)
+        supported = True
+    if not supported:
+        raise AdapterError("unsupported success delivery policy")
+    if observation_delivery_policy != SEALED_OBSERVATION_DELIVERY:
+        raise AdapterError("success delivery requires sealed observation delivery")
+    return policy
+
+
+def validate_success_delivery_command_entry(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise AdapterError("success delivery command entry must be an object")
+    group_index = value.get("required_group_index")
+    argv = value.get("argv")
+    kind = value.get("kind")
+    if not isinstance(group_index, int) or group_index < 0:
+        raise AdapterError("success delivery command entry has invalid required_group_index")
+    if not isinstance(argv, list) or not argv or not all(
+        isinstance(item, str) and item for item in argv
+    ):
+        raise AdapterError("success delivery command entry has invalid argv")
+    if any(any(marker in item for marker in ("&&", ";", "|", ">", "<", "\n")) for item in argv):
+        raise AdapterError("success delivery command entry must not be compound")
+    if kind == "pytest":
+        if len(argv) < 4 or argv[:3] != [".venv/bin/python", "-m", "pytest"]:
+            raise AdapterError("pytest success delivery requires exact venv module argv")
+        if set(value) != {"required_group_index", "kind", "argv"}:
+            raise AdapterError("pytest success delivery entry has unsupported fields")
+    elif kind == "pinned_pytest_wrapper":
+        if argv != ["bash", "scripts/dev/main_verify.sh"]:
+            raise AdapterError("pinned pytest wrapper argv is unsupported")
+        if value.get("script_path") != "scripts/dev/main_verify.sh" or not re.fullmatch(
+            r"[0-9a-f]{64}", str(value.get("script_sha256", ""))
+        ):
+            raise AdapterError("pinned pytest wrapper identity is invalid")
+        if set(value) != {
+            "required_group_index",
+            "kind",
+            "argv",
+            "script_path",
+            "script_sha256",
+        }:
+            raise AdapterError("pinned pytest wrapper entry has unsupported fields")
+    else:
+        raise AdapterError("success delivery command kind is unsupported")
+    return value
+
+
+def success_delivery_commands_for_case(
+    policy: dict[str, Any] | None,
+    case_id: str,
+    required_command_groups: list[list[str]],
+) -> list[dict[str, Any]]:
+    if policy is None or policy.get("schema_version") != "the-caption-prompt.success-delivery/v2":
+        return []
+    entries = policy["commands_by_case"].get(case_id, [])
+    if len(entries) != len(required_command_groups):
+        raise AdapterError("success delivery commands must cover every required command group")
+    seen_indices: set[int] = set()
+    result: list[dict[str, Any]] = []
+    for raw_entry in entries:
+        entry = validate_success_delivery_command_entry(raw_entry)
+        index = entry["required_group_index"]
+        if index >= len(required_command_groups) or index in seen_indices:
+            raise AdapterError("success delivery command group binding is invalid")
+        command = " ".join(entry["argv"])
+        if not all(token in command for token in required_command_groups[index]):
+            raise AdapterError("success delivery argv does not match its required command group")
+        seen_indices.add(index)
+        result.append(entry)
+    if seen_indices != set(range(len(required_command_groups))):
+        raise AdapterError("success delivery command group binding is incomplete")
+    return sorted(result, key=lambda item: item["required_group_index"])
+
+
+def prepare_success_delivery_runtime(
+    policy: dict[str, Any] | None,
+    commands: list[dict[str, Any]],
+    workspace: Path,
+) -> dict[str, Any] | None:
+    if policy is None or policy.get("schema_version") != "the-caption-prompt.success-delivery/v2":
+        return None
+    root = Path(tempfile.mkdtemp(prefix="the-caption-success-command-"))
+    evidence_dir = root / "evidence"
+    policy_path = root / "policy.json"
+    runtime_policy = {
+        "schema_version": "the-caption-prompt.success-command-runtime/v1",
+        "workspace": str(workspace.resolve()),
+        "commands": [
+            {
+                key: value
+                for key, value in entry.items()
+                if key in {"argv", "script_path", "script_sha256"}
+            }
+            for entry in commands
+        ],
+    }
+    write_json(policy_path, runtime_policy)
+    return {
+        "root": root,
+        "policy_path": policy_path,
+        "evidence_dir": evidence_dir,
+        "runtime_policy": runtime_policy,
+    }
+
+
+def finalize_success_delivery_runtime(
+    runtime: dict[str, Any] | None,
+    extension_root: Path,
+) -> None:
+    if runtime is None:
+        return
+    target = extension_root / "success-delivery"
+    try:
+        write_json(target / "command-policy.json", runtime["runtime_policy"])
+        evidence_dir = runtime["evidence_dir"]
+        if evidence_dir.is_dir():
+            shutil.copytree(evidence_dir, target / "raw-command-evidence")
+    finally:
+        shutil.rmtree(runtime["root"])
 
 
 def detect_external_failure(stderr: bytes, stdout: bytes = b"") -> dict[str, str] | None:
@@ -781,6 +979,8 @@ def render_task(
     case: dict[str, Any],
     boundary_evidence: dict[str, Any] | None = None,
     command_evidence_protocol: dict[str, Any] | None = None,
+    success_delivery_protocol: dict[str, Any] | None = None,
+    success_delivery_commands: list[dict[str, Any]] | None = None,
 ) -> str:
     payload = require_object(case.get("payload"), "case.payload")
     trial_input = require_object(payload.get("trial_prompt_input"), "case.payload.trial_prompt_input")
@@ -828,6 +1028,52 @@ def render_task(
             + json.dumps(command_evidence_protocol, ensure_ascii=False, sort_keys=True)
             + "\n</command-evidence-protocol-json>\n"
         )
+    if success_delivery_protocol is not None:
+        if success_delivery_protocol.get("schema_version") == "the-caption-prompt.success-delivery/v2":
+            commands = success_delivery_commands or []
+            wrapper = [
+                "python3",
+                str(Path(__file__).with_name("success_silent_command.py").resolve()),
+                "--",
+            ]
+            invocations = [wrapper + entry["argv"] for entry in commands]
+            public_protocol = {
+                **{
+                    key: value
+                    for key, value in success_delivery_protocol.items()
+                    if key != "commands_by_case"
+                },
+                "eligible_commands": commands,
+                "wrapper_prefix": wrapper,
+            }
+            task += (
+                "\n以下はTaskSpecを変更しないexecutorのallowlisted success delivery protocolです。"
+                "required validationは一つのcode call内で列挙順にtools.exec_commandへ個別発行してください。"
+                "次のexact invocationだけをそのまま使用してください:\n"
+                + "\n".join(f"- `{shlex.join(invocation)}`" for invocation in invocations)
+                + "\nwrapperは成功時にraw stdout / stderrをadapter localへ保存し、小さいreceiptだけを返します。"
+                "nonzero時は元のstdout / stderrとexit codeを変更せず返します。nonzero、unknown、permission要求なら"
+                "後続required commandを止め、そのresultを一度返してください。allowlist外のread、diff、status commandは"
+                "wrapperを使わず通常どおり実行し、内容をmodelへ返してください。"
+                "中間messageは開始時、blocking / unknown発生時、または前回updateから60秒を超える場合だけに限定してください。\n"
+                "<success-delivery-protocol-json>\n"
+                + json.dumps(public_protocol, ensure_ascii=False, sort_keys=True)
+                + "\n</success-delivery-protocol-json>\n"
+            )
+        else:
+            task += (
+                "\n以下はTaskSpecを変更しないexecutorのsuccess delivery protocolです。"
+                "判断を要しない正常resultを説明し直さないでください。"
+                "required validationは一つのcode call内で列挙順にtools.exec_commandへ個別発行し、"
+                "各resultをcode localに保持してください。exit_codeが0ならstdout / stderrをtextへ渡さず、"
+                "全required validation成功後に実行した完全なcommand文字列とexit_codeだけを一度返してください。"
+                "nonzero、unknown、permission要求なら後続を止め、そのtool resultを変更せず一度返してください。"
+                "中間messageは開始時、blocking / unknown発生時、または前回updateから60秒を超える場合だけに限定し、"
+                "identity一致、差分正常、validation成功をmessageで再説明しないでください。\n"
+                "<success-delivery-protocol-json>\n"
+                + json.dumps(success_delivery_protocol, ensure_ascii=False, sort_keys=True)
+                + "\n</success-delivery-protocol-json>\n"
+            )
     if boundary_evidence is not None:
         evidence = json.dumps(boundary_evidence, ensure_ascii=False, indent=2, sort_keys=True)
         task += (
@@ -953,18 +1199,40 @@ def execute() -> int:
     executor_parameters = require_object(
         conditions.get("executor_parameters"), "comparison_conditions.executor_parameters"
     )
+    observation_delivery_policy = observation_delivery_policy_from_parameters(
+        executor_parameters
+    )
     declared_command_protocol, required_command_groups = command_protocol_for_case(
         executor_parameters.get("command_evidence_protocol"),
         require_string(binding.get("case_id"), "binding.case_id"),
     )
+    success_delivery_policy = success_delivery_policy_from_parameters(
+        executor_parameters, observation_delivery_policy
+    )
+    success_delivery_commands = success_delivery_commands_for_case(
+        success_delivery_policy,
+        require_string(binding.get("case_id"), "binding.case_id"),
+        required_command_groups,
+    )
     adapter_teardown_paths = adapter_teardown_paths_from_protocol(
         binding, parameters, executor_parameters
     )
-    task = render_task(case, boundary_evidence, declared_command_protocol)
+    task = render_task(
+        case,
+        boundary_evidence,
+        declared_command_protocol,
+        success_delivery_policy,
+        success_delivery_commands,
+    )
     task_sha256 = hashlib.sha256(task.encode("utf-8")).hexdigest()
     adapter_extension = extension_root / "codex-adapter"
     final_response = adapter_extension / "final-response.txt"
     adapter_extension.mkdir(parents=True, exist_ok=True)
+    success_delivery_runtime = prepare_success_delivery_runtime(
+        success_delivery_policy,
+        success_delivery_commands,
+        workspace,
+    )
     boundary_evidence_sha256 = None
     if boundary_evidence is not None:
         boundary_evidence_bytes = (
@@ -981,6 +1249,7 @@ def execute() -> int:
         "--strict-config",
         "--enable",
         "multi_agent",
+        *observation_delivery_codex_args(observation_delivery_policy),
         "--disable",
         "memories",
         "-c",
@@ -1008,13 +1277,29 @@ def execute() -> int:
             "plugin_sharing",
         ]
     session_started_at = time.time()
-    completed = subprocess.run(
-        command,
-        cwd=workspace,
-        input=task.encode("utf-8"),
-        capture_output=True,
-        check=False,
-    )
+    command_environment = os.environ.copy()
+    if success_delivery_runtime is not None:
+        command_environment.update(
+            {
+                "CODEX_SUCCESS_COMMAND_POLICY": str(
+                    success_delivery_runtime["policy_path"]
+                ),
+                "CODEX_SUCCESS_COMMAND_EVIDENCE_DIR": str(
+                    success_delivery_runtime["evidence_dir"]
+                ),
+            }
+        )
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=workspace,
+            input=task.encode("utf-8"),
+            capture_output=True,
+            check=False,
+            env=command_environment,
+        )
+    finally:
+        finalize_success_delivery_runtime(success_delivery_runtime, extension_root)
     sys.stdout.buffer.write(completed.stdout)
     sys.stderr.buffer.write(completed.stderr)
     (adapter_extension / "codex-events.jsonl").write_bytes(completed.stdout)
@@ -1068,6 +1353,33 @@ def execute() -> int:
                 extension_root / "all-agent-usage" / "usage.json",
                 all_agent_usage,
             )
+            if observation_delivery_policy is not None:
+                write_json(
+                    extension_root / "observation-delivery" / "audit.json",
+                    audit_observation_delivery(root_rollout_file(all_agent_usage)),
+                )
+            if success_delivery_policy is not None:
+                write_json(
+                    extension_root / "success-delivery" / "audit.json",
+                    audit_success_silent_delivery(
+                        root_rollout_file(all_agent_usage),
+                        required_command_groups,
+                        (
+                            success_delivery_commands
+                            if success_delivery_policy.get("schema_version")
+                            == "the-caption-prompt.success-delivery/v2"
+                            else None
+                        ),
+                        (
+                            extension_root
+                            / "success-delivery"
+                            / "raw-command-evidence"
+                            if success_delivery_policy.get("schema_version")
+                            == "the-caption-prompt.success-delivery/v2"
+                            else None
+                        ),
+                    ),
+                )
             if capability_catalog_policy is not None:
                 try:
                     capability_catalog = capability_catalog_identity(

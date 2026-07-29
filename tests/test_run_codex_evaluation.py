@@ -12,6 +12,9 @@ from scripts.run_codex_evaluation import (
     AdapterError,
     COMMAND_EVIDENCE_PROTOCOL,
     ORDERED_ROOT_WRAPPER_PROTOCOL,
+    PYTEST_ALLOWLIST_SUCCESS_DELIVERY,
+    SEALED_OBSERVATION_DELIVERY,
+    SUCCESS_SILENT_DELIVERY,
     agents_max_threads_from_conditions,
     adapter_teardown_paths_from_protocol,
     capability_catalog_external_failure,
@@ -22,6 +25,10 @@ from scripts.run_codex_evaluation import (
     detect_external_failure,
     evaluate_boundary_observations,
     observe_boundary_source,
+    observation_delivery_codex_args,
+    observation_delivery_policy_from_parameters,
+    success_delivery_policy_from_parameters,
+    success_delivery_commands_for_case,
     prompt_fixture_collisions,
     prompt_set_identity_from_binding,
     remove_adapter_owned_outputs,
@@ -73,6 +80,151 @@ class RunCodexEvaluationTest(unittest.TestCase):
         }
         with self.assertRaisesRegex(AdapterError, "unsupported"):
             capability_catalog_policy_from_conditions(conditions)
+
+    def test_binds_sealed_observation_delivery_to_codex_feature_flags(self) -> None:
+        self.assertIsNone(observation_delivery_policy_from_parameters({}))
+        self.assertEqual(
+            observation_delivery_policy_from_parameters(
+                {"observation_delivery": SEALED_OBSERVATION_DELIVERY}
+            ),
+            SEALED_OBSERVATION_DELIVERY,
+        )
+        self.assertEqual(
+            observation_delivery_codex_args(SEALED_OBSERVATION_DELIVERY),
+            [
+                "--enable",
+                "code_mode",
+                "--enable",
+                "code_mode_buffered_exec",
+                "--enable",
+                "code_mode_only",
+                "-c",
+                "suppress_unstable_features_warning=true",
+            ],
+        )
+        with self.assertRaisesRegex(AdapterError, "unsupported"):
+            observation_delivery_policy_from_parameters(
+                {
+                    "observation_delivery": {
+                        **SEALED_OBSERVATION_DELIVERY,
+                        "direct_tool_result_delivery": "enabled",
+                    }
+                }
+            )
+
+    def test_success_delivery_requires_exact_policy_and_sealed_delivery(self) -> None:
+        self.assertIsNone(success_delivery_policy_from_parameters({}, None))
+        self.assertEqual(
+            success_delivery_policy_from_parameters(
+                {"success_delivery": SUCCESS_SILENT_DELIVERY},
+                SEALED_OBSERVATION_DELIVERY,
+            ),
+            SUCCESS_SILENT_DELIVERY,
+        )
+        with self.assertRaisesRegex(AdapterError, "requires sealed"):
+            success_delivery_policy_from_parameters(
+                {"success_delivery": SUCCESS_SILENT_DELIVERY}, None
+            )
+        with self.assertRaisesRegex(AdapterError, "unsupported"):
+            success_delivery_policy_from_parameters(
+                {
+                    "success_delivery": {
+                        **SUCCESS_SILENT_DELIVERY,
+                        "failure_delivery": "tail",
+                    }
+                },
+                SEALED_OBSERVATION_DELIVERY,
+            )
+
+    def test_success_delivery_v2_binds_exact_pytest_and_pinned_wrapper_argv(self) -> None:
+        commands = [
+            {
+                "required_group_index": 0,
+                "kind": "pytest",
+                "argv": [
+                    ".venv/bin/python",
+                    "-m",
+                    "pytest",
+                    "tests/unit/test_one.py",
+                    "-v",
+                ],
+            },
+            {
+                "required_group_index": 1,
+                "kind": "pinned_pytest_wrapper",
+                "argv": ["bash", "scripts/dev/main_verify.sh"],
+                "script_path": "scripts/dev/main_verify.sh",
+                "script_sha256": "a" * 64,
+            },
+        ]
+        policy = {
+            **PYTEST_ALLOWLIST_SUCCESS_DELIVERY,
+            "commands_by_case": {"TC-F02": commands},
+        }
+
+        selected = success_delivery_policy_from_parameters(
+            {"success_delivery": policy}, SEALED_OBSERVATION_DELIVERY
+        )
+
+        self.assertEqual(selected, policy)
+        self.assertEqual(
+            success_delivery_commands_for_case(
+                selected,
+                "TC-F02",
+                [["pytest", "tests/unit/test_one.py"], ["bash", "scripts/dev/main_verify.sh"]],
+            ),
+            commands,
+        )
+
+    def test_success_delivery_v2_rejects_compound_or_incomplete_allowlist(self) -> None:
+        compound = {
+            **PYTEST_ALLOWLIST_SUCCESS_DELIVERY,
+            "commands_by_case": {
+                "TC-F02": [
+                    {
+                        "required_group_index": 0,
+                        "kind": "pytest",
+                        "argv": [
+                            ".venv/bin/python",
+                            "-m",
+                            "pytest",
+                            "tests/unit/test_one.py && git status",
+                        ],
+                    }
+                ]
+            },
+        }
+        with self.assertRaisesRegex(AdapterError, "must not be compound"):
+            success_delivery_policy_from_parameters(
+                {"success_delivery": compound}, SEALED_OBSERVATION_DELIVERY
+            )
+
+        valid = {
+            **PYTEST_ALLOWLIST_SUCCESS_DELIVERY,
+            "commands_by_case": {
+                "TC-F02": [
+                    {
+                        "required_group_index": 0,
+                        "kind": "pytest",
+                        "argv": [
+                            ".venv/bin/python",
+                            "-m",
+                            "pytest",
+                            "tests/unit/test_one.py",
+                        ],
+                    }
+                ]
+            },
+        }
+        selected = success_delivery_policy_from_parameters(
+            {"success_delivery": valid}, SEALED_OBSERVATION_DELIVERY
+        )
+        with self.assertRaisesRegex(AdapterError, "cover every required"):
+            success_delivery_commands_for_case(
+                selected,
+                "TC-F02",
+                [["pytest", "tests/unit/test_one.py"], ["bash", "verify.sh"]],
+            )
 
     def test_extracts_and_hashes_only_model_visible_capability_blocks(self) -> None:
         skills = "<skills_instructions>\nseven skills\n</skills_instructions>"
@@ -391,6 +543,46 @@ class RunCodexEvaluationTest(unittest.TestCase):
         self.assertIn("全resultを一度だけmodelへ返", task)
         self.assertIn("compound command、`&&`、`;`で結合しない", task)
         self.assertIn('"schema_version": "the-caption-prompt.command-evidence-protocol/v2"', task)
+
+    def test_render_task_adds_success_silent_delivery_without_changing_taskspec(self) -> None:
+        case = {"payload": {"trial_prompt_input": {"task_id": "TC-F02"}}}
+
+        task = render_task(case, success_delivery_protocol=SUCCESS_SILENT_DELIVERY)
+
+        self.assertIn('<task-spec-json>\n{\n  "task_id": "TC-F02"', task)
+        self.assertIn("stdout / stderrをtextへ渡さず", task)
+        self.assertIn("nonzero、unknown、permission要求", task)
+        self.assertIn("<success-delivery-protocol-json>", task)
+
+    def test_render_task_v2_wraps_only_exact_allowlisted_commands(self) -> None:
+        case = {"payload": {"trial_prompt_input": {"task_id": "TC-F02"}}}
+        commands = [
+            {
+                "required_group_index": 0,
+                "kind": "pytest",
+                "argv": [
+                    ".venv/bin/python",
+                    "-m",
+                    "pytest",
+                    "tests/unit/test_one.py",
+                    "-v",
+                ],
+            }
+        ]
+        policy = {
+            **PYTEST_ALLOWLIST_SUCCESS_DELIVERY,
+            "commands_by_case": {"TC-F02": commands},
+        }
+
+        task = render_task(
+            case,
+            success_delivery_protocol=policy,
+            success_delivery_commands=commands,
+        )
+
+        self.assertIn("success_silent_command.py -- .venv/bin/python -m pytest", task)
+        self.assertIn("allowlist外のread、diff、status command", task)
+        self.assertIn("元のstdout / stderrとexit codeを変更せず", task)
 
     def test_selects_ordered_root_wrapper_protocol_for_current_case(self) -> None:
         declaration = {

@@ -27,6 +27,13 @@
 | [`Candidate87`](candidate87-adoption-decision.md) | `standard14_evaluated / not_adopted / stopped` | 品質差なし、集約token・elapsedともに増加。C81を維持し、release・本体反映へ進めない |
 | [`Candidate88`](candidate88-parallel-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | 逐次Workerを観測し、token・elapsedもともに悪化。F04以降へ進めない |
 | [`Candidate89`](candidate89-dispatch-time-worker-admission-design.md) | `targeted_f02_evaluated / stopped` | dispatch gateが実発行順を制約できず、token・elapsedもともに悪化。F04以降へ進めない |
+| [`Candidate90`](../evaluations/results/candidate81-candidate90-tool-output-ingress-boundary-v14-medium-f02-n5_2026-07-29.md) | `targeted_f02_evaluated / stopped` | 取得時projectionが0 / 5で、token・elapsedもともに悪化。F04以降へ進めない |
+| [`Candidate91`](../evaluations/results/candidate81-candidate91-concise-output-ingress-v14-medium-f02-n5_2026-07-29.md) | `targeted_f02_evaluated / stopped` | 短文化でwrapper使用は増えたがstrict compliance 2 / 5、token・elapsedも悪化。prompt改訂とF04以降へ進めない |
+| [`Candidate92`](../evaluations/results/candidate81-candidate92-bound-output-route-v14-medium-f02-n5_2026-07-29.md) | `targeted_f02_evaluated / stopped` | pre-command routeは5 / 5、capは3 / 5。read細分化でtoken・elapsedが悪化し、F04以降へ進めない |
+| [`Candidate93`](../evaluations/results/candidate81-candidate93-result-classification-v14-medium-f02-n5_2026-07-29.md) | `targeted_f02_evaluated / stopped` | 3分類機構は0 / 5。KPI改善は帰属不能で、F04以降へ進めない |
+| [Observation delivery executor A/B](../evaluations/results/candidate81-observation-delivery-executor-ab-v14-medium-f02-n5_2026-07-29.md) | `executor_f02_evaluated / stopped` | 直接result禁止は5 / 5で成立したが、model再入は中央値7・合計36で不変。次は外側code returnをterminal waveへ制約できる場合だけ再開 |
+| [Success-silent delivery](../evaluations/results/candidate81-success-silent-delivery-v14-medium-f02-n5_2026-07-29.md) | `executor_f02_evaluated / cost_reduced / F04未実施` | 成功validation rawを配送せず5 / 5 score 4。sealed control比token中央値-17.86%、合計-21.60%。次はF04互換A/Bで再現性を確認 |
+| [Pytest exact allowlist success delivery](../evaluations/results/candidate81-success-delivery-executor-ab-v14-medium-f06-n5_2026-07-29.md) | `executor_f02_f06_evaluated / output_reduced / cost_control_failed / transparent_runtime_probe_failed / executor_hook_unavailable / stopped` | F06 matched A/Bは両条件5 / 5 score 4。output合計-64.47%だがtoken中央値+41.76%、合計+22.29%。runtime shimはallowlist外Pythonの`sys.executable`を変更し、Codex CLI 0.146.0のPostToolUse hookもoutput抑制・置換を提供しないためprofile作成前に停止 |
 | C81・C87・C88・C89 F02 control graph診断 | 完了・新Candidateなし | 保存trace診断で上流のoperation誤分解を特定。fresh C81互換traceで再観測した場合だけ再開 |
 | A01の3択variation診断 | 完了・新Candidateなし | 修正版30 / 30 valid。補集合選択、候補順依存、過剰停止を再現せず終了 |
 | 投影済みCandidate71のrisk整理 | 完了・監視 | 現在は非再現。fresh traceで未固定値の誤実行を再観測した場合だけ再開 |
