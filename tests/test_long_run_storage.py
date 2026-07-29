@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+import sys
 import tarfile
 import tempfile
 import unittest
@@ -202,6 +203,53 @@ class LongRunStorageTest(unittest.TestCase):
                 f"cycle/layer2/evidence/{run_id}/workspace/src.py", archived_paths
             )
             self.assertGreater(receipt["allocated_bytes_reclaimed"], 0)
+
+    @unittest.skipUnless(shutil.which("zstd"), "zstd is required")
+    def test_seal_cli_prunes_matching_codex_project_config(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            batch, run_id = self.make_batch(root)
+            workspace = (
+                batch.resolve()
+                / "cycle"
+                / "layer2"
+                / "evidence"
+                / run_id
+                / "workspace"
+            )
+            config = root / "config.toml"
+            config.write_text(
+                f'[projects."{workspace}"]\ntrust_level = "trusted"\n',
+                encoding="utf-8",
+            )
+            script = (
+                Path(__file__).parents[1]
+                / "layer2/extensions/long_run_storage/long_run_storage.py"
+            )
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "seal-batch",
+                    "--batch",
+                    str(batch),
+                    "--codex-config",
+                    str(config),
+                ],
+                capture_output=True,
+                check=True,
+                text=True,
+            )
+
+            output = json.loads(completed.stdout)
+            cleanup = output["codex_project_config_cleanup"]
+            self.assertEqual(cleanup["status"], "updated")
+            self.assertEqual(cleanup["removed_paths"], [str(workspace)])
+            self.assertNotIn(str(workspace), config.read_text(encoding="utf-8"))
+            self.assertTrue(
+                (batch / "compact/codex-project-config-prune-receipt.json").is_file()
+            )
 
     @unittest.skipUnless(shutil.which("zstd"), "zstd is required")
     def test_seal_rejects_valid_run_without_all_agent_usage(self) -> None:

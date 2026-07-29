@@ -24,11 +24,23 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from scripts.storage_copy import COPY_MODE_ENV, StorageCopyError, materialize_tree
 
+from layer2.extensions.long_run_storage.codex_config_cleanup import (
+    CodexConfigCleanupError,
+    maintain_codex_config_for_batch,
+)
+
 
 GIB = 1024**3
 DEFAULT_DISPATCH_STOP_GIB = 25.0
 DEFAULT_HARD_FLOOR_GIB = 20.0
 ZSTD_LONG_WINDOW_LOG = 27
+
+
+def default_codex_config() -> Path:
+    codex_root = os.environ.get("CODEX_HOME")
+    if codex_root:
+        return Path(codex_root).expanduser() / "config.toml"
+    return Path.home() / ".codex" / "config.toml"
 
 
 class LongRunStorageError(Exception):
@@ -668,6 +680,8 @@ def build_parser() -> argparse.ArgumentParser:
     seal = subparsers.add_parser("seal-batch", help="seal rating evidence and prune workspaces")
     seal.add_argument("--batch", type=Path, required=True)
     seal.add_argument("--zstd-level", type=zstd_level, default=6)
+    seal.add_argument("--codex-config", type=Path, default=default_codex_config())
+    seal.add_argument("--skip-codex-config-cleanup", action="store_true")
 
     compact = subparsers.add_parser("compact-batch", help="compress a registered batch")
     compact.add_argument("--batch", type=Path, required=True)
@@ -694,6 +708,16 @@ def main() -> int:
             )
         elif args.command == "seal-batch":
             result = seal_batch(args.batch, args.zstd_level)
+            if not args.skip_codex_config_cleanup:
+                try:
+                    result["codex_project_config_cleanup"] = maintain_codex_config_for_batch(
+                        args.batch, args.codex_config
+                    )
+                except (CodexConfigCleanupError, OSError) as exc:
+                    result["codex_project_config_cleanup"] = {
+                        "status": "warning",
+                        "error": str(exc),
+                    }
         else:
             result = compact_batch(args.batch, args.zstd_level)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
