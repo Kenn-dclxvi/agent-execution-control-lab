@@ -256,6 +256,8 @@ python3 scripts/owner_producer_evidence.py \
 
 `owner_producer_evidence.py`のexit `0`は全valid runでowner-producer evidenceがbindできたこと、exit `1`は1件以上で欠落または不一致があることを示す。**現行のv13ではこのexit codeをscoreの上限へ変換しない。** owner-producer evidenceは`diagnostic_only`であり、exit `1`のrunも診断として記録したうえで、提示した成果条件・禁止境界・コマンド名まで明示された必須試験の充足だけで0〜4を採点する（充足していればscore `4`を記録する）。実装も`owner_producer_evidence_policy`が`score_4_gate`のrevisionだけscore `4`を拒否する。
 
+F10 MonthlyまたはD01のtargeted reviewを採点する場合は、[`targeted_review_quality_audit.py`](../scripts/targeted_review_quality_audit.py)を使う。`--expected-set-id`、`--expected-set-revision`、`--expected-run-count`を明示し、rating contract IDはvalid bindingの`comparison_conditions.quality_rating.contract_id`から一意に取得する。campaign固有scriptから`monthly_review_failures`または`monthly_review_rating`をcontract IDなしで呼び出してはならない。v11以降の数値lineはdiagnosticであり、v10既定値へfallbackさせない。
+
 v1〜v8では同じexit `1`がscore `4`の拒否条件だった。この扱いはv8以前で採点した既存resultの条件として保持し、v9以降の新規runへ適用しない。
 
 ```bash

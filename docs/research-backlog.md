@@ -28,6 +28,80 @@
 A01のscore `1`で確認した文面依存の偽陰性には、Rating v14を追加して対応した。v14は疑問符や質問語を採点せず、未固定値、terminal response、zero drift、試験・変更operation未開始から`awaiting_required_value`状態を作る。v13のB20公式scoreはimmutableなまま保持し、v14の新規model runや再採点resultはまだ作成していない。
 - 旧分析が作業呼称として使った「Candidate74」は別軸へ割り当て済みであり、履歴上の呼称としてのみ保持する
 
+### Candidate83: Worker価値による委譲境界（F02評価完了・停止）
+
+Candidate82のF02 / F04誤起動を、Worker一律禁止ではなく`delegation_value_ready`で扱う。AIは独立性、並列化、context分割、worker固有capabilityに固有価値がある場合にWorkerを選べる。一方、criterion owner語列だけの起動と、rootが同じpredicateを処理する逐次重複は許可しない。
+
+- 設計正本: [`candidate83-delegation-value-boundary-design.md`](candidate83-delegation-value-boundary-design.md)
+- prompt identity: `the-caption-3ce91a4-delegation-value-boundary-r1`
+- bundle SHA-256: `0e3fd8e8b24b82f84fad1d2e9c68f391a7e3fa722b82fcfc5cbff80a2d6bf852`
+- F02結果: [`Rating v14 Medium F02 N=5`](../evaluations/results/candidate83-delegation-value-boundary-v14-medium-f02-n5_2026-07-28.md)。5 / 5 score `4`だったが、5 / 5で不要Workerを起動し、1 runは同じ確認を別Workerへ再割当てした
+- immutable評価state: `targeted_f02_evaluated / stopped`
+- 現在解釈: [`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)により`quality_passed / cost_control_not_demonstrated`。Worker起動自体は失敗条件にしないが、互換baselineと事前toleranceがないため追加評価、採用、release、本体反映へ進めない
+
+### Candidate84: Worker限界価値の状態境界（F02評価完了・停止）
+
+Candidate83の`TaskSpecが独立性を要求`という語義判定を削除し、Worker専有scopeと実質的な限界価値を状態として判定する。criterion owner、risk owner、`independent`語列、独立確認という作業名だけではWorkerを起動しない。一方、別execution identity、並列化、context分離、固有capability、未解決判断に実質的価値があればAIがWorkerを選べる。
+
+- 設計正本: [`candidate84-delegation-marginal-value-boundary-design.md`](candidate84-delegation-marginal-value-boundary-design.md)
+- prompt identity: `the-caption-3ce91a4-delegation-marginal-value-boundary-r1`
+- bundle SHA-256: `b58ab2d14417be459dc8fd2a66cd1d48c1f8ae538e1e58a38148cb9598825d82`
+- F02結果: [`Rating v14 Medium F02 N=5`](../evaluations/results/candidate84-delegation-marginal-value-boundary-v14-medium-f02-n5_2026-07-28.md)。5 / 5 score `4`、3 / 5 root-onlyだったが、2 / 5で不要Workerを起動した
+- immutable評価state: `targeted_f02_evaluated / stopped`
+- 現在解釈: [`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)により`quality_passed / cost_control_mixed`。Workerあり2件のうち並行経路と逐次経路が混在し、互換baselineと事前toleranceもないため追加評価、採用、release、本体反映へ進めない
+
+### Candidate85: planning-first producer selection（F02・F04評価完了・停止）
+
+C83 / C84でWorkerの期待価値をprompt内predicateへ展開した方向を停止した。C85はC81を直接親とし、AIが実行前planningでoperation graph、producer、dependency、execution waveを一体として決める。既存F02 r1、F04 r2、D01 r1のTaskSpec、fixture、oracleは変更しない。Workerを含む経路全体は互換な品質・all-agent token・elapsedで判定し、routingはdiagnosticへ戻す。
+
+- 正本: [`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)
+- 設計: [`Candidate85 planning-first producer selection設計`](candidate85-planning-first-producer-selection-design.md)
+- prompt identity: `the-caption-3ce91a4-planning-first-producer-selection-r1`
+- bundle SHA-256: `293e1457a9de4501574a31cad281990244aaea0f6c1a927a25356b00b99fd48d`
+- route診断: [`Planning-first route diagnostic`](planning-first-route-diagnostic.md)
+- 評価profile: C81 / C85それぞれF02、F04、D01をRating v14、Medium、`N=5`で固定。各pairはprompt identity以外を一致させる
+- 事前cost tolerance: token `0`、elapsed `0`
+- F02結果: [`Candidate81 / Candidate85 Rating v14 Medium F02 N=5`](../evaluations/results/candidate81-candidate85-planning-first-v14-medium-f02-n5_2026-07-28.md)。両条件5 / 5 score `4`、C85はtoken中央値`-0.94%`、elapsed中央値`+5.32%`の`cost_tradeoff`
+- F04結果: [`Candidate81 / Candidate85 Rating v14 Medium F04 N=5`](../evaluations/results/candidate81-candidate85-planning-first-v14-medium-f04-n5_2026-07-28.md)。両条件5 / 5 score `4`、C85はtoken中央値`+38.29%`、elapsed中央値`+24.70%`の`cost_control_failed`
+- route: C81 / C85ともF02・F04の全runがroot-only。C85は全runで最初のcommand前にproducerを固定したが、F04のコスト悪化はWorker起動なしで発生した
+- 現在境界: `targeted_f02_f04_evaluated / stopped`。D01 profileは未実行のまま保持し、標準14、採用、release、本体反映へ進めない
+
+### Candidate86: producer plan fast path（F02・F04・D01評価完了・停止）
+
+C85のplanning-first順序は維持し、単一operationでも完全なoperation graphと明示planを維持する経路を除く。C81を直接親とし、独立した`PLAN` labelを追加せず、既存`PRODUCER`、`OWNER_ROLE`、`DECISION_BOUNDARY`だけを置換する。
+
+- 設計: [`Candidate86 producer plan fast path設計`](candidate86-producer-plan-fast-path-design.md)
+- prompt identity: `the-caption-3ce91a4-producer-plan-fast-path-r1`
+- bundle SHA-256: `053b23c2a51ed58e7cc1e2bc6c6e973b72f04f1e1058dcbed22d0e7fc6e93a51`
+- root prompt本文: `5,914 bytes`。C81比`+389 bytes`、C85比`-625 bytes`
+- 評価profile: 既存F02 r1、F04 r2、D01 r1を再利用したC81 / C86 pair。新しいcase、fixture、oracle、Evaluation setは作成していない
+- 評価順: F02、通過時だけF04、さらに通過時だけD01
+- 事前cost tolerance: token `0`、elapsed `0`
+- F02結果: [`Rating v14 Medium F02 N=5`](../evaluations/results/candidate81-candidate86-producer-plan-fast-path-v14-medium-f02-n5_2026-07-29.md)。両条件5 / 5 score `4`、token中央値`-2.44%`、elapsed中央値`+1.43%`の`cost_tradeoff`
+- F04結果: [`Rating v14 Medium F04 N=5`](../evaluations/results/candidate81-candidate86-producer-plan-fast-path-v14-medium-f04-n5_2026-07-29.md)。両条件5 / 5 score `4`、C86 root-only 5 / 5、token中央値`+6.77%`、elapsed中央値`-6.03%`の`cost_tradeoff`
+- D01結果: [`Rating v14 Medium D01 N=5`](../evaluations/results/candidate81-candidate86-producer-plan-fast-path-v14-medium-d01-n5_2026-07-29.md)。両条件5 / 5 score `4`かつ指定worker route成立。C86はtoken中央値`+83.28%`、elapsed中央値`+45.81%`の`cost_control_failed`
+- route診断: C86 childのcustom exec call合計がC81の`13`から`41`へ増え、child token合計は`340,228`から`873,848`へ増えた
+- 現在境界: `targeted_f02_f04_d01_evaluated / stopped`。標準14、採用、release、本体反映へ進めない
+
+### Candidate87: producer-local invocation wave（標準14品質通過・集約コスト悪化）
+
+C86 D01のコスト悪化を、Worker起動判断ではなくbind済みproducer内部のinvocation分割へ限定する。C86を直接親とし、`DECISION_BOUNDARY`だけを置換する。
+
+- 設計: [`Candidate87 producer-local invocation wave設計`](candidate87-producer-local-invocation-wave-design.md)
+- prompt identity: `the-caption-3ce91a4-producer-local-invocation-wave-r1`
+- bundle SHA-256: `b5f581afa5fafa941c7d9974abc127d50acc488085a63d85974b8bd8047b4e67`
+- root prompt本文: `6,278 bytes`。C86比`+364 bytes`
+- 変更軸: root / worker共通で、decision boundary、明示order、fail-stop dependencyを持たない同一operation内invocationを一つのcustom exec wrapperから同時発行する
+- 試験: 既存D01 r1でC86 / C87一軸qualification。通過後だけ保存済みC81 D01との比較、F02 r1、F04 r2へ進む
+- 新しいcase、fixture、oracle、Evaluation set: 作成しない
+- D01結果: [`Rating v14 Medium D01 N=5`](../evaluations/results/candidate86-candidate87-producer-local-invocation-wave-v14-medium-d01-n5_2026-07-29.md)。指定worker routeは5 / 5件で成立し、C86比でchild custom exec call合計`41 → 12`、token中央値`-51.06%`、elapsed中央値`-26.54%`
+- 品質結果: append-only訂正後はscore `4 = 5`。当初の`4 / 3 = 4 / 1`は、個別監査がv14 contract IDを渡さずv10規則を適用した誤採点だった。詳細は[`rating contract binding訂正`](../evaluations/results/targeted-review-rating-contract-binding-correction_2026-07-29.md)
+- C81比較: token中央値`-14,694`（`-10.29%`）、elapsed中央値`+6.606`秒（`+7.12%`）。両KPI悪化の停止条件には該当しない
+- F02結果: [`Rating v14 Medium F02 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f02-n5_2026-07-29.md)。5 / 5 score `4`、C81比のtoken中央値`-5.26%`、elapsed中央値`-10.63%`でgate通過。token合計は`+16.06%`で分布はmixed
+- F04結果: [`Rating v14 Medium F04 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)。5 / 5 score `4`、C81比のtoken中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoff。両KPI悪化の停止条件には非該当
+- 標準14結果: [`Rating v14 Medium標準14 N=5`](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)。C81 / C87とも70 / 70 score `4`。C87はtoken中央値`+6.09%`、elapsed中央値`+1.35%`で、集約コストは両方大きい
+- 現在境界: `standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`。採用、release、本体反映は未実施・未判断
+
 ## 3. A01の3択variation診断
 
 **2026-07-28に完了。** A01の現行2択caseを回帰基準として変更せず、現在値と候補順を3通り回転した`AMBIGUOUS` / `AUTHORITY`の6 caseを追加した。

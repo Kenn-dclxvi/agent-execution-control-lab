@@ -10,9 +10,13 @@
 - `total_tokens`: root agentと、そのrunから起動された全SA sessionの最終token usageの合計
 - `elapsed_seconds`: task開始から終了までの時間
 
+Worker routing、child session数、root / child token内訳、並列／逐次実行、再割当てはdiagnosticであり、KPIへ追加しない。比較viewはこれらの診断値をKPI差の説明に使えるが、Worker起動の有無だけで品質またはコスト判定を反転させない。
+
 各iterationの`total_tokens`と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は`1..N`の中央値である。数値差は明示したminuend resultからsubtrahend resultを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。
 
 このworkflowはpromptの作成、改善、採用、release判断、THE-CAPTION本体反映を行わない。
+
+採用側がtokenまたはelapsedの許容幅を使う場合、その値、直接baseline、比較単位をcandidate result確認前に別artifactへ固定する。Layer 4は許容幅やwinnerを生成せず、compatibility keyが異なるresultを正式なコスト判定へ渡さない。
 
 ## 保存単位
 
