@@ -77,6 +77,8 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 単一caseまたは少数反復の結果を、評価範囲外へ一般化しない。
 このhostの新規試験はprofileの`max_workers=24`を固定する。readyなslot数が24未満でも設定値をslot数へ合わせて変更せず、実際の同時実行数とprofileへ固定した並列上限を区別する。
 
+上記は履歴prompt-set resultの完全一致条件である。atomic run経路では、prompt以外のEvaluation set、case、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、token accountingを実効互換条件とする。`N`、coverage、iteration集合、計画順序、`max_workers`はexecution provenanceへ分離し、run poolのmember identityにしない。異なる`max_workers`のrunを同じpoolで再利用する場合も、analysisはexecution stratum別の件数と差分を保持する。
+
 ## Model-visible境界
 
 - TaskSpecと適用されるrepository authorityをmodel-visible入力として扱う。

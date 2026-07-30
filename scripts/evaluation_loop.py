@@ -526,10 +526,41 @@ def validate_comparison_conditions(value: Any) -> dict[str, Any]:
     return conditions
 
 
+def validate_atomic_run_conditions(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise EvaluationError("comparison_conditions must be an object")
+    conditions = dict(value)
+    for key in REQUIRED_COMPARISON_CONDITIONS:
+        if key == "repetition_condition":
+            continue
+        if key not in conditions or conditions[key] is None:
+            raise EvaluationError(f"comparison_conditions.{key} is required")
+        if isinstance(conditions[key], str) and not conditions[key].strip():
+            raise EvaluationError(f"comparison_conditions.{key} must not be empty")
+    if "repetition_condition" in conditions:
+        raise EvaluationError("atomic run conditions must not contain repetition_condition")
+    executor_parameters = conditions["executor_parameters"]
+    if not isinstance(executor_parameters, dict):
+        raise EvaluationError("comparison_conditions.executor_parameters must be an object")
+    if executor_parameters.get("token_accounting") != TOKEN_ACCOUNTING:
+        raise EvaluationError(
+            "comparison_conditions.executor_parameters.token_accounting must use all_agents/v1"
+        )
+    if conditions["quality_rating"] not in SUPPORTED_QUALITY_RATINGS:
+        raise EvaluationError(
+            "comparison_conditions.quality_rating uses an unsupported contract revision"
+        )
+    return conditions
+
+
 def validate_run_capsule(
     capsule: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
-    if capsule.get("schema_version") != "the-caption-prompt.execution-capsule/v2":
+    capsule_schema = capsule.get("schema_version")
+    if capsule_schema not in {
+        "the-caption-prompt.execution-capsule/v2",
+        "the-caption-prompt.execution-capsule/v3",
+    }:
         raise EvaluationError("run capsule has an unsupported schema_version")
     binding = capsule.get("binding")
     adapter = capsule.get("adapter")
@@ -538,7 +569,15 @@ def validate_run_capsule(
     identity = validate_prompt_set_identity(binding.get("prompt_set_identity"))
     case_id = require_non_empty_string(binding.get("case_id"), "binding.case_id")
     iteration = require_positive(binding.get("iteration"), "binding.iteration")
-    conditions = validate_comparison_conditions(capsule.get("comparison_conditions"))
+    sample_id = binding.get("sample_id")
+    if sample_id is not None:
+        sample_id = require_non_empty_string(sample_id, "binding.sample_id")
+    if capsule_schema == "the-caption-prompt.execution-capsule/v3":
+        if sample_id is None:
+            raise EvaluationError("atomic run capsule requires binding.sample_id")
+        conditions = validate_atomic_run_conditions(capsule.get("comparison_conditions"))
+    else:
+        conditions = validate_comparison_conditions(capsule.get("comparison_conditions"))
     argv = adapter.get("argv")
     if not isinstance(argv, list) or not argv or not all(
         isinstance(item, str) and item for item in argv
@@ -549,6 +588,7 @@ def validate_run_capsule(
         "prompt_set_identity_sha256": identity_sha256(identity),
         "case_id": case_id,
         "iteration": iteration,
+        "sample_id": sample_id,
     }, conditions, argv
 
 
@@ -699,6 +739,8 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
         "comparison_conditions_sha256": identity_sha256(conditions),
         "status": status,
     }
+    if binding_input["sample_id"] is not None:
+        binding["sample_id"] = binding_input["sample_id"]
     write_json_once(evidence / "execution.json", execution)
     write_json_once(cycle / "layer2" / "bindings" / f"{run_id}.json", binding)
     result = {"layer": 2, "run_id": run_id, "evidence": str(evidence), "status": status}

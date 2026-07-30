@@ -52,6 +52,7 @@ def prepare_global_plan(
     max_workers: int = DEFAULT_MAX_WORKERS,
     max_attempts: int = 3,
     monitor_interval_seconds: int = 15,
+    resource_class: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     iterations = sorted(
         {require_positive_integer(value, "iteration") for value in selected_iterations}
@@ -142,6 +143,10 @@ def prepare_global_plan(
         "monitor_interval_seconds": monitor_interval_seconds,
         "jobs": jobs,
     }
+    if resource_class is not None:
+        if not isinstance(resource_class, dict) or not resource_class:
+            raise ParallelRunError("resource_class must be a non-empty object")
+        plan["resource_class"] = resource_class
     plan_path = output / "global-plan.json"
     write_json_once(plan_path, plan)
     return {
@@ -164,12 +169,18 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--max-workers", type=int, default=DEFAULT_MAX_WORKERS)
     result.add_argument("--max-attempts", type=int, default=3)
     result.add_argument("--monitor-interval-seconds", type=int, default=15)
+    result.add_argument("--resource-class")
     return result
 
 
 def main() -> int:
     args = parser().parse_args()
     try:
+        resource_class = (
+            json.loads(Path(args.resource_class).read_text(encoding="utf-8"))
+            if args.resource_class
+            else None
+        )
         result = prepare_global_plan(
             [Path(path) for path in args.template],
             args.iteration,
@@ -180,8 +191,9 @@ def main() -> int:
             args.max_workers,
             args.max_attempts,
             args.monitor_interval_seconds,
+            resource_class,
         )
-    except (ParallelRunError, OSError) as exc:
+    except (ParallelRunError, OSError, json.JSONDecodeError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))

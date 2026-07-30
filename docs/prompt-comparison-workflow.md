@@ -2,7 +2,7 @@
 
 ## 目的
 
-固定条件下で1つのprompt setを実行した結果を独立して保存し、後から互換条件を満たす2つ以上のresultを任意に取得・比較する。
+固定条件下の各runを独立して保存し、後から実効互換条件を満たす任意のrun集合を固定して集計・比較する。`N`はrunのidentityではなく、分析時に選択したsample件数とする。
 
 扱うKPIは次の3つだけとする。
 
@@ -12,7 +12,7 @@
 
 Worker routing、child session数、root / child token内訳、並列／逐次実行、再割当てはdiagnosticであり、KPIへ追加しない。比較viewはこれらの診断値をKPI差の説明に使えるが、Worker起動の有無だけで品質またはコスト判定を反転させない。
 
-各iterationの`total_tokens`と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は`1..N`の中央値である。数値差は明示したminuend resultからsubtrahend resultを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。
+選択した各sampleの`total_tokens`と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は選択sampleの中央値である。数値差は明示したcandidate analysisからreference analysisを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。
 
 このworkflowはpromptの作成、改善、採用、release判断、THE-CAPTION本体反映を行わない。
 
@@ -20,9 +20,11 @@ Worker routing、child session数、root / child token内訳、並列／逐次�
 
 ## 保存単位
 
-一次結果の単位は、1つのEvaluation set上で1つのimmutableな`prompt_set_identity`を`1..N`回実行したprompt set resultである。1 cycleへ複数prompt setを混ぜず、比較相手やcondition labelを保存identityにしない。
+2026-07-31以降の一次保存単位は、1つのimmutableな`prompt_set_identity`、1 case、1 sampleにbindしたatomic runである。run poolはprompt identityとcase別の実効条件だけを持つ検索索引であり、member一覧、`N`、coverage、iteration集合を持たない。
 
-実行schedulerは保存単位ではない。任意個prompt setの独立cycleに属する未実行slotを一つのcampaign global queueへ入れてよい。新規比較では保存済み互換resultを先に再利用し、不足slotだけを推定所要時間の長い順で発行する。このhostの新規試験は外側並列上限を`M=24`へ固定し、readyなslotが24件未満でもprofileの`max_workers`をslot数へ合わせて下げない。実際の同時実行数はreadyなslot数により24未満になり得るが、試験ごとの環境最適化として扱わない。prompt setを理由なく直列実行しない。
+`desired-count`は不足runをmaterializeするwrite-once dispatch planだけに置く。例えば同じpoolにcomplete sampleが5件あり、100件を要求した場合は、既存5件を再利用し、95 sample分だけを発行する。分析時は使用するatomic run IDをselection receiptへ固定し、その派生analysisを作る。既存selection、analysis、runを更新しない。
+
+実行schedulerは分析互換性と分離する。同じ`resource_class`で実行できる独立runは、prompt、case、coverage、計画sample数が異なっても一つのpair-aware global queueへ入れてよい。比較対象の同一case / sampleを近接配置しつつ、空いたworkerへ次のready runを投入する。このhostの新規試験は外側並列上限を`M=24`へ固定する。
 
 `prompt_set_identity`は少なくとも次を含む。
 
@@ -73,7 +75,7 @@ prompt bundle pathやprompt固有parameterを`comparison_conditions.executor_par
 
 Agentがmodelへ提示するskill、app、plugin catalogが変わり得る実行では、その有効・無効policyとmodel-visible catalog identityを`comparison_conditions.agent_environment`へ固定する。adapterはroot rolloutの`skills_instructions / apps_instructions / plugins_instructions` blockからidentityを計算する。expected identityと異なるrunは外部計測失敗として除外し、同じslotを再実行する。profile上のruntime identityだけで実効catalog一致を推定しない。
 
-Layer 1は`.git`内部を除くfixtureのpath、type、mode、contentまたはsymlink targetからcase別fixture identityを計算する。resultの互換条件にはEvaluation setの`set_id`、`revision`、content identity、case別fixture identity、Run capsuleの全`comparison_conditions`、case集合、iteration集合を含める。
+Layer 1は`.git`内部を除くfixtureのpath、type、mode、contentまたはsymlink targetからcase別fixture identityを計算する。atomic runの実効条件にはEvaluation set identity、対象case、case別fixture identity、TaskSpec、model、Agent/runtime/CLI、permission、executor挙動、rating、token accountingを含める。`N`、coverage、iteration集合、計画順序、`max_workers`は実効条件へ含めず、完全なexecution provenanceとstratumとしてrunへ保存する。
 
 保存済みresultを基準にする比較では、fixtureを同じsourceから再生成しない。基準resultと対応する保存済みLayer 1を`prepare-comparison-layer1`で検証・複製し、candidate capsuleとglobal planの生成後に`preflight-comparison`で全互換条件を照合する。比較用Layer 1の生成receiptがあるcycleでは、Layer 2がpreflight receiptを実行直前に再検証する。
 
@@ -104,6 +106,22 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 
 ## Append-only result registry
 
+### Atomic run registry（現行）
+
+[`atomic_run_registry.py`](../scripts/atomic_run_registry.py)は次をwrite-onceで保存する。
+
+```text
+<registry>/
+├── runs/<atomic_run_id>.json
+└── pools/<pool_key>.json
+```
+
+`runs/`は1 runのidentity、実効条件、execution provenance、3 KPI、sourceを保持する。`pools/`は実効互換なrunを検索するための条件索引であり、run memberや件数を保持しない。既存prompt-set resultは`import-result`でatomic runへ索引化できる。元resultは変更しない。
+
+`plan-missing`はpool内のcomplete sampleを数え、不足sampleだけをdispatch planへ固定する。`select-runs`は分析に用いるrun IDをselection receiptへ固定する。`aggregate-selection`と`compare-analyses`は派生artifactだけを作る。
+
+### Prompt-set result registry（履歴互換）
+
 `record-result`は全caseと`1..N`が揃い、全valid runが採点済みであることを確認して次へwrite-onceで保存する。
 
 ```text
@@ -124,6 +142,10 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 registryは比較相手を固定するmutable indexを持たず、`query-results`が保存fileを走査する。既存resultを別比較のために書き換えたり、現行prompt revisionへ読み替えたりしない。
 
 ## 互換条件と任意個比較
+
+atomic比較では、prompt identityを除いたcase別の実効条件から`comparison_key`を作る。計画上の`N`または`max_workers`だけが異なるrunは同じpoolへ蓄積できる。`max_workers`差は消去せずexecution stratumへ残し、比較viewはstratum別件数と差分を併記する。model、CLI、model-visible catalog、fixture、TaskSpecなど実効条件が異なるrunは同じpoolへ入れない。
+
+以下の`compare`は履歴互換のprompt-set result経路である。
 
 `compare`は2件以上の`result_id`を受け付ける。全resultの`compatibility_key`と互換条件実体が完全一致しない場合はfail closedする。
 

@@ -20,6 +20,7 @@ from scripts.evaluation_loop import (
     identity_sha256,
     kpi_difference,
     validate_comparison_conditions,
+    validate_run_capsule,
 )
 
 
@@ -90,6 +91,26 @@ class EvaluationLoopTest(unittest.TestCase):
             ),
             {"quality_score": 25, "total_tokens": 100, "elapsed_seconds": 10},
         )
+
+    def test_atomic_capsule_has_sample_identity_without_repetition_count(self) -> None:
+        conditions = self.conditions(5)
+        conditions.pop("repetition_condition")
+        binding, validated, argv = validate_run_capsule(
+            {
+                "schema_version": "the-caption-prompt.execution-capsule/v3",
+                "binding": {
+                    "prompt_set_identity": {"name": "prompt", "revision": "r1"},
+                    "case_id": "TEST-CASE",
+                    "iteration": 95,
+                    "sample_id": "planned:sample-95",
+                },
+                "comparison_conditions": conditions,
+                "adapter": {"argv": ["true"]},
+            }
+        )
+        self.assertEqual(binding["sample_id"], "planned:sample-95")
+        self.assertNotIn("repetition_condition", validated)
+        self.assertEqual(argv, ["true"])
 
     def cli(self, *args: str) -> dict:
         completed = subprocess.run(
@@ -346,6 +367,7 @@ class EvaluationLoopTest(unittest.TestCase):
         tokens: int,
         conditions: dict,
         case_id: str = "TEST-CASE",
+        sample_id: str | None = None,
     ) -> str:
         command = (
             "import json,os,pathlib; "
@@ -362,15 +384,18 @@ class EvaluationLoopTest(unittest.TestCase):
             f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':{tokens}}}))"
         )
         capsule = cycle.parent / f"{cycle.name}-{identity['name']}-{case_id}-{iteration}.json"
+        binding = {
+            "prompt_set_identity": identity,
+            "case_id": case_id,
+            "iteration": iteration,
+        }
+        if sample_id is not None:
+            binding["sample_id"] = sample_id
         capsule.write_text(
             json.dumps(
                 {
                     "schema_version": "the-caption-prompt.execution-capsule/v2",
-                    "binding": {
-                        "prompt_set_identity": identity,
-                        "case_id": case_id,
-                        "iteration": iteration,
-                    },
+                    "binding": binding,
                     "comparison_conditions": conditions,
                     "adapter": {"argv": [sys.executable, "-c", command]},
                     "parameters": {"future_parameter": 42},
@@ -380,6 +405,25 @@ class EvaluationLoopTest(unittest.TestCase):
         )
         result = self.cli("run", "--cycle", str(cycle), "--capsule", str(capsule))
         return result["run_id"]
+
+    def test_run_binding_preserves_optional_atomic_sample_id(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cycle = root / "cycle"
+            manifest = self.make_set(root)
+            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
+            run_id = self.execute(
+                cycle,
+                {"name": "prompt", "revision": "r1"},
+                1,
+                100,
+                self.conditions(1),
+                sample_id="planned:test:sample-1",
+            )
+            binding = json.loads(
+                (cycle / "layer2" / "bindings" / f"{run_id}.json").read_text()
+            )
+            self.assertEqual(binding["sample_id"], "planned:test:sample-1")
 
     def record_prompt_set(
         self,

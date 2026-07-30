@@ -2,7 +2,7 @@
 
 ## 目的
 
-1つのprompt set resultに属する独立したLayer 2 runを、外側並列度`M`で実行する。wave barrierとglobal queueを提供する。複数prompt setを比較する新規slotは、cycleを分離したままcampaign global queueへ統合できる。評価基盤v3の保存単位、4 Layer、3 KPIは変更しない。
+独立したLayer 2 runを外側並列度`M`で実行する。wave barrierとglobal queueを提供する。複数prompt set、異なるcoverage、異なるdispatch件数の新規runも、cycleを分離したまま同じ`resource_class`のcampaign global queueへ統合できる。
 
 このextensionはcontroller起動、客観的`external_failure`の再実施、OS sample、実行summaryだけを扱う。採点、result登録、複数prompt set比較、改善、release判断は行わない。
 
@@ -27,7 +27,7 @@ python3 layer2/extensions/parallel_execution/prepare_plan.py \
 
 ## Global queue
 
-空いたworkerへlongest-firstで次のslotを投入する。duration hintはcase IDから正の秒数へのmappingであり、処理時間短縮にだけ使う。KPI、quality score、互換条件の補正には使わない。
+空いたworkerへ次のslotを投入する。複数plan campaignでは同一case / sampleの比較対象を近接配置し、group間はlongest-firstにする。duration hintは処理時間短縮にだけ使い、KPI、quality score、互換条件の補正には使わない。
 
 ```json
 {
@@ -54,7 +54,9 @@ python3 layer2/extensions/parallel_execution/prepare_global_plan.py \
 
 ## 複数prompt setのcampaign queue
 
-比較対象ごとのcycle、prompt identity、resultは混ぜない。ただし、実行待ちの独立slotは[`campaign_runner.py`](campaign_runner.py)で一つのlongest-first queueへ入れる。全planは`global_queue`、同一comparison conditions、`max_workers=24`でなければならない。
+比較対象ごとのcycleとprompt identityは混ぜない。ただし、実行待ちの独立runは[`campaign_runner.py`](campaign_runner.py)で一つのpair-aware queueへ入れる。旧planは同一comparison conditionsを要求する。新planは同一の明示`resource_class`と`max_workers=24`を持てば、analysis condition、coverage、dispatch件数が異なっても同じqueueへ投入できる。旧planと`resource_class` planを同じcampaignへ混ぜない。
+
+不足runだけを生成する場合は[`prepare_atomic_plan.py`](prepare_atomic_plan.py)を使う。このcommandはatomic dispatch plan、run pool、固定Layer 1、case templateの実効条件を照合し、missing slotだけへ共有`sample_id`を付けた`execution-capsule/v3` global planを作る。v3 capsuleは`repetition_condition`を持たず、dispatch件数をrun identityへ流入させない。
 
 ```bash
 python3 layer2/extensions/parallel_execution/campaign_runner.py \
