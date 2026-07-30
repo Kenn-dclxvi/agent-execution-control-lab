@@ -20,7 +20,9 @@ Worker routing、child session数、root / child token内訳、並列／逐次�
 
 ## 保存単位
 
-一次結果の単位は、1つのEvaluation set上で1つのimmutableな`prompt_set_identity`を`1..N`回実行したprompt set resultである。1 cycleへ複数prompt setを混ぜず、固定A / B pairやcondition labelを保存identityにしない。
+一次結果の単位は、1つのEvaluation set上で1つのimmutableな`prompt_set_identity`を`1..N`回実行したprompt set resultである。1 cycleへ複数prompt setを混ぜず、比較相手やcondition labelを保存identityにしない。
+
+実行schedulerは保存単位ではない。任意個prompt setの独立cycleに属する未実行slotを一つのcampaign global queueへ入れてよい。新規比較では保存済み互換resultを先に再利用し、不足slotだけを推定所要時間の長い順で発行する。このhostの新規試験は外側並列上限を`M=24`へ固定し、readyなslotが24件未満でもprofileの`max_workers`をslot数へ合わせて下げない。実際の同時実行数はreadyなslot数により24未満になり得るが、試験ごとの環境最適化として扱わない。prompt setを理由なく直列実行しない。
 
 `prompt_set_identity`は少なくとも次を含む。
 
@@ -73,6 +75,8 @@ Agentがmodelへ提示するskill、app、plugin catalogが変わり得る実行
 
 Layer 1は`.git`内部を除くfixtureのpath、type、mode、contentまたはsymlink targetからcase別fixture identityを計算する。resultの互換条件にはEvaluation setの`set_id`、`revision`、content identity、case別fixture identity、Run capsuleの全`comparison_conditions`、case集合、iteration集合を含める。
 
+保存済みresultを基準にする比較では、fixtureを同じsourceから再生成しない。基準resultと対応する保存済みLayer 1を`prepare-comparison-layer1`で検証・複製し、candidate capsuleとglobal planの生成後に`preflight-comparison`で全互換条件を照合する。比較用Layer 1の生成receiptがあるcycleでは、Layer 2がpreflight receiptを実行直前に再検証する。
+
 ## `quality_score`
 
 quality raterが各caseの成果全体を0から4で採点する。
@@ -117,7 +121,7 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 - 除外attempt
 - 作成時刻とresult全体のcontent SHA-256
 
-registryはmutableなA / B indexを持たず、`query-results`が保存fileを走査する。既存resultを別比較のために書き換えたり、現行prompt revisionへ読み替えたりしない。
+registryは比較相手を固定するmutable indexを持たず、`query-results`が保存fileを走査する。既存resultを別比較のために書き換えたり、現行prompt revisionへ読み替えたりしない。
 
 ## 互換条件と任意個比較
 

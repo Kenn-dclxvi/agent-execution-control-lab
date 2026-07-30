@@ -295,6 +295,16 @@ def frozen_set(cycle: Path) -> dict[str, Any]:
     return load_json(cycle / "layer1" / "set.json")
 
 
+def bound_coverage(cycle: Path) -> dict[str, Any] | None:
+    path = cycle / "layer1" / "coverage.json"
+    if not path.exists():
+        return None
+    coverage = load_json(path)
+    if coverage.get("schema_version") != "the-caption-prompt.evaluation-coverage/v1":
+        raise EvaluationError("bound coverage has an unsupported schema_version")
+    return coverage
+
+
 def find_case(cycle: Path, case_id: str) -> dict[str, Any]:
     manifest = frozen_set(cycle)
     for case in manifest["cases"]:
@@ -405,6 +415,33 @@ def layer1_freeze(args: argparse.Namespace) -> dict[str, Any]:
         "revision": frozen["revision"],
         "identity_sha256": frozen["identity_sha256"],
         "case_count": len(frozen_cases),
+    }
+
+
+def layer1_bind_coverage(args: argparse.Namespace) -> dict[str, Any]:
+    cycle = Path(args.cycle).resolve()
+    manifest = frozen_set(cycle)
+    known_cases = {case["id"] for case in manifest["cases"]}
+    case_ids = list(dict.fromkeys(args.case_id))
+    if len(case_ids) != len(args.case_id):
+        raise EvaluationError("coverage case ids must be unique")
+    unknown = sorted(set(case_ids) - known_cases)
+    if unknown:
+        raise EvaluationError(f"coverage contains unknown case: {unknown[0]}")
+    iterations = require_positive(args.iterations, "coverage iterations")
+    coverage = {
+        "schema_version": "the-caption-prompt.evaluation-coverage/v1",
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
+        "case_ids": case_ids,
+        "iterations": list(range(1, iterations + 1)),
+        "bound_at": utc_now(),
+    }
+    write_json_once(cycle / "layer1" / "coverage.json", coverage)
+    return {
+        "layer": 1,
+        "case_ids": case_ids,
+        "iterations": coverage["iterations"],
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
     }
 
 
@@ -551,6 +588,26 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     binding_input, conditions, command = validate_run_capsule(capsule)
     case_id = binding_input["case_id"]
     iteration = binding_input["iteration"]
+    generation_receipt = cycle / "layer1" / "comparison-generation.json"
+    if generation_receipt.exists():
+        preflight = verify_comparison_preflight(cycle)
+        authorized = {
+            (item["case_id"], item["iteration"]): item
+            for item in preflight["authorized_slots"]
+        }
+        slot = authorized.get((case_id, iteration))
+        if slot is None:
+            raise EvaluationError("run is not authorized by comparison preflight")
+        if Path(slot["capsule"]).resolve() != capsule_source:
+            raise EvaluationError("run capsule path does not match comparison preflight")
+        if slot["capsule_sha256"] != file_sha256(capsule_source):
+            raise EvaluationError("run capsule content does not match comparison preflight")
+    coverage = bound_coverage(cycle)
+    if coverage is not None and (
+        case_id not in coverage["case_ids"]
+        or iteration not in coverage["iterations"]
+    ):
+        raise EvaluationError("run is outside the bound evaluation coverage")
     case = find_case(cycle, case_id)
     validate_cycle_binding(existing_bindings(cycle), binding_input, conditions)
 
@@ -865,6 +922,385 @@ def build_compatibility(
     }
 
 
+COMPARISON_GENERATION_SCHEMA = "the-caption-prompt.comparison-layer1-generation/v1"
+COMPARISON_PREFLIGHT_SCHEMA = "the-caption-prompt.comparison-preflight/v1"
+
+
+def file_sha256(path: Path) -> str:
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except FileNotFoundError as exc:
+        raise EvaluationError(f"missing file: {path}") from exc
+
+
+def load_reference_result(registry: Path, result_id: str) -> dict[str, Any]:
+    require_non_empty_string(result_id, "reference result id")
+    result = load_json(registry / "results" / f"{result_id}.json")
+    if result.get("result_id") != result_id:
+        raise EvaluationError("reference result identity does not match its registry path")
+    stored_content_sha256 = require_non_empty_string(
+        result.get("result_content_sha256"),
+        "reference result content SHA-256",
+    )
+    content = dict(result)
+    content.pop("result_content_sha256", None)
+    if identity_sha256(content) != stored_content_sha256:
+        raise EvaluationError("reference result content SHA-256 does not match")
+    compatibility = result.get("compatibility")
+    if not isinstance(compatibility, dict):
+        raise EvaluationError("reference result compatibility must be an object")
+    if result.get("compatibility_key") != identity_sha256(compatibility):
+        raise EvaluationError("reference result compatibility key does not match")
+    return result
+
+
+def first_value_difference(expected: Any, actual: Any, path: str = "$") -> str | None:
+    if type(expected) is not type(actual):
+        return f"{path}: expected {type(expected).__name__}, got {type(actual).__name__}"
+    if isinstance(expected, dict):
+        expected_keys = set(expected)
+        actual_keys = set(actual)
+        if expected_keys != actual_keys:
+            missing = sorted(expected_keys - actual_keys)
+            extra = sorted(actual_keys - expected_keys)
+            return f"{path}: missing keys={missing}, extra keys={extra}"
+        for key in sorted(expected):
+            difference = first_value_difference(expected[key], actual[key], f"{path}.{key}")
+            if difference is not None:
+                return difference
+        return None
+    if isinstance(expected, list):
+        if len(expected) != len(actual):
+            return f"{path}: expected length {len(expected)}, got {len(actual)}"
+        for index, (expected_item, actual_item) in enumerate(zip(expected, actual)):
+            difference = first_value_difference(
+                expected_item,
+                actual_item,
+                f"{path}[{index}]",
+            )
+            if difference is not None:
+                return difference
+        return None
+    if expected != actual:
+        return f"{path}: expected {expected!r}, got {actual!r}"
+    return None
+
+
+def actual_layer1_fixtures(layer1: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    fixtures: dict[str, Any] = {}
+    for case in manifest.get("cases", []):
+        if not isinstance(case, dict):
+            raise EvaluationError("frozen evaluation set case must be an object")
+        case_id = require_non_empty_string(case.get("id"), "frozen case id")
+        fixture_value = require_non_empty_string(case.get("fixture"), "frozen case fixture")
+        fixture_path = (layer1 / fixture_value).resolve()
+        if not fixture_path.is_relative_to(layer1.resolve()) or not fixture_path.is_dir():
+            raise EvaluationError(f"frozen fixture is invalid: {case_id}")
+        actual = fixture_identity(fixture_path)
+        recorded = case.get("fixture_identity")
+        if actual != recorded:
+            difference = first_value_difference(recorded, actual)
+            raise EvaluationError(
+                f"frozen fixture identity does not match for {case_id}: {difference}"
+            )
+        fixtures[case_id] = actual
+    return fixtures
+
+
+def validate_layer1_against_reference(
+    layer1: Path,
+    reference: dict[str, Any],
+) -> dict[str, Any]:
+    manifest = load_json(layer1 / "set.json")
+    fixtures = actual_layer1_fixtures(layer1, manifest)
+    expected = reference["compatibility"]
+    actual = {
+        "evaluation_set": {
+            "set_id": manifest.get("set_id"),
+            "revision": manifest.get("revision"),
+            "identity_sha256": manifest.get("identity_sha256"),
+        },
+        "fixtures": fixtures,
+    }
+    expected_layer1 = {
+        "evaluation_set": expected.get("evaluation_set"),
+        "fixtures": expected.get("fixtures"),
+    }
+    difference = first_value_difference(expected_layer1, actual)
+    if difference is not None:
+        raise EvaluationError(f"Layer 1 does not match reference result: {difference}")
+    return manifest
+
+
+def receipt_with_hash(payload: dict[str, Any]) -> dict[str, Any]:
+    return {**payload, "receipt_content_sha256": identity_sha256(payload)}
+
+
+def validate_receipt_hash(receipt: dict[str, Any], name: str) -> dict[str, Any]:
+    stored = require_non_empty_string(
+        receipt.get("receipt_content_sha256"),
+        f"{name} receipt content SHA-256",
+    )
+    payload = dict(receipt)
+    payload.pop("receipt_content_sha256", None)
+    if identity_sha256(payload) != stored:
+        raise EvaluationError(f"{name} receipt content SHA-256 does not match")
+    return payload
+
+
+def prepare_comparison_layer1(args: argparse.Namespace) -> dict[str, Any]:
+    registry = Path(args.registry).resolve()
+    source_layer1 = Path(args.reference_layer1).resolve()
+    cycle = Path(args.cycle).resolve()
+    destination_layer1 = cycle / "layer1"
+    reference = load_reference_result(registry, args.reference_result_id)
+    if cycle.exists() and any(cycle.iterdir()):
+        raise EvaluationError(f"comparison cycle directory is not empty: {cycle}")
+    validate_layer1_against_reference(source_layer1, reference)
+    try:
+        materialization = materialize_tree(source_layer1, destination_layer1)
+    except StorageCopyError as exc:
+        raise EvaluationError(f"failed to materialize reference Layer 1: {exc}") from exc
+    manifest = validate_layer1_against_reference(destination_layer1, reference)
+
+    expected_coverage = reference["compatibility"].get("coverage")
+    if not isinstance(expected_coverage, dict):
+        raise EvaluationError("reference result coverage must be an object")
+    coverage_path = destination_layer1 / "coverage.json"
+    if coverage_path.exists():
+        coverage = load_json(coverage_path)
+        actual_coverage = {
+            "case_ids": coverage.get("case_ids"),
+            "iterations": coverage.get("iterations"),
+        }
+        difference = first_value_difference(expected_coverage, actual_coverage)
+        if difference is not None:
+            raise EvaluationError(f"reference Layer 1 coverage mismatch: {difference}")
+    else:
+        coverage = {
+            "schema_version": "the-caption-prompt.evaluation-coverage/v1",
+            "evaluation_set_identity_sha256": manifest["identity_sha256"],
+            "case_ids": expected_coverage["case_ids"],
+            "iterations": expected_coverage["iterations"],
+            "bound_at": utc_now(),
+        }
+        write_json_once(coverage_path, coverage)
+
+    payload = {
+        "schema_version": COMPARISON_GENERATION_SCHEMA,
+        "status": "ready",
+        "reference_result_id": reference["result_id"],
+        "reference_result_content_sha256": reference["result_content_sha256"],
+        "reference_compatibility_key": reference["compatibility_key"],
+        "reference_layer1": str(source_layer1),
+        "registry": str(registry),
+        "materialization": materialization,
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
+        "fixtures": reference["compatibility"]["fixtures"],
+        "coverage": expected_coverage,
+    }
+    receipt = receipt_with_hash(payload)
+    receipt_path = destination_layer1 / "comparison-generation.json"
+    write_json_once(receipt_path, receipt)
+    return {
+        "layer": 1,
+        "artifact": str(receipt_path),
+        "reference_result_id": reference["result_id"],
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
+        "case_count": len(expected_coverage["case_ids"]),
+        "iterations": expected_coverage["iterations"],
+    }
+
+
+def profile_coverage(profile: dict[str, Any]) -> dict[str, Any]:
+    raw_cases = profile.get("cases")
+    if not isinstance(raw_cases, list) or not raw_cases:
+        raise EvaluationError("profile cases must be a non-empty array")
+    case_ids: list[str] = []
+    for raw_case in raw_cases:
+        if not isinstance(raw_case, dict):
+            raise EvaluationError("profile case must be an object")
+        case_ids.append(require_non_empty_string(raw_case.get("id"), "profile case id"))
+    if len(set(case_ids)) != len(case_ids):
+        raise EvaluationError("profile case ids must be unique")
+    iterations = require_positive(profile.get("iterations"), "profile iterations")
+    return {"case_ids": case_ids, "iterations": list(range(1, iterations + 1))}
+
+
+def build_comparison_preflight_payload(
+    cycle: Path,
+    profile_path: Path,
+    global_plan_path: Path,
+    registry: Path,
+    reference_result_id: str,
+    require_pristine: bool,
+) -> dict[str, Any]:
+    layer1 = cycle / "layer1"
+    generation_receipt = load_json(layer1 / "comparison-generation.json")
+    generation_payload = validate_receipt_hash(generation_receipt, "generation")
+    if generation_payload.get("schema_version") != COMPARISON_GENERATION_SCHEMA:
+        raise EvaluationError("comparison generation receipt has an unsupported schema_version")
+    if generation_payload.get("reference_result_id") != reference_result_id:
+        raise EvaluationError("comparison generation reference result does not match")
+    reference = load_reference_result(registry, reference_result_id)
+    manifest = validate_layer1_against_reference(layer1, reference)
+    profile = load_json(profile_path)
+    prompt_identity = validate_prompt_set_identity(profile.get("prompt_set_identity"))
+    conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+    coverage = profile_coverage(profile)
+    profile_set = profile.get("evaluation_set")
+    expected_profile_set = {
+        "set_id": manifest.get("set_id"),
+        "revision": manifest.get("revision"),
+    }
+    if profile_set != expected_profile_set:
+        difference = first_value_difference(expected_profile_set, profile_set)
+        raise EvaluationError(f"profile evaluation set mismatch: {difference}")
+    candidate_compatibility = build_compatibility(
+        manifest,
+        conditions,
+        coverage["case_ids"],
+        coverage["iterations"],
+    )
+    difference = first_value_difference(reference["compatibility"], candidate_compatibility)
+    if difference is not None:
+        raise EvaluationError(f"comparison compatibility mismatch: {difference}")
+
+    execution = profile.get("execution")
+    if not isinstance(execution, dict):
+        raise EvaluationError("profile execution must be an object")
+    max_workers = require_positive(execution.get("max_workers"), "profile max_workers")
+    reference_max_workers = conditions["executor_parameters"].get("max_workers")
+    if max_workers != reference_max_workers:
+        raise EvaluationError("profile max_workers does not match comparison conditions")
+
+    global_plan = load_json(global_plan_path)
+    if Path(require_non_empty_string(global_plan.get("cycle"), "global plan cycle")).resolve() != cycle:
+        raise EvaluationError("global plan cycle does not match comparison cycle")
+    if global_plan.get("max_workers") != max_workers:
+        raise EvaluationError("global plan max_workers does not match profile")
+    jobs = global_plan.get("jobs")
+    if not isinstance(jobs, list) or not jobs:
+        raise EvaluationError("global plan jobs must be a non-empty array")
+    authorized_slots: list[dict[str, Any]] = []
+    observed_slots: set[tuple[str, int]] = set()
+    for job in jobs:
+        if not isinstance(job, dict):
+            raise EvaluationError("global plan job must be an object")
+        capsule_path = Path(
+            require_non_empty_string(job.get("capsule"), "global plan capsule")
+        ).resolve()
+        capsule = load_json(capsule_path)
+        binding, capsule_conditions, _ = validate_run_capsule(capsule)
+        slot = (binding["case_id"], binding["iteration"])
+        if slot in observed_slots:
+            raise EvaluationError(f"global plan has duplicate slot: {slot}")
+        observed_slots.add(slot)
+        if binding["prompt_set_identity"] != prompt_identity:
+            raise EvaluationError("capsule prompt identity does not match profile")
+        if capsule_conditions != conditions:
+            raise EvaluationError("capsule comparison conditions do not match profile")
+        authorized_slots.append(
+            {
+                "case_id": binding["case_id"],
+                "iteration": binding["iteration"],
+                "capsule": str(capsule_path),
+                "capsule_sha256": file_sha256(capsule_path),
+            }
+        )
+    expected_slots = {
+        (case_id, iteration)
+        for case_id in coverage["case_ids"]
+        for iteration in coverage["iterations"]
+    }
+    if observed_slots != expected_slots:
+        missing = sorted(expected_slots - observed_slots)
+        extra = sorted(observed_slots - expected_slots)
+        raise EvaluationError(f"global plan coverage mismatch: missing={missing}, extra={extra}")
+    if require_pristine and (cycle / "layer2").exists() and any((cycle / "layer2").iterdir()):
+        raise EvaluationError("comparison cycle already contains Layer 2 state")
+
+    authorized_slots.sort(key=lambda item: (item["case_id"], item["iteration"]))
+    return {
+        "schema_version": COMPARISON_PREFLIGHT_SCHEMA,
+        "status": "ready",
+        "issued_slots": 0,
+        "reference_result_id": reference["result_id"],
+        "reference_result_content_sha256": reference["result_content_sha256"],
+        "compatibility_key": reference["compatibility_key"],
+        "generation_receipt_content_sha256": generation_receipt["receipt_content_sha256"],
+        "registry": str(registry),
+        "profile": str(profile_path),
+        "profile_sha256": file_sha256(profile_path),
+        "global_plan": str(global_plan_path),
+        "global_plan_sha256": file_sha256(global_plan_path),
+        "prompt_set_identity": prompt_identity,
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
+        "fixtures": reference["compatibility"]["fixtures"],
+        "coverage": coverage,
+        "max_workers": max_workers,
+        "authorized_slots": authorized_slots,
+    }
+
+
+def preflight_comparison(args: argparse.Namespace) -> dict[str, Any]:
+    cycle = Path(args.cycle).resolve()
+    profile_path = Path(args.profile).resolve()
+    global_plan_path = Path(args.global_plan).resolve()
+    registry = Path(args.registry).resolve()
+    payload = build_comparison_preflight_payload(
+        cycle,
+        profile_path,
+        global_plan_path,
+        registry,
+        args.reference_result_id,
+        require_pristine=True,
+    )
+    receipt = receipt_with_hash(payload)
+    receipt_path = cycle / "layer1" / "comparison-preflight.json"
+    write_json_once(receipt_path, receipt)
+    return {
+        "layer": 1,
+        "artifact": str(receipt_path),
+        "reference_result_id": payload["reference_result_id"],
+        "compatibility_key": payload["compatibility_key"],
+        "authorized_slot_count": len(payload["authorized_slots"]),
+        "max_workers": payload["max_workers"],
+    }
+
+
+def verify_comparison_preflight(cycle: Path) -> dict[str, Any]:
+    receipt_path = cycle / "layer1" / "comparison-preflight.json"
+    receipt = load_json(receipt_path)
+    payload = validate_receipt_hash(receipt, "comparison preflight")
+    if payload.get("schema_version") != COMPARISON_PREFLIGHT_SCHEMA:
+        raise EvaluationError("comparison preflight has an unsupported schema_version")
+    expected = build_comparison_preflight_payload(
+        cycle,
+        Path(payload["profile"]).resolve(),
+        Path(payload["global_plan"]).resolve(),
+        Path(payload["registry"]).resolve(),
+        payload["reference_result_id"],
+        require_pristine=False,
+    )
+    difference = first_value_difference(expected, payload)
+    if difference is not None:
+        raise EvaluationError(f"comparison preflight receipt is stale: {difference}")
+    return payload
+
+
+def verify_comparison_preflight_command(args: argparse.Namespace) -> dict[str, Any]:
+    cycle = Path(args.cycle).resolve()
+    payload = verify_comparison_preflight(cycle)
+    return {
+        "layer": 1,
+        "artifact": str(cycle / "layer1" / "comparison-preflight.json"),
+        "reference_result_id": payload["reference_result_id"],
+        "authorized_slot_count": len(payload["authorized_slots"]),
+        "status": "ready",
+    }
+
+
 def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
     cycle = Path(args.cycle).resolve()
     registry = Path(args.registry).resolve()
@@ -872,7 +1308,12 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
     if receipt_path.exists():
         raise EvaluationError(f"cycle result is already registered: {receipt_path}")
     manifest, runs, excluded_attempts = collect_runs(cycle)
-    cases = sorted(case["id"] for case in manifest["cases"])
+    coverage = bound_coverage(cycle)
+    cases = (
+        coverage["case_ids"]
+        if coverage is not None
+        else sorted(case["id"] for case in manifest["cases"])
+    )
     identities = {canonical_json(run["prompt_set_identity"]) for run in runs}
     conditions_values = {canonical_json(run["comparison_conditions"]) for run in runs}
     if len(identities) != 1:
@@ -891,9 +1332,12 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
     iterations = sorted({key[1] for key in index})
     if not iterations or iterations != list(range(1, max(iterations) + 1)):
         raise EvaluationError("iterations must be contiguous and start at 1")
+    if coverage is not None and iterations != coverage["iterations"]:
+        raise EvaluationError("observed iterations do not match bound coverage")
     expected = {(case_id, iteration) for case_id in cases for iteration in iterations}
     if set(index) != expected:
-        raise EvaluationError("prompt set must cover every frozen case and iteration")
+        scope = "bound coverage" if coverage is not None else "frozen set"
+        raise EvaluationError(f"prompt set must cover every {scope} case and iteration")
     expected_iterations = conditions["repetition_condition"]["iterations"]
     if len(iterations) != expected_iterations:
         raise EvaluationError("observed iterations do not match repetition_condition.iterations")
@@ -1200,6 +1644,43 @@ def parser() -> argparse.ArgumentParser:
     freeze.add_argument("--set", required=True)
     freeze.add_argument("--cycle", required=True)
     freeze.set_defaults(handler=layer1_freeze)
+
+    coverage = commands.add_parser(
+        "bind-coverage",
+        help="Layer 1: bind the case and iteration subset planned for this cycle",
+    )
+    coverage.add_argument("--cycle", required=True)
+    coverage.add_argument("--case-id", action="append", required=True)
+    coverage.add_argument("--iterations", type=int, required=True)
+    coverage.set_defaults(handler=layer1_bind_coverage)
+
+    prepare_comparison = commands.add_parser(
+        "prepare-comparison-layer1",
+        help="Layer 1: copy and verify the frozen Layer 1 from a reference result",
+    )
+    prepare_comparison.add_argument("--registry", required=True)
+    prepare_comparison.add_argument("--reference-result-id", required=True)
+    prepare_comparison.add_argument("--reference-layer1", required=True)
+    prepare_comparison.add_argument("--cycle", required=True)
+    prepare_comparison.set_defaults(handler=prepare_comparison_layer1)
+
+    comparison_preflight = commands.add_parser(
+        "preflight-comparison",
+        help="Layer 1: authorize a compatible comparison plan before dispatch",
+    )
+    comparison_preflight.add_argument("--cycle", required=True)
+    comparison_preflight.add_argument("--profile", required=True)
+    comparison_preflight.add_argument("--global-plan", required=True)
+    comparison_preflight.add_argument("--registry", required=True)
+    comparison_preflight.add_argument("--reference-result-id", required=True)
+    comparison_preflight.set_defaults(handler=preflight_comparison)
+
+    verify_preflight = commands.add_parser(
+        "verify-comparison-preflight",
+        help="Layer 1: revalidate a stored comparison preflight receipt",
+    )
+    verify_preflight.add_argument("--cycle", required=True)
+    verify_preflight.set_defaults(handler=verify_comparison_preflight_command)
 
     run = commands.add_parser("run", help="Layer 2: execute one case and iteration")
     run.add_argument("--cycle", required=True)

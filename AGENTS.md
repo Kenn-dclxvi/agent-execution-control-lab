@@ -33,6 +33,17 @@
 - 検証していない成果を完了または成功として報告しない。
 - tool callの成功を予測で語らず、実際のresultで確認する。
 
+## 比較試験の実行前gate
+
+- 保存済みresultを基準に品質、token、elapsed、採用可否を比較する試験では、評価slotを一件でも発行する前に基準resultを一意にbindする。
+- 実行予定条件から、Evaluation set identity、全caseのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合を確定し、基準resultの互換条件と機械照合する。
+- prompt比較では、事前に宣言したprompt identity以外の互換条件が完全一致することを実行前gateとする。完全一致を証明するpreflight receiptを保存してから実行する。
+- Layer 4へ登録する試験では、発行予定のcase / iteration集合が固定Layer 1の全case coverageとresult schemaの登録条件を満たすこともpreflightで機械検証する。満たさない試験を非登録diagnosticとして実施する場合は、その状態と再利用不能なgateを一件目の発行前に明示する。
+- 一項目でも不一致、未固定、未確認があれば、評価slotを一件も発行しない。不一致の値と理由を報告して停止する。実行後に不一致を発見して結果を参考値へ降格する進め方を禁止する。
+- 試験ごとにfixture、file mode、runtime、設定上の並列上限などの実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。複数条件を新規実行する場合は、一つのLayer 1を先に固定して全条件へ複製する。
+- 保存済みresultとの比較cycleは`prepare-comparison-layer1`で基準Layer 1から生成し、capsuleとglobal planの生成後に`preflight-comparison`を通す。比較用Layer 1を`freeze-set`で再生成しない。`comparison-preflight.json`がない、失効した、または改ざんされたcycleの`run`は禁止する。
+- このhostの通常試験ではprofileの`max_workers`をqualification済み上限`M=24`へ固定する。readyなslotが24件未満でも設定値をslot数へ合わせて下げず、実際の同時実行数だけがready数に応じて24未満になり得る。
+
 ## 共通の変更規律
 
 - 一つの変更では一つの判断または一つのartifact単位を扱う。

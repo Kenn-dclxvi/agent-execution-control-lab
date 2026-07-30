@@ -137,6 +137,22 @@ class EvaluationLoopTest(unittest.TestCase):
         )
         return manifest
 
+    def make_two_case_set(self, root: Path) -> Path:
+        manifest = self.make_set(root)
+        second_fixture = root / "fixture-2"
+        second_fixture.mkdir()
+        (second_fixture / "input.txt").write_text("second\n", encoding="utf-8")
+        document = json.loads(manifest.read_text(encoding="utf-8"))
+        document["cases"].append(
+            {
+                "id": "TEST-CASE-2",
+                "fixture": "fixture-2",
+                "payload": {"task": "second task", "future_parameter": "opaque"},
+            }
+        )
+        manifest.write_text(json.dumps(document), encoding="utf-8")
+        return manifest
+
     def conditions(self, iterations: int, model: str = "test-model") -> dict:
         return {
             "target_repository_ref": "example/repo@abc123",
@@ -146,6 +162,7 @@ class EvaluationLoopTest(unittest.TestCase):
             "permission": "workspace-write/never",
             "executor_parameters": {
                 "reasoning_effort": "high",
+                "max_workers": 24,
                 "token_accounting": TOKEN_ACCOUNTING,
             },
             "quality_rating": QUALITY_RATING_V8,
@@ -328,6 +345,7 @@ class EvaluationLoopTest(unittest.TestCase):
         iteration: int,
         tokens: int,
         conditions: dict,
+        case_id: str = "TEST-CASE",
     ) -> str:
         command = (
             "import json,os,pathlib; "
@@ -343,14 +361,14 @@ class EvaluationLoopTest(unittest.TestCase):
             "'schema_version':'the-caption-prompt.token-usage/v2',"
             f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':{tokens}}}))"
         )
-        capsule = cycle.parent / f"{cycle.name}-{identity['name']}-{iteration}.json"
+        capsule = cycle.parent / f"{cycle.name}-{identity['name']}-{case_id}-{iteration}.json"
         capsule.write_text(
             json.dumps(
                 {
                     "schema_version": "the-caption-prompt.execution-capsule/v2",
                     "binding": {
                         "prompt_set_identity": identity,
-                        "case_id": "TEST-CASE",
+                        "case_id": case_id,
                         "iteration": iteration,
                     },
                     "comparison_conditions": conditions,
@@ -419,6 +437,86 @@ class EvaluationLoopTest(unittest.TestCase):
         return self.cli(
             "record-result", "--cycle", str(cycle), "--registry", str(registry)
         )
+
+    def test_bound_subset_is_enforced_and_registered_without_changing_the_set(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cycle = root / "cycle"
+            registry = root / "registry"
+            manifest = self.make_two_case_set(root)
+            frozen = self.cli(
+                "freeze-set", "--set", str(manifest), "--cycle", str(cycle)
+            )
+            coverage = self.cli(
+                "bind-coverage",
+                "--cycle",
+                str(cycle),
+                "--case-id",
+                "TEST-CASE",
+                "--iterations",
+                "2",
+            )
+            self.assertEqual(coverage["case_ids"], ["TEST-CASE"])
+            self.assertEqual(coverage["iterations"], [1, 2])
+            self.assertEqual(
+                coverage["evaluation_set_identity_sha256"], frozen["identity_sha256"]
+            )
+
+            identity = {"name": "subset-prompt", "revision": "r1"}
+            conditions = self.conditions(2)
+            for iteration in (1, 2):
+                run_id = self.execute(
+                    cycle, identity, iteration, 100 + iteration, conditions
+                )
+                self.write_command_evidence(cycle, run_id)
+                self.cli(
+                    "rate",
+                    "--cycle",
+                    str(cycle),
+                    "--run-id",
+                    run_id,
+                    "--score",
+                    "4",
+                    "--reason",
+                    "subset rating",
+                )
+
+            outside_capsule = root / "outside.json"
+            outside_capsule.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "the-caption-prompt.execution-capsule/v2",
+                        "binding": {
+                            "prompt_set_identity": identity,
+                            "case_id": "TEST-CASE-2",
+                            "iteration": 1,
+                        },
+                        "comparison_conditions": conditions,
+                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            rejected = self.cli_failure(
+                "run", "--cycle", str(cycle), "--capsule", str(outside_capsule)
+            )
+            self.assertIn("outside the bound evaluation coverage", rejected.stderr)
+
+            receipt = self.cli(
+                "record-result", "--cycle", str(cycle), "--registry", str(registry)
+            )
+            result = json.loads(Path(receipt["artifact"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                result["compatibility"]["coverage"],
+                {"case_ids": ["TEST-CASE"], "iterations": [1, 2]},
+            )
+            self.assertEqual(
+                result["compatibility"]["evaluation_set"]["identity_sha256"],
+                frozen["identity_sha256"],
+            )
+            self.assertEqual(
+                {item["case_id"] for item in result["case_results"]}, {"TEST-CASE"}
+            )
 
     def test_three_prompt_sets_are_stored_independently_and_compared_as_a_view(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -754,6 +852,255 @@ class EvaluationLoopTest(unittest.TestCase):
                 "run", "--cycle", str(cycle), "--capsule", str(capsule)
             )
             self.assertIn("needs revision or bundle_sha256", completed.stderr)
+
+    def write_comparison_plan(
+        self,
+        root: Path,
+        cycle: Path,
+        conditions: dict,
+    ) -> tuple[Path, Path, list[Path]]:
+        prompt_identity = {"name": "candidate", "revision": "r1"}
+        profile = root / "candidate-profile.json"
+        profile.write_text(
+            json.dumps(
+                {
+                    "profile_id": "candidate-profile",
+                    "prompt_set_identity": prompt_identity,
+                    "evaluation_set": {"set_id": "test-set", "revision": "r1"},
+                    "cases": [{"id": "TEST-CASE", "revision": "r1"}],
+                    "iterations": 2,
+                    "execution": {"max_workers": 24},
+                    "comparison_conditions": conditions,
+                }
+            ),
+            encoding="utf-8",
+        )
+        capsules: list[Path] = []
+        jobs: list[dict] = []
+        adapter_command = (
+            "import json,os,pathlib; "
+            "pathlib.Path('result.txt').write_text('result\\n', encoding='utf-8'); "
+            f"pathlib.Path(os.environ['EVAL_USAGE_FILE']).write_text(json.dumps({{"
+            "'schema_version':'the-caption-prompt.token-usage/v2',"
+            f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':100}}))"
+        )
+        for iteration in (1, 2):
+            capsule = root / f"candidate-i{iteration}.json"
+            capsule.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "the-caption-prompt.execution-capsule/v2",
+                        "binding": {
+                            "prompt_set_identity": prompt_identity,
+                            "case_id": "TEST-CASE",
+                            "iteration": iteration,
+                        },
+                        "comparison_conditions": conditions,
+                        "adapter": {"argv": [sys.executable, "-c", adapter_command]},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            capsules.append(capsule)
+            jobs.append({"capsule": str(capsule), "sequence": iteration})
+        global_plan = root / "global-plan.json"
+        global_plan.write_text(
+            json.dumps(
+                {
+                    "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
+                    "cycle": str(cycle),
+                    "max_workers": 24,
+                    "jobs": jobs,
+                }
+            ),
+            encoding="utf-8",
+        )
+        return profile, global_plan, capsules
+
+    def prepare_reference_comparison(
+        self,
+        root: Path,
+    ) -> tuple[Path, Path, dict, dict, Path, Path, list[Path]]:
+        registry = root / "registry"
+        manifest = self.make_set(root)
+        (root / "fixture" / "input.txt").chmod(0o600)
+        reference = self.record_prompt_set(
+            manifest,
+            root,
+            registry,
+            "reference",
+            4,
+            100,
+        )
+        reference_layer1 = root / "cycle-reference-test-model" / "layer1"
+        candidate_cycle = root / "candidate-cycle"
+        prepared = self.cli(
+            "prepare-comparison-layer1",
+            "--registry",
+            str(registry),
+            "--reference-result-id",
+            reference["result_id"],
+            "--reference-layer1",
+            str(reference_layer1),
+            "--cycle",
+            str(candidate_cycle),
+        )
+        conditions = self.conditions(2)
+        profile, global_plan, capsules = self.write_comparison_plan(
+            root,
+            candidate_cycle,
+            conditions,
+        )
+        return (
+            registry,
+            candidate_cycle,
+            reference,
+            prepared,
+            profile,
+            global_plan,
+            capsules,
+        )
+
+    def test_comparison_layer1_is_generated_from_exact_reference_modes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (
+                _,
+                candidate_cycle,
+                reference,
+                prepared,
+                _,
+                _,
+                _,
+            ) = self.prepare_reference_comparison(root)
+            self.assertEqual(prepared["reference_result_id"], reference["result_id"])
+            candidate_file = candidate_cycle / "layer1/fixtures/TEST-CASE/input.txt"
+            self.assertEqual(candidate_file.stat().st_mode & 0o777, 0o600)
+            generation = json.loads(
+                (candidate_cycle / "layer1/comparison-generation.json").read_text()
+            )
+            self.assertEqual(generation["status"], "ready")
+            self.assertEqual(len(generation["receipt_content_sha256"]), 64)
+
+    def test_comparison_layer1_rejects_same_content_with_different_modes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            manifest = self.make_set(root)
+            (root / "fixture/input.txt").chmod(0o600)
+            reference = self.record_prompt_set(
+                manifest,
+                root,
+                registry,
+                "reference",
+                4,
+                100,
+            )
+            wrong_root = root / "wrong"
+            wrong_root.mkdir()
+            wrong_manifest = self.make_set(wrong_root)
+            (wrong_root / "fixture/input.txt").chmod(0o644)
+            wrong_cycle = wrong_root / "cycle"
+            self.cli(
+                "freeze-set",
+                "--set",
+                str(wrong_manifest),
+                "--cycle",
+                str(wrong_cycle),
+            )
+            completed = self.cli_failure(
+                "prepare-comparison-layer1",
+                "--registry",
+                str(registry),
+                "--reference-result-id",
+                reference["result_id"],
+                "--reference-layer1",
+                str(wrong_cycle / "layer1"),
+                "--cycle",
+                str(root / "candidate-cycle"),
+            )
+            self.assertIn("Layer 1 does not match reference result", completed.stderr)
+            self.assertFalse((root / "candidate-cycle/layer1").exists())
+
+    def test_comparison_run_requires_preflight_before_adapter_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (
+                _,
+                candidate_cycle,
+                _,
+                _,
+                _,
+                _,
+                capsules,
+            ) = self.prepare_reference_comparison(root)
+            completed = self.cli_failure(
+                "run",
+                "--cycle",
+                str(candidate_cycle),
+                "--capsule",
+                str(capsules[0]),
+            )
+            self.assertIn("comparison-preflight.json", completed.stderr)
+            self.assertFalse((candidate_cycle / "layer2").exists())
+
+    def test_comparison_preflight_is_reverified_and_tamper_evident(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (
+                registry,
+                candidate_cycle,
+                reference,
+                _,
+                profile,
+                global_plan,
+                capsules,
+            ) = self.prepare_reference_comparison(root)
+            preflight = self.cli(
+                "preflight-comparison",
+                "--cycle",
+                str(candidate_cycle),
+                "--profile",
+                str(profile),
+                "--global-plan",
+                str(global_plan),
+                "--registry",
+                str(registry),
+                "--reference-result-id",
+                reference["result_id"],
+            )
+            self.assertEqual(preflight["authorized_slot_count"], 2)
+            verified = self.cli(
+                "verify-comparison-preflight",
+                "--cycle",
+                str(candidate_cycle),
+            )
+            self.assertEqual(verified["status"], "ready")
+            run = self.cli(
+                "run",
+                "--cycle",
+                str(candidate_cycle),
+                "--capsule",
+                str(capsules[0]),
+            )
+            self.assertEqual(run["status"], "valid")
+            verified_after_run = self.cli(
+                "verify-comparison-preflight",
+                "--cycle",
+                str(candidate_cycle),
+            )
+            self.assertEqual(verified_after_run["status"], "ready")
+
+            receipt_path = candidate_cycle / "layer1/comparison-preflight.json"
+            receipt = json.loads(receipt_path.read_text())
+            receipt["max_workers"] = 5
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            completed = self.cli_failure(
+                "verify-comparison-preflight",
+                "--cycle",
+                str(candidate_cycle),
+            )
+            self.assertIn("receipt content SHA-256 does not match", completed.stderr)
 
 
 if __name__ == "__main__":

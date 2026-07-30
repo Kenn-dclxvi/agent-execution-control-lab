@@ -1,0 +1,194 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "the-caption-3ce91a4-validation-wrapper-precedence-r1",
+    "change_reason": "wave後の追加invocationへ必要evidence bindingを要求し、terminal resultがある同一invocationの理由なし再発行を止める。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "inspection / completion commandの列挙",
+      "TaskSpec、repository authority、required validationの変更",
+      "command数、message数、token数の上限",
+      "stdout配送またはexecutor変更",
+      "改善の主張",
+      "採用判断",
+      "release判断",
+      "THE-CAPTION本体への反映"
+    ],
+    "problem": "Candidate81 F02で同一qualityのままdecision量の大きな分布と5 / 100のfull validation再実行を観測した。",
+    "scope": "Candidate81の19 path full bundle。変更targetはroot AGENTS.mdだけで、DECISION_BOUNDARY一規則へ二つの閉包条件を追加する。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "07f535a6e4f4d1b13731879ccd5bddfa3856b679b39bb7a14bc7da6ea01cbc23",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "the-caption-3ce91a4-validation-wrapper-precedence-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "0599a49401f61431ed25975ad48b22add3761480",
+      "mode": "100644",
+      "sha256": "c7c4e8616699dbaa11598ddd832e70677de363fa35326abf29a20c13842b3415",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "the-caption-3ce91a4-current-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-decision-round-closure-r2",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git",
+    "construction_state": "uncommitted_working_tree",
+    "design_inputs": [
+      "docs/candidate97-minimal-decision-round-closure-r2-design.md",
+      "docs/prompt-control-design-principles.md",
+      "evaluations/results/candidate81-candidate96-successful-validation-result-projection-v14-medium-f02-n5-cli0146_2026-07-30.md"
+    ],
+    "design_status": "complete",
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "source_prompt_identity identifies Candidate81 as the direct prompt parent. Candidate97 r2 preserves the 11 labels and replaces only DECISION_BOUNDARY with two minimal closure conditions."
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

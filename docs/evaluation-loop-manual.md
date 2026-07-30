@@ -21,6 +21,9 @@
 | Layer | subcommand | 役割 |
 | --- | --- | --- |
 | 1. Evaluation set | `freeze-set` | set revisionとfixtureをcycleへ固定する |
+| 1. Evaluation coverage | `bind-coverage` | このcycleで発行・登録するcaseとiterationを実行前に固定する |
+| 1. Comparison generation | `prepare-comparison-layer1` | 保存済み基準resultのLayer 1を検証し、比較cycleへ複製する |
+| 1. Comparison preflight | `preflight-comparison` | profile、capsule、global planを基準resultへ照合して発行を許可する |
 | 2. Execution | `run` | 1 prompt setの1 case / 1 iterationを実行する |
 | 3. Quality rating | `rate` | 1 runへ0〜4のscoreを記録する |
 | 4. KPI comparison | `record-result` | 1 prompt set resultをregistryへ追記する |
@@ -70,11 +73,50 @@ capsuleへsecretやcredentialを直接保存しない。非公開のraw run evid
 
 `freeze-set`はcase別fixture identityとset content identityを計算する。fixture identityは`.git`内部を除くpath、type、mode、file content、symlink targetに結び付く。
 
+保存済みresultとの比較では`freeze-set`を使わない。`git clone`等による再生成はprocessの`umask`によってfile / directory modeが変わり得るためである。基準resultと対応する保存済みLayer 1を`prepare-comparison-layer1`へ渡し、検証済みの実体から比較cycleを生成する。
+
+固定setの一部だけを対象試験として発行する場合は、一件目の`run`より前に`bind-coverage`でcaseとiteration数を固定する。これによりset identityとTaskSpecを変えず、coverageだけをresultの互換条件として分離できる。coverage外の`run`は拒否し、`record-result`はbound coverage全件が揃わなければ停止する。
+
 ### reasoning effortの運用基準
 
 2026-07-27以降に新規作成する通常のprompt比較profileは、reasoning effortを`medium`へ固定する。例外は、reasoning effort自体を比較変数にする試験と、既存`high` resultの互換条件をそのまま再現する追試だけである。
 
 reasoning effortはcomparison conditionである。既存`high` profileとresultは履歴として変更せず、`medium` profileを新しいidentityで追加する。`high`と`medium`のresultを同一のLayer 4 comparisonへ混ぜない。
+
+### 実行前のresult再利用とcampaign scheduling
+
+新しいslotをmaterializeする前に、registryから同じimmutable prompt identityとcompatibility keyのresultを検索する。必要なcase、iteration、rating済みresultが揃っているprompt setは再実行しない。保存resultで不足するslotだけを新しいcycleへ固定する。
+
+candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。mechanism gate不通過時はbaseline KPI比較へ進まない。gate通過後にbaselineが必要になった場合は保存済み互換resultを優先し、存在しない場合だけbaseline slotを追加する。
+
+保存済みresultを基準にする比較cycleは、次の順序で準備する。
+
+```bash
+python3 "$CLI" prepare-comparison-layer1 \
+  --registry "$REGISTRY" \
+  --reference-result-id <result_id> \
+  --reference-layer1 /path/to/reference/cycle/layer1 \
+  --cycle "$CYCLE"
+```
+
+このcommandは、基準resultのcontent SHA-256、compatibility key、Evaluation set identity、全fixture identityと保存Layer 1の実体を照合する。照合後にLayer 1をcopyし、基準resultのcase / iteration coverageを固定する。内容が同じでもmodeが異なるLayer 1は生成前に拒否する。
+
+target固有の手順でcandidate profile、Run capsule、global planを生成した後、最初のslotより前に次を実行する。
+
+```bash
+python3 "$CLI" preflight-comparison \
+  --cycle "$CYCLE" \
+  --profile /path/to/candidate-profile.json \
+  --global-plan /path/to/global-plan.json \
+  --registry "$REGISTRY" \
+  --reference-result-id <result_id>
+
+python3 "$CLI" verify-comparison-preflight --cycle "$CYCLE"
+```
+
+preflightは、prompt identity以外の全compatibility、設定上の`M`、全case / iteration、各capsuleのidentityとcomparison conditionsを照合する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleを再検証するため、receipt欠落、改ざん、準備後の条件変更はadapter起動前に停止する。
+
+複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。推定所要時間の長いslotから発行し、このhostの新規試験はprofileの`max_workers`をqualification済み上限`M=24`へ固定する。readyなslotが5件なら実際の同時実行数は5件になるが、設定値を`M=5`へ変更しない。比較対象をA、Bの順に直列実行するのは、先行resultが後続実行の有無または条件を変えるgateがある場合だけである。
 
 ## 5. Run capsule v2
 
@@ -127,7 +169,7 @@ reasoning effortはcomparison conditionである。既存`high` profileとresult
 }
 ```
 
-`prompt_set_identity`は`name`に加え、`revision`または`bundle_sha256`を必須とする。固定A / B conditionは指定しない。同じcycleの全capsuleは同一identityと同一`comparison_conditions`を使用する。
+`prompt_set_identity`は`name`に加え、`revision`または`bundle_sha256`を必須とする。比較相手のconditionは指定しない。同じcycleの全capsuleは同一identityと同一`comparison_conditions`を使用する。
 
 `comparison_conditions`はprompt identity以外の比較互換条件である。次を必須とする。
 
@@ -236,6 +278,19 @@ python3 "$CLI" freeze-set \
 ```
 
 cycleは空でなければならない。固定後にsource setやfixtureを変更してもcycleへ反映されない。
+
+この`freeze-set`経路は新規Evaluation setまたは基準resultを持たない単独評価用である。保存済みresultとの比較には前節の`prepare-comparison-layer1`経路を使う。
+
+固定setの一部だけを発行する場合は、続けてcoverageを固定する。
+
+```bash
+python3 "$CLI" bind-coverage \
+  --cycle "$CYCLE" \
+  --case-id CASE-001 \
+  --iterations 5
+```
+
+`--case-id`は複数指定できる。coverageはwrite-onceであり、実行後にcaseやiterationを追加しない。全setを実行する既存cycleでは省略でき、その場合は固定set全件を登録条件とする。
 
 ### Layer 2: case / iterationを実行する
 

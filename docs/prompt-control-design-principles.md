@@ -141,6 +141,12 @@ LLM promptは形式仕様ではない。本文上の余白、重複、既定値�
 
 重複を削除、統合、移動する場合は、文字列または論理式の一致ではなく、削除前後の実行routeで同じ判断が維持されることを確認する。意味上の正規化は、単独ではprompt改善ではない。
 
+### 13. mechanism gateの前にbaselineを再実行しない
+
+candidate固有の狙った経路変化は、candidateの保存traceだけで先に確認する。qualityまたはmechanism gateが不通過なら、KPI比較用baselineを新規実行しない。
+
+gate通過後にbaselineが必要になった場合も、同じimmutable identityとcompatibility keyを持つ保存済みresultを先に再利用する。必要なresultが欠ける場合だけ新規slotを作る。複数prompt setの不足slotは別cycleのまま一つのglobal queueへ入れ、推定所要時間の長い順に最大24 workerまで使用する。baseline完了後にcandidateを開始する直列化は、先行resultが後続の発行条件を変える場合だけ許す。
+
 ## 参照例
 
 ### 有効な方向: worker context sufficiency
