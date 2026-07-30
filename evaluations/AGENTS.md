@@ -75,6 +75,7 @@
 
 compatibility keyが異なるresultを同一比較へ混ぜない。
 単一caseまたは少数反復の結果を、評価範囲外へ一般化しない。
+このhostの新規試験はprofileの`max_workers=24`を固定する。readyなslot数が24未満でも設定値をslot数へ合わせて変更せず、実際の同時実行数とprofileへ固定した並列上限を区別する。
 
 ## Model-visible境界
 

@@ -2,7 +2,7 @@
 
 ## 目的
 
-1つのprompt set resultに属する独立したLayer 2 runを、外側並列度`M`で実行する。wave barrierとglobal queueを提供するが、評価基盤v3の保存単位、4 Layer、3 KPIを変更しない。
+1つのprompt set resultに属する独立したLayer 2 runを、外側並列度`M`で実行する。wave barrierとglobal queueを提供する。複数prompt setを比較する新規slotは、cycleを分離したままcampaign global queueへ統合できる。評価基盤v3の保存単位、4 Layer、3 KPIは変更しない。
 
 このextensionはcontroller起動、客観的`external_failure`の再実施、OS sample、実行summaryだけを扱う。採点、result登録、複数prompt set比較、改善、release判断は行わない。
 
@@ -51,6 +51,26 @@ python3 layer2/extensions/parallel_execution/prepare_global_plan.py \
 ```
 
 `--max-workers`の既定は、履歴上このhostでqualification済みの`24`である。別host、model、Agent条件または別`M`は新しい`comparison_conditions.executor_parameters`として固定し、必要なqualificationを別cycleで行う。既存v1 / v2 profileは変更しない。
+
+## 複数prompt setのcampaign queue
+
+比較対象ごとのcycle、prompt identity、resultは混ぜない。ただし、実行待ちの独立slotは[`campaign_runner.py`](campaign_runner.py)で一つのlongest-first queueへ入れる。全planは`global_queue`、同一comparison conditions、`max_workers=24`でなければならない。
+
+```bash
+python3 layer2/extensions/parallel_execution/campaign_runner.py \
+  --plan /absolute/path/to/prompt-1/global-plan.json \
+  --runner-output /absolute/path/to/prompt-1/parallel-run \
+  --plan /absolute/path/to/prompt-2/global-plan.json \
+  --runner-output /absolute/path/to/prompt-2/parallel-run \
+  --plan /absolute/path/to/prompt-3/global-plan.json \
+  --runner-output /absolute/path/to/prompt-3/parallel-run \
+  --campaign-output /absolute/path/to/campaign-run \
+  --max-workers 24
+```
+
+queueは任意個のplanに属する全slotを推定所要時間の長い順に並べる。同時実行可能なslotが24件未満なら全件を開始し、24件以上なら空いたworkerへ次slotを直ちに投入する。prompt setごとの直列campaignは、dependencyまたは明示的な停止gateがある場合だけ使用する。
+
+保存済みの互換resultがあるprompt setは新しいplanへ含めない。candidate固有のquality・mechanism gateはcandidateだけを先に実行し、gate通過後にKPI baselineが必要になった時点で保存resultを照合する。不足する新規slotだけをcampaign queueへ投入する。
 
 ## 実行
 

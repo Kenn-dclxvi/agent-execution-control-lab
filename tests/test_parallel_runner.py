@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from layer2.extensions.parallel_execution.parallel_runner import ParallelRunError, run_plan
+from layer2.extensions.parallel_execution.campaign_runner import run_campaign
 from layer2.extensions.parallel_execution.prepare_global_plan import prepare_global_plan
 from layer2.extensions.parallel_execution.prepare_plan import prepare_plan
 
@@ -19,7 +20,7 @@ class ParallelRunnerTest(unittest.TestCase):
             "agent_environment": "test-agent",
             "task_spec": "test-task-spec",
             "permission": "workspace-write/never",
-            "executor_parameters": {"reasoning_effort": "high"},
+            "executor_parameters": {"reasoning_effort": "high", "max_workers": 24},
             "repetition_condition": {"iterations": 3},
         }
 
@@ -312,6 +313,71 @@ class ParallelRunnerTest(unittest.TestCase):
             self.assertEqual(result["max_workers"], 24)
             plan = json.loads(Path(result["plan"]).read_text())
             self.assertEqual(plan["max_workers"], 24)
+
+    def test_campaign_uses_one_queue_for_separate_prompt_cycles(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "state.json").write_text(
+                json.dumps({"active": 0, "max_active": 0, "attempts": {}, "events": []}),
+                encoding="utf-8",
+            )
+            controller = self.make_controller(root)
+            plans = []
+            outputs = []
+            for plan_index, prompt_name in enumerate(("prompt-one", "prompt-two"), start=1):
+                cycle = root / f"cycle-{plan_index}"
+                (cycle / "layer1").mkdir(parents=True)
+                (cycle / "layer1" / "set.json").write_text("{}\n", encoding="utf-8")
+                capsules = [
+                    self.make_capsule(
+                        root,
+                        f"CASE-{plan_index}-{iteration}",
+                        iteration,
+                        delay_seconds=0.1,
+                        prompt_name=prompt_name,
+                        iteration_count=2,
+                    )
+                    for iteration in (1, 2)
+                ]
+                plan_path = root / f"plan-{plan_index}.json"
+                plan_path.write_text(
+                    json.dumps(
+                        {
+                            "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
+                            "schedule_policy": "global_queue",
+                            "cycle": str(cycle),
+                            "evaluation_loop": str(controller),
+                            "max_workers": 24,
+                            "max_attempts": 3,
+                            "monitor_interval_seconds": 0.05,
+                            "jobs": [
+                                {
+                                    "sequence": sequence,
+                                    "estimated_seconds": 10,
+                                    "capsule": str(capsule),
+                                }
+                                for sequence, capsule in enumerate(capsules, start=1)
+                            ],
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                plans.append(plan_path)
+                outputs.append(root / f"runner-{plan_index}")
+
+            summary = run_campaign(plans, outputs, root / "campaign", max_workers=24)
+
+            self.assertEqual(summary["status"], "complete")
+            self.assertEqual(summary["requested_slots"], 4)
+            self.assertEqual(summary["max_workers"], 24)
+            state = json.loads((root / "state.json").read_text())
+            self.assertEqual(state["max_active"], 4)
+            for output in outputs:
+                plan_summary = json.loads((output / "summary.json").read_text())
+                self.assertEqual(plan_summary["valid_slots"], 2)
+                self.assertEqual(
+                    plan_summary["campaign_output"], str((root / "campaign").resolve())
+                )
 
 
 if __name__ == "__main__":
