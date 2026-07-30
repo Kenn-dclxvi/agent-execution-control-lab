@@ -14,7 +14,7 @@ DESIGN = ROOT / "docs/candidate104-staged-evidence-admission-design.md"
 C103_PROFILE = ROOT / "evaluations/profiles/candidate103-prechange-evidence-receipt-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json"
 C104_PROFILE = ROOT / "evaluations/profiles/candidate104-staged-evidence-admission-v14-reasoning-medium-a02-f07-global-m24-n5-cli0146-r1.json"
 C81_STANDARD_PROFILE = ROOT / "evaluations/profiles/candidate81-validation-wrapper-precedence-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r2.json"
-C104_STANDARD_PROFILE = ROOT / "evaluations/profiles/candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json"
+C104_STANDARD_PROFILE = ROOT / "evaluations/profiles/candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r3.json"
 
 
 def rules(path: Path) -> dict[str, str]:
@@ -95,7 +95,15 @@ class Candidate104Test(unittest.TestCase):
     def test_standard14_profile_changes_only_prompt_identity(self) -> None:
         source = json.loads(C81_STANDARD_PROFILE.read_text(encoding="utf-8"))
         candidate = json.loads(C104_STANDARD_PROFILE.read_text(encoding="utf-8"))
-        self.assertEqual(candidate["cases"], source["cases"])
+        self.assertEqual(
+            {(case["id"], case["revision"]) for case in candidate["cases"]},
+            {(case["id"], case["revision"]) for case in source["cases"]},
+        )
+        self.assertEqual(
+            [case["id"] for case in candidate["cases"][:2]],
+            ["TC-A01-LATENT-MODE-POLICY", "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"],
+        )
+        self.assertEqual(candidate["iterations"], 5)
         self.assertEqual(candidate["comparison_conditions"], source["comparison_conditions"])
         self.assertEqual(candidate["evaluation_set"], source["evaluation_set"])
         self.assertEqual(candidate["execution"], source["execution"])

@@ -14,7 +14,7 @@ Candidate104はCandidate98を直接親とし、変更前の証拠取得を既定
 - bundle SHA-256: `b25d13fb2f9d598adfae2359bd5cfbcef2591731d07e9165b1f9b3fc83e036b0`
 - changed target: root `AGENTS.md`
 - changed predicate: `EVIDENCE_GATE`の追加
-- evaluation status: `not_evaluated`
+- evaluation status: `targeted_a02_f07_evaluated / mechanism_gate_passed / standard14_evaluated / quality_gate_passed / result_registered / adoption_not_decided`
 - release: `not_created`
 - runtime projection: `not_projected`
 

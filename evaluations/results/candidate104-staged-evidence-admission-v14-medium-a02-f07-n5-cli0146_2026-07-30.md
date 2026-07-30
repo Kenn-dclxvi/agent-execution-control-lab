@@ -4,7 +4,7 @@
 
 Candidate104はA02 r2とF07 r2の各5件、計10件でvalid・rateable・score `4`だった。F07は5 / 5で対象外を含む広い検索と履歴参照を行わず、A02は5 / 5でclarificationを返さずrepository authorityから正規routeを解決した。A02でrequested valueをbindした後のauthority、fixture、履歴探索も0 / 5だった。
 
-現在状態を`targeted_a02_f07_evaluated / quality_gate_passed / mechanism_gate_passed / result_registered / standard14_not_started`とする。Standard14 N=5へ進めるが、Standard14通過前にB20、採用、release、本体反映へ進めない。
+このtargeted result登録時の状態を`targeted_a02_f07_evaluated / quality_gate_passed / mechanism_gate_passed / result_registered / standard14_not_started`とした。後続のStandard14 N=5結果と現在状態は[`Candidate98 / Candidate104標準14 N=5`](candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)を正本とする。
 
 Candidate104の直接親はCandidate98である。Candidate57、58、62とCandidate99からCandidate103までは観測証拠であり、prompt lineageへ含めない。
 
