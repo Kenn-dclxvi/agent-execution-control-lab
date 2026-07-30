@@ -2,7 +2,7 @@
 
 ## 1. 対象
 
-この文書は、`scripts/evaluation_loop.py`でprompt set別のKPI evidenceを保存し、互換resultを任意個比較する方法を説明する。
+この文書は、`scripts/evaluation_loop.py`で1 runを実行・採点し、`scripts/atomic_run_registry.py`で各runを独立保存して、任意のrun selectionを集計・比較する方法を説明する。従来のprompt-set result経路も履歴互換として扱う。
 
 基盤にはprompt作成、quality rater用prompt、優劣判定、採用、release判断、THE-CAPTION本体反映を含めない。
 
@@ -10,7 +10,7 @@
 
 今後のTHE-CAPTION向け全体試験は、[`the-caption-standard14-r1`](../evaluations/sets/the-caption-standard14-r1/README.md)の14項目で実施する。
 
-標準14項目は、従来のF項目12件とA01・A02で構成する。各項目を5回実行する場合は70件を一つの結果として登録する。
+標準14項目は、従来のF項目12件とA01・A02で構成する。各項目を5回実行した場合も、70 runを個別登録する。`N=5`は70 runの保存identityではなく、各caseを含むcomplete sampleを5件選んだanalysisの件数である。
 
 一部項目だけの原因確認は対象試験として分離する。A01・A02を除いた旧12項目の実行を、今後の全体試験完了として扱わない。
 
@@ -26,8 +26,13 @@
 | 1. Comparison preflight | `preflight-comparison` | profile、capsule、global planを基準resultへ照合して発行を許可する |
 | 2. Execution | `run` | 1 prompt setの1 case / 1 iterationを実行する |
 | 3. Quality rating | `rate` | 1 runへ0〜4のscoreを記録する |
-| 4. KPI comparison | `record-result` | 1 prompt set resultをregistryへ追記する |
-| 4. KPI comparison | `compare` | 互換な2件以上の保存resultからviewを作る |
+| 4. Atomic registration | `atomic_run_registry.py register-run` | 採点済み1 runをregistryへ追記する |
+| 4. Legacy import | `atomic_run_registry.py import-result` | 既存prompt-set resultのrunを元result不変のまま索引化する |
+| 4. Missing dispatch | `atomic_run_registry.py plan-missing` | poolの既存complete sampleを数え、不足runだけを固定する |
+| 4. Selection | `atomic_run_registry.py select-runs` | 分析に用いるrun ID集合をwrite-onceで固定する |
+| 4. KPI analysis | `atomic_run_registry.py aggregate-selection` | selectionから3 KPIを集計する |
+| 4. KPI comparison | `atomic_run_registry.py compare-analyses` | 実効互換な2 analysisの差分viewを作る |
+| 4. 履歴互換 | `record-result` / `compare` | 従来のprompt-set resultを登録・比較する |
 
 `reaccount-result`はroot-only v3 resultを変更せずall-agent resultを追記する履歴補正interface、`query-results`はregistryのread-only取得interfaceである。各書込subcommandは既存artifactを上書きしない。
 
@@ -85,7 +90,63 @@ reasoning effortはcomparison conditionである。既存`high` profileとresult
 
 ### 実行前のresult再利用とcampaign scheduling
 
-新しいslotをmaterializeする前に、registryから同じimmutable prompt identityとcompatibility keyのresultを検索する。必要なcase、iteration、rating済みresultが揃っているprompt setは再実行しない。保存resultで不足するslotだけを新しいcycleへ固定する。
+新しいslotをmaterializeする前に、atomic registryの同じ`pool_key`からcomplete sampleを数える。必要件数との差だけを`plan-missing`へ固定する。例えば既存5 sampleから100 sampleへ増やす場合、95 sampleだけを発行する。既存5 sampleのrunは再実行しない。
+
+```bash
+ATOMIC=scripts/atomic_run_registry.py
+
+# 既存N=5 resultのrunを独立索引へ追加する
+python3 "$ATOMIC" import-result \
+  --registry "$REGISTRY" \
+  --result-id <n5-result-id>
+
+# poolに5 sampleあれば95 sample分だけをplanへ出す
+python3 "$ATOMIC" plan-missing \
+  --registry "$REGISTRY" \
+  --pool-key <pool-key> \
+  --desired-count 100 \
+  --output /new/path/missing-to-100.json
+```
+
+`plan-missing`の`desired-count`はdispatch要求だけであり、runまたはpool identityへ含めない。各missing slotは共有`sample_id`、case ID、dispatch用の局所iterationを持つ。`prepare_atomic_plan.py`はこのplanから不足capsuleだけを生成する。
+
+```bash
+python3 layer2/extensions/parallel_execution/prepare_atomic_plan.py \
+  --template /path/to/CASE-A-template.json \
+  --template /path/to/CASE-B-template.json \
+  --dispatch-plan /new/path/missing-to-100.json \
+  --registry "$REGISTRY" \
+  --cycle /path/to/extension-cycle \
+  --evaluation-loop scripts/evaluation_loop.py \
+  --duration-hints /path/to/profile.json \
+  --resource-class /path/to/resource-class.json \
+  --output /new/path/atomic-global-plan
+```
+
+各runの`rate`完了後、prompt-set result完成を待たず個別登録する。
+
+```bash
+python3 "$ATOMIC" register-run \
+  --registry "$REGISTRY" \
+  --pool-key <pool-key> \
+  --cycle /path/to/extension-cycle \
+  --run-id <rated-run-id>
+```
+
+必要件数が揃った時点でrun ID集合を固定し、集計する。
+
+```bash
+python3 "$ATOMIC" select-runs \
+  --registry "$REGISTRY" \
+  --pool-key <pool-key> \
+  --count 100 \
+  --output /new/path/selection.json
+
+python3 "$ATOMIC" aggregate-selection \
+  --registry "$REGISTRY" \
+  --selection /new/path/selection.json \
+  --output /new/path/analysis.json
+```
 
 candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。mechanism gate不通過時はbaseline KPI比較へ進まない。gate通過後にbaselineが必要になった場合は保存済み互換resultを優先し、存在しない場合だけbaseline slotを追加する。
 
@@ -116,11 +177,31 @@ python3 "$CLI" verify-comparison-preflight --cycle "$CYCLE"
 
 preflightは、prompt identity以外の全compatibility、設定上の`M`、全case / iteration、各capsuleのidentityとcomparison conditionsを照合する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleを再検証するため、receipt欠落、改ざん、準備後の条件変更はadapter起動前に停止する。
 
-複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。推定所要時間の長いslotから発行し、このhostの新規試験はprofileの`max_workers`をqualification済み上限`M=24`へ固定する。readyなslotが5件なら実際の同時実行数は5件になるが、設定値を`M=5`へ変更しない。比較対象をA、Bの順に直列実行するのは、先行resultが後続実行の有無または条件を変えるgateがある場合だけである。
+複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。明示した`resource_class`が一致すれば、analysis condition、coverage、局所反復数が異なるplanも同じqueueへ入れられる。queueは同一case / sampleの比較対象を近接配置したうえでworkerを空けず、このhostでは`M=24`を上限とする。
 
 ## 5. Run capsule v2
 
 1 prompt set、1 case、1 iterationにつき1つ用意する。
+
+atomic経路では`execution-capsule/v3`を使う。`binding.sample_id`を必須とし、`comparison_conditions.repetition_condition`を持たない。`iteration`はcycle内でcapsuleを一意にする局所dispatch番号であり、run poolまたは分析上の`N`を表さない。`prepare_atomic_plan.py`は既存v2 templateからv3 capsuleを生成し、repetition conditionを除去する。
+
+```json
+{
+  "schema_version": "the-caption-prompt.execution-capsule/v3",
+  "binding": {
+    "prompt_set_identity": {"name": "<name>", "revision": "<revision>"},
+    "case_id": "<case>",
+    "iteration": 1,
+    "sample_id": "planned:<dispatch-plan>:<sample>"
+  },
+  "comparison_conditions": {
+    "model": "<model>",
+    "executor_parameters": {"max_workers": 24}
+  }
+}
+```
+
+省略した他の実効条件はv2と同じである。`repetition_condition` keyは含めない。
 
 ```json
 {
@@ -456,9 +537,12 @@ python3 "$CLI" compare \
     └── result-registration.json
 
 <registry>/
-└── results/
-    └── <result_id>.json
+├── runs/<atomic_run_id>.json
+├── pools/<pool_key>.json
+└── results/<legacy-result-id>.json
 ```
+
+selection、analysis、comparisonは利用者が指定した新規pathへ作る。poolは条件索引だけを持ち、run member一覧や件数を持たない。
 
 比較viewは利用者が指定した新規pathへ作る。cycle、registry result、既存viewを上書きしない。
 
@@ -476,11 +560,11 @@ python3 "$CLI" compare \
 | `compatibility keys do not match` | 固定条件が異なるresultを選択 | 同じkeyのresultをqueryする |
 | `refusing to overwrite` | resultまたはview pathが既存 | 新規path / 新規cycleを使う |
 
-## 12. v1 / v2との境界
+## 12. v1 / v2 / v3との境界
 
-v1の`decide`、`decision.json`、`winner`と、v2の固定A / B `compare`、`comparison.json`、`difference_b_minus_a`は履歴契約である。v3は旧cycleや旧resultを読み込まず、in-place変換もしない。
+v1の`decide`、v2の固定A / B比較、v3のprompt-set resultは履歴契約である。atomic run経路は既存artifactを変更しない。
 
-旧resultをv3 registryへ入れるmigrationは未実装であり、このworkflowの対象外である。必要になった場合はprovenanceを維持する別schema・別要件として扱う。
+v3 resultは`import-result`でcase rowごとのatomic runへ索引化できる。元resultのcontent hash、run ID、実行時provenanceを各recordへ保持し、元resultを再採点または上書きしない。
 
 ## 13. Storage maintenance
 
@@ -496,5 +580,6 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v \
   tests/test_storage_copy.py \
   tests/test_run_codex_evaluation.py \
   tests/test_parallel_runner.py \
+  tests/test_atomic_run_registry.py \
   tests/test_prepare_case_fixture.py
 ```

@@ -136,7 +136,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 ## 7. 現在の状態（まとめ）
 
-- 評価基盤は `evaluation_foundation_v3`。3 KPIをappend-onlyで保存し、互換条件を満たす結果だけを比較します。
+- 評価基盤は `evaluation_foundation_v4`。3 KPIをatomic run単位でappend-only保存し、計画上の`N`をrun identityへ含めません。実効互換なrunだけをpoolから選択し、使用run ID集合を固定して比較します。v3 prompt-set resultは履歴として保持します。
 - baselineから多数の候補（C78まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
 - 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。最初のv13互換resultは6条件・計420件です。

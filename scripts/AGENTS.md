@@ -9,6 +9,7 @@ prompt bundleを生成・合成・展開するscript（`export_prompt_bundle.py`
 - model-visible / model-invisible境界、evaluation compatibility、4 Layer / 3 KPIの境界は`docs/prompt-comparison-workflow.md`と`evaluations/AGENTS.md`。overlayでmodel-invisible情報をworkspaceへ流入させない。
 
 - `scripts/evaluation_loop.py`をevaluation foundation v3の固定点として扱う。
+- `scripts/atomic_run_registry.py`をcount-free atomic保存・選択・集計の固定点とする。poolへrun member一覧または`N`を保存せず、要求件数はdispatch plan、使用run集合はselection receiptへだけ固定する。
 - 再現可能な不具合または明示要件なしに、Layer、KPI、出力schemaを拡張しない。
 - 書込処理はappend-onlyを維持する。
 - 既存artifactを上書きしない。

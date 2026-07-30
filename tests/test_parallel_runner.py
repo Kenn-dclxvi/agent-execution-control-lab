@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from layer2.extensions.parallel_execution.parallel_runner import ParallelRunError, run_plan
-from layer2.extensions.parallel_execution.campaign_runner import run_campaign
+from layer2.extensions.parallel_execution.campaign_runner import prepare_campaign, run_campaign
 from layer2.extensions.parallel_execution.prepare_global_plan import prepare_global_plan
 from layer2.extensions.parallel_execution.prepare_plan import prepare_plan
 
@@ -378,6 +378,66 @@ class ParallelRunnerTest(unittest.TestCase):
                 self.assertEqual(
                     plan_summary["campaign_output"], str((root / "campaign").resolve())
                 )
+
+    def test_campaign_resource_class_allows_different_analysis_conditions_and_pairs_jobs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            controller = self.make_controller(root)
+            plans = []
+            outputs = []
+            resource_class = {"host": "qualified-local-m24", "executor": "codex-v1"}
+            for plan_index, prompt_name in enumerate(("baseline", "candidate"), start=1):
+                cycle = root / f"cycle-{plan_index}"
+                (cycle / "layer1").mkdir(parents=True)
+                (cycle / "layer1" / "set.json").write_text("{}\n", encoding="utf-8")
+                capsules = []
+                for iteration in (1, 2):
+                    capsule = self.make_capsule(
+                        root,
+                        "CASE-SHARED",
+                        iteration,
+                        prompt_name=prompt_name,
+                        iteration_count=2 + plan_index,
+                    )
+                    document = json.loads(capsule.read_text())
+                    document["comparison_conditions"]["model"] = f"model-{plan_index}"
+                    capsule.write_text(json.dumps(document), encoding="utf-8")
+                    capsules.append(capsule)
+                plan_path = root / f"resource-plan-{plan_index}.json"
+                plan_path.write_text(
+                    json.dumps(
+                        {
+                            "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
+                            "schedule_policy": "global_queue",
+                            "resource_class": resource_class,
+                            "cycle": str(cycle),
+                            "evaluation_loop": str(controller),
+                            "max_workers": 24,
+                            "max_attempts": 3,
+                            "monitor_interval_seconds": 0.05,
+                            "jobs": [
+                                {
+                                    "sequence": sequence,
+                                    "estimated_seconds": 10,
+                                    "capsule": str(capsule),
+                                }
+                                for sequence, capsule in enumerate(capsules, start=1)
+                            ],
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                plans.append(plan_path)
+                outputs.append(root / f"resource-output-{plan_index}")
+
+            validated, pending = prepare_campaign(
+                plans, outputs, root / "resource-campaign", max_workers=24
+            )
+            self.assertEqual(len(validated), 2)
+            self.assertEqual(
+                [item["plan"]["plan_index"] for item in pending],
+                [0, 1, 0, 1],
+            )
 
 
 if __name__ == "__main__":

@@ -82,7 +82,9 @@ def prepare_campaign(
             raise ParallelRunError(f"refusing to overwrite output: {output}")
 
     plans: list[dict[str, Any]] = []
+    compatibility_mode: str | None = None
     conditions_sha256: str | None = None
+    resource_class_sha256: str | None = None
     for index, plan_path in enumerate(plan_paths):
         plan = validate_plan(plan_path.resolve())
         if plan["schedule_policy"] != "global_queue":
@@ -96,10 +98,25 @@ def prepare_campaign(
                 "comparison_conditions.executor_parameters.max_workers must equal campaign max_workers"
             )
         current_sha256 = canonical_sha256(conditions)
-        if conditions_sha256 is None:
-            conditions_sha256 = current_sha256
-        elif current_sha256 != conditions_sha256:
-            raise ParallelRunError("campaign plans must have identical comparison conditions")
+        resource_class = plan.get("resource_class")
+        current_mode = "resource_class" if resource_class is not None else "legacy_conditions"
+        if compatibility_mode is None:
+            compatibility_mode = current_mode
+        elif compatibility_mode != current_mode:
+            raise ParallelRunError(
+                "campaign cannot mix resource-class plans with legacy condition-bound plans"
+            )
+        if current_mode == "legacy_conditions":
+            if conditions_sha256 is None:
+                conditions_sha256 = current_sha256
+            elif current_sha256 != conditions_sha256:
+                raise ParallelRunError("campaign plans must have identical comparison conditions")
+        else:
+            current_resource_sha256 = canonical_sha256(resource_class)
+            if resource_class_sha256 is None:
+                resource_class_sha256 = current_resource_sha256
+            elif current_resource_sha256 != resource_class_sha256:
+                raise ParallelRunError("campaign plans must have identical resource_class values")
         plans.append(
             {
                 **plan,
@@ -119,13 +136,23 @@ def prepare_campaign(
                     "plan_sequence": job["sequence"],
                 }
             )
-    pending.sort(
-        key=lambda item: (
-            -item["job"]["estimated_seconds"],
-            item["plan"]["plan_index"],
-            item["plan_sequence"],
-        )
+    groups: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    for item in pending:
+        binding = item["job"]["binding"]
+        groups.setdefault((binding["case_id"], binding["iteration"]), []).append(item)
+    ordered_groups = sorted(
+        groups.items(),
+        key=lambda pair: (
+            -max(item["job"]["estimated_seconds"] for item in pair[1]),
+            pair[0][0],
+            pair[0][1],
+        ),
     )
+    pending = [
+        item
+        for _, group in ordered_groups
+        for item in sorted(group, key=lambda value: value["plan"]["plan_index"])
+    ]
     for sequence, item in enumerate(pending, start=1):
         item["job"]["sequence"] = sequence
     return plans, pending
@@ -145,8 +172,11 @@ def run_campaign(
     group_document = {
         "schema_version": "the-caption-prompt.parallel-campaign-plan/v1",
         "schedule_policy": "global_queue",
-        "ordering": "estimated_seconds_descending",
+        "ordering": "pair-block-longest-first",
         "max_workers": max_workers,
+        "compatibility_mode": (
+            "resource_class" if plans[0].get("resource_class") is not None else "legacy_conditions"
+        ),
         "plans": [
             {
                 "plan": str(plan["plan_path"]),
@@ -157,6 +187,8 @@ def run_campaign(
             for plan in plans
         ],
     }
+    if plans[0].get("resource_class") is not None:
+        group_document["resource_class"] = plans[0]["resource_class"]
     write_json_once(campaign_output / "plan-group.json", group_document)
     monitor_path = campaign_output / "os-samples.jsonl"
     monitor_path.touch(exist_ok=False)

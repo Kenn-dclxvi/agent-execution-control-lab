@@ -169,7 +169,10 @@ class OsMonitor:
 
 def binding_from_capsule(path: Path) -> dict[str, Any]:
     capsule = load_object(path)
-    if capsule.get("schema_version") != "the-caption-prompt.execution-capsule/v2":
+    if capsule.get("schema_version") not in {
+        "the-caption-prompt.execution-capsule/v2",
+        "the-caption-prompt.execution-capsule/v3",
+    }:
         raise ParallelRunError(f"unsupported capsule schema_version: {path}")
     binding = capsule.get("binding")
     if not isinstance(binding, dict):
@@ -219,6 +222,11 @@ def validate_plan(path: Path) -> dict[str, Any]:
     monitor_interval = require_positive_number(
         plan.get("monitor_interval_seconds", 15), "monitor_interval_seconds"
     )
+    resource_class = plan.get("resource_class")
+    if resource_class is not None and (
+        not isinstance(resource_class, dict) or not resource_class
+    ):
+        raise ParallelRunError("resource_class must be a non-empty object")
     raw_jobs = plan.get("jobs")
     if not isinstance(raw_jobs, list) or not raw_jobs:
         raise ParallelRunError("jobs must be a non-empty array")
@@ -280,6 +288,7 @@ def validate_plan(path: Path) -> dict[str, Any]:
         "max_attempts": max_attempts,
         "monitor_interval_seconds": monitor_interval,
         "schedule_policy": schedule_policy,
+        "resource_class": resource_class,
         "jobs": jobs,
         "waves": waves,
     }

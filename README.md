@@ -16,7 +16,7 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 ## 現在の状態
 
-`evaluation_foundation_v3`。1つのimmutableなprompt set identityごとに3 KPIをappend-onlyで保存し、互換条件を満たす任意個のresultを後から取得・比較できます。現行の`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。root-onlyで保存したv3 `prompt-set-result/v1`は履歴として保持し、再集計値を`prompt-set-result/v2`へ追記します。比較対象の固定pair、winner、改善・悪化は保存・出力しません。新規実行前に保存済み互換resultを再利用し、不足slotだけを任意個prompt set共通の最大24 global queueへ投入します。v1 / v2 evaluation foundation resultも履歴として保持し、migrationや再解釈は行っていません。評価基盤自体は候補の採用・本体反映・runtime有効化を判断しません。これらは別の明示的な承認作業で、現時点ではCandidate41・Candidate43・Candidate71・Candidate81がその判断でTHE-CAPTION本体へ投影済みです（[`docs/repository-overview.md`](docs/repository-overview.md)、[`prompts/releases/README.md`](prompts/releases/README.md)）。
+`evaluation_foundation_v4`。1 case × 1 sampleのatomic runをappend-onlyで保存し、`N`をrun identityから分離しています。既存5 sampleから100 sampleへ増やす場合は95 sampleだけを追加し、分析時に使用run ID集合をwrite-onceで固定します。同じ`resource_class`のready runはanalysis conditionやdispatch件数が異なってもpair-awareな最大24 global queueへ投入できます。`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。v3 `prompt-set-result/v1` / `v2`とそれ以前のresultは履歴として保持し、元artifactを変更せずatomic runへ索引化できます。評価基盤はwinner、採用、本体反映、runtime有効化を判断しません。
 
 ## 主要な知見
 
