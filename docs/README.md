@@ -119,6 +119,8 @@
 | [`task-spec-planner-phase1-plan.md`](task-spec-planner-phase1-plan.md) | TaskSpec確認 第1段階の実施記録（実施・評価・release・projection完了） |
 | [`sa-routing-decision-table.md`](sa-routing-decision-table.md) | candidate2のSA routing decision table |
 | [`candidate87-adoption-decision.md`](candidate87-adoption-decision.md) | C87の評価状態を保持した別stateの不採用・停止判断と、C82〜C89系列の完了境界 |
+| [`candidate106-f03-b20-short-yield-route-analysis.md`](candidate106-f03-b20-short-yield-route-analysis.md) | C104 / C106 F03 B20の途中messageをouter early yieldとnonterminal再入の二段階へ分解した診断 |
+| [`candidate107-validation-wrapper-reentry-closure-design.md`](candidate107-validation-wrapper-reentry-closure-design.md) | C106のF03 B20再発経路をouter deadline条件とcell ID wait-only遷移で閉じるCandidate107設計 |
 | [`prompt-set-result-registry-additional-requirements.md`](prompt-set-result-registry-additional-requirements.md) | result台帳の追加要件記録。status `implemented_as_evaluation_foundation_v3`。具体設計の正本は`prompt-comparison-workflow.md`と`evaluation-loop-manual.md` |
 
 ## 4. historical handoff／superseded interpretation
