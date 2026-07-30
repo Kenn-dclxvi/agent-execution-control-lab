@@ -6,7 +6,7 @@
 
 評価基盤のLayer、KPI、schemaを変更しない。特定candidateの採用、release承認、THE-CAPTION本体への反映も判断しない。
 
-以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
+以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate69からCandidate95までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
 
 ## 結論
 
@@ -107,6 +107,40 @@ labelを読むたびに複数条件の展開が必要になる場合、そのlab
 
 candidateのroot promptが短くなったこと自体を効率化としない。意味上の判断点と参照関係が減ったことを確認する。
 
+### 9. semantic auditをCandidate作成根拠にしない
+
+prompt本文だけを読んで見つけた未定義、複数解釈、論理上の非対称性は、説明上のriskとして記録できる。ただし、互換なbaselineの保存済み実行結果で対応する誤経路を観測していない限り、それだけを制御追加またはCandidate作成の根拠にしない。
+
+LLM promptは形式仕様ではない。本文上の余白、重複、既定値の未記載が、実行時には正常経路を選ぶための注意配分または裁量として働く場合がある。論理的な完全化によって新しいstate、分類、clarification条件を導入すると、未観測だった判断経路を新たに発火させる可能性がある。
+
+低頻度または確率的な誤経路を一般制御へ昇格する場合は、単発traceの事後説明だけで原因を確定しない。同じbaseline identityとcompatibility条件で再現性を確認するか、別の観測証拠によって変更対象predicateとの因果境界を固定する。
+
+### 10. 実行結果から必要な制御を逆算する
+
+制御設計では、prompt本文の完全性ではなく、baselineの実行結果を出発点にする。最初に、正常経路、誤経路、余分なmodel再入、不要なtool call、欠落したresult、誤った停止を保存済みtraceへbindする。その後で、観測した差を消す最小の制御を選ぶ。
+
+追加する制御は、モデルへ新しい意味判定を要求するのではなく、既存の選択肢またはmodel再入を一つ以上減らすものとする。例えば「non-machine judgmentが必要かを判断する」のようなmeta-predicateは、それ自体が新しい非機械的判断になる。明示input、repository authority、machine-bound resultなど、実行時に直接観測できる値へ変換できない場合はprompt predicateにしない。
+
+局所caseで得たroute改善を共通promptへ昇格する前に、非対象caseへ同じ制御の読解、探索、確認costが流入しないことを確認する。対象caseだけの改善と標準集合全体の改善を分けて評価する。
+
+### 11. 制御を強制可能な層へ置く
+
+観測した問題ごとに、制御を置く層を先に決める。
+
+- requested outcome value、permission、required operationの未固定はTaskSpecまたはschemaで明示する。
+- repositoryから一意に解決できるpath、command、配置規則はrepository authorityへ置く。
+- モデルが観測可能な条件に基づく判断、停止、具体的なtool発行順はpromptで制御する。
+- tool result配送、output cap、atomicity、dispatch順、modelへ戻る前の処理はexecutorで強制する。
+- 正しい成果を誤って低得点にする問題はrating contractで修正する。
+
+モデルが発行時点で観測できないruntime stateや、tool adapterがresultを返す前にしか変更できない挙動をpromptへ記述しない。prompt文面で希望するだけでは強制できない制御は、Candidateではなくexecutor capabilityの不足として扱う。
+
+### 12. 意味上の重複を行動上の冗長性と区別する
+
+同じpredicateが別labelにも書かれていることだけを理由に削除しない。LLM promptでは、実行判断を行う位置の近くにある再記述が、注意喚起または誤変換を防ぐ局所的な制約として働く場合がある。
+
+重複を削除、統合、移動する場合は、文字列または論理式の一致ではなく、削除前後の実行routeで同じ判断が維持されることを確認する。意味上の正規化は、単独ではprompt改善ではない。
+
 ## 参照例
 
 ### 有効な方向: worker context sufficiency
@@ -132,9 +166,9 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 新しいcandidateを作る前に、次をすべて記録する。
 
 1. 基準prompt setと、その状態での最短正常経路。
-2. 保存済みtraceで確認した一つの誤経路。
-3. 既存のTaskSpec、repository authority、repository stateで防げない理由。
-4. 追加または置換する一つのpredicate。
+2. 保存済みtraceで確認した一つの誤経路。semantic auditの指摘だけではこの項目を満たさない。
+3. 既存のTaskSpec、repository authority、repository stateで防げない理由と、promptが制御を置く正しい層である理由。
+4. 追加または置換する一つのpredicate。その発火条件は、明示input、repository authority、machine-bound resultのいずれかから直接判定できること。
 5. そのpredicateが消す具体的な判断点またはcontext伝播。
 6. 新たに増える判断点、label参照、例外条件。
 7. 成果品質を維持したことを判定するcaseとscore分布。
@@ -146,7 +180,7 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 ## 現時点の検討方針
 
 > [!IMPORTANT]
-> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate89まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（Candidate36は`not_evaluated`である。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜8とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
+> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate95まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（Candidate36は`not_evaluated`である。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜12とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
 
 - ControlFreeRepositoryの自然な最短経路を比較基準に含める。
 - C35からC40までに追加されたlabelとpredicateを、必要性、重複、参照関係で棚卸しする。
@@ -162,3 +196,8 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 - [Candidate35 / Candidate38 v9 targeted N=5](../evaluations/results/candidate35-candidate38-outcome-quality-owner-diagnostic-v9-targeted2-n5_2026-07-19.md)
 - [Candidate35 / Candidate38 token trace analysis](../evaluations/results/candidate35-candidate38-v9-targeted2-n5-token-trace-analysis_2026-07-19.md)
 - [Candidate40 targeted N=5](../evaluations/results/candidate40-operation-result-projection-boundary-v9-targeted2-n5_2026-07-19.md)
+- [Candidate69 / Candidate71 validation closure Standard14 B18](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)
+- [Candidate71 / Candidate74 typed execution state machine Standard14 N=5](../evaluations/results/candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md)
+- [Candidate71 / Candidate79 ordered validation wave F04 N=5](../evaluations/results/candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md)
+- [Candidate71 / Candidate81 validation wrapper precedence Standard14 N=5](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
+- [Candidate81 / Candidate95 required judgment owner boundary Standard14 B20](../evaluations/results/candidate81-candidate95-required-judgment-owner-boundary-v14-medium-standard14-continuous-n5-b20-cli0146_2026-07-30.md)
