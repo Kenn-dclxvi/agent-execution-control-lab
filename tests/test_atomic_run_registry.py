@@ -12,6 +12,8 @@ from scripts.atomic_run_registry import (
     import_result,
     plan_missing,
     register_cycle_run,
+    register_selection_result,
+    seed_pool,
     select_runs,
 )
 from scripts.evaluation_loop import QUALITY_RATING_V14, identity_sha256
@@ -29,6 +31,7 @@ class AtomicRunRegistryTest(unittest.TestCase):
         max_workers: int,
         token_offset: int = 0,
         suffix: str,
+        case_ids: tuple[str, ...] = ("CASE-A", "CASE-B"),
     ) -> str:
         prompt = {"name": name, "revision": "r1"}
         compatibility = {
@@ -57,7 +60,7 @@ class AtomicRunRegistryTest(unittest.TestCase):
                 "order": "estimated_seconds_descending",
             },
             "coverage": {
-                "case_ids": ["CASE-A", "CASE-B"],
+                "case_ids": list(case_ids),
                 "iterations": list(range(1, iterations + 1)),
             },
         }
@@ -65,7 +68,7 @@ class AtomicRunRegistryTest(unittest.TestCase):
         rows = []
         per_iteration = []
         for iteration in range(1, iterations + 1):
-            for case_index, case_id in enumerate(("CASE-A", "CASE-B"), start=1):
+            for case_index, case_id in enumerate(case_ids, start=1):
                 rows.append(
                     {
                         "run_id": f"{name}-{suffix}-{case_id}-{iteration}",
@@ -141,7 +144,9 @@ class AtomicRunRegistryTest(unittest.TestCase):
                 desired_count=10,
                 output=str(plan_path),
             )
-            self.assertEqual(plan["existing_complete_sample_count"], 5)
+            self.assertEqual(
+                plan["existing_sample_count_by_case"], {"CASE-A": 5, "CASE-B": 5}
+            )
             self.assertEqual(plan["missing_sample_count"], 5)
             self.assertEqual(plan["missing_slot_count"], 10)
 
@@ -217,6 +222,102 @@ class AtomicRunRegistryTest(unittest.TestCase):
             document = json.loads(output.read_text())
             self.assertEqual(document["differences"]["total_tokens"], -40)
             self.assertNotIn("winner", document)
+
+    def test_case_subset_selection_registers_a_compatible_reference_result(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            result_id = self.make_result(
+                registry,
+                name="reference",
+                iterations=5,
+                max_workers=24,
+                suffix="standard-n5",
+            )
+            imported = self.call(import_result, registry=str(registry), result_id=result_id)
+            selection = root / "selection.json"
+            selected = self.call(
+                select_runs,
+                registry=str(registry),
+                pool_key=imported["pool_key"],
+                count=5,
+                case_id=["CASE-A"],
+                output=str(selection),
+            )
+            self.assertEqual(selected["run_count"], 5)
+            profile = root / "profile.json"
+            source = json.loads((registry / "results" / f"{result_id}.json").read_text())
+            profile.write_text(
+                json.dumps(
+                    {
+                        "prompt_set_identity": source["prompt_set_identity"],
+                        "evaluation_set": {"set_id": "set-r1", "revision": "r1"},
+                        "cases": [{"id": "CASE-A"}],
+                        "iterations": 5,
+                        "comparison_conditions": {
+                            key: value
+                            for key, value in source["compatibility"].items()
+                            if key not in {"evaluation_set", "fixtures", "coverage"}
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            registered = self.call(
+                register_selection_result,
+                registry=str(registry),
+                selection=str(selection),
+                profile=str(profile),
+            )
+            result = json.loads(Path(registered["artifact"]).read_text())
+            self.assertEqual(result["compatibility"]["coverage"]["case_ids"], ["CASE-A"])
+            self.assertEqual(len(result["case_results"]), 5)
+            self.assertEqual(result["median"]["total_tokens"], 101)
+
+    def test_empty_candidate_pool_can_be_seeded_from_reference_conditions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            result_id = self.make_result(
+                registry,
+                name="reference",
+                iterations=5,
+                max_workers=24,
+                suffix="n5",
+            )
+            imported = self.call(import_result, registry=str(registry), result_id=result_id)
+            identity = root / "candidate.json"
+            identity.write_text(
+                json.dumps(
+                    {
+                        "prompt_set_identity": {
+                            "name": "candidate",
+                            "revision": "r1",
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            seeded = self.call(
+                seed_pool,
+                registry=str(registry),
+                reference_pool_key=imported["pool_key"],
+                prompt_identity=str(identity),
+            )
+            self.assertEqual(seeded["comparison_key"], imported["comparison_key"])
+            self.assertNotEqual(seeded["pool_key"], imported["pool_key"])
+            plan = self.call(
+                plan_missing,
+                registry=str(registry),
+                pool_key=seeded["pool_key"],
+                desired_count=5,
+                output=str(root / "dispatch.json"),
+            )
+            self.assertEqual(
+                plan["existing_sample_count_by_case"], {"CASE-A": 0, "CASE-B": 0}
+            )
+            self.assertEqual(plan["missing_sample_count"], 5)
+            self.assertEqual(plan["missing_slot_count"], 10)
 
     def test_missing_dispatch_plan_materializes_only_missing_atomic_slots(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -316,11 +417,62 @@ class AtomicRunRegistryTest(unittest.TestCase):
             self.assertNotIn(
                 "repetition_condition", generated_capsule["comparison_conditions"]
             )
-            samples = {}
-            for binding in bindings:
-                samples.setdefault(binding["sample_id"], set()).add(binding["case_id"])
-            self.assertEqual(len(samples), 3)
-            self.assertTrue(all(cases == {"CASE-A", "CASE-B"} for cases in samples.values()))
+            self.assertEqual(len({binding["sample_id"] for binding in bindings}), 6)
+
+    def test_targeted_case_runs_reduce_only_that_case_in_a_larger_pool(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            reference_id = self.make_result(
+                registry,
+                name="reference",
+                iterations=5,
+                max_workers=24,
+                suffix="standard-n5",
+            )
+            reference = self.call(
+                import_result, registry=str(registry), result_id=reference_id
+            )
+            identity = root / "candidate.json"
+            identity.write_text(
+                json.dumps(
+                    {"prompt_set_identity": {"name": "candidate", "revision": "r1"}}
+                ),
+                encoding="utf-8",
+            )
+            candidate_pool = self.call(
+                seed_pool,
+                registry=str(registry),
+                reference_pool_key=reference["pool_key"],
+                prompt_identity=str(identity),
+            )
+            targeted_id = self.make_result(
+                registry,
+                name="candidate",
+                iterations=5,
+                max_workers=24,
+                suffix="case-a-n5",
+                case_ids=("CASE-A",),
+            )
+            self.call(import_result, registry=str(registry), result_id=targeted_id)
+
+            plan_path = root / "missing.json"
+            plan = self.call(
+                plan_missing,
+                registry=str(registry),
+                pool_key=candidate_pool["pool_key"],
+                desired_count=5,
+                output=str(plan_path),
+            )
+            self.assertEqual(
+                plan["existing_sample_count_by_case"], {"CASE-A": 5, "CASE-B": 0}
+            )
+            self.assertEqual(
+                plan["missing_sample_count_by_case"], {"CASE-A": 0, "CASE-B": 5}
+            )
+            self.assertEqual(plan["missing_slot_count"], 5)
+            document = json.loads(plan_path.read_text())
+            self.assertEqual({slot["case_id"] for slot in document["missing_slots"]}, {"CASE-B"})
 
     def test_rated_cycle_runs_register_individually_into_an_existing_pool(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

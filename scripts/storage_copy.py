@@ -31,7 +31,7 @@ def _clonefile_copytree(source: Path, destination: Path) -> None:
     if sys.platform != "darwin":
         raise StorageCopyError("clonefile materialization is only available on macOS")
     completed = subprocess.run(
-        ["/bin/cp", "-cR", str(source), str(destination)],
+        ["/bin/cp", "-cRp", str(source), str(destination)],
         capture_output=True,
         check=False,
         text=True,

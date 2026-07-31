@@ -1146,6 +1146,101 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertIn("receipt content SHA-256 does not match", completed.stderr)
 
+    def test_atomic_comparison_preflight_authorizes_v3_capsules(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (
+                registry,
+                candidate_cycle,
+                reference,
+                _,
+                profile,
+                _,
+                legacy_capsules,
+            ) = self.prepare_reference_comparison(root)
+            atomic_capsules = []
+            missing_slots = []
+            jobs = []
+            for iteration, legacy_path in zip((95, 96), legacy_capsules, strict=True):
+                capsule = json.loads(legacy_path.read_text())
+                sample_id = f"planned:test:{iteration}"
+                capsule["schema_version"] = "the-caption-prompt.execution-capsule/v3"
+                capsule["binding"]["iteration"] = iteration
+                capsule["binding"]["sample_id"] = sample_id
+                capsule["comparison_conditions"].pop("repetition_condition")
+                path = root / f"atomic-i{iteration}.json"
+                path.write_text(json.dumps(capsule), encoding="utf-8")
+                atomic_capsules.append(path)
+                missing_slots.append(
+                    {
+                        "case_id": "TEST-CASE",
+                        "dispatch_iteration": iteration,
+                        "sample_id": sample_id,
+                        "comparison_block_key": "a" * 64,
+                    }
+                )
+                jobs.append({"capsule": str(path), "sequence": iteration})
+            dispatch = {
+                "schema_version": "the-caption-prompt.atomic-dispatch-plan/v2",
+                "plan_id": "test-plan",
+                "pool_key": "b" * 64,
+                "pool_content_sha256": "c" * 64,
+                "desired_count": 2,
+                "existing_sample_count_by_case": {"TEST-CASE": 0},
+                "missing_sample_count_by_case": {"TEST-CASE": 2},
+                "missing_sample_count": 2,
+                "missing_slots": missing_slots,
+                "created_at": "2026-07-31T00:00:00+00:00",
+            }
+            dispatch["plan_content_sha256"] = identity_sha256(dispatch)
+            dispatch_path = root / "dispatch.json"
+            dispatch_path.write_text(json.dumps(dispatch), encoding="utf-8")
+            global_plan = root / "atomic-global-plan.json"
+            global_plan.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
+                        "cycle": str(candidate_cycle),
+                        "max_workers": 24,
+                        "dispatch_plan": str(dispatch_path),
+                        "dispatch_plan_sha256": dispatch["plan_content_sha256"],
+                        "jobs": jobs,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            preflight = self.cli(
+                "preflight-comparison",
+                "--cycle",
+                str(candidate_cycle),
+                "--profile",
+                str(profile),
+                "--global-plan",
+                str(global_plan),
+                "--registry",
+                str(registry),
+                "--reference-result-id",
+                reference["result_id"],
+            )
+            self.assertEqual(preflight["authorized_slot_count"], 2)
+            receipt = json.loads(
+                (candidate_cycle / "layer1/comparison-preflight.json").read_text()
+            )
+            self.assertEqual(receipt["dispatch_mode"], "atomic")
+            run = self.cli(
+                "run",
+                "--cycle",
+                str(candidate_cycle),
+                "--capsule",
+                str(atomic_capsules[0]),
+            )
+            self.assertEqual(run["status"], "valid")
+            binding = json.loads(
+                (candidate_cycle / "layer2/bindings" / f"{run['run_id']}.json").read_text()
+            )
+            self.assertEqual(binding["iteration"], 95)
+            self.assertEqual(binding["sample_id"], "planned:test:95")
+
 
 if __name__ == "__main__":
     unittest.main()

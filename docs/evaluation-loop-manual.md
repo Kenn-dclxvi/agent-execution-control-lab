@@ -10,7 +10,7 @@
 
 今後のTHE-CAPTION向け全体試験は、[`the-caption-standard14-r1`](../evaluations/sets/the-caption-standard14-r1/README.md)の14項目で実施する。
 
-標準14項目は、従来のF項目12件とA01・A02で構成する。各項目を5回実行した場合も、70 runを個別登録する。`N=5`は70 runの保存identityではなく、各caseを含むcomplete sampleを5件選んだanalysisの件数である。
+標準14項目は、従来のF項目12件とA01・A02で構成する。各項目を5回実行した場合も、70 runを個別登録する。`N=5`は保存identityやrunの束ではなく、analysisがcaseごとに選ぶ件数である。
 
 一部項目だけの原因確認は対象試験として分離する。A01・A02を除いた旧12項目の実行を、今後の全体試験完了として扱わない。
 
@@ -28,7 +28,8 @@
 | 3. Quality rating | `rate` | 1 runへ0〜4のscoreを記録する |
 | 4. Atomic registration | `atomic_run_registry.py register-run` | 採点済み1 runをregistryへ追記する |
 | 4. Legacy import | `atomic_run_registry.py import-result` | 既存prompt-set resultのrunを元result不変のまま索引化する |
-| 4. Missing dispatch | `atomic_run_registry.py plan-missing` | poolの既存complete sampleを数え、不足runだけを固定する |
+| 1. Atomic pool seed | `atomic_run_registry.py seed-pool` | 基準poolの実効条件から、run 0件の新prompt poolを固定する |
+| 4. Missing dispatch | `atomic_run_registry.py plan-missing` | poolの既存runをcase別に数え、不足runだけを固定する |
 | 4. Selection | `atomic_run_registry.py select-runs` | 分析に用いるrun ID集合をwrite-onceで固定する |
 | 4. KPI analysis | `atomic_run_registry.py aggregate-selection` | selectionから3 KPIを集計する |
 | 4. KPI comparison | `atomic_run_registry.py compare-analyses` | 実効互換な2 analysisの差分viewを作る |
@@ -90,7 +91,7 @@ reasoning effortはcomparison conditionである。既存`high` profileとresult
 
 ### 実行前のresult再利用とcampaign scheduling
 
-新しいslotをmaterializeする前に、atomic registryの同じ`pool_key`からcomplete sampleを数える。必要件数との差だけを`plan-missing`へ固定する。例えば既存5 sampleから100 sampleへ増やす場合、95 sampleだけを発行する。既存5 sampleのrunは再実行しない。
+新しいslotをmaterializeする前に、atomic registryの同じ`pool_key`からcase別の保存run数を数える。各caseの必要件数との差だけを`plan-missing`へ固定する。例えばStandard14のF03だけ5件あり、全caseを5件へ揃える場合、F03は再実行せず残る13 case × 5 = 65 runだけを発行する。
 
 ```bash
 ATOMIC=scripts/atomic_run_registry.py
@@ -100,7 +101,13 @@ python3 "$ATOMIC" import-result \
   --registry "$REGISTRY" \
   --result-id <n5-result-id>
 
-# poolに5 sampleあれば95 sample分だけをplanへ出す
+# 新しいpromptを初めて実行する場合は、基準poolの実効条件から空poolを作る
+python3 "$ATOMIC" seed-pool \
+  --registry "$REGISTRY" \
+  --reference-pool-key <reference-pool-key> \
+  --prompt-identity /path/to/candidate-profile.json
+
+# 各caseの保存run数から不足slotだけをplanへ出す
 python3 "$ATOMIC" plan-missing \
   --registry "$REGISTRY" \
   --pool-key <pool-key> \
@@ -108,7 +115,9 @@ python3 "$ATOMIC" plan-missing \
   --output /new/path/missing-to-100.json
 ```
 
-`plan-missing`の`desired-count`はdispatch要求だけであり、runまたはpool identityへ含めない。各missing slotは共有`sample_id`、case ID、dispatch用の局所iterationを持つ。`prepare_atomic_plan.py`はこのplanから不足capsuleだけを生成する。
+`plan-missing`の`desired-count`は各caseへ要求する件数であり、runまたはpool identityへ含めない。各missing slotは独立した`sample_id`、case ID、dispatch用の局所iterationを持つ。case間で同じ`sample_id`へ束ねない。`prepare_atomic_plan.py`はこのplanから不足capsuleだけを生成する。
+
+`seed-pool`はrunを捏造せず、基準poolのcase別実効条件とcomparison keyだけを新しいprompt identityへbindする。生成したv3 global planも`preflight-comparison`へ渡し、基準resultとの完全なprofile互換性、dispatch plan hash、全capsule path / hash / sample IDを`comparison-preflight/v2`へ固定してから発行する。
 
 ```bash
 python3 layer2/extensions/parallel_execution/prepare_atomic_plan.py \
@@ -148,6 +157,25 @@ python3 "$ATOMIC" aggregate-selection \
   --output /new/path/analysis.json
 ```
 
+`select-runs`はcaseごとに要求件数を選び、selection iterationへ組み合わせる。selection iterationはKPI集計上の対応付けであり、実行時の束または共通sample identityではない。
+
+poolの一部caseだけを比較へ再利用する場合は`--case-id`を繰り返す。選択済みatomic runを後続の`prepare-comparison-layer1`へ渡せる基準resultにする場合は、同じ条件を固定したprofileで`register-selection-result`を実行する。新しいrunは発行せず、selection内のrun identityとprofile条件が完全一致する場合だけimmutable resultを登録する。
+
+```bash
+python3 "$ATOMIC" select-runs \
+  --registry "$REGISTRY" \
+  --pool-key <pool-key> \
+  --count 5 \
+  --case-id TC-A01-LATENT-MODE-POLICY \
+  --case-id TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING \
+  --output /new/path/reference-selection.json
+
+python3 "$ATOMIC" register-selection-result \
+  --registry "$REGISTRY" \
+  --selection /new/path/reference-selection.json \
+  --profile /path/to/matching-reference-profile.json
+```
+
 candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。mechanism gate不通過時はbaseline KPI比較へ進まない。gate通過後にbaselineが必要になった場合は保存済み互換resultを優先し、存在しない場合だけbaseline slotを追加する。
 
 保存済みresultを基準にする比較cycleは、次の順序で準備する。
@@ -175,7 +203,7 @@ python3 "$CLI" preflight-comparison \
 python3 "$CLI" verify-comparison-preflight --cycle "$CYCLE"
 ```
 
-preflightは、prompt identity以外の全compatibility、設定上の`M`、全case / iteration、各capsuleのidentityとcomparison conditionsを照合する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleを再検証するため、receipt欠落、改ざん、準備後の条件変更はadapter起動前に停止する。
+preflightは、prompt identity以外の全compatibility、設定上の`M`、発行対象case / iteration、各capsuleのidentityとcomparison conditionsを照合する。legacy planではprofileの全coverage、atomic planではhash固定したdispatch planの不足slot集合との一致を要求する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleを再検証するため、receipt欠落、改ざん、準備後の条件変更はadapter起動前に停止する。
 
 複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。明示した`resource_class`が一致すれば、analysis condition、coverage、局所反復数が異なるplanも同じqueueへ入れられる。queueは同一case / sampleの比較対象を近接配置したうえでworkerを空けず、このhostでは`M=24`を上限とする。
 

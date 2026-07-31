@@ -628,14 +628,26 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     binding_input, conditions, command = validate_run_capsule(capsule)
     case_id = binding_input["case_id"]
     iteration = binding_input["iteration"]
+    atomic_preflight_authorized = False
     generation_receipt = cycle / "layer1" / "comparison-generation.json"
     if generation_receipt.exists():
         preflight = verify_comparison_preflight(cycle)
-        authorized = {
-            (item["case_id"], item["iteration"]): item
-            for item in preflight["authorized_slots"]
-        }
-        slot = authorized.get((case_id, iteration))
+        if preflight.get("schema_version") == ATOMIC_COMPARISON_PREFLIGHT_SCHEMA:
+            sample_id = require_non_empty_string(
+                binding_input.get("sample_id"), "binding.sample_id"
+            )
+            authorized = {
+                (item["case_id"], item["iteration"], item["sample_id"]): item
+                for item in preflight["authorized_slots"]
+            }
+            slot = authorized.get((case_id, iteration, sample_id))
+            atomic_preflight_authorized = slot is not None
+        else:
+            authorized = {
+                (item["case_id"], item["iteration"]): item
+                for item in preflight["authorized_slots"]
+            }
+            slot = authorized.get((case_id, iteration))
         if slot is None:
             raise EvaluationError("run is not authorized by comparison preflight")
         if Path(slot["capsule"]).resolve() != capsule_source:
@@ -643,11 +655,11 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
         if slot["capsule_sha256"] != file_sha256(capsule_source):
             raise EvaluationError("run capsule content does not match comparison preflight")
     coverage = bound_coverage(cycle)
-    if coverage is not None and (
-        case_id not in coverage["case_ids"]
-        or iteration not in coverage["iterations"]
-    ):
-        raise EvaluationError("run is outside the bound evaluation coverage")
+    if coverage is not None:
+        if case_id not in coverage["case_ids"]:
+            raise EvaluationError("run is outside the bound evaluation coverage")
+        if not atomic_preflight_authorized and iteration not in coverage["iterations"]:
+            raise EvaluationError("run is outside the bound evaluation coverage")
     case = find_case(cycle, case_id)
     validate_cycle_binding(existing_bindings(cycle), binding_input, conditions)
 
@@ -966,6 +978,7 @@ def build_compatibility(
 
 COMPARISON_GENERATION_SCHEMA = "the-caption-prompt.comparison-layer1-generation/v1"
 COMPARISON_PREFLIGHT_SCHEMA = "the-caption-prompt.comparison-preflight/v1"
+ATOMIC_COMPARISON_PREFLIGHT_SCHEMA = "the-caption-prompt.comparison-preflight/v2"
 
 
 def file_sha256(path: Path) -> str:
@@ -1224,8 +1237,44 @@ def build_comparison_preflight_payload(
     jobs = global_plan.get("jobs")
     if not isinstance(jobs, list) or not jobs:
         raise EvaluationError("global plan jobs must be a non-empty array")
+    atomic_dispatch = global_plan.get("dispatch_plan") is not None
+    expected_atomic_slots: set[tuple[str, int, str]] | None = None
+    dispatch_plan_path: Path | None = None
+    dispatch_plan_sha256: str | None = None
+    if atomic_dispatch:
+        dispatch_plan_path = Path(
+            require_non_empty_string(global_plan.get("dispatch_plan"), "dispatch plan")
+        ).resolve()
+        dispatch = load_json(dispatch_plan_path)
+        if dispatch.get("schema_version") not in {
+            "the-caption-prompt.atomic-dispatch-plan/v1",
+            "the-caption-prompt.atomic-dispatch-plan/v2",
+        }:
+            raise EvaluationError("atomic dispatch plan has an unsupported schema_version")
+        dispatch_content = dict(dispatch)
+        dispatch_plan_sha256 = dispatch_content.pop("plan_content_sha256", None)
+        if dispatch_plan_sha256 != identity_sha256(dispatch_content):
+            raise EvaluationError("atomic dispatch plan content SHA-256 does not match")
+        if global_plan.get("dispatch_plan_sha256") != dispatch_plan_sha256:
+            raise EvaluationError("global plan does not bind the atomic dispatch plan")
+        missing_slots = dispatch.get("missing_slots")
+        if not isinstance(missing_slots, list) or not missing_slots:
+            raise EvaluationError("atomic dispatch plan has no missing slots")
+        expected_atomic_slots = {
+            (
+                require_non_empty_string(item.get("case_id"), "atomic slot case_id"),
+                require_positive(item.get("dispatch_iteration"), "atomic slot iteration"),
+                require_non_empty_string(item.get("sample_id"), "atomic slot sample_id"),
+            )
+            for item in missing_slots
+        }
+        if len(expected_atomic_slots) != len(missing_slots):
+            raise EvaluationError("atomic dispatch plan has duplicate slots")
+    atomic_conditions = json.loads(json.dumps(conditions))
+    atomic_conditions.pop("repetition_condition", None)
     authorized_slots: list[dict[str, Any]] = []
     observed_slots: set[tuple[str, int]] = set()
+    observed_atomic_slots: set[tuple[str, int, str]] = set()
     for job in jobs:
         if not isinstance(job, dict):
             raise EvaluationError("global plan job must be an object")
@@ -1240,22 +1289,30 @@ def build_comparison_preflight_payload(
         observed_slots.add(slot)
         if binding["prompt_set_identity"] != prompt_identity:
             raise EvaluationError("capsule prompt identity does not match profile")
-        if capsule_conditions != conditions:
+        expected_conditions = atomic_conditions if atomic_dispatch else conditions
+        if capsule_conditions != expected_conditions:
             raise EvaluationError("capsule comparison conditions do not match profile")
-        authorized_slots.append(
-            {
-                "case_id": binding["case_id"],
-                "iteration": binding["iteration"],
-                "capsule": str(capsule_path),
-                "capsule_sha256": file_sha256(capsule_path),
-            }
-        )
+        authorized = {
+            "case_id": binding["case_id"],
+            "iteration": binding["iteration"],
+            "capsule": str(capsule_path),
+            "capsule_sha256": file_sha256(capsule_path),
+        }
+        if atomic_dispatch:
+            sample_id = require_non_empty_string(binding.get("sample_id"), "atomic sample_id")
+            observed_atomic_slots.add((binding["case_id"], binding["iteration"], sample_id))
+            authorized["sample_id"] = sample_id
+        authorized_slots.append(authorized)
     expected_slots = {
         (case_id, iteration)
         for case_id in coverage["case_ids"]
         for iteration in coverage["iterations"]
     }
-    if observed_slots != expected_slots:
+    if atomic_dispatch and observed_atomic_slots != expected_atomic_slots:
+        missing = sorted(expected_atomic_slots - observed_atomic_slots)
+        extra = sorted(observed_atomic_slots - expected_atomic_slots)
+        raise EvaluationError(f"atomic global plan coverage mismatch: missing={missing}, extra={extra}")
+    if not atomic_dispatch and observed_slots != expected_slots:
         missing = sorted(expected_slots - observed_slots)
         extra = sorted(observed_slots - expected_slots)
         raise EvaluationError(f"global plan coverage mismatch: missing={missing}, extra={extra}")
@@ -1263,8 +1320,12 @@ def build_comparison_preflight_payload(
         raise EvaluationError("comparison cycle already contains Layer 2 state")
 
     authorized_slots.sort(key=lambda item: (item["case_id"], item["iteration"]))
-    return {
-        "schema_version": COMPARISON_PREFLIGHT_SCHEMA,
+    result = {
+        "schema_version": (
+            ATOMIC_COMPARISON_PREFLIGHT_SCHEMA
+            if atomic_dispatch
+            else COMPARISON_PREFLIGHT_SCHEMA
+        ),
         "status": "ready",
         "issued_slots": 0,
         "reference_result_id": reference["result_id"],
@@ -1283,6 +1344,15 @@ def build_comparison_preflight_payload(
         "max_workers": max_workers,
         "authorized_slots": authorized_slots,
     }
+    if atomic_dispatch:
+        result.update(
+            {
+                "dispatch_mode": "atomic",
+                "dispatch_plan": str(dispatch_plan_path),
+                "dispatch_plan_sha256": dispatch_plan_sha256,
+            }
+        )
+    return result
 
 
 def preflight_comparison(args: argparse.Namespace) -> dict[str, Any]:
@@ -1315,7 +1385,10 @@ def verify_comparison_preflight(cycle: Path) -> dict[str, Any]:
     receipt_path = cycle / "layer1" / "comparison-preflight.json"
     receipt = load_json(receipt_path)
     payload = validate_receipt_hash(receipt, "comparison preflight")
-    if payload.get("schema_version") != COMPARISON_PREFLIGHT_SCHEMA:
+    if payload.get("schema_version") not in {
+        COMPARISON_PREFLIGHT_SCHEMA,
+        ATOMIC_COMPARISON_PREFLIGHT_SCHEMA,
+    }:
         raise EvaluationError("comparison preflight has an unsupported schema_version")
     expected = build_comparison_preflight_payload(
         cycle,
