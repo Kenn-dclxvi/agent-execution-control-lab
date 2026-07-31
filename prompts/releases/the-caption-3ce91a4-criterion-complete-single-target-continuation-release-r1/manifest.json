@@ -20,11 +20,26 @@
     ],
     "prompt_set_name": "criterion_complete_single_target_continuation_release",
     "release_identity": "the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1",
-    "release_status": "approved_for_projection",
+    "projection_evidence": {
+      "baseline_commit": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44",
+      "effective_path_count": 1,
+      "manifest_target_count": 19,
+      "matched_manifest_target_count": 18,
+      "merge_commit": "2791c21d414d849b376be0d9496fc455f7e10e45",
+      "preserved_target_drift": [
+        "docs/how-to/index.md"
+      ],
+      "projection_record": "projection.json",
+      "pull_request": "https://github.com/Kenn-dclxvi/THE-CAPTION/pull/345",
+      "rollback_identity": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44",
+      "validation": "bash ./scripts/dev/verify_change_set.sh: 408 passed in 6.36s"
+    },
+    "release_status": "projected",
     "scope": "評価済みCandidate125の19 path full bundleを内容変更なしで固定し、THE-CAPTIONへの投影を承認する。",
     "unresolved_risks": [
       "Rating v14 Medium Standard14 N=5の70 / 70件ではscore 4だったが、評価範囲外へ一般化しない。",
       "Standard14 B20はCandidate125で実施していない。長期route stabilityはCandidate81の保存済み証拠より弱い。",
+      "Candidate125のN=100試験は後日実施予定であり、現時点では未実施である。",
       "Candidate122比でtoken中央値は0.19%低い一方、elapsed中央値は2.84%長い。全KPI改善とは扱わない。",
       "A02 N=20の20 / 20件でbind後・変更前再入0件を確認したが、A02以外へ一般化しない。"
     ]
@@ -199,8 +214,8 @@
     ],
     "design_status": "release_candidate",
     "evaluation_status": "standard14_evaluated_quality_gate_passed_a02_terminal_closure_passed_candidate107_token_target_passed",
-    "runtime_projection_status": "approved_for_projection",
-    "source_interpretation": "This release is a content-identical snapshot of Candidate125. The explicit user request on 2026-07-31 separately authorizes adoption and THE-CAPTION projection while retaining the missing Standard14 B20 risk."
+    "runtime_projection_status": "projected",
+    "source_interpretation": "This release is a content-identical snapshot of Candidate125. The explicit user request on 2026-07-31 separately authorized adoption and THE-CAPTION projection while retaining the missing Standard14 B20 risk. Projection completed through THE-CAPTION PR #345. Candidate125 N=100 remains planned and not started."
   },
   "schema_version": "the-caption-prompt.bundle/v1",
   "source": {
