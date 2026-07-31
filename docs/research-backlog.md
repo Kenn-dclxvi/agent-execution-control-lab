@@ -13,6 +13,8 @@
 | `CONTEXT`（`X1`） | ペンディング | A06はUltra制御用。Ultra条件で再検討する明示判断があった場合だけ再開 |
 | `RECOVERY`（`R1 / R2`） | 未完了・効果未測定 | `environment_recovery_max>0`の正のrecovery scenarioを評価するか判断 |
 | [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 保留・実装／pilot／本測定未着手 | 系列へ着手する明示判断とPhase 0の認証方式選択が揃った場合だけ再開 |
+| 部分曖昧・長期タスクでの仕様確定境界（項目11） | 未着手・該当caseなし | 部分曖昧かつ複数段のcase familyと、誤停止・過剰問合せの採点条件を固定できた場合に着手 |
+| model / CLI更新時の再測定範囲と費用記録（項目12） | 未着手 | 次のmodelまたはCLI更新時に、再実行するbaselineの範囲を事前固定する明示判断があった場合 |
 
 ### 完了・停止
 
@@ -368,6 +370,25 @@ repository非依存な層とtarget固有な層は次のとおりである。
 6. **Phase 4 Bundle B水平比較**: Std14 baseline確立後に、1軸だけを変更した新しいCandidateをBundle Bとして固定し、同じStd14条件でBundle Aと比較する。content-identicalなBundle Bは作らない。
 
 candidate bundleを作る段階ではcandidate作成前gate 9項目（[`prompts/AGENTS.md`](../prompts/AGENTS.md)）を通す。
+
+## 11. 部分曖昧・長期タスクでの仕様確定境界の挙動（未着手）
+
+**問い**: 仕様の8割が確定し2割が曖昧なまま進む複数段の作業で、`spec_ready`境界が過剰な問合せや誤停止を起こさずに働くか。
+
+- 現状の測定範囲は単発課題である。標準14項目のA01は「未確定のrequired outcome valueが明確に一件ある」設計で、部分的な曖昧さが混在する長期作業を再現していない。該当するcaseもevaluation setも存在しない。
+- 論文側の限界記述は[`execution-control-research-paper.md`](execution-control-research-paper.md)の第14節（限界10）である。このリポジトリの実務利用は対話形態であり、この条件は実利用へ近い。
+- **着手条件**: 部分曖昧かつ複数段のcase familyを設計でき、誤停止と過剰問合せを区別する採点条件をrating contract revisionへ固定できた場合だけ着手する。
+- **境界**: repository内のcase、TaskSpec、rating contract、promptの範囲だけで扱う。executor、runtime hook、外部wrapperの変更を解決策にしない。
+
+## 12. model / CLI更新時の再測定範囲と費用記録（未着手）
+
+**問い**: modelまたは実行環境の版が上がるたびに必要な再測定の範囲と費用を、着手判断の材料として残す。
+
+- 結合はすでに2度観測されている。Codex CLI `0.144.0 → 0.146.0`で公開target側のC81とC125の互換キーが一致せず、tokenとelapsedの比較が成立しなくなった（[`Click C125 Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-c125-reasoning-medium-standard14-r2-n5-cli0146_2026-07-31.md)）。model軸ではTerra / Lunaで品質とcostが維持されなかった（[`C125 model-axis`](../evaluations/results/candidate125-model-sol-terra-luna-v14-medium-standard14-n5-cli0146_2026-07-31.md)）。
+- 低頻度failureはB20規模でしか観測されない。C95は`N=5`を通過し、B20の1,400件で2件落ちた。
+- 費用の概算は[`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md)の単価による外挿で、標準14項目B20が1条件あたり約`$311`である。人間の設計・監査時間は含まない。
+- **着手条件**: 次のmodelまたはCLI更新時に、再実行するbaselineの範囲（control-free、現行採用prompt、直近candidateのどれを何回か）を事前固定する明示判断があった場合だけ着手する。
+- **境界**: 再測定範囲の固定と費用記録だけを扱う。executor置換やruntime強制の実装は含めない（項目8とは別項目）。
 
 ## 着手時の共通条件
 
