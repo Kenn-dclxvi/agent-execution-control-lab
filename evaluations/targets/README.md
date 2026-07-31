@@ -20,7 +20,7 @@ instanceが登録されていることは、評価済み、採用済み、releas
 | target_id | layout | visibility | 第三者再現 | descriptor | 状態 |
 | --- | --- | --- | --- | --- | --- |
 | `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行instance |
-| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | Bundle A Std14完了（70 / 70 score 4）。Bundle比較・採用は未実施 |
+| `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | Bundle A Std14とCandidate125水平適用N=5完了。採用は未実施 |
 
 `click`（`pallets/click`、BSD-3-Clause）はgate 1〜9の判定と14項目coverage対応を[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で確定して登録した。Bundle Aを固定したまま14 caseを構築し、追加case各`N=3`を経てStd14 70 / 70件をscore `4`で登録した（正本: [`click Std14 result`](click/results/click-control-free-standard14-n5_2026-07-26.md)）。**これはBundle Aのbaseline確立であり、Bundle比較、採用、release、本体反映を意味しない。** 共有runtimeとlocal cloneはrepository外（`/Users/kenn/repos/_verification/click-prompt-ab-measurement/environment/.venv`と`/Users/kenn/repos/click`）に置く。段階計画は[`docs/research-backlog.md`](../../docs/research-backlog.md)の項目10を参照する。
 

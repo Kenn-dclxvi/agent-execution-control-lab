@@ -30,6 +30,7 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | [`click-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 70） |
 | [`click-c81-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-c81-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 65 / score 1 × 5） |
 | [`click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 70） |
+| [`click-c125-reasoning-medium-standard14-r2-global-m24-n5-cli0146-r1`](click-c125-reasoning-medium-standard14-r2-global-m24-n5-cli0146-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | CLI 0.146.0で完了（70 / 70 valid、score 4 × 65 / score 1 × 5）。CLI 0.144.0のC81とは非互換 |
 
 `B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
 
@@ -41,7 +42,7 @@ F01 profile r1はLayer 2開始前に必須のall-agent token accounting宣言が
 
 | 項目 | 値 | 根拠 |
 | --- | --- | --- |
-| `codex_cli` | `0.144.0` | `codex --version`の実測値 |
+| `codex_cli` | 既存Click result `0.144.0` / Candidate125 `0.146.0` | 各実行前の`codex --version`実測値。異なるCLIのresultを同一comparisonへ混ぜない |
 | `python_version` | `3.14.5` | 共有runtimeの`platform.python_version()` |
 | `runtime_identity_sha256` | r1 `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` / r2 `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952` | 共有venvの`pip freeze --all`出力のSHA-256。r2は`uv==0.11.32`を追加 |
 
