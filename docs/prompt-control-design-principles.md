@@ -6,7 +6,9 @@
 
 評価基盤のLayer、KPI、schemaを変更しない。特定candidateの採用、release承認、THE-CAPTION本体への反映も判断しない。
 
-以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate117までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
+試験の試行回数は`N`で表す。新規の試験、設計、結果では`B`を試行回数の表記に使わない。`N=20`は同一互換条件で選択した20 atomic runを意味する。過去artifactのpathや題名に残る`B20`は履歴identityとして保持するが、新規文書ではその意味を`N`へ読み替えず、実際のrun数を確認して`N=<run数>`と記録する。batch数を示す必要がある場合は`batch count`と明記する。
+
+以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate118までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
 
 ## 結論
 
@@ -122,10 +124,11 @@ token増加は次のように扱う。
 | Candidate98 → Candidate104 Standard14 | A01中央値`+23.63%`、A02`-25.02%`、A系token合計`-22.12%` | 一つのA caseの増加だけでA系全体を失敗としない。targeted A02 / F07 mechanismと非対象経路を分けて判定 |
 | Candidate108 → Candidate116 Standard14 | A02中央値`+19.72%`だがA系token合計`-8.47%`、F系`-9.68%` | A02増加は誤停止せずcanonical implementationを解決する必要costを含む。outcome / implementation境界は成立 |
 | Candidate116 → Candidate117 Standard14 | A系token合計`-23.16%`、F系`+19.91%`、全体`+12.80%`。A01 / A02の再入13件減に対し他caseで26件増 | A向けauthority admission分類がFへ判断costを移した。Aの局所改善をglobal predicateとして採用せず停止 |
+| Candidate116 → Candidate118 | A02 `N=20`のbind後・変更前再入は5件から0件。Standard14はtoken中央値`+7.44%`、elapsed`-14.37%`で、tokenは11 / 14 caseで増加。completed commandは11件減ったがinput token合計は`+9.67%` | terminal遷移のmechanism成立と全体cost改善を分離する。機構通過だけでは採用せず、command数へ帰属できないinput context costとKPI優先順位を別判断へ残す |
 
 この履歴から、許容されてきたのは「A系ならtoken増加してよい」という規則ではない。正しい挙動を維持し、新しい探索・再入へbindできない局所増加、または品質回復に必要なcostだけを理由付きで許容してきた。経路拡大へbindできる増加は、F側の削減やStandard14全体の削減があっても停止条件とする。
 
-数値と当時の判断の一次記録は、[`Candidate43 / Candidate50 targeted`](../evaluations/results/candidate43-candidate50-root-read-batch-targeted-n5_2026-07-21.md)、[`Candidate43 / Candidate69 Standard14`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)、[`Candidate69 / Candidate71 Standard14`](../evaluations/results/candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`Candidate98 / Candidate104 Standard14`](../evaluations/results/candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)、[`Candidate108 / Candidate116 Standard14`](../evaluations/results/candidate108-candidate116-outcome-implementation-boundary-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate117 Standard14`](../evaluations/results/candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)に置く。
+数値と当時の判断の一次記録は、[`Candidate43 / Candidate50 targeted`](../evaluations/results/candidate43-candidate50-root-read-batch-targeted-n5_2026-07-21.md)、[`Candidate43 / Candidate69 Standard14`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)、[`Candidate69 / Candidate71 Standard14`](../evaluations/results/candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`Candidate98 / Candidate104 Standard14`](../evaluations/results/candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)、[`Candidate108 / Candidate116 Standard14`](../evaluations/results/candidate108-candidate116-outcome-implementation-boundary-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate117 Standard14`](../evaluations/results/candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate118`](../evaluations/results/candidate116-candidate118-implementation-bind-terminal-closure-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)に置く。
 
 評価では中央値だけでなく、score分布、case別token、tool call、model step、worker数、context継承方法を確認する。token差をprompt文面の長短だけへ帰属させない。
 
@@ -211,7 +214,15 @@ LLM promptは形式仕様ではない。本文上の余白、重複、既定値�
 - tool result配送、output cap、atomicity、dispatch順、modelへ戻る前の処理はexecutorで強制する。
 - 正しい成果を誤って低得点にする問題はrating contractで修正する。
 
-モデルが発行時点で観測できないruntime stateや、tool adapterがresultを返す前にしか変更できない挙動をpromptへ記述しない。prompt文面で希望するだけでは強制できない制御は、Candidateではなくexecutor capabilityの不足として扱う。
+モデルが発行時点で観測できないruntime stateや、tool adapterがresultを返す前にしか変更できない挙動をpromptへ記述しない。prompt文面で希望するだけでは強制できない制御は、このリポジトリではscope外の制約として記録して停止する。
+
+### 11.1 repository外対応を解決方法にしない
+
+このリポジトリのprompt制御研究では、repository外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、target runtimeの変更を、Candidateの解決策、次案、backlog、または再開条件にしない。正しい強制層がexecutorであるという分類は、外部変更を提案する権限や理由へ変換しない。
+
+repository外の挙動や過去のexecutor試験は、保存済みresultの原因を分類するread-only診断証拠としてだけ利用する。例えば、同じpromptでresult配送方法だけを変えた過去試験は、token増加がprompt判断とoutput配送のどちらに対応するかを切り分ける証拠にはできる。しかし、その観測から外部hook、wrapper、CLI改修をこのrepositoryの次候補として導かない。
+
+promptだけで強制できない問題は、無理に方法指定をpromptへ書かず、かつ外部対応へ作業を広げず、`prompt_control_not_demonstrated / candidate_not_created`として停止する。再開できるのは、保存済み互換traceからmodel-visibleな新しいprompt判断点が確認された場合、またはユーザーが評価基盤保守を別作業として明示した場合だけである。後者をprompt Candidateの系譜、採用判断、releaseへ混ぜない。
 
 ### 12. 意味上の重複を行動上の冗長性と区別する
 
