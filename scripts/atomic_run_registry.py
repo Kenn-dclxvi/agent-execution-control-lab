@@ -16,6 +16,7 @@ if __package__:
         EXECUTION_SCHEMA_V3,
         TOKEN_ACCOUNTING,
         EvaluationError,
+        canonical_json,
         frozen_set,
         identity_sha256,
         load_json,
@@ -31,6 +32,7 @@ else:
         EXECUTION_SCHEMA_V3,
         TOKEN_ACCOUNTING,
         EvaluationError,
+        canonical_json,
         frozen_set,
         identity_sha256,
         load_json,
@@ -45,8 +47,10 @@ else:
 
 ATOMIC_RUN_SCHEMA = "the-caption-prompt.atomic-run/v1"
 RUN_POOL_SCHEMA = "the-caption-prompt.run-pool/v1"
-DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v1"
-SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v1"
+LEGACY_DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v1"
+DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v2"
+LEGACY_SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v1"
+SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v2"
 ANALYSIS_SCHEMA = "the-caption-prompt.atomic-run-analysis/v1"
 COMPARISON_SCHEMA = "the-caption-prompt.atomic-run-comparison/v1"
 
@@ -199,6 +203,73 @@ def store_records_and_pool(registry: Path, records: list[dict[str, Any]]) -> dic
     pool_path = registry / "pools" / f"{pool['pool_key']}.json"
     write_or_verify(pool_path, pool, {"created_at", "pool_content_sha256"})
     return pool
+
+
+def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
+    """Create an empty prompt-specific pool from a compatible reference pool."""
+    registry = Path(args.registry).resolve()
+    reference = load_pool(registry, args.reference_pool_key)
+    identity_source = load_json(Path(args.prompt_identity).resolve())
+    prompt_identity = identity_source.get("prompt_set_identity", identity_source)
+    if not isinstance(prompt_identity, dict):
+        raise EvaluationError("prompt identity source must be an object")
+    name = require_non_empty_string(prompt_identity.get("name"), "prompt identity name")
+    if not any(prompt_identity.get(key) for key in ("revision", "bundle_sha256")):
+        raise EvaluationError("prompt identity needs revision or bundle_sha256")
+    prompt_identity = json.loads(json.dumps(prompt_identity))
+    prompt_identity["name"] = name
+    requested_cases = identity_source.get("cases")
+    case_ids = reference["case_ids"]
+    if requested_cases is not None:
+        case_ids = sorted(
+            require_non_empty_string(item.get("id"), "prompt identity case id")
+            for item in requested_cases
+        )
+        if len(set(case_ids)) != len(case_ids):
+            raise EvaluationError("seed pool case ids must be unique")
+        unknown = sorted(set(case_ids) - set(reference["case_ids"]))
+        if unknown:
+            raise EvaluationError(f"seed pool has cases outside the reference pool: {unknown}")
+    blocks = {case_id: reference["comparison_block_keys"][case_id] for case_id in case_ids}
+    effective = {
+        case_id: reference["effective_conditions_by_case"][case_id]
+        for case_id in case_ids
+    }
+    comparison_key = identity_sha256(effective)
+    pool_key = identity_sha256(
+        {
+            "prompt_set_identity": prompt_identity,
+            "comparison_block_keys": blocks,
+        }
+    )
+    pool = {
+        "schema_version": RUN_POOL_SCHEMA,
+        "pool_key": pool_key,
+        "prompt_set_identity": prompt_identity,
+        "prompt_set_identity_sha256": identity_sha256(prompt_identity),
+        "case_ids": case_ids,
+        "comparison_block_keys": blocks,
+        "comparison_key": comparison_key,
+        "effective_conditions_by_case": effective,
+        "seeded_from_pool_key": reference["pool_key"],
+        "created_at": utc_now(),
+    }
+    pool["pool_content_sha256"] = identity_sha256(pool)
+    write_or_verify(
+        registry / "pools" / f"{pool_key}.json",
+        pool,
+        {"created_at", "pool_content_sha256"},
+    )
+    return {
+        "layer": 1,
+        "pool_key": pool_key,
+        "comparison_key": pool["comparison_key"],
+        "case_count": len(pool["case_ids"]),
+        "existing_sample_count_by_case": {
+            case_id: 0 for case_id in pool["case_ids"]
+        },
+        "seeded_from_pool_key": reference["pool_key"],
+    }
 
 
 def import_result(args: argparse.Namespace) -> dict[str, Any]:
@@ -357,34 +428,24 @@ def runs_for_pool(registry: Path, pool: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def complete_samples(records: list[dict[str, Any]], case_ids: list[str]) -> dict[str, dict[str, dict[str, Any]]]:
-    grouped: dict[str, dict[str, dict[str, Any]]] = {}
-    for record in records:
-        sample = grouped.setdefault(record["sample_id"], {})
-        if record["case_id"] in sample:
-            raise EvaluationError(
-                f"duplicate case in atomic sample: {record['sample_id']} / {record['case_id']}"
-            )
-        sample[record["case_id"]] = record
-    return {
-        sample_id: rows
-        for sample_id, rows in grouped.items()
-        if sorted(rows) == case_ids
-    }
-
-
 def plan_missing(args: argparse.Namespace) -> dict[str, Any]:
     registry = Path(args.registry).resolve()
     pool = load_pool(registry, args.pool_key)
     desired = require_positive(args.desired_count, "desired count")
-    complete = complete_samples(runs_for_pool(registry, pool), pool["case_ids"])
-    existing = len(complete)
-    missing_count = max(0, desired - existing)
+    records = runs_for_pool(registry, pool)
+    existing_by_case = {
+        case_id: len([record for record in records if record["case_id"] == case_id])
+        for case_id in pool["case_ids"]
+    }
+    missing_by_case = {
+        case_id: max(0, desired - existing_by_case[case_id])
+        for case_id in pool["case_ids"]
+    }
     plan_id = uuid.uuid4().hex
     missing_slots = []
-    for dispatch_iteration in range(1, missing_count + 1):
-        sample_id = f"planned:{plan_id}:{uuid.uuid4().hex}"
-        for case_id in pool["case_ids"]:
+    for case_id in pool["case_ids"]:
+        for dispatch_iteration in range(1, missing_by_case[case_id] + 1):
+            sample_id = f"planned:{plan_id}:{uuid.uuid4().hex}"
             missing_slots.append(
                 {
                     "sample_id": sample_id,
@@ -399,8 +460,9 @@ def plan_missing(args: argparse.Namespace) -> dict[str, Any]:
         "pool_key": pool["pool_key"],
         "pool_content_sha256": pool["pool_content_sha256"],
         "desired_count": desired,
-        "existing_complete_sample_count": existing,
-        "missing_sample_count": missing_count,
+        "existing_sample_count_by_case": existing_by_case,
+        "missing_sample_count_by_case": missing_by_case,
+        "missing_sample_count": max(missing_by_case.values(), default=0),
         "missing_slots": missing_slots,
         "created_at": utc_now(),
     }
@@ -411,9 +473,10 @@ def plan_missing(args: argparse.Namespace) -> dict[str, Any]:
         "layer": 1,
         "artifact": str(output),
         "pool_key": pool["pool_key"],
-        "existing_complete_sample_count": existing,
+        "existing_sample_count_by_case": existing_by_case,
         "desired_count": desired,
-        "missing_sample_count": missing_count,
+        "missing_sample_count_by_case": missing_by_case,
+        "missing_sample_count": max(missing_by_case.values(), default=0),
         "missing_slot_count": len(missing_slots),
     }
 
@@ -422,33 +485,55 @@ def select_runs(args: argparse.Namespace) -> dict[str, Any]:
     registry = Path(args.registry).resolve()
     pool = load_pool(registry, args.pool_key)
     count = require_positive(args.count, "selection count")
-    complete = complete_samples(runs_for_pool(registry, pool), pool["case_ids"])
-    ordered = sorted(
-        complete.items(),
-        key=lambda item: (
-            max(row["registered_at"] for row in item[1].values()),
-            item[0],
-        ),
+    case_ids = list(getattr(args, "case_id", None) or pool["case_ids"])
+    if len(set(case_ids)) != len(case_ids):
+        raise EvaluationError("selection case ids must be unique")
+    unknown = sorted(set(case_ids) - set(pool["case_ids"]))
+    if unknown:
+        raise EvaluationError(f"selection has cases outside the pool: {unknown}")
+    case_ids = sorted(case_ids)
+    comparison_key = identity_sha256(
+        {
+            case_id: pool["effective_conditions_by_case"][case_id]
+            for case_id in case_ids
+        }
     )
-    if len(ordered) < count:
-        raise EvaluationError(
-            f"run pool has only {len(ordered)} complete samples; requested {count}"
+    records = runs_for_pool(registry, pool)
+    selected_by_case: dict[str, list[dict[str, Any]]] = {}
+    for case_id in case_ids:
+        ordered = sorted(
+            (record for record in records if record["case_id"] == case_id),
+            key=lambda record: (record["registered_at"], record["sample_id"], record["atomic_run_id"]),
         )
-    chosen = ordered[:count]
+        if len(ordered) < count:
+            raise EvaluationError(
+                f"run pool case {case_id} has only {len(ordered)} samples; requested {count}"
+            )
+        selected_by_case[case_id] = ordered[:count]
+    slots = [
+        {
+            "selection_iteration": iteration + 1,
+            "runs_by_case": {
+                case_id: selected_by_case[case_id][iteration]["atomic_run_id"]
+                for case_id in case_ids
+            },
+        }
+        for iteration in range(count)
+    ]
     selection_id = uuid.uuid4().hex
     selection = {
         "schema_version": SELECTION_SCHEMA,
         "selection_id": selection_id,
         "pool_key": pool["pool_key"],
         "pool_content_sha256": pool["pool_content_sha256"],
-        "comparison_key": pool["comparison_key"],
-        "sample_ids": [sample_id for sample_id, _ in chosen],
+        "comparison_key": comparison_key,
+        "slots": slots,
         "atomic_run_ids": [
-            rows[case_id]["atomic_run_id"]
-            for sample_id, rows in chosen
-            for case_id in pool["case_ids"]
+            slot["runs_by_case"][case_id]
+            for slot in slots
+            for case_id in case_ids
         ],
-        "case_ids": pool["case_ids"],
+        "case_ids": case_ids,
         "created_at": utc_now(),
     }
     selection["selection_content_sha256"] = identity_sha256(selection)
@@ -458,14 +543,14 @@ def select_runs(args: argparse.Namespace) -> dict[str, Any]:
         "layer": 4,
         "artifact": str(output),
         "selection_id": selection_id,
-        "sample_count": len(chosen),
+        "sample_count": len(slots),
         "run_count": len(selection["atomic_run_ids"]),
     }
 
 
 def load_selection(path: Path) -> dict[str, Any]:
     selection = load_json(path)
-    if selection.get("schema_version") != SELECTION_SCHEMA:
+    if selection.get("schema_version") not in {LEGACY_SELECTION_SCHEMA, SELECTION_SCHEMA}:
         raise EvaluationError("run selection has an unsupported schema_version")
     content = dict(selection)
     stored = content.pop("selection_content_sha256", None)
@@ -485,12 +570,31 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
     }
     per_sample = []
     strata: dict[str, list[dict[str, Any]]] = {}
-    for sample_id in selection["sample_ids"]:
-        selected = [record for record in records.values() if record["sample_id"] == sample_id]
-        if sorted(record["case_id"] for record in selected) != pool["case_ids"]:
-            raise EvaluationError(f"selection sample is incomplete: {sample_id}")
+    if selection["schema_version"] == LEGACY_SELECTION_SCHEMA:
+        slots = [
+            {
+                "selection_iteration": iteration,
+                "runs_by_case": {
+                    record["case_id"]: record["atomic_run_id"]
+                    for record in records.values()
+                    if record["sample_id"] == sample_id
+                },
+            }
+            for iteration, sample_id in enumerate(selection["sample_ids"], start=1)
+        ]
+    else:
+        slots = selection["slots"]
+    for slot in slots:
+        selected = [records[slot["runs_by_case"][case_id]] for case_id in selection["case_ids"]]
+        if sorted(record["case_id"] for record in selected) != selection["case_ids"]:
+            raise EvaluationError(
+                f"selection slot is incomplete: {slot['selection_iteration']}"
+            )
         row = {
-            "sample_id": sample_id,
+            "selection_iteration": slot["selection_iteration"],
+            "source_sample_ids_by_case": {
+                record["case_id"]: record["sample_id"] for record in selected
+            },
             "quality_score": sum(record["quality_score"] for record in selected)
             / (4 * len(selected))
             * 100,
@@ -515,9 +619,9 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
             "content_sha256": selection["selection_content_sha256"],
         },
         "pool_key": pool["pool_key"],
-        "comparison_key": pool["comparison_key"],
+        "comparison_key": selection["comparison_key"],
         "prompt_set_identity": pool["prompt_set_identity"],
-        "case_ids": pool["case_ids"],
+        "case_ids": selection["case_ids"],
         "sample_count": len(per_sample),
         "run_count": len(records),
         "samples": per_sample,
@@ -545,6 +649,148 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
         "sample_count": len(per_sample),
         "run_count": len(records),
         "stratum_count": len(strata),
+    }
+
+
+def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
+    """Register an immutable prompt-set result derived only from selected atomic runs."""
+    registry = Path(args.registry).resolve()
+    selection_path = Path(args.selection).resolve()
+    profile = load_json(Path(args.profile).resolve())
+    selection = load_selection(selection_path)
+    pool = load_pool(registry, selection["pool_key"])
+    case_ids = selection["case_ids"]
+    profile_case_ids = [item["id"] for item in profile.get("cases", [])]
+    if profile_case_ids != case_ids:
+        raise EvaluationError("profile case coverage does not match atomic selection")
+    if profile.get("iterations") != len(selection["slots"]):
+        raise EvaluationError("profile iterations do not match atomic selection")
+    if profile.get("prompt_set_identity") != pool["prompt_set_identity"]:
+        raise EvaluationError("profile prompt identity does not match atomic selection")
+
+    records = {
+        record_id: load_atomic_run(registry, record_id)
+        for record_id in selection["atomic_run_ids"]
+    }
+    evaluation_sets = {
+        canonical_json(record["effective_conditions"]["evaluation_set"])
+        for record in records.values()
+    }
+    if len(evaluation_sets) != 1:
+        raise EvaluationError("selected atomic runs have different evaluation sets")
+    evaluation_set = json.loads(next(iter(evaluation_sets)))
+    fixtures = {
+        case_id: conditions["fixture"]
+        for case_id, conditions in pool["effective_conditions_by_case"].items()
+    }
+    if getattr(args, "reference_result_id", None):
+        reference = load_reference_result(registry, args.reference_result_id)
+        evaluation_set = reference["compatibility"]["evaluation_set"]
+        fixtures = reference["compatibility"]["fixtures"]
+    for case_id in case_ids:
+        values = {
+            canonical_json(record["effective_conditions"]["fixture"])
+            for record in records.values()
+            if record["case_id"] == case_id
+        }
+        if len(values) != 1 or json.loads(next(iter(values))) != fixtures[case_id]:
+            raise EvaluationError(f"selected atomic runs have different fixtures: {case_id}")
+    conditions = json.loads(json.dumps(profile.get("comparison_conditions")))
+    compatibility = {
+        "evaluation_set": evaluation_set,
+        "fixtures": fixtures,
+        **conditions,
+        "coverage": {
+            "case_ids": case_ids,
+            "iterations": list(range(1, len(selection["slots"]) + 1)),
+        },
+    }
+    effective_common, _ = split_conditions(compatibility)
+    effective_common.pop("fixtures")
+    for record in records.values():
+        expected = {
+            **effective_common,
+            "case_id": record["case_id"],
+            "fixture": fixtures[record["case_id"]],
+        }
+        if record["effective_conditions"] != expected:
+            raise EvaluationError(
+                f"selected atomic run does not match profile conditions: {record['atomic_run_id']}"
+            )
+
+    case_results = []
+    iterations = []
+    for slot in selection["slots"]:
+        selected = [records[slot["runs_by_case"][case_id]] for case_id in case_ids]
+        iteration = slot["selection_iteration"]
+        for record in selected:
+            case_results.append(
+                {
+                    "run_id": record["run_id"],
+                    "case_id": record["case_id"],
+                    "iteration": iteration,
+                    "quality_score": record["quality_score"],
+                    "total_tokens": record["total_tokens"],
+                    "elapsed_seconds": record["elapsed_seconds"],
+                }
+            )
+        iterations.append(
+            {
+                "iteration": iteration,
+                "quality_score": sum(item["quality_score"] for item in selected)
+                / (4 * len(selected))
+                * 100,
+                "total_tokens": sum(item["total_tokens"] for item in selected),
+                "elapsed_seconds": sum(item["elapsed_seconds"] for item in selected),
+            }
+        )
+    median = {
+        key: statistics.median(item[key] for item in iterations)
+        for key in ("quality_score", "total_tokens", "elapsed_seconds")
+    }
+    result_id = uuid.uuid4().hex
+    result = {
+        "schema_version": "the-caption-prompt.prompt-set-result/v2",
+        "result_id": result_id,
+        "token_accounting": TOKEN_ACCOUNTING,
+        "prompt_set_identity": pool["prompt_set_identity"],
+        "prompt_set_identity_sha256": pool["prompt_set_identity_sha256"],
+        "compatibility": compatibility,
+        "compatibility_key": identity_sha256(compatibility),
+        "case_results": case_results,
+        "iterations": iterations,
+        "median": median,
+        "excluded_attempts": [],
+        "source_selection": {
+            "selection_id": selection["selection_id"],
+            "selection_content_sha256": selection["selection_content_sha256"],
+        },
+        "created_at": utc_now(),
+    }
+    result["result_content_sha256"] = identity_sha256(result)
+    artifact = registry / "results" / f"{result_id}.json"
+    write_json_once(artifact, result)
+    if getattr(args, "cycle", None):
+        receipt = Path(args.cycle).resolve() / "layer4" / "result-registration.json"
+        write_json_once(
+            receipt,
+            {
+                "schema_version": "the-caption-prompt.result-registration/v2",
+                "result_id": result_id,
+                "result_path": str(artifact),
+                "compatibility_key": result["compatibility_key"],
+                "result_content_sha256": result["result_content_sha256"],
+                "token_accounting": TOKEN_ACCOUNTING,
+                "registered_at": utc_now(),
+            },
+        )
+    return {
+        "layer": 4,
+        "result_id": result_id,
+        "artifact": str(artifact),
+        "compatibility_key": result["compatibility_key"],
+        "case_count": len(case_ids),
+        "iteration_count": len(iterations),
     }
 
 
@@ -659,6 +905,12 @@ def parser() -> argparse.ArgumentParser:
     imported.add_argument("--result-id", required=True)
     imported.set_defaults(handler=import_result)
 
+    seeded = commands.add_parser("seed-pool")
+    seeded.add_argument("--registry", required=True)
+    seeded.add_argument("--reference-pool-key", required=True)
+    seeded.add_argument("--prompt-identity", required=True)
+    seeded.set_defaults(handler=seed_pool)
+
     registered = commands.add_parser("register-run")
     registered.add_argument("--registry", required=True)
     registered.add_argument("--cycle", required=True)
@@ -683,6 +935,7 @@ def parser() -> argparse.ArgumentParser:
     select.add_argument("--registry", required=True)
     select.add_argument("--pool-key", required=True)
     select.add_argument("--count", type=int, required=True)
+    select.add_argument("--case-id", action="append")
     select.add_argument("--output", required=True)
     select.set_defaults(handler=select_runs)
 
@@ -691,6 +944,14 @@ def parser() -> argparse.ArgumentParser:
     aggregate.add_argument("--selection", required=True)
     aggregate.add_argument("--output", required=True)
     aggregate.set_defaults(handler=aggregate_selection)
+
+    register_selection = commands.add_parser("register-selection-result")
+    register_selection.add_argument("--registry", required=True)
+    register_selection.add_argument("--selection", required=True)
+    register_selection.add_argument("--profile", required=True)
+    register_selection.add_argument("--reference-result-id")
+    register_selection.add_argument("--cycle")
+    register_selection.set_defaults(handler=register_selection_result)
 
     compare = commands.add_parser("compare-analyses")
     compare.add_argument("--reference", required=True)

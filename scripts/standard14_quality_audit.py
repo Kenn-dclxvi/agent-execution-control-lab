@@ -203,7 +203,7 @@ def workspace_failures(case_id: str, workspace: Path) -> list[str]:
     return failures
 
 
-def collect(batch: Path) -> dict[str, Any]:
+def collect(batch: Path, expected_run_count: int = EXPECTED_RUN_COUNT) -> dict[str, Any]:
     cycle = batch / "cycle"
     frozen = load_json(cycle / "layer1/set.json")
     if {key: frozen.get(key) for key in ("set_id", "revision")} != EXPECTED_SET:
@@ -239,9 +239,9 @@ def collect(batch: Path) -> dict[str, Any]:
                 "workspace_failures": workspace_failures(case_id, workspace),
             }
         )
-    if len(observations) != EXPECTED_RUN_COUNT:
+    if len(observations) != expected_run_count:
         raise RuntimeError(
-            f"expected {EXPECTED_RUN_COUNT} valid runs, found {len(observations)}"
+            f"expected {expected_run_count} valid runs, found {len(observations)}"
         )
     return {
         "schema_version": "the-caption-prompt.standard14-pre-seal-observations/v1",
@@ -635,8 +635,15 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def apply_ratings(batch: Path, report: dict[str, Any]) -> None:
-    if report["run_count"] != EXPECTED_RUN_COUNT or report["rateable_runs"] != EXPECTED_RUN_COUNT:
+def apply_ratings(
+    batch: Path,
+    report: dict[str, Any],
+    expected_run_count: int = EXPECTED_RUN_COUNT,
+) -> None:
+    if (
+        report["run_count"] != expected_run_count
+        or report["rateable_runs"] != expected_run_count
+    ):
         raise RuntimeError("refusing to rate incomplete standard14 audit")
     cycle = batch / "cycle"
     for item in report["runs"]:
@@ -686,12 +693,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("collect", "apply"))
     parser.add_argument("--batch", type=Path, required=True)
+    parser.add_argument("--expected-run-count", type=int, default=EXPECTED_RUN_COUNT)
     args = parser.parse_args()
     batch = args.batch.resolve()
     observations_path = batch / "pre-seal-observations.json"
     report_path = batch / "quality-audit.json"
     if args.command == "collect":
-        report = collect(batch)
+        report = collect(batch, args.expected_run_count)
         write_once(observations_path, report)
         print(json.dumps({"artifact": str(observations_path), "run_count": report["run_count"]}))
         return 0
@@ -702,7 +710,7 @@ def main() -> int:
             terminal_state_report(report),
         )
     write_once(report_path, report)
-    apply_ratings(batch, report)
+    apply_ratings(batch, report, args.expected_run_count)
     print(
         json.dumps(
             {

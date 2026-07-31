@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import tempfile
 import unittest
+import sys
 from pathlib import Path
 from unittest import mock
 
@@ -10,6 +11,21 @@ from scripts import storage_copy
 
 
 class StorageCopyTest(unittest.TestCase):
+    @unittest.skipUnless(sys.platform == "darwin", "clonefile is a macOS facility")
+    def test_clonefile_mode_preserves_file_modes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            destination = root / "destination"
+            source.mkdir()
+            protected = source / "protected.txt"
+            protected.write_text("value\n", encoding="utf-8")
+            protected.chmod(0o700)
+            with mock.patch.dict(os.environ, {storage_copy.COPY_MODE_ENV: "clonefile"}):
+                used = storage_copy.materialize_tree(source, destination)
+            self.assertEqual(used, "clonefile")
+            self.assertEqual((destination / "protected.txt").stat().st_mode & 0o777, 0o700)
+
     def test_copy_mode_preserves_symlinks_and_isolates_mutation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -10,6 +10,7 @@ prompt bundleを生成・合成・展開するscript（`export_prompt_bundle.py`
 
 - `scripts/evaluation_loop.py`をevaluation foundation v3の固定点として扱う。
 - `scripts/atomic_run_registry.py`をcount-free atomic保存・選択・集計の固定点とする。poolへrun member一覧または`N`を保存せず、要求件数はdispatch plan、使用run集合はselection receiptへだけ固定する。
+- 新しいpromptのrunが0件でも、互換な基準poolから`seed-pool`でcase別実効条件を固定してから不足runを計画する。空pool作成のために架空runを登録しない。
 - 再現可能な不具合または明示要件なしに、Layer、KPI、出力schemaを拡張しない。
 - 書込処理はappend-onlyを維持する。
 - 既存artifactを上書きしない。

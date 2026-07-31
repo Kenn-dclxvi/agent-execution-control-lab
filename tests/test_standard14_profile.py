@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -23,6 +24,7 @@ from scripts.standard14_quality_audit import (
     a01_failures,
     a02_failures,
     a_rating,
+    apply_ratings,
     f_rating,
     terminal_state_report,
 )
@@ -44,6 +46,13 @@ A02 = "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
 class Standard14ProfileTest(unittest.TestCase):
     def load(self, path: Path) -> dict:
         return json.loads(path.read_text(encoding="utf-8"))
+
+    def test_partial_atomic_campaign_uses_explicit_expected_run_count(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            report = {"run_count": 0, "rateable_runs": 0, "runs": []}
+            apply_ratings(Path(tmp), report, expected_run_count=0)
+            with self.assertRaisesRegex(RuntimeError, "incomplete standard14 audit"):
+                apply_ratings(Path(tmp), report, expected_run_count=65)
 
     def test_standard14_is_current_f12_plus_a01_a02(self) -> None:
         profile = self.load(PROFILE)

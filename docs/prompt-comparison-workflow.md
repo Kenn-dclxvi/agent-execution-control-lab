@@ -22,7 +22,7 @@ Worker routing、child session数、root / child token内訳、並列／逐次�
 
 2026-07-31以降の一次保存単位は、1つのimmutableな`prompt_set_identity`、1 case、1 sampleにbindしたatomic runである。run poolはprompt identityとcase別の実効条件だけを持つ検索索引であり、member一覧、`N`、coverage、iteration集合を持たない。
 
-`desired-count`は不足runをmaterializeするwrite-once dispatch planだけに置く。例えば同じpoolにcomplete sampleが5件あり、100件を要求した場合は、既存5件を再利用し、95 sample分だけを発行する。分析時は使用するatomic run IDをselection receiptへ固定し、その派生analysisを作る。既存selection、analysis、runを更新しない。
+`desired-count`は不足runをmaterializeするwrite-once dispatch planだけに置く。pool内の保存runをcase別に数え、要求件数との差だけを発行する。例えばStandard14のF03だけ5件あり、全caseを5件へ揃える場合は、残る13 case × 5 = 65 runだけを発行する。分析時は使用するatomic run IDをselection receiptへ固定し、その派生analysisを作る。既存selection、analysis、runを更新しない。
 
 実行schedulerは分析互換性と分離する。同じ`resource_class`で実行できる独立runは、prompt、case、coverage、計画sample数が異なっても一つのpair-aware global queueへ入れてよい。比較対象の同一case / sampleを近接配置しつつ、空いたworkerへ次のready runを投入する。このhostの新規試験は外側並列上限を`M=24`へ固定する。
 
@@ -118,7 +118,7 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 
 `runs/`は1 runのidentity、実効条件、execution provenance、3 KPI、sourceを保持する。`pools/`は実効互換なrunを検索するための条件索引であり、run memberや件数を保持しない。既存prompt-set resultは`import-result`でatomic runへ索引化できる。元resultは変更しない。
 
-`plan-missing`はpool内のcomplete sampleを数え、不足sampleだけをdispatch planへ固定する。`select-runs`は分析に用いるrun IDをselection receiptへ固定する。`aggregate-selection`と`compare-analyses`は派生artifactだけを作る。
+`plan-missing`はpool内のrunをcase別に数え、不足slotだけをdispatch planへ固定する。`select-runs`はcaseごとに選んだrun IDをselection receiptへ固定する。`aggregate-selection`と`compare-analyses`は派生artifactだけを作る。
 
 ### Prompt-set result registry（履歴互換）
 
@@ -144,6 +144,8 @@ registryは比較相手を固定するmutable indexを持たず、`query-results
 ## 互換条件と任意個比較
 
 atomic比較では、prompt identityを除いたcase別の実効条件から`comparison_key`を作る。計画上の`N`または`max_workers`だけが異なるrunは同じpoolへ蓄積できる。`max_workers`差は消去せずexecution stratumへ残し、比較viewはstratum別件数と差分を併記する。model、CLI、model-visible catalog、fixture、TaskSpecなど実効条件が異なるrunは同じpoolへ入れない。
+
+poolの一部caseだけを選ぶ場合、selectionの`comparison_key`は選択caseの実効条件だけから再計算する。pool全体のcoverageを引き継がない。`register-selection-result`は選択済みatomic runと固定profileを照合し、保存済み比較resultから全fixture catalogを継承できる。これにより、Standard14 pool内のA01 / A02 / F01だけを新しいtargeted比較へ再利用しても、残りcaseの再実行やrun identityの書換えを必要としない。
 
 以下の`compare`は履歴互換のprompt-set result経路である。
 
