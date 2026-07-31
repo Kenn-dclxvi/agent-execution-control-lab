@@ -8,7 +8,7 @@
 
 試験の試行回数は`N`で表す。新規の試験、設計、結果では`B`を試行回数の表記に使わない。`N=20`は同一互換条件で選択した20 atomic runを意味する。過去artifactのpathや題名に残る`B20`は履歴identityとして保持するが、新規文書ではその意味を`N`へ読み替えず、実際のrun数を確認して`N=<run数>`と記録する。batch数を示す必要がある場合は`batch count`と明記する。
 
-以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate118までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
+以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate125までの保存済み観測から得た現時点の設計原則である。Candidate81以降の横断整理は[`Candidate81からCandidate125までのprompt制御知見`](candidate81-candidate125-control-findings-synthesis.md)を参照する。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
 
 ## 結論
 
