@@ -6,7 +6,7 @@
 
 評価基盤のLayer、KPI、schemaを変更しない。特定candidateの採用、release承認、THE-CAPTION本体への反映も判断しない。
 
-以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate69からCandidate95までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
+以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate117までの保存済み観測から得た現時点の設計原則である。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
 
 ## 結論
 
@@ -48,6 +48,84 @@ token削減だけを成功としない。必要な確認や成果を省略して
 | 同じ | 増加 | 制御処理だけを追加した可能性を先に疑う |
 | 低下 | 増加 | 解釈負荷または最短経路の阻害を疑う |
 | 低下 | 減少 | 必要な実行や成果を省略していないか確認する |
+
+## 制御経路の分類と評価単位
+
+共通promptの一つの効率制御を全taskへ水平適用すると、対象経路の判断を減らす一方で、非対象経路へ新しい分類、確認、再入を追加することがある。制御設計と評価では、少なくともambiguity系（A系）とfulfillment系（F系）を分ける。さらに、正常経路が異なる下位区分を分離する。
+
+この分類は、保存traceを分析し、targeted gateと非対象経路へのspilloverを判定するための設計上の分類である。prompt本文へ`A_MODE`、`F_MODE`、case ID、固定path、固定commandの分岐を追加する根拠にはしない。promptが分岐に使えるのは、TaskSpec、repository authority、repository state、bind済みresultから直接観測できる状態だけである。
+
+### A系: required outcomeとimplementation choiceの解決
+
+A系は、変更開始前に何が未解決かによって二つへ分ける。
+
+| 経路 | 開始状態 | 最短の正常経路 | 閉じるべき誤経路 |
+| --- | --- | --- | --- |
+| outcome unresolved型（A01型） | 利用者に観測可能なrequired outcome valueが未固定 | TaskSpec明示の開始状態をbindし、変更・試験前に一度のclarificationへ停止 | target、test、history、authorityを読んで未固定outcomeを推測する経路 |
+| implementation resolvable型（A02型） | required outcomeは固定済みだがimplementation choiceが未解決 | repository authorityからchoiceを解決し、choiceがbindされた時点で変更前evidence operationをterminalにして変更へ進む | authority path未記載だけによる誤停止と、choice確定後の追加探索・再入 |
+
+outcomeの確定とimplementation choiceの解決を同じauthority判定へまとめない。一般的なallowed readをoutcome決定委譲へ読み替えず、repository evidenceで未固定outcomeを事後補完しない。一方、outcomeが固定済みでrepositoryからimplementationを一意に解決できる場合は、必要なauthority探索をclarificationへ置換しない。
+
+### F系: 成果生成、review、terminal disposition
+
+F系は、成果の性質によって少なくとも三つへ分ける。
+
+| 経路 | 主なoperation | 最短の正常経路 | 主な制御対象 |
+| --- | --- | --- | --- |
+| 実装・validation型 | artifact変更とrequired validation | 独立した変更前evidenceを必要十分なwaveで取得し、変更後はrequired validation全体を一度発行してterminal resultを集約 | evidence間の不要なmodel再入、validation途中return、再取得、再実行 |
+| read-only review型 | 固定diff、source、inventoryの判定 | 判定に必要なevidenceを取得し、findingまたは根拠あるno-findingを一度返す | 固定済みevidenceの再読、対象外探索、finding確定後の追加確認 |
+| 変更なしterminal型 | clarification、refusal、scope外停止 | TaskSpecだけでterminal dispositionを決められる場合はrepository evidenceを開かず停止 | 不要なrepository探索、変更・試験の開始、停止後の再入 |
+
+F系の効率制御をA系のauthority解決へ流入させず、A系のauthority admission条件をF系の通常実装へ流入させない。例えば、read batchが固定evidence reviewを短縮しても探索型A02のread集合を広げるなら、共通制御として採用しない。逆に、A01 / A02のauthority分類を追加してF系の全caseへ分類costと再入を増やすなら、そのA系改善をStandard14集約値だけで採用しない。
+
+### 共通promptへ残す不変条件
+
+A系とF系を分けても、次の品質・安全境界は共通promptの不変条件として維持する。
+
+- required outcome、permission、constraintを推測で補完しない。
+- operationごとにproducerをbindし、producerのterminal resultを待つ。
+- bind済みresultを、明示的な失効またはevidence不足なしに再び問題にしない。
+- artifact変更後はrequired validation全体を確定し、全result受領後に一度だけ成否を判断する。
+- 未検証の成果を成功、完了、採用可能として報告しない。
+
+共通部分は不変条件に限定する。経路固有の効率制御、探索範囲、review方法、validation配送方法を、別経路にも常時解釈させるglobal proseとして重ねない。
+
+### 経路別gateとspillover判定
+
+新しいcandidateは、変更対象経路のtargeted gateだけでなく、非対象経路へ追加costを移していないことを確認する。
+
+1. outcome unresolved型のqualityと停止挙動を判定する。
+2. implementation resolvable型のquality、canonical成果、choice確定前後の探索を判定する。
+3. F実装・validation型のquality、required validation、validation再入を判定する。
+4. F read-only review型と変更なしterminal型のquality、不要read、停止後再入を判定する。
+5. 変更対象外の区分でmodel step、tool call、探索範囲、再読、再試行が増えていないかspilloverを判定する。
+6. 各区分のgate通過後にだけStandard14の3 KPIを集約する。
+
+Standard14集約値は最終的な横断KPIであり、経路間のcost移動を相殺してよいという意味ではない。結果報告ではA系subtotal、F系subtotal、下位区分のcase別値を併記する。
+
+token増加は次のように扱う。
+
+- qualityが維持され、保存trace上の経路、model step、探索範囲が変わらない増加は、反復変動の可能性を残して記述する。
+- 品質回復または必要なcanonical成果の復元に伴う増加は、必要costとして理由と対象経路を分離する。
+- 新しい探索、分類、再入、再読、retryを伴う増加は、全体tokenが減っていてもspillover失敗とする。
+- 対象経路の削減を非対象経路の増加で相殺した値だけをcandidate成功の根拠にしない。
+
+### 保存済み結果から得た境界
+
+過去の主な観測は次のとおりである。比率は各resultで固定した比較単位に従い、互換条件の異なる行同士を直接比較しない。
+
+| 比較 | 観測 | 設計上の読み方 |
+| --- | --- | --- |
+| Candidate43 → Candidate50 targeted | F05 / F10 token合計`-40.08%`、A01 / A02`+15.70%`、20 run全体`-2.49%` | Fのread batchは成立したが、A02のcommand `38 → 84`、model step `48 → 54`を伴う探索拡大のため停止。全体削減はspilloverを打ち消さない |
+| Candidate43 → Candidate69 Standard14 | A系token合計`-12.39%`、F系`-24.07%`。A01中央値は増加 | model再入削減は横断効果を示したがcase別方向は一様でない。Candidate69自体はF10 quality gateで停止 |
+| Candidate69 → Candidate71 Standard14 | A01 token合計`+1.12%`だがtool call / model stepは不変。A02とF 12 caseはtoken減少 | A01増加を新しい誤経路とせず、validation closureの経路削減を採用判断材料にした |
+| Candidate98 → Candidate104 Standard14 | A01中央値`+23.63%`、A02`-25.02%`、A系token合計`-22.12%` | 一つのA caseの増加だけでA系全体を失敗としない。targeted A02 / F07 mechanismと非対象経路を分けて判定 |
+| Candidate108 → Candidate116 Standard14 | A02中央値`+19.72%`だがA系token合計`-8.47%`、F系`-9.68%` | A02増加は誤停止せずcanonical implementationを解決する必要costを含む。outcome / implementation境界は成立 |
+| Candidate116 → Candidate117 Standard14 | A系token合計`-23.16%`、F系`+19.91%`、全体`+12.80%`。A01 / A02の再入13件減に対し他caseで26件増 | A向けauthority admission分類がFへ判断costを移した。Aの局所改善をglobal predicateとして採用せず停止 |
+
+この履歴から、許容されてきたのは「A系ならtoken増加してよい」という規則ではない。正しい挙動を維持し、新しい探索・再入へbindできない局所増加、または品質回復に必要なcostだけを理由付きで許容してきた。経路拡大へbindできる増加は、F側の削減やStandard14全体の削減があっても停止条件とする。
+
+数値と当時の判断の一次記録は、[`Candidate43 / Candidate50 targeted`](../evaluations/results/candidate43-candidate50-root-read-batch-targeted-n5_2026-07-21.md)、[`Candidate43 / Candidate69 Standard14`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)、[`Candidate69 / Candidate71 Standard14`](../evaluations/results/candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`Candidate98 / Candidate104 Standard14`](../evaluations/results/candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)、[`Candidate108 / Candidate116 Standard14`](../evaluations/results/candidate108-candidate116-outcome-implementation-boundary-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate117 Standard14`](../evaluations/results/candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)に置く。
 
 評価では中央値だけでなく、score分布、case別token、tool call、model step、worker数、context継承方法を確認する。token差をprompt文面の長短だけへ帰属させない。
 

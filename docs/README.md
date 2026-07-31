@@ -121,6 +121,15 @@
 | [`candidate87-adoption-decision.md`](candidate87-adoption-decision.md) | C87の評価状態を保持した別stateの不採用・停止判断と、C82〜C89系列の完了境界 |
 | [`candidate106-f03-b20-short-yield-route-analysis.md`](candidate106-f03-b20-short-yield-route-analysis.md) | C104 / C106 F03 B20の途中messageをouter early yieldとnonterminal再入の二段階へ分解した診断 |
 | [`candidate107-validation-wrapper-reentry-closure-design.md`](candidate107-validation-wrapper-reentry-closure-design.md) | C106のF03 B20再発経路をouter deadline条件とcell ID wait-only遷移で閉じるCandidate107設計 |
+| [`candidate108-validation-ticket-terminal-closure-design.md`](candidate108-validation-ticket-terminal-closure-design.md) | C107のdeadline大小比較を削除し、実行票全体のterminal wait-only遷移へ一本化するCandidate108設計 |
+| [`candidate109-validation-ticket-outer-wait-closure-design.md`](candidate109-validation-ticket-outer-wait-closure-design.md) | C108のwait-only fallbackを維持し、validation ticketのouter yieldをruntime最大値へ固定するCandidate109設計 |
+| [`candidate110-validation-ticket-decision-boundary-design.md`](candidate110-validation-ticket-decision-boundary-design.md) | C108の実行票途中状態を既存DECISION_BOUNDARYの外へ置くprompt-only Candidate110設計 |
+| [`candidate111-validation-ticket-model-return-boundary-design.md`](candidate111-validation-ticket-model-return-boundary-design.md) | 判断価値のない途中状態をmodelへ返す必要性を発行時点で否定するprompt-only Candidate111設計 |
+| [`candidate112-evidence-admission-scheduling-boundary-design.md`](candidate112-evidence-admission-scheduling-boundary-design.md) | evidence identityのadmissionと、許可済みで独立したinvocationの発行順序を分離するprompt-only Candidate112設計 |
+| [`candidate113-explicit-authority-delegation-design.md`](candidate113-explicit-authority-delegation-design.md) | requested outcome valueのauthority探索をTaskSpecの明示委譲だけで開くprompt-only Candidate113設計 |
+| [`candidate114-spec-ready-evidence-phase-boundary-design.md`](candidate114-spec-ready-evidence-phase-boundary-design.md) | `spec_ready`で仕様確定evidenceとtarget evidenceを分けるCandidate114設計 |
+| [`candidate115-authority-location-discovery-design.md`](candidate115-authority-location-discovery-design.md) | authority path未記載による誤停止を対象にしたCandidate115設計 |
+| [`candidate116-outcome-implementation-boundary-design.md`](candidate116-outcome-implementation-boundary-design.md) | required outcome確定とimplementation choice解決を分離するCandidate116設計 |
 | [`prompt-set-result-registry-additional-requirements.md`](prompt-set-result-registry-additional-requirements.md) | result台帳の追加要件記録。status `implemented_as_evaluation_foundation_v3`。具体設計の正本は`prompt-comparison-workflow.md`と`evaluation-loop-manual.md` |
 
 ## 4. historical handoff／superseded interpretation

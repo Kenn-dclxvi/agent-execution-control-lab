@@ -14,6 +14,8 @@ C107 = ROOT / "prompts/candidates/the-caption-3ce91a4-validation-wrapper-reentry
 DESIGN = ROOT / "docs/candidate107-validation-wrapper-reentry-closure-design.md"
 C106_PROFILE = ROOT / "evaluations/profiles/candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json"
 C107_PROFILE = ROOT / "evaluations/profiles/candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json"
+C106_STANDARD14_PROFILE = ROOT / "evaluations/profiles/candidate106-compact-validation-terminal-wait-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json"
+C107_STANDARD14_PROFILE = ROOT / "evaluations/profiles/candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json"
 
 
 def rules(path: Path) -> dict[str, str]:
@@ -84,6 +86,23 @@ class Candidate107Test(unittest.TestCase):
                 "revision": "r1",
             },
         )
+        self.assertEqual(candidate["execution"]["max_workers"], 24)
+
+    def test_standard14_profile_changes_only_prompt_identity(self) -> None:
+        source = json.loads(C106_STANDARD14_PROFILE.read_text(encoding="utf-8"))
+        candidate = json.loads(C107_STANDARD14_PROFILE.read_text(encoding="utf-8"))
+        for key in source:
+            if key not in {"profile_id", "prompt_set_identity"}:
+                self.assertEqual(candidate[key], source[key])
+        self.assertEqual(
+            candidate["prompt_set_identity"],
+            {
+                "bundle_sha256": "72c6f4b8818065300ca24fd0a42bdf49ce834ae44d4f2406da497f98c064c50d",
+                "name": "the-caption-3ce91a4-validation-wrapper-reentry-closure-r1",
+                "revision": "r1",
+            },
+        )
+        self.assertEqual(candidate["iterations"], 5)
         self.assertEqual(candidate["execution"]["max_workers"], 24)
 
 
