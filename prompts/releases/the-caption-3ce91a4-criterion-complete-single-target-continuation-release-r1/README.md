@@ -2,9 +2,9 @@
 
 ## 結論
 
-Candidate125を採用し、THE-CAPTIONへの投影を承認する。
+Candidate125を採用し、THE-CAPTIONへ投影した。
 
-リリース状態は`approved_for_projection`、承認状態は`approved`である。Candidate125と内容が同一のrelease snapshotであり、prompt本文は変更していない。
+リリース状態は`projected`、承認状態は`approved`、runtime projectionは`projected`である。Candidate125と内容が同一のrelease snapshotであり、prompt本文は変更していない。
 
 ## 識別情報
 
@@ -29,11 +29,24 @@ Candidate125は、C118のA02 terminal closureとStandard14品質を維持し、�
 ## 未解決risk
 
 - Candidate125のStandard14 B20は実施していない。Candidate81と同じ長期route stabilityを実測済みとは扱わない。
+- Candidate125のN=100試験は後日実施予定であり、現時点では未実施である。これは今回完了した投影とは別の将来評価である。
 - C122比はtoken`-0.19%`、elapsed`+2.84%`であり、全KPI改善ではない。
 - 品質・cost結果はRating v14、Medium、CLI `0.146.0`、固定Standard14 N=5の範囲に限定する。
 - A02 N=20のterminal closure結果を他caseへ一般化しない。
 
 2026-07-31のユーザーによる明示的な採用・THE-CAPTION展開依頼は、これらのriskを保持した別のlifecycle判断である。
+
+## 投影結果
+
+- THE-CAPTION PR: [#345](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/345)
+- merge commit: `2791c21d414d849b376be0d9496fc455f7e10e45`
+- rollback identity: `f12e4cc0e1d9291307a49c151e473e3bc6e92e44`
+- 実効変更: root `AGENTS.md`一つ
+- required validation: `bash ./scripts/dev/verify_change_set.sh`、`408 passed in 6.36s`
+- post-merge照合: 実効変更1 / 1、manifest target 18 / 19
+- 保持したtarget drift: `docs/how-to/index.md`。Candidate125外のTHE-CAPTION更新であり、上書きしなかった
+- 正本: [`projection.json`](projection.json)
+- 後続評価: Candidate125 N=100は`planned / not_started`。今回のprojection完了を妨げない
 
 ## 状態
 
@@ -41,9 +54,9 @@ Candidate125は、C118のA02 terminal closureとStandard14品質を維持し、�
 | --- | --- |
 | evaluation | `standard14_evaluated / quality_gate_passed / a02_terminal_closure_passed / candidate107_token_target_passed` |
 | adoption | `adopted` |
-| release | `approved_for_projection` |
+| release | `projected` |
 | approval | `approved` |
-| runtime projection | `approved_for_projection / not_yet_projected` |
+| runtime projection | `projected` |
 
 ## 根拠
 

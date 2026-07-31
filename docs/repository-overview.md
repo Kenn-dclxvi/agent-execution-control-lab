@@ -92,27 +92,28 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 現行プロンプトの固定スナップショット。`the-caption-3ce91a4-current-r1` と `-r2`。すべての候補はここから派生します。
 
-### candidate（C1〜C81、bundle 79件保存）
+### candidate（C1〜C125、bundle 124件保存）
 
 baselineから枝分かれした改良案です。番号順が単純な親子ではなく、いくつかの系譜に分かれています（例: compact構造を保つC1系、完了志向を保つC5系）。開発の主眼は一貫して「**品質を保ったままall-agentトークンを減らす制御**」の探索でした。トークンを大きく減らせた制御の分類と教訓は、[`docs/control-mechanisms.md`](control-mechanisms.md)にまとめています。
 
-bundle 79件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`（現在2件）はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
+bundle 124件はすべてcandidate index（[`prompts/candidates/README.md`](../prompts/candidates/README.md)）の表に掲載しています。正本は責務ごとに分かれます。identityは各`manifest.json`（構築時provenanceとしてimmutable）、系譜と観測の整理は[`docs/candidate-history.md`](candidate-history.md)です。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultが正本で、未実施の`not_evaluated`はresultが存在しないためindexの状態列が正本です。manifestの`evaluation_status`は構築時の記録で、状態更新時にin-place変更しません。indexは実施済みcandidateについては一覧と導線です。
 
 掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 
-### release（5件）と本体反映状況
+### release（6件）と本体反映状況
 
 正本`prompts/releases/README.md`はrelease status / approval / runtime projectionを別軸で保持する。ここでも同じ3軸に分けて示す。
 
 | release（由来候補） | release status | approval | runtime projection | 本体反映 |
 | --- | --- | --- | --- | --- |
+| **Candidate125** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #345](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/345)、直前投影からroot `AGENTS.md`一つ） |
 | Candidate34 | `cancelled` | `cancelled` | `not_authorized` | なし（不採用・artifact削除ではない） |
 | Candidate41 | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)、実変更8 path）。直前の投影履歴・C43の巻き戻し先として維持 |
 | **Candidate43** | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #335](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/335)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate81** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)、直前投影からroot `AGENTS.md`一つ） |
 
-現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81の順に積み上げたreleaseです。直近のCandidate81は、root producerの複数required validationを一つのcustom wrapper内で順に発行するprecedence ruleへ`VALIDATION_CLOSURE`を置換しました。C41・C43・C71は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
+現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81 → Candidate125の順に積み上げたreleaseです。直近のCandidate125は、一つのeditable targetが全未解決変更criterionを所有する場合に限定して、同じtargetへのcriterion-complete continuationを一度許可します。Candidate125 N=100は後日実施予定であり、投影状態とは分離して`planned / not_started`です。C41・C43・C71・C81は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 

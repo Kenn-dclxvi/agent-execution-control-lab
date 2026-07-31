@@ -1,0 +1,55 @@
+{
+  "authorization": {
+    "date": "2026-07-31",
+    "scope": [
+      "write",
+      "push",
+      "pull_request",
+      "merge",
+      "runtime_activation"
+    ],
+    "source": "explicit_user_request"
+  },
+  "bundle_sha256": "60e95bfe7f9e09a0cbb2fb980c54f1cd1bd671c37509976e7e88574adf911435",
+  "future_evaluation": {
+    "blocks_current_projection": false,
+    "candidate125_n100": "planned_not_started"
+  },
+  "projection": {
+    "baseline_commit": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44",
+    "merge_commit": "2791c21d414d849b376be0d9496fc455f7e10e45",
+    "merged_at": "2026-07-31T10:36:29Z",
+    "pull_request": "https://github.com/Kenn-dclxvi/THE-CAPTION/pull/345",
+    "rollback_identity": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44",
+    "runtime_activation": {
+      "mechanism": "merge_to_main",
+      "status": "active"
+    }
+  },
+  "release_identity": "the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1",
+  "schema_version": "the-caption-prompt.projection/v1",
+  "scope": {
+    "effective_path_count": 1,
+    "effective_paths": [
+      "AGENTS.md"
+    ],
+    "manifest_target_count": 19,
+    "matched_manifest_target_count": 18,
+    "preserved_target_drift": [
+      {
+        "path": "docs/how-to/index.md",
+        "reason": "post-C43 THE-CAPTION update outside Candidate125 changed targets"
+      }
+    ]
+  },
+  "target_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+  "validation": {
+    "command": "bash ./scripts/dev/verify_change_set.sh",
+    "git_diff_check": "passed",
+    "post_merge_effective_path_match": "1/1",
+    "post_merge_manifest_match": "18/19",
+    "post_merge_out_of_scope_paths": 0,
+    "result": "passed",
+    "summary": "408 passed in 6.36s"
+  }
+}
