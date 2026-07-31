@@ -300,6 +300,7 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - THE-CAPTION ControlFreeRepositoryとの構成差を分離するため、Clickでtarget-local No-AGENTSとrootなしRepository sub-AGENTSをMedium Std14 N=5で比較した。両条件70 / 70件がscore `4`で、sub-AGENTS側はtoken中央値`+3.74%`、elapsed中央値`+7.90%`だった。ただしsub本文の初期context注入は0 / 70で、本文をreadしたA01 5 / 5だけがtoken中央値`+80.47%`となった。配置だけでは全caseへ水平適用されないため、Std14全体の本文効果とは扱わない
 - THE-CAPTIONと同質のauthority availabilityを測れているかClick Std14全14 caseを見直した。F01〜F08、F10-R、A01、A02は元の実行判断点を維持し、回帰setとして変更不要だった。F10 r1だけはsource-onlyで完結していたため、`src/AGENTS.md`を明示authorityとするF10 r2をMedium N=5で追試した。No-AGENTSは5 / 5件がscore `1`でauthority不足停止、Repository Authorityは5 / 5件がscore `4`でinventoryを完了した。全10件がvalid・rateable、zero drift、excluded attempt 0件で、THE-CAPTION F10と同じavailability方向を再現した
 - 見直し後の`click-standard14-r2`をNo-AGENTS / Repository Authority、Medium、N=5、M=24で全件再実施した。F10以外は両条件65 / 65件がscore `4`、F10だけがscore `1` × 5 / score `4` × 5へ分離した。全140件がvalid・rateable、excluded attemptとunexpected driftは0件で、14実行判断点の比較setとして互換性を達成した。quality中央値は94.643対100.000、tokenは`+5.57%`、elapsedは`+3.96%`だが、後二者はF10の完了作業量差とM=24の変動を含むため効率差とは扱わない
+- 2026-07-31にTHE-CAPTION Candidate125 root本文をClickへbyte-identicalに水平適用し、`click-standard14-r2` Medium N=5をCodex CLI `0.146.0`で実施した。70 / 70件がvalid・rateable、F10以外65 / 65件がscore `4`、authorityなしF10は5 / 5件が`authority_unavailable`でscore `1`、excluded attemptとunexpected driftは0件だった。quality中央値`94.643`、all-agent token中央値`1,348,515`、elapsed中央値`786.007`秒である。保存済みClick C81はCLI `0.144.0`でcompatibility keyが異なるため、tokenとelapsedの差は算出しない
 - C81 / C81 + Repository Authorityも同じStd14 r2、Medium、N=5、M=24で各70件実施した。C81はscore `4` × 65 / score `1` × 5、C81 + Authorityはscore `4` × 70で、F10以外のquality回帰は0件だった。同じauthority状態のC81差は、authorityなしでtoken `-27.35%`・elapsed `-17.04%`、authorityありでtoken `-25.08%`・elapsed `-10.98%`となり、C81の削減方向はsub authority追加後も維持された
 - 2026-07-28に既存共有venvを使わない空環境から、固定Click commitと固定package versionでknown-good 8 package identityをbyte単位で再構築した。通常条件とprocess単位のnetwork遮断条件でfull gateが同じ`1939 passed, 25 skipped, 31000 deselected, 1 xfailed`となり、`uv lock --check --offline`も`Resolved 81 packages`で成功した。手順とplatform境界の正本は[`Click runtime再構築とoffline full gate`](click-runtime-reproducibility.md)とする
 
@@ -308,6 +309,8 @@ Bundle AのHigh一次結果は[`click control-free Std14 N=5`](../evaluations/ta
 見直し後Std14全体の正本は[`Click No-AGENTS / Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-no-agents-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)である。
 
 C81との組合せ結果の正本は[`Click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](../evaluations/targets/click/results/click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)である。
+
+Candidate125水平適用の正本は[`Click Candidate125 Medium Std14 r2 N=5 CLI 0.146`](../evaluations/targets/click/results/click-c125-reasoning-medium-standard14-r2-n5-cli0146_2026-07-31.md)である。これは単独品質resultであり、CLI `0.144.0`の保存済みC81とのKPI比較ではない。
 
 ### 現在の依存範囲（2026-07-26に実測）
 

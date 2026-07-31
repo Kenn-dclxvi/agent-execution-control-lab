@@ -51,3 +51,10 @@ C81とC81 + Repository Authorityの追加比較も各70 / 70件を完了した�
 組合せ結果は
 [`Click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](../../results/click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md)
 を正本とする。
+
+2026-07-31にはCandidate125 root本文の水平適用をCodex CLI `0.146.0`で各case
+N=5実施した。70 / 70件がvalid・rateableで、F10以外65 / 65件がscore `4`、
+authorityなしF10はscore `1` × 5だった。保存済みC81はCLI `0.144.0`で非互換なため、
+KPI差は算出しない。正本は
+[`Click Candidate125 Medium Std14 r2 N=5 CLI 0.146`](../../results/click-c125-reasoning-medium-standard14-r2-n5-cli0146_2026-07-31.md)
+とする。

@@ -1,0 +1,223 @@
+{
+  "cases": [
+    {
+      "id": "CLICK-F01-ANSI-SEQUENCE-STRIP",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F02-STREAM-DEPRECATION-CONTRACT",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F04-NESTED-GROUP-COMPLETION",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F05-CLARIFY-COMMAND-ORDER",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F05-OS-PYPI-PUBLISH-BOUNDARY",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F06-RESTORE-ECHO-COLOR-REGRESSION",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F07-CANONICAL-TOX-RUNNER",
+      "revision": "r2"
+    },
+    {
+      "id": "CLICK-F07-P-DEPENDENCY-LOCK-PAIR",
+      "revision": "r3"
+    },
+    {
+      "id": "CLICK-F08-SHELL-COMPLETION-DOC-SYNC",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F10-COMMAND-API-INVENTORY",
+      "revision": "r2"
+    },
+    {
+      "id": "CLICK-F10-R-NESTED-COMPLETION-REVIEW",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-A01-LATENT-CONTEXT-POLICY",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING",
+      "revision": "r1"
+    }
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.146.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952",
+      "session_mode": "persisted"
+    },
+    "executor_parameters": {
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [],
+        "required_command_groups_by_case": {
+          "CLICK-A01-LATENT-CONTEXT-POLICY": [],
+          "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING": [],
+          "CLICK-F01-ANSI-SEQUENCE-STRIP": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_compat.py tests/test_utils/test_style.py -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F02-STREAM-DEPRECATION-CONTRACT": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_deprecations.py tests/test_testing.py -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_testing.py::test_isolated_runner tests/test_testing.py::test_isolated_runner_custom_tempdir -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F04-NESTED-GROUP-COMPLETION": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py::test_nested_group -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F05-CLARIFY-COMMAND-ORDER": [],
+          "CLICK-F05-OS-PYPI-PUBLISH-BOUNDARY": [],
+          "CLICK-F06-RESTORE-ECHO-COLOR-REGRESSION": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_utils/test_echo.py::test_echo_color_flag -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F07-CANONICAL-TOX-RUNNER": [
+            [
+              "rg -n 'pytest.*-v.*--tb=short' pyproject.toml"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F07-P-DEPENDENCY-LOCK-PAIR": [
+            [
+              "UV_CACHE_DIR=.uv-cache .venv/bin/python -m uv lock --check --offline"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F08-SHELL-COMPLETION-DOC-SYNC": [
+            [
+              "rg -n 'Bash .*Zsh, Fish, and PowerShell' docs/shell-completion.md"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F10-COMMAND-API-INVENTORY": [],
+          "CLICK-F10-R-NESTED-COMPLETION-REVIEW": []
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "none_first_run",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "medium",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "click-outcome-abstract-condition-preserving-v10",
+      "contract_sha256": "ad5ca3b4ba526fe0fb9c9ec079231d5b7476335b00d540ff8cf67b9e95cd5929",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "case-major"
+    },
+    "target_repository_ref": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "https://github.com/pallets/click.git",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "task_spec": {
+      "evaluation_set_id": "click-standard14-r2",
+      "evaluation_set_revision": "r2",
+      "source": "case revision and model-visible trial_prompt_input frozen by Layer 1"
+    }
+  },
+  "evaluation_set": {
+    "revision": "r2",
+    "set_id": "click-standard14-r2"
+  },
+  "execution": {
+    "max_attempts": 3,
+    "max_workers": 24,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "profile_id": "click-c125-reasoning-medium-standard14-r2-global-m24-n5-cli0146-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "2a94d070a9f2a4f130f50b33e341d45ece09eeb38113c486acc4bae71a513e3c",
+    "name": "click-00e592c-criterion-complete-single-target-continuation-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

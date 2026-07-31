@@ -1,0 +1,64 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-validation-wrapper-precedence-r1",
+    "change_reason": "THE-CAPTION Candidate125全文をClickのroot AGENTS.mdへ水平適用し、現行CLIでStd14 r2品質と経路を確認する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "Candidate125内の個別predicateへの因果帰属",
+      "非互換な保存済みClick C81とのKPI比較",
+      "Click case、TaskSpec、rating、target runtime、model、reasoning effortの変更",
+      "Click固有predicateまたはrepository authorityの追加",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "problem": "Candidate125の品質と実行経路が別repositoryのClick Standard14 r2でも維持されるか未確認である。",
+    "scope": "Click C81のroot AGENTS.md 1 targetを、THE-CAPTION Candidate125の同一本文へ置換する一つの構成軸。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "2a94d070a9f2a4f130f50b33e341d45ece09eeb38113c486acc4bae71a513e3c",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "click-00e592c-validation-wrapper-precedence-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "41749fb810d16c49d6491bb7adec7c9a1e5f6ed0",
+      "mode": "100644",
+      "sha256": "ba16e5d7be8e880364b4aca9702dd79e3f6c50b7bfb1ecae8818102be076798d",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "same_path_set",
+    "source_prompt_identity": "click-00e592c-validation-wrapper-precedence-r1"
+  },
+  "prompt_identity": "click-00e592c-criterion-complete-single-target-continuation-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "design_inputs": [
+      "docs/click-c125-full-portability-design.md",
+      "docs/candidate125-criterion-complete-single-target-continuation-design.md",
+      "evaluations/results/candidate118-candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md"
+    ],
+    "design_status": "complete",
+    "donor_prompt_identity": "the-caption-3ce91a4-criterion-complete-single-target-continuation-r1",
+    "donor_target": "AGENTS.md",
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "Click向けtarget mapはroot AGENTS.md 1件だけとし、donor root本文はbyte-identicalに保持する。"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

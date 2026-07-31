@@ -23,6 +23,7 @@ control-free条件の固定方法は`the-caption`側の[`control-free-generic`](
 | [`click-00e592c-repository-subagents-r1`](candidates/click-00e592c-repository-subagents-r1/manifest.json) | 3 | `7f2c7f336ebcbbbfcd04ea7b25bd08840f31da73daadf404b5ac4a73d00b23cd` | rootなし。`docs`・`src`・`tests`へClick固有sub `AGENTS.md`を配置。Std14 Medium評価済み（配置・露出比較） |
 | [`click-00e592c-repository-authority-r1`](candidates/click-00e592c-repository-authority-r1/manifest.json) | 3 | `fc81314aec37546950daf623509e8b423db32bcff696ee6f7d33bc6342458c3f` | rootなし。既存3 sub本文を維持し、`src/AGENTS.md`へcommand API authorityを追加。F10 Medium N=5評価済み |
 | [`click-00e592c-c81-repository-authority-r1`](candidates/click-00e592c-c81-repository-authority-r1/manifest.json) | 4 | `e3aa97e5417fdcf75cf93480136537fa2f31fda6bb6611b59e97de3e2cc6d277` | C81 root本文とRepository Authority 3本文をbyte-identicalに合成。Std14 r2 Medium評価済み |
+| [`click-00e592c-criterion-complete-single-target-continuation-r1`](candidates/click-00e592c-criterion-complete-single-target-continuation-r1/manifest.json) | 1 | `2a94d070a9f2a4f130f50b33e341d45ece09eeb38113c486acc4bae71a513e3c` | THE-CAPTION Candidate125のroot本文をbyte-identicalに水平適用。Std14 r2 Medium N=5をCLI 0.146.0で評価済み |
 
 Candidateは一つのpredicateまたは一つの変更軸だけを扱い、作成前gate 9項目（[`prompts/AGENTS.md`](../../../../prompts/AGENTS.md)）を通してからbundleを作る。Bundle Bは個別predicateを分離せず、固定済みC81全文の有無を一つの構成軸として扱う。設計境界は[`Click C81全文水平適用`](../../../../docs/click-c81-full-portability-design.md)を正本とする。
 
