@@ -67,4 +67,10 @@ F03 N=5は5 / 5件がscore `4`で、内部waitより短いouter deadline、cell 
 
 続くF03 B20は100 / 100件がscore `4`だった。required validation間の途中messageとrequired validation再実行は0 / 100である。cell ID付きnonterminal resultは6件あり、6 / 6件とも直後に同じcell IDへの`wait`を発行した。一方、内部waitより短いouter deadlineが4 / 100件あったため、作成前zero gateは不通過である。
 
-現在状態を`targeted_f03_b20_evaluated / quality_gate_passed / wait_only_gate_passed / outer_deadline_gate_failed / result_registered / stopped`とする。詳細は[`Candidate107 F03 N=5 B20 result`](../evaluations/results/candidate107-validation-wrapper-reentry-closure-v14-medium-f03-continuous-n5-b20-cli0146_2026-07-30.md)を正本とする。Standard14、採用、release、runtime projection、本体反映へ進めない。
+当時の状態を`targeted_f03_b20_evaluated / quality_gate_passed / wait_only_gate_passed / outer_deadline_gate_failed / result_registered / stopped`とした。詳細は[`Candidate107 F03 N=5 B20 result`](../evaluations/results/candidate107-validation-wrapper-reentry-closure-v14-medium-f03-continuous-n5-b20-cli0146_2026-07-30.md)を正本とする。このgateから自動的にStandard14、採用、release、runtime projection、本体反映へ進めない。
+
+## 明示再開したStandard14
+
+2026-07-31にユーザーがStandard14 N=5だけを明示的に再開した。C106の保存済み互換resultを参照し、C107の不足70 atomic runだけをM=24のglobal queueで実行した。70 / 70件がvalid・rateable・score `4`で、excluded attemptは0件だった。
+
+C107 minus C106の5 sample中央値差はquality `0.000`、token `-181,469`（`-10.65%`）、elapsed `+74.332`秒（`+8.53%`）だった。方向が分かれたため効率改善は主張しない。F03 B20のouter deadline違反4 / 100件は失効しない。現在状態は`targeted_f03_b20_evaluated / standard14_evaluated_by_explicit_reopen / quality_gate_passed / wait_only_gate_passed / outer_deadline_gate_failed / result_registered / stopped`とする。詳細は[`Candidate106 / Candidate107 Standard14 atomic N=5 result`](../evaluations/results/candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)を正本とする。
