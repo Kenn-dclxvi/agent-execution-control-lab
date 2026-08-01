@@ -3,7 +3,7 @@
 ## 品質制約下でのprompt設計と実行KPIの測定
 
 > [!IMPORTANT]
-> **位置付け**: この文書は、既存の[`execution-control-research-paper.md`](execution-control-research-paper.md)を置き換えるためではなく、**同じ一次資料を別の論証構造へ組み直した仮組み（reframed draft）**である。既存論文は変更していない。契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
+> **位置付け**: この文書は、既存の[`execution-control-research-paper.md`](execution-control-research-paper.md)を置き換えるためではなく、**既存論文が使用した研究artifactを基礎とし、公開Baselineの系譜を示す[`orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)の固定履歴を補助一次資料として追加したうえで、別の論証構造へ組み直した仮組み（reframed draft）**である。既存論文は変更していない。契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
 >
 > **仮組みとしての体裁**: 各節の冒頭に「節の目的」「中心主張」「使用する証拠」を置き、そのあとに暫定本文を置く。主張には`[R*]`のClaim IDを付け、一次資料との対応と証拠水準は[`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md)を正本とする。
 >
