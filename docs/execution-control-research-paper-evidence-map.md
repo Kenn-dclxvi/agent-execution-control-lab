@@ -27,6 +27,7 @@
 | `historical_design_record` | 当時のmanifest、設計文書、prompt本文に記録された意図または判断の記録。効果の測定ではない | C35の`change_reason`、`prompt-guide.md`の設計理由 |
 | `interpretive_synthesis` | 本論文が複数の観測やartifactから構成した解釈・分類・対応づけ | 9責務の抽出、工程と判定条件の対応表 |
 | `descriptive_cross_layer` | compatibility keyが異なる条件の並置。効果量として読めない記述的比較 | 料金換算表、model軸の3条件 |
+| `author-provided_historical_premise` | 研究者から与えられた歴史的前提。本リポジトリの一次資料では検証できない | Baselineの実務利用 |
 | `unverified` | 該当するcase、result、測定条件が存在しない | 長期・部分曖昧タスク、Claude系model |
 
 ### 1.2 再検証分類
@@ -71,9 +72,10 @@
 | R1-1 | 1.1 | Baselineは人間の開発工程（指示書化・実装・監査・レビュー・差し戻し・完了判定・PR）を役割と関所として写している | prompt本文の工程と役割の限定列挙 | `prompts/baselines/the-caption-3ce91a4-current-r2/files/AGENTS.md.txt`（§役割・§指示書草案・§SA起動と分離・§停止と自動再修正・§完了判定・§PR作成）、`files/docs/orchestration-process.md`（§基本方針・§SA利用ケース・§自動修正ループ）、`files/prompts/{plan,implement,audit,review}.md` | Baseline bundle `63225d2d…`（19 path） | `artifact_verified` | 「工程・成果物・関所の構造を写している」まで。工程が人間の職能配分の写しであるという意図は主張できない（R1-3） | 不要 |
 | R1-2 | 1.1 | 親エージェントは実装・修正・テスト実行・監査・レビュー相当の品質確認・指示書作成を直接行わない | prompt本文の禁止列挙 | Baseline root `AGENTS.md` §役割、`orchestration-process.md` §基本方針 | 同上 | `artifact_verified` | prompt上の規定であり、tool levelの強制ではない（`orchestration-process.md` §制約が明記） | 不要 |
 | R1-3 | 1.2 | Baselineの設計記録は、この分業を「人間の組織図の写し取りではない」と明示し、AI固有の失敗様式（確証バイアス・迎合・reward hacking）へ向けた設計として7点の理由を挙げていた | 設計理由の原文 | `files/docs/prompt-guide.md` §AI最適化の設計理由 | 同上 | `historical_design_record` | 当時の設計意図の記録である。設計理由の妥当性が測定されたわけではない | 不要 |
-| R1-4 | 1.2, 1.4 | Baselineは実務利用と当時の拡張12課題評価において一定品質を示し、研究開始時点では品質確保の初期解として扱われていた。その工程構造がAI実行として最適かは未計測だった | R1-1〜R1-3、R1-6、および当時のtoken集計がroot-onlyだった事実 | 上記＋[`v3-all-agent-token-reaccounting_2026-07-16.md`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md) | 混在（設計記録＋層A） | `interpretive_synthesis` | **「品質確保に成功」と断定しない。** 当時の認識、初期評価の事実、後続評価の事実（R5-1）を3段に分けて記述する | 文言限定（本文で3段記述へ統一済み） |
+| R1-4 | 1.2, 1.4 | Baselineは当時の拡張12課題評価で`58 / 60`件が4点・2件が3点・品質中央値`100.000`を示し、研究開始時点では品質確保の初期解として扱われていた。その工程構造がAI実行として最適かは未計測だった | R1-1〜R1-3、R1-6、および当時のtoken集計がroot-onlyだった事実 | 上記＋[`v3-all-agent-token-reaccounting_2026-07-16.md`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md) | 混在（設計記録＋層A） | `interpretive_synthesis` | **「品質確保に成功」と断定しない。また「当時の評価範囲では品質制約を満たしていた」とも書かない**（2件の減点があり、2.1節の「全課題で減点なし」という定義を完全には満たさない）。当時の認識、初期評価の事実、後続評価の事実（R5-1）を3段に分けて記述する | 文言限定（本文1.4節で対応済み） |
 | R1-5 | 1.3 | Baselineが守ろうとした品質責務を9項目として抽出できる | prompt本文の該当節 | Baseline root `AGENTS.md` §入力境界・§作業単位化・§停止と自動再修正・§完了判定・§出力、`orchestration-process.md` §停止条件・§各工程の確認範囲・§指摘分類、`prompts/audit.md` §指摘、`prompts/implement.md` §ルール、`prompts/review.md` §レビュー観点、`docs/prompt-guide.md` §原則 | 同上 | `interpretive_synthesis` | **本論文が本文から抽出した整理である。** Baseline作者が「9項目」と宣言した記述はなく、この9項目からStandard14を導出した履歴もない（R3-1） | 文言限定（本文1.3節で明示済み） |
 | R1-6 | 1.4 | Baselineは拡張12課題60回で score `4 / 3 = 58 / 2`、`quality_score`中央値`100.000`だった | 一次resultのscore分布 | [`baseline-control-free-repository-c35-c41-…-v9-expanded12-n5_2026-07-19.md`](../evaluations/results/baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md) | 層A（`abc7d7a9…`）、rating v9、`high` | `same_condition_observation` | この12課題・rating v9・推論`high`の範囲。標準14項目では`92.857`（R5-1） | 不要 |
+| R1-7 | 1.4, 要旨 | Baselineは研究開始前に対象リポジトリで運用されていた（実務利用） | 導入commit、運用記録、採用記録 | **該当する一次資料をこのリポジトリで確認できない。** Baseline bundleは比較元として固定された19 pathのfile bundleであり、運用履歴を示すartifactを含まない | — | `author-provided_historical_premise` | **本論文が一次資料から検証した事実ではない。** 「実務利用」を根拠として使う箇所では著者提供の前提である旨を明示するか、初期評価の事実（R1-6）だけを根拠にする | 文言限定（前提である旨の明示）／または導入commit・運用記録の追加 |
 
 ### 2.2 第2節 研究疑問
 
@@ -133,7 +135,7 @@
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| R7-1 | 7.5, 要旨, 13 | 研究過程で識別された境界ファミリーは**9件**（A1〜A9）、C125のroot本文のlabelは**13件**、`synthesis`がC81以降の寄与として記録しているのは**7件**であり、**この3つは別の集合である**。いずれも「モデルが実行時に観測できる状態・証拠・結果に対する条件」として書かれている | 各候補のroot本文のpredicate形式と各層のKPI | C43 / C71 / C81 / C104 / C116 / C118 / C122 / C125のroot `AGENTS.md.txt`、[synthesis](candidate81-candidate125-control-findings-synthesis.md) | 層B・層C | `artifact_verified`（本文の形式）＋`repeated_observation`（KPIと品質の方向） | **「観測可能性が効果の原因である」は示していない**（単文効果を測っていない）。反例系列（R8-4）との対照からの解釈にとどまる。**「7つの境界」という単一の数を要旨・結論へ置かない。** また**このファミリー一覧はKPI低下の一覧ではない**（A3は所要時間`+5.78%`、A6はtoken`+7.44%`、A8は品質`69 / 70`） | ablation（原因性を主張する場合） |
+| R7-1 | 7.5, 要旨, 13 | 研究過程で**識別・検証された**境界ファミリーは**9件**（A1〜A9。成立、部分成立、後続候補による修正のいずれかが観測された制御であり、9件すべてが「成立が確認された制御」ではない）、C125のroot本文のlabelは**13件**、`synthesis`がC81以降の寄与として記録しているのは**7件**であり、**この3つは別の集合である**。いずれも「モデルが実行時に観測できる状態・証拠・結果に対する条件」として書かれている | 各候補のroot本文のpredicate形式と各層のKPI | C43 / C71 / C81 / C104 / C116 / C118 / C122 / C125のroot `AGENTS.md.txt`、[synthesis](candidate81-candidate125-control-findings-synthesis.md) | 層B・層C | `artifact_verified`（本文の形式とlabel集合）＋`interpretive_synthesis`（ファミリーへの分類） | **「観測可能性が効果の原因である」は示していない**（単文効果を測っていない）。反例系列（R8-4）との対照からの解釈にとどまる。**「7つの境界」という単一の数を要旨・結論へ置かない。** また**このファミリー一覧はKPI低下の一覧でも「成立が確認された制御」の一覧でもない**（A3は所要時間`+5.78%`、A6はtoken`+7.44%`、A7は部分成立、A8は品質`69 / 70`）。**9件全体について共通の反復効果が観測されたわけではないため`repeated_observation`は当てない。各候補の効果はR7-7〜R7-13を正本とする。** 表Aの各セルには比較元を併記する（A1の`5 / 5 → 0`はCFR / C5 / C35との比較、token`-77.32%`はBaselineとの比較であり、同一比較ではない） | ablation（原因性を主張する場合） |
 | R7-2 | 7.1 | 層Bの7条件は指示書以外の条件（課題、作業指示、fixture、必要な検証、採点契約、実行環境、`M`、`N`）がすべて一致している | resultの固定条件節と「prompt identity以外を一致させた」記述 | 層B result §固定条件、[C71 / C81 result](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)（「両profileの差は`profile_id`と`prompt_set_identity`だけ」） | 層B `79ed04a4…` | `same_condition_observation` | 設定値の一致であり、実行時交絡（実行時刻・同時実行数・キャッシュ・提供側負荷）の排除ではない（R12-15） | 不要 |
 | R7-3 | 7.1 | 結果は一つの勝者に収束しない（token最小はC81、所要時間と合計最小はC71、`4 = 70`はC43・C71・C81、1回で出し切れた率最良はC81） | 層Bの2 result | 層B result、C71 / C81 result | 層B | `same_condition_observation` | 記述的な比較。優劣・採用の順位ではない | 不要 |
 | R7-4 | 7.1 | Baselineとの差分（CFR `-70.80%`〜C81 `-83.99%`） | resultの差分表 | 層B result §Baselineとの差 | 層B | `same_condition_observation` | 同一key内の記述的差分。個々の一文の効果ではない（R7-14） | 不要 |
@@ -153,7 +155,7 @@
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| R8-1 | 8.1, 13#5 | 表面圧縮を主目的とした各試行では、**静的量の減少が動的tokenの減少へ一貫して対応しなかった**（8件中7件で増加または実質不変）。この系列が示すのは、静的なバイト数を動的実行量の代理指標として使用できないことである | 各候補の一次result | C32 / C49 / C54 / C64 / C65 / C66 / C67 / C68の各result、[`candidate-history.md`](candidate-history.md)、[`control-mechanisms.md`](control-mechanisms.md) | 候補ごとに異なるkey・課題範囲・集計軸 | `descriptive_cross_layer` | **効果量の横断比較は行わない。** 中央値・70件合計・単一課題F10が混在し、互換キーと候補系列も異なる。**「判定条件を1つ足した候補は`26`〜`30%`削減した」を同じ比較の中に並べない**（別campaign・別条件） | 既存データ再解析（同一集計軸への再集計） |
+| R8-1 | 8.1, 13#5 | 表面量を操作した8件（**圧縮を主目的とした7件＋全文重複の対照C64 1件**）では、**静的量の減少が動的tokenの減少へ一貫して対応しなかった**（8件中7件で増加または実質不変）。この系列が示すのは、静的なバイト数を動的実行量の代理指標として使用できないことである | 各候補の一次result | C32 / C49 / C54 / C64 / C65 / C66 / C67 / C68の各result、[`candidate-history.md`](candidate-history.md)、[`control-mechanisms.md`](control-mechanisms.md) | 候補ごとに異なるkey・課題範囲・集計軸 | `descriptive_cross_layer` | **効果量の横断比較は行わない。** 中央値・70件合計・単一課題F10が混在し、互換キーと候補系列も異なる。**「判定条件を1つ足した候補は`26`〜`30%`削減した」を同じ比較の中に並べない**（別campaign・別条件）。**またC64は圧縮候補ではないため「表面圧縮を主目的とした8件」とは書かない** | 既存データ再解析（同一集計軸への再集計） |
 | R8-2 | 8.2 | 委譲条件の細分化（C82〜C89）は工程分解の誤りを修復しなかった。C87はD01で親候補比token`-51.06%`だがStandard14全体ではC81比token`+6.09%`、所要時間`+1.35%` | 一次resultとsynthesis | [C81 / C87 result](../evaluations/results/candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)、[synthesis](candidate81-candidate125-control-findings-synthesis.md) §2、[`research-backlog.md`](research-backlog.md) §2 | 層C（Standard14）／D01は別case set | `same_condition_observation`（C81 / C87 Standard14）＋`descriptive_cross_layer`（D01との並置） | 局所改善と全体コストの乖離まで。`-51.06%`はC86比であり、Standard14の`+6.09%`と同一比較ではない | 不要 |
 | R8-3 | 8.3 | 実行環境側の性質を指示書へ書いても成立しない。C96は成功時stdoutが全5件でモデルへ返り、C97は全5件で成功後に別の`git status`を発行した（completion closure `0 / 5`） | 一次resultと診断 | [synthesis](candidate81-candidate125-control-findings-synthesis.md) §3、C96 / C97の各result、[`candidate97-decision-round-closure-design.md`](candidate97-decision-round-closure-design.md) | 層C | `same_condition_observation`（各`N=5`） | 各`N=5`の観測。「promptで一切制御できない」ではなく「この条件で狙った投影・締めが成立しなかった」まで | 不要 |
 | R8-4 | 8.4, 13#9 | **少数反復の通過は分布の裾にある低頻度欠陥を除外しない。** C95は`N=5`を通過したがB20（1,400回）で`4 / 2 / 1 = 1,398 / 1 / 1`。token`+4.49%`（Holm補正後`p=0.002325`）、所要時間`+5.53%`（`p=0.000019`）でC81より有意に悪化。C81側は`1,400 / 1,400`が4点。command protocol violationはC95のみ19件 / 10 run（McNemar `p=0.001953`） | B20 resultの品質表・検定結果 | [B20 result](../evaluations/results/candidate81-candidate95-required-judgment-owner-boundary-v14-medium-standard14-continuous-n5-b20-cli0146_2026-07-30.md) | 層C B20 `c5bfcd6d…`。実行順を奇数batch C81→C95、偶数batch C95→C81で交互化 | `repeated_observation` | 本研究で検定を適用した唯一の比較。score `4`件数の差2件はMcNemar `p=0.5`で有意ではないが、事前品質gateは4点未満を1件も許容しない。**「効率改善の代償」の例としてC95を使わない。C95はC81比でtoken`+4.49%`・所要時間`+5.53%`であり効率を改善していない。** 効率改善の代償が裾に現れた例はC71（C69比でtokenとtool callを減らしつつ1,260回で実質欠落`+3`件）である | 不要 |
@@ -184,9 +186,9 @@
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| R11-1 | 11.1, 11.2, 13#12 | Baselineの各工程について、runtimeで残った制御と、評価課題集合で維持確認する品質責務を分けて対応づけられる。**レビューSAにはrootの対応制御がなく、責務は評価課題集合（F10）にしか残っていない。独立監査としての監査SAも常設工程が削除され、runtimeに残ったのは機械的なvalidation closureである。評価課題集合はruntime mechanismではなく、実装runごとのレビューまたは独立監査の実施を保証しない** | Baseline本文とC125本文の対応、および4 Layerの境界定義 | Baseline root `AGENTS.md`・`orchestration-process.md`・4ロールプロンプト、C125 root `AGENTS.md.txt`、Standard14のF10×2、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md) §4 Layer | bundle実体＋基盤規則 | `artifact_verified`（rootに対応制御が存在しないこと、4 Layerの分離）＋`interpretive_synthesis`（対応表） | **対応表は本論文が構成した解釈である。** 各行が「意図的な置換」として記録されているのはC35 / C43 / C118などの個別manifestに限られ、全体を1つの変換として設計した記録はない。**「レビューSAの責務は評価集合へ移った」とは書かない**（Layerが違う）。**同じ限定は監査SAにも適用する。** `VALIDATION_CLOSURE` / `VALIDATION_PLAN` / `TERMINAL`が担うのは必須検証の発行・結果のbind・terminal判定であり、独立した契約準拠監査、reward hackingの敵対的検出、範囲逸脱の第三者判定と同じではない。`CONTEXT`は継承範囲のpredicateであり、独立監査主体が存在しない状態で情報非対称性そのものを再現するものではない。`PRODUCER`はrootが実装と検証双方のproducerになる経路を禁止していない | 文言限定（本文11.1の限定(1)〜(3)と11.2の拡張で対応済み） |
+| R11-1 | 11.1, 11.2, 13#12 | Baselineの各工程について、runtimeで残った制御と、評価課題集合で維持確認する品質責務を分けて対応づけられる。**レビューSAにはrootの対応制御がなく、責務は評価課題集合（F10）にしか残っていない。独立監査としての監査SAも常設工程が削除され、runtimeに残ったのは機械的なvalidation closureである。評価課題集合はruntime mechanismではなく、実装runごとのレビューまたは独立監査の実施を保証しない** | Baseline本文とC125本文の対応、および4 Layerの境界定義 | Baseline root `AGENTS.md`・`orchestration-process.md`・4ロールプロンプト、C125 root `AGENTS.md.txt`、Standard14のF10×2、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md) §4 Layer | bundle実体＋基盤規則 | `artifact_verified`（rootに対応制御が存在しないこと、4 Layerの分離）＋`interpretive_synthesis`（対応表） | **対応表は本論文が構成した解釈である。** 各行が「意図的な置換」として記録されているのはC35 / C43 / C118などの個別manifestに限られ、全体を1つの変換として設計した記録はない。**「レビューSAの責務は評価集合へ移った」とは書かない**（Layerが違う）。**同じ限定は監査SAにも適用する。** `VALIDATION_CLOSURE` / `VALIDATION_PLAN` / `TERMINAL`が担うのは必須検証の発行・結果のbind・terminal判定であり、独立した契約準拠監査、reward hackingの敵対的検出、範囲逸脱の第三者判定と同じではない。`CONTEXT`は継承範囲のpredicateであり、独立監査主体が存在しない状態で情報非対称性そのものを再現するものではない。`PRODUCER`はrootが実装と検証双方のproducerになる経路を禁止していない。**さらにBaselineの自動再修正ループ（監査停止指摘・レビュー重大指摘を起点とする最大5回の差し戻し）と`RECOVERY`（`environment-only repair + same required command rerun`）は置換の関係ではない。** 前者は常設ループごと削除され、後者は別種の境界である。`machine_rework_max=1`は評価caseのTaskSpec契約であり実行時ループの代替ではない | 文言限定（本文11.1の限定(1)〜(4)、RECOVERY行の分割、11.2の拡張で対応済み） |
 | R11-2 | 11.2.1 | Baselineは品質責務と工程を同じ文章で表現しており、工程への経路を外すと責務も落ち、責務を守るために不要な工程を払い続ける状態だった | R6-1（経路を外すと責務が落ちる）、R5-3 / R5-4（不要な委譲） | 層B result、`v3-all-agent-token-reaccounting`、`baseline-candidate1…candidate5` result | 層B・層A | `interpretive_synthesis` | 2種類の観測の統合による解釈。単一実験による検証ではない。**CFR（経路の非活性化）とC35（静的artifactの除去）を混同しない**（R6-2） | 不要 |
-| R11-3 | 11.3, 要旨 | 条件1〜3（品質制約下でKPIが低下）を満たすのは表Aの5組。**そのうち条件4〜5（同一比較内の経路診断）まで満たすのはC98→C104、C118→C125、Click control-free→C81の3組だけである。Baseline→C43とC43→C71は同一比較内の経路診断を持たない。C116→C118はKPIが低下していないため表B（機構成立）へ分ける** | 各比較のKPI・分布・診断値、および診断値の出所campaign | 該当する各一次result（R7-7、R7-8、R7-10、R7-12、R7-13、R10-3）。C69 / C71のB18は[B18 result](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md) | 各層内。B18はv12・別候補対・別campaign | `same_condition_observation`（各比較個別）＋`interpretive_synthesis`（5条件という枠組み） | **C69 / C71のB18の診断値（tool call `-30.16%`、モデルステップ`-26.54%`）をC43→C71の経路分解として使わない。** 比較元候補・rating revision・campaignがいずれも異なる。表を「表A: KPIが低下した比較」と「表B: KPI低下を伴わない機構成立」へ分け、表A内でも経路診断の有無を列で区別する。**要旨の一般化も「品質制約下でKPIが低下し、かつ同一比較内の診断値またはtraceが整合する比較では」へ限定する** | 文言限定（本文11.3の表A / 表B分離と要旨の限定で対応済み） |
+| R11-3 | 11.3, 要旨 | 条件1〜3（品質制約下でKPIが低下）を満たすのは表Aの5組。**そのうち条件4〜5（同一比較内の経路診断）まで満たすのはC98→C104、C118→C125、Click control-free→C81の3組だけである。Baseline→C43とC43→C71は同一比較内の経路診断を持たない。C116→C118はtokenが`+7.44%`、所要時間が`-14.37%`でKPIの方向が分かれるため表Bへ分ける。**「KPIが低下していない」とは書かない**（3 KPIのうち所要時間は低下している）** | 各比較のKPI・分布・診断値、および診断値の出所campaign | 該当する各一次result（R7-7、R7-8、R7-10、R7-12、R7-13、R10-3）。C69 / C71のB18は[B18 result](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md) | 各層内。B18はv12・別候補対・別campaign | `same_condition_observation`（各比較個別）＋`interpretive_synthesis`（5条件という枠組み） | **C69 / C71のB18の診断値（tool call `-30.16%`、モデルステップ`-26.54%`）をC43→C71の経路分解として使わない。** 比較元候補・rating revision・campaignがいずれも異なる。表を「表A: 品質制約下でKPIが低下した比較」と「表B: KPIの方向が分かれた機構成立」へ分け、表A内でも経路診断の有無を列で区別する。**要旨の一般化も「品質制約下でKPIが低下し、かつ同一比較内の診断値またはtraceが整合する比較では」へ限定する** | 文言限定（本文11.3の表A / 表B分離と要旨の限定で対応済み） |
 | R11-4 | 11.3 | 5条件を満たさない例として、C33はtoken中央値`-24.63%`だが`quality_score`中央値も`-6.250`低下した | 一次result | [C33 result](../evaluations/results/candidate33-worker-context-sufficiency-owner-producer-v5-expanded12-global-m24-n5_2026-07-18.md)、[`control-mechanisms.md`](control-mechanisms.md) メカニズム2 | 層A系（拡張12課題、旧rating） | `same_condition_observation`（当該key内） | この条件の観測。層Bの数値と連結しない | 不要 |
 | R11-5 | 11.4 | 正味token差 = 制御文の読解cost + 追加された判断・確認cost − 回避できた探索・context継承・再読・再試行・手戻りcost | 各系列の符号の一致 | [`prompt-control-design-principles.md`](prompt-control-design-principles.md)、既存論文第10節、R8-1 / R7-8 / R8-4 | 複数層 | `interpretive_synthesis` | **観測されたtoken差を解釈するための概念モデルであり、各項を独立に計装したものではない。「どの項が支配的だったか」は測定結果ではない** | 計装追加 |
 | R11-6 | 11.5 | 指示書が制御できるのは、返された結果をどう分類し次に何を選ぶかまでである | R8-3 | 上記 | 層C | `interpretive_synthesis` | C90〜C97・C105〜C111の失敗範囲まで。「原理的に不可能」ではない | 対象外（runtime強制の実装はこのリポジトリの範囲外） |
@@ -243,6 +245,7 @@
 | 16 | 「9つの品質責務」がBaseline作者の意図した分類である | 本論文が本文から抽出した整理である | 当時の責務列挙artifact（存在しない） | 文言限定 | — |
 | 17 | 実装runごとのレビュー工程がruntimeで保証されている | 常設工程は削除され、rootに対応制御はない。F10は評価範囲の品質制約である | runtime側のレビュー起動機構 | 対象外（TaskSpecとruntimeの領域。11.2節） | — |
 | 18 | 制御の便益が保守費用に見合う | どの制御が何を変えたかまで | 実務利用における利用者価値の測定 | field study | 測定設計から必要 |
+| 19 | Baselineが研究開始前に実務利用されていた | 著者から与えられた歴史的前提である | 導入commit、運用記録、採用記録 | 文言限定（前提である旨の明示）／またはartifact追加 | — |
 
 ---
 
@@ -298,11 +301,23 @@
 - とくにC43（仕様確定）とC71（validation closure）は`synthesis`の7件に現れないが、`SPEC`と`VALIDATION_CLOSURE`としてC125の本文に載っている。逆にC119とC122は7件に含まれるが、7.5節Aでは別ファミリー（A7 / A8）として数えている。
 - **要旨と結論へ単一の「7つの境界」を置かない。** また**ファミリー一覧はKPI低下の一覧ではない**（A3は所要時間`+5.78%`、A6はtoken`+7.44%`、A8は品質`69 / 70`）。仮組みでは7.5節をA / Bへ分割し、要旨・13節#7でこの区別を明示した（R7-1、R7-15）。
 
-### 留保9: 層Aの数値は推論`high`である
+### 留保9: 自動再修正ループと`RECOVERY`は置換の関係ではない
+
+- Baselineの自動再修正は、監査SAの停止指摘とレビューSAの重大指摘を起点に実装SAへ差し戻す最大5回のループである（root `AGENTS.md` §停止と自動再修正、`orchestration-process.md` §自動修正ループ）。
+- C125の`RECOVERY`が扱うのは`environment-only repair + same required command rerun`だけであり、監査・レビュー指摘に基づく実装修正ループではない。
+- したがって11.1節の対応表を「回数による制御を状態による制御へ置換した」と書くことはできない。仮組みでは行を2つに分け、**監査・レビュー駆動の自動再修正ループは常設工程ごと削除された**こと、**`RECOVERY`は別種の環境recovery境界である**ことを明示した（R11-1、限定(4)）。
+- `machine_rework_max=1`は評価caseのTaskSpec契約であり、実行時の自動再修正ループの代替ではない。
+
+### 留保10: 「実務利用」は本リポジトリの一次資料で確認できない
+
+- 仮組みと既存論文はBaselineを「実務で運用しているリポジトリ」の指示書として説明しているが、導入commit、運用記録、採用記録といった一次資料は本リポジトリに存在しない。Baseline bundleは比較元として固定された19 pathのfile bundleである。
+- したがって「実務利用」は`author-provided_historical_premise`（研究者から与えられた歴史的前提）として分類し、Claim R1-7を新設した。仮組みでは要旨・1.4節・5.1節でこの前提である旨を明示し、品質の根拠としては初期評価の事実（R1-6）だけを使う形へ直した。
+
+### 留保11: 層Aの数値は推論`high`である
 
 - 層A（拡張12課題）の結果は推論`high`、層B・層C・層Dは`medium`である。既存論文2.5節も同じ層分けをしている。仮組みでも層をまたいだ連結はしていない（R4-3）。
 
-### 留保10: atomic run経路のEvaluation set identityが層Bと異なる
+### 留保12: atomic run経路のEvaluation set identityが層Bと異なる
 
 - 層Bのset identityは`430d1d4b…`、C125のmodel軸resultは`2096d15e…`である。これはatomic run経路でのidentity計算が異なるためであり、`evaluations/AGENTS.md`が「atomic run経路では`N`、coverage、iteration集合、計画順序、`max_workers`をrunの実効互換条件へ含めない」と定めている。同じ`the-caption-standard14-r1`だが、identity値としては別である。**この2つのidentity値を同一視しない。**
 

@@ -44,7 +44,7 @@
 | [`control-mechanisms.md`](control-mechanisms.md) | 横断的な制御メカニズムの知見 |
 | [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
 | [`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md) | 総説と同じ一次資料を別の論証構造へ組み直した**仮組み（draft）**。Baselineを研究前の到達点として置き、研究疑問を「人間向け工程のAI実行上の最適性」として定義する。**正本ではなく、総説の置き換えでもない**。主張と証拠の対応は下記evidence mapを正本とする |
-| [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md) | 上記仮組みのClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補18件、一次資料と要約文書の相違・留保10件 |
+| [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md) | 上記仮組みのClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補19件、一次資料と要約文書の相違・留保12件 |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ### 2c. 運用・評価infra spec
