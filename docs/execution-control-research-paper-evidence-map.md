@@ -27,7 +27,7 @@
 | `historical_design_record` | 当時のmanifest、設計文書、prompt本文に記録された意図または判断の記録。効果の測定ではない | C35の`change_reason`、`prompt-guide.md`の設計理由 |
 | `interpretive_synthesis` | 本論文が複数の観測やartifactから構成した解釈・分類・対応づけ | 9責務の抽出、工程と判定条件の対応表 |
 | `descriptive_cross_layer` | compatibility keyが異なる条件の並置。効果量として読めない記述的比較 | 料金換算表、model軸の3条件 |
-| `author-provided_historical_premise` | 研究者から与えられた歴史的前提。本リポジトリの一次資料では検証できない | Baselineの実務利用 |
+| `author-provided_historical_premise` | 研究者から与えられた歴史的前提。本リポジトリでも公開artifactでも検証できない | Baselineの実務利用の規模と成果（R1-7b） |
 | `unverified` | 該当するcase、result、測定条件が存在しない | 長期・部分曖昧タスク、Claude系model |
 
 ### 1.2 再検証分類
@@ -75,7 +75,8 @@
 | R1-4 | 1.2, 1.4, 要旨, 5.1, 13#1 | **研究開始前と研究開始後を分けて記述する。** 研究開始前、著者は利用経験からBaselineを初期解として扱っていた（R1-7）。研究開始後の初期測定では拡張12課題で`58 / 60`件が4点・2件が3点・品質中央値`100.000`だった。この測定は研究前の認識を部分的に支持したが、品質制約は満たしていない。その工程構造がAI実行として最適かは未計測だった | R1-1〜R1-3、R1-6、および当時のtoken集計がroot-onlyだった事実 | 上記＋[`v3-all-agent-token-reaccounting_2026-07-16.md`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md) | 混在（設計記録＋層A） | `interpretive_synthesis` | **「品質確保に成功」と断定しない。「当時の評価範囲では品質制約を満たしていた」とも書かない**（2件の減点があり、2.1節の「全課題で減点なし」という定義を完全には満たさない）。**さらに、研究の中で得た拡張12課題の結果を「研究開始時点で初期解と考えていた根拠」として使わない。** 研究開始前の認識（R1-7）、研究開始後の初期測定、後続評価の事実（R5-1）を分けて記述する | 文言限定（本文1.4節・要旨・5.1節・13#1で対応済み） |
 | R1-5 | 1.3 | Baselineが守ろうとした品質責務を9項目として抽出できる | prompt本文の該当節 | Baseline root `AGENTS.md` §入力境界・§作業単位化・§停止と自動再修正・§完了判定・§出力、`orchestration-process.md` §停止条件・§各工程の確認範囲・§指摘分類、`prompts/audit.md` §指摘、`prompts/implement.md` §ルール、`prompts/review.md` §レビュー観点、`docs/prompt-guide.md` §原則 | 同上 | `interpretive_synthesis` | **本論文が本文から抽出した整理である。** Baseline作者が「9項目」と宣言した記述はなく、この9項目からStandard14を導出した履歴もない（R3-1） | 文言限定（本文1.3節で明示済み） |
 | R1-6 | 1.4 | Baselineは拡張12課題60回で score `4 / 3 = 58 / 2`、`quality_score`中央値`100.000`だった | 一次resultのscore分布 | [`baseline-control-free-repository-c35-c41-…-v9-expanded12-n5_2026-07-19.md`](../evaluations/results/baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md) | 層A（`abc7d7a9…`）、rating v9、`high` | `same_condition_observation` | この12課題・rating v9・推論`high`の範囲。標準14項目では`92.857`（R5-1） | 不要 |
-| R1-7 | 1.4, 要旨 | Baselineは研究開始前に対象リポジトリで運用されていた（実務利用） | 導入commit、運用記録、採用記録 | **該当する一次資料をこのリポジトリで確認できない。** Baseline bundleは比較元として固定された19 pathのfile bundleであり、運用履歴を示すartifactを含まない | — | `author-provided_historical_premise` | **本論文が一次資料から検証した事実ではない。** 「実務利用」を根拠として使う箇所では著者提供の前提である旨を明示するか、初期評価の事実（R1-6）だけを根拠にする | 文言限定（前提である旨の明示）／または導入commit・運用記録の追加 |
+| R1-7a | 1.4, 要旨, 5.1, 13#1 | Baselineの汎用コアは公開リポジトリ`Kenn-dclxvi/orchestration-prompt`で管理されていた。研究Baselineのroot `AGENTS.md`は公開履歴PR #18 headの`AGENTS.md`とGit blob単位で一致する。公開リポジトリにはTHE-CAPTION向けoverlayがあり、実運用上の観測に基づく改訂履歴も保存されている | 公開repoの可視性、固定refのtree、blob SHA、PR本文、overlay READMEの照合 | [`Kenn-dclxvi/orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)（PUBLIC、2026-06-14作成）。固定ref `28fddf7d2734daeca9b9e9756159460c2ec6b09c`（PR [#18](https://github.com/Kenn-dclxvi/orchestration-prompt/pull/18) head、2026-06-28 merged）。`AGENTS.md` blob `9d70bc48adc5699f4e986f2ae9bc79dbf623f8db`（5,980 bytes）は本リポジトリのBaseline manifestの記録値と一致。`overlays/the-caption/{README.md, repo-context.md, files/AGENTS.md, files/prompts/*.md}`。PR #18本文が「プランSA…実運用ではほぼ自律起動しなかった」を変更理由として記録 | 公開repoの固定ref（`main`は参照しない） | `artifact_verified` ＋ `historical_design_record` | **公開された実在のprompt設計だった／THE-CAPTIONへの適用構造が存在した／運用上の観測を理由に改訂されていた、までが上限。** **blob一致は6 targetに限る**（`AGENTS.md`、overlay側の`prompts/{plan,implement,audit,review}.md`、`docs/prompt-guide.md`）。`docs/orchestration-process.md`は公開`22,203`bytes対Baseline`24,209`bytesで**不一致**、`docs/glossary.md`（4,086 bytes）は公開リポジトリに**存在しない**。overlay READMEの適用先は`THE-CAPTION-DEV`、Baselineのsourceは`THE-CAPTION@3ce91a4`である。**「研究Baseline bundle全体が公開されていた」とは書かない。** 研究Baselineの正本は引き続き本リポジトリの19 path bundle（`63225d2d…`） | 不要 |
+| R1-7b | 1.4, 要旨, 5.1, 12.4, 13#1 | Baselineが研究開始前にTHE-CAPTIONの実務開発で継続利用され、品質確保の到達点として認識されていた | 利用件数、運用期間、対象タスク範囲、実務成果の成功率、手戻り・レビュー品質、研究用評価と独立した品質記録 | **該当する一次資料をこのリポジトリでも公開リポジトリでも確認できない。** PR #18本文は運用上の観測を1件記録しているが、利用の規模・期間・成果品質の記録ではない | — | `author-provided_historical_premise` | **利用の規模と成果は本論文が検証した事実ではない。** 「実務利用」を根拠として使う箇所では著者提供の前提である旨を明示するか、初期評価の事実（R1-6）だけを根拠にする。公開artifactの存在と改訂履歴はR1-7aで検証済みであり、この行の対象ではない | 文言限定（前提である旨の明示）／または運用記録・成果記録の追加 |
 
 ### 2.2 第2節 研究疑問
 
@@ -246,7 +247,7 @@
 | 16 | 「9つの品質責務」がBaseline作者の意図した分類である | 本論文が本文から抽出した整理である | 当時の責務列挙artifact（存在しない） | 文言限定 | — |
 | 17 | 実装runごとのレビュー工程・独立監査がruntimeで保証されている | 常設工程は削除され、rootに対応制御はない。F10と各caseの禁止境界は評価範囲の品質制約である | runtime側のレビュー／独立監査の起動機構 | 対象外（TaskSpecとruntimeの領域。11.2節） | — |
 | 18 | 制御の便益が保守費用に見合う | どの制御が何を変えたかまで | 実務利用における利用者価値の測定 | field study | 測定設計から必要 |
-| 19 | Baselineが研究開始前に実務利用されていた | 著者から与えられた歴史的前提である | 導入commit、運用記録、採用記録 | 文言限定（前提である旨の明示）／またはartifact追加 | — |
+| 19 | Baselineの実務利用件数、運用期間、対象タスク範囲、実務成果の品質がどの程度だったか | 公開artifactの存在・blob一致・THE-CAPTION overlay・運用観測に基づく改訂履歴は**検証済み**（R1-7a）。利用の規模と成果だけが未検証 | 運用記録、成果記録、研究用評価と独立した品質記録 | 文言限定（著者提供前提である旨の明示）／または運用・成果記録の追加 | — |
 | 20 | 監査・レビュー指摘に基づく自動再修正（差し戻し・再監査・再レビュー）の能力が維持されている | 常設ループは削除され、`RECOVERY`は別種の境界である。`machine_rework_max=1`は同じ責務ではない。**runtimeにも評価課題集合にも同等形がなく、能力は未測定である** | 差し戻しループの能力を測るcase | 新case family | case family設計＋rating revision＋反復 |
 
 ---
@@ -310,10 +311,32 @@
 - したがって11.1節の対応表を「回数による制御を状態による制御へ置換した」と書くことはできない。仮組みでは行を2つに分け、**監査・レビュー駆動の自動再修正ループは常設工程ごと削除された**こと、**`RECOVERY`は別種の環境recovery境界である**ことを明示した（R11-1、限定(4)）。
 - `machine_rework_max=1`は評価caseのTaskSpec契約であり、実行時の自動再修正ループの代替ではない。
 
-### 留保10: 「実務利用」は本リポジトリの一次資料で確認できない
+### 留保10: 「実務利用」は公開artifactで検証できる部分と、著者提供前提にとどまる部分へ分ける
 
-- 仮組みと既存論文はBaselineを「実務で運用しているリポジトリ」の指示書として説明しているが、導入commit、運用記録、採用記録といった一次資料は本リポジトリに存在しない。Baseline bundleは比較元として固定された19 pathのfile bundleである。
-- したがって「実務利用」は`author-provided_historical_premise`（研究者から与えられた歴史的前提）として分類し、Claim R1-7を新設した。仮組みでは要旨・1.4節・5.1節でこの前提である旨を明示し、品質の根拠としては初期評価の事実（R1-6）だけを使う形へ直した。
+**検証済み（`artifact_verified` ＋ `historical_design_record`、R1-7a）**
+
+- `Kenn-dclxvi/orchestration-prompt`はPUBLICなリポジトリである（2026-06-14作成）。
+- PR #18（2026-06-28 merged、head `28fddf7d2734daeca9b9e9756159460c2ec6b09c`）時点の`AGENTS.md`は blob `9d70bc48adc5699f4e986f2ae9bc79dbf623f8db`（5,980 bytes）で、**本リポジトリのBaseline manifestが記録する研究Baselineのroot `AGENTS.md`と一致する**。
+- 同refに`overlays/the-caption/`が存在し、READMEが適用順と管理方針を定めている。
+- PR #18本文は「プランSA（ケースE）が…実運用ではほぼ自律起動しなかった」を変更理由として記録しており、**運用上の観測に基づく改訂履歴**である。
+
+**同時に確認した相違（R1-7aの表現上限）**
+
+| target | 研究Baseline | 公開PR #18 head | 判定 |
+| --- | --- | --- | --- |
+| `AGENTS.md` | blob `9d70bc48…` | 同一（root / overlay とも） | 一致 |
+| `prompts/{plan,implement,audit,review}.md` | 4 blob | overlay側と同一 | 一致 |
+| `docs/prompt-guide.md` | `835aebcd…`（15,421 bytes） | 同一 | 一致 |
+| `docs/orchestration-process.md` | `1a25c460…`（24,209 bytes） | `6cf63f29…`（22,203 bytes） | **不一致** |
+| `docs/glossary.md` | `14bf17c2…`（4,086 bytes） | 存在しない | **欠落** |
+
+overlay READMEの適用先は`THE-CAPTION-DEV`、研究Baselineのsourceは`THE-CAPTION@3ce91a4`である。**したがって「研究Baseline bundle全体が公開されていた」とは書かない。**
+
+**依然として著者提供前提（R1-7b）**
+
+利用件数、運用期間、対象タスクの範囲、実務成果の成功率、不具合・手戻り・レビュー品質、研究用評価と独立した品質記録は、公開リポジトリにも本リポジトリにも存在しない。
+
+**参照する履歴点**: 現在の`orchestration-prompt/main`はその後の改訂を含むため参照しない。論文が参照するのは上記の固定refである。研究Baseline全体の正本は引き続き本リポジトリの19 path bundle（`the-caption-3ce91a4-current-r2`、`63225d2d…`）であり、**公開`orchestration-prompt`（汎用コア・公開系譜・改訂履歴）と入れ替えない。**
 
 ### 留保11: C71の「実質欠落+3件」は現在の解釈では維持されない
 
