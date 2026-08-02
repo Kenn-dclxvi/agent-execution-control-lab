@@ -18,8 +18,25 @@
       "repository外executorまたはruntimeの変更"
     ],
     "prompt_set_name": "result_effect_scope_release",
+    "projection_evidence": {
+      "baseline_commit": "3b6013e0850d0f9ebbec72e534c0b644602ca880",
+      "effective_path_count": 1,
+      "manifest_target_count": 19,
+      "matched_manifest_target_count": 15,
+      "merge_commit": "3119a91d3fad63180884f80ac6b742fbae328afe",
+      "preserved_target_drift": [
+        "docs/AGENTS.md",
+        "docs/how-to/index.md",
+        "docs/reference/project-contexts/the-caption.txt",
+        "src/AGENTS.md"
+      ],
+      "projection_record": "projection.json",
+      "pull_request": "https://github.com/Kenn-dclxvi/the-caption/pull/13",
+      "rollback_identity": "3b6013e0850d0f9ebbec72e534c0b644602ca880",
+      "validation": "bash scripts/dev/verify_change_set.sh: 382 passed in 7.12s; Secret Scan gitleaks passed"
+    },
     "release_identity": "the-caption-3ce91a4-result-effect-scope-release-r1",
-    "release_status": "approved",
+    "release_status": "projected",
     "scope": "評価済みCandidate147の19 path full bundleを内容変更なしで固定し、公開版the-captionへの投影を承認する。",
     "unresolved_risks": [
       "品質と安定性はRating v14 Medium、CLI 0.146.0、固定Standard14 N=100の範囲に限定する。",
@@ -203,8 +220,8 @@
     ],
     "design_status": "release_approved",
     "evaluation_status": "standard14_n100_evaluated_quality_stability_gate_passed_mechanism_gate_passed_aggregate_cost_recovered",
-    "runtime_projection_status": "not_projected",
-    "source_interpretation": "This release is a content-identical snapshot of Candidate147. The user's explicit adoption and publication request on 2026-08-03 authorizes release and projection to the public the-caption repository through the-caption-dev. Projection evidence is recorded only after the target merge."
+    "runtime_projection_status": "projected",
+    "source_interpretation": "This release is a content-identical snapshot of Candidate147. The user's explicit adoption and publication request on 2026-08-03 authorized projection through the-caption-dev. Projection completed through public the-caption PR #13. The production checkout was not updated because the requested terminal was publication to repository main."
   },
   "schema_version": "the-caption-prompt.bundle/v1",
   "source": {

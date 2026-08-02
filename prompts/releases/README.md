@@ -2,7 +2,7 @@
 
 評価済みcandidateを反映判断可能なbundleへ固定して置く。release作成だけでは採用承認またはTHE-CAPTION本体への反映を意味しない。
 
-候補147は明示承認後に公開版`the-caption`への投影を準備している。Rating v14 Medium Standard14 N=100で1,400 / 1,400 score `4`、targeted F01 / F02 / F03でmechanism 15 / 15を確認した。releaseは`approved`、runtime projectionは`not_projected`である。
+候補147は明示承認後に公開版`the-caption`へ投影済みである。Rating v14 Medium Standard14 N=100で1,400 / 1,400 score `4`、targeted F01 / F02 / F03でmechanism 15 / 15を確認した。公開版PR #13、merge commit `3119a91d3fad63180884f80ac6b742fbae328afe`、rollback identity `3b6013e0850d0f9ebbec72e534c0b644602ca880`を固定した。
 
 候補125は明示承認後に移行前のTHE-CAPTIONへ投影済みである。Rating v14 Medium Standard14 N=5で70 / 70 score `4`、A02 N=20で20 / 20 score `4`かつbind後再入0件、token中央値`1,401,225`を確認した。直接のrollback identityは移行前THE-CAPTION commit `f12e4cc0e1d9291307a49c151e473e3bc6e92e44`である。Candidate125 N=100追試は2026-08-01にregistered poolを各case30件まで拡張した時点でF04 score `2`を5件確認し、N=50 partial batchを中断した。これは既存projection stateを変更しない。
 
@@ -14,7 +14,7 @@
 
 | release identity | source candidate | evaluation | release status | approval | runtime projection |
 | --- | --- | --- | --- | --- | --- |
-| [`the-caption-3ce91a4-result-effect-scope-release-r1`](the-caption-3ce91a4-result-effect-scope-release-r1/README.md) | `the-caption-3ce91a4-result-effect-scope-r1` | rating v14 Medium Standard14 N=100 1,400 / 1,400 score 4、targeted mechanism 15 / 15、C145比cost回収 | `approved` | `approved` | `not_projected` |
+| [`the-caption-3ce91a4-result-effect-scope-release-r1`](the-caption-3ce91a4-result-effect-scope-release-r1/README.md) | `the-caption-3ce91a4-result-effect-scope-r1` | rating v14 Medium Standard14 N=100 1,400 / 1,400 score 4、targeted mechanism 15 / 15、C145比cost回収 | `projected` | `approved` | `projected` |
 | [`the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1`](the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1/README.md) | `the-caption-3ce91a4-criterion-complete-single-target-continuation-r1` | rating v14 Medium Standard14 70 / 70 score 4、A02 N=20 20 / 20 score 4・bind後再入0件、token中央値1,401,225 | `projected` | `approved` | `projected` |
 | [`the-caption-3ce91a4-validation-wrapper-precedence-release-r1`](the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md) | `the-caption-3ce91a4-validation-wrapper-precedence-r1` | rating v13 Medium 標準14項目70 / 70 valid・rateable・score 4、quality / prompt stability gate通過 | `projected` | `approved` | `projected` |
 | [`the-caption-3ce91a4-validation-closure-release-r1`](the-caption-3ce91a4-validation-closure-release-r1/README.md) | `the-caption-3ce91a4-validation-closure-r1` | rating v12 標準14項目B18 1,260 / 1,260 valid、公式点数4 / 3 / 0 = 1,255 / 4 / 1、品質gate不通過 | `projected` | `approved` | `projected` |

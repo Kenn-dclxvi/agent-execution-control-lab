@@ -2,9 +2,9 @@
 
 ## 結論
 
-Candidate147を採用し、公開版`the-caption`へ投影するreleaseとして承認した。
+Candidate147を採用し、公開版`the-caption`へ投影した。
 
-release状態は`approved`、runtime projectionは`not_projected`である。Candidate147と内容が同一のrelease snapshotであり、prompt本文は変更していない。
+release状態は`projected`、runtime projectionは`projected`である。Candidate147と内容が同一のrelease snapshotであり、prompt本文は変更していない。
 
 ## 識別情報
 
@@ -32,14 +32,28 @@ release状態は`approved`、runtime projectionは`not_projected`である。Can
 - F06ではauthority追加readが21 / 100件残った。quality failureではないが、完全に除去したとは扱わない。
 - Candidate manifestのtarget commit・treeは公開移行前の記録であり、公開版では解決しない。投影時は公開版のbaselineを別に固定する。
 
+## 投影結果
+
+- public repository: [`Kenn-dclxvi/the-caption`](https://github.com/Kenn-dclxvi/the-caption)
+- PR: [#13](https://github.com/Kenn-dclxvi/the-caption/pull/13)
+- baseline / rollback identity: `3b6013e0850d0f9ebbec72e534c0b644602ca880`
+- merge commit: `3119a91d3fad63180884f80ac6b742fbae328afe`
+- 実効変更: root `AGENTS.md`一つ
+- required validation: `bash scripts/dev/verify_change_set.sh`、`382 passed in 7.12s`
+- public CI: Secret Scan `gitleaks` success
+- post-merge照合: 実効変更1 / 1、manifest target 15 / 19
+- 保持したtarget drift: `docs/AGENTS.md`、`docs/how-to/index.md`、`docs/reference/project-contexts/the-caption.txt`、`src/AGENTS.md`
+- 本番運用checkout `/Users/kenn/repos/the-caption`は更新していない。今回のterminalはpublic repository `main`への公開である
+- 正本: [`projection.json`](projection.json)
+
 ## 状態
 
 | lifecycle | state |
 | --- | --- |
 | evaluation | `standard14_n100_evaluated / quality_stability_gate_passed / mechanism_gate_passed / aggregate_cost_recovered` |
 | adoption | `adopted` |
-| release | `approved` |
-| runtime projection | `not_projected` |
+| release | `projected` |
+| runtime projection | `projected` |
 
 ## 根拠
 
