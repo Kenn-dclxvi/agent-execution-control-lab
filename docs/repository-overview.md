@@ -135,6 +135,16 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 正本: [`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)。
 
+### 対象リポジトリの公開移行（2026-08-01〜08-03）
+
+登録instance `the-caption` の実体は公開のための移行を行った。3リポジトリの関係は[root `README.md`](../README.md)を正本とする。
+
+本リポジトリの記録には**公開日という時間の境界**がある。
+
+- **2026-08-01より前の記録は、移行前のリポジトリを対象としている。** manifest、profile、release、resultが記録する対象repository、commit、tree、PR番号はすべてこの時点のものである。write-onceの記録として変更しない。
+- **公開版は履歴を切り出し直しているため、移行前のcommit・tree・PR番号は公開版では解決しない。**
+- 公開日以降の投影・反映を記録する場合は、公開版を対象として書く。
+
 ## 7. 現在の状態（まとめ）
 
 - 評価基盤は `evaluation_foundation_v4`。3 KPIをatomic run単位でappend-only保存し、計画上の`N`をrun identityへ含めません。実効互換なrunだけをpoolから選択し、使用run ID集合を固定して比較します。v3 prompt-set resultは履歴として保持します。
