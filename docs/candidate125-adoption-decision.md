@@ -29,8 +29,6 @@ Candidate125のStandard14 B20は未実施である。Candidate81にはStandard14
 
 Candidate125のN=100試験は後日実施予定であり、現時点では`planned / not_started`である。これは投影後の追加安定性評価であり、今回の採用・release・runtime projectionの完了状態とは分離する。
 
-> **後日の注記（2026-08-01）**: 上記は採用判断時点の状態であり、変更しない。その後Candidate125のN=100追試を開始し、compatible atomic poolを各case 30件（計420 run）まで拡張した時点でF04にscore `2`を5件確認して停止した。現在状態は`n100_execution_stopped / registered_pool_n30`である（[一次result](../evaluations/results/candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n100-stopped-at-pool-n30-cli0146_2026-08-01.md)）。case別30件を固定するselection receiptと集約analysisがないため正式な`N=30 result`ではない。**本文書の採用・release・runtime projectionの完了状態は、この追試結果で変更しない。**
-
 Candidate122比ではtoken中央値が`0.19%`低い一方、elapsed中央値は`2.84%`高い。Candidate122は品質gate不通過であり、C125は品質を70 / 70へ回復したため採用するが、全KPI改善とは主張しない。
 
 ## 投影境界

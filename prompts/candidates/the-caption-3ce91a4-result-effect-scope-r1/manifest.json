@@ -1,0 +1,203 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "the-caption-3ce91a4-lifecycle-consumer-evidence-admission-r1",
+    "change_reason": "resultの停止効果をtask全体へ伝播させず、実際に影響を受けるoperation classだけへ限定する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "改善の主張",
+      "採用判断",
+      "release判断",
+      "THE-CAPTION本体への反映"
+    ],
+    "problem": "Candidate145のDECISION_BOUNDARYは開始identity resultの影響範囲を限定せず、TaskSpecがreadを禁止していないF01 / F02 / F03でもidentityと許可済みreadを別model stepへ分離した。",
+    "scope": "root AGENTS.mdのDECISION_BOUNDARYにおけるresultのoperation class別影響範囲。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "the-caption-3ce91a4-lifecycle-consumer-evidence-admission-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "54b1ca99fad87d0935d28229c810a734c85f08a7",
+      "mode": "100644",
+      "sha256": "46ed3811aa798fec6356cf53feb7403ff15bf75c71a9c76af6d6893b05fb8fc7",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "the-caption-3ce91a4-current-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git",
+    "construction_state": "uncommitted_working_tree",
+    "design_inputs": [
+      "docs/candidate147-result-effect-scope-design.md",
+      "docs/candidate146-model-step-boundary-audit.md",
+      "docs/candidate145-f01-f02-f03-cost-causal-analysis.md",
+      "docs/candidate145-lifecycle-consumer-evidence-admission-design.md",
+      "evaluations/results/candidate143-candidate144-required-outcome-validation-method-boundary-v14-medium-a01-a02-f01-f02-f04-f07-atomic-n5-cli0146_2026-08-02.md",
+      "docs/candidate144-required-outcome-validation-method-boundary-design.md",
+      "docs/candidate143-required-outcome-implementation-bind-design.md",
+      "docs/candidate119-validation-predicate-method-boundary-design.md",
+      "evaluations/results/candidate142-initial-joint-effect-admission-v14-medium-f02-f04-f07-atomic-n5-stopped-cli0146_2026-08-02.md",
+      "evaluations/results/candidate141-prechange-relation-coverage-v14-medium-f02-f04-f07-atomic-n5-stopped-cli0146_2026-08-02.md",
+      "docs/candidate121-f02-evidence-route-analysis.md",
+      "docs/candidate118-implementation-bind-terminal-closure-design.md",
+      "docs/candidate116-outcome-implementation-boundary-design.md",
+      "evaluations/results/candidate116-outcome-implementation-boundary-v14-medium-a02-atomic-n20-cli0146_2026-07-31.md",
+      "docs/prompt-control-design-principles.md",
+      "docs/prompt-file-bundle.md"
+    ],
+    "design_status": "complete",
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "source_prompt_identity identifies Candidate145 as direct parent. Candidate147 preserves lifecycle-wide evidence consumer admission, required-outcome implementation bind, and validation predicate versus method boundary. It replaces only DECISION_BOUNDARY so a result delays the operation classes it can actually invalidate. Candidate125 and Candidate146 are behavioral evidence, not prompt parents; exact-target, single-target continuation, fixed-span, and consumer-closure procedures are not inherited."
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}
