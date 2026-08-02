@@ -1,7 +1,7 @@
-# 論文仮組みのevidence map
+# 論文第1版のevidence map
 
 > [!IMPORTANT]
-> **位置付け**: この文書は[`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md)の各主張と一次資料の対応表である。契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
+> **位置付け**: この文書は[`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md)（**第1版、2026-08-03**）の各主張と一次資料の対応表である。**本文の記述の限界は、本文ではなくこの文書の「現状の表現上限」列を正とする。**契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
 >
 > **作成方針**: 数値は一次result（`evaluations/results/`および`evaluations/targets/*/results/`）とprompt bundleの実体から取得した。**Baselineの公開系譜については、既存論文が使用していなかった公開リポジトリ[`orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)の固定履歴を補助一次資料として追加した**（R1-7a、第4節の留保10）。要約文書（`candidate-history.md`、`control-mechanisms.md`、`candidate81-candidate125-control-findings-synthesis.md`、既存の`execution-control-research-paper.md`）は所在の索引としてだけ使い、数値の正本としては使っていない。一次resultと要約文書の相違は第4節へ記録した。
 >
@@ -218,7 +218,7 @@
 | R12-13 | —（補助指標の節は本文から削除） | `$25.1562`（v13 / `0.144.0`）と`$15.5472`（v14 / `0.146.0`）の差`-38.20%`は互換キーが違うため制御の効果量ではない | 両条件の互換条件 | [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md)、各一次result | — | `descriptive_cross_layer` | 並置にとどまる | 同条件追加反復 |
 | R12-15 | 4.3, 12.4 | 所要時間はprompt差から分離されていない。`M=24`の共有待ち行列で実行順のランダム化・交互配置・時刻ブロック化をしておらず、負荷も記録していない。例外はC81 / C95 B20の交互実行だけである | 各resultの実行スケジュール記述 | 層B result（「5つの新規campaignは同時実行せず、Baseline、CFR、C5、C35、C43の順に実行した」）、B20 result（「奇数batchはC81→C95、偶数batchはC95→C81」） | — | `artifact_verified` | 交絡が残ることの記述。`elapsed_seconds`は記述値として扱う | 同条件追加反復（`M=1`および順序統制） |
 | R12-17 | —（補助指標の節は本文から削除） | 指示書単体の注入コストは算出できない。キャッシュ済み入力`$2.4741`（総額の`15.91%`）は複数要素が混在した区分の換算額である | 換算の内訳 | [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md)、既存論文7.5節 | 層C（C125 Sol） | `derived_arithmetic`（区分総額）＋`unverified`（指示書単体） | 区分総額までが上限。root指示書の寄与は分離できない | 計装追加 |
-| R12-20 | 冒頭注記 | この文書は仮組みであり、いずれの状態についても正本ではない | 文書の位置付け | 本文書の冒頭 | — | — | 記述 | 不要 |
+| R12-20 | 冒頭注記 | 本稿は第1版（2026-08-03）であり、この版をもって記述を固定する。**数値と識別子の正本は本稿がリンクする一次artifactであり、採用・release・本体反映のいずれの状態についても本稿は正本ではない** | 文書の位置付け | 本文書の冒頭 | — | — | 記述 | 不要 |
 
 ### 2.13 第13節 結論
 
@@ -238,7 +238,7 @@
 
 ## 3. 既存証拠では接続できない主張（再検証候補）
 
-以下は、論文仮組みの中で**主張として書けなかった**か、**限定付きでしか書けなかった**接続である。本文では該当箇所に留保を置いている。
+以下は、第1版の中で**主張として書けなかった**か、**限定付きでしか書けなかった**接続である。本文では該当箇所に留保を置いている。
 
 | # | 接続したい主張 | 現在言えること | 不足している証拠 | 再検証分類 | 概算規模 |
 | --- | --- | --- | --- | --- | --- |
@@ -514,7 +514,7 @@
 
 ---
 
-## 5. 数値のsource一覧（仮組み本文に出る主要数値）
+## 5. 数値のsource一覧（第1版本文に出る主要数値）
 
 | 数値 | 出所 | 条件 |
 | --- | ---: | --- |
