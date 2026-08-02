@@ -45,7 +45,7 @@
 | [`candidate125-candidate147-control-findings-synthesis.md`](candidate125-candidate147-control-findings-synthesis.md) | C125のN=5成立とN拡張停止から、C126〜C142のeffect / evidence境界探索、C143の上流再構築、C147のN=100採用までの因果系列と現在解釈 |
 | [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
 | [`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md) | 研究者向けに書き下ろした**論文草稿**（14節＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献を一次・補助資料として使う。**正本ではない。** 数値と識別子は一次artifactを、主張と証拠の対応はevidence mapを正本とする。|
-| [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md) | 上記草稿のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保26件（外部文献への誤帰属5件の撤回を含む） |
+| [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md) | 上記草稿のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保27件（外部文献への誤帰属5件の撤回を含む） |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 草稿§12.2はこれを引用する |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 

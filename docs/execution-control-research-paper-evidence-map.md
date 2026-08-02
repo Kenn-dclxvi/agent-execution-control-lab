@@ -224,6 +224,13 @@
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| R5-4 | 5.2, 6.4, 14 | **単一の互換キー`60226e5443…`で5条件が並ぶ。** 出発点`65 / 1 / 4`・13,624,982・3,333.567秒、0バイト`65 / 5`・3,488,611・1,166.296秒、着手条件`4 = 70`・3,151,442・1,091.549秒、検証のまとめ方`4 = 70`・2,030,116・988.187秒、到達点`4 = 70`・1,447,626・852.543秒 | 同一互換キー・同一Layer 1での5条件のscore分布と3 KPI | [Baseline / free / C147](../evaluations/results/baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)、[C43 / C71 / C147](../evaluations/results/candidate43-candidate71-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md) | `60226e5443…`、preflight `cc0c022a…`、v14 / `medium` / CLI `0.146.0` / 14課題×`N=5` | `same_condition_observation` | **各条件`N=5`（14課題×5反復）の記述比較である。** 統計的優越を主張しない。既存互換runは0件で全140 runを新規発行した。旧v13群の数値は別群として保持し、群をまたいだ差分を取らない | 同条件追加反復（規模を上げる場合） |
+| R6-5 | 6.4, 14 | **到達点は0バイト条件より品質が高く（`+7.143`）実行量も小さい（token`-58.50%`、経過時間`-26.90%`）。** この両立は6.3節の群では成立しておらず、当時の最良条件は0バイト条件より`+1.87%`大きかった | 同一互換キーでの2条件比較 | [Baseline / free / C147](../evaluations/results/baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md) | `60226e5443…` | `same_condition_observation` | **「制御を足せば両立する」とは書けない。** 両立が現れたのは系列を進めた後であり、途中の候補では成立していない。単文ablationがないため、どの記述が両立をもたらしたかは分離していない | ablation |
+| R6-6b | 6.2 | 0バイト条件の低score 5件はすべて曖昧性境界（停止側）であり、v13 `high` / v13 `medium` / v14 `medium`の3群すべてで`65 / 5`が再現した | 3群のscore分布とcase別内訳 | [環境別推移](../evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md) | 3群（互換キーは相互に異なる） | `repeated_observation` | **群をまたいだ絶対値は比較しない。** 再現したのは分布と失敗caseの同一性である | 対象外 |
+| R7-16 | 7.7, 14 | 到達点は14課題×各100回＝1,400 runすべてがscore `4`。品質100.000、token中央値`1,394,412.5`、経過時間中央値`831.914秒`。`N=29`以降の中央値は`1.383M`〜`1.394M`に収まる | 1,400 runのscore分布と3 KPI、selection / analysis ID | [C147 N=100](../evaluations/results/candidate147-result-effect-scope-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-02.md) | `60226e5443…`のsample拡張（pool `2a081681…`） | `same_condition_observation` | **低頻度欠陥の不在は示さない。** より大きい規模、別課題、別modelでの失敗は排除できない。F06の親候補比コスト増が残存riskとして記録されている | 同条件追加反復／別model・CLI |
+| R8-6 | 8.6, 7.7, 11.6 | ひとつ前の到達点の欠陥を閉じるまでに22件の後続候補を要し、下流に判定を足す方向の17候補がすべて停止した。閉じたのは最後に成立した親へ戻り、結果の待機を状態を変え得る操作の種類だけへ限定したときである | 各候補のresultとstate、系譜 | [synthesis](candidate125-candidate147-control-findings-synthesis.md) | 候補ごとに異なる（同一比較ではない） | `historical_design_record`＋`interpretive_synthesis` | **17件の停止理由は同一ではない。** 品質gate未達、機構不成立、誤停止増加が混在する。「下流追加は常に失敗する」とは書けない。読めるのはこの系列でその方向が収束しなかったことである | 対象外 |
+| R4-2b | 4.2 | 同じ4条件をv13 / `0.144.0`群とv14 / `0.146.0`群で測ると、token中央値の動きが`-0.24%`から`+16.00%`まで条件ごとに揃わない | 2群の同一条件の絶対値差 | [環境別推移](../evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md) | 2群（互換キーは異なる） | `derived_arithmetic`（記述差） | **これは互換comparisonではない。** 群をまたいだ差分を指示書固有の性質として読まないことの根拠として使う | 対象外 |
+| R10-2 | 10.2 | 同じ指示書で推論の深さだけを6水準変えると、tokenは`medium`が最小、経過時間は`low`が最小で、`xhigh`以上は両方増える。最深水準では品質が1件落ちた | 6水準各`N=5`のscore分布と3 KPI | [C71 reasoning 6水準](../evaluations/results/candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md) | v13 / 14課題。**深さは互換条件の一項目のため6行は同一互換キーではない** | `same_condition_observation`（各水準内）＋`descriptive_cross_layer`（水準間） | **指示書の効果と分離していない。** 読めるのは、深さを上げることが実行量・所要時間・品質のいずれについても単調な改善にならなかったという事実である | 対象外 |
 | R13-1 | 14 | 観測した評価範囲では、擬人的な工程仕様全体を保持しないbundleでも品質制約を満たした。品質制約を維持しながら**all-agent token**を小さくした候補に共通していたのは、仕様・証拠・実装・検証・停止を実行時に観測可能な条件として表した境界である。`elapsed_seconds`はこの主張へ含めない | R5-*、R6-*、R7-*、R8-*の統合 | 上記すべて | 複数層（連結しない） | `interpretive_synthesis`（統合）＋`same_condition_observation`（各層内のKPI） | **「品質を支えていたのは境界である」という排他的な因果主張はしない。** 品質を支える要素にはmodelの既定能力、TaskSpec、path別`AGENTS.md`、repository authority、fixtureと対象リポジトリの状態、executorの挙動が残る。**「評価範囲内では」が必須の限定である**（Standard14（反復適応あり）、`gpt-5.6-sol`、Codex CLI、単発作業）。**C125の正式なStandard14集約結果は`N=5`である。これとは別に、未完了の`N=100`追試poolで各case 30件まで実行され、F04の品質未達5件が観測されている（R7-13）。正式な`N=30`結果ではないが、低頻度欠陥が存在しないとはいえない** | ablation＋同条件追加反復＋holdout target＋独立再採点 |
 
 ---
@@ -479,7 +486,14 @@
 - **記録は変更しない。** 当時の対象を正しく記録したものである。本文§13で、測定時点では非公開だったこと、および移行前の履歴が公開範囲に含まれないことを明示した。
 - 3リポジトリの関係はroot `README.md`を正本とする。時間の境界は[`repository-overview.md`](repository-overview.md)の「対象リポジトリの公開移行」を正本とする。
 
-### 留保26: atomic run経路のEvaluation set identityが層Bと異なる
+### 留保26: 到達点がCandidate125からCandidate147へ移った
+
+- 本稿の到達点は系列の進行に伴い変わる。**現在の到達点はCandidate147**（`standard14_n100_evaluated / adopted / release_projected / runtime_projected`）である。
+- **Candidate125の記述を削除しない。** 30件規模poolで5件落ちた観測は、7.7節・11.5節・12.5節が依拠する「`N=5`の通過は低頻度欠陥の不在ではない」という主張の根拠である。過去の採用・投影状態も遡及変更しない。
+- 到達点の`1,400 / 1,400`は**低頻度欠陥の不在を証明しない**。本文でこの限定を明示している（R7-16）。
+- 5条件を単一互換キーで並べたことにより、5.2節・6.4節・7.4節・14節の主要数値が同一群に載った。**ただし旧v13群の数値は履歴として保持し、群をまたいだ差分を取らない。**
+
+### 留保27: atomic run経路のEvaluation set identityが層Bと異なる
 
 - 層Bのset identityは`430d1d4b…`、C125のmodel軸resultは`2096d15e…`である。これはatomic run経路でのidentity計算が異なるためであり、`evaluations/AGENTS.md`が「atomic run経路では`N`、coverage、iteration集合、計画順序、`max_workers`をrunの実効互換条件へ含めない」と定めている。同じ`the-caption-standard14-r1`だが、identity値としては別である。**この2つのidentity値を同一視しない。**
 
