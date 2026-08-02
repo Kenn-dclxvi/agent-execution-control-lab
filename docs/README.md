@@ -47,7 +47,7 @@
 | [`execution-control-measurement-report.md`](execution-control-measurement-report.md) | 研究者向けの**技術報告 第1版**（2026-08-03、14節＋要旨＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献・提供者指針を一次・補助資料として使う。**この版をもって記述を固定し、以降の測定は新しい版として追加する。** 数値と識別子は一次artifactを、主張と証拠の対応はevidence mapを正本とする。|
 | [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md) | 上記**第1版**のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保30件（外部文献への誤帰属5件の撤回を含む） |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 技術報告§12.2はこれを引用する |
-| [`why-prompt-writing-changes-your-bill.md`](why-prompt-writing-changes-your-bill.md) | **平易な説明資料**（引用なし）。0バイト条件と到達点の2条件だけで、(1)指示書を書き足すと実行トークンが`-58.5%`になり品質も上がること、(2)キャッシュ単価が1/10・出力が6倍のため金額の減少はトークンほど大きくないこと（`-38.2%`）を説明する。**金額は1つ前の版の分解値で、採点条件と実行環境の版が揃っていない。** 正本は技術報告と課金換算比較 |
+| [`why-prompt-writing-changes-your-bill.md`](why-prompt-writing-changes-your-bill.md) | **YouTube向けの平易な説明資料**（引用なし）。Freeを基準に0バイト条件と最新版だけを並べ、静的プロンプト`0 → 10,772 B`に対して実行トークン`-58.50%`、同一条件のAPI料金換算`-39.95%`、最高評価`65 / 70 → 70 / 70件`となった観測を、強い導入、一表、短い解説で説明する。 |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ### 2c. 運用・評価infra spec
