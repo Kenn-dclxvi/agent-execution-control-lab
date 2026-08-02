@@ -12,10 +12,10 @@ Candidate147を採用する。
 | --- | --- |
 | evaluation | `standard14_n100_evaluated / quality_stability_gate_passed / mechanism_gate_passed / aggregate_cost_recovered` |
 | adoption | `adopted` |
-| release | `approved` |
-| runtime projection | `not_projected` |
+| release | `projected` |
+| runtime projection | `projected` |
 
-この判断は2026-08-03のユーザーによる明示的な採用・公開依頼に基づく。一次evaluation resultに保存した当時の`adoption_not_decided`は変更しない。内容同一の[`release bundle`](../prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/README.md)を承認したが、runtime投影は別状態として未完了である。
+この判断は2026-08-03のユーザーによる明示的な採用・公開依頼に基づく。一次evaluation resultに保存した当時の`adoption_not_decided`は変更しない。内容同一の[`release bundle`](../prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/README.md)を公開版`the-caption`のPR #13で投影した。
 
 ## 採用理由
 
@@ -55,4 +55,4 @@ F06ではauthority追加readが21 / 100件に残った。発生群のtoken中央
 
 評価は`gpt-5.6-sol / medium`に固定されている。他modelやreasoning水準への採用を意味しない。
 
-採用判断後、内容同一のrelease bundleを構築して承認した。runtime投影は公開版`the-caption`のbaseline、required validation、merge結果を別に固定した後で完了状態へ更新する。
+採用判断後、内容同一のrelease bundleを構築した。公開版`the-caption`のbaseline、required validation、PR、merge結果はreleaseの[`projection.json`](../prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/projection.json)へ固定した。本番運用checkoutは今回更新していない。
