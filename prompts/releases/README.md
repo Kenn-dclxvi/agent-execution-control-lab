@@ -2,7 +2,7 @@
 
 評価済みcandidateを反映判断可能なbundleへ固定して置く。release作成だけでは採用承認またはTHE-CAPTION本体への反映を意味しない。
 
-候補125は明示承認後にTHE-CAPTIONへ投影済みである。Rating v14 Medium Standard14 N=5で70 / 70 score `4`、A02 N=20で20 / 20 score `4`かつbind後再入0件、token中央値`1,401,225`を確認した。直接のrollback identityはTHE-CAPTION commit `f12e4cc0e1d9291307a49c151e473e3bc6e92e44`である。Candidate125 N=100は後日実施予定で、現在は`planned / not_started`である。
+候補125は明示承認後にTHE-CAPTIONへ投影済みである。Rating v14 Medium Standard14 N=5で70 / 70 score `4`、A02 N=20で20 / 20 score `4`かつbind後再入0件、token中央値`1,401,225`を確認した。直接のrollback identityはTHE-CAPTION commit `f12e4cc0e1d9291307a49c151e473e3bc6e92e44`である。Candidate125 N=100追試は2026-08-01にregistered poolを各case30件まで拡張した時点でF04 score `2`を5件確認し、N=50 partial batchを中断した。これは既存projection stateを変更しない。
 
 候補81は候補125の直前投影履歴として維持する。Rating v13 Medium標準14項目N=5でquality gateとprompt stability gateを通過した評価状態を保持する。
 

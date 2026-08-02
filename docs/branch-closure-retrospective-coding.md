@@ -38,7 +38,7 @@
 各候補について、**親bundleのroot `AGENTS.md`と当該候補のroot `AGENTS.md`のunified diff**だけを入力とする。
 
 - 親identityは各候補の`manifest.json`の`content_relation.source_prompt_identity`または`baseline_prompt_identity`から取る。
-- root本文は`prompts/candidates/<identity>/files/AGENTS.md.txt`（比較元は`prompts/baselines/<identity>/files/AGENTS.md`）。
+- root本文は各bundleディレクトリ配下の`files/AGENTS.md.txt`とする。候補は`prompts/candidates/`、比較元は`prompts/baselines/`の各identityディレクトリにある。
 - rootの形式は1行1ラベルであり、diffの追加行が追加された述語に対応する。
 
 **入力に含めないもの**: 当該候補のresult、score、token、経過時間、状態、設計文書、系譜文書。
