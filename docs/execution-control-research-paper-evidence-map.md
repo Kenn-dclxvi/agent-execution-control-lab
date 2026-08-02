@@ -74,7 +74,7 @@
 | R1-1 | 3.1 | Baselineは人間の開発工程（指示書化・実装・監査・レビュー・差し戻し・完了判定・PR）を役割と関所として写している | prompt本文の工程と役割の限定列挙 | `prompts/baselines/the-caption-3ce91a4-current-r2/files/AGENTS.md.txt`（§役割・§指示書草案・§SA起動と分離・§停止と自動再修正・§完了判定・§PR作成）、`files/docs/orchestration-process.md`（§基本方針・§SA利用ケース・§自動修正ループ）、`files/prompts/{plan,implement,audit,review}.md` | Baseline bundle `63225d2d…`（19 path） | `artifact_verified` | 「工程・成果物・関所の構造を写している」まで。工程が人間の職能配分の写しであるという意図は主張できない（R1-3） | 不要 |
 | R1-2 | 3.1 | 親エージェントは実装・修正・テスト実行・監査・レビュー相当の品質確認・指示書作成を直接行わない | prompt本文の禁止列挙 | Baseline root `AGENTS.md` §役割、`orchestration-process.md` §基本方針 | 同上 | `artifact_verified` | prompt上の規定であり、tool levelの強制ではない（`orchestration-process.md` §制約が明記） | 不要 |
 | R1-3 | 3.2 | Baselineの設計記録は、この分業を「人間の組織図の写し取りではない」と明示し、AI固有の失敗様式（確証バイアス・迎合・reward hacking）へ向けた設計として7点の理由を挙げていた | 設計理由の原文 | `files/docs/prompt-guide.md` §AI最適化の設計理由 | 同上 | `historical_design_record` | 当時の設計意図の記録である。設計理由の妥当性が測定されたわけではない | 不要 |
-| R1-4 | 1.1, 3.6, 5.1, 14#1 | **研究開始前と研究開始後を分けて記述する。** 研究開始前、著者は利用経験からBaselineを初期解として扱っていた（R1-7b）。その汎用コアが公開され、運用上の観測に基づいて改訂されていたことはR1-7aで確認できる。研究開始後の初期測定では拡張12課題で`58 / 60`件が4点・2件が3点・品質中央値`100.000`だった。この測定は研究前の認識を部分的に支持したが、品質制約は満たしていない。その工程構造がAI実行として最適かは未計測だった | R1-1〜R1-3、R1-6、および当時のtoken集計がroot-onlyだった事実 | 上記＋[`v3-all-agent-token-reaccounting_2026-07-16.md`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md) | 混在（設計記録＋層A） | `interpretive_synthesis` | **「品質確保に成功」と断定しない。「当時の評価範囲では品質制約を満たしていた」とも書かない**（2件の減点があり、2.1節の「全課題で減点なし」という定義を完全には満たさない）。**さらに、研究の中で得た拡張12課題の結果を「研究開始時点で初期解と考えていた根拠」として使わない。** 研究開始前の認識（R1-7b。公開artifactと改訂履歴はR1-7a）、研究開始後の初期測定、後続評価の事実（R5-1）を分けて記述する | 文言限定（本文1.4節・要旨・5.1節・13#1で対応済み） |
+| R1-4 | 1.1, 3.6, 5.1, 14#1 | **研究開始前と研究開始後を分けて記述する。** 研究開始前、著者は利用経験からBaselineを初期解として扱っていた（R1-7b）。その汎用コアが公開され、運用上の観測に基づいて改訂されていたことはR1-7aで確認できる。研究開始後の初期測定では拡張12課題で`58 / 60`件が4点・2件が3点・品質中央値`100.000`だった。この測定は研究前の認識を部分的に支持したが、品質制約は満たしていない。その工程構造がAI実行として最適かは未計測だった | R1-1〜R1-3、R1-6、および当時のtoken集計がroot-onlyだった事実 | 上記＋[`v3-all-agent-token-reaccounting_2026-07-16.md`](../evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md) | 混在（設計記録＋層A） | `interpretive_synthesis` | **「品質確保に成功」と断定しない。「当時の評価範囲では品質制約を満たしていた」とも書かない**（2件の減点があり、2.1節の「全課題で減点なし」という定義を完全には満たさない）。**さらに、研究の中で得た拡張12課題の結果を「研究開始時点で初期解と考えていた根拠」として使わない。** 研究開始前の認識（R1-7b。公開artifactと改訂履歴はR1-7a）、研究開始後の初期測定、後続評価の事実（R5-1）を分けて記述する | 文言限定（本文1.4節・要旨・5.1節・14#1で対応済み） |
 | R1-5 | 3.5 | Baselineが守ろうとした品質責務を9項目として抽出できる | prompt本文の該当節 | Baseline root `AGENTS.md` §入力境界・§作業単位化・§停止と自動再修正・§完了判定・§出力、`orchestration-process.md` §停止条件・§各工程の確認範囲・§指摘分類、`prompts/audit.md` §指摘、`prompts/implement.md` §ルール、`prompts/review.md` §レビュー観点、`docs/prompt-guide.md` §原則 | 同上 | `interpretive_synthesis` | **本論文が本文から抽出した整理である。** Baseline作者が「9項目」と宣言した記述はなく、この9項目からStandard14を導出した履歴もない（R3-1） | 文言限定（本文1.3節で明示済み） |
 | R1-6 | 3.6 | Baselineは拡張12課題60回で score `4 / 3 = 58 / 2`、`quality_score`中央値`100.000`だった | 一次resultのscore分布 | [`baseline-control-free-repository-c35-c41-…-v9-expanded12-n5_2026-07-19.md`](../evaluations/results/baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md) | 層A（`abc7d7a9…`）、rating v9、`high` | `same_condition_observation` | この12課題・rating v9・推論`high`の範囲。標準14項目では`92.857`（R5-1） | 不要 |
 | R1-7a | 3.1, 3.4 | Baselineの汎用コアは公開リポジトリ`Kenn-dclxvi/orchestration-prompt`で管理されていた。研究Baselineのroot `AGENTS.md`は公開履歴PR #18 headの`AGENTS.md`とGit blob単位で一致する。公開リポジトリにはTHE-CAPTION向けoverlayがあり、実運用上の観測に基づく改訂履歴も保存されている | 公開repoの可視性、固定refのtree、blob SHA、PR本文、overlay READMEの照合 | [`Kenn-dclxvi/orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)（PUBLIC、2026-06-14作成）。固定ref `28fddf7d2734daeca9b9e9756159460c2ec6b09c`（PR [#18](https://github.com/Kenn-dclxvi/orchestration-prompt/pull/18) head、2026-06-28 merged）。`AGENTS.md` blob `9d70bc48adc5699f4e986f2ae9bc79dbf623f8db`（5,980 bytes）は本リポジトリのBaseline manifestの記録値と一致。`overlays/the-caption/{README.md, repo-context.md, files/AGENTS.md, files/prompts/*.md}`。PR #18本文が「プランSA…実運用ではほぼ自律起動しなかった」を変更理由として記録 | 公開repoの固定ref（`main`は参照しない） | `artifact_verified` ＋ `historical_design_record` | **公開された実在のprompt設計だった／THE-CAPTIONへの適用構造が存在した／運用上の観測を理由に改訂されていた、までが上限。** **blob一致は6 targetに限る**（`AGENTS.md`、overlay側の`prompts/{plan,implement,audit,review}.md`、`docs/prompt-guide.md`）。`docs/orchestration-process.md`は公開`22,203`bytes対Baseline`24,209`bytesで**不一致**、`docs/glossary.md`（4,086 bytes）は公開リポジトリに**存在しない**。適用は作業用クローンへ配置してから`THE-CAPTION`へマージする経路をとる。Baselineはマージ後の`THE-CAPTION@3ce91a4`から取得している。**「研究Baseline bundle全体が公開されていた」とは書かない。** 研究Baselineの正本は引き続き本リポジトリの19 path bundle（`63225d2d…`） | 不要 |
@@ -165,15 +165,15 @@
 | R8-5 | 8.5 | 量による証拠の打ち切りは成立しない。C123は正常なdetached HEADを未確定と誤分類し、C124はF04の誤停止を2件出しF02の一括取得も崩した | 一次resultとsynthesis | [synthesis](candidate81-candidate125-control-findings-synthesis.md) §7、[`candidate123-preterminal-result-round-closure-design.md`](candidate123-preterminal-result-round-closure-design.md)、[`candidate124-incomplete-content-continuation-design.md`](candidate124-incomplete-content-continuation-design.md) | 層C | `same_condition_observation`（各targeted `N=5`） | 各targeted `N=5`の観測 | 不要 |
 | R8-6 | 9.1, 9.2 | 抽象的な成果条件を採点側で特定コマンドへ具体化すると実体のない減点が出る。C71 B18のA02 score 3の4件のうち3件がこのずれだった。v13で塞ぎ、v14で`not_required_unless_model_visible`として明文化した。同型の事例がClick側でも1件（A01の`resilient_parsing`字句監査で4件） | 個別事例の分析と契約本文 | [`a02-rating-divergence.md`](a02-rating-divergence.md)、[C69 / C71 B18 result](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)、[`v14`](../evaluations/rating-contracts/outcome-terminal-state-evidence-owner-diagnostic-v14.json)、[Click C125 result](../evaluations/targets/click/results/click-c125-reasoning-medium-standard14-r2-n5-cli0146_2026-07-31.md) | B18はv12。Clickは別instance・別rating | `artifact_verified`（契約本文）＋`same_condition_observation`（事例）＋`interpretive_synthesis`（偏りの方向） | 「この偏りは効率化された側を不利にする方向を持つ」は2事例からの解釈である。偏りの大きさは定量化していない | 不要 |
 | R8-7 | 8（冒頭） | 失敗候補を直系継承せず、最後に成立した親（C122）へ戻して成功predicateだけを別軸で再検証した | manifestの`baseline_identity`と系譜 | `the-caption-3ce91a4-criterion-complete-single-target-continuation-r1/manifest.json`（`baseline_identity` = C122）、[synthesis](candidate81-candidate125-control-findings-synthesis.md) 設計原則8 | bundle実体 | `artifact_verified`（系譜）＋`historical_design_record`（方針） | **「指示書の中身と同じくらい結果に効いた」とは書けない。** 直系継承した場合との比較を測っていない。「系列管理上の採用方針になった」までに限定する | 文言限定（本文8.7で修正済み） |
-| R8-8 | 9.1, 14 | B18（v12）の当時の分類「C71はC69比で実質的な低得点が3件多い」は、現在の解釈では維持されない。**C69の実質欠落1件もC71の3件と同じ`git diff --check`未実行であり、v13解釈では両者ともこの分が「要求と採点のずれ」へ再分類される。** 提示条件に照らした実質的な低下として残るのはC71のA01 1件だけである | B18 resultの意味確認表と後続の個別事例分析 | [B18 result](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)（C69 A02 実質欠落1件・C71 A02 実質欠落3件がいずれも`git diff --check`未実行）、[`a02-rating-divergence.md`](a02-rating-divergence.md)（3件は「本物の品質低下とは言えない」） | B18はv12。再分類はv13解釈の適用 | `artifact_verified`（両resultの失敗内容の一致）＋`interpretive_synthesis`（v13解釈の遡及適用） | **当時の判定と保存済みresultはin-placeで書き換えない。** C71の評価状態は`standard14_b18_evaluated / stopped`のまま、release artifactの未解決risk 2件も保持する。**補正後に残る差はC71のA01 1件である。これは効率改善と同時に観測された低頻度の品質未達の一観測ではあるが、1件だけから一般的な品質・効率トレードオフを確立するものではない。** 「C71は1,260回で実質欠落が`+3`件」と書かない。**なお「本研究は効率改善が品質低下を伴った比較を確立していない」とも書かない**（C33が同一条件内の反例。R11-4） | 文言限定（本文8.6・13#9で対応済み） |
+| R8-8 | 9.1, 14 | B18（v12）の当時の分類「C71はC69比で実質的な低得点が3件多い」は、現在の解釈では維持されない。**C69の実質欠落1件もC71の3件と同じ`git diff --check`未実行であり、v13解釈では両者ともこの分が「要求と採点のずれ」へ再分類される。** 提示条件に照らした実質的な低下として残るのはC71のA01 1件だけである | B18 resultの意味確認表と後続の個別事例分析 | [B18 result](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)（C69 A02 実質欠落1件・C71 A02 実質欠落3件がいずれも`git diff --check`未実行）、[`a02-rating-divergence.md`](a02-rating-divergence.md)（3件は「本物の品質低下とは言えない」） | B18はv12。再分類はv13解釈の適用 | `artifact_verified`（両resultの失敗内容の一致）＋`interpretive_synthesis`（v13解釈の遡及適用） | **当時の判定と保存済みresultはin-placeで書き換えない。** C71の評価状態は`standard14_b18_evaluated / stopped`のまま、release artifactの未解決risk 2件も保持する。**補正後に残る差はC71のA01 1件である。これは効率改善と同時に観測された低頻度の品質未達の一観測ではあるが、1件だけから一般的な品質・効率トレードオフを確立するものではない。** 「C71は1,260回で実質欠落が`+3`件」と書かない。**なお「本研究は効率改善が品質低下を伴った比較を確立していない」とも書かない**（C33が同一条件内の反例。R11-4） | 文言限定（本文8.6・14#9で対応済み） |
 
 ### 2.9 第9節 後続設計
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | R9-1 | —（本文から削除） | C81以降の系列は**7つ**の軸へ分解された探索として読める | synthesisの系列見取り図と各result | [synthesis](candidate81-candidate125-control-findings-synthesis.md) §系列全体の見取り図、[`candidate-history.md`](candidate-history.md) | 層C | `interpretive_synthesis` | 軸の分類は本論文とsynthesisの整理である。番号順の系譜ではないことはmanifestの`baseline_identity`から確認できる | 不要 |
-| R9-2 | 7.7 | C125は現在の設計到達点であり終点ではない。Standard14 B20未実施、**`N=100`追試は実施され`n100_execution_stopped`で停止（pool 30件/caseでF04にscore `2`が5件）**、一次結果は`adoption_not_decided`で、別状態として`adopted / release_projected / runtime_projected`が記録されている | resultのstatus、synthesis、採用判断 | [C125 result](../evaluations/results/candidate118-candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md) §結論のstatus列、[synthesis](candidate81-candidate125-control-findings-synthesis.md) §現在状態と残るrisk、[`candidate125-adoption-decision.md`](candidate125-adoption-decision.md) | 層C | `artifact_verified` | 状態の記述。**採用は`N=5`通過を長期安定性の確定として扱ったものではない。またC125を「成立した設計」として記述しない**（R9-4） | 同条件追加反復（B20） |
-| R9-3 | 12 | 現在残るriskは、C125 B20未実施、**`N=100`追試の停止とF04の未解決残余欠陥**、Terra / Luna未採用、`CONTEXT`・`RECOVERY`ペンディング、部分曖昧・長期タスク未着手、model / CLI更新時の再測定範囲未着手、Claude Code CLI系列保留である | backlogとsynthesisの状態表 | [`research-backlog.md`](research-backlog.md) §状況サマリー、[synthesis](candidate81-candidate125-control-findings-synthesis.md) §現在状態と残るrisk | — | `artifact_verified` | 記録された状態の列挙 | 不要 |
+| R9-2 | 7.7 | C125は現在の設計到達点であり終点ではない。Standard14 B20未実施、**`N=100`追試は実施され`n100_execution_stopped`で停止（pool 30件/caseでF04にscore `2`が5件）**、一次結果は`adoption_not_decided`で、別状態として`adopted / release_projected / runtime_projected`が記録されている | resultのstatus、synthesis、採用判断 | [C125 result](../evaluations/results/candidate118-candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md) §結論のstatus列、[synthesis](candidate81-candidate125-control-findings-synthesis.md) §現在状態と残るrisk、[`candidate125-adoption-decision.md`](candidate125-adoption-decision.md)、[C125 N=100追試停止result](../evaluations/results/candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n100-stopped-at-pool-n30-cli0146_2026-08-01.md) | 層C | `artifact_verified` | 状態の記述。**採用は`N=5`通過を長期安定性の確定として扱ったものではない。またC125を「成立した設計」として記述しない**（R9-4） | 同条件追加反復（B20） |
+| R9-3 | 12 | 現在残るriskは、C125 B20未実施、**`N=100`追試の停止とF04の未解決残余欠陥**、Terra / Luna未採用、`CONTEXT`・`RECOVERY`ペンディング、部分曖昧・長期タスク未着手、model / CLI更新時の再測定範囲未着手、Claude Code CLI系列保留である | backlogとsynthesisの状態表 |[C125 N=100追試停止result](../evaluations/results/candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n100-stopped-at-pool-n30-cli0146_2026-08-01.md)、[`research-backlog.md`](research-backlog.md) §状況サマリー、[synthesis](candidate81-candidate125-control-findings-synthesis.md) §現在状態と残るrisk | — | `artifact_verified` | 記録された状態の列挙 | 不要 |
 | R9-4 | 7.7, 12.5, 14#10 | C125の`N=100`追試は2026-08-01に実施され完了しなかった。pool各case 30件（計420 run）でF04にscore `2`を5件確認し、N=50 batchを中断した。全体`415 / 420`、F04`25 / 5`、他13 case`390 / 0`。失敗経路は共通で、証拠は足りていたが、正しい変更と開始状態に存在しない値を前提とする不要な変更を同一patchへ入れpreimage不一致で失敗した。後続候補C126はF04 `N=5`で`4 / 2 = 3 / 2`となり停止（誤patchは`0 / 5`へ消えたが誤停止が2件） | 追試resultのpool分布・失敗経路分析、後続候補result | [`C125 N=100追試停止結果`](../evaluations/results/candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n100-stopped-at-pool-n30-cli0146_2026-08-01.md)、[`C125 / C126 F04 targeted結果`](../evaluations/results/candidate125-candidate126-criterion-bound-change-input-v14-medium-f04-atomic-n20-cli0146_2026-08-01.md) | 層C（atomic pool `9437d24c…`。prompt / set / case / fixture / TaskSpec / rating / model / reasoning / runtime / CLI / permission / executor / token accountingをrun単位で固定。`N`・iteration集合・coverage・計画順序はexecution provenanceへ分離） | `same_condition_observation` | **正式な`N=30 result`ではない**（case別30件を固定するselection receiptと集約analysisを作成していないため、pool member数として報告する）。中断したN=50 batchの54 attemptは分布・pool countへ含めない。**C125の既存`adopted / release_projected / runtime_projected` stateをこの結果で履歴上書きしない。** 原因はmodel-visibleな判断の誤りであり、executor変更を解決策にしない | 同条件追加反復（正式な`N=30` / `N=100` selectionの作成） |
 
 ### 2.10 第10節 modelおよびtargetへの依存
@@ -200,7 +200,7 @@
 | R11-7 | 11.5 | 制御はmodelと実行環境へ強く結合しており、CLI版更新で比較が失効し、model変更で品質とコストが維持されなかった。B20の概算は1条件約`$311`、2条件約`$622` | R10-2、R10-5、換算単価による外挿 | [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md)、[`research-backlog.md`](research-backlog.md) §12 | — | `descriptive_cross_layer`（結合の観測）＋`derived_arithmetic`（費用外挿） | 金額は換算値の線形外挿で、実測でも実請求額でもない。人間の時間を含まない | 不要 |
 | R11-8 | —（補助指標の節は本文から削除） | 料金換算では14課題×5回ぶんがBaseline `$91.6701`、0バイト対照`$25.1562`、C125 Sol `$15.5472`、Terra `$6.5447`、Luna `$0.9571`。同一互換キーで成立する比較はBaselineと0バイト対照（`3.64倍`）だけである | 換算の集計と単価、各条件の互換条件 | [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md)、各一次resultのtoken内訳 | Baselineと0バイト対照はv13 / CLI `0.144.0`（同一key）。C125系はv14 / `0.146.0` | `same_condition_observation`（`3.64倍`）＋`descriptive_cross_layer`（他の行） | **補助指標であり研究の指標ではない。** C125の`0.62倍`（`-38.20%`）を制御による費用削減として読まない。単価に依存し実請求額でもない | 同条件追加反復（v14 / CLI `0.146.0`での0バイト対照） |
 | R11-9 | 11.6 | 移行の設計指針を「書き換える／先に書く／書かない／削らない」の4区分で整理した表。各行はR6-*・R7-*・R8-*・R11-4の既存Claimの再掲であり、新しい主張を追加しない | 参照先Claimの一次result | 各行の根拠列に示した節（6、7.2、7.4a〜7.4e、8.1〜8.5、11.4、4.6、10.1、10.2） | 各行の根拠Claimに従う（同一比較ではない） | `interpretive_synthesis`（4区分への分類と実務向けの言い換え） | **一般的な設計原則としては提示できない。** 単一対象・単一モデル系列・14課題の範囲で、各行の根拠となった比較が保存されているという意味の指針にとどまる。単文ablationがないため個々の記述の寄与は分離していない。**指示書の内容単独の指針ではなく、指示書とモデルの組についての観測である**（R10-1）。表内の率は互換キーが異なるため行間で大小比較できない（R7-1） | ablation（原因性を主張する場合）／別model・CLI（組への依存を外す場合） |
-| R12-2b | 12.2 | 保存済みdiff 124件の事後符号化により、(i)軸が実行経路を閉じる述語と往復を閉じる述語の2操作を含み往復側は成立後にのみ現れる（0 / 33 対 33 / 91）、(ii)判定が符号化者に依存する（同一人物で33件中9件、規則との一致29 / 33）、(iii)経路を閉じた48件中37件が停止した | root `AGENTS.md`の親子diffと候補indexの状態 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md)、`prompts/candidates/*/files/AGENTS.md.txt`、`prompts/candidates/*/manifest.json` | 対象外（promptのみを入力とし、KPIを結果変数にしていない） | `artifact_verified`（diffと区間分割）＋`interpretive_synthesis`（符号化） | **軸の妥当性の検証ではない。** 符号化者は盲検ではなく、約15件のKPIを既知である。**成立前区間を独立検証群として使う設計は完了していない**（候補indexの状態語彙が区間で異なり、成立前33件に`stopped`が0件）。停止率の差を因果として読めない（停止理由が機械可読でなく、区間で問題の難度も異なる） | 対象外（保存済みデータでは独立検証群の検定が成立しない。第4節の留保22） |
+| R12-2b | 12.2 | 保存済みdiff 124件の事後符号化により、(i)軸が実行経路を閉じる述語と往復を閉じる述語の2操作を含み往復側は成立後にのみ現れる（0 / 33 対 33 / 91）、(ii)判定が符号化者に依存する（同一人物で33件中9件、規則との一致29 / 33）、(iii)経路を閉じた48件中37件が停止した | root `AGENTS.md`の親子diffと候補indexの状態 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md)、各候補bundleの`files/AGENTS.md.txt`と`manifest.json`（`prompts/candidates/`配下） | 対象外（promptのみを入力とし、KPIを結果変数にしていない） | `artifact_verified`（diffと区間分割）＋`interpretive_synthesis`（符号化） | **軸の妥当性の検証ではない。** 符号化者は盲検ではなく、約15件のKPIを既知である。**成立前区間を独立検証群として使う設計は完了していない**（候補indexの状態語彙が区間で異なり、成立前33件に`stopped`が0件）。停止率の差を因果として読めない（停止理由が機械可読でなく、区間で問題の難度も異なる） | 対象外（保存済みデータでは独立検証群の検定が成立しない。第4節の留保23） |
 
 ### 2.12 第12節 限界
 
@@ -208,7 +208,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | R12-1 | 12.1 | Standard14は候補の生成・選別に繰り返し使ってきた課題集合であり、C125の`70 / 70`は未使用課題による独立確認ではない。Clickも独立な外部検証集合ではない | 基盤規則と設計利用の記録 | [`evaluations/cases/README.md`](../evaluations/cases/README.md)、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)（「tuningに使ったcaseを同一revisionのheld-out evidenceとして扱わない」）、[`click-c81-medium-residual-analysis.md`](click-c81-medium-residual-analysis.md) | — | `protocol_defined`＋`artifact_verified` | 反復適応を除外できないことの記述 | holdout target |
 | R12-2 | 12.6 | 主targetは非公開1件、公開targetは`pallets/click` 1件で、後者では14課題全体の成功が成立していない | 各resultのtarget欄、R10-4 | 各result §固定条件、[`evaluations/targets/README.md`](../evaluations/targets/README.md) | — | `artifact_verified` | 測定範囲の記述 | holdout target |
-| R12-3 | 12.5 | 最大反復は1,400回（B20）。C125はB20未実施。`N=100`追試は実施され30件/caseで停止した。`70 / 70`（`N=5`）はC95がB20で落ちた事例と同じ証拠水準にあり、**実際に同型の現象がC125自身で起きた**（R9-4） | B20 resultとC125 resultのstatus | [B20 result](../evaluations/results/candidate81-candidate95-required-judgment-owner-boundary-v14-medium-standard14-continuous-n5-b20-cli0146_2026-07-30.md)、[C125 result](../evaluations/results/candidate118-candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[synthesis](candidate81-candidate125-control-findings-synthesis.md) | 層C | `artifact_verified` | 証拠量の記述。C81のB20で代替しない | 同条件追加反復 |
+| R12-3 | 12.5 | 最大反復は1,400回（B20）。C125はB20未実施。`N=100`追試は実施され30件/caseで停止した。`70 / 70`（`N=5`）はC95がB20で落ちた事例と同じ証拠水準にあり、**実際に同型の現象がC125自身で起きた**（R9-4） | B20 resultとC125 resultのstatus | [B20 result](../evaluations/results/candidate81-candidate95-required-judgment-owner-boundary-v14-medium-standard14-continuous-n5-b20-cli0146_2026-07-30.md)、[C125 result](../evaluations/results/candidate118-candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[synthesis](candidate81-candidate125-control-findings-synthesis.md)、[C125 N=100追試停止result](../evaluations/results/candidate125-criterion-complete-single-target-continuation-v14-medium-standard14-atomic-reuse-n100-stopped-at-pool-n30-cli0146_2026-08-01.md) | 層C | `artifact_verified` | 証拠量の記述。C81のB20で代替しない | 同条件追加反復 |
 | R12-4 | 12.6 | 14課題はすべて単発で、部分的に曖昧な長期作業のcaseもevaluation setも存在しない。この未測定領域は実務利用（対話形態）に当たる | 該当caseの不存在とbacklogの記述 | [`research-backlog.md`](research-backlog.md) §11 | — | `unverified` | 未測定であることの記述 | 新case family |
 | R12-6 | 12.5 | 信頼区間、課題ブロック考慮の効果量、課題別の反復分布は算出していない。検定を適用したのはB20規模のC81 / C95比較だけである | 各resultの統計記述 | 各result（検定はB20 resultのみ）、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md) | — | `artifact_verified` | 統計処理の範囲の記述 | 既存データ再解析（保存済みiteration値からの区間推定） |
 | R12-7 | 12.3 | 採点は独立した盲検の第三者ではなく、固定契約による監査である | 基盤規則と各resultの採点記述 | [`evaluations/cases/README.md`](../evaluations/cases/README.md) §採点、各result（「採点は独立blind quality raterによるものではない」） | — | `protocol_defined` | 採点方式の記述。契約欠陥の実例はR8-6 | 独立再採点 |
@@ -224,7 +224,7 @@
 
 | Claim ID | 論文節 | 主張 | 必要な証拠 | 一次資料 | compatibility key／条件 | 証拠水準 | 現状の表現上限 | 再検証 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| R13-1 | 14 | 観測した評価範囲では、擬人的な工程仕様全体を保持しないbundleでも品質制約を満たした。品質制約を維持しながら**all-agent token**を小さくした候補に共通していたのは、仕様・証拠・実装・検証・停止を実行時に観測可能な条件として表した境界である。`elapsed_seconds`はこの主張へ含めない | R5-*、R6-*、R7-*、R8-*の統合 | 上記すべて | 複数層（連結しない） | `interpretive_synthesis`（統合）＋`same_condition_observation`（各層内のKPI） | **「品質を支えていたのは境界である」という排他的な因果主張はしない。** 品質を支える要素にはmodelの既定能力、TaskSpec、path別`AGENTS.md`、repository authority、fixtureと対象リポジトリの状態、executorの挙動が残る。**「評価範囲内では」が必須の限定である**（Standard14（反復適応あり）、`gpt-5.6-sol`、Codex CLI、単発作業、C125は最大`N=5`） | ablation＋同条件追加反復＋holdout target＋独立再採点 |
+| R13-1 | 14 | 観測した評価範囲では、擬人的な工程仕様全体を保持しないbundleでも品質制約を満たした。品質制約を維持しながら**all-agent token**を小さくした候補に共通していたのは、仕様・証拠・実装・検証・停止を実行時に観測可能な条件として表した境界である。`elapsed_seconds`はこの主張へ含めない | R5-*、R6-*、R7-*、R8-*の統合 | 上記すべて | 複数層（連結しない） | `interpretive_synthesis`（統合）＋`same_condition_observation`（各層内のKPI） | **「品質を支えていたのは境界である」という排他的な因果主張はしない。** 品質を支える要素にはmodelの既定能力、TaskSpec、path別`AGENTS.md`、repository authority、fixtureと対象リポジトリの状態、executorの挙動が残る。**「評価範囲内では」が必須の限定である**（Standard14（反復適応あり）、`gpt-5.6-sol`、Codex CLI、単発作業）。**C125の正式なStandard14集約結果は`N=5`である。これとは別に、未完了の`N=100`追試poolで各case 30件まで実行され、F04の品質未達5件が観測されている（R7-13）。正式な`N=30`結果ではないが、低頻度欠陥が存在しないとはいえない** | ablation＋同条件追加反復＋holdout target＋独立再採点 |
 
 ---
 
@@ -234,7 +234,7 @@
 
 | # | 接続したい主張 | 現在言えること | 不足している証拠 | 再検証分類 | 概算規模 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | C125の`70 / 70`は長期的にも安定である | `N=5`で70 / 70。同じ証拠水準のC95はB20で2件落ちた | 1,400回規模の反復 | 同条件追加反復 | 標準14項目B20、1条件1,400回、換算約`$311` |
+| 1 | C125の失敗頻度と参照条件との差を正式に評価できる | **低頻度欠陥の有無は既に判明している。** 正式な集約は`N=5`で`70 / 70`だが、未完了の`N=100`追試poolで各case 30件まで実行され、F04で品質未達5件が観測された（正式な`N=30`結果ではない）。同じ証拠水準のC95はB20で2件落ちた | 比較条件を正式に固定したうえでの失敗頻度の推定と、参照候補との差の評価 | 同条件追加反復 | 標準14項目B20、1条件1,400回、換算約`$311` |
 | 2 | 品質境界を閉じたうえで費用も下げた | v13 / CLI `0.144.0`の0バイト対照と、v14 / `0.146.0`のC125の換算額を並置できるだけ | 同一互換キーでの0バイト対照 | 同条件追加反復 | 標準14項目`N=5`、70回、換算約`$16`相当 |
 | 3 | 各境界は単独で必要である／境界集合が最小である | 版と版の差までしか言えない | 境界ごとの除去条件。**何をablationするかを先に定義する必要がある**（9ファミリー＝630 run、C81以降の寄与7件＝490 run、13 label＝910 run。複数の制御を同じlabelへ統合しているため、単純なlabel単位ablationが妥当かも別途定義が必要） | ablation | 定義次第で490〜910 run |
 | 4 | 境界を閉じる順序に必要性がある | 実際に開発が進んだ順序である | 順序入れ替え条件、同時追加条件 | ablation | 条件数に比例 |
@@ -364,13 +364,13 @@
 
 - 研究の経緯は「(1) Baselineが到達点として先に存在 → (2) AI実行として最適かという疑問 → (3) 評価基盤と評価課題集合の構築 → (4) 初期測定」の順である。
 - したがって**研究の中で得た拡張12課題の結果（`58 / 60`）を、研究開始時点でBaselineを初期解と考えていた根拠として使えない**。研究開始前の初期解という認識の根拠は著者提供の利用経験（R1-7b）である。公開artifactと改訂履歴はR1-7aが支えるが、**利用規模と成果は支えない**。
-- 仮組みでは要旨・1.4節・5.1節・13#1をすべて「研究開始前の認識」「研究開始後の初期測定」の二段へ統一した。12.4節の「このリポジトリの実務利用は対話形態」も著者提供前提である旨を明示した（R1-4、R1-7）。
+- 仮組みでは要旨・1.4節・5.1節・14#1をすべて「研究開始前の認識」「研究開始後の初期測定」の二段へ統一した。12.4節の「このリポジトリの実務利用は対話形態」も著者提供前提である旨を明示した（R1-4、R1-7）。
 
 ### 留保14: C125の`N=5`結果は30件規模で否定された
 
 - 仮組みの初版はC125を「現在の設計到達点」とし、残riskをB20未実施と`N=100`未着手だけとしていた。**2026-08-01に`N=100`追試が実施され、pool 30件/caseでF04にscore `2`が5件出て停止した。**
-- したがって「F04の誤停止を解消した」「70 / 70」は`N=5`の範囲に限る記述であり、**低頻度欠陥の不在を意味しない**。本文7.4(7)・9.2・9.4・12.3・13#13へ反映した（R9-4）。
-- 皮肉な整合として、本文が5.2節・12.3節で述べていた「`N=5`の通過は長期安定性ではない」という主張が、**C125自身の系列で実証された**。論証はこの結果で弱まらない。
+- したがって「F04の誤停止を解消した」「70 / 70」は`N=5`の範囲に限る記述であり、**低頻度欠陥の不在を意味しない**。本文の1.6節・7.7節・11.5節・12.5節・14節#10へ反映した（R9-4）。
+- 皮肉な整合として、本文が7.7節・12.5節で述べていた「`N=5`の通過は長期安定性ではない」という主張が、**C125自身の系列で実証された**。論証はこの結果で弱まらない。
 - **過去の判定と保存済みresultはin-placeで変更していない。** C125の`adopted / release_projected / runtime_projected`は追試結果で履歴上書きしない。
 
 ### 留保15: 中心問いを「Baselineの品質の維持」として定義しない
@@ -425,7 +425,40 @@
 - 表内の率は互換キーが異なる比較から集めているため、**行間で大小を比較できない**（留保：R7-1と同じ制約）。
 - 10.1節の結果により、この指針は指示書の内容単独に属さない。**指示書とモデルの組についての観測である。**
 
-### 留保22: 事後符号化は§12.2の限界を解消していない
+### 留保22: 経過時間と中心結論の表現を本文で引き下げた
+
+外部査読で、研究者向け草稿への整形時に本文がevidence mapの表現上限を越えていることが指摘され、次を訂正した。
+
+| 越えていた記述 | 訂正後 |
+| --- | --- |
+| 18束の方向一致に符号確率`2^-18`を当てていた | **削除した。** 一次結果が記録しているのは「18 / 18 Batchで中央値が小さかった」という事実だけで、確率計算はしていない。実行順のランダム化・交互配置がなく、束間独立性も等確率も確認していないため推測統計を当てない |
+| 経過時間の差の「向き」をKPIとして読む | **同条件比較における記述として読む**へ引き下げた。追加検証の優先度を決める診断値とする |
+| 「直列実行ではtoken増・時間減が成立する機序がない」 | **削除した。** input構成の変化、提供側の処理速度、tool I/Oや待ち時間など、本研究が計装していない要因で起こり得る。本文自身がC116→C118で機序を特定できていないと認めている |
+| 「品質を支えていたのは……観測可能な実行境界である」（結論4と最終文） | **R13-1の禁止に反していた。** 「借りた枠組み全体を保持しなくても品質制約は満たせた」「共通していたのは……構造だった」へ引き下げ、モデルの既定能力・TaskSpec・path別`AGENTS.md`・repository authority・fixture・executor挙動が残ることを明記した |
+| 「効率を決めるのは……分岐を1つ閉じているか」（1.5節と結論5） | **解釈軸**へ引き下げた。留保23の事後符号化（2類型の混在、判定者依存、非十分性）と両立しない断定だった |
+| 「1文がモデルの分岐を1つ増減させ、子セッションの起動を1体増減させる」 | 一対一対応は測っていない。**確率を変え得るという記述**へ改めた |
+
+**経過時間の位置づけは変えていない。** 統制しないことは設計上の選択であり（KPIではなく指標として観測する）、統制の失敗としては記述しない。訂正したのは、統制していない量の向きをpromptの因果効果として読んでいた点である。
+
+**第2回の査読で、同じ意味の主張が別節に残っていることが指摘された。** 文言を消しても機構主張が残っていたため、次を追加で訂正した。
+
+| 残っていた記述 | 訂正後 |
+| --- | --- |
+| 「作業仮説は……部分的に支持される」（4.3節） | 「記述的に整合する結果が観測された」 |
+| 「両指標が同方向なら整合として読む」（4.3節） | 「同方向・逆方向のいずれも追加調査の手掛かりとして記録する」 |
+| 「経過時間は直列の往復回数に、tokenは……総量に対応する。両者の乖離は経路のどこが変わったかを示す」（4.3節） | **削除。** 「乖離は未計装の要因を含む追加調査の対象として記録する。経過時間の内訳を観測していないため機序を特定しない」 |
+| 「通常の機序は並列化」（7.4d節） | 「あり得る複数の説明の一つ」へ |
+| 「経過時間の増加は発行順を固定したことに対応する」（4.3節） | 「発行順の固定と経過時間の増加が同時に観測された。因果として帰属しない」 |
+| 「差の向きは……指標としてそのまま使う」（12.4節） | 「記述的な共変動であり、そこから実行経路の機序を読まない」 |
+| 「所要時間の向きは……確認している」（12.7節） | 「記述的に整合する共変動を観測している」 |
+| 「その記述が実行経路の分岐を1つ閉じているかで効果が決まる」（7.5節） | **解釈軸へ。** 判定基準の再現性・十分条件性・因果的決定因子であることのいずれも確認していないことを明記 |
+| 「分岐を1つ閉じる記述は実行量を下げた」（11.6節） | 「本系列でtoken低下と同時に観測された記述」へ。同時観測であり単独の因果効果ではないと明記 |
+| 「Lullaらの設定では事実の記述が探索を代替した」（7.5節） | 同論文は探索削減を**説明仮説**として挙げ、execution traceによる確認を将来課題としている。「異なる研究で同じ機構が独立に観測された」とは扱わない |
+| 「本研究が示せたのは、どの記述が実行経路の何を変えたかまで」（14節） | 「どの候補差分と、どの品質・token・実行経路の変化が同時に観測されたかまで」へ。単文ablationを実施していないことと矛盾していた |
+| 「非比例かつ不連続に動く」（1.2節） | 「非比例・離散的に変化する場合がある」へ |
+| 結論4の参照先「11.4節、12.6節」 | 単独因果・最小性の参照先として不適当。「1.6節、12.2節」へ |
+
+### 留保23: 事後符号化は§12.2の限界を解消していない
 
 - [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md)は、§12.2の構造的限界を**解消していない**。到達したのは限界の所在の具体化である。
 - 符号化中に、事前固定した基準では判定できない区別が2つ現れ、全件へ一律に適用した（実行経路と往復の分離、候補単位への集約規則）。**基準は結果参照前に固定したが、無修正では通らなかった。**
@@ -433,7 +466,7 @@
 - 語彙ベースの機械判定は否定表現（「停止理由にしない」）と既存述語の再表現を読めず、`closed`を過大に判定する方向の誤りを持つ。
 - **成立前区間を独立検証群として使う設計は成立しない。** 候補indexの状態語彙が研究途中で変わり、成立前33件には`stopped`が0件しかない。さらに全resultを走査すると、成立前で「閉じていない」と符号化された14件のうち親と同一互換条件の比較が保存されているのは5件だけで、欠落は「閉じていない」側へ偏る。**追加作業では回復できない構造上の制約であり、未実施の残作業ではない。**
 
-### 留保23: atomic run経路のEvaluation set identityが層Bと異なる
+### 留保24: atomic run経路のEvaluation set identityが層Bと異なる
 
 - 層Bのset identityは`430d1d4b…`、C125のmodel軸resultは`2096d15e…`である。これはatomic run経路でのidentity計算が異なるためであり、`evaluations/AGENTS.md`が「atomic run経路では`N`、coverage、iteration集合、計画順序、`max_workers`をrunの実効互換条件へ含めない」と定めている。同じ`the-caption-standard14-r1`だが、identity値としては別である。**この2つのidentity値を同一視しない。**
 
