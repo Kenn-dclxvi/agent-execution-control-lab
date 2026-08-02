@@ -291,3 +291,7 @@ candidate1も[`candidate1-expanded12-global-m24-n1-r1.json`](candidate1-expanded
 v2の新しい比較は、winnerやKPI優先順位を持たない新revisionを作り、実行前に`N`を固定する。v3ではA / B pairをprofile identityにせず、1 prompt set単位でprofileを固定する。
 
 expanded profileにF09 r1とF10 review r1はexecution blockerのため含めない。
+
+[`Baseline Rating v14 Medium Standard14 N=5`](baseline-current-r2-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)と[`ControlFreeRepository Rating v14 Medium Standard14 N=5`](control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)は、Candidate147の同条件profileからprompt identityだけを替えた。Evaluation set、全case revision、fixture、TaskSpec、Rating v14、model、reasoning、Agent / runtime / CLI、permission、executor挙動、`M=24`、token accountingを一致させた。[result](../results/baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)は両条件の各70 runをappend-only登録した。
+
+[`Candidate43 Rating v14 Medium Standard14 N=5`](candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)と[`Candidate71 Rating v14 Medium Standard14 N=5`](candidate71-validation-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)も、Candidate147の同条件profileからprompt identityだけを替えた。[result](../results/candidate43-candidate71-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)は両条件の各70 runをappend-only登録し、全140件がscore `4`だった。
