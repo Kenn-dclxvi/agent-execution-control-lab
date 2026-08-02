@@ -69,7 +69,8 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
 | [`docs/execution-control-research-paper.md`](docs/execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針との対照 |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
-| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate103までの系譜と知見 |
+| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate147までの系譜と知見 |
+| [`docs/candidate125-candidate147-control-findings-synthesis.md`](docs/candidate125-candidate147-control-findings-synthesis.md) | Candidate125のN拡張停止からCandidate147のN=100採用までの因果系列と統合知見 |
 | [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
 | [`docs/repository-contract.md`](docs/repository-contract.md) | 運用境界の正本 |
 | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |
