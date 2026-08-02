@@ -5,9 +5,9 @@
 > [!IMPORTANT]
 > **版**: **第1版（2026-08-03）。** 本稿はこの版をもって記述を固定する。以降の測定で内容が変わる場合は、この版を書き換えず新しい版として追加する。
 >
-> **位置付け**: 研究者向けの技術報告である。既存の[`execution-control-research-paper.md`](execution-control-research-paper.md)（第3版総説、2026-07-31時点）とは別の文書であり、置き換えるものではない。同文書は変更しない。**数値と識別子は、本稿がリンクする一次artifactを正本とする。**
+> **位置付け**: 研究者向けの技術報告である。**数値と識別子は、本稿がリンクする一次artifactを正本とする。**
 >
-> **主張と証拠の対応**: [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md)を正本とする（付録D）。本文にClaim IDは置かない。同文書の`論文節`列は2026-08-01に本稿の現行14節構成へ振り直してある。本稿から削除された節に対応するClaimは`—`である。
+> **主張と証拠の対応**: [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md)を正本とする（付録D）。**本文の記述の限界は、本文ではなく同文書の「現状の表現上限」列を正とする。** 本文にClaim IDは置かない。
 >
 > **測定範囲**: 2026-08-03時点。候補はC1〜C147、主要比較は採点契約v14・実行環境`0.146.0`・推論`medium`・14課題である。**この範囲の外側は本稿の主張に含まれない。**
 >
