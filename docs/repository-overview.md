@@ -113,7 +113,7 @@ bundle 124件はすべてcandidate index（[`prompts/candidates/README.md`](../p
 | **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate81** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)、直前投影からroot `AGENTS.md`一つ） |
 
-現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81 → Candidate125の順に積み上げたreleaseです。直近のCandidate125は、一つのeditable targetが全未解決変更criterionを所有する場合に限定して、同じtargetへのcriterion-complete continuationを一度許可します。Candidate125 N=100は後日実施予定であり、投影状態とは分離して`planned / not_started`です。C41・C43・C71・C81は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
+現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81 → Candidate125の順に積み上げたreleaseです。直近のCandidate125は、一つのeditable targetが全未解決変更criterionを所有する場合に限定して、同じtargetへのcriterion-complete continuationを一度許可します。Candidate125 N=100追試は投影状態と分離して実施し、registered poolを各case30件まで拡張した時点でF04 score `2`を5件確認して停止しました。N=30 selection resultは未作成です。C41・C43・C71・C81は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 

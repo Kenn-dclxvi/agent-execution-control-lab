@@ -181,7 +181,7 @@ Candidate121、Candidate123、Candidate124の失敗規則を積み重ねず、�
 - Candidate125 Solは`adopted / release_projected / runtime_projected`である。
 - Candidate81は直前の投影履歴とStandard14 B20長期stability evidenceとして保持する。
 - Candidate125 Standard14 B20は未実施である。Candidate81のB20で代替しない。
-- Candidate125 N=100は`planned / not_started`である。
+- Candidate125 N=100追試は2026-08-01にregistered poolを各case30件まで拡張し、F04 score `2`を5件確認して停止した。N=30 selection resultは未作成で、N=50 partial batchは未採点・未登録である。
 - Candidate125 Terra / LunaはN=5評価済みだが未採用である。
 - 外部executor対応は、このrepositoryのprompt Candidate、backlog、再開条件へ含めない。
 
