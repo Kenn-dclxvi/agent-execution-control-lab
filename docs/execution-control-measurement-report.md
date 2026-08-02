@@ -7,7 +7,7 @@
 >
 > **位置付け**: 研究者向けの技術報告である。**数値と識別子は、本稿がリンクする一次artifactを正本とする。**
 >
-> **主張と証拠の対応**: [`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md)を正本とする（付録D）。**本文の記述の限界は、本文ではなく同文書の「現状の表現上限」列を正とする。** 本文にClaim IDは置かない。
+> **主張と証拠の対応**: [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md)を正本とする（付録D）。**本文の記述の限界は、本文ではなく同文書の「現状の表現上限」列を正とする。** 本文にClaim IDは置かない。
 >
 > **測定範囲**: 2026-08-03時点。候補はC1〜C147、主要比較は採点契約v14・実行環境`0.146.0`・推論`medium`・14課題である。**この範囲の外側は本稿の主張に含まれない。**
 >
@@ -1330,4 +1330,4 @@ continuation_scope_complete := 未観測criterionへ直接bindした同一target
 
 ## 付録D. 主張と一次資料の対応表
 
-[`execution-control-research-paper-evidence-map.md`](execution-control-research-paper-evidence-map.md)を正本とする。Claim IDごとに、主張・必要な証拠・一次資料・互換キー・証拠水準・表現上限・再検証分類を記録する。**本稿の記述の限界は同文書の「表現上限」列を正とする。**
+[`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md)を正本とする。Claim IDごとに、主張・必要な証拠・一次資料・互換キー・証拠水準・表現上限・再検証分類を記録する。**本稿の記述の限界は同文書の「表現上限」列を正とする。**

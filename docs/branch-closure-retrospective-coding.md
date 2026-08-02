@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > **本文書は新規測定を含まない。** 保存済みのprompt bundleとresultだけを使う。既存resultをin-placeで変更せず、再採点もしない。
 >
-> **目的**: [`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md) の§7.5が置く「分岐の開閉」という軸について、**同じ研究が生んだ軸を同じ研究の結果で確かめている**という§12.2の構造的限界を、事後の頑健性チェックによってどこまで解けるかを確定する。
+> **目的**: [`execution-control-measurement-report.md`](execution-control-measurement-report.md) の§7.5が置く「分岐の開閉」という軸について、**同じ研究が生んだ軸を同じ研究の結果で確かめている**という§12.2の構造的限界を、事後の頑健性チェックによってどこまで解けるかを確定する。
 >
 > **状態**: 符号化を124件について完了（第5節・第7節）。**対象は2026-08-01時点でcommit済みのbundleであり、以降に追加されたCandidate126〜Candidate147は含まない。** **独立検証群による検定は保存済みデータの構造上成立しない**（第6節）。**§12.2の構造的限界は解消していない。** 到達点と未完了部分は第6節を正とする。
 

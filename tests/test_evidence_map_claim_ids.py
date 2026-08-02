@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE_MAP = REPO_ROOT / "docs" / "execution-control-research-paper-evidence-map.md"
+EVIDENCE_MAP = REPO_ROOT / "docs" / "execution-control-measurement-report-evidence-map.md"
 CLAIM_ROW = re.compile(r"^\| (R\d+-\w+) \|", re.MULTILINE)
 
 

@@ -1,7 +1,7 @@
 # 論文第1版のevidence map
 
 > [!IMPORTANT]
-> **位置付け**: この文書は[`execution-control-research-paper-reframed-draft.md`](execution-control-research-paper-reframed-draft.md)（**第1版、2026-08-03**）の各主張と一次資料の対応表である。**本文の記述の限界は、本文ではなくこの文書の「現状の表現上限」列を正とする。**契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
+> **位置付け**: この文書は[`execution-control-measurement-report.md`](execution-control-measurement-report.md)（**第1版、2026-08-03**）の各主張と一次資料の対応表である。**本文の記述の限界は、本文ではなくこの文書の「現状の表現上限」列を正とする。**契約、評価状態、採用、release、本体反映の正本ではない。数値と識別子はリンク先の一次artifactを正本とする。
 >
 > **作成方針**: 数値は一次result（`evaluations/results/`および`evaluations/targets/*/results/`）とprompt bundleの実体から取得した。**Baselineの公開系譜については、既存論文が使用していなかった公開リポジトリ[`orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)の固定履歴を補助一次資料として追加した**（R1-7a、第4節の留保10）。要約文書（`candidate-history.md`、`control-mechanisms.md`、`candidate81-candidate125-control-findings-synthesis.md`、既存の`execution-control-research-paper.md`）は所在の索引としてだけ使い、数値の正本としては使っていない。一次resultと要約文書の相違は第4節へ記録した。
 >
