@@ -472,7 +472,14 @@
 - 参考文献[18]として追加し、3.1節と13節から参照した。blob単位で一致するのは6ファイルに限るという3.4節の留保（留保10）も文献項目へ書き添えた。
 - **本稿の測定はこのリポジトリでは行っていない。** 同リポジトリは測定対象ではなく、Baselineの由来を示す資料である。
 
-### 留保25: atomic run経路のEvaluation set identityが層Bと異なる
+### 留保25: 対象リポジトリの公開移行より前の記録である
+
+- 対象リポジトリは2026-08-01から08-03にかけて公開のための移行を行った。**本稿が引用する一次資料はすべて移行より前の記録である。**
+- 公開版は履歴を切り出し直しているため、記録された対象commit `3ce91a403f9e…`、tree `88eecfa2…`、投影PR番号（#334・#335・#340・#343・#345）は**公開版では解決しない**。
+- **記録は変更しない。** 当時の対象を正しく記録したものである。本文§13で、測定時点では非公開だったこと、および移行前の履歴が公開範囲に含まれないことを明示した。
+- 3リポジトリの関係はroot `README.md`を正本とする。時間の境界は[`repository-overview.md`](repository-overview.md)の「対象リポジトリの公開移行」を正本とする。
+
+### 留保26: atomic run経路のEvaluation set identityが層Bと異なる
 
 - 層Bのset identityは`430d1d4b…`、C125のmodel軸resultは`2096d15e…`である。これはatomic run経路でのidentity計算が異なるためであり、`evaluations/AGENTS.md`が「atomic run経路では`N`、coverage、iteration集合、計画順序、`max_workers`をrunの実効互換条件へ含めない」と定めている。同じ`the-caption-standard14-r1`だが、identity値としては別である。**この2つのidentity値を同一視しない。**
 
