@@ -76,6 +76,16 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md) | 評価の実行手順 |
 | [`docs/prompt-control-design-principles.md`](docs/prompt-control-design-principles.md) | 制御追加・置換・削除の検討原則 |
 
+## 関連リポジトリ
+
+「規約 → 計測 → 適用」の3層で運用している。本リポジトリは計測にあたる。
+
+| リポジトリ | 役割 |
+| :--- | :--- |
+| [orchestration-prompt](https://github.com/Kenn-dclxvi/orchestration-prompt) | **規約**。エージェント実行制御の汎用プロンプトセット正本。ここで評価したCandidateを反映する |
+| [agent-execution-control-lab](https://github.com/Kenn-dclxvi/agent-execution-control-lab) | **計測**。実行制御の効果を再現可能に測る研究基盤（本リポジトリ） |
+| [the-caption](https://github.com/Kenn-dclxvi/the-caption) | **適用**。登録instance `the-caption` の実体。実運用しているポートフォリオ評価システム |
+
 ## License
 
 [Apache License 2.0](LICENSE)。

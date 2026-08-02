@@ -466,7 +466,13 @@
 - 語彙ベースの機械判定は否定表現（「停止理由にしない」）と既存述語の再表現を読めず、`closed`を過大に判定する方向の誤りを持つ。
 - **成立前区間を独立検証群として使う設計は成立しない。** 候補indexの状態語彙が研究途中で変わり、成立前33件には`stopped`が0件しかない。さらに全resultを走査すると、成立前で「閉じていない」と符号化された14件のうち親と同一互換条件の比較が保存されているのは5件だけで、欠落は「閉じていない」側へ偏る。**追加作業では回復できない構造上の制約であり、未実施の残作業ではない。**
 
-### 留保24: atomic run経路のEvaluation set identityが層Bと異なる
+### 留保24: 公開リポジトリを参考文献へ明示した
+
+- 本稿3節の一次資料は公開リポジトリ[`orchestration-prompt`](https://github.com/Kenn-dclxvi/orchestration-prompt)の固定参照点（PR #18 head `28fddf7d2734daeca9b9e9756159460c2ec6b09c`、2026-06-28マージ）だが、**草稿の参考文献に項目がなく、本文にもURLがなかった。** 節の中心的な一次資料が引用形式を持たない状態だった。
+- 参考文献[18]として追加し、3.1節と13節から参照した。blob単位で一致するのは6ファイルに限るという3.4節の留保（留保10）も文献項目へ書き添えた。
+- **本稿の測定はこのリポジトリでは行っていない。** 同リポジトリは測定対象ではなく、Baselineの由来を示す資料である。
+
+### 留保25: atomic run経路のEvaluation set identityが層Bと異なる
 
 - 層Bのset identityは`430d1d4b…`、C125のmodel軸resultは`2096d15e…`である。これはatomic run経路でのidentity計算が異なるためであり、`evaluations/AGENTS.md`が「atomic run経路では`N`、coverage、iteration集合、計画順序、`max_workers`をrunの実効互換条件へ含めない」と定めている。同じ`the-caption-standard14-r1`だが、identity値としては別である。**この2つのidentity値を同一視しない。**
 
