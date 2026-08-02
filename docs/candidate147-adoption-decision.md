@@ -12,10 +12,10 @@ Candidate147を採用する。
 | --- | --- |
 | evaluation | `standard14_n100_evaluated / quality_stability_gate_passed / mechanism_gate_passed / aggregate_cost_recovered` |
 | adoption | `adopted` |
-| release | `not_created` |
+| release | `approved` |
 | runtime projection | `not_projected` |
 
-この判断は2026-08-03のユーザーによる明示的な採用判断に基づく。一次evaluation resultに保存した当時の`adoption_not_decided`は変更しない。release作成とTHE-CAPTIONへの投影は別判断とするため、現在のruntimeはCandidate125のままである。
+この判断は2026-08-03のユーザーによる明示的な採用・公開依頼に基づく。一次evaluation resultに保存した当時の`adoption_not_decided`は変更しない。内容同一の[`release bundle`](../prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/README.md)を承認したが、runtime投影は別状態として未完了である。
 
 ## 採用理由
 
@@ -55,4 +55,4 @@ F06ではauthority追加readが21 / 100件に残った。発生群のtoken中央
 
 評価は`gpt-5.6-sol / medium`に固定されている。他modelやreasoning水準への採用を意味しない。
 
-採用はrelease承認またはruntime投影を意味しない。release bundleの構築、内容同一性の検証、THE-CAPTIONへの投影は、明示的に依頼された別作業とする。
+採用判断後、内容同一のrelease bundleを構築して承認した。runtime投影は公開版`the-caption`のbaseline、required validation、merge結果を別に固定した後で完了状態へ更新する。
