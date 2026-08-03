@@ -48,7 +48,7 @@
 | [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md) | 上記**第1版**のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保30件（外部文献への誤帰属5件の撤回を含む） |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 技術報告§12.2はこれを引用する |
 | [`why-prompt-writing-changes-your-bill.md`](why-prompt-writing-changes-your-bill.md) | **YouTube向けの3分説明資料**（引用なし）。Free比のAPI料金換算`-39.95%`を前面に出し、静的プロンプト`0 → 10,772 B`、実行トークン`-58.50%`、最高評価`65 / 70 → 70 / 70件`となった観測を一表と短い解説で説明する。 |
-| [`how-to-write-prompts-that-cut-api-cost.md`](how-to-write-prompts-that-cut-api-cost.md) | **単独で読める「じゃあどう書くのか」3分説明資料**（引用なし）。そのまま使える4文を最初に示し、「仕様を決める・変更を始める・調べる・作業を終える」の各場面で何が変わるかを、具体例と作業への割り当てで説明する。 |
+| [`how-to-write-prompts-that-cut-api-cost.md`](how-to-write-prompts-that-cut-api-cost.md) | **単独で読める「AIの無駄足をどう止めるか」の3分説明資料**（引用なし）。短い4文の核を先に示し、具体化した指示と限界を説明したうえで、「仕様を決める・変更を始める・調べる・作業を終える」の各場面へ割り当てる。 |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ### 2c. 運用・評価infra spec
