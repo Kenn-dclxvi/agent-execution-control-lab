@@ -1,0 +1,189 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "the-caption-3ce91a4-control-free-repository-r1",
+    "change_reason": "Freeの0-byte rootへ、変更開始前に成果・箇所・方法・維持動作を一つの方針へまとめる読みやすい一文を追加し、F02 N=5で影響を測定する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "改善の主張",
+      "採用判断",
+      "release判断",
+      "THE-CAPTION本体への反映"
+    ],
+    "problem": "コピペ可能な一文が、複数の必要成果を変更前に一つの方針へまとめる行動へ影響するかは未確認である。",
+    "scope": "root AGENTS.mdの一行だけ。残る18 targetはFreeと同一に保つ。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "95a9c711991eba4974225231272f93886148c2f237669b31f584ee4b5b9ebfb8",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "the-caption-3ce91a4-control-free-repository-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "708185b8274a3ab5995c9999c4c78946ae46cc0b",
+      "mode": "100644",
+      "sha256": "bf78d381ec9a9e88eceacfc5817d63e69059df765aa30995887185fef680cf4a",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "14bf17c23b6b233ceae58800de18ef1844cd1108",
+      "mode": "100644",
+      "sha256": "ce861b947e0c5181b22aa553cb431fd50d356864db228f3283ae7e376de96d3d",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "1a25c4600d2e5221fae1a5d25bb2c2b0ac13aa87",
+      "mode": "100644",
+      "sha256": "0bac08fb39548ac35e2b0ba2f6822d760dfc939914b2c0f6da0a21450909a34c",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "835aebcdf1b595a42eccb8ed0ab4458cfba54039",
+      "mode": "100644",
+      "sha256": "00424e0cd356dfdf050d59427e591e81d2466b73485045897a6f2e02c27bc414",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "8193bba57f46d478c666b43b2192e731af0b2f36",
+      "mode": "100644",
+      "sha256": "6a2f4c67e28ee88f3f67e9b0ed5e4ff51c880c3a0e8f77f1fa50713f9259fb45",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "0c55692c42b43125b1e6c605aa4027b75ea24035",
+      "mode": "100644",
+      "sha256": "85257eaae5558461e943bbc93bd0846d5f7db66ef2b6df1692ad574922492bdd",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "0d8231ebd32e2fe63269540f6d4f790a52da8d78",
+      "mode": "100644",
+      "sha256": "397c1a47f3236b4249d05dc0127943ceb3b3a5860f906839d96ad55b9b79a885",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "17aef2fcea36e7aeac81334fbdaab08754c42906",
+      "mode": "100644",
+      "sha256": "40b4b51def80b54aa035927e95221875ef7ceba2f0cdd0ea77c11ebbc028c200",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "the-caption-3ce91a4-current-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-change-start-readable-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git",
+    "construction_state": "uncommitted_working_tree",
+    "design_inputs": [
+      "prompts/baselines/the-caption-3ce91a4-current-r2/manifest.json",
+      "docs/prompt-file-bundle.md"
+    ],
+    "design_status": "draft",
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "source_prompt_identity identifies ControlFreeRepository as the direct prompt parent. Only root AGENTS.md changes to the readable change-start line; the F02 targeted result is not generalized to the other four explanation categories."
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

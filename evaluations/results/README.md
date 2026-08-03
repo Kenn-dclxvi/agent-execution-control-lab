@@ -112,6 +112,20 @@ Candidate151の[`A01 / A02 / F01 / F02 / F04 / F07 targeted N=5`](candidate151-f
 
 Candidate152の[`4つの判断ルール targeted N=5`](candidate152-free-four-decision-rules-readable-v14-medium-targeted-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ外部説明用の4文だけを追加した。「仕様を決める」はFreeの質問停止0 / 5に対して変更前質問が1 / 5、「調べる」はF08の変更前command中央値がFree `10`件から`7`件となり、行動選択への影響を観測した。「変更を始める」と「作業を終える」は狙った選択が出たがFreeでも同じだったため増分効果を判定できない。4文だけで完全制御できたとは扱わず、Standard14全体、採用、release、本体反映へ進めていない。
 
+Candidate156の[`Free比較 Standard14 N=5`](candidate156-free-five-prompt-conditions-readable-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ利用者指定の5文だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`+3.98%`、all-agent total token中央値`+3.18%`、elapsed中央値`+14.10%`だった。両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、利用者成果が不足した場合の質問停止は成立しなかった。Candidate156は品質gate不通過として`not_adopted`で停止する。
+
+Candidate157の[`Free比較 F08 N=5`](candidate157-free-focused-prechange-research-readable-v14-medium-f08-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を調べるか」に対応する一文だけをFreeへ追加した。5 / 5件がscore `4`で、変更前command中央値はFreeの`10`件から`7`件へ減った。token中央値は`-27.56%`、elapsed中央値は`-18.05%`だった。品質を維持して狙った行動への影響を確認したが、単一case N=5からStandard14全体の料金削減へ一般化しない。
+
+Candidate158の[`Free比較 A01 / A02各N=5`](candidate158-free-outcome-method-readable-v14-medium-a01-a02-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を成果にするか」に対応する一行だけをFreeへ追加した。A01の質問停止はFreeの`0 / 5`件から`5 / 5`件となり、A02は過剰質問なしの完了を`5 / 5`件で維持した。2 case合算中央値はtoken`-45.13%`、elapsed`-47.90%`だが、主にA01の誤実装を質問停止へ変えた作業量差であり一般的な料金削減率にはしない。
+
+Candidate159の[`Free比較 F02 N=5`](candidate159-free-change-start-readable-v14-medium-f02-n5-cli0146_2026-08-04.md)は、「いつ変更を始めるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的方針は`0 / 5 → 4 / 5`となった。最初のfile changeまでには両条件とも`5 / 5`が方針を形成しており、cost低下は観測していない。
+
+Candidate160の[`Free比較 D01 N=5停止結果`](candidate160-free-assignment-result-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、起動前の担当・対象・結果対応が`1 / 5 → 5 / 5`となった一方、1件でrootの重複reviewが出たため掲載せず停止した。Candidate161の[`Free比較 D01 N=5`](candidate161-free-assignment-result-closure-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、同一判定のやり直し禁止まで含め、起動前対応`1 / 5 → 5 / 5`、重複review`0 / 5`を確認した。cost低下は観測していない。
+
+Candidate162の[`Free比較 F03 N=5`](candidate162-free-completion-ticket-readable-v14-medium-f03-n5-cli0146_2026-08-04.md)は、「何を確認したら終わるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的実行票は`0 / 5 → 5 / 5`となった。required validation再実行と最終差分確認後の追加調査は0 / 5件、token中央値は`-9.79%`、elapsed中央値は`+10.72%`だった。
+
+Candidate163の[`Free比較 Standard14 N=5`](candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md)は、Candidate157、158、159、161、162で個別確認した5文をFreeへそのまま統合した。Candidate163は70 / 70件がscore `4`で、Freeが5 / 5件失敗したA01も5 / 5件で質問停止した。Free比の中央値はAPI価格換算`-14.01%`、all-agent total token`-15.85%`、elapsed`-5.74%`で、3指標とも5 / 5 iterationで低下した。5文セット全体の結果であり、各一文の因果効果へ分解しない。採用は未判断である。
+
 Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
 
 Candidate71のreasoning 6水準は、[`Rating v13標準14項目各N=5`](candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)として記録した。新規のLow、Medium、XHigh、Max、Ultraは各70 / 70件がvalid・rateableで、既存Highを含めた6水準の品質中央値は`100.000`だった。公式scoreはUltraだけ`4 / 0 = 69 / 1`だが、score `0`はsearch patternの`pytest.fixture`をtest実行と誤認したRating v13偽陽性だった。Mediumはtoken中央値`1,923,688`、Lowはelapsed中央値`901.850秒`で各KPIの最小値が分かれた。Ultraは14 / 70 runがchild sessionを起動し、他の5水準はすべてroot-onlyだった。reasoningの異なるresultは別compatibility keyとし、Layer 4の互換comparison、winner、採用、release、本体反映は判断しない。
