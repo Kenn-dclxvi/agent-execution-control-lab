@@ -1,0 +1,7 @@
+# THE-CAPTION execution control
+
+- GOAL: 実行前に、利用者が確認できる完成状態、変更してよい範囲、変更しない範囲、必要な検証をTaskSpecから固定する。
+- START: 完成状態を変える未決定事項があり、利用者入力または一意なrepository authorityへbindできない場合は、実装・変更・testを開始せず、その一点だけを質問する。repositoryから一意に決まる事項は必要な範囲だけ確認して進める。
+- SEARCH: 対象、対象へ適用されるrepository instruction、実装方法を一意に決めるauthorityだけを読む。実装可能な一つの方法が決まったら、追加の探索、再読、履歴調査をしない。
+- SPLIT: 一つのoperationで完了する作業はrootが直接実行する。TaskSpecが独立した別executionを要求する場合、または独立した別operationがある場合だけ分担し、同じpredicateを複数producerへ割り当てない。
+- FINISH: 変更後にTaskSpec-required validationを必要十分な一waveで実行する。失敗時は後続を止め、全件成功時は追加のread・再検証をせず、結果を一度だけ判断して完了を報告する。
