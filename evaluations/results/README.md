@@ -100,6 +100,14 @@ Baseline、ControlFreeRepository、Candidate43、Candidate71、Candidate147の[`
 
 上記一次resultの状態は変更しない。2026-08-03の後続別stateで[`Candidate147採用判断`](../../docs/candidate147-adoption-decision.md)を記録し、`adopted / release_not_created / runtime_not_projected`とした。採用理由はC125より統計的に低costであることではなく、C145の安全境界を保持したmechanism成立、C145比cost回復、Standard14 N=100の低Score 0件である。
 
+Candidate148の[`Free比較 Standard14 N=5`](candidate148-free-five-point-execution-control-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ`GOAL / START / SEARCH / SPLIT / FINISH`の5項目だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`-17.21%`、all-agent total token中央値`-21.76%`、elapsed中央値`-3.63%`だった。一方、両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、START制御は成立しなかった。Candidate148は品質gate不通過として`not_adopted`で停止する。
+
+Candidate150の[`F02 / F04 / F07 targeted N=5`](candidate150-free-required-outcome-bind-readable-v14-medium-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は15 / 15件がscore `4`で、複数の必要成果を変更前に一つの方針へ結び付けるmechanismも15 / 15件で成立した。3 case集約はFree比token`-2.86%`、elapsed`+7.89%`だったが、targeted N=5のため全体cost改善は主張しない。Standard14、採用、release、本体反映は未実施である。
+
+Candidate151の[`A01 / A02 / F01 / F02 / F04 / F07 targeted N=5`](candidate151-free-evidence-consumer-boundary-readable-v14-medium-a01-a02-f01-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は30 / 30件がscore `4`で、6 case集約はFree比token`-25.76%`、elapsed`-9.41%`だった。一方、A02の変更後method探索が2 / 5件に残り、書いた調査境界のmechanism gateに失敗したため停止した。KPI差を当該mechanismの効果として採用せず、Standard14、採用、release、本体反映は未実施である。
+
+Candidate152の[`4つの判断ルール targeted N=5`](candidate152-free-four-decision-rules-readable-v14-medium-targeted-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ外部説明用の4文だけを追加した。「仕様を決める」はFreeの質問停止0 / 5に対して変更前質問が1 / 5、「調べる」はF08の変更前command中央値がFree `10`件から`7`件となり、行動選択への影響を観測した。「変更を始める」と「作業を終える」は狙った選択が出たがFreeでも同じだったため増分効果を判定できない。4文だけで完全制御できたとは扱わず、Standard14全体、採用、release、本体反映へ進めていない。
+
 Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
 
 Candidate71のreasoning 6水準は、[`Rating v13標準14項目各N=5`](candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)として記録した。新規のLow、Medium、XHigh、Max、Ultraは各70 / 70件がvalid・rateableで、既存Highを含めた6水準の品質中央値は`100.000`だった。公式scoreはUltraだけ`4 / 0 = 69 / 1`だが、score `0`はsearch patternの`pytest.fixture`をtest実行と誤認したRating v13偽陽性だった。Mediumはtoken中央値`1,923,688`、Lowはelapsed中央値`901.850秒`で各KPIの最小値が分かれた。Ultraは14 / 70 runがchild sessionを起動し、他の5水準はすべてroot-onlyだった。reasoningの異なるresultは別compatibility keyとし、Layer 4の互換comparison、winner、採用、release、本体反映は判断しない。
