@@ -4,6 +4,8 @@
 
 このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
+Candidate147互換条件のControlFreeRepositoryを[`Standard14各N=100`](control-free-repository-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-03.md)まで追試した。N=80から不足していた280件だけを追加し、累計1,400件はscore `4 / 0 = 1,300 / 100`、quality中央値`92.857`、token中央値`3,457,525`、elapsed中央値`1,180.997秒`だった。scoreにかかわらず完走するエビデンス取得であり、N=5からN=100までの中央値推移を記述値として保持する。Candidate147の採用、release、projection状態は変更しない。
+
 Candidate112の[`Rating v14、Medium、A01 / A02 / F01各N=5`](candidate108-candidate112-evidence-admission-scheduling-boundary-v14-medium-a01-a02-f01-atomic-n5-cli0146_2026-07-31.md)は15 / 15 score `4`だった。保存済みCandidate108の対象15 atomic runを再実行せず比較し、合算中央値はtoken`+3.53%`、elapsed`-3.10%`だった。tool callとmodel stepが各`+16`件でevidence scheduling制御は成立しなかったため、`stopped`としStandard14へ進めない。
 
 Candidate113の[`Rating v14、Medium、A01 / A02各N=5`](candidate108-candidate113-explicit-authority-delegation-v14-medium-a01-a02-atomic-n5-cli0146_2026-07-31.md)は10 / 10 score `4`だった。保存済みCandidate108の対象10 atomic runを再実行せず比較し、固定schema中央値はtoken`-26.28%`、elapsed`-18.90%`だった。ただしA01の狙ったauthority admission routeは0 / 5で、KPI低下を制御効果へbindできないため`stopped`としStandard14へ進めない。
