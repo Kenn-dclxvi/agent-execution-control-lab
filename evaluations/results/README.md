@@ -4,6 +4,22 @@
 
 このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
+FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
+
+[文書held-out / independent SA r1](candidate147-information-closure-document-heldout-sa-r1_2026-08-04.md)は、ID05と異なる題材でblind 10 / 10、context 4 / 10、差+6を記録した。独立SA初回のHTTP 401と、次cycleのfixture mode identity不一致をprompt behaviorから分離し、permission込みのr3で10 / 10正解、independent producer 10 / 10、root duplicateとforbidden context各0 / 10を確認した。これは明示routeのmechanism diagnosticであり、自律routingの証拠ではない。
+
+[自律routing r1](candidate147-information-closure-autonomous-routing-r1_2026-08-04.md)は、固定producer後の3 routeを各N=5で評価した。HR01とHR02は各5 / 5、HR03はindependent reviewer 0 / 5、事前oracle一致0 / 5で、全件root自己reviewの`blocked`だった。後続見直しでHR03 r1のoracleをcase設計不備と判定したため、root reviewの不正解またはSA必要性の証拠には使わない。
+
+Candidate164の[自律review admission targeted routing r1](candidate164-autonomous-review-admission-routing-r1_2026-08-04.md)は、C147と同じfrozen Layer 1でprompt identityだけを変更した。HR03はindependent reviewer 5 / 5、forbidden context delivery 0 / 5だったが、1件でrootがreviewer result後に先行producerの`blocked`を再採用した。後続見直しにより、HR03 reviewerの`completion_ready` 5 / 5はterminal観測としてのみ保持し、客観的な正解とは扱わない。
+
+Candidate165の[review result admission targeted gate r1](candidate165-review-result-admission-r1_2026-08-04.md)は、4方向を各N=5で確認し、実行時は20 / 20 valid、oracle一致20 / 20、mechanism 20 / 20だった。後続見直し後もRA02 / RA03 / RA04の15件と、HR03のreviewer起動・情報封鎖・root非上書きmechanismを維持する。HR03 5件のqualityは未判定へ変更した。
+
+後続のCandidate165 [Rating v14 Medium Standard14 N=5](candidate165-review-result-admission-v14-medium-standard14-atomic-n5-cli0146_2026-08-04.md)は、Review4を混ぜず既存14 caseを70件実行し、70 / 70 Score `4`でquality gateを通過した。互換なCandidate147 N=5比はtoken`+75.79%`、elapsed`+34.99%`で、独立criterion owner result 41件とcommand protocol diagnostic 52件を観測した。adoptionは未決定である。
+
+一次resultを変更しない後続の[Candidate165 Standard14 review route分析](../../docs/candidate165-standard14-review-route-analysis.md)では、独立SAの実質的な成果修正0 / 41、誤った先行評価がない通常caseへの系統起動40件、clean-contextのroot review成功5 / 5を確認した。現在解釈は、C165のresult admissionは成立した一方でreview admissionが過大であり、現状のまま採用しない、である。
+
+Candidate166の[Review4 preservation gate](candidate166-prior-evaluation-review-admission-r1_2026-08-04.md)は20 / 20 valid、事前oracleとのterminal一致18 / 20だった。独立SA route 10 / 10、禁止canary漏洩0 / 10、root override / substitution 0件、RA02 / RA03 / RA04各5 / 5は維持した。後続の[HR03 case妥当性見直し](../../docs/candidate166-review4-case-validity-analysis.md)で、HR03 r1は期待terminalを一意に導く証拠が不足していたと判定した。Candidate166のquality failureとは扱わず、`case_design_invalid / review4_quality_not_adjudicated`としてStandard14前で停止している。
+
 Candidate147互換条件のControlFreeRepositoryを[`Standard14各N=100`](control-free-repository-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-03.md)まで追試した。N=80から不足していた280件だけを追加し、累計1,400件はscore `4 / 0 = 1,300 / 100`、quality中央値`92.857`、token中央値`3,457,525`、elapsed中央値`1,180.997秒`だった。scoreにかかわらず完走するエビデンス取得であり、N=5からN=100までの中央値推移を記述値として保持する。Candidate147の採用、release、projection状態は変更しない。
 
 ControlFreeRepositoryとCandidate147の[`互換Standard14 N=100比較`](control-free-candidate147-v14-medium-standard14-atomic-n100-cli0146_2026-08-03.md)は、各1,400 runの登録済み一次結果を再利用した。Freeはscore `4 / 0 = 1,300 / 100`、C147は`4 = 1,400`だった。`C147 - Free`の集約中央値はquality `+7.143`、all-agent token `-59.67%`、elapsed `-29.56%`である。quality分布が異なるため同一品質の効率比較とは扱わず、case別中央値とA01の既知経路を記述する。一次結果とadoption、release、projection状態は変更しない。
