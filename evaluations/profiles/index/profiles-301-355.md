@@ -1,7 +1,8 @@
-# Profile index 301-354
+# Profile index 301-355
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
 - [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
 - [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r2.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r2.json)
 - [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-standard14-global-m24-n5-r1.json)

@@ -65,7 +65,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`121–180`](index/profiles-121-180.md)
 - [`181–240`](index/profiles-181-240.md)
 - [`241–300`](index/profiles-241-300.md)
-- [`301–354`](index/profiles-301-354.md)
+- [`301–355`](index/profiles-301-355.md)
 
 profile追加・削除時は[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、directory実体、READMEから辿れるindex shard、profile JSON linkの集合一致を確認する。
 

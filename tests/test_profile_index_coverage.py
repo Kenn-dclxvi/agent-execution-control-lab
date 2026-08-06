@@ -26,14 +26,15 @@ class ProfileIndexCoverageTest(unittest.TestCase):
         readme = PROFILE_README.read_text(encoding="utf-8")
         self.linked_index_files = set(INDEX_LINK_RE.findall(readme))
 
-        index_documents = [readme]
+        index_documents = [(PROFILE_README, readme)]
         for path in sorted(PROFILE_INDEX_DIR.glob("*.md")):
-            index_documents.append(path.read_text(encoding="utf-8"))
-        self.linked_profiles = {
-            Path(target).name
-            for document in index_documents
+            index_documents.append((path, path.read_text(encoding="utf-8")))
+        self.profile_links = [
+            (source, target)
+            for source, document in index_documents
             for target in PROFILE_LINK_RE.findall(document)
-        }
+        ]
+        self.linked_profiles = {Path(target).name for _, target in self.profile_links}
 
     def test_all_profile_json_files_are_linked_from_index(self) -> None:
         missing = sorted(self.profile_files - self.linked_profiles)
@@ -51,6 +52,19 @@ class ProfileIndexCoverageTest(unittest.TestCase):
             [],
             "profile索引に実体のないprofile JSON linkがある:\n"
             + "\n".join(stale),
+        )
+
+    def test_profile_json_links_resolve_from_their_own_document(self) -> None:
+        unresolved = sorted(
+            f"{source.relative_to(REPO_ROOT).as_posix()} -> {target}"
+            for source, target in self.profile_links
+            if not (source.parent / target).is_file()
+        )
+        self.assertEqual(
+            unresolved,
+            [],
+            "記述元からの相対pathで解決できないprofile JSON linkがある:\n"
+            + "\n".join(unresolved),
         )
 
     def test_readme_links_every_profile_index_shard(self) -> None:
