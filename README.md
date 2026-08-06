@@ -69,7 +69,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | ドキュメント | 内容 |
 | --- | --- |
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
-| [`docs/execution-control-research-paper.md`](docs/execution-control-research-paper.md) | 研究成果の総説（論文形式）。実測値の要約と2026年7月ベンダ公式指針との対照 |
+| [`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md) | 研究者向けの技術報告 第1版（2026-08-03）。品質制約下の指示書設計と実行経路の測定。数値と識別子は一次artifactを正本とする |
 | [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
 | [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate147までの系譜と知見 |
 | [`docs/candidate125-candidate147-control-findings-synthesis.md`](docs/candidate125-candidate147-control-findings-synthesis.md) | Candidate125のN拡張停止からCandidate147のN=100採用までの因果系列と統合知見 |
