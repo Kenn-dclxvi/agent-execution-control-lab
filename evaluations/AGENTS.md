@@ -2,6 +2,13 @@
 
 `evaluations/`の指示は、現行のevaluation foundation v4の境界を扱う。v3以前のprompt-set resultは履歴として保持し、v4へin-place変換しない。root `AGENTS.md`の共通規則に加えて、この領域規則を適用する。評価基盤のLayerと境界、および世代（`v1`〜`v4`）の定義と遷移は`docs/prompt-comparison-workflow.md`、実行方法は`docs/evaluation-loop-manual.md`を正本とする。
 
+## READMEと索引の責務
+
+- `evaluations/README.md`は評価領域の入口とartifact配置だけを示す。CLI手順、Layer詳細、compatibility条件を複製せず、対応する正本へ委譲する。
+- 配下READMEはartifactの現在の索引と所在を示す。case、profile、rating contract、result本体のidentity、score、statusをREADME側へ移さない。
+- READMEへ数値や状態を要約する場合も一次artifactへの導線を付け、要約を正本として扱わない。
+- 過去の形成経緯や個別Candidateの判断は、必要な導線を残してcase / profile索引からresultまたは`docs/`の研究記録へ委譲する。
+
 ## Target instance
 
 計測系列は評価対象repositoryごとのinstanceとして別管理する。instanceの登録、layout、境界の正本は`evaluations/targets/README.md`とする。
@@ -12,6 +19,27 @@
 - 新instanceのartifactは`evaluations/targets/<target_id>/`配下へ閉じる。
 - 別instanceのresultを同一比較へ入れない。rating contractがinstance単位である以上、`quality_score`の絶対値をinstance間で比較しない。
 - instanceのdescriptorは参照とtarget固有identityだけを持ち、gate command、bundle target map、resultの実体を複製しない。
+
+## Case artifact
+
+`evaluations/cases/`は`the-caption`の`legacy_root` case artifactを保持する。case追加・revision更新は次を守る。
+
+- 1 caseが基盤へ渡す固定点はcase ID、開始repository fixture、adapterへ渡すopaque payloadとする。TaskSpec、model-visible入力、期待成果などの可変fieldはpayloadへ閉じ、kernelが意味解釈しない境界を維持する。
+- oracle、grader、expected result、private commandはmodel-invisibleに保ち、model-visible TaskSpecやrepository authorityへ漏らさない。
+- case revision、fixture identity、seed / reference behaviorを固定し、既存revisionを結果確認後にin-place変更しない。
+- case追加の根拠は、既存setで見えない実測失敗、または評価対象controlが既存caseで観測不能であることとする。family番号を埋めることや同じcontrol pathの反復数を増やすことだけを追加理由にしない。
+- tuningに使用したcaseを同一revisionのheld-out evidenceとして扱わない。
+- `evaluations/cases/README.md`はcase設計規則や採点規則の正本にせず、`the-caption` legacy-rootのcase索引、variation、現在状態、関連set / resultへの導線に限定する。
+
+## Profile artifact
+
+`evaluations/profiles/`は`the-caption`の`legacy_root` execution profileを保持する。
+
+- 実行前にmodel、reasoning、Agent/runtime/CLI、permission、environment、実行policy、対象set / case、rating contract、repetition、停止条件を固定する。結果確認後に条件を変える場合は新しいprofile revisionとする。
+- 実行順はexecution provenanceとして保存するが、prompt set間のKPI補正には使わない。実測tokenとelapsedを環境補正して比較値へ変換しない。
+- candidate固有のquality / mechanism gateでは対象promptだけを先に実行する。gate前に比較相手の再実行を必須化しない。
+- 比較resultが必要になった時点で保存済み互換resultを優先し、不足slotだけを新規dispatchへ固定する。既存runを習慣的に再実行しない。
+- `evaluations/profiles/README.md`はprofile identity、用途、条件要約、対応resultへの導線を示す索引とする。score、KPI、停止判断の正本はresult本体または対応する研究記録とし、READMEの要約を判定根拠へ格上げしない。
 
 ## 4 Layer
 
