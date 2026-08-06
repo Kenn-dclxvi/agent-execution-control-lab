@@ -45,7 +45,7 @@
 - targeted評価で成果品質と狙った経路変化を確認する前に、expandedまたはcontinuous評価へ進めない。
 - candidate固有のquality・mechanism gateではcandidateだけを先に実行する。gate前に比較相手のprofileや新規runを必須化しない。
 - 比較resultが必要になった時点で保存済み互換resultを先に使い、不足するprompt set / slotだけを評価profileへ追加する。
-- このhostの新規試験はprofileの`max_workers=24`を固定し、readyなslotが24件未満でも試験ごとに設定値を下げない。複数prompt setの新規slotは別cycleのまま共通global queueへ入れる。
+- このhostの新規試験の`max_workers`固定値と適用条件は`evaluations/AGENTS.md`を正本とし、readyなslot数へ合わせて試験ごとに設定値を下げない。複数prompt setの新規slotは別cycleのまま共通global queueへ入れる。
 - 保存済みtraceにない将来不安だけを理由として制御を追加しない。
 - 新しいpredicateの追加より、既存predicateの置換、統合、削除を優先する。
 - 作成前gateが未定義なら、candidate bundleと`evaluations/`配下の評価profileを先に作らない。
