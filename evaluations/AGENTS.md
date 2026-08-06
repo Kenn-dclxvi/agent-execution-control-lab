@@ -40,6 +40,8 @@
 - candidate固有のquality / mechanism gateでは対象promptだけを先に実行する。gate前に比較相手の再実行を必須化しない。
 - 比較resultが必要になった時点で保存済み互換resultを優先し、不足slotだけを新規dispatchへ固定する。既存runを習慣的に再実行しない。
 - `evaluations/profiles/README.md`はprofile identity、用途、条件要約、対応resultへの導線を示す索引とする。score、KPI、停止判断の正本はresult本体または対応する研究記録とし、READMEの要約を判定根拠へ格上げしない。
+- `evaluations/profiles/`直下の全profile JSONは、`evaluations/profiles/README.md`からfile名を知らなくても到達できるよう、同README内で少なくとも1回は直接linkする。現行・直近系列の説明linkと全profile indexの重複は許容する。
+- profile索引を変更した場合は、directory直下の全profile JSONがREADMEから被参照であることと、README内のprofile JSON linkに実体不存在がないことを機械確認する。
 
 ## 4 Layer
 
