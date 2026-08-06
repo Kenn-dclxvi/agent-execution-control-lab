@@ -2,7 +2,7 @@
 
 ## 目的
 
-8時間程度の反復実行でstorage枯渇を起こさないため、batch dispatch前の容量guard、Layer 1のclonefile必須化、実行直後のevidence seal、登録後の最終圧縮を提供する。評価基盤v3のLayer、KPI、schema、比較条件は変更しない。
+8時間程度の反復実行でstorage枯渇を起こさないため、batch dispatch前の容量guard、Layer 1のclonefile必須化、実行直後のevidence seal、登録後の最終圧縮を提供する。評価基盤のLayer、KPI、schema、比較条件は変更しない。
 
 このextensionが作るarchiveとreceiptはraw evidenceであり、評価済み、採用済み、release済みを意味しない。非公開のraw archiveはcommitしない。
 

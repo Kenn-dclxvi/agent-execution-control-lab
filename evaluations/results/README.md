@@ -2,7 +2,7 @@
 
 固定済みprofileで得た再現可能な結果を置く。raw logを無条件にcommitせず、必要なprovenance、集計、比較情報、除外理由を残す。
 
-このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
+このdirectoryはv1 / v2の履歴resultを含む。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。現行のv4の一次結果は1 case × 1 sampleのatomic runであり、v3 resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
 この索引は各resultの要約と所在だけを示す。数値、score、状態の正本は各result本体とする。節は新しい系列から並べ、節内は実行順（古い順）に並べる。過去の判定と当時の状態は書き換えず、後続の再解釈は当該段落に併記した文言をそのまま残す。
 
