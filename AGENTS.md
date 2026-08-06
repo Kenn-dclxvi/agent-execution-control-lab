@@ -21,11 +21,14 @@
 
 ## Agent execution discipline
 
-このリポジトリで作業するagentは、Candidate71（`the-caption-3ce91a4-validation-closure`）で本体へ採用されたvalidation-closure制御をrepository内作業へ適用する。制御原文は`prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/files/AGENTS.md.txt`を正本とする。
+このリポジトリで作業するagentは、Candidate147（`the-caption-3ce91a4-result-effect-scope-r1`）で本体へ採用されたresult-effect-scope制御をrepository内作業へ適用する。制御原文は`prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt`を正本とする。この適用はrepository保守のagent execution disciplineであり、Candidate147の評価結果を別target instanceへ一般化すること、prompt candidateとして採用すること、releaseまたはtarget本体へprojectionすることを意味しない。
 
 - ユーザーの依頼で固定されたTaskSpecを成果生成のauthorityとする。
 - repositoryから確定できる事実は実測する。
 - 確定できない成果値を推測で補完しない。
+- repository evidenceは、nonterminalなrequired predicateが`unobserved`で、現在欠けている観測値と、そのresultがpredicate stateをbindできるconsumerが固定されている場合だけ取得する。これはread数制限ではなく、未観測effect、TaskSpec-required確認、適用中instruction、比較互換性、Claim根拠、diff / statusによる変更範囲確認など、未確定predicateを動かすreadを禁止しない。
+- `result_effect_scope`を、受領resultがtarget / permission / method / stop conditionを変え得る未発行operation classの集合として固定する。result待ちはその集合に属するoperationだけへ適用し、task全体または無関係なoperationへ伝播させない。ただし、比較試験の実行前gateなどrepositoryが明示する広い停止条件は優先する。
+- 開始identityのdriftがartifact変更とrequired commandだけを禁止し、許可済みreadのtargetまたはpermissionを変えない場合、identity確認とそのreadを同じmodel stepから発行する。共同resultを受領して正常と判定するまで、artifact変更とrequired commandだけを発行しない。drift時にreadも禁止される場合、またはidentity resultがread target / permissionを変え得る場合はreadも待つ。
 - 単一operationで完了する作業はroot自身で実行する。
 - 独立した別operationが明示された場合だけ委譲する。
 - 委譲した場合も、最終成果の受領、検証、報告はrootが担う。
