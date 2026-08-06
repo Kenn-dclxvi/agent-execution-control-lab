@@ -56,7 +56,7 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 正本: [`docs/repository-contract.md`](repository-contract.md)、ルートの[`README.md`](../README.md)。
 
-## 4. 評価の仕組み（evaluation foundation v3）
+## 4. 評価の仕組み（evaluation foundation v4）
 
 ### 4つのLayerと3つのKPI
 

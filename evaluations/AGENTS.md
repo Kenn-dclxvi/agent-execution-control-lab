@@ -1,6 +1,6 @@
 # evaluations instructions
 
-`evaluations/`の指示は、evaluation foundation v3の境界を扱う。root `AGENTS.md`の共通規則に加えて、この領域規則を適用する。評価基盤のLayerと境界は`docs/prompt-comparison-workflow.md`、実行方法は`docs/evaluation-loop-manual.md`を正本とする。
+`evaluations/`の指示は、現行のevaluation foundation v4の境界を扱う。v3以前のprompt-set resultは履歴として保持し、v4へin-place変換しない。root `AGENTS.md`の共通規則に加えて、この領域規則を適用する。評価基盤のLayerと境界、および世代（`v1`〜`v4`）の定義と遷移は`docs/prompt-comparison-workflow.md`、実行方法は`docs/evaluation-loop-manual.md`を正本とする。
 
 ## Target instance
 
