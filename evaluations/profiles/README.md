@@ -67,7 +67,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`241–300`](index/profiles-241-300.md)
 - [`301–355`](index/profiles-301-355.md)
 
-profile追加・削除時は[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、directory実体、READMEから辿れるindex shard、profile JSON linkの集合一致を確認する。
+このshardと上のlinkは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。profile追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、directory実体、READMEから辿れるindex shard、profile JSON linkの集合一致として固定する。
 
 ## 履歴profileの探し方
 

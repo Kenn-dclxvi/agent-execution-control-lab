@@ -42,6 +42,7 @@
 - `evaluations/profiles/README.md`はprofile identity、用途、条件要約、対応resultへの導線を示す索引とする。score、KPI、停止判断の正本はresult本体または対応する研究記録とし、READMEの要約を判定根拠へ格上げしない。
 - `evaluations/profiles/`直下の全profile JSONは、file名を知らなくても`evaluations/profiles/README.md`から到達できるよう、README本体またはREADMEが直接linkする`evaluations/profiles/index/*.md`で少なくとも1回は直接linkする。索引shardはprofile名と所在だけを持ち、評価史を複製しない。
 - profile索引を変更した場合は、directory直下の全profile JSONがREADMEまたはREADME直結shardから被参照であること、READMEが全shardを参照すること、profile JSONとshardのlinkに実体不存在がないことを機械確認する。
+- profileを追加・削除した変更では、index shardとREADMEの導線を`scripts/generate_profile_index.py --write`で再生成する。shardを手書きで部分更新せず、生成物と手元の状態が一致することを同scriptの引数なし実行で確認する。
 
 ## 4 Layer
 
