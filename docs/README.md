@@ -1,11 +1,15 @@
 # docs 索引
 
-`docs/`配下の研究文書を、読む前に**役割で選べる**ようにするための索引。文書は次の4分類で位置づける。
+`docs/`配下の研究文書を、読む前に**役割で選べる**ようにするための索引。文書は次の8分類で位置づける。
 
 | 分類 | 意味 | 扱い |
 |---|---|---|
 | **正本（canonical）** | 他文書が参照authorityとして引く契約・原則 | 統合・要約せず維持。正本指定は各領域の`AGENTS.md`（下表参照） |
-| **現在の研究状態** | 入口・全体像・横断知見・現行frontier・運用spec | 現在地点を把握する起点 |
+| **現在地・研究全体像** | 研究の目的、系譜、横断知見、未完了項目、長期方向 | 現在地点を把握する最初の起点 |
+| **現行frontier** | 現在進行中の研究軸と、その直近の設計・診断 | 因果系列ごとに追い、完了済み成果と混ぜない |
+| **研究成果・統合知見** | 固定版の技術報告、総説、横断分析、統合知見 | 現在有効な研究成果として読む。数値・状態は各文書が示す一次artifactを正本とする |
+| **実務者向け解説** | 研究成果を実務へ翻訳した読み物 | 研究artifactの代替ではなく、実務から理解する入口として扱う |
+| **評価・運用基盤** | 評価infra、実行環境、運用spec | 研究内容そのものではなく、測定・運用を成立させる基盤として扱う |
 | **完了済み研究記録** | 特定Candidate・比較・診断の成果artifact | 当時のresult・scoreを保持（遡及書換なし） |
 | **historical／superseded** | root-only履歴、完了済みhandoff、旧design input | 現行設計として読まない。冒頭バナーで位置づけ |
 
@@ -25,17 +29,26 @@
 | [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | prompt制御の設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-file-bundle.md`](prompt-file-bundle.md) | prompt file bundle形式・manifest・格納の正本 | [`scripts/AGENTS.md`](../scripts/AGENTS.md) |
 
-## 2. 現在の研究状態
+## 2. 現在地・研究全体像
 
-### 2a. 入口・全体像
+「何を研究しているか → どこまで来たか → 何が分かったか → 何が残っているか → どこへ進むか」の順に読むための入口。
 
 | 文書 | 役割 |
 |---|---|
 | [`repository-overview.md`](repository-overview.md) | 初見向けの全体像（入口） |
-| [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向（恒久的な方針のみ） |
-| [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
 | [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜と現在状態の一覧は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
-| [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開target選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
+| [`control-mechanisms.md`](control-mechanisms.md) | 横断的な制御メカニズムの知見 |
+| [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
+| [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向（恒久的な方針のみ） |
+
+## 3. 現行frontier
+
+現在進行中の研究軸を、別軸の作業を混ぜず因果系列ごとに並べる。
+
+### 3a. 機能見直し・review admission
+
+| 文書 | 役割 |
+|---|---|
 | [`feature-review-phase1-plan.md`](feature-review-phase1-plan.md) | Candidate147を基準に、過去機能の維持・休眠・欠落・prompt強制不能を一件ずつ判定する機能見直しフェーズ。最初の対象は独立SA reviewと情報封鎖の必要性 |
 | [`candidate164-autonomous-review-admission-design.md`](candidate164-autonomous-review-admission-design.md) | FR-01自律routingで観測したHR03失敗に対し、C147へreview admission / producer選択predicate一つだけを追加した設計。targeted試験はreviewer起動5 / 5まで改善したがterminal再生成1件で停止 |
 | [`candidate165-review-result-admission-design.md`](candidate165-review-result-admission-design.md) | C164の1件をprior評価のauthority誤分類として分解し、current TaskSpecへbind済みのresultだけをquality criterionへadmitする設計。Review4は20 / 20、Standard14は70 / 70 Score `4`。C147比cost増を残す |
@@ -44,16 +57,31 @@
 | [`candidate166-review4-case-validity-analysis.md`](candidate166-review4-case-validity-analysis.md) | C166 Review4のHR03を再監査し、raw response不在のまま観測表現を強めたため期待terminalが一意でないと判定。18 / 20をquality failureへ使わず、r2 case revisionの事前条件を固定 |
 | [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | prompt内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存caseを再分類。次gateを7 case × N=5へ固定するcase設計 |
 
-### 2b. 横断知見・現行frontier
+### 3b. 公開target拡張
 
 | 文書 | 役割 |
 |---|---|
-| [`control-mechanisms.md`](control-mechanisms.md) | 横断的な制御メカニズムの知見 |
-| [`candidate125-candidate147-control-findings-synthesis.md`](candidate125-candidate147-control-findings-synthesis.md) | C125のN=5成立とN拡張停止から、C126〜C142のeffect / evidence境界探索、C143の上流再構築、C147のN=100採用までの因果系列と現在解釈 |
-| [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式、第3版・2026-07-31時点）。**下記の技術報告 第1版とは別の文書で、互いに置き換えない。** 実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
+| [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開target選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
+
+## 4. 研究成果・統合知見
+
+固定版の研究成果、総説、横断分析、現在有効な統合知見をまとめる。進行中のCandidate系列とは分けて読む。
+
+| 文書 | 役割 |
+|---|---|
 | [`execution-control-measurement-report.md`](execution-control-measurement-report.md) | 研究者向けの**技術報告 第1版**（2026-08-03、14節＋要旨＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献・提供者指針を一次・補助資料として使う。**この版をもって記述を固定し、以降の測定は新しい版として追加する。** 数値と識別子は一次artifactを、主張と証拠の対応はevidence mapを正本とする。|
 | [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md) | 上記**第1版**のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保30件（外部文献への誤帰属5件の撤回を含む） |
+| [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式、第3版・2026-07-31時点）。**上記の技術報告 第1版とは別の文書で、互いに置き換えない。** 実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
+| [`candidate125-candidate147-control-findings-synthesis.md`](candidate125-candidate147-control-findings-synthesis.md) | C125のN=5成立とN拡張停止から、C126〜C142のeffect / evidence境界探索、C143の上流再構築、C147のN=100採用までの因果系列と現在解釈 |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 技術報告§12.2はこれを引用する |
+| [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
+
+## 5. 実務者向け解説
+
+研究成果を実務から読むためのExecution Controlシリーズ。研究artifactや一次資料の代替ではない。
+
+| 文書 | 役割 |
+|---|---|
 | [`01_why-prompt-writing-changes-your-bill.md`](01_why-prompt-writing-changes-your-bill.md) | **実務者向けExecution Controlシリーズ 1 / 8**。Free比のAPI料金換算`-39.95%`を入口に、削るべきものは文字数ではなく迷う余地だと説明する。 |
 | [`02_how-to-write-prompts-that-cut-api-cost.md`](02_how-to-write-prompts-that-cut-api-cost.md) | **シリーズ 2 / 8**。成果、変更開始、担当と結果、調査、完了という5つの判断条件を、推測・手戻り・過剰な探索や検証と対応づける。 |
 | [`03_what-not-to-write-in-ai-prompts.md`](03_what-not-to-write-in-ai-prompts.md) | **シリーズ 3 / 8**。索引追加、表面的な短文化、抽象的なmeta判断など、無条件に足さない7項目と代替を書く。 |
@@ -62,9 +90,8 @@
 | [`06_execution-paths-drive-ai-cost.md`](06_execution-paths-drive-ai-cost.md) | **シリーズ 6 / 8**。静的な文章量ではなく、モデル往復、再読、再検証を含む実行経路を設計対象として説明する。 |
 | [`07_do-not-copy-human-development-processes.md`](07_do-not-copy-human-development-processes.md) | **シリーズ 7 / 8**。人間組織の工程を導入経路として認めつつ、AI向けには失敗様式と観測可能な条件へ変換する。 |
 | [`08_what-is-execution-control.md`](08_what-is-execution-control.md) | **シリーズ 8 / 8**。AIへの依頼とExecution Controlを分け、進行・停止・完了を制御する全体像をまとめる。 |
-| [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
-### 2c. 運用・評価infra spec
+## 6. 評価・運用基盤
 
 | 文書 | 役割 |
 |---|---|
@@ -75,9 +102,9 @@
 | [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceのspec |
 | [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md) | Layer 2 executorをClaude Code CLIへ置き換える試験方法の設計検討（未実装。未確定事項を含む） |
 
-## 3. 完了済み研究記録
+## 7. 完了済み研究記録
 
-### 3a. Candidate設計記録
+### 7a. Candidate設計記録
 
 各Candidateの制御軸を記録した成果artifact。当時のresult・scoreは遡及変更しない。
 
@@ -127,7 +154,7 @@
 | C80 | [`candidate80-root-validation-wrapper-design.md`](candidate80-root-validation-wrapper-design.md) | root validation wrapper |
 | C81 | [`candidate81-validation-wrapper-precedence-design.md`](candidate81-validation-wrapper-precedence-design.md) | validation wrapper precedence |
 
-C107〜C116の設計記録は「3b. 比較・診断・段階記録」へ掲載している。C164〜C166は現行frontierのため「2b」へ掲載している。
+C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載している。C164〜C166は現行frontierのため「3a」へ掲載している。
 
 | Candidate | 文書 | 制御軸 |
 |---|---|---|
@@ -202,7 +229,7 @@ C107〜C116の設計記録は「3b. 比較・診断・段階記録」へ掲載�
 | C162 | [`candidate162-completion-ticket-readable-design.md`](candidate162-completion-ticket-readable-design.md) | completion ticket readable |
 | C163 | [`candidate163-five-verified-lines-integrated-design.md`](candidate163-five-verified-lines-integrated-design.md) | five verified lines integrated |
 
-### 3b. 比較・診断・段階記録
+### 7b. 比較・診断・段階記録
 
 | 文書 | 役割 |
 |---|---|
@@ -259,7 +286,7 @@ C107〜C116の設計記録は「3b. 比較・診断・段階記録」へ掲載�
 | [`success-silent-delivery-design.md`](success-silent-delivery-design.md) | deterministicな成功resultだけをmodelへ配送しない`success-delivery/v1`第1版設計 |
 | [`pytest-allowlist-success-delivery-design.md`](pytest-allowlist-success-delivery-design.md) | 成功出力の大半を占めるpytest系だけをexact argv boundなwrapper対象とする`success-delivery/v2`設計 |
 
-## 4. historical handoff／superseded interpretation
+## 8. historical handoff／superseded interpretation
 
 内容は当時の記録として保持する。現行設計・現行値として読まない。各文書の冒頭バナーが位置づけを示す。
 
