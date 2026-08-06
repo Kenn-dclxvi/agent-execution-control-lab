@@ -90,7 +90,9 @@ quality_score = median(quality_score[1], ..., quality_score[N])
 
 quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだけである。`layer2/bindings/`、Run capsule、oracle、grader、expected resultをmodel-visible入力へ混ぜない。raterはscoreと短い事実根拠だけを返し、promptの選択や改善提案を行わない。
 
-現行rating contractは[`outcome-abstract-condition-preserving-owner-diagnostic-v13`](../evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json)とする。v13の要点は次のとおりである。
+現行rating contractは[`outcome-terminal-state-evidence-owner-diagnostic-v14`](../evaluations/rating-contracts/outcome-terminal-state-evidence-owner-diagnostic-v14.json)とする。v14は第13版の条件をすべて維持し、A01だけを応答文面の分類からversioned terminal-state evidenceへ切り替える。`required_value_state=unresolved`、terminal responseあり、final changed path 0件、試験・変更operation未開始を合わせて`outcome_state=awaiting_required_value`とする。疑問符、質問語、文末表現、応答本文はこの状態の導出とquality scoreに使用しない。本文は表示証拠として保持する。command evidenceは`all-agent-command-evidence/v5` collectorを要求し、A01には`terminal-state-evidence/v1`も要求する。revision別要求の正本は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)とする。
+
+v14が維持するv13の要点は次のとおりである。
 
 - 実行役へ提示した成果条件が抽象的なときは、成立を判定できる任意の証拠で満たされたとみなす。提示した抽象条件を特定の質問項目、特定の試験コマンド、特定の実装手順へ具体化して必須要求へ格上げしない。コマンド名がmodel-visibleに明示された場合だけ、そのコマンドを必須試験として扱う。
 - score `4`は、提示した成果条件と禁止境界をすべて満たすこと（`case_quality_rules`で`diagnostic_only`とした提示要素を除く）と、TaskSpecまたは適用されるリポジトリ規則がコマンド名まで明示した必須試験の成功証拠があることを要件とする。
@@ -100,9 +102,9 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 
 許可path判定はLayer 2 adapterをSSOTとし、Layer 3は必須成果pathだけを確認する。既存resultは履歴として保持し、rating contract revisionが異なるresultを互換比較へ混ぜない。
 
-2026-07-26に[`Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録した。各条件70 / 70件、計420 / 420件がvalid・rateableである。v12以前のresultは同一comparisonへ混ぜない。
+2026-07-26に[`Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録した。各条件70 / 70件、計420 / 420件がvalid・rateableである。v12以前のresultは同一comparisonへ混ぜない。v14はv13とは別のcompatibility conditionであり、v13以前のresultと同一comparisonへ混ぜない。v10 / v11 / v12 / v13 profileは既存resultの再現用として保持する。
 
-なお、この節が以前`owner-producer-quality-v8`を現行として指定し、owner-producer evidenceをscore `4`の必要条件、response markerのNFKC / casefold照合を要求していた記述は、v8時点の契約に基づくものである。v8からv12で採点した既存resultは当時の契約のまま保持し、再採点しない。revision別の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
+なお、この節が以前`outcome-abstract-condition-preserving-owner-diagnostic-v13`を現行として指定していた記述は、v13時点の契約に基づくものである。v13で採点した既存resultは当時の契約のまま保持し、v14で再採点したものとして扱わない。同様に、この節が以前`owner-producer-quality-v8`を現行として指定し、owner-producer evidenceをscore `4`の必要条件、response markerのNFKC / casefold照合を要求していた記述は、v8時点の契約に基づくものである。v8からv12で採点した既存resultは当時の契約のまま保持し、再採点しない。revision別の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
 
 ## Evaluation foundation世代
 

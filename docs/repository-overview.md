@@ -130,9 +130,9 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 ### 採点条件（rating contract）
 
-採点条件はrevision別に固定し、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。最新revisionは**v13**で、提示した抽象成果条件を特定コマンドへ具体化して必須化することを禁じ、コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映します。既存のv12契約とB18結果は履歴として保持します。
+採点条件はrevision別に固定し、in-placeで書き換えません（結果を見た後の基準変更は必ず新revision）。最新revisionは**v14**で、v13の条件（提示した抽象成果条件を特定コマンドへ具体化して必須化しない。コマンド名までmodel-visibleに明示された必須試験だけを品質へ反映する）をすべて維持したうえで、A01だけを応答文面の分類からversioned terminal-state evidenceへ切り替えます。疑問符や質問語といった文面特徴はこの状態の導出とscoreに使いません。既存のv13以前の契約と結果は履歴として保持します。
 
-新規runへ適用する「現行」契約も**v13**です（指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。2026-07-26に[`6条件の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録しました。v12以前のresultは同一comparisonへ混ぜません。
+新規runへ適用する「現行」契約も**v14**です（指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)、revision別要求の正本は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)）。2026-07-26に[`6条件の標準14項目各N=5`](../evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を最初のv13互換result集合として登録しました。v14はv13とは別のcompatibility conditionであり、v13以前のresultと同一comparisonへ混ぜません。
 
 この論点の具体例（A02で実際に起きた「要求と採点のずれ」3件、v10〜v13の変遷）は、個別事例として[`a02-rating-divergence.md`](a02-rating-divergence.md)へ分離しています。
 
@@ -153,7 +153,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 - 評価基盤は `evaluation_foundation_v4`。3 KPIをatomic run単位でappend-only保存し、計画上の`N`をrun identityへ含めません。実効互換なrunだけをpoolから選択し、使用run ID集合を固定して比較します。v3 prompt-set resultは履歴として保持します。
 - baselineから多数の候補（C78まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
 - 本体へ反映済みなのは **C41・C43・C71・C81・C125・C147**（この順に積み上げ投影、直近はC147）。C41〜C125は過去の投影履歴かつ巻き戻し先として保持。C125までは移行前のTHE-CAPTION、C147は公開版`the-caption`を対象とする。
-- 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。最初のv13互換resultは6条件・計420件です。
+- 採点条件は **v14が現行**（v13でA02の「要求と採点のずれ」を塞ぎ、v14でA01をterminal-state evidenceへ切り替えた版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。v13とv14は別のcompatibility conditionで、最初のv13互換resultは6条件・計420件です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 
 ## 8. どこから読むとよいか
