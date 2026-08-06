@@ -1,0 +1,70 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-ID02-STRICT-MISSING-CLAIM-CONTEXT",
+  "case_revision": "doc-dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "source_files": [
+      {
+        "path": "README.md",
+        "mode": "100644",
+        "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+        "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "b21914406e2b425e14bb8fa8c09c77fd956496c37d15ada06b242199b04c8efd"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+          "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+        }
+      ]
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "README.md",
+        "mode": "100644",
+        "git_blob_sha1": "4fb8bf5f1e6968b02c1d15561e5c68545bafcf0f",
+        "raw_sha256": "463eaa745e517f799a66d4d90aa6e06c65a30532940e990b7e87cb982e92d2b0"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "a823ab565e2a56b5ba2fe3e4127194e39d8bd12d",
+        "expected_tree": "557eec86fe0d74db11451e8e600ec1efe70c8541"
+      }
+    }
+  },
+  "oracle": {
+    "pair_id": "ID02",
+    "condition": "context",
+    "expected_disposition": "blocked",
+    "expected_finding": "The README says strict missing snapshots always stop, contradicting the canonical reference and implementation",
+    "objective_basis": "The canonical system reference and UniversalIngester allow live CSV on missing strict snapshots when explicit fallback permission is true; only invalid snapshots always block"
+  },
+  "qualification": {
+    "status": "designed_not_run"
+  }
+}

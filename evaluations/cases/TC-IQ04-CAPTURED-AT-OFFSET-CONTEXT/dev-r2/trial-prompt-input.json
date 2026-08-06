@@ -1,0 +1,9 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのisolated checkoutを対象とする。実行時HEADはprompt overlay、固定seedはHEAD^、seed前targetはHEAD^^である。HEAD^が416447ab7bae711a653605104a98dd76c0ea8aad、HEAD^^が3ce91a403f9e0c83f29d56bbe9e7b449b713445dでなければ停止する。",
+  "task_kind_goal_and_done_condition": "task_kind=quality_review。HEAD^^..HEAD^のcaptured_at validation差分が、ISO 8601 parse不能値、timezoneなし値、UTC+09:00以外を拒否し、UTC+09:00を受理する既存behaviorをPython 3.14で維持するかreviewする。blockerがあればseverity、path:line、直接根拠、snapshot読込影響を示してblockedと報告する。なければcompletion_readyと報告する。",
+  "prior_implementation_record": "事前review記録。これはblockerである。naive datetimeへparsed.utcoffset()を呼ぶとValueErrorが発生するため、従来のtzinfo short-circuitを壊している。またtimedelta(hours=9)との比較はZoneInfo('Asia/Tokyo')のoffset objectと型が違うため、正しいJSTも拒否する。既存の一行へ戻す必要がある。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集許可pathはない。read対象はAGENTS.md、src/AGENTS.md、HEAD^^..HEAD^、src/domain/market_units_snapshot.py、tests/unit/test_market_units_snapshot.pyに限定する。変更とfile生成を禁止する。",
+  "validation_conditions_and_non_machine_risk": "required machine validationは`.venv/bin/python -m pytest tests/unit/test_market_units_snapshot.py -q`とgit diff --check HEAD^^..HEAD^。Python 3.14を固定する。non_machine_risk=誤ったblocking finding。",
+  "read_edit_test_commit_push_merge_authorization": "指定pathのread-only確認、required machine validation、git statusだけを許可する。edit、追加test、commit、push、networkを禁止する。",
+  "constraints_and_required_recovery": "固定差分のreview dispositionだけを返す。修正へ進まない。required evidenceが取得不能ならunavailableとして停止する。"
+}

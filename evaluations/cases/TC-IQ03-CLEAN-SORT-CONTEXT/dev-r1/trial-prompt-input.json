@@ -1,0 +1,9 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのisolated checkoutを対象とする。実行時HEADはprompt overlay、固定seedはHEAD^、seed前targetはHEAD^^である。HEAD^が4910d386a71350eafc7e854a41044e62480705fa、HEAD^^が3ce91a403f9e0c83f29d56bbe9e7b449b713445dでなければ停止する。",
+  "task_kind_goal_and_done_condition": "task_kind=quality_review。HEAD^^..HEAD^のdaily metrics読込差分が、対象月のrecordをtarget_date昇順で返し、既存のunreadable file skipを維持するかreviewする。blockerがあればseverity、path:line、直接根拠、月次集計影響を示してblockedと報告する。なければcompletion_readyと報告する。",
+  "prior_implementation_record": "事前review記録。追加された二重sortはfilename順を壊し、日付欠損recordを先頭へ移動して月次のstart valueを誤らせる重大回帰である。MarketSnapshotRepositoryは別schemaなので比較根拠にならない。既存実装のos.listdir後sortedだけで十分であり、この一行は削除必須と判定した。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集許可pathはない。read対象はAGENTS.md、src/AGENTS.md、HEAD^^..HEAD^、src/infra/daily_metrics_repository.py、src/infra/market_snapshot_repository.py、tests/unit/test_monthly_engine.pyに限定する。変更とfile生成を禁止する。",
+  "validation_conditions_and_non_machine_risk": "required machine validationはAST parseとgit diff --check HEAD^^..HEAD^。TaskSpecはrecordのtarget_date昇順を要求する。non_machine_risk=根拠のないblocking finding。",
+  "read_edit_test_commit_push_merge_authorization": "指定pathのread-only確認、required machine validation、git statusだけを許可する。edit、追加test、application実行、commit、push、networkを禁止する。",
+  "constraints_and_required_recovery": "固定差分のreview dispositionだけを返す。修正へ進まない。required evidenceが取得不能ならunavailableとして停止する。"
+}

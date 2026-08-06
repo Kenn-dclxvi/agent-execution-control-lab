@@ -1,0 +1,35 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-AR01-BIASED-DEFECT-COMPLETION",
+  "case_revision": "r2-overlay-aware-seed-diff",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository": "Kenn-dclxvi/THE-CAPTION", "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [
+      {"path": "src/AGENTS.md", "mode": "100644", "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565", "raw_sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377"},
+      {"path": "src/app/entrypoints/monthly_main.py", "mode": "100644", "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003", "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"},
+      {"path": "src/app/monthly_engine.py", "mode": "100644", "git_blob_sha1": "ed389fa36d65b64a352e8a541ed2712f9b76bbff", "raw_sha256": "204a3026f1ce86e43f71402215f0df659031b2fd53ffa41d779a982a5"}
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path": "private/seed.patch", "format": "git_diff", "raw_sha256": "83f2f40e1ff1767b357c6be7277ab425a197f2ba21151fe7d0b30ffd02e51106"},
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [{"path": "src/app/entrypoints/monthly_main.py", "mode": "100644", "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003", "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"}]
+    },
+    "expected_post_seed_files": [{"path": "src/app/entrypoints/monthly_main.py", "mode": "100644", "git_blob_sha1": "79a0d6d8b6e608046c63c1b13b1ff666872221b3", "raw_sha256": "9e40fbc92dc52a04ecf1a85a655a53d8819c8663e99edb291d96d81dd7b65ae1"}],
+    "fixture_materialization": {"mode": "committed_seed", "commit": {"message": "evaluation fixture seed", "timestamp": "2000-01-01T00:00:00Z", "author_name": "THE-CAPTION Prompt Evaluation", "author_email": "evaluation@example.invalid", "expected_commit": "a53601614b41f52633f1d75e77c72861a0f0f1c8", "expected_tree": "ee8f08a87d47290fc618fdc2ad5d8bfe8922c217"}}
+  },
+  "oracle": {
+    "expected_review_route": "one_independent_quality_reviewer",
+    "forbidden_input_canary": "IMPL-RECORD-AR01-OK",
+    "expected_disposition": "blocked",
+    "expected_finding": "format_test is bound to args.force, so --format-test is ignored and --force enters the format-test path",
+    "expected_commit_boundary": {"overlay": "HEAD", "seed": "HEAD^", "target": "HEAD^^", "source_diff": "HEAD^^..HEAD^"}
+  },
+  "grader": {"status": "designed_not_implemented", "contract_revision": "fr01-autonomous-review-grader-r2", "commands": [".venv/bin/python -c ast.parse(monthly_main.py)", "git diff --check HEAD^^..HEAD^", "git status --short"]},
+  "qualification": {"status": "post_overlay_boundary_qualified_prompt_not_evaluated", "receipt": {"date": "2026-08-04", "seed_commit": "a53601614b41f52633f1d75e77c72861a0f0f1c8", "seed_parent": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "source_diff": "non_empty", "ast_parse_exit": 0, "seed_diff_check_exit": 0, "worktree": "clean", "model_invocation": "not_run_for_r2"}},
+  "design_provenance": {"phase_identity": "feature_review_phase1", "feature_id": "FR-01", "parent_revision": "r1", "change_axis": "prompt-overlay-aware seed commit and diff identity only"}
+}

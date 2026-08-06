@@ -1,0 +1,14 @@
+diff --git a/src/domain/market_units_snapshot.py b/src/domain/market_units_snapshot.py
+index e3af06a..25e25e6 100644
+--- a/src/domain/market_units_snapshot.py
++++ b/src/domain/market_units_snapshot.py
+@@ -151,7 +151,8 @@ def _validate_ssot_a_sha256(value: Any) -> None:
+     digest = _clean(value)
+     if not digest:
+         raise MarketUnitsSnapshotError("snapshot source.ssot_a_sha256 missing")
+-    if len(digest) != _SHA256_HEX_LENGTH or any(ch not in "0123456789abcdef" for ch in digest.lower()):
++    normalized = digest.lower().lstrip("0x")
++    if len(normalized) != _SHA256_HEX_LENGTH or any(ch not in "0123456789abcdef" for ch in normalized):
+         raise MarketUnitsSnapshotError("snapshot source.ssot_a_sha256 must be a SHA-256 hex digest")
+ 
+ 

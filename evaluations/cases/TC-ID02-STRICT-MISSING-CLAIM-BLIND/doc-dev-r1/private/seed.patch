@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index a047f9c..4fb8bf5 100644
+--- a/README.md
++++ b/README.md
+@@ -74,7 +74,7 @@ THE CAPTION は、資産の動きを「美術館のキャプション」のよ
+ 
+ ### v4.1 "Collection-Primary"
+ * **Dual Input SSOT**: `data/collection/market_units.csv` を市場連動資産の保有数正典、`data/external_assets.json` を現金・外部資産の絶対額正典として扱います。
+-* **Units Snapshot Contract**: `data/current/collection_units_YYYYMMDD.json` がある日は日付別 Units 固定入力として採用し、採用元は `ShadowLedger.units_source` に記録します。
++* **Units Snapshot Contract**: `data/current/collection_units_YYYYMMDD.json` がある日は日付別 Units 固定入力として採用し、採用元は `ShadowLedger.units_source` に記録します。strict modeではsnapshot欠損時もlive CSVへのfallbackを一切許可せず、常に処理を停止します。
+ * **Universal Ingester**: `src/domain/universal_ingester.py` が両SSOTを統合し、`ShadowLedger` (`data/v4_shadow_ledger.json`) を生成します。
+ * **Canonical Ledger Promotion**: v4日次パイプラインでは `v4_shadow_ledger.json` を正規台帳として AI 因果推論とレポート生成へ渡します。
+ * **Monolithic Scroll**: `V4ContentRenderer` が INDEX / CONTEXT / COLLECTION を1通の縦長HTMLメールへ統合し、Unified Ledger と Shield を同一の鑑定書内に描画します。

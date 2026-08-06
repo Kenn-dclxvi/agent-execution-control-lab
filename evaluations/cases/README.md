@@ -90,6 +90,27 @@ F09はcase artifactとfixtureの再現には成功しているが、seed対象�
 | F10-R | [`TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3`](TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3/README.md) | non-destructive fixed-seed diff review + severity/evidence | `evaluated_candidate30_expanded_n5_continuous_b5` |
 | F10-R-C | [`TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3-method-capsule-probe1`](TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3-method-capsule-probe1/README.md) | fixed-seed reviewへ局所read methodを提示するoperation capsule | `diagnostic_c55_c60_n1_stopped` |
 | D01 | [`TC-D01-EXPLICIT-PRODUCER-MONTHLY-REVIEW/r1`](TC-D01-EXPLICIT-PRODUCER-MONTHLY-REVIEW/r1/README.md) | F10-Rの成果条件へ明示producer execution bindingだけを追加 | `evaluated_c43_c64_catalog_fixed_n5_diagnostic` |
+| IQ01 | [`context`](TC-IQ01-CROSS-DEVICE-ATOMIC-CONTEXT/dev-r1/README.md) / [`blind`](TC-IQ01-CROSS-DEVICE-ATOMIC-BLIND/dev-r1/README.md) | cross-filesystem atomic replacement defect + implementation record boundary | `development_n3_no_discrimination` |
+| IQ02 | [`context`](TC-IQ02-ZERO-RETURN-CONTEXT/dev-r1/README.md) / [`blind`](TC-IQ02-ZERO-RETURN-BLIND/dev-r1/README.md) | explicit zero preservation defect + implementation record boundary | `development_n3_no_discrimination` |
+| IQ03 | [`context`](TC-IQ03-CLEAN-SORT-CONTEXT/dev-r1/README.md) / [`blind`](TC-IQ03-CLEAN-SORT-BLIND/dev-r1/README.md) | sort review + implementation record boundary | `development_n3_oracle_ambiguous_not_qualified` |
+| IQ04 | [`context`](TC-IQ04-CAPTURED-AT-OFFSET-CONTEXT/dev-r2/README.md) / [`blind`](TC-IQ04-CAPTURED-AT-OFFSET-BLIND/dev-r2/README.md) | clean UTC offset refactor + false prior review boundary | `discriminative_development_only_heldout_not_reproduced` |
+| IH01 | [`context`](TC-IH01-LEADING-ZERO-DIGEST-CONTEXT/heldout-r1/README.md) / [`blind`](TC-IH01-LEADING-ZERO-DIGEST-BLIND/heldout-r1/README.md) | leading-zero SHA-256 rejection defect + false implementation record boundary | `heldout_n5_context_5_of_5_blind_5_of_5` |
+| IH02 | [`context`](TC-IH02-NUMERIC-TUPLE-ORDER-CONTEXT/heldout-r1/README.md) / [`blind`](TC-IH02-NUMERIC-TUPLE-ORDER-BLIND/heldout-r1/README.md) | equivalent isinstance type-tuple order + false prior review boundary | `heldout_n5_context_5_of_5_blind_5_of_5` |
+| ID01 | [`context`](TC-ID01-V4-LENGTH-CLAIM-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID01-V4-LENGTH-CLAIM-BLIND/doc-dev-r1/README.md) | product documentationの未実装runtime保証 | `document_development_n3_no_discrimination` |
+| ID02 | [`context`](TC-ID02-STRICT-MISSING-CLAIM-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID02-STRICT-MISSING-CLAIM-BLIND/doc-dev-r1/README.md) | strict fallback説明の意味不整合 | `document_development_n3_no_discrimination` |
+| ID03 | [`context`](TC-ID03-SSOT-SOURCE-REWRITE-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID03-SSOT-SOURCE-REWRITE-BLIND/doc-dev-r1/README.md) | canonical pathと採用sourceの正しい言い換え | `document_development_n3_no_discrimination` |
+| ID04 | [`context`](TC-ID04-RESULT-SUMMARY-CONTEXT/doc-dev-r2/README.md) / [`blind`](TC-ID04-RESULT-SUMMARY-BLIND/doc-dev-r2/README.md) | report-only summary不整合。TaskSpecへoracleの手掛かりが漏れた | `document_development_n5_invalid_oracle_leakage` |
+| ID05 | [`context`](TC-ID05-RESULT-SUMMARY-CONTEXT/doc-dev-r3/README.md) / [`blind`](TC-ID05-RESULT-SUMMARY-BLIND/doc-dev-r3/README.md) | oracle非開示のreport-only summary review | `document_development_blind_5_of_5_context_0_of_5_discriminative` |
+| HD01 | [`context`](TC-HD01-T6-FAIL-LABEL-CONTEXT/doc-heldout-r1/README.md) / [`blind`](TC-HD01-T6-FAIL-LABEL-BLIND/doc-heldout-r1/README.md) | T6 fail-closeの結果ラベル不整合 + 執筆経緯境界 | `document_heldout_blind_5_of_5_context_4_of_5` |
+| HD02 | [`context`](TC-HD02-T4-TERMS-REWRITE-CONTEXT/doc-heldout-r1/README.md) / [`blind`](TC-HD02-T4-TERMS-REWRITE-BLIND/doc-heldout-r1/README.md) | T4用語の意味保存rewrite + 執筆経緯境界 | `document_heldout_blind_5_of_5_context_0_of_5` |
+| HS01 | [`independent`](TC-HS01-T6-FAIL-LABEL-INDEPENDENT/doc-sa-r1/README.md) | HD01と同じdiffを情報封鎖した独立quality reviewerへ明示委任 | `independent_sa_r3_blocked_5_of_5_route_5_of_5` |
+| HS02 | [`independent`](TC-HS02-T4-TERMS-REWRITE-INDEPENDENT/doc-sa-r1/README.md) | HD02と同じdiffを情報封鎖した独立quality reviewerへ明示委任 | `independent_sa_r3_completion_ready_5_of_5_route_5_of_5` |
+| HR01 | [`routing`](TC-HR01-MARKDOWN-BULLET-CLOSURE/doc-routing-r1/README.md) | exact machine evidenceで直接閉じるpost-implementation closure | `autonomous_routing_outcome_5_of_5_no_child_5_of_5` |
+| HR02 | [`routing`](TC-HR02-T6-SUMMARY-UNBIASED/doc-routing-r1/README.md) | 評価意見なしのproducer記録 + report意味closure | `root_review_route_5_of_5 / quality_case_design_invalid` |
+| HR03 | [`routing`](TC-HR03-T6-SUMMARY-BIASED/doc-routing-r1/README.md) | HR02と同一diff + producer closure判断 | `route_history_preserved / quality_case_design_invalid / r2_required` |
+| RA02 | [`result admission`](TC-RA02-UNBOUND-OPTIMISTIC-DEFECT/result-admission-r1/README.md) | authorityなしの楽観的producer評価 + 不正なT6判定diff | `designed_not_run` |
+| RA03 | [`result admission`](TC-RA03-TASKSPEC-AUTHORITATIVE-STOP/result-admission-r1/README.md) | TaskSpec-bound approval stop result | `designed_not_run` |
+| RA04 | [`result admission`](TC-RA04-MISMATCHED-REVIEW-RECEIPT/result-admission-r1/README.md) | saved reviewer receiptのSender identity不一致 | `designed_not_run` |
 
 ## Ambiguity boundaries r1
 

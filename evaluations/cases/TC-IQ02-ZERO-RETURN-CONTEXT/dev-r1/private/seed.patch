@@ -1,0 +1,13 @@
+diff --git a/src/app/monthly_engine.py b/src/app/monthly_engine.py
+index ed389fa..4a85a6c 100644
+--- a/src/app/monthly_engine.py
++++ b/src/app/monthly_engine.py
+@@ -164,7 +164,7 @@ class MonthlyEngine:
+             total_acquisition_cost = self.__load_total_acquisition_cost(year_month)
+ 
+         raw_total_return = self.__coerce_float(end_metrics.get("total_return_jpy"))
+-        if raw_total_return is None and total_acquisition_cost is not None:
++        if not raw_total_return and total_acquisition_cost is not None:
+             raw_total_return = float(exposure) - total_acquisition_cost
+ 
+         total_return = int(round(raw_total_return or 0))

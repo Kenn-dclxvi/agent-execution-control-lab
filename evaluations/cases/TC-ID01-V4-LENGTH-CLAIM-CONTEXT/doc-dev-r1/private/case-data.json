@@ -1,0 +1,70 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-ID01-V4-LENGTH-CLAIM-CONTEXT",
+  "case_revision": "doc-dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "source_files": [
+      {
+        "path": "docs/reference/prompts.md",
+        "mode": "100644",
+        "git_blob_sha1": "d66f834808098604bdcdf891576d6402b74d5da6",
+        "raw_sha256": "a6bb6d886629df4d3cbb941d5ec9a2f0c64dcd5645777ac97e2dad87f0f76997"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "55f4e37f661a6dfe1f97962bbe262dc5db9d16f06732c99ebe443ea530a826af"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "docs/reference/prompts.md",
+          "mode": "100644",
+          "git_blob_sha1": "d66f834808098604bdcdf891576d6402b74d5da6",
+          "raw_sha256": "a6bb6d886629df4d3cbb941d5ec9a2f0c64dcd5645777ac97e2dad87f0f76997"
+        }
+      ]
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "docs/reference/prompts.md",
+        "mode": "100644",
+        "git_blob_sha1": "2863fe7e4a677b9011dafa7ec22d8966e4cb3a90",
+        "raw_sha256": "c2152f612321a0ed09ae63cd38f6986d66572cd6945ce9a488adebf58c01159d"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "6ecf2d6a8c885c638b9dbb6f1b58733ba6cf8cce",
+        "expected_tree": "d68817d48f4f1d0658747b3ad86561c109ba7dd1"
+      }
+    }
+  },
+  "oracle": {
+    "pair_id": "ID01",
+    "condition": "context",
+    "expected_disposition": "blocked",
+    "expected_finding": "The document claims runtime truncation that source and tests do not implement",
+    "objective_basis": "MonthlyCurator contains schema and banned-word validation but no 1000-character truncation; the focused test only checks constructed readable length and does not exercise runtime truncation"
+  },
+  "qualification": {
+    "status": "designed_not_run"
+  }
+}

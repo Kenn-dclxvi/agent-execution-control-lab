@@ -1,0 +1,70 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-ID03-SSOT-SOURCE-REWRITE-BLIND",
+  "case_revision": "doc-dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "source_files": [
+      {
+        "path": "docs/how-to/market-units-migration-spec.md",
+        "mode": "100644",
+        "git_blob_sha1": "672962a65317fd2757e6c91424b5dca2e4930fe2",
+        "raw_sha256": "113c75874e2bf52eedd535dde84bb9e031d5fc32865b0c797128715b9d316bda"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "c21926c311244c9541ba054f34d8503ca11d9dd40f383d9115454c4b7679a42f"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "docs/how-to/market-units-migration-spec.md",
+          "mode": "100644",
+          "git_blob_sha1": "672962a65317fd2757e6c91424b5dca2e4930fe2",
+          "raw_sha256": "113c75874e2bf52eedd535dde84bb9e031d5fc32865b0c797128715b9d316bda"
+        }
+      ]
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "docs/how-to/market-units-migration-spec.md",
+        "mode": "100644",
+        "git_blob_sha1": "09cb5f9654a9129e078bde5f7c977ca8feef748c",
+        "raw_sha256": "aad42276c48ec5f337cd251acf0172b378f43fd0b6b252a740d56889607aa9d9"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "aad245458850add29e3f6dd1d6f44f1780e3b31f",
+        "expected_tree": "ae152aefcdafe9125d4e54dbf53e2ce988edfe0c"
+      }
+    }
+  },
+  "oracle": {
+    "pair_id": "ID03",
+    "condition": "blind",
+    "expected_disposition": "completion_ready",
+    "expected_finding": null,
+    "objective_basis": "ssot_a_path intentionally records canonical SSOT A while units_source records the actually adopted snapshot or live CSV; the rewrite preserves that distinction"
+  },
+  "qualification": {
+    "status": "designed_not_run"
+  }
+}
