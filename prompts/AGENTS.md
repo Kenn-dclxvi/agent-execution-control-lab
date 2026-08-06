@@ -10,6 +10,13 @@
 - 変更時は新しいrevisionまたはidentityを作る。
 - artifactの存在を評価済みまたは採用済みの根拠にしない。
 
+## README index
+
+- `baselines/README.md`、`candidates/README.md`、`routes/README.md`、`releases/README.md`は各artifact classの現在索引と所在を示す。bundle本文、manifest、evaluation result、release個別READMEの代替正本にしない。
+- READMEへ評価状態やlifecycle状態を要約する場合は一次artifactへ到達できる導線を持たせ、要約だけを判定根拠にしない。
+- artifact追加時は対応する索引を同じ変更で追従させる。索引整理のために既存bundle identity、manifest、評価resultを変更しない。
+- 過去Candidateの形成経緯、評価数値、採用理由、rollback詳細を索引へ長く複製せず、evaluation result、`docs/`の研究記録、個別release READMEへ委譲する。
+
 ## Baseline
 
 - baselineは取得元repository、commitまたはtree、source path、content SHA-256へbindする。
@@ -43,6 +50,17 @@
 - 新しいpredicateの追加より、既存predicateの置換、統合、削除を優先する。
 - 作成前gateが未定義なら、candidate bundleと`evaluations/`配下の評価profileを先に作らない。
 
+### Candidate索引
+
+`prompts/candidates/README.md`はcandidate bundleの一覧と評価状態への導線を持つ索引とする。
+
+- 一つのbundle identityにつき一行を持ち、baseline、変更軸、評価状態への導線を記録する。
+- prompt identity、bundle hash、target mapの正本は各manifestとし、READMEへ複製して別identityを作らない。
+- `not_evaluated`は評価resultが存在しない状態として索引へ記録できる。評価を実施した場合は対応する一次resultへリンクする。
+- 採用、release status、approval、runtime projectionはCandidate評価状態と別軸であり、Candidate索引の状態列へ混ぜない。
+- candidate bundleを追加・削除しない限り、索引再編だけを理由に既存行を現在解釈へ書き換えない。後続評価による状態更新は一次resultに基づいて行う。
+- 索引変更後はcandidate bundle実体が索引から参照可能であることを確認する。
+
 ## Route
 
 - routeは共通全文sourceへ実行前に合成する最小差分として扱う。
@@ -57,3 +75,13 @@
 - 評価上の`stopped`と、別判断による`approved`または`projected`を混ぜない。
 - THE-CAPTIONへの反映はrelease作成とは別operationとする。
 - projection後も、元の評価状態と未解決riskを削除しない。
+
+### Release索引
+
+`prompts/releases/README.md`はrelease identityとlifecycleの現在台帳とする。
+
+- 一つのrelease identityにつき一行を持ち、source candidate、評価要約、`release status`、`approval`、`runtime projection`を独立列で保持する。
+- rollback identity、projection対象、PR / commit、未解決risk、評価の詳細は個別release READMEまたは一次evaluation resultを正とし、索引本文へ重複させない。
+- release status、approval、runtime projectionのいずれかが後続operationで変化した場合だけ、一次artifactに基づいて該当列を追従させる。別軸の評価状態を理由に遡及変更しない。
+- `projected`済みreleaseの後続評価で新しいriskが見つかっても、既存projection stateを自動的に取り消したものとして記述しない。
+- 索引変更後はrelease directory実体が索引から参照可能であることを確認する。
