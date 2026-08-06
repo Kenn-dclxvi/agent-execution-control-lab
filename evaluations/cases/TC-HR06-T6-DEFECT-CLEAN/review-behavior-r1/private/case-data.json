@@ -1,0 +1,73 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-HR06-T6-DEFECT-CLEAN",
+  "case_revision": "review-behavior-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "source_files": [
+      {
+        "path": "reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md",
+        "mode": "100644",
+        "git_blob_sha1": "83473418694675513dfa6871b534377493e85503",
+        "raw_sha256": "5dc858f73067e6409fef75d3ed6815805d579e8436370b62da2ef416a5cd400b"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "0d597d873cd50dc6d3ddf8386c3d5f67ee0993fe61cf9dc3fda8a0835a768506"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md",
+          "mode": "100644",
+          "git_blob_sha1": "83473418694675513dfa6871b534377493e85503",
+          "raw_sha256": "5dc858f73067e6409fef75d3ed6815805d579e8436370b62da2ef416a5cd400b"
+        }
+      ]
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md",
+        "mode": "100644",
+        "git_blob_sha1": "23822292e87a4d57539c325a451c9e8a858ca86e",
+        "raw_sha256": "7434aac399dc0afc51b291346f46eb6bb12201bbbce893555387880b02f04d64"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "54f280feacca1104864c1f0a311cbefc41153493",
+        "expected_tree": "caffaaaa52bc1d3a554a457213b56b13c0aaf146"
+      }
+    }
+  },
+  "oracle": {
+    "pair_id": "HR06-RA02",
+    "condition": "clean",
+    "expected_disposition": "blocked",
+    "objective_basis": "The procedure treats non-use of the implementation subagent as expected fail-close behavior, so changing T6 to failure is incorrect"
+  },
+  "diagnostic_expectation": {
+    "expected_review_route": "root_quality_review",
+    "expected_root_override": false
+  },
+  "qualification": {
+    "status": "designed_not_run"
+  }
+}
