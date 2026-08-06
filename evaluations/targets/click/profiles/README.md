@@ -1,8 +1,17 @@
-# click profiles
+# click profile index
 
-target instance `click`のevaluation profileを置く。`M`は指定がない限り24へ固定する。段階ごとのCase / N / B / Mは[`docs/public-target-selection-phase0.md`](../../../../docs/public-target-selection-phase0.md)の「Phase 1の実行設定」を正本とする。
+`click` target instanceのevaluation profileを引くための索引である。profile固定条件、reasoning運用基準、runtime / CLI互換、`max_workers`の規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。各profileのmodel、runtime identity、permission、token accounting、set / case、rating、Nなどの実効条件はprofile JSONを正とする。
 
-2026-07-27以降の新規通常比較はreasoning effort `medium`を運用基準とする。既存`high` profileとresultは履歴として保持し、reasoningが異なるresultを同一comparisonへ混ぜない。
+状態列は索引用の要約であり、実測値、score、KPI、停止判断は[`click results`](../results/README.md)の各一次resultを正とする。
+
+## runtime identity
+
+profileの`agent_environment.runtime_identity_sha256`が指す共有runtimeは次の2 revisionである。runtime構成手順、`PYTHONPATH=src`などのgate運用規則は[`../AGENTS.md`](../AGENTS.md)を正本とし、各runがどちらのrevisionを固定したかはprofile JSONを正とする。
+
+| revision | `runtime_identity_sha256` | 備考 |
+| --- | --- | --- |
+| r1 | `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` | 共有venvの`pip freeze --all`出力のSHA-256 |
+| r2 | `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952` | r1へ`uv==0.11.32`を追加。Std14の全runはr2へ固定 |
 
 ## 現在のprofile
 
@@ -32,33 +41,4 @@ target instance `click`のevaluation profileを置く。`M`は指定がない限
 | [`click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1`](click-c81-repository-authority-reasoning-medium-standard14-r2-global-m24-n5-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | 完了（70 / 70 valid、score 4 × 70） |
 | [`click-c125-reasoning-medium-standard14-r2-global-m24-n5-cli0146-r1`](click-c125-reasoning-medium-standard14-r2-global-m24-n5-cli0146-r1.json) | `click-standard14-r2` | 14 | 5 | 1 | 24 | CLI 0.146.0で完了（70 / 70 valid、score 4 × 65 / score 1 × 5）。CLI 0.144.0のC81とは非互換 |
 
-`B`はprofileのfieldではなく、同一profileを変更せず独立resultとして反復した回数である。P1-cはP1-bと同じ`N=5` profileを変更せず、合計`B=3`として完了した。
-
-F01 profile r1はLayer 2開始前に必須のall-agent token accounting宣言がないことを検出し、runを生成せず停止した。履歴を上書きせず、r2で`token_accounting`とrequired commandのcommand evidence protocolだけを追加した。各profileの一次結果とClick Std14の集約値は[`click results`](../results/README.md)を正本とする。
-
-## 実行環境の固定
-
-`agent_environment`は比較条件であり、次を実測して固定した。
-
-| 項目 | 値 | 根拠 |
-| --- | --- | --- |
-| `codex_cli` | 既存Click result `0.144.0` / Candidate125 `0.146.0` | 各実行前の`codex --version`実測値。異なるCLIのresultを同一comparisonへ混ぜない |
-| `python_version` | `3.14.5` | 共有runtimeの`platform.python_version()` |
-| `runtime_identity_sha256` | r1 `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` / r2 `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952` | 共有venvの`pip freeze --all`出力のSHA-256。r2は`uv==0.11.32`を追加 |
-
-共有runtimeは`/Users/kenn/repos/_verification/click-prompt-ab-measurement/environment/.venv`に置き、`runtime_links`の`venv_shim`としてworkspaceの`.venv`へmaterializeする。fixture生成元のlocal cloneは`/Users/kenn/repos/click`（target commitでdetach）である。
-
-- 共有venvは`pytest`と、target commitから通常installした`click`を持つ。`click`を入れるのは`importlib.metadata`へversion metadataを供給するためで、実装はgate実行時に`PYTHONPATH=src`でworkspace側の`src`から解決させる。
-- `pip install .`は`direct_url.json`を残し、`pip freeze`が`click @ file:///...`という環境依存の行を出す。identityをpath非依存にするため、install後に`direct_url.json`を削除してから`pip freeze --all`を取得した。結果は`click==8.5.0.dev0`である。
-- `PYTHONPATH=src`を付けない場合、`tests/test_deprecations.py`が`PackageNotFoundError`でcollection errorになる。`venv_shim`は共有purelibを`.pth`で追加するだけでworkspaceの`src`を通さないため、gate commandへ明示する。
-- F07-Pではconsole scriptに依存せず、`UV_CACHE_DIR=.uv-cache .venv/bin/python -m uv lock --check --offline`を使う。Std14の全runはruntime r2へ固定した。
-
-## 実測したgateの挙動
-
-| 条件 | 結果 |
-| --- | --- |
-| seed未適用（target commit）full gate | `1939 passed, 25 skipped, 1 xfailed` |
-| seed適用済みfixture focused gate | `30 failed, 250 passed` |
-| seed適用済みfixture full gate | `30 failed, 1909 passed, 25 skipped, 1 xfailed` |
-
-gate実行後もfixtureは`git status`上cleanである（pytestが`.pytest_cache/.gitignore`を自動生成するため、cacheがdriftにならない）。
+`B`はprofile fieldではなく、同一profileを変更せず独立resultとして反復した回数を表す。profileの存在や表の状態要約だけを評価完了の根拠にせず、該当する一次resultで確認する。

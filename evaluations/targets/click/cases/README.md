@@ -1,8 +1,8 @@
-# click cases
+# click case index
 
-target instance `click`のcase artifactを置く。1 case revisionごとに`README.md`、`trial-prompt-input.json`、`private/`（`seed.patch`と`case-data.json`）を持つ。
+`click` target instanceのcase artifactを引くための索引である。1 case revisionは`README.md`、`trial-prompt-input.json`、`private/`の固定artifactを持つ。fixture qualification、seed、model-visible境界、revision更新の規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。
 
-カバーすべき判断点と元caseの対応は[`docs/public-target-selection-phase0.md`](../../../../docs/public-target-selection-phase0.md)の「14項目のcoverage対応」を正本とする。case追加手順は[`evaluations/cases/README.md`](../../../cases/README.md)の追加順序に従う。
+14項目のcoverage対応は[`docs/public-target-selection-phase0.md`](../../../../docs/public-target-selection-phase0.md)を設計記録として参照する。各行の状態は索引用の要約であり、case identityは各case artifact、実測値とscoreは[`results/`](../results/README.md)の一次resultを正とする。
 
 ## 現在のcase
 
@@ -24,10 +24,4 @@ target instance `click`のcase artifactを置く。1 case revisionごとに`READ
 | [`CLICK-A01-LATENT-CONTEXT-POLICY/r1`](CLICK-A01-LATENT-CONTEXT-POLICY/r1/README.md) | A01 | latent ambiguityの確認停止 | N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1`](CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1/README.md) | A02 | repository根拠による無質問解決 | N=3 evaluated（3 / 3 score 4） |
 
-14項目のcaseを固定し、Bundle Aの標準setは70 / 70件がscore `4`で完了した（[一次結果](../results/click-control-free-standard14-n5_2026-07-26.md)）。F07 r1とF07-P r1 / r2は失敗revisionの履歴として保持し、標準setへは含めない。
-
-## 実測で確定した共通条件
-
-- gate commandは**repository rootをcwdとして実行する**。cwd外実行では`tests/test_utils/test__expand_args.py::test_expand_args`がseedと無関係に失敗する。
-- seedは2026-05-01以降のcommitから選び、`src/`部分だけの逆patchとして固定する。逆patchが現在のtarget commitへ当たること（後続commitで同じ箇所が変更されていないこと）を`git apply --check`で確認する。
-- seed patchは純粋なdiffだけを保存する。`git show`のheaderはcommit messageを含み、修正内容がoracleとして漏れるため除去する。
+Bundle Aの標準14項目baselineは[`click-control-free-standard14-n5_2026-07-26.md`](../results/click-control-free-standard14-n5_2026-07-26.md)を一次resultとする。F07 r1とF07-P r1 / r2は履歴revisionとして保持され、標準setのmembershipは各set artifactを正とする。
