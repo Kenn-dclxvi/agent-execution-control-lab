@@ -2,11 +2,13 @@
 
 固定済みprofileで得た再現可能な結果を置く。raw logを無条件にcommitせず、必要なprovenance、集計、比較情報、除外理由を残す。
 
-このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
+このdirectoryはv1 / v2の履歴resultを含む。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。現行のv4の一次結果は1 case × 1 sampleのatomic runであり、v3 resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
 この索引は各resultの要約と所在だけを示す。数値、score、状態の正本は各result本体とする。節は新しい系列から並べ、節内は実行順（古い順）に並べる。過去の判定と当時の状態は書き換えず、後続の再解釈は当該段落に併記した文言をそのまま残す。
 
+節タイトルと本文には系統の異なる版番号が出てくる。**単独の`v1` / `v2` / `v3` / `v4`は評価基盤（evaluation foundation）の世代を指す。世代の定義と遷移は[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)の「Evaluation foundation世代」節を正本とする。** 採点契約は`Rating v13` / `Rating v14`のように`Rating`を付け、result schemaは`prompt-set-result/v1`のようにschema名を付け、command evidence protocolは`command evidence v3`のように対象名を付ける。
 
+このdirectory内では、file名に`-atomic-n<N>-`または`-atomic-reuse-`を持つ62件がv4（atomic run）経路である。v4経路の最初のresultは2026-07-31の[`Candidate106 / Candidate107 Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)（第5節）で、第4節のCandidate108以降はすべてv4経路である。それより前のresultはv3以前の経路であり、履歴として保持する。
 
 ## 目次
 
@@ -20,7 +22,7 @@
 8. Candidate62〜Candidate77（Rating v12〜v13、2026-07-22〜07-23）
 9. Candidate41〜Candidate61（標準14項目の確立、2026-07-20〜07-22）
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
-11. v3初期（Baseline〜Candidate15、2026-07-15〜07-16）
+11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
 ## 1. Review admission系（Candidate147情報封鎖〜Candidate166、2026-08-04）
@@ -405,7 +407,7 @@ TaskSpecのcriterion owner語列と明示的なproducer delegationを分離し�
 
 Candidate41 expanded resultと同じv9互換条件でbaseline、ControlFreeRepository、Candidate35を新規実行した[`4-result expanded N=5 comparison`](baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md)は、各60 / 60 valid runをappend-only登録した。score分布はbaseline `4 / 3 = 58 / 2`、ControlFreeRepository `4 / 3 = 59 / 1`、Candidate35とCandidate41は各`4 = 60`だった。Candidate35のall-agent token合計はCandidate41比`+7,347,269`、`+50.02%`で、12 case中11 caseで大きかった。`elapsed_seconds`中央値はCandidate41比`+668.926`秒、`+57.07%`だった。winner、採用、release、本体反映は未判断、未実施である。
 
-## 11. v3初期（Baseline〜Candidate15、2026-07-15〜07-16）
+## 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 
 最初のv3 standalone resultは[`candidate2 expanded 12-case global M=24 N=1`](candidate2-expanded12-global-m24-n1_2026-07-15.md)である。candidate2だけをimmutableな`prompt_set_identity`へ結び付けて保存し、比較、winner、採用判断は行っていない。
 

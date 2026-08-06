@@ -104,6 +104,30 @@ quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだ�
 
 なお、この節が以前`owner-producer-quality-v8`を現行として指定し、owner-producer evidenceをscore `4`の必要条件、response markerのNFKC / casefold照合を要求していた記述は、v8時点の契約に基づくものである。v8からv12で採点した既存resultは当時の契約のまま保持し、再採点しない。revision別の要求は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)を参照する。
 
+## Evaluation foundation世代
+
+評価基盤（evaluation foundation）の世代は、単独の`v1` / `v2` / `v3` / `v4`で表記する。この節を世代遷移の正本とする。採点契約（`Rating v13` / `Rating v14`）、result schema（`prompt-set-result/v1`）、command evidence protocol（`command evidence v3`）は別系統の版番号であり、単独の`vN`で書かない。
+
+| 世代 | 保存単位 | 主なartifact | 状態 |
+|---|---|---|---|
+| v1 | cycle単位 | `winner`、`kpi_order`、`decision.json` | 履歴 |
+| v2 | 固定A / B比較 | `comparison.json`、`difference_b_minus_a` | 履歴 |
+| v3 | 1 prompt setごとのappend-only registry result | `prompt-set-result/v1`（root-only token）、`prompt-set-result/v2`（all-agent token） | 履歴互換 |
+| v4 | 1 case × 1 sampleのatomic run | `runs/<atomic_run_id>.json`、`pools/<pool_key>.json` | 現行 |
+
+切替点は次のとおり。
+
+- **v1 / v2 → v3**: v1 cycle、result、profileは2026-07-15までに作成した。同日中にv3 registry resultの登録も始まっているため、result file名だけでは世代を分離できない。個々のresultの世代は、当該resultが宣言するschema fieldを正とする。
+- **v3内のtoken accounting改訂**: 2026-07-16までに保存した`prompt-set-result/v1`は`total_tokens`へroot agentだけを数えている。all-agent revisionは`execution-capsule/v2`、`evaluation-set/v2`、`execution/v3`、`prompt-set-result/v2`、`prompt-set-comparison-view/v2`を使う。詳細は「旧artifactの扱い」節を正本とする。
+- **v3 → v4**: 2026-07-31に[`scripts/atomic_run_registry.py`](../scripts/atomic_run_registry.py)を追加した時点で切り替わった。`evaluations/results/`でv4経路の最初のresultは[`Candidate106 / Candidate107 Standard14 atomic N=5`](../evaluations/results/candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)である。以降のfile名は`-atomic-n<N>-`または`-atomic-reuse-`を持つ。
+
+世代間の扱いは次に限定する。
+
+- 旧世代のresultを新世代のschemaへin-place変換しない。identityと内容を遡及変更しない。
+- v3 prompt-set resultをv4へ取り込む場合は、`atomic_run_registry.py import-result`による索引化だけを行う。元resultは変更しない。
+- 異なる世代のresultを同一comparisonへ混ぜない。
+- 世代を上げる場合は、この節へ行を追加し、切替点と最初のresultを併記する。既存行を書き換えない。
+
 ## Append-only result registry
 
 ### Atomic run registry（現行）
