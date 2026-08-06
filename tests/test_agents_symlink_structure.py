@@ -6,8 +6,18 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# path-scoped agent instructions: root と 6 領域ディレクトリ
-SCOPES = ["", "docs", "prompts", "evaluations", "scripts", "tests", "layer2"]
+# path-scoped agent instructions: root と領域ディレクトリ
+SCOPES = [
+    "",
+    "docs",
+    "prompts",
+    "evaluations",
+    "evaluations/targets",
+    "evaluations/targets/click",
+    "scripts",
+    "tests",
+    "layer2",
+]
 
 
 def _scoped(name: str, scope: str) -> str:
