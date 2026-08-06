@@ -64,6 +64,8 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 
 主要文書は次のとおり。`docs/`配下の研究文書は[`docs/README.md`](docs/README.md)で役割別（正本、現在の研究状態、完了済み研究記録、historical）に索引化しており、未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)にまとめる。領域固有の作業規則は各`AGENTS.md`を正本とする。
 
+研究内容を実務から読みたい場合は、[「AIへの指示は、短いほど安いのか？」](docs/01_why-prompt-writing-changes-your-bill.md)から始まる全8本のExecution Controlシリーズを参照してください。各記事は単体でも読め、ファイル名の`01`〜`08`が推奨順です。
+
 | ドキュメント | 内容 |
 | --- | --- |
 | [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
