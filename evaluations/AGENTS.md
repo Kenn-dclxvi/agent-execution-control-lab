@@ -98,3 +98,16 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 - root-only token resultをall-agentへ補正する場合も、元resultを残して新schema resultをappendする。
 - excluded attemptとenvironment failureをprompt qualityへ混ぜない。
 - 全session usageが取得できないrunのtokenを推定しない。
+
+## Result索引
+
+`evaluations/results/README.md`は、このdirectoryへ登録済みのresultを引くための索引とする。
+
+- 索引は要約と所在だけを持つ。数値、score、状態の正本は各result本体とし、正本を索引へ移さない。
+- 節は新しい系列から並べ、節内は実行順（古い順）で並べる。節を追加または改称した場合は目次を追従させる。
+- 新しいresultは該当する節の末尾へ追記する。file先頭やfile末尾への場当たり追記をしない。
+- 一件のresultにつき一段落とする。要約はresultへのlink、件数、score分布、主要KPI、現在状態に限定する。
+- 既存段落を現在解釈へ書き換えない。後続の再解釈は当該段落へ併記文として追加し、当時の記述を残す。
+- 節を再編する場合は段落の移動だけを行い、本文を書き換えない。移動後に段落集合が変わっていないことを機械確認する。
+- directory内の全resultを索引から参照可能にする。要約未作成のresultは専用節へlinkだけ登録し、要約を推測で作らない。
+- 索引を変更した場合は、link切れ0件と全resultの被参照を機械確認してから完了とする。

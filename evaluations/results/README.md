@@ -4,6 +4,27 @@
 
 このdirectoryの既存文書はv1 / v2の履歴resultである。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
 
+この索引は各resultの要約と所在だけを示す。数値、score、状態の正本は各result本体とする。節は新しい系列から並べ、節内は実行順（古い順）に並べる。過去の判定と当時の状態は書き換えず、後続の再解釈は当該段落に併記した文言をそのまま残す。
+
+
+
+## 目次
+
+1. Review admission系（Candidate147情報封鎖〜Candidate166、2026-08-04）
+2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
+3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
+4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
+5. Candidate94〜Candidate107（Rating v14 Medium、targeted、2026-07-30〜07-31）
+6. Rating v13条件の横断比較（2026-07-26）
+7. Candidate78〜Candidate93（Rating v13からv14への移行、2026-07-26〜07-29）
+8. Candidate62〜Candidate77（Rating v12〜v13、2026-07-22〜07-23）
+9. Candidate41〜Candidate61（標準14項目の確立、2026-07-20〜07-22）
+10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
+11. v3初期（Baseline〜Candidate15、2026-07-15〜07-16）
+12. この索引に要約を持たないresult
+
+## 1. Review admission系（Candidate147情報封鎖〜Candidate166、2026-08-04）
+
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
 [文書held-out / independent SA r1](candidate147-information-closure-document-heldout-sa-r1_2026-08-04.md)は、ID05と異なる題材でblind 10 / 10、context 4 / 10、差+6を記録した。独立SA初回のHTTP 401と、次cycleのfixture mode identity不一致をprompt behaviorから分離し、permission込みのr3で10 / 10正解、independent producer 10 / 10、root duplicateとforbidden context各0 / 10を確認した。これは明示routeのmechanism diagnosticであり、自律routingの証拠ではない。
@@ -20,9 +41,53 @@ Candidate165の[review result admission targeted gate r1](candidate165-review-re
 
 Candidate166の[Review4 preservation gate](candidate166-prior-evaluation-review-admission-r1_2026-08-04.md)は20 / 20 valid、事前oracleとのterminal一致18 / 20だった。独立SA route 10 / 10、禁止canary漏洩0 / 10、root override / substitution 0件、RA02 / RA03 / RA04各5 / 5は維持した。後続の[HR03 case妥当性見直し](../../docs/candidate166-review4-case-validity-analysis.md)で、HR03 r1は期待terminalを一意に導く証拠が不足していたと判定した。Candidate166のquality failureとは扱わず、`case_design_invalid / review4_quality_not_adjudicated`としてStandard14前で停止している。
 
+## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
+
+Candidate148の[`Free比較 Standard14 N=5`](candidate148-free-five-point-execution-control-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ`GOAL / START / SEARCH / SPLIT / FINISH`の5項目だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`-17.21%`、all-agent total token中央値`-21.76%`、elapsed中央値`-3.63%`だった。一方、両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、START制御は成立しなかった。Candidate148は品質gate不通過として`not_adopted`で停止する。
+
+Candidate150の[`F02 / F04 / F07 targeted N=5`](candidate150-free-required-outcome-bind-readable-v14-medium-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は15 / 15件がscore `4`で、複数の必要成果を変更前に一つの方針へ結び付けるmechanismも15 / 15件で成立した。3 case集約はFree比token`-2.86%`、elapsed`+7.89%`だったが、targeted N=5のため全体cost改善は主張しない。Standard14、採用、release、本体反映は未実施である。
+
+Candidate151の[`A01 / A02 / F01 / F02 / F04 / F07 targeted N=5`](candidate151-free-evidence-consumer-boundary-readable-v14-medium-a01-a02-f01-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は30 / 30件がscore `4`で、6 case集約はFree比token`-25.76%`、elapsed`-9.41%`だった。一方、A02の変更後method探索が2 / 5件に残り、書いた調査境界のmechanism gateに失敗したため停止した。KPI差を当該mechanismの効果として採用せず、Standard14、採用、release、本体反映は未実施である。
+
+Candidate152の[`4つの判断ルール targeted N=5`](candidate152-free-four-decision-rules-readable-v14-medium-targeted-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ外部説明用の4文だけを追加した。「仕様を決める」はFreeの質問停止0 / 5に対して変更前質問が1 / 5、「調べる」はF08の変更前command中央値がFree `10`件から`7`件となり、行動選択への影響を観測した。「変更を始める」と「作業を終える」は狙った選択が出たがFreeでも同じだったため増分効果を判定できない。4文だけで完全制御できたとは扱わず、Standard14全体、採用、release、本体反映へ進めていない。
+
+Candidate156の[`Free比較 Standard14 N=5`](candidate156-free-five-prompt-conditions-readable-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ利用者指定の5文だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`+3.98%`、all-agent total token中央値`+3.18%`、elapsed中央値`+14.10%`だった。両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、利用者成果が不足した場合の質問停止は成立しなかった。Candidate156は品質gate不通過として`not_adopted`で停止する。
+
+Candidate157の[`Free比較 F08 N=5`](candidate157-free-focused-prechange-research-readable-v14-medium-f08-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を調べるか」に対応する一文だけをFreeへ追加した。5 / 5件がscore `4`で、変更前command中央値はFreeの`10`件から`7`件へ減った。token中央値は`-27.56%`、elapsed中央値は`-18.05%`だった。品質を維持して狙った行動への影響を確認したが、単一case N=5からStandard14全体の料金削減へ一般化しない。
+
+Candidate158の[`Free比較 A01 / A02各N=5`](candidate158-free-outcome-method-readable-v14-medium-a01-a02-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を成果にするか」に対応する一行だけをFreeへ追加した。A01の質問停止はFreeの`0 / 5`件から`5 / 5`件となり、A02は過剰質問なしの完了を`5 / 5`件で維持した。2 case合算中央値はtoken`-45.13%`、elapsed`-47.90%`だが、主にA01の誤実装を質問停止へ変えた作業量差であり一般的な料金削減率にはしない。
+
+Candidate159の[`Free比較 F02 N=5`](candidate159-free-change-start-readable-v14-medium-f02-n5-cli0146_2026-08-04.md)は、「いつ変更を始めるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的方針は`0 / 5 → 4 / 5`となった。最初のfile changeまでには両条件とも`5 / 5`が方針を形成しており、cost低下は観測していない。
+
+Candidate160の[`Free比較 D01 N=5停止結果`](candidate160-free-assignment-result-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、起動前の担当・対象・結果対応が`1 / 5 → 5 / 5`となった一方、1件でrootの重複reviewが出たため掲載せず停止した。Candidate161の[`Free比較 D01 N=5`](candidate161-free-assignment-result-closure-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、同一判定のやり直し禁止まで含め、起動前対応`1 / 5 → 5 / 5`、重複review`0 / 5`を確認した。cost低下は観測していない。
+
+Candidate162の[`Free比較 F03 N=5`](candidate162-free-completion-ticket-readable-v14-medium-f03-n5-cli0146_2026-08-04.md)は、「何を確認したら終わるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的実行票は`0 / 5 → 5 / 5`となった。required validation再実行と最終差分確認後の追加調査は0 / 5件、token中央値は`-9.79%`、elapsed中央値は`+10.72%`だった。
+
+Candidate163の[`Free比較 Standard14 N=5`](candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md)は、Candidate157、158、159、161、162で個別確認した5文をFreeへそのまま統合した。Candidate163は70 / 70件がscore `4`で、Freeが5 / 5件失敗したA01も5 / 5件で質問停止した。Free比の中央値はAPI価格換算`-14.01%`、all-agent total token`-15.85%`、elapsed`-5.74%`で、3指標とも5 / 5 iterationで低下した。5文セット全体の結果であり、各一文の因果効果へ分解しない。採用は未判断である。
+
+## 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
+
 Candidate147互換条件のControlFreeRepositoryを[`Standard14各N=100`](control-free-repository-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-03.md)まで追試した。N=80から不足していた280件だけを追加し、累計1,400件はscore `4 / 0 = 1,300 / 100`、quality中央値`92.857`、token中央値`3,457,525`、elapsed中央値`1,180.997秒`だった。scoreにかかわらず完走するエビデンス取得であり、N=5からN=100までの中央値推移を記述値として保持する。Candidate147の採用、release、projection状態は変更しない。
 
 ControlFreeRepositoryとCandidate147の[`互換Standard14 N=100比較`](control-free-candidate147-v14-medium-standard14-atomic-n100-cli0146_2026-08-03.md)は、各1,400 runの登録済み一次結果を再利用した。Freeはscore `4 / 0 = 1,300 / 100`、C147は`4 = 1,400`だった。`C147 - Free`の集約中央値はquality `+7.143`、all-agent token `-59.67%`、elapsed `-29.56%`である。quality分布が異なるため同一品質の効率比較とは扱わず、case別中央値とA01の既知経路を記述する。一次結果とadoption、release、projection状態は変更しない。
+
+BaselineとControlFreeRepositoryは、Candidate147と同じRating v14、Medium、Standard14、CLI 0.146、`M=24`で[`各N=5`](baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)を新規実行した。両条件とも70 / 70 valid、excluded attempt 0だった。score分布はBaseline `4 / 3 / 0 = 65 / 1 / 4`、ControlFreeRepository `4 / 0 = 65 / 5`で、Candidate147の保存済み70 / 70 score `4`とは品質分布が異なる。集約中央値はBaseline `92.857 / 13,624,982 token / 3,333.567秒`、ControlFreeRepository `92.857 / 3,488,611 / 1,166.296秒`、Candidate147 `100.000 / 1,447,626 / 852.543秒`だった。低scoreがあるためcost差は記述比較に限定する。
+
+Candidate43とCandidate71もCandidate147と同じ条件で[`各N=5`](candidate43-candidate71-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)を新規実行した。両条件とも70 / 70 valid、score `4`、excluded attempt 0だった。集約中央値はCandidate43 `100.000 / 3,151,442 token / 1,091.549秒`、Candidate71 `100.000 / 2,030,116 / 988.187秒`、Candidate147 `100.000 / 1,447,626 / 852.543秒`だった。Candidate147はCandidate71比token `-28.69%`、elapsed `-13.73%`だが、case別tokenは4 caseで高く、差はN=5の記述比較に限定する。
+
+Baseline、ControlFreeRepository、Candidate43、Candidate71、Candidate147の[`試験環境別推移`](baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md)は、Rating v13 High、v13 Medium、v14 Mediumの共通N=5比較と、C43 / C71の過去B18、C71のreasoning 6水準、C147のN=100を分離して整理する。共通3環境では`Candidate71 < Candidate43 < ControlFreeRepository < Baseline`のtoken・elapsed順位が維持された。Candidate147はv14 Mediumだけで同列比較でき、C71比token`-28.69%`・elapsed`-13.73%`、N=100で1,400 / 1,400 score `4`だった。異なるrating、reasoning、Evaluation set identity、CLIの絶対値は互換比較へ混ぜない。
+
+上記一次resultの状態は変更しない。2026-08-03の後続別stateで[`Candidate147採用判断`](../../docs/candidate147-adoption-decision.md)を記録し、`adopted / release_not_created / runtime_not_projected`とした。採用理由はC125より統計的に低costであることではなく、C145の安全境界を保持したmechanism成立、C145比cost回復、Standard14 N=100の低Score 0件である。
+
+## 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
+
+Candidate108はCandidate107のdeadline大小比較を削除し、nonterminal resultを実行票の完了判定に使わないwait-only遷移へ置換した。[`F03 gateとStandard14 atomic reuse N=5`](candidate107-candidate108-validation-ticket-terminal-closure-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)では、F03 5 / 5 score `4`、nonterminal後wait-only 3 / 3でmechanism gateを通過した。標準14は保存済みF03 5 runを再利用し、残る13 case × 5 = 65 runだけを発行した。最終70 / 70件がscore `4`で、C107比token中央値`+15.75%`、elapsed`+3.69%`だった。現在状態は`targeted_f03_evaluated / standard14_evaluated / quality_gate_passed / mechanism_gate_passed / adoption_not_decided`であり、release、runtime projection、本体反映は未実施である。
+
+Candidate109の[`F03 atomic N=5`](candidate108-candidate109-validation-ticket-outer-wait-closure-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、terminal前model再入0件で、C108比token中央値`-15.97%`、elapsed中央値`-16.43%`だった。ただしouter yield最大値という実行方法をpromptへ指定する変更軸が設計方針に反するため、現在状態を`prompt_design_boundary_failed / stopped`とする。
+
+Candidate110の[`F03 atomic N=5`](candidate110-validation-ticket-decision-boundary-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、C108比token中央値`-1.31%`、elapsed中央値`-6.99%`だった。一方、terminal前model再入なしは2 / 5だけで、3件がouter yield `1000ms`からnonterminal resultを返し、うち2件は進捗messageを挟んだ。KPI低下を制御効果へbindできないためStandard14を発行せず、現在状態は`targeted_f03_evaluated / quality_gate_passed / targeted_cost_both_lower / control_not_demonstrated / result_registered / stopped`である。
+
+Candidate111の[`F03 atomic N=5`](candidate111-validation-ticket-model-return-boundary-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、C108比token中央値`-0.99%`、elapsed中央値`-9.34%`だった。発行時にmodel return horizonを明示したrunは4 / 5件で、`1000ms`を選んだ2件は2 / 2件がnonterminalとなり、判断を追加せず同じcell IDへwaitするためだけにmodelへ再入した。中間messageは0件だったが、不要な再入削減は3 / 5に留まったため、現在状態は`targeted_f03_evaluated / quality_gate_passed / targeted_cost_both_lower / model_return_gate_failed / result_registered / stopped`である。
 
 Candidate112の[`Rating v14、Medium、A01 / A02 / F01各N=5`](candidate108-candidate112-evidence-admission-scheduling-boundary-v14-medium-a01-a02-f01-atomic-n5-cli0146_2026-07-31.md)は15 / 15 score `4`だった。保存済みCandidate108の対象15 atomic runを再実行せず比較し、合算中央値はtoken`+3.53%`、elapsed`-3.10%`だった。tool callとmodel stepが各`+16`件でevidence scheduling制御は成立しなかったため、`stopped`としStandard14へ進めない。
 
@@ -112,63 +177,7 @@ Candidate147の[`F06 N=100`](candidate147-result-effect-scope-v14-medium-f06-ato
 
 Candidate147の[`Standard14 N=100`](candidate147-result-effect-scope-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-02.md)は、先行F06 N=100と残る13 caseの保存済みN=5を再利用し、不足1,235件を24 / 24 / 24 / 23件ずつ追加した。14 case合計1,400 / 1,400件がscore `4`で、score `3`以下、excluded attempt、controller errorは0件だった。集約中央値はtoken`1,394,412.5`、elapsed`831.914秒`で、保存済みCandidate125 N=5比`-0.49% / -1.71%`だった。ただし基準側はN=5なので、同数sampleのpaired比較や採用優位は未判断とする。
 
-BaselineとControlFreeRepositoryは、Candidate147と同じRating v14、Medium、Standard14、CLI 0.146、`M=24`で[`各N=5`](baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)を新規実行した。両条件とも70 / 70 valid、excluded attempt 0だった。score分布はBaseline `4 / 3 / 0 = 65 / 1 / 4`、ControlFreeRepository `4 / 0 = 65 / 5`で、Candidate147の保存済み70 / 70 score `4`とは品質分布が異なる。集約中央値はBaseline `92.857 / 13,624,982 token / 3,333.567秒`、ControlFreeRepository `92.857 / 3,488,611 / 1,166.296秒`、Candidate147 `100.000 / 1,447,626 / 852.543秒`だった。低scoreがあるためcost差は記述比較に限定する。
-
-Candidate43とCandidate71もCandidate147と同じ条件で[`各N=5`](candidate43-candidate71-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)を新規実行した。両条件とも70 / 70 valid、score `4`、excluded attempt 0だった。集約中央値はCandidate43 `100.000 / 3,151,442 token / 1,091.549秒`、Candidate71 `100.000 / 2,030,116 / 988.187秒`、Candidate147 `100.000 / 1,447,626 / 852.543秒`だった。Candidate147はCandidate71比token `-28.69%`、elapsed `-13.73%`だが、case別tokenは4 caseで高く、差はN=5の記述比較に限定する。
-
-Baseline、ControlFreeRepository、Candidate43、Candidate71、Candidate147の[`試験環境別推移`](baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md)は、Rating v13 High、v13 Medium、v14 Mediumの共通N=5比較と、C43 / C71の過去B18、C71のreasoning 6水準、C147のN=100を分離して整理する。共通3環境では`Candidate71 < Candidate43 < ControlFreeRepository < Baseline`のtoken・elapsed順位が維持された。Candidate147はv14 Mediumだけで同列比較でき、C71比token`-28.69%`・elapsed`-13.73%`、N=100で1,400 / 1,400 score `4`だった。異なるrating、reasoning、Evaluation set identity、CLIの絶対値は互換比較へ混ぜない。
-
-上記一次resultの状態は変更しない。2026-08-03の後続別stateで[`Candidate147採用判断`](../../docs/candidate147-adoption-decision.md)を記録し、`adopted / release_not_created / runtime_not_projected`とした。採用理由はC125より統計的に低costであることではなく、C145の安全境界を保持したmechanism成立、C145比cost回復、Standard14 N=100の低Score 0件である。
-
-Candidate148の[`Free比較 Standard14 N=5`](candidate148-free-five-point-execution-control-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ`GOAL / START / SEARCH / SPLIT / FINISH`の5項目だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`-17.21%`、all-agent total token中央値`-21.76%`、elapsed中央値`-3.63%`だった。一方、両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、START制御は成立しなかった。Candidate148は品質gate不通過として`not_adopted`で停止する。
-
-Candidate150の[`F02 / F04 / F07 targeted N=5`](candidate150-free-required-outcome-bind-readable-v14-medium-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は15 / 15件がscore `4`で、複数の必要成果を変更前に一つの方針へ結び付けるmechanismも15 / 15件で成立した。3 case集約はFree比token`-2.86%`、elapsed`+7.89%`だったが、targeted N=5のため全体cost改善は主張しない。Standard14、採用、release、本体反映は未実施である。
-
-Candidate151の[`A01 / A02 / F01 / F02 / F04 / F07 targeted N=5`](candidate151-free-evidence-consumer-boundary-readable-v14-medium-a01-a02-f01-f02-f04-f07-atomic-n5-cli0146_2026-08-03.md)は30 / 30件がscore `4`で、6 case集約はFree比token`-25.76%`、elapsed`-9.41%`だった。一方、A02の変更後method探索が2 / 5件に残り、書いた調査境界のmechanism gateに失敗したため停止した。KPI差を当該mechanismの効果として採用せず、Standard14、採用、release、本体反映は未実施である。
-
-Candidate152の[`4つの判断ルール targeted N=5`](candidate152-free-four-decision-rules-readable-v14-medium-targeted-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ外部説明用の4文だけを追加した。「仕様を決める」はFreeの質問停止0 / 5に対して変更前質問が1 / 5、「調べる」はF08の変更前command中央値がFree `10`件から`7`件となり、行動選択への影響を観測した。「変更を始める」と「作業を終える」は狙った選択が出たがFreeでも同じだったため増分効果を判定できない。4文だけで完全制御できたとは扱わず、Standard14全体、採用、release、本体反映へ進めていない。
-
-Candidate156の[`Free比較 Standard14 N=5`](candidate156-free-five-prompt-conditions-readable-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ利用者指定の5文だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`+3.98%`、all-agent total token中央値`+3.18%`、elapsed中央値`+14.10%`だった。両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、利用者成果が不足した場合の質問停止は成立しなかった。Candidate156は品質gate不通過として`not_adopted`で停止する。
-
-Candidate157の[`Free比較 F08 N=5`](candidate157-free-focused-prechange-research-readable-v14-medium-f08-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を調べるか」に対応する一文だけをFreeへ追加した。5 / 5件がscore `4`で、変更前command中央値はFreeの`10`件から`7`件へ減った。token中央値は`-27.56%`、elapsed中央値は`-18.05%`だった。品質を維持して狙った行動への影響を確認したが、単一case N=5からStandard14全体の料金削減へ一般化しない。
-
-Candidate158の[`Free比較 A01 / A02各N=5`](candidate158-free-outcome-method-readable-v14-medium-a01-a02-n5-cli0146_2026-08-04.md)は、5つの説明項目のうち「何を成果にするか」に対応する一行だけをFreeへ追加した。A01の質問停止はFreeの`0 / 5`件から`5 / 5`件となり、A02は過剰質問なしの完了を`5 / 5`件で維持した。2 case合算中央値はtoken`-45.13%`、elapsed`-47.90%`だが、主にA01の誤実装を質問停止へ変えた作業量差であり一般的な料金削減率にはしない。
-
-Candidate159の[`Free比較 F02 N=5`](candidate159-free-change-start-readable-v14-medium-f02-n5-cli0146_2026-08-04.md)は、「いつ変更を始めるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的方針は`0 / 5 → 4 / 5`となった。最初のfile changeまでには両条件とも`5 / 5`が方針を形成しており、cost低下は観測していない。
-
-Candidate160の[`Free比較 D01 N=5停止結果`](candidate160-free-assignment-result-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、起動前の担当・対象・結果対応が`1 / 5 → 5 / 5`となった一方、1件でrootの重複reviewが出たため掲載せず停止した。Candidate161の[`Free比較 D01 N=5`](candidate161-free-assignment-result-closure-readable-v14-medium-d01-n5-cli0146_2026-08-04.md)は、同一判定のやり直し禁止まで含め、起動前対応`1 / 5 → 5 / 5`、重複review`0 / 5`を確認した。cost低下は観測していない。
-
-Candidate162の[`Free比較 F03 N=5`](candidate162-free-completion-ticket-readable-v14-medium-f03-n5-cli0146_2026-08-04.md)は、「何を確認したら終わるか」に対応する一行だけをFreeへ追加した。5 / 5件がscore `4`で、最初のcommand前の具体的実行票は`0 / 5 → 5 / 5`となった。required validation再実行と最終差分確認後の追加調査は0 / 5件、token中央値は`-9.79%`、elapsed中央値は`+10.72%`だった。
-
-Candidate163の[`Free比較 Standard14 N=5`](candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md)は、Candidate157、158、159、161、162で個別確認した5文をFreeへそのまま統合した。Candidate163は70 / 70件がscore `4`で、Freeが5 / 5件失敗したA01も5 / 5件で質問停止した。Free比の中央値はAPI価格換算`-14.01%`、all-agent total token`-15.85%`、elapsed`-5.74%`で、3指標とも5 / 5 iterationで低下した。5文セット全体の結果であり、各一文の因果効果へ分解しない。採用は未判断である。
-
-Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
-
-Candidate71のreasoning 6水準は、[`Rating v13標準14項目各N=5`](candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)として記録した。新規のLow、Medium、XHigh、Max、Ultraは各70 / 70件がvalid・rateableで、既存Highを含めた6水準の品質中央値は`100.000`だった。公式scoreはUltraだけ`4 / 0 = 69 / 1`だが、score `0`はsearch patternの`pytest.fixture`をtest実行と誤認したRating v13偽陽性だった。Mediumはtoken中央値`1,923,688`、Lowはelapsed中央値`901.850秒`で各KPIの最小値が分かれた。Ultraは14 / 70 runがchild sessionを起動し、他の5水準はすべてroot-onlyだった。reasoningの異なるresultは別compatibility keyとし、Layer 4の互換comparison、winner、採用、release、本体反映は判断しない。
-
-Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43をMediumで再計測し、既存Candidate71 Mediumと[`同一互換条件のRating v13標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)へ登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。Candidate43とCandidate71はscore `4 = 70`かつ品質中央値`100.000`だった。Candidate71はCandidate43比でtoken中央値`-29.19%`、elapsed中央値`-10.59%`だった。6条件とも既存High比で品質中央値を維持し、token中央値とelapsed中央値が小さかったが、reasoningが異なるHighとの数値は記述差として扱う。
-
-Candidate71へ条件付きproject index導線だけを追加したCandidate78は、[`第13版採点の標準14項目各N=5`](candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だったが、Candidate71比でall-agent token中央値は`+8.66%`、elapsed中央値は`+4.38%`だった。A02の広域探索が減らず、F10 Entryに不要なindex readが増えたため、事前条件どおり`stopped`とした。採用、release、本体反映は行っていない。
-
-Candidate71の順序依存validationを明確化したCandidate79は、[`Rating v13、Medium、F04各N=5`](candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md)を互換条件で新規実行した。両条件とも5 / 5件がvalid・rateableかつscore `4`だった。一方、1-step closureはCandidate71の3 / 5から0 / 5へ悪化し、Candidate79のall-agent token中央値は`+16.88%`、elapsed中央値は`+2.48%`だった。事前停止条件どおりCandidate79は`stopped`とし、Candidate71へ還元せず、標準14項目、採用、release、本体反映へ進めていない。
-
-Candidate71のroot validation wrapper方法をpromptへ固定したCandidate80は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate80-root-validation-wrapper-v13-medium-f04-n10_2026-07-26.md)を互換条件で新規実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`だった。1-step closureはCandidate71の5 / 10から9 / 10へ改善したが、strict gateの10 / 10未達によりCandidate80は`stopped`とした。tokenとelapsedは診断値として保存し、prompt安定性の合否には使っていない。
-
-Candidate80で残った逐次解釈を解消したCandidate81は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-f04-n10_2026-07-26.md)を互換条件で実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`で、1-step closureはCandidate71の5 / 10に対してCandidate81が10 / 10だった。Candidate81は`prompt_stability_gate_passed`とし、標準14項目、採用、release、本体反映は未実施である。今後、互換条件を変えない候補試験では既存C71 resultを固定参照し、C71を毎回再実行しない。
-
-Candidate81の[`Rating v13、Medium、標準14項目N=5`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)は70 / 70件がvalid・rateable・score `4`だった。既存Candidate71は再実行せず、同じcompatibility keyの登録済みresultを固定参照した。複数required command caseの1-step closureはCandidate71の30 / 35からCandidate81の35 / 35となり、差はF04の0 / 5から5 / 5だった。Candidate81は`standard14_evaluated / quality_gate_passed / prompt_stability_gate_passed`とし、採用、release、本体反映は未実施である。
-
-Candidate81の`PRODUCER` P3だけを削除したCandidate82は、[`Rating v13、Medium、F10 / D01各N=5`](candidate81-candidate82-producer-gate-deduplication-v13-medium-f10-d01-n5_2026-07-28.md)を同時実行した。Candidate82は10 / 10がscore `4`で、F10は5 / 5 root-only、D01は5 / 5で指定workerだけがreview対象を読みroot再読は0件だった。Candidate81 D01も[`contract binding訂正`](targeted-review-rating-contract-binding-correction_2026-07-29.md)後は5 / 5 score `4`である。1件のroot再読はroute diagnosticとして残る。Candidate82は`targeted_evaluated / targeted_gate_passed`とするが、両scopeでtoken・elapsed中央値が増えたため効率改善は主張しない。標準14、採用、release、本体反映は未判断である。
-
-Candidate82の[`Rating v13、Medium、標準14項目N=5`](candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)は70 / 70件がvalid・rateable・score `4`で、保存session上も70 / 70 root-onlyだった。互換な既存Candidate81 resultも70 / 70 score `4`、root-onlyである。Candidate82は`standard14_evaluated / quality_gate_passed / targeted_gate_passed`とする。Candidate81比でtoken中央値は`+2.28%`、elapsed中央値は`-6.50%`と方向が分かれたため効率改善は主張しない。採用、release、本体反映は未判断である。
-
-Candidate81の[`Rating v14、Medium、A01 N=5 B20`](candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md)は20 result、100 / 100件をvalid・rateable・score `4`として登録・圧縮した。100件すべてが`terminal-state-evidence/v1`で`awaiting_required_value`、artifact unchanged、read-only、試験・変更operation未開始となり、全件root-onlyだった。これはA01限定の`diagnostic_only` resultであり、標準14全体のB20、v13 B20の再採点、採用、release、本体反映判断ではない。
-
-Candidate87はD01のcontract binding訂正後にqualificationを通過した。続く[`Rating v14、Medium、F02 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`で、C81比のtoken中央値`-5.26%`、elapsed中央値`-10.63%`だった。[`F04 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)も5 / 5 score `4`で、token中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoffだった。targeted gate通過後の[`標準14 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)はC81 / C87とも70 / 70 score `4`だったが、C87の集約中央値はtoken`+6.09%`、elapsed中央値`+1.35%`だった。一次評価状態は`standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`として変更しない。後続の採用判断は[`Candidate87採用判断`](../../docs/candidate87-adoption-decision.md)を正本とする。
-
-Candidate88はC87標準14の逐次Worker経路を対象に、AI裁量Workerを同時開始可能なroot operationがある状態へ限定した。[`Rating v14、Medium、F02 N=5`](candidate81-candidate88-parallel-worker-admission-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`だったが、Worker 4件中2件がWorker完了後にrequired validationを開始した。C81比の中央値もtoken`+26.28%`、elapsed`+8.03%`で両方悪化したため、状態は`targeted_f02_evaluated / stopped`である。F04、D01、標準14、採用、release、本体反映へ進めない。
-
-Candidate89はC88を継承せずC87から分岐し、AI裁量Workerをroot operationのdispatch済み・実行中状態へ限定する起動時gateを`DECISION_BOUNDARY`へ置いた。[`Rating v14、Medium、F02 N=5`](candidate81-candidate89-dispatch-time-worker-admission-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`だったが、Worker 4件すべてがroot required-validation invocationより`9.276〜16.549`秒先に起動した。C81比の中央値もtoken`+6.45%`、elapsed`+4.14%`で両方悪化したため、状態は`targeted_f02_evaluated / stopped`である。F04、D01、標準14、採用、release、本体反映へ進めない。
+## 5. Candidate94〜Candidate107（Rating v14 Medium、targeted、2026-07-30〜07-31）
 
 Candidate94はユーザーの明示依頼によりtargeted gateより先に[`Rating v14、Medium、標準14 N=5`](candidate81-candidate94-operation-criterion-totality-v14-medium-standard14-n5-cli0146_2026-07-30.md)を実行した。Codex CLI `0.146.0`条件でC81とCandidate94を各70件新規実行し、両方70 / 70 valid・rateable、excluded 0だった。C81は70 / 70 score `4`、Candidate94は`4 / 1 = 69 / 1`で、A02 iteration 5が正規routeを質問して停止した。事前停止条件に従いCandidate94を`standard14_evaluated / quality_gate_failed / stopped`とし、未実施のtargeted gate、採用、release、本体反映へ進めない。
 
@@ -200,13 +209,37 @@ Candidate106はCandidate104から直接分岐し、Candidate105のC104比`+314`�
 
 Candidate107はCandidate106のF03 B20再発traceを直接の作成根拠とし、outer deadline条件とcell ID付きnonterminal result後のwait-only遷移へ`VALIDATION_PLAN`を置換した。[`Rating v14、Medium、F03 N=5 B20`](candidate107-validation-wrapper-reentry-closure-v14-medium-f03-continuous-n5-b20-cli0146_2026-07-30.md)は100 / 100件がscore `4`で、required validation間の途中message0、再実行0、nonterminal後wait-only 6 / 6だった。一方、内部waitより短いouter deadlineが4 / 100件あり停止した。ユーザーが明示再開した[`Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)は70 / 70 score `4`で、C106比token中央値`-10.65%`、elapsed`+8.53%`だった。先行gate失敗を維持し、現在状態を`targeted_f03_b20_evaluated / standard14_evaluated_by_explicit_reopen / quality_gate_passed / outer_deadline_gate_failed / result_registered / stopped`とする。採用、release、本体反映へ進めない。
 
-Candidate108はCandidate107のdeadline大小比較を削除し、nonterminal resultを実行票の完了判定に使わないwait-only遷移へ置換した。[`F03 gateとStandard14 atomic reuse N=5`](candidate107-candidate108-validation-ticket-terminal-closure-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)では、F03 5 / 5 score `4`、nonterminal後wait-only 3 / 3でmechanism gateを通過した。標準14は保存済みF03 5 runを再利用し、残る13 case × 5 = 65 runだけを発行した。最終70 / 70件がscore `4`で、C107比token中央値`+15.75%`、elapsed`+3.69%`だった。現在状態は`targeted_f03_evaluated / standard14_evaluated / quality_gate_passed / mechanism_gate_passed / adoption_not_decided`であり、release、runtime projection、本体反映は未実施である。
+## 6. Rating v13条件の横断比較（2026-07-26）
 
-Candidate109の[`F03 atomic N=5`](candidate108-candidate109-validation-ticket-outer-wait-closure-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、terminal前model再入0件で、C108比token中央値`-15.97%`、elapsed中央値`-16.43%`だった。ただしouter yield最大値という実行方法をpromptへ指定する変更軸が設計方針に反するため、現在状態を`prompt_design_boundary_failed / stopped`とする。
+Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43、Candidate71は、[`第13版採点の標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)を同一互換条件で登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。score `4`は順に62、65、65、65、70、70件だった。Candidate71はCandidate43と同じ品質中央値`100.000`で、all-agent token中央値が`-31.47%`、elapsed中央値が`-5.63%`だった。このresultは数値差だけを記録し、winner、採用、release、本体反映は判断しない。
 
-Candidate110の[`F03 atomic N=5`](candidate110-validation-ticket-decision-boundary-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、C108比token中央値`-1.31%`、elapsed中央値`-6.99%`だった。一方、terminal前model再入なしは2 / 5だけで、3件がouter yield `1000ms`からnonterminal resultを返し、うち2件は進捗messageを挟んだ。KPI低下を制御効果へbindできないためStandard14を発行せず、現在状態は`targeted_f03_evaluated / quality_gate_passed / targeted_cost_both_lower / control_not_demonstrated / result_registered / stopped`である。
+Candidate71のreasoning 6水準は、[`Rating v13標準14項目各N=5`](candidate71-reasoning-levels-v13-standard14-n5_2026-07-26.md)として記録した。新規のLow、Medium、XHigh、Max、Ultraは各70 / 70件がvalid・rateableで、既存Highを含めた6水準の品質中央値は`100.000`だった。公式scoreはUltraだけ`4 / 0 = 69 / 1`だが、score `0`はsearch patternの`pytest.fixture`をtest実行と誤認したRating v13偽陽性だった。Mediumはtoken中央値`1,923,688`、Lowはelapsed中央値`901.850秒`で各KPIの最小値が分かれた。Ultraは14 / 70 runがchild sessionを起動し、他の5水準はすべてroot-onlyだった。reasoningの異なるresultは別compatibility keyとし、Layer 4の互換comparison、winner、採用、release、本体反映は判断しない。
 
-Candidate111の[`F03 atomic N=5`](candidate111-validation-ticket-model-return-boundary-v14-medium-f03-atomic-n5-cli0146_2026-07-31.md)は5 / 5 score `4`、C108比token中央値`-0.99%`、elapsed中央値`-9.34%`だった。発行時にmodel return horizonを明示したrunは4 / 5件で、`1000ms`を選んだ2件は2 / 2件がnonterminalとなり、判断を追加せず同じcell IDへwaitするためだけにmodelへ再入した。中間messageは0件だったが、不要な再入削減は3 / 5に留まったため、現在状態は`targeted_f03_evaluated / quality_gate_passed / targeted_cost_both_lower / model_return_gate_failed / result_registered / stopped`である。
+Baseline、ControlFreeRepository、Candidate5、Candidate35、Candidate43をMediumで再計測し、既存Candidate71 Mediumと[`同一互換条件のRating v13標準14項目各N=5`](baseline-control-free-repository-c5-c35-c43-c71-v13-reasoning-medium-standard14-n5_2026-07-26.md)へ登録した。各条件70 / 70件、計420 / 420件がvalid・rateableだった。Candidate43とCandidate71はscore `4 = 70`かつ品質中央値`100.000`だった。Candidate71はCandidate43比でtoken中央値`-29.19%`、elapsed中央値`-10.59%`だった。6条件とも既存High比で品質中央値を維持し、token中央値とelapsed中央値が小さかったが、reasoningが異なるHighとの数値は記述差として扱う。
+
+## 7. Candidate78〜Candidate93（Rating v13からv14への移行、2026-07-26〜07-29）
+
+Candidate71へ条件付きproject index導線だけを追加したCandidate78は、[`第13版採点の標準14項目各N=5`](candidate71-candidate78-project-index-navigation-v13-standard14-n5_2026-07-26.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だったが、Candidate71比でall-agent token中央値は`+8.66%`、elapsed中央値は`+4.38%`だった。A02の広域探索が減らず、F10 Entryに不要なindex readが増えたため、事前条件どおり`stopped`とした。採用、release、本体反映は行っていない。
+
+Candidate71の順序依存validationを明確化したCandidate79は、[`Rating v13、Medium、F04各N=5`](candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md)を互換条件で新規実行した。両条件とも5 / 5件がvalid・rateableかつscore `4`だった。一方、1-step closureはCandidate71の3 / 5から0 / 5へ悪化し、Candidate79のall-agent token中央値は`+16.88%`、elapsed中央値は`+2.48%`だった。事前停止条件どおりCandidate79は`stopped`とし、Candidate71へ還元せず、標準14項目、採用、release、本体反映へ進めていない。
+
+Candidate71のroot validation wrapper方法をpromptへ固定したCandidate80は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate80-root-validation-wrapper-v13-medium-f04-n10_2026-07-26.md)を互換条件で新規実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`だった。1-step closureはCandidate71の5 / 10から9 / 10へ改善したが、strict gateの10 / 10未達によりCandidate80は`stopped`とした。tokenとelapsedは診断値として保存し、prompt安定性の合否には使っていない。
+
+Candidate80で残った逐次解釈を解消したCandidate81は、[`Rating v13、Medium、F04各N=10`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-f04-n10_2026-07-26.md)を互換条件で実行した。両条件とも10 / 10件がvalid・rateableかつscore `4`で、1-step closureはCandidate71の5 / 10に対してCandidate81が10 / 10だった。Candidate81は`prompt_stability_gate_passed`とし、標準14項目、採用、release、本体反映は未実施である。今後、互換条件を変えない候補試験では既存C71 resultを固定参照し、C71を毎回再実行しない。
+
+Candidate81の[`Rating v13、Medium、標準14項目N=5`](candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)は70 / 70件がvalid・rateable・score `4`だった。既存Candidate71は再実行せず、同じcompatibility keyの登録済みresultを固定参照した。複数required command caseの1-step closureはCandidate71の30 / 35からCandidate81の35 / 35となり、差はF04の0 / 5から5 / 5だった。Candidate81は`standard14_evaluated / quality_gate_passed / prompt_stability_gate_passed`とし、採用、release、本体反映は未実施である。
+
+Candidate81の`PRODUCER` P3だけを削除したCandidate82は、[`Rating v13、Medium、F10 / D01各N=5`](candidate81-candidate82-producer-gate-deduplication-v13-medium-f10-d01-n5_2026-07-28.md)を同時実行した。Candidate82は10 / 10がscore `4`で、F10は5 / 5 root-only、D01は5 / 5で指定workerだけがreview対象を読みroot再読は0件だった。Candidate81 D01も[`contract binding訂正`](targeted-review-rating-contract-binding-correction_2026-07-29.md)後は5 / 5 score `4`である。1件のroot再読はroute diagnosticとして残る。Candidate82は`targeted_evaluated / targeted_gate_passed`とするが、両scopeでtoken・elapsed中央値が増えたため効率改善は主張しない。標準14、採用、release、本体反映は未判断である。
+
+Candidate82の[`Rating v13、Medium、標準14項目N=5`](candidate81-candidate82-producer-gate-deduplication-v13-medium-standard14-n5_2026-07-28.md)は70 / 70件がvalid・rateable・score `4`で、保存session上も70 / 70 root-onlyだった。互換な既存Candidate81 resultも70 / 70 score `4`、root-onlyである。Candidate82は`standard14_evaluated / quality_gate_passed / targeted_gate_passed`とする。Candidate81比でtoken中央値は`+2.28%`、elapsed中央値は`-6.50%`と方向が分かれたため効率改善は主張しない。採用、release、本体反映は未判断である。
+
+Candidate81の[`Rating v14、Medium、A01 N=5 B20`](candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md)は20 result、100 / 100件をvalid・rateable・score `4`として登録・圧縮した。100件すべてが`terminal-state-evidence/v1`で`awaiting_required_value`、artifact unchanged、read-only、試験・変更operation未開始となり、全件root-onlyだった。これはA01限定の`diagnostic_only` resultであり、標準14全体のB20、v13 B20の再採点、採用、release、本体反映判断ではない。
+
+Candidate87はD01のcontract binding訂正後にqualificationを通過した。続く[`Rating v14、Medium、F02 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`で、C81比のtoken中央値`-5.26%`、elapsed中央値`-10.63%`だった。[`F04 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-f04-n5_2026-07-29.md)も5 / 5 score `4`で、token中央値`+15.48%`、elapsed中央値`-12.62%`のtradeoffだった。targeted gate通過後の[`標準14 N=5`](candidate81-candidate87-producer-local-invocation-wave-v14-medium-standard14-n5_2026-07-29.md)はC81 / C87とも70 / 70 score `4`だったが、C87の集約中央値はtoken`+6.09%`、elapsed中央値`+1.35%`だった。一次評価状態は`standard14_evaluated / quality_gate_passed / aggregate_cost_both_higher / adoption_not_decided`として変更しない。後続の採用判断は[`Candidate87採用判断`](../../docs/candidate87-adoption-decision.md)を正本とする。
+
+Candidate88はC87標準14の逐次Worker経路を対象に、AI裁量Workerを同時開始可能なroot operationがある状態へ限定した。[`Rating v14、Medium、F02 N=5`](candidate81-candidate88-parallel-worker-admission-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`だったが、Worker 4件中2件がWorker完了後にrequired validationを開始した。C81比の中央値もtoken`+26.28%`、elapsed`+8.03%`で両方悪化したため、状態は`targeted_f02_evaluated / stopped`である。F04、D01、標準14、採用、release、本体反映へ進めない。
+
+Candidate89はC88を継承せずC87から分岐し、AI裁量Workerをroot operationのdispatch済み・実行中状態へ限定する起動時gateを`DECISION_BOUNDARY`へ置いた。[`Rating v14、Medium、F02 N=5`](candidate81-candidate89-dispatch-time-worker-admission-v14-medium-f02-n5_2026-07-29.md)は5 / 5 score `4`だったが、Worker 4件すべてがroot required-validation invocationより`9.276〜16.549`秒先に起動した。C81比の中央値もtoken`+6.45%`、elapsed`+4.14%`で両方悪化したため、状態は`targeted_f02_evaluated / stopped`である。F04、D01、標準14、採用、release、本体反映へ進めない。
 
 採用前の長期確認として新規実行したCandidate82の[`Rating v13、Medium、標準14項目N=5 B20`](candidate82-producer-gate-deduplication-v13-medium-standard14-continuous-n5-b20_2026-07-28.md)は、20 result、1,400 / 1,400件をvalid・rateableとして登録・圧縮した。公式score分布は`4 / 1 = 1,399 / 1`で、score `1`のA01は実際には未固定値を質問して編集・試験前に停止したRating v13の機械判定偽陰性だった。一方、保存session監査でF02とF04の各1件がcriterion ownerを独立producer指定へ変換し、不要childを起動していた。Candidate82設計の停止条件に従い、現在状態を`standard14_b20_evaluated / stopped`へ更新する。単発N=5の通過履歴は上書きせず、採用、release、本体反映へ進めない。
 
@@ -216,53 +249,35 @@ Candidate81の[`A01 3択variation診断`](candidate81-a01-three-choice-variation
 
 Candidate71を変更せずcommand evidence protocolだけをv1 / v2へ分けた[`Rating v13、Medium、F04各N=10診断`](candidate71-command-protocol-v1-v2-v13-medium-f04-n10_2026-07-26.md)は、両条件10 / 10件がvalid・rateableかつscore `4`だった。root ordered wrapperを明示したv2は1-step closureを`5 / 10 -> 10 / 10`へ増やした。一方、token中央値は`-0.13%`、elapsed中央値は`+0.34%`、token合計は`+6.63%`、elapsed合計は`+2.69%`だった。protocol revisionが異なるため数値はdiagnosticな記述差とし、v2は`behavior_gate_passed / efficiency_gate_not_passed`、標準profile未採用とする。
 
+## 8. Candidate62〜Candidate77（Rating v12〜v13、2026-07-22〜07-23）
+
+C43を共通coreとし、C56方法をtask全体がclosed read-onlyの場合だけへ限定したCandidate62は、[`catalog固定F05 / F10とA01 / A02各N=5`](candidate43-candidate56-candidate62-task-closed-read-route-catalog-fixed_2026-07-22.md)を登録した。F10は`2 / 3 / 3 / 1 / 1 tool call`、F系tokenはCandidate43比`-61.32%`、A系は10 / 10 score `4`だった。一方、A02 4 / 5で並行methodが流入し、F05 2 / 5でreadを追加したため、事前gateに従い停止した。
+
+C43を唯一の共通全文sourceとし、固定証拠reviewでだけ一行deltaを実行前合成するCandidate63は、[`F10-only各N=5`](candidate43-candidate63-fixed-evidence-route-projection-f10-n5_2026-07-22.md)を同じ新規Layer 1で登録した。両promptとも5 / 5 score `4`、root-only、zero driftだった。Candidate63は5 / 5で3 tool callへ収束し、shell commandはC43と同じ55件を維持した。all-agent token合計は`811,578 -> 382,228`、`-52.90%`だった。route gateは通過したが、採用、release、本体反映は未判断である。
+
+C43の32 atomic clauseを保持し、root / delegatedへF coreを全文重複したCandidate64は、[`catalog固定A01 / A02、F05 / F10、D01各N=5`](candidate43-candidate64-self-contained-execution-paths-catalog-fixed-n5_2026-07-22.md)を登録した。Candidate64は25 / 25 score `4`だった。D01は5 / 5で指定workerを起動し、rootのreview再実行は0件だった。一方、root-only F10はCandidate43比でtool call `43 -> 54`、model step `48 -> 59`、token合計`+28.90%`となった。事前gateに従いCandidate64は停止し、standard14、採用、release、本体反映へ進めていない。
+
+C43の32 atomic clauseを重複なしの11 labelへ短文化したCandidate65は、[`catalog固定F05 / F10各N=5`](candidate43-candidate65-shared-operation-core-catalog-fixed-f-n5_2026-07-22.md)を登録した。10 / 10はscore `4`、root-onlyだった。root bytesは`-7.01%`だったが、F10はCandidate43比でtool call `43 -> 49`、model step `48 -> 54`、token合計`+14.25%`となった。事前gateに従いCandidate65は停止し、A / D、standard14、採用、release、本体反映へ進めていない。
+
+C43の一層9 label、label順、32 clause所属を維持し、root bytesを`-1.43%`だけ短文化したCandidate66は、[`F10-onlyとcatalog固定A01 / A02、F05 / F10、D01各N=5`](candidate43-candidate66-topology-preserving-compression-catalog-fixed-n5_2026-07-22.md)を登録した。Candidate66は30 / 30がscore `4`だった。最初のF10-onlyはtool call `40 -> 39`、model step `29 -> 28`、token合計`-2.04%`でgateを通過したが、追加F set内のF10は`43 -> 57`、`48 -> 62`、token合計`+31.36%`となった。実行時削減を再現できなかったためCandidate66は停止し、standard14、採用、release、本体反映へ進めていない。
+
+C43の明示委譲gateとproducer再割当て禁止について、別labelの短い重複文2件だけを削除したCandidate67は、対象試験の後に[`標準14項目各N=5`](candidate43-candidate67-cross-label-predicate-deduplication-v10-standard14-n5_2026-07-22.md)を追加登録した。Candidate43とCandidate67は両方が70 / 70 score `4`だった。Candidate67からCandidate43を引いた3 KPI中央値差はquality `0.000`、all-agent token `-84,992`、elapsed `-9.276秒`だった。一方、70件token合計は`+48,808`であり、runtime削減の再現性は確定しない。Candidate67は`standard14_evaluated`で、採用、release、本体反映は未判断である。
+
+C43の`INDEPENDENCE`から先行artifactの独立確認を別operationへ固定するF9一文だけを削除したCandidate68は、[`F10-only N=5`](candidate43-candidate68-independent-review-operation-removal-f10-n5_2026-07-22.md)を登録した。root bytesは`-3.02%`、5 / 5 score `4`、root-only、zero driftだった。3 KPI中央値はquality同値、all-agent token `+1.16%`、elapsed `+26.04%`で、token合計も`+426`、`+0.05%`となった。事前gateに従いCandidate68は停止し、A / F追加scope / D、standard14、採用、release、本体反映へ進めていない。
+
+C43実traceでall-agent tokenと強く結び付いたmodel再入を直接対象にしたCandidate69は、[`標準14項目各N=5`](candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)を登録した。70 / 70 valid・rateable、zero driftで、Candidate69の点数分布は`4 / 3 = 69 / 1`だった。3 KPI中央値差はquality `0.000`、all-agent token `-26.21%`、elapsed `-18.37%`、70件token合計は`-22.59%`、top-level tool callは`-26.60%`だった。[同条件18 Batch](candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-continuous-n5-b18_2026-07-22.md)は1,260 / 1,260件を独立登録・圧縮した。C43比の18結果中央値差はquality `0.000`、all-agent token `-11.08%`、elapsed `+4.12%`、全token合計は`-13.00%`、top-level tool callは`-15.29%`だった。score分布は`4 / 3 / 1 = 1,258 / 1 / 1`で、score `3`は既知のF10 location mismatch、score `1`はA01 rating偽陰性である。事前gate未達のためCandidate69は停止するが、model再入境界を次の機械制御対象として保持する。
+
+Candidate69へartifact変更後の完全なrequired-validation集合だけをまとめる`VALIDATION_CLOSURE`一labelを追加したCandidate71は、[`A02、F04、F06、F07 canonical各N=5`](candidate69-candidate71-validation-closure-targeted4-n5_2026-07-22.md)、[`標準14項目各N=5`](candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`第12版採点の標準14項目各N=5、18 Batch`](candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)を登録した。B18はCandidate69 / Candidate71とも1,260 / 1,260件がvalid・rateableだった。Candidate71はCandidate69比でtoken合計`-27.93%`、elapsed合計`-11.71%`、top-level tool call`-30.16%`だった。一方、意味確認後もA01誤実行1件とA02必須validation欠落3件が残り、Candidate69より実質的な低得点が3件多かった。Candidate71は`standard14_b18_evaluated / stopped`とし、採用、release、本体反映へ進めない。
+
+Candidate69へbind済みmachine resultだけで次のcommandまたはstopが一意な区間を追加したCandidate70は、[`A02、F04、F06、F07 canonical各N=5`](candidate69-candidate70-machine-decision-boundary-targeted4-n5_2026-07-22.md)と[`標準14項目各N=5`](candidate69-candidate70-machine-decision-boundary-v10-standard14-n5_2026-07-22.md)に続き、[`標準14項目各N=5、18 Batch`](candidate69-candidate70-machine-decision-boundary-v10-standard14-continuous-n5-b18_2026-07-22.md)を登録した。B18は1,260 / 1,260 runがvalid・rateableで、保存済みCandidate69 B18比のtoken合計は`-16.52%`、18結果token中央値は`-18.64%`、elapsed合計は`-9.16%`、18結果elapsed中央値は`-9.47%`だった。top-level tool callは`9,040 -> 7,285`へ減ったが、shell commandは`12,691 -> 13,077`へ増えた。採点偽陰性6件を分離しても、A02必須validation欠落2件とF10位置ずれ2件が残る。Candidate70は`standard14_evaluated / stopped`のままとし、採用、release、本体反映へ進めていない。
+
 Candidate71の実行制御を型付き状態機械へ全面改訂したCandidate74は、[`第12版採点の標準14項目各N=5`](candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md)を登録した。70 / 70件がvalid・rateableかつscore `4`だった。互換なCandidate71 Batch 1比ではall-agent token中央値`+58.88%`、elapsed中央値`+9.28%`だった。構造testと今回の品質維持を状態機械全体のruntime採用証明へ読み替えず、Candidate74は`standard14_evaluated`、採用・release・本体反映は未実施とする。
 
 Candidate74の独立validationを同一waveへ戻したCandidate75と、最終target versionの観測だけを後続waveへ分離したCandidate76は、[`F06 targeted N=5とCandidate76標準14項目N=5`](candidate74-candidate75-candidate76-validation-wave-v12_2026-07-23.md)を登録した。Candidate75はfocused / full同一waveを5 / 5へ回復したがfinal-state依存を4 / 5で失い停止した。Candidate76はtargeted behavior gateを通過し、Candidate74比でtoken中央値`-13.82%`、elapsed中央値`-3.63%`だったが、標準14項目はA02の`git diff --check`成功証拠欠落によりscore `4 = 69 / 3 = 1`となった。Candidate76も停止し、採用・release・本体反映へ進めていない。
 
 Candidate71を直接sourceとし、型付き状態仕様を例外trigger時だけ参照するCandidate77は、[`第12版採点の標準14項目各N=5`](candidate71-candidate77-triggered-exception-transition-v12-standard14-n5_2026-07-23.md)を登録した。70 / 70件がvalid・rateableかつscore `4`で、Candidate76の低得点1件は解消した。一方、互換なCandidate71 Batch 1比ではall-agent token中央値`+24.16%`、elapsed中央値`+17.77%`だった。Candidate71の最短正常経路よりcostが増えたためCandidate77は`stopped`とし、採用・release・本体反映へ進めていない。
 
-Candidate69へartifact変更後の完全なrequired-validation集合だけをまとめる`VALIDATION_CLOSURE`一labelを追加したCandidate71は、[`A02、F04、F06、F07 canonical各N=5`](candidate69-candidate71-validation-closure-targeted4-n5_2026-07-22.md)、[`標準14項目各N=5`](candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`第12版採点の標準14項目各N=5、18 Batch`](candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)を登録した。B18はCandidate69 / Candidate71とも1,260 / 1,260件がvalid・rateableだった。Candidate71はCandidate69比でtoken合計`-27.93%`、elapsed合計`-11.71%`、top-level tool call`-30.16%`だった。一方、意味確認後もA01誤実行1件とA02必須validation欠落3件が残り、Candidate69より実質的な低得点が3件多かった。Candidate71は`standard14_b18_evaluated / stopped`とし、採用、release、本体反映へ進めない。
-
-Candidate69へbind済みmachine resultだけで次のcommandまたはstopが一意な区間を追加したCandidate70は、[`A02、F04、F06、F07 canonical各N=5`](candidate69-candidate70-machine-decision-boundary-targeted4-n5_2026-07-22.md)と[`標準14項目各N=5`](candidate69-candidate70-machine-decision-boundary-v10-standard14-n5_2026-07-22.md)に続き、[`標準14項目各N=5、18 Batch`](candidate69-candidate70-machine-decision-boundary-v10-standard14-continuous-n5-b18_2026-07-22.md)を登録した。B18は1,260 / 1,260 runがvalid・rateableで、保存済みCandidate69 B18比のtoken合計は`-16.52%`、18結果token中央値は`-18.64%`、elapsed合計は`-9.16%`、18結果elapsed中央値は`-9.47%`だった。top-level tool callは`9,040 -> 7,285`へ減ったが、shell commandは`12,691 -> 13,077`へ増えた。採点偽陰性6件を分離しても、A02必須validation欠落2件とF10位置ずれ2件が残る。Candidate70は`standard14_evaluated / stopped`のままとし、採用、release、本体反映へ進めていない。
-
-THE-CAPTION-DEVの広いv4適合性監査を再現するA06は、[`C43 Ultra max-thread diagnostic`](TC-A06-c43-ultra-n1-context-boundary-diagnostic_2026-07-20.md)として再試験した。初回runはcapsuleの`agents.max_threads=30`に対してadapterが4を強制していたため環境不一致として保持する。宣言値を実行へbindした再試験はrootと7 workerの8 session、all-agent `total_tokens=14,343,786`、`elapsed_seconds=1,709.745`だった。同じfindingの独立validator再割当ては再現しなかった。共有contextの個別取得は観測したが、削減可能な重複か独立判断に必要な読取りかは未判定である。blind ratingとLayer 4登録は行わず、winner、採用、release、本体反映は判断していない。
-
-同じA06を、producer exclusivityを判断成立責任境界へ置換したCandidate45で実行した[`C43 / Candidate45 Ultra N=1 diagnostic`](TC-A06-c43-c45-ultra-n1-judgment-authority-boundary-diagnostic_2026-07-20.md)は、rootと4 workerの5 session、all-agent `total_tokens=15,783,901`だった。C43比でtool callは`-24.39%`、model stepは`-25.45%`、root task durationは`-26.93%`だったが、tokenは`+10.04%`だった。root tokenが`+186.43%`となり、4候補を再確認して棄却0件だった反証workerが1,305,675 tokenを使った。判断成立責任の境界違反は観測しなかったが、known findingの見落としとfile作成禁止違反があるため品質維持は未確定である。C43 / Candidate45とも宣言max threadは30、Agentへ提示された実効slotはroot込み4であり、THE-CAPTION-DEVとの同一並行条件ではない。blind rating、winner、採用、release、本体反映は判断していない。
-
-fixed Desktop slotでAgent-visible concurrencyをroot込み31へ揃えた[`C43 / Candidate45 slot31 N=1 diagnostic`](TC-A06-c43-c45-ultra-slot31-n1-judgment-authority-boundary-diagnostic_2026-07-20.md)は、C43が35 session / `57,184,182` tokens、Candidate45が25 session / `38,883,860` tokensだった。Candidate45はtool call`-33.48%`、model step`-32.22%`、all-agent token`-32.00%`だったが、root tokenは`+32.22%`、root durationは`-1.68%`だった。C43は17本の独立再検証workerを追加し、Candidate45は追加workerを起動せずroot admissionでauthorityと到達経路を再取得した。ただしDesktop Memoryに過去A06結果が含まれ、Candidate45が実際に参照したため、両runは`diagnostic_only / memory_contaminated`として保持する。互換比較、blind rating、winner、採用、release、本体反映には使わない。
-
-user configでMemoryを無効にし、新しいDesktop taskで31-slotを確認した[`C43 / Candidate45 slot31 memory-off N=1 diagnostic`](TC-A06-c43-c45-ultra-slot31-memory-off-n1-judgment-authority-boundary-diagnostic_2026-07-21.md)では、C43が47 session / `103,070,239` tokens、Candidate45が32 session / `105,471,441` tokensだった。Candidate45はroot duration`-38.12%`、tool call`-11.30%`、model step`-10.41%`だったが、all-agent tokenは`+2.33%`だった。C43の候補別validator waveとfinal guardはCandidate45で消えた。一方、Candidate45は16本の入れ子workerを含み、worker当たりchild tokenが`+53.90%`だった。判断成立責任境界はresultの暗黙補完を抑えたが、authority、scope、既知resultをproducerへ渡す情報境界までは作らなかった。blind rating、winner、採用、release、本体反映は判断していない。
-
-Candidate45を直接sourceとし、解決済み前提を下流operationの入力として閉じるCandidate46の[`slot31 memory-off N=1 diagnostic`](TC-A06-c45-c46-ultra-slot31-memory-off-n1-resolved-premise-input-boundary-diagnostic_2026-07-21.md)は、43 session / `74,748,801` tokensだった。Candidate45比でtoken`-29.13%`、tool call`-7.70%`、model step`-5.07%`となり、rootの`docs/reference`参照は`22 → 1`へ減った。一方、workerは`31 → 42`、root durationは`+46.51%`で、8本の反証workerとprovenance探索が長尾になった。主要既知findingの一部を最終報告から除外し、test中に3つのignored fileを一時生成したため、score `4`の維持は確認できない。Candidate46はdraftのdiagnosticとして保持し、追加candidate、採用、release、本体反映へ進まない。
-
-Candidate46を直接sourceとし、解決済みpremiseの適用域を適用predicateとevidence conditionで閉じるCandidate47の[`slot31 memory-off N=1 diagnostic`](TC-A06-c46-c47-ultra-slot31-memory-off-n1-applicability-domain-boundary-diagnostic_2026-07-21.md)は、35 session / `65,251,694` tokensだった。Candidate46比でtoken`-12.71%`、tool call`-13.69%`、model step`-12.05%`、duration`-26.72%`だった。Web Editorを同じ監査適用域へ取り込み、root直下の8本の反証waveは発生しなかった。一方、nested探索は深さ4、thread-limit失敗4件、`fork_turns=all` 8件となり、rootとworkerのauthority参照も増えた。1件のnested workerをnonterminalのまま中断してrootが全producer終端として集約した。週次legacy ledger依存を規約衝突として合否から除外したため、score `4`の維持は確認しない。後続補完では、実データfixtureにより元の3 skipが38 caseへ展開し、全suiteは`364 passed / 0 skipped / 0 failed`、Web Editorの`tsc --noEmit`もpassした。これは元runのroutingとKPIへ混ぜない。Candidate47はdraftのdiagnosticとして保持し、追加candidate、採用、release、本体反映へ進まない。
-
-Candidate47を直接sourceとし、先行premiseがterminal inputになる前の依存judgment分散を禁止するCandidate48の[`slot31 memory-off N=1 diagnostic`](TC-A06-c47-c48-ultra-slot31-memory-off-n1-premise-dependency-boundary-diagnostic_2026-07-21.md)は、34 session / `92,801,081` tokensだった。開始時はauthority / scope inventoryだけを起動し、その終端後に依存worker waveを開始した。known findingは6 / 6を報告し、既知false positiveは報告しなかった。一方、Candidate47比でtool call`+20.57%`、model step`+15.03%`、duration`+5.05%`、token`+42.22%`となり、root直下workerも`21 → 29`へ増えた。rootとpremise producerのauthority読取りが重なり、1件のnested workerをnonterminalのまま親producerがcompleteと宣言した。Candidate48はdraftのdiagnosticとして保持し、blind rating、追加candidate、採用、release、本体反映へ進まない。
-
-C43をreasoning effort `max`で再実行した[`slot31 memory-off N=1 diagnostic`](TC-A06-c43-max-slot31-memory-off-n1-diagnostic_2026-07-21.md)は、開始gateとno-driftを満たし、12件の確認済み不適合を報告した。rootが監査operationの唯一のproducerになり、1 session / worker 0 / 72 tool call / 74 model step / `9,415,805` tokens / `1,352.530`秒だった。reasoning effortとAgent環境が異なるため過去の`ultra` runと互換KPI比較へ混ぜない。blind rating、winner、採用、release、本体反映は判断していない。
-
-v3で2026-07-16までに保存した`prompt-set-result/v1`の`total_tokens`はroot agentだけを数えていた。現行値は[`v3 all-agent token再集計`](v3-all-agent-token-reaccounting_2026-07-16.md)の`prompt-set-result/v2`を使用する。以下から参照する旧v3 standalone resultとcomparison viewのtoken値はroot-onlyの履歴であり、all-agent値として使用しない。qualityとelapsedの履歴は変更していない。
-
-root-only履歴のv3 resultは[`baseline N=5`](baseline-expanded12-global-m24-n5_2026-07-15.md)、[`candidate1 N=5`](candidate1-expanded12-global-m24-n5_2026-07-15.md)、[`candidate2 N=5`](candidate2-expanded12-global-m24-n5_2026-07-15.md)、[`candidate3 N=5`](candidate3-expanded12-global-m24-n5_2026-07-15.md)、[`candidate4 N=5`](candidate4-expanded12-global-m24-n5_2026-07-15.md)、[`candidate5 N=5`](candidate5-expanded12-global-m24-n5_2026-07-16.md)、[`candidate6 N=5`](candidate6-expanded12-global-m24-n5_2026-07-16.md)である。C6の設計対象に合わせ、同じ旧compatibility keyを持つBase、C1、C5、C6から[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate6-expanded12-global-m24-n5_2026-07-16.md)を生成した。既存viewは履歴として変更せず、winner、採用、release判断は行っていない。
-
-Candidate9の[`expanded 12-case staged N=5 result`](candidate9-expanded12-global-m24-n5_2026-07-16.md)は、F03 / F06先行stageとremaining 10 case stageの60 runを1つのcampaign summaryへまとめた。2つのEvaluation set identityとappend-only一次resultは変更せず、既存expanded resultとのKPI comparison view、winner、採用、release判断は生成していない。
-
-Candidate1直接派生のCandidate10は[`expanded 12-case global M=24 N=5 result`](candidate10-c1-counter-boundary-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。既存expanded 12-case all-agent resultと互換なfixture identityを使い、winner、採用、release判断は行っていない。
-
-Baseline、C1、C5、C1直接派生C10の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate10-c1-derived-expanded12-global-m24-n5_2026-07-16.md)は、all-agentの3 KPI中央値、反復値、quality分布、C10から各setを引いた数値差だけを記録する。winnerや採用判断は出力しない。
-
-C10直接派生のCandidate11は[`expanded 12-case global M=24 N=5 result`](candidate11-sa-context-boundary-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C11の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate11-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case token、SA context境界の補助観測を記録し、winnerや採用判断は出力しない。
-
-C11直接派生のCandidate12は[`expanded 12-case global M=24 N=5 result`](candidate12-route-cardinality-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C12の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate12-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、route cardinalityの補助観測を記録し、winnerや採用判断は出力しない。
-
-Candidate13のreview role接続とCandidate14のvalidation authority接続は[`targeted check`](candidate13-candidate14-targeted-checks_2026-07-16.md)へ分離した。C13はF03 / F04、C14はF06だけを確認し、partial set resultをexpanded comparisonへ混ぜていない。
-
-C13直接派生のCandidate14は[`expanded 12-case global M=24 N=5 result`](candidate14-validation-authority-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C14の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate14-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、validation authorityの補助観測を記録し、winnerや採用判断は出力しない。
-
-C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](candidate15-selected-role-control-input-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C5、C14、C15の[`4-result N=5 comparison view`](baseline-candidate5-candidate14-candidate15-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、selected-role control input境界の補助観測を記録し、winnerや採用判断は出力しない。
-
-制御promptなし・repository情報ありとC15は、独立した[`ambiguity boundaries 5-case global M=10 N=3 comparison`](control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)として各15 runをappend-only resultへ登録した。互換な3 KPI、case別のclarify / execute / stopped境界、semanticな成果同等性を記録し、winner、採用、release判断は出力しない。
+## 9. Candidate41〜Candidate61（標準14項目の確立、2026-07-20〜07-22）
 
 候補41は同じ曖昧性評価集合からA01とA02だけを選び、[`各5回の結果`](candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-n5_2026-07-20.md)として10件を追記専用で登録した。A01は5回すべてで方針を推測して編集と試験へ進み点数`0`だった。A02は5回すべてで正規の起動先へ修復したが、非公開条件の`main_verify.sh`を実行せず点数`3`だった。この結果は候補作成前の記録である。旧3回試験との互換比較、優劣、採用、公開判断は行わない。
 
@@ -277,6 +292,22 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 同じ70件のうち候補43の使用量が候補41より多かった9項目は、[`使用量増加項目の分析`](candidate41-candidate43-v10-standard14-n5-token-increase-analysis_2026-07-20.md)へ分離した。全70回は候補43が多い回と少ない回が35回ずつで、差の中央値は`-2,587`だった。候補43の変更が全体的な増加を起こしたとは判断していない。直接作用を確認したA01では未固定値を推測した実行を5 / 5で禁止し、使用量は`-1,254,612`だった。増加項目ではF08だけに変更の広い解釈が一部関与した可能性を残し、9項目共通の新しい制御は提案していない。
 
 候補43を同じ標準14項目、第10版採点で18回継続した[`各5回、18回の結果`](candidate43-outcome-authority-boundary-v10-standard14-continuous-n5-b18_2026-07-20.md)は、18個の追記専用結果、1,260 / 1,260件を登録・圧縮した。公式点数分布は`4 / 3 / 1 = 1,255 / 4 / 1`だった。点数`3`の4件はF10月次試験確認の指摘位置ずれである。点数`1`のA01は「明示してください」を採点側が質問表現として認識しなかった偽陰性で、実応答は編集と試験を行わず未固定値を質問して停止していた。1,259件は起点実行だけで、F04の1件だけが担当情報を独立実行指定と解釈して子実行を起動した。採用、公開、本体反映は未判断である。
+
+THE-CAPTION-DEVの広いv4適合性監査を再現するA06は、[`C43 Ultra max-thread diagnostic`](TC-A06-c43-ultra-n1-context-boundary-diagnostic_2026-07-20.md)として再試験した。初回runはcapsuleの`agents.max_threads=30`に対してadapterが4を強制していたため環境不一致として保持する。宣言値を実行へbindした再試験はrootと7 workerの8 session、all-agent `total_tokens=14,343,786`、`elapsed_seconds=1,709.745`だった。同じfindingの独立validator再割当ては再現しなかった。共有contextの個別取得は観測したが、削減可能な重複か独立判断に必要な読取りかは未判定である。blind ratingとLayer 4登録は行わず、winner、採用、release、本体反映は判断していない。
+
+同じA06を、producer exclusivityを判断成立責任境界へ置換したCandidate45で実行した[`C43 / Candidate45 Ultra N=1 diagnostic`](TC-A06-c43-c45-ultra-n1-judgment-authority-boundary-diagnostic_2026-07-20.md)は、rootと4 workerの5 session、all-agent `total_tokens=15,783,901`だった。C43比でtool callは`-24.39%`、model stepは`-25.45%`、root task durationは`-26.93%`だったが、tokenは`+10.04%`だった。root tokenが`+186.43%`となり、4候補を再確認して棄却0件だった反証workerが1,305,675 tokenを使った。判断成立責任の境界違反は観測しなかったが、known findingの見落としとfile作成禁止違反があるため品質維持は未確定である。C43 / Candidate45とも宣言max threadは30、Agentへ提示された実効slotはroot込み4であり、THE-CAPTION-DEVとの同一並行条件ではない。blind rating、winner、採用、release、本体反映は判断していない。
+
+fixed Desktop slotでAgent-visible concurrencyをroot込み31へ揃えた[`C43 / Candidate45 slot31 N=1 diagnostic`](TC-A06-c43-c45-ultra-slot31-n1-judgment-authority-boundary-diagnostic_2026-07-20.md)は、C43が35 session / `57,184,182` tokens、Candidate45が25 session / `38,883,860` tokensだった。Candidate45はtool call`-33.48%`、model step`-32.22%`、all-agent token`-32.00%`だったが、root tokenは`+32.22%`、root durationは`-1.68%`だった。C43は17本の独立再検証workerを追加し、Candidate45は追加workerを起動せずroot admissionでauthorityと到達経路を再取得した。ただしDesktop Memoryに過去A06結果が含まれ、Candidate45が実際に参照したため、両runは`diagnostic_only / memory_contaminated`として保持する。互換比較、blind rating、winner、採用、release、本体反映には使わない。
+
+user configでMemoryを無効にし、新しいDesktop taskで31-slotを確認した[`C43 / Candidate45 slot31 memory-off N=1 diagnostic`](TC-A06-c43-c45-ultra-slot31-memory-off-n1-judgment-authority-boundary-diagnostic_2026-07-21.md)では、C43が47 session / `103,070,239` tokens、Candidate45が32 session / `105,471,441` tokensだった。Candidate45はroot duration`-38.12%`、tool call`-11.30%`、model step`-10.41%`だったが、all-agent tokenは`+2.33%`だった。C43の候補別validator waveとfinal guardはCandidate45で消えた。一方、Candidate45は16本の入れ子workerを含み、worker当たりchild tokenが`+53.90%`だった。判断成立責任境界はresultの暗黙補完を抑えたが、authority、scope、既知resultをproducerへ渡す情報境界までは作らなかった。blind rating、winner、採用、release、本体反映は判断していない。
+
+C43をreasoning effort `max`で再実行した[`slot31 memory-off N=1 diagnostic`](TC-A06-c43-max-slot31-memory-off-n1-diagnostic_2026-07-21.md)は、開始gateとno-driftを満たし、12件の確認済み不適合を報告した。rootが監査operationの唯一のproducerになり、1 session / worker 0 / 72 tool call / 74 model step / `9,415,805` tokens / `1,352.530`秒だった。reasoning effortとAgent環境が異なるため過去の`ultra` runと互換KPI比較へ混ぜない。blind rating、winner、採用、release、本体反映は判断していない。
+
+Candidate45を直接sourceとし、解決済み前提を下流operationの入力として閉じるCandidate46の[`slot31 memory-off N=1 diagnostic`](TC-A06-c45-c46-ultra-slot31-memory-off-n1-resolved-premise-input-boundary-diagnostic_2026-07-21.md)は、43 session / `74,748,801` tokensだった。Candidate45比でtoken`-29.13%`、tool call`-7.70%`、model step`-5.07%`となり、rootの`docs/reference`参照は`22 → 1`へ減った。一方、workerは`31 → 42`、root durationは`+46.51%`で、8本の反証workerとprovenance探索が長尾になった。主要既知findingの一部を最終報告から除外し、test中に3つのignored fileを一時生成したため、score `4`の維持は確認できない。Candidate46はdraftのdiagnosticとして保持し、追加candidate、採用、release、本体反映へ進まない。
+
+Candidate46を直接sourceとし、解決済みpremiseの適用域を適用predicateとevidence conditionで閉じるCandidate47の[`slot31 memory-off N=1 diagnostic`](TC-A06-c46-c47-ultra-slot31-memory-off-n1-applicability-domain-boundary-diagnostic_2026-07-21.md)は、35 session / `65,251,694` tokensだった。Candidate46比でtoken`-12.71%`、tool call`-13.69%`、model step`-12.05%`、duration`-26.72%`だった。Web Editorを同じ監査適用域へ取り込み、root直下の8本の反証waveは発生しなかった。一方、nested探索は深さ4、thread-limit失敗4件、`fork_turns=all` 8件となり、rootとworkerのauthority参照も増えた。1件のnested workerをnonterminalのまま中断してrootが全producer終端として集約した。週次legacy ledger依存を規約衝突として合否から除外したため、score `4`の維持は確認しない。後続補完では、実データfixtureにより元の3 skipが38 caseへ展開し、全suiteは`364 passed / 0 skipped / 0 failed`、Web Editorの`tsc --noEmit`もpassした。これは元runのroutingとKPIへ混ぜない。Candidate47はdraftのdiagnosticとして保持し、追加candidate、採用、release、本体反映へ進まない。
+
+Candidate47を直接sourceとし、先行premiseがterminal inputになる前の依存judgment分散を禁止するCandidate48の[`slot31 memory-off N=1 diagnostic`](TC-A06-c47-c48-ultra-slot31-memory-off-n1-premise-dependency-boundary-diagnostic_2026-07-21.md)は、34 session / `92,801,081` tokensだった。開始時はauthority / scope inventoryだけを起動し、その終端後に依存worker waveを開始した。known findingは6 / 6を報告し、既知false positiveは報告しなかった。一方、Candidate47比でtool call`+20.57%`、model step`+15.03%`、duration`+5.05%`、token`+42.22%`となり、root直下workerも`21 → 29`へ増えた。rootとpremise producerのauthority読取りが重なり、1件のnested workerをnonterminalのまま親producerがcompleteと宣言した。Candidate48はdraftのdiagnosticとして保持し、blind rating、追加candidate、採用、release、本体反映へ進まない。
 
 Candidate43のworker制御6 labelを明示委譲時の3 labelへ圧縮したCandidate49は、[`A01 / A02とF05 / F10の各5回結果`](candidate43-candidate49-explicit-delegation-control-boundary-targeted-n5_2026-07-21.md)として4つの追記専用resultへ登録した。Candidate49は20 / 20件がscore `4`で全件root-onlyだったが、root prompt `-39.12%`に対してCandidate43比のall-agent token合計は`+425,761`、`+13.21%`だった。停止条件に従い、A03 / F07、標準14項目、A06、採用、release、本体反映へ進めていない。
 
@@ -308,21 +339,7 @@ methodをTaskSpecの局所operation capsuleへ移し、共通promptにはoperati
 
 C55で分割した`READINESS + OPERATION`をC43のatomic `SPEC`へ戻したCandidate61は、[`catalog固定F05 / F10とA01 / A02各N=5`](candidate43-candidate55-candidate61-atomic-spec-operation-gate-catalog-fixed-targeted-n5_2026-07-21.md)を登録した。A01 / A02は10 / 10 score `4`だった。一方、F10は5 / 5が11 tool call経路で、C43比`43 -> 55 tool call`、token合計`+23.63%`だった。atomic `SPEC`だけではC43短経路を復元しなかったため停止した。
 
-C43を共通coreとし、C56方法をtask全体がclosed read-onlyの場合だけへ限定したCandidate62は、[`catalog固定F05 / F10とA01 / A02各N=5`](candidate43-candidate56-candidate62-task-closed-read-route-catalog-fixed_2026-07-22.md)を登録した。F10は`2 / 3 / 3 / 1 / 1 tool call`、F系tokenはCandidate43比`-61.32%`、A系は10 / 10 score `4`だった。一方、A02 4 / 5で並行methodが流入し、F05 2 / 5でreadを追加したため、事前gateに従い停止した。
-
-C43を唯一の共通全文sourceとし、固定証拠reviewでだけ一行deltaを実行前合成するCandidate63は、[`F10-only各N=5`](candidate43-candidate63-fixed-evidence-route-projection-f10-n5_2026-07-22.md)を同じ新規Layer 1で登録した。両promptとも5 / 5 score `4`、root-only、zero driftだった。Candidate63は5 / 5で3 tool callへ収束し、shell commandはC43と同じ55件を維持した。all-agent token合計は`811,578 -> 382,228`、`-52.90%`だった。route gateは通過したが、採用、release、本体反映は未判断である。
-
-C43の32 atomic clauseを保持し、root / delegatedへF coreを全文重複したCandidate64は、[`catalog固定A01 / A02、F05 / F10、D01各N=5`](candidate43-candidate64-self-contained-execution-paths-catalog-fixed-n5_2026-07-22.md)を登録した。Candidate64は25 / 25 score `4`だった。D01は5 / 5で指定workerを起動し、rootのreview再実行は0件だった。一方、root-only F10はCandidate43比でtool call `43 -> 54`、model step `48 -> 59`、token合計`+28.90%`となった。事前gateに従いCandidate64は停止し、standard14、採用、release、本体反映へ進めていない。
-
-C43の32 atomic clauseを重複なしの11 labelへ短文化したCandidate65は、[`catalog固定F05 / F10各N=5`](candidate43-candidate65-shared-operation-core-catalog-fixed-f-n5_2026-07-22.md)を登録した。10 / 10はscore `4`、root-onlyだった。root bytesは`-7.01%`だったが、F10はCandidate43比でtool call `43 -> 49`、model step `48 -> 54`、token合計`+14.25%`となった。事前gateに従いCandidate65は停止し、A / D、standard14、採用、release、本体反映へ進めていない。
-
-C43の一層9 label、label順、32 clause所属を維持し、root bytesを`-1.43%`だけ短文化したCandidate66は、[`F10-onlyとcatalog固定A01 / A02、F05 / F10、D01各N=5`](candidate43-candidate66-topology-preserving-compression-catalog-fixed-n5_2026-07-22.md)を登録した。Candidate66は30 / 30がscore `4`だった。最初のF10-onlyはtool call `40 -> 39`、model step `29 -> 28`、token合計`-2.04%`でgateを通過したが、追加F set内のF10は`43 -> 57`、`48 -> 62`、token合計`+31.36%`となった。実行時削減を再現できなかったためCandidate66は停止し、standard14、採用、release、本体反映へ進めていない。
-
-C43の明示委譲gateとproducer再割当て禁止について、別labelの短い重複文2件だけを削除したCandidate67は、対象試験の後に[`標準14項目各N=5`](candidate43-candidate67-cross-label-predicate-deduplication-v10-standard14-n5_2026-07-22.md)を追加登録した。Candidate43とCandidate67は両方が70 / 70 score `4`だった。Candidate67からCandidate43を引いた3 KPI中央値差はquality `0.000`、all-agent token `-84,992`、elapsed `-9.276秒`だった。一方、70件token合計は`+48,808`であり、runtime削減の再現性は確定しない。Candidate67は`standard14_evaluated`で、採用、release、本体反映は未判断である。
-
-C43の`INDEPENDENCE`から先行artifactの独立確認を別operationへ固定するF9一文だけを削除したCandidate68は、[`F10-only N=5`](candidate43-candidate68-independent-review-operation-removal-f10-n5_2026-07-22.md)を登録した。root bytesは`-3.02%`、5 / 5 score `4`、root-only、zero driftだった。3 KPI中央値はquality同値、all-agent token `+1.16%`、elapsed `+26.04%`で、token合計も`+426`、`+0.05%`となった。事前gateに従いCandidate68は停止し、A / F追加scope / D、standard14、採用、release、本体反映へ進めていない。
-
-C43実traceでall-agent tokenと強く結び付いたmodel再入を直接対象にしたCandidate69は、[`標準14項目各N=5`](candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)を登録した。70 / 70 valid・rateable、zero driftで、Candidate69の点数分布は`4 / 3 = 69 / 1`だった。3 KPI中央値差はquality `0.000`、all-agent token `-26.21%`、elapsed `-18.37%`、70件token合計は`-22.59%`、top-level tool callは`-26.60%`だった。[同条件18 Batch](candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-continuous-n5-b18_2026-07-22.md)は1,260 / 1,260件を独立登録・圧縮した。C43比の18結果中央値差はquality `0.000`、all-agent token `-11.08%`、elapsed `+4.12%`、全token合計は`-13.00%`、top-level tool callは`-15.29%`だった。score分布は`4 / 3 / 1 = 1,258 / 1 / 1`で、score `3`は既知のF10 location mismatch、score `1`はA01 rating偽陰性である。事前gate未達のためCandidate69は停止するが、model再入境界を次の機械制御対象として保持する。
+## 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 
 C15連続試験のF04 / F10低scoreに対するCandidate16 / 17の原則化、および明示合意なく診断中に追加され後に破棄したC18 / C19の経緯は[`evidence boundary targeted checks`](candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ分離した。expanded 12 case resultへ混ぜず、観測値と破棄理由を履歴として保持する。
 
@@ -388,6 +405,8 @@ TaskSpecのcriterion owner語列と明示的なproducer delegationを分離し�
 
 Candidate41 expanded resultと同じv9互換条件でbaseline、ControlFreeRepository、Candidate35を新規実行した[`4-result expanded N=5 comparison`](baseline-control-free-repository-c35-c41-outcome-quality-owner-diagnostic-v9-expanded12-n5_2026-07-19.md)は、各60 / 60 valid runをappend-only登録した。score分布はbaseline `4 / 3 = 58 / 2`、ControlFreeRepository `4 / 3 = 59 / 1`、Candidate35とCandidate41は各`4 = 60`だった。Candidate35のall-agent token合計はCandidate41比`+7,347,269`、`+50.02%`で、12 case中11 caseで大きかった。`elapsed_seconds`中央値はCandidate41比`+668.926`秒、`+57.07%`だった。winner、採用、release、本体反映は未判断、未実施である。
 
+## 11. v3初期（Baseline〜Candidate15、2026-07-15〜07-16）
+
 最初のv3 standalone resultは[`candidate2 expanded 12-case global M=24 N=1`](candidate2-expanded12-global-m24-n1_2026-07-15.md)である。candidate2だけをimmutableな`prompt_set_identity`へ結び付けて保存し、比較、winner、採用判断は行っていない。
 
 同じ互換条件で新規実行した[`baseline standalone result`](baseline-expanded12-global-m24-n1_2026-07-15.md)とcandidate2から、[`baseline / candidate2 comparison view`](baseline-vs-candidate2-expanded12-global-m24-n1_2026-07-15.md)を生成した。差分方向は`candidate2 - baseline`であり、3 KPIの数値差だけを記録する。
@@ -403,3 +422,72 @@ control coverage追加の最初のstandalone comparisonは[`TC-F05 out-of-scope 
 2番目のstandalone comparisonは[`TC-F07 dependency provenance pair r1 N=3`](TC-F07-dependency-provenance-pair-r1-n3_2026-07-15.md)である。
 
 3番目のstandalone comparisonは[`TC-F10 monthly format-test review r2 N=3`](TC-F10-monthly-format-test-review-r2-n3_2026-07-15.md)である。r1のprompt-overlay-relative diff blockerも同resultへ記録する。
+
+v3で2026-07-16までに保存した`prompt-set-result/v1`の`total_tokens`はroot agentだけを数えていた。現行値は[`v3 all-agent token再集計`](v3-all-agent-token-reaccounting_2026-07-16.md)の`prompt-set-result/v2`を使用する。以下から参照する旧v3 standalone resultとcomparison viewのtoken値はroot-onlyの履歴であり、all-agent値として使用しない。qualityとelapsedの履歴は変更していない。
+
+root-only履歴のv3 resultは[`baseline N=5`](baseline-expanded12-global-m24-n5_2026-07-15.md)、[`candidate1 N=5`](candidate1-expanded12-global-m24-n5_2026-07-15.md)、[`candidate2 N=5`](candidate2-expanded12-global-m24-n5_2026-07-15.md)、[`candidate3 N=5`](candidate3-expanded12-global-m24-n5_2026-07-15.md)、[`candidate4 N=5`](candidate4-expanded12-global-m24-n5_2026-07-15.md)、[`candidate5 N=5`](candidate5-expanded12-global-m24-n5_2026-07-16.md)、[`candidate6 N=5`](candidate6-expanded12-global-m24-n5_2026-07-16.md)である。C6の設計対象に合わせ、同じ旧compatibility keyを持つBase、C1、C5、C6から[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate6-expanded12-global-m24-n5_2026-07-16.md)を生成した。既存viewは履歴として変更せず、winner、採用、release判断は行っていない。
+
+Candidate9の[`expanded 12-case staged N=5 result`](candidate9-expanded12-global-m24-n5_2026-07-16.md)は、F03 / F06先行stageとremaining 10 case stageの60 runを1つのcampaign summaryへまとめた。2つのEvaluation set identityとappend-only一次resultは変更せず、既存expanded resultとのKPI comparison view、winner、採用、release判断は生成していない。
+
+Candidate1直接派生のCandidate10は[`expanded 12-case global M=24 N=5 result`](candidate10-c1-counter-boundary-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。既存expanded 12-case all-agent resultと互換なfixture identityを使い、winner、採用、release判断は行っていない。
+
+Baseline、C1、C5、C1直接派生C10の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate10-c1-derived-expanded12-global-m24-n5_2026-07-16.md)は、all-agentの3 KPI中央値、反復値、quality分布、C10から各setを引いた数値差だけを記録する。winnerや採用判断は出力しない。
+
+C10直接派生のCandidate11は[`expanded 12-case global M=24 N=5 result`](candidate11-sa-context-boundary-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C11の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate11-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case token、SA context境界の補助観測を記録し、winnerや採用判断は出力しない。
+
+C11直接派生のCandidate12は[`expanded 12-case global M=24 N=5 result`](candidate12-route-cardinality-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C12の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate12-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、route cardinalityの補助観測を記録し、winnerや採用判断は出力しない。
+
+Candidate13のreview role接続とCandidate14のvalidation authority接続は[`targeted check`](candidate13-candidate14-targeted-checks_2026-07-16.md)へ分離した。C13はF03 / F04、C14はF06だけを確認し、partial set resultをexpanded comparisonへ混ぜていない。
+
+C13直接派生のCandidate14は[`expanded 12-case global M=24 N=5 result`](candidate14-validation-authority-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C1、C5、C14の[`4-result N=5 comparison view`](baseline-candidate1-candidate5-candidate14-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、validation authorityの補助観測を記録し、winnerや採用判断は出力しない。
+
+C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](candidate15-selected-role-control-input-expanded12-global-m24-n5_2026-07-16.md)として60 runを単一のappend-only resultへ登録した。Baseline、C5、C14、C15の[`4-result N=5 comparison view`](baseline-candidate5-candidate14-candidate15-expanded12-global-m24-n5_2026-07-16.md)は、互換なall-agentの3 KPI、quality分布、case elapsed、selected-role control input境界の補助観測を記録し、winnerや採用判断は出力しない。
+
+制御promptなし・repository情報ありとC15は、独立した[`ambiguity boundaries 5-case global M=10 N=3 comparison`](control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)として各15 runをappend-only resultへ登録した。互換な3 KPI、case別のclarify / execute / stopped境界、semanticな成果同等性を記録し、winner、採用、release判断は出力しない。
+
+## 12. この索引に要約を持たないresult
+
+2026-08-06時点の棚卸しで、このdirectoryに登録済みだが上記の節に要約を持たないresultは次の42件である。登録済み一次resultとして保持し、要約は未作成である。
+
+- [`TC-F01-r1_identical-bundle-pilot_2026-07-15.md`](TC-F01-r1_identical-bundle-pilot_2026-07-15.md)
+- [`TC-F01-r2_identical-bundle-n10_2026-07-15.md`](TC-F01-r2_identical-bundle-n10_2026-07-15.md)
+- [`TC-F01-r2_identical-bundle-parallel-m2-n3_2026-07-15.md`](TC-F01-r2_identical-bundle-parallel-m2-n3_2026-07-15.md)
+- [`TC-F01-r2_identical-bundle-pilot_2026-07-15.md`](TC-F01-r2_identical-bundle-pilot_2026-07-15.md)
+- [`baseline-candidate1-candidate2-candidate3-candidate4-candidate5-expanded12-global-m24-n5_2026-07-16.md`](baseline-candidate1-candidate2-candidate3-candidate4-candidate5-expanded12-global-m24-n5_2026-07-16.md)
+- [`baseline-candidate1-candidate2-candidate3-candidate4-expanded12-global-m24-n5_2026-07-15.md`](baseline-candidate1-candidate2-candidate3-candidate4-expanded12-global-m24-n5_2026-07-15.md)
+- [`baseline-candidate1-candidate2-candidate3-expanded12-global-m24-n5_2026-07-15.md`](baseline-candidate1-candidate2-candidate3-expanded12-global-m24-n5_2026-07-15.md)
+- [`baseline-candidate1-candidate2-expanded12-global-m24-n5_2026-07-15.md`](baseline-candidate1-candidate2-expanded12-global-m24-n5_2026-07-15.md)
+- [`candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md`](candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)
+- [`candidate116-outcome-implementation-boundary-v14-medium-a02-atomic-n20-cli0146_2026-07-31.md`](candidate116-outcome-implementation-boundary-v14-medium-a02-atomic-n20-cli0146_2026-07-31.md)
+- [`candidate125-candidate127-failed-change-salvage-v14-medium-standard14-atomic-n5-cli0146_2026-08-01.md`](candidate125-candidate127-failed-change-salvage-v14-medium-standard14-atomic-n5-cli0146_2026-08-01.md)
+- [`candidate127-failed-change-salvage-v14-medium-f02-f04-f07-sequential-atomic-n100-stopped-at-f02-n29-cli0146_2026-08-01.md`](candidate127-failed-change-salvage-v14-medium-f02-f04-f07-sequential-atomic-n100-stopped-at-f02-n29-cli0146_2026-08-01.md)
+- [`candidate147-autonomous-review-r1-coverage-stop_2026-08-04.md`](candidate147-autonomous-review-r1-coverage-stop_2026-08-04.md)
+- [`candidate147-autonomous-review-r2-root-only-diagnostic_2026-08-04.md`](candidate147-autonomous-review-r2-root-only-diagnostic_2026-08-04.md)
+- [`candidate147-information-closure-heldout-r1_2026-08-04.md`](candidate147-information-closure-heldout-r1_2026-08-04.md)
+- [`candidate147-information-closure-task-qualification-dev-r1-r2_2026-08-04.md`](candidate147-information-closure-task-qualification-dev-r1-r2_2026-08-04.md)
+- [`candidate31-operation-terminal-closure-owner-producer-v4-expanded12-global-m24-n5_2026-07-18.md`](candidate31-operation-terminal-closure-owner-producer-v4-expanded12-global-m24-n5_2026-07-18.md)
+- [`candidate31-operation-terminal-closure-owner-producer-v4-targeted3-global-m15-n5_2026-07-17.md`](candidate31-operation-terminal-closure-owner-producer-v4-targeted3-global-m15-n5_2026-07-17.md)
+- [`candidate31-operation-terminal-closure-owner-producer-v5-expanded12-global-m24-n5_2026-07-18.md`](candidate31-operation-terminal-closure-owner-producer-v5-expanded12-global-m24-n5_2026-07-18.md)
+- [`candidate43-candidate67-cross-label-predicate-deduplication-catalog-fixed-n5_2026-07-22.md`](candidate43-candidate67-cross-label-predicate-deduplication-catalog-fixed-n5_2026-07-22.md)
+- [`candidate71-candidate72-closed-validation-state-v12-targeted4-n5_2026-07-23.md`](candidate71-candidate72-closed-validation-state-v12-targeted4-n5_2026-07-23.md)
+- [`candidate71-candidate73-terminal-closure-preserving-compression-v12-targeted4-n5_2026-07-23.md`](candidate71-candidate73-terminal-closure-preserving-compression-v12-targeted4-n5_2026-07-23.md)
+- [`candidate81-candidate85-planning-first-v14-medium-f02-n5_2026-07-28.md`](candidate81-candidate85-planning-first-v14-medium-f02-n5_2026-07-28.md)
+- [`candidate81-candidate85-planning-first-v14-medium-f04-n5_2026-07-28.md`](candidate81-candidate85-planning-first-v14-medium-f04-n5_2026-07-28.md)
+- [`candidate81-candidate86-producer-plan-fast-path-v14-medium-d01-n5_2026-07-29.md`](candidate81-candidate86-producer-plan-fast-path-v14-medium-d01-n5_2026-07-29.md)
+- [`candidate81-candidate86-producer-plan-fast-path-v14-medium-f02-n5_2026-07-29.md`](candidate81-candidate86-producer-plan-fast-path-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-candidate86-producer-plan-fast-path-v14-medium-f04-n5_2026-07-29.md`](candidate81-candidate86-producer-plan-fast-path-v14-medium-f04-n5_2026-07-29.md)
+- [`candidate81-candidate90-tool-output-ingress-boundary-v14-medium-f02-n5_2026-07-29.md`](candidate81-candidate90-tool-output-ingress-boundary-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-candidate91-concise-output-ingress-v14-medium-f02-n5_2026-07-29.md`](candidate81-candidate91-concise-output-ingress-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-candidate92-bound-output-route-v14-medium-f02-n5_2026-07-29.md`](candidate81-candidate92-bound-output-route-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-candidate93-result-classification-v14-medium-f02-n5_2026-07-29.md`](candidate81-candidate93-result-classification-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-observation-delivery-executor-ab-v14-medium-f02-n5_2026-07-29.md`](candidate81-observation-delivery-executor-ab-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-pytest-allowlist-success-delivery-v14-medium-f02-n5_2026-07-29.md`](candidate81-pytest-allowlist-success-delivery-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate81-pytest-allowlist-success-delivery-v14-medium-f06-n5_2026-07-29.md`](candidate81-pytest-allowlist-success-delivery-v14-medium-f06-n5_2026-07-29.md)
+- [`candidate81-success-delivery-executor-ab-v14-medium-f06-n5_2026-07-29.md`](candidate81-success-delivery-executor-ab-v14-medium-f06-n5_2026-07-29.md)
+- [`candidate81-success-silent-delivery-v14-medium-f02-n5_2026-07-29.md`](candidate81-success-silent-delivery-v14-medium-f02-n5_2026-07-29.md)
+- [`candidate83-delegation-value-boundary-v14-medium-f02-n5_2026-07-28.md`](candidate83-delegation-value-boundary-v14-medium-f02-n5_2026-07-28.md)
+- [`candidate84-delegation-marginal-value-boundary-v14-medium-f02-n5_2026-07-28.md`](candidate84-delegation-marginal-value-boundary-v14-medium-f02-n5_2026-07-28.md)
+- [`candidate86-candidate87-producer-local-invocation-wave-v14-medium-d01-n5_2026-07-29.md`](candidate86-candidate87-producer-local-invocation-wave-v14-medium-d01-n5_2026-07-29.md)
+- [`control-free-generic-repository-expanded12-global-m24-n5_2026-07-16.md`](control-free-generic-repository-expanded12-global-m24-n5_2026-07-16.md)
+- [`revision-2-core9-n1_2026-07-15.md`](revision-2-core9-n1_2026-07-15.md)
+- [`revision-2-core9-parallel-m2-n3_2026-07-15.md`](revision-2-core9-parallel-m2-n3_2026-07-15.md)
