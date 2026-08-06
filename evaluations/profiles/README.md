@@ -56,6 +56,19 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 | --- | --- | --- |
 | Candidate81 A01 B20 | [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1`](candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1.json) | [`result`](../results/candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md) |
 
+## 全profile index
+
+`evaluations/profiles/`直下の全profile JSONへ、file名を知らなくても到達できる機械的な索引である。README本体へCandidate別評価史を戻さないため60件単位のshardへ分ける。各shardはprofile名と直接linkだけを持ち、用途・結果・状態の正本にはしない。
+
+- [`001–060`](index/profiles-001-060.md)
+- [`061–120`](index/profiles-061-120.md)
+- [`121–180`](index/profiles-121-180.md)
+- [`181–240`](index/profiles-181-240.md)
+- [`241–300`](index/profiles-241-300.md)
+- [`301–355`](index/profiles-301-355.md)
+
+profile追加・削除時は[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、directory実体、READMEから辿れるindex shard、profile JSON linkの集合一致を確認する。
+
 ## 履歴profileの探し方
 
 Candidate1〜147、rating v1〜v14、targeted / expanded / continuous / atomic各経路のprofile JSONは既存fileのまま保持する。過去profileの結果・停止理由・互換条件を探す場合は、Candidate別の長い説明をこのREADMEへ再掲せず、[`evaluations/results/README.md`](../results/README.md)の系列別目次から該当resultへ進む。
