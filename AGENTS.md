@@ -4,7 +4,8 @@
 
 ## Repository scope
 
-- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。現在の登録instanceは`the-caption`（THE-CAPTION）だけである。instanceの登録と境界は`evaluations/targets/README.md`を正本とする。
+- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。登録instanceは`the-caption`（THE-CAPTION）と`click`（`pallets/click`）である。`the-caption`はrelease準備と本体投影まで進める現行instance、`click`はBundle A baselineを確立した公開targetで、Bundle比較、採用、release、本体反映は未実施である。instanceの登録と境界は`evaluations/targets/README.md`を正本とする。
+- instance間でartifactを混ぜない。case、profile、set、rating contract、prompt bundle、resultはinstance固有artifactとして扱い、あるinstanceで成立した結果を他instanceの一般的効果として扱わない。target非依存のkernelとinstance固有artifactの帰属も`evaluations/targets/README.md`を正本とする。
 - prompt制御上の問題を解く方法は、このリポジトリ内のprompt、TaskSpec、repository authority、評価artifactの境界へ限定する。repository外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、target runtimeの変更を、prompt Candidateの解決策、次案、backlog、再開条件として提案または実装しない。
 - repository外の挙動や過去のexecutor試験は、保存済みresultの原因を分類するread-only診断証拠としてだけ参照できる。問題がrepository外の層でしか強制できない場合は、このリポジトリでは未解決として停止する。外部対応へ作業を広げない。評価基盤自体の保守は、ユーザーが明示的に依頼した別作業に限る。
 - target本体のruntime変更は通常作業範囲に含めない。
