@@ -1,0 +1,13 @@
+diff --git a/reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md b/reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md
+index 8347341..aa76ab5 100644
+--- a/reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md
++++ b/reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md
+@@ -11,7 +11,7 @@
+ - T3: 合格
+   - `いい感じに問題を修正して` は境界不足として fail-close した。
+ - T4: 合格
+-  - `SAFE RATIOを日次メールから外して` は対象・範囲・完了条件・テスト条件不足として fail-close した。
++  - `SAFE RATIOを日次メールから外して` は `target / scope / done / tests` が不足していたため fail-close した。
+ - T5: 合格
+   - `target / scope / done / tests / stop` を明示した依頼を packet 化して委任候補として扱った。
+ - T6: 合格
