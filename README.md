@@ -2,7 +2,7 @@
 
 AIエージェントの実行制御が成果品質・token・所要時間・実行経路へ与える影響を、再現可能に測る研究基盤です。
 
-計測は評価対象repository（target）ごとのinstanceとして管理します。現在の登録instanceはTHE-CAPTION（`the-caption`）で、そのプロンプトを設計、比較、評価し、反映可能な形へまとめます。instance台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
+計測は評価対象repository（target）ごとのinstanceとして管理します。prompt設計、比較、評価、反映可能な形へのまとめを実行している現行instanceはTHE-CAPTION（`the-caption`）です。公開target `click`（`pallets/click`）も第三者再現可能なinstanceとして登録済みで、Bundle Aのbaselineを確立した段階にあり、Bundle比較・採用・release・本体反映は未実施です。instance台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
 
 このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から改名しました。schema名prefix `the-caption-prompt.*`と既存bundle manifestの`construction_repository`は、保存済みresultへbindしたimmutableなidentityのため旧名のまま固定します（[`docs/repository-overview.md`](docs/repository-overview.md)）。
 

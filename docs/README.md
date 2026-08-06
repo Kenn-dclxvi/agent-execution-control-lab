@@ -127,6 +127,81 @@
 | C80 | [`candidate80-root-validation-wrapper-design.md`](candidate80-root-validation-wrapper-design.md) | root validation wrapper |
 | C81 | [`candidate81-validation-wrapper-precedence-design.md`](candidate81-validation-wrapper-precedence-design.md) | validation wrapper precedence |
 
+C107〜C116の設計記録は「3b. 比較・診断・段階記録」へ掲載している。C164〜C166は現行frontierのため「2b」へ掲載している。
+
+| Candidate | 文書 | 制御軸 |
+|---|---|---|
+| C82 | [`candidate82-producer-gate-deduplication-design.md`](candidate82-producer-gate-deduplication-design.md) | producer gate deduplication |
+| C83 | [`candidate83-delegation-value-boundary-design.md`](candidate83-delegation-value-boundary-design.md) | delegation value boundary |
+| C84 | [`candidate84-delegation-marginal-value-boundary-design.md`](candidate84-delegation-marginal-value-boundary-design.md) | delegation marginal value boundary |
+| C85 | [`candidate85-planning-first-producer-selection-design.md`](candidate85-planning-first-producer-selection-design.md) | planning first producer selection |
+| C86 | [`candidate86-producer-plan-fast-path-design.md`](candidate86-producer-plan-fast-path-design.md) | producer plan fast path |
+| C87 | [`candidate87-producer-local-invocation-wave-design.md`](candidate87-producer-local-invocation-wave-design.md) | producer local invocation wave |
+| C88 | [`candidate88-parallel-worker-admission-design.md`](candidate88-parallel-worker-admission-design.md) | parallel worker admission |
+| C89 | [`candidate89-dispatch-time-worker-admission-design.md`](candidate89-dispatch-time-worker-admission-design.md) | dispatch time worker admission |
+| C90 | [`candidate90-tool-output-ingress-boundary-design.md`](candidate90-tool-output-ingress-boundary-design.md) | tool output ingress boundary |
+| C91 | [`candidate91-concise-output-ingress-design.md`](candidate91-concise-output-ingress-design.md) | concise output ingress |
+| C92 | [`candidate92-bound-output-route-design.md`](candidate92-bound-output-route-design.md) | bound output route |
+| C93 | [`candidate93-result-classification-design.md`](candidate93-result-classification-design.md) | result classification |
+| C94 | [`candidate94-operation-criterion-totality-design.md`](candidate94-operation-criterion-totality-design.md) | operation criterion totality |
+| C95 | [`candidate95-required-judgment-owner-boundary-design.md`](candidate95-required-judgment-owner-boundary-design.md) | required judgment owner boundary |
+| C96 | [`candidate96-successful-validation-result-projection-design.md`](candidate96-successful-validation-result-projection-design.md) | successful validation result projection |
+| C97 | [`candidate97-decision-round-closure-design.md`](candidate97-decision-round-closure-design.md) | decision round closure |
+| C97 | [`candidate97-minimal-decision-round-closure-r2-design.md`](candidate97-minimal-decision-round-closure-r2-design.md) | minimal decision round closure r2 |
+| C98 | [`candidate98-validation-completion-sheet-design.md`](candidate98-validation-completion-sheet-design.md) | validation completion sheet |
+| C99 | [`candidate99-decision-evidence-boundary-design.md`](candidate99-decision-evidence-boundary-design.md) | decision evidence boundary |
+| C100 | [`candidate100-outcome-source-closure-design.md`](candidate100-outcome-source-closure-design.md) | outcome source closure |
+| C101 | [`candidate101-additional-investigation-trigger-design.md`](candidate101-additional-investigation-trigger-design.md) | additional investigation trigger |
+| C102 | [`candidate102-prechange-evidence-freeze-design.md`](candidate102-prechange-evidence-freeze-design.md) | prechange evidence freeze |
+| C103 | [`candidate103-prechange-evidence-receipt-design.md`](candidate103-prechange-evidence-receipt-design.md) | prechange evidence receipt |
+| C104 | [`candidate104-staged-evidence-admission-design.md`](candidate104-staged-evidence-admission-design.md) | staged evidence admission |
+| C105 | [`candidate105-validation-terminal-return-design.md`](candidate105-validation-terminal-return-design.md) | validation terminal return |
+| C106 | [`candidate106-compact-validation-terminal-wait-design.md`](candidate106-compact-validation-terminal-wait-design.md) | compact validation terminal wait |
+| C117 | [`candidate117-implementation-authority-delegation-design.md`](candidate117-implementation-authority-delegation-design.md) | implementation authority delegation |
+| C118 | [`candidate118-implementation-bind-terminal-closure-design.md`](candidate118-implementation-bind-terminal-closure-design.md) | implementation bind terminal closure |
+| C119 | [`candidate119-validation-predicate-method-boundary-design.md`](candidate119-validation-predicate-method-boundary-design.md) | validation predicate method boundary |
+| C120 | [`candidate120-implementation-edit-ticket-closure-design.md`](candidate120-implementation-edit-ticket-closure-design.md) | implementation edit ticket closure |
+| C121 | [`candidate121-evidence-request-scope-closure-design.md`](candidate121-evidence-request-scope-closure-design.md) | evidence request scope closure |
+| C122 | [`candidate122-prechange-evidence-wave-closure-design.md`](candidate122-prechange-evidence-wave-closure-design.md) | prechange evidence wave closure |
+| C123 | [`candidate123-preterminal-result-round-closure-design.md`](candidate123-preterminal-result-round-closure-design.md) | preterminal result round closure |
+| C124 | [`candidate124-incomplete-content-continuation-design.md`](candidate124-incomplete-content-continuation-design.md) | incomplete content continuation |
+| C125 | [`candidate125-criterion-complete-single-target-continuation-design.md`](candidate125-criterion-complete-single-target-continuation-design.md) | criterion complete single target continuation |
+| C126 | [`candidate126-criterion-bound-change-input-design.md`](candidate126-criterion-bound-change-input-design.md) | criterion bound change input |
+| C127 | [`candidate127-failed-change-salvage-design.md`](candidate127-failed-change-salvage-design.md) | failed change salvage |
+| C128 | [`candidate128-required-effect-closure-design.md`](candidate128-required-effect-closure-design.md) | required effect closure |
+| C129 | [`candidate129-unsatisfied-effect-change-admission-design.md`](candidate129-unsatisfied-effect-change-admission-design.md) | unsatisfied effect change admission |
+| C130 | [`candidate130-focused-criterion-continuation-design.md`](candidate130-focused-criterion-continuation-design.md) | focused criterion continuation |
+| C131 | [`candidate131-criterion-anchor-continuation-design.md`](candidate131-criterion-anchor-continuation-design.md) | criterion anchor continuation |
+| C132 | [`candidate132-observed-preimage-change-construction-design.md`](candidate132-observed-preimage-change-construction-design.md) | observed preimage change construction |
+| C133 | [`candidate133-anchor-first-continuation-order-design.md`](candidate133-anchor-first-continuation-order-design.md) | anchor first continuation order |
+| C134 | [`candidate134-syntactic-lexeme-continuation-design.md`](candidate134-syntactic-lexeme-continuation-design.md) | syntactic lexeme continuation |
+| C135 | [`candidate135-criterion-span-request-authority-design.md`](candidate135-criterion-span-request-authority-design.md) | criterion span request authority |
+| C136 | [`candidate136-effect-local-change-admission-design.md`](candidate136-effect-local-change-admission-design.md) | effect local change admission |
+| C137 | [`candidate137-pending-effect-validation-admission-design.md`](candidate137-pending-effect-validation-admission-design.md) | pending effect validation admission |
+| C138 | [`candidate138-continuation-effect-change-handoff-design.md`](candidate138-continuation-effect-change-handoff-design.md) | continuation effect change handoff |
+| C139 | [`candidate139-single-target-continuation-handoff-design.md`](candidate139-single-target-continuation-handoff-design.md) | single target continuation handoff |
+| C140 | [`candidate140-effect-satisfaction-witness-design.md`](candidate140-effect-satisfaction-witness-design.md) | effect satisfaction witness |
+| C141 | [`candidate141-prechange-relation-coverage-design.md`](candidate141-prechange-relation-coverage-design.md) | prechange relation coverage |
+| C142 | [`candidate142-initial-joint-effect-admission-design.md`](candidate142-initial-joint-effect-admission-design.md) | initial joint effect admission |
+| C143 | [`candidate143-required-outcome-implementation-bind-design.md`](candidate143-required-outcome-implementation-bind-design.md) | required outcome implementation bind |
+| C144 | [`candidate144-required-outcome-validation-method-boundary-design.md`](candidate144-required-outcome-validation-method-boundary-design.md) | required outcome validation method boundary |
+| C145 | [`candidate145-lifecycle-consumer-evidence-admission-design.md`](candidate145-lifecycle-consumer-evidence-admission-design.md) | lifecycle consumer evidence admission |
+| C146 | [`candidate146-consumer-closure-evidence-operation-design.md`](candidate146-consumer-closure-evidence-operation-design.md) | consumer closure evidence operation |
+| C147 | [`candidate147-result-effect-scope-design.md`](candidate147-result-effect-scope-design.md) | result effect scope |
+| C148 | [`candidate148-five-point-execution-control-design.md`](candidate148-five-point-execution-control-design.md) | five point execution control |
+| C149 | [`candidate149-specification-start-boundary-design.md`](candidate149-specification-start-boundary-design.md) | specification start boundary |
+| C150 | [`candidate150-required-outcome-bind-readable-design.md`](candidate150-required-outcome-bind-readable-design.md) | required outcome bind readable |
+| C151 | [`candidate151-evidence-consumer-boundary-readable-design.md`](candidate151-evidence-consumer-boundary-readable-design.md) | evidence consumer boundary readable |
+| C152 | [`candidate152-four-decision-rules-readable-design.md`](candidate152-four-decision-rules-readable-design.md) | four decision rules readable |
+| C156 | [`candidate156-five-prompt-conditions-readable-design.md`](candidate156-five-prompt-conditions-readable-design.md) | five prompt conditions readable |
+| C157 | [`candidate157-focused-prechange-research-readable-design.md`](candidate157-focused-prechange-research-readable-design.md) | focused prechange research readable |
+| C158 | [`candidate158-outcome-method-readable-design.md`](candidate158-outcome-method-readable-design.md) | outcome method readable |
+| C159 | [`candidate159-change-start-readable-design.md`](candidate159-change-start-readable-design.md) | change start readable |
+| C160 | [`candidate160-assignment-result-readable-design.md`](candidate160-assignment-result-readable-design.md) | assignment result readable |
+| C161 | [`candidate161-assignment-result-closure-readable-design.md`](candidate161-assignment-result-closure-readable-design.md) | assignment result closure readable |
+| C162 | [`candidate162-completion-ticket-readable-design.md`](candidate162-completion-ticket-readable-design.md) | completion ticket readable |
+| C163 | [`candidate163-five-verified-lines-integrated-design.md`](candidate163-five-verified-lines-integrated-design.md) | five verified lines integrated |
+
 ### 3b. 比較・診断・段階記録
 
 | 文書 | 役割 |
@@ -150,6 +225,39 @@
 | [`candidate115-authority-location-discovery-design.md`](candidate115-authority-location-discovery-design.md) | authority path未記載による誤停止を対象にしたCandidate115設計 |
 | [`candidate116-outcome-implementation-boundary-design.md`](candidate116-outcome-implementation-boundary-design.md) | required outcome確定とimplementation choice解決を分離するCandidate116設計 |
 | [`prompt-set-result-registry-additional-requirements.md`](prompt-set-result-registry-additional-requirements.md) | result台帳の追加要件記録。status `implemented_as_evaluation_foundation_v3`。具体設計の正本は`prompt-comparison-workflow.md`と`evaluation-loop-manual.md` |
+| [`candidate118-residual-validation-reentry-analysis.md`](candidate118-residual-validation-reentry-analysis.md) | C118の残存token増加を、追加したbind closureではなく変更後validationのnonterminal返却とmodel再入で説明した診断 |
+| [`candidate121-f02-evidence-route-analysis.md`](candidate121-f02-evidence-route-analysis.md) | C121のF02 cost未達をevidence bytesだけでは説明できないと示し、locator→content spanの二段階routeを共通差として分離した診断 |
+| [`candidate122-preterminal-result-round-analysis.md`](candidate122-preterminal-result-round-analysis.md) | tokenの高低を分けた共通差がinvocation数ではなく、変更・停止までにtool resultをmodelへ返したround数だと特定した診断 |
+| [`candidate125-adoption-decision.md`](candidate125-adoption-decision.md) | C125の採用判断。評価状態、release、approval、projectionを分離して記録 |
+| [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md) | C125 Standard14 N=5を通常input / cached input / cache write / outputへ分解し、公開API単価で課金換算した比較 |
+| [`candidate125-candidate132-six-point-control-synthesis.md`](candidate125-candidate132-six-point-control-synthesis.md) | C125〜C132の六点controlを統合し、六点を同時に解くglobal predicateは作らないと結論した記録 |
+| [`candidate131-point4-dependency-audit.md`](candidate131-point4-dependency-audit.md) | Point 4 dependencyを独立predicateへ固定しないと判断した監査 |
+| [`candidate131-point6-closure-recovery-audit.md`](candidate131-point6-closure-recovery-audit.md) | Point 6 closure / recoveryに新Candidateを作らないと判断した監査 |
+| [`candidate133-task-spec-lexeme-authority-audit.md`](candidate133-task-spec-lexeme-authority-audit.md) | anchorを意味判断で選ばず、TaskSpec原文のcode-shaped lexemeを構文規則で全件抽出する次軸を固定した監査 |
+| [`candidate134-reference-symbol-coverage-ownership-audit.md`](candidate134-reference-symbol-coverage-ownership-audit.md) | C134の低ScoreをPoint 2 evidence coverage不足へ帰属させ、request identity失敗とcoverage closure失敗の同時修正を禁じた監査 |
+| [`candidate135-effect-local-change-admission-audit.md`](candidate135-effect-local-change-admission-audit.md) | 充足済み`colSpan` effectを再び変更対象へ入れ必要変更と同一patchへ結合したことをScore 2の直接原因とした監査 |
+| [`candidate136-criterion-lexeme-member-totality-audit.md`](candidate136-criterion-lexeme-member-totality-audit.md) | C136 Score 3の原因を入力範囲ではなくlexeme member抽出規則の退行と特定した監査 |
+| [`candidate137-existing-case-observer-coverage-audit.md`](candidate137-existing-case-observer-coverage-audit.md) | `pending_effect_validation_admitted`を既存caseで確実に発生させる方法はないと判定し、F04維持と停止条件を固定した監査 |
+| [`candidate139-effect-satisfaction-witness-audit.md`](candidate139-effect-satisfaction-witness-audit.md) | F02部分変更の一次原因を`satisfied`の誤bindとし、次軸`effect_satisfaction_witness`を導出した監査 |
+| [`candidate140-evidence-completeness-granularity-audit.md`](candidate140-evidence-completeness-granularity-audit.md) | F02低Scoreを分けた差がwitness定義ではなく変更前evidenceの粒度だと示した監査 |
+| [`candidate141-post-result-change-admission-audit.md`](candidate141-post-result-change-admission-audit.md) | 残存失敗を、変更前request準備完了とresult受領後の変更開始準備完了が未分離であることへ帰属させた監査 |
+| [`candidate145-f01-f02-f03-cost-causal-analysis.md`](candidate145-f01-f02-f03-cost-causal-analysis.md) | C145 cost増加の先行分析を誤りと訂正し、`command_execution`件数とmodel step数の混同を明示した再集計 |
+| [`candidate146-model-step-boundary-audit.md`](candidate146-model-step-boundary-audit.md) | `agent_message`をmodel step境界としてC125 / C145 / C146を再集計し、C146の増分機構なしと判定した監査 |
+| [`candidate147-adoption-decision.md`](candidate147-adoption-decision.md) | C147の採用判断。品質・安定性・機構・cost回収を別々に確認し、公開版`the-caption`へ投影した記録 |
+| [`candidate81-candidate125-control-findings-synthesis.md`](candidate81-candidate125-control-findings-synthesis.md) | C81〜C125で有効だった制御の統合知見。抽象的注意ではなく実行時に観測できる条件へ閉じることが要点 |
+| [`click-runtime-reproducibility.md`](click-runtime-reproducibility.md) | Click評価用known-good runtimeを空環境から再構築し、offline full gateまで一致を確認した記録 |
+| [`click-control-free-medium-baseline-analysis.md`](click-control-free-medium-baseline-analysis.md) | Click Control-free baselineがTHE-CAPTIONより軽い主因をrepository / caseのcontext量差として分離した分析 |
+| [`click-c81-medium-residual-analysis.md`](click-c81-medium-residual-analysis.md) | Click C81 Mediumの残余経路をpaired差で再評価し、F01の悪化は非再現、F04 elapsed増加は再現性ありと判定した分析 |
+| [`click-c81-full-portability-design.md`](click-c81-full-portability-design.md) | THE-CAPTION C81全文をClick root 1 targetへ改変なく水平適用する比較設計（外部妥当性の検証） |
+| [`click-c125-full-portability-design.md`](click-c125-full-portability-design.md) | 同様にC125全文をClickへ水平適用し、Click Standard14 r2を各case`N=5`で実施する設計 |
+| [`click-c81-repository-authority-standard14-r2-design.md`](click-c81-repository-authority-standard14-r2-design.md) | C81全文のみと、C81全文＋Click repository authorityを`click-standard14-r2`で比較する設計 |
+| [`click-repository-authority-availability-design.md`](click-repository-authority-availability-design.md) | repository authorityの可用性差を、THE-CAPTIONで差が出たF10と同じ観点でClickへ移す比較設計 |
+| [`click-repository-subagents-comparison-design.md`](click-repository-subagents-comparison-design.md) | Clickの階層別repository instructionの影響を、root制御promptと分離して確認する比較設計 |
+| [`delegation-cost-control-redesign.md`](delegation-cost-control-redesign.md) | Worker起動自体を失敗条件にせず、実行全体を3 KPIで判定するコスト判定・制御の再設計 |
+| [`planning-first-route-diagnostic.md`](planning-first-route-diagnostic.md) | planning-first経路のrun別補助記録。Worker数の採点ではなくKPI差の説明に使う |
+| [`sealed-execution-wave-design.md`](sealed-execution-wave-design.md) | 中間resultをmodelへ配送しないexecutor境界の第1版設計（`sealed_execution_wave.py`） |
+| [`success-silent-delivery-design.md`](success-silent-delivery-design.md) | deterministicな成功resultだけをmodelへ配送しない`success-delivery/v1`第1版設計 |
+| [`pytest-allowlist-success-delivery-design.md`](pytest-allowlist-success-delivery-design.md) | 成功出力の大半を占めるpytest系だけをexact argv boundなwrapper対象とする`success-delivery/v2`設計 |
 
 ## 4. historical handoff／superseded interpretation
 
