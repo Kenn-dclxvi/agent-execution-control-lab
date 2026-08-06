@@ -4,6 +4,15 @@
 
 状態列は索引用の要約であり、実測値、score、KPI、停止判断は[`click results`](../results/README.md)の各一次resultを正とする。
 
+## runtime identity
+
+profileの`agent_environment.runtime_identity_sha256`が指す共有runtimeは次の2 revisionである。runtime構成手順、`PYTHONPATH=src`などのgate運用規則は[`../AGENTS.md`](../AGENTS.md)を正本とし、各runがどちらのrevisionを固定したかはprofile JSONを正とする。
+
+| revision | `runtime_identity_sha256` | 備考 |
+| --- | --- | --- |
+| r1 | `e591efde94b1b8cf5901a8e9d71857bbc2abe1740ca9a66eea92fbe2cae13c37` | 共有venvの`pip freeze --all`出力のSHA-256 |
+| r2 | `0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952` | r1へ`uv==0.11.32`を追加。Std14の全runはr2へ固定 |
+
 ## 現在のprofile
 
 | profile_id | set | Case | N | B | M | 状態 |
