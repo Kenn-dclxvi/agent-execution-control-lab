@@ -6,7 +6,18 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から改名しました。schema名prefix `the-caption-prompt.*`と既存bundle manifestの`construction_repository`は、保存済みresultへbindしたimmutableなidentityのため旧名のまま固定します（[`docs/repository-overview.md`](docs/repository-overview.md)）。
 
-## 目的
+## 研究目的
+
+本研究の中心は、AIエージェントへソフトウェア開発を委ねる際、**導入のために人間組織から借りたオーケストレーションの枠組みがどれだけの実行コストを要求し、そのどこを残せば守ろうとしていた品質責務を保てるのかを測定すること**です。品質を最適化対象ではなく維持すべき制約として固定し、指示書の内容を変えたときのall-agent token・所要時間・実行経路を、比較可能な条件のもとで観測します。
+
+- 人間中心の開発プロセスをAIエージェントへ再現したときの実行コストを測る
+- 品質責務を保ちながら削除・置換できる枠組みと、残す必要がある実行制御を対象instance内で識別する
+- 静的なprompt量と動的な実行量を分け、実行経路の効率を評価する
+- 成立しなかった条件と測定上の限界も、再現可能な研究結果として残す
+
+研究の問い、測定方法、結果、限界の固定版は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)を参照してください。
+
+## 研究基盤としての役割
 
 - 現行プロンプトの参照元とidentityを固定する
 - 候補プロンプトを本体から分離して構築する
