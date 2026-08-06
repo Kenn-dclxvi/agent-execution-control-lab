@@ -100,12 +100,13 @@ bundle 126件はすべてcandidate index（[`prompts/candidates/README.md`](../p
 
 掲載candidateには互換比較できないものが含まれます。C45〜C48はA06の広域監査を`N=1`で観測した`diagnostic_only / memory_off`の枝で、いずれも診断resultを`evaluations/results/`へ保存していますが、blind quality ratingを実施していないため`quality_score`は保存せず、状態は`draft`です。標準14項目やB18と互換な品質比較ではありません。C72/C73は対象4項目各`N=5`で`targeted_evaluated`ですが、いずれも`stopped`です。indexへの掲載は、評価済み・採用済みを意味しません。
 
-### release（6件）と本体反映状況
+### release（7件）と本体反映状況
 
 正本`prompts/releases/README.md`はrelease status / approval / runtime projectionを別軸で保持する。ここでも同じ3軸に分けて示す。
 
 | release（由来候補） | release status | approval | runtime projection | 本体反映 |
 | --- | --- | --- | --- | --- |
+| **Candidate147** | `projected` | `approved` | `projected` | **反映済み・承認済み**（公開版`the-caption` [PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate125** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #345](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/345)、直前投影からroot `AGENTS.md`一つ） |
 | Candidate34 | `cancelled` | `cancelled` | `not_authorized` | なし（不採用・artifact削除ではない） |
 | Candidate41 | `projected` | `approved` | `projected` | **反映済み**（THE-CAPTION [PR #334](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/334)、実変更8 path）。直前の投影履歴・C43の巻き戻し先として維持 |
@@ -113,7 +114,9 @@ bundle 126件はすべてcandidate index（[`prompts/candidates/README.md`](../p
 | **Candidate71** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #340](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/340)、直前投影からroot `AGENTS.md`一つ） |
 | **Candidate81** | `projected` | `approved` | `projected` | **反映済み・承認済み**（THE-CAPTION [PR #343](https://github.com/Kenn-dclxvi/THE-CAPTION/pull/343)、直前投影からroot `AGENTS.md`一つ） |
 
-現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81 → Candidate125の順に積み上げたreleaseです。直近のCandidate125は、一つのeditable targetが全未解決変更criterionを所有する場合に限定して、同じtargetへのcriterion-complete continuationを一度許可します。Candidate125 N=100追試は投影状態と分離して実施し、registered poolを各case30件まで拡張した時点でF04 score `2`を5件確認して停止しました。N=30 selection resultは未作成です。C41・C43・C71・C81は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
+現在の本体投影は、Candidate41 → Candidate43 → Candidate71 → Candidate81 → Candidate125 → Candidate147の順に積み上げたreleaseです。直近のCandidate147は、resultの停止効果をtask全体へ広げず、実際に影響を受けるoperation classだけへ限定します。Standard14 N=100で1,400 / 1,400件がscore `4`、targeted F01 / F02 / F03で狙った機構が15 / 15件成立し、Candidate145で生じたcost増加をCandidate125付近へ戻したという判断で2026-08-03に採用しました（正本: [`candidate147-adoption-decision.md`](candidate147-adoption-decision.md)）。F06のauthority追加readは21 / 100件残っており、quality failureではないが除去済みとは扱いません。
+
+Candidate125までの投影は移行前のTHE-CAPTIONを対象とし、Candidate147は公開版`the-caption`を対象とします（公開移行の時間境界は本節末の「対象リポジトリの公開移行」を参照）。Candidate125は、一つのeditable targetが全未解決変更criterionを所有する場合に限定して、同じtargetへのcriterion-complete continuationを一度許可した版です。Candidate125 N=100追試は投影状態と分離して実施し、registered poolを各case30件まで拡張した時点でF04 score `2`を5件確認して停止しました。N=30 selection resultは未作成です。C41・C43・C71・C81・C125は投影履歴かつ巻き戻し先として保持し、`cancelled`にはしません。
 
 正本: [`prompts/candidates/README.md`](../prompts/candidates/README.md)、[`prompts/releases/README.md`](../prompts/releases/README.md)、[`prompts/baselines/README.md`](../prompts/baselines/README.md)。
 
@@ -149,7 +152,7 @@ caseは「提示する情報（model-visible）」と「隠す情報（private: 
 
 - 評価基盤は `evaluation_foundation_v4`。3 KPIをatomic run単位でappend-only保存し、計画上の`N`をrun identityへ含めません。実効互換なrunだけをpoolから選択し、使用run ID集合を固定して比較します。v3 prompt-set resultは履歴として保持します。
 - baselineから多数の候補（C78まで）を派生させ、主眼は「品質維持でのall-agentトークン削減」。
-- 本体へ反映済みなのは **C41・C43・C71**（この順に積み上げ投影、直近はC71）。C41・C43は過去の投影履歴として保持。C71は評価上`stopped`のまま、トークン効率優先の採用判断で適用済み。
+- 本体へ反映済みなのは **C41・C43・C71・C81・C125・C147**（この順に積み上げ投影、直近はC147）。C41〜C125は過去の投影履歴かつ巻き戻し先として保持。C125までは移行前のTHE-CAPTION、C147は公開版`the-caption`を対象とする。
 - 採点条件は **v13が現行**（A02の「要求と採点のずれ」を塞いだ版。指定の正本は[`prompt-comparison-workflow.md`](prompt-comparison-workflow.md)）。最初のv13互換resultは6条件・計420件です。
 - **評価と採用は別レイヤー**。この基盤は数値を並べるだけで、優劣・採否は出しません。採否は人が判断します。
 
