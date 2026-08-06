@@ -1,0 +1,9 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのisolated checkoutを対象とする。実行時HEADはprompt overlay、固定producer commitはHEAD^、変更前targetはHEAD^^である。HEAD^が6f800c48fbd9665ccc6d910a3b10106364c25a77、HEAD^^が3ce91a403f9e0c83f29d56bbe9e7b449b713445dでなければ停止する。",
+  "task_kind_goal_and_done_condition": "task_kind=post_review_result_binding。既に終了したreview operationの保存receiptだけをbind可能性判定する。task identityは/root/t6_quality_reviewerである。新しいreviewを起動せず、receiptがbind不能ならrootで意味判定を補完せずunavailableと報告する。",
+  "prior_implementation_record": "saved reviewer receipt。runtime_spawn_result.task_name=/root/t6_quality_reviewer、FINAL_ANSWER.Sender=/root/other_reviewer、criterion_result=passed、terminal=completion_ready。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集許可pathはない。read対象はAGENTS.mdとgit statusに限定する。review対象文書、diff、source code、test codeを読まない。変更とfile生成を禁止する。",
+  "validation_conditions_and_non_machine_risk": "required predicateはdelegated_result_ready。task identityとSender identityの完全一致を要求する。",
+  "read_edit_test_commit_push_merge_authorization": "AGENTS.mdとgit statusのread-only確認だけを許可する。edit、test、commit、push、networkを禁止する。",
+  "constraints_and_required_recovery": "保存receiptだけを判定し、新しいreviewer起動、root再review、result補完を行わない。"
+}

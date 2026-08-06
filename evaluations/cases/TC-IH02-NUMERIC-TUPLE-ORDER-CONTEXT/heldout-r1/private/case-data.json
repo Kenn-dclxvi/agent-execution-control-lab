@@ -1,0 +1,70 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-IH02-NUMERIC-TUPLE-ORDER-CONTEXT",
+  "case_revision": "heldout-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "source_files": [
+      {
+        "path": "src/lib/utils.py",
+        "mode": "100644",
+        "git_blob_sha1": "6c83c076d4f089252b4ae3eefe8a3db98074cff6",
+        "raw_sha256": "b9fff2c0b16a4aab05a31a9d1243ba98ed52b0bcb1adddc00edb856f22436900"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "f40ade7b53974f9c93b5e05461b38c8770dce499051a1f446b4128f03bbc8ca4"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "src/lib/utils.py",
+          "mode": "100644",
+          "git_blob_sha1": "6c83c076d4f089252b4ae3eefe8a3db98074cff6",
+          "raw_sha256": "b9fff2c0b16a4aab05a31a9d1243ba98ed52b0bcb1adddc00edb856f22436900"
+        }
+      ]
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "src/lib/utils.py",
+        "mode": "100644",
+        "git_blob_sha1": "cd330c05eb478f8ba5b8c4149cf8a46bd685979a",
+        "raw_sha256": "265626da9173bd58ab1df322aa5c84b918d1bfa078f5c3b9860a58a3817f2877"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "751f7cc643369dac14a514d896ade4c07cd680a2",
+        "expected_tree": "465277778ff704eee45e8f9136742d7f6cdc2018"
+      }
+    }
+  },
+  "oracle": {
+    "pair_id": "IH02",
+    "condition": "context",
+    "expected_disposition": "completion_ready",
+    "expected_finding": null,
+    "objective_basis": "Python 3.14 isinstance checks membership against every type in the tuple without order-dependent conversion; both tuple orders return the same bool and numeric results"
+  },
+  "qualification": {
+    "status": "preregistered_heldout_not_run"
+  }
+}

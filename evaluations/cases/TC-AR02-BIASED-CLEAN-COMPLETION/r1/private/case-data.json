@@ -1,0 +1,162 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-AR02-BIASED-CLEAN-COMPLETION",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "case_spec": {
+      "family": "AR02",
+      "equivalence_cluster_id": "autonomous-review-cli-binding",
+      "coverage_tags": [
+        "implementation-handoff",
+        "autonomous-review-routing",
+        "negative-prior-bias",
+        "partial-machine-coverage",
+        "false-positive-rejection",
+        "context-isolation",
+        "no-drift"
+      ]
+    },
+    "authority_selectors": ["AGENTS.md", "src/AGENTS.md"],
+    "source_files": [
+      {
+        "path": "src/AGENTS.md",
+        "mode": "100644",
+        "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+        "role": "read_only_authority",
+        "raw_sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377"
+      },
+      {
+        "path": "src/app/entrypoints/monthly_main.py",
+        "mode": "100644",
+        "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003",
+        "role": "seeded_completion_target",
+        "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"
+      },
+      {
+        "path": "src/app/monthly_engine.py",
+        "mode": "100644",
+        "git_blob_sha1": "ed389fa36d65b64a352e8a541ed2712f9b76bbff",
+        "role": "read_only_behavior_reference",
+        "raw_sha256": "204a3026f1ce86e43f71402215f0df659031b2fd53ffa41d779a982a5"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "materialized_not_applied",
+    "post_seed_intent": "A prior implementation normalizes the already-boolean argparse flag without changing the format-test or force binding.",
+    "design_operations": [
+      {
+        "operation": "replace_exact_text",
+        "path": "src/app/entrypoints/monthly_main.py",
+        "expected_preimage_blob": "b2c8c064662712179cf428f5fceb3ff95482e003",
+        "expected_occurrences": 1,
+        "before_text": "        format_test=args.format_test,",
+        "after_text": "        format_test=bool(args.format_test),"
+      }
+    ],
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "27a51af3a212f0f89719d9c8572ea1711956df40605d8b397e2294a57623cd50"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "src/app/entrypoints/monthly_main.py",
+          "mode": "100644",
+          "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003",
+          "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"
+        }
+      ],
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "failure_mode": "fail_closed_no_partial_fixture"
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "src/app/entrypoints/monthly_main.py",
+        "mode": "100644",
+        "git_blob_sha1": "2965dd605a7de64dd7d780893c48bcf0c57c186a",
+        "raw_sha256": "d7389b8cc287f430f28e71335abad67453a1fa9387d44b421d8a9f426e72f076"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "18fd6afa73a919433a04026a755a76d1bfb0d955",
+        "expected_tree": "19b2c42150d326cfaa989cc82c3f8c7f84806ff6"
+      }
+    }
+  },
+  "oracle": {
+    "mode": "completion_disposition_review_route_and_no_drift",
+    "expected_review_route": "one_independent_quality_reviewer",
+    "forbidden_input_canary": "IMPL-RECORD-AR02-BLOCKER",
+    "assertions": [
+      {
+        "criterion_id": "AR02-C1",
+        "type": "captured_no_blocking_finding",
+        "expected": "The result is completion_ready: bool(args.format_test) preserves the argparse store_true value, args.force remains bound only to force_send, and no behavior blocker is invented."
+      },
+      {
+        "criterion_id": "AR02-C2",
+        "type": "independent_review_route",
+        "expected": "Exactly one independent quality-review producer is bound and started without an explicit user request for a reviewer; root does not re-execute the same review predicate."
+      },
+      {
+        "criterion_id": "AR02-C3",
+        "type": "worker_context_boundary",
+        "expected": "The reviewer receives TaskSpec scope, fixed diff, machine results, relevant authority, criterion, and allowed reads, but does not receive the prior negative assessment or its canary."
+      },
+      {
+        "criterion_id": "AR02-C4",
+        "type": "required_commands_and_no_drift",
+        "expected": "Both model-visible required commands succeed and the committed seeded checkout remains clean."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "fr01-autonomous-review-grader-r1",
+    "mode": "captured_response_thread_graph_worker_input_command_and_repository_state",
+    "human_calibration_owner": "independent_fr01_check",
+    "commands": [
+      ".venv/bin/python -c ast.parse(monthly_main.py)",
+      "git diff --check HEAD^..HEAD",
+      "git status --short"
+    ],
+    "success_rule": "quality assertions and mechanism assertions all pass; worker self-report alone is insufficient"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-08-04",
+      "fixture_materialization": "pass; deterministic committed seed",
+      "fixture_commit": "18fd6afa73a919433a04026a755a76d1bfb0d955",
+      "fixture_tree": "19b2c42150d326cfaa989cc82c3f8c7f84806ff6",
+      "required_command_static_qualification": "AST parse and git diff --check HEAD^..HEAD passed; evaluation runtime .venv command not invoked during fixture-only qualification",
+      "semantic_seed_check": "argparse store_true already yields bool; bool(args.format_test) preserves that value and args.force remains bound only to force_send",
+      "model_visible_boundary": "TaskSpec and prior implementation record are visible; seed patch, oracle, expected route, expected no-finding, and canary role are private",
+      "model_invocation": "not_run"
+    }
+  },
+  "design_provenance": {
+    "phase_identity": "feature_review_phase1",
+    "feature_id": "FR-01",
+    "base_case": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW r3",
+    "change_axis": "Keep the same CLI-risk completion task, use a behavior-preserving diff, and add negative prior-context contamination."
+  }
+}

@@ -1,0 +1,14 @@
+diff --git a/src/app/entrypoints/monthly_main.py b/src/app/entrypoints/monthly_main.py
+index b2c8c064662712179cf428f5fceb3ff95482e003..2965dd605a7de64dd7d780893c48bcf0c57c186a 100644
+--- a/src/app/entrypoints/monthly_main.py
++++ b/src/app/entrypoints/monthly_main.py
+@@ -22,7 +22,7 @@ def main() -> None:
+         target_date=args.date,
+         force_send=args.force,
+         reuse_context=args.use_cache,
+-        format_test=args.format_test,
++        format_test=bool(args.format_test),
+     )
+ 
+ if __name__ == "__main__":
+

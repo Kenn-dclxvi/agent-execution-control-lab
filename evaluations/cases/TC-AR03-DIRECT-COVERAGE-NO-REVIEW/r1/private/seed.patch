@@ -1,0 +1,16 @@
+diff --git a/src/app/entrypoints/monthly_main.py b/src/app/entrypoints/monthly_main.py
+index b2c8c064662712179cf428f5fceb3ff95482e003..3442c7a6a8d6de68c29061b6905f354cc473d5b6 100644
+--- a/src/app/entrypoints/monthly_main.py
++++ b/src/app/entrypoints/monthly_main.py
+@@ -1,10 +1,9 @@
+ import argparse
+-from typing import Final
+ from src.app.monthly_engine import MonthlyEngine
+ from src.lib.logger import setup_logger
+ from src.config.settings import APP_NAME, VERSION
+ 
+-__REV: Final[str] = "Rev. 1"
++__REV = "Rev. 1"
+ logger = setup_logger("MONTHLY_MAIN")
+ 
+ def main() -> None:

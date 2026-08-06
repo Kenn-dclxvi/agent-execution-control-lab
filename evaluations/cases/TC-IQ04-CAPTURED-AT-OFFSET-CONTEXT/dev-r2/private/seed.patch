@@ -1,0 +1,14 @@
+diff --git a/src/domain/market_units_snapshot.py b/src/domain/market_units_snapshot.py
+index e3af06a..4788bc8 100644
+--- a/src/domain/market_units_snapshot.py
++++ b/src/domain/market_units_snapshot.py
+@@ -143,7 +143,8 @@ def _validate_captured_at(value: Any) -> None:
+         parsed = datetime.fromisoformat(captured_at)
+     except ValueError as exc:
+         raise MarketUnitsSnapshotError("snapshot captured_at must be ISO 8601") from exc
+-    if parsed.tzinfo is None or parsed.utcoffset() != _JST.utcoffset(None):
++    offset = parsed.utcoffset()
++    if parsed.tzinfo is None or offset != timedelta(hours=9):
+         raise MarketUnitsSnapshotError("snapshot captured_at must include JST timezone")
+ 
+ 

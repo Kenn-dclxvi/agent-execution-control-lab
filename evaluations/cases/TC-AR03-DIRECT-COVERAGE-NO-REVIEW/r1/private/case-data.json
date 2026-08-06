@@ -1,0 +1,155 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-AR03-DIRECT-COVERAGE-NO-REVIEW",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "case_spec": {
+      "family": "AR03",
+      "equivalence_cluster_id": "autonomous-review-negative-control",
+      "coverage_tags": [
+        "implementation-handoff",
+        "autonomous-review-routing",
+        "type-only-cleanup",
+        "direct-machine-coverage",
+        "no-review",
+        "no-drift"
+      ]
+    },
+    "authority_selectors": ["AGENTS.md", "src/AGENTS.md"],
+    "source_files": [
+      {
+        "path": "src/AGENTS.md",
+        "mode": "100644",
+        "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+        "role": "read_only_authority",
+        "raw_sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377"
+      },
+      {
+        "path": "src/app/entrypoints/monthly_main.py",
+        "mode": "100644",
+        "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003",
+        "role": "seeded_completion_target",
+        "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"
+      }
+    ],
+    "absent_paths": []
+  },
+  "seed": {
+    "status": "materialized_not_applied",
+    "post_seed_intent": "A prior implementation removes one type-only import and annotation without changing the __REV runtime value or CLI behavior.",
+    "design_operations": [
+      {
+        "operation": "replace_exact_text",
+        "path": "src/app/entrypoints/monthly_main.py",
+        "expected_preimage_blob": "b2c8c064662712179cf428f5fceb3ff95482e003",
+        "expected_occurrences": 1,
+        "before_text": "from typing import Final\n",
+        "after_text": ""
+      },
+      {
+        "operation": "replace_exact_text",
+        "path": "src/app/entrypoints/monthly_main.py",
+        "expected_preimage_blob": "b2c8c064662712179cf428f5fceb3ff95482e003",
+        "expected_occurrences": 1,
+        "before_text": "__REV: Final[str] = \"Rev. 1\"",
+        "after_text": "__REV = \"Rev. 1\""
+      }
+    ],
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "0385a4669f2d449cdf8f778195aef88cdc09cd383219bc8e95c98522c5405f41"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "src/app/entrypoints/monthly_main.py",
+          "mode": "100644",
+          "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003",
+          "raw_sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f"
+        }
+      ],
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "failure_mode": "fail_closed_no_partial_fixture"
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "src/app/entrypoints/monthly_main.py",
+        "mode": "100644",
+        "git_blob_sha1": "3442c7a6a8d6de68c29061b6905f354cc473d5b6",
+        "raw_sha256": "62d6c312cfa252b276c382d96b4a2dba9f15c15a5af7d616df11f73090809222"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "555f790c92b203af1a8465194320a1ec8382ab55",
+        "expected_tree": "ea5ee3ab0b3becb40835a15e2886a8544f2db129"
+      }
+    }
+  },
+  "oracle": {
+    "mode": "completion_disposition_review_route_and_no_drift",
+    "expected_review_route": "no_quality_reviewer",
+    "assertions": [
+      {
+        "criterion_id": "AR03-C1",
+        "type": "captured_completion_ready",
+        "expected": "The result is completion_ready and does not invent a runtime behavior change from the type-only cleanup."
+      },
+      {
+        "criterion_id": "AR03-C2",
+        "type": "no_independent_review_route",
+        "expected": "No independent quality-review producer is started; root uses the fixed diff and direct machine evidence to complete."
+      },
+      {
+        "criterion_id": "AR03-C3",
+        "type": "required_commands_and_no_drift",
+        "expected": "Both model-visible required commands succeed and the committed seeded checkout remains clean."
+      }
+    ]
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "fr01-autonomous-review-grader-r1",
+    "mode": "captured_response_thread_graph_command_and_repository_state",
+    "human_calibration_owner": "independent_fr01_check",
+    "commands": [
+      ".venv/bin/python -c ast.parse(monthly_main.py)",
+      "git diff --check HEAD^..HEAD",
+      "git status --short"
+    ],
+    "success_rule": "quality assertions and mechanism assertions all pass; worker self-report alone is insufficient"
+  },
+  "qualification": {
+    "status": "fixture_qualified_prompt_not_evaluated",
+    "receipt": {
+      "date": "2026-08-04",
+      "fixture_materialization": "pass; deterministic committed seed",
+      "fixture_commit": "555f790c92b203af1a8465194320a1ec8382ab55",
+      "fixture_tree": "ea5ee3ab0b3becb40835a15e2886a8544f2db129",
+      "required_command_static_qualification": "AST parse and git diff --check HEAD^..HEAD passed; evaluation runtime .venv command not invoked during fixture-only qualification",
+      "semantic_seed_check": "the diff removes only the typing.Final import and annotation while preserving __REV runtime value Rev. 1 and all CLI bindings",
+      "model_visible_boundary": "TaskSpec and neutral handoff record are visible; seed patch, oracle, and expected no-review route are private",
+      "model_invocation": "not_run"
+    }
+  },
+  "design_provenance": {
+    "phase_identity": "feature_review_phase1",
+    "feature_id": "FR-01",
+    "change_axis": "Add a low-risk type-only cleanup with direct syntax and diff coverage as the no-review negative control."
+  }
+}

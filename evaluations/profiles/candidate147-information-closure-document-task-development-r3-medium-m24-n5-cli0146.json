@@ -1,0 +1,117 @@
+{
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "profile_id": "candidate147-information-closure-document-task-development-r3-medium-m24-n5-cli0146",
+  "evaluation_set": {
+    "set_id": "the-caption-information-closure-document-task-development-r3",
+    "revision": "doc-dev-r3"
+  },
+  "cases": [
+    {
+      "id": "TC-ID05-RESULT-SUMMARY-BLIND",
+      "revision": "doc-dev-r3"
+    },
+    {
+      "id": "TC-ID05-RESULT-SUMMARY-CONTEXT",
+      "revision": "doc-dev-r3"
+    }
+  ],
+  "iterations": 5,
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-result-effect-scope-r1",
+    "revision": "r1",
+    "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc"
+  },
+  "comparison_conditions": {
+    "target_repository_ref": {
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-information-closure-document-task-development-r3",
+      "evaluation_set_revision": "doc-dev-r3",
+      "source": "FR-01 report-only semantic consistency development qualification without oracle leakage"
+    },
+    "model": "gpt-5.6-sol",
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.146.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted"
+    },
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+      "contract_sha256": "9d01b7ee77bbc7b6e5bde23f57bafbcf304f4a82020da5c3150b7ffb129011b1",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "terminal_state_evidence_required_cases": [
+        "TC-A01-LATENT-MODE-POLICY"
+      ],
+      "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "executor_parameters": {
+      "reasoning_effort": "medium",
+      "max_workers": 24,
+      "max_attempts": 3,
+      "monitor_interval_seconds": 5,
+      "schedule_policy": "global_queue",
+      "environment_adjustment": "none",
+      "duration_hint_method": "fixed_report_review_hint",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      },
+      "command_evidence_protocol": {
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1",
+        "mode": "separate_required_commands_with_structured_exit",
+        "required_command_groups_by_case": {
+          "TC-ID05-RESULT-SUMMARY-BLIND": [
+            [
+              "git",
+              "diff",
+              "--check",
+              "HEAD^^..HEAD^"
+            ]
+          ],
+          "TC-ID05-RESULT-SUMMARY-CONTEXT": [
+            [
+              "git",
+              "diff",
+              "--check",
+              "HEAD^^..HEAD^"
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "execution": {
+    "duration_hints_seconds": {
+      "TC-ID05-RESULT-SUMMARY-BLIND": 90,
+      "TC-ID05-RESULT-SUMMARY-CONTEXT": 90
+    },
+    "max_workers": 24,
+    "max_attempts": 3,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "scope": {
+    "adoption": "not_applicable",
+    "release": "not_applicable",
+    "runtime_projection": "not_authorized"
+  }
+}

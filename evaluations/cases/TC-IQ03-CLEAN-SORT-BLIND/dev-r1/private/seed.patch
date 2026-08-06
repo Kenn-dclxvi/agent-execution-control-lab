@@ -1,0 +1,12 @@
+diff --git a/src/infra/daily_metrics_repository.py b/src/infra/daily_metrics_repository.py
+index aa92643..1c72e49 100644
+--- a/src/infra/daily_metrics_repository.py
++++ b/src/infra/daily_metrics_repository.py
+@@ -51,6 +51,7 @@ class DailyMetricsRepository:
+                     records.append(json.load(handle))
+             except Exception as exc:
+                 logger.warning(f"[V4] Skipping unreadable daily metrics: {filename} ({exc})")
++        records.sort(key=lambda row: str(row.get("target_date", "")))
+         return records
+ 
+     def __get_path(self, target_date: str) -> str:

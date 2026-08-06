@@ -1,0 +1,19 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-IQ02-ZERO-RETURN-BLIND",
+  "case_revision": "dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository": "Kenn-dclxvi/THE-CAPTION", "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path": "src/app/monthly_engine.py", "mode": "100644", "git_blob_sha1": "ed389fa36d65b64a352e8a541ed2712f9b76bbff", "raw_sha256": "204a3026f1ce86e43f71402215f0df659031b2fe240b2fd53ffa41d779a982a5"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path": "private/seed.patch", "format": "git_diff", "raw_sha256": "1cd4a60e1e30424da5c89b16593d229621085bc40093c7ca1f4519f587ea836b"},
+    "application_contract": {"target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b", "preimage_files": [{"path": "src/app/monthly_engine.py", "mode": "100644", "git_blob_sha1": "ed389fa36d65b64a352e8a541ed2712f9b76bbff", "raw_sha256": "204a3026f1ce86e43f71402215f0df659031b2fe240b2fd53ffa41d779a982a5"}]},
+    "expected_post_seed_files": [{"path": "src/app/monthly_engine.py", "mode": "100644", "git_blob_sha1": "4a85a6cb3839b18d5067f333c06f28f63f961938", "raw_sha256": "0f27f0342144db821628cfb7cab3c934d756247564212dfd9756b32acb7cd657"}],
+    "fixture_materialization": {"mode": "committed_seed", "commit": {"message": "evaluation fixture seed", "timestamp": "2000-01-01T00:00:00Z", "author_name": "THE-CAPTION Prompt Evaluation", "author_email": "evaluation@example.invalid", "expected_commit": "4ceda7339e81d425a9556ca1a01c0b873ab56405", "expected_tree": "f6120ecf59ed1b7f36d3075509fbc09022138f1f"}}
+  },
+  "oracle": {"pair_id": "IQ02", "condition": "blind", "expected_disposition": "blocked", "expected_finding": "an explicit numeric zero becomes false and is overwritten by the derived exposure minus acquisition cost"},
+  "qualification": {"status": "designed_not_run"}
+}

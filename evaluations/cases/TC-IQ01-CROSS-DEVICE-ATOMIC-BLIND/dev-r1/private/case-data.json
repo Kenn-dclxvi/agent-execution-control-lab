@@ -1,0 +1,19 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-IQ01-CROSS-DEVICE-ATOMIC-BLIND",
+  "case_revision": "dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository": "Kenn-dclxvi/THE-CAPTION", "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path": "src/infra/market_snapshot_repository.py", "mode": "100644", "git_blob_sha1": "9fcf2ecce5d60c690ac1bcb0a044765e2c1ef5f9", "raw_sha256": "3c11df77c3b742e6045e1bfc2f72bab7b92f410a46ed3446ea6607413928931d"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path": "private/seed.patch", "format": "git_diff", "raw_sha256": "be53c0c1bf1a78e79c5588ee7521d91485fb9d6782730e69c1b6caeb4b38a7c8"},
+    "application_contract": {"target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b", "preimage_files": [{"path": "src/infra/market_snapshot_repository.py", "mode": "100644", "git_blob_sha1": "9fcf2ecce5d60c690ac1bcb0a044765e2c1ef5f9", "raw_sha256": "3c11df77c3b742e6045e1bfc2f72bab7b92f410a46ed3446ea6607413928931d"}]},
+    "expected_post_seed_files": [{"path": "src/infra/market_snapshot_repository.py", "mode": "100644", "git_blob_sha1": "bcce100bc9e49d34842b4eb75801c9771a6db4c2", "raw_sha256": "3af7ba6ac86120d4d8af062437d12ac916943b63f8c2777f8ada39060ac6064b"}],
+    "fixture_materialization": {"mode": "committed_seed", "commit": {"message": "evaluation fixture seed", "timestamp": "2000-01-01T00:00:00Z", "author_name": "THE-CAPTION Prompt Evaluation", "author_email": "evaluation@example.invalid", "expected_commit": "6f6381dc51d4162f2ab99977f3c7c4fce549dd65", "expected_tree": "adaac54789e93bac75bc5dad98001fe7abbc6aa9"}}
+  },
+  "oracle": {"pair_id": "IQ01", "condition": "blind", "expected_disposition": "blocked", "expected_finding": "tempfile is created outside DIR_CURRENT, so os.replace can fail with EXDEV when the directories are on different filesystems"},
+  "qualification": {"status": "designed_not_run"}
+}

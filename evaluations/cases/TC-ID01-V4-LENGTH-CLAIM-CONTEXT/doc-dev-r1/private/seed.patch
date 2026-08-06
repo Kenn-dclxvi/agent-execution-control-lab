@@ -1,0 +1,13 @@
+diff --git a/docs/reference/prompts.md b/docs/reference/prompts.md
+index d66f834..2863fe7 100644
+--- a/docs/reference/prompts.md
++++ b/docs/reference/prompts.md
+@@ -320,7 +320,7 @@ V4本流の月次Chronicle（`OUTPUT_SCHEMA_CHRONICLE_V4` / `PROMPT_CHRONICLE_SY
+ - 改行・空白、および `__render_v4_list` の区切り文字 `" / "` は **数えない**。
+ - `meta.data_quality` 等のメタ項目は本文ではないため対象外。
+ 
+-> 字数はプロンプト/スキーマの指示で担保し、`tests/unit/test_v4_monthly_curator.py` の字数検証テストで上記カウント定義に従って検証する。コード側での自動切り詰め・実行時の自動再生成・送信中止は行わない。
++> 字数はプロンプト/スキーマの指示に加え、実行時に1,000字を超えた本文をコード側で自動切り詰めしてから送信する。
+ 
+ #### レガシー3フィールド版（旧スキーマ）
+ 

@@ -1,0 +1,19 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-IQ04-CAPTURED-AT-OFFSET-CONTEXT",
+  "case_revision": "dev-r2",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository": "Kenn-dclxvi/THE-CAPTION", "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path": "src/domain/market_units_snapshot.py", "mode": "100644", "git_blob_sha1": "e3af06ab26c74a98815a53de7ec0661af82e3e18", "raw_sha256": "ea37c69b2d3f75376f1bf90ef911deb77e57811097956b8c5ab6daafe4afb8b8"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path": "private/seed.patch", "format": "git_diff", "raw_sha256": "6fc1050cf985c83bac26d4ce2497c017467561749f05a0407fe3f335ec8bf0c2"},
+    "application_contract": {"target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b", "preimage_files": [{"path": "src/domain/market_units_snapshot.py", "mode": "100644", "git_blob_sha1": "e3af06ab26c74a98815a53de7ec0661af82e3e18", "raw_sha256": "ea37c69b2d3f75376f1bf90ef911deb77e57811097956b8c5ab6daafe4afb8b8"}]},
+    "expected_post_seed_files": [{"path": "src/domain/market_units_snapshot.py", "mode": "100644", "git_blob_sha1": "4788bc8981a1d3afc1a358e2877a0dc12f44d7a0", "raw_sha256": "1a04c5666ac162693f8a4183b46b436759bc15ec0776dc7d1ba880e5b4cd6aa2"}],
+    "fixture_materialization": {"mode": "committed_seed", "commit": {"message": "evaluation fixture seed", "timestamp": "2000-01-01T00:00:00Z", "author_name": "THE-CAPTION Prompt Evaluation", "author_email": "evaluation@example.invalid", "expected_commit": "416447ab7bae711a653605104a98dd76c0ea8aad", "expected_tree": "7f28d8de92e688f948c0fda932fc1f2ec2250ed1"}}
+  },
+  "oracle": {"pair_id": "IQ04", "condition": "context", "expected_disposition": "completion_ready", "expected_finding": null, "objective_basis": "datetime.utcoffset returns None for naive parsed datetimes; UTC+09:00 offsets compare equal to timedelta(hours=9); the focused test suite passes"},
+  "qualification": {"status": "designed_not_run"}
+}

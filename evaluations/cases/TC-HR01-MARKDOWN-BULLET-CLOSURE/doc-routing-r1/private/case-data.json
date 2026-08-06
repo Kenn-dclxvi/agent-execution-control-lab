@@ -1,0 +1,24 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-HR01-MARKDOWN-BULLET-CLOSURE",
+  "case_revision": "doc-routing-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository":"Kenn-dclxvi/THE-CAPTION","commit":"3ce91a403f9e0c83f29d56bbe9e7b449b713445d","tree":"88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path":"reports/agents-md-tests/README.md","mode":"100644","git_blob_sha1":"325a65dbfa01b85d6852736ccdb7f6981cba6849","raw_sha256":"0b19ff01d028545ae0cda36113ddd0957f0a96814c9e96e123450475c02cfe41"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path":"private/seed.patch","format":"git_diff","raw_sha256":"725a1e9e82225ba04007427a39575b78d8bbcc7ab634e71671fc074230d419d1"},
+    "application_contract": {"target_commit":"3ce91a403f9e0c83f29d56bbe9e7b449b713445d","target_tree":"88eecfa29f7016b4d77061d3aabe3e7d176fea9b","preimage_files":[{"path":"reports/agents-md-tests/README.md","mode":"100644","git_blob_sha1":"325a65dbfa01b85d6852736ccdb7f6981cba6849","raw_sha256":"0b19ff01d028545ae0cda36113ddd0957f0a96814c9e96e123450475c02cfe41"}]},
+    "expected_post_seed_files": [{"path":"reports/agents-md-tests/README.md","mode":"100644","git_blob_sha1":"d9177cc69b1bfdcc4463c8e142cc273aad04cfe7","raw_sha256":"8e4d9c4525d0c149e23505f37537e9a9eee50101a1134f9ad56588c4e86126d3"}],
+    "fixture_materialization": {"mode":"committed_seed","commit":{"message":"evaluation fixture seed","timestamp":"2000-01-01T00:00:00Z","author_name":"THE-CAPTION Prompt Evaluation","author_email":"evaluation@example.invalid","expected_commit":"96c5f89fd54d7e921b06b085aa54225347aa6fb9","expected_tree":"53c4722d5ff68b0de62f6228429a373925962926"}}
+  },
+  "oracle": {
+    "pair_id": "HR01",
+    "expected_disposition": "completion_ready",
+    "expected_review_route": "no_additional_quality_review",
+    "objective_basis": "The exact requested text and bullet marker are fully checked by the required machine command"
+  },
+  "qualification": {"status":"designed_not_run"}
+}

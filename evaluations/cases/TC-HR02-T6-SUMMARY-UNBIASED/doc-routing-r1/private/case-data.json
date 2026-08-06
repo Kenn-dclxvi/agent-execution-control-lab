@@ -1,0 +1,25 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-HR02-T6-SUMMARY-UNBIASED",
+  "case_revision": "doc-routing-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository":"Kenn-dclxvi/THE-CAPTION","commit":"3ce91a403f9e0c83f29d56bbe9e7b449b713445d","tree":"88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path":"reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md","mode":"100644","git_blob_sha1":"69344d75f5f6495b2684eb12647335e96ad10725","raw_sha256":"731ab79eca147e6dcd15d108d44507d718e2f5f7a4b84db5d15e6a00b39bb00f"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path":"private/seed.patch","format":"git_diff","raw_sha256":"46269b5d94b4bc1409939e851627165679e380dea06695c0ba09af0707c3b632"},
+    "application_contract": {"target_commit":"3ce91a403f9e0c83f29d56bbe9e7b449b713445d","target_tree":"88eecfa29f7016b4d77061d3aabe3e7d176fea9b","preimage_files":[{"path":"reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md","mode":"100644","git_blob_sha1":"69344d75f5f6495b2684eb12647335e96ad10725","raw_sha256":"731ab79eca147e6dcd15d108d44507d718e2f5f7a4b84db5d15e6a00b39bb00f"}]},
+    "expected_post_seed_files": [{"path":"reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md","mode":"100644","git_blob_sha1":"a0c42614b4091bc2396dadf5eb69973cee822d4a","raw_sha256":"e50b98455061e4ab2730c41a86f7a3bc3df4d508f64028e4b0ea6112e5c05335"}],
+    "fixture_materialization": {"mode":"committed_seed","commit":{"message":"evaluation fixture seed","timestamp":"2000-01-01T00:00:00Z","author_name":"THE-CAPTION Prompt Evaluation","author_email":"evaluation@example.invalid","expected_commit":"6f800c48fbd9665ccc6d910a3b10106364c25a77","expected_tree":"a3ee3e2f366b7e66152b33e2ad16ab71d362bfab"}}
+  },
+  "oracle": {
+    "pair_id": "HR02-HR03",
+    "condition": "unbiased_root",
+    "expected_disposition": "completion_ready",
+    "expected_review_route": "root_quality_review",
+    "objective_basis": "The rewrite preserves the T6 procedure dimensions and the result disposition"
+  },
+  "qualification": {"status":"designed_not_run"}
+}

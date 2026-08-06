@@ -1,0 +1,19 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-IQ03-CLEAN-SORT-BLIND",
+  "case_revision": "dev-r1",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {"repository": "Kenn-dclxvi/THE-CAPTION", "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"},
+    "source_files": [{"path": "src/infra/daily_metrics_repository.py", "mode": "100644", "git_blob_sha1": "aa926437f780d9251ad38d7cb6d8295c50d8f68e", "raw_sha256": "7fd74687636e3ee1ae5097aa1e9c8e75b0201153f983f763b6606ed21a8e4719"}],
+    "absent_paths": []
+  },
+  "seed": {
+    "artifact": {"path": "private/seed.patch", "format": "git_diff", "raw_sha256": "e0855f622745c9ee0bb9a88269811f054b957a9a84ebdfdb5cb971703db850e8"},
+    "application_contract": {"target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d", "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b", "preimage_files": [{"path": "src/infra/daily_metrics_repository.py", "mode": "100644", "git_blob_sha1": "aa926437f780d9251ad38d7cb6d8295c50d8f68e", "raw_sha256": "7fd74687636e3ee1ae5097aa1e9c8e75b0201153f983f763b6606ed21a8e4719"}]},
+    "expected_post_seed_files": [{"path": "src/infra/daily_metrics_repository.py", "mode": "100644", "git_blob_sha1": "1c72e499cb8885650f606136251f0e0ef48f2b47", "raw_sha256": "642d476d627ecfb14b1ae7ba3a2c54d35c29a70807671ef8785350dbbc3f354e"}],
+    "fixture_materialization": {"mode": "committed_seed", "commit": {"message": "evaluation fixture seed", "timestamp": "2000-01-01T00:00:00Z", "author_name": "THE-CAPTION Prompt Evaluation", "author_email": "evaluation@example.invalid", "expected_commit": "4910d386a71350eafc7e854a41044e62480705fa", "expected_tree": "c78c43b23d8098c245ae1a0d3cece7c2548e083b"}}
+  },
+  "oracle": {"pair_id": "IQ03", "condition": "blind", "expected_disposition": "completion_ready", "expected_finding": null},
+  "qualification": {"status": "designed_not_run"}
+}

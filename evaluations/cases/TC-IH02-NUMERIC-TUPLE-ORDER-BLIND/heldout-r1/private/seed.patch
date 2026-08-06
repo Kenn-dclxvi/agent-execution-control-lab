@@ -1,0 +1,13 @@
+diff --git a/src/lib/utils.py b/src/lib/utils.py
+index 6c83c07..cd330c0 100644
+--- a/src/lib/utils.py
++++ b/src/lib/utils.py
+@@ -58,7 +58,7 @@ class SystemUtils:
+     @staticmethod
+     def parse_pct_str(pct_str: Union[str, float]) -> float:
+         try:
+-            if isinstance(pct_str, (int, float)):
++            if isinstance(pct_str, (float, int)):
+                 return float(pct_str)
+             
+             s_val = str(pct_str).strip()

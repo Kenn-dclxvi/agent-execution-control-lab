@@ -1,0 +1,13 @@
+diff --git a/src/infra/market_snapshot_repository.py b/src/infra/market_snapshot_repository.py
+index 9fcf2ec..bcce100 100644
+--- a/src/infra/market_snapshot_repository.py
++++ b/src/infra/market_snapshot_repository.py
+@@ -19,7 +19,7 @@ class MarketSnapshotRepository:
+         path = self.__get_path(target_date)
+         try:
+             os.makedirs(DIR_CURRENT, exist_ok=True)
+-            fd, tmp_path = tempfile.mkstemp(dir=DIR_CURRENT, suffix=".json.tmp")
++            fd, tmp_path = tempfile.mkstemp(suffix=".json.tmp")
+             try:
+                 with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                     json.dump(data, handle, indent=2, ensure_ascii=False)
