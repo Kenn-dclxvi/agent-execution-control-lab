@@ -1,6 +1,6 @@
-# click results
+# click result index
 
-target instance `click`の公開済み履歴評価結果を置く。
+`click` target instanceの公開済み履歴評価resultを引くための索引である。write-once、instance境界、互換条件の規則は[`../AGENTS.md`](../AGENTS.md)を正本とし、数値、score、状態、comparison条件は各result本体を正とする。
 
 | result | set | run | 用途 |
 | --- | --- | ---: | --- |
@@ -18,4 +18,4 @@ target instance `click`の公開済み履歴評価結果を置く。
 | [`click C81 / C81 + Repository Authority Medium Std14 r2 N=5`](click-c81-repository-authority-reasoning-medium-standard14-r2-n5_2026-07-27.md) | `click-standard14-r2` | 70 + 70 | C81との組合せ。13 caseは両条件全件score 4、F10だけscore 1 × 5 / score 4 × 5へ分離 |
 | [`click Candidate125 Medium Std14 r2 N=5 CLI 0.146`](click-c125-reasoning-medium-standard14-r2-n5-cli0146_2026-07-31.md) | `click-standard14-r2` | 70 | C125水平適用。13 caseは65 / 65 score 4、authorityなしF10はscore 1 × 5。CLI 0.144.0のC81とは非互換 |
 
-resultはwrite-onceで、revisionによる上書きをしない。別instanceのresultを同一比較へ入れない。F01、F02、各追加caseのtargeted resultはset / rating revisionが異なるため同一comparisonへ混ぜない。Std14のBundle A / B比較は評価結果であり、採用、release、runtime projectionを示さない。
+この表は所在と要約だけを示す。評価resultの存在を採用、release、runtime projectionの根拠にしない。
