@@ -48,6 +48,14 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 | D01 assignment | [`Free`](control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json) / [`C160`](candidate160-assignment-result-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json) / [`C161`](candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json) | [`results 第2節`](../results/README.md) |
 | 5文統合 | [`Candidate163 Standard14`](candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json) | [`result`](../results/candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md) |
 
+### 個別に導線を保持する履歴anchor
+
+系列目次からは辿りにくいが、後続比較のanchorとして参照され続けるprofileはこの索引から直接引く。
+
+| anchor | profile | result |
+| --- | --- | --- |
+| Candidate81 A01 B20 | [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1`](candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1.json) | [`result`](../results/candidate81-validation-wrapper-precedence-v14-medium-a01-continuous-n5-b20_2026-07-29.md) |
+
 ## 履歴profileの探し方
 
 Candidate1〜147、rating v1〜v14、targeted / expanded / continuous / atomic各経路のprofile JSONは既存fileのまま保持する。過去profileの結果・停止理由・互換条件を探す場合は、Candidate別の長い説明をこのREADMEへ再掲せず、[`evaluations/results/README.md`](../results/README.md)の系列別目次から該当resultへ進む。
