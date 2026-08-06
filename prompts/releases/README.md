@@ -1,16 +1,8 @@
-# Releases
+# Release index
 
-評価済みcandidateを反映判断可能なbundleへ固定して置く。release作成だけでは採用承認またはTHE-CAPTION本体への反映を意味しない。
+`the-caption`向けに固定したrelease bundleとlifecycle状態を引くための索引である。release作成・approval・runtime projectionの境界と索引更新規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。
 
-候補147は明示承認後に公開版`the-caption`へ投影済みである。Rating v14 Medium Standard14 N=100で1,400 / 1,400 score `4`、targeted F01 / F02 / F03でmechanism 15 / 15を確認した。公開版PR #13、merge commit `3119a91d3fad63180884f80ac6b742fbae328afe`、rollback identity `3b6013e0850d0f9ebbec72e534c0b644602ca880`を固定した。
-
-候補125は明示承認後に移行前のTHE-CAPTIONへ投影済みである。Rating v14 Medium Standard14 N=5で70 / 70 score `4`、A02 N=20で20 / 20 score `4`かつbind後再入0件、token中央値`1,401,225`を確認した。直接のrollback identityは移行前THE-CAPTION commit `f12e4cc0e1d9291307a49c151e473e3bc6e92e44`である。Candidate125 N=100追試は2026-08-01にregistered poolを各case30件まで拡張した時点でF04 score `2`を5件確認し、N=50 partial batchを中断した。これは既存projection stateを変更しない。
-
-候補81は候補125の直前投影履歴として維持する。Rating v13 Medium標準14項目N=5でquality gateとprompt stability gateを通過した評価状態を保持する。
-
-候補71は過去の投影履歴として維持する。候補81の直接の巻き戻し先はTHE-CAPTION commit `2f550a88dfa5b7b24ff653b8fab8cd2ef150d360`である。候補43も過去の投影履歴として維持する。
-
-候補41は直前の投影履歴と候補43の巻き戻し先として維持する。候補34は一旦キャンセルし、不採用または削除にはしていない。
+各行の評価欄は索引用の要約であり、評価結果は対応する一次result、rollback identity・projection対象・PR / commit・未解決riskは各release READMEを正とする。release artifactの存在や評価上の`stopped`を、approvalまたはruntime projectionと同一状態として扱わない。
 
 | release identity | source candidate | evaluation | release status | approval | runtime projection |
 | --- | --- | --- | --- | --- | --- |
