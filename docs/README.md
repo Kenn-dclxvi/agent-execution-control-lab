@@ -36,6 +36,13 @@
 | [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
 | [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜と現在状態の一覧は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
 | [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開target選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
+| [`feature-review-phase1-plan.md`](feature-review-phase1-plan.md) | Candidate147を基準に、過去機能の維持・休眠・欠落・prompt強制不能を一件ずつ判定する機能見直しフェーズ。最初の対象は独立SA reviewと情報封鎖の必要性 |
+| [`candidate164-autonomous-review-admission-design.md`](candidate164-autonomous-review-admission-design.md) | FR-01自律routingで観測したHR03失敗に対し、C147へreview admission / producer選択predicate一つだけを追加した設計。targeted試験はreviewer起動5 / 5まで改善したがterminal再生成1件で停止 |
+| [`candidate165-review-result-admission-design.md`](candidate165-review-result-admission-design.md) | C164の1件をprior評価のauthority誤分類として分解し、current TaskSpecへbind済みのresultだけをquality criterionへadmitする設計。Review4は20 / 20、Standard14は70 / 70 Score `4`。C147比cost増を残す |
+| [`candidate165-standard14-review-route-analysis.md`](candidate165-standard14-review-route-analysis.md) | C165 Standard14 70 traceから、独立SAの実質修正0 / 41、通常caseへの系統起動40件、clean-context root review成功5 / 5を分離し、result admission成立とreview admission過大を切り分けた現在解釈 |
+| [`candidate166-prior-evaluation-review-admission-design.md`](candidate166-prior-evaluation-review-admission-design.md) | C165の過大発動に対し、artifact実装・調査を独立SA切替条件から外した一変更。Review4はroute / closure 20 / 20、oracle一致18 / 20。HR03 case設計不備によりquality未判定、Standard14未実施 |
+| [`candidate166-review4-case-validity-analysis.md`](candidate166-review4-case-validity-analysis.md) | C166 Review4のHR03を再監査し、raw response不在のまま観測表現を強めたため期待terminalが一意でないと判定。18 / 20をquality failureへ使わず、r2 case revisionの事前条件を固定 |
+| [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | prompt内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存caseを再分類。次gateを7 case × N=5へ固定するcase設計 |
 
 ### 2b. 横断知見・現行frontier
 

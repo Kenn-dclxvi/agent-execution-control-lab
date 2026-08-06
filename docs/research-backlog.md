@@ -10,6 +10,7 @@
 
 | 項目 | 現在状態 | 次の判断または再開条件 |
 | --- | --- | --- |
+| [`機能見直しフェーズ 第1期`](feature-review-phase1-plan.md) | `active / FR-01 Candidate166_behavior_cases_redesigned` | prompt predicateの直積を廃止。HR01、正常・欠陥・判定不能のclean / perturbed 3 pairを7 case × N=5へ固定する。RA03 / RA04はresult integrityの保存済み別証拠とし、case materializationとpreflight前のため新規slot未発行 |
 | `CONTEXT`（`X1`） | ペンディング | A06はUltra制御用。Ultra条件で再検討する明示判断があった場合だけ再開 |
 | `RECOVERY`（`R1 / R2`） | 未完了・効果未測定 | `environment_recovery_max>0`の正のrecovery scenarioを評価するか判断 |
 | [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 保留・実装／pilot／本測定未着手 | 系列へ着手する明示判断とPhase 0の認証方式選択が揃った場合だけ再開 |
