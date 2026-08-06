@@ -27,6 +27,18 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 - 結論が変わらない場面の再判断（Decision Boundary）と、検証の一括化（Validation Closure）がstepとtokenを減らした（例: Validation ClosureのCandidate71はCandidate69比でtoken合計 -27.93%、top-level tool call -30.16%）。
 - トークン削減の評価と、採用の判断は別レイヤーである。
 
+### 代表的な同一環境比較
+
+| Prompt | score分布 | token中央値 | Baseline比 | elapsed中央値 | Baseline比 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Baseline | `4 / 3 / 0 = 65 / 1 / 4` | 13,624,982 | — | 3,333.567秒 | — |
+| Free | `4 / 0 = 65 / 5` | 3,488,611 | -74.40% | 1,166.296秒 | -65.01% |
+| Candidate43 | `4 = 70` | 3,151,442 | -76.87% | 1,091.549秒 | -67.26% |
+| Candidate71 | `4 = 70` | 2,030,116 | -85.10% | 988.187秒 | -70.36% |
+| **Candidate147** | **`4 = 70`** | **1,447,626** | **-89.38%** | **852.543秒** | **-74.43%** |
+
+Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比較で、tokenはall-agent `total_tokens`。詳細と比較境界は[`evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md`](evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md)を参照。
+
 ## Candidate開発の経緯
 
 BaselineからCandidate147までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。Candidate148以降の系譜と現在状態は[`prompts/candidates/README.md`](prompts/candidates/README.md)、制御メカニズムの整理は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)を正本とする。candidate bundle 162件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71・Candidate81・Candidate125・Candidate147（この順に積み上げた投影で直近はCandidate147）。Candidate125までは移行前のTHE-CAPTIONを対象とし、Candidate147は2026-08-03に公開版`the-caption`（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）へ投影した。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)、[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)、[Candidate81](prompts/releases/the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md)、[Candidate125](prompts/releases/the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1/README.md)、[Candidate147](prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
