@@ -47,8 +47,14 @@
 | [`execution-control-measurement-report.md`](execution-control-measurement-report.md) | 研究者向けの**技術報告 第1版**（2026-08-03、14節＋要旨＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献・提供者指針を一次・補助資料として使う。**この版をもって記述を固定し、以降の測定は新しい版として追加する。** 数値と識別子は一次artifactを、主張と証拠の対応はevidence mapを正本とする。|
 | [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md) | 上記**第1版**のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保30件（外部文献への誤帰属5件の撤回を含む） |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 技術報告§12.2はこれを引用する |
-| [`why-prompt-writing-changes-your-bill.md`](why-prompt-writing-changes-your-bill.md) | **YouTube向けの3分説明資料**（引用なし）。Free比のAPI料金換算`-39.95%`を前面に出し、静的プロンプト`0 → 10,772 B`、実行トークン`-58.50%`、最高評価`65 / 70 → 70 / 70件`となった観測を一表と短い解説で説明する。 |
-| [`how-to-write-prompts-that-cut-api-cost.md`](how-to-write-prompts-that-cut-api-cost.md) | **料金比較記事の補足として、実際にプロンプトへ何を書くかを説明する資料**。成果、変更開始、担当と結果、調査と待機、完了の順に条件を整理し、13規則を含む実運用版全体の測定結果と短い記述の限界を分けて示す。 |
+| [`01_why-prompt-writing-changes-your-bill.md`](01_why-prompt-writing-changes-your-bill.md) | **実務者向けExecution Controlシリーズ 1 / 8**。Free比のAPI料金換算`-39.95%`を入口に、削るべきものは文字数ではなく迷う余地だと説明する。 |
+| [`02_how-to-write-prompts-that-cut-api-cost.md`](02_how-to-write-prompts-that-cut-api-cost.md) | **シリーズ 2 / 8**。成果、変更開始、担当と結果、調査、完了という5つの判断条件を、推測・手戻り・過剰な探索や検証と対応づける。 |
+| [`03_what-not-to-write-in-ai-prompts.md`](03_what-not-to-write-in-ai-prompts.md) | **シリーズ 3 / 8**。索引追加、表面的な短文化、抽象的なmeta判断など、無条件に足さない7項目と代替を書く。 |
+| [`04_what-prompts-can-and-cannot-control.md`](04_what-prompts-can-and-cannot-control.md) | **シリーズ 4 / 8**。AIが観測後に選ぶ行動と、executorやtool adapterが担う配送・原子性などの境界を説明する。 |
+| [`05_review-roles-vs-decision-conditions.md`](05_review-roles-vs-decision-conditions.md) | **シリーズ 5 / 8**。レビュー工程と品質責務を分離し、別担当を増やす前に固定する判定対象と結果を示す。 |
+| [`06_execution-paths-drive-ai-cost.md`](06_execution-paths-drive-ai-cost.md) | **シリーズ 6 / 8**。静的な文章量ではなく、モデル往復、再読、再検証を含む実行経路を設計対象として説明する。 |
+| [`07_do-not-copy-human-development-processes.md`](07_do-not-copy-human-development-processes.md) | **シリーズ 7 / 8**。人間組織の工程を導入経路として認めつつ、AI向けには失敗様式と観測可能な条件へ変換する。 |
+| [`08_what-is-execution-control.md`](08_what-is-execution-control.md) | **シリーズ 8 / 8**。AIへの依頼とExecution Controlを分け、進行・停止・完了を制御する全体像をまとめる。 |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ### 2c. 運用・評価infra spec
