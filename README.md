@@ -1,35 +1,32 @@
 # agent-execution-control-lab
 
-AIエージェントの実行制御が成果品質・token・所要時間・実行経路へ与える影響を、再現可能に測る研究基盤です。
-
-計測は評価対象repository（target）ごとのinstanceとして管理します。prompt設計、比較、評価、反映可能な形へのまとめを実行している現行instanceはTHE-CAPTION（`the-caption`）です。公開target `click`（`pallets/click`）も第三者再現可能なinstanceとして登録済みで、Bundle Aのbaselineを確立した段階にあり、Bundle比較・採用・release・本体反映は未実施です。instance台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
-
-このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から改名しました。schema名prefix `the-caption-prompt.*`と既存bundle manifestの`construction_repository`は、保存済みresultへbindしたimmutableなidentityのため旧名のまま固定します（[`docs/repository-overview.md`](docs/repository-overview.md)）。
+AIエージェントの実行制御を再現可能に測る研究基盤です。
 
 ## 研究目的
 
-本研究の中心は、AIエージェントへソフトウェア開発を委ねる際、**導入のために人間組織から借りたオーケストレーションの枠組みがどれだけの実行コストを要求し、そのどこを残せば守ろうとしていた品質責務を保てるのかを測定すること**です。品質を最適化対象ではなく維持すべき制約として固定し、指示書の内容を変えたときのall-agent token・所要時間・実行経路を、比較可能な条件のもとで観測します。
+本研究の中心は、AIエージェントへソフトウェア開発を委ねる際、**導入のために人間組織から借りたオーケストレーションの枠組みがどれだけの実行コストを要求し、そのどこを残せば守ろうとしていた品質責務を保てるのかを測定すること**です。
+
+指示書がAIエージェントの進行・停止・完了をどう決めるかを実行制御と呼びます。このリポジトリは、品質を最適化対象ではなく維持すべき制約として固定したうえで、実行制御を変えたときの成果品質・all-agent token・所要時間・実行経路を、比較可能な条件のもとで観測する研究基盤です。
 
 - 人間中心の開発プロセスをAIエージェントへ再現したときの実行コストを測る
 - 品質責務を保ちながら削除・置換できる枠組みと、残す必要がある実行制御を対象instance内で識別する
 - 静的なprompt量と動的な実行量を分け、実行経路の効率を評価する
 - 成立しなかった条件と測定上の限界も、再現可能な研究結果として残す
 
-研究の問い、測定方法、結果、限界の固定版は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)を参照してください。
+計測は評価対象repository（target）ごとのinstanceとして管理します。prompt設計、比較、評価、反映可能な形へのまとめを実行している現行instanceはTHE-CAPTION（`the-caption`）です。instance台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
 
-## 研究基盤としての役割
+## いま進めていること
 
-- 現行プロンプトの参照元とidentityを固定する
-- 候補プロンプトを本体から分離して構築する
-- 同一条件で比較できる評価caseとprofileを管理する
-- 評価済み候補をrelease単位でまとめる
-- THE-CAPTION本体への反映を明示的な承認作業として扱う
+Candidate147を本体へ投影した後は、次の2軸を進めています。進行中の設計・診断文書は[`docs/README.md`](docs/README.md)の「現行frontier」を正本とします。
 
-## 現在の状態
+| 軸 | 現在地 |
+| --- | --- |
+| 機能見直し・review admission | Candidate147を基準に、過去機能の維持・休眠・欠落・prompt強制不能を一件ずつ判定しています。Candidate164から166でreview admissionの過不足を詰め、review挙動のcaseを再分類して次gateを7 case × N=5へ固定した段階です |
+| 公開target拡張 | 公開target `click`（`pallets/click`）を第三者再現可能なinstanceとして登録し、Bundle Aのbaselineを確立しました。Bundle比較・採用・release・本体反映は未実施です |
 
-`evaluation_foundation_v4`。1 case × 1 sampleのatomic runをappend-onlyで保存し、`N`をrun identityから分離しています。既存5 sampleから100 sampleへ増やす場合は95 sampleだけを追加し、分析時に使用run ID集合をwrite-onceで固定します。同じ`resource_class`のready runはanalysis conditionやdispatch件数が異なってもpair-awareな最大24 global queueへ投入できます。`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値です。v3 `prompt-set-result/v1` / `v2`とそれ以前のresultは履歴として保持し、元artifactを変更せずatomic runへ索引化できます。評価基盤はwinner、採用、本体反映、runtime有効化を判断しません。
+計測に使う評価基盤は`evaluation_foundation_v4`です（1 case × 1 sampleのatomic runをappend-only保存し、比較時に使用run ID集合を固定。`total_tokens`はroot agentと全descendant SA sessionを合算するall-agent値。詳細は[`docs/repository-overview.md`](docs/repository-overview.md)）。基盤はwinner、採用、本体反映、runtime有効化を判断しません。
 
-## 主要な知見
+## 実行制御で何が変わったか
 
 観測された効率改善の要点は次のとおり。詳細と因果は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)を参照。
 
@@ -38,7 +35,7 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 - 結論が変わらない場面の再判断（Decision Boundary）と、検証の一括化（Validation Closure）がstepとtokenを減らした（例: Validation ClosureのCandidate71はCandidate69比でtoken合計 -27.93%、top-level tool call -30.16%）。
 - トークン削減の評価と、採用の判断は別レイヤーである。
 
-### 代表的な同一環境比較
+代表的な同一環境比較は次のとおり。
 
 | Prompt | score分布 | token中央値 | Baseline比 | elapsed中央値 | Baseline比 |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -50,9 +47,13 @@ AIエージェントの実行制御が成果品質・token・所要時間・実�
 
 Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比較で、tokenはall-agent `total_tokens`。詳細と比較境界は[`evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md`](evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md)を参照。
 
-## Candidate開発の経緯
+この表に出るCandidateは、構築した162件のbundleの一部です。本体へ投影済みなのはCandidate41・43・71・81・125・147の6件（この順に積み上げ）で、Candidate125までは移行前のTHE-CAPTIONを対象とし、直近は2026-08-03にCandidate147を公開版`the-caption`（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）へ投影しました。
 
-BaselineからCandidate147までの系譜、固定した変更単位、保存evidence、評価状態は[`docs/candidate-history.md`](docs/candidate-history.md)にまとめる。Candidate148以降の系譜と現在状態は[`prompts/candidates/README.md`](prompts/candidates/README.md)、制御メカニズムの整理は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)を正本とする。candidate bundle 162件の系譜と現在状態の一覧は[`prompts/candidates/README.md`](prompts/candidates/README.md)にあり、identityの正本は各bundleの`manifest.json`（構築時provenanceとしてimmutable）とする。評価状態は、評価または診断を実施したcandidateでは独立したevaluation / diagnostic resultを正本とし、未実施の`not_evaluated`はresultが存在しないためindexの状態列を正本とする（manifestの`evaluation_status`は構築時の記録で、更新時にin-place変更しない）。本体へ投影済みなのはCandidate41・Candidate43・Candidate71・Candidate81・Candidate125・Candidate147（この順に積み上げた投影で直近はCandidate147）。Candidate125までは移行前のTHE-CAPTIONを対象とし、Candidate147は2026-08-03に公開版`the-caption`（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）へ投影した。release / approval / projection状態の正本は[`prompts/releases/README.md`](prompts/releases/README.md)。投影の実変更範囲は各release READMEを正本とし、[Candidate41は8 path](prompts/releases/the-caption-3ce91a4-owner-metadata-delegation-boundary-release-r1/README.md)、[Candidate43](prompts/releases/the-caption-3ce91a4-outcome-authority-boundary-release-r1/README.md)、[Candidate71](prompts/releases/the-caption-3ce91a4-validation-closure-release-r1/README.md)、[Candidate81](prompts/releases/the-caption-3ce91a4-validation-wrapper-precedence-release-r1/README.md)、[Candidate125](prompts/releases/the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1/README.md)、[Candidate147](prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/README.md)は各々直前投影からroot `AGENTS.md`一つである。
+| 知りたいこと | 正本 |
+| --- | --- |
+| 系譜、固定した変更単位、保存evidence、知見 | [`docs/candidate-history.md`](docs/candidate-history.md) |
+| 全bundleの現在状態とidentity | [`prompts/candidates/README.md`](prompts/candidates/README.md) |
+| release / approval / projection状態と投影の実変更範囲 | [`prompts/releases/README.md`](prompts/releases/README.md) |
 
 ## 構成
 
@@ -67,40 +68,29 @@ BaselineからCandidate147までの系譜、固定した変更単位、保存evi
 | `evaluations/profiles/` | model、Agent、環境、反復条件、比較条件 |
 | `evaluations/results/` | 公開済みの履歴評価結果。v3 runtime registryとは分離 |
 
-運用境界は[`docs/repository-contract.md`](docs/repository-contract.md)を正本とします。
-評価基盤のLayerと境界は[`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md)に定義します。実行方法は[`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md)、検証cloneの容量維持は[`docs/evaluation-storage-maintenance.md`](docs/evaluation-storage-maintenance.md)を参照します。
-v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md`](evaluations/results/v3-all-agent-token-reaccounting_2026-07-16.md)に記録します。今後の制御追加、置換、削除は[`docs/prompt-control-design-principles.md`](docs/prompt-control-design-principles.md)を検討原則とします。Candidate5の評価整理と次candidateの設計方向は[`docs/candidate5-token-efficiency-direction.md`](docs/candidate5-token-efficiency-direction.md)、Candidate6からCandidate8までの効率化調査と設計結論は[`docs/candidate6-candidate8-efficiency-investigation.md`](docs/candidate6-candidate8-efficiency-investigation.md)に記録します。両設計文書のtoken由来の旧解釈はroot-only履歴であり、補正結果を現行値として扱います。
-
-## 初期作業
-
-1. THE-CAPTIONの対象commitと現行prompt identityを固定する
-2. 現行promptを`prompts/baselines/`へ取り込む
-3. 最初の候補が解く問題と非目標を定義する
-4. 比較前にevaluation profileを固定する
-5. 評価結果と承認を分けて記録する
-
-## 今後の使い方と発展方針
-
-このリポジトリは、AIエージェントの実行制御を設計・評価・改善する研究基盤として育てる。改善サイクル、評価setの育て方、model / runtime更新時の扱い、runtime制御への発展、採用判断の考え方は[`docs/future-roadmap.md`](docs/future-roadmap.md)にまとめる。
+運用境界の正本は[`docs/repository-contract.md`](docs/repository-contract.md)です。その他の文書は[ドキュメント](#ドキュメント)を参照してください。
 
 ## ドキュメント
 
-主要文書は次のとおり。`docs/`配下の研究文書は[`docs/README.md`](docs/README.md)で役割別（正本、現在の研究状態、完了済み研究記録、historical）に索引化しており、未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)にまとめる。領域固有の作業規則は各`AGENTS.md`を正本とする。
+全文書の索引は[`docs/README.md`](docs/README.md)を正本とし、役割別（正本、現在の研究状態、完了済み研究記録、historical）に分類しています。未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)、領域固有の作業規則は各`AGENTS.md`を正本とします。
 
-研究内容を実務から読みたい場合は、[「AIへの指示は、短いほど安いのか？」](docs/01_why-prompt-writing-changes-your-bill.md)から始まる全8本のExecution Controlシリーズを参照してください。各記事は単体でも読め、ファイル名の`01`〜`08`が推奨順です。
+読み始める場所は目的別に次のとおりです。
 
-| ドキュメント | 内容 |
+| 目的 | 入口 |
 | --- | --- |
-| [`docs/repository-overview.md`](docs/repository-overview.md) | 初見向けの全体像・用語・評価基盤・現状 |
-| [`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md) | 研究者向けの技術報告 第1版（2026-08-03）。品質制約下の指示書設計と実行経路の測定。数値と識別子は一次artifactを正本とする |
-| [`docs/control-mechanisms.md`](docs/control-mechanisms.md) | トークンを大きく減らせた制御メカニズムの整理 |
-| [`docs/candidate-history.md`](docs/candidate-history.md) | BaselineからCandidate147までの系譜と知見 |
-| [`docs/candidate125-candidate147-control-findings-synthesis.md`](docs/candidate125-candidate147-control-findings-synthesis.md) | Candidate125のN拡張停止からCandidate147のN=100採用までの因果系列と統合知見 |
-| [`docs/future-roadmap.md`](docs/future-roadmap.md) | 今後の運用・改善サイクル・runtime化の方針 |
-| [`docs/repository-contract.md`](docs/repository-contract.md) | 運用境界の正本 |
-| [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) | 評価基盤のLayerと境界 |
-| [`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md) | 評価の実行手順 |
-| [`docs/prompt-control-design-principles.md`](docs/prompt-control-design-principles.md) | 制御追加・置換・削除の検討原則 |
+| 全体像・用語・評価基盤・現状を知る | [`docs/repository-overview.md`](docs/repository-overview.md) |
+| 研究の問い・測定方法・結果・限界を読む | [`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md) |
+| 実務の観点から読む | [「AIへの指示は、短いほど安いのか？」](docs/01_why-prompt-writing-changes-your-bill.md)（全8本のExecution Controlシリーズ。単体でも読め、ファイル名の`01`〜`08`が推奨順） |
+| 今後の方針を知る（改善サイクル、評価setの育て方、model / runtime更新時の扱い、runtime制御への発展、採用判断） | [`docs/future-roadmap.md`](docs/future-roadmap.md) |
+
+作業を始める場所は次のとおりです。
+
+| 作業 | 正本 |
+| --- | --- |
+| baseline / candidate / releaseのbundle構築（形式・manifest・格納） | [`docs/prompt-file-bundle.md`](docs/prompt-file-bundle.md) |
+| 比較条件の固定（評価基盤のLayerと境界） | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) |
+| 評価の実行 | [`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md) |
+| 新しいtarget instanceの追加 | [`evaluations/targets/AGENTS.md`](evaluations/targets/AGENTS.md) |
 
 ## 関連リポジトリ
 
@@ -112,7 +102,11 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [agent-execution-control-lab](https://github.com/Kenn-dclxvi/agent-execution-control-lab) | **計測**。V1を出発点として候補を作り、実行制御の効果を再現可能に測る研究基盤（本リポジトリ） |
 | [the-caption](https://github.com/Kenn-dclxvi/the-caption) | **適用**。登録instance `the-caption` の実体。実運用しているポートフォリオ評価システムであり、採用したCandidateのreleaseはこのリポジトリへのプルリクエストとして記録する |
 
-Candidateは本リポジトリで評価し、採用したもののreleaseは`the-caption`へのプルリクエストとして記録する。V1と本研究の系列を別リポジトリで育てている理由、および適用の実体は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)の3節を参照。
+V1と本研究の系列を別リポジトリで育てている理由、および適用の実体は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)の3節を参照。
+
+## リポジトリ名の変更
+
+このリポジトリは2026-07-26に`THE-CAPTION-PROMPT`から改名した。schema名prefix `the-caption-prompt.*`と既存bundle manifestの`construction_repository`は、保存済みresultへbindしたimmutableなidentityのため旧名のまま固定する（[`docs/repository-overview.md`](docs/repository-overview.md)）。
 
 ## License
 
