@@ -112,7 +112,7 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 | [agent-execution-control-lab](https://github.com/Kenn-dclxvi/agent-execution-control-lab) | **計測**。V1を出発点として候補を作り、実行制御の効果を再現可能に測る研究基盤（本リポジトリ） |
 | [the-caption](https://github.com/Kenn-dclxvi/the-caption) | **適用**。登録instance `the-caption` の実体。実運用しているポートフォリオ評価システムであり、採用したCandidateのreleaseはこのリポジトリへのプルリクエストとして記録する |
 
-Candidateは本リポジトリで評価し、採用したものを`the-caption`へ反映する。V1側へ書き戻す経路は運用していない。V1と本研究の系列の関係、および適用の実体は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)の3節を参照。
+Candidateは本リポジトリで評価し、採用したもののreleaseは`the-caption`へのプルリクエストとして記録する。V1と本研究の系列を別リポジトリで育てている理由、および適用の実体は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)の3節を参照。
 
 ## License
 
