@@ -28,6 +28,39 @@ jobs:
         run: |
           set -euo pipefail
 
+          pr_number=""
+          target_head_sha=""
+          finding_count="0"
+          trigger_comment_url=""
+
+          write_summary() {
+            local stop_reason="$1"
+            local codex_trigger_posted="$2"
+            {
+              echo "## Codex PR Review Fix Trigger"
+              echo "- upstream_run_id: $RUN_ID"
+              echo "- upstream_run_attempt: $RUN_ATTEMPT"
+              echo "- upstream_head_branch: ${RUN_HEAD_BRANCH:-unavailable}"
+              echo "- upstream_head_sha: ${RUN_HEAD_SHA:-unavailable}"
+              echo "- resolved_pr: ${pr_number:-unresolved}"
+              echo "- target_head_sha: ${target_head_sha:-unresolved}"
+              echo "- finding_count: ${finding_count:-0}"
+              echo "- stop_reason: $stop_reason"
+              echo "- codex_trigger_posted: $codex_trigger_posted"
+              if [[ -n "$trigger_comment_url" ]]; then
+                echo "- trigger_comment_url: $trigger_comment_url"
+              fi
+            } >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          on_error() {
+            local rc=$?
+            trap - ERR
+            write_summary "execution_failed(exit=$rc)" "false"
+            exit "$rc"
+          }
+          trap on_error ERR
+
           pr_number="$(jq -r '.workflow_run.pull_requests[0].number // empty' "$GITHUB_EVENT_PATH")"
 
           if [[ -z "$pr_number" && -n "$RUN_HEAD_BRANCH" ]]; then
@@ -50,6 +83,7 @@ jobs:
 
           if [[ -z "$pr_number" ]]; then
             echo "Unable to resolve a unique open PR for Claude review run $RUN_ID; nothing to do."
+            write_summary "pr_unresolved" "false"
             exit 0
           fi
 
@@ -59,6 +93,7 @@ jobs:
 
           if [[ "$head_repo" != "$REPO" ]]; then
             echo "Fork pull requests are outside this automation boundary."
+            write_summary "fork_pr_outside_boundary" "false"
             exit 0
           fi
 
@@ -66,6 +101,7 @@ jobs:
           prior_rounds="$(jq '[.[][] | select(.body | contains("<!-- codex-fix-trigger:"))] | length' <<<"$issue_comments")"
           if (( prior_rounds >= MAX_CODEX_FIX_ROUNDS )); then
             echo "Automatic Codex fix round limit reached: $prior_rounds/$MAX_CODEX_FIX_ROUNDS."
+            write_summary "round_limit_reached($prior_rounds/$MAX_CODEX_FIX_ROUNDS)" "false"
             exit 0
           fi
 
@@ -83,8 +119,10 @@ jobs:
               <<<"$review_comments"
           )"
 
-          if [[ "$(jq 'length' <<<"$new_findings")" -eq 0 ]]; then
+          finding_count="$(jq 'length' <<<"$new_findings")"
+          if [[ "$finding_count" -eq 0 ]]; then
             echo "Claude review completed without new inline findings for current PR head $target_head_sha."
+            write_summary "no_matching_findings" "false"
             exit 0
           fi
 
@@ -102,6 +140,7 @@ jobs:
           finding_count="$(jq 'length' <<<"$unprocessed")"
           if [[ "$finding_count" -eq 0 ]]; then
             echo "All Claude findings from this review were already processed."
+            write_summary "all_findings_already_processed" "false"
             exit 0
           fi
 
@@ -122,4 +161,6 @@ jobs:
           EOF
           )
 
-          gh pr comment "$pr_number" --repo "$REPO" --body "$body"
+          trigger_comment_url="$(gh pr comment "$pr_number" --repo "$REPO" --body "$body")"
+          echo "Codex fix trigger posted: $trigger_comment_url"
+          write_summary "trigger_posted" "true"
