@@ -1,0 +1,39 @@
+name: Codex PR Review Fix Trigger Experiment
+
+on:
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  request-codex-fix:
+    if: >-
+      github.event.comment.user.login == 'claude[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+    steps:
+      - name: Request Codex Cloud fix
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REVIEW_COMMENT_URL: ${{ github.event.comment.html_url }}
+          REVIEW_PATH: ${{ github.event.comment.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          body=$(cat <<EOF
+          @codex address the Claude review feedback in this PR.
+
+          Trigger source: Claude inline review comment
+          Review comment: ${REVIEW_COMMENT_URL}
+          Path: ${REVIEW_PATH}
+
+          Verify that the finding is still valid against the current PR head before changing anything. If it is valid, make only the minimum necessary repository change and run the relevant validation. If the finding is already resolved, invalid, ambiguous, or requires a design decision, do not make a speculative change.
+          EOF
+          )
+
+          gh pr comment "$PR_NUMBER" --body "$body"
