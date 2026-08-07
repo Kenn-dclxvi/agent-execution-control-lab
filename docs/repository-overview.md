@@ -19,7 +19,7 @@ AIエージェントの実行制御を与える**プロンプト（AIへの指�
 
 | 識別子 | 状態 | 理由 |
 | --- | --- | --- |
-| schema名prefix `the-caption-prompt.*` | 旧名で固定 | 20種類以上のschemaで使用し、保存済みresultとprofileへbind済み。[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)のImmutable historyが上書きを禁じる |
+| schema名prefix `the-caption-prompt.*` | 旧名で固定 | 20種類以上のschemaで使用し、保存済みresultとprofileへbind済み。[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)の不変の履歴が上書きを禁じる |
 | 既存bundle manifestの`construction_repository` | 旧名で固定 | 構築時provenanceであり、in-place変更しない。GitHubのrename redirectで解決できる |
 | prompt set identity（`the-caption-*`） | 旧名で固定 | target instance `the-caption`の名前空間であり、改名の対象ではない |
 
