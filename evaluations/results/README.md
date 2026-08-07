@@ -1,14 +1,14 @@
-# Results
+# result索引
 
-固定済みprofileで得た再現可能な結果を置く。raw logを無条件にcommitせず、必要なprovenance、集計、比較情報、除外理由を残す。
+固定済みプロファイルで得た再現可能な結果を置く。生のログを無条件にcommitせず、必要なprovenance、集計、比較情報、除外理由を残す。
 
-このdirectoryはv1 / v2の履歴resultを含む。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。現行のv4の一次結果は1 case × 1 sampleのatomic runであり、v3 resultをin-place変換しない。sanitized resultをrepositoryへ公開する場合もruntime registryからの別artifact単位として扱う。
+このディレクトリはv1 / v2の履歴resultを含む。v3の一次結果は1 prompt setごとのappend-only registry resultであり、旧A / B resultをin-place変換しない。現行のv4の一次結果は1 case × 1 sampleのatomic runであり、v3 resultをin-place変換しない。sanitized resultをリポジトリへ公開する場合もruntime registryからの別アーティファクト単位として扱う。
 
 この索引は各resultの要約と所在だけを示す。数値、score、状態の正本は各result本体とする。節は新しい系列から並べ、節内は実行順（古い順）に並べる。過去の判定と当時の状態は書き換えず、後続の再解釈は当該段落に併記した文言をそのまま残す。
 
 節タイトルと本文には系統の異なる版番号が出てくる。**単独の`v1` / `v2` / `v3` / `v4`は評価基盤（evaluation foundation）の世代を指す。世代の定義と遷移は[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)の「Evaluation foundation世代」節を正本とする。** 採点契約は`Rating v13` / `Rating v14`のように`Rating`を付け、result schemaは`prompt-set-result/v1`のようにschema名を付け、command evidence protocolは`command evidence v3`のように対象名を付ける。
 
-このdirectory内では、file名に`-atomic-n<N>-`または`-atomic-reuse-`を持つ62件がv4（atomic run）経路である。v4経路の最初のresultは2026-07-31の[`Candidate106 / Candidate107 Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)（第5節）で、第4節のCandidate108以降はすべてv4経路である。それより前のresultはv3以前の経路であり、履歴として保持する。
+このディレクトリ内では、ファイル名に`-atomic-n<N>-`または`-atomic-reuse-`を持つ62件がv4（atomic run）経路である。v4経路の最初のresultは2026-07-31の[`Candidate106 / Candidate107 Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)（第5節）で、第4節のCandidate108以降はすべてv4経路である。それより前のresultはv3以前の経路であり、履歴として保持する。
 
 ## 目次
 

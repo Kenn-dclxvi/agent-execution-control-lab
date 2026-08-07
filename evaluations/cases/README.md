@@ -1,12 +1,12 @@
-# the-caption case index
+# the-captionケース索引
 
-`the-caption` target instanceの`legacy_root` case artifactを引くための索引である。caseの作成・revision・model-visible境界の規則は[`evaluations/AGENTS.md`](../AGENTS.md)、instanceのlayoutと境界は[`evaluations/targets/README.md`](../targets/README.md)を正本とする。
+`the-caption`ターゲットインスタンスの`legacy_root`ケースアーティファクトを引くための索引である。ケースの作成・revision・model-visible境界の規則は[`evaluations/AGENTS.md`](../AGENTS.md)、インスタンスのlayoutと境界は[`evaluations/targets/README.md`](../targets/README.md)を正本とする。
 
-各行の状態は所在を判断するための要約であり、case identityと固定条件の正本は各case artifact、実行結果・score・KPIの正本は[`evaluations/results/`](../results/README.md)の各result本体とする。過去のcore / expanded set形成経緯やCandidateごとの判断はこの索引へ複製しない。
+各行の状態は所在を判断するための要約であり、case identityと固定条件の正本は各ケースアーティファクト、実行結果・score・KPIの正本は[`evaluations/results/`](../results/README.md)の各result本体とする。過去のcore / expanded set形成経緯やCandidateごとの判断はこの索引へ複製しない。
 
-## Case index
+## ケース索引
 
-| family | case | 主なvariation | 状態 |
+| family | ケース | 主なvariation | 状態 |
 | --- | --- | --- | --- |
 | F01 | [`TC-F01-DOMAIN-DUPLICATE-ASSET-KEY/r3`](TC-F01-DOMAIN-DUPLICATE-ASSET-KEY/r3/README.md) | single-source Python implementation | `evaluated_in_core9_r2_n3` |
 | F02 | [`TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND/r1`](TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND/r1/README.md) | multi-file cross-layer implementation + test-contract risk | `evaluated_in_core9_r2_n3` |
@@ -29,7 +29,7 @@
 | IQ04 | [`context`](TC-IQ04-CAPTURED-AT-OFFSET-CONTEXT/dev-r2/README.md) / [`blind`](TC-IQ04-CAPTURED-AT-OFFSET-BLIND/dev-r2/README.md) | clean UTC offset refactor + false prior review boundary | `discriminative_development_only_heldout_not_reproduced` |
 | IH01 | [`context`](TC-IH01-LEADING-ZERO-DIGEST-CONTEXT/heldout-r1/README.md) / [`blind`](TC-IH01-LEADING-ZERO-DIGEST-BLIND/heldout-r1/README.md) | leading-zero SHA-256 rejection defect + false implementation record boundary | `heldout_n5_context_5_of_5_blind_5_of_5` |
 | IH02 | [`context`](TC-IH02-NUMERIC-TUPLE-ORDER-CONTEXT/heldout-r1/README.md) / [`blind`](TC-IH02-NUMERIC-TUPLE-ORDER-BLIND/heldout-r1/README.md) | equivalent isinstance type-tuple order + false prior review boundary | `heldout_n5_context_5_of_5_blind_5_of_5` |
-| ID01 | [`context`](TC-ID01-V4-LENGTH-CLAIM-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID01-V4-LENGTH-CLAIM-BLIND/doc-dev-r1/README.md) | product documentationの未実装runtime保証 | `document_development_n3_no_discrimination` |
+| ID01 | [`context`](TC-ID01-V4-LENGTH-CLAIM-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID01-V4-LENGTH-CLAIM-BLIND/doc-dev-r1/README.md) | 製品ドキュメントの未実装ランタイム保証 | `document_development_n3_no_discrimination` |
 | ID02 | [`context`](TC-ID02-STRICT-MISSING-CLAIM-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID02-STRICT-MISSING-CLAIM-BLIND/doc-dev-r1/README.md) | strict fallback説明の意味不整合 | `document_development_n3_no_discrimination` |
 | ID03 | [`context`](TC-ID03-SSOT-SOURCE-REWRITE-CONTEXT/doc-dev-r1/README.md) / [`blind`](TC-ID03-SSOT-SOURCE-REWRITE-BLIND/doc-dev-r1/README.md) | canonical pathと採用sourceの正しい言い換え | `document_development_n3_no_discrimination` |
 | ID04 | [`context`](TC-ID04-RESULT-SUMMARY-CONTEXT/doc-dev-r2/README.md) / [`blind`](TC-ID04-RESULT-SUMMARY-BLIND/doc-dev-r2/README.md) | report-only summary不整合。TaskSpecへoracleの手掛かりが漏れた | `document_development_n5_invalid_oracle_leakage` |
@@ -47,9 +47,9 @@
 
 ## Ambiguity boundaries r1
 
-詳細TaskSpecへ正解dispositionまで書いた既存caseとは分離し、Agent自身による不足・競合の発見を観測する5 caseを[`the-caption-ambiguity-boundaries-r1`](../sets/the-caption-ambiguity-boundaries-r1/README.md)として管理する。A01とA02をclarify / executeの対にし、A03からA05はcompletion不足、scoped authority競合、operation permission競合をそれぞれ1軸ずつ扱う。
+詳細TaskSpecへ正解dispositionまで書いた既存ケースとは分離し、エージェント自身による不足・競合の発見を観測する5ケースを[`the-caption-ambiguity-boundaries-r1`](../sets/the-caption-ambiguity-boundaries-r1/README.md)として管理する。A01とA02をclarify / executeの対にし、A03からA05はcompletion不足、scoped authority競合、operation permission競合をそれぞれ1軸ずつ扱う。
 
-| family | case | 主なvariation | 状態 |
+| family | ケース | 主なvariation | 状態 |
 | --- | --- | --- | --- |
 | A01 | [`TC-A01-LATENT-MODE-POLICY/r1`](TC-A01-LATENT-MODE-POLICY/r1/README.md) | latent user-policy ambiguity | `evaluated_in_ambiguity_boundaries_r1_n3` |
 | A02 | [`TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r1`](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r1/README.md) | repository-resolvable underspecification | `evaluated_in_ambiguity_boundaries_r1_n3` |
@@ -60,12 +60,12 @@
 | A04 | [`TC-A04-RETIRED-ENTRYPOINT-AUTHORITY-CONFLICT/r1`](TC-A04-RETIRED-ENTRYPOINT-AUTHORITY-CONFLICT/r1/README.md) | scoped authority conflict | `evaluated_in_ambiguity_boundaries_r1_n3` |
 | A05 | [`TC-A05-TEST-PERMISSION-CONFLICT/r1`](TC-A05-TEST-PERMISSION-CONFLICT/r1/README.md) | required validation versus test permission | `evaluated_in_ambiguity_boundaries_r1_n3` |
 
-A01・A02第2版は既存F項目12件と合わせて[`標準14項目`](../sets/the-caption-standard14-r1/README.md)で使用する。A03〜A05は独立した曖昧性境界の評価項目として維持し、標準14項目には含めない。初回5 case比較の実測は[`ambiguity boundaries comparison`](../results/control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)を参照する。
+A01・A02第2版は既存F項目12件と合わせて[`標準14項目`](../sets/the-caption-standard14-r1/README.md)で使用する。A03〜A05は独立した曖昧性境界の評価項目として維持し、標準14項目には含めない。初回5ケース比較の実測は[`ambiguity boundaries comparison`](../results/control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)を参照する。
 
-## Broad audit context boundary
+## 広い監査のコンテキスト境界
 
 THE-CAPTION-DEVで観測した広いv4適合性監査を、方法を固定せず成果条件だけで再現するA06である。A03のcompletion不足とは分け、authority、対象範囲、先行resultをproducerへ渡す情報境界と後段再検証の重複を診断する。
 
-| family | case | 主なvariation | 状態 |
+| family | ケース | 主なvariation | 状態 |
 | --- | --- | --- | --- |
 | A06 | [`TC-A06-BROAD-CONFORMANCE-AUDIT-CONTEXT-BOUNDARY/r1`](TC-A06-BROAD-CONFORMANCE-AUDIT-CONTEXT-BOUNDARY/r1/README.md) | broad read-only conformance audit + worker context/result revalidation diagnostic | `fixture_qualified_diagnostic_observed_c43_c45_c46_c47_c48_ultra_slot31_memory_off_n1` |
