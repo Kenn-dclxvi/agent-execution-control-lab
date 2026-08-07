@@ -5,3 +5,5 @@
 This sentence is intentionally written in English and should be corrected to Japanese.
 
 期待結果は、上の英語一般文が文書品質のinline指摘になり、Codexが日本語へ修正すること。
+
+ChatGPT側のCodex自動レビュー設定を停止した状態で再試行する。
