@@ -1,31 +1,33 @@
 # Repository instructions
 
-このrootには、全pathへ共通して適用する不変条件と、リポジトリ全体へ及ぶ規律を残す。規律の適用場面が特定領域に限られる場合も、規則本体はrootへ置き、その内訳は対象領域の局所`AGENTS.md`を正本とする。領域固有の配置、更新、検証、履歴保持規則も、対象領域の局所`AGENTS.md`を正本とする。対象pathに局所`AGENTS.md`がある場合は、その領域固有規則を追加適用する。
+このルートには、全パスへ共通して適用する不変条件と、リポジトリ全体へ及ぶ規律を残す。規律の適用場面が特定領域に限られる場合も、規則本体はルートへ置き、その内訳は対象領域の局所`AGENTS.md`を正本とする。領域固有の配置、更新、検証、履歴保持規則も、対象領域の局所`AGENTS.md`を正本とする。対象パスに局所`AGENTS.md`がある場合は、その領域固有規則を追加適用する。
 
 ## Repository scope
 
-- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。登録instanceの識別子、layout、visibility、進行状態、およびinstance境界は`evaluations/targets/README.md`を正本とする。instance個別の状態をrootへ複製しない。
-- instance間でartifactを混ぜない。case、profile、set、rating contract、prompt bundle、resultはinstance固有artifactとして扱い、あるinstanceで成立した結果を他instanceの一般的効果として扱わない。target非依存のkernelとinstance固有artifactの帰属も`evaluations/targets/README.md`を正本とする。
-- prompt制御上の問題を解く方法は、このリポジトリ内のprompt、TaskSpec、repository authority、評価artifactの境界へ限定する。repository外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、target runtimeの変更を、prompt Candidateの解決策、次案、backlog、再開条件として提案または実装しない。
-- repository外の挙動や過去のexecutor試験は、保存済みresultの原因を分類するread-only診断証拠としてだけ参照できる。問題がrepository外の層でしか強制できない場合は、このリポジトリでは未解決として停止する。外部対応へ作業を広げない。評価基盤自体の保守は、ユーザーが明示的に依頼した別作業に限る。
-- target本体のruntime変更は通常作業範囲に含めない。
-- target本体への変更、push、PR、merge、runtime有効化は、明示的に依頼された別作業とする。
+- このリポジトリは、ターゲットインスタンスごとのプロンプト構築、比較、評価、release準備を扱う。登録インスタンスの識別子、layout、visibility、進行状態、およびインスタンス境界は`evaluations/targets/README.md`を正本とする。インスタンス個別の状態をルートへ複製しない。
+- インスタンス間でアーティファクトを混ぜない。ケース、プロファイル、セット、rating contract、プロンプトバンドル、resultはインスタンス固有のアーティファクトとして扱い、あるインスタンスで成立した結果を他インスタンスの一般的効果として扱わない。ターゲット非依存のkernelとインスタンス固有アーティファクトの帰属も`evaluations/targets/README.md`を正本とする。
+- プロンプト制御上の問題を解く方法は、このリポジトリ内のプロンプト、TaskSpec、repository authority、評価アーティファクトの境界へ限定する。リポジトリ外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、ターゲットのランタイムの変更を、プロンプトCandidateの解決策、次案、バックログ、再開条件として提案または実装しない。
+- リポジトリ外の挙動や過去のexecutor試験は、保存済みresultの原因を分類する読み取り専用の診断証拠としてだけ参照できる。問題がリポジトリ外の層でしか強制できない場合は、このリポジトリでは未解決として停止する。外部対応へ作業を広げない。評価基盤自体の保守は、ユーザーが明示的に依頼した別作業に限る。
+- ターゲット本体のランタイム変更は通常作業範囲に含めない。
+- ターゲット本体への変更、push、PR、merge、ランタイム有効化は、明示的に依頼された別作業とする。
 
-## 共通のartifact境界
+## 共通のアーティファクト境界
 
-- artifactが存在することと、評価済み、採用済み、release済み、本体反映済みであることを混同しない。
-- baseline、candidate、release、evaluation result、approval、projectionを別の状態とgateとして扱う。
-- secret、credential、非公開のraw run log、一時worktreeをcommitしない。
+- アーティファクトが存在することと、評価済み、採用済み、release済み、本体反映済みであることを混同しない。
+- baseline、candidate、release、evaluation result、approval、projectionを別の状態とゲートとして扱う。
+- シークレット、クレデンシャル、非公開の生の実行ログ、一時worktreeをcommitしない。
 - 文書は原則として日本語で記述する。
 - schema名、path、status、commandは再現性のため英語表記を許容する。
+- 上記以外の一般語へ英単語を混ぜない。訳語がある語は訳し（elapsed→経過時間、prefix→接頭辞）、日本語で一般にカタカナ表記される語はカタカナで書く（instance→インスタンス、evidence→エビデンス、artifact→アーティファクト）。専門用語と制御語（review admission、atomic run、rating contractなど）、および固有名は英語のまま残す。
+- 履歴アーティファクト（保存済みresult、releaseのfiles、candidate設計文書）はこの表記規則の対象外とし、現在解釈へ書き換えない。
 
 ## Agent execution discipline
 
-このリポジトリで作業するagentは、次の制御をそのまま適用する。本文はCandidate147（`the-caption-3ce91a4-result-effect-scope-r1`）で本体へ採用された制御原文`prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt`からの逐語転記であり、要約、緩和、repository向けの調整を加えていない。転記元のreleaseが変わる場合は、release identityを更新して全文を差し替える。
+このリポジトリで作業するエージェントは、次の制御をそのまま適用する。本文はCandidate147（`the-caption-3ce91a4-result-effect-scope-r1`）で本体へ採用された制御原文`prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt`からの逐語転記であり、要約、緩和、リポジトリ向けの調整を加えていない。上の表記規則もこの条項本文へは適用しない。転記元のreleaseが変わる場合は、release identityを更新して全文を差し替える。
 
-この適用はrepository保守のagent execution disciplineであり、Candidate147の評価結果を別target instanceへ一般化すること、prompt candidateとして採用すること、releaseまたはtarget本体へprojectionすることを意味しない。
+この適用はリポジトリ保守のagent execution disciplineであり、Candidate147の評価結果を別のターゲットインスタンスへ一般化すること、prompt candidateとして採用すること、releaseまたはターゲット本体へprojectionすることを意味しない。
 
-repository固有の不都合が観測されるまで、条項へ差分を加えない。差分が必要になった場合は、根拠となる観測事象と原文からの差分をこの節へ明示する。
+リポジトリ固有の不都合が観測されるまで、条項へ差分を加えない。差分が必要になった場合は、根拠となる観測事象と原文からの差分をこの節へ明示する。
 
 - SPEC: 実行前にrequired outcomeをoperation identityへ分け、`predicate / criterion owner / permission / constraint`をTaskSpecへ固定する。`spec_ready := required outcome valueが、明示user inputまたはそのvalueを直接要求する一意なrepository authorityへbind済み`。required outcome valueはTaskSpecが利用者に観測可能な成果として選択を要求する値とする。target artifact / canonical path / module / command / implementation methodは、TaskSpecがそれ自体を成果として要求しない限りimplementation choiceであり、未固定でも`spec_ready`をfalseにしない。current value / option set / complement / test expectation / implementation convenienceはrequired outcome valueをbindしない。`spec_ready=false`の間はproducer binding / predicate実行 / artifact変更 / testを開始せず、未固定のrequired outcome valueだけをclarification resultにする。`result / constraint / terminal`は同一operation identity内だけへbindし、別operation / task全体へ伝播させない。
 - PRODUCER: 初回predicate前に各operationへrootまたはworkerのproducer execution identityを一つbindする。同一operationのpredicate実行 / result生成を他producerへ順次・並行に割り当てない。TaskSpecが独立したproducer executionを明示した場合だけ、その指定identityをproducer role identityへbindする。criterion owner語列だけでproducerを選ばない。producer変更は理由を問わず旧bindingを失効し、新identityのTaskSpecで行う。
@@ -41,19 +43,19 @@ repository固有の不都合が観測されるまで、条項へ差分を加え�
 - METHOD: TaskSpec明示手段だけを固定する。未固定手段はpredicateを変えずpermission内でexecutorが選び、validationでは既に受領したTaskSpec / 適用中instruction / target evidenceの範囲から選択して実行票発行時にcommandへbindする。exact commandの選択だけを理由にrepository evidenceを追加しない。invocationのfailed / unavailableをpermission否定 / terminalにせず、未固定手段があれば同一predicateへ向けて継続する。明示禁止 / permission否定は停止し、回避しない。
 - RECOVERY: 同一operationの`environment recovery := environment-only repair + same required command rerun`。組の開始時だけ`environment_recovery_max`を消費し、未固定手段の選択は数えない。
 
-## 比較試験の実行前gate
+## 比較試験の実行前ゲート
 
-- 保存済みresultを基準に品質、token、elapsed、採用可否を比較する試験では、評価slotを一件でも発行する前に基準resultを一意にbindし、宣言したprompt identity以外の互換条件が完全一致することを証明するpreflight receiptを保存する。
-- 一項目でも不一致、未固定、未確認があれば、評価slotを一件も発行しない。不一致の値と理由を報告して停止する。実行後に不一致を発見して結果を参考値へ降格する進め方を禁止する。
+- 保存済みresultを基準に品質、トークン、経過時間、採用可否を比較する試験では、評価スロットを一件でも発行する前に基準resultを一意にbindし、宣言したprompt identity以外の互換条件が完全一致することを証明するpreflight receiptを保存する。
+- 一項目でも不一致、未固定、未確認があれば、評価スロットを一件も発行しない。不一致の値と理由を報告して停止する。実行後に不一致を発見して結果を参考値へ降格する進め方を禁止する。
 - 試験ごとに実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。
 - 照合する互換条件の内訳、preflight command、Layer 1再利用、atomic run経路、並列上限の固定値は`evaluations/AGENTS.md`を正本とする。
 
 ## 共通の変更規律
 
-- 一つの変更では一つの判断または一つのartifact単位を扱う。この項の`変更`と`artifact単位`は、case、profile、set、rating contract、prompt bundle、release、resultなど評価artifactとprompt artifactの変更単位を指す。gitのcommit、branch、PRの粒度を定める規則ではなく、docsとdescriptorだけの変更にこの単位規則を適用しない。
-- 依頼が要求しないartifactを変更しない。
-- 既存artifactと周辺経路を破壊しない。
+- 一つの変更では一つの判断または一つの`アーティファクト単位`を扱う。この項の`変更`と`アーティファクト単位`は、ケース、プロファイル、セット、rating contract、プロンプトバンドル、release、resultなど評価アーティファクトとプロンプトアーティファクトの変更単位を指す。gitのcommit、branch、PRの粒度を定める規則ではなく、docsとdescriptorだけの変更にこの単位規則を適用しない。
+- 依頼が要求しないアーティファクトを変更しない。
+- 既存アーティファクトと周辺経路を破壊しない。
 - 正本と履歴を区別する。
-- 履歴artifactを現在解釈へin-placeで書き換えない。
-- prompt変更と評価条件変更を同じ比較単位へ混ぜない。
+- 履歴アーティファクトを現在解釈へその場で書き換えない。
+- プロンプト変更と評価条件変更を同じ比較単位へ混ぜない。
 - root `README.md`は入口と要約に限定し、詳細な履歴やCandidate全系譜を戻さない（配下READMEの詳細一覧は対象外）。
