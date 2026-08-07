@@ -50,7 +50,7 @@ repository固有の不都合が観測されるまで、条項へ差分を加え�
 
 ## 共通の変更規律
 
-- 一つの変更では一つの判断または一つのartifact単位を扱う。
+- 一つの変更では一つの判断または一つのartifact単位を扱う。この項の`変更`と`artifact単位`は、case、profile、set、rating contract、prompt bundle、release、resultなど評価artifactとprompt artifactの変更単位を指す。gitのcommit、branch、PRの粒度を定める規則ではなく、docsとdescriptorだけの変更にこの単位規則を適用しない。
 - 依頼が要求しないartifactを変更しない。
 - 既存artifactと周辺経路を破壊しない。
 - 正本と履歴を区別する。
