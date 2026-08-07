@@ -107,4 +107,4 @@ jobs:
           EOF
           )
 
-          gh pr comment "$pr_number" --body "$body"
+          gh pr comment "$pr_number" --repo "$REPO" --body "$body"
