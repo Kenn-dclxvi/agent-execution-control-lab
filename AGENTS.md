@@ -1,10 +1,10 @@
 # Repository instructions
 
-このrootには、全pathへ共通して適用する不変条件だけを残す。領域固有の配置、更新、検証、履歴保持規則は、対象領域の局所`AGENTS.md`を正本とする。対象pathに局所`AGENTS.md`がある場合は、その領域固有規則を追加適用する。
+このrootには、全pathへ共通して適用する不変条件と、リポジトリ全体へ及ぶ規律を残す。規律の適用場面が特定領域に限られる場合も、規則本体はrootへ置き、その内訳は対象領域の局所`AGENTS.md`を正本とする。領域固有の配置、更新、検証、履歴保持規則も、対象領域の局所`AGENTS.md`を正本とする。対象pathに局所`AGENTS.md`がある場合は、その領域固有規則を追加適用する。
 
 ## Repository scope
 
-- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。登録instanceは`the-caption`（THE-CAPTION）と`click`（`pallets/click`）である。`the-caption`はrelease準備と本体投影まで進める現行instance、`click`はBundle A baselineを確立した公開targetで、Bundle比較、採用、release、本体反映は未実施である。instanceの登録と境界は`evaluations/targets/README.md`を正本とする。
+- このリポジトリは、target instanceごとのprompt構築、比較、評価、release準備を扱う。登録instanceの識別子、layout、visibility、進行状態、およびinstance境界は`evaluations/targets/README.md`を正本とする。instance個別の状態をrootへ複製しない。
 - instance間でartifactを混ぜない。case、profile、set、rating contract、prompt bundle、resultはinstance固有artifactとして扱い、あるinstanceで成立した結果を他instanceの一般的効果として扱わない。target非依存のkernelとinstance固有artifactの帰属も`evaluations/targets/README.md`を正本とする。
 - prompt制御上の問題を解く方法は、このリポジトリ内のprompt、TaskSpec、repository authority、評価artifactの境界へ限定する。repository外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、target runtimeの変更を、prompt Candidateの解決策、次案、backlog、再開条件として提案または実装しない。
 - repository外の挙動や過去のexecutor試験は、保存済みresultの原因を分類するread-only診断証拠としてだけ参照できる。問題がrepository外の層でしか強制できない場合は、このリポジトリでは未解決として停止する。外部対応へ作業を広げない。評価基盤自体の保守は、ユーザーが明示的に依頼した別作業に限る。
