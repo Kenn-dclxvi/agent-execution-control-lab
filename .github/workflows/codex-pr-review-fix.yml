@@ -20,7 +20,6 @@ jobs:
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
-          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           RUN_STARTED_AT: ${{ github.event.workflow_run.run_started_at }}
           MAX_CODEX_FIX_ROUNDS: "3"
         shell: bash
@@ -35,15 +34,10 @@ jobs:
 
           pr_json="$(gh api "repos/$REPO/pulls/$pr_number")"
           head_repo="$(jq -r '.head.repo.full_name' <<<"$pr_json")"
-          current_head_sha="$(jq -r '.head.sha' <<<"$pr_json")"
+          target_head_sha="$(jq -r '.head.sha' <<<"$pr_json")"
 
           if [[ "$head_repo" != "$REPO" ]]; then
             echo "Fork pull requests are outside this automation boundary."
-            exit 0
-          fi
-
-          if [[ "$current_head_sha" != "$RUN_HEAD_SHA" ]]; then
-            echo "PR head changed after the Claude review started; skip this stale review result."
             exit 0
           fi
 
@@ -57,7 +51,7 @@ jobs:
           review_comments="$(gh api --paginate "repos/$REPO/pulls/$pr_number/comments?per_page=100" --slurp)"
           new_findings="$(
             jq \
-              --arg head_sha "$RUN_HEAD_SHA" \
+              --arg head_sha "$target_head_sha" \
               --arg started_at "$RUN_STARTED_AT" \
               '[.[][]
                 | select(.user.login == "claude[bot]")
@@ -69,7 +63,7 @@ jobs:
           )"
 
           if [[ "$(jq 'length' <<<"$new_findings")" -eq 0 ]]; then
-            echo "Claude review completed without new inline findings."
+            echo "Claude review completed without new inline findings for current PR head $target_head_sha."
             exit 0
           fi
 
