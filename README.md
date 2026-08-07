@@ -104,13 +104,15 @@ v3のall-agent token補正結果は[`evaluations/results/v3-all-agent-token-reac
 
 ## 関連リポジトリ
 
-「規約 → 計測 → 適用」の3層で運用している。本リポジトリは計測にあたる。
+「出発点 → 計測 → 適用」の3層で運用している。本リポジトリは計測にあたる。
 
 | リポジトリ | 役割 |
 | :--- | :--- |
-| [orchestration-prompt](https://github.com/Kenn-dclxvi/orchestration-prompt) | **規約**。エージェント実行制御の汎用プロンプトセット正本。ここで評価したCandidateを反映する |
-| [agent-execution-control-lab](https://github.com/Kenn-dclxvi/agent-execution-control-lab) | **計測**。実行制御の効果を再現可能に測る研究基盤（本リポジトリ） |
-| [the-caption](https://github.com/Kenn-dclxvi/the-caption) | **適用**。登録instance `the-caption` の実体。実運用しているポートフォリオ評価システム |
+| [orchestration-prompt](https://github.com/Kenn-dclxvi/orchestration-prompt) | **出発点（V1）**。任意のリポジトリへ展開する前提で書かれた汎用プロンプトセット。本研究のBaselineは、これを`the-caption`へ適用した結果である |
+| [agent-execution-control-lab](https://github.com/Kenn-dclxvi/agent-execution-control-lab) | **計測**。V1を出発点として候補を作り、実行制御の効果を再現可能に測る研究基盤（本リポジトリ） |
+| [the-caption](https://github.com/Kenn-dclxvi/the-caption) | **適用**。登録instance `the-caption` の実体。実運用しているポートフォリオ評価システムであり、採用したCandidateのreleaseはこのリポジトリへのプルリクエストとして記録する |
+
+Candidateは本リポジトリで評価し、採用したもののreleaseは`the-caption`へのプルリクエストとして記録する。V1と本研究の系列を別リポジトリで育てている理由、および適用の実体は[`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md)の3節を参照。
 
 ## License
 
