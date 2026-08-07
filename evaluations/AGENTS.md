@@ -138,7 +138,7 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 - 過去のresultを新契約でその場で再採点しない。
 - 既存resultのscore、識別子、schemaを現在解釈へ上書きしない。
 - root-only token resultをall-agentへ補正する場合も、元のresultを残して新しいschemaのresultをappendする。
-- excluded attemptとenvironment failureをprompt qualityへ混ぜない。
+- excluded attemptとenvironment failureをプロンプト品質へ混ぜない。
 - 全session usageが取得できないrunのトークンを推定しない。
 
 ## Result索引
