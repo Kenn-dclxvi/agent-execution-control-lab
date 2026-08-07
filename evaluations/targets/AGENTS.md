@@ -51,3 +51,12 @@ namespaced instance配下のREADMEは、artifactの現在の索引、用途、�
 4. 最小caseをfixture qualificationし、同一baseline bundle identityの独立resultで実行系の安定性を確認する。
 5. `README.md`の登録済みinstance表へ追加する。
 6. 既存instanceのresultを比較元にせず、そのinstance内のbaselineから計測する。
+7. そのinstanceのcontrol-free baselineで、対象evaluation setの全caseがscore `4`になることを確認する。
+
+## 立ち上げ時のquality invariant
+
+New instance gateの7は、品質を維持すべき制約として固定し、`total_tokens`と`elapsed_seconds`だけを比較するという評価基盤の前提が、そのinstanceでも成立するかの確認である。品質差の発見を目的にしない。
+
+- score `4`未満のcaseが出た場合、prompt qualityの差として扱わない。fixture、実行環境、case定義のいずれの不備かを切り分け、当該caseのrevisionを更新してから評価slotを発行する（前例: `click`のF07-Pはr1でuv console script不在、r2でsandbox外cache拒否により各3 / 3件がscore `3`となり、r3の環境固定で`4`になった。[`click Std14 result`](click/results/click-control-free-standard14-n5_2026-07-26.md)）。
+- この確認は小さい`N`でよい。判定はscore `4`の全件成立であり、KPIの水準やinstance間の比較には使わない。
+- 確認を通過した後にscore `4`未満が観測された場合も、同じ切り分けを先に行う。control-free側の低scoreを、prompt条件の効果として登録しない。

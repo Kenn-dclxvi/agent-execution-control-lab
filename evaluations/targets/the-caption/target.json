@@ -13,7 +13,8 @@
   "authority_notes": {
     "bundle_target_map": "各prompt bundleのmanifest.jsonを正本とする。target側directory構造への依存はbundleごとに固定する",
     "gate_commands": "focused gateとfull gateは各case revisionのtrial-prompt-input.jsonを正本とし、このdescriptorへ複製しない",
-    "verification_root": "検証cloneのrootと容量維持はdocs/evaluation-storage-maintenance.mdを正本とする"
+    "verification_root": "検証cloneのrootと容量維持はdocs/evaluation-storage-maintenance.mdを正本とする",
+    "visibility": "このinstanceのvisibilityは、計測が固定した移行前treeの可視性を指す。2026-08-01〜08-03の移行で公開されたKenn-dclxvi/the-captionは履歴を切り出し直しており、primary_ref / additional_refsのcommit・treeを含まない。したがって公開版はこのinstanceの現在状態ではなく、別instanceとして登録する。時間境界はdocs/repository-overview.mdの「対象リポジトリの公開移行」を正本とする"
   },
   "current_rating_contract": "outcome-abstract-condition-preserving-owner-diagnostic-v13",
   "executor": "codex",
