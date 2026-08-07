@@ -1,4 +1,4 @@
-# Evaluations
+# 評価領域の入口
 
 プロンプト比較に使う評価アーティファクトとターゲットインスタンスを管理する入口である。現行のevaluation foundationはv4で、レイヤー・互換条件・不変の履歴の規則は[`AGENTS.md`](AGENTS.md)、レイヤーと世代の定義は[`docs/prompt-comparison-workflow.md`](../docs/prompt-comparison-workflow.md)、実行方法は[`docs/evaluation-loop-manual.md`](../docs/evaluation-loop-manual.md)を正本とする。
 

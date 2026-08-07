@@ -8,7 +8,7 @@
 
 1 planの全capsuleは同じ`prompt_set_identity`と`comparison_conditions`を持たなければならない。重複する`case_id / iteration`は実行前に拒否する。
 
-## Wave plan
+## waveの実行計画
 
 ケースごとにRun capsule templateを1つ用意する。ジェネレータはその他の値を変更せず、`binding.iteration`だけを`1..N`へ展開する。
 

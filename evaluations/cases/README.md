@@ -45,7 +45,7 @@
 | RA03 | [`result admission`](TC-RA03-TASKSPEC-AUTHORITATIVE-STOP/result-admission-r1/README.md) | TaskSpec-bound approval stop result | `designed_not_run` |
 | RA04 | [`result admission`](TC-RA04-MISMATCHED-REVIEW-RECEIPT/result-admission-r1/README.md) | saved reviewer receiptのSender identity不一致 | `designed_not_run` |
 
-## Ambiguity boundaries r1
+## 曖昧性境界 r1
 
 詳細TaskSpecへ正解dispositionまで書いた既存ケースとは分離し、エージェント自身による不足・競合の発見を観測する5ケースを[`the-caption-ambiguity-boundaries-r1`](../sets/the-caption-ambiguity-boundaries-r1/README.md)として管理する。A01とA02をclarify / executeの対にし、A03からA05はcompletion不足、scoped authority競合、operation permission競合をそれぞれ1軸ずつ扱う。
 
