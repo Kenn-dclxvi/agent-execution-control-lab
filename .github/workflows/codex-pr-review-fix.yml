@@ -1,39 +1,110 @@
-name: Codex PR Review Fix Trigger Experiment
+name: Codex PR Review Fix Trigger
 
 on:
-  pull_request_review_comment:
-    types: [created]
+  workflow_run:
+    workflows: ["Claude PR Review"]
+    types: [completed]
 
 jobs:
   request-codex-fix:
-    if: >-
-      github.event.comment.user.login == 'claude[bot]' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       issues: write
       pull-requests: read
     steps:
-      - name: Request Codex Cloud fix
+      - name: Request Codex Cloud fix for new Claude findings
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          REVIEW_COMMENT_URL: ${{ github.event.comment.html_url }}
-          REVIEW_PATH: ${{ github.event.comment.path }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_STARTED_AT: ${{ github.event.workflow_run.run_started_at }}
+          MAX_CODEX_FIX_ROUNDS: "3"
         shell: bash
         run: |
           set -euo pipefail
 
+          pr_number="$(jq -r '.workflow_run.pull_requests[0].number // empty' "$GITHUB_EVENT_PATH")"
+          if [[ -z "$pr_number" ]]; then
+            echo "Claude review run is not associated with a pull request; nothing to do."
+            exit 0
+          fi
+
+          pr_json="$(gh api "repos/$REPO/pulls/$pr_number")"
+          head_repo="$(jq -r '.head.repo.full_name' <<<"$pr_json")"
+          current_head_sha="$(jq -r '.head.sha' <<<"$pr_json")"
+
+          if [[ "$head_repo" != "$REPO" ]]; then
+            echo "Fork pull requests are outside this automation boundary."
+            exit 0
+          fi
+
+          if [[ "$current_head_sha" != "$RUN_HEAD_SHA" ]]; then
+            echo "PR head changed after the Claude review started; skip this stale review result."
+            exit 0
+          fi
+
+          issue_comments="$(gh api --paginate "repos/$REPO/issues/$pr_number/comments?per_page=100" --slurp)"
+          prior_rounds="$(jq '[.[][] | select(.body | contains("<!-- codex-fix-trigger:"))] | length' <<<"$issue_comments")"
+          if (( prior_rounds >= MAX_CODEX_FIX_ROUNDS )); then
+            echo "Automatic Codex fix round limit reached: $prior_rounds/$MAX_CODEX_FIX_ROUNDS."
+            exit 0
+          fi
+
+          review_comments="$(gh api --paginate "repos/$REPO/pulls/$pr_number/comments?per_page=100" --slurp)"
+          new_findings="$(
+            jq \
+              --arg head_sha "$RUN_HEAD_SHA" \
+              --arg started_at "$RUN_STARTED_AT" \
+              '[.[][]
+                | select(.user.login == "claude[bot]")
+                | select(.in_reply_to_id == null)
+                | select(.commit_id == $head_sha)
+                | select(.created_at >= $started_at)
+              ]' \
+              <<<"$review_comments"
+          )"
+
+          if [[ "$(jq 'length' <<<"$new_findings")" -eq 0 ]]; then
+            echo "Claude review completed without new inline findings."
+            exit 0
+          fi
+
+          unprocessed='[]'
+          while IFS= read -r finding; do
+            comment_id="$(jq -r '.id' <<<"$finding")"
+            marker="codex-review-comment:$comment_id"
+            if jq -e --arg marker "$marker" 'any(.[][]; .body | contains($marker))' <<<"$issue_comments" >/dev/null; then
+              echo "Review comment $comment_id was already handed to Codex; skip."
+              continue
+            fi
+            unprocessed="$(jq --argjson finding "$finding" '. + [$finding]' <<<"$unprocessed")"
+          done < <(jq -c '.[]' <<<"$new_findings")
+
+          finding_count="$(jq 'length' <<<"$unprocessed")"
+          if [[ "$finding_count" -eq 0 ]]; then
+            echo "All Claude findings from this review were already processed."
+            exit 0
+          fi
+
+          findings_text="$(
+            jq -r '.[] | "- [" + (.path // "path不明") + "](" + .html_url + ") <!-- codex-review-comment:" + (.id | tostring) + " -->"' \
+              <<<"$unprocessed"
+          )"
+
           body=$(cat <<EOF
-          @codex address the Claude review feedback in this PR.
+          @codex address the Claude review feedback listed below.
 
-          Trigger source: Claude inline review comment
-          Review comment: ${REVIEW_COMMENT_URL}
-          Path: ${REVIEW_PATH}
+          Claude PR Reviewで新たに確認されたinline指摘を対象にする。
+          現在のPR headで各指摘がまだ妥当かを再確認し、妥当な指摘だけを最小限の変更で修正すること。必要なvalidationを実行すること。既に解消済み、誤り、曖昧、または設計判断が必要な指摘は推測で変更しないこと。
 
-          Verify that the finding is still valid against the current PR head before changing anything. If it is valid, make only the minimum necessary repository change and run the relevant validation. If the finding is already resolved, invalid, ambiguous, or requires a design decision, do not make a speculative change.
+          ${findings_text}
+
+          <!-- codex-fix-trigger:run:${RUN_ID}:attempt:${RUN_ATTEMPT} -->
           EOF
           )
 
-          gh pr comment "$PR_NUMBER" --body "$body"
+          gh pr comment "$pr_number" --body "$body"
