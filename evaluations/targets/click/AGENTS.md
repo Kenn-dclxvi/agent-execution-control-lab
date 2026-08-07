@@ -6,7 +6,7 @@
 
 既存のClickケース系列と同じfixture policyで新しいrevisionを作る場合は次を守る。別のpolicyを導入する場合は、既存revisionを変更せず新しい設計・case revisionとして固定する。
 
-- ゲートコマンドはtarget repository rootをcwdとして実行する。cwd外実行で生じるseed非依存の失敗をプロンプト品質へ混ぜない。
+- ゲートコマンドはターゲットリポジトリのルートをcwdとして実行する。cwd外実行で生じるseed非依存の失敗をプロンプト品質へ混ぜない。
 - seedは固定target commitへ適用可能な逆パッチとして保存し、`git apply --check`で適用可能性を確認する。
 - 既存ケース系列では2026-05-01以降のsource changeから`src/`部分をseed化している。この選定境界を既存revisionへ遡及変更しない。
 - seed patchは純粋な差分だけをmodel-visibleなfixtureへ含める。commit messageやreference postimageを推測できる`git show`のヘッダを混ぜない。

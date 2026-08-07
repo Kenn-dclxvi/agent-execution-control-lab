@@ -14,7 +14,7 @@
 
 ## 検証commandの正本
 
-このリポジトリ自身の回帰検証は、repository rootをcwdとして次のexact commandで実行する。ここに列挙したcommandは`METHOD`および`VALIDATION_PLAN`がbindできる固定値であり、exact commandを解決する目的でrepository evidenceを追加しない。
+このリポジトリ自身の回帰検証は、リポジトリのルートをcwdとして次のexact commandで実行する。ここに列挙したcommandは`METHOD`および`VALIDATION_PLAN`がbindできる固定値であり、exact commandを解決する目的でrepository evidenceを追加しない。
 
 - 全test discovery: `.venv/bin/python -m pytest -q`
 - focused実行: `.venv/bin/python -m pytest <test path> -q`
