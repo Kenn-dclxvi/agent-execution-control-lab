@@ -7,7 +7,7 @@
 - baseline、candidate、route、releaseを別パスで管理する。
 - prompt identity、source identity、bundle hash、変更対象を固定する。
 - 既存バンドルをその場で改訂しない。
-- 変更時は新しいリビジョンまたは識別子を作る。
+- 変更時は新しいrevisionまたは識別子を作る。
 - アーティファクトの存在を評価済みまたは採用済みの根拠にしない。
 
 ## README索引

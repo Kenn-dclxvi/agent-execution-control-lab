@@ -141,7 +141,7 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 - excluded attemptとenvironment failureをprompt qualityへ混ぜない。
 - 全session usageが取得できないrunのトークンを推定しない。
 
-## result索引
+## Result索引
 
 `evaluations/results/README.md`は、このディレクトリへ登録済みのresultを引くための索引とする。
 

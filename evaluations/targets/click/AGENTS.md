@@ -12,7 +12,7 @@
 - seed patchは純粋な差分だけをmodel-visibleなfixtureへ含める。commit messageやreference postimageを推測できる`git show`のヘッダを混ぜない。
 - seed由来のcommitとreference implementationはraterのforbidden inputとして扱い、model-visibleなTaskSpecやrating inputへ漏らさない。
 
-## Execution profile
+## 実行プロファイル
 
 - 2026-07-27以降の新規通常比較はreasoning effort `medium`を運用基準とする。既存の`high` resultは履歴として保持し、reasoningが異なるresultを同一比較へ混ぜない。
 - プロファイルは`codex_cli`、Python、runtime identity、permission、token accountingを固定する。CLIまたはruntime identityが異なるresultを同一比較へ混ぜない。
