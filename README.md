@@ -74,7 +74,7 @@ Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比�
 
 全文書の索引は[`docs/README.md`](docs/README.md)を正本とし、役割別（正本、現在の研究状態、完了済み研究記録、historical）に分類しています。未完了の研究項目は[`docs/research-backlog.md`](docs/research-backlog.md)、領域固有の作業規則は各`AGENTS.md`を正本とします。
 
-読み始める場所は目的別に次の3つです。
+読み始める場所は目的別に次のとおりです。
 
 | 目的 | 入口 |
 | --- | --- |
