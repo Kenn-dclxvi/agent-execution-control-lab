@@ -1,10 +1,10 @@
-# Release index
+# release索引
 
-`the-caption`向けに固定したrelease bundleとlifecycle状態を引くための索引である。release作成・approval・runtime projectionの境界と索引更新規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。
+`the-caption`向けに固定したrelease bundleとライフサイクル状態を引くための索引である。release作成・approval・runtime projectionの境界と索引更新規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。
 
-各行の評価欄は索引用の要約であり、評価結果は対応する一次result、rollback identity・projection対象・PR / commit・未解決riskは各release READMEを正とする。release artifactの存在や評価上の`stopped`を、approvalまたはruntime projectionと同一状態として扱わない。
+各行の評価欄は索引用の要約であり、評価結果は対応する一次result、rollback identity・projection対象・PR / commit・未解決リスクは各release READMEを正とする。releaseアーティファクトの存在や評価上の`stopped`を、approvalまたはruntime projectionと同一状態として扱わない。
 
-| release identity | source candidate | evaluation | release status | approval | runtime projection |
+| release identity | source candidate | 評価 | release status | approval | runtime projection |
 | --- | --- | --- | --- | --- | --- |
 | [`the-caption-3ce91a4-result-effect-scope-release-r1`](the-caption-3ce91a4-result-effect-scope-release-r1/README.md) | `the-caption-3ce91a4-result-effect-scope-r1` | rating v14 Medium Standard14 N=100 1,400 / 1,400 score 4、targeted mechanism 15 / 15、C145比cost回収 | `projected` | `approved` | `projected` |
 | [`the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1`](the-caption-3ce91a4-criterion-complete-single-target-continuation-release-r1/README.md) | `the-caption-3ce91a4-criterion-complete-single-target-continuation-r1` | rating v14 Medium Standard14 70 / 70 score 4、A02 N=20 20 / 20 score 4・bind後再入0件、token中央値1,401,225 | `projected` | `approved` | `projected` |

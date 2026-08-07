@@ -7,11 +7,11 @@
 | **正本（canonical）** | 他文書が参照authorityとして引く契約・原則 | 統合・要約せず維持。正本指定は各領域の`AGENTS.md`（下表参照） |
 | **現在地・研究全体像** | 研究の目的、系譜、横断知見、未完了項目、長期方向 | 現在地点を把握する最初の起点 |
 | **現行frontier** | 現在進行中の研究軸と、その直近の設計・診断 | 因果系列ごとに追い、完了済み成果と混ぜない |
-| **研究成果・統合知見** | 固定版の技術報告、総説、横断分析、統合知見 | 現在有効な研究成果として読む。数値・状態は各文書が示す一次artifactを正本とする |
-| **実務者向け解説** | 研究成果を実務へ翻訳した読み物 | 研究artifactの代替ではなく、実務から理解する入口として扱う |
-| **評価・運用基盤** | 評価infra、実行環境、運用spec | 研究内容そのものではなく、測定・運用を成立させる基盤として扱う |
-| **完了済み研究記録** | 特定Candidate・比較・診断の成果artifact | 当時のresult・scoreを保持（遡及書換なし） |
-| **historical／superseded** | root-only履歴、完了済みhandoff、旧design input | 現行設計として読まない。冒頭バナーで位置づけ |
+| **研究成果・統合知見** | 固定版の技術報告、総説、横断分析、統合知見 | 現在有効な研究成果として読む。数値・状態は各文書が示す一次アーティファクトを正本とする |
+| **実務者向け解説** | 研究成果を実務へ翻訳した読み物 | 研究アーティファクトの代替ではなく、実務から理解する入口として扱う |
+| **評価・運用基盤** | 評価インフラ、実行環境、運用仕様 | 研究内容そのものではなく、測定・運用を成立させる基盤として扱う |
+| **完了済み研究記録** | 特定Candidate・比較・診断の成果アーティファクト | 当時のresult・scoreを保持（遡及書換なし） |
+| **historical／superseded** | root-only履歴、完了済みの引き継ぎ文書、旧設計入力 | 現行設計として読まない。冒頭バナーで位置づけ |
 
 分類間の原則は[`AGENTS.md`](AGENTS.md)を正とする（現在状態・当時の評価・後続の再解釈を混ぜない／過去result・scoreを削除しない／現在解釈は注記か別文書として追加）。
 
@@ -24,9 +24,9 @@
 | 文書 | 役割 | 正本指定元 |
 |---|---|---|
 | [`repository-contract.md`](repository-contract.md) | リポジトリ契約の正本 | [`docs/AGENTS.md`](AGENTS.md) |
-| [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md) | 評価基盤のLayerと境界の正本 | [`docs/AGENTS.md`](AGENTS.md) |
+| [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md) | 評価基盤のレイヤーと境界の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`evaluation-loop-manual.md`](evaluation-loop-manual.md) | 評価実行方法の正本 | [`docs/AGENTS.md`](AGENTS.md) |
-| [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | prompt制御の設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
+| [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | プロンプト制御の設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-file-bundle.md`](prompt-file-bundle.md) | prompt file bundle形式・manifest・格納の正本 | [`scripts/AGENTS.md`](../scripts/AGENTS.md) |
 
 ## 2. 現在地・研究全体像
@@ -38,7 +38,7 @@
 | [`repository-overview.md`](repository-overview.md) | 初見向けの全体像（入口） |
 | [`candidate-history.md`](candidate-history.md) | Candidate系譜と知見の索引。系譜と現在状態の一覧は[`prompts/candidates/README.md`](../prompts/candidates/README.md) |
 | [`control-mechanisms.md`](control-mechanisms.md) | 横断的な制御メカニズムの知見 |
-| [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決risk）。判定の正本は各リンク先 |
+| [`research-backlog.md`](research-backlog.md) | 未完了研究項目の索引（label監査の再測定、`P3`削除candidate、A01 variation、未解決リスク）。判定の正本は各リンク先 |
 | [`future-roadmap.md`](future-roadmap.md) | 長期方針と発展方向（恒久的な方針のみ） |
 
 ## 3. 現行frontier
@@ -49,19 +49,19 @@
 
 | 文書 | 役割 |
 |---|---|
-| [`feature-review-phase1-plan.md`](feature-review-phase1-plan.md) | Candidate147を基準に、過去機能の維持・休眠・欠落・prompt強制不能を一件ずつ判定する機能見直しフェーズ。最初の対象は独立SA reviewと情報封鎖の必要性 |
+| [`feature-review-phase1-plan.md`](feature-review-phase1-plan.md) | Candidate147を基準に、過去機能の維持・休眠・欠落・プロンプト強制不能を一件ずつ判定する機能見直しフェーズ。最初の対象は独立SA reviewと情報封鎖の必要性 |
 | [`candidate164-autonomous-review-admission-design.md`](candidate164-autonomous-review-admission-design.md) | FR-01自律routingで観測したHR03失敗に対し、C147へreview admission / producer選択predicate一つだけを追加した設計。targeted試験はreviewer起動5 / 5まで改善したがterminal再生成1件で停止 |
-| [`candidate165-review-result-admission-design.md`](candidate165-review-result-admission-design.md) | C164の1件をprior評価のauthority誤分類として分解し、current TaskSpecへbind済みのresultだけをquality criterionへadmitする設計。Review4は20 / 20、Standard14は70 / 70 Score `4`。C147比cost増を残す |
-| [`candidate165-standard14-review-route-analysis.md`](candidate165-standard14-review-route-analysis.md) | C165 Standard14 70 traceから、独立SAの実質修正0 / 41、通常caseへの系統起動40件、clean-context root review成功5 / 5を分離し、result admission成立とreview admission過大を切り分けた現在解釈 |
-| [`candidate166-prior-evaluation-review-admission-design.md`](candidate166-prior-evaluation-review-admission-design.md) | C165の過大発動に対し、artifact実装・調査を独立SA切替条件から外した一変更。Review4はroute / closure 20 / 20、oracle一致18 / 20。HR03 case設計不備によりquality未判定、Standard14未実施 |
+| [`candidate165-review-result-admission-design.md`](candidate165-review-result-admission-design.md) | C164の1件をprior評価のauthority誤分類として分解し、current TaskSpecへbind済みのresultだけをquality criterionへadmitする設計。Review4は20 / 20、Standard14は70 / 70 Score `4`。C147比のコスト増を残す |
+| [`candidate165-standard14-review-route-analysis.md`](candidate165-standard14-review-route-analysis.md) | C165 Standard14 70 traceから、独立SAの実質修正0 / 41、通常ケースへの系統起動40件、clean-context root review成功5 / 5を分離し、result admission成立とreview admission過大を切り分けた現在解釈 |
+| [`candidate166-prior-evaluation-review-admission-design.md`](candidate166-prior-evaluation-review-admission-design.md) | C165の過大発動に対し、アーティファクト実装・調査を独立SA切替条件から外した一変更。Review4はroute / closure 20 / 20、oracle一致18 / 20。HR03のケース設計不備によりquality未判定、Standard14未実施 |
 | [`candidate166-review4-case-validity-analysis.md`](candidate166-review4-case-validity-analysis.md) | C166 Review4のHR03を再監査し、raw response不在のまま観測表現を強めたため期待terminalが一意でないと判定。18 / 20をquality failureへ使わず、r2 case revisionの事前条件を固定 |
-| [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | prompt内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存caseを再分類。次gateを7 case × N=5へ固定するcase設計 |
+| [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | プロンプト内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存ケースを再分類。次gateを7ケース × N=5へ固定するケース設計 |
 
-### 3b. 公開target拡張
+### 3b. 公開ターゲット拡張
 
 | 文書 | 役割 |
 |---|---|
-| [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開target選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
+| [`public-target-selection-phase0.md`](public-target-selection-phase0.md) | 公開ターゲット選定Phase 0の実測記録と判定（`pallets/click`をPhase 1候補とした根拠） |
 
 ## 4. 研究成果・統合知見
 
@@ -69,16 +69,16 @@
 
 | 文書 | 役割 |
 |---|---|
-| [`execution-control-measurement-report.md`](execution-control-measurement-report.md) | 研究者向けの**技術報告 第1版**（2026-08-03、14節＋要旨＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献・提供者指針を一次・補助資料として使う。**この版をもって記述を固定し、以降の測定は新しい版として追加する。** 数値と識別子は一次artifactを、主張と証拠の対応はevidence mapを正本とする。|
+| [`execution-control-measurement-report.md`](execution-control-measurement-report.md) | 研究者向けの**技術報告 第1版**（2026-08-03、14節＋要旨＋付録A〜D）。BaselineをV1（汎用オーケストレーションプロンプト製品）の適用結果として位置づけ、本研究をV1が予定していたAI向け移行（V2）の実行として記述する。公開Baseline系譜（`orchestration-prompt`固定履歴）と外部文献・提供者指針を一次・補助資料として使う。**この版をもって記述を固定し、以降の測定は新しい版として追加する。** 数値と識別子は一次アーティファクトを、主張と証拠の対応はevidence mapを正本とする。|
 | [`execution-control-measurement-report-evidence-map.md`](execution-control-measurement-report-evidence-map.md) | 上記**第1版**のClaim IDごとの一次資料対応表（証拠水準・表現上限・再検証分類）、再検証候補20件、一次資料と要約文書の相違・留保30件（外部文献への誤帰属5件の撤回を含む） |
-| [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式、第3版・2026-07-31時点）。**上記の技術報告 第1版とは別の文書で、互いに置き換えない。** 実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次artifact |
+| [`execution-control-research-paper.md`](execution-control-research-paper.md) | 研究成果の総説（論文形式、第3版・2026-07-31時点）。**上記の技術報告 第1版とは別の文書で、互いに置き換えない。** 実測値の要約と2026年7月ベンダ公式指針（GPT-5.6 Sol / Claude Opus 5）との対照。**正本ではない**。数値・状態の正本は同文書が示す一次アーティファクト |
 | [`candidate125-candidate147-control-findings-synthesis.md`](candidate125-candidate147-control-findings-synthesis.md) | C125のN=5成立とN拡張停止から、C126〜C142のeffect / evidence境界探索、C143の上流再構築、C147のN=100採用までの因果系列と現在解釈 |
 | [`branch-closure-retrospective-coding.md`](branch-closure-retrospective-coding.md) | 「分岐の開閉」軸の事後符号化（保存済みdiff 124件、新規測定なし）。判定入力をroot本文diffだけに限り、KPIを参照せずに符号化した手続きと全件の符号。**軸が実行経路と往復の2操作を含むこと、判定が符号化者に依存すること、経路を閉じることが十分条件でないことを確定する。** 技術報告§12.2はこれを引用する |
 | [`candidate71-control-abstraction-analysis.md`](candidate71-control-abstraction-analysis.md) | C71 control abstraction分析（11 label監査台帳＋現在の結論）。現在の総括は同文書の「監査状況の分類」表を正とする |
 
 ## 5. 実務者向け解説
 
-研究成果を実務から読むためのExecution Controlシリーズ。研究artifactや一次資料の代替ではない。
+研究成果を実務から読むためのExecution Controlシリーズ。研究アーティファクトや一次資料の代替ではない。
 
 | 文書 | 役割 |
 |---|---|
@@ -96,21 +96,21 @@
 | 文書 | 役割 |
 |---|---|
 | [`THE-CAPTION_execution-control_revision-instructions.md`](THE-CAPTION_execution-control_revision-instructions.md) | execution control修正指示（invocation_status等の定義） |
-| [`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md) | 評価storageの維持・GC |
-| [`desktop-evaluation-slot.md`](desktop-evaluation-slot.md) | desktop評価slotの前提条件 |
-| [`shared-python-runtime.md`](shared-python-runtime.md) | 共有Python runtime |
-| [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceのspec |
+| [`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md) | 評価ストレージの維持・GC |
+| [`desktop-evaluation-slot.md`](desktop-evaluation-slot.md) | desktop評価スロットの前提条件 |
+| [`shared-python-runtime.md`](shared-python-runtime.md) | 共有Pythonランタイム |
+| [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceの仕様 |
 | [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md) | Layer 2 executorをClaude Code CLIへ置き換える試験方法の設計検討（未実装。未確定事項を含む） |
 
 ## 7. 完了済み研究記録
 
 ### 7a. Candidate設計記録
 
-各Candidateの制御軸を記録した成果artifact。当時のresult・scoreは遡及変更しない。
+各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
 
-正本はlifecycle軸ごとに分かれる。**identityは各bundleの`manifest.json`**、**評価状態は評価・診断を実施済みなら独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列**、**release・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)**を正本とする。系譜と現在状態の一覧はcandidate indexにある。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
+正本はlifecycle軸ごとに分かれる。**identityは各バンドルの`manifest.json`**、**評価状態は評価・診断を実施済みなら独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列**、**release・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)**を正本とする。系譜と現在状態の一覧はcandidate索引にある。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
 
-> **本体投影と評価状態は別軸**: Candidate147は公開版`the-caption`へ投影済みで、release status `projected` / approval `approved` / runtime projection `projected`である。Rating v14 Medium Standard14 N=100は1,400 / 1,400 score `4`、targeted F01 / F02 / F03のmechanismは15 / 15だった。Candidate125は移行前THE-CAPTIONへの投影履歴として保持する。Candidate125のStandard14 N=5は70 / 70 score `4`、A02 N=20はbind後再入0件だったが、2026-08-01のN=100追試はregistered poolを各case30件まで拡張した時点でF04 score `2`を5件確認し、`n100_execution_stopped / registered_pool_n30`で中断した（正式な`N=30`結果ではない）。過去のCandidate41・Candidate43・Candidate71・Candidate81・Candidate125の投影状態と、Candidate71の`standard14_b18_evaluated / stopped`を遡及変更しない。正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release READMEとする。
+> **本体投影と評価状態は別軸**: Candidate147は公開版`the-caption`へ投影済みで、release status `projected` / approval `approved` / runtime projection `projected`である。Rating v14 Medium Standard14 N=100は1,400 / 1,400 score `4`、targeted F01 / F02 / F03のmechanismは15 / 15だった。Candidate125は移行前THE-CAPTIONへの投影履歴として保持する。Candidate125のStandard14 N=5は70 / 70 score `4`、A02 N=20はbind後再入0件だったが、2026-08-01のN=100追試はregistered poolを各ケース30件まで拡張した時点でF04 score `2`を5件確認し、`n100_execution_stopped / registered_pool_n30`で中断した（正式な`N=30`結果ではない）。過去のCandidate41・Candidate43・Candidate71・Candidate81・Candidate125の投影状態と、Candidate71の`standard14_b18_evaluated / stopped`を遡及変更しない。正本は[`prompts/releases/README.md`](../prompts/releases/README.md)と各release READMEとする。
 
 | Candidate | 文書 | 制御軸 |
 |---|---|---|
@@ -233,14 +233,14 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 
 | 文書 | 役割 |
 |---|---|
-| [`prompt-control-graph-review.md`](prompt-control-graph-review.md) | 制御graph棚卸し。提案predicateはCandidate41として実装・評価済みで、B18後も追加規則を導かないと結論した根拠記録 |
+| [`prompt-control-graph-review.md`](prompt-control-graph-review.md) | 制御グラフ棚卸し。提案predicateはCandidate41として実装・評価済みで、B18後も追加規則を導かないと結論した根拠記録 |
 | [`a02-rating-divergence.md`](a02-rating-divergence.md) | A02の「要求と採点のずれ」3件と、rating contract v10〜v13の変遷 |
 | [`candidate5-candidate15-continuous-comparison.md`](candidate5-candidate15-continuous-comparison.md) | Candidate5 / Candidate15の連続試験比較 |
 | [`review-location-cause-diagnostic-plan.md`](review-location-cause-diagnostic-plan.md) | Review location誤差の原因診断 |
 | [`task-spec-planner-phase1-plan.md`](task-spec-planner-phase1-plan.md) | TaskSpec確認 第1段階の実施記録（実施・評価・release・projection完了） |
 | [`sa-routing-decision-table.md`](sa-routing-decision-table.md) | candidate2のSA routing decision table |
 | [`candidate87-adoption-decision.md`](candidate87-adoption-decision.md) | C87の評価状態を保持した別stateの不採用・停止判断と、C82〜C89系列の完了境界 |
-| [`candidate106-f03-b20-short-yield-route-analysis.md`](candidate106-f03-b20-short-yield-route-analysis.md) | C104 / C106 F03 B20の途中messageをouter early yieldとnonterminal再入の二段階へ分解した診断 |
+| [`candidate106-f03-b20-short-yield-route-analysis.md`](candidate106-f03-b20-short-yield-route-analysis.md) | C104 / C106 F03 B20の途中のメッセージをouter early yieldとnonterminal再入の二段階へ分解した診断 |
 | [`candidate107-validation-wrapper-reentry-closure-design.md`](candidate107-validation-wrapper-reentry-closure-design.md) | C106のF03 B20再発経路をouter deadline条件とcell ID wait-only遷移で閉じるCandidate107設計 |
 | [`candidate108-validation-ticket-terminal-closure-design.md`](candidate108-validation-ticket-terminal-closure-design.md) | C107のdeadline大小比較を削除し、実行票全体のterminal wait-only遷移へ一本化するCandidate108設計 |
 | [`candidate109-validation-ticket-outer-wait-closure-design.md`](candidate109-validation-ticket-outer-wait-closure-design.md) | C108のwait-only fallbackを維持し、validation ticketのouter yieldをruntime最大値へ固定するCandidate109設計 |
@@ -252,36 +252,36 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`candidate115-authority-location-discovery-design.md`](candidate115-authority-location-discovery-design.md) | authority path未記載による誤停止を対象にしたCandidate115設計 |
 | [`candidate116-outcome-implementation-boundary-design.md`](candidate116-outcome-implementation-boundary-design.md) | required outcome確定とimplementation choice解決を分離するCandidate116設計 |
 | [`prompt-set-result-registry-additional-requirements.md`](prompt-set-result-registry-additional-requirements.md) | result台帳の追加要件記録。status `implemented_as_evaluation_foundation_v3`。具体設計の正本は`prompt-comparison-workflow.md`と`evaluation-loop-manual.md` |
-| [`candidate118-residual-validation-reentry-analysis.md`](candidate118-residual-validation-reentry-analysis.md) | C118の残存token増加を、追加したbind closureではなく変更後validationのnonterminal返却とmodel再入で説明した診断 |
-| [`candidate121-f02-evidence-route-analysis.md`](candidate121-f02-evidence-route-analysis.md) | C121のF02 cost未達をevidence bytesだけでは説明できないと示し、locator→content spanの二段階routeを共通差として分離した診断 |
-| [`candidate122-preterminal-result-round-analysis.md`](candidate122-preterminal-result-round-analysis.md) | tokenの高低を分けた共通差がinvocation数ではなく、変更・停止までにtool resultをmodelへ返したround数だと特定した診断 |
+| [`candidate118-residual-validation-reentry-analysis.md`](candidate118-residual-validation-reentry-analysis.md) | C118の残存トークン増加を、追加したbind closureではなく変更後validationのnonterminal返却とmodel再入で説明した診断 |
+| [`candidate121-f02-evidence-route-analysis.md`](candidate121-f02-evidence-route-analysis.md) | C121のF02のコスト未達をevidence bytesだけでは説明できないと示し、locator→content spanの二段階routeを共通差として分離した診断 |
+| [`candidate122-preterminal-result-round-analysis.md`](candidate122-preterminal-result-round-analysis.md) | トークンの高低を分けた共通差がinvocation数ではなく、変更・停止までにtool resultをmodelへ返したround数だと特定した診断 |
 | [`candidate125-adoption-decision.md`](candidate125-adoption-decision.md) | C125の採用判断。評価状態、release、approval、projectionを分離して記録 |
 | [`candidate125-billing-equivalent-cost-comparison.md`](candidate125-billing-equivalent-cost-comparison.md) | C125 Standard14 N=5を通常input / cached input / cache write / outputへ分解し、公開API単価で課金換算した比較 |
-| [`candidate125-candidate132-six-point-control-synthesis.md`](candidate125-candidate132-six-point-control-synthesis.md) | C125〜C132の六点controlを統合し、六点を同時に解くglobal predicateは作らないと結論した記録 |
+| [`candidate125-candidate132-six-point-control-synthesis.md`](candidate125-candidate132-six-point-control-synthesis.md) | C125〜C132の六点の制御を統合し、六点を同時に解くglobal predicateは作らないと結論した記録 |
 | [`candidate131-point4-dependency-audit.md`](candidate131-point4-dependency-audit.md) | Point 4 dependencyを独立predicateへ固定しないと判断した監査 |
 | [`candidate131-point6-closure-recovery-audit.md`](candidate131-point6-closure-recovery-audit.md) | Point 6 closure / recoveryに新Candidateを作らないと判断した監査 |
 | [`candidate133-task-spec-lexeme-authority-audit.md`](candidate133-task-spec-lexeme-authority-audit.md) | anchorを意味判断で選ばず、TaskSpec原文のcode-shaped lexemeを構文規則で全件抽出する次軸を固定した監査 |
 | [`candidate134-reference-symbol-coverage-ownership-audit.md`](candidate134-reference-symbol-coverage-ownership-audit.md) | C134の低ScoreをPoint 2 evidence coverage不足へ帰属させ、request identity失敗とcoverage closure失敗の同時修正を禁じた監査 |
-| [`candidate135-effect-local-change-admission-audit.md`](candidate135-effect-local-change-admission-audit.md) | 充足済み`colSpan` effectを再び変更対象へ入れ必要変更と同一patchへ結合したことをScore 2の直接原因とした監査 |
+| [`candidate135-effect-local-change-admission-audit.md`](candidate135-effect-local-change-admission-audit.md) | 充足済み`colSpan` effectを再び変更対象へ入れ必要変更と同一のパッチへ結合したことをScore 2の直接原因とした監査 |
 | [`candidate136-criterion-lexeme-member-totality-audit.md`](candidate136-criterion-lexeme-member-totality-audit.md) | C136 Score 3の原因を入力範囲ではなくlexeme member抽出規則の退行と特定した監査 |
-| [`candidate137-existing-case-observer-coverage-audit.md`](candidate137-existing-case-observer-coverage-audit.md) | `pending_effect_validation_admitted`を既存caseで確実に発生させる方法はないと判定し、F04維持と停止条件を固定した監査 |
+| [`candidate137-existing-case-observer-coverage-audit.md`](candidate137-existing-case-observer-coverage-audit.md) | `pending_effect_validation_admitted`を既存ケースで確実に発生させる方法はないと判定し、F04維持と停止条件を固定した監査 |
 | [`candidate139-effect-satisfaction-witness-audit.md`](candidate139-effect-satisfaction-witness-audit.md) | F02部分変更の一次原因を`satisfied`の誤bindとし、次軸`effect_satisfaction_witness`を導出した監査 |
 | [`candidate140-evidence-completeness-granularity-audit.md`](candidate140-evidence-completeness-granularity-audit.md) | F02低Scoreを分けた差がwitness定義ではなく変更前evidenceの粒度だと示した監査 |
 | [`candidate141-post-result-change-admission-audit.md`](candidate141-post-result-change-admission-audit.md) | 残存失敗を、変更前request準備完了とresult受領後の変更開始準備完了が未分離であることへ帰属させた監査 |
-| [`candidate145-f01-f02-f03-cost-causal-analysis.md`](candidate145-f01-f02-f03-cost-causal-analysis.md) | C145 cost増加の先行分析を誤りと訂正し、`command_execution`件数とmodel step数の混同を明示した再集計 |
+| [`candidate145-f01-f02-f03-cost-causal-analysis.md`](candidate145-f01-f02-f03-cost-causal-analysis.md) | C145のコスト増加の先行分析を誤りと訂正し、`command_execution`件数とmodel step数の混同を明示した再集計 |
 | [`candidate146-model-step-boundary-audit.md`](candidate146-model-step-boundary-audit.md) | `agent_message`をmodel step境界としてC125 / C145 / C146を再集計し、C146の増分機構なしと判定した監査 |
-| [`candidate147-adoption-decision.md`](candidate147-adoption-decision.md) | C147の採用判断。品質・安定性・機構・cost回収を別々に確認し、公開版`the-caption`へ投影した記録 |
+| [`candidate147-adoption-decision.md`](candidate147-adoption-decision.md) | C147の採用判断。品質・安定性・機構・コスト回収を別々に確認し、公開版`the-caption`へ投影した記録 |
 | [`candidate81-candidate125-control-findings-synthesis.md`](candidate81-candidate125-control-findings-synthesis.md) | C81〜C125で有効だった制御の統合知見。抽象的注意ではなく実行時に観測できる条件へ閉じることが要点 |
-| [`click-runtime-reproducibility.md`](click-runtime-reproducibility.md) | Click評価用known-good runtimeを空環境から再構築し、offline full gateまで一致を確認した記録 |
-| [`click-control-free-medium-baseline-analysis.md`](click-control-free-medium-baseline-analysis.md) | Click Control-free baselineがTHE-CAPTIONより軽い主因をrepository / caseのcontext量差として分離した分析 |
+| [`click-runtime-reproducibility.md`](click-runtime-reproducibility.md) | Click評価用known-goodランタイムを空環境から再構築し、offline full gateまで一致を確認した記録 |
+| [`click-control-free-medium-baseline-analysis.md`](click-control-free-medium-baseline-analysis.md) | Click Control-free baselineがTHE-CAPTIONより軽い主因をリポジトリ / ケースのcontext量差として分離した分析 |
 | [`click-c81-medium-residual-analysis.md`](click-c81-medium-residual-analysis.md) | Click C81 Mediumの残余経路をpaired差で再評価し、F01の悪化は非再現、F04 elapsed増加は再現性ありと判定した分析 |
 | [`click-c81-full-portability-design.md`](click-c81-full-portability-design.md) | THE-CAPTION C81全文をClick root 1 targetへ改変なく水平適用する比較設計（外部妥当性の検証） |
 | [`click-c125-full-portability-design.md`](click-c125-full-portability-design.md) | 同様にC125全文をClickへ水平適用し、Click Standard14 r2を各case`N=5`で実施する設計 |
 | [`click-c81-repository-authority-standard14-r2-design.md`](click-c81-repository-authority-standard14-r2-design.md) | C81全文のみと、C81全文＋Click repository authorityを`click-standard14-r2`で比較する設計 |
 | [`click-repository-authority-availability-design.md`](click-repository-authority-availability-design.md) | repository authorityの可用性差を、THE-CAPTIONで差が出たF10と同じ観点でClickへ移す比較設計 |
-| [`click-repository-subagents-comparison-design.md`](click-repository-subagents-comparison-design.md) | Clickの階層別repository instructionの影響を、root制御promptと分離して確認する比較設計 |
-| [`delegation-cost-control-redesign.md`](delegation-cost-control-redesign.md) | Worker起動自体を失敗条件にせず、実行全体を3 KPIで判定するコスト判定・制御の再設計 |
-| [`planning-first-route-diagnostic.md`](planning-first-route-diagnostic.md) | planning-first経路のrun別補助記録。Worker数の採点ではなくKPI差の説明に使う |
+| [`click-repository-subagents-comparison-design.md`](click-repository-subagents-comparison-design.md) | Clickの階層別repository instructionの影響を、root制御プロンプトと分離して確認する比較設計 |
+| [`delegation-cost-control-redesign.md`](delegation-cost-control-redesign.md) | ワーカー起動自体を失敗条件にせず、実行全体を3 KPIで判定するコスト判定・制御の再設計 |
+| [`planning-first-route-diagnostic.md`](planning-first-route-diagnostic.md) | planning-first経路のrun別補助記録。ワーカー数の採点ではなくKPI差の説明に使う |
 | [`sealed-execution-wave-design.md`](sealed-execution-wave-design.md) | 中間resultをmodelへ配送しないexecutor境界の第1版設計（`sealed_execution_wave.py`） |
 | [`success-silent-delivery-design.md`](success-silent-delivery-design.md) | deterministicな成功resultだけをmodelへ配送しない`success-delivery/v1`第1版設計 |
 | [`pytest-allowlist-success-delivery-design.md`](pytest-allowlist-success-delivery-design.md) | 成功出力の大半を占めるpytest系だけをexact argv boundなwrapper対象とする`success-delivery/v2`設計 |
@@ -295,5 +295,5 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`candidate5-token-efficiency-direction.md`](candidate5-token-efficiency-direction.md) | root-only token由来の旧解釈。現行値はall-agent再集計へ置換済み |
 | [`candidate6-candidate8-efficiency-investigation.md`](candidate6-candidate8-efficiency-investigation.md) | root-only token由来の調査履歴。現行値はall-agent再集計を参照 |
 | [`candidate71-spec-audit-handoff.md`](candidate71-spec-audit-handoff.md) | C71 `SPEC`監査の完了済みhandoff。監査結果は`candidate71-control-abstraction-analysis.md`へ統合済み |
-| [`prompt-control-review-handoff.md`](prompt-control-review-handoff.md) | C35〜C40時点の制御見直しhandoff。当時のbranch・HEAD・未commit差分を含む |
+| [`prompt-control-review-handoff.md`](prompt-control-review-handoff.md) | C35〜C40時点の制御見直しの引き継ぎ記録。当時のbranch・HEAD・未commit差分を含む |
 | [`sa-routing-condition-extraction.md`](sa-routing-condition-extraction.md) | candidate2設計の出発点となった`design_input`。その後の系譜は大きく進行 |

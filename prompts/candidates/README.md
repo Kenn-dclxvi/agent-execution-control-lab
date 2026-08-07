@@ -1,4 +1,4 @@
-# Candidates
+# candidate索引
 
 構築中の候補プロンプトをrevision別に置く。各candidateは解く問題、対象範囲、baseline identity、変更理由、非目標、評価状態を記録する。
 
@@ -167,8 +167,8 @@
 | `the-caption-3ce91a4-review-result-admission-r1`（Candidate165） | `the-caption-3ce91a4-autonomous-review-admission-r1` | current TaskSpecでsame operationへbindしたproducer resultだけをquality criterionへadmitし、unbound prior評価をcontext-onlyへ分類する | [`Review4 20 / 20`](../../evaluations/results/candidate165-review-result-admission-r1_2026-08-04.md)、[`Standard14 70 / 70 Score 4`](../../evaluations/results/candidate165-review-result-admission-v14-medium-standard14-atomic-n5-cli0146_2026-08-04.md)。C147比token`+75.79%`・elapsed`+34.99%`、adoption未決定 |
 | `the-caption-3ce91a4-prior-evaluation-review-admission-r1`（Candidate166） | `the-caption-3ce91a4-review-result-admission-r1` | rootがartifactを実装・調査した事実を独立SA切替条件から外し、同じreview criterionの先行評価受領時だけ情報封鎖した独立SAへ切り替える | [`Review4 20 / 20 valid、oracle一致18 / 20`](../../evaluations/results/candidate166-prior-evaluation-review-admission-r1_2026-08-04.md)。後続見直しでHR03 r1を[`case_design_invalid`](../../docs/candidate166-review4-case-validity-analysis.md)と判定。quality未判定、Standard14未実施、adoption未決定 |
 
-candidate bundleのmanifestは構築時provenanceとしてimmutableに保持する。評価状態の更新はmanifestをin-place変更せず、このindexと独立したevaluation resultで表す。
+candidate bundleのmanifestは構築時provenanceとして不変のまま保持する。評価状態の更新はmanifestをin-place変更せず、この索引と独立したevaluation resultで表す。
 
-C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、bundleと現行candidate indexから削除した。
+C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、バンドルと現行のcandidate索引から削除した。
 
 C25〜C27はF10の一つの失敗形をroute固有の制御で避ける方向へ狭まり、既存のoperation binding系列へ一般化できないため公開候補にせず破棄した。番号は再利用せず、Candidate28をCandidate24の直接childとして構築する。

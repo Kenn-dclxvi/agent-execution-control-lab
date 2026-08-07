@@ -1,13 +1,13 @@
-# click prompt bundle index
+# clickプロンプトバンドル索引
 
-`click` target instanceのprompt bundleを引くための索引である。baseline / candidate lifecycle、instance間の水平適用、bundle identityの規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。各bundleのtarget map、source identity、bundle SHA-256はmanifestを正とする。
+`click` ターゲットインスタンスのプロンプトバンドルを引くための索引である。baseline / candidateのライフサイクル、インスタンス間の水平適用、bundle identityの規則は[`../AGENTS.md`](../AGENTS.md)を正本とする。各バンドルのtarget map、source identity、bundle SHA-256はmanifestを正とする。
 
 ## baselines
 
 | prompt identity | target数 | bundle SHA-256 | 条件 |
 | --- | ---: | --- | --- |
-| [`click-00e592c-control-free-r1`](baselines/click-00e592c-control-free-r1/manifest.json) | 1 | `7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9` | 制御prompt不在。root `AGENTS.md`を空fileへ固定する |
-| [`click-00e592c-no-agents-r1`](baselines/click-00e592c-no-agents-r1/manifest.json) | 0 | `62570c22091a0e5c3431c5be416222987c6d4251fa634d633c6c6ebcee8ab82c` | root・subとも`AGENTS.md`を配置しないempty bundle |
+| [`click-00e592c-control-free-r1`](baselines/click-00e592c-control-free-r1/manifest.json) | 1 | `7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9` | 制御プロンプト不在。root `AGENTS.md`を空のファイルへ固定する |
+| [`click-00e592c-no-agents-r1`](baselines/click-00e592c-no-agents-r1/manifest.json) | 0 | `62570c22091a0e5c3431c5be416222987c6d4251fa634d633c6c6ebcee8ab82c` | root・subとも`AGENTS.md`を配置しない空のバンドル |
 
 ## candidates
 

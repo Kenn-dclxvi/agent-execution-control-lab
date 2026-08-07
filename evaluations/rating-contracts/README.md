@@ -1,8 +1,8 @@
-# Quality rating contract index
+# quality rating contract索引
 
-`the-caption` legacy-rootのquality rating contract revisionを引くための索引である。revision固定、model-visible境界、過去resultの再採点禁止は[`evaluations/AGENTS.md`](../AGENTS.md)を正本とし、各revisionの採点条件は対応するcontract JSONを正とする。現行profileで使用するcontractは[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)と各profile identityで確認する。
+`the-caption` legacy-rootのquality rating contract revisionを引くための索引である。revision固定、model-visible境界、過去resultの再採点禁止は[`evaluations/AGENTS.md`](../AGENTS.md)を正本とし、各revisionの採点条件は対応するcontract JSONを正とする。現行のプロファイルで使用するcontractは[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)と各profile identityで確認する。
 
-## Revisions
+## revision一覧
 
 | revision | 主な変更軸 | 状態 |
 | --- | --- | --- |
@@ -21,6 +21,6 @@
 | [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](outcome-abstract-condition-preserving-owner-diagnostic-v13.json) | 抽象成果条件を非公開の特定commandへ具体化して必須化することを禁止 | 履歴互換 |
 | [`outcome-terminal-state-evidence-owner-diagnostic-v14`](outcome-terminal-state-evidence-owner-diagnostic-v14.json) | v13を維持し、A01をresponse文面分類から`terminal-state-evidence/v1`へ切替 | 現行 |
 
-v14はv13以前と異なるcompatibility conditionであり、過去resultをv14で再採点したものとして扱わない。既存v10〜v13 profileは履歴再現用として保持する。
+v14はv13以前と異なる互換条件であり、過去resultをv14で再採点したものとして扱わない。既存のv10〜v13プロファイルは履歴再現用として保持する。
 
 command / producer / terminal-state evidenceのcollector schemaとLayer 3実行手順は[`docs/evaluation-loop-manual.md`](../../docs/evaluation-loop-manual.md)および実装側のversioned contractを参照する。このREADMEへcollector実装の詳細を複製しない。
