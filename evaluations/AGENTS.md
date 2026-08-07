@@ -18,7 +18,7 @@
 - 既存インスタンス `the-caption`のアーティファクトのパス（`evaluations/cases`、`evaluations/profiles`、`evaluations/sets`、`evaluations/rating-contracts`、`evaluations/results`、`prompts/`配下）を移動しない。
 - 新インスタンスのアーティファクトは`evaluations/targets/<target_id>/`配下へ閉じる。
 - 別インスタンスのresultを同一比較へ入れない。rating contractがインスタンス単位である以上、`quality_score`の絶対値をインスタンス間で比較しない。
-- インスタンスのディスクリプタは参照とターゲット固有の識別子だけを持ち、gate command、bundle target map、resultの実体を複製しない。
+- インスタンスのディスクリプタは参照とターゲット固有の識別子だけを持ち、ゲートコマンド、bundle target map、resultの実体を複製しない。
 
 ## ケースアーティファクト
 
@@ -37,7 +37,7 @@
 
 - 実行前にmodel、reasoning、Agent/runtime/CLI、permission、environment、実行ポリシー、対象セット / ケース、rating contract、repetition、停止条件を固定する。結果確認後に条件を変える場合は新しいprofile revisionとする。
 - 実行順はexecution provenanceとして保存するが、プロンプトセット間のKPI補正には使わない。実測のトークンと経過時間を環境補正して比較値へ変換しない。
-- candidate固有のquality / mechanism gateでは対象プロンプトだけを先に実行する。gate前に比較相手の再実行を必須化しない。
+- candidate固有のquality / mechanismのゲートでは対象プロンプトだけを先に実行する。ゲート前に比較相手の再実行を必須化しない。
 - 比較resultが必要になった時点で保存済み互換resultを優先し、不足スロットだけを新規のdispatchへ固定する。既存runを習慣的に再実行しない。
 - `evaluations/profiles/README.md`はprofile identity、用途、条件要約、対応resultへの導線を示す索引とする。score、KPI、停止判断の正本はresult本体または対応する研究記録とし、READMEの要約を判定根拠へ格上げしない。
 - `evaluations/profiles/`直下の全profile JSONは、ファイル名を知らなくても`evaluations/profiles/README.md`から到達できるよう、README本体またはREADMEが直接リンクする`evaluations/profiles/index/*.md`で少なくとも1回は直接リンクする。索引シャードはプロファイル名と所在だけを持ち、評価史を複製しない。

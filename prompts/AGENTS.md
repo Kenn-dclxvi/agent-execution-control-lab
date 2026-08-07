@@ -43,12 +43,12 @@
 - 解く問題、baseline identity、変更理由、非目標、評価状態を記録する。
 - プロンプト短縮、ラベル削減、構造変更だけを効率改善と判断しない。
 - targeted評価で成果品質と狙った経路変化を確認する前に、expandedまたはcontinuous評価へ進めない。
-- candidate固有のquality・mechanism gateではcandidateだけを先に実行する。gate前に比較相手のプロファイルや新規の実行を必須化しない。
+- candidate固有のquality・mechanismのゲートではcandidateだけを先に実行する。ゲート前に比較相手のプロファイルや新規の実行を必須化しない。
 - 比較resultが必要になった時点で保存済み互換resultを先に使い、不足するプロンプトセット / スロットだけを評価プロファイルへ追加する。
 - このホストの新規試験の`max_workers`固定値と適用条件は`evaluations/AGENTS.md`を正本とし、readyなスロット数へ合わせて試験ごとに設定値を下げない。複数プロンプトセットの新規スロットは別サイクルのまま共通のグローバルキューへ入れる。
 - 保存済みトレースにない将来不安だけを理由として制御を追加しない。
 - 新しいpredicateの追加より、既存predicateの置換、統合、削除を優先する。
-- 作成前gateが未定義なら、candidateバンドルと`evaluations/`配下の評価プロファイルを先に作らない。
+- 作成前ゲートが未定義なら、candidateバンドルと`evaluations/`配下の評価プロファイルを先に作らない。
 
 ### Candidate索引
 

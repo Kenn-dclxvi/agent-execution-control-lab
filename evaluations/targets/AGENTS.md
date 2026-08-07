@@ -6,7 +6,7 @@
 
 ## 台帳の保守
 
-- インスタンス追加時は`target.json`へtarget identity、layout、visibility、現行のrating contractなど、ディスクリプタが必要とする参照だけを固定する。gate command、プロンプトバンドル、resultの実体をディスクリプタへ複製しない。
+- インスタンス追加時は`target.json`へtarget identity、layout、visibility、現行のrating contractなど、ディスクリプタが必要とする参照だけを固定する。ゲートコマンド、プロンプトバンドル、resultの実体をディスクリプタへ複製しない。
 - `README.md`の登録済みインスタンス表は現在台帳とし、インスタンス追加、layout変更、状態要約の変更があった場合だけ追従させる。
 - インスタンスが登録済みであることと、評価済み、採用済み、release済み、ターゲット本体へ反映済みであることを混同しない。
 - `legacy_root`は既存`the-caption`だけに許可し、そのアーティファクトのパスを対称化のために移動しない。新インスタンスは`evaluations/targets/<target_id>/`へ閉じる`namespaced` layoutを使う。

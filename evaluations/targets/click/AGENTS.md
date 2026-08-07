@@ -6,7 +6,7 @@
 
 既存のClickケース系列と同じfixture policyで新しいrevisionを作る場合は次を守る。別のpolicyを導入する場合は、既存revisionを変更せず新しい設計・case revisionとして固定する。
 
-- gate commandはtarget repository rootをcwdとして実行する。cwd外実行で生じるseed非依存の失敗をプロンプト品質へ混ぜない。
+- ゲートコマンドはtarget repository rootをcwdとして実行する。cwd外実行で生じるseed非依存の失敗をプロンプト品質へ混ぜない。
 - seedは固定target commitへ適用可能な逆パッチとして保存し、`git apply --check`で適用可能性を確認する。
 - 既存ケース系列では2026-05-01以降のsource changeから`src/`部分をseed化している。この選定境界を既存revisionへ遡及変更しない。
 - seed patchは純粋な差分だけをmodel-visibleなfixtureへ含める。commit messageやreference postimageを推測できる`git show`のヘッダを混ぜない。
@@ -16,7 +16,7 @@
 
 - 2026-07-27以降の新規通常比較はreasoning effort `medium`を運用基準とする。既存の`high` resultは履歴として保持し、reasoningが異なるresultを同一比較へ混ぜない。
 - プロファイルは`codex_cli`、Python、runtime identity、permission、token accountingを固定する。CLIまたはruntime identityが異なるresultを同一比較へ混ぜない。
-- gate実行ではワークスペース側の`src`を解決するため、現行のClickプロファイルが要求する`PYTHONPATH=src`境界を維持する。runtime shimだけでsourceのimportを代替したとみなさない。
+- ゲート実行ではワークスペース側の`src`を解決するため、現行のClickプロファイルが要求する`PYTHONPATH=src`境界を維持する。runtime shimだけでsourceのimportを代替したとみなさない。
 - F07-Pの現行のoffline lock確認はconsole scriptの所在へ依存させず、プロファイル / TaskSpecが固定したmodule invocationを正とする。
 - `max_workers`とatomic run再利用の共通規則は親の[`evaluations/AGENTS.md`](../../AGENTS.md)を正とし、このターゲットのreadyなスロット数へ合わせて設定値を変更しない。
 
@@ -24,7 +24,7 @@
 
 - Clickのrating contractはcase ID単位のruleを持つインスタンス固有のアーティファクトであり、`the-caption`側のcontractをそのまま参照して採点しない。
 - 現行contractは`target.json`の`current_rating_contract`を正とする。contract変更は新しいrevisionとして追加し、既存resultを再採点しない。
-- required gateのcwd、seed provenanceのforbidden input、Click固有の診断情報はcontract本体へ固定する。これらをREADMEの説明だけで変更しない。
+- 必須ゲートのcwd、seed provenanceのforbidden input、Click固有の診断情報はcontract本体へ固定する。これらをREADMEの説明だけで変更しない。
 - kernelへ登録するのはcontract identity、SHA-256、collector schema、policyなどターゲット非依存の参照情報に限定し、Clickのcase IDやターゲットのパスによる分岐を追加しない。
 
 ## プロンプトバンドル
