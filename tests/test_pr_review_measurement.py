@@ -2033,6 +2033,31 @@ def test_claude_code_core_first_attempt_is_saved_as_unobserved_failure():
     ).read_text(encoding="utf-8")
 
 
+def test_claude_code_core_recovery_attempt_is_saved_as_measurement_incomplete():
+    result_path = (
+        INSTANCE_ROOT
+        / "results"
+        / "pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31263713165.json"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "run-result-r8.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "measurement_incomplete"
+    assert result["quality"]["observed"] is True
+    assert result["quality"]["true_positive"] == 1
+    assert result["quality"]["false_negative"] == 0
+    assert result["quality"]["false_positive"] == 0
+    assert result["workflow_trace"]["complete"] is False
+    assert result["github_run_id"] == "31263713165"
+    assert result_path.name in (
+        INSTANCE_ROOT / "results" / "README.md"
+    ).read_text(encoding="utf-8")
+
+
 def test_claude_code_core_environment_recovery_changes_only_runtime_wiring():
     original = json.loads(code_review_qualification.PROFILE_PATH.read_text(encoding="utf-8"))
     recovered, preflight = code_review_qualification_r2.validate_preflight(1)

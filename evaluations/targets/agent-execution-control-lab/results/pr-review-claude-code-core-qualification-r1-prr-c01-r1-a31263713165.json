@@ -1,0 +1,96 @@
+{
+  "attempt": 31263713165,
+  "base_sha": "3333333333333333333333333333333333333331",
+  "case_id": "PRR-C01",
+  "comparison_revision": "pr-review-claude-code-core-qualification-r1",
+  "fixture_revision": "r4",
+  "github_run_id": "31263713165",
+  "head_sha": "3333333333333333333333333333333333333332",
+  "model": {
+    "reported": "claude-sonnet-5",
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-claude-code-core-c01-r4-qualification-n2-r2",
+  "quality": {
+    "category_accuracy": 1,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 0,
+    "false_positive": 0,
+    "line_accuracy": 1,
+    "observed": true,
+    "path_accuracy": 1,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": true,
+    "true_positive": 1
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v5",
+  "quality_score": null,
+  "repetition": 1,
+  "result": "measurement_incomplete",
+  "result_id": "pr-review-claude-code-core-qualification-r1:PRR-C01:claude-code-review-core:r1:a31263713165",
+  "reviewer_executor": {
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "authentication": "claude_code_oauth_token",
+    "claude_cli": "reported_by_action",
+    "runner": "ubuntu-latest",
+    "session_mode": "one_root_action_with_subagents_per_run"
+  },
+  "runtime": {
+    "input_tokens": 5532356,
+    "output_tokens": 556,
+    "reported_cost_usd": 2.01609345,
+    "total_tokens": 5532912,
+    "turns": 39
+  },
+  "schema_version": 8,
+  "timing": {
+    "action_step_ms": 387124,
+    "e2e_ms": null,
+    "execution_ms": 387124,
+    "input_ms": 1314,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": 370558,
+    "setup_ms": null
+  },
+  "variant": "claude-code-review-core",
+  "workflow_revision": "pr-review-qualify-claude-code-core-r2",
+  "workflow_trace": {
+    "agent_model_groups": [
+      [
+        "haiku"
+      ],
+      [
+        "haiku"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "opus"
+      ],
+      [
+        "opus"
+      ]
+    ],
+    "all_agent_input_tokens": 5532356,
+    "all_agent_output_tokens": 556,
+    "authority_haiku": true,
+    "complete": false,
+    "eligibility_haiku": true,
+    "parallel_reviewers_2_sonnet_2_opus": false,
+    "separate_validation_agents": true,
+    "subagent_usage_observed": true,
+    "summary_sonnet": true,
+    "usage_records": 132
+  }
+}
