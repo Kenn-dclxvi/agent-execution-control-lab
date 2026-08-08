@@ -3,6 +3,7 @@
     "cases": "evaluations/targets/agent-execution-control-lab/cases",
     "diagnostic_contracts": "evaluations/targets/agent-execution-control-lab/contracts",
     "profiles": "evaluations/targets/agent-execution-control-lab/profiles",
+    "prompt_bundles": "evaluations/targets/agent-execution-control-lab/prompts",
     "published_results": "evaluations/targets/agent-execution-control-lab/results",
     "rating_contracts": "evaluations/targets/agent-execution-control-lab/rating-contracts",
     "schemas": "evaluations/targets/agent-execution-control-lab/schemas",
@@ -11,7 +12,7 @@
   },
   "authority_notes": {
     "diagnostic_boundary": "2026-08-08のPRR-C01 probeは新インスタンスゲート前に実行されたため正式evaluation resultへ登録しない。run IDとterminal状態はresults/README.mdのdiagnostic receiptとしてだけ保持する",
-    "fixture_authority": "各cases/<case_id>/r1/input.jsonをmodel-visible入力、oracle.jsonをmodel-invisible採点根拠とする",
+    "fixture_authority": "各cases/<case_id>/<revision>/input.jsonをmodel-visible入力、同revisionのoracle.jsonをmodel-invisible採点根拠とする",
     "functional_specification": "specifications/pr-review-function-r1.mdをcase、oracle、rating contractより上位のPRレビュー成果条件とし、specifications/core-baseline-r1.mdのadmission gateを通過するまで正式evaluation slotを発行しない",
     "workflow": ".github/workflows/pr-review-measure-core.ymlはGitHub上の手動entrypointであり、dispatch時にprofile identityをcase、variant、model、repetitionへ照合する"
   },

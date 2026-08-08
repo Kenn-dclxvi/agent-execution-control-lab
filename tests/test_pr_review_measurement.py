@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -243,6 +244,74 @@ def test_function_spec_and_baseline_design_precede_future_evaluation():
     assert "Baselineとして未qualification" in baseline_design
     assert "prompt identity" in baseline_design
     assert "正式resultは0件" in instance_index
+
+
+def test_baseline_prompt_manifest_binds_content_and_remains_blocked():
+    bundle = (
+        INSTANCE_ROOT
+        / "prompts"
+        / "baselines"
+        / "claude-pr-review-core-r1"
+    )
+    manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
+    mapping = json.loads(
+        (INSTANCE_ROOT / "contracts" / "baseline-input-mapping-r1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    for entry in manifest["files"]:
+        assert hashlib.sha256((bundle / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+    for dependency in ("review_contract", "output_schema", "fixture_tool"):
+        entry = manifest["dependencies"][dependency]
+        assert hashlib.sha256((INSTANCE_ROOT / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+
+    states = {entry["identity"]: entry["state"] for entry in mapping["mappings"]}
+    assert manifest["state"] == "admission_blocked"
+    assert manifest["admission"]["state"] == "blocked"
+    assert mapping["state"] == "unsatisfied"
+    assert states["applicable_repository_rules"] == "unsatisfied"
+    assert states["changed_file_content"] == "partially_satisfied"
+
+
+def test_fixture_tool_matches_prr_c01_r2_logical_input(tmp_path: Path):
+    case_root = measurement.FIXTURE_ROOT / "PRR-C01" / "r2"
+    fixture_input = json.loads((case_root / "input.json").read_text(encoding="utf-8"))
+    shutil.copyfile(case_root / "input.json", tmp_path / "review-input.json")
+    shutil.copyfile(
+        INSTANCE_ROOT / "rating-contracts" / "review-contract-r2.md",
+        tmp_path / "review-contract.md",
+    )
+    fixture_tool = tmp_path / "fixture-tool"
+    shutil.copyfile(INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py", fixture_tool)
+    fixture_tool.chmod(0o755)
+
+    def invoke(command: str) -> str:
+        return subprocess.run(
+            [str(fixture_tool), command],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+
+    assert json.loads(invoke("metadata")) == fixture_input["pr"]
+    assert json.loads(invoke("changed-paths")) == fixture_input["changed_paths"]
+    assert json.loads(invoke("rules")) == fixture_input["rules"]
+    assert json.loads(invoke("files")) == {
+        change["path"]: change["content_after"] for change in fixture_input["changes"]
+    }
+    assert invoke("diff") == "".join(
+        f"diff --git a/{change['path']} b/{change['path']}\n{change['patch']}\n"
+        for change in fixture_input["changes"]
+    )
+    assert invoke("contract") == (
+        INSTANCE_ROOT / "rating-contracts" / "review-contract-r2.md"
+    ).read_text(encoding="utf-8")
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):

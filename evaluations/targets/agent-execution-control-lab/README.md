@@ -11,9 +11,11 @@
 - [`cases/`](cases/README.md): r1 diagnostic fixtureと、機能仕様から導出したPRR-C01/r2 development case
 - [`sets/`](sets/README.md): 6ケースの未qualification set
 - [`profiles/`](profiles/README.md): PRR-C01 baseline qualification profile
+- [`prompts/`](prompts/README.md): 現行workflow source promptとCore Baseline prompt候補
 - [`rating-contracts/`](rating-contracts/README.md): model-visible review contractとmodel-invisible quality rating contract
 - [`results/`](results/README.md): 保存済みrunとdiagnostic再分類receipt。正式resultは0件
 - [`contracts/`](contracts/README.md): GitHub Actions診断経路の比較条件
+- [`contracts/baseline-input-mapping-r1.json`](contracts/baseline-input-mapping-r1.json): 現行workflowとCore入力の対応。現在`unsatisfied`
 - [`schemas/`](schemas/README.md): fixture、review出力、診断run resultのschema
 - [`tools/`](tools/README.md): このインスタンス固有の入力生成、収集、採点補助
 
