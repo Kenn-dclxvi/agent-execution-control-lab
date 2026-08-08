@@ -1,6 +1,6 @@
 # PRレビュー測定result
 
-登録済みresultはまだない。Core Review workflowが生成する`run-result.json`はGitHub Actions artifactとして保持し、pilotの互換条件とquality gateを確認した後に、別変更でこの配下へappend-only登録する。
+登録済みの正式evaluation resultはない。2026-08-08のCore Review workflowが生成した`run-result.json`は、新インスタンス登録前かつfoundation互換のrating contract / profile未確定のdiagnostic artifactであり、この配下へ一次resultとして登録しない。
 
 - 生のAction出力を登録しない。
 - `result_id`とcontent SHA-256を固定する。
@@ -21,4 +21,4 @@
 | runtime集計修正後 | `deterministic-input` | [31244736581](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31244736581) | `quality_failed` | required findingのruleは出したが、oracleとpath identityが一致せず`false_negative=1` |
 | runtime集計修正後 | `agentic-retrieval` | [31244739479](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31244739479) | `pass` | model、構造化出力、runtime集計、required findingを観測 |
 
-最終2 attemptは同じcommit、fixture、review contract、model、Action revisionで実行した。hard gateが両variantで成立しなかったため、残りcaseとN=5は発行していない。artifactを正式resultとして登録するか、finding identityを新しいcomparison revisionで変更するかは未判断である。
+最終2 attemptは同じcommit、fixture、review contract、model、Action revisionで実行した。hard gateが両variantで成立しなかったため、残りcaseとN=5は発行していない。既存artifactは正式resultへ昇格せず、新しいrating contract、profile、comparison revisionを事前固定した将来runだけを登録候補とする。

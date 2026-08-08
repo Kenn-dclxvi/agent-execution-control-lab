@@ -15,13 +15,14 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-MEASUREMENT_ROOT = REPOSITORY_ROOT / "pr-review-measurements"
-FIXTURE_ROOT = MEASUREMENT_ROOT / "fixtures" / "r1"
+INSTANCE_ROOT = Path(__file__).resolve().parents[1]
+REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
+MEASUREMENT_ROOT = INSTANCE_ROOT
+FIXTURE_ROOT = INSTANCE_ROOT / "cases"
 CONTRACT_PATH = MEASUREMENT_ROOT / "contracts" / "pr-review-core-r1.json"
-REVIEW_CONTRACT_PATH = MEASUREMENT_ROOT / "contracts" / "review-contract-r1.md"
+REVIEW_CONTRACT_PATH = MEASUREMENT_ROOT / "rating-contracts" / "review-contract-r1.md"
 REVIEW_SCHEMA_PATH = MEASUREMENT_ROOT / "schemas" / "review-output-r1.schema.json"
-FIXTURE_TOOL_PATH = REPOSITORY_ROOT / "scripts" / "pr_review_fixture_tool.py"
+FIXTURE_TOOL_PATH = INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py"
 
 CASE_IDS = tuple(f"PRR-C0{number}" for number in range(1, 7))
 VARIANTS = ("agentic-retrieval", "deterministic-input")
@@ -375,7 +376,7 @@ def validate_run_result(value: Any) -> dict:
 def _fixture_paths(case_id: str) -> tuple[Path, Path]:
     if case_id not in CASE_IDS:
         raise ValidationError(f"unknown case_id: {case_id}")
-    case_dir = FIXTURE_ROOT / case_id
+    case_dir = FIXTURE_ROOT / case_id / "r1"
     return case_dir / "input.json", case_dir / "oracle.json"
 
 

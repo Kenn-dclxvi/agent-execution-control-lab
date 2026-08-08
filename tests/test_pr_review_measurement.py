@@ -9,7 +9,8 @@ import pytest
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPOSITORY_ROOT / "scripts"))
+INSTANCE_ROOT = REPOSITORY_ROOT / "evaluations" / "targets" / "agent-execution-control-lab"
+sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 
 import pr_review_measurement as measurement
 
@@ -24,7 +25,9 @@ def _summary_for(findings: list[dict]) -> dict[str, str]:
 
 def _expected_review_output(case_id: str) -> dict:
     oracle = json.loads(
-        (measurement.FIXTURE_ROOT / case_id / "oracle.json").read_text(encoding="utf-8")
+        (measurement.FIXTURE_ROOT / case_id / "r1" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
     )
     findings = oracle["expected_findings"]
     return {"findings": findings, "summary": _summary_for(findings)}
@@ -72,11 +75,28 @@ def test_all_six_fixtures_are_valid_and_revision_bound():
 
 
 def test_all_measurement_json_files_are_syntactically_valid():
-    json_paths = sorted((REPOSITORY_ROOT / "pr-review-measurements").rglob("*.json"))
+    json_paths = sorted(INSTANCE_ROOT.rglob("*.json"))
 
     assert json_paths
     for path in json_paths:
         assert json.loads(path.read_text(encoding="utf-8")) is not None, path
+
+
+def test_measurement_artifacts_are_namespaced_under_registered_target():
+    descriptor = json.loads((INSTANCE_ROOT / "target.json").read_text(encoding="utf-8"))
+
+    assert descriptor["target_id"] == "agent-execution-control-lab"
+    assert descriptor["layout"] == "namespaced"
+    assert descriptor["current_rating_contract"] is None
+    assert descriptor["target_repository"]["primary_ref"] == {
+        "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+        "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d",
+    }
+    assert not (REPOSITORY_ROOT / "pr-review-measurements").exists()
+    assert not (REPOSITORY_ROOT / "scripts" / "pr_review_measurement.py").exists()
+    assert not (REPOSITORY_ROOT / "scripts" / "pr_review_fixture_tool.py").exists()
+    for relative in descriptor["artifact_roots"].values():
+        assert (REPOSITORY_ROOT / relative).is_dir(), relative
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
@@ -410,4 +430,7 @@ def test_workflow_is_manual_read_only_and_pinned():
     assert "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" in workflow
     assert "github_token: ${{ github.token }}" in workflow
     assert "jq -c 'del(.\"$schema\")'" in workflow
+    assert "evaluations/targets/agent-execution-control-lab/" in workflow
+    assert "scripts/pr_review_measurement.py" not in workflow
+    assert "pr-review-measurements/" not in workflow
     assert "fixture-tool file:*)" not in workflow

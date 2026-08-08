@@ -1,0 +1,38 @@
+{
+  "artifact_roots": {
+    "cases": "evaluations/targets/agent-execution-control-lab/cases",
+    "diagnostic_contracts": "evaluations/targets/agent-execution-control-lab/contracts",
+    "profiles": "evaluations/targets/agent-execution-control-lab/profiles",
+    "published_results": "evaluations/targets/agent-execution-control-lab/results",
+    "rating_contracts": "evaluations/targets/agent-execution-control-lab/rating-contracts",
+    "schemas": "evaluations/targets/agent-execution-control-lab/schemas",
+    "sets": "evaluations/targets/agent-execution-control-lab/sets"
+  },
+  "authority_notes": {
+    "diagnostic_boundary": "2026-08-08のPRR-C01 probeは新インスタンスゲート前に実行されたため正式evaluation resultへ登録しない。run IDとterminal状態はresults/README.mdのdiagnostic receiptとしてだけ保持する",
+    "fixture_authority": "各cases/<case_id>/r1/input.jsonをmodel-visible入力、oracle.jsonをmodel-invisible採点根拠とする",
+    "workflow": ".github/workflows/pr-review-measure-core.ymlはGitHub上の手動診断entrypointであり、current_rating_contractがnullの間はevaluation foundationの実行経路ではない"
+  },
+  "current_rating_contract": null,
+  "executor": "anthropics/claude-code-action",
+  "layout": "namespaced",
+  "naming_prefix": "agent-execution-control-lab-pr-review",
+  "schema_version": "the-caption-prompt.evaluation-target/v1",
+  "target_id": "agent-execution-control-lab",
+  "target_license": "Apache-2.0",
+  "target_repository": {
+    "additional_refs": [],
+    "primary_ref": {
+      "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+      "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+    },
+    "ref_authority": "target.jsonのprimary_refと各case revisionのinput SHA-256を固定し、正式profile作成時にcomparison_conditions.target_repository_refへ複製する",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git"
+  },
+  "target_specific_modules": [
+    "evaluations/targets/agent-execution-control-lab/tools/pr_review_fixture_tool.py",
+    "evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py"
+  ],
+  "third_party_reproducible": true,
+  "visibility": "public"
+}

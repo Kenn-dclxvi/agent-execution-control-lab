@@ -2,7 +2,7 @@
 
 ## 位置付け
 
-この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは実装済みである。PRR-C01の両variantによるprobeは実行済みで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。残り5 caseのpilot、N=5、比較result、Integrationは未実行・未評価である。
+この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは`evaluations/targets/agent-execution-control-lab/`のnamespacedインスタンスへ配置している。PRR-C01の両variantによるprobeは新インスタンス登録前のdiagnostic runで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。正式rating contract / profile / result、残り5 caseのpilot、N=5、Integrationは未実行・未評価である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -26,15 +26,15 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 
 ## 実装済みアーティファクト
 
-実装の入口は[`pr-review-measurements/README.md`](../pr-review-measurements/README.md)とする。
+実装の入口は[`evaluations/targets/agent-execution-control-lab/README.md`](../evaluations/targets/agent-execution-control-lab/README.md)とする。
 
 | アーティファクト | 役割 | 現在状態 |
 |---|---|---|
-| `pr-review-measurements/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
-| `pr-review-measurements/fixtures/r1/PRR-C01`〜`PRR-C06` | model-visible入力とmodel-invisible oracle | 6件固定済み |
-| `pr-review-measurements/schemas/` | fixture、review output、run resultのschema | r1実装済み |
-| `scripts/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
-| `scripts/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
+| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
+| `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r1`〜`PRR-C06/r1` | model-visible入力とmodel-invisible oracle | 6件固定済み・未qualification |
+| `evaluations/targets/agent-execution-control-lab/schemas/` | fixture、review output、run resultのschema | r1実装済み |
+| `evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
+| `evaluations/targets/agent-execution-control-lab/tools/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
 | `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | PRR-C01 probe実行済み |
 | `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
 

@@ -51,21 +51,21 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Validate fixed fixtures
-        run: python3 scripts/pr_review_measurement.py validate-fixtures >/dev/null
+        run: python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py validate-fixtures >/dev/null
 
       - name: Prepare model-visible input
         env:
           CASE_ID: ${{ inputs.case_id }}
           VARIANT: ${{ inputs.variant }}
         run: |
-          python3 scripts/pr_review_measurement.py prepare-input \
+          python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py prepare-input \
             --case-id "$CASE_ID" \
             --variant "$VARIANT" \
             --output-dir "$RUNNER_TEMP/reviewer-input"
 
       - name: Export structured output schema
         id: schema
-        run: echo "review_schema=$(jq -c 'del(."$schema")' pr-review-measurements/schemas/review-output-r1.schema.json)" >> "$GITHUB_OUTPUT"
+        run: echo "review_schema=$(jq -c 'del(."$schema")' evaluations/targets/agent-execution-control-lab/schemas/review-output-r1.schema.json)" >> "$GITHUB_OUTPUT"
 
       - name: Upload model-visible input only
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
@@ -224,7 +224,7 @@ jobs:
           REPETITION: ${{ inputs.repetition }}
           MODEL_REQUESTED: ${{ inputs.model }}
         run: |
-          python3 scripts/pr_review_measurement.py grade \
+          python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py grade \
             --case-id "$CASE_ID" \
             --variant "$VARIANT" \
             --repetition "$REPETITION" \
@@ -249,7 +249,7 @@ jobs:
           if [[ "$REVIEW_JOB_RESULT" == "cancelled" ]]; then
             status="cancelled"
           fi
-          python3 scripts/pr_review_measurement.py record-terminal \
+          python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py record-terminal \
             --case-id "$CASE_ID" \
             --variant "$VARIANT" \
             --repetition "$REPETITION" \
