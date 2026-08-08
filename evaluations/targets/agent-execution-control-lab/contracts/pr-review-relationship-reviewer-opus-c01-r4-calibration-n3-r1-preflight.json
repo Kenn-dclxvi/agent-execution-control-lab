@@ -1,0 +1,29 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-calibration-preflight/v1",
+  "preflight_id": "pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1", "path": "profiles/pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json", "sha256": "3b271aabf6e375cfc837a27430c237e8bf8b39a847ba98686193cc502f87c92c"},
+  "predicates": {"case_is_calibration_not_held_out": "satisfied", "relationship_role_boundary": "satisfied", "single_model_axis": "satisfied", "all_agent_token_accounting": "fixed", "fresh_n3_plan": "satisfied", "profile_conditions": "satisfied"},
+  "planned_slots": [
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "relationship-reviewer-opus", "repetition": 1},
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "relationship-reviewer-opus", "repetition": 2},
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "relationship-reviewer-opus", "repetition": 3}
+  ],
+  "verified_artifacts": [
+    {"path": "cases/PRR-C01/r4/input.json", "sha256": "57f321693dde33d52910d7a4806b53ebf0757f5550399e357e27e91ae1a603fe"},
+    {"path": "cases/PRR-C01/r4/oracle.json", "sha256": "5304ee3981ae41a7ec3de2540332f03e30457cba52ddd4b9c71da792a4bedf82"},
+    {"path": "contracts/pr-review-relationship-role-boundary-r1.json", "sha256": "f609132c7450d701a46c2036065e75b159e2634285324326a787c7a158f20435"},
+    {"path": "prompts/candidates/pr-review-relationship-role-r1/manifest.json", "sha256": "4e3fccf321d1a44ddfb2dd30c9ba33c84a9a01ba6745c5a3c88350745394b574"},
+    {"path": "prompts/candidates/pr-review-relationship-role-r1/core-prompt-template.md", "sha256": "3013c3352380364253e5431435450f484ded73f7d8b8d7484523aadd2a64ee70"},
+    {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    {"path": "schemas/run-result-r12.schema.json", "sha256": "0e519f94f7f07e5d4bc4c3b6b051ac7830491ea7bd2f80a82d748094ba9bc3c9"},
+    {"path": "tools/pr_review_relationship_role_calibration.py", "sha256": "09ee7b9c990756a7554ec4ecbd9d1fe3881cd8930c33b3541aeca5147c856318"},
+    {"path": "tools/pr_review_workflow_free_calibration.py", "sha256": "895c72b7b30c361ce41f6d9f128914b8d5f4126a100960a1b512509aa1aae503"},
+    {"path": "tools/pr_review_subagent_hook.py", "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce"},
+    {"path": "rating-contracts/pr-review-finding-quality-v5.json", "sha256": "d712beb285247e27bca18eb1b16a938bbb47908b7759e48224451f1dfa0fed4a"},
+    {"path": "tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+    {"path": ".github/workflows/pr-review-calibrate-relationship-reviewer.yml", "sha256": "35569aabbdd883ce109e9d6484f10e91e66fe34c12e725fb3b42b497cf50945f"}
+  ],
+  "execution": {"state": "not_issued", "quality_miss_stops_later_repetitions": false, "environment_or_measurement_failure_stops_later_repetitions": true}
+}

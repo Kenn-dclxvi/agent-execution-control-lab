@@ -1,0 +1,31 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "pr-review-relationship-role-r1",
+  "artifact_role": "calibration_candidate",
+  "state": "frozen_not_executed",
+  "base": {
+    "identity": "pr-review-workflow-free-r1",
+    "manifest_path": "prompts/candidates/pr-review-workflow-free-r1/manifest.json",
+    "manifest_sha256": "879642181a0eab913cbd9af885332b48ce8baa115cd2c948dfecccb0f4c4a0b7"
+  },
+  "change_axis": "one_fixed_relationship_reviewer_role",
+  "core": {
+    "path": "core-prompt-template.md",
+    "content_sha256": "3013c3352380364253e5431435450f484ded73f7d8b8d7484523aadd2a64ee70"
+  },
+  "model_placeholder": "{{RELATIONSHIP_REVIEWER_MODEL}}",
+  "allowed_model_values": ["sonnet", "opus"],
+  "fixed": [
+    "one relationship reviewer",
+    "root does not access fixture tool or reassess findings",
+    "relationship reviewer accesses all model-visible review inputs",
+    "relationship reviewer returns the complete structured review"
+  ],
+  "comparison_axis": "relationship reviewer model only",
+  "non_goals": [
+    "held-out quality claim",
+    "general model ranking",
+    "winner or adoption decision",
+    "GitHub comment"
+  ]
+}
