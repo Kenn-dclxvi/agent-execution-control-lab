@@ -11,6 +11,7 @@
 - [authority selection r1](authority-selection-r1.schema.json)
 - [authority packet r1](authority-packet-r1.schema.json)
 - [repository snapshot r1](repository-snapshot-r1.schema.json)
+- [baseline execution parity r1](baseline-execution-parity-r1.schema.json)
 - [diagnostic run result r1](run-result-r1.schema.json)
 - [qualification以後のrun result r2](run-result-r2.schema.json)
 - [PRR-C01/r3 Core Baseline qualification run result r3](run-result-r3.schema.json)

@@ -2,7 +2,7 @@
 
 ## 結論
 
-現行の`agentic-retrieval`経路は、Core Review測定の診断prototypeであり、現行Claude PRレビューのBaselineとして未qualificationである。Baselineを名乗るには、PRレビュー機能仕様への適合と、現行workflowからCore経路への意味保存を別々に証明する。
+現行の`agentic-retrieval`経路は、Core Review測定の診断prototypeであり、現行Claude PRレビューのBaselineとして未qualificationである。Baselineを名乗るには、PRレビュー機能仕様への適合、入力値の対応、実行条件の互換性を別々に証明する。
 
 ## 比較元
 
@@ -60,7 +60,13 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 
 `claude-pr-review-core-r3`では、固定target treeへschema v2 caseの変更後本文をoverlayし、`.git`を含まないread-only repository snapshotを生成する。agentic reviewerは`list-files`と`file PATH`だけでsnapshotを参照し、repository外path、`.git`、書込へ到達できない。materializerとtool policyはcase IDに依存せず、各caseのsnapshot tree、fixture、利用可能path集合、aggregate content identityをcase固有receiptへ固定する。入力対応の代表receiptは[`baseline-repository-snapshot-r1`](../contracts/baseline-repository-snapshot-r1.json)へ`PRR-C01/r2`で固定した。これにより[`baseline-input-mapping-r3`](../contracts/baseline-input-mapping-r3.json)のsource-to-Core入力対応は成立した。
 
-入力対応の成立はBaseline qualificationではない。case設計が機能仕様から独立にqualificationされ、Action、model、tool policy、permission等をprofileへ固定し、preflightを通過するまでevaluation slotを発行しない。
+入力対応の成立はBaseline qualificationではない。case設計が機能仕様から独立にqualificationされ、現行workflowとの実行互換監査を通過し、Action、model、tool policy、permission等をprofileへ固定したpreflightを通過するまでevaluation slotを発行しない。
+
+## 実行互換監査
+
+[`baseline-execution-parity-r1`](../contracts/baseline-execution-parity-r1.json)で、固定target commitの現行workflowと、三回目のCore実行条件を比較した。レビュー観点とmodel-visibleな論理入力値は対応している。一方で、PR eventの有無、git worktreeの有無、Action revision、modelの固定方法、turn上限、利用可能tool、出力契約、GitHubへの書込み条件が一致しない。このため監査状態は`unsatisfied`であり、現在のCore経路は元workflowをそのまま移したBaselineではない。
+
+PRR-C01/r3の三回の実行結果は、変換後のCore経路で発生した問題を示す診断証拠として保持する。これらを現行workflowの機能または性能を測ったBaseline resultとして扱わない。
 
 ## Baseline admission gate
 
@@ -70,9 +76,11 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 2. case設計監査を通過したEvaluation set revisionがある。
 3. expected findingが機能仕様から導出され、意味同一性をgraderが扱える。
 4. 現行workflowとCore経路の入力対応receiptが全項目で成立する。
-5. Action、model、prompt、tool policy、permission、sandbox、timeoutを固定する。
-6. prompt identity以外を含む全comparison conditionsをprofileへ固定する。
-7. 機能qualificationの反復数、個別pass条件、停止条件を実行前に固定する。
+5. 現行workflowを変更しない対照実行で、Action revision、reported model、turn挙動、tool到達性を観測する。
+6. 現行workflowからCore経路へ変える条件を一項目ずつ分離し、実行互換receiptを成立させる。
+7. Action、model、prompt、tool policy、permission、sandbox、timeoutを固定する。
+8. prompt identity以外を含む全comparison conditionsをprofileへ固定する。
+9. 機能qualificationの反復数、個別pass条件、停止条件を実行前に固定する。
 
 このgateは速度測定前に行う。gate用runで速度差やCandidate採否を判断しない。
 
@@ -80,7 +88,7 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 
 Core Baseline admission後に、同じ機能仕様、Evaluation set、model、Action、出力schema、rating contractをCandidate Aへ複製する。変更軸は情報取得経路だけに限定する。
 
-BaselineとCandidate Aの各runを発行する前にpreflight receiptを保存し、prompt identityとtool policy以外の実効互換条件を機械照合する。Baselineが未qualificationの間はCandidate A、残りcase、N=5、Integrationを発行しない。
+BaselineとCandidate Aの各runを発行する前にpreflight receiptを保存し、prompt identityとtool policy以外の実効互換条件を機械照合する。実行互換監査が`unsatisfied`である現在はCore Baselineの追加runを発行しない。Baselineが未qualificationの間はCandidate A、残りcase、N=5、Integrationも発行しない。
 
 ## 既存runの扱い
 

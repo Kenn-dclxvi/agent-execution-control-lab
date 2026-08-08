@@ -1,0 +1,171 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-execution-parity/v1",
+  "audit_id": "baseline-execution-parity-r1",
+  "state": "unsatisfied",
+  "source": {
+    "target_commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+    "workflow_path": ".github/workflows/claude-pr-review.yml",
+    "workflow_sha256": "6e5eecd689e6492add329e8b633a7f9a36aa570306c240c240b9d584aceb1a44",
+    "trigger": "pull_request: opened, synchronize, ready_for_review",
+    "workspace": {
+      "checkout": "actions/checkout@v6",
+      "fetch_depth": 1,
+      "git_directory_present": true,
+      "live_pull_request_context": true
+    },
+    "action": {
+      "reference": "anthropics/claude-code-action@v1",
+      "resolved_revision": null,
+      "model_explicit": false,
+      "max_turns_explicit": false,
+      "json_schema": false
+    },
+    "permissions": {
+      "contents": "read",
+      "pull_requests": "write",
+      "id_token": "write"
+    },
+    "tool_policy": [
+      "mcp__github_inline_comment__create_inline_comment",
+      "Bash(gh pr comment:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr view:*)"
+    ],
+    "output_mode": "github_inline_comment_and_summary_comment"
+  },
+  "core_candidate": {
+    "profile_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3",
+    "profile_sha256": "c7b1e3205568a769d0e815ceab3f451b026bd593db04698dab12854496c666d3",
+    "workflow_path": ".github/workflows/pr-review-measure-core.yml",
+    "workflow_sha256": "f7740c74c5d9ef12801fe4da7cd52351645ba741ad2722e69a8b1fd08fa77bc2",
+    "trigger": "workflow_dispatch with fixed synthetic fixture",
+    "workspace": {
+      "transport": "downloaded model-visible artifact",
+      "git_directory_present": false,
+      "repository_snapshot_write_allowed": false,
+      "live_pull_request_context": false
+    },
+    "action": {
+      "reference": "anthropics/claude-code-action@6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "model_explicit": true,
+      "model": "claude-sonnet-5",
+      "max_turns_explicit": true,
+      "max_turns": 12,
+      "json_schema": true,
+      "json_schema_revision": "review-output-r2"
+    },
+    "permissions": {
+      "contents": "read",
+      "pull_requests": "read",
+      "id_token": "none"
+    },
+    "tool_policy": ["Bash(./fixture-tool:*)"],
+    "output_mode": "structured_output_artifact_without_github_comment"
+  },
+  "checks": [
+    {
+      "identity": "review_criteria",
+      "state": "satisfied",
+      "source_value": "source promptの4観点と推測禁止",
+      "core_value": "core promptとreview contract r2の同じ4観点と推測禁止",
+      "evidence": "baseline-input-mapping-r3のreview_criteria対応"
+    },
+    {
+      "identity": "model_visible_input_values",
+      "state": "satisfied",
+      "source_value": "live PR metadata, changed paths, diff, applicable rules, repository files",
+      "core_value": "固定fixtureの同じ論理値とread-only repository snapshot",
+      "evidence": "baseline-input-mapping-r3 sha256 eb1ef8c5373a7cfc3e28eb5ec6f0af4caa8eab980327e97c15bc5dcf51fb9cac"
+    },
+    {
+      "identity": "action_revision",
+      "state": "unverified",
+      "source_value": "floating anthropics/claude-code-action@v1",
+      "core_value": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "evidence": "source workflowだけでは成功runが解決したAction commitをbindできない"
+    },
+    {
+      "identity": "trigger_and_pull_request_context",
+      "state": "unsatisfied",
+      "source_value": "pull_request event with repository and PR number",
+      "core_value": "workflow_dispatch with synthetic PR values",
+      "evidence": "Actionへ渡るGitHub event contextが一致しない"
+    },
+    {
+      "identity": "git_workspace",
+      "state": "unsatisfied",
+      "source_value": "checkout済みgit worktree",
+      "core_value": ".gitを除いたartifact workspace",
+      "evidence": "Core run 31253838176と31254138818でAction setupがfatal: not in a git directoryを記録"
+    },
+    {
+      "identity": "model_selection",
+      "state": "unverified",
+      "source_value": "Action default; workflowに明示なし",
+      "core_value": "claude-sonnet-5を明示",
+      "evidence": "source success runのreported model identityを同一receiptへbindしていない"
+    },
+    {
+      "identity": "turn_limit",
+      "state": "unsatisfied",
+      "source_value": "workflowにmax-turns指定なし",
+      "core_value": "--max-turns 12",
+      "evidence": "Core run 31254138818はpermission denial 0件でも13ターン目にerror_max_turns"
+    },
+    {
+      "identity": "tool_surface",
+      "state": "unsatisfied",
+      "source_value": "GitHub MCP、gh pr view、gh pr diff、gh pr comment",
+      "core_value": "fixture-toolだけを許可",
+      "evidence": "Core run 31253838176でexact allow ruleに一致しない4件のpermission denialを観測"
+    },
+    {
+      "identity": "output_contract",
+      "state": "unsatisfied",
+      "source_value": "inline commentとsummary comment",
+      "core_value": "review-output-r2 JSON Schemaのstructured_output",
+      "evidence": "source workflowはjson-schemaを指定せず、Coreは構造化結果の欠落を実行失敗にする"
+    },
+    {
+      "identity": "github_permissions_and_reporting",
+      "state": "intentionally_changed",
+      "source_value": "pull-requests writeとid-token writeでGitHubへ投稿",
+      "core_value": "read-only permissionsでGitHub投稿を除外",
+      "evidence": "CoreとIntegrationを分離する設計上の差だが、source execution parityは満たさない"
+    }
+  ],
+  "blocking_conditions": [
+    "action_revision",
+    "trigger_and_pull_request_context",
+    "git_workspace",
+    "model_selection",
+    "turn_limit",
+    "tool_surface",
+    "output_contract",
+    "github_permissions_and_reporting"
+  ],
+  "diagnostic_results": [
+    {
+      "github_run_id": "31253512886",
+      "result_path": "results/pr-review-core-baseline-qualification-r1-prr-c01-agentic-retrieval-r1-a31253512886.json",
+      "classification": "execution_parity_diagnostic_only"
+    },
+    {
+      "github_run_id": "31253838176",
+      "result_path": "results/pr-review-core-baseline-qualification-r1-prr-c01-agentic-retrieval-r1-a31253838176.json",
+      "classification": "execution_parity_diagnostic_only"
+    },
+    {
+      "github_run_id": "31254138818",
+      "result_path": "results/pr-review-core-baseline-qualification-r1-prr-c01-agentic-retrieval-r1-a31254138818.json",
+      "classification": "execution_parity_diagnostic_only"
+    }
+  ],
+  "admission_effect": "core_baseline_blocked",
+  "recovery_requirements": [
+    "元workflowを変更せず、指定した実PRでAction revision、reported model、turn挙動、tool到達性を観測するsource control runを先に固定する",
+    "実PRとGitHub commentを使うため、対象PRと書込み許可を別作業として明示的に得る",
+    "source controlからCoreへ変える条件を一項目ずつ新revisionへ分け、各段階でterminal structured resultを確認する",
+    "execution parityがunsatisfiedの間はCore Baseline qualification、Candidate A、N=5、Integrationを発行しない"
+  ]
+}

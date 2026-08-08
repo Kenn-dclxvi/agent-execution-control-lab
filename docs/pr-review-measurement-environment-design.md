@@ -4,7 +4,7 @@
 
 この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境全体の設計**を記録する文書である。PRレビュー機能の成果条件は[`PRレビュー機能仕様 r1`](../evaluations/targets/agent-execution-control-lab/specifications/pr-review-function-r1.md)、現行workflowとCore経路の対応およびBaseline admission gateは[`Core Baseline設計 r1`](../evaluations/targets/agent-execution-control-lab/specifications/core-baseline-r1.md)を上位の正本とする。
 
-2026-08-08の仕様監査で、既存case、oracle、rating contract、`agentic-retrieval`経路、r2 N=2がこの2文書より先に作られていたことを確認した。既存runはworkflow、schema、collector、graderの接続を示すdiagnostic evidenceとして保持し、正式Baseline qualificationまたはquality resultへ使用しない。Core Baseline、Candidate A、残り5 case、N=5、Integrationは未qualification・未実行である。
+2026-08-08の仕様監査で、既存case、oracle、rating contract、`agentic-retrieval`経路、r2 N=2がこの2文書より先に作られていたことを確認した。既存runはworkflow、schema、collector、graderの接続を示すdiagnostic evidenceとして保持し、正式Baseline qualificationまたはquality resultへ使用しない。PRR-C01/r3によるCore repetition 1も三回実行したが、すべて`execution_failed`となった。後続の実行互換監査でCore経路が現行workflowと異なる条件を複数含むことを確認したため、この三件も診断証拠としてだけ保持する。Core Baselineは未qualificationであり、Candidate A、残り5 case、N=5、Integrationは未実行である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -39,12 +39,13 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | `evaluations/targets/agent-execution-control-lab/contracts/baseline-input-mapping-r1.json` | 現行workflowとCore入力の対応 | `unsatisfied` |
 | `evaluations/targets/agent-execution-control-lab/prompts/baselines/claude-pr-review-core-r3` | authority packetとread-only repository snapshotへ接続したCore Baseline候補 | 入力対応成立・Baseline未qualification |
 | `evaluations/targets/agent-execution-control-lab/contracts/baseline-input-mapping-r3.json` | 現行workflowとCore入力の最終対応receipt | `satisfied` |
+| `evaluations/targets/agent-execution-control-lab/contracts/baseline-execution-parity-r1.json` | 現行workflowとCore候補の実行互換監査 | `unsatisfied`・Core追加実行をblock |
 | `evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-r1.json` | 固定tree、fixture overlay、利用可能path集合のidentity | 固定済み |
 | `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3` | 新しい入力identityを持つheld-out fixture | 独立case設計監査通過・未実行 |
 | `evaluations/targets/agent-execution-control-lab/contracts/prr-c01-r3-case-design-audit-r1.json` | 機能仕様からの導出と複数path finding identityの独立監査receipt | `satisfied` |
-| `evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-prr-c01-r3-r1.json` | PRR-C01/r3固有のread-only snapshot identity | 固定済み・未実行 |
-| `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json` | Core Baseline機能qualificationのfresh N=2条件 | 固定済み・slot未発行 |
-| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json` | profileと全依存identity、2 slot、停止条件の機械照合 | `ready_not_executed` |
+| `evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-prr-c01-r3-r1.json` | PRR-C01/r3固有のread-only snapshot identity | 固定済み・診断runで使用 |
+| `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json` | Core機能確認の初回N=2条件 | 固定済み・履歴profile |
+| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json` | profileと全依存identity、2 slot、停止条件の機械照合 | 初回実行条件の履歴 |
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r2.json` | 当時のprofile、rating、3 KPI identity | diagnostic履歴 |
 | `evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v1.json` | 当時のhard gateを0〜4の`quality_score`へ写像 | diagnostic履歴 |
 | `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-qualification-n2-r1.json` | PRR-C01の独立2反復条件 | diagnostic履歴 |
@@ -53,12 +54,12 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | `evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
 | `evaluations/targets/agent-execution-control-lab/tools/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
 | `evaluations/targets/agent-execution-control-lab/results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md` | 既存r2 N=2の現在解釈 | diagnosticへ再分類 |
-| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | qualification revision r1へ固定・repetition 1未発行 |
+| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | 変換後Core経路の診断workflow・追加実行停止 |
 | `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
 
-Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへmodel-visible artifactと読み取り専用snapshotだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。qualification revision r1はPRR-C01/r3、agentic retrieval、Claude Sonnet 5、固定profile、repetition 1を開始前に機械照合し、run JSONへ`quality_score`、`total_tokens`、`execution_ms`を保存する。旧r2 workflowのrunはdiagnostic履歴のまま変更しない。
+Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへmodel-visible artifactと読み取り専用snapshotだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。この構成は測定境界としては明確だが、実PRのgit worktreeとGitHub toolを使う現行workflowをそのまま再現していない。PRR-C01/r3の三回の結果と旧r2 workflowのrunはdiagnostic履歴のまま変更しない。
 
-Core Baseline候補r3は、固定target treeへcaseの変更後本文をoverlayした`.git`なしread-only repository snapshotを使用する。materializerとtool policyはcase IDに依存せず、snapshot identityとmodel-visibleな利用可能path集合はcase固有receiptへ固定し、reviewerは限定fixture toolからだけ参照する。PRR-C01/r3ではcase設計の独立監査、case固有snapshot、fresh N=2 profile、preflightまで成立した。Core Baselineの2反復は未実行であり、Candidate Aと後続測定はまだ発行しない。
+Core Baseline候補r3は、固定target treeへcaseの変更後本文をoverlayした`.git`なしread-only repository snapshotを使用する。materializerとtool policyはcase IDに依存せず、snapshot identityとmodel-visibleな利用可能path集合はcase固有receiptへ固定し、reviewerは限定fixture toolからだけ参照する。PRR-C01/r3ではcase設計の独立監査、case固有snapshot、fresh N=2 profile、当時のCore条件内でのpreflightまで成立した。repetition 1は三回とも失敗し、実行互換監査も`unsatisfied`である。repetition 2、Candidate A、後続測定は発行しない。
 
 ## Diagnostic N=2
 
@@ -409,7 +410,7 @@ A5 -> B5
 
 Baselineの機能、対応関係、admission gateは[`Core Baseline設計 r1`](../evaluations/targets/agent-execution-control-lab/specifications/core-baseline-r1.md)を正本とする。以下は測定環境全体がBaselineを変更しないための補助規則である。
 
-現行`.github/workflows/claude-pr-review.yml`は、削除や内部最適化を先に行わない。Baseline identityを保持する。
+現行`.github/workflows/claude-pr-review.yml`は、削除や内部最適化を先に行わない。Baseline identityを保持する。固定fixtureの入力対応だけではこのidentityを再現したことにならないため、trigger、workspace、Action revision、reported model、turn挙動、tool、出力方法、permissionも別の実行互換receiptで確認する。
 
 測定準備では次を守る。
 
@@ -537,7 +538,7 @@ PRR-C01の両variantを使い、Phase 4へ進む前のprobeを実施した。
 | 0 | PRレビュー機能仕様 | caseとratingより上位の成果条件が固定される | r1固定 |
 | 1 | Baseline設計 | 現行workflowとの対応とadmission gateが固定される | r1固定・admission未実施 |
 | 2 | fixtureとrating qualification | 仕様から導出したcase、oracle、rating contractが独立監査を通過する | PRR-C01/r3とquality contract v3の独立監査通過 |
-| 3 | Baseline admission | 入力対応、prompt identity、実効条件、機能反復gateが成立する | 入力対応、case固有snapshot、fresh N=2 profile、preflight成立。2反復の機能結果は未観測 |
+| 3 | Baseline admission | 入力対応、実行互換、prompt identity、実効条件、機能反復gateが成立する | 入力対応は成立。実行互換は`unsatisfied`。repetition 1の三回は失敗し、追加実行停止 |
 | 4 | Candidate A pilot | qualification済みLayer 1でBaselineとCandidate Aの接続を確認する | 未実行 |
 | 5 | N=5 | 全caseを交互順序でN=5実行する | 未実行 |
 | 6 | 比較result | quality gate通過可否と時間KPI中央値を固定resultとして保存する | 未実行 |
@@ -572,9 +573,11 @@ PRR-C01の両variantを使い、Phase 4へ進む前のprobeを実施した。
 
 ## 再開条件
 
-1. 別途実行を許可した場合だけ、preflightへ固定したCore Baselineのrepetition 1を発行する。
-2. repetition 1がscore `4`、model一致、計測完全を満たした場合だけrepetition 2を発行する。
-3. 2件とも個別pass条件を満たした場合だけCore Baseline機能qualificationを成立させる。
-4. 一件でもquality、model identity、計測、固定identityのgateを満たさない場合は後続slotを止め、terminal resultを保持する。
+1. 対象となる実PRとGitHub commentの書込みを明示的に許可した場合だけ、現行workflowを変更しないsource control runを実行する。
+2. source control runからAction revision、reported model、turn挙動、tool到達性を固定する。
+3. 現行workflowからCoreへ変える条件を一項目ずつ新しいrevisionへ分け、各段階でterminal resultと実行互換を確認する。
+4. 実行互換receiptが`satisfied`になった後に、新しいprofileとpreflightでCore Baseline qualificationを計画する。
+5. Core repetition 1がscore `4`、model一致、計測完全を満たした場合だけrepetition 2を発行する。
+6. 2件とも個別pass条件を満たした場合だけCore Baseline機能qualificationを成立させる。
 
 停止中はN=5、Integration、レビュー方式の置換、自動修正の再接続、既存evaluation resultの変更まで広げない。

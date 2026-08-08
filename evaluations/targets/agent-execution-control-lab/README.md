@@ -2,7 +2,7 @@
 
 現行Claude Code Actionのagentic retrievalと、決定論的に入力を準備するCandidate Aを固定fixtureで調べる、`agent-execution-control-lab`向けnamespacedインスタンスである。ターゲットrefは測定環境導入前のcommit `8cd97283e60f13393fb1302c601c9a4fe0a5381f`へ固定する。
 
-現在のインスタンス状態は登録済みであり、PRR-C01/r3のcase設計監査を終えている。Core Baseline repetition 1は3回とも`execution_failed`となり、再試行上限に達した。品質は観測できておらず、repetition 2は開始していない。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。正式な品質resultは0件である。
+現在のインスタンス状態は登録済みであり、PRR-C01/r3のcase設計監査を終えている。Core Baseline repetition 1は3回とも`execution_failed`となり、再試行上限に達した。さらに実行互換監査で、現在のCore経路が現行workflowと異なる条件を複数含むことを確認した。品質は観測できておらず、repetition 2は開始していない。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。正式な品質resultは0件である。
 
 ## アーティファクト
 
@@ -14,8 +14,9 @@
 - [`prompts/`](prompts/README.md): 現行workflow source promptとCore Baseline prompt候補
 - [`rating-contracts/`](rating-contracts/README.md): model-visible review contractとmodel-invisible quality rating contract
 - [`results/`](results/README.md): 保存済みrunとdiagnostic再分類receipt。正式resultは0件
-- [`contracts/`](contracts/README.md): 入力対応、case設計監査、snapshot、qualification preflight
+- [`contracts/`](contracts/README.md): 入力対応、実行互換監査、case設計監査、snapshot、qualification preflight
 - [`contracts/baseline-input-mapping-r3.json`](contracts/baseline-input-mapping-r3.json): 現行workflowとCore入力の対応。`satisfied`
+- [`contracts/baseline-execution-parity-r1.json`](contracts/baseline-execution-parity-r1.json): 現行workflowとCore候補の実行互換監査。`unsatisfied`
 - [`schemas/`](schemas/README.md): fixture、review出力、診断run resultのschema
 - [`tools/`](tools/README.md): このインスタンス固有の入力生成、収集、採点補助
 
@@ -24,7 +25,7 @@
 - profileへ固定したcase revisionの`input.json`だけをreviewerへ渡し、同revisionの`oracle.json`はgrader jobだけが読む。
 - `.github/workflows/pr-review-measure-core.yml`はGitHubの配置制約によりリポジトリ共通領域へ置くが、このインスタンスのアーティファクトとtoolsだけを参照する。
 - workflowは手動起動のみでGitHub commentを投稿しない。
-- PRR-C01/r3のcase設計監査とCore Baseline fresh N=2 preflightは成立したが、2反復の機能結果は未観測である。Candidate A、残り5ケース、N=5、Integrationは発行しない。
+- PRR-C01/r3のcase設計監査と、当時のCore条件内でのfresh N=2 preflightは成立した。しかし現行workflowとの実行互換監査は`unsatisfied`であり、三回の失敗結果は実行互換を診断する証拠としてだけ扱う。Core Baselineの追加run、Candidate A、残り5ケース、N=5、Integrationは発行しない。
 
 ## ローカル検証
 
@@ -35,7 +36,7 @@
 
 ## Core Baseline qualification
 
-GitHub Actionsの`PR Review Measurement Core`は、現在PRR-C01/r3のCore Baseline機能確認だけを扱う。入力欄は過去のworkflowとの互換性のために残すが、prepare jobがcase、variant、model、profile、repetitionを固定値へ照合し、今回はrepetition 1以外を開始前に拒否する。
+GitHub Actionsの`PR Review Measurement Core`は、PRR-C01/r3の変換後Core経路を診断した履歴workflowである。入力欄は過去のworkflowとの互換性のために残し、prepare jobがcase、variant、model、profile、repetitionを固定値へ照合する。ただし現在の状態では追加実行しない。
 
 - reviewerは固定fixture toolからPR情報、規則、対象本文、読み取り専用snapshotを取得する。
 - reviewer jobにはoracleと`.git`を渡さず、repository snapshotから書込権限を除く。

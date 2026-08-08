@@ -26,6 +26,8 @@ Core Baselineのrepetition 1は、測定環境の修正を挟んで3回実行し
 
 三回目では要求モデル`claude-sonnet-5`との一致を確認し、13ターン、594,415トークン、実行時間106.513秒を記録した。ただし構造化レビュー結果がないため、これらは失敗実行の診断値であり、Baselineの品質または性能を示す値ではない。一次JSONのSHA-256は順に`764981d1981ff8509efceada7c0dbfa3f054aefe3fd8ae751e87d4abe2b3fe85`、`bf42c0c6cd343645e79a029210da45c6988c7548f91687949f4439747ce02968`、`076c4686e7f4d7191b453306390a227453bc6b8665c2e7220ada02170e815299`である。
 
+後続の[`実行互換監査`](../contracts/baseline-execution-parity-r1.json)では、現行workflowとこのCore経路のtrigger、workspace、turn上限、tool、出力方法などが一致しないと判定した。上の三件はすべて`execution_parity_diagnostic_only`であり、現行workflowを再現したBaseline resultには数えない。
+
 ## PRR-C01 probe receipt
 
 2026-08-08にPRR-C01の両variantをprobeした。次は正式な比較resultではなく、測定経路の成立可否を確認したdiagnostic receiptである。
