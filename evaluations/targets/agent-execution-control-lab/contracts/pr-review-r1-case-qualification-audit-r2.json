@@ -1,0 +1,16 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-case-qualification-audit/v1",
+  "audit_id": "pr-review-r1-case-qualification-audit-r2",
+  "decision": "partially_satisfied",
+  "purpose": "初回control-free出力を受けた既存r1ケースの機能適合再監査",
+  "admitted_cases": ["PRR-C02/r1", "PRR-C03/r1", "PRR-C06/r1"],
+  "excluded_cases": ["PRR-C01/r1", "PRR-C04/r1", "PRR-C05/r1"],
+  "new_observation": {
+    "case": "PRR-C05/r1",
+    "github_run_id": "31276177531",
+    "result": "model-visibleなsingle_artifact_unit規則へbindした3件目のfindingを返した",
+    "audit_conclusion": "変更はcredential例とrelease状態記録という別判断を同一fileへ含むため、3件目は有効である。oracleが2件だけを期待するC05/r1は機能適合gateを満たさない。"
+  },
+  "allowed_use": "admitted 3 casesのcontrol-free baseline qualification only",
+  "forbidden_use": ["held-out evidence", "prompt comparison", "adoption", "release"]
+}

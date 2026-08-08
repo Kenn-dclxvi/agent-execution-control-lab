@@ -33,7 +33,9 @@
 | [`pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1-preflight`](pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1-preflight.json) | 実行条件の履歴 | 関係レビュー役Sonnetの3反復を固定し、全件実行済み |
 | [`pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1-preflight`](pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1-preflight.json) | 実行条件の履歴 | 関係レビュー役Opusの3反復を固定し、全件実行済み |
 | [`pr-review-control-free-four-qualification-n1-r1-preflight`](pr-review-control-free-four-qualification-n1-r1-preflight.json) | 実行条件の履歴 | 初回4件はschema出力とcollector依存の移植漏れによりreview開始前に`execution_failed` |
-| [`pr-review-control-free-four-qualification-n1-r2-preflight`](pr-review-control-free-four-qualification-n1-r2-preflight.json) | `ready_not_executed` | 初回4件のschema出力とcollector依存の移植漏れだけを直すenvironment recoveryを固定 |
+| [`pr-review-control-free-four-qualification-n1-r2-preflight`](pr-review-control-free-four-qualification-n1-r2-preflight.json) | 実行条件の履歴 | 4件を完了し、C05のcase不備と3件のfixture access計測不成立を観測 |
+| [`pr-review-r1-case-qualification-audit-r2`](pr-review-r1-case-qualification-audit-r2.json) | `partially_satisfied` | C05/r1の欠落findingを確認し、C02、C03、C06だけを資格確認へ許可 |
+| [`pr-review-control-free-three-qualification-n1-r3-preflight`](pr-review-control-free-three-qualification-n1-r3-preflight.json) | `ready_not_executed` | C05を除外し、fixture-tool計測を拡張した3ケース資格確認を固定 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 

@@ -1,0 +1,11 @@
+{
+  "schema_version": "the-caption-prompt.quality-rating-contract/v13",
+  "contract_id": "pr-review-finding-quality-v7",
+  "state": "case_qualification_satisfied",
+  "supported_cases": ["PRR-C02/r1", "PRR-C03/r1", "PRR-C06/r1"],
+  "source_contract": "pr-review-finding-quality-v6",
+  "quality_score_rule": {"rating_scale": [0, 1, 2, 3, 4], "score_4_requires": ["required finding miss 0", "false positive 0", "review contract violation 0", "requested modelとreported modelの一致"]},
+  "qualification_boundary": {"case_audit": "contracts/pr-review-r1-case-qualification-audit-r2.json", "purpose": "新インスタンスのcontrol-free baseline品質確認専用", "held_out": false, "comparison_use": "forbidden"},
+  "model_visible": ["cases/<case_id>/r1/input.json", "rating-contracts/review-contract-r1.md"],
+  "model_invisible": ["cases/<case_id>/r1/oracle.json", "expected finding identity", "grader implementation"]
+}
