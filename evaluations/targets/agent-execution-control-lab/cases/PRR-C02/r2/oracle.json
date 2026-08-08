@@ -1,0 +1,29 @@
+{
+  "schema_version": 5,
+  "case_id": "PRR-C02",
+  "fixture_revision": "r2",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "evaluation_artifact_integrity",
+      "rule_id": "instance_artifact_separation",
+      "paths": [
+        "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+        "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json"
+      ],
+      "locations": [
+        {
+          "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+          "line_start": 3,
+          "line_end": 3
+        },
+        {
+          "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json",
+          "line_start": 1,
+          "line_end": 1
+        }
+      ],
+      "severity": "major"
+    }
+  ]
+}

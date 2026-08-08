@@ -1,0 +1,52 @@
+{
+  "schema_version": 5,
+  "case_id": "PRR-C02",
+  "fixture_revision": "r2",
+  "review_contract_revision": "pr-review-contract-r2",
+  "pr": {
+    "title": "ターゲット横断のレビューsetを追加",
+    "body": "agent-execution-control-lab向けの比較setへ、clickターゲットのcaseを含める。",
+    "base_sha": "7777777777777777777777777777777777777771",
+    "head_sha": "7777777777777777777777777777777777777772"
+  },
+  "changed_paths": [
+    "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+    "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json"
+  ],
+  "changes": [
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+      "patch": "new file mode 100644\n--- /dev/null\n+++ b/evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md\n@@ -0,0 +1,3 @@\n+# ターゲット横断レビュー r1\n+\n+このsetはagent-execution-control-labのPRレビュー方式を比較する。",
+      "content_after": "# ターゲット横断レビュー r1\n\nこのsetはagent-execution-control-labのPRレビュー方式を比較する。\n"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json",
+      "patch": "new file mode 100644\n--- /dev/null\n+++ b/evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json\n@@ -0,0 +1 @@\n+{\"members\":[{\"target_id\":\"click\",\"case_id\":\"F07-P\",\"revision\":\"r3\"}]}",
+      "content_after": "{\"members\":[{\"target_id\":\"click\",\"case_id\":\"F07-P\",\"revision\":\"r3\"}]}\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {
+          "rule_id": "instance_artifact_separation",
+          "text": "インスタンス間でアーティファクトを混ぜない。ケース、プロファイル、セット、rating contract、プロンプトバンドル、resultはインスタンス固有のアーティファクトとして扱う。"
+        },
+        {
+          "rule_id": "result_write_once",
+          "text": "resultはwrite-onceのresult_idとcontent SHA-256で固定し、revisionで上書きしない。"
+        },
+        {
+          "rule_id": "no_secrets",
+          "text": "シークレット、クレデンシャル、非公開の生の実行ログ、一時worktreeをcommitしない。"
+        },
+        {
+          "rule_id": "natural_japanese",
+          "text": "人が読む内容は自然な日本語で表す。"
+        }
+      ]
+    }
+  ]
+}

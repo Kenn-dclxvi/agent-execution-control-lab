@@ -1,0 +1,46 @@
+{
+  "schema_version": 5,
+  "case_id": "PRR-C06",
+  "fixture_revision": "r2",
+  "review_contract_revision": "pr-review-contract-r2",
+  "pr": {
+    "title": "PRレビュー候補の状態説明を追加",
+    "body": "候補の作成と、その後に必要な判断を分けて説明する文書を追加する。",
+    "base_sha": "9999999999999999999999999999999999999991",
+    "head_sha": "9999999999999999999999999999999999999992"
+  },
+  "changed_paths": [
+    "docs/pr-review-candidate-status.md"
+  ],
+  "changes": [
+    {
+      "path": "docs/pr-review-candidate-status.md",
+      "patch": "new file mode 100644\n--- /dev/null\n+++ b/docs/pr-review-candidate-status.md\n@@ -0,0 +1,5 @@\n+# PRレビュー候補の状態\n+\n+関係レビュー役を使う候補を作成し、校正結果を保存した。\n+\n+比較、採用、release、本体反映はまだ行っていない。",
+      "content_after": "# PRレビュー候補の状態\n\n関係レビュー役を使う候補を作成し、校正結果を保存した。\n\n比較、採用、release、本体反映はまだ行っていない。\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {
+          "rule_id": "state_separation",
+          "text": "アーティファクトが存在することと、評価済み、採用済み、release済み、本体反映済みであることを混同しない。"
+        },
+        {
+          "rule_id": "result_write_once",
+          "text": "resultはwrite-onceのresult_idとcontent SHA-256で固定し、revisionで上書きしない。"
+        },
+        {
+          "rule_id": "no_secrets",
+          "text": "シークレット、クレデンシャル、非公開の生の実行ログ、一時worktreeをcommitしない。"
+        },
+        {
+          "rule_id": "natural_japanese",
+          "text": "人が読む内容は自然な日本語で表す。"
+        }
+      ]
+    }
+  ]
+}

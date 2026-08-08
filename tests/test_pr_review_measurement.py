@@ -3185,3 +3185,120 @@ def test_control_free_two_admission_reuses_only_score_four_results():
             )
         )
         assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]
+
+
+@pytest.mark.parametrize("case_id", ["PRR-C02", "PRR-C03", "PRR-C06"])
+def test_held_out_three_fixtures_are_schema_valid_and_revision_bound(case_id: str):
+    input_path = INSTANCE_ROOT / "cases" / case_id / "r2" / "input.json"
+    oracle_path = INSTANCE_ROOT / "cases" / case_id / "r2" / "oracle.json"
+    fixture = json.loads(input_path.read_text(encoding="utf-8"))
+    oracle = json.loads(oracle_path.read_text(encoding="utf-8"))
+    input_schema = json.loads(
+        (INSTANCE_ROOT / "schemas/fixture-input-r5.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    oracle_schema = json.loads(
+        (INSTANCE_ROOT / "schemas/fixture-oracle-r5.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(input_schema).validate(fixture)
+    jsonschema.Draft202012Validator(oracle_schema).validate(oracle)
+    assert fixture["case_id"] == oracle["case_id"] == case_id
+    assert fixture["fixture_revision"] == oracle["fixture_revision"] == "r2"
+    assert fixture["changed_paths"] == [change["path"] for change in fixture["changes"]]
+    for finding in oracle["expected_findings"]:
+        assert set(finding["paths"]) == {
+            location["path"] for location in finding["locations"]
+        }
+        assert set(finding["paths"]).issubset(fixture["changed_paths"])
+
+
+def test_held_out_three_case_shapes_cover_relationship_history_and_clean_control():
+    fixtures = {
+        case_id: json.loads(
+            (INSTANCE_ROOT / "cases" / case_id / "r2/input.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for case_id in ("PRR-C02", "PRR-C03", "PRR-C06")
+    }
+    oracles = {
+        case_id: json.loads(
+            (INSTANCE_ROOT / "cases" / case_id / "r2/oracle.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for case_id in fixtures
+    }
+
+    assert len(fixtures["PRR-C02"]["changed_paths"]) == 2
+    assert len(oracles["PRR-C02"]["expected_findings"][0]["paths"]) == 2
+    assert oracles["PRR-C02"]["expected_findings"][0]["rule_id"] == (
+        "instance_artifact_separation"
+    )
+    assert fixtures["PRR-C03"]["changed_paths"] == [
+        "evaluations/targets/agent-execution-control-lab/results/"
+        "pr-review-control-free-qualification_2026-08-09.md"
+    ]
+    assert oracles["PRR-C03"]["expected_findings"][0]["rule_id"] == (
+        "result_write_once"
+    )
+    assert oracles["PRR-C06"] == {
+        "schema_version": 5,
+        "case_id": "PRR-C06",
+        "fixture_revision": "r2",
+        "clean_control": True,
+        "expected_findings": [],
+    }
+
+
+def test_held_out_three_patches_match_fixed_target_tree():
+    target_result = (
+        INSTANCE_ROOT
+        / "results/pr-review-control-free-qualification_2026-08-09.md"
+    ).read_text(encoding="utf-8")
+    c03 = json.loads(
+        (INSTANCE_ROOT / "cases/PRR-C03/r2/input.json").read_text(encoding="utf-8")
+    )
+    assert c03["changes"][0]["content_after"] == target_result.replace(
+        "| satisfied | 4 | 234,423 |", "| satisfied | 4 | 23,443 |", 1
+    )
+
+    for case_id in ("PRR-C02", "PRR-C06"):
+        fixture = json.loads(
+            (INSTANCE_ROOT / "cases" / case_id / "r2/input.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for change in fixture["changes"]:
+            assert not (REPOSITORY_ROOT / change["path"]).exists()
+            assert change["patch"].startswith("new file mode 100644\n--- /dev/null\n")
+            assert f"+++ b/{change['path']}\n" in change["patch"]
+
+
+def test_held_out_three_is_not_executable_before_independent_audit():
+    rating = json.loads(
+        (INSTANCE_ROOT / "rating-contracts/pr-review-finding-quality-v8.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    set_readme = (
+        INSTANCE_ROOT / "sets/pr-review-held-out-three-r1/README.md"
+    ).read_text(encoding="utf-8")
+    specification = (
+        INSTANCE_ROOT / "specifications/pr-review-held-out-comparison-r1.md"
+    ).read_text(encoding="utf-8")
+
+    assert rating["state"] == "case_design_audit_pending"
+    assert rating["admission"] == {
+        "case_design_audit": "unobserved",
+        "control_free_qualification": "not_executed",
+        "comparison_preflight": "not_created",
+        "comparison_execution": "forbidden",
+    }
+    assert "スロットを発行しない" in set_readme
+    assert "全件で測定が成立し、quality score `4`" in specification
+    assert "`quality_score`、all-agent `total_tokens`、`elapsed_seconds`" in specification
