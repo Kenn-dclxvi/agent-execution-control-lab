@@ -25,6 +25,7 @@ import pr_review_code_review_qualification_r3 as code_review_qualification_r3
 import pr_review_code_review_qualification_r4 as code_review_qualification_r4
 import pr_review_workflow_free_calibration as workflow_free_calibration
 import pr_review_relationship_role_calibration as relationship_role_calibration
+import pr_review_control_free_qualification as control_free_qualification
 import pr_review_subagent_hook as subagent_hook
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
@@ -2867,3 +2868,114 @@ def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: 
     denied = code_review_qualification_r3._instrumented_trace(execution, hook_file)
     assert denied["fixture_tool_permission_denials"] == 1
     assert denied["complete"] is False
+
+
+@pytest.mark.parametrize("case_id", control_free_qualification.CASES)
+def test_control_free_four_preflight_and_packet_are_fixed(
+    tmp_path: Path, case_id: str
+):
+    profile, preflight = control_free_qualification.validate_preflight(case_id)
+    assert profile["purpose"] == "control_free_baseline_qualification"
+    assert profile["comparison_conditions"]["executor_parameters"]["max_workers"] == 24
+    assert profile["comparison_conditions"]["executor_parameters"]["dispatch_concurrency"] == 4
+    assert len(preflight["planned_slots"]) == 4
+
+    output = tmp_path / case_id
+    metadata = control_free_qualification.prepare_input(case_id, output)
+    assert metadata["case_id"] == case_id
+    assert metadata["variant"] == "workflow-free-qualification"
+    assert (output / "review-input.json").is_file()
+    assert (output / "fixture-tool").is_file()
+    assert (output / "pr_review_control_free_qualification.py").is_file()
+    assert not (output / "oracle.json").exists()
+
+
+def test_control_free_four_grade_accepts_all_agent_measurement(tmp_path: Path):
+    case_id = "PRR-C02"
+    prepared_dir = tmp_path / "prepared"
+    control_free_qualification.prepare_input(case_id, prepared_dir)
+    review_output = tmp_path / "review-output.json"
+    review_output.write_text(
+        json.dumps(_expected_review_output(case_id)), encoding="utf-8"
+    )
+    review_metadata = tmp_path / "review-metadata.json"
+    review_metadata.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {
+                    "model": "claude-sonnet-5",
+                    "duration_ms": 1000,
+                    "turns": 3,
+                    "input_tokens": 200,
+                    "output_tokens": 40,
+                    "reported_cost_usd": 0.01,
+                },
+                "workflow_trace": {
+                    "complete": True,
+                    "fixture_tool_access_observed": True,
+                    "fixture_tool_permission_denials": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    result_path = tmp_path / "result.json"
+    result = control_free_qualification.grade_run(
+        case_id,
+        123,
+        "claude-sonnet-5",
+        review_output,
+        review_metadata,
+        prepared_dir / "prepare-metadata.json",
+        result_path,
+        "123",
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r13.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "pass"
+    assert result["quality_score"] == 4
+    assert result["runtime"]["total_tokens"] == 240
+    assert result["measurement_qualification"]["state"] == "satisfied"
+
+
+def test_control_free_four_workflow_uses_fixed_r1_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-qualify-control-free-four.yml"
+    ).read_text(encoding="utf-8")
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    expected = (
+        INSTANCE_ROOT
+        / "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md"
+    ).read_text(encoding="utf-8")
+    assert prompt_text == expected
+    assert "review eligibility" not in prompt_text
+    assert "related_paths" not in prompt_text
+
+
+def test_control_free_four_quality_requires_expected_severity():
+    fixture = json.loads(
+        (INSTANCE_ROOT / "cases/PRR-C02/r1/input.json").read_text(encoding="utf-8")
+    )
+    oracle = json.loads(
+        (INSTANCE_ROOT / "cases/PRR-C02/r1/oracle.json").read_text(encoding="utf-8")
+    )
+    review = _expected_review_output("PRR-C02")
+    review["findings"][0]["severity"] = "minor"
+    quality = control_free_qualification._quality_result(oracle, review, fixture)
+    assert quality["true_positive"] == 0
+    assert quality["false_negative"] == 1
+    assert quality["false_positive"] == 1

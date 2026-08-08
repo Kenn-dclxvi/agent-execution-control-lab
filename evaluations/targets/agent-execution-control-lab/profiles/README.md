@@ -1,6 +1,6 @@
 # agent-execution-control-lab PRレビュープロファイル索引
 
-登録済みprofileは次の12件である。
+登録済みprofileは次の13件である。
 
 機械的な全件索引:
 
@@ -16,8 +16,9 @@
 - [`pr-review-claude-code-core-c01-r4-qualification-n2-r3`](pr-review-claude-code-core-c01-r4-qualification-n2-r3.json): 同じrepetition 1に対し、project設定からsubagentへ同じ読取り権限を継承し、内容を保存しないlifecycleとtool batchの計測を加えたprofile。[GitHub Actions run 31265402558](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265402558)ではproject設定がartifactから除外され、reviewer開始前に`execution_failed`となった
 - [`pr-review-claude-code-core-c01-r4-qualification-n2-r4`](pr-review-claude-code-core-c01-r4-qualification-n2-r4.json): project設定を通常名で転送してreview job内で配置し、開始前失敗時の収集も回復した同一repetition 1 profile。[GitHub Actions run 31265761721](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265761721)では実並列と権限境界を確認したが、required findingをmissして`quality_failed`となった
 - [`pr-review-workflow-free-c01-r4-calibration-n2-r1`](pr-review-workflow-free-c01-r4-calibration-n2-r1.json): PRR-C01/r4でreview方法をmodelへ委ね、品質、全agent token、経過時間を2反復で観測する校正profile。[N=2 result](../results/pr-review-workflow-free-c01-r4-calibration-n2_2026-08-09.md)は両方とも測定成立、subagent 0件のroot単独reviewで、quality scoreは`4 / 1`
-- [`pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1`](pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json): 関係レビュー役を1人に固定し、その役にSonnetを使う3反復の校正profile。実行前
-- [`pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1`](pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json): 同じ関係レビュー体制で、その役だけをOpusへ変える3反復の校正profile。実行前
+- [`pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1`](pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json): 関係レビュー役を1人に固定し、その役にSonnetを使った3反復の校正profile。[N=3 result](../results/pr-review-relationship-reviewer-model-calibration-n3_2026-08-09.md)は全件測定成立、quality scoreは`4 / 0 / 4`
+- [`pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1`](pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json): 同じ関係レビュー体制で、その役だけをOpusへ変えた3反復の校正profile。[N=3 result](../results/pr-review-relationship-reviewer-model-calibration-n3_2026-08-09.md)は全件測定成立、quality scoreは`4 / 4 / 4`
+- [`pr-review-control-free-four-qualification-n1-r1`](pr-review-control-free-four-qualification-n1-r1.json): 現行仕様へ適合したPRR-C02、C03、C05、C06を各1回実行するcontrol-free資格確認profile。[preflight](../contracts/pr-review-control-free-four-qualification-n1-r1-preflight.json)済み・未実行
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 

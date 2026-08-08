@@ -1,0 +1,32 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v2",
+  "preflight_id": "pr-review-control-free-four-qualification-n1-r1-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-control-free-four-qualification-n1-r1", "path": "profiles/pr-review-control-free-four-qualification-n1-r1.json", "sha256": "2de1e08e5de696996494b43782b04bbfa05bc6245a16d0f2ccf6e5f7558d1a1c"},
+  "predicates": {
+    "case_design_audit": "four_cases_satisfied_one_case_excluded",
+    "model_visible_boundary": "satisfied",
+    "control_free_prompt": "fixed",
+    "all_agent_token_accounting": "fixed",
+    "fresh_n1_per_case": "satisfied",
+    "profile_conditions": "satisfied"
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C03", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C05", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C06", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "contracts/pr-review-r1-case-qualification-audit-r1.json", "sha256": "079abc67493d9f7b686c0e05d8c78598ad51b99ab5568f4cfd5067899c1dfb2f"},
+    {"path": "rating-contracts/pr-review-finding-quality-v6.json", "sha256": "85d899283fce3ab75486c0a120f60bfdcbed2e3763ca37dcb024d19ed3f12db5"},
+    {"path": "specifications/control-free-four-qualification-r1.md", "sha256": "8dfaffa10243cec1c5b4f15d903fea6014e6ef5604524fc76b80cfdb5504defd"},
+    {"path": "schemas/run-result-r13.schema.json", "sha256": "be4031520bc814e1a77cc66cf64a92c5853f5ad1a1a84fa03da4ea0b49520388"},
+    {"path": "tools/pr_review_control_free_qualification.py", "sha256": "a2a145e31b72ddd769804d42a6145649b26b2367dfa89fbc9f47211216d9b439"},
+    {"path": "prompts/baselines/pr-review-control-free-qualification-r1/manifest.json", "sha256": "734ae04d8008165507122cf713e827a1f40eade909c92955118e2e0636dc428b"},
+    {"path": "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md", "sha256": "253281ecff56e47749aeec5bcb99de596cff4cb448693c8a9c16284f8fb83744"},
+    {"path": ".github/workflows/pr-review-qualify-control-free-four.yml", "sha256": "64b844722e17d54430ce354259fe537f5b8db0101cb92ca663444c70609d65a1"}
+  ],
+  "issuance": {"max_workers": 24, "dispatch_concurrency": 4, "external_execution": "not_started"},
+  "scope": "control-free baseline qualification only; no held-out, comparison, adoption, or release claim"
+}
