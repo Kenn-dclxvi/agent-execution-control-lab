@@ -359,4 +359,5 @@ def test_workflow_is_manual_read_only_and_pinned():
     assert contract["reviewer_executor"]["revision"] in workflow
     assert "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" in workflow
     assert "github_token: ${{ github.token }}" in workflow
+    assert "jq -c 'del(.\"$schema\")'" in workflow
     assert "fixture-tool file:*)" not in workflow
