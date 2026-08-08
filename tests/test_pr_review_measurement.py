@@ -487,14 +487,22 @@ def test_prr_c01_r3_qualification_failures_are_registered_write_once():
         "31253512886",
         "31253838176",
         "31254138818",
+        "31256216037",
     ]
-    assert [result["schema_version"] for result in results] == [3, 4, 5]
-    assert all(result["result"] == "execution_failed" for result in results)
-    assert all(result["quality_score"] is None for result in results)
+    assert [result["schema_version"] for result in results] == [3, 4, 5, 6]
+    assert [result["result"] for result in results] == [
+        "execution_failed",
+        "execution_failed",
+        "execution_failed",
+        "quality_failed",
+    ]
+    assert [result["quality_score"] for result in results] == [None, None, None, 0]
+    assert qualification.validate_run_result(results[-1])
     assert [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths] == [
         "764981d1981ff8509efceada7c0dbfa3f054aefe3fd8ae751e87d4abe2b3fe85",
         "bf42c0c6cd343645e79a029210da45c6988c7548f91687949f4439747ce02968",
         "076c4686e7f4d7191b453306390a227453bc6b8665c2e7220ada02170e815299",
+        "dc622383fe4e80aef176ec7f5d6207e17297b5a4f572ebe12acaf7e28ffcc8f7",
     ]
 
 
