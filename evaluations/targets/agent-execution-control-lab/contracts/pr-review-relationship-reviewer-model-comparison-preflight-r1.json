@@ -1,0 +1,29 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-model-comparison-preflight/v1",
+  "preflight_id": "pr-review-relationship-reviewer-model-comparison-preflight-r1",
+  "state": "ready_not_executed",
+  "profiles": [
+    {"model": "sonnet", "path": "profiles/pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json", "sha256": "8c8fe619dd1bac87d9771647d22c3dde1735c35d1f242d73af8282f986109d05"},
+    {"model": "opus", "path": "profiles/pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json", "sha256": "3b271aabf6e375cfc837a27430c237e8bf8b39a847ba98686193cc502f87c92c"}
+  ],
+  "changed_axis": "relationship_reviewer_model",
+  "allowed_profile_differences": [
+    "profile_id",
+    "comparison_conditions.variant",
+    "comparison_conditions.relationship_reviewer_model",
+    "comparison_conditions.prompt.effective_identity",
+    "comparison_conditions.prompt.effective_content_sha256",
+    "comparison_conditions.model.relationship_reviewer"
+  ],
+  "mechanical_diff_state": "satisfied",
+  "common_conditions": [
+    "case, fixture, oracle, and target repository snapshot",
+    "TaskSpec and review contract",
+    "prompt template except model placeholder substitution",
+    "root model and Claude Code Action revision",
+    "permission and output schema",
+    "quality rating and token accounting",
+    "N=3, repetition order, timeout, max_workers, and dispatch concurrency"
+  ],
+  "scope": "PRR-C01/r4 calibration; no held-out or general model ranking claim"
+}

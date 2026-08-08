@@ -1,0 +1,35 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-relationship-role-boundary/v1",
+  "boundary_id": "pr-review-relationship-role-boundary-r1",
+  "state": "satisfied",
+  "base_prompt_identity": "pr-review-workflow-free-r1",
+  "candidate_prompt_identity": "pr-review-relationship-role-r1",
+  "fixed_topology": {
+    "root_model": "claude-sonnet-5",
+    "relationship_reviewer_count": 1,
+    "root_repository_review": false,
+    "root_fixture_tool_access": false,
+    "relationship_reviewer_fixture_tool_access": true,
+    "root_output_policy": "relay_relationship_reviewer_structured_output_without_reassessment"
+  },
+  "comparison_axis": {
+    "field": "relationship_reviewer_model",
+    "values": ["sonnet", "opus"]
+  },
+  "preserved_conditions": [
+    "PRR-C01/r4 fixture and oracle",
+    "target repository ref and snapshot",
+    "TaskSpec and review contract",
+    "root model identity",
+    "Claude Code Action revision",
+    "read-only permission boundary",
+    "output schema and rating contract",
+    "timeout, dispatch concurrency, and token accounting"
+  ],
+  "measurement_rule": {
+    "formal_kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "quality_failure_stops_later_repetitions": false,
+    "environment_or_measurement_failure_stops_later_repetitions_within_variant": true
+  },
+  "scope": "PRR-C01/r4 model-role calibration only; not held-out evidence and not an adoption decision"
+}

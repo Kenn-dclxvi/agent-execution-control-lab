@@ -13,6 +13,8 @@
 | [`baseline-measurement-boundary-r1`](baseline-measurement-boundary-r1.json) | `satisfied` | Claude Code純正相当のレビュー条件と測定用の変更との境界 |
 | [`baseline-measurement-boundary-r2`](baseline-measurement-boundary-r2.json) | `satisfied` | 固定code-review sourceのsubagent model role、並列review、issue validationを保持する新Baseline測定境界 |
 | [`pr-review-workflow-free-boundary-r1`](pr-review-workflow-free-boundary-r1.json) | `satisfied` | 同じ入力、権限、成果条件、root model、Actionを保ち、review方法の指定だけを外す校正境界 |
+| [`pr-review-relationship-role-boundary-r1`](pr-review-relationship-role-boundary-r1.json) | `satisfied` | 関係レビュー役を1人に固定し、rootの調査を禁止する校正境界 |
+| [`pr-review-relationship-reviewer-model-comparison-preflight-r1`](pr-review-relationship-reviewer-model-comparison-preflight-r1.json) | `ready_not_executed` | Sonnet条件とOpus条件の構造差分をmodel roleだけに固定 |
 | [`baseline-authority-selection-r1`](baseline-authority-selection-r1.json) | 選択・接続済み | 固定target treeのroot `CLAUDE.md`解決とchanged path局所`AGENTS.md`の適用順・content identity |
 | [`baseline-repository-snapshot-r1`](baseline-repository-snapshot-r1.json) | 固定済み | target treeとPRR-C01/r2 overlayから生成するrepository snapshot identity |
 | [`baseline-repository-snapshot-prr-c01-r3-r1`](baseline-repository-snapshot-prr-c01-r3-r1.json) | 固定済み・qualificationで使用 | target treeと独立監査済みPRR-C01/r3 overlayから生成するqualification用snapshot identity |
@@ -27,6 +29,8 @@
 | [`pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight.json) | 実行条件の履歴 | project設定がartifactから除外され、run 31265402558はreviewer開始前に`execution_failed` |
 | [`pr-review-claude-code-core-c01-r4-qualification-n2-r4-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r4-preflight.json) | 実行条件の履歴 | run 31265761721で実並列と権限境界は成立したが、required findingをmissして`quality_failed` |
 | [`pr-review-workflow-free-c01-r4-calibration-n2-r1-preflight`](pr-review-workflow-free-c01-r4-calibration-n2-r1-preflight.json) | `ready_not_executed` | Free prompt、同じ入力・権限・root model、3 KPI、N=2、品質missで停止しない条件を固定 |
+| [`pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1-preflight`](pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1-preflight.json) | `ready_not_executed` | 関係レビュー役Sonnetの3反復を固定 |
+| [`pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1-preflight`](pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1-preflight.json) | `ready_not_executed` | 関係レビュー役Opusの3反復を固定 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 

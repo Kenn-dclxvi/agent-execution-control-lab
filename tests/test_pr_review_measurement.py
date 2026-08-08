@@ -24,6 +24,7 @@ import pr_review_code_review_qualification_r2 as code_review_qualification_r2
 import pr_review_code_review_qualification_r3 as code_review_qualification_r3
 import pr_review_code_review_qualification_r4 as code_review_qualification_r4
 import pr_review_workflow_free_calibration as workflow_free_calibration
+import pr_review_relationship_role_calibration as relationship_role_calibration
 import pr_review_subagent_hook as subagent_hook
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
@@ -2486,6 +2487,254 @@ def test_workflow_free_saved_results_are_measured_calibration_evidence(
     assert result["runtime"]["total_tokens"] == tokens
     assert result["workflow_trace"]["subagent_start_count"] == subagents
     assert filename in (INSTANCE_ROOT / "results/README.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("reviewer_model", ["sonnet", "opus"])
+@pytest.mark.parametrize("repetition", [1, 2, 3])
+def test_relationship_role_preflight_fixes_each_model_slot(
+    reviewer_model: str, repetition: int
+):
+    profile, preflight = relationship_role_calibration.validate_preflight(
+        repetition, reviewer_model
+    )
+    conditions = profile["comparison_conditions"]
+
+    assert conditions["model"]["requested"] == "claude-sonnet-5"
+    assert conditions["model"]["relationship_reviewer"] == reviewer_model
+    assert conditions["relationship_reviewer_model"] == reviewer_model
+    assert conditions["executor_parameters"]["max_workers"] == 24
+    assert preflight["execution"]["quality_miss_stops_later_repetitions"] is False
+
+
+def test_relationship_role_profiles_differ_only_on_declared_model_axis():
+    sonnet = json.loads(
+        (
+            INSTANCE_ROOT
+            / "profiles/pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    opus = json.loads(
+        (
+            INSTANCE_ROOT
+            / "profiles/pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    receipt = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-relationship-reviewer-model-comparison-preflight-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    differences = set()
+
+    def compare(left, right, path=""):
+        if isinstance(left, dict) and isinstance(right, dict):
+            assert left.keys() == right.keys()
+            for key in left:
+                compare(left[key], right[key], f"{path}.{key}".lstrip("."))
+        elif isinstance(left, list) and isinstance(right, list):
+            assert left == right
+        elif left != right:
+            differences.add(path)
+
+    compare(sonnet, opus)
+    assert differences == set(receipt["allowed_profile_differences"])
+
+
+def test_relationship_role_workflow_prompt_matches_fixed_template():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-calibrate-relationship-reviewer.yml"
+    ).read_text(encoding="utf-8")
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    prompt_text = prompt_text.replace(
+        "${{ inputs.relationship_reviewer_model }}",
+        "{{RELATIONSHIP_REVIEWER_MODEL}}",
+    )
+    expected = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-relationship-role-r1/core-prompt-template.md"
+    ).read_text(encoding="utf-8")
+
+    assert prompt_text == expected
+    assert '--allowedTools "Agent,Bash(./fixture-tool:*)"' in workflow
+    assert "pull-requests: write" not in workflow
+    assert "gh pr comment" not in workflow
+
+
+def test_relationship_role_packet_excludes_oracle_and_includes_collectors(
+    tmp_path: Path,
+):
+    output = tmp_path / "packet"
+    metadata = relationship_role_calibration.prepare_input(1, "sonnet", output)
+
+    assert metadata["relationship_reviewer_model"] == "sonnet"
+    assert not (output / "oracle.json").exists()
+    assert (output / "pr_review_relationship_role_calibration.py").is_file()
+    assert (output / "pr_review_workflow_free_calibration.py").is_file()
+    assert (output / "pr_review_subagent_hook.py").is_file()
+
+
+def _relationship_trace_fixture(tmp_path: Path, reviewer_model: str):
+    execution = tmp_path / "execution.json"
+    execution.write_text(
+        json.dumps(
+            [
+                {
+                    "type": "assistant",
+                    "parent_tool_use_id": None,
+                    "message": {
+                        "usage": {"input_tokens": 100, "output_tokens": 20},
+                        "content": [
+                            {
+                                "type": "tool_use",
+                                "name": "Agent",
+                                "input": {"model": reviewer_model},
+                            }
+                        ],
+                    },
+                },
+                {
+                    "type": "assistant",
+                    "parent_tool_use_id": "agent-tool-1",
+                    "message": {
+                        "usage": {"input_tokens": 200, "output_tokens": 40},
+                        "content": [],
+                    },
+                },
+            ]
+        ),
+        encoding="utf-8",
+    )
+    hook = tmp_path / "events.jsonl"
+    hook.write_text(
+        "\n".join(
+            json.dumps(event)
+            for event in (
+                {
+                    "event": "SubagentStart",
+                    "timestamp_ns": 1,
+                    "agent_id": "reviewer-1",
+                },
+                {
+                    "event": "PostToolUse",
+                    "timestamp_ns": 2,
+                    "agent_id": "reviewer-1",
+                    "tool_name": "Bash",
+                    "fixture_tool_command": True,
+                },
+                {
+                    "event": "SubagentStop",
+                    "timestamp_ns": 3,
+                    "agent_id": "reviewer-1",
+                },
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return execution, hook
+
+
+@pytest.mark.parametrize("reviewer_model", ["sonnet", "opus"])
+def test_relationship_role_trace_requires_one_selected_model_reviewer(
+    tmp_path: Path, reviewer_model: str
+):
+    execution, hook = _relationship_trace_fixture(tmp_path, reviewer_model)
+    trace = relationship_role_calibration._workflow_trace(
+        execution, hook, reviewer_model
+    )
+
+    assert trace["complete"] is True
+    assert trace["agent_model_groups"] == [[reviewer_model]]
+    assert trace["subagent_start_count"] == 1
+    assert trace["relationship_reviewer_fixture_access_count"] == 1
+    assert trace["root_fixture_tool_access_count"] == 0
+    assert trace["all_agent_input_tokens"] == 300
+    assert trace["all_agent_output_tokens"] == 60
+
+
+def test_relationship_role_trace_rejects_root_fixture_access(tmp_path: Path):
+    execution, hook = _relationship_trace_fixture(tmp_path, "sonnet")
+    with hook.open("a", encoding="utf-8") as stream:
+        stream.write(
+            json.dumps(
+                {
+                    "event": "PostToolUse",
+                    "timestamp_ns": 4,
+                    "tool_name": "Bash",
+                    "fixture_tool_command": True,
+                }
+            )
+            + "\n"
+        )
+
+    trace = relationship_role_calibration._workflow_trace(execution, hook, "sonnet")
+
+    assert trace["complete"] is False
+    assert trace["root_fixture_tool_access_count"] == 1
+
+
+def test_relationship_role_quality_miss_remains_measured(tmp_path: Path):
+    review_output = tmp_path / "review-output.json"
+    review_output.write_text(
+        json.dumps({"findings": [], "summary": _summary_for([])}), encoding="utf-8"
+    )
+    execution, hook = _relationship_trace_fixture(tmp_path, "sonnet")
+    trace = relationship_role_calibration._workflow_trace(execution, hook, "sonnet")
+    review_metadata = tmp_path / "review-metadata.json"
+    review_metadata.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1000,
+                "runtime": {
+                    "model": "claude-sonnet-5",
+                    "duration_ms": 900,
+                    "turns": 2,
+                    "input_tokens": 300,
+                    "output_tokens": 60,
+                    "reported_cost_usd": 0.01,
+                },
+                "workflow_trace": trace,
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepare_metadata = tmp_path / "prepare-metadata.json"
+    prepare_metadata.write_text(json.dumps({"input_ms": 10}), encoding="utf-8")
+    output = tmp_path / "run-result.json"
+
+    result = relationship_role_calibration.grade_run(
+        1,
+        999,
+        "claude-sonnet-5",
+        "sonnet",
+        review_output,
+        review_metadata,
+        prepare_metadata,
+        output,
+        "999",
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r12.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+
+    assert result["result"] == "quality_failed"
+    assert result["quality_score"] == 1
+    assert result["measurement_qualification"]["state"] == "satisfied"
+    assert result["runtime"]["total_tokens"] == 360
 
 
 def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: Path):
