@@ -1,6 +1,6 @@
 # agent-execution-control-lab PRレビュープロファイル索引
 
-登録済みprofileは次の9件である。
+登録済みprofileは次の10件である。
 
 - [`pr-review-agentic-retrieval-c01-qualification-n2-r1`](pr-review-agentic-retrieval-c01-qualification-n2-r1.json): PRR-C01のagentic-retrieval baselineを独立2反復で確認する最小qualification profile。不成立（score `1 / 4`）。一次resultは[`results/`](../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)
 - [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json): 独立監査済みPRR-C01/r3を使った初回profile。repetition 1は[GitHub Actions run 31253512886](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31253512886)でreviewer開始前に`execution_failed`となった。profileと[preflight](../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)は変更せず履歴として残す
@@ -11,6 +11,7 @@
 - [`pr-review-claude-code-core-c01-r4-qualification-n2-r2`](pr-review-claude-code-core-c01-r4-qualification-n2-r2.json): 初回attemptのtimeoutに対し、`Agent` tool許可とcollector依存同梱だけを修正したrepetition 1 environment recovery profile。[GitHub Actions run 31263713165](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31263713165)ではレビューと採点は完了したが、4担当の並列実行を確認できず`measurement_incomplete`となった
 - [`pr-review-claude-code-core-c01-r4-qualification-n2-r3`](pr-review-claude-code-core-c01-r4-qualification-n2-r3.json): 同じrepetition 1に対し、project設定からsubagentへ同じ読取り権限を継承し、内容を保存しないlifecycleとtool batchの計測を加えたprofile。[GitHub Actions run 31265402558](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265402558)ではproject設定がartifactから除外され、reviewer開始前に`execution_failed`となった
 - [`pr-review-claude-code-core-c01-r4-qualification-n2-r4`](pr-review-claude-code-core-c01-r4-qualification-n2-r4.json): project設定を通常名で転送してreview job内で配置し、開始前失敗時の収集も回復した同一repetition 1 profile。[GitHub Actions run 31265761721](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265761721)では実並列と権限境界を確認したが、required findingをmissして`quality_failed`となった
+- [`pr-review-workflow-free-c01-r4-calibration-n2-r1`](pr-review-workflow-free-c01-r4-calibration-n2-r1.json): PRR-C01/r4でreview方法をmodelへ委ね、品質、全agent token、経過時間を2反復で観測する校正profile。quality missは後続反復の停止条件にせず、実行または計測不成立だけを停止条件にする
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 

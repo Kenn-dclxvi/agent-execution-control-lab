@@ -1,0 +1,177 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v4",
+  "profile_id": "pr-review-workflow-free-c01-r4-calibration-n2-r1",
+  "state": "frozen_not_executed",
+  "purpose": "workflow_free_calibration",
+  "cases": [{"id": "PRR-C01", "revision": "r4"}],
+  "evaluation_set": {
+    "set_id": "pr-review-c01-r4-calibration-r1",
+    "revision": "r1",
+    "coverage": "PRR-C01/r4 only",
+    "held_out": false
+  },
+  "comparison_conditions": {
+    "variant": "workflow-free",
+    "target_repository_ref": {
+      "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+      "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+      "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+    },
+    "task_spec": {
+      "source": "cases/PRR-C01/r4/input.json and rating-contracts/review-contract-r2.md",
+      "functional_specification": "specifications/pr-review-function-r1.md",
+      "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す。review方法はreviewerが選ぶ"
+    },
+    "fixture_identity": {
+      "input_path": "cases/PRR-C01/r4/input.json",
+      "input_sha256": "57f321693dde33d52910d7a4806b53ebf0757f5550399e357e27e91ae1a603fe",
+      "oracle_path": "cases/PRR-C01/r4/oracle.json",
+      "oracle_sha256": "5304ee3981ae41a7ec3de2540332f03e30457cba52ddd4b9c71da792a4bedf82",
+      "case_design_audit_path": "contracts/prr-c01-r4-case-design-audit-r1.json",
+      "case_design_audit_sha256": "a2c0f79528f65819784e2fc5a0a56fd7e326b6804a4c8473993a17c4165cf77e"
+    },
+    "workflow_free_boundary": {
+      "path": "contracts/pr-review-workflow-free-boundary-r1.json",
+      "sha256": "dfdf3f9761f9155444294d1fad961837aa69e6a7594a90220e45e8b8a69411d8",
+      "required_state": "satisfied"
+    },
+    "repository_snapshot": {
+      "receipt_path": "contracts/baseline-repository-snapshot-prr-c01-r4-r1.json",
+      "receipt_sha256": "e41e27bc821492bbae0f557ecf1e9319c0ae64a03bf17b280d28cd1c74b5c88c",
+      "snapshot_sha256": "32f9e4a076a1cb75f8f31dbf19403bc0259a056d5da2473bf6463b73c5f6d528",
+      "available_paths_sha256": "5d57dac34ce308d5793883370ad8e78449b877c8af1d5105b387e85e8555505b",
+      "materializer_path": "tools/pr_review_repository_snapshot_r3.py",
+      "materializer_sha256": "993e591612ab4b38263aba44348f28d3b0cbcdbeef6cb9ec2b5061a1d2832849"
+    },
+    "authority_selection": {
+      "path": "contracts/baseline-authority-selection-r1.json",
+      "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"
+    },
+    "prompt": {
+      "identity": "pr-review-workflow-free-r1",
+      "manifest_path": "prompts/candidates/pr-review-workflow-free-r1/manifest.json",
+      "manifest_sha256": "879642181a0eab913cbd9af885332b48ce8baa115cd2c948dfecccb0f4c4a0b7",
+      "content_path": "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md",
+      "content_sha256": "2bff83c1a8dbab8891beba4a791ca0d8e982d94d3b6b9e06d2a26a5678692fb4"
+    },
+    "eligibility": {
+      "path": "contracts/prr-c01-r4-review-eligibility-r1.json",
+      "sha256": "638c7ed54fcbaaaee9aeb0abe626a0c84573d58b7cf9aa5a9062d6d5e4ba340e"
+    },
+    "review_contract": {
+      "revision": "pr-review-contract-r2",
+      "path": "rating-contracts/review-contract-r2.md",
+      "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"
+    },
+    "review_output_schema": {
+      "revision": "review-output-r2",
+      "path": "schemas/review-output-r2.schema.json",
+      "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"
+    },
+    "run_result_schema": {
+      "revision": "run-result-r11",
+      "path": "schemas/run-result-r11.schema.json",
+      "sha256": "48f58ecb68e5afa4de1169ac86fc941f7c0e01f3333ff3e2de3673b0d14ceb2b"
+    },
+    "calibration_tool": {
+      "path": "tools/pr_review_workflow_free_calibration.py",
+      "sha256": "895c72b7b30c361ce41f6d9f128914b8d5f4126a100960a1b512509aa1aae503"
+    },
+    "lifecycle_recorder": {
+      "path": "tools/pr_review_subagent_hook.py",
+      "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce",
+      "stored_fields": ["event", "timestamp_ns", "agent_id", "agent_type", "tool_name", "tool_use_id", "fixture_tool_command", "tool_names", "tool_use_ids"]
+    },
+    "workflow": {
+      "revision": "pr-review-measure-workflow-free-r1",
+      "repository_path": ".github/workflows/pr-review-measure-workflow-free.yml",
+      "sha256": "59f2a9fce90e3f5dac96560b2006fad593ca4f04fa12351a6a9881ae2bcecc3f"
+    },
+    "quality_rating": {
+      "contract_id": "pr-review-finding-quality-v5",
+      "path": "rating-contracts/pr-review-finding-quality-v5.json",
+      "contract_sha256": "d712beb285247e27bca18eb1b16a938bbb47908b7759e48224451f1dfa0fed4a",
+      "use": "calibration_observation"
+    },
+    "model": {
+      "requested": "claude-sonnet-5",
+      "reported_identity_required": true,
+      "reasoning": "action_default_at_fixed_action_revision",
+      "available_subagent_models": ["haiku", "sonnet", "opus"],
+      "subagent_policy": "reviewer_selected_not_required"
+    },
+    "agent_environment": {
+      "action": "anthropics/claude-code-action",
+      "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "claude_cli": "reported_by_action",
+      "runner": "ubuntu-latest",
+      "session_mode": "one_root_action_with_optional_subagents_per_run",
+      "authentication": "claude_code_oauth_token"
+    },
+    "permission": {
+      "github": "contents:read",
+      "repository_write": false,
+      "github_comment_write": false,
+      "tool_policy": "fixture-tool-and-optional-agent-read-only-snapshot-r1",
+      "fixture_tool_path": "tools/pr_review_fixture_tool_r5.py",
+      "fixture_tool_sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"
+    },
+    "executor_parameters": {
+      "max_attempts_per_repetition": 2,
+      "max_turns": null,
+      "turn_limit_source": "action_default_at_fixed_action_revision",
+      "max_workers": 24,
+      "internal_review_topology": "reviewer_selected",
+      "dispatch_concurrency": 1,
+      "schedule_policy": "sequential_by_repetition",
+      "action_timeout_seconds": 1200,
+      "reviewer_job_timeout_seconds": 1500,
+      "token_accounting": {
+        "revision": "claude-code-action-execution-message-usage-sum-v1",
+        "scope": "root_and_subagent_assistant_messages",
+        "subagent_inclusion_required_when_used": true
+      }
+    },
+    "repetition_condition": {
+      "iterations": 2,
+      "order": [1, 2],
+      "external_failure_policy": "repeat_same_repetition_with_new_attempt_identity",
+      "result_reuse": "forbidden"
+    },
+    "measurement_gate": {
+      "individual_pass_condition": {
+        "action_completed": true,
+        "structured_output_valid": true,
+        "reported_model_matches_requested": true,
+        "all_agent_tokens_complete": true,
+        "elapsed_time_complete": true,
+        "fixture_access_observed": true,
+        "fixture_permission_denials": 0
+      },
+      "aggregate_pass_condition": "2 fresh repetitions both satisfy individual_pass_condition",
+      "quality_score_is_observation_not_stop_condition": true,
+      "stop_conditions": [
+        "artifact or execution identity drift stops all slot issuance",
+        "environment or measurement failure stops later unissued repetitions",
+        "external execution failure may retry the same repetition only"
+      ]
+    },
+    "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "diagnostics": ["fixture tool calls", "model steps", "subagent count", "subagent model groups", "root and subagent usage records"]
+  },
+  "execution": {
+    "planned_slots": 2,
+    "max_workers": 24,
+    "actual_concurrency": 1,
+    "state": "not_issued"
+  },
+  "scope": {
+    "calibration": "authorized_after_preflight",
+    "held_out_quality_claim": "not_authorized",
+    "strict_kpi_comparison": "not_authorized",
+    "candidate_a": "not_authorized",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

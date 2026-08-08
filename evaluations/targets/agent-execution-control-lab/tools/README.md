@@ -17,5 +17,6 @@
 - `pr_review_code_review_qualification_r3.py`: 同じrepetitionへsubagent lifecycle、tool batch、fixture access、permission denialの計測を追加するinstrumented recovery tool
 - `pr_review_code_review_qualification_r4.py`: project設定を通常名でartifact転送し、review job内で配置するenvironment recovery tool
 - `pr_review_subagent_hook.py`: Claude Code hook入力から内容を除き、event identity、時刻、agent identity、tool種別だけを原子的に記録する
+- `pr_review_workflow_free_calibration.py`: Workflow Freeのpreflight再照合、入力準備、任意subagent構成の診断trace、全agent token収集、品質と測定成立を分けた採点を行う
 
 これらは`agent-execution-control-lab`固有のcase ID、rule、authority選択を扱うため、ターゲット非依存kernelの`scripts/`へ置かない。authorityとrepository snapshotのreceiptはmodel-visible入力対応を証明するが、case設計の独立qualification、profile、preflight、Baseline admissionを単独では成立させない。
