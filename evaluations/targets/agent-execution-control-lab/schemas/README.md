@@ -15,5 +15,6 @@
 - [qualification以後のrun result r2](run-result-r2.schema.json)
 - [PRR-C01/r3 Core Baseline qualification run result r3](run-result-r3.schema.json)
 - [PRR-C01/r3 Core Baseline qualification recovery run result r4](run-result-r4.schema.json)
+- [PRR-C01/r3 Core Baseline qualification recovery run result r5](run-result-r5.schema.json)
 
-r1は診断経路の履歴schemaである。`fixture-oracle-r2`と`review-output-r2`は複数path finding identityを扱うcase設計で導入した。`fixture-input-r3`と`fixture-oracle-r3`は独立監査済みPRR-C01/r3を既存revisionから分離した。`run-result-r3`は初回実行の条件を、`run-result-r4`は固定commitを取得できるようにした再実行の条件を保持する。`run-result-r2`も履歴identityとして残し、既存resultを事後変換しない。
+r1は診断経路の履歴schemaである。`fixture-oracle-r2`と`review-output-r2`は複数path finding identityを扱うcase設計で導入した。`fixture-input-r3`と`fixture-oracle-r3`は独立監査済みPRR-C01/r3を既存revisionから分離した。`run-result-r3`は初回実行の条件を、`run-result-r4`は固定commitを取得できるようにした条件を保持する。`run-result-r5`はreviewerの読取り権限と結果回収経路を修正した条件である。過去のschemaとresultは事後変換しない。

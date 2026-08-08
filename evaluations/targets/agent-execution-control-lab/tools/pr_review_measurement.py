@@ -30,6 +30,7 @@ FIXTURE_TOOL_PATH = INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py"
 QUALIFICATION_PROFILE_IDS = {
     "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1",
     "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2",
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3",
 }
 
 CASE_IDS = tuple(f"PRR-C0{number}" for number in range(1, 7))
@@ -1111,6 +1112,7 @@ def validate_qualification_profile(value: Any) -> dict:
     expected_workflow_revision = {
         "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1": "pr-review-qualify-core-r1",
         "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2": "pr-review-qualify-core-r2",
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3": "pr-review-qualify-core-r3",
     }[profile_id]
     workflow = conditions.get("workflow")
     if workflow != {

@@ -1,0 +1,55 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v1",
+  "preflight_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {
+    "profile_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3",
+    "path": "profiles/pr-review-agentic-retrieval-c01-r3-qualification-n2-r3.json",
+    "sha256": "c7b1e3205568a769d0e815ceab3f451b026bd593db04698dab12854496c666d3"
+  },
+  "validation_tool": {
+    "path": "tools/pr_review_measurement.py",
+    "sha256": "7931dde3b78bdd4b9348ac39f019d69e5c07c07b598826af9ee5028c00ef42bd"
+  },
+  "verified_artifacts": [
+    {"path": "cases/PRR-C01/r3/input.json", "sha256": "8d51a4dc3bf9eba5486a08e4bb7099bcc85b2f23ee90acfa4cc0a8c0e4758ecf"},
+    {"path": "cases/PRR-C01/r3/oracle.json", "sha256": "ce37506416d2309110bfbe2ef9eb4ea3fbcb8a58cf01a450238cddac3fac8089"},
+    {"path": "contracts/prr-c01-r3-case-design-audit-r1.json", "sha256": "fbb0966615edf91d5ffee016681696f4c3161c2369a9a5800ff30639b95a4584"},
+    {"path": "contracts/baseline-input-mapping-r3.json", "sha256": "eb1ef8c5373a7cfc3e28eb5ec6f0af4caa8eab980327e97c15bc5dcf51fb9cac"},
+    {"path": "contracts/baseline-repository-snapshot-prr-c01-r3-r1.json", "sha256": "2aa1b6ea47ecbb4e78220bd353cb22b16259438ef41bd9d98d01f7aac4048a16"},
+    {"path": "tools/pr_review_repository_snapshot_r2.py", "sha256": "692f488c7cd0ce8a93d0d5b257a7f8513403094ef51de88d8045d2da8c64d7ad"},
+    {"path": "contracts/baseline-authority-selection-r1.json", "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"},
+    {"path": "prompts/baselines/claude-pr-review-core-r3/manifest.json", "sha256": "5d06748acac944031edbf0d534533530fd9e1a2ef2c81a3ab625ce0f25523eda"},
+    {"path": "prompts/baselines/claude-pr-review-core-r3/core-prompt.md", "sha256": "9a61d9f4a2ce386802ed561149dbbbc0969bb7ac97542f9ba160749144c6acfd"},
+    {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    {"path": "schemas/run-result-r5.schema.json", "sha256": "87358c295160bce460c2fed86c2cdca38c99af827645059aba642d48b6038f7c"},
+    {"path": "tools/pr_review_qualification.py", "sha256": "593a2db492e4cede33c6bf4c7616ffb1a4a0f3393622b9590f6b94a4ff684bd5"},
+    {"path": "rating-contracts/pr-review-finding-quality-v3.json", "sha256": "657327caba77cdf94bf7ffbdfa81de595bbf89c9c5e32504f440834b7ad943c6"},
+    {"path": "tools/pr_review_fixture_tool_r3.py", "sha256": "4796243d08cd1762c1b785a067c93799d743aa2b745d48990382838d3fe04c3b"},
+    {"path": ".github/workflows/pr-review-measure-core.yml", "sha256": "f7740c74c5d9ef12801fe4da7cd52351645ba741ad2722e69a8b1fd08fa77bc2"}
+  ],
+  "planned_slots": [
+    {"case_id": "PRR-C01", "fixture_revision": "r3", "variant": "agentic-retrieval", "repetition": 1},
+    {"case_id": "PRR-C01", "fixture_revision": "r3", "variant": "agentic-retrieval", "repetition": 2}
+  ],
+  "predicates": {
+    "case_design_audit": "satisfied",
+    "source_to_core_input_mapping": "satisfied",
+    "case_specific_snapshot": "satisfied",
+    "profile_conditions": "satisfied",
+    "fresh_n2_plan": "satisfied"
+  },
+  "execution": {
+    "state": "not_issued",
+    "authorization": "not_granted_by_preflight",
+    "allowed_after_separate_authorization": "two sequential Core Baseline qualification slots only"
+  },
+  "forbidden_scope": [
+    "Candidate A",
+    "N=5 comparison",
+    "Integration measurement",
+    "quality or speed claim before terminal N=2 results",
+    "target repository write or GitHub comment"
+  ]
+}

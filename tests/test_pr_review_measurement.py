@@ -452,12 +452,19 @@ def test_prr_c01_r3_qualification_recovery_preserves_first_attempt_identity():
             encoding="utf-8"
         )
     )
+    second = json.loads(
+        (profiles / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2.json").read_text(
+            encoding="utf-8"
+        )
+    )
     recovery = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
 
     assert first["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r1"
     assert first["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r3"
-    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r2"
-    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r4"
+    assert second["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r2"
+    assert second["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r4"
+    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r3"
+    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r5"
 
 
 def test_r2_results_are_write_once_and_reclassified_as_diagnostic():
@@ -1319,6 +1326,15 @@ def test_qualification_prepare_collect_and_grade_passes_fixed_r3_identity(tmp_pa
         assert metadata["repetition"] == 1
         assert not (prepared / "oracle.json").exists()
         assert not (snapshot_root / ".git").exists()
+        assert (prepared / "pr_review_measurement.py").is_file()
+        assert not (prepared / "pr-review-measurement.py").exists()
+        subprocess.run(
+            [sys.executable, "pr-review-qualification.py", "--help"],
+            cwd=prepared,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
         assert result["result"] == "pass"
         assert result["quality_score"] == 4
         assert result["quality"]["true_positive"] == 1
@@ -1354,7 +1370,7 @@ def test_workflow_is_fixed_to_first_read_only_qualification_slot():
     assert "scripts/pr_review_measurement.py" not in workflow
     assert "pr-review-measurements/" not in workflow
     assert "deterministic-input" not in workflow
-    assert "Bash(./fixture-tool file:*)" in workflow
+    assert '--allowedTools "Bash(./fixture-tool:*)"' in workflow
     assert "pr_review_qualification.py" in workflow
     assert "review-output-r2.schema.json" in workflow
     assert hashlib.sha256(workflow.encode()).hexdigest() == profile[

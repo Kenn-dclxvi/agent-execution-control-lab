@@ -27,7 +27,7 @@ on:
         description: Fixed qualification profile identity
         required: true
         type: string
-        default: pr-review-agentic-retrieval-c01-r3-qualification-n2-r2
+        default: pr-review-agentic-retrieval-c01-r3-qualification-n2-r3
 
 permissions: {}
 
@@ -60,7 +60,7 @@ jobs:
           test "$CASE_ID" = "PRR-C01"
           test "$VARIANT" = "agentic-retrieval"
           test "$MODEL" = "claude-sonnet-5"
-          test "$PROFILE_ID" = "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2"
+          test "$PROFILE_ID" = "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3"
           test "$REPETITION" = "1"
           python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_qualification.py \
             validate-preflight --repetition "$REPETITION"
@@ -162,7 +162,7 @@ jobs:
             --model "${{ inputs.model }}"
             --max-turns 12
             --json-schema '${{ needs.prepare.outputs.review_schema }}'
-            --allowedTools "Bash(./fixture-tool contract),Bash(./fixture-tool metadata),Bash(./fixture-tool changed-paths),Bash(./fixture-tool diff),Bash(./fixture-tool rules),Bash(./fixture-tool files),Bash(./fixture-tool list-files),Bash(./fixture-tool file:*)"
+            --allowedTools "Bash(./fixture-tool:*)"
           display_report: false
           show_full_output: false
           include_fix_links: false
