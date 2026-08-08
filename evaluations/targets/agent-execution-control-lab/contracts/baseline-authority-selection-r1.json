@@ -1,0 +1,80 @@
+{
+  "authorities": [
+    {
+      "applies_to": [
+        "prompts/candidates/example/files/AGENTS.md.txt",
+        "evaluations/profiles/example.json"
+      ],
+      "authority_role": "root",
+      "content_bytes": 17999,
+      "content_sha256": "93b965c98e8ee45bd9ab44ce646836b80ebedf2b124c1a03261a0079b0daff46",
+      "resolved_blob_sha1": "25d5985f6c115a23cd1f11c19b20faae92649c0e",
+      "resolved_mode": "100644",
+      "resolved_path": "AGENTS.md",
+      "source_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "source_mode": "120000",
+      "source_path": "CLAUDE.md",
+      "symlink_target": "AGENTS.md"
+    },
+    {
+      "applies_to": [
+        "prompts/candidates/example/files/AGENTS.md.txt"
+      ],
+      "authority_role": "local",
+      "content_bytes": 6947,
+      "content_sha256": "456fc0912949e13a8b6a4f2575136aa6b0eefb5ff89a813a35050c25fa55d047",
+      "resolved_blob_sha1": "3f9148f23153388a2991188a8c8b131e03826cd9",
+      "resolved_mode": "100644",
+      "resolved_path": "prompts/AGENTS.md",
+      "source_blob_sha1": "3f9148f23153388a2991188a8c8b131e03826cd9",
+      "source_mode": "100644",
+      "source_path": "prompts/AGENTS.md",
+      "symlink_target": null
+    },
+    {
+      "applies_to": [
+        "evaluations/profiles/example.json"
+      ],
+      "authority_role": "local",
+      "content_bytes": 13876,
+      "content_sha256": "bc7590873d5a56936e0cb426d1e341d9aa4325a72d37ec46350895842dba365c",
+      "resolved_blob_sha1": "c5c76969262d5140ea4192e79d5b2110f2805c09",
+      "resolved_mode": "100644",
+      "resolved_path": "evaluations/AGENTS.md",
+      "source_blob_sha1": "c5c76969262d5140ea4192e79d5b2110f2805c09",
+      "source_mode": "100644",
+      "source_path": "evaluations/AGENTS.md",
+      "symlink_target": null
+    }
+  ],
+  "changed_paths": [
+    "prompts/candidates/example/files/AGENTS.md.txt",
+    "evaluations/profiles/example.json"
+  ],
+  "collector_revision": "pr-review-authority-collector-r1",
+  "path_bindings": [
+    {
+      "applicable_authorities": [
+        "CLAUDE.md",
+        "prompts/AGENTS.md"
+      ],
+      "changed_path": "prompts/candidates/example/files/AGENTS.md.txt"
+    },
+    {
+      "applicable_authorities": [
+        "CLAUDE.md",
+        "evaluations/AGENTS.md"
+      ],
+      "changed_path": "evaluations/profiles/example.json"
+    }
+  ],
+  "schema_version": "agent-execution-control-lab.pr-review-authority-selection/v1",
+  "selection_rule": {
+    "local": "for each changed path, apply ancestor AGENTS.md files from shallow to deep",
+    "root": "resolve root CLAUDE.md and apply it first"
+  },
+  "target_repository_ref": {
+    "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+    "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+  }
+}

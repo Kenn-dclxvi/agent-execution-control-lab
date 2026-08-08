@@ -16,10 +16,10 @@
 - アーティファクトが存在することと、評価済み、採用済み、release済み、本体反映済みであることを混同しない。
 - baseline、candidate、release、evaluation result、approval、projectionを別の状態とゲートとして扱う。
 - シークレット、クレデンシャル、非公開の生の実行ログ、一時worktreeをcommitしない。
-- 文書は原則として日本語で記述する。
-- schema名、path、status、commandは再現性のため英語表記を許容する。
-- 上記以外の一般語へ英単語を混ぜない。訳語がある語は訳し（elapsed→経過時間、prefix→接頭辞）、日本語で一般にカタカナ表記される語はカタカナで書く（instance→インスタンス、evidence→エビデンス、artifact→アーティファクト）。専門用語と制御語（review admission、atomic run、rating contractなど）、および固有名は英語のまま残す。単独では訳す語でも、専門用語・制御語・Layer名の複合語の一部である場合は英語のまま残す（held-out evidence、evidence collector、KPI comparisonなど）。`revision`のように複合語で識別単位を作る語（case revision、profile revision、schema revisionなど）は、単独で現れる場合も制御語として英語で統一する。
-- 履歴アーティファクト（保存済みresult、releaseのfiles、candidate設計文書）はこの表記規則の対象外とし、現在解釈へ書き換えない。
+
+## 内部メモの扱い
+
+内部の作業メモは、判断と進行状況を整理するためだけに使う。利用者への説明や質問、作業計画、要約、リポジトリ内の文書へそのまま流用しない。依頼、根拠、現在の状況を理解し直し、それぞれの目的と読み手に合う形で内容を最初から組み立てる。人が読む内容は自然な日本語で表し、正確な区別や参照に必要な用語、識別子、ファイル名だけを後から加える。
 
 ## Agent execution discipline
 

@@ -54,6 +54,14 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 
 `claude-pr-review-core-r1`を[`prompt artifact`](../prompts/baselines/claude-pr-review-core-r1/README.md)として作成した。固定target refのsource promptと、レビュー観点を意味保存したCore prompt候補を分離して保持する。現在の入力対応判定は[`baseline-input-mapping-r1`](../contracts/baseline-input-mapping-r1.json)を正本とし、局所規則とrepository readの対応が未成立のためadmissionを開放しない。
 
+局所規則の選択は[`baseline-authority-selection-r1`](../contracts/baseline-authority-selection-r1.json)で、root `CLAUDE.md`のsymlink解決、changed path祖先の`AGENTS.md`探索、浅い順の適用、content identityまで固定した。ただしauthority原文をmodel-visible packetへ接続していないため、入力対応は部分成立に留める。
+
+`claude-pr-review-core-r2`では、選択receiptを固定treeへ再照合してauthority原文packetを生成し、Candidate Aの直接Readとagentic fixture toolの`rules`へ同じJSONを渡す。これによりauthority入力は成立した。現在の対応判定は[`baseline-input-mapping-r2`](../contracts/baseline-input-mapping-r2.json)を正本とし、残るblockは差分外repository read範囲である。
+
+`claude-pr-review-core-r3`では、固定target treeへschema v2 caseの変更後本文をoverlayし、`.git`を含まないread-only repository snapshotを生成する。agentic reviewerは`list-files`と`file PATH`だけでsnapshotを参照し、repository外path、`.git`、書込へ到達できない。materializerとtool policyはcase IDに依存せず、各caseのsnapshot tree、fixture、利用可能path集合、aggregate content identityをcase固有receiptへ固定する。入力対応の代表receiptは[`baseline-repository-snapshot-r1`](../contracts/baseline-repository-snapshot-r1.json)へ`PRR-C01/r2`で固定した。これにより[`baseline-input-mapping-r3`](../contracts/baseline-input-mapping-r3.json)のsource-to-Core入力対応は成立した。
+
+入力対応の成立はBaseline qualificationではない。case設計が機能仕様から独立にqualificationされ、Action、model、tool policy、permission等をprofileへ固定し、preflightを通過するまでevaluation slotを発行しない。
+
 ## Baseline admission gate
 
 次の順で全件を満たした場合だけ、Core経路をBaselineとしてprofileへ登録する。

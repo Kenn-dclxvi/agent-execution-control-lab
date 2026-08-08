@@ -6,6 +6,9 @@
 - [fixture input r2](fixture-input-r2.schema.json)
 - [fixture oracle r2](fixture-oracle-r2.schema.json)
 - [review output r2](review-output-r2.schema.json)
+- [authority selection r1](authority-selection-r1.schema.json)
+- [authority packet r1](authority-packet-r1.schema.json)
+- [repository snapshot r1](repository-snapshot-r1.schema.json)
 - [diagnostic run result r1](run-result-r1.schema.json)
 - [qualification以後のrun result r2](run-result-r2.schema.json)
 

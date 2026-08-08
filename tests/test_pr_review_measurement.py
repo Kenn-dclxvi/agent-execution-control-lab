@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -16,6 +17,9 @@ PROFILE_ID = "pr-review-agentic-retrieval-c01-qualification-n2-r1"
 sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 
 import pr_review_measurement as measurement
+import pr_review_authority_collector as authority_collector
+import pr_review_authority_packet as authority_packet
+import pr_review_repository_snapshot as repository_snapshot
 
 
 @pytest.fixture
@@ -274,8 +278,87 @@ def test_baseline_prompt_manifest_binds_content_and_remains_blocked():
     assert manifest["state"] == "admission_blocked"
     assert manifest["admission"]["state"] == "blocked"
     assert mapping["state"] == "unsatisfied"
-    assert states["applicable_repository_rules"] == "unsatisfied"
+    assert states["applicable_repository_rules"] == "partially_satisfied"
     assert states["changed_file_content"] == "partially_satisfied"
+
+
+def test_baseline_prompt_r2_binds_authority_packet_dependencies():
+    bundle = INSTANCE_ROOT / "prompts" / "baselines" / "claude-pr-review-core-r2"
+    manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
+    mapping = json.loads(
+        (INSTANCE_ROOT / "contracts" / "baseline-input-mapping-r2.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    for entry in manifest["files"]:
+        assert hashlib.sha256((bundle / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+    for dependency in (
+        "authority_selection",
+        "authority_packet_schema",
+        "authority_packet_materializer",
+        "review_contract",
+        "output_schema",
+        "fixture_tool",
+    ):
+        entry = manifest["dependencies"][dependency]
+        assert hashlib.sha256((INSTANCE_ROOT / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+
+    states = {entry["identity"]: entry["state"] for entry in mapping["mappings"]}
+    assert manifest["prompt_identity"] == "claude-pr-review-core-r2"
+    assert manifest["admission"]["state"] == "blocked"
+    assert states["applicable_repository_rules"] == "satisfied"
+    assert states["changed_file_content"] == "partially_satisfied"
+
+
+def test_baseline_prompt_r3_binds_satisfied_input_mapping():
+    bundle = INSTANCE_ROOT / "prompts" / "baselines" / "claude-pr-review-core-r3"
+    manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
+    mapping = json.loads(
+        (INSTANCE_ROOT / "contracts" / "baseline-input-mapping-r3.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    for entry in manifest["files"]:
+        assert hashlib.sha256((bundle / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+    for dependency in (
+        "authority_selection",
+        "authority_packet_schema",
+        "authority_packet_materializer",
+        "repository_snapshot",
+        "repository_snapshot_schema",
+        "repository_snapshot_materializer",
+        "review_contract",
+        "output_schema",
+        "fixture_tool",
+    ):
+        entry = manifest["dependencies"][dependency]
+        assert hashlib.sha256((INSTANCE_ROOT / entry["path"]).read_bytes()).hexdigest() == entry[
+            "sha256"
+        ]
+
+    states = {entry["identity"]: entry["state"] for entry in mapping["mappings"]}
+    source_r2 = (
+        INSTANCE_ROOT
+        / "prompts"
+        / "baselines"
+        / "claude-pr-review-core-r2"
+        / "source-prompt.md"
+    )
+    assert (bundle / "source-prompt.md").read_bytes() == source_r2.read_bytes()
+    assert manifest["state"] == "input_mapping_satisfied"
+    assert manifest["admission"]["state"] == "blocked"
+    assert mapping["state"] == "satisfied"
+    assert mapping["blocking_conditions"] == []
+    assert states["applicable_repository_rules"] == "satisfied"
+    assert states["changed_file_content"] == "satisfied"
 
 
 def test_fixture_tool_matches_prr_c01_r2_logical_input(tmp_path: Path):
@@ -312,6 +395,241 @@ def test_fixture_tool_matches_prr_c01_r2_logical_input(tmp_path: Path):
     assert invoke("contract") == (
         INSTANCE_ROOT / "rating-contracts" / "review-contract-r2.md"
     ).read_text(encoding="utf-8")
+
+
+def test_authority_collector_resolves_root_symlink_and_local_precedence(tmp_path: Path):
+    repository = tmp_path / "repository"
+    repository.mkdir()
+    subprocess.run(["git", "init", "-q"], cwd=repository, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "test@example.com"], cwd=repository, check=True
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "Test"], cwd=repository, check=True
+    )
+    (repository / "AGENTS.md").write_text("root rules\n", encoding="utf-8")
+    (repository / "CLAUDE.md").symlink_to("AGENTS.md")
+    (repository / "prompts" / "candidates").mkdir(parents=True)
+    (repository / "prompts" / "AGENTS.md").write_text("prompt rules\n", encoding="utf-8")
+    (repository / "prompts" / "candidates" / "AGENTS.md").write_text(
+        "candidate rules\n", encoding="utf-8"
+    )
+    (repository / "evaluations").mkdir()
+    (repository / "evaluations" / "AGENTS.md").write_text(
+        "evaluation rules\n", encoding="utf-8"
+    )
+    subprocess.run(["git", "add", "."], cwd=repository, check=True)
+    subprocess.run(["git", "commit", "-qm", "fixture"], cwd=repository, check=True)
+    commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+    receipt = authority_collector.collect_authorities(
+        repository,
+        commit,
+        [
+            "prompts/candidates/example/files/AGENTS.md.txt",
+            "evaluations/profiles/example.json",
+        ],
+    )
+
+    assert receipt["path_bindings"] == [
+        {
+            "changed_path": "prompts/candidates/example/files/AGENTS.md.txt",
+            "applicable_authorities": [
+                "CLAUDE.md",
+                "prompts/AGENTS.md",
+                "prompts/candidates/AGENTS.md",
+            ],
+        },
+        {
+            "changed_path": "evaluations/profiles/example.json",
+            "applicable_authorities": ["CLAUDE.md", "evaluations/AGENTS.md"],
+        },
+    ]
+    root = receipt["authorities"][0]
+    assert root["source_mode"] == "120000"
+    assert root["symlink_target"] == "AGENTS.md"
+    assert root["resolved_path"] == "AGENTS.md"
+
+
+def test_saved_authority_selection_matches_fixed_target_tree():
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    availability = subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    if availability.returncode != 0:
+        pytest.skip("fixed target commit is unavailable in this checkout")
+    fixture_input = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts"
+            / "baseline-authority-selection-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    observed = authority_collector.collect_authorities(
+        REPOSITORY_ROOT, commit, fixture_input["changed_paths"]
+    )
+
+    assert observed == expected
+
+
+def test_authority_packet_is_identical_for_both_variant_inputs(tmp_path: Path):
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    availability = subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    if availability.returncode != 0:
+        pytest.skip("fixed target commit is unavailable in this checkout")
+    receipt = INSTANCE_ROOT / "contracts" / "baseline-authority-selection-r1.json"
+    packet = authority_packet.materialize_authority_packet(REPOSITORY_ROOT, receipt)
+
+    case_input = measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json"
+    shutil.copyfile(case_input, tmp_path / "review-input.json")
+    shutil.copyfile(
+        INSTANCE_ROOT / "rating-contracts" / "review-contract-r2.md",
+        tmp_path / "review-contract.md",
+    )
+    (tmp_path / "authority-input.json").write_text(
+        json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    fixture_tool = tmp_path / "fixture-tool"
+    shutil.copyfile(INSTANCE_ROOT / "tools" / "pr_review_fixture_tool_r2.py", fixture_tool)
+    fixture_tool.chmod(0o755)
+
+    agentic_packet = json.loads(
+        subprocess.run(
+            [str(fixture_tool), "rules"],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
+    candidate_packet = json.loads(
+        (tmp_path / "authority-input.json").read_text(encoding="utf-8")
+    )
+
+    assert agentic_packet == candidate_packet == packet
+    assert [entry["source_path"] for entry in packet["authorities"]] == [
+        "CLAUDE.md",
+        "prompts/AGENTS.md",
+        "evaluations/AGENTS.md",
+    ]
+    for entry in packet["authorities"]:
+        assert hashlib.sha256(entry["content"].encode()).hexdigest() == entry[
+            "content_sha256"
+        ]
+
+
+def test_repository_snapshot_and_fixture_tool_r3_preserve_read_boundary(tmp_path: Path):
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    availability = subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    if availability.returncode != 0:
+        pytest.skip("fixed target commit is unavailable in this checkout")
+
+    case_input_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json"
+    case_input = json.loads(case_input_path.read_text(encoding="utf-8"))
+    output = tmp_path / "snapshot"
+    receipt = repository_snapshot.materialize_snapshot(
+        REPOSITORY_ROOT, commit, case_input_path, output
+    )
+    snapshot_root = output / "repository"
+    try:
+        expected_receipt = json.loads(
+            (
+                INSTANCE_ROOT
+                / "contracts"
+                / "baseline-repository-snapshot-r1.json"
+            ).read_text(encoding="utf-8")
+        )
+        assert receipt == expected_receipt
+        assert not (snapshot_root / ".git").exists()
+        assert snapshot_root.stat().st_mode & 0o222 == 0
+        for change in case_input["changes"]:
+            path = snapshot_root / change["path"]
+            assert path.read_text(encoding="utf-8") == change["content_after"]
+            assert path.stat().st_mode & 0o222 == 0
+
+        harness = tmp_path / "harness"
+        harness.mkdir()
+        shutil.copyfile(case_input_path, harness / "review-input.json")
+        shutil.copyfile(
+            INSTANCE_ROOT / "rating-contracts" / "review-contract-r2.md",
+            harness / "review-contract.md",
+        )
+        packet = authority_packet.materialize_authority_packet(
+            REPOSITORY_ROOT,
+            INSTANCE_ROOT / "contracts" / "baseline-authority-selection-r1.json",
+        )
+        (harness / "authority-input.json").write_text(
+            json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        fixture_tool = harness / "fixture-tool"
+        shutil.copyfile(
+            INSTANCE_ROOT / "tools" / "pr_review_fixture_tool_r3.py", fixture_tool
+        )
+        fixture_tool.chmod(0o755)
+        environment = {
+            **os.environ,
+            "PR_REVIEW_INPUT": str(harness / "review-input.json"),
+            "PR_REVIEW_AUTHORITY": str(harness / "authority-input.json"),
+            "PR_REVIEW_REPOSITORY": str(snapshot_root),
+        }
+
+        def invoke(*arguments: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+            return subprocess.run(
+                [str(fixture_tool), *arguments],
+                cwd=harness,
+                env=environment,
+                check=check,
+                capture_output=True,
+                text=True,
+            )
+
+        available_paths = json.loads(invoke("list-files").stdout)
+        assert "README.md" in available_paths
+        assert set(case_input["changed_paths"]) <= set(available_paths)
+        assert invoke("file", "evaluations/profiles/example.json").stdout == next(
+            change["content_after"]
+            for change in case_input["changes"]
+            if change["path"] == "evaluations/profiles/example.json"
+        )
+        expected_readme = subprocess.run(
+            ["git", "show", f"{commit}:README.md"],
+            cwd=REPOSITORY_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        assert invoke("file", "README.md").stdout == expected_readme
+        assert invoke("file", ".git/config", check=False).returncode != 0
+        assert invoke("file", "../AGENTS.md", check=False).returncode != 0
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot_root)
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
