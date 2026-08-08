@@ -19,6 +19,7 @@ sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 
 import pr_review_measurement as measurement
 import pr_review_qualification as qualification
+import pr_review_code_review_qualification as code_review_qualification
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
@@ -1904,3 +1905,106 @@ def test_workflow_is_fixed_to_first_read_only_qualification_slot():
         / "core-prompt.md"
     ).read_text(encoding="utf-8")
     assert prompt_text == expected_prompt
+
+
+def test_claude_code_core_preflight_binds_r4_and_workflow_trace_gate():
+    profile, preflight = code_review_qualification.validate_preflight(1)
+
+    assert profile["cases"] == [{"id": "PRR-C01", "revision": "r4"}]
+    assert profile["comparison_conditions"]["variant"] == "claude-code-review-core"
+    assert profile["comparison_conditions"]["quality_rating"]["contract_id"] == (
+        "pr-review-finding-quality-v5"
+    )
+    assert profile["comparison_conditions"]["qualification_gate"][
+        "individual_pass_condition"
+    ]["workflow_trace_complete"] is True
+    assert preflight["state"] == "ready_not_executed"
+    assert preflight["execution"]["state"] == "not_issued"
+    assert preflight["execution"]["authorization"] == "not_granted_by_preflight"
+
+
+def test_claude_code_core_workflow_uses_exact_prompt_and_read_only_boundary():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github"
+        / "workflows"
+        / "pr-review-qualify-claude-code-core.yml"
+    ).read_text(encoding="utf-8")
+    assert "pull_request:" not in workflow
+    assert "pull-requests: write" not in workflow
+    assert "gh pr comment" not in workflow
+    assert 'Bash(./fixture-tool:*)' in workflow
+    assert "mcp__github__*" in workflow
+    assert "test \"$REPETITION\" = \"1\"" in workflow
+    assert "pr_review_code_review_qualification.py" in workflow
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    expected = (
+        INSTANCE_ROOT
+        / "prompts"
+        / "baselines"
+        / "claude-code-review-core-r1"
+        / "core-prompt.md"
+    ).read_text(encoding="utf-8")
+    assert prompt_text == expected
+
+
+def test_claude_code_core_trace_requires_all_source_agent_stages(tmp_path: Path):
+    def assistant(models, parent=None):
+        return {
+            "type": "assistant",
+            "parent_tool_use_id": parent,
+            "message": {
+                "usage": {"input_tokens": 10, "output_tokens": 2},
+                "content": [
+                    {
+                        "type": "tool_use",
+                        "name": "Agent",
+                        "input": {"model": model},
+                    }
+                    for model in models
+                ]
+            },
+        }
+
+    execution = tmp_path / "execution.json"
+    execution.write_text(
+        json.dumps(
+            [
+                assistant(["haiku"]),
+                assistant(["haiku"]),
+                assistant(["sonnet"]),
+                assistant(["sonnet", "sonnet", "opus", "opus"]),
+                assistant(["sonnet"]),
+                assistant([], parent="agent-call-1"),
+            ]
+        ),
+        encoding="utf-8",
+    )
+    trace = code_review_qualification._workflow_trace(execution)
+    assert trace["complete"] is True
+    assert trace["all_agent_input_tokens"] == 60
+    incomplete = json.loads(execution.read_text(encoding="utf-8"))[:-2]
+    execution.write_text(json.dumps(incomplete), encoding="utf-8")
+    assert code_review_qualification._workflow_trace(execution)["complete"] is False
+
+
+def test_claude_code_core_prepare_exposes_only_r4_model_input(tmp_path: Path):
+    output = tmp_path / "reviewer-input"
+    snapshot = output / "repository"
+    try:
+        metadata = code_review_qualification.prepare_input(1, output)
+        assert metadata["fixture_revision"] == "r4"
+        assert metadata["variant"] == "claude-code-review-core"
+        assert (output / "review-eligibility.json").is_file()
+        assert (output / "pr_review_code_review_qualification.py").is_file()
+        assert not (output / "oracle.json").exists()
+        assert not (snapshot / ".git").exists()
+        assert not any(path.stat().st_mode & 0o222 for path in snapshot.rglob("*"))
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot)

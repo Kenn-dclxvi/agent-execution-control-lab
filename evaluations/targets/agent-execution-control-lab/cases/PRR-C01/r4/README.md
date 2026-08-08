@@ -11,4 +11,4 @@
 
 r3の実行で観測した入力不整合を修正するための新revisionである。`rules`が返すmodel-visible入力に規則本文と`rule_id`を同時に含める。二つのchanged pathはいずれも新規ファイルとして表し、patchと変更後本文の状態を一致させた。
 
-このrevisionはr3の結果確認後に作成したため、held-out evidenceとして扱わない。Core Baselineの機能qualification専用であり、case設計の独立監査は完了した。profile、preflight、外部実行は未完了である。
+このrevisionはr3の結果確認後に作成したため、held-out evidenceとして扱わない。Core Baselineの機能qualification専用であり、case設計の独立監査、profile、preflightは完了した。外部実行は未完了である。
