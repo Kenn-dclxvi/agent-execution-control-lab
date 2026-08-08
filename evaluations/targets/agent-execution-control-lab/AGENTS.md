@@ -3,7 +3,7 @@
 この領域は、`agent-execution-control-lab`を対象とするPRレビュー方式のnamespacedターゲットインスタンスである。ルート、`evaluations/AGENTS.md`、`evaluations/targets/AGENTS.md`を追加適用する。
 
 - ケース、セット、プロファイル、rating contract、result、target固有の採点補助をこのインスタンス配下へ閉じる。target固有case IDや分岐をルート`scripts/`へ追加しない。
-- `cases/*/r1/input.json`だけをmodel-visible入力とする。`oracle.json`、expected finding、grader内部値をreviewer jobへ渡さない。
+- 各case revisionの`input.json`だけをmodel-visibleなcase入力とする。`oracle.json`、expected finding、grader内部値をreviewer jobへ渡さない。
 - fixture、contract、schemaはrevision単位で固定し、result確認後にその場で変更しない。
 - 新インスタンスゲート未通過の間は、profileへ固定したqualificationスロット以外を発行しない。profile外のGitHub Actions artifactを正式evaluation resultとして登録しない。
 - 2026-08-08のprobeは新インスタンス登録前のdiagnostic receiptであり、quality score、3 KPI比較、採用判断へ使わない。

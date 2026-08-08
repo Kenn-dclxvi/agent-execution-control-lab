@@ -44,6 +44,8 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | `evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-r1.json` | 固定tree、fixture overlay、利用可能path集合のidentity | 固定済み |
 | `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3` | 新しい入力identityを持つheld-out fixture | 独立case設計監査通過・rule identity不整合を観測 |
 | `evaluations/targets/agent-execution-control-lab/contracts/prr-c01-r3-case-design-audit-r1.json` | 機能仕様からの導出と複数path finding identityの独立監査receipt | `satisfied` |
+| `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r4` | 規則identityと新規file差分を整合させたqualification fixture候補 | 固定済み・独立監査前・未実行 |
+| `evaluations/targets/agent-execution-control-lab/contracts/baseline-input-mapping-r4.json` | 規則identity修正後の純正code-review workflow対応監査 | `unsatisfied`・producer構成と検証段階が未移植 |
 | `evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-prr-c01-r3-r1.json` | PRR-C01/r3固有のread-only snapshot identity | 固定済み・診断runで使用 |
 | `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json` | Core機能確認の初回N=2条件 | 固定済み・履歴profile |
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json` | profileと全依存identity、2 slot、停止条件の機械照合 | 初回実行条件の履歴 |
@@ -62,7 +64,9 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 
 Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへmodel-visible artifactと読み取り専用snapshotだけを渡す。reviewer jobへoracleは渡さず、target snapshotにも`.git`を含めない。reviewer workspace自体はClaude Code Actionが前提とする最小git repositoryとして初期化する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。PRR-C01/r3の三回の結果と旧r2 workflowのrunはdiagnostic履歴のまま変更しない。
 
-Core Baseline候補r3は、固定target treeへcaseの変更後本文をoverlayした`.git`なしread-only repository snapshotを使用する。materializerとtool policyはcase IDに依存せず、snapshot identityとmodel-visibleな利用可能path集合はcase固有receiptへ固定し、reviewerは限定fixture toolからだけ参照する。PRR-C01/r3ではcase設計の独立監査、case固有snapshot、fresh N=2 profile、preflightまで成立した。四回目はAction用git workspaceを復元し、明示的な12ターン上限を外してterminal resultまで到達した。しかしmodel-visibleなauthority原文にはgraderが必須とするrule identityがなく、個別gateを満たさなかった。repetition 2、Candidate A、後続測定は発行しない。
+Core Baseline候補r3は、固定target treeへcaseの変更後本文をoverlayした`.git`なしread-only repository snapshotを使用する。materializerとtool policyはcase IDに依存せず、snapshot identityとmodel-visibleな利用可能path集合はcase固有receiptへ固定し、reviewerは限定fixture toolからだけ参照する。PRR-C01/r3ではcase設計の独立監査、case固有snapshot、fresh N=2 profile、preflightまで成立した。四回目はAction用git workspaceを復元し、明示的な12ターン上限を外してterminal resultまで到達した。しかしmodel-visibleなauthority原文にはgraderが必須とするrule identityがなく、個別gateを満たさなかった。後続のPRR-C01/r4では、`rules`応答へ規則identity・本文catalogとauthority原文を同時に固定し、二つの変更を新規fileとして矛盾なく表した。r4はr3実行後に作成したqualification fixtureであり、held-out evidenceではない。
+
+同時に比較元を再確認したところ、Anthropicの固定commitでPRレビューの正本となるのは[`plugins/code-review/commands/code-review.md`](https://github.com/anthropics/claude-code/blob/2bb60696142b493eafaeacfe00eac51d16c50c4f/plugins/code-review/commands/code-review.md)である。これは事前判定、authority path収集、PR要約、4並列reviewer、issue別validation、未確認issueの除外を定める。現行Coreは対象リポジトリへインストール済みworkflow由来の観点を単一Actionで実行しており、この構成を移植していない。したがって規則identityを直しただけでは純正相当Baselineにならない。新しいworkflow、r4の独立監査、profile、preflightが未完了のため、外部実行はまだ発行しない。
 
 ## Diagnostic N=2
 

@@ -1,0 +1,40 @@
+{
+  "schema_version": 4,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r4",
+  "review_contract_revision": "pr-review-contract-r2",
+  "pr": {
+    "title": "レビュー規則と測定条件の追加",
+    "body": "レビュー規則と、その効果を測る実行profileを同じPRで追加する。",
+    "base_sha": "3333333333333333333333333333333333333331",
+    "head_sha": "3333333333333333333333333333333333333332"
+  },
+  "changed_paths": [
+    "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt",
+    "evaluations/profiles/review-output-contract-r1.json"
+  ],
+  "changes": [
+    {
+      "path": "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt",
+      "patch": "new file mode 100644\n--- /dev/null\n+++ b/prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt\n@@ -0,0 +1 @@\n+レビュー結果は構造化JSONとして返す。",
+      "content_after": "レビュー結果は構造化JSONとして返す。\n"
+    },
+    {
+      "path": "evaluations/profiles/review-output-contract-r1.json",
+      "patch": "new file mode 100644\n--- /dev/null\n+++ b/evaluations/profiles/review-output-contract-r1.json\n@@ -0,0 +1 @@\n+{\"max_workers\":24,\"timeout_seconds\":600}",
+      "content_after": "{\"max_workers\":24,\"timeout_seconds\":600}\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "prompt_evaluation_separation", "text": "prompt変更と評価条件変更を同じ比較単位へ混ぜない。"},
+        {"rule_id": "state_separation", "text": "artifact、evaluation、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secret、credential、非公開の生logをcommitしない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}
