@@ -28,6 +28,8 @@ Core Baselineのrepetition 1は、測定環境の修正を挟んで3回実行し
 
 後続の[`実行互換監査`](../contracts/baseline-execution-parity-r1.json)では、現行workflowとこのCore経路のtrigger、workspace、turn上限、tool、出力方法などが一致しないと判定した。上の三件はすべて`execution_parity_diagnostic_only`であり、現行workflowを再現したBaseline resultには数えない。
 
+その後、比較元はtarget repositoryへインストール済みのworkflowではなく、Anthropicの実運用workflowを参考にしたClaude Code純正相当のレビュー手順であることを確認した。[`測定境界`](../contracts/baseline-measurement-boundary-r1.json)では、固定fixture、構造化出力、GitHub投稿の除外などを測定用の変更として分離している。上の三件を正式resultへ昇格しない点は変わらないが、現在の停止理由には`baseline-execution-parity-r1`を使わない。
+
 ## PRR-C01 probe receipt
 
 2026-08-08にPRR-C01の両variantをprobeした。次は正式な比較resultではなく、測定経路の成立可否を確認したdiagnostic receiptである。

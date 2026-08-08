@@ -1,0 +1,64 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-measurement-boundary/v1",
+  "audit_id": "baseline-measurement-boundary-r1",
+  "state": "satisfied",
+  "baseline_definition": {
+    "reference": "Anthropicが実運用で使用するClaude Code workflowの構造を参考にしたCore Baseline",
+    "reference_repository": "https://github.com/anthropics/claude-code.git",
+    "reference_commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "excluded_reference": "target repositoryへインストール済みの.github/workflows/claude-pr-review.yml"
+  },
+  "preserved_review_conditions": [
+    "Claude Code Actionが一つのagent operationとして入力を取得してレビュー判断を行う",
+    "model identityをclaude-sonnet-5へ固定する",
+    "レビュー観点、推測禁止、repository authorityの適用を保持する",
+    "PR metadata、changed paths、diff、適用規則、対象本文へreviewer自身が到達できる",
+    "reviewerはrepositoryを変更しない"
+  ],
+  "measurement_adaptations": [
+    {
+      "identity": "fixed_fixture",
+      "purpose": "同一入力を反復できるよう実PRを固定fixtureへ置き換える",
+      "allowed": true
+    },
+    {
+      "identity": "read_only_fixture_tool",
+      "purpose": "GitHub APIの代わりに同じ論理入力をagenticに取得させる",
+      "allowed": true
+    },
+    {
+      "identity": "structured_output",
+      "purpose": "findingをmodel-invisible oracleで採点できる形にする",
+      "allowed": true
+    },
+    {
+      "identity": "github_reporting_removed",
+      "purpose": "レビュー判断とGitHub投稿時間を分離する",
+      "allowed": true
+    },
+    {
+      "identity": "fixed_action_and_model",
+      "purpose": "反復間の実行条件を固定する",
+      "allowed": true
+    },
+    {
+      "identity": "bounded_action_timeout",
+      "purpose": "無制限runを避け、timeoutをterminal resultとして保存する",
+      "allowed": true
+    }
+  ],
+  "disallowed_changes": [
+    "レビュー観点またはfinding条件の変更",
+    "modelまたはAction familyの変更",
+    "model-visibleな論理入力の欠落",
+    "agentic retrievalを決定論的な入力注入へ置き換えること"
+  ],
+  "prior_audit": {
+    "path": "contracts/baseline-execution-parity-r1.json",
+    "current_interpretation": "target repositoryへインストール済みworkflowとの完全一致を要求したため、Baselineの比較元と測定用変更の境界を誤っていた",
+    "effect": "履歴として保持するが、Core Baseline admissionのgateには使用しない"
+  },
+  "admission_effect": "core_baseline_profile_may_proceed_after_preflight"
+}
