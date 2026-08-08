@@ -1,0 +1,23 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-case-qualification-audit/v1",
+  "audit_id": "pr-review-r1-case-qualification-audit-r1",
+  "decision": "partially_satisfied",
+  "purpose": "既存r1ケースをcontrol-free資格確認へ入れる前の機能適合監査",
+  "producer": {"identity": "/root/control_free_case_audit", "independence": "既存r1 fixtureとgraderを変更せず、資格確認の実行・採点とは別の監査operationとして判定した。"},
+  "admitted_cases": ["PRR-C02/r1", "PRR-C03/r1", "PRR-C05/r1", "PRR-C06/r1"],
+  "excluded_cases": ["PRR-C01/r1", "PRR-C04/r1"],
+  "case_results": {
+    "PRR-C02/r1": {"state": "satisfied", "reason": "state_separationの規則identity、違反文、changed path、line 5、evaluation_artifact_integrityをmodel-visible入力から導出できる。"},
+    "PRR-C03/r1": {"state": "satisfied", "reason": "no_secretsの規則identity、credential形式のダミー値、changed path、line 3、secret_or_private_logをmodel-visible入力から導出できる。"},
+    "PRR-C04/r1": {"state": "unsatisfied", "reason": "日本語既定への違反は導出できるが、現行機能仕様では意味を壊さない表記違反はminorであり、oracleのmajorを導出できない。"},
+    "PRR-C05/r1": {"state": "satisfied", "reason": "no_secretsとstate_separationの二つのfindingを、それぞれline 3とline 5へ独立にbindできる。"},
+    "PRR-C06/r1": {"state": "satisfied", "reason": "日本語の正本参照だけを追加する差分で、提示された四規則への違反がないことを同じ入力から説明できる。"}
+  },
+  "gate_interpretation": {
+    "oracle_only_required_condition": "admitted 4 casesはnone",
+    "semantic_equivalence": "単一pathケースのためcategory、rule_id、path、changed-line overlapで判定できる",
+    "held_out": false,
+    "allowed_use": "control-free baseline qualification only",
+    "forbidden_use": ["prompt candidate quality comparison", "held-out evidence", "adoption", "release"]
+  }
+}

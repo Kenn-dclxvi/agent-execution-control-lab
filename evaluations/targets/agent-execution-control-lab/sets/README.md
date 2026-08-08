@@ -6,3 +6,4 @@
 | [`pr-review-c01-qualification-r1`](pr-review-c01-qualification-r1/README.md) | 1 | agentic-retrieval baselineの独立2反復qualification用 |
 | [`pr-review-c01-r4-calibration-r1`](pr-review-c01-r4-calibration-r1/README.md) | 1 | Workflow Freeとreview体制・model構成の校正用。held-outではない |
 | [`pr-review-c01-r4-relationship-model-calibration-r1`](pr-review-c01-r4-relationship-model-calibration-r1/README.md) | 1 | 1人の関係レビュー役についてSonnet／Opusを各3回校正する。held-outではない |
+| [`pr-review-control-free-qualification-four-r1`](pr-review-control-free-qualification-four-r1/README.md) | 4 | 現行仕様へ適合した既存r1ケースのcontrol-free資格確認用。未実行 |
