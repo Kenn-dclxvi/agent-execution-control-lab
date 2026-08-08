@@ -7,4 +7,4 @@
 - [`manifest.json`](manifest.json): snapshot receipt、materializer、fixture tool r3、schema、content hash
 - 入力対応: [`baseline-input-mapping-r3`](../../../contracts/baseline-input-mapping-r3.json)
 
-source-to-Core入力対応後、PRR-C01/r3の独立case設計監査と[fresh N=2 preflight](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)が別アーティファクトとして成立した。prompt manifest自体は代表receipt PRR-C01/r2へ固定した履歴identityのまま変更しない。Core Baselineの機能qualification結果は未観測であり、slotも未発行である。
+source-to-Core入力対応後、PRR-C01/r3の独立case設計監査とfresh N=2 preflightを別アーティファクトとして作成した。[初回条件](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)による実行はreviewer開始前に失敗したため、[修正版](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r2-preflight.json)へ実行方法を固定し直した。prompt manifest自体は代表receipt PRR-C01/r2へ固定した履歴identityのまま変更しない。Core Baselineの品質はまだ観測していない。

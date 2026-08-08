@@ -403,20 +403,10 @@ def test_qualification_profile_binds_only_planned_baseline_slots():
 def test_prr_c01_r3_qualification_preflight_is_reproducible_and_not_executed(
     tmp_path: Path,
 ):
-    profile_path = (
-        INSTANCE_ROOT
-        / "profiles"
-        / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json"
-    )
+    profile_path = qualification.PROFILE_PATH
     profile = json.loads(profile_path.read_text(encoding="utf-8"))
     validation = measurement.validate_qualification_profile(profile)
-    expected_receipt = json.loads(
-        (
-            INSTANCE_ROOT
-            / "contracts"
-            / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json"
-        ).read_text(encoding="utf-8")
-    )
+    expected_receipt = json.loads(qualification.PREFLIGHT_PATH.read_text(encoding="utf-8"))
     output = tmp_path / "preflight.json"
     actual_receipt = measurement.preflight_qualification(profile_path, output)
 
@@ -447,16 +437,27 @@ def test_prr_c01_r3_qualification_preflight_is_reproducible_and_not_executed(
 
 
 def test_prr_c01_r3_qualification_preflight_rejects_repetition_drift():
-    profile_path = (
-        INSTANCE_ROOT
-        / "profiles"
-        / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json"
-    )
+    profile_path = qualification.PROFILE_PATH
     profile = json.loads(profile_path.read_text(encoding="utf-8"))
     profile["comparison_conditions"]["repetition_condition"]["iterations"] = 3
 
     with pytest.raises(measurement.ValidationError, match="repetition condition mismatch"):
         measurement.validate_qualification_profile(profile)
+
+
+def test_prr_c01_r3_qualification_recovery_preserves_first_attempt_identity():
+    profiles = INSTANCE_ROOT / "profiles"
+    first = json.loads(
+        (profiles / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    recovery = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
+
+    assert first["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r1"
+    assert first["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r3"
+    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r2"
+    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r4"
 
 
 def test_r2_results_are_write_once_and_reclassified_as_diagnostic():

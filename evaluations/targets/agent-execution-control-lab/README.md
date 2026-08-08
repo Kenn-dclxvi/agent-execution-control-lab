@@ -2,7 +2,7 @@
 
 現行Claude Code Actionのagentic retrievalと、決定論的に入力を準備するCandidate Aを固定fixtureで調べる、`agent-execution-control-lab`向けnamespacedインスタンスである。ターゲットrefは測定環境導入前のcommit `8cd97283e60f13393fb1302c601c9a4fe0a5381f`へ固定する。
 
-現在のインスタンス状態は登録済み・PRR-C01/r3のcase設計監査とfresh N=2 preflight成立後・Baseline機能qualification未実行である。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。正式resultは0件である。
+現在のインスタンス状態は登録済みであり、PRR-C01/r3のcase設計監査を終えている。Core Baseline repetition 1の初回実行は固定commitを取得できず、reviewerの開始前に終了した。修正版のpreflightは成立しているが、品質はまだ観測していない。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。正式な品質resultは0件である。
 
 ## アーティファクト
 
@@ -41,4 +41,4 @@ GitHub Actionsの`PR Review Measurement Core`は、現在PRR-C01/r3のCore Basel
 - reviewer jobにはoracleと`.git`を渡さず、repository snapshotから書込権限を除く。
 - GitHub comment、Candidate A、repetition 2はこの実行経路で開始しない。
 
-旧workflowによる両variantのrunはdiagnostic evidenceとして履歴に残す。今回のworkflow revisionは`pr-review-qualify-core-r1`であり、独立監査済みfixtureとfresh N=2 profileへ新しく固定した実行経路である。
+旧workflowによる両variantのrunはdiagnostic evidenceとして履歴に残す。`pr-review-qualify-core-r1`の初回実行は、checkoutに固定commitが含まれずreviewer開始前に終了した。この条件は変更せずに保存し、全履歴を取得する`pr-review-qualify-core-r2`を新しいprofileへ固定してrepetition 1を再実行する。

@@ -1,0 +1,167 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v2",
+  "profile_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2",
+  "state": "frozen_not_executed",
+  "purpose": "core_baseline_function_qualification",
+  "cases": [
+    {"id": "PRR-C01", "revision": "r3"}
+  ],
+  "evaluation_set": {
+    "set_id": "pr-review-c01-r3-baseline-qualification-r1",
+    "revision": "r1",
+    "coverage": "PRR-C01/r3 only"
+  },
+  "comparison_conditions": {
+    "variant": "agentic-retrieval",
+    "target_repository_ref": {
+      "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+      "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+      "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+    },
+    "task_spec": {
+      "source": "cases/PRR-C01/r3/input.json and rating-contracts/review-contract-r2.md",
+      "functional_specification": "specifications/pr-review-function-r1.md",
+      "required_outcome": "model-visible inputからrequired findingを欠落・余分なfinding・review contract違反なく返す"
+    },
+    "fixture_identity": {
+      "input_path": "cases/PRR-C01/r3/input.json",
+      "input_sha256": "8d51a4dc3bf9eba5486a08e4bb7099bcc85b2f23ee90acfa4cc0a8c0e4758ecf",
+      "oracle_path": "cases/PRR-C01/r3/oracle.json",
+      "oracle_sha256": "ce37506416d2309110bfbe2ef9eb4ea3fbcb8a58cf01a450238cddac3fac8089",
+      "case_design_audit_path": "contracts/prr-c01-r3-case-design-audit-r1.json",
+      "case_design_audit_sha256": "fbb0966615edf91d5ffee016681696f4c3161c2369a9a5800ff30639b95a4584"
+    },
+    "input_mapping": {
+      "path": "contracts/baseline-input-mapping-r3.json",
+      "sha256": "eb1ef8c5373a7cfc3e28eb5ec6f0af4caa8eab980327e97c15bc5dcf51fb9cac",
+      "required_state": "satisfied"
+    },
+    "repository_snapshot": {
+      "receipt_path": "contracts/baseline-repository-snapshot-prr-c01-r3-r1.json",
+      "receipt_sha256": "2aa1b6ea47ecbb4e78220bd353cb22b16259438ef41bd9d98d01f7aac4048a16",
+      "snapshot_sha256": "26bae8ea409c423693946edb8b2cbb77330a0409d238336e4a85ef6266b7ec7f",
+      "available_paths_sha256": "36a1705ef20a5d9b611fa255b5e1c546fd030ba4354917166c3b2b3cbe202ed4",
+      "materializer_path": "tools/pr_review_repository_snapshot_r2.py",
+      "materializer_sha256": "692f488c7cd0ce8a93d0d5b257a7f8513403094ef51de88d8045d2da8c64d7ad"
+    },
+    "authority_selection": {
+      "path": "contracts/baseline-authority-selection-r1.json",
+      "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"
+    },
+    "prompt": {
+      "identity": "claude-pr-review-core-r3",
+      "manifest_path": "prompts/baselines/claude-pr-review-core-r3/manifest.json",
+      "manifest_sha256": "5d06748acac944031edbf0d534533530fd9e1a2ef2c81a3ab625ce0f25523eda",
+      "content_path": "prompts/baselines/claude-pr-review-core-r3/core-prompt.md",
+      "content_sha256": "9a61d9f4a2ce386802ed561149dbbbc0969bb7ac97542f9ba160749144c6acfd"
+    },
+    "review_contract": {
+      "revision": "pr-review-contract-r2",
+      "path": "rating-contracts/review-contract-r2.md",
+      "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"
+    },
+    "review_output_schema": {
+      "revision": "review-output-r2",
+      "path": "schemas/review-output-r2.schema.json",
+      "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"
+    },
+    "run_result_schema": {
+      "revision": "run-result-r4",
+      "path": "schemas/run-result-r4.schema.json",
+      "sha256": "6f118dc11d362cc5ea4a8b490ffd2ab652a6fe7a7920981a60c3b334e30115e0"
+    },
+    "qualification_tool": {
+      "path": "tools/pr_review_qualification.py",
+      "sha256": "079ba736b702b9c62a7074b571cdd3451b3400691a5e3b06b9cda458d76d84d2"
+    },
+    "workflow": {
+      "revision": "pr-review-qualify-core-r2",
+      "repository_path": ".github/workflows/pr-review-measure-core.yml",
+      "sha256": "02ea45733a70d2fa0030b53fb294fe128d359d66d0398daf5967a7692050014c"
+    },
+    "quality_rating": {
+      "contract_id": "pr-review-finding-quality-v3",
+      "path": "rating-contracts/pr-review-finding-quality-v3.json",
+      "contract_sha256": "657327caba77cdf94bf7ffbdfa81de595bbf89c9c5e32504f440834b7ad943c6",
+      "required_state": "independent_qualification_satisfied"
+    },
+    "model": {
+      "requested": "claude-sonnet-5",
+      "reported_identity_required": true,
+      "reasoning": "action_default_at_fixed_action_revision"
+    },
+    "agent_environment": {
+      "action": "anthropics/claude-code-action",
+      "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "claude_cli": "reported_by_action",
+      "runner": "ubuntu-latest",
+      "session_mode": "one_action_invocation_per_run",
+      "authentication": "claude_code_oauth_token"
+    },
+    "permission": {
+      "github": "contents:read,pull-requests:read",
+      "repository_write": false,
+      "github_comment_write": false,
+      "tool_policy": "fixture-tool-read-only-repository-snapshot-r1",
+      "fixture_tool_path": "tools/pr_review_fixture_tool_r3.py",
+      "fixture_tool_sha256": "4796243d08cd1762c1b785a067c93799d743aa2b745d48990382838d3fe04c3b"
+    },
+    "executor_parameters": {
+      "max_attempts_per_repetition": 3,
+      "max_turns": 12,
+      "max_workers": 24,
+      "dispatch_concurrency": 1,
+      "schedule_policy": "sequential_by_repetition",
+      "action_timeout_seconds": 720,
+      "reviewer_job_timeout_seconds": 900,
+      "token_accounting": {
+        "revision": "claude-code-action-final-result-usage-v1",
+        "scope": "claude_code_session_total",
+        "source": "execution_file final result usage including cache input tokens"
+      }
+    },
+    "repetition_condition": {
+      "iterations": 2,
+      "order": [1, 2],
+      "external_failure_policy": "repeat_same_repetition_with_new_attempt_identity",
+      "result_reuse": "forbidden"
+    },
+    "qualification_gate": {
+      "individual_pass_condition": {
+        "result": "pass",
+        "quality_score": 4,
+        "required_finding_miss": 0,
+        "false_positive": 0,
+        "review_contract_violation": 0,
+        "reported_model_matches_requested": true,
+        "measurement_complete": true
+      },
+      "aggregate_pass_condition": "2 fresh repetitions both satisfy individual_pass_condition",
+      "stop_conditions": [
+        "quality_score below 4 or any quality gate failure stops later unissued repetitions",
+        "reported model mismatch or missing model identity stops later unissued repetitions",
+        "fixture, prompt, snapshot, contract, Action, permission, timeout, or token-accounting identity drift stops all slot issuance",
+        "external execution failure may retry the same repetition only, up to max_attempts_per_repetition"
+      ]
+    },
+    "kpi_mapping": {
+      "quality_score": "quality_score",
+      "total_tokens": "runtime.total_tokens",
+      "elapsed_seconds": "timing.execution_ms / 1000"
+    }
+  },
+  "execution": {
+    "planned_slots": 2,
+    "max_workers": 24,
+    "actual_concurrency": 1,
+    "state": "not_issued"
+  },
+  "scope": {
+    "quality_claim": "not_observed",
+    "kpi_comparison": "not_authorized",
+    "candidate_a": "not_authorized",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

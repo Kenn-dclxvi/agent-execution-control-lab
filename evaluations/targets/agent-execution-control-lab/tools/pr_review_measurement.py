@@ -27,7 +27,10 @@ PROFILES_ROOT = MEASUREMENT_ROOT / "profiles"
 REVIEW_CONTRACT_PATH = MEASUREMENT_ROOT / "rating-contracts" / "review-contract-r1.md"
 REVIEW_SCHEMA_PATH = MEASUREMENT_ROOT / "schemas" / "review-output-r1.schema.json"
 FIXTURE_TOOL_PATH = INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py"
-QUALIFICATION_PROFILE_ID = "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1"
+QUALIFICATION_PROFILE_IDS = {
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1",
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2",
+}
 
 CASE_IDS = tuple(f"PRR-C0{number}" for number in range(1, 7))
 VARIANTS = ("agentic-retrieval", "deterministic-input")
@@ -974,7 +977,8 @@ def validate_qualification_profile(value: Any) -> dict:
         raise ValidationError("qualification profile must be an object")
     if value.get("schema_version") != "agent-execution-control-lab.pr-review-profile/v2":
         raise ValidationError("qualification profile schema_version mismatch")
-    if value.get("profile_id") != QUALIFICATION_PROFILE_ID:
+    profile_id = value.get("profile_id")
+    if profile_id not in QUALIFICATION_PROFILE_IDS:
         raise ValidationError("qualification profile identity mismatch")
     if value.get("state") != "frozen_not_executed":
         raise ValidationError("qualification profile state mismatch")
@@ -1104,9 +1108,13 @@ def validate_qualification_profile(value: Any) -> dict:
         != fixture["case_design_audit_path"]
     ):
         raise ValidationError("quality rating admission mismatch")
+    expected_workflow_revision = {
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1": "pr-review-qualify-core-r1",
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2": "pr-review-qualify-core-r2",
+    }[profile_id]
     workflow = conditions.get("workflow")
     if workflow != {
-        "revision": "pr-review-qualify-core-r1",
+        "revision": expected_workflow_revision,
         "repository_path": ".github/workflows/pr-review-measure-core.yml",
         "sha256": workflow.get("sha256") if isinstance(workflow, dict) else None,
     }:
@@ -1191,7 +1199,7 @@ def validate_qualification_profile(value: Any) -> dict:
         raise ValidationError("qualification scope boundary mismatch")
 
     return {
-        "profile_id": QUALIFICATION_PROFILE_ID,
+        "profile_id": profile_id,
         "verified_artifacts": verified_artifacts,
         "planned_slots": [
             {
