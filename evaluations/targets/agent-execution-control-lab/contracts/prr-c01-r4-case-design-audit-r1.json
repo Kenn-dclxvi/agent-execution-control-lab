@@ -1,0 +1,144 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-case-design-audit/v1",
+  "audit_id": "prr-c01-r4-case-design-audit-r1",
+  "producer_task_name": "/root/prr_c01_r4_independent_audit",
+  "target": {
+    "case_revision": "PRR-C01/r4",
+    "repository_head": "bf735338c18b3d53a65142241da30601478bbc89",
+    "receipt_path": "evaluations/targets/agent-execution-control-lab/contracts/prr-c01-r4-case-design-audit-r1.json"
+  },
+  "decision": "satisfied",
+  "結論": "5項目をすべて一次アーティファクトで確認した。期待findingにoracleまたはgraderだけが要求する条件はなく、PRR-C01/r4はCore Baselineの機能qualificationへ進めるcase設計である。ただし、この監査は実行、baseline qualification、held-out evidenceへの昇格を意味しない。",
+  "stage_a": {
+    "確認順序": "oracle、oracle schema、quality rating contractを開く前に、上位機能仕様、model-visibleなcase入力、model-visibleなreview contract、固定target commitのrepository authority、read-only snapshotの情報だけで期待findingと4カテゴリの状態を確定した。",
+    "期待finding": {
+      "件数": 1,
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "severity": "major",
+      "変更関係": "同じPRで、レビュー出力を定めるprompt candidateの新規ファイルと、その効果を測る評価profileの新規ファイルを追加しており、prompt変更と評価条件変更を同じ比較単位へ混ぜている。二つを別の比較単位へ分ける必要がある。",
+      "必須path集合": [
+        "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt",
+        "evaluations/profiles/review-output-contract-r1.json"
+      ],
+      "許容anchor": [
+        {
+          "path": "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt",
+          "line_start": 1,
+          "line_end": 1,
+          "related_paths": [
+            "evaluations/profiles/review-output-contract-r1.json"
+          ]
+        },
+        {
+          "path": "evaluations/profiles/review-output-contract-r1.json",
+          "line_start": 1,
+          "line_end": 1,
+          "related_paths": [
+            "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt"
+          ]
+        }
+      ],
+      "導出根拠": "機能仕様は複数pathの関係違反を関係するいずれかのchanged pathへanchorできると定め、review contractはpathとrelated_pathsで関係を表す。input.jsonのrulesにはrule_idと規則本文があり、実際のfixture-tool rules応答にも同じrule_idと本文が含まれた。severityは、mergeによりrepository authorityを直接破る違反をmajorとする機能仕様から導出した。"
+    },
+    "4カテゴリの期待状態": {
+      "repository_discipline": "fail",
+      "evaluation_artifact_integrity": "pass",
+      "secret_or_private_log": "pass",
+      "document_quality": "pass",
+      "説明": "入力から確定したfindingはrepository_disciplineの1件である。二つの変更後本文には秘密情報や非公開logがなく、日本語表記上の違反もない。今回の期待finding identityとして評価アーティファクトの状態・revision・比較条件そのものの矛盾は要求しない。"
+    },
+    "実行時規則取得": {
+      "command_identity": "pr_review_fixture_tool_r5.py rules",
+      "result": "rule_catalogからprompt_evaluation_separationと規則本文を取得できた。repository_authorityは固定commit 8cd97283e60f13393fb1302c601c9a4fe0a5381f、tree 56c7bbbaed3b2b74e5f0978d9d9cab498749bf8dへ固定されていた。",
+      "required_rule": {
+        "rule_id": "prompt_evaluation_separation",
+        "text": "prompt変更と評価条件変更を同じ比較単位へ混ぜない。"
+      }
+    },
+    "変更とsnapshotの整合": {
+      "target_repository_ref": {
+        "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+        "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+      },
+      "target_tree_observation": "固定target treeには二つのchanged pathが存在しなかった。",
+      "patch_observation": "input.jsonの二つのpatchはいずれもnew file mode 100644、/dev/nullからline 1を追加する形式であり、各追加行はcontent_afterと改行を含めて一致した。",
+      "snapshot_observation": "snapshot r3は同じ固定commitとtreeへ二つのcontent_afterを通常ファイルmode 100644でoverlayする。再生成したreceiptは保存済みreceiptと同じinput SHA-256、overlay path順、snapshot SHA-256、read-onlyかつgit directoryなしの境界を返した。",
+      "snapshot_sha256": "32f9e4a076a1cb75f8f31dbf19403bc0259a056d5da2473bf6463b73c5f6d528"
+    }
+  },
+  "stage_b": {
+    "開始条件": "Stage Aの期待finding identityと4カテゴリの期待状態を確定した後にだけ、oracle、oracle schema、quality rating contractを読んだ。",
+    "照合結果": "oracleのcategory、rule_id、二つのpath、両pathのline 1、severityはStage Aの導出と一致した。graderはcategory、rule_id、severity、pathとrelated_pathsの集合を一致条件とし、actual pathはoracleの二つのlocationのいずれかでよいと定めている。",
+    "oracle_or_grader_only_required_conditions": [],
+    "片方欠落の扱い": "graderがset(path + related_paths)をoracleの二つのpath集合と照合するため、どちらか一方をpathにもrelated_pathsにも含めない出力はrequired finding identityを満たさず、missになる。",
+    "qualification境界": "READMEとquality rating contractはともに、r4がr3実行後に入力不整合を修正して作られたqualification fixtureであり、held-out evidenceではなく、未実行かつbaseline未qualificationであると明記している。"
+  },
+  "gates": [
+    {
+      "gate": 1,
+      "state": "satisfied",
+      "evidence": "期待findingの規則、変更関係、二つのpath、line 1、category、severity、修正方針を、上位機能仕様、input.json、review contract、fixture-tool rules応答から導出できた。"
+    },
+    {
+      "gate": 2,
+      "state": "satisfied",
+      "evidence": "oracleのrule_id、path集合、locations、category、severityはStage Aの導出と一致し、rule_idは実際のrules応答に含まれた。oracleまたはgraderだけに存在する必須条件は0件だった。"
+    },
+    {
+      "gate": 3,
+      "state": "satisfied",
+      "evidence": "固定target treeで二つのpathは不存在であり、両patchは新規mode 100644、content_afterは追加行と一致し、snapshot r3は同じcommitへ同じ二つのpathをread-only overlayした。"
+    },
+    {
+      "gate": 4,
+      "state": "satisfied",
+      "evidence": "oracleは両pathをlocationsへ持ち、graderはどちらかをanchorとして許容する。pathとrelated_pathsの集合一致により片方の欠落はmissになる。"
+    },
+    {
+      "gate": 5,
+      "state": "satisfied",
+      "evidence": "READMEとquality rating contractの双方が、r4をr3実行後に作成したCore Baseline機能qualification専用fixture、held-out evidenceではない、未実行、baseline未qualificationとしている。"
+    }
+  ],
+  "forbidden_input": {
+    "used": false,
+    "statement": "この監査の導出と判定には、PRR-C01/r1からr3のinput、oracle、audit、results配下、過去run、reviewer出力、会話履歴、docsの実行結果説明、tests/test_pr_review_measurement.py、既存テストassertionを使用していない。"
+  },
+  "artifacts_read": {
+    "stage_a": [
+      {"path": "AGENTS.md", "sha256": "43994924951de6ed57afe829e2395eb2d55b74221ccbcd5287a5a4d8359da0b9"},
+      {"path": "evaluations/AGENTS.md", "sha256": "bc7590873d5a56936e0cb426d1e341d9aa4325a72d37ec46350895842dba365c"},
+      {"path": "evaluations/targets/AGENTS.md", "sha256": "fe4550dfe40021396cc30cfad259131b3c4cd58114fd7cb3615021c787ffcf90"},
+      {"path": "evaluations/targets/agent-execution-control-lab/AGENTS.md", "sha256": "a2e5e5d758b8c83be9deb3f37cdb8c4e04a929bba596774092a8e2a5010f32f6"},
+      {"path": "evaluations/targets/agent-execution-control-lab/specifications/pr-review-function-r1.md", "sha256": "eb0872cf7198e0ec286c8a9df31da54f39aeaf64b3360656c912fc5f3e725a60"},
+      {"path": "evaluations/targets/agent-execution-control-lab/rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+      {"path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r4/input.json", "sha256": "57f321693dde33d52910d7a4806b53ebf0757f5550399e357e27e91ae1a603fe"},
+      {"path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r4/README.md", "sha256": "a2d3adf4c81d3bce4c12ce295cd32f830401d5adca1837d0996b4b664be213d0"},
+      {"path": "evaluations/targets/agent-execution-control-lab/schemas/fixture-input-r4.schema.json", "sha256": "75b87f34bdebe16f245718e26404a8ef6070f0742bfe5ed071298221d024313b"},
+      {"path": "evaluations/targets/agent-execution-control-lab/schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+      {"path": "evaluations/targets/agent-execution-control-lab/tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+      {"path": "evaluations/targets/agent-execution-control-lab/contracts/prr-c01-r4-review-eligibility-r1.json", "sha256": "638c7ed54fcbaaaee9aeb0abe626a0c84573d58b7cf9aa5a9062d6d5e4ba340e"},
+      {"path": "evaluations/targets/agent-execution-control-lab/contracts/baseline-authority-selection-r1.json", "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"},
+      {"path": "evaluations/targets/agent-execution-control-lab/tools/pr_review_authority_packet.py", "sha256": "cc3f34e12f362460f9467f6ea4bf518ab7347142bec51762ae0fb5773cc4ed4d"},
+      {"path": "evaluations/targets/agent-execution-control-lab/tools/pr_review_authority_collector.py", "sha256": "5848dadba4e548689aef90aabc8d4b2e5e0912f41267197c4026851ea1614d98"},
+      {"path": "evaluations/targets/agent-execution-control-lab/schemas/authority-packet-r1.schema.json", "sha256": "a8b65c6362b3168460d15b30481129d7a2b7e7a9089dfb6107afe9cc4c505bb1"},
+      {"path": "evaluations/targets/agent-execution-control-lab/contracts/baseline-repository-snapshot-prr-c01-r4-r1.json", "sha256": "e41e27bc821492bbae0f557ecf1e9319c0ae64a03bf17b280d28cd1c74b5c88c"},
+      {"path": "evaluations/targets/agent-execution-control-lab/tools/pr_review_repository_snapshot_r3.py", "sha256": "993e591612ab4b38263aba44348f28d3b0cbcdbeef6cb9ec2b5061a1d2832849"}
+    ],
+    "fixed_target_commit_authorities": [
+      {"path": "8cd97283e60f13393fb1302c601c9a4fe0a5381f:AGENTS.md", "sha256": "93b965c98e8ee45bd9ab44ce646836b80ebedf2b124c1a03261a0079b0daff46"},
+      {"path": "8cd97283e60f13393fb1302c601c9a4fe0a5381f:prompts/AGENTS.md", "sha256": "456fc0912949e13a8b6a4f2575136aa6b0eefb5ff89a813a35050c25fa55d047"},
+      {"path": "8cd97283e60f13393fb1302c601c9a4fe0a5381f:evaluations/AGENTS.md", "sha256": "bc7590873d5a56936e0cb426d1e341d9aa4325a72d37ec46350895842dba365c"}
+    ],
+    "stage_b": [
+      {"path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r4/oracle.json", "sha256": "5304ee3981ae41a7ec3de2540332f03e30457cba52ddd4b9c71da792a4bedf82"},
+      {"path": "evaluations/targets/agent-execution-control-lab/schemas/fixture-oracle-r4.schema.json", "sha256": "8ef1c3202c017facf1f4701ac5d98451e7174f6f01d353db0d91fd73780ec57d"},
+      {"path": "evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v4.json", "sha256": "cf45a87ad5d8f70ea57d740db105c3914c6b4a1dfc0fb25d81a71b29725c1e7b"}
+    ]
+  },
+  "validation": {
+    "json_parse": "success",
+    "git_diff_check": "success"
+  }
+}
