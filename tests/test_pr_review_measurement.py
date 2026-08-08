@@ -3137,3 +3137,51 @@ def test_subagent_hook_r2_recognizes_nested_fixture_tool_without_content(
     assert record["fixture_tool_command"] is True
     assert "command" not in record
     assert "private fixture content" not in content
+
+
+@pytest.mark.parametrize(
+    ("case_id", "attempt", "score", "result"),
+    [
+        ("PRR-C02", 31276611327, 4, "pass"),
+        ("PRR-C03", 31276612631, 4, "pass"),
+        ("PRR-C06", 31276613765, 3, "quality_failed"),
+    ],
+)
+def test_control_free_three_saved_results(
+    case_id: str, attempt: int, score: int, result: str
+):
+    path = (
+        INSTANCE_ROOT
+        / "results"
+        / f"pr-review-control-free-three-qualification-r2-{case_id.lower()}-workflow-free-qualification-r1-a{attempt}.json"
+    )
+    value = json.loads(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r15.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(value)
+    assert value["quality_score"] == score
+    assert value["result"] == result
+    assert value["measurement_qualification"]["state"] == "satisfied"
+    assert value["runtime"]["total_tokens"] is not None
+
+
+def test_control_free_two_admission_reuses_only_score_four_results():
+    admission = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-control-free-two-qualification-admission-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert admission["state"] == "satisfied"
+    assert admission["evaluation_set"]["cases"] == ["PRR-C02/r1", "PRR-C03/r1"]
+    for result in admission["result_reuse"]["results"]:
+        assert result["quality_score"] == 4
+        path = next(
+            (INSTANCE_ROOT / "results").glob(
+                f"pr-review-control-free-three-qualification-r2-{result['case_id'].lower()}-*-a{result['github_run_id']}.json"
+            )
+        )
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]

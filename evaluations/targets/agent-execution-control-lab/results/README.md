@@ -8,6 +8,12 @@
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
 
+## Control-Free資格確認
+
+[`Control-Free資格確認`](pr-review-control-free-qualification_2026-08-09.md)では、PRR-C02/r1とPRR-C03/r1が同じr3条件で測定成立・quality score `4`となり、2ケースの最小setについて資格確認が成立した。PRR-C05/r1とPRR-C06/r1は実行後監査でcase不備を確認したため、モデル品質として集約しない。
+
+[PRR-C02](pr-review-control-free-three-qualification-r2-prr-c02-workflow-free-qualification-r1-a31276611327.json)は234,423トークン、execution 67.445秒、[PRR-C03](pr-review-control-free-three-qualification-r2-prr-c03-workflow-free-qualification-r1-a31276612631.json)は342,225トークン、execution 60.673秒で、どちらもscore `4`だった。[PRR-C06](pr-review-control-free-three-qualification-r2-prr-c06-workflow-free-qualification-r1-a31276613765.json)は情報不足を`unknown`とした診断resultでscore `3`だった。
+
 ## PRR-C01/r4 関係レビュー役モデル校正 N=3
 
 全体の観測値は[`関係レビュー役モデル校正 N=3`](pr-review-relationship-reviewer-model-calibration-n3_2026-08-09.md)に記録する。SonnetとOpusを各3回実行し、6件すべて測定成立。Opusのquality scoreは`4 / 4 / 4`、Sonnetは`4 / 0 / 4`だった。PRR-C01/r4は校正用であり、一般的なmodel優劣または採用判断の証拠にはしない。
