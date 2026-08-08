@@ -2737,6 +2737,48 @@ def test_relationship_role_quality_miss_remains_measured(tmp_path: Path):
     assert result["runtime"]["total_tokens"] == 360
 
 
+@pytest.mark.parametrize(
+    ("reviewer_model", "repetition", "run_id", "score", "tokens"),
+    [
+        ("opus", 1, "31269234142", 4, 570567),
+        ("opus", 2, "31269414636", 4, 637780),
+        ("opus", 3, "31269611740", 4, 933211),
+        ("sonnet", 1, "31269234148", 4, 1539180),
+        ("sonnet", 2, "31269611823", 0, 1765770),
+        ("sonnet", 3, "31269923611", 4, 1021924),
+    ],
+)
+def test_relationship_role_saved_results_are_complete_calibration_evidence(
+    reviewer_model: str,
+    repetition: int,
+    run_id: str,
+    score: int,
+    tokens: int,
+):
+    filename = (
+        "pr-review-relationship-reviewer-model-calibration-r1-prr-c01-"
+        f"relationship-reviewer-{reviewer_model}-r{repetition}-a{run_id}.json"
+    )
+    result = json.loads((INSTANCE_ROOT / "results" / filename).read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r12.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+
+    assert result["measurement_qualification"]["state"] == "satisfied"
+    assert result["relationship_reviewer_model"] == reviewer_model
+    assert result["repetition"] == repetition
+    assert result["quality_score"] == score
+    assert result["runtime"]["total_tokens"] == tokens
+    assert result["workflow_trace"]["subagent_start_count"] == 1
+    assert result["workflow_trace"]["root_fixture_tool_access_count"] == 0
+    assert filename in (INSTANCE_ROOT / "results/README.md").read_text(
+        encoding="utf-8"
+    )
+
+
 def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: Path):
     def assistant(models, parent=None):
         return {
