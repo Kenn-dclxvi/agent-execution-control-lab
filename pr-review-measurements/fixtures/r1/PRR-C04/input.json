@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C04",
+  "fixture_revision": "r1",
+  "review_contract_revision": "pr-review-contract-r1",
+  "pr": {
+    "title": "運用文書を追加",
+    "body": "日常運用の説明を追加する。",
+    "base_sha": "4444444444444444444444444444444444444441",
+    "head_sha": "4444444444444444444444444444444444444442"
+  },
+  "changed_paths": ["docs/operations.md"],
+  "changes": [
+    {
+      "path": "docs/operations.md",
+      "patch": "@@ -1 +1,3 @@\n # 運用\n+\n+This document explains the daily operating procedure for contributors.",
+      "content_after": "# 運用\n\nThis document explains the daily operating procedure for contributors.\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "single_artifact_unit", "text": "一つの変更では一つの判断または一つのアーティファクト単位を扱う。"},
+        {"rule_id": "state_separation", "text": "artifactの存在、評価、採用、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secret、credential、非公開の生logをcommitしない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}

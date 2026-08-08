@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r1",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "path": "evaluations/profiles/example.json",
+      "line_start": 1,
+      "line_end": 1,
+      "severity": "major",
+      "message": "prompt変更と評価条件変更が同じ変更へ混在している。"
+    }
+  ]
+}

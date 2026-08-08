@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C05",
+  "fixture_revision": "r1",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "secret_or_private_log",
+      "rule_id": "no_secrets",
+      "path": "docs/release-note.md",
+      "line_start": 3,
+      "line_end": 3,
+      "severity": "major",
+      "message": "credential形式のダミー値が文書へ直接記載されている。"
+    },
+    {
+      "category": "evaluation_artifact_integrity",
+      "rule_id": "state_separation",
+      "path": "docs/release-note.md",
+      "line_start": 5,
+      "line_end": 5,
+      "severity": "major",
+      "message": "Candidate作成から評価、release、本体反映の完了を導いている。"
+    }
+  ]
+}

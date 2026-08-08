@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C03",
+  "fixture_revision": "r1",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "secret_or_private_log",
+      "rule_id": "no_secrets",
+      "path": "docs/connection-example.md",
+      "line_start": 3,
+      "line_end": 3,
+      "severity": "major",
+      "message": "credential形式のダミー値が文書へ直接記載されている。"
+    }
+  ]
+}

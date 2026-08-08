@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review-output-r1.schema.json",
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["category", "rule_id", "path", "line_start", "line_end", "severity", "message"],
+      "properties": {
+        "category": {
+          "enum": [
+            "repository_discipline",
+            "evaluation_artifact_integrity",
+            "secret_or_private_log",
+            "document_quality"
+          ]
+        },
+        "rule_id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "line_start": {"type": "integer", "minimum": 1},
+        "line_end": {"type": "integer", "minimum": 1},
+        "severity": {"enum": ["major", "minor"]},
+        "message": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["findings", "summary"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/finding"}
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "repository_discipline",
+        "evaluation_artifact_integrity",
+        "secret_or_private_log",
+        "document_quality"
+      ],
+      "properties": {
+        "repository_discipline": {"enum": ["pass", "fail", "unknown"]},
+        "evaluation_artifact_integrity": {"enum": ["pass", "fail", "unknown"]},
+        "secret_or_private_log": {"enum": ["pass", "fail", "unknown"]},
+        "document_quality": {"enum": ["pass", "fail", "unknown"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

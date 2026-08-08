@@ -2,7 +2,7 @@
 
 ## 位置付け
 
-この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する引き継ぎ文書である。2026-08-08時点で、ここに記載する代替レビューworkflow、fixture、collector、比較resultは未実装・未評価である。
+この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは実装済みである。Claudeを使うpilot、N=5、比較result、Integrationは未実行・未評価である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -14,7 +14,8 @@
 
 最初の比較は、モデル間比較ではなく、**同じClaudeを使った実行経路比較**とする。
 
-- **Baseline**: 現行の`anthropics/claude-code-action@v1`。Claude Code自身がPR情報取得、規則確認、レビュー判断、GitHubへの結果反映まで行う。
+- **Integration Baseline**: 現行の`anthropics/claude-code-action@v1`。Claude Code自身がPR情報取得、規則確認、レビュー判断、GitHubへの結果反映まで行う。
+- **Core Baseline (`agentic-retrieval`)**: 固定したClaude Code Actionを使い、Claude自身がread-onlyのfixture toolからmetadata、diff、changed path、rules、対象ファイルを取得して判断する。GitHubへは投稿しない。
 - **Candidate A**: GitHub Actions側でPR差分、PR metadata、changed path、適用規則を決定論的に収集し、Claudeにはレビュー判断を主に担当させる。
 
 最初の研究質問は次とする。
@@ -22,6 +23,22 @@
 > 同一レビュー対象・同一レビュー規則・同一モデル条件で、PR情報取得をClaude Codeのagent loopから決定論的な前処理へ移すことで、レビュー品質を維持したまま実行時間を削減できるか。
 
 Codex reviewer、別モデル、直接API、self-hosted runner、自動修正はこの比較へ混ぜない。Candidate Aで実行経路差の効果を確認した後に、別の比較軸として追加する。
+
+## 実装済みアーティファクト
+
+実装の入口は[`pr-review-measurements/README.md`](../pr-review-measurements/README.md)とする。
+
+| アーティファクト | 役割 | 現在状態 |
+|---|---|---|
+| `pr-review-measurements/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | 実装済み・未実行 |
+| `pr-review-measurements/fixtures/r1/PRR-C01`〜`PRR-C06` | model-visible入力とmodel-invisible oracle | 6件固定済み |
+| `pr-review-measurements/schemas/` | fixture、review output、run resultのschema | r1実装済み |
+| `scripts/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
+| `scripts/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
+| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | 実装済み・未実行 |
+| `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
+
+Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへはmodel-visible artifactだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。
 
 ## 現在の観測値
 
@@ -170,6 +187,9 @@ BaselineとCandidate Aで、次を同一に固定する。
 - レビュー観点
 - findingの許容範囲
 - model familyとmodel identity。固定できない場合はrun recordへ実測値を保存し、identityが異なるrunを同一比較へ混ぜない
+- reviewerを起動するActionまたはCLIのrevision。Actionを使う場合は可変tagではなくcommit SHAへbindする
+- 認証方式、GitHub permissions、sandbox
+- workflow revisionとtimeout
 - repetition数
 
 最初の比較では次を変更しない。
@@ -183,6 +203,8 @@ BaselineとCandidate Aで、次を同一に固定する。
 - re-review処理
 
 一つの比較で複数軸を変更しない。
+
+情報取得のtool policyだけは比較対象となる実行経路差である。Core Baselineはread-onlyのfixture tool、Candidate Aは準備済み入力のReadへ固定する。GitHub書込、任意のshell、追加情報取得は両variantで許可しない。
 
 ## fixture設計
 
@@ -246,21 +268,44 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
 ```json
 {
   "schema_version": 1,
+  "comparison_revision": "pr-review-core-r1",
+  "result_id": "pr-review-core-r1:PRR-C01:deterministic-input:r1:a123456",
   "case_id": "PRR-C01",
   "fixture_revision": "r1",
-  "variant": "anthropic-action",
+  "variant": "deterministic-input",
   "repetition": 1,
+  "attempt": 123456,
   "base_sha": "...",
   "head_sha": "...",
-  "model": "claude-sonnet-5",
+  "model": {
+    "requested": "claude-sonnet-5",
+    "reported": "claude-sonnet-5"
+  },
+  "workflow_revision": "pr-review-measure-core-r1",
+  "github_run_id": "123456",
+  "reviewer_executor": {
+    "type": "github_action",
+    "identity": "anthropics/claude-code-action",
+    "revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "claude_authentication": "claude_code_oauth_token",
+    "github_authentication": "job_scoped_github_token",
+    "permission_profile": "review-read-only-r1",
+    "sandbox": "claude-code-action-default",
+    "tool_policies": {
+      "agentic-retrieval": "fixture-tool-read-only-r1",
+      "deterministic-input": "prepared-input-read-only-r1"
+    },
+    "timeout_seconds": 900
+  },
   "timing": {
-    "queue_ms": 0,
-    "setup_ms": 0,
+    "queue_ms": null,
+    "setup_ms": null,
     "input_ms": 0,
+    "action_step_ms": 0,
     "review_ms": 0,
-    "report_ms": 0,
+    "report_ms": null,
     "execution_ms": 0,
-    "e2e_ms": 0
+    "e2e_ms": null
   },
   "runtime": {
     "turns": null,
@@ -269,11 +314,18 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
     "reported_cost_usd": null
   },
   "quality": {
+    "observed": true,
     "expected_findings": 1,
     "true_positive": 1,
     "false_positive": 0,
     "false_negative": 0,
-    "scope_violation_count": 0
+    "path_accuracy": 1,
+    "line_accuracy": 1,
+    "category_accuracy": 1,
+    "clean_control_major_false_positive": 0,
+    "scope_violation_count": 0,
+    "review_contract_violation": 0,
+    "summary_complete": true
   },
   "result": "pass"
 }
@@ -284,9 +336,11 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
 - 取得できない値を推定しない。`null`を許容する
 - `turns`、token、costはproviderまたはActionが安定して一次値を出す場合だけ保存する
 - model identityを必ず保存する
+- workflow、ActionまたはCLI、認証、permission、sandbox、tool policy、timeoutのidentityを保存する
 - GitHub run ID、job ID、開始・終了timestampもdiagnostic fieldとして保存する
 - エラーrunを速度比較の成功runへ混ぜない。ただし固定費分析のdiagnostic resultとして保持する
 - retryしたrunは同じrepetitionへ上書きせず別attempt identityを持つ
+- `pass`、`quality_failed`、`invalid_output`、`execution_failed`、`timeout`、`cancelled`、`measurement_incomplete`を別statusとして保存する
 
 ## 反復と実行順
 
@@ -363,31 +417,97 @@ GitHub Actions側でレビュー判断を行わない。
 
 Candidate Aの初期版では、Reviewer自身に追加の`gh pr diff`や`gh pr view`を要求しない。入力不足が観測された場合は、追加toolを無条件に許可するのではなく、不足した入力identityをresultへ記録してfixture / input preparation側を見直す。
 
-## 未確定事項
+## 公式リポジトリのworkflow調査
 
-以下はこの文書では確定しない。Phase 0でrepository authorityと実測から決める。
+2026-08-08に、次の公式リポジトリを固定commitで確認した。
 
-1. Core Review Baselineを`anthropics/claude-code-action@v1`のままGitHub投稿なしで成立させる方法。高レベルActionの出力制約により難しい場合、BaselineはIntegration測定だけに残し、Core Reviewは別の同等条件を定義する必要がある。
-2. Candidate AでClaudeを呼ぶ実行方式。Claude Code Actionの低レベル構成、Claude Code CLI、APIのどれを使うかは、model identityと入力条件をBaselineへどこまで合わせられるかで決める。
-3. timestamp取得点。GitHub Actions step境界、Action内部event、provider result timestampのどれを各`t0`〜`t5`へbindするか。
-4. inline `line_accuracy`の許容範囲。同一行必須か、同一hunk内の対象範囲を許すか。
-5. expected findingの意味一致判定を完全な決定論的ruleで実装できるか。難しい場合でも、評価用LLMを即追加せず、まず限定されたcategory/path/rule identityで判定する。
-6. model identityがsubscription側で自動更新された場合の比較停止条件。
+- OpenAI Codex: [`openai/codex@3aae5d8`](https://github.com/openai/codex/tree/3aae5d885bac39c1262491aa3fd100dfd8b3919f)
+- Claude Code: [`anthropics/claude-code@2bb6069`](https://github.com/anthropics/claude-code/tree/2bb60696142b493eafaeacfe00eac51d16c50c4f)
 
-未確定事項を便宜的に補完して実装を進めない。
+これらは実運用workflowの構造を確認する参考実装である。fixture固定、同条件反復、quality gateを備えた比較試験ではないため、速度、品質、採用可否のエビデンスとして扱わない。
+
+### OpenAI Codexリポジトリ
+
+Codexリポジトリでは、PR時の短い検証と`main`反映後の重い検証を分けている。PRではBazel中心の主要検証と小さいCargo検証を行い、完全なクロスプラットフォーム検証はpost-mergeへ分離している。この方針は[workflow方針](https://github.com/openai/codex/blob/3aae5d885bac39c1262491aa3fd100dfd8b3919f/.github/workflows/README.md)に明示されている。
+
+Codex Actionを使うissue automationでは、次の構造が確認できる。
+
+1. GitHub Actions側がissue等の入力をJSONへ決定論的に準備する。
+2. `openai/codex-action`をcommit SHAで固定し、`sandbox: read-only`と限定permissionsで判断を実行する。
+3. `output-schema`で構造化結果を取得する。
+4. 後続jobがJSONを検証・正規化してからGitHubへの変更を行う。
+
+具体例は[Issue Translator](https://github.com/openai/codex/blob/3aae5d885bac39c1262491aa3fd100dfd8b3919f/.github/workflows/issue-translator.yml)と[Issue Deduplicator](https://github.com/openai/codex/blob/3aae5d885bac39c1262491aa3fd100dfd8b3919f/.github/workflows/issue-deduplicator.yml)である。前者はmodel入力をuntrusted contentとして明示し、reviewer相当のjobとGitHub反映jobをpermissionsごと分けている。後者は空結果時の代替経路を別jobにし、各model出力を正規化してから次段へ渡している。
+
+また、`.github/codex/labels/`では、汎用PRレビューとRust固有レビューを別promptとして管理し、event JSONに含まれるbase / head refsを利用する。[codex-review.md](https://github.com/openai/codex/blob/3aae5d885bac39c1262491aa3fd100dfd8b3919f/.github/codex/labels/codex-review.md)と[codex-rust-review.md](https://github.com/openai/codex/blob/3aae5d885bac39c1262491aa3fd100dfd8b3919f/.github/codex/labels/codex-rust-review.md)から、共通レビュー契約と領域固有規則を分離する構造を確認できる。ただし、このlabel経路は本設計のBaselineまたはCandidate Aではなく、後続の別方式候補である。
+
+### Claude Codeリポジトリ
+
+Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.com/anthropics/claude-code/blob/2bb60696142b493eafaeacfe00eac51d16c50c4f/.github/workflows/claude.yml)は、全PRへの自動レビューではない。issue comment、review comment、review本文等に`@claude`が含まれる場合だけ起動し、repository checkout、read-onlyのGitHub permissions、OIDC、明示modelでClaude Code Actionを実行する。
+
+自動issue triageでは、[issue単位のconcurrencyとtimeout](https://github.com/anthropics/claude-code/blob/2bb60696142b493eafaeacfe00eac51d16c50c4f/.github/workflows/claude-issue-triage.yml)を設定し、書込可能な補助scriptの呼出回数を`CLAUDE_CODE_SCRIPT_CAPS`で制限している。duplicate処理も[専用workflow](https://github.com/anthropics/claude-code/blob/2bb60696142b493eafaeacfe00eac51d16c50c4f/.github/workflows/claude-dedupe-issues.yml)へ分離されている。
+
+さらに、`.github/`配下のworkflow変更で`allowed_non_write_users`が追加された場合に警告commentを出す[セキュリティ検査](https://github.com/anthropics/claude-code/blob/2bb60696142b493eafaeacfe00eac51d16c50c4f/.github/workflows/non-write-users-check.yml)がある。これは、外部入力を受けるagent workflowではtrigger許可とrepository書込権限を独立したリスクとして扱う必要があることを示す。
+
+### 本設計への反映
+
+公式リポジトリの構造から、次を本測定環境へ採用する。
+
+1. **入力準備、reviewer、結果正規化、GitHub反映を別stepまたは別jobにする。** ReviewerへGitHub書込権限を与えず、Integrationのreporterだけに必要最小限の権限を付与する。
+2. **Reviewer出力をschemaで固定する。** finding、category、path、line、summaryをJSONで受け、schema不適合をreview失敗と区別した`invalid_output`として保存する。
+3. **外部入力を命令として扱わない。** PR title、body、diff、comment、対象ファイル本文をuntrusted review inputとしてreview contractと分離する。
+4. **Action identityを固定する。** 本番workflowの可変`@v1`をそのまま比較identityにせず、測定時に解決したcommit SHA、model identity、workflow revisionをrun recordへ保存する。
+5. **権限と認証を比較条件へ入れる。** GitHub permissions、OIDCまたはOAuth、sandboxが異なるrunを同一comparison revisionへ混ぜない。tool policyはvariantごとの固定値とし、同じvariant内で異なるrunを混ぜない。
+6. **Core Reviewを短い経路、Integrationを重い経路として分離する。** N=5を通常PRの待ち時間へ載せず、手動dispatchの測定経路で実行する。通常PRへの導入判断は固定result完成後の別operationとする。
+7. **timeoutと重複起動を明示的に扱う。** case / variant / repetition / attemptを一意にし、同一identityの重複runを防ぐ。通常運用のstale run取消をそのまま測定へ適用せず、timeoutまたは取消runは成功runと分けて保存する。
+8. **領域固有規則は入力カプセルとして合成する。** Codexリポジトリの領域別review promptは参考にするが、本比較中にvariant別promptを作らない。root規則、changed pathへ適用される局所規則、共通review contractを同じ決定論的処理で両variantへ供給する。
+
+採用しないものは次である。
+
+- CodexとClaudeのモデル間比較をCandidate Aへ混ぜること
+- labelまたは`@mention`起動をN=5測定のidentityとして使うこと
+- modelへGitHub書込を許可したままCore Reviewを測ること
+- 本番workflowのcancel動作を測定runへ無条件に流用すること
+- 公式リポジトリで使われているという理由だけでqualityまたは速度を成立済みとみなすこと
+
+## Phase 0で固定した実装条件
+
+実装開始に必要な条件は次へbindした。
+
+1. Core BaselineとCandidate Aは同じ`anthropics/claude-code-action` commit `6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975`を使う。
+2. Core Baselineは固定fixture toolから情報を取得し、Candidate Aは完成済み`review-input.json`を読む。review contract、fixture、model、出力schemaは共通とする。
+3. Reviewer出力はActionの`structured_output`を受け、schema適合済みfieldだけを次jobへ渡す。Actionの生出力はartifactへ保存しない。
+4. `execution_file`はruntime値の許可一覧だけを再帰抽出し、message、tool出力、環境値を保存しない。
+5. model-invisible oracleはreviewerと別jobへ置き、reviewer workspaceに`.git`、`oracle.json`を含めない。
+6. reviewer jobはjob-scoped `github.token`とread-only permissionsを使い、GitHub投稿処理を持たない。Claude API認証は両variantとも`CLAUDE_CODE_OAUTH_TOKEN`へ固定する。
+7. `attempt`はGitHub run IDへbindし、同じrepetitionのretryを別identityとして保持する。
+8. Action stepは12分、reviewer jobは15分を上限とし、schema不適合、実行失敗、取消、計測不完全を成功runと分ける。
+
+## pilotで確認する未観測事項
+
+以下は静的実装から確定できないため、Phase 4のpilotで観測する。
+
+1. 固定Action commitで`structured_output`が6 fixtureすべてについてschema適合するか。
+2. `execution_file`からmodel identity、`duration_ms`、`num_turns`を安定して取得できるか。取得できない値は`null`のまま保持する。
+3. Action step境界の`execution_ms`とAction内部の`review_ms`をvariant間で同じ定義として取得できるか。
+4. Core Baselineのfixture tool経路が、現行の`gh pr diff` / `gh pr view`経路を比較するための診断経路として十分か。不足する入力identityがあればcomparison revisionを変える。
+5. model identityが要求値と実測値で一致するか。一致しない場合、または実測不能の場合は比較を停止する。
+6. inline `line_accuracy`の許容範囲とIntegrationのtimestamp取得点。これはCore Review gate通過後に固定する。
+
+未観測値を推定で補完せず、`measurement_incomplete`または新しいcomparison revisionとして扱う。
 
 ## 実装段階
 
-| Phase | 内容 | 完了条件 |
-|---|---|---|
-| 0 | 測定契約確定 | 未確定事項のうち実装開始に必要な項目がbind済み |
-| 1 | fixtureとrun schema | 6 fixtureとexpected finding、run JSON schemaが固定される |
-| 2 | Baseline collector | 現行方式の`t0`〜`t5`または取得可能な区間とquality resultを保存できる |
-| 3 | Candidate A最小実装 | deterministic input preparation + Claude reviewがCore Reviewで動作する |
-| 4 | pilot | 6 case × Baseline/Candidate A × N=1でschema、collector、quality判定を検証する |
-| 5 | N=5 | 全caseを交互順序でN=5実行する |
-| 6 | 比較result | quality gate通過可否と時間KPI中央値を固定resultとして保存する |
-| 7 | Integration | Core Reviewで採用候補となったCandidateだけGitHub commentまで含めて測る |
+| Phase | 内容 | 完了条件 | 現在状態 |
+|---|---|---|---|
+| 0 | 測定契約確定 | Action / model / workflow identity、permissions、sandbox、timeoutを含む実装開始条件がbind済み | 完了 |
+| 1 | fixtureとrun schema | 6 fixtureとexpected finding、run JSON schemaが固定される | 完了 |
+| 2 | Baseline collector | 取得可能な時間区間とquality resultを保存できる | 静的実装完了・実run未確認 |
+| 3 | Candidate A最小実装 | deterministic input preparation + Claude reviewのCore Review経路が実装される | 静的実装完了・実run未確認 |
+| 4 | pilot | 6 case × Baseline/Candidate A × N=1でschema、collector、quality判定を検証する | 未実行 |
+| 5 | N=5 | 全caseを交互順序でN=5実行する | 未実行 |
+| 6 | 比較result | quality gate通過可否と時間KPI中央値を固定resultとして保存する | 未実行 |
+| 7 | Integration | Core Reviewで採用候補となったCandidateだけGitHub commentまで含めて測る | 未実装・未実行 |
 
 ## 停止条件
 
@@ -416,16 +536,11 @@ Candidate Aの初期版では、Reviewer自身に追加の`gh pr diff`や`gh pr 
 
 これらはレビュー測定環境が成立し、Candidate Aのquality / timing resultが得られた後の別作業とする。
 
-## Codexへの次作業
+## pilot開始前の次作業
 
-この文書を実装指示へ変換する場合、最初の変更単位は**測定環境の骨格だけ**とする。
+1. 実装変更をGitHubへ反映し、`PR Review Measurement Core`を手動起動可能にする。
+2. まず`PRR-C01`の両variantを各1件実行し、Action出力、model identity、runtime抽出、artifact境界をprobeする。
+3. probeが成立した場合だけ、残り5 caseを含む`6 case × 2 variant × N=1`へ進む。
+4. 一件でもhard gate、model identity、schema、timing定義が不成立ならN=5を開始せず、新しいcomparison revisionの要否を判断する。
 
-推奨する最初の作業:
-
-1. 現行`.github/workflows/claude-pr-review.yml`と関連する自動修正workflowを読み、現状のtriggerとside effectを一覧化する。
-2. 測定用アーティファクトの配置先を、既存のevaluation基盤と混同しない形で決める。
-3. `PRR-C01`〜`PRR-C06`のfixture schemaとrun result schemaを提案する。
-4. timestamp取得可能点とGitHub Actions log / Action outputから取得できるruntime値をprobeする。
-5. Phase 0の未確定事項を、実測結果とともにこの文書の新revisionまたは後続設計文書へ固定する。
-
-この最初の作業では、レビュー方式の置換、自動修正の再接続、既存評価resultの変更まで広げない。
+pilotではレビュー方式の置換、自動修正の再接続、既存evaluation resultの変更まで広げない。

@@ -67,6 +67,7 @@ Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比�
 | `evaluations/cases/` | 評価ケースとmodel-visible / private境界 |
 | `evaluations/profiles/` | モデル、エージェント、環境、反復条件、比較条件 |
 | `evaluations/results/` | 公開済みの履歴評価結果。v3のランタイムレジストリとは分離 |
+| `pr-review-measurements/` | AI PRレビューの実行経路を固定fixtureで比較する独立測定環境 |
 
 運用境界の正本は[`docs/repository-contract.md`](docs/repository-contract.md)です。その他の文書は[ドキュメント](#ドキュメント)を参照してください。
 
@@ -90,6 +91,7 @@ Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比�
 | baseline / candidate / releaseのバンドル構築（形式・マニフェスト・格納） | [`docs/prompt-file-bundle.md`](docs/prompt-file-bundle.md) |
 | 比較条件の固定（評価基盤のレイヤーと境界） | [`docs/prompt-comparison-workflow.md`](docs/prompt-comparison-workflow.md) |
 | 評価の実行 | [`docs/evaluation-loop-manual.md`](docs/evaluation-loop-manual.md) |
+| PRレビュー測定環境の検証・手動実行 | [`pr-review-measurements/README.md`](pr-review-measurements/README.md) |
 | 新しいターゲットインスタンスの追加 | [`evaluations/targets/AGENTS.md`](evaluations/targets/AGENTS.md) |
 
 ## 関連リポジトリ
