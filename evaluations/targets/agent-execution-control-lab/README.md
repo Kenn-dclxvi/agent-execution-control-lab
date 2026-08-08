@@ -2,7 +2,7 @@
 
 現行Claude Code Actionのagentic retrievalと、決定論的に入力を準備するCandidate Aを固定fixtureで調べる、`agent-execution-control-lab`向けnamespacedインスタンスである。ターゲットrefは測定環境導入前のcommit `8cd97283e60f13393fb1302c601c9a4fe0a5381f`へ固定する。
 
-現在のインスタンス状態は登録済みであり、PRR-C01/r3のcase設計監査を終えている。Core Baseline repetition 1は3回とも`execution_failed`となった。三回目ではreviewerが入力を取得できたが、Action用git workspaceがなく、12ターンの明示上限にも達した。純正相当のレビュー条件と測定用の変更を分け直し、この二点を修正した四回目のprofileとpreflightを固定した。品質は観測できておらず、repetition 2は開始していない。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。正式な品質resultは0件である。
+現在のインスタンス状態は登録済みであり、PRR-C01/r3のcase設計監査を終えている。Core Baseline repetition 1は最初の3回が`execution_failed`となった。Action用git workspaceとturn条件を修正した四回目では、review、構造化出力、採点が完了したがscore `0`で`quality_failed`となった。reviewerはrequired findingの内容を捉えたものの、model-visible規則にgrader必須のrule identityがなく、finding identityを一致させられなかった。これはBaseline性能へbindせず、fixtureと入力契約の不整合としてrepetition 2を停止している。既存`pr-review-finding-quality-v1`とPRR-C01 N=2は、PRレビュー機能仕様とBaseline admission gateより先に作成されたため、正式quality resultではなくdiagnostic evidenceとして保持する。
 
 ## アーティファクト
 
@@ -25,7 +25,7 @@
 - profileへ固定したcase revisionの`input.json`だけをreviewerへ渡し、同revisionの`oracle.json`はgrader jobだけが読む。
 - `.github/workflows/pr-review-measure-core.yml`はGitHubの配置制約によりリポジトリ共通領域へ置くが、このインスタンスのアーティファクトとtoolsだけを参照する。
 - workflowは手動起動のみでGitHub commentを投稿しない。
-- PRR-C01/r3のcase設計監査、入力対応、測定境界、四回目のfresh N=2 preflightは成立した。三回の失敗結果は測定環境を診断する証拠として保持する。四回目のrepetition 1が個別pass条件を満たすまで、repetition 2、Candidate A、残り5ケース、N=5、Integrationは発行しない。
+- PRR-C01/r3のcase設計監査、入力対応、測定境界、四回目のfresh N=2 preflightは成立した。四回目で実行経路はterminalになったが、fixtureのmodel-visible rule identityがgraderと一致しないため個別pass条件は未成立である。repetition 2、Candidate A、残り5ケース、N=5、Integrationは発行しない。
 
 ## ローカル検証
 
