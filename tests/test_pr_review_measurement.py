@@ -21,6 +21,8 @@ import pr_review_measurement as measurement
 import pr_review_qualification as qualification
 import pr_review_code_review_qualification as code_review_qualification
 import pr_review_code_review_qualification_r2 as code_review_qualification_r2
+import pr_review_code_review_qualification_r3 as code_review_qualification_r3
+import pr_review_subagent_hook as subagent_hook
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
@@ -2096,3 +2098,178 @@ def test_claude_code_core_recovery_packet_contains_collector_dependencies(tmp_pa
         assert "validate-preflight" in completed.stdout
     finally:
         repository_snapshot._make_cleanup_writable(snapshot)
+
+
+def test_claude_code_core_instrumented_recovery_preserves_fixed_conditions():
+    recovered, preflight = code_review_qualification_r2.validate_preflight(1)
+    instrumented, instrumented_preflight = code_review_qualification_r3.validate_preflight(1)
+    recovered_conditions = recovered["comparison_conditions"]
+    instrumented_conditions = instrumented["comparison_conditions"]
+    for key in (
+        "target_repository_ref", "task_spec", "fixture_identity", "workflow_mapping",
+        "measurement_boundary", "repository_snapshot", "authority_selection", "prompt",
+        "eligibility", "review_contract", "review_output_schema", "quality_rating", "model",
+        "permission", "executor_parameters", "repetition_condition",
+    ):
+        assert instrumented_conditions[key] == recovered_conditions[key]
+    assert instrumented["recovery"]["source_attempt"] == 31263713165
+    assert instrumented_preflight["environment_recovery"]["same_repetition"] == 1
+    assert preflight["execution"] == instrumented_preflight["execution"]
+
+    workflow = (
+        REPOSITORY_ROOT / ".github/workflows/pr-review-qualify-claude-code-core-r3.yml"
+    ).read_text(encoding="utf-8")
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    expected = (
+        INSTANCE_ROOT
+        / "prompts/baselines/claude-code-review-core-r1/core-prompt.md"
+    ).read_text(encoding="utf-8")
+    assert prompt_text == expected
+    assert "pull-requests: write" not in workflow
+    assert "gh pr comment" not in workflow
+
+
+def test_claude_code_core_instrumented_terminal_result_matches_r9_schema(tmp_path: Path):
+    output = tmp_path / "run-result.json"
+    result = code_review_qualification_r3.record_terminal(
+        1, 999, "claude-sonnet-5", "execution_failed", output, "999"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r9.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["schema_version"] == 9
+    assert result["workflow_trace"]["reviewer_agent_batch_observed"] is False
+
+
+def test_claude_code_core_instrumented_packet_has_project_hooks(tmp_path: Path):
+    output = tmp_path / "reviewer-input"
+    snapshot = output / "repository"
+    try:
+        code_review_qualification_r3.prepare_input(1, output)
+        settings = json.loads((output / ".claude/settings.json").read_text(encoding="utf-8"))
+        assert settings["permissions"]["allow"] == ["Agent", "Bash(./fixture-tool:*)"]
+        assert set(settings["hooks"]) == {
+            "SubagentStart", "SubagentStop", "PostToolUse", "PostToolUseFailure",
+            "PermissionDenied", "PostToolBatch",
+        }
+        assert (output / "pr_review_subagent_hook.py").is_file()
+        assert not (output / "oracle.json").exists()
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot)
+
+
+def test_subagent_hook_sanitizes_tool_content():
+    event = subagent_hook.sanitize_event(
+        {
+            "hook_event_name": "PostToolBatch",
+            "tool_calls": [
+                {
+                    "tool_name": "Agent",
+                    "tool_use_id": "tool-1",
+                    "tool_input": {"prompt": "private prompt"},
+                    "tool_response": "private response",
+                }
+            ],
+        }
+    )
+    assert event["tool_names"] == ["Agent"]
+    assert event["tool_use_ids"] == ["tool-1"]
+    assert "private prompt" not in json.dumps(event)
+    assert "private response" not in json.dumps(event)
+
+
+def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: Path):
+    def assistant(models, parent=None):
+        return {
+            "type": "assistant",
+            "parent_tool_use_id": parent,
+            "message": {
+                "usage": {"input_tokens": 10, "output_tokens": 2},
+                "content": [
+                    {"type": "tool_use", "name": "Agent", "input": {"model": model}}
+                    for model in models
+                ],
+            },
+        }
+
+    execution = tmp_path / "execution.json"
+    execution.write_text(
+        json.dumps(
+            [
+                assistant(["haiku"]),
+                assistant(["haiku"]),
+                assistant(["sonnet"]),
+                assistant(["sonnet", "sonnet", "opus", "opus"]),
+                assistant(["sonnet"]),
+                assistant([], parent="agent-call-1"),
+            ]
+        ),
+        encoding="utf-8",
+    )
+    events = []
+    timestamp = 10
+    for index in range(3):
+        agent_id = f"prerequisite-{index}"
+        events.extend(
+            [
+                {"event": "SubagentStart", "timestamp_ns": timestamp, "agent_id": agent_id},
+                {"event": "SubagentStop", "timestamp_ns": timestamp + 5, "agent_id": agent_id},
+            ]
+        )
+        timestamp += 10
+    reviewer_ids = [f"reviewer-{index}" for index in range(4)]
+    for index, agent_id in enumerate(reviewer_ids):
+        events.append({"event": "SubagentStart", "timestamp_ns": 40 + index, "agent_id": agent_id})
+        events.append(
+            {
+                "event": "PostToolUse",
+                "timestamp_ns": 50 + index,
+                "agent_id": agent_id,
+                "tool_name": "Bash",
+                "fixture_tool_command": True,
+            }
+        )
+        events.append({"event": "SubagentStop", "timestamp_ns": 60 + index, "agent_id": agent_id})
+    events.extend(
+        [
+            {
+                "event": "PostToolBatch",
+                "timestamp_ns": 70,
+                "tool_names": ["Agent", "Agent", "Agent", "Agent"],
+            },
+            {"event": "SubagentStart", "timestamp_ns": 80, "agent_id": "validator"},
+            {"event": "SubagentStop", "timestamp_ns": 90, "agent_id": "validator"},
+        ]
+    )
+    hook_file = tmp_path / "events.jsonl"
+    hook_file.write_text(
+        "".join(json.dumps(event) + "\n" for event in events), encoding="utf-8"
+    )
+    trace = code_review_qualification_r3._instrumented_trace(execution, hook_file)
+    assert trace["reviewer_agent_batch_observed"] is True
+    assert trace["reviewer_lifecycle_overlap_observed"] is True
+    assert trace["reviewer_fixture_access_observed"] is True
+    assert trace["fixture_tool_permission_denials"] == 0
+    assert trace["complete"] is True
+
+    events.append(
+        {
+            "event": "PermissionDenied",
+            "timestamp_ns": 95,
+            "tool_name": "Bash",
+            "fixture_tool_command": True,
+        }
+    )
+    hook_file.write_text(
+        "".join(json.dumps(event) + "\n" for event in events), encoding="utf-8"
+    )
+    denied = code_review_qualification_r3._instrumented_trace(execution, hook_file)
+    assert denied["fixture_tool_permission_denials"] == 1
+    assert denied["complete"] is False
