@@ -2441,6 +2441,53 @@ def test_workflow_free_quality_miss_is_measured_not_environment_failure(
     assert result["runtime"]["total_tokens"] == 120
 
 
+@pytest.mark.parametrize(
+    ("filename", "repetition", "score", "false_negative", "tokens", "subagents"),
+    [
+        (
+            "pr-review-workflow-free-calibration-r1-prr-c01-r1-a31267762618.json",
+            1,
+            4,
+            0,
+            3412444,
+            0,
+        ),
+        (
+            "pr-review-workflow-free-calibration-r1-prr-c01-r2-a31268027384.json",
+            2,
+            1,
+            1,
+            2247776,
+            0,
+        ),
+    ],
+)
+def test_workflow_free_saved_results_are_measured_calibration_evidence(
+    filename: str,
+    repetition: int,
+    score: int,
+    false_negative: int,
+    tokens: int,
+    subagents: int,
+):
+    result_path = INSTANCE_ROOT / "results" / filename
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r11.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+
+    assert result["repetition"] == repetition
+    assert result["measurement_qualification"]["state"] == "satisfied"
+    assert result["quality_score"] == score
+    assert result["quality"]["false_negative"] == false_negative
+    assert result["runtime"]["total_tokens"] == tokens
+    assert result["workflow_trace"]["subagent_start_count"] == subagents
+    assert filename in (INSTANCE_ROOT / "results/README.md").read_text(encoding="utf-8")
+
+
 def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: Path):
     def assistant(models, parent=None):
         return {

@@ -8,6 +8,14 @@
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
 
+## PRR-C01/r4 Workflow Free calibration N=2
+
+全体の解釈は[`Workflow Free calibration N=2`](pr-review-workflow-free-c01-r4-calibration-n2_2026-08-09.md)に記録する。PRR-C01/r4はheld-outではないため、この結果はreview体制とmodel選択の校正にだけ使う。
+
+[repetition 1](pr-review-workflow-free-calibration-r1-prr-c01-r1-a31267762618.json)は測定成立条件を満たした。subagentを使わないroot単独reviewで期待findingを検出し、quality scoreは`4`、all-agent tokenは`3,412,444`、review時間は`273.019秒`だった。
+
+[repetition 2](pr-review-workflow-free-calibration-r1-prr-c01-r2-a31268027384.json)も測定成立条件を満たした。subagentを使わないroot単独reviewで期待findingを見逃し、quality scoreは`1`、all-agent tokenは`2,247,776`、review時間は`259.356秒`だった。
+
 ## PRR-C01 baseline qualification
 
 [`PRR-C01 agentic-retrieval baseline qualification N=2`](pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)は2件をrateableとして登録し、scoreは`1 / 4`だった。2 / 2件score `4`のgateを満たさないためqualification不成立で停止した。数値と停止判断はリンク先と2件の一次run JSONを正本とする。
