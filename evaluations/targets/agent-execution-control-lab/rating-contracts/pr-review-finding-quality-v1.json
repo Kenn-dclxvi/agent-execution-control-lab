@@ -1,0 +1,59 @@
+{
+  "boundary_rules": {
+    "model_invisible": [
+      "cases/<case_id>/r1/oracle.json",
+      "expected finding identity",
+      "grader implementation"
+    ],
+    "model_visible": [
+      "cases/<case_id>/r1/input.json",
+      "rating-contracts/review-contract-r1.md"
+    ]
+  },
+  "case_quality_rules": {
+    "PRR-C01": "required finding identity 1件",
+    "PRR-C02": "required finding identity 1件",
+    "PRR-C03": "required finding identity 1件",
+    "PRR-C04": "required finding identity 1件",
+    "PRR-C05": "required finding identity 2件",
+    "PRR-C06": "clean control。major false positive 0件"
+  },
+  "contract_id": "pr-review-finding-quality-v1",
+  "quality_score_rule": {
+    "every_rateable_run_must_receive_one_score": true,
+    "rating_scale": [0, 1, 2, 3, 4],
+    "score_4_requires": [
+      "required finding missが0件",
+      "clean controlのmajor false positiveが0件",
+      "review contract violationが0件",
+      "requested modelとreported modelが一致する"
+    ],
+    "score_anchors": {
+      "0": "観測済みだが、clean controlのmajor false positiveまたはscope violationがあり、有害または境界外のレビューである",
+      "1": "観測済みだがrequired finding identityを満たさず、部分一致したrequired findingもない",
+      "2": "少なくとも1件のrequired finding identityを満たしたが、required finding missが残る",
+      "3": "required finding missは0件でscope violationもないが、summary整合のreview contract gateを満たさない",
+      "4": "hard gateとmodel identityをすべて満たす"
+    },
+    "unrateable_statuses": [
+      "invalid_output",
+      "execution_failed",
+      "timeout",
+      "cancelled",
+      "measurement_incomplete"
+    ]
+  },
+  "rater_input": {
+    "allowed": [
+      "固定fixtureのoracle.json",
+      "sanitized review output",
+      "review metadataのrequested modelとreported model"
+    ],
+    "forbidden": [
+      "variant間の速度またはtoken情報",
+      "優劣、採用、release情報",
+      "生のClaude Code実行log"
+    ]
+  },
+  "schema_version": "the-caption-prompt.quality-rating-contract/v13"
+}

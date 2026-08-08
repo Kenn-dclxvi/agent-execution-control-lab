@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run-result-r2.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "comparison_revision",
+    "profile_id",
+    "quality_rating_contract",
+    "result_id",
+    "case_id",
+    "fixture_revision",
+    "variant",
+    "repetition",
+    "attempt",
+    "base_sha",
+    "head_sha",
+    "model",
+    "reviewer_executor",
+    "workflow_revision",
+    "github_run_id",
+    "timing",
+    "runtime",
+    "quality",
+    "quality_score",
+    "result"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "comparison_revision": {"const": "pr-review-core-r2"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "quality_rating_contract": {"const": "pr-review-finding-quality-v1"},
+    "result_id": {"type": "string", "minLength": 1},
+    "case_id": {"pattern": "^PRR-C0[1-6]$"},
+    "fixture_revision": {"const": "r1"},
+    "variant": {"enum": ["agentic-retrieval", "deterministic-input"]},
+    "repetition": {"type": "integer", "minimum": 1},
+    "attempt": {"type": "integer", "minimum": 1},
+    "base_sha": {"pattern": "^[0-9a-f]{40}$"},
+    "head_sha": {"pattern": "^[0-9a-f]{40}$"},
+    "model": {"type": "object"},
+    "reviewer_executor": {"type": "object"},
+    "workflow_revision": {"const": "pr-review-measure-core-r2"},
+    "github_run_id": {"type": ["string", "null"]},
+    "timing": {"type": "object"},
+    "runtime": {
+      "type": "object",
+      "required": ["turns", "input_tokens", "output_tokens", "total_tokens", "reported_cost_usd"]
+    },
+    "quality": {"type": "object"},
+    "quality_score": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+    "result": {
+      "enum": [
+        "pass",
+        "quality_failed",
+        "invalid_output",
+        "execution_failed",
+        "timeout",
+        "cancelled",
+        "measurement_incomplete"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

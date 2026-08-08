@@ -11,9 +11,9 @@
   "authority_notes": {
     "diagnostic_boundary": "2026-08-08のPRR-C01 probeは新インスタンスゲート前に実行されたため正式evaluation resultへ登録しない。run IDとterminal状態はresults/README.mdのdiagnostic receiptとしてだけ保持する",
     "fixture_authority": "各cases/<case_id>/r1/input.jsonをmodel-visible入力、oracle.jsonをmodel-invisible採点根拠とする",
-    "workflow": ".github/workflows/pr-review-measure-core.ymlはGitHub上の手動診断entrypointであり、current_rating_contractがnullの間はevaluation foundationの実行経路ではない"
+    "workflow": ".github/workflows/pr-review-measure-core.ymlはGitHub上の手動entrypointであり、dispatch時にprofile identityをcase、variant、model、repetitionへ照合する"
   },
-  "current_rating_contract": null,
+  "current_rating_contract": "pr-review-finding-quality-v1",
   "executor": "anthropics/claude-code-action",
   "layout": "namespaced",
   "naming_prefix": "agent-execution-control-lab-pr-review",
@@ -26,7 +26,7 @@
       "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
       "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
     },
-    "ref_authority": "target.jsonのprimary_refと各case revisionのinput SHA-256を固定し、正式profile作成時にcomparison_conditions.target_repository_refへ複製する",
+    "ref_authority": "target.jsonのprimary_refと各case revisionのinput SHA-256を固定し、各profileのcomparison_conditions.target_repository_refとfixture_identityへ複製する",
     "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git"
   },
   "target_specific_modules": [

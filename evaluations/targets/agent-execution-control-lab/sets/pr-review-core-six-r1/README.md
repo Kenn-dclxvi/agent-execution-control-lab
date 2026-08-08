@@ -5,4 +5,4 @@
 - target ref: `8cd97283e60f13393fb1302c601c9a4fe0a5381f`
 - 状態: 未qualification
 
-このsetは既存の診断contractが列挙した6ケースをnamespaced layoutへ移したmembership receiptである。新インスタンスゲート、foundation互換のquality rating contract、正式profileが未成立のため、評価スロットを発行しない。
+このsetは既存の診断contractが列挙した6ケースをnamespaced layoutへ移したmembership receiptである。rating contractは固定済みだが、PRR-C01 baseline qualificationが未完了のため、この6ケースsetの評価スロットを発行しない。

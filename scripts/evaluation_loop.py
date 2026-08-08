@@ -194,6 +194,10 @@ QUALITY_RATING_CLICK_V10 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_PR_REVIEW_V1 = {
+    "contract_id": "pr-review-finding-quality-v1",
+    "contract_sha256": "b81216a23bd3ace39c5f1c5ffb3a4a07ac944580567615e9e2390daccfaecc50",
+}
 QUALITY_RATING_V8 = {
     "contract_id": "owner-producer-quality-v8",
     "contract_sha256": "22794275b34458898a26e94276126834db0bbc19dfa915e9187d02955419e1c2",
@@ -225,6 +229,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_CLICK_V8,
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
+    QUALITY_RATING_PR_REVIEW_V1,
 )
 OWNER_PATTERN = re.compile(r"owner\s*=\s*([^\u3002\n;,]+)", re.IGNORECASE)
 EXECUTION_SCHEMA_V3 = "the-caption-prompt.execution/v3"
