@@ -21,5 +21,7 @@
 - `pr_review_relationship_role_calibration.py`: 関係レビュー役を1人に固定したSonnet／Opus条件のpreflight、agent別fixture access、model routing、全agent token、品質と測定成立を収集する
 - `pr_review_control_free_qualification.py`: PRR-C02、C03、C05、C06の固定profileを再照合し、control-free資格確認の入力準備、全agent token収集、採点を行う
 - `pr_review_control_free_qualification_r2.py`: schema出力の引用とreview job用collector依存の同梱を修復した同一資格確認スロットのenvironment recoveryを行う
+- `pr_review_subagent_hook_r2.py`: command内容を保存せず、loopや複合command内の`./fixture-tool`呼出しも検出する
+- `pr_review_control_free_qualification_r3.py`: C05/r1を除外した3ケースsetとfixture-tool計測r2を固定して資格確認する
 
 これらは`agent-execution-control-lab`固有のcase ID、rule、authority選択を扱うため、ターゲット非依存kernelの`scripts/`へ置かない。authorityとrepository snapshotのreceiptはmodel-visible入力対応を証明するが、case設計の独立qualification、profile、preflight、Baseline admissionを単独では成立させない。

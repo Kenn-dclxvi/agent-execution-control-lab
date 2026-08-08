@@ -1,0 +1,27 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v2",
+  "preflight_id": "pr-review-control-free-three-qualification-n1-r3-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-control-free-three-qualification-n1-r3", "path": "profiles/pr-review-control-free-three-qualification-n1-r3.json", "sha256": "96e08a2236e2afec4f5446736fde950ecef434eb8a08bd353ecb69fff1470681"},
+  "predicates": {"case_set_reaudited": "satisfied", "c05_excluded": "satisfied", "nested_fixture_tool_measurement": "satisfied", "review_conditions_unchanged": "satisfied", "fresh_n1_per_case": "satisfied"},
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C03", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C06", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "contracts/pr-review-r1-case-qualification-audit-r2.json", "sha256": "b19a12453a04bafae565f749b562ba6affcb2861f63fb26fa9ca258191aed207"},
+    {"path": "rating-contracts/pr-review-finding-quality-v7.json", "sha256": "1f6d1e4823173297c038733e10bfef095887cfa12069baac53b61575710c59c0"},
+    {"path": "schemas/run-result-r15.schema.json", "sha256": "419a578cb5bc734f798b64fcf8143b77e0157a805882a54533081dc4f2e169a5"},
+    {"path": "tools/pr_review_control_free_qualification_r3.py", "sha256": "10d33b724c63d781d3c0fe45aac46c870048be5e4cb19ae4d17b65d3bb7d0f24"},
+    {"path": "tools/pr_review_subagent_hook_r2.py", "sha256": "eb8c5f2445227b18941e24200c37de5243eae5adfa72d53097c39ab4234b0134"},
+    {"path": ".github/workflows/pr-review-qualify-control-free-three-r3.yml", "sha256": "219d3ef979a5f4de44ecd6d61c0378a5db5869ba8f31b2129edf24ac908b128b"}
+  ],
+  "prior_observations": [
+    {"case_id": "PRR-C02", "github_run_id": "31276175003", "quality_score": 4, "measurement": "satisfied"},
+    {"case_id": "PRR-C03", "github_run_id": "31276176368", "quality_score": 4, "measurement": "fixture_access_unobserved"},
+    {"case_id": "PRR-C05", "github_run_id": "31276177531", "quality_score": 3, "measurement": "fixture_invalid_and_fixture_access_unobserved"},
+    {"case_id": "PRR-C06", "github_run_id": "31276178557", "quality_score": 4, "measurement": "fixture_access_unobserved"}
+  ],
+  "scope": "three-case control-free qualification only; no held-out, comparison, adoption, or release claim"
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run-result-r15.schema.json",
+  "type": "object",
+  "required": ["schema_version", "comparison_revision", "profile_id", "quality_rating_contract", "result_id", "case_id", "fixture_revision", "variant", "repetition", "attempt", "base_sha", "head_sha", "model", "reviewer_executor", "workflow_revision", "workflow_trace", "measurement_qualification", "github_run_id", "timing", "runtime", "quality", "quality_score", "result"],
+  "properties": {
+    "schema_version": {"const": 15},
+    "comparison_revision": {"const": "pr-review-control-free-three-qualification-r2"},
+    "profile_id": {"const": "pr-review-control-free-three-qualification-n1-r3"},
+    "quality_rating_contract": {"const": "pr-review-finding-quality-v7"},
+    "result_id": {"type": "string", "minLength": 1},
+    "case_id": {"enum": ["PRR-C02", "PRR-C03", "PRR-C06"]},
+    "fixture_revision": {"const": "r1"},
+    "variant": {"const": "workflow-free-qualification"},
+    "repetition": {"const": 1},
+    "attempt": {"type": "integer", "minimum": 1},
+    "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "model": {"type": "object"},
+    "reviewer_executor": {"type": "object"},
+    "workflow_revision": {"const": "pr-review-qualify-control-free-three-r3"},
+    "workflow_trace": {"type": "object"},
+    "measurement_qualification": {"type": "object"},
+    "github_run_id": {"type": "string"},
+    "timing": {"type": "object"},
+    "runtime": {"type": "object"},
+    "quality": {"type": "object"},
+    "quality_score": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+    "result": {"enum": ["pass", "quality_failed", "invalid_output", "execution_failed", "timeout", "cancelled", "measurement_incomplete"]}
+  },
+  "additionalProperties": false
+}

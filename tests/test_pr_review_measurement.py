@@ -3060,3 +3060,80 @@ def test_control_free_four_recovery_exports_nonempty_json_schema():
     ).read_text(encoding="utf-8")
     assert r'del(.\"$schema\")' not in workflow
     assert 'del(."$schema")' in workflow
+
+
+def test_control_free_three_r3_packet_and_schema(tmp_path: Path):
+    tool = INSTANCE_ROOT / "tools/pr_review_control_free_qualification_r3.py"
+    prepared = tmp_path / "prepared"
+    subprocess.run(
+        [sys.executable, str(tool), "prepare", "--case-id", "PRR-C03", "--output-dir", str(prepared)],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    settings = json.loads(
+        (prepared / "claude-project-settings.json").read_text(encoding="utf-8")
+    )
+    assert "pr_review_subagent_hook_r2.py" in json.dumps(settings)
+    assert (prepared / "pr_review_subagent_hook_r2.py").is_file()
+    assert not (prepared / "oracle.json").exists()
+
+    output = tmp_path / "terminal.json"
+    subprocess.run(
+        [
+            sys.executable,
+            str(tool),
+            "record-terminal",
+            "--case-id",
+            "PRR-C03",
+            "--attempt",
+            "1000",
+            "--model-requested",
+            "claude-sonnet-5",
+            "--status",
+            "execution_failed",
+            "--github-run-id",
+            "1000",
+            "--output",
+            str(output),
+        ],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(output.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r15.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+
+
+def test_subagent_hook_r2_recognizes_nested_fixture_tool_without_content(
+    tmp_path: Path,
+):
+    script = INSTANCE_ROOT / "tools/pr_review_subagent_hook_r2.py"
+    event = {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+            "command": "for part in metadata diff rules; do ./fixture-tool \"$part\"; done"
+        },
+        "tool_response": "private fixture content",
+    }
+    event_file = tmp_path / "events.jsonl"
+    subprocess.run(
+        [sys.executable, str(script), str(event_file)],
+        input=json.dumps(event),
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    content = event_file.read_text(encoding="utf-8")
+    record = json.loads(content)
+    assert record["fixture_tool_command"] is True
+    assert "command" not in record
+    assert "private fixture content" not in content

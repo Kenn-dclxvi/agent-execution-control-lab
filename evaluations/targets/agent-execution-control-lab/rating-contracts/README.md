@@ -6,6 +6,7 @@
 - [`pr-review-finding-quality-v4`](pr-review-finding-quality-v4.json): PRR-C01/r4の独立監査前の状態を固定した履歴contract
 - [`pr-review-finding-quality-v5`](pr-review-finding-quality-v5.json): PRR-C01/r4のCore Baseline機能qualification用contract。[独立case設計監査](../contracts/prr-c01-r4-case-design-audit-r1.json)済み・未実行・Baseline未qualification
 - [`pr-review-finding-quality-v6`](pr-review-finding-quality-v6.json): 現行仕様へ適合したPRR-C02、C03、C05、C06のcontrol-free資格確認専用contract。[case監査](../contracts/pr-review-r1-case-qualification-audit-r1.json)済み・未実行
+- [`pr-review-finding-quality-v7`](pr-review-finding-quality-v7.json): 初回出力でoracle欠落を確認したC05/r1を除き、PRR-C02、C03、C06だけを扱うcontrol-free資格確認専用contract
 - [r1 diagnostic review contract](review-contract-r1.md): r1 runでClaudeへ提示したfinding構造
 - [r2 review contract](review-contract-r2.md): `related_paths`を含む機能仕様r1準拠のmodel-visible契約
 

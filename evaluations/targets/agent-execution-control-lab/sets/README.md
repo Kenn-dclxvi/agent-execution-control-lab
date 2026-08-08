@@ -7,3 +7,4 @@
 | [`pr-review-c01-r4-calibration-r1`](pr-review-c01-r4-calibration-r1/README.md) | 1 | Workflow Freeとreview体制・model構成の校正用。held-outではない |
 | [`pr-review-c01-r4-relationship-model-calibration-r1`](pr-review-c01-r4-relationship-model-calibration-r1/README.md) | 1 | 1人の関係レビュー役についてSonnet／Opusを各3回校正する。held-outではない |
 | [`pr-review-control-free-qualification-four-r1`](pr-review-control-free-qualification-four-r1/README.md) | 4 | 現行仕様へ適合した既存r1ケースのcontrol-free資格確認用。未実行 |
+| [`pr-review-control-free-qualification-three-r2`](pr-review-control-free-qualification-three-r2/README.md) | 3 | C05/r1のoracle欠落を受けたcontrol-free資格確認改訂set。未実行 |

@@ -1,0 +1,38 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v5",
+  "profile_id": "pr-review-control-free-three-qualification-n1-r3",
+  "state": "frozen_not_executed",
+  "purpose": "control_free_baseline_qualification",
+  "cases": [{"id": "PRR-C02", "revision": "r1"}, {"id": "PRR-C03", "revision": "r1"}, {"id": "PRR-C06", "revision": "r1"}],
+  "evaluation_set": {"set_id": "pr-review-control-free-qualification-three-r2", "revision": "r2", "held_out": false},
+  "comparison_conditions": {
+    "variant": "workflow-free-qualification",
+    "target_repository_ref": {"repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git", "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f", "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"},
+    "task_spec": {"source": "cases/<case_id>/r1/input.json and rating-contracts/review-contract-r1.md", "functional_specification": "specifications/pr-review-function-r1.md", "qualification_specification": "specifications/control-free-four-qualification-r1.md", "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す"},
+    "prompt": {"identity": "pr-review-control-free-qualification-r1", "manifest_path": "prompts/baselines/pr-review-control-free-qualification-r1/manifest.json", "manifest_sha256": "734ae04d8008165507122cf713e827a1f40eade909c92955118e2e0636dc428b", "path": "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md", "sha256": "253281ecff56e47749aeec5bcb99de596cff4cb448693c8a9c16284f8fb83744"},
+    "quality_rating": {"contract_id": "pr-review-finding-quality-v7", "path": "rating-contracts/pr-review-finding-quality-v7.json", "required_state": "case_qualification_satisfied"},
+    "model": {"requested": "claude-sonnet-5", "reported_identity_required": true, "review_topology": "model_selected"},
+    "agent_environment": {"action": "anthropics/claude-code-action", "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975", "claude_cli": "reported_by_action", "runner": "ubuntu-latest", "session_mode": "one_root_action_per_case", "authentication": "claude_code_oauth_token"},
+    "permission": {"github": "contents:read", "repository_write": false, "github_comment_write": false, "tool_policy": "fixture-tool-read-only-r1"},
+    "executor_parameters": {"max_attempts_per_case": 2, "max_turns": null, "max_workers": 24, "dispatch_concurrency": 4, "actual_planned_slots": 3, "schedule_policy": "three_independent_workflow_dispatches", "action_timeout_seconds": 1200, "token_accounting": {"revision": "claude-code-action-execution-message-usage-sum-v1", "scope": "root_and_subagent_assistant_messages", "subagent_inclusion_required": true}},
+    "repetition_condition": {"iterations_per_case": 1, "external_failure_policy": "repeat_same_case_with_new_attempt_identity", "result_reuse": "forbidden"},
+    "qualification_gate": {"individual_pass_condition": {"result": "pass", "quality_score": 4, "required_finding_miss": 0, "false_positive": 0, "review_contract_violation": 0, "reported_model_matches_requested": true, "all_agent_tokens_complete": true, "elapsed_time_complete": true, "fixture_access_observed": true, "fixture_permission_denials": 0}, "aggregate_pass_condition": "all three cases satisfy individual_pass_condition"},
+    "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "revision_reason": {"excluded_case": "PRR-C05/r1", "reason": "oracle omitted a valid single_artifact_unit finding", "measurement_change": "recognize nested or compound fixture-tool commands without storing command content"},
+    "bound_artifacts": [
+      {"path": "profiles/pr-review-control-free-four-qualification-n1-r2.json", "sha256": "cd43669ee6502cf9fe067b8fe164cef4c04f3fd18877a1b503d5348b010a8c9f"},
+      {"path": "contracts/pr-review-r1-case-qualification-audit-r2.json", "sha256": "b19a12453a04bafae565f749b562ba6affcb2861f63fb26fa9ca258191aed207"},
+      {"path": "rating-contracts/pr-review-finding-quality-v7.json", "sha256": "1f6d1e4823173297c038733e10bfef095887cfa12069baac53b61575710c59c0"},
+      {"path": "sets/pr-review-control-free-qualification-three-r2/README.md", "sha256": "28e6aac9659e5391e67933e971d86bf99e5700bfaf4067b6973fd972c182416e"},
+      {"path": "prompts/baselines/pr-review-control-free-qualification-r1/manifest.json", "sha256": "734ae04d8008165507122cf713e827a1f40eade909c92955118e2e0636dc428b"},
+      {"path": "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md", "sha256": "253281ecff56e47749aeec5bcb99de596cff4cb448693c8a9c16284f8fb83744"},
+      {"path": "schemas/run-result-r15.schema.json", "sha256": "419a578cb5bc734f798b64fcf8143b77e0157a805882a54533081dc4f2e169a5"},
+      {"path": "tools/pr_review_control_free_qualification_r3.py", "sha256": "10d33b724c63d781d3c0fe45aac46c870048be5e4cb19ae4d17b65d3bb7d0f24"},
+      {"path": "tools/pr_review_subagent_hook_r2.py", "sha256": "eb8c5f2445227b18941e24200c37de5243eae5adfa72d53097c39ab4234b0134"},
+      {"path": "tools/pr_review_subagent_hook.py", "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce"},
+      {"path": ".github/workflows/pr-review-qualify-control-free-three-r3.yml", "sha256": "219d3ef979a5f4de44ecd6d61c0378a5db5869ba8f31b2129edf24ac908b128b"}
+    ]
+  },
+  "execution": {"planned_slots": 3, "max_workers": 24, "actual_concurrency": 3, "state": "not_issued"},
+  "scope": {"qualification": "authorized_after_preflight", "held_out_quality_claim": "not_authorized", "comparison": "not_authorized", "adoption": "not_decided", "release": "not_decided", "runtime_projection": "not_authorized"}
+}
