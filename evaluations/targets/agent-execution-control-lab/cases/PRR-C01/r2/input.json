@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r2",
+  "review_contract_revision": "pr-review-contract-r2",
+  "pr": {
+    "title": "promptと評価条件を同時更新",
+    "body": "レビュー制御と実行条件を一度に更新する。",
+    "base_sha": "1111111111111111111111111111111111111111",
+    "head_sha": "1111111111111111111111111111111111111112"
+  },
+  "changed_paths": [
+    "prompts/candidates/example/files/AGENTS.md.txt",
+    "evaluations/profiles/example.json"
+  ],
+  "changes": [
+    {
+      "path": "prompts/candidates/example/files/AGENTS.md.txt",
+      "patch": "@@ -1 +1 @@\n-変更前の制御。\n+新しいレビュー制御。",
+      "content_after": "新しいレビュー制御。\n"
+    },
+    {
+      "path": "evaluations/profiles/example.json",
+      "patch": "@@ -1 +1 @@\n-{\"max_workers\": 12}\n+{\"max_workers\": 24}",
+      "content_after": "{\"max_workers\": 24}\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "prompt_evaluation_separation", "text": "prompt変更と評価条件変更を同じ比較単位へ混ぜない。"},
+        {"rule_id": "state_separation", "text": "artifact、evaluation、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secret、credential、非公開の生logをcommitしない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}

@@ -4,4 +4,6 @@
 
 - [`pr-review-agentic-retrieval-c01-qualification-n2-r1`](pr-review-agentic-retrieval-c01-qualification-n2-r1.json): PRR-C01のagentic-retrieval baselineを独立2反復で確認する最小qualification profile。不成立（score `1 / 4`）。一次resultは[`results/`](../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)
 
+後続の仕様監査で、このprofileはPRレビュー機能仕様とCore Baseline admission gateより先に固定されていたことを確認した。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
+
 2026-08-08のGitHub Actions runは、[`contracts/pr-review-core-r1.json`](../contracts/pr-review-core-r1.json)で固定した診断条件によるprobeであり、新インスタンス登録前のrunを事後にこのprofileへ昇格しない。3 KPI、rating、model、Action revision、権限、反復、停止条件の正本はprofile JSONとする。

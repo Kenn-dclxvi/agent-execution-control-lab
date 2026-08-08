@@ -56,6 +56,14 @@ FINDING_KEYS = {
     "severity",
     "message",
 }
+FINDING_V2_KEYS = FINDING_KEYS | {"related_paths"}
+EXPECTED_FINDING_V2_KEYS = {
+    "category",
+    "rule_id",
+    "paths",
+    "locations",
+    "severity",
+}
 
 
 class ValidationError(ValueError):
@@ -132,6 +140,72 @@ def _validate_finding(value: Any, label: str, changed_paths: set[str] | None = N
     return value
 
 
+def _validate_review_finding_v2(
+    value: Any, label: str, changed_paths: set[str] | None = None
+) -> dict:
+    if not isinstance(value, dict):
+        raise ValidationError(f"{label} must be an object")
+    _require_exact_keys(value, FINDING_V2_KEYS, label)
+    base_finding = {key: value[key] for key in FINDING_KEYS}
+    _validate_finding(base_finding, label, changed_paths)
+    related_paths = value["related_paths"]
+    if not isinstance(related_paths, list):
+        raise ValidationError(f"{label}.related_paths must be a list")
+    normalized = [
+        _relative_path(path, f"{label}.related_paths entry") for path in related_paths
+    ]
+    if len(normalized) != len(set(normalized)):
+        raise ValidationError(f"{label}.related_paths must be unique")
+    if value["path"] in normalized:
+        raise ValidationError(f"{label}.related_paths must not contain path")
+    if changed_paths is not None and not set(normalized) <= changed_paths:
+        raise ValidationError(f"{label}.related_paths contains a non-changed path")
+    return value
+
+
+def _validate_expected_finding_v2(
+    value: Any, label: str, changed_paths: set[str]
+) -> dict:
+    if not isinstance(value, dict):
+        raise ValidationError(f"{label} must be an object")
+    _require_exact_keys(value, EXPECTED_FINDING_V2_KEYS, label)
+    if value["category"] not in CATEGORIES:
+        raise ValidationError(f"{label}.category is invalid")
+    if not isinstance(value["rule_id"], str) or not value["rule_id"]:
+        raise ValidationError(f"{label}.rule_id must be a non-empty string")
+    if value["severity"] not in SEVERITIES:
+        raise ValidationError(f"{label}.severity is invalid")
+    paths = value["paths"]
+    if not isinstance(paths, list) or not paths:
+        raise ValidationError(f"{label}.paths must be a non-empty list")
+    normalized_paths = [_relative_path(path, f"{label}.paths entry") for path in paths]
+    if len(normalized_paths) != len(set(normalized_paths)):
+        raise ValidationError(f"{label}.paths must be unique")
+    if not set(normalized_paths) <= changed_paths:
+        raise ValidationError(f"{label}.paths contains a non-changed path")
+    locations = value["locations"]
+    if not isinstance(locations, list) or not locations:
+        raise ValidationError(f"{label}.locations must be a non-empty list")
+    location_paths: list[str] = []
+    for index, location in enumerate(locations):
+        location_label = f"{label}.locations[{index}]"
+        if not isinstance(location, dict):
+            raise ValidationError(f"{location_label} must be an object")
+        _require_exact_keys(
+            location, {"path", "line_start", "line_end"}, location_label
+        )
+        location_paths.append(_relative_path(location["path"], f"{location_label}.path"))
+        start = _positive_int(location["line_start"], f"{location_label}.line_start")
+        end = _positive_int(location["line_end"], f"{location_label}.line_end")
+        if end < start:
+            raise ValidationError(f"{location_label} line range is reversed")
+    if set(location_paths) != set(normalized_paths) or len(location_paths) != len(
+        normalized_paths
+    ):
+        raise ValidationError(f"{label}.locations must cover paths exactly once")
+    return value
+
+
 def validate_fixture_input(value: Any, expected_case_id: str | None = None) -> dict:
     if not isinstance(value, dict):
         raise ValidationError("fixture input must be an object")
@@ -149,15 +223,17 @@ def validate_fixture_input(value: Any, expected_case_id: str | None = None) -> d
         },
         "fixture input",
     )
-    if value["schema_version"] != 1:
-        raise ValidationError("fixture input schema_version must be 1")
+    if value["schema_version"] not in {1, 2}:
+        raise ValidationError("fixture input schema_version must be 1 or 2")
     if value["case_id"] not in CASE_IDS or (
         expected_case_id is not None and value["case_id"] != expected_case_id
     ):
         raise ValidationError("fixture input case_id is invalid")
-    if value["fixture_revision"] != "r1":
-        raise ValidationError("fixture_revision must be r1")
-    if value["review_contract_revision"] != "pr-review-contract-r1":
+    expected_revision = f"r{value['schema_version']}"
+    if value["fixture_revision"] != expected_revision:
+        raise ValidationError(f"fixture_revision must be {expected_revision}")
+    expected_review_contract = f"pr-review-contract-r{value['schema_version']}"
+    if value["review_contract_revision"] != expected_review_contract:
         raise ValidationError("review_contract_revision is invalid")
 
     pr = value["pr"]
@@ -233,8 +309,8 @@ def validate_fixture_oracle(value: Any, fixture_input: dict) -> dict:
         {"schema_version", "case_id", "fixture_revision", "clean_control", "expected_findings"},
         "fixture oracle",
     )
-    if value["schema_version"] != 1:
-        raise ValidationError("fixture oracle schema_version must be 1")
+    if value["schema_version"] != fixture_input["schema_version"]:
+        raise ValidationError("fixture oracle schema_version mismatch")
     if value["case_id"] != fixture_input["case_id"]:
         raise ValidationError("fixture oracle case_id mismatch")
     if value["fixture_revision"] != fixture_input["fixture_revision"]:
@@ -246,7 +322,13 @@ def validate_fixture_oracle(value: Any, fixture_input: dict) -> dict:
         raise ValidationError("expected_findings must be a list")
     changed_paths = set(fixture_input["changed_paths"])
     for index, finding in enumerate(expected):
-        _validate_finding(finding, f"expected_findings[{index}]", changed_paths)
+        label = f"expected_findings[{index}]"
+        if value["schema_version"] == 1:
+            _validate_finding(finding, label, changed_paths)
+        elif value["schema_version"] == 2:
+            _validate_expected_finding_v2(finding, label, changed_paths)
+        else:
+            raise ValidationError("fixture oracle schema_version is unsupported")
     if value["clean_control"] != (len(expected) == 0):
         raise ValidationError("clean_control must be true exactly when expected_findings is empty")
     return value
@@ -260,6 +342,26 @@ def validate_review_output(value: Any) -> dict:
         raise ValidationError("findings must be a list")
     for index, finding in enumerate(value["findings"]):
         _validate_finding(finding, f"findings[{index}]")
+    summary = value["summary"]
+    if not isinstance(summary, dict):
+        raise ValidationError("summary must be an object")
+    _require_exact_keys(summary, set(CATEGORIES), "summary")
+    for category, state in summary.items():
+        if state not in SUMMARY_STATES:
+            raise ValidationError(f"summary.{category} is invalid")
+    return value
+
+
+def validate_review_output_v2(value: Any, changed_paths: set[str] | None = None) -> dict:
+    if not isinstance(value, dict):
+        raise ValidationError("review output must be an object")
+    _require_exact_keys(value, {"findings", "summary"}, "review output")
+    if not isinstance(value["findings"], list):
+        raise ValidationError("findings must be a list")
+    for index, finding in enumerate(value["findings"]):
+        _validate_review_finding_v2(
+            finding, f"findings[{index}]", changed_paths=changed_paths
+        )
     summary = value["summary"]
     if not isinstance(summary, dict):
         raise ValidationError("summary must be an object")
@@ -400,11 +502,27 @@ def validate_run_result(value: Any) -> dict:
     return value
 
 
-def _fixture_paths(case_id: str) -> tuple[Path, Path]:
+def _fixture_paths(case_id: str, fixture_revision: str = "r1") -> tuple[Path, Path]:
     if case_id not in CASE_IDS:
         raise ValidationError(f"unknown case_id: {case_id}")
-    case_dir = FIXTURE_ROOT / case_id / "r1"
+    if re.fullmatch(r"r[1-9][0-9]*", fixture_revision) is None:
+        raise ValidationError(f"invalid fixture revision: {fixture_revision}")
+    case_dir = FIXTURE_ROOT / case_id / fixture_revision
     return case_dir / "input.json", case_dir / "oracle.json"
+
+
+def validate_fixture_revision(case_id: str, fixture_revision: str) -> dict:
+    input_path, oracle_path = _fixture_paths(case_id, fixture_revision)
+    fixture_input = validate_fixture_input(_load_json(input_path), case_id)
+    oracle = validate_fixture_oracle(_load_json(oracle_path), fixture_input)
+    return {
+        "case_id": case_id,
+        "fixture_revision": fixture_revision,
+        "input_sha256": _sha256(input_path),
+        "oracle_sha256": _sha256(oracle_path),
+        "expected_findings": len(oracle["expected_findings"]),
+        "clean_control": oracle["clean_control"],
+    }
 
 
 def validate_all_fixtures() -> list[dict]:
@@ -715,6 +833,22 @@ def _finding_identity_matches(expected: dict, actual: dict) -> bool:
         and expected["rule_id"] == actual["rule_id"]
         and expected["path"] == actual["path"]
         and _line_ranges_overlap(expected, actual)
+    )
+
+
+def _finding_identity_matches_v2(expected: dict, actual: dict) -> bool:
+    actual_paths = {actual["path"], *actual["related_paths"]}
+    if (
+        expected["category"] != actual["category"]
+        or expected["rule_id"] != actual["rule_id"]
+        or expected["severity"] != actual["severity"]
+        or set(expected["paths"]) != actual_paths
+    ):
+        return False
+    return any(
+        location["path"] == actual["path"]
+        and _line_ranges_overlap(location, actual)
+        for location in expected["locations"]
     )
 
 
@@ -1087,6 +1221,14 @@ def _build_parser() -> argparse.ArgumentParser:
 
     subparsers.add_parser("validate-fixtures")
 
+    validate_fixture_revision_parser = subparsers.add_parser(
+        "validate-fixture-revision"
+    )
+    validate_fixture_revision_parser.add_argument(
+        "--case-id", required=True, choices=CASE_IDS
+    )
+    validate_fixture_revision_parser.add_argument("--fixture-revision", required=True)
+
     prepare = subparsers.add_parser("prepare-input")
     prepare.add_argument("--case-id", required=True, choices=CASE_IDS)
     prepare.add_argument("--variant", required=True, choices=VARIANTS)
@@ -1150,6 +1292,9 @@ def main() -> int:
     try:
         if args.command == "validate-fixtures":
             print(json.dumps(validate_all_fixtures(), ensure_ascii=False, indent=2))
+        elif args.command == "validate-fixture-revision":
+            receipt = validate_fixture_revision(args.case_id, args.fixture_revision)
+            print(json.dumps(receipt, ensure_ascii=False, indent=2))
         elif args.command == "prepare-input":
             metadata = prepare_input(args.case_id, args.variant, args.output_dir)
             print(json.dumps(metadata, ensure_ascii=False, indent=2))

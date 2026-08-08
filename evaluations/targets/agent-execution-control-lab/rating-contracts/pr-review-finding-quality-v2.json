@@ -1,0 +1,50 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-quality/v2",
+  "contract_id": "pr-review-finding-quality-v2",
+  "state": "case_design_ready",
+  "functional_specification": "specifications/pr-review-function-r1.md",
+  "review_contract_revision": "pr-review-contract-r2",
+  "supported_case_revisions": ["PRR-C01/r2"],
+  "boundary_rules": {
+    "model_visible": [
+      "cases/<case_id>/<revision>/input.json",
+      "rating-contracts/review-contract-r2.md"
+    ],
+    "model_invisible": [
+      "cases/<case_id>/<revision>/oracle.json",
+      "expected finding identity",
+      "grader implementation"
+    ]
+  },
+  "finding_identity": {
+    "required_equal": ["category", "rule_id", "severity", "set(path + related_paths)"],
+    "anchor_rule": "actual pathはexpected locationsのいずれかと一致し、line rangeがoverlapする",
+    "message_rule": "messageは違反関係と修正内容を利用者へ説明する。r2 graderは文字列完全一致を行わない",
+    "forbidden": "複数path違反でoracleの一方のpathだけを唯一の正解anchorにしない"
+  },
+  "quality_score_rule": {
+    "rating_scale": [0, 1, 2, 3, 4],
+    "score_4_requires": [
+      "required finding missが0件",
+      "false positiveが0件",
+      "review contract violationが0件",
+      "requested modelとreported modelが一致する"
+    ],
+    "score_anchors": {
+      "0": "観測済みだがscope violationまたはmajor false positiveがあり、有害または境界外のレビューである",
+      "1": "観測済みだがrequired finding identityを満たさない",
+      "2": "少なくとも1件のrequired finding identityを満たしたが、required finding missが残る",
+      "3": "required finding missは0件だがfalse positiveまたはreview contract violationが残る",
+      "4": "required finding、false positive、review contract、model identityのgateをすべて満たす"
+    }
+  },
+  "admission": {
+    "current_state": "independent_qualification_unobserved",
+    "required_before_profile": [
+      "PRR-C01/r2のexpected findingを機能仕様とmodel-visible authorityだけから導出できる",
+      "両方の許可anchorが同じfinding identityへ採点される",
+      "片方のrelated pathが欠ける出力をrequired finding missとして扱う",
+      "development fixtureをheld-out evidenceとして再利用しない"
+    ]
+  }
+}
