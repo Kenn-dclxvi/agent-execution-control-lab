@@ -27,5 +27,6 @@
 - [PRR-C01/r4 Claude Code純正相当Core qualification run result r7](run-result-r7.schema.json)
 - [PRR-C01/r4 Claude Code純正相当Core environment recovery run result r8](run-result-r8.schema.json)
 - [PRR-C01/r4 Claude Code純正相当Core instrumented recovery run result r9](run-result-r9.schema.json)
+- [PRR-C01/r4 Claude Code純正相当Core artifact-transfer recovery run result r10](run-result-r10.schema.json)
 
 r1は診断経路の履歴schemaである。`fixture-oracle-r2`と`review-output-r2`は複数path finding identityを扱うcase設計で導入した。`fixture-input-r3`と`fixture-oracle-r3`は独立監査済みPRR-C01/r3を既存revisionから分離した。`fixture-input-r4`と`fixture-oracle-r4`は規則identityのmodel-visible境界と新規file差分を整合させた独立監査済みqualification fixtureである。`run-result-r3`から`r6`は旧Coreの各実行条件を保持し、`run-result-r7`はPRR-C01/r4と純正相当のsubagent workflow traceを固定する。`run-result-r9`は4つのreviewerが同じbatchで発行され、終了前に全担当が開始したことを示す計測値を追加する。過去のschemaとresultは事後変換しない。
