@@ -482,6 +482,29 @@ def _iter_json_values(value: Any) -> Iterable[dict]:
             yield from _iter_json_values(child)
 
 
+def _nonnegative_number(value: Any) -> int | float | None:
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0:
+        return value
+    return None
+
+
+def _usage_totals(usage: Any) -> tuple[int | float | None, int | float | None]:
+    if not isinstance(usage, dict):
+        return None, None
+    input_parts = [
+        _nonnegative_number(usage.get(key))
+        for key in (
+            "input_tokens",
+            "cache_creation_input_tokens",
+            "cache_read_input_tokens",
+        )
+    ]
+    present_input_parts = [value for value in input_parts if value is not None]
+    input_tokens = sum(present_input_parts) if present_input_parts else None
+    output_tokens = _nonnegative_number(usage.get("output_tokens"))
+    return input_tokens, output_tokens
+
+
 def _parse_execution_file(path: Path | None) -> dict:
     runtime = {
         "duration_ms": None,
@@ -503,27 +526,74 @@ def _parse_execution_file(path: Path | None) -> dict:
                 documents.append(json.loads(line))
             except json.JSONDecodeError:
                 continue
-    aliases = {
-        "duration_ms": ("duration_ms",),
-        "turns": ("num_turns", "turns"),
-        "input_tokens": ("input_tokens",),
-        "output_tokens": ("output_tokens",),
-        "reported_cost_usd": ("total_cost_usd", "reported_cost_usd"),
-        "model": ("model", "model_name"),
-    }
-    for document in documents:
-        for mapping in _iter_json_values(document):
-            for destination, keys in aliases.items():
-                if runtime[destination] is not None:
-                    continue
-                for key in keys:
-                    candidate = mapping.get(key)
-                    if destination == "model" and isinstance(candidate, str) and candidate:
-                        runtime[destination] = candidate
-                        break
-                    if destination != "model" and isinstance(candidate, (int, float)) and not isinstance(candidate, bool):
-                        runtime[destination] = candidate
-                        break
+    mappings = [mapping for document in documents for mapping in _iter_json_values(document)]
+    result_mapping = next(
+        (mapping for mapping in reversed(mappings) if mapping.get("type") == "result"),
+        None,
+    )
+    if result_mapping is None:
+        result_mapping = next(
+            (
+                mapping
+                for mapping in mappings
+                if "duration_ms" in mapping or "num_turns" in mapping
+            ),
+            None,
+        )
+    if result_mapping is not None:
+        runtime["duration_ms"] = _nonnegative_number(result_mapping.get("duration_ms"))
+        runtime["turns"] = _nonnegative_number(
+            result_mapping.get("num_turns", result_mapping.get("turns"))
+        )
+        runtime["reported_cost_usd"] = _nonnegative_number(
+            result_mapping.get("total_cost_usd", result_mapping.get("reported_cost_usd"))
+        )
+        runtime["input_tokens"], runtime["output_tokens"] = _usage_totals(
+            result_mapping.get("usage")
+        )
+
+    system_mapping = next(
+        (
+            mapping
+            for mapping in mappings
+            if mapping.get("type") == "system"
+            and mapping.get("subtype") == "init"
+            and isinstance(mapping.get("model"), str)
+            and mapping["model"]
+        ),
+        None,
+    )
+    if system_mapping is not None:
+        runtime["model"] = system_mapping["model"]
+    else:
+        for mapping in mappings:
+            for key in ("model", "model_name"):
+                candidate = mapping.get(key)
+                if isinstance(candidate, str) and candidate:
+                    runtime["model"] = candidate
+                    break
+            if runtime["model"] is not None:
+                break
+
+    if runtime["input_tokens"] is None and runtime["output_tokens"] is None:
+        assistant_usages = []
+        for mapping in mappings:
+            if mapping.get("type") != "assistant":
+                continue
+            message = mapping.get("message")
+            if isinstance(message, dict) and isinstance(message.get("usage"), dict):
+                assistant_usages.append(message["usage"])
+        if assistant_usages:
+            input_values = []
+            output_values = []
+            for usage in assistant_usages:
+                input_tokens, output_tokens = _usage_totals(usage)
+                if input_tokens is not None:
+                    input_values.append(input_tokens)
+                if output_tokens is not None:
+                    output_values.append(output_tokens)
+            runtime["input_tokens"] = sum(input_values) if input_values else None
+            runtime["output_tokens"] = sum(output_values) if output_values else None
     return runtime
 
 

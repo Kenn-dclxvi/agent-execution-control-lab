@@ -477,7 +477,7 @@ Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.c
 1. Core BaselineとCandidate Aは同じ`anthropics/claude-code-action` commit `6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975`を使う。
 2. Core Baselineは固定fixture toolから情報を取得し、Candidate Aは完成済み`review-input.json`を読む。review contract、fixture、model、出力schemaは共通とする。
 3. Reviewer出力はActionの`structured_output`を受け、schema適合済みfieldだけを次jobへ渡す。Actionの生出力はartifactへ保存しない。
-4. `execution_file`はruntime値の許可一覧だけを再帰抽出し、message、tool出力、環境値を保存しない。
+4. `execution_file`はSDKの最終`result`から`duration_ms`、`num_turns`、`total_cost_usd`、`usage`を取得し、`system/init`からmodel identityを取得する。`input_tokens`は`usage.input_tokens`、`cache_creation_input_tokens`、`cache_read_input_tokens`の合計とする。message、tool出力、環境値は保存しない。
 5. model-invisible oracleはreviewerと別jobへ置き、reviewer workspaceに`.git`、`oracle.json`を含めない。
 6. reviewer jobはjob-scoped `github.token`とread-only permissionsを使い、GitHub投稿処理を持たない。Claude API認証は両variantとも`CLAUDE_CODE_OAUTH_TOKEN`へ固定する。
 7. `attempt`はGitHub run IDへbindし、同じrepetitionのretryを別identityとして保持する。
