@@ -1,0 +1,26 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v2",
+  "preflight_id": "pr-review-control-free-four-qualification-n1-r2-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-control-free-four-qualification-n1-r2", "path": "profiles/pr-review-control-free-four-qualification-n1-r2.json", "sha256": "cd43669ee6502cf9fe067b8fe164cef4c04f3fd18877a1b503d5348b010a8c9f"},
+  "predicates": {"prior_attempts_environment_failed": "satisfied", "review_conditions_unchanged": "satisfied", "json_schema_export_repaired": "satisfied", "collector_dependencies_bundled": "satisfied", "fresh_attempt_per_case": "satisfied"},
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C03", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C05", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1},
+    {"case_id": "PRR-C06", "fixture_revision": "r1", "variant": "workflow-free-qualification", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "profiles/pr-review-control-free-four-qualification-n1-r1.json", "sha256": "2de1e08e5de696996494b43782b04bbfa05bc6245a16d0f2ccf6e5f7558d1a1c"},
+    {"path": "schemas/run-result-r14.schema.json", "sha256": "4a28b7ab5118e6d5b0eb8c42d52af8679e660eae71215019d7fcf89769c12cb0"},
+    {"path": "tools/pr_review_control_free_qualification_r2.py", "sha256": "85bcff4544f12de66b7a9ebec977edee609b491eac132cd3e26fe9725a981ab8"},
+    {"path": ".github/workflows/pr-review-qualify-control-free-four-r2.yml", "sha256": "f64870e0f0df99a3176abfb82d75bd8879529eb0cc0976517f2172f19d21274e"}
+  ],
+  "failed_attempts": [
+    {"case_id": "PRR-C02", "github_run_id": "31275781897", "status": "execution_failed"},
+    {"case_id": "PRR-C03", "github_run_id": "31275782746", "status": "execution_failed"},
+    {"case_id": "PRR-C05", "github_run_id": "31275783851", "status": "execution_failed"},
+    {"case_id": "PRR-C06", "github_run_id": "31275784765", "status": "execution_failed"}
+  ],
+  "scope": "same four qualification slots; environment recovery only"
+}

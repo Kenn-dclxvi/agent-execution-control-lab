@@ -2979,3 +2979,84 @@ def test_control_free_four_quality_requires_expected_severity():
     assert quality["true_positive"] == 0
     assert quality["false_negative"] == 1
     assert quality["false_positive"] == 1
+
+
+def test_control_free_four_recovery_bundles_imports_and_upgrades_schema(
+    tmp_path: Path,
+):
+    tool = INSTANCE_ROOT / "tools/pr_review_control_free_qualification_r2.py"
+    prepared = tmp_path / "prepared"
+    subprocess.run(
+        [
+            sys.executable,
+            str(tool),
+            "prepare",
+            "--case-id",
+            "PRR-C02",
+            "--output-dir",
+            str(prepared),
+        ],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    for filename in (
+        "pr_review_measurement.py",
+        "pr_review_qualification.py",
+        "pr_review_code_review_qualification.py",
+        "pr_review_workflow_free_calibration.py",
+        "pr_review_control_free_qualification.py",
+        "pr_review_control_free_qualification_r2.py",
+    ):
+        assert (prepared / filename).is_file()
+    subprocess.run(
+        [sys.executable, "-c", "import pr_review_control_free_qualification_r2"],
+        cwd=prepared,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    result_path = tmp_path / "terminal.json"
+    subprocess.run(
+        [
+            sys.executable,
+            str(tool),
+            "record-terminal",
+            "--case-id",
+            "PRR-C02",
+            "--attempt",
+            "999",
+            "--model-requested",
+            "claude-sonnet-5",
+            "--status",
+            "execution_failed",
+            "--github-run-id",
+            "999",
+            "--output",
+            str(result_path),
+        ],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r14.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["schema_version"] == 14
+    assert result["profile_id"].endswith("-r2")
+
+
+def test_control_free_four_recovery_exports_nonempty_json_schema():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-qualify-control-free-four-r2.yml"
+    ).read_text(encoding="utf-8")
+    assert r'del(.\"$schema\")' not in workflow
+    assert 'del(."$schema")' in workflow
