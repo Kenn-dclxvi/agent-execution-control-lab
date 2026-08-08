@@ -2,7 +2,7 @@
 
 現行Claude Code Actionと、決定論的に入力を準備するCandidate Aを、固定fixtureと同一review contractで比較するための測定環境。
 
-現在状態は`implemented_unexecuted`である。fixture、schema、collector、grader、Core Review workflowは実装済みだが、Claudeを使うpilotおよびN=5比較は未実行・未評価である。
+現在状態は`pilot_probe_blocked`である。fixture、schema、collector、grader、Core Review workflowは実装済みで、PRR-C01の両variantによるprobeまで実行した。最終attemptでは`agentic-retrieval`が`pass`、`deterministic-input`がrequired findingのpath identity不一致により`quality_failed`となったため、残り5 caseのpilotとN=5比較は未実行のまま停止している。
 
 ## 境界
 

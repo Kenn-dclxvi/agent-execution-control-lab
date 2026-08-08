@@ -2,7 +2,7 @@
 
 ## 位置付け
 
-この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは実装済みである。Claudeを使うpilot、N=5、比較result、Integrationは未実行・未評価である。
+この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは実装済みである。PRR-C01の両variantによるprobeは実行済みで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。残り5 caseのpilot、N=5、比較result、Integrationは未実行・未評価である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -30,12 +30,12 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 
 | アーティファクト | 役割 | 現在状態 |
 |---|---|---|
-| `pr-review-measurements/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | 実装済み・未実行 |
+| `pr-review-measurements/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
 | `pr-review-measurements/fixtures/r1/PRR-C01`〜`PRR-C06` | model-visible入力とmodel-invisible oracle | 6件固定済み |
 | `pr-review-measurements/schemas/` | fixture、review output、run resultのschema | r1実装済み |
 | `scripts/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
 | `scripts/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
-| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | 実装済み・未実行 |
+| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | PRR-C01 probe実行済み |
 | `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
 
 Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへはmodel-visible artifactだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。
@@ -483,9 +483,9 @@ Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.c
 7. `attempt`はGitHub run IDへbindし、同じrepetitionのretryを別identityとして保持する。
 8. Action stepは12分、reviewer jobは15分を上限とし、schema不適合、実行失敗、取消、計測不完全を成功runと分ける。
 
-## pilotで確認する未観測事項
+## pilot probeの観測結果
 
-以下は静的実装から確定できないため、Phase 4のpilotで観測する。
+PRR-C01の両variantを使い、Phase 4へ進む前のprobeを実施した。
 
 1. 固定Action commitで`structured_output`が6 fixtureすべてについてschema適合するか。
 2. `execution_file`からmodel identity、`duration_ms`、`num_turns`を安定して取得できるか。取得できない値は`null`のまま保持する。
@@ -494,7 +494,11 @@ Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.c
 5. model identityが要求値と実測値で一致するか。一致しない場合、または実測不能の場合は比較を停止する。
 6. inline `line_accuracy`の許容範囲とIntegrationのtimestamp取得点。これはCore Review gate通過後に固定する。
 
-未観測値を推定で補完せず、`measurement_incomplete`または新しいcomparison revisionとして扱う。
+1〜5はPRR-C01で観測できた。JSON Schema draft宣言はClaude Code CLIへそのまま渡せなかったため、schema正本を変えずAction入力から宣言だけを除外した。runtimeはSDK最終`result`を基準に取得し、model identity、`duration_ms`、`num_turns`、cost、cache込みtokenを抽出できた。
+
+最終attemptでは`agentic-retrieval`がrequired findingをoracleと同じpath identityで返して`pass`した。一方、`deterministic-input`は同じ`prompt_evaluation_separation`違反をprompt側pathで指摘し、oracleが固定した評価profile側pathとは一致しなかった。加えて評価profile側には`state_separation`を返したため、grader上はrequired findingの`false_negative=1`となり`quality_failed`である。意味的に近い指摘を同一findingとするかは、現在のoracleを事後変更せず、新しいcomparison revisionの要否として判断する。
+
+6はCore Review gate未通過のため未観測のまま保持する。未観測値を推定で補完しない。
 
 ## 実装段階
 
@@ -502,9 +506,9 @@ Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.c
 |---|---|---|---|
 | 0 | 測定契約確定 | Action / model / workflow identity、permissions、sandbox、timeoutを含む実装開始条件がbind済み | 完了 |
 | 1 | fixtureとrun schema | 6 fixtureとexpected finding、run JSON schemaが固定される | 完了 |
-| 2 | Baseline collector | 取得可能な時間区間とquality resultを保存できる | 静的実装完了・実run未確認 |
-| 3 | Candidate A最小実装 | deterministic input preparation + Claude reviewのCore Review経路が実装される | 静的実装完了・実run未確認 |
-| 4 | pilot | 6 case × Baseline/Candidate A × N=1でschema、collector、quality判定を検証する | 未実行 |
+| 2 | Baseline collector | 取得可能な時間区間とquality resultを保存できる | PRR-C01で実run確認済み |
+| 3 | Candidate A最小実装 | deterministic input preparation + Claude reviewのCore Review経路が実装される | PRR-C01で実run確認済み |
+| 4 | pilot | 6 case × Baseline/Candidate A × N=1でschema、collector、quality判定を検証する | PRR-C01 probeでquality gate停止。残り5 caseは未実行 |
 | 5 | N=5 | 全caseを交互順序でN=5実行する | 未実行 |
 | 6 | 比較result | quality gate通過可否と時間KPI中央値を固定resultとして保存する | 未実行 |
 | 7 | Integration | Core Reviewで採用候補となったCandidateだけGitHub commentまで含めて測る | 未実装・未実行 |
@@ -536,11 +540,11 @@ Claude Codeリポジトリの一般的な[Claude Code workflow](https://github.c
 
 これらはレビュー測定環境が成立し、Candidate Aのquality / timing resultが得られた後の別作業とする。
 
-## pilot開始前の次作業
+## 再開条件
 
-1. 実装変更をGitHubへ反映し、`PR Review Measurement Core`を手動起動可能にする。
-2. まず`PRR-C01`の両variantを各1件実行し、Action出力、model identity、runtime抽出、artifact境界をprobeする。
-3. probeが成立した場合だけ、残り5 caseを含む`6 case × 2 variant × N=1`へ進む。
-4. 一件でもhard gate、model identity、schema、timing定義が不成立ならN=5を開始せず、新しいcomparison revisionの要否を判断する。
+1. `prompt_evaluation_separation`のfinding identityを、違反を構成する複数pathのどこへ固定するか判断する。
+2. 現行oracleのexact pathを維持する場合は、`deterministic-input`の`quality_failed`をterminal resultとして比較を停止する。
+3. 複数pathを同一findingとして許容する場合は、現行oracleとgraderを事後変更せず、新しいfixture / comparison revisionを作る。
+4. 新revisionを作った場合だけPRR-C01の両variantから再度probeし、両方がhard gateを通過した後に残り5 caseへ進む。
 
-pilotではレビュー方式の置換、自動修正の再接続、既存evaluation resultの変更まで広げない。
+停止中はN=5、Integration、レビュー方式の置換、自動修正の再接続、既存evaluation resultの変更まで広げない。
