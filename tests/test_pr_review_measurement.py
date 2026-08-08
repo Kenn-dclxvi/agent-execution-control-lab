@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import jsonschema
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,7 @@ import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
 import pr_review_repository_snapshot_r2 as repository_snapshot_r2
+import pr_review_repository_snapshot_r3 as repository_snapshot_r3
 
 
 @pytest.fixture
@@ -187,7 +189,6 @@ def test_prr_c01_r3_is_fresh_held_out_fixture_candidate():
             / "pr-review-finding-quality-v3.json"
         ).read_text(encoding="utf-8")
     )
-
     assert receipt["fixture_revision"] == "r3"
     assert receipt["expected_findings"] == 1
     assert receipt["clean_control"] is False
@@ -206,6 +207,166 @@ def test_prr_c01_r3_is_fresh_held_out_fixture_candidate():
         "excluded_development_fixture": "PRR-C01/r2",
         "excluded_prior_results": True,
     }
+
+
+def test_prr_c01_r4_is_revision_bound_and_not_held_out():
+    input_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "input.json"
+    oracle_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "oracle.json"
+    fixture = json.loads(input_path.read_text(encoding="utf-8"))
+    oracle = json.loads(oracle_path.read_text(encoding="utf-8"))
+    input_schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "fixture-input-r4.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    oracle_schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "fixture-oracle-r4.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(input_schema).validate(fixture)
+    jsonschema.Draft202012Validator(oracle_schema).validate(oracle)
+    quality_contract = json.loads(
+        (
+            INSTANCE_ROOT
+            / "rating-contracts"
+            / "pr-review-finding-quality-v4.json"
+        ).read_text(encoding="utf-8")
+    )
+    input_mapping = json.loads(
+        (INSTANCE_ROOT / "contracts" / "baseline-input-mapping-r4.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert fixture["fixture_revision"] == "r4"
+    assert len(oracle["expected_findings"]) == 1
+    assert set(oracle["expected_findings"][0]["paths"]) == set(
+        fixture["changed_paths"]
+    )
+    assert quality_contract["supported_case_revisions"] == ["PRR-C01/r4"]
+    assert quality_contract["state"] == "independent_qualification_unobserved"
+    assert quality_contract["qualification_boundary"]["heldout_evidence"] is False
+    assert input_mapping["state"] == "unsatisfied"
+    assert input_mapping["source"] == {
+        "repository": "https://github.com/anthropics/claude-code.git",
+        "commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+        "workflow_path": "plugins/code-review/commands/code-review.md",
+        "workflow_sha256": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c",
+        "entrypoint": "/code-review",
+        "excluded_source": "target repositoryの.github/workflows/claude-pr-review.yml",
+    }
+    assert {entry["identity"] for entry in input_mapping["mappings"] if entry["state"] == "unsatisfied"} == {
+        "review_criteria",
+        "review_orchestration",
+        "false_positive_filter",
+    }
+
+
+def test_prr_c01_r4_uses_consistent_new_file_patches():
+    fixture = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    for change in fixture["changes"]:
+        assert change["patch"].startswith("new file mode 100644\n--- /dev/null\n")
+        assert f"+++ b/{change['path']}\n" in change["patch"]
+        assert "@@ -0,0 +1 @@\n" in change["patch"]
+        assert change["patch"].split("@@ -0,0 +1 @@\n", 1)[1] == "+" + change[
+            "content_after"
+        ].rstrip("\n")
+
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    if subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    ).returncode == 0:
+        for path in fixture["changed_paths"]:
+            assert subprocess.run(
+                ["git", "cat-file", "-e", f"{commit}:{path}"],
+                cwd=REPOSITORY_ROOT,
+                check=False,
+                capture_output=True,
+            ).returncode != 0
+
+
+def test_fixture_tool_r4_exposes_rule_identity_and_authority(tmp_path: Path):
+    fixture_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "input.json"
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    authority = {
+        "schema_version": "agent-execution-control-lab.authority-packet/v1",
+        "authorities": [{"source_path": "AGENTS.md", "content": "規則本文"}],
+    }
+    (tmp_path / "review-input.json").write_text(
+        json.dumps(fixture, ensure_ascii=False), encoding="utf-8"
+    )
+    (tmp_path / "authority-input.json").write_text(
+        json.dumps(authority, ensure_ascii=False), encoding="utf-8"
+    )
+    fixture_tool = tmp_path / "fixture-tool"
+    shutil.copyfile(
+        INSTANCE_ROOT / "tools" / "pr_review_fixture_tool_r4.py", fixture_tool
+    )
+    fixture_tool.chmod(0o755)
+
+    output = subprocess.run(
+        [str(fixture_tool), "rules"],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    rules_output = json.loads(output.stdout)
+    visible_ids = {
+        rule["rule_id"]
+        for source in rules_output["rule_catalog"]
+        for rule in source["rules"]
+    }
+
+    assert rules_output["repository_authority"] == authority
+    assert "prompt_evaluation_separation" in visible_ids
+
+
+def test_repository_snapshot_r3_materializes_prr_c01_r4(tmp_path: Path):
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    if subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    ).returncode != 0:
+        pytest.skip("fixed target commit is unavailable in this checkout")
+
+    fixture_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "input.json"
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    output = tmp_path / "snapshot"
+    receipt = repository_snapshot_r3.materialize_snapshot(
+        REPOSITORY_ROOT, commit, fixture_path, output
+    )
+    snapshot_root = output / "repository"
+    try:
+        expected_receipt = json.loads(
+            (
+                INSTANCE_ROOT
+                / "contracts"
+                / "baseline-repository-snapshot-prr-c01-r4-r1.json"
+            ).read_text(encoding="utf-8")
+        )
+        assert receipt == expected_receipt
+        assert receipt["snapshot_revision"] == "pr-review-repository-snapshot-r3"
+        assert receipt["fixture"]["revision"] == "r4"
+        assert receipt["overlay_paths"] == fixture["changed_paths"]
+        assert not (snapshot_root / ".git").exists()
+        for change in fixture["changes"]:
+            assert (snapshot_root / change["path"]).read_text(encoding="utf-8") == change[
+                "content_after"
+            ]
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot_root)
 
 
 @pytest.mark.parametrize(

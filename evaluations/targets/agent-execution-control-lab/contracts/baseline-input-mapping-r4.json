@@ -1,0 +1,48 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-mapping/v1",
+  "mapping_id": "baseline-input-mapping-r4",
+  "state": "unsatisfied",
+  "source_mapping": "baseline-input-mapping-r3",
+  "source": {
+    "repository": "https://github.com/anthropics/claude-code.git",
+    "commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+    "workflow_path": "plugins/code-review/commands/code-review.md",
+    "workflow_sha256": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c",
+    "entrypoint": "/code-review",
+    "excluded_source": "target repositoryの.github/workflows/claude-pr-review.yml"
+  },
+  "core_candidate": {
+    "prompt_identity": "claude-pr-review-core-r3",
+    "prompt_artifact": "prompts/baselines/claude-pr-review-core-r3/core-prompt.md",
+    "fixture_tool": "tools/pr_review_fixture_tool_r4.py",
+    "authority_selection": "contracts/baseline-authority-selection-r1.json",
+    "authority_packet_schema": "schemas/authority-packet-r1.schema.json",
+    "repository_snapshot_materializer": "tools/pr_review_repository_snapshot_r3.py",
+    "repository_snapshot": "contracts/baseline-repository-snapshot-prr-c01-r4-r1.json",
+    "repository_snapshot_schema": "schemas/repository-snapshot-r3.schema.json",
+    "review_contract": "rating-contracts/review-contract-r2.md",
+    "output_schema": "schemas/review-output-r2.schema.json"
+  },
+  "mappings": [
+    {"identity": "pr_metadata", "source_operation": "gh pr view", "core_operation": "fixture-tool metadata", "state": "satisfied", "evidence": "case input.prをJSONとしてbyte-stableに取得する"},
+    {"identity": "changed_paths", "source_operation": "gh pr diff and repository state", "core_operation": "fixture-tool changed-paths", "state": "satisfied", "evidence": "input.changed_pathsを順序保持したJSON配列として取得する"},
+    {"identity": "diff", "source_operation": "gh pr diff", "core_operation": "fixture-tool diff", "state": "satisfied", "evidence": "input.changesのpathとpatchから論理diffを決定論的に再構成する"},
+    {"identity": "changed_file_content", "source_operation": "checked out repository read", "core_operation": "fixture-tool files and file PATH", "state": "satisfied", "evidence": "固定target treeへcaseの変更後本文をoverlayした.gitなしsnapshotから取得する"},
+    {"identity": "applicable_repository_rules", "source_operation": "root CLAUDE.md and changed-path local AGENTS.md selection", "core_operation": "fixture-tool rules", "state": "satisfied", "evidence": "規則identityと本文のcatalog、および固定treeでhash照合したauthority原文を同じmodel-visible応答で返す"},
+    {"identity": "review_criteria", "source_operation": "code-review pluginのCLAUDE.md complianceと高確度bug review", "core_operation": "target固有の4カテゴリを列挙したcore prompt and review contract r2", "state": "unsatisfied", "evidence": "現行Coreはplugin原文ではなくtarget repositoryへインストール済みworkflow由来の観点を使う"},
+    {"identity": "review_orchestration", "source_operation": "haiku事前判定、authority path収集、sonnet要約、4並列reviewer、issue別validation", "core_operation": "単一Claude Code Action operation", "state": "unsatisfied", "evidence": "純正code-review pluginのproducer構成とvalidation段階が移植されていない"},
+    {"identity": "false_positive_filter", "source_operation": "bug・規則違反候補を別subagentで検証し未確認issueを除外", "core_operation": "reviewer出力をそのままgraderへ渡す", "state": "unsatisfied", "evidence": "純正workflowのhigh-signal filteringがCoreにない"},
+    {"identity": "github_reporting", "source_operation": "inline comment and summary comment", "core_operation": "excluded", "state": "excluded_by_core_boundary", "evidence": "Integrationで別測定し、Core qualityまたは時間へ含めない"}
+  ],
+  "blocking_conditions": [
+    "Anthropic code-review plugin原文をsource identityへ持つ新しいBaseline prompt bundleがない",
+    "事前判定、authority収集、PR要約、4並列review、issue別validationのproducer構成が未実装",
+    "high-signal issueだけを残すvalidationとfilteringが未実装"
+  ],
+  "verification": {
+    "rule_identity_test": "tests/test_pr_review_measurement.py::test_fixture_tool_r4_exposes_rule_identity_and_authority",
+    "case_consistency_test": "tests/test_pr_review_measurement.py::test_prr_c01_r4_uses_consistent_new_file_patches",
+    "interpretation": "規則identityの入力欠落は解消したが、純正code-review pluginのreview workflow自体は現行Coreへ移植されていない"
+  },
+  "admission_effect": "Core Baseline admissionはblocked。新しい純正相当workflow、独立case監査、profile、preflightが揃うまでevaluation slotを発行しない"
+}

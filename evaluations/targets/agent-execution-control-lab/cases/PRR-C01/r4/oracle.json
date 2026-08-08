@@ -1,0 +1,21 @@
+{
+  "schema_version": 4,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r4",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "paths": [
+        "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt",
+        "evaluations/profiles/review-output-contract-r1.json"
+      ],
+      "locations": [
+        {"path": "prompts/candidates/review-output-contract-r1/files/AGENTS.md.txt", "line_start": 1, "line_end": 1},
+        {"path": "evaluations/profiles/review-output-contract-r1.json", "line_start": 1, "line_end": 1}
+      ],
+      "severity": "major"
+    }
+  ]
+}

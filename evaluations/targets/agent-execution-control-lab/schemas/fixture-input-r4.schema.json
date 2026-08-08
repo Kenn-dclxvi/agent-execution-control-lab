@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture-input-r4.schema.json",
+  "type": "object",
+  "required": ["schema_version", "case_id", "fixture_revision", "review_contract_revision", "pr", "changed_paths", "changes", "rules"],
+  "properties": {
+    "schema_version": {"const": 4},
+    "case_id": {"pattern": "^PRR-C0[1-6]$"},
+    "fixture_revision": {"const": "r4"},
+    "review_contract_revision": {"const": "pr-review-contract-r2"},
+    "pr": {
+      "type": "object",
+      "required": ["title", "body", "base_sha", "head_sha"],
+      "properties": {
+        "title": {"type": "string"},
+        "body": {"type": "string"},
+        "base_sha": {"pattern": "^[0-9a-f]{40}$"},
+        "head_sha": {"pattern": "^[0-9a-f]{40}$"}
+      },
+      "additionalProperties": false
+    },
+    "changed_paths": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "changes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "patch", "content_after"],
+        "properties": {
+          "path": {"type": "string"},
+          "patch": {"type": "string"},
+          "content_after": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source", "scope", "rules"],
+        "properties": {
+          "source": {"type": "string"},
+          "scope": {"type": "string"},
+          "rules": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["rule_id", "text"],
+              "properties": {
+                "rule_id": {"type": "string"},
+                "text": {"type": "string"}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
