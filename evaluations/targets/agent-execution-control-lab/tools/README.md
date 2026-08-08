@@ -20,5 +20,6 @@
 - `pr_review_workflow_free_calibration.py`: Workflow Freeのpreflight再照合、入力準備、任意subagent構成の診断trace、全agent token収集、品質と測定成立を分けた採点を行う
 - `pr_review_relationship_role_calibration.py`: 関係レビュー役を1人に固定したSonnet／Opus条件のpreflight、agent別fixture access、model routing、全agent token、品質と測定成立を収集する
 - `pr_review_control_free_qualification.py`: PRR-C02、C03、C05、C06の固定profileを再照合し、control-free資格確認の入力準備、全agent token収集、採点を行う
+- `pr_review_control_free_qualification_r2.py`: schema出力の引用とreview job用collector依存の同梱を修復した同一資格確認スロットのenvironment recoveryを行う
 
 これらは`agent-execution-control-lab`固有のcase ID、rule、authority選択を扱うため、ターゲット非依存kernelの`scripts/`へ置かない。authorityとrepository snapshotのreceiptはmodel-visible入力対応を証明するが、case設計の独立qualification、profile、preflight、Baseline admissionを単独では成立させない。

@@ -1,0 +1,43 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v5",
+  "profile_id": "pr-review-control-free-four-qualification-n1-r2",
+  "state": "frozen_not_executed",
+  "purpose": "control_free_baseline_qualification",
+  "cases": [
+    {"id": "PRR-C02", "revision": "r1"},
+    {"id": "PRR-C03", "revision": "r1"},
+    {"id": "PRR-C05", "revision": "r1"},
+    {"id": "PRR-C06", "revision": "r1"}
+  ],
+  "evaluation_set": {"set_id": "pr-review-control-free-qualification-four-r1", "revision": "r1", "held_out": false},
+  "comparison_conditions": {
+    "variant": "workflow-free-qualification",
+    "target_repository_ref": {"repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git", "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f", "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"},
+    "task_spec": {"source": "cases/<case_id>/r1/input.json and rating-contracts/review-contract-r1.md", "functional_specification": "specifications/pr-review-function-r1.md", "qualification_specification": "specifications/control-free-four-qualification-r1.md", "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す"},
+    "prompt": {"identity": "pr-review-control-free-qualification-r1", "manifest_path": "prompts/baselines/pr-review-control-free-qualification-r1/manifest.json", "manifest_sha256": "734ae04d8008165507122cf713e827a1f40eade909c92955118e2e0636dc428b", "path": "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md", "sha256": "253281ecff56e47749aeec5bcb99de596cff4cb448693c8a9c16284f8fb83744"},
+    "quality_rating": {"contract_id": "pr-review-finding-quality-v6", "path": "rating-contracts/pr-review-finding-quality-v6.json", "required_state": "case_qualification_satisfied"},
+    "model": {"requested": "claude-sonnet-5", "reported_identity_required": true, "review_topology": "model_selected"},
+    "agent_environment": {"action": "anthropics/claude-code-action", "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975", "claude_cli": "reported_by_action", "runner": "ubuntu-latest", "session_mode": "one_root_action_per_case", "authentication": "claude_code_oauth_token"},
+    "permission": {"github": "contents:read", "repository_write": false, "github_comment_write": false, "tool_policy": "fixture-tool-read-only-r1"},
+    "executor_parameters": {"max_attempts_per_case": 2, "max_turns": null, "max_workers": 24, "dispatch_concurrency": 4, "schedule_policy": "four_independent_workflow_dispatches", "action_timeout_seconds": 1200, "token_accounting": {"revision": "claude-code-action-execution-message-usage-sum-v1", "scope": "root_and_subagent_assistant_messages", "subagent_inclusion_required": true}},
+    "repetition_condition": {"iterations_per_case": 1, "external_failure_policy": "repeat_same_case_with_new_attempt_identity", "result_reuse": "forbidden"},
+    "qualification_gate": {"individual_pass_condition": {"result": "pass", "quality_score": 4, "required_finding_miss": 0, "false_positive": 0, "review_contract_violation": 0, "reported_model_matches_requested": true, "all_agent_tokens_complete": true, "elapsed_time_complete": true, "fixture_access_observed": true, "fixture_permission_denials": 0}, "aggregate_pass_condition": "all four cases satisfy individual_pass_condition"},
+    "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "recovery": {"prior_profile": "pr-review-control-free-four-qualification-n1-r1", "failed_runs": ["31275781897", "31275782746", "31275783851", "31275784765"], "failure_class": "environment_only", "changes": ["correct JSON schema export quoting", "bundle collector import dependencies"]},
+    "bound_artifacts": [
+      {"path": "profiles/pr-review-control-free-four-qualification-n1-r1.json", "sha256": "2de1e08e5de696996494b43782b04bbfa05bc6245a16d0f2ccf6e5f7558d1a1c"},
+      {"path": "prompts/baselines/pr-review-control-free-qualification-r1/manifest.json", "sha256": "734ae04d8008165507122cf713e827a1f40eade909c92955118e2e0636dc428b"},
+      {"path": "prompts/baselines/pr-review-control-free-qualification-r1/core-prompt.md", "sha256": "253281ecff56e47749aeec5bcb99de596cff4cb448693c8a9c16284f8fb83744"},
+      {"path": "schemas/run-result-r14.schema.json", "sha256": "4a28b7ab5118e6d5b0eb8c42d52af8679e660eae71215019d7fcf89769c12cb0"},
+      {"path": "tools/pr_review_control_free_qualification_r2.py", "sha256": "85bcff4544f12de66b7a9ebec977edee609b491eac132cd3e26fe9725a981ab8"},
+      {"path": "tools/pr_review_control_free_qualification.py", "sha256": "a2a145e31b72ddd769804d42a6145649b26b2367dfa89fbc9f47211216d9b439"},
+      {"path": "tools/pr_review_measurement.py", "sha256": "224d674a5bfde8759bf045cc2b5be1446fbb24d2dc1fdb43364609351febb2db"},
+      {"path": "tools/pr_review_qualification.py", "sha256": "5e9d1ff5d88d9873a2a464d7737a89bb2f134d484bdef0648cfef5a4e79000ff"},
+      {"path": "tools/pr_review_code_review_qualification.py", "sha256": "d3724261b9f64845bbc85ae531fba6b32efa181044fde81298007f1438c3780e"},
+      {"path": "tools/pr_review_workflow_free_calibration.py", "sha256": "895c72b7b30c361ce41f6d9f128914b8d5f4126a100960a1b512509aa1aae503"},
+      {"path": ".github/workflows/pr-review-qualify-control-free-four-r2.yml", "sha256": "f64870e0f0df99a3176abfb82d75bd8879529eb0cc0976517f2172f19d21274e"}
+    ]
+  },
+  "execution": {"planned_slots": 4, "max_workers": 24, "actual_concurrency": 4, "state": "not_issued"},
+  "scope": {"qualification": "authorized_after_preflight", "held_out_quality_claim": "not_authorized", "comparison": "not_authorized", "adoption": "not_decided", "release": "not_decided", "runtime_projection": "not_authorized"}
+}
