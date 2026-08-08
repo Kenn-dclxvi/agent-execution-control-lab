@@ -1,6 +1,6 @@
 # PRレビュー測定result
 
-登録済みの正式evaluation resultは1件である。新インスタンス登録前のr1 probeはdiagnostic artifactであり、この配下へ一次resultとして登録しない。
+このインスタンスの正式evaluation resultは0件である。保存済みのr1 probeとr2 N=2はdiagnostic evidenceであり、Baseline qualityまたは実行経路比較のresultとして使用しない。
 
 - 生のAction出力を登録しない。
 - `result_id`とcontent SHA-256を固定する。
@@ -11,6 +11,8 @@
 ## PRR-C01 baseline qualification
 
 [`PRR-C01 agentic-retrieval baseline qualification N=2`](pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)は2件をrateableとして登録し、scoreは`1 / 4`だった。2 / 2件score `4`のgateを満たさないためqualification不成立で停止した。数値と停止判断はリンク先と2件の一次run JSONを正本とする。
+
+後続の仕様監査により、このN=2はPRレビュー機能仕様とCore Baseline admission gateより先に実行され、正式qualificationの前提を満たさないことが判明した。元resultは変更せず、[`diagnostic再分類receipt`](pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)によりdiagnostic evidenceへ再分類する。score `1 / 4`をBaseline性能の根拠にしない。
 
 ## PRR-C01 probe receipt
 

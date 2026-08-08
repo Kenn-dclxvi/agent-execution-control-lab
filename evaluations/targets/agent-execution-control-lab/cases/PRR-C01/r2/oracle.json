@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r2",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "paths": [
+        "prompts/candidates/example/files/AGENTS.md.txt",
+        "evaluations/profiles/example.json"
+      ],
+      "locations": [
+        {"path": "prompts/candidates/example/files/AGENTS.md.txt", "line_start": 1, "line_end": 1},
+        {"path": "evaluations/profiles/example.json", "line_start": 1, "line_end": 1}
+      ],
+      "severity": "major"
+    }
+  ]
+}

@@ -81,6 +81,89 @@ def test_all_six_fixtures_are_valid_and_revision_bound():
     assert all(len(receipt["oracle_sha256"]) == 64 for receipt in receipts)
 
 
+def test_prr_c01_r2_is_revision_bound_and_uses_multi_path_identity():
+    receipt = measurement.validate_fixture_revision("PRR-C01", "r2")
+    fixture_input = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    oracle = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert receipt["fixture_revision"] == "r2"
+    assert receipt["expected_findings"] == 1
+    assert fixture_input["review_contract_revision"] == "pr-review-contract-r2"
+    assert set(oracle["expected_findings"][0]["paths"]) == set(
+        fixture_input["changed_paths"]
+    )
+
+
+@pytest.mark.parametrize(
+    ("path", "related_path"),
+    [
+        (
+            "prompts/candidates/example/files/AGENTS.md.txt",
+            "evaluations/profiles/example.json",
+        ),
+        (
+            "evaluations/profiles/example.json",
+            "prompts/candidates/example/files/AGENTS.md.txt",
+        ),
+    ],
+)
+def test_prr_c01_r2_accepts_either_relational_anchor(path: str, related_path: str):
+    fixture_input = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
+    )["expected_findings"][0]
+    actual = {
+        "category": "repository_discipline",
+        "rule_id": "prompt_evaluation_separation",
+        "path": path,
+        "related_paths": [related_path],
+        "line_start": 1,
+        "line_end": 1,
+        "severity": "major",
+        "message": "prompt変更と評価条件変更を同じ比較単位へ混ぜているため分離する。",
+    }
+
+    measurement.validate_review_output_v2(
+        {"findings": [actual], "summary": _summary_for([actual])},
+        set(fixture_input["changed_paths"]),
+    )
+    assert measurement._finding_identity_matches_v2(expected, actual)
+
+
+def test_prr_c01_r2_rejects_missing_related_path():
+    expected = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
+    )["expected_findings"][0]
+    actual = {
+        "category": "repository_discipline",
+        "rule_id": "prompt_evaluation_separation",
+        "path": "evaluations/profiles/example.json",
+        "related_paths": [],
+        "line_start": 1,
+        "line_end": 1,
+        "severity": "major",
+        "message": "評価条件を変更している。",
+    }
+
+    assert not measurement._finding_identity_matches_v2(expected, actual)
+
+
 def test_all_measurement_json_files_are_syntactically_valid():
     json_paths = sorted(INSTANCE_ROOT.rglob("*.json"))
 
@@ -126,7 +209,7 @@ def test_qualification_profile_binds_only_planned_baseline_slots():
         )
 
 
-def test_qualification_results_are_write_once_indexed_and_stop_below_four():
+def test_r2_results_are_write_once_and_reclassified_as_diagnostic():
     results_root = INSTANCE_ROOT / "results"
     paths = sorted(results_root.glob("pr-review-core-r2-*.json"))
     results = [
@@ -144,8 +227,22 @@ def test_qualification_results_are_write_once_indexed_and_stop_below_four():
         "524596702724620a511e8686286afdfc2ec14ea003d6bd22f213619b514a6d50",
         "86a80ebddab68a4efd67999f6a7dcdf81ac102e9ec8dc8af232e8b19af9fe85b",
     ]
-    assert "qualification不成立" in index
+    assert "正式evaluation resultは0件" in index
+    assert "diagnostic evidenceへ再分類" in index
     assert "pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md" in index
+
+
+def test_function_spec_and_baseline_design_precede_future_evaluation():
+    specifications = INSTANCE_ROOT / "specifications"
+    function_spec = (specifications / "pr-review-function-r1.md").read_text(encoding="utf-8")
+    baseline_design = (specifications / "core-baseline-r1.md").read_text(encoding="utf-8")
+    instance_index = (INSTANCE_ROOT / "README.md").read_text(encoding="utf-8")
+
+    assert "oracleだけに存在する正解条件を作らない" in function_spec
+    assert "複数pathの関係で成立する違反" in function_spec
+    assert "Baselineとして未qualification" in baseline_design
+    assert "prompt identity" in baseline_design
+    assert "正式resultは0件" in instance_index
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
