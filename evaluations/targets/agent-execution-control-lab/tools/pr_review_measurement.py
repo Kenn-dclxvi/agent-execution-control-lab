@@ -19,7 +19,11 @@ INSTANCE_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
 MEASUREMENT_ROOT = INSTANCE_ROOT
 FIXTURE_ROOT = INSTANCE_ROOT / "cases"
-CONTRACT_PATH = MEASUREMENT_ROOT / "contracts" / "pr-review-core-r1.json"
+CONTRACT_PATH = MEASUREMENT_ROOT / "contracts" / "pr-review-core-r2.json"
+RATING_CONTRACT_PATH = (
+    MEASUREMENT_ROOT / "rating-contracts" / "pr-review-finding-quality-v1.json"
+)
+PROFILES_ROOT = MEASUREMENT_ROOT / "profiles"
 REVIEW_CONTRACT_PATH = MEASUREMENT_ROOT / "rating-contracts" / "review-contract-r1.md"
 REVIEW_SCHEMA_PATH = MEASUREMENT_ROOT / "schemas" / "review-output-r1.schema.json"
 FIXTURE_TOOL_PATH = INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py"
@@ -274,6 +278,8 @@ def validate_run_result(value: Any) -> dict:
         {
             "schema_version",
             "comparison_revision",
+            "profile_id",
+            "quality_rating_contract",
             "result_id",
             "case_id",
             "fixture_revision",
@@ -289,12 +295,17 @@ def validate_run_result(value: Any) -> dict:
             "timing",
             "runtime",
             "quality",
+            "quality_score",
             "result",
         },
         "run result",
     )
-    if value["schema_version"] != 1 or value["comparison_revision"] != "pr-review-core-r1":
+    if value["schema_version"] != 2 or value["comparison_revision"] != "pr-review-core-r2":
         raise ValidationError("run result identity is invalid")
+    if not isinstance(value["profile_id"], str) or not value["profile_id"]:
+        raise ValidationError("run result profile_id is invalid")
+    if value["quality_rating_contract"] != "pr-review-finding-quality-v1":
+        raise ValidationError("run result quality rating contract is invalid")
     if not isinstance(value["result_id"], str) or not value["result_id"]:
         raise ValidationError("result_id must be non-empty")
     if value["case_id"] not in CASE_IDS or value["fixture_revision"] != "r1":
@@ -336,7 +347,13 @@ def validate_run_result(value: Any) -> dict:
     for key, item in value["timing"].items():
         if item is not None and (not isinstance(item, (int, float)) or isinstance(item, bool) or item < 0):
             raise ValidationError(f"run result timing.{key} is invalid")
-    runtime_keys = {"turns", "input_tokens", "output_tokens", "reported_cost_usd"}
+    runtime_keys = {
+        "turns",
+        "input_tokens",
+        "output_tokens",
+        "total_tokens",
+        "reported_cost_usd",
+    }
     if not isinstance(value["runtime"], dict):
         raise ValidationError("run result runtime must be an object")
     _require_exact_keys(value["runtime"], runtime_keys, "run result runtime")
@@ -368,6 +385,16 @@ def validate_run_result(value: Any) -> dict:
         raise ValidationError("run result quality.summary_complete is invalid")
     if not isinstance(value["quality"]["observed"], bool):
         raise ValidationError("run result quality.observed is invalid")
+    if value["quality_score"] is not None and (
+        not isinstance(value["quality_score"], int)
+        or isinstance(value["quality_score"], bool)
+        or not 0 <= value["quality_score"] <= 4
+    ):
+        raise ValidationError("run result quality_score is invalid")
+    if value["result"] == "pass" and value["quality_score"] != 4:
+        raise ValidationError("passed run must have quality_score 4")
+    if value["result"] not in {"pass", "quality_failed"} and value["quality_score"] is not None:
+        raise ValidationError("unrateable terminal run must have null quality_score")
     if value["result"] not in RESULT_STATUSES:
         raise ValidationError("run result status is invalid")
     return value
@@ -764,6 +791,58 @@ def _quality_result(oracle: dict, review_output: dict, fixture_input: dict) -> d
     }
 
 
+def _quality_score(result: str, quality: dict) -> int | None:
+    if result == "pass":
+        return 4
+    if result != "quality_failed" or not quality["observed"]:
+        return None
+    if (
+        quality["clean_control_major_false_positive"] > 0
+        or quality["scope_violation_count"] > 0
+    ):
+        return 0
+    if quality["false_negative"] == 0:
+        return 3
+    if quality["true_positive"] > 0:
+        return 2
+    if quality["review_contract_violation"] == 0:
+        return 1
+    return 0
+
+
+def validate_profile(
+    profile_id: str,
+    case_id: str,
+    variant: str,
+    repetition: int,
+    model_requested: str,
+) -> dict:
+    profile_path = PROFILES_ROOT / f"{profile_id}.json"
+    profile = _load_json(profile_path)
+    if profile.get("profile_id") != profile_id:
+        raise ValidationError("profile identity mismatch")
+    if profile.get("schema_version") != "agent-execution-control-lab.pr-review-profile/v1":
+        raise ValidationError("profile schema_version mismatch")
+    cases = profile.get("cases")
+    if not isinstance(cases, list) or {"id": case_id, "revision": "r1"} not in cases:
+        raise ValidationError("case is not registered in profile")
+    conditions = profile.get("comparison_conditions", {})
+    if conditions.get("variant") != variant:
+        raise ValidationError("profile variant mismatch")
+    if conditions.get("model") != model_requested:
+        raise ValidationError("profile model mismatch")
+    iterations = conditions.get("repetition_condition", {}).get("iterations")
+    if not isinstance(iterations, int) or repetition < 1 or repetition > iterations:
+        raise ValidationError("repetition is outside profile")
+    rating = conditions.get("quality_rating", {})
+    rating_contract = _load_json(RATING_CONTRACT_PATH)
+    if rating.get("contract_id") != rating_contract.get("contract_id"):
+        raise ValidationError("profile rating contract mismatch")
+    if rating.get("contract_sha256") != _sha256(RATING_CONTRACT_PATH):
+        raise ValidationError("profile rating contract hash mismatch")
+    return profile
+
+
 def grade_run(
     case_id: str,
     variant: str,
@@ -775,6 +854,7 @@ def grade_run(
     prepare_metadata_path: Path,
     output_path: Path,
     github_run_id: str | None = None,
+    profile_id: str | None = None,
 ) -> dict:
     if variant not in VARIANTS:
         raise ValidationError(f"unknown variant: {variant}")
@@ -784,6 +864,9 @@ def grade_run(
     fixture_input = validate_fixture_input(_load_json(input_path), case_id)
     oracle = validate_fixture_oracle(_load_json(oracle_path), fixture_input)
     contract = _load_json(CONTRACT_PATH)
+    if not profile_id:
+        raise ValidationError("profile_id is required")
+    validate_profile(profile_id, case_id, variant, repetition, model_requested)
     prepare_metadata = validate_prepare_metadata(_load_json(prepare_metadata_path), case_id, variant)
     review_metadata = validate_review_metadata(_load_json(review_metadata_path), model_requested)
 
@@ -820,9 +903,20 @@ def grade_run(
     if result == "pass" and (not model_reported or model_reported != model_requested):
         result = "measurement_incomplete"
 
+    quality_score = _quality_score(result, quality)
+    input_tokens = runtime.get("input_tokens")
+    output_tokens = runtime.get("output_tokens")
+    total_tokens = (
+        input_tokens + output_tokens
+        if input_tokens is not None and output_tokens is not None
+        else None
+    )
+
     run_result = {
-        "schema_version": 1,
+        "schema_version": 2,
         "comparison_revision": contract["comparison_revision"],
+        "profile_id": profile_id,
+        "quality_rating_contract": contract["quality_rating_contract"],
         "result_id": f"{contract['comparison_revision']}:{case_id}:{variant}:r{repetition}:a{attempt}",
         "case_id": case_id,
         "fixture_revision": fixture_input["fixture_revision"],
@@ -849,9 +943,11 @@ def grade_run(
             "turns": runtime.get("turns"),
             "input_tokens": runtime.get("input_tokens"),
             "output_tokens": runtime.get("output_tokens"),
+            "total_tokens": total_tokens,
             "reported_cost_usd": runtime.get("reported_cost_usd"),
         },
         "quality": quality,
+        "quality_score": quality_score,
         "result": result,
     }
     validate_run_result(run_result)
@@ -868,6 +964,7 @@ def record_terminal_run(
     status: str,
     output_path: Path,
     github_run_id: str | None = None,
+    profile_id: str | None = None,
 ) -> dict:
     if variant not in VARIANTS:
         raise ValidationError(f"unknown variant: {variant}")
@@ -879,9 +976,14 @@ def record_terminal_run(
     fixture_input = validate_fixture_input(_load_json(input_path), case_id)
     oracle = validate_fixture_oracle(_load_json(oracle_path), fixture_input)
     contract = _load_json(CONTRACT_PATH)
+    if not profile_id:
+        raise ValidationError("profile_id is required")
+    validate_profile(profile_id, case_id, variant, repetition, model_requested)
     run_result = {
-        "schema_version": 1,
+        "schema_version": 2,
         "comparison_revision": contract["comparison_revision"],
+        "profile_id": profile_id,
+        "quality_rating_contract": contract["quality_rating_contract"],
         "result_id": f"{contract['comparison_revision']}:{case_id}:{variant}:r{repetition}:a{attempt}",
         "case_id": case_id,
         "fixture_revision": fixture_input["fixture_revision"],
@@ -908,6 +1010,7 @@ def record_terminal_run(
             "turns": None,
             "input_tokens": None,
             "output_tokens": None,
+            "total_tokens": None,
             "reported_cost_usd": None,
         },
         "quality": {
@@ -924,6 +1027,7 @@ def record_terminal_run(
             "review_contract_violation": 0,
             "summary_complete": False,
         },
+        "quality_score": None,
         "result": status,
     }
     validate_run_result(run_result)
@@ -948,7 +1052,7 @@ def summarize_results(paths: list[Path]) -> dict:
         by_variant[variant].append(result)
     summary: dict[str, Any] = {
         "schema_version": 1,
-        "comparison_revision": "pr-review-core-r1",
+        "comparison_revision": "pr-review-core-r2",
         "result_count": len(results),
         "variants": {},
     }
@@ -991,6 +1095,13 @@ def _build_parser() -> argparse.ArgumentParser:
     validate_output = subparsers.add_parser("validate-review-output")
     validate_output.add_argument("--input", required=True, type=Path)
 
+    validate_profile_parser = subparsers.add_parser("validate-profile")
+    validate_profile_parser.add_argument("--profile-id", required=True)
+    validate_profile_parser.add_argument("--case-id", required=True, choices=CASE_IDS)
+    validate_profile_parser.add_argument("--variant", required=True, choices=VARIANTS)
+    validate_profile_parser.add_argument("--repetition", required=True, type=int)
+    validate_profile_parser.add_argument("--model-requested", required=True)
+
     collect = subparsers.add_parser("collect-review")
     collect.add_argument("--raw-output", required=True, type=Path)
     collect.add_argument("--action-conclusion", required=True)
@@ -1011,6 +1122,7 @@ def _build_parser() -> argparse.ArgumentParser:
     grade.add_argument("--prepare-metadata", required=True, type=Path)
     grade.add_argument("--output", required=True, type=Path)
     grade.add_argument("--github-run-id")
+    grade.add_argument("--profile-id", required=True)
 
     terminal = subparsers.add_parser("record-terminal")
     terminal.add_argument("--case-id", required=True, choices=CASE_IDS)
@@ -1025,6 +1137,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     terminal.add_argument("--output", required=True, type=Path)
     terminal.add_argument("--github-run-id")
+    terminal.add_argument("--profile-id", required=True)
 
     summarize = subparsers.add_parser("summarize")
     summarize.add_argument("--result", action="append", required=True, type=Path)
@@ -1043,6 +1156,15 @@ def main() -> int:
         elif args.command == "validate-review-output":
             validate_review_output(_load_json(args.input))
             print("review output is valid")
+        elif args.command == "validate-profile":
+            profile = validate_profile(
+                args.profile_id,
+                args.case_id,
+                args.variant,
+                args.repetition,
+                args.model_requested,
+            )
+            print(json.dumps(profile, ensure_ascii=False, indent=2))
         elif args.command == "collect-review":
             metadata = collect_review(
                 args.raw_output,
@@ -1066,6 +1188,7 @@ def main() -> int:
                 args.prepare_metadata,
                 args.output,
                 args.github_run_id,
+                args.profile_id,
             )
             print(json.dumps(result, ensure_ascii=False, indent=2))
         elif args.command == "record-terminal":
@@ -1078,6 +1201,7 @@ def main() -> int:
                 args.status,
                 args.output,
                 args.github_run_id,
+                args.profile_id,
             )
             print(json.dumps(result, ensure_ascii=False, indent=2))
         elif args.command == "summarize":

@@ -2,4 +2,5 @@
 
 | set | ケース数 | 状態 |
 | --- | ---: | --- |
-| [`pr-review-core-six-r1`](pr-review-core-six-r1/README.md) | 6 | 未qualification・正式profile未登録 |
+| [`pr-review-core-six-r1`](pr-review-core-six-r1/README.md) | 6 | PRR-C01 baseline qualification待ち |
+| [`pr-review-c01-qualification-r1`](pr-review-c01-qualification-r1/README.md) | 1 | agentic-retrieval baselineの独立2反復qualification用 |

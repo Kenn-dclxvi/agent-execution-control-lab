@@ -10,9 +10,15 @@ import pytest
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 INSTANCE_ROOT = REPOSITORY_ROOT / "evaluations" / "targets" / "agent-execution-control-lab"
+PROFILE_ID = "pr-review-agentic-retrieval-c01-qualification-n2-r1"
 sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 
 import pr_review_measurement as measurement
+
+
+@pytest.fixture
+def profile_stub(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(measurement, "validate_profile", lambda *args, **kwargs: {})
 
 
 def _summary_for(findings: list[dict]) -> dict[str, str]:
@@ -87,7 +93,7 @@ def test_measurement_artifacts_are_namespaced_under_registered_target():
 
     assert descriptor["target_id"] == "agent-execution-control-lab"
     assert descriptor["layout"] == "namespaced"
-    assert descriptor["current_rating_contract"] is None
+    assert descriptor["current_rating_contract"] == "pr-review-finding-quality-v1"
     assert descriptor["target_repository"]["primary_ref"] == {
         "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
         "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d",
@@ -97,6 +103,26 @@ def test_measurement_artifacts_are_namespaced_under_registered_target():
     assert not (REPOSITORY_ROOT / "scripts" / "pr_review_fixture_tool.py").exists()
     for relative in descriptor["artifact_roots"].values():
         assert (REPOSITORY_ROOT / relative).is_dir(), relative
+
+
+def test_qualification_profile_binds_only_planned_baseline_slots():
+    profile = measurement.validate_profile(
+        PROFILE_ID, "PRR-C01", "agentic-retrieval", 2, "claude-sonnet-5"
+    )
+
+    assert profile["comparison_conditions"]["kpi_mapping"] == {
+        "elapsed_seconds": "timing.execution_ms / 1000",
+        "quality_score": "quality_score",
+        "total_tokens": "runtime.total_tokens",
+    }
+    with pytest.raises(measurement.ValidationError, match="variant mismatch"):
+        measurement.validate_profile(
+            PROFILE_ID, "PRR-C01", "deterministic-input", 1, "claude-sonnet-5"
+        )
+    with pytest.raises(measurement.ValidationError, match="outside profile"):
+        measurement.validate_profile(
+            PROFILE_ID, "PRR-C01", "agentic-retrieval", 3, "claude-sonnet-5"
+        )
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
@@ -182,7 +208,7 @@ def test_fixture_tool_only_exposes_model_visible_input(tmp_path: Path):
     assert "expected_findings" not in completed.stdout
 
 
-def test_valid_expected_findings_pass_quality_gate(tmp_path: Path):
+def test_valid_expected_findings_pass_quality_gate(tmp_path: Path, profile_stub):
     prepared, review_output_path, review_metadata_path = _collect_valid_review(
         tmp_path, "PRR-C01", _expected_review_output("PRR-C01")
     )
@@ -199,6 +225,7 @@ def test_valid_expected_findings_pass_quality_gate(tmp_path: Path):
         prepared / "prepare-metadata.json",
         result_path,
         "1001",
+        PROFILE_ID,
     )
 
     assert result["result"] == "pass"
@@ -207,10 +234,12 @@ def test_valid_expected_findings_pass_quality_gate(tmp_path: Path):
     assert result["quality"]["false_negative"] == 0
     assert result["timing"]["review_ms"] == 1234
     assert result["runtime"]["turns"] == 4
+    assert result["runtime"]["total_tokens"] == 140
+    assert result["quality_score"] == 4
     assert measurement.validate_run_result(json.loads(result_path.read_text(encoding="utf-8")))
 
 
-def test_clean_control_major_false_positive_fails_gate(tmp_path: Path):
+def test_clean_control_major_false_positive_fails_gate(tmp_path: Path, profile_stub):
     finding = {
         "category": "document_quality",
         "rule_id": "japanese_default",
@@ -235,13 +264,15 @@ def test_clean_control_major_false_positive_fails_gate(tmp_path: Path):
         review_metadata_path,
         prepared / "prepare-metadata.json",
         tmp_path / "clean-result.json",
+        profile_id=PROFILE_ID,
     )
 
     assert result["result"] == "quality_failed"
     assert result["quality"]["clean_control_major_false_positive"] == 1
+    assert result["quality_score"] == 0
 
 
-def test_summary_inconsistent_with_findings_fails_contract_gate(tmp_path: Path):
+def test_summary_inconsistent_with_findings_fails_contract_gate(tmp_path: Path, profile_stub):
     output = _expected_review_output("PRR-C02")
     output["summary"]["evaluation_artifact_integrity"] = "pass"
     prepared, review_output_path, review_metadata_path = _collect_valid_review(
@@ -258,13 +289,15 @@ def test_summary_inconsistent_with_findings_fails_contract_gate(tmp_path: Path):
         review_metadata_path,
         prepared / "prepare-metadata.json",
         tmp_path / "contract-result.json",
+        profile_id=PROFILE_ID,
     )
 
     assert result["result"] == "quality_failed"
     assert result["quality"]["review_contract_violation"] == 1
+    assert result["quality_score"] == 3
 
 
-def test_finding_outside_applicable_rules_is_scope_violation(tmp_path: Path):
+def test_finding_outside_applicable_rules_is_scope_violation(tmp_path: Path, profile_stub):
     finding = {
         "category": "document_quality",
         "rule_id": "unbound_preference",
@@ -289,13 +322,15 @@ def test_finding_outside_applicable_rules_is_scope_violation(tmp_path: Path):
         review_metadata_path,
         prepared / "prepare-metadata.json",
         tmp_path / "scope-result.json",
+        profile_id=PROFILE_ID,
     )
 
     assert result["result"] == "quality_failed"
     assert result["quality"]["scope_violation_count"] == 1
+    assert result["quality_score"] == 0
 
 
-def test_invalid_structured_output_is_not_preserved(tmp_path: Path):
+def test_invalid_structured_output_is_not_preserved(tmp_path: Path, profile_stub):
     prepared = tmp_path / "prepared"
     measurement.prepare_input("PRR-C03", "deterministic-input", prepared)
     raw_output = tmp_path / "raw.json"
@@ -321,15 +356,17 @@ def test_invalid_structured_output_is_not_preserved(tmp_path: Path):
         collected / "review-metadata.json",
         prepared / "prepare-metadata.json",
         tmp_path / "invalid-result.json",
+        profile_id=PROFILE_ID,
     )
 
     assert metadata["output_valid"] is False
     assert not (collected / "review-output.json").exists()
     assert result["result"] == "invalid_output"
     assert result["quality"]["observed"] is False
+    assert result["quality_score"] is None
 
 
-def test_missing_reported_model_is_measurement_incomplete(tmp_path: Path):
+def test_missing_reported_model_is_measurement_incomplete(tmp_path: Path, profile_stub):
     prepared = tmp_path / "prepared"
     measurement.prepare_input("PRR-C04", "deterministic-input", prepared)
     raw_output = tmp_path / "raw.json"
@@ -355,6 +392,7 @@ def test_missing_reported_model_is_measurement_incomplete(tmp_path: Path):
         collected / "review-metadata.json",
         prepared / "prepare-metadata.json",
         tmp_path / "incomplete-result.json",
+        profile_id=PROFILE_ID,
     )
 
     assert result["quality"]["true_positive"] == 1
@@ -371,6 +409,7 @@ def test_record_terminal_keeps_quality_unobserved(tmp_path: Path):
         "timeout",
         tmp_path / "timeout.json",
         "2001",
+        PROFILE_ID,
     )
 
     assert result["result"] == "timeout"
@@ -378,7 +417,7 @@ def test_record_terminal_keeps_quality_unobserved(tmp_path: Path):
     assert result["timing"]["execution_ms"] is None
 
 
-def test_summary_uses_only_passed_run_timings(tmp_path: Path):
+def test_summary_uses_only_passed_run_timings(tmp_path: Path, profile_stub):
     prepared, review_output_path, review_metadata_path = _collect_valid_review(
         tmp_path, "PRR-C01", _expected_review_output("PRR-C01")
     )
@@ -393,6 +432,7 @@ def test_summary_uses_only_passed_run_timings(tmp_path: Path):
         review_metadata_path,
         prepared / "prepare-metadata.json",
         passed_path,
+        profile_id=PROFILE_ID,
     )
     timeout_path = tmp_path / "timeout.json"
     measurement.record_terminal_run(
@@ -403,6 +443,7 @@ def test_summary_uses_only_passed_run_timings(tmp_path: Path):
         "claude-sonnet-5",
         "timeout",
         timeout_path,
+        profile_id=PROFILE_ID,
     )
 
     summary = measurement.summarize_results([passed_path, timeout_path])
@@ -434,3 +475,5 @@ def test_workflow_is_manual_read_only_and_pinned():
     assert "scripts/pr_review_measurement.py" not in workflow
     assert "pr-review-measurements/" not in workflow
     assert "fixture-tool file:*)" not in workflow
+    assert "validate-profile" in workflow
+    assert "--profile-id \"$PROFILE_ID\"" in workflow

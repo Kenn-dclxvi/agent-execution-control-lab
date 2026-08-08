@@ -1,0 +1,77 @@
+{
+  "cases": [
+    {"id": "PRR-C01", "revision": "r1"}
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "action": "anthropics/claude-code-action",
+      "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "claude_cli": "reported_by_action",
+      "runner": "ubuntu-latest",
+      "session_mode": "one_action_invocation_per_run"
+    },
+    "executor_parameters": {
+      "max_attempts": 3,
+      "max_turns": 12,
+      "max_workers": 24,
+      "schedule_policy": "github_workflow_dispatch",
+      "timeout_seconds": 900,
+      "token_accounting": {
+        "revision": "claude-code-action-final-result-usage-v1",
+        "scope": "claude_code_session_total",
+        "source": "execution_file final result usage including cache input tokens"
+      }
+    },
+    "fixture_identity": {
+      "input_sha256": "23397550bbdbe2f57369c586581c53761abe91a864a505685cf20425bfbfdcd9",
+      "oracle_sha256": "8e1478d1f0850ca8960811258d2d79a9169d715ec1093d29f4b2272d51c84389"
+    },
+    "kpi_mapping": {
+      "elapsed_seconds": "timing.execution_ms / 1000",
+      "quality_score": "quality_score",
+      "total_tokens": "runtime.total_tokens"
+    },
+    "model": "claude-sonnet-5",
+    "permission": {
+      "github": "contents:read,pull-requests:read",
+      "repository_write": false,
+      "tool_policy": "fixture-tool-read-only-r1"
+    },
+    "quality_rating": {
+      "contract_id": "pr-review-finding-quality-v1",
+      "contract_sha256": "b81216a23bd3ace39c5f1c5ffb3a4a07ac944580567615e9e2390daccfaecc50"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 2,
+      "order": "repetition-major"
+    },
+    "target_repository_ref": {
+      "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+      "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+      "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d"
+    },
+    "task_spec": {
+      "evaluation_set_id": "pr-review-c01-qualification-r1",
+      "evaluation_set_revision": "r1",
+      "source": "cases/PRR-C01/r1/input.json and rating-contracts/review-contract-r1.md"
+    },
+    "variant": "agentic-retrieval"
+  },
+  "evaluation_set": {
+    "revision": "r1",
+    "set_id": "pr-review-c01-qualification-r1"
+  },
+  "execution": {
+    "max_attempts": 3,
+    "max_workers": 24,
+    "schedule_policy": "github_workflow_dispatch"
+  },
+  "profile_id": "pr-review-agentic-retrieval-c01-qualification-n2-r1",
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v1",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

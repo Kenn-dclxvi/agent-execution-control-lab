@@ -2,7 +2,7 @@
 
 ## 位置付け
 
-この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは`evaluations/targets/agent-execution-control-lab/`のnamespacedインスタンスへ配置している。PRR-C01の両variantによるprobeは新インスタンス登録前のdiagnostic runで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。正式rating contract / profile / result、残り5 caseのpilot、N=5、Integrationは未実行・未評価である。
+この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは`evaluations/targets/agent-execution-control-lab/`のnamespacedインスタンスへ配置している。PRR-C01の両variantによるprobeは新インスタンス登録前のdiagnostic runで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。そのr1を上書きせず、r2でquality rating contractとPRR-C01 agentic-retrieval N=2 qualification profileを固定した。qualification、正式result、残り5 case、Candidate A、N=5、Integrationは未実行・未評価である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -31,6 +31,9 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | アーティファクト | 役割 | 現在状態 |
 |---|---|---|
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
+| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r2.json` | qualification以後のprofile、rating、3 KPI identity | 実行前 |
+| `evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v1.json` | hard gateを0〜4の`quality_score`へ写像 | 固定済み |
+| `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-qualification-n2-r1.json` | PRR-C01 baselineの独立2反復条件 | 実行前 |
 | `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r1`〜`PRR-C06/r1` | model-visible入力とmodel-invisible oracle | 6件固定済み・未qualification |
 | `evaluations/targets/agent-execution-control-lab/schemas/` | fixture、review output、run resultのschema | r1実装済み |
 | `evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
@@ -38,7 +41,7 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | PRR-C01 probe実行済み |
 | `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
 
-Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへはmodel-visible artifactだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。
+Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへはmodel-visible artifactだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。r2ではdispatch時の`profile_id`をcase、variant、model、repetitionへ機械照合し、run JSONへ`quality_score`、`total_tokens`、`execution_ms`を保存する。
 
 ## 現在の観測値
 
@@ -263,16 +266,18 @@ findingの文言完全一致は要求しない。fixture側で意味上同一と
 
 runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に生成し、JSONと競合する現在値を手書きで複製しない。
 
-初期schema案:
+現行r2 schemaの要点:
 
 ```json
 {
-  "schema_version": 1,
-  "comparison_revision": "pr-review-core-r1",
-  "result_id": "pr-review-core-r1:PRR-C01:deterministic-input:r1:a123456",
+  "schema_version": 2,
+  "comparison_revision": "pr-review-core-r2",
+  "profile_id": "pr-review-agentic-retrieval-c01-qualification-n2-r1",
+  "quality_rating_contract": "pr-review-finding-quality-v1",
+  "result_id": "pr-review-core-r2:PRR-C01:agentic-retrieval:r1:a123456",
   "case_id": "PRR-C01",
   "fixture_revision": "r1",
-  "variant": "deterministic-input",
+  "variant": "agentic-retrieval",
   "repetition": 1,
   "attempt": 123456,
   "base_sha": "...",
@@ -281,7 +286,7 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
     "requested": "claude-sonnet-5",
     "reported": "claude-sonnet-5"
   },
-  "workflow_revision": "pr-review-measure-core-r1",
+  "workflow_revision": "pr-review-measure-core-r2",
   "github_run_id": "123456",
   "reviewer_executor": {
     "type": "github_action",
@@ -311,6 +316,7 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
     "turns": null,
     "input_tokens": null,
     "output_tokens": null,
+    "total_tokens": null,
     "reported_cost_usd": null
   },
   "quality": {
@@ -327,6 +333,7 @@ runごとの一次記録はJSONとする。Markdown summaryはJSONを入力に�
     "review_contract_violation": 0,
     "summary_complete": true
   },
+  "quality_score": 4,
   "result": "pass"
 }
 ```

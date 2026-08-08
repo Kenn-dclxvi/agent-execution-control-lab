@@ -31,6 +31,11 @@ on:
         required: true
         type: string
         default: claude-sonnet-5
+      profile_id:
+        description: Fixed evaluation profile identity
+        required: true
+        type: string
+        default: pr-review-agentic-retrieval-c01-qualification-n2-r1
 
 permissions: {}
 
@@ -52,6 +57,21 @@ jobs:
 
       - name: Validate fixed fixtures
         run: python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py validate-fixtures >/dev/null
+
+      - name: Validate fixed profile before reviewer dispatch
+        env:
+          CASE_ID: ${{ inputs.case_id }}
+          MODEL_REQUESTED: ${{ inputs.model }}
+          PROFILE_ID: ${{ inputs.profile_id }}
+          REPETITION: ${{ inputs.repetition }}
+          VARIANT: ${{ inputs.variant }}
+        run: |
+          python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py validate-profile \
+            --profile-id "$PROFILE_ID" \
+            --case-id "$CASE_ID" \
+            --variant "$VARIANT" \
+            --repetition "$REPETITION" \
+            --model-requested "$MODEL_REQUESTED" >/dev/null
 
       - name: Prepare model-visible input
         env:
@@ -160,6 +180,7 @@ jobs:
           CANDIDATE_EXECUTION_FILE: ${{ steps.candidate_review.outputs.execution_file }}
           CANDIDATE_OUTCOME: ${{ steps.candidate_review.outcome }}
           MODEL_REQUESTED: ${{ inputs.model }}
+          PROFILE_ID: ${{ inputs.profile_id }}
           VARIANT: ${{ inputs.variant }}
         run: |
           finished_ms="$(date +%s%3N)"
@@ -230,6 +251,7 @@ jobs:
             --repetition "$REPETITION" \
             --attempt "${{ github.run_id }}" \
             --model-requested "$MODEL_REQUESTED" \
+            --profile-id "$PROFILE_ID" \
             --review-output "$RUNNER_TEMP/review-result/review-output.json" \
             --review-metadata "$RUNNER_TEMP/review-result/review-metadata.json" \
             --prepare-metadata "$RUNNER_TEMP/review-result/prepare-metadata.json" \
@@ -243,6 +265,7 @@ jobs:
           VARIANT: ${{ inputs.variant }}
           REPETITION: ${{ inputs.repetition }}
           MODEL_REQUESTED: ${{ inputs.model }}
+          PROFILE_ID: ${{ inputs.profile_id }}
           REVIEW_JOB_RESULT: ${{ needs.review.result }}
         run: |
           status="execution_failed"
@@ -255,6 +278,7 @@ jobs:
             --repetition "$REPETITION" \
             --attempt "${{ github.run_id }}" \
             --model-requested "$MODEL_REQUESTED" \
+            --profile-id "$PROFILE_ID" \
             --status "$status" \
             --github-run-id "${{ github.run_id }}" \
             --output "$RUNNER_TEMP/run-result.json"
@@ -265,11 +289,13 @@ jobs:
             echo "## PR Review Measurement Core"
             echo "- result_id: $(jq -r .result_id "$RUNNER_TEMP/run-result.json")"
             echo "- result: $(jq -r .result "$RUNNER_TEMP/run-result.json")"
+            echo "- quality_score: $(jq -r .quality_score "$RUNNER_TEMP/run-result.json")"
             echo "- true_positive: $(jq -r .quality.true_positive "$RUNNER_TEMP/run-result.json")"
             echo "- false_negative: $(jq -r .quality.false_negative "$RUNNER_TEMP/run-result.json")"
             echo "- false_positive: $(jq -r .quality.false_positive "$RUNNER_TEMP/run-result.json")"
             echo "- execution_ms: $(jq -r .timing.execution_ms "$RUNNER_TEMP/run-result.json")"
             echo "- review_ms: $(jq -r .timing.review_ms "$RUNNER_TEMP/run-result.json")"
+            echo "- total_tokens: $(jq -r .runtime.total_tokens "$RUNNER_TEMP/run-result.json")"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload primary run JSON
