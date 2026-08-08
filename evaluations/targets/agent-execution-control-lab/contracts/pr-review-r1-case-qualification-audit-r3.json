@@ -1,0 +1,16 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-case-qualification-audit/v1",
+  "audit_id": "pr-review-r1-case-qualification-audit-r3",
+  "decision": "partially_satisfied",
+  "purpose": "3ケースcontrol-free結果を受けたclean controlの再監査",
+  "admitted_cases": ["PRR-C02/r1", "PRR-C03/r1"],
+  "excluded_cases": ["PRR-C01/r1", "PRR-C04/r1", "PRR-C05/r1", "PRR-C06/r1"],
+  "new_observation": {
+    "case": "PRR-C06/r1",
+    "github_run_id": "31276613765",
+    "review_output": "finding 0件、document_quality unknown",
+    "audit_conclusion": "変更後本文が参照するdocs/evaluation-loop-manual.mdはmodel-visible fixtureから読めず、リンク先と正本参照の整合を確定できない。機能仕様は情報不足categoryをunknownとするため、oracleのpass要求は導出できない。"
+  },
+  "allowed_use": "PRR-C02/r1とPRR-C03/r1のcontrol-free baseline qualification only",
+  "forbidden_use": ["held-out evidence", "prompt comparison", "adoption", "release"]
+}

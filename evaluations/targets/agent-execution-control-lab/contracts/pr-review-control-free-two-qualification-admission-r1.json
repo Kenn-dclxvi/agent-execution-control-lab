@@ -1,0 +1,17 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-admission/v1",
+  "admission_id": "pr-review-control-free-two-qualification-admission-r1",
+  "state": "satisfied",
+  "evaluation_set": {"set_id": "pr-review-control-free-qualification-two-r3", "revision": "r3", "cases": ["PRR-C02/r1", "PRR-C03/r1"]},
+  "case_audit": "contracts/pr-review-r1-case-qualification-audit-r3.json",
+  "result_reuse": {
+    "rule": "r3 profileで独立に完了したcase単位resultを再実行せず、新setのmembershipへ選択する",
+    "compatibility": "case、fixture、TaskSpec、rating、model、Action、permission、executor、prompt、token accountingは同一。変更は不適合caseをaggregate membershipから除く選択だけである。",
+    "results": [
+      {"case_id": "PRR-C02", "github_run_id": "31276611327", "quality_score": 4, "result_sha256": "ec7237bfe47db0796df0f79ab5c0914c84bdc30fa051c9ea1312fe7444556b2a"},
+      {"case_id": "PRR-C03", "github_run_id": "31276612631", "quality_score": 4, "result_sha256": "b870aed03bdb171f6883da6c0cd4afd4897d94e8efbf725532cc8e7155684c66"}
+    ]
+  },
+  "aggregate_gate": {"required": "全ケースで測定成立かつquality score 4", "observed": "2 / 2件で成立", "result": "satisfied"},
+  "scope": {"new_instance_control_free_gate": "satisfied_for_this_two_case_set", "held_out": false, "comparison": false, "adoption": false, "release": false}
+}
