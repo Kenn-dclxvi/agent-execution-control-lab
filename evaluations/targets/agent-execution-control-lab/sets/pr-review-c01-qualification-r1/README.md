@@ -8,3 +8,5 @@
 - stop condition: 1件でもscore `4`未満、unrateable、model不一致、`total_tokens`または`elapsed_seconds`欠落なら停止
 
 このsetは新インスタンスゲート4の実行系安定性確認だけに使う。6ケース全体のcontrol-free qualificationまたはvariant比較のresultへ混ぜない。
+
+2026-08-08に2反復を完了し、scoreは`1 / 4`だった。pass conditionを満たさないためqualification不成立で停止した。一次resultは[`PRR-C01 agentic-retrieval baseline qualification N=2`](../../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)を正本とする。

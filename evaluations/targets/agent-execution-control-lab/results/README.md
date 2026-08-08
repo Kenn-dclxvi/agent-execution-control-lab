@@ -1,12 +1,16 @@
 # PRレビュー測定result
 
-登録済みの正式evaluation resultはない。2026-08-08のCore Review workflowが生成した`run-result.json`は、新インスタンス登録前かつfoundation互換のrating contract / profile未確定のdiagnostic artifactであり、この配下へ一次resultとして登録しない。
+登録済みの正式evaluation resultは1件である。新インスタンス登録前のr1 probeはdiagnostic artifactであり、この配下へ一次resultとして登録しない。
 
 - 生のAction出力を登録しない。
 - `result_id`とcontent SHA-256を固定する。
 - 同じ`case / variant / repetition / attempt`を上書きしない。
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
+
+## PRR-C01 baseline qualification
+
+[`PRR-C01 agentic-retrieval baseline qualification N=2`](pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)は2件をrateableとして登録し、scoreは`1 / 4`だった。2 / 2件score `4`のgateを満たさないためqualification不成立で停止した。数値と停止判断はリンク先と2件の一次run JSONを正本とする。
 
 ## PRR-C01 probe receipt
 
