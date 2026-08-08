@@ -1,0 +1,60 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v1",
+  "prompt_identity": "claude-pr-review-core-r2",
+  "artifact_role": "baseline_candidate",
+  "state": "admission_blocked",
+  "source": {
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+    "workflow_path": ".github/workflows/claude-pr-review.yml",
+    "workflow_sha256": "6e5eecd689e6492add329e8b633a7f9a36aa570306c240c240b9d584aceb1a44",
+    "action": "anthropics/claude-code-action@v1"
+  },
+  "content_relation": {
+    "source_prompt_identity": "claude-pr-review-core-r1",
+    "prompt_files": "byte_identical",
+    "changed_axis": "fixture-tool rulesを固定authority原文packetへ接続"
+  },
+  "files": [
+    {"path": "source-prompt.md", "sha256": "bd9a4f9b9f1bb8cfeae2834a5a101d0e5fb1533908bf5e26b2f7b29758f6ccb9", "role": "source_workflow_prompt"},
+    {"path": "core-prompt.md", "sha256": "235ba68f6068d01253cc88be9cdbe708bc5f9cf02ca3842d54946ab41ee2cd10", "role": "core_baseline_candidate_prompt"}
+  ],
+  "dependencies": {
+    "input_mapping": "contracts/baseline-input-mapping-r2.json",
+    "authority_selection": {
+      "path": "contracts/baseline-authority-selection-r1.json",
+      "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"
+    },
+    "authority_packet_schema": {
+      "path": "schemas/authority-packet-r1.schema.json",
+      "sha256": "a8b65c6362b3168460d15b30481129d7a2b7e7a9089dfb6107afe9cc4c505bb1"
+    },
+    "authority_packet_materializer": {
+      "path": "tools/pr_review_authority_packet.py",
+      "sha256": "cc3f34e12f362460f9467f6ea4bf518ab7347142bec51762ae0fb5773cc4ed4d"
+    },
+    "review_contract": {
+      "path": "rating-contracts/review-contract-r2.md",
+      "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"
+    },
+    "output_schema": {
+      "path": "schemas/review-output-r2.schema.json",
+      "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"
+    },
+    "fixture_tool": {
+      "path": "tools/pr_review_fixture_tool_r2.py",
+      "sha256": "e66cef9fae0a9f544d608cb6153b6aefce870fd238bf4d88295e280d4627ff79"
+    }
+  },
+  "admission": {
+    "state": "blocked",
+    "receipt": "contracts/baseline-input-mapping-r2.json",
+    "reason": "changed path以外のrepository read範囲が未固定"
+  },
+  "non_goals": [
+    "Candidate Aとの実行",
+    "qualityまたは速度resultの登録",
+    "通常Claude workflowへの反映",
+    "GitHub comment経路の再現"
+  ]
+}

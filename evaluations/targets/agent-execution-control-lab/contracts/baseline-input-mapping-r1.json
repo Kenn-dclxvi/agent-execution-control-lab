@@ -49,8 +49,8 @@
       "identity": "applicable_repository_rules",
       "source_operation": "root CLAUDE.md and changed-path local AGENTS.md selection",
       "core_operation": "fixture-tool rules",
-      "state": "unsatisfied",
-      "evidence": "fixtureは選択済みrulesを返すが、source path、局所探索、優先順位、原文との意味同一性receiptがない"
+      "state": "partially_satisfied",
+      "evidence": "baseline-authority-selection-r1.jsonが固定tree上のsource path、symlink解決、局所探索、適用順、content identityを固定した。原文contentをmodel-visible packetへ接続していない"
     },
     {
       "identity": "review_criteria",
@@ -68,7 +68,7 @@
     }
   ],
   "blocking_conditions": [
-    "applicable_repository_rulesがunsatisfied",
+    "applicable_repository_rulesはcollector receiptまで成立したがmodel-visible packetへ未接続",
     "changed_file_contentがpartially_satisfied"
   ],
   "verification": {

@@ -1,0 +1,40 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-mapping/v1",
+  "mapping_id": "baseline-input-mapping-r3",
+  "state": "satisfied",
+  "source_mapping": "baseline-input-mapping-r2",
+  "source": {
+    "target_commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+    "workflow_path": ".github/workflows/claude-pr-review.yml",
+    "workflow_sha256": "6e5eecd689e6492add329e8b633a7f9a36aa570306c240c240b9d584aceb1a44",
+    "action": "anthropics/claude-code-action@v1",
+    "prompt_artifact": "prompts/baselines/claude-pr-review-core-r3/source-prompt.md"
+  },
+  "core_candidate": {
+    "prompt_identity": "claude-pr-review-core-r3",
+    "prompt_artifact": "prompts/baselines/claude-pr-review-core-r3/core-prompt.md",
+    "fixture_tool": "tools/pr_review_fixture_tool_r3.py",
+    "authority_selection": "contracts/baseline-authority-selection-r1.json",
+    "authority_packet_schema": "schemas/authority-packet-r1.schema.json",
+    "repository_snapshot": "contracts/baseline-repository-snapshot-r1.json",
+    "repository_snapshot_schema": "schemas/repository-snapshot-r1.schema.json",
+    "review_contract": "rating-contracts/review-contract-r2.md",
+    "output_schema": "schemas/review-output-r2.schema.json"
+  },
+  "mappings": [
+    {"identity": "pr_metadata", "source_operation": "gh pr view", "core_operation": "fixture-tool metadata", "state": "satisfied", "evidence": "PRR-C01/r2 input.prをJSONとしてbyte-stableに取得する"},
+    {"identity": "changed_paths", "source_operation": "gh pr diff and repository state", "core_operation": "fixture-tool changed-paths", "state": "satisfied", "evidence": "input.changed_pathsを順序保持したJSON配列として取得する"},
+    {"identity": "diff", "source_operation": "gh pr diff", "core_operation": "fixture-tool diff", "state": "satisfied", "evidence": "input.changesのpathとpatchから論理diffを決定論的に再構成する"},
+    {"identity": "changed_file_content", "source_operation": "checked out repository read", "core_operation": "fixture-tool files and file PATH", "state": "satisfied", "evidence": "固定target treeへPRR-C01/r2の変更後本文をoverlayした.gitなしsnapshotから、changed pathと差分外pathを同じread-only境界で取得する"},
+    {"identity": "applicable_repository_rules", "source_operation": "root CLAUDE.md and changed-path local AGENTS.md selection", "core_operation": "fixture-tool rules", "state": "satisfied", "evidence": "固定treeで選択・hash照合したrootと局所authority原文をauthority-input.jsonから返す"},
+    {"identity": "review_criteria", "source_operation": "workflow inline prompt", "core_operation": "core prompt and review contract r2", "state": "satisfied", "evidence": "source promptの4観点と制約をcore promptへ保持し、GitHub投稿責務だけを除外する"},
+    {"identity": "github_reporting", "source_operation": "inline comment and summary comment", "core_operation": "excluded", "state": "excluded_by_core_boundary", "evidence": "Integrationで別測定し、Core qualityまたは時間へ含めない"}
+  ],
+  "blocking_conditions": [],
+  "verification": {
+    "authority_test": "tests/test_pr_review_measurement.py::test_authority_packet_is_identical_for_both_variant_inputs",
+    "snapshot_test": "tests/test_pr_review_measurement.py::test_repository_snapshot_and_fixture_tool_r3_preserve_read_boundary",
+    "interpretation": "現行workflowがcheckoutとghから得るmodel-visible入力を、固定authority packetと.gitなしread-only repository snapshotへ対応付ける"
+  },
+  "admission_effect": "source-to-Core入力対応だけが成立。case設計の独立qualification、profile、preflight、evaluation slotは未成立"
+}
