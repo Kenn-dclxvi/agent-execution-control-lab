@@ -14,6 +14,12 @@
 
 後続の仕様監査により、このN=2はPRレビュー機能仕様とCore Baseline admission gateより先に実行され、正式qualificationの前提を満たさないことが判明した。元resultは変更せず、[`diagnostic再分類receipt`](pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)によりdiagnostic evidenceへ再分類する。score `1 / 4`をBaseline性能の根拠にしない。
 
+## PRR-C01/r4 Claude Code純正相当 Core Baseline repetition 1
+
+[初回attempt](pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31262429048.json)は[GitHub Actions run 31262429048](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31262429048)で20分のAction timeoutに達し、`execution_failed`となった。Claude Code 2.1.226は初期化したがassistant messageを返さず、品質、model identity、workflow trace、token、経過時間は未観測である。repetition 2は発行しない。
+
+timeout後の収集処理にも依存moduleのpacket漏れがあり、sanitized traceを保存できなかった。次のattemptは同じrepetition 1に対するenvironment recoveryとし、subagent起動toolの許可と収集依存だけを新revisionで修正する。このresultをBaseline品質または速度の根拠にしない。
+
 ## PRR-C01/r3 Core Baseline repetition 1
 
 Core Baselineのrepetition 1は、測定環境の修正を挟んで4回実行した。最初の3回は`execution_failed`であり、四回目は実行と採点を完了したが`quality_failed`となった。個別pass条件を満たさないため、repetition 2は開始しない。

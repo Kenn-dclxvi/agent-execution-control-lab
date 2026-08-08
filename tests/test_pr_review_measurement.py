@@ -2008,3 +2008,25 @@ def test_claude_code_core_prepare_exposes_only_r4_model_input(tmp_path: Path):
         assert not any(path.stat().st_mode & 0o222 for path in snapshot.rglob("*"))
     finally:
         repository_snapshot._make_cleanup_writable(snapshot)
+
+
+def test_claude_code_core_first_attempt_is_saved_as_unobserved_failure():
+    result_path = (
+        INSTANCE_ROOT
+        / "results"
+        / "pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31262429048.json"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "run-result-r7.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "execution_failed"
+    assert result["quality"]["observed"] is False
+    assert result["workflow_trace"]["complete"] is False
+    assert result["github_run_id"] == "31262429048"
+    assert result_path.name in (
+        INSTANCE_ROOT / "results" / "README.md"
+    ).read_text(encoding="utf-8")
