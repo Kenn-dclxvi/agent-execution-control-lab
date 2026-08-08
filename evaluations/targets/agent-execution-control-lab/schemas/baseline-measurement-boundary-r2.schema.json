@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "baseline-measurement-boundary-r2.schema.json",
+  "type": "object",
+  "required": ["schema_version", "audit_id", "state", "baseline_definition", "preserved_review_conditions", "measurement_adaptations", "disallowed_changes", "supersedes", "admission_effect"],
+  "properties": {
+    "schema_version": {"const": "agent-execution-control-lab.pr-review-baseline-measurement-boundary/v2"},
+    "audit_id": {"const": "baseline-measurement-boundary-r2"},
+    "state": {"const": "satisfied"},
+    "baseline_definition": {
+      "type": "object",
+      "required": ["reference_repository", "reference_commit", "reference_path", "reference_sha256", "action", "action_revision", "excluded_reference"],
+      "properties": {
+        "reference_repository": {"const": "https://github.com/anthropics/claude-code.git"},
+        "reference_commit": {"const": "2bb60696142b493eafaeacfe00eac51d16c50c4f"},
+        "reference_path": {"const": "plugins/code-review/commands/code-review.md"},
+        "reference_sha256": {"const": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c"},
+        "action": {"const": "anthropics/claude-code-action"},
+        "action_revision": {"const": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975"},
+        "excluded_reference": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "preserved_review_conditions": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "measurement_adaptations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["identity", "purpose", "allowed"],
+        "properties": {
+          "identity": {"type": "string", "minLength": 1},
+          "purpose": {"type": "string", "minLength": 1},
+          "allowed": {"const": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "disallowed_changes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "supersedes": {
+      "type": "object",
+      "required": ["path", "reason", "effect"],
+      "properties": {
+        "path": {"const": "contracts/baseline-measurement-boundary-r1.json"},
+        "reason": {"type": "string", "minLength": 1},
+        "effect": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "admission_effect": {"const": "measurement_boundary_satisfied_only"}
+  },
+  "additionalProperties": false
+}

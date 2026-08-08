@@ -60,15 +60,21 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 
 `claude-pr-review-core-r3`では、固定target treeへschema v2 caseの変更後本文をoverlayし、`.git`を含まないread-only repository snapshotを生成する。agentic reviewerは`list-files`と`file PATH`だけでsnapshotを参照し、repository外path、`.git`、書込へ到達できない。materializerとtool policyはcase IDに依存せず、各caseのsnapshot tree、fixture、利用可能path集合、aggregate content identityをcase固有receiptへ固定する。入力対応の代表receiptは[`baseline-repository-snapshot-r1`](../contracts/baseline-repository-snapshot-r1.json)へ`PRR-C01/r2`で固定した。これにより[`baseline-input-mapping-r3`](../contracts/baseline-input-mapping-r3.json)のsource-to-Core入力対応は成立した。
 
+その後、Anthropicの固定commitにある`code-review` plugin原文を再確認し、`claude-pr-review-core-r1`からr3までがtarget repositoryへインストール済みworkflow由来の観点を単一Actionで実行しており、純正workflowのproducer構成を移植していないことを[`baseline-input-mapping-r4`](../contracts/baseline-input-mapping-r4.json)へ固定した。これらは履歴prompt候補として保持するが、純正相当Baselineの外部実行には使わない。
+
+新しい[`claude-code-review-core-r1`](../prompts/baselines/claude-code-review-core-r1/README.md)は、Anthropicの`plugins/code-review/commands/code-review.md`をsource identityへbindする。固定eligibilityとfixture toolへの置換、構造化出力、GitHub投稿の除外だけを測定用変更とし、haiku事前判定、authority path収集、sonnet要約、4並列reviewer、issue別validation、未確認issueの除外を保持する。対応は[`baseline-code-review-workflow-mapping-r1`](../contracts/baseline-code-review-workflow-mapping-r1.json)で成立したが、runtime実行は未観測である。
+
 入力対応の成立はBaseline qualificationではない。case設計が機能仕様から独立にqualificationされ、測定用の変更がレビュー方式を変えていないことを確認し、Action、model、tool policy、permission等をprofileへ固定したpreflightを通過するまでevaluation slotを発行しない。
 
 ## 測定境界
 
-[`baseline-measurement-boundary-r1`](../contracts/baseline-measurement-boundary-r1.json)で、純正相当のレビュー手順として保持する条件と、反復・採点・計測のために許される変更を分けた。固定fixture、read-only fixture tool、構造化出力、GitHub投稿の除外、Actionとmodelの固定、step timeoutは測定用の変更として許可する。レビュー観点、model、Action family、model-visibleな論理入力、agentic retrievalは変更しない。
+新Baselineには[`baseline-measurement-boundary-r2`](../contracts/baseline-measurement-boundary-r2.json)を適用し、純正`code-review`のsubagent model role、4並列review、issue別validation、high-signal条件と、反復・採点・計測のために許される変更を分ける。固定eligibility、固定fixture、read-only fixture tool、構造化出力、GitHub投稿の除外、root Actionとmodelの固定、step timeoutは測定用の変更として許可する。
+
+先行する`baseline-measurement-boundary-r1`は、純正source pathを固定せず、複数のsubagent model roleを単一model identityとして扱っていた。履歴として保持するが、新Baseline profileのgateには使用しない。
 
 先行する[`baseline-execution-parity-r1`](../contracts/baseline-execution-parity-r1.json)は、target repositoryへインストール済みのworkflowとの完全一致を要求したため、比較元と測定層の境界を誤っていた。履歴として残すが、Baseline admissionのgateには使用しない。
 
-PRR-C01/r3の三回の実行結果は、測定可能にした純正相当workflowの環境問題を示す診断証拠として保持する。三回目ではreviewerが入力へ到達できたが、Actionが前提とするgit workspaceがなく、純正相当の手順にはない12ターン上限にも達した。次のrevisionでは、oracleを含まないmodel-visible workspaceだけをgit repositoryとして初期化し、Action revision既定のturn条件と12分のstep timeoutを使用する。
+PRR-C01/r3の実行結果は、単一Actionによる旧測定経路の環境と入力不整合を示す診断証拠として保持する。純正`code-review` workflowを実行していないため、純正相当Baselineの品質または環境安定性へbindしない。
 
 ## Baseline admission gate
 

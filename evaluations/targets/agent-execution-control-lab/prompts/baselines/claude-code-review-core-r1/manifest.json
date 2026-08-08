@@ -1,0 +1,68 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "claude-code-review-core-r1",
+  "artifact_role": "baseline_candidate",
+  "state": "workflow_mapping_satisfied_runtime_unobserved",
+  "source": {
+    "repository": "https://github.com/anthropics/claude-code.git",
+    "commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+    "path": "plugins/code-review/commands/code-review.md",
+    "content_sha256": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c",
+    "local_copy": "source-workflow.md"
+  },
+  "core": {
+    "path": "core-prompt.md",
+    "content_sha256": "30a73a3517759b08cb353c758869c08fe9ba87328d29f3cb4b6abb171a02425c"
+  },
+  "preserved_workflow": [
+    "haiku eligibility check",
+    "haiku authority path collection",
+    "sonnet PR summary",
+    "two sonnet compliance reviewers and two opus bug reviewers in parallel",
+    "separate validation agent for each candidate issue",
+    "unvalidated issue filtering",
+    "high-signal-only finding policy"
+  ],
+  "measurement_adaptations": [
+    "live PR stateをmodel-visibleな固定eligibility receiptへ置換",
+    "ghとrepository探索をread-only fixture toolへ置換",
+    "terminal reviewをgrader用structured outputへ置換",
+    "GitHub comment処理をCoreから除外",
+    "Action、root model、timeoutをprofileで固定"
+  ],
+  "dependencies": {
+    "workflow_mapping": {
+      "path": "contracts/baseline-code-review-workflow-mapping-r1.json",
+      "sha256": "160b8f9c035d4809ad88413190ee6502f5de707a3d0d17f1f8b4d0f130bae8a4"
+    },
+    "eligibility": {
+      "path": "contracts/prr-c01-r4-review-eligibility-r1.json",
+      "sha256": "638c7ed54fcbaaaee9aeb0abe626a0c84573d58b7cf9aa5a9062d6d5e4ba340e",
+      "schema_path": "schemas/review-eligibility-r1.schema.json",
+      "schema_sha256": "febb7dae7278c3235cf6a502fafa291d394946bc787d03cdf6341dd61e8847d5"
+    },
+    "fixture_tool": {
+      "path": "tools/pr_review_fixture_tool_r5.py",
+      "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"
+    },
+    "input_mapping": "contracts/baseline-input-mapping-r4.json",
+    "measurement_boundary": {
+      "path": "contracts/baseline-measurement-boundary-r2.json",
+      "sha256": "43e5fdf25fba14a36cdbfb3bdf1689c0206bf0df94abad1e4f5c1c02e50198e9",
+      "schema_path": "schemas/baseline-measurement-boundary-r2.schema.json",
+      "schema_sha256": "e3e2f9adb1447992d3d5ba52b22366d455424edaa40665be715100af8d91d8fa"
+    },
+    "review_contract": "rating-contracts/review-contract-r2.md",
+    "review_output_schema": "schemas/review-output-r2.schema.json"
+  },
+  "admission": {
+    "state": "blocked",
+    "reason": "Action接続、subagent実行記録の確認、PRR-C01/r4独立監査、profile、preflightが未完了"
+  },
+  "non_goals": [
+    "Candidate A実行",
+    "GitHub comment",
+    "qualityまたは速度result登録",
+    "target repository workflow変更"
+  ]
+}
