@@ -23,7 +23,8 @@
 | [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r4-preflight`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r4-preflight.json) | 四回目の実行条件の履歴 | model-visible workspaceのgit初期化とAction既定turn条件を固定。run 31256216037は`quality_failed` |
 | [`pr-review-claude-code-core-c01-r4-qualification-n2-r1-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r1-preflight.json) | `ready_not_executed` | 純正相当workflow、PRR-C01/r4、v5 rating、subagent trace gate、repetition 1を固定 |
 | [`pr-review-claude-code-core-c01-r4-qualification-n2-r2-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r2-preflight.json) | 実行条件の履歴 | `Agent`許可とcollector依存を修正したrun 31263713165はレビュー品質を満たしたが、実並列を確認できず`measurement_incomplete` |
-| [`pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight.json) | `ready_not_executed` | 前回のレビュー品質を保ったまま、subagentの権限継承と4担当の実並列を確認する同一repetitionのinstrumented recovery |
+| [`pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r3-preflight.json) | 実行条件の履歴 | project設定がartifactから除外され、run 31265402558はreviewer開始前に`execution_failed` |
+| [`pr-review-claude-code-core-c01-r4-qualification-n2-r4-preflight`](pr-review-claude-code-core-c01-r4-qualification-n2-r4-preflight.json) | `ready_not_executed` | project設定を通常名で転送してreview job内で配置し、同一repetitionの4回目だけを許可するenvironment recovery |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 

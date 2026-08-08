@@ -22,6 +22,7 @@ import pr_review_qualification as qualification
 import pr_review_code_review_qualification as code_review_qualification
 import pr_review_code_review_qualification_r2 as code_review_qualification_r2
 import pr_review_code_review_qualification_r3 as code_review_qualification_r3
+import pr_review_code_review_qualification_r4 as code_review_qualification_r4
 import pr_review_subagent_hook as subagent_hook
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
@@ -2185,6 +2186,62 @@ def test_claude_code_core_instrumented_packet_has_project_hooks(tmp_path: Path):
         assert not (output / "oracle.json").exists()
     finally:
         repository_snapshot._make_cleanup_writable(snapshot)
+
+
+def test_claude_code_core_artifact_recovery_uses_visible_settings_file(tmp_path: Path):
+    output = tmp_path / "reviewer-input"
+    snapshot = output / "repository"
+    try:
+        code_review_qualification_r4.prepare_input(1, output)
+        settings_path = output / "claude-project-settings.json"
+        settings = json.loads(settings_path.read_text(encoding="utf-8"))
+        assert settings["permissions"]["allow"] == ["Agent", "Bash(./fixture-tool:*)"]
+        assert not (output / ".claude").exists()
+        assert (output / "pr_review_subagent_hook.py").is_file()
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot)
+
+
+def test_claude_code_core_artifact_recovery_changes_only_observed_environment():
+    previous, _ = code_review_qualification_r3.validate_preflight(1)
+    recovered, preflight = code_review_qualification_r4.validate_preflight(1)
+    previous_conditions = previous["comparison_conditions"]
+    recovered_conditions = recovered["comparison_conditions"]
+    for key in (
+        "target_repository_ref", "task_spec", "fixture_identity", "workflow_mapping",
+        "measurement_boundary", "repository_snapshot", "authority_selection", "prompt",
+        "eligibility", "review_contract", "review_output_schema", "quality_rating", "model",
+        "permission", "repetition_condition", "qualification_gate",
+    ):
+        assert recovered_conditions[key] == previous_conditions[key]
+    previous_executor = dict(previous_conditions["executor_parameters"])
+    recovered_executor = dict(recovered_conditions["executor_parameters"])
+    assert previous_executor.pop("max_attempts_per_repetition") == 3
+    assert recovered_executor.pop("max_attempts_per_repetition") == 4
+    assert recovered_executor == previous_executor
+    assert recovered["recovery"]["source_attempt"] == 31265402558
+    assert preflight["environment_recovery"]["same_repetition"] == 1
+
+    workflow = (
+        REPOSITORY_ROOT / ".github/workflows/pr-review-qualify-claude-code-core-r4.yml"
+    ).read_text(encoding="utf-8")
+    assert "test -f claude-project-settings.json" in workflow
+    assert "mv claude-project-settings.json .claude/settings.json" in workflow
+    assert 'started_ms="$finished_ms"' in workflow
+
+
+def test_claude_code_core_artifact_recovery_terminal_result_matches_r10_schema(
+    tmp_path: Path,
+):
+    output = tmp_path / "run-result.json"
+    result = code_review_qualification_r4.record_terminal(
+        1, 1000, "claude-sonnet-5", "execution_failed", output, "1000"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r10.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["schema_version"] == 10
 
 
 def test_subagent_hook_sanitizes_tool_content():

@@ -15,6 +15,7 @@
 - `pr_review_code_review_qualification.py`: 純正相当Core Baselineの入力準備、Action出力の許可field収集、workflow trace確認、採点を行う
 - `pr_review_code_review_qualification_r2.py`: 初回失敗に対し、`Agent`許可とcollector依存同梱を追加した履歴上のenvironment recovery tool
 - `pr_review_code_review_qualification_r3.py`: 同じrepetitionへsubagent lifecycle、tool batch、fixture access、permission denialの計測を追加するinstrumented recovery tool
+- `pr_review_code_review_qualification_r4.py`: project設定を通常名でartifact転送し、review job内で配置するenvironment recovery tool
 - `pr_review_subagent_hook.py`: Claude Code hook入力から内容を除き、event identity、時刻、agent identity、tool種別だけを原子的に記録する
 
 これらは`agent-execution-control-lab`固有のcase ID、rule、authority選択を扱うため、ターゲット非依存kernelの`scripts/`へ置かない。authorityとrepository snapshotのreceiptはmodel-visible入力対応を証明するが、case設計の独立qualification、profile、preflight、Baseline admissionを単独では成立させない。
