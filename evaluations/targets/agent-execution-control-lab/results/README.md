@@ -24,6 +24,8 @@ timeout後の収集処理にも依存moduleのpacket漏れがあり、sanitized 
 
 [実並列計測を追加したattempt](pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31265402558.json)は[GitHub Actions run 31265402558](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265402558)でreviewer開始前に`execution_failed`となった。入力artifactが隠しファイルを除外したため、準備した`.claude/settings.json`がreview jobへ渡らず、境界確認で停止した。品質、model identity、workflow trace、token、経過時間は未観測である。一次JSONのSHA-256は`57cf06afc14c8147ac7d7a997d19f594e2cdb85a54c3fc4fe73d797569e11826`である。repetition 2は発行しない。
 
+[設定転送を回復したattempt](pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31265761721.json)は[GitHub Actions run 31265761721](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265761721)で実行と採点を完了した。4 reviewerは同じAgent batchで発行され、全担当が最初の終了前に開始し、各担当のfixture-tool利用と権限拒否0件も確認できた。一方、最終結果はfindingを返さず、required findingを1件missしたため`quality_failed`、score `1 / 4`となった。実行messageでは4 reviewerが別groupとして表示されたため旧group判定はfalseのままだが、実並列はlifecycle hookの独立した二つの観測値で成立している。16ターン、3,338,635トークン、review 563.788秒を記録した。一次JSONのSHA-256は`a119019d3557f60f7511dfe1c49efde973e184fddab78835da8dc076ac45cea1`である。品質ゲート不成立のためrepetition 2は発行しない。
+
 ## PRR-C01/r3 Core Baseline repetition 1
 
 Core Baselineのrepetition 1は、測定環境の修正を挟んで4回実行した。最初の3回は`execution_failed`であり、四回目は実行と採点を完了したが`quality_failed`となった。個別pass条件を満たさないため、repetition 2は開始しない。

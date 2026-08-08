@@ -1,0 +1,108 @@
+{
+  "attempt": 31265761721,
+  "base_sha": "3333333333333333333333333333333333333331",
+  "case_id": "PRR-C01",
+  "comparison_revision": "pr-review-claude-code-core-qualification-r1",
+  "fixture_revision": "r4",
+  "github_run_id": "31265761721",
+  "head_sha": "3333333333333333333333333333333333333332",
+  "model": {
+    "reported": "claude-sonnet-5",
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-claude-code-core-c01-r4-qualification-n2-r4",
+  "quality": {
+    "category_accuracy": 0,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 1,
+    "false_positive": 0,
+    "line_accuracy": 0,
+    "observed": true,
+    "path_accuracy": 0,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": true,
+    "true_positive": 0
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v5",
+  "quality_score": 1,
+  "repetition": 1,
+  "result": "quality_failed",
+  "result_id": "pr-review-claude-code-core-qualification-r1:PRR-C01:claude-code-review-core:r1:a31265761721",
+  "reviewer_executor": {
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "authentication": "claude_code_oauth_token",
+    "claude_cli": "reported_by_action",
+    "runner": "ubuntu-latest",
+    "session_mode": "one_root_action_with_subagents_per_run"
+  },
+  "runtime": {
+    "input_tokens": 3338239,
+    "output_tokens": 396,
+    "reported_cost_usd": 2.3522539499999997,
+    "total_tokens": 3338635,
+    "turns": 16
+  },
+  "schema_version": 10,
+  "timing": {
+    "action_step_ms": 576847,
+    "e2e_ms": null,
+    "execution_ms": 576847,
+    "input_ms": 1266,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": 563788,
+    "setup_ms": null
+  },
+  "variant": "claude-code-review-core",
+  "workflow_revision": "pr-review-qualify-claude-code-core-r4",
+  "workflow_trace": {
+    "agent_model_groups": [
+      [
+        "haiku"
+      ],
+      [
+        "haiku"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "sonnet"
+      ],
+      [
+        "opus"
+      ],
+      [
+        "opus"
+      ],
+      [
+        "sonnet"
+      ]
+    ],
+    "all_agent_input_tokens": 3338239,
+    "all_agent_output_tokens": 396,
+    "authority_haiku": true,
+    "complete": false,
+    "eligibility_haiku": true,
+    "fixture_tool_permission_denials": 0,
+    "hook_event_count": 155,
+    "parallel_reviewers_2_sonnet_2_opus": false,
+    "permission_denials_by_tool": {},
+    "prerequisite_sequence_observed": true,
+    "reviewer_agent_batch_observed": true,
+    "reviewer_fixture_access_observed": true,
+    "reviewer_lifecycle_overlap_observed": true,
+    "separate_validation_agents": true,
+    "subagent_start_count": 8,
+    "subagent_stop_count": 8,
+    "subagent_usage_observed": true,
+    "summary_sonnet": true,
+    "usage_records": 103
+  }
+}

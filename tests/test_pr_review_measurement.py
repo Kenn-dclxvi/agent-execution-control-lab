@@ -2083,6 +2083,32 @@ def test_claude_code_core_instrumented_attempt_is_saved_as_execution_failure():
     ).read_text(encoding="utf-8")
 
 
+def test_claude_code_core_artifact_recovery_attempt_is_saved_as_quality_failure():
+    result_path = (
+        INSTANCE_ROOT
+        / "results"
+        / "pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31265761721.json"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "run-result-r10.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "quality_failed"
+    assert result["quality_score"] == 1
+    assert result["quality"]["false_negative"] == 1
+    assert result["workflow_trace"]["reviewer_agent_batch_observed"] is True
+    assert result["workflow_trace"]["reviewer_lifecycle_overlap_observed"] is True
+    assert result["workflow_trace"]["reviewer_fixture_access_observed"] is True
+    assert result["workflow_trace"]["fixture_tool_permission_denials"] == 0
+    assert result["github_run_id"] == "31265761721"
+    assert result_path.name in (
+        INSTANCE_ROOT / "results" / "README.md"
+    ).read_text(encoding="utf-8")
+
+
 def test_claude_code_core_environment_recovery_changes_only_runtime_wiring():
     original = json.loads(code_review_qualification.PROFILE_PATH.read_text(encoding="utf-8"))
     recovered, preflight = code_review_qualification_r2.validate_preflight(1)
