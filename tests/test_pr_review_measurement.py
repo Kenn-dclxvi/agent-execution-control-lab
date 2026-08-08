@@ -23,6 +23,7 @@ import pr_review_code_review_qualification as code_review_qualification
 import pr_review_code_review_qualification_r2 as code_review_qualification_r2
 import pr_review_code_review_qualification_r3 as code_review_qualification_r3
 import pr_review_code_review_qualification_r4 as code_review_qualification_r4
+import pr_review_workflow_free_calibration as workflow_free_calibration
 import pr_review_subagent_hook as subagent_hook
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
@@ -2288,6 +2289,156 @@ def test_subagent_hook_sanitizes_tool_content():
     assert event["tool_use_ids"] == ["tool-1"]
     assert "private prompt" not in json.dumps(event)
     assert "private response" not in json.dumps(event)
+
+
+def test_workflow_free_preflight_separates_measurement_from_quality():
+    profile, preflight = workflow_free_calibration.validate_preflight(1)
+
+    conditions = profile["comparison_conditions"]
+    assert conditions["variant"] == "workflow-free"
+    assert conditions["model"]["requested"] == "claude-sonnet-5"
+    assert conditions["model"]["subagent_policy"] == "reviewer_selected_not_required"
+    assert conditions["measurement_gate"][
+        "quality_score_is_observation_not_stop_condition"
+    ] is True
+    assert preflight["comparison_boundary"]["strict_kpi_comparison_ready"] is False
+    assert preflight["execution"]["quality_miss_stops_later_repetitions"] is False
+    assert workflow_free_calibration.validate_preflight(2)[0] == profile
+
+
+def test_workflow_free_prompt_is_exact_and_does_not_prescribe_topology():
+    workflow = (
+        REPOSITORY_ROOT / ".github/workflows/pr-review-measure-workflow-free.yml"
+    ).read_text(encoding="utf-8")
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    expected = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md"
+    ).read_text(encoding="utf-8")
+
+    assert prompt_text == expected
+    assert "2 sonnet" not in prompt_text
+    assert "2 opus" not in prompt_text
+    assert "次の順序" not in prompt_text
+    assert '--allowedTools "Agent,Bash(./fixture-tool:*)"' in workflow
+    assert "pull-requests: write" not in workflow
+    assert "gh pr comment" not in workflow
+
+
+def test_workflow_free_trace_accepts_root_only_review(tmp_path: Path):
+    execution = tmp_path / "execution.json"
+    execution.write_text(
+        json.dumps(
+            [
+                {
+                    "type": "assistant",
+                    "parent_tool_use_id": None,
+                    "message": {
+                        "usage": {"input_tokens": 100, "output_tokens": 20},
+                        "content": [],
+                    },
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+    hook_file = tmp_path / "events.jsonl"
+    hook_file.write_text(
+        json.dumps(
+            {
+                "event": "PostToolUse",
+                "timestamp_ns": 10,
+                "tool_name": "Bash",
+                "fixture_tool_command": True,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    trace = workflow_free_calibration._workflow_trace(execution, hook_file)
+
+    assert trace["complete"] is True
+    assert trace["subagent_usage_observed"] is False
+    assert trace["subagent_start_count"] == 0
+    assert trace["fixture_tool_access_count"] == 1
+    assert trace["all_agent_input_tokens"] == 100
+    assert trace["all_agent_output_tokens"] == 20
+
+
+def test_workflow_free_quality_miss_is_measured_not_environment_failure(
+    tmp_path: Path,
+):
+    review_output = tmp_path / "review-output.json"
+    review_output.write_text(
+        json.dumps({"findings": [], "summary": _summary_for([])}), encoding="utf-8"
+    )
+    review_metadata = tmp_path / "review-metadata.json"
+    review_metadata.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1000,
+                "runtime": {
+                    "model": "claude-sonnet-5",
+                    "duration_ms": 900,
+                    "turns": 2,
+                    "input_tokens": 100,
+                    "output_tokens": 20,
+                    "reported_cost_usd": 0.01,
+                },
+                "workflow_trace": {
+                    "complete": True,
+                    "agent_model_groups": [],
+                    "subagent_usage_observed": False,
+                    "subagent_start_count": 0,
+                    "subagent_stop_count": 0,
+                    "fixture_tool_access_count": 1,
+                    "fixture_tool_access_observed": True,
+                    "fixture_tool_permission_denials": 0,
+                    "permission_denials_by_tool": {},
+                    "usage_records": 1,
+                    "all_agent_input_tokens": 100,
+                    "all_agent_output_tokens": 20,
+                    "hook_event_count": 1,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepare_metadata = tmp_path / "prepare-metadata.json"
+    prepare_metadata.write_text(json.dumps({"input_ms": 10}), encoding="utf-8")
+    output = tmp_path / "run-result.json"
+
+    result = workflow_free_calibration.grade_run(
+        1,
+        999,
+        "claude-sonnet-5",
+        review_output,
+        review_metadata,
+        prepare_metadata,
+        output,
+        "999",
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r11.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+
+    assert result["result"] == "quality_failed"
+    assert result["quality_score"] == 1
+    assert result["quality"]["false_negative"] == 1
+    assert result["measurement_qualification"]["state"] == "satisfied"
+    assert result["runtime"]["total_tokens"] == 120
 
 
 def test_instrumented_trace_requires_batch_overlap_and_fixture_access(tmp_path: Path):

@@ -1,0 +1,78 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-calibration-preflight/v1",
+  "preflight_id": "pr-review-workflow-free-c01-r4-calibration-n2-r1-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {
+    "profile_id": "pr-review-workflow-free-c01-r4-calibration-n2-r1",
+    "path": "profiles/pr-review-workflow-free-c01-r4-calibration-n2-r1.json",
+    "sha256": "3b8fcda2f04c3f53e9c3a3653046f54f593e52b2003f273b4a5a43f5c58672ca"
+  },
+  "predicates": {
+    "case_design_audit": "satisfied",
+    "case_is_calibration_not_held_out": "satisfied",
+    "case_specific_snapshot": "satisfied",
+    "workflow_free_boundary": "satisfied",
+    "quality_and_measurement_gates_separated": "satisfied",
+    "all_agent_token_accounting": "fixed",
+    "fresh_n2_plan": "satisfied",
+    "profile_conditions": "satisfied"
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "workflow-free", "repetition": 1},
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "workflow-free", "repetition": 2}
+  ],
+  "verified_artifacts": [
+    {"path": "cases/PRR-C01/r4/input.json", "sha256": "57f321693dde33d52910d7a4806b53ebf0757f5550399e357e27e91ae1a603fe"},
+    {"path": "cases/PRR-C01/r4/oracle.json", "sha256": "5304ee3981ae41a7ec3de2540332f03e30457cba52ddd4b9c71da792a4bedf82"},
+    {"path": "contracts/prr-c01-r4-case-design-audit-r1.json", "sha256": "a2c0f79528f65819784e2fc5a0a56fd7e326b6804a4c8473993a17c4165cf77e"},
+    {"path": "contracts/pr-review-workflow-free-boundary-r1.json", "sha256": "dfdf3f9761f9155444294d1fad961837aa69e6a7594a90220e45e8b8a69411d8"},
+    {"path": "contracts/baseline-repository-snapshot-prr-c01-r4-r1.json", "sha256": "e41e27bc821492bbae0f557ecf1e9319c0ae64a03bf17b280d28cd1c74b5c88c"},
+    {"path": "tools/pr_review_repository_snapshot_r3.py", "sha256": "993e591612ab4b38263aba44348f28d3b0cbcdbeef6cb9ec2b5061a1d2832849"},
+    {"path": "contracts/baseline-authority-selection-r1.json", "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"},
+    {"path": "prompts/candidates/pr-review-workflow-free-r1/manifest.json", "sha256": "879642181a0eab913cbd9af885332b48ce8baa115cd2c948dfecccb0f4c4a0b7"},
+    {"path": "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md", "sha256": "2bff83c1a8dbab8891beba4a791ca0d8e982d94d3b6b9e06d2a26a5678692fb4"},
+    {"path": "contracts/prr-c01-r4-review-eligibility-r1.json", "sha256": "638c7ed54fcbaaaee9aeb0abe626a0c84573d58b7cf9aa5a9062d6d5e4ba340e"},
+    {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    {"path": "schemas/run-result-r11.schema.json", "sha256": "48f58ecb68e5afa4de1169ac86fc941f7c0e01f3333ff3e2de3673b0d14ceb2b"},
+    {"path": "tools/pr_review_workflow_free_calibration.py", "sha256": "895c72b7b30c361ce41f6d9f128914b8d5f4126a100960a1b512509aa1aae503"},
+    {"path": "tools/pr_review_code_review_qualification.py", "sha256": "d3724261b9f64845bbc85ae531fba6b32efa181044fde81298007f1438c3780e"},
+    {"path": "tools/pr_review_qualification.py", "sha256": "5e9d1ff5d88d9873a2a464d7737a89bb2f134d484bdef0648cfef5a4e79000ff"},
+    {"path": "tools/pr_review_measurement.py", "sha256": "224d674a5bfde8759bf045cc2b5be1446fbb24d2dc1fdb43364609351febb2db"},
+    {"path": "tools/pr_review_subagent_hook.py", "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce"},
+    {"path": "rating-contracts/pr-review-finding-quality-v5.json", "sha256": "d712beb285247e27bca18eb1b16a938bbb47908b7759e48224451f1dfa0fed4a"},
+    {"path": "tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+    {"path": ".github/workflows/pr-review-measure-workflow-free.yml", "sha256": "59f2a9fce90e3f5dac96560b2006fad593ca4f04fa12351a6a9881ae2bcecc3f"}
+  ],
+  "comparison_boundary": {
+    "preserved_from_core_baseline": [
+      "case and fixture",
+      "target ref and snapshot",
+      "TaskSpec and review contract",
+      "root model",
+      "Action revision",
+      "permission boundary",
+      "output schema",
+      "rating contract",
+      "token accounting revision",
+      "timeout and dispatch concurrency"
+    ],
+    "changed_axis": "workflow method controls are removed",
+    "strict_kpi_comparison_ready": false,
+    "reason": "realized subagent topology and model mix are observations in Free; this run is calibration evidence"
+  },
+  "execution": {
+    "state": "not_issued",
+    "authorization": "requires explicit user authorization",
+    "quality_miss_stops_later_repetitions": false,
+    "environment_or_measurement_failure_stops_later_repetitions": true
+  },
+  "forbidden_scope": [
+    "held-out quality claim",
+    "strict KPI winner claim",
+    "Candidate A",
+    "GitHub comment",
+    "target repository write",
+    "adoption or release decision"
+  ]
+}

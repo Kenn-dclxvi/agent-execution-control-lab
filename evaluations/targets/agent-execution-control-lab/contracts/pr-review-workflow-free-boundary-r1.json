@@ -1,0 +1,44 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-workflow-free-boundary/v1",
+  "boundary_id": "pr-review-workflow-free-boundary-r1",
+  "state": "satisfied",
+  "base_prompt_identity": "claude-code-review-core-r1",
+  "free_prompt_identity": "pr-review-workflow-free-r1",
+  "definition": "同じreview対象、適用規則、権限、成果条件、出力契約、root model、Action revisionを保ち、レビュー方法を規定する手順とmodel roleだけを外した校正条件",
+  "preserved_conditions": [
+    "target repository ref",
+    "PRR-C01/r4 fixture and oracle",
+    "TaskSpec and functional specification",
+    "review eligibility input",
+    "authority selection and repository snapshot",
+    "review contract and output schema",
+    "read-only permission boundary",
+    "root model identity",
+    "Claude Code Action revision",
+    "token accounting revision",
+    "timeout and external dispatch concurrency"
+  ],
+  "removed_method_controls": [
+    "review stage order",
+    "required prerequisite agents",
+    "required reviewer count",
+    "required reviewer parallelism",
+    "required subagent model roles",
+    "required per-issue validation agents"
+  ],
+  "observed_not_fixed": [
+    "fixture tool call order and count",
+    "subagent use and count",
+    "realized model role selection",
+    "realized parallelism",
+    "validation method",
+    "model steps"
+  ],
+  "measurement_rule": {
+    "formal_kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "diagnostics": ["tool calls", "model steps", "subagent routing", "root and subagent token records"],
+    "quality_failure_stops_later_repetitions": false,
+    "environment_or_measurement_failure_stops_later_repetitions": true
+  },
+  "scope": "PRR-C01/r4 calibration only; not held-out evidence and not a strict prompt-only KPI comparison"
+}

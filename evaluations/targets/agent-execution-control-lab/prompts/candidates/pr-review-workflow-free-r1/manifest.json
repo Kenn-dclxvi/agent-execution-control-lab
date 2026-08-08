@@ -1,0 +1,46 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "pr-review-workflow-free-r1",
+  "artifact_role": "calibration_candidate",
+  "state": "frozen_not_executed",
+  "base": {
+    "identity": "claude-code-review-core-r1",
+    "manifest_path": "prompts/baselines/claude-code-review-core-r1/manifest.json",
+    "manifest_sha256": "3708e77f1ba1c0ea5e28253dcd9fef78027d1185210411ab5831e768e05b479d"
+  },
+  "change_axis": "workflow_control_removal",
+  "core": {
+    "path": "core-prompt.md",
+    "content_sha256": "2bff83c1a8dbab8891beba4a791ca0d8e982d94d3b6b9e06d2a26a5678692fb4"
+  },
+  "preserved": [
+    "same PRR-C01/r4 model-visible fixture",
+    "same applicable repository authority",
+    "same read-only fixture tool and repository snapshot",
+    "same review contract and structured output schema",
+    "same GitHub write prohibition",
+    "same root model and Claude Code Action revision"
+  ],
+  "removed_controls": [
+    "fixed haiku eligibility agent",
+    "fixed haiku authority inventory agent",
+    "fixed sonnet summary agent",
+    "fixed two-sonnet and two-opus parallel review batch",
+    "fixed per-finding validator model roles",
+    "fixed review stage order"
+  ],
+  "free_choices": [
+    "input retrieval order",
+    "whether to use subagents",
+    "subagent count and model roles",
+    "parallelism",
+    "finding validation method"
+  ],
+  "non_goals": [
+    "held-out quality claim",
+    "Core Baseline admission",
+    "Candidate A comparison",
+    "winner or adoption decision",
+    "GitHub comment"
+  ]
+}
