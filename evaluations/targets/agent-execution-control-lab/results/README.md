@@ -8,6 +8,14 @@
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
 
+## PRR-C01/r4 関係レビュー役モデル校正 N=3
+
+全体の観測値は[`関係レビュー役モデル校正 N=3`](pr-review-relationship-reviewer-model-calibration-n3_2026-08-09.md)に記録する。SonnetとOpusを各3回実行し、6件すべて測定成立。Opusのquality scoreは`4 / 4 / 4`、Sonnetは`4 / 0 / 4`だった。PRR-C01/r4は校正用であり、一般的なmodel優劣または採用判断の証拠にはしない。
+
+[Opus repetition 1](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-opus-r1-a31269234142.json)、[repetition 2](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-opus-r2-a31269414636.json)、[repetition 3](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-opus-r3-a31269611740.json)は、quality scoreがすべて`4`で、all-agent tokenは`570,567 / 637,780 / 933,211`、review時間は`169.185 / 184.554 / 269.832秒`だった。
+
+[Sonnet repetition 1](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-sonnet-r1-a31269234148.json)、[repetition 2](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-sonnet-r2-a31269611823.json)、[repetition 3](pr-review-relationship-reviewer-model-calibration-r1-prr-c01-relationship-reviewer-sonnet-r3-a31269923611.json)は、quality scoreが`4 / 0 / 4`で、all-agent tokenは`1,539,180 / 1,765,770 / 1,021,924`、review時間は`447.768 / 370.624 / 248.640秒`だった。
+
 ## PRR-C01/r4 Workflow Free calibration N=2
 
 全体の解釈は[`Workflow Free calibration N=2`](pr-review-workflow-free-c01-r4-calibration-n2_2026-08-09.md)に記録する。PRR-C01/r4はheld-outではないため、この結果はreview体制とmodel選択の校正にだけ使う。
