@@ -11,5 +11,6 @@
 - `pr_review_qualification.py`: PRR-C01/r3のfixed profileとpreflightを再照合し、Core Baseline qualificationの入力準備、許可field収集、採点を行う
 - `pr_review_fixture_tool_r3.py`: r2の入力取得に加え、snapshot内のpath一覧とUTF-8本文をread-onlyで返すBaseline候補用tool
 - `pr_review_fixture_tool_r4.py`: r3のread-only境界を保ち、`rules`で規則identity・本文catalogとauthority原文を同時に返すqualification候補用tool
+- `pr_review_fixture_tool_r5.py`: r4の入力境界に固定eligibility取得を加え、純正code-reviewの事前判定をmodel-visibleにする新Baseline候補用tool
 
 これらは`agent-execution-control-lab`固有のcase ID、rule、authority選択を扱うため、ターゲット非依存kernelの`scripts/`へ置かない。authorityとrepository snapshotのreceiptはmodel-visible入力対応を証明するが、case設計の独立qualification、profile、preflight、Baseline admissionを単独では成立させない。

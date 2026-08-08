@@ -331,6 +331,135 @@ def test_fixture_tool_r4_exposes_rule_identity_and_authority(tmp_path: Path):
     assert "prompt_evaluation_separation" in visible_ids
 
 
+def test_claude_code_review_core_r1_binds_source_and_workflow():
+    prompt_root = (
+        INSTANCE_ROOT / "prompts" / "baselines" / "claude-code-review-core-r1"
+    )
+    manifest = json.loads((prompt_root / "manifest.json").read_text(encoding="utf-8"))
+    mapping = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts"
+            / "baseline-code-review-workflow-mapping-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    boundary = json.loads(
+        (
+            INSTANCE_ROOT / "contracts" / "baseline-measurement-boundary-r2.json"
+        ).read_text(encoding="utf-8")
+    )
+    boundary_schema = json.loads(
+        (
+            INSTANCE_ROOT
+            / "schemas"
+            / "baseline-measurement-boundary-r2.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(boundary_schema).validate(boundary)
+    source_sha256 = hashlib.sha256((prompt_root / "source-workflow.md").read_bytes()).hexdigest()
+    core_sha256 = hashlib.sha256((prompt_root / "core-prompt.md").read_bytes()).hexdigest()
+    core_prompt = (prompt_root / "core-prompt.md").read_text(encoding="utf-8")
+
+    assert source_sha256 == "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c"
+    assert manifest["source"]["content_sha256"] == source_sha256
+    assert manifest["core"]["content_sha256"] == core_sha256
+    assert manifest["prompt_identity"] == "claude-code-review-core-r1"
+    assert manifest["state"] == "workflow_mapping_satisfied_runtime_unobserved"
+    assert mapping["state"] == "satisfied_not_executed"
+    assert boundary["state"] == "satisfied"
+    assert any("2 sonnet compliance reviewer" in condition for condition in boundary["preserved_review_conditions"])
+    dependencies = manifest["dependencies"]
+    for binding, path_key, hash_key in (
+        (dependencies["workflow_mapping"], "path", "sha256"),
+        (dependencies["eligibility"], "path", "sha256"),
+        (dependencies["eligibility"], "schema_path", "schema_sha256"),
+        (dependencies["fixture_tool"], "path", "sha256"),
+        (dependencies["measurement_boundary"], "path", "sha256"),
+        (dependencies["measurement_boundary"], "schema_path", "schema_sha256"),
+    ):
+        assert hashlib.sha256((INSTANCE_ROOT / binding[path_key]).read_bytes()).hexdigest() == binding[
+            hash_key
+        ]
+    assert [entry["source_step"] for entry in mapping["operation_mapping"]] == [
+        1, 2, 3, 4, 5, 6, 7, "8-9"
+    ]
+    for required in (
+        "haiku agentを1つ起動",
+        "sonnet agentを1つ起動",
+        "次の4 agentを並列に起動",
+        "別のvalidation agentを並列に起動",
+        "validationで高い確度を確認できなかったissue",
+    ):
+        assert required in core_prompt
+    assert ".github/workflows/claude-pr-review.yml" not in core_prompt
+
+
+def test_fixture_tool_r5_exposes_fixed_eligibility_and_rules(tmp_path: Path):
+    fixture = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r4" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    eligibility_path = (
+        INSTANCE_ROOT / "contracts" / "prr-c01-r4-review-eligibility-r1.json"
+    )
+    eligibility = json.loads(eligibility_path.read_text(encoding="utf-8"))
+    eligibility_schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "review-eligibility-r1.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(eligibility_schema).validate(eligibility)
+    authority = {"authorities": [{"source_path": "AGENTS.md", "content": "規則本文"}]}
+    (tmp_path / "review-input.json").write_text(json.dumps(fixture), encoding="utf-8")
+    (tmp_path / "authority-input.json").write_text(json.dumps(authority), encoding="utf-8")
+    (tmp_path / "review-eligibility.json").write_text(
+        json.dumps(eligibility), encoding="utf-8"
+    )
+    core_prompt = "固定code-review workflow\n"
+    (tmp_path / "core-prompt.md").write_text(core_prompt, encoding="utf-8")
+    fixture_tool = tmp_path / "fixture-tool"
+    shutil.copyfile(
+        INSTANCE_ROOT / "tools" / "pr_review_fixture_tool_r5.py", fixture_tool
+    )
+    fixture_tool.chmod(0o755)
+
+    observed_eligibility = json.loads(
+        subprocess.run(
+            [str(fixture_tool), "eligibility"],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
+    observed_rules = json.loads(
+        subprocess.run(
+            [str(fixture_tool), "rules"],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
+    observed_workflow = subprocess.run(
+        [str(fixture_tool), "workflow"],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+
+    assert observed_eligibility == eligibility
+    assert observed_rules["repository_authority"] == authority
+    assert observed_workflow == core_prompt
+    assert any(
+        rule["rule_id"] == "prompt_evaluation_separation"
+        for source in observed_rules["rule_catalog"]
+        for rule in source["rules"]
+    )
+
+
 def test_repository_snapshot_r3_materializes_prr_c01_r4(tmp_path: Path):
     commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
     if subprocess.run(

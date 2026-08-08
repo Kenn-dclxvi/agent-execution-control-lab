@@ -11,12 +11,13 @@
 - [`cases/`](cases/README.md): r1 diagnostic fixture、PRR-C01/r2 development case、独立監査済みPRR-C01/r3 held-out fixture
 - [`sets/`](sets/README.md): 6ケースの未qualification set
 - [`profiles/`](profiles/README.md): 履歴profileと、fresh PRR-C01/r3 Core Baseline qualification profile
-- [`prompts/`](prompts/README.md): 現行workflow source promptとCore Baseline prompt候補
+- [`prompts/`](prompts/README.md): 履歴prompt候補と、Anthropic `code-review` sourceへbindした新Core Baseline prompt候補
 - [`rating-contracts/`](rating-contracts/README.md): model-visible review contractとmodel-invisible quality rating contract
 - [`results/`](results/README.md): 保存済みrunとdiagnostic再分類receipt。正式resultは0件
 - [`contracts/`](contracts/README.md): 入力対応、測定境界、case設計監査、snapshot、qualification preflight
-- [`contracts/baseline-input-mapping-r3.json`](contracts/baseline-input-mapping-r3.json): 現行workflowとCore入力の対応。`satisfied`
-- [`contracts/baseline-measurement-boundary-r1.json`](contracts/baseline-measurement-boundary-r1.json): Claude Code純正相当のレビュー条件と測定用の変更との境界。`satisfied`
+- [`contracts/baseline-input-mapping-r4.json`](contracts/baseline-input-mapping-r4.json): 規則identity修正後の純正workflow対応監査。旧Coreは`unsatisfied`
+- [`contracts/baseline-code-review-workflow-mapping-r1.json`](contracts/baseline-code-review-workflow-mapping-r1.json): 新Baseline promptのproducer構成対応。`satisfied_not_executed`
+- [`contracts/baseline-measurement-boundary-r2.json`](contracts/baseline-measurement-boundary-r2.json): 固定`code-review` sourceのproducer構成と測定用変更の境界。`satisfied`
 - [`schemas/`](schemas/README.md): fixture、review出力、診断run resultのschema
 - [`tools/`](tools/README.md): このインスタンス固有の入力生成、収集、採点補助
 
@@ -36,7 +37,7 @@
 
 ## Core Baseline qualification
 
-GitHub Actionsの`PR Review Measurement Core`は、PRR-C01/r3を使って測定可能にしたClaude Code純正相当workflowを確認する。入力欄は過去のworkflowとの互換性のために残し、prepare jobがcase、variant、model、profile、repetitionを固定値へ照合する。
+GitHub Actionsの既存`PR Review Measurement Core`は、PRR-C01/r3で単一Actionの測定経路を確認した履歴workflowであり、Anthropic純正`code-review`のproducer構成を移植していない。純正相当Baselineの外部実行には使わない。
 
 - reviewerは固定fixture toolからPR情報、規則、対象本文、読み取り専用snapshotを取得する。
 - reviewer jobにはoracleと`.git`を渡さず、repository snapshotから書込権限を除く。
@@ -45,3 +46,5 @@ GitHub Actionsの`PR Review Measurement Core`は、PRR-C01/r3を使って測定�
 旧workflowによる両variantのrunはdiagnostic evidenceとして履歴に残す。`pr-review-qualify-core-r1`は固定commitを取得できず、`pr-review-qualify-core-r2`は読取りコマンドの権限不足と結果回収用ファイル名の不一致により終了した。これらを修正した`pr-review-qualify-core-r3`ではreviewerが動作したが、12ターン以内に構造化結果を返せなかった。3件の一次resultは[`results/`](results/README.md)に保存している。
 
 `pr-review-qualify-core-r4`は、downloadしたmodel-visible workspaceをAction用の最小git repositoryにし、target snapshotには`.git`を含めない。明示的な`--max-turns`は使用せず、Action stepを12分で停止する。profileとpreflightを新revisionとして固定し、過去三件の条件は変更しない。
+
+新しい[`claude-code-review-core-r1`](prompts/baselines/claude-code-review-core-r1/README.md)は、Anthropicの固定`code-review`原文をsourceにし、haiku事前判定、authority path収集、sonnet要約、4並列reviewer、issue別validation、未確認issueの除外を保持する。現時点ではprompt-level mappingまでで、Action接続、PRR-C01/r4独立監査、profile、preflightは未完了である。

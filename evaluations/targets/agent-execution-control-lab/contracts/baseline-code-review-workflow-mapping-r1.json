@@ -1,0 +1,40 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-workflow-mapping/v1",
+  "mapping_id": "baseline-code-review-workflow-mapping-r1",
+  "state": "satisfied_not_executed",
+  "source": {
+    "repository": "https://github.com/anthropics/claude-code.git",
+    "commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+    "path": "plugins/code-review/commands/code-review.md",
+    "sha256": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c"
+  },
+  "candidate": {
+    "prompt_identity": "claude-code-review-core-r1",
+    "path": "prompts/baselines/claude-code-review-core-r1/core-prompt.md",
+    "fixture_tool": "tools/pr_review_fixture_tool_r5.py"
+  },
+  "operation_mapping": [
+    {"source_step": 1, "source_operation": "haiku agentによるclosed、draft、review不要、既review確認", "candidate_operation": "haiku agentが固定eligibilityとmetadataを確認", "state": "satisfied", "measurement_change": "live GitHub状態を固定eligibility receiptへ置換"},
+    {"source_step": 2, "source_operation": "haiku agentによる適用CLAUDE.md path収集", "candidate_operation": "haiku agentがchanged pathsとrules packetから適用authority pathを収集", "state": "satisfied", "measurement_change": "ghとrepository探索をread-only fixture toolへ置換"},
+    {"source_step": 3, "source_operation": "sonnet agentによるPR要約", "candidate_operation": "sonnet agentがmetadata、diff、changed file本文から要約", "state": "satisfied", "measurement_change": "live PR取得を固定fixtureへ置換"},
+    {"source_step": 4, "source_operation": "2 sonnet compliance agentと2 opus bug agentを並列実行", "candidate_operation": "同じ4 agent roleと並列関係", "state": "satisfied", "measurement_change": "tool入力だけを固定fixtureへ置換"},
+    {"source_step": 5, "source_operation": "候補issueごとの別validation agent", "candidate_operation": "候補ごとにsonnetまたはopus validation agentを並列実行", "state": "satisfied", "measurement_change": "なし"},
+    {"source_step": 6, "source_operation": "未確認issueの除外", "candidate_operation": "validation未通過issueと重複を除外", "state": "satisfied", "measurement_change": "なし"},
+    {"source_step": 7, "source_operation": "terminal出力、comment指定なしならGitHub投稿せず停止", "candidate_operation": "review contractとJSON schemaによる構造化結果だけを返す", "state": "satisfied", "measurement_change": "採点可能なstructured outputへ置換"},
+    {"source_step": "8-9", "source_operation": "comment指定時の投稿準備とinline comment", "candidate_operation": "Core境界から除外", "state": "excluded_by_core_boundary", "measurement_change": "GitHub reportingをIntegrationへ分離"}
+  ],
+  "preserved_conditions": [
+    "haiku、sonnet、opusのrole割当て",
+    "4 reviewerの並列独立実行",
+    "候補issueとvalidation agentのproducer分離",
+    "high-signal条件とfalse-positive除外規則",
+    "PR titleとbodyを全reviewerへ渡す",
+    "未確認issueをfinal reviewから除外する"
+  ],
+  "unobserved_runtime_conditions": [
+    "固定Action revisionがpromptどおりのsubagent model roleを実行すること",
+    "4 reviewerとissue validationが実行記録から識別できること",
+    "structured outputまでterminalに到達すること"
+  ],
+  "admission_effect": "prompt-level workflow mappingだけが成立。Action接続、独立case監査、profile、preflight、external runは未成立"
+}

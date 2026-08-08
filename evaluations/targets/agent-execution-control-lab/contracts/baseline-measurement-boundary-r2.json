@@ -1,0 +1,47 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-measurement-boundary/v2",
+  "audit_id": "baseline-measurement-boundary-r2",
+  "state": "satisfied",
+  "baseline_definition": {
+    "reference_repository": "https://github.com/anthropics/claude-code.git",
+    "reference_commit": "2bb60696142b493eafaeacfe00eac51d16c50c4f",
+    "reference_path": "plugins/code-review/commands/code-review.md",
+    "reference_sha256": "2b0837c5ec0b2e75f8ba4565bdafd76fa916b0dc146608c5733af7ba5802012c",
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "excluded_reference": "target repositoryへインストール済みの.github/workflows/claude-pr-review.yml"
+  },
+  "preserved_review_conditions": [
+    "haikuによるreview eligibility確認",
+    "haikuによる適用authority path収集",
+    "sonnetによるPR要約",
+    "2 sonnet compliance reviewerと2 opus bug reviewerの並列独立実行",
+    "候補issueごとの別validation agent",
+    "validation未通過issueと重複の除外",
+    "high-signal issueだけを残すfinding条件",
+    "PR titleとbodyを各reviewerとvalidatorへ渡す",
+    "repositoryを変更しないreview判断"
+  ],
+  "measurement_adaptations": [
+    {"identity": "fixed_eligibility", "purpose": "live PR状態と既review確認を反復可能なmodel-visible receiptへ置き換える", "allowed": true},
+    {"identity": "fixed_fixture", "purpose": "live PR metadata、diff、changed path、本文を同一入力で反復する", "allowed": true},
+    {"identity": "read_only_fixture_tool", "purpose": "ghとrepository readの代わりに同じ論理入力へagenticに到達させる", "allowed": true},
+    {"identity": "structured_output", "purpose": "validation済みfindingをmodel-invisible oracleで採点できる形にする", "allowed": true},
+    {"identity": "github_reporting_removed", "purpose": "review判断とGitHub投稿をCoreとIntegrationへ分離する", "allowed": true},
+    {"identity": "fixed_runtime", "purpose": "root Action revision、root model、timeoutを反復間で固定する", "allowed": true}
+  ],
+  "disallowed_changes": [
+    "haiku、sonnet、opusのsource role割当てを単一model roleへ縮退すること",
+    "4 reviewerの並列独立実行を省略すること",
+    "候補issueごとのvalidation agentを省略すること",
+    "未確認issueをfinal findingへ残すこと",
+    "high-signal条件またはfalse-positive除外規則を変更すること",
+    "agentic retrievalを決定論的な入力注入だけへ置き換えること"
+  ],
+  "supersedes": {
+    "path": "contracts/baseline-measurement-boundary-r1.json",
+    "reason": "r1は純正source pathを固定せず、複数のsubagent model roleを単一model identityとして扱っていた",
+    "effect": "r1は履歴として保持し、新Baseline profileのgateには使わない"
+  },
+  "admission_effect": "measurement_boundary_satisfied_only"
+}

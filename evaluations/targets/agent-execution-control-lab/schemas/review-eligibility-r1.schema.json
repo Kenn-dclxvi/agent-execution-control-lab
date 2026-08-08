@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review-eligibility-r1.schema.json",
+  "type": "object",
+  "required": ["schema_version", "eligibility_id", "case_revision", "pull_request_state", "model_visible", "source", "effect"],
+  "properties": {
+    "schema_version": {"const": "agent-execution-control-lab.pr-review-eligibility/v1"},
+    "eligibility_id": {"const": "prr-c01-r4-review-eligibility-r1"},
+    "case_revision": {"const": "PRR-C01/r4"},
+    "pull_request_state": {
+      "type": "object",
+      "required": ["closed", "draft", "review_required", "prior_claude_review"],
+      "properties": {
+        "closed": {"const": false},
+        "draft": {"const": false},
+        "review_required": {"const": true},
+        "prior_claude_review": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "model_visible": {"const": true},
+    "source": {"const": "fixed qualification fixture"},
+    "effect": {"const": "review may proceed"}
+  },
+  "additionalProperties": false
+}
