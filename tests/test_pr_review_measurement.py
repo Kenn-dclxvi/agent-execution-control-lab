@@ -467,6 +467,27 @@ def test_prr_c01_r3_qualification_recovery_preserves_first_attempt_identity():
     assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r5"
 
 
+def test_prr_c01_r3_qualification_failures_are_registered_write_once():
+    result_root = INSTANCE_ROOT / "results"
+    paths = sorted(result_root.glob("pr-review-core-baseline-qualification-r1-*.json"))
+    results = [json.loads(path.read_text(encoding="utf-8")) for path in paths]
+
+    assert [result["github_run_id"] for result in results] == [
+        "31253512886",
+        "31253838176",
+        "31254138818",
+    ]
+    assert [result["schema_version"] for result in results] == [3, 4, 5]
+    assert all(result["result"] == "execution_failed" for result in results)
+    assert all(result["quality_score"] is None for result in results)
+    assert qualification.validate_run_result(results[-1])
+    assert [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths] == [
+        "764981d1981ff8509efceada7c0dbfa3f054aefe3fd8ae751e87d4abe2b3fe85",
+        "bf42c0c6cd343645e79a029210da45c6988c7548f91687949f4439747ce02968",
+        "076c4686e7f4d7191b453306390a227453bc6b8665c2e7220ada02170e815299",
+    ]
+
+
 def test_r2_results_are_write_once_and_reclassified_as_diagnostic():
     results_root = INSTANCE_ROOT / "results"
     paths = sorted(results_root.glob("pr-review-core-r2-*.json"))
