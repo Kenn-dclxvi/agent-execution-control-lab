@@ -1,0 +1,33 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v2",
+  "preflight_id": "pr-review-claude-code-core-c01-r4-qualification-n2-r1-preflight-r1",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-claude-code-core-c01-r4-qualification-n2-r1", "path": "profiles/pr-review-claude-code-core-c01-r4-qualification-n2-r1.json", "sha256": "7ecc35b44b65f94ed57525a1ec090b6068d80bd4caa9db2f3f7a42c8144a90da"},
+  "predicates": {"case_design_audit": "satisfied", "case_specific_snapshot": "satisfied", "workflow_mapping": "satisfied_not_executed", "measurement_boundary": "satisfied", "action_connection": "statically_bound_runtime_unobserved", "fresh_n2_plan": "satisfied", "profile_conditions": "satisfied"},
+  "planned_slots": [
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "claude-code-review-core", "repetition": 1},
+    {"case_id": "PRR-C01", "fixture_revision": "r4", "variant": "claude-code-review-core", "repetition": 2}
+  ],
+  "verified_artifacts": [
+    {"path": "cases/PRR-C01/r4/input.json", "sha256": "57f321693dde33d52910d7a4806b53ebf0757f5550399e357e27e91ae1a603fe"},
+    {"path": "cases/PRR-C01/r4/oracle.json", "sha256": "5304ee3981ae41a7ec3de2540332f03e30457cba52ddd4b9c71da792a4bedf82"},
+    {"path": "contracts/prr-c01-r4-case-design-audit-r1.json", "sha256": "a2c0f79528f65819784e2fc5a0a56fd7e326b6804a4c8473993a17c4165cf77e"},
+    {"path": "contracts/baseline-code-review-workflow-mapping-r1.json", "sha256": "160b8f9c035d4809ad88413190ee6502f5de707a3d0d17f1f8b4d0f130bae8a4"},
+    {"path": "contracts/baseline-measurement-boundary-r2.json", "sha256": "43e5fdf25fba14a36cdbfb3bdf1689c0206bf0df94abad1e4f5c1c02e50198e9"},
+    {"path": "contracts/baseline-repository-snapshot-prr-c01-r4-r1.json", "sha256": "e41e27bc821492bbae0f557ecf1e9319c0ae64a03bf17b280d28cd1c74b5c88c"},
+    {"path": "tools/pr_review_repository_snapshot_r3.py", "sha256": "993e591612ab4b38263aba44348f28d3b0cbcdbeef6cb9ec2b5061a1d2832849"},
+    {"path": "contracts/baseline-authority-selection-r1.json", "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"},
+    {"path": "prompts/baselines/claude-code-review-core-r1/manifest.json", "sha256": "3708e77f1ba1c0ea5e28253dcd9fef78027d1185210411ab5831e768e05b479d"},
+    {"path": "prompts/baselines/claude-code-review-core-r1/core-prompt.md", "sha256": "30a73a3517759b08cb353c758869c08fe9ba87328d29f3cb4b6abb171a02425c"},
+    {"path": "contracts/prr-c01-r4-review-eligibility-r1.json", "sha256": "638c7ed54fcbaaaee9aeb0abe626a0c84573d58b7cf9aa5a9062d6d5e4ba340e"},
+    {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    {"path": "schemas/run-result-r7.schema.json", "sha256": "89748056dc1613c8cf09c26819163e37c917296f1bcbc34bc72849d9a5e914b0"},
+    {"path": "tools/pr_review_code_review_qualification.py", "sha256": "d3724261b9f64845bbc85ae531fba6b32efa181044fde81298007f1438c3780e"},
+    {"path": "rating-contracts/pr-review-finding-quality-v5.json", "sha256": "d712beb285247e27bca18eb1b16a938bbb47908b7759e48224451f1dfa0fed4a"},
+    {"path": "tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+    {"path": ".github/workflows/pr-review-qualify-claude-code-core.yml", "sha256": "acca520251a0e452714680bddce29492070840f91362816cba524445a6445f03"}
+  ],
+  "execution": {"state": "not_issued", "authorization": "not_granted_by_preflight", "allowed_after_separate_authorization": "Core Baseline repetition 1 only"},
+  "forbidden_scope": ["repetition 2 before repetition 1 admission", "Candidate A", "KPI comparison", "quality claim", "GitHub comment", "target repository write"]
+}
