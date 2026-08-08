@@ -22,6 +22,8 @@ timeout後の収集処理にも依存moduleのpacket漏れがあり、sanitized 
 
 [回復後のattempt](pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31263713165.json)は[GitHub Actions run 31263713165](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31263713165)で実行と採点を完了した。期待したfindingを過不足なく検出し、model identityとall-agent tokenも観測したが、4 reviewerの並列関係を保存traceから確認できなかったため`measurement_incomplete`となった。一次JSONのSHA-256は`24df7206fac24bd9a6316a28a5021ba44bb16b9906f0ede66736f43f32f6a96e`である。repetition 1の個別pass条件を満たさないため、repetition 2は発行しない。
 
+[実並列計測を追加したattempt](pr-review-claude-code-core-qualification-r1-prr-c01-r1-a31265402558.json)は[GitHub Actions run 31265402558](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31265402558)でreviewer開始前に`execution_failed`となった。入力artifactが隠しファイルを除外したため、準備した`.claude/settings.json`がreview jobへ渡らず、境界確認で停止した。品質、model identity、workflow trace、token、経過時間は未観測である。一次JSONのSHA-256は`57cf06afc14c8147ac7d7a997d19f594e2cdb85a54c3fc4fe73d797569e11826`である。repetition 2は発行しない。
+
 ## PRR-C01/r3 Core Baseline repetition 1
 
 Core Baselineのrepetition 1は、測定環境の修正を挟んで4回実行した。最初の3回は`execution_failed`であり、四回目は実行と採点を完了したが`quality_failed`となった。個別pass条件を満たさないため、repetition 2は開始しない。
