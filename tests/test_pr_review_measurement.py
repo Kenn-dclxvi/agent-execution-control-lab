@@ -635,6 +635,104 @@ def test_baseline_prompt_r3_binds_satisfied_input_mapping():
     assert states["changed_file_content"] == "satisfied"
 
 
+def test_baseline_execution_parity_blocks_transformed_core_path():
+    contract_path = (
+        INSTANCE_ROOT / "contracts" / "baseline-execution-parity-r1.json"
+    )
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    source = contract["source"]
+    core = contract["core_candidate"]
+
+    source_workflow = subprocess.run(
+        [
+            "git",
+            "show",
+            f'{source["target_commit"]}:{source["workflow_path"]}',
+        ],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
+    core_workflow_path = REPOSITORY_ROOT / core["workflow_path"]
+    core_workflow = core_workflow_path.read_bytes()
+    profile_path = INSTANCE_ROOT / "profiles" / f'{core["profile_id"]}.json'
+
+    assert contract["schema_version"] == (
+        "agent-execution-control-lab.pr-review-baseline-execution-parity/v1"
+    )
+    assert contract["state"] == "unsatisfied"
+    assert contract["admission_effect"] == "core_baseline_blocked"
+    assert hashlib.sha256(source_workflow).hexdigest() == source["workflow_sha256"]
+    assert hashlib.sha256(core_workflow).hexdigest() == core["workflow_sha256"]
+    assert hashlib.sha256(profile_path.read_bytes()).hexdigest() == core["profile_sha256"]
+
+    states = {check["identity"]: check["state"] for check in contract["checks"]}
+    assert states == {
+        "review_criteria": "satisfied",
+        "model_visible_input_values": "satisfied",
+        "action_revision": "unverified",
+        "trigger_and_pull_request_context": "unsatisfied",
+        "git_workspace": "unsatisfied",
+        "model_selection": "unverified",
+        "turn_limit": "unsatisfied",
+        "tool_surface": "unsatisfied",
+        "output_contract": "unsatisfied",
+        "github_permissions_and_reporting": "intentionally_changed",
+    }
+    assert set(contract["blocking_conditions"]) == {
+        identity for identity, state in states.items() if state != "satisfied"
+    }
+
+    source_text = source_workflow.decode()
+    core_text = core_workflow.decode()
+    assert "pull_request:" in source_text
+    assert "actions/checkout@v6" in source_text
+    assert "pull-requests: write" in source_text
+    assert "id-token: write" in source_text
+    assert "Bash(gh pr diff:*)" in source_text
+    assert "mcp__github_inline_comment__create_inline_comment" in source_text
+    assert "--max-turns" not in source_text
+    assert "--json-schema" not in source_text
+
+    assert "workflow_dispatch:" in core_text
+    assert "test ! -d .git" in core_text
+    assert "--max-turns 12" in core_text
+    assert "--json-schema" in core_text
+    assert 'Bash(./fixture-tool:*)' in core_text
+    assert "pull-requests: read" in core_text
+
+    diagnostic_results = contract["diagnostic_results"]
+    assert [entry["github_run_id"] for entry in diagnostic_results] == [
+        "31253512886",
+        "31253838176",
+        "31254138818",
+    ]
+    for entry in diagnostic_results:
+        result = json.loads((INSTANCE_ROOT / entry["result_path"]).read_text(encoding="utf-8"))
+        assert result["github_run_id"] == entry["github_run_id"]
+        assert entry["classification"] == "execution_parity_diagnostic_only"
+
+
+def test_baseline_execution_parity_is_indexed_and_bound_to_admission_gate():
+    contracts_index = (INSTANCE_ROOT / "contracts" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    schemas_index = (INSTANCE_ROOT / "schemas" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    baseline_design = (
+        INSTANCE_ROOT / "specifications" / "core-baseline-r1.md"
+    ).read_text(encoding="utf-8")
+    instance_index = (INSTANCE_ROOT / "README.md").read_text(encoding="utf-8")
+
+    assert "baseline-execution-parity-r1.json" in contracts_index
+    assert "baseline-execution-parity-r1.schema.json" in schemas_index
+    assert "実行互換監査" in baseline_design
+    assert "現在のCore経路は元workflowをそのまま移したBaselineではない" in baseline_design
+    assert "Core Baselineの追加runを発行しない" in baseline_design
+    assert "実行互換監査。`unsatisfied`" in instance_index
+
+
 def test_fixture_tool_matches_prr_c01_r2_logical_input(tmp_path: Path):
     case_root = measurement.FIXTURE_ROOT / "PRR-C01" / "r2"
     fixture_input = json.loads((case_root / "input.json").read_text(encoding="utf-8"))

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "baseline-execution-parity-r1.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "audit_id",
+    "state",
+    "source",
+    "core_candidate",
+    "checks",
+    "blocking_conditions",
+    "diagnostic_results",
+    "admission_effect",
+    "recovery_requirements"
+  ],
+  "properties": {
+    "schema_version": {"const": "agent-execution-control-lab.pr-review-baseline-execution-parity/v1"},
+    "audit_id": {"const": "baseline-execution-parity-r1"},
+    "state": {"const": "unsatisfied"},
+    "source": {"$ref": "#/$defs/execution"},
+    "core_candidate": {"$ref": "#/$defs/execution"},
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["identity", "state", "source_value", "core_value", "evidence"],
+        "properties": {
+          "identity": {"type": "string", "minLength": 1},
+          "state": {"enum": ["satisfied", "intentionally_changed", "unsatisfied", "unverified"]},
+          "source_value": {},
+          "core_value": {},
+          "evidence": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "blocking_conditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "diagnostic_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["github_run_id", "result_path", "classification"],
+        "properties": {
+          "github_run_id": {"type": "string", "pattern": "^[0-9]+$"},
+          "result_path": {"type": "string", "minLength": 1},
+          "classification": {"const": "execution_parity_diagnostic_only"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "admission_effect": {"const": "core_baseline_blocked"},
+    "recovery_requirements": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "execution": {
+      "type": "object",
+      "required": ["workflow_path", "workflow_sha256", "trigger", "workspace", "action", "permissions", "tool_policy", "output_mode"],
+      "properties": {
+        "workflow_path": {"type": "string", "minLength": 1},
+        "workflow_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trigger": {"type": "string", "minLength": 1},
+        "workspace": {"type": "object"},
+        "action": {"type": "object"},
+        "permissions": {"type": "object"},
+        "tool_policy": {"type": "array", "items": {"type": "string"}},
+        "output_mode": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
