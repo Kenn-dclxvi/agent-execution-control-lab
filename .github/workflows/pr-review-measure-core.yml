@@ -65,7 +65,7 @@ jobs:
 
       - name: Export structured output schema
         id: schema
-        run: echo "review_schema=$(jq -c . pr-review-measurements/schemas/review-output-r1.schema.json)" >> "$GITHUB_OUTPUT"
+        run: echo "review_schema=$(jq -c 'del(."$schema")' pr-review-measurements/schemas/review-output-r1.schema.json)" >> "$GITHUB_OUTPUT"
 
       - name: Upload model-visible input only
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
