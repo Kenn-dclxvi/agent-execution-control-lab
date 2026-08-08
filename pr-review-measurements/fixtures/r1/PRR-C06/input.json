@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C06",
+  "fixture_revision": "r1",
+  "review_contract_revision": "pr-review-contract-r1",
+  "pr": {
+    "title": "索引の説明を明確化",
+    "body": "既存文書への導線だけを追加する。",
+    "base_sha": "6666666666666666666666666666666666666661",
+    "head_sha": "6666666666666666666666666666666666666662"
+  },
+  "changed_paths": ["docs/guide-index.md"],
+  "changes": [
+    {
+      "path": "docs/guide-index.md",
+      "patch": "@@ -1 +1,3 @@\n # ガイド索引\n+\n+評価手順は正本の `docs/evaluation-loop-manual.md` を参照する。",
+      "content_after": "# ガイド索引\n\n評価手順は正本の `docs/evaluation-loop-manual.md` を参照する。\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "single_artifact_unit", "text": "一つの変更では一つの判断または一つのアーティファクト単位を扱う。"},
+        {"rule_id": "state_separation", "text": "artifactの存在、評価、採用、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secret、credential、非公開の生logをcommitしない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture-oracle-r1.schema.json",
+  "type": "object",
+  "required": ["schema_version", "case_id", "fixture_revision", "clean_control", "expected_findings"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "case_id": {"pattern": "^PRR-C0[1-6]$"},
+    "fixture_revision": {"const": "r1"},
+    "clean_control": {"type": "boolean"},
+    "expected_findings": {
+      "type": "array",
+      "items": {"$ref": "review-output-r1.schema.json#/$defs/finding"}
+    }
+  },
+  "additionalProperties": false
+}

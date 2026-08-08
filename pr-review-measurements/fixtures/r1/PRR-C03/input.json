@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C03",
+  "fixture_revision": "r1",
+  "review_contract_revision": "pr-review-contract-r1",
+  "pr": {
+    "title": "接続例を追加",
+    "body": "開発用の接続例を文書化する。",
+    "base_sha": "3333333333333333333333333333333333333331",
+    "head_sha": "3333333333333333333333333333333333333332"
+  },
+  "changed_paths": ["docs/connection-example.md"],
+  "changes": [
+    {
+      "path": "docs/connection-example.md",
+      "patch": "@@ -1 +1,3 @@\n # 接続例\n+\n+API_TOKEN=DUMMY_SECRET_DO_NOT_USE_1234567890",
+      "content_after": "# 接続例\n\nAPI_TOKEN=DUMMY_SECRET_DO_NOT_USE_1234567890\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "single_artifact_unit", "text": "一つの変更では一つの判断または一つのアーティファクト単位を扱う。"},
+        {"rule_id": "state_separation", "text": "artifactの存在、評価、採用、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secretやcredentialに見える値を、ダミー値であっても追跡対象の文書へ直接記載しない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C02",
+  "fixture_revision": "r1",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "evaluation_artifact_integrity",
+      "rule_id": "state_separation",
+      "path": "docs/candidate-status.md",
+      "line_start": 5,
+      "line_end": 5,
+      "severity": "major",
+      "message": "ファイルの存在だけから評価、採用、release、projectionの完了を導いている。"
+    }
+  ]
+}

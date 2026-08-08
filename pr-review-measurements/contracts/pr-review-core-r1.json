@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "comparison_revision": "pr-review-core-r1",
+  "state": "implemented_unexecuted",
+  "fixture_revision": "r1",
+  "review_contract_revision": "pr-review-contract-r1",
+  "variants": [
+    "agentic-retrieval",
+    "deterministic-input"
+  ],
+  "cases": [
+    "PRR-C01",
+    "PRR-C02",
+    "PRR-C03",
+    "PRR-C04",
+    "PRR-C05",
+    "PRR-C06"
+  ],
+  "repetitions": 5,
+  "pilot_repetitions": 1,
+  "model": {
+    "requested": "claude-sonnet-5",
+    "reported_identity_required_for_comparison": true
+  },
+  "reviewer_executor": {
+    "type": "github_action",
+    "identity": "anthropics/claude-code-action",
+    "revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "resolved_from": "refs/tags/v1^{}",
+    "resolved_at": "2026-08-08",
+    "claude_authentication": "claude_code_oauth_token",
+    "github_authentication": "job_scoped_github_token",
+    "permission_profile": "review-read-only-r1",
+    "sandbox": "claude-code-action-default",
+    "tool_policies": {
+      "agentic-retrieval": "fixture-tool-read-only-r1",
+      "deterministic-input": "prepared-input-read-only-r1"
+    },
+    "timeout_seconds": 900
+  },
+  "workflow_revision": "pr-review-measure-core-r1",
+  "quality_gate": {
+    "required_finding_miss": 0,
+    "clean_control_major_false_positive": 0,
+    "review_contract_violation": 0
+  },
+  "result_statuses": [
+    "pass",
+    "quality_failed",
+    "invalid_output",
+    "execution_failed",
+    "timeout",
+    "cancelled",
+    "measurement_incomplete"
+  ]
+}

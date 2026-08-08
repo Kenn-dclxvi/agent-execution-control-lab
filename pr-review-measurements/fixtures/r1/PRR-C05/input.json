@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "case_id": "PRR-C05",
+  "fixture_revision": "r1",
+  "review_contract_revision": "pr-review-contract-r1",
+  "pr": {
+    "title": "release記録と認証例を追加",
+    "body": "複数の運用情報をまとめて記録する。",
+    "base_sha": "5555555555555555555555555555555555555551",
+    "head_sha": "5555555555555555555555555555555555555552"
+  },
+  "changed_paths": ["docs/release-note.md"],
+  "changes": [
+    {
+      "path": "docs/release-note.md",
+      "patch": "@@ -1 +1,5 @@\n # release記録\n+\n+ACCESS_TOKEN=DUMMY_SECRET_DO_NOT_USE_ABCDEFGHIJ\n+\n+Candidateを作成したため、評価とreleaseと本体反映は完了した。",
+      "content_after": "# release記録\n\nACCESS_TOKEN=DUMMY_SECRET_DO_NOT_USE_ABCDEFGHIJ\n\nCandidateを作成したため、評価とreleaseと本体反映は完了した。\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "single_artifact_unit", "text": "一つの変更では一つの判断または一つのアーティファクト単位を扱う。"},
+        {"rule_id": "state_separation", "text": "artifactの存在、評価、採用、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secretやcredentialに見える値を、ダミー値であっても追跡対象の文書へ直接記載しない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}

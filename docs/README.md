@@ -101,6 +101,7 @@
 | [`shared-python-runtime.md`](shared-python-runtime.md) | 共有Pythonランタイム |
 | [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceの仕様 |
 | [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md) | Layer 2 executorをClaude Code CLIへ置き換える試験方法の設計検討（未実装。未確定事項を含む） |
+| [`pr-review-measurement-environment-design.md`](pr-review-measurement-environment-design.md) | Claude Code Actionのagentic retrievalと決定論的入力準備を比較するPRレビュー測定環境。Phase 0〜3は実装済み、pilot・N=5・Integrationは未実行 |
 
 ## 7. 完了済み研究記録
 

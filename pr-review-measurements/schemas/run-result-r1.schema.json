@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run-result-r1.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "comparison_revision",
+    "result_id",
+    "case_id",
+    "fixture_revision",
+    "variant",
+    "repetition",
+    "attempt",
+    "base_sha",
+    "head_sha",
+    "model",
+    "reviewer_executor",
+    "workflow_revision",
+    "github_run_id",
+    "timing",
+    "runtime",
+    "quality",
+    "result"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "comparison_revision": {"const": "pr-review-core-r1"},
+    "result_id": {"type": "string"},
+    "case_id": {"pattern": "^PRR-C0[1-6]$"},
+    "fixture_revision": {"const": "r1"},
+    "variant": {"enum": ["agentic-retrieval", "deterministic-input"]},
+    "repetition": {"type": "integer", "minimum": 1},
+    "attempt": {"type": "integer", "minimum": 1},
+    "base_sha": {"pattern": "^[0-9a-f]{40}$"},
+    "head_sha": {"pattern": "^[0-9a-f]{40}$"},
+    "model": {
+      "type": "object",
+      "required": ["requested", "reported"],
+      "properties": {
+        "requested": {"type": "string"},
+        "reported": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "reviewer_executor": {"type": "object"},
+    "workflow_revision": {"type": "string"},
+    "github_run_id": {"type": ["string", "null"]},
+    "timing": {"type": "object"},
+    "runtime": {"type": "object"},
+    "quality": {
+      "type": "object",
+      "required": [
+        "observed",
+        "expected_findings",
+        "true_positive",
+        "false_positive",
+        "false_negative",
+        "path_accuracy",
+        "line_accuracy",
+        "category_accuracy",
+        "clean_control_major_false_positive",
+        "scope_violation_count",
+        "review_contract_violation",
+        "summary_complete"
+      ],
+      "properties": {
+        "observed": {"type": "boolean"},
+        "expected_findings": {"type": "integer", "minimum": 0},
+        "true_positive": {"type": "integer", "minimum": 0},
+        "false_positive": {"type": "integer", "minimum": 0},
+        "false_negative": {"type": "integer", "minimum": 0},
+        "path_accuracy": {"type": "integer", "minimum": 0},
+        "line_accuracy": {"type": "integer", "minimum": 0},
+        "category_accuracy": {"type": "integer", "minimum": 0},
+        "clean_control_major_false_positive": {"type": "integer", "minimum": 0},
+        "scope_violation_count": {"type": "integer", "minimum": 0},
+        "review_contract_violation": {"type": "integer", "minimum": 0},
+        "summary_complete": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "quality_failed",
+        "invalid_output",
+        "execution_failed",
+        "timeout",
+        "cancelled",
+        "measurement_incomplete"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
