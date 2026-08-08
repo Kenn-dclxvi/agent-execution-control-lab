@@ -1,0 +1,63 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-quality/v5",
+  "contract_id": "pr-review-finding-quality-v5",
+  "state": "independent_qualification_satisfied",
+  "functional_specification": "specifications/pr-review-function-r1.md",
+  "review_contract_revision": "pr-review-contract-r2",
+  "supported_case_revisions": ["PRR-C01/r4"],
+  "boundary_rules": {
+    "model_visible": [
+      "cases/<case_id>/<revision>/input.json",
+      "rating-contracts/review-contract-r2.md",
+      "rule catalog with rule_id and text",
+      "materialized authority packet",
+      "case-specific read-only repository snapshot"
+    ],
+    "model_invisible": [
+      "cases/<case_id>/<revision>/oracle.json",
+      "expected finding identity",
+      "grader implementation",
+      "過去runのreviewer出力"
+    ]
+  },
+  "finding_identity": {
+    "required_equal": ["category", "rule_id", "severity", "set(path + related_paths)"],
+    "anchor_rule": "actual pathはexpected locationsのいずれかと一致し、line rangeがoverlapする",
+    "message_rule": "messageは違反関係と修正内容を利用者へ説明する。文字列完全一致を行わない",
+    "forbidden": "複数path違反でoracleの一方のpathだけを唯一の正解anchorにしない"
+  },
+  "quality_score_rule": {
+    "rating_scale": [0, 1, 2, 3, 4],
+    "score_4_requires": [
+      "required finding missが0件",
+      "false positiveが0件",
+      "review contract violationが0件",
+      "requested modelとreported modelが一致する"
+    ],
+    "score_anchors": {
+      "0": "観測済みだがscope violationまたはmajor false positiveがあり、有害または境界外のレビューである",
+      "1": "観測済みだがrequired finding identityを満たさない",
+      "2": "少なくとも1件のrequired finding identityを満たしたが、required finding missが残る",
+      "3": "required finding missは0件だがfalse positiveまたはreview contract violationが残る",
+      "4": "required finding、false positive、review contract、model identityのgateをすべて満たす"
+    }
+  },
+  "qualification_boundary": {
+    "fixture": "PRR-C01/r4",
+    "created_after_r3_execution": true,
+    "heldout_evidence": false,
+    "purpose": "Core Baseline機能qualification専用"
+  },
+  "admission": {
+    "current_state": "independent_qualification_satisfied",
+    "audit_receipt": "contracts/prr-c01-r4-case-design-audit-r1.json",
+    "execution_state": "not_executed",
+    "baseline_qualification_state": "not_qualified",
+    "satisfied_requirements": [
+      "rules commandからexpected rule_idと規則本文をmodel-visibleに取得できる",
+      "patchの新規・変更状態と固定repository snapshotが一致する",
+      "expected findingを機能仕様とmodel-visible入力だけから導出できる",
+      "case作成者とは別のproducerが監査receiptへ署名した"
+    ]
+  }
+}

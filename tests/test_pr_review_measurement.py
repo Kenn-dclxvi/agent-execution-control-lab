@@ -607,6 +607,58 @@ def test_prr_c01_r3_independent_audit_receipt_and_state():
     assert "Baseline未qualification" in ratings_index
 
 
+def test_prr_c01_r4_independent_audit_receipt_and_state():
+    receipt = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts"
+            / "prr-c01-r4-case-design-audit-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    quality_contract = json.loads(
+        (
+            INSTANCE_ROOT
+            / "rating-contracts"
+            / "pr-review-finding-quality-v5.json"
+        ).read_text(encoding="utf-8")
+    )
+    case_readme = (
+        INSTANCE_ROOT / "cases" / "PRR-C01" / "r4" / "README.md"
+    ).read_text(encoding="utf-8")
+    cases_index = (INSTANCE_ROOT / "cases" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    ratings_index = (INSTANCE_ROOT / "rating-contracts" / "README.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert receipt["schema_version"] == (
+        "agent-execution-control-lab.pr-review-case-design-audit/v1"
+    )
+    assert receipt["audit_id"] == "prr-c01-r4-case-design-audit-r1"
+    assert receipt["target"]["case_revision"] == "PRR-C01/r4"
+    assert receipt["producer_task_name"] == "/root/prr_c01_r4_independent_audit"
+    assert receipt["decision"] == "satisfied"
+    assert all(gate["state"] == "satisfied" for gate in receipt["gates"])
+    assert receipt["stage_b"]["oracle_or_grader_only_required_conditions"] == []
+    assert receipt["forbidden_input"]["used"] is False
+    assert quality_contract["supported_case_revisions"] == ["PRR-C01/r4"]
+    assert quality_contract["state"] == "independent_qualification_satisfied"
+    assert quality_contract["admission"]["current_state"] == (
+        "independent_qualification_satisfied"
+    )
+    assert quality_contract["admission"]["audit_receipt"] == (
+        "contracts/prr-c01-r4-case-design-audit-r1.json"
+    )
+    assert quality_contract["admission"]["execution_state"] == "not_executed"
+    assert quality_contract["admission"]["baseline_qualification_state"] == (
+        "not_qualified"
+    )
+    assert "independent_audit_satisfied" in case_readme
+    assert "Baseline未qualification" in cases_index
+    assert "Baseline未qualification" in ratings_index
+
+
 def test_fixture_schema_revisions_coexist_and_r3_is_indexed():
     for revision in ("r1", "r2", "r3"):
         measurement.validate_fixture_revision("PRR-C01", revision)
