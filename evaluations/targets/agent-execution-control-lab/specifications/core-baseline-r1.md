@@ -52,6 +52,8 @@ Core用の追加指示は、固定fixture toolの使用方法とGitHub書込禁�
 
 既存`.github/workflows/pr-review-measure-core.yml`のinline promptは独立したprompt artifactへbindされていないため、正式Baseline identityとして不足している。
 
+`claude-pr-review-core-r1`を[`prompt artifact`](../prompts/baselines/claude-pr-review-core-r1/README.md)として作成した。固定target refのsource promptと、レビュー観点を意味保存したCore prompt候補を分離して保持する。現在の入力対応判定は[`baseline-input-mapping-r1`](../contracts/baseline-input-mapping-r1.json)を正本とし、局所規則とrepository readの対応が未成立のためadmissionを開放しない。
+
 ## Baseline admission gate
 
 次の順で全件を満たした場合だけ、Core経路をBaselineとしてprofileへ登録する。

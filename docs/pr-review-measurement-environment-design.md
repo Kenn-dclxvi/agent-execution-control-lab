@@ -35,6 +35,8 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
 | `evaluations/targets/agent-execution-control-lab/specifications/pr-review-function-r1.md` | caseとratingより上位のPRレビュー成果条件 | r1固定 |
 | `evaluations/targets/agent-execution-control-lab/specifications/core-baseline-r1.md` | 現行workflowとの対応とBaseline admission gate | r1固定・Baseline未qualification |
+| `evaluations/targets/agent-execution-control-lab/prompts/baselines/claude-pr-review-core-r1` | source promptとCore Baseline prompt候補 | 固定済み・admission blocked |
+| `evaluations/targets/agent-execution-control-lab/contracts/baseline-input-mapping-r1.json` | 現行workflowとCore入力の対応 | `unsatisfied` |
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r2.json` | 当時のprofile、rating、3 KPI identity | diagnostic履歴 |
 | `evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v1.json` | 当時のhard gateを0〜4の`quality_score`へ写像 | diagnostic履歴 |
 | `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-qualification-n2-r1.json` | PRR-C01の独立2反復条件 | diagnostic履歴 |
@@ -525,7 +527,7 @@ PRR-C01の両variantを使い、Phase 4へ進む前のprobeを実施した。
 | 0 | PRレビュー機能仕様 | caseとratingより上位の成果条件が固定される | r1固定 |
 | 1 | Baseline設計 | 現行workflowとの対応とadmission gateが固定される | r1固定・admission未実施 |
 | 2 | fixtureとrating qualification | 仕様から導出したcase、oracle、rating contractが独立監査を通過する | PRR-C01/r2 development case作成済み・独立qualification未実施 |
-| 3 | Baseline admission | 入力対応、prompt identity、実効条件、機能反復gateが成立する | 未実施 |
+| 3 | Baseline admission | 入力対応、prompt identity、実効条件、機能反復gateが成立する | prompt候補作成済み。局所規則とrepository readの対応が未成立 |
 | 4 | Candidate A pilot | qualification済みLayer 1でBaselineとCandidate Aの接続を確認する | 未実行 |
 | 5 | N=5 | 全caseを交互順序でN=5実行する | 未実行 |
 | 6 | 比較result | quality gate通過可否と時間KPI中央値を固定resultとして保存する | 未実行 |

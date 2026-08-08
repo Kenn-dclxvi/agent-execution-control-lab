@@ -1,0 +1,80 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-baseline-mapping/v1",
+  "mapping_id": "baseline-input-mapping-r1",
+  "state": "unsatisfied",
+  "source": {
+    "target_commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+    "workflow_path": ".github/workflows/claude-pr-review.yml",
+    "workflow_sha256": "6e5eecd689e6492add329e8b633a7f9a36aa570306c240c240b9d584aceb1a44",
+    "action": "anthropics/claude-code-action@v1",
+    "prompt_artifact": "prompts/baselines/claude-pr-review-core-r1/source-prompt.md"
+  },
+  "core_candidate": {
+    "prompt_identity": "claude-pr-review-core-r1",
+    "prompt_artifact": "prompts/baselines/claude-pr-review-core-r1/core-prompt.md",
+    "fixture_tool": "tools/pr_review_fixture_tool.py",
+    "review_contract": "rating-contracts/review-contract-r2.md",
+    "output_schema": "schemas/review-output-r2.schema.json"
+  },
+  "mappings": [
+    {
+      "identity": "pr_metadata",
+      "source_operation": "gh pr view",
+      "core_operation": "fixture-tool metadata",
+      "state": "satisfied",
+      "evidence": "PRR-C01/r2 input.prをJSONとしてbyte-stableに取得する"
+    },
+    {
+      "identity": "changed_paths",
+      "source_operation": "gh pr diff and repository state",
+      "core_operation": "fixture-tool changed-paths",
+      "state": "satisfied",
+      "evidence": "input.changed_pathsを順序保持したJSON配列として取得する"
+    },
+    {
+      "identity": "diff",
+      "source_operation": "gh pr diff",
+      "core_operation": "fixture-tool diff",
+      "state": "satisfied",
+      "evidence": "input.changesのpathとpatchから論理diffを決定論的に再構成する"
+    },
+    {
+      "identity": "changed_file_content",
+      "source_operation": "checked out repository read",
+      "core_operation": "fixture-tool files",
+      "state": "partially_satisfied",
+      "evidence": "changed pathの変更後本文だけを取得できる。差分外の参照先と変更前本文は取得不能"
+    },
+    {
+      "identity": "applicable_repository_rules",
+      "source_operation": "root CLAUDE.md and changed-path local AGENTS.md selection",
+      "core_operation": "fixture-tool rules",
+      "state": "unsatisfied",
+      "evidence": "fixtureは選択済みrulesを返すが、source path、局所探索、優先順位、原文との意味同一性receiptがない"
+    },
+    {
+      "identity": "review_criteria",
+      "source_operation": "workflow inline prompt",
+      "core_operation": "core prompt and review contract r2",
+      "state": "satisfied",
+      "evidence": "source promptの4観点と制約をcore promptへ保持し、GitHub投稿責務だけを除外する"
+    },
+    {
+      "identity": "github_reporting",
+      "source_operation": "inline comment and summary comment",
+      "core_operation": "excluded",
+      "state": "excluded_by_core_boundary",
+      "evidence": "Integrationで別測定し、Core qualityまたは時間へ含めない"
+    }
+  ],
+  "blocking_conditions": [
+    "applicable_repository_rulesがunsatisfied",
+    "changed_file_contentがpartially_satisfied"
+  ],
+  "verification": {
+    "test": "tests/test_pr_review_measurement.py::test_fixture_tool_matches_prr_c01_r2_logical_input",
+    "scope": ["pr_metadata", "changed_paths", "diff", "changed_file_content", "applicable_repository_rules", "review_contract"],
+    "interpretation": "fixture内の論理値一致だけを検証する。局所規則の選択過程または差分外repository readの同一性を証明しない"
+  },
+  "admission_effect": "Core Baseline profile、preflight、evaluation slotを発行しない"
+}
