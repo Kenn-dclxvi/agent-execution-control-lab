@@ -20,6 +20,7 @@ sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 import pr_review_measurement as measurement
 import pr_review_qualification as qualification
 import pr_review_code_review_qualification as code_review_qualification
+import pr_review_code_review_qualification_r2 as code_review_qualification_r2
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
@@ -2030,3 +2031,43 @@ def test_claude_code_core_first_attempt_is_saved_as_unobserved_failure():
     assert result_path.name in (
         INSTANCE_ROOT / "results" / "README.md"
     ).read_text(encoding="utf-8")
+
+
+def test_claude_code_core_environment_recovery_changes_only_runtime_wiring():
+    original = json.loads(code_review_qualification.PROFILE_PATH.read_text(encoding="utf-8"))
+    recovered, preflight = code_review_qualification_r2.validate_preflight(1)
+    original_conditions = original["comparison_conditions"]
+    recovered_conditions = recovered["comparison_conditions"]
+    for key in (
+        "target_repository_ref", "task_spec", "fixture_identity", "workflow_mapping",
+        "measurement_boundary", "repository_snapshot", "authority_selection", "prompt",
+        "eligibility", "review_contract", "review_output_schema", "quality_rating", "model",
+        "executor_parameters", "repetition_condition", "qualification_gate",
+    ):
+        assert recovered_conditions[key] == original_conditions[key]
+    assert recovered["recovery"]["source_attempt"] == 31262429048
+    assert preflight["environment_recovery"]["same_repetition"] == 1
+    workflow = (
+        REPOSITORY_ROOT / ".github/workflows/pr-review-qualify-claude-code-core-r2.yml"
+    ).read_text(encoding="utf-8")
+    assert '--allowedTools "Agent,Bash(./fixture-tool:*)"' in workflow
+
+
+def test_claude_code_core_recovery_packet_contains_collector_dependencies(tmp_path: Path):
+    output = tmp_path / "reviewer-input"
+    snapshot = output / "repository"
+    try:
+        code_review_qualification_r2.prepare_input(1, output)
+        assert (output / "pr_review_code_review_qualification_r2.py").is_file()
+        assert (output / "pr_review_code_review_qualification.py").is_file()
+        assert (output / "pr_review_qualification.py").is_file()
+        completed = subprocess.run(
+            [sys.executable, "pr_review_code_review_qualification_r2.py", "--help"],
+            cwd=output,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        assert "validate-preflight" in completed.stdout
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot)
