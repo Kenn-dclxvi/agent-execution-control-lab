@@ -244,6 +244,7 @@ jobs:
           VARIANT: ${{ inputs.variant }}
           REPETITION: ${{ inputs.repetition }}
           MODEL_REQUESTED: ${{ inputs.model }}
+          PROFILE_ID: ${{ inputs.profile_id }}
         run: |
           python3 evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py grade \
             --case-id "$CASE_ID" \

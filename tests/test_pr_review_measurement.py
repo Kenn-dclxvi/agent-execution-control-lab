@@ -477,3 +477,7 @@ def test_workflow_is_manual_read_only_and_pinned():
     assert "fixture-tool file:*)" not in workflow
     assert "validate-profile" in workflow
     assert "--profile-id \"$PROFILE_ID\"" in workflow
+    grade_block = workflow.split("- name: Grade fixed finding identities", 1)[1].split(
+        "- name: Record missing review result", 1
+    )[0]
+    assert "PROFILE_ID: ${{ inputs.profile_id }}" in grade_block
