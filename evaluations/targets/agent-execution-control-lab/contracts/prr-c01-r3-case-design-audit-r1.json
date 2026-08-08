@@ -1,0 +1,229 @@
+{
+  "schema_version": "agent-execution-control-lab.case-design-audit/v1",
+  "audit_id": "prr-c01-r3-case-design-audit-r1",
+  "case_revision": "PRR-C01/r3",
+  "producer_task_name": "prr_c01_r3_independent_audit",
+  "criterion_owner": "PR review functional qualification gate",
+  "evidence_policy": {
+    "stage_a": {
+      "purpose": "model-visible inputsだけからexpected finding identityを導出して封印する",
+      "allowed_inputs": [
+        "evaluations/targets/agent-execution-control-lab/specifications/pr-review-function-r1.md",
+        "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3/input.json",
+        "evaluations/targets/agent-execution-control-lab/rating-contracts/review-contract-r2.md",
+        "AGENTS.mdのinput.json掲載規則に対応するauthority本文"
+      ],
+      "sealed_before_stage_b": true
+    },
+    "stage_b": {
+      "purpose": "封印済み導出をmodel-invisible artifact、schema、grader identity処理、focused regression、状態索引と照合する",
+      "allowed_inputs": [
+        "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3/oracle.json",
+        "evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v3.json",
+        "evaluations/targets/agent-execution-control-lab/schemas/fixture-input-r3.schema.json",
+        "evaluations/targets/agent-execution-control-lab/schemas/fixture-oracle-r3.schema.json",
+        "evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.pyのvalidationとfinding identity処理",
+        "tests/test_pr_review_measurement.pyのPRR-C01/r3 focused assertions",
+        "PRR-C01/r3、case索引、rating contract索引の状態本文"
+      ]
+    },
+    "forbidden_inputs": [
+      "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r1/**",
+      "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r2/**",
+      "evaluations/targets/agent-execution-control-lab/results/**",
+      "prior reviewer output",
+      "GitHub Actions logs",
+      "diagnostic reports",
+      "docs/pr-review-measurement-environment-design.md pilot observations",
+      "conversation history",
+      "internal memory",
+      "git history for forbidden contents"
+    ],
+    "forbidden_inputs_used_as_evidence": false
+  },
+  "artifact_sha256": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "2be36bdcd249c9851066ad02227a201925b760b6474753cb26b783064087f803",
+      "role": "model-visible repository authority verification"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/specifications/pr-review-function-r1.md",
+      "sha256": "eb0872cf7198e0ec286c8a9df31da54f39aeaf64b3360656c912fc5f3e725a60",
+      "role": "functional gate and finding semantics"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3/input.json",
+      "sha256": "8d51a4dc3bf9eba5486a08e4bb7099bcc85b2f23ee90acfa4cc0a8c0e4758ecf",
+      "role": "model-visible case input"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/rating-contracts/review-contract-r2.md",
+      "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9",
+      "role": "model-visible output and category contract"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3/oracle.json",
+      "sha256": "ce37506416d2309110bfbe2ef9eb4ea3fbcb8a58cf01a450238cddac3fac8089",
+      "role": "stage-B oracle comparison"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v3.json",
+      "sha256": "657327caba77cdf94bf7ffbdfa81de595bbf89c9c5e32504f440834b7ad943c6",
+      "role": "quality contract state and finding identity"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/schemas/fixture-input-r3.schema.json",
+      "sha256": "769c7d8169f7c0a3635f08e27b49518afc578dd19154d285aef7e164fff85328",
+      "role": "input revision schema"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/schemas/fixture-oracle-r3.schema.json",
+      "sha256": "1df9a21196bd04d59d641657f9a2bd9735e5dc21d24c3385489a8e8be246f400",
+      "role": "oracle path and location schema"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py",
+      "sha256": "7dec825756b5a26be445d318f94a7da9fad41c08f4c3311a36f613ab6cd98af8",
+      "role": "grader validation and finding identity implementation"
+    },
+    {
+      "path": "tests/test_pr_review_measurement.py",
+      "sha256": "3cbf123bb40f03c33bf8c33837b4806ee1b7b33a9ab714f247f78fd2be3dd2cc",
+      "role": "focused regression assertions"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r3/README.md",
+      "sha256": "fd722b832dab27b9a5eddc41cd820a88e5a410ee3d8e6096ad2cba92fc695515",
+      "role": "case state index"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/cases/README.md",
+      "sha256": "b58ea029891d041aa8efc5b2cc94a42bab9401ac9ef7bd7a770f074a96ee7c37",
+      "role": "case revision index"
+    },
+    {
+      "path": "evaluations/targets/agent-execution-control-lab/rating-contracts/README.md",
+      "sha256": "518dec5e6b4ccdcea6b18f5a9b7060de395f765ace2e8e8dfba0a12d195656df",
+      "role": "quality contract state index"
+    }
+  ],
+  "sealed_derivation": {
+    "expected_finding_count": 1,
+    "finding_identity": {
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "severity": "major",
+      "changed_path_set": [
+        "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+        "evaluations/profiles/heldout-review.json"
+      ],
+      "allowed_anchors": [
+        {
+          "path": "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+          "line_start": 1,
+          "line_end": 1,
+          "required_related_paths": [
+            "evaluations/profiles/heldout-review.json"
+          ]
+        },
+        {
+          "path": "evaluations/profiles/heldout-review.json",
+          "line_start": 1,
+          "line_end": 1,
+          "required_related_paths": [
+            "prompts/candidates/heldout-review/files/AGENTS.md.txt"
+          ]
+        }
+      ],
+      "required_path_relationship": "レビュー出力を構造化JSONへ固定するprompt変更とmax_workersおよびtimeout_secondsのevaluation profile変更を同じ比較単位へ混ぜている",
+      "required_message_meaning": "両変更の関係がpromptと評価条件の分離規則に違反し、比較identityを保つため別の比較単位へ分離する必要があることを説明する"
+    },
+    "summary": {
+      "repository_discipline": "fail",
+      "evaluation_artifact_integrity": "pass",
+      "secret_or_private_log": "pass",
+      "document_quality": "pass"
+    },
+    "non_finding_reasons": {
+      "evaluation_artifact_integrity": "model-visible差分はrevision、状態、artifact identityの混同を示さず、target findingをこのcategoryへ重複させない",
+      "secret_or_private_log": "changed contentにsecret、credential、非公開の生log、一時worktreeがない",
+      "document_quality": "changed contentは日本語で、path、link、正本参照の明示違反がない",
+      "unknown": "4 categoryの判定に必要なchanged path、diff、変更後本文、適用規則が揃っているため該当なし"
+    }
+  },
+  "oracle_comparison": {
+    "state": "satisfied",
+    "differences": [],
+    "matching_fields": [
+      "expected finding count",
+      "category",
+      "rule_id",
+      "severity",
+      "changed path set",
+      "both allowed anchor paths",
+      "both line ranges"
+    ],
+    "oracle_only_condition_present": false
+  },
+  "grader_checks": {
+    "identity_rule": "category、rule_id、severity、set(path + related_paths)が一致し、actual anchorがexpected locationsの一つとline overlapする",
+    "anchor_checks": [
+      {
+        "anchor": "prompts/candidates/heldout-review/files/AGENTS.md.txt:1",
+        "related_path": "evaluations/profiles/heldout-review.json",
+        "matches_expected_identity": true
+      },
+      {
+        "anchor": "evaluations/profiles/heldout-review.json:1",
+        "related_path": "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+        "matches_expected_identity": true
+      }
+    ],
+    "both_allowed_anchors_match": true,
+    "missing_related_path_rejected": true,
+    "missing_related_path_reason": "actual path集合がoracleの2 path集合と一致しないためidentity matchはfalseになる"
+  },
+  "functional_gate": [
+    {
+      "criterion": "expected findingの各条件を機能仕様、model-visible入力、repository authorityから導出できる",
+      "state": "satisfied",
+      "evidence": "Stage Aでcategory、rule_id、severity、2 path関係、両anchor、message修正意味をoracle参照前に導出して封印した"
+    },
+    {
+      "criterion": "oracleだけに存在するpath、line、rule、category、severity条件がない",
+      "state": "satisfied",
+      "evidence": "Stage Bのoracle各fieldは封印済み導出と一致し、differencesは0件だった"
+    },
+    {
+      "criterion": "意味的に同じfindingの許容範囲をgraderで表現できる",
+      "state": "satisfied",
+      "evidence": "graderは2 path集合をidentityとし、oracle locationsのどちらのanchorでも同じfindingへmatchする。related path欠落はrejectする"
+    },
+    {
+      "criterion": "clean controlの非違反理由を同じ入力から説明できる",
+      "state": "satisfied",
+      "evidence": "target違反以外の3 categoryはmodel-visible changed contentと規則からpass理由を説明でき、情報不足によるunknownはない。PRR-C01/r3自体はclean_control=falseである"
+    },
+    {
+      "criterion": "case作成またはgrader調整に使ったfixtureをheld-out evidenceとして扱わない",
+      "state": "satisfied",
+      "evidence": "Stage AはPRR-C01/r3のmodel-visible artifactだけで封印し、development fixture、prior result、reviewer outputをevidenceから除外した"
+    }
+  ],
+  "decision": {
+    "state": "satisfied",
+    "reason": "機能適合gateの全5 criterionがsatisfiedであり、oracleとgraderに封印済み導出を超える条件がない",
+    "scope_boundary": "この監査はcase設計の機能適合だけを満たす。Baselineをqualifyせず、reviewer executionを許可せず、quality claimを作らない"
+  },
+  "remaining_gates": {
+    "reviewer_execution": "not_executed",
+    "baseline_qualification": "not_qualified",
+    "evaluation_set_admission": "not_admitted",
+    "quality_claim": "not_made",
+    "profile_creation": "not_created",
+    "set_creation": "not_created",
+    "workflow_creation": "not_created",
+    "result_creation": "not_created"
+  }
+}

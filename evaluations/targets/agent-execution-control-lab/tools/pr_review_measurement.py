@@ -27,6 +27,11 @@ PROFILES_ROOT = MEASUREMENT_ROOT / "profiles"
 REVIEW_CONTRACT_PATH = MEASUREMENT_ROOT / "rating-contracts" / "review-contract-r1.md"
 REVIEW_SCHEMA_PATH = MEASUREMENT_ROOT / "schemas" / "review-output-r1.schema.json"
 FIXTURE_TOOL_PATH = INSTANCE_ROOT / "tools" / "pr_review_fixture_tool.py"
+QUALIFICATION_PROFILE_IDS = {
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1",
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2",
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3",
+}
 
 CASE_IDS = tuple(f"PRR-C0{number}" for number in range(1, 7))
 VARIANTS = ("agentic-retrieval", "deterministic-input")
@@ -223,8 +228,8 @@ def validate_fixture_input(value: Any, expected_case_id: str | None = None) -> d
         },
         "fixture input",
     )
-    if value["schema_version"] not in {1, 2}:
-        raise ValidationError("fixture input schema_version must be 1 or 2")
+    if value["schema_version"] not in {1, 2, 3}:
+        raise ValidationError("fixture input schema_version must be 1, 2, or 3")
     if value["case_id"] not in CASE_IDS or (
         expected_case_id is not None and value["case_id"] != expected_case_id
     ):
@@ -232,7 +237,11 @@ def validate_fixture_input(value: Any, expected_case_id: str | None = None) -> d
     expected_revision = f"r{value['schema_version']}"
     if value["fixture_revision"] != expected_revision:
         raise ValidationError(f"fixture_revision must be {expected_revision}")
-    expected_review_contract = f"pr-review-contract-r{value['schema_version']}"
+    expected_review_contract = {
+        1: "pr-review-contract-r1",
+        2: "pr-review-contract-r2",
+        3: "pr-review-contract-r2",
+    }[value["schema_version"]]
     if value["review_contract_revision"] != expected_review_contract:
         raise ValidationError("review_contract_revision is invalid")
 
@@ -325,7 +334,7 @@ def validate_fixture_oracle(value: Any, fixture_input: dict) -> dict:
         label = f"expected_findings[{index}]"
         if value["schema_version"] == 1:
             _validate_finding(finding, label, changed_paths)
-        elif value["schema_version"] == 2:
+        elif value["schema_version"] in {2, 3}:
             _validate_expected_finding_v2(finding, label, changed_paths)
         else:
             raise ValidationError("fixture oracle schema_version is unsupported")
@@ -944,6 +953,311 @@ def _quality_score(result: str, quality: dict) -> int | None:
     return 0
 
 
+def _bound_instance_artifact(
+    binding: dict, path_key: str, sha256_key: str, label: str
+) -> tuple[Path, dict]:
+    if not isinstance(binding, dict):
+        raise ValidationError(f"{label} must be an object")
+    relative = _relative_path(binding.get(path_key), f"{label}.{path_key}")
+    path = INSTANCE_ROOT.joinpath(*PurePosixPath(relative).parts)
+    resolved_root = INSTANCE_ROOT.resolve()
+    resolved_path = path.resolve()
+    if resolved_root not in resolved_path.parents or not resolved_path.is_file():
+        raise ValidationError(f"{label}.{path_key} is not an instance file")
+    expected_sha256 = binding.get(sha256_key)
+    if not isinstance(expected_sha256, str) or re.fullmatch(r"[0-9a-f]{64}", expected_sha256) is None:
+        raise ValidationError(f"{label}.{sha256_key} is invalid")
+    observed_sha256 = _sha256(resolved_path)
+    if observed_sha256 != expected_sha256:
+        raise ValidationError(f"{label} sha256 mismatch")
+    return resolved_path, {"path": relative, "sha256": observed_sha256}
+
+
+def validate_qualification_profile(value: Any) -> dict:
+    if not isinstance(value, dict):
+        raise ValidationError("qualification profile must be an object")
+    if value.get("schema_version") != "agent-execution-control-lab.pr-review-profile/v2":
+        raise ValidationError("qualification profile schema_version mismatch")
+    profile_id = value.get("profile_id")
+    if profile_id not in QUALIFICATION_PROFILE_IDS:
+        raise ValidationError("qualification profile identity mismatch")
+    if value.get("state") != "frozen_not_executed":
+        raise ValidationError("qualification profile state mismatch")
+    if value.get("purpose") != "core_baseline_function_qualification":
+        raise ValidationError("qualification profile purpose mismatch")
+    if value.get("cases") != [{"id": "PRR-C01", "revision": "r3"}]:
+        raise ValidationError("qualification profile case mismatch")
+
+    conditions = value.get("comparison_conditions")
+    if not isinstance(conditions, dict):
+        raise ValidationError("qualification profile comparison_conditions is invalid")
+    if conditions.get("variant") != "agentic-retrieval":
+        raise ValidationError("qualification profile variant mismatch")
+    target = conditions.get("target_repository_ref")
+    expected_target = {
+        "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+        "commit": "8cd97283e60f13393fb1302c601c9a4fe0a5381f",
+        "tree": "56c7bbbaed3b2b74e5f0978d9d9cab498749bf8d",
+    }
+    if target != expected_target:
+        raise ValidationError("qualification profile target repository mismatch")
+
+    verified_artifacts: list[dict] = []
+    fixture = conditions.get("fixture_identity")
+    input_path, input_receipt = _bound_instance_artifact(
+        fixture, "input_path", "input_sha256", "fixture input"
+    )
+    oracle_path, oracle_receipt = _bound_instance_artifact(
+        fixture, "oracle_path", "oracle_sha256", "fixture oracle"
+    )
+    audit_path, audit_receipt = _bound_instance_artifact(
+        fixture,
+        "case_design_audit_path",
+        "case_design_audit_sha256",
+        "case design audit",
+    )
+    verified_artifacts.extend((input_receipt, oracle_receipt, audit_receipt))
+    fixture_input = validate_fixture_input(_load_json(input_path), "PRR-C01")
+    validate_fixture_oracle(_load_json(oracle_path), fixture_input)
+    audit = _load_json(audit_path)
+    if (
+        audit.get("case_revision") != "PRR-C01/r3"
+        or audit.get("producer_task_name") != "prr_c01_r3_independent_audit"
+        or audit.get("decision", {}).get("state") != "satisfied"
+    ):
+        raise ValidationError("case design audit is not satisfied")
+
+    mapping_path, mapping_receipt = _bound_instance_artifact(
+        conditions.get("input_mapping"), "path", "sha256", "input mapping"
+    )
+    verified_artifacts.append(mapping_receipt)
+    mapping = _load_json(mapping_path)
+    if mapping.get("state") != conditions["input_mapping"].get("required_state"):
+        raise ValidationError("input mapping state mismatch")
+
+    snapshot_binding = conditions.get("repository_snapshot")
+    snapshot_path, snapshot_receipt = _bound_instance_artifact(
+        snapshot_binding, "receipt_path", "receipt_sha256", "repository snapshot"
+    )
+    materializer_path, materializer_receipt = _bound_instance_artifact(
+        snapshot_binding,
+        "materializer_path",
+        "materializer_sha256",
+        "repository snapshot materializer",
+    )
+    verified_artifacts.extend((snapshot_receipt, materializer_receipt))
+    snapshot = _load_json(snapshot_path)
+    if snapshot.get("snapshot_revision") != "pr-review-repository-snapshot-r2":
+        raise ValidationError("repository snapshot revision mismatch")
+    if snapshot.get("fixture") != {
+        "case_id": "PRR-C01",
+        "revision": "r3",
+        "input_sha256": fixture["input_sha256"],
+    }:
+        raise ValidationError("repository snapshot fixture mismatch")
+    if snapshot.get("target_repository_ref") != {
+        "commit": target["commit"],
+        "tree": target["tree"],
+    }:
+        raise ValidationError("repository snapshot target mismatch")
+    if snapshot.get("snapshot_sha256") != snapshot_binding.get("snapshot_sha256"):
+        raise ValidationError("repository snapshot identity mismatch")
+    if snapshot.get("available_paths_sha256") != snapshot_binding.get(
+        "available_paths_sha256"
+    ):
+        raise ValidationError("repository snapshot available paths mismatch")
+    if snapshot.get("workspace_boundary") != {
+        "git_directory_present": False,
+        "write_allowed": False,
+    }:
+        raise ValidationError("repository snapshot boundary mismatch")
+
+    bindings = (
+        ("authority_selection", "path", "sha256", "authority selection"),
+        ("prompt", "manifest_path", "manifest_sha256", "prompt manifest"),
+        ("prompt", "content_path", "content_sha256", "prompt content"),
+        ("review_contract", "path", "sha256", "review contract"),
+        ("review_output_schema", "path", "sha256", "review output schema"),
+        ("run_result_schema", "path", "sha256", "run result schema"),
+        ("qualification_tool", "path", "sha256", "qualification tool"),
+        ("quality_rating", "path", "contract_sha256", "quality rating"),
+        ("permission", "fixture_tool_path", "fixture_tool_sha256", "fixture tool"),
+    )
+    loaded: dict[str, Any] = {}
+    for binding_name, path_key, sha_key, label in bindings:
+        path, receipt = _bound_instance_artifact(
+            conditions.get(binding_name), path_key, sha_key, label
+        )
+        verified_artifacts.append(receipt)
+        loaded[label] = _load_json(path) if path.suffix == ".json" else path
+
+    prompt = conditions["prompt"]
+    prompt_manifest = loaded["prompt manifest"]
+    if (
+        prompt.get("identity") != "claude-pr-review-core-r3"
+        or prompt_manifest.get("prompt_identity") != prompt["identity"]
+        or prompt_manifest.get("state") != "input_mapping_satisfied"
+    ):
+        raise ValidationError("prompt identity mismatch")
+    rating = conditions["quality_rating"]
+    rating_contract = loaded["quality rating"]
+    if (
+        rating.get("contract_id") != "pr-review-finding-quality-v3"
+        or rating_contract.get("contract_id") != rating["contract_id"]
+        or rating_contract.get("state") != rating.get("required_state")
+        or rating_contract.get("admission", {}).get("audit_receipt")
+        != fixture["case_design_audit_path"]
+    ):
+        raise ValidationError("quality rating admission mismatch")
+    expected_workflow_revision = {
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1": "pr-review-qualify-core-r1",
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2": "pr-review-qualify-core-r2",
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3": "pr-review-qualify-core-r3",
+    }[profile_id]
+    workflow = conditions.get("workflow")
+    if workflow != {
+        "revision": expected_workflow_revision,
+        "repository_path": ".github/workflows/pr-review-measure-core.yml",
+        "sha256": workflow.get("sha256") if isinstance(workflow, dict) else None,
+    }:
+        raise ValidationError("qualification workflow binding mismatch")
+    workflow_path = REPOSITORY_ROOT / ".github" / "workflows" / "pr-review-measure-core.yml"
+    if not workflow_path.is_file() or _sha256(workflow_path) != workflow["sha256"]:
+        raise ValidationError("qualification workflow sha256 mismatch")
+    verified_artifacts.append(
+        {"path": ".github/workflows/pr-review-measure-core.yml", "sha256": workflow["sha256"]}
+    )
+
+    model = conditions.get("model")
+    if model != {
+        "requested": "claude-sonnet-5",
+        "reported_identity_required": True,
+        "reasoning": "action_default_at_fixed_action_revision",
+    }:
+        raise ValidationError("qualification profile model mismatch")
+    environment = conditions.get("agent_environment")
+    if not isinstance(environment, dict) or environment.get("action_revision") != (
+        "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975"
+    ):
+        raise ValidationError("qualification profile Action revision mismatch")
+    permission = conditions.get("permission")
+    if (
+        not isinstance(permission, dict)
+        or permission.get("repository_write") is not False
+        or permission.get("github_comment_write") is not False
+        or permission.get("tool_policy")
+        != "fixture-tool-read-only-repository-snapshot-r1"
+    ):
+        raise ValidationError("qualification profile permission mismatch")
+
+    executor = conditions.get("executor_parameters")
+    if (
+        not isinstance(executor, dict)
+        or executor.get("max_workers") != 24
+        or executor.get("dispatch_concurrency") != 1
+        or executor.get("schedule_policy") != "sequential_by_repetition"
+        or executor.get("action_timeout_seconds") != 720
+        or executor.get("reviewer_job_timeout_seconds") != 900
+    ):
+        raise ValidationError("qualification profile executor parameters mismatch")
+    repetition = conditions.get("repetition_condition")
+    if repetition != {
+        "iterations": 2,
+        "order": [1, 2],
+        "external_failure_policy": "repeat_same_repetition_with_new_attempt_identity",
+        "result_reuse": "forbidden",
+    }:
+        raise ValidationError("qualification profile repetition condition mismatch")
+    gate = conditions.get("qualification_gate")
+    individual = gate.get("individual_pass_condition") if isinstance(gate, dict) else None
+    if (
+        not isinstance(individual, dict)
+        or individual.get("result") != "pass"
+        or individual.get("quality_score") != 4
+        or individual.get("required_finding_miss") != 0
+        or individual.get("false_positive") != 0
+        or individual.get("review_contract_violation") != 0
+        or individual.get("reported_model_matches_requested") is not True
+        or individual.get("measurement_complete") is not True
+        or not isinstance(gate.get("stop_conditions"), list)
+        or len(gate["stop_conditions"]) != 4
+    ):
+        raise ValidationError("qualification gate mismatch")
+    if value.get("execution") != {
+        "planned_slots": 2,
+        "max_workers": 24,
+        "actual_concurrency": 1,
+        "state": "not_issued",
+    }:
+        raise ValidationError("qualification execution state mismatch")
+    scope = value.get("scope")
+    if (
+        not isinstance(scope, dict)
+        or scope.get("quality_claim") != "not_observed"
+        or scope.get("kpi_comparison") != "not_authorized"
+        or scope.get("candidate_a") != "not_authorized"
+        or scope.get("runtime_projection") != "not_authorized"
+    ):
+        raise ValidationError("qualification scope boundary mismatch")
+
+    return {
+        "profile_id": profile_id,
+        "verified_artifacts": verified_artifacts,
+        "planned_slots": [
+            {
+                "case_id": "PRR-C01",
+                "fixture_revision": "r3",
+                "variant": "agentic-retrieval",
+                "repetition": repetition_number,
+            }
+            for repetition_number in (1, 2)
+        ],
+    }
+
+
+def preflight_qualification(profile_path: Path, output_path: Path) -> dict:
+    profile = _load_json(profile_path)
+    validation = validate_qualification_profile(profile)
+    relative_profile = profile_path.resolve().relative_to(INSTANCE_ROOT.resolve()).as_posix()
+    receipt = {
+        "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v1",
+        "preflight_id": f"{validation['profile_id']}-preflight-r1",
+        "state": "ready_not_executed",
+        "profile": {
+            "profile_id": validation["profile_id"],
+            "path": relative_profile,
+            "sha256": _sha256(profile_path),
+        },
+        "validation_tool": {
+            "path": "tools/pr_review_measurement.py",
+            "sha256": _sha256(Path(__file__)),
+        },
+        "verified_artifacts": validation["verified_artifacts"],
+        "planned_slots": validation["planned_slots"],
+        "predicates": {
+            "case_design_audit": "satisfied",
+            "source_to_core_input_mapping": "satisfied",
+            "case_specific_snapshot": "satisfied",
+            "profile_conditions": "satisfied",
+            "fresh_n2_plan": "satisfied",
+        },
+        "execution": {
+            "state": "not_issued",
+            "authorization": "not_granted_by_preflight",
+            "allowed_after_separate_authorization": "two sequential Core Baseline qualification slots only",
+        },
+        "forbidden_scope": [
+            "Candidate A",
+            "N=5 comparison",
+            "Integration measurement",
+            "quality or speed claim before terminal N=2 results",
+            "target repository write or GitHub comment",
+        ],
+    }
+    _write_json_once(output_path, receipt)
+    return receipt
+
+
 def validate_profile(
     profile_id: str,
     case_id: str,
@@ -1244,6 +1558,12 @@ def _build_parser() -> argparse.ArgumentParser:
     validate_profile_parser.add_argument("--repetition", required=True, type=int)
     validate_profile_parser.add_argument("--model-requested", required=True)
 
+    preflight_qualification_parser = subparsers.add_parser(
+        "preflight-qualification"
+    )
+    preflight_qualification_parser.add_argument("--profile", required=True, type=Path)
+    preflight_qualification_parser.add_argument("--output", required=True, type=Path)
+
     collect = subparsers.add_parser("collect-review")
     collect.add_argument("--raw-output", required=True, type=Path)
     collect.add_argument("--action-conclusion", required=True)
@@ -1310,6 +1630,9 @@ def main() -> int:
                 args.model_requested,
             )
             print(json.dumps(profile, ensure_ascii=False, indent=2))
+        elif args.command == "preflight-qualification":
+            receipt = preflight_qualification(args.profile, args.output)
+            print(json.dumps(receipt, ensure_ascii=False, indent=2))
         elif args.command == "collect-review":
             metadata = collect_review(
                 args.raw_output,

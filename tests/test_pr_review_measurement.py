@@ -17,9 +17,11 @@ PROFILE_ID = "pr-review-agentic-retrieval-c01-qualification-n2-r1"
 sys.path.insert(0, str(INSTANCE_ROOT / "tools"))
 
 import pr_review_measurement as measurement
+import pr_review_qualification as qualification
 import pr_review_authority_collector as authority_collector
 import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
+import pr_review_repository_snapshot_r2 as repository_snapshot_r2
 
 
 @pytest.fixture
@@ -169,6 +171,190 @@ def test_prr_c01_r2_rejects_missing_related_path():
     assert not measurement._finding_identity_matches_v2(expected, actual)
 
 
+def test_prr_c01_r3_is_fresh_held_out_fixture_candidate():
+    receipt = measurement.validate_fixture_revision("PRR-C01", "r3")
+    r2_input_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "input.json"
+    r2_oracle_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r2" / "oracle.json"
+    r3_input_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "input.json"
+    r3_oracle_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "oracle.json"
+    r2_input = json.loads(r2_input_path.read_text(encoding="utf-8"))
+    r3_input = json.loads(r3_input_path.read_text(encoding="utf-8"))
+    r3_oracle = json.loads(r3_oracle_path.read_text(encoding="utf-8"))
+    quality_contract = json.loads(
+        (
+            INSTANCE_ROOT
+            / "rating-contracts"
+            / "pr-review-finding-quality-v3.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert receipt["fixture_revision"] == "r3"
+    assert receipt["expected_findings"] == 1
+    assert receipt["clean_control"] is False
+    assert receipt["input_sha256"] != hashlib.sha256(r2_input_path.read_bytes()).hexdigest()
+    assert receipt["oracle_sha256"] != hashlib.sha256(r2_oracle_path.read_bytes()).hexdigest()
+    assert r3_input["pr"] != r2_input["pr"]
+    assert set(r3_input["changed_paths"]).isdisjoint(r2_input["changed_paths"])
+    assert set(r3_oracle["expected_findings"][0]["paths"]) == set(
+        r3_input["changed_paths"]
+    )
+    assert quality_contract["supported_case_revisions"] == ["PRR-C01/r3"]
+    assert quality_contract["state"] == "independent_qualification_satisfied"
+    assert quality_contract["heldout_boundary"] == {
+        "fixture": "PRR-C01/r3",
+        "created_before_reviewer_execution": True,
+        "excluded_development_fixture": "PRR-C01/r2",
+        "excluded_prior_results": True,
+    }
+
+
+@pytest.mark.parametrize(
+    ("path", "related_path"),
+    [
+        (
+            "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+            "evaluations/profiles/heldout-review.json",
+        ),
+        (
+            "evaluations/profiles/heldout-review.json",
+            "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+        ),
+    ],
+)
+def test_prr_c01_r3_accepts_either_relational_anchor(path: str, related_path: str):
+    fixture_input = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "input.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
+    )["expected_findings"][0]
+    actual = {
+        "category": "repository_discipline",
+        "rule_id": "prompt_evaluation_separation",
+        "path": path,
+        "related_paths": [related_path],
+        "line_start": 1,
+        "line_end": 1,
+        "severity": "major",
+        "message": "レビュー制御と実行条件を同じ比較単位で変更しているため分離する。",
+    }
+
+    measurement.validate_review_output_v2(
+        {"findings": [actual], "summary": _summary_for([actual])},
+        set(fixture_input["changed_paths"]),
+    )
+    assert measurement._finding_identity_matches_v2(expected, actual)
+
+
+def test_prr_c01_r3_rejects_incomplete_relational_identity():
+    expected = json.loads(
+        (measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "oracle.json").read_text(
+            encoding="utf-8"
+        )
+    )["expected_findings"][0]
+    actual = {
+        "category": "repository_discipline",
+        "rule_id": "prompt_evaluation_separation",
+        "path": "evaluations/profiles/heldout-review.json",
+        "related_paths": [],
+        "line_start": 1,
+        "line_end": 1,
+        "severity": "major",
+        "message": "実行条件を変更している。",
+    }
+
+    assert not measurement._finding_identity_matches_v2(expected, actual)
+
+
+def test_prr_c01_r3_independent_audit_receipt_and_state():
+    receipt_path = (
+        INSTANCE_ROOT / "contracts" / "prr-c01-r3-case-design-audit-r1.json"
+    )
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    quality_contract = json.loads(
+        (
+            INSTANCE_ROOT
+            / "rating-contracts"
+            / "pr-review-finding-quality-v3.json"
+        ).read_text(encoding="utf-8")
+    )
+    case_readme = (
+        INSTANCE_ROOT / "cases" / "PRR-C01" / "r3" / "README.md"
+    ).read_text(encoding="utf-8")
+    cases_index = (INSTANCE_ROOT / "cases" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    ratings_index = (INSTANCE_ROOT / "rating-contracts" / "README.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert receipt["schema_version"] == "agent-execution-control-lab.case-design-audit/v1"
+    assert receipt["audit_id"] == "prr-c01-r3-case-design-audit-r1"
+    assert receipt["case_revision"] == "PRR-C01/r3"
+    assert receipt["producer_task_name"] == "prr_c01_r3_independent_audit"
+    assert receipt["decision"]["state"] == "satisfied"
+    assert all(
+        criterion["state"] == "satisfied"
+        for criterion in receipt["functional_gate"]
+    )
+    assert receipt["grader_checks"]["both_allowed_anchors_match"] is True
+    assert receipt["grader_checks"]["missing_related_path_rejected"] is True
+    assert receipt["remaining_gates"]["reviewer_execution"] == "not_executed"
+    assert receipt["remaining_gates"]["baseline_qualification"] == "not_qualified"
+    assert quality_contract["state"] == "independent_qualification_satisfied"
+    assert quality_contract["admission"]["current_state"] == (
+        "independent_qualification_satisfied"
+    )
+    assert quality_contract["admission"]["audit_receipt"] == (
+        "contracts/prr-c01-r3-case-design-audit-r1.json"
+    )
+    assert "independent_audit_satisfied" in case_readme
+    assert "Baseline未qualification" in cases_index
+    assert "Baseline未qualification" in ratings_index
+
+
+def test_fixture_schema_revisions_coexist_and_r3_is_indexed():
+    for revision in ("r1", "r2", "r3"):
+        measurement.validate_fixture_revision("PRR-C01", revision)
+
+    input_schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "fixture-input-r3.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    oracle_schema = json.loads(
+        (INSTANCE_ROOT / "schemas" / "fixture-oracle-r3.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    cases_index = (INSTANCE_ROOT / "cases" / "README.md").read_text(encoding="utf-8")
+    ratings_index = (INSTANCE_ROOT / "rating-contracts" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    schemas_index = (INSTANCE_ROOT / "schemas" / "README.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert input_schema["properties"]["schema_version"] == {"const": 3}
+    assert input_schema["properties"]["fixture_revision"] == {"const": "r3"}
+    assert input_schema["properties"]["review_contract_revision"] == {
+        "const": "pr-review-contract-r2"
+    }
+    assert oracle_schema["properties"]["schema_version"] == {"const": 3}
+    assert oracle_schema["properties"]["fixture_revision"] == {"const": "r3"}
+    assert "[`PRR-C01/r3`](PRR-C01/r3/README.md)" in cases_index
+    assert (
+        "[`pr-review-finding-quality-v3`](pr-review-finding-quality-v3.json)"
+        in ratings_index
+    )
+    assert "[fixture input r3](fixture-input-r3.schema.json)" in schemas_index
+    assert "[fixture oracle r3](fixture-oracle-r3.schema.json)" in schemas_index
+
+
 def test_all_measurement_json_files_are_syntactically_valid():
     json_paths = sorted(INSTANCE_ROOT.rglob("*.json"))
 
@@ -212,6 +398,94 @@ def test_qualification_profile_binds_only_planned_baseline_slots():
         measurement.validate_profile(
             PROFILE_ID, "PRR-C01", "agentic-retrieval", 3, "claude-sonnet-5"
         )
+
+
+def test_prr_c01_r3_qualification_preflight_is_reproducible_and_not_executed(
+    tmp_path: Path,
+):
+    profile_path = qualification.PROFILE_PATH
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    validation = measurement.validate_qualification_profile(profile)
+    expected_receipt = json.loads(qualification.PREFLIGHT_PATH.read_text(encoding="utf-8"))
+    output = tmp_path / "preflight.json"
+    actual_receipt = measurement.preflight_qualification(profile_path, output)
+
+    assert validation["planned_slots"] == [
+        {
+            "case_id": "PRR-C01",
+            "fixture_revision": "r3",
+            "variant": "agentic-retrieval",
+            "repetition": 1,
+        },
+        {
+            "case_id": "PRR-C01",
+            "fixture_revision": "r3",
+            "variant": "agentic-retrieval",
+            "repetition": 2,
+        },
+    ]
+    assert actual_receipt == expected_receipt
+    assert json.loads(output.read_text(encoding="utf-8")) == expected_receipt
+    assert actual_receipt["state"] == "ready_not_executed"
+    assert actual_receipt["execution"] == {
+        "state": "not_issued",
+        "authorization": "not_granted_by_preflight",
+        "allowed_after_separate_authorization": (
+            "two sequential Core Baseline qualification slots only"
+        ),
+    }
+
+
+def test_prr_c01_r3_qualification_preflight_rejects_repetition_drift():
+    profile_path = qualification.PROFILE_PATH
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    profile["comparison_conditions"]["repetition_condition"]["iterations"] = 3
+
+    with pytest.raises(measurement.ValidationError, match="repetition condition mismatch"):
+        measurement.validate_qualification_profile(profile)
+
+
+def test_prr_c01_r3_qualification_recovery_preserves_first_attempt_identity():
+    profiles = INSTANCE_ROOT / "profiles"
+    first = json.loads(
+        (profiles / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    second = json.loads(
+        (profiles / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    recovery = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
+
+    assert first["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r1"
+    assert first["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r3"
+    assert second["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r2"
+    assert second["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r4"
+    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r3"
+    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r5"
+
+
+def test_prr_c01_r3_qualification_failures_are_registered_write_once():
+    result_root = INSTANCE_ROOT / "results"
+    paths = sorted(result_root.glob("pr-review-core-baseline-qualification-r1-*.json"))
+    results = [json.loads(path.read_text(encoding="utf-8")) for path in paths]
+
+    assert [result["github_run_id"] for result in results] == [
+        "31253512886",
+        "31253838176",
+        "31254138818",
+    ]
+    assert [result["schema_version"] for result in results] == [3, 4, 5]
+    assert all(result["result"] == "execution_failed" for result in results)
+    assert all(result["quality_score"] is None for result in results)
+    assert qualification.validate_run_result(results[-1])
+    assert [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths] == [
+        "764981d1981ff8509efceada7c0dbfa3f054aefe3fd8ae751e87d4abe2b3fe85",
+        "bf42c0c6cd343645e79a029210da45c6988c7548f91687949f4439747ce02968",
+        "076c4686e7f4d7191b453306390a227453bc6b8665c2e7220ada02170e815299",
+    ]
 
 
 def test_r2_results_are_write_once_and_reclassified_as_diagnostic():
@@ -632,6 +906,49 @@ def test_repository_snapshot_and_fixture_tool_r3_preserve_read_boundary(tmp_path
         repository_snapshot._make_cleanup_writable(snapshot_root)
 
 
+def test_prr_c01_r3_repository_snapshot_has_case_specific_receipt(tmp_path: Path):
+    commit = "8cd97283e60f13393fb1302c601c9a4fe0a5381f"
+    availability = subprocess.run(
+        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+        cwd=REPOSITORY_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    if availability.returncode != 0:
+        pytest.skip("fixed target commit is unavailable in this checkout")
+
+    case_input_path = measurement.FIXTURE_ROOT / "PRR-C01" / "r3" / "input.json"
+    case_input = json.loads(case_input_path.read_text(encoding="utf-8"))
+    output = tmp_path / "snapshot-r3"
+    receipt = repository_snapshot_r2.materialize_snapshot(
+        REPOSITORY_ROOT, commit, case_input_path, output
+    )
+    snapshot_root = output / "repository"
+    try:
+        expected_receipt = json.loads(
+            (
+                INSTANCE_ROOT
+                / "contracts"
+                / "baseline-repository-snapshot-prr-c01-r3-r1.json"
+            ).read_text(encoding="utf-8")
+        )
+        assert receipt == expected_receipt
+        assert receipt["fixture"] == {
+            "case_id": "PRR-C01",
+            "revision": "r3",
+            "input_sha256": hashlib.sha256(case_input_path.read_bytes()).hexdigest(),
+        }
+        assert receipt["overlay_paths"] == case_input["changed_paths"]
+        assert not (snapshot_root / ".git").exists()
+        assert snapshot_root.stat().st_mode & 0o222 == 0
+        for change in case_input["changes"]:
+            path = snapshot_root / change["path"]
+            assert path.read_text(encoding="utf-8") == change["content_after"]
+            assert path.stat().st_mode & 0o222 == 0
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot_root)
+
+
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
     execution_file = tmp_path / "execution.json"
     execution_file.write_text(
@@ -962,11 +1279,101 @@ def test_summary_uses_only_passed_run_timings(tmp_path: Path, profile_stub):
     assert candidate["median_execution_ms"] == 1500
 
 
-def test_workflow_is_manual_read_only_and_pinned():
+def test_qualification_prepare_collect_and_grade_passes_fixed_r3_identity(tmp_path: Path):
+    prepared = tmp_path / "prepared"
+    snapshot_root = prepared / "repository"
+    try:
+        metadata = qualification.prepare_input(1, prepared)
+        fixture_input = json.loads(
+            (prepared / "review-input.json").read_text(encoding="utf-8")
+        )
+        paths = fixture_input["changed_paths"]
+        finding = {
+            "category": "repository_discipline",
+            "rule_id": "prompt_evaluation_separation",
+            "path": paths[0],
+            "related_paths": [paths[1]],
+            "line_start": 1,
+            "line_end": 1,
+            "severity": "major",
+            "message": "レビュー制御と評価条件を同じ変更へ混ぜているため分離する。",
+        }
+        raw_output = tmp_path / "raw-output.json"
+        raw_output.write_text(
+            json.dumps(
+                {"findings": [finding], "summary": _summary_for([finding])},
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+        execution_file = tmp_path / "execution.json"
+        execution_file.write_text(
+            json.dumps(
+                {
+                    "type": "result",
+                    "duration_ms": 1200,
+                    "num_turns": 6,
+                    "model": "claude-sonnet-5",
+                    "usage": {"input_tokens": 120, "output_tokens": 30},
+                    "total_cost_usd": 0.03,
+                }
+            ),
+            encoding="utf-8",
+        )
+        collected = tmp_path / "collected"
+        qualification.collect_review(
+            raw_output,
+            "success",
+            execution_file,
+            100,
+            1400,
+            "claude-sonnet-5",
+            prepared / "review-input.json",
+            collected,
+        )
+        result_path = tmp_path / "result.json"
+        result = qualification.grade_run(
+            1,
+            123456,
+            "claude-sonnet-5",
+            collected / "review-output.json",
+            collected / "review-metadata.json",
+            prepared / "prepare-metadata.json",
+            result_path,
+            "123456",
+        )
+
+        assert metadata["fixture_revision"] == "r3"
+        assert metadata["repetition"] == 1
+        assert not (prepared / "oracle.json").exists()
+        assert not (snapshot_root / ".git").exists()
+        assert (prepared / "pr_review_measurement.py").is_file()
+        assert not (prepared / "pr-review-measurement.py").exists()
+        subprocess.run(
+            [sys.executable, "pr-review-qualification.py", "--help"],
+            cwd=prepared,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        assert result["result"] == "pass"
+        assert result["quality_score"] == 4
+        assert result["quality"]["true_positive"] == 1
+        assert result["quality"]["false_negative"] == 0
+        assert result["quality"]["false_positive"] == 0
+        assert result["runtime"]["total_tokens"] == 150
+        assert qualification.validate_run_result(
+            json.loads(result_path.read_text(encoding="utf-8"))
+        )
+    finally:
+        repository_snapshot._make_cleanup_writable(snapshot_root)
+
+
+def test_workflow_is_fixed_to_first_read_only_qualification_slot():
     workflow = (
         REPOSITORY_ROOT / ".github" / "workflows" / "pr-review-measure-core.yml"
     ).read_text(encoding="utf-8")
-    contract = json.loads(measurement.CONTRACT_PATH.read_text(encoding="utf-8"))
+    profile = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
 
     assert "workflow_dispatch:" in workflow
     assert "pull_request:" not in workflow
@@ -974,17 +1381,35 @@ def test_workflow_is_manual_read_only_and_pinned():
     assert "gh pr comment" not in workflow
     assert "test ! -e oracle.json" in workflow
     assert "test ! -d .git" in workflow
-    assert contract["reviewer_executor"]["revision"] in workflow
+    assert "test ! -d repository/.git" in workflow
+    assert "test \"$REPETITION\" = \"1\"" in workflow
+    assert profile["comparison_conditions"]["agent_environment"]["action_revision"] in workflow
     assert "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" in workflow
     assert "github_token: ${{ github.token }}" in workflow
     assert "jq -c 'del(.\"$schema\")'" in workflow
     assert "evaluations/targets/agent-execution-control-lab/" in workflow
     assert "scripts/pr_review_measurement.py" not in workflow
     assert "pr-review-measurements/" not in workflow
-    assert "fixture-tool file:*)" not in workflow
-    assert "validate-profile" in workflow
-    assert "--profile-id \"$PROFILE_ID\"" in workflow
-    grade_block = workflow.split("- name: Grade fixed finding identities", 1)[1].split(
-        "- name: Record missing review result", 1
+    assert "deterministic-input" not in workflow
+    assert '--allowedTools "Bash(./fixture-tool:*)"' in workflow
+    assert "pr_review_qualification.py" in workflow
+    assert "review-output-r2.schema.json" in workflow
+    assert hashlib.sha256(workflow.encode()).hexdigest() == profile[
+        "comparison_conditions"
+    ]["workflow"]["sha256"]
+
+    prompt_block = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
     )[0]
-    assert "PROFILE_ID: ${{ inputs.profile_id }}" in grade_block
+    prompt_text = "\n".join(
+        line[12:] if line.startswith("            ") else line
+        for line in prompt_block.splitlines()
+    ).rstrip() + "\n"
+    expected_prompt = (
+        INSTANCE_ROOT
+        / "prompts"
+        / "baselines"
+        / "claude-pr-review-core-r3"
+        / "core-prompt.md"
+    ).read_text(encoding="utf-8")
+    assert prompt_text == expected_prompt

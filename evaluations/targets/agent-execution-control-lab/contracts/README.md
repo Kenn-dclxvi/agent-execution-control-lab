@@ -9,5 +9,9 @@
 | [`baseline-input-mapping-r3`](baseline-input-mapping-r3.json) | `satisfied` | `.git`なしread-only snapshot接続後のsource-to-Core入力対応 |
 | [`baseline-authority-selection-r1`](baseline-authority-selection-r1.json) | 選択・接続済み | 固定target treeのroot `CLAUDE.md`解決とchanged path局所`AGENTS.md`の適用順・content identity |
 | [`baseline-repository-snapshot-r1`](baseline-repository-snapshot-r1.json) | 固定済み | target treeとPRR-C01/r2 overlayから生成するrepository snapshot identity |
+| [`baseline-repository-snapshot-prr-c01-r3-r1`](baseline-repository-snapshot-prr-c01-r3-r1.json) | 固定済み・未実行 | target treeと独立監査済みPRR-C01/r3 overlayから生成するqualification用snapshot identity |
+| [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json) | 初回実行条件の履歴 | repetition 1はreviewer開始前に`execution_failed`となった。receiptは変更せず保持 |
+| [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r2-preflight`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r2-preflight.json) | 二回目の実行条件の履歴 | reviewerは起動したが構造化結果を返せず、結果は`execution_failed`。receiptは変更せず保持 |
+| [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r3-preflight`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r3-preflight.json) | 三回目の実行条件の履歴 | reviewerは動作したがターン上限に達し、結果は`execution_failed`。receiptは変更せず保持 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
