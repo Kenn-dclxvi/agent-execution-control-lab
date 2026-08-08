@@ -457,14 +457,25 @@ def test_prr_c01_r3_qualification_recovery_preserves_first_attempt_identity():
             encoding="utf-8"
         )
     )
+    third = json.loads(
+        (profiles / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3.json").read_text(
+            encoding="utf-8"
+        )
+    )
     recovery = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
 
     assert first["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r1"
     assert first["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r3"
     assert second["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r2"
     assert second["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r4"
-    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r3"
-    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r5"
+    assert third["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r3"
+    assert third["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r5"
+    assert recovery["comparison_conditions"]["workflow"]["revision"] == "pr-review-qualify-core-r4"
+    assert recovery["comparison_conditions"]["run_result_schema"]["revision"] == "run-result-r6"
+    assert recovery["comparison_conditions"]["executor_parameters"]["max_turns"] is None
+    assert recovery["comparison_conditions"]["executor_parameters"]["turn_limit_source"] == (
+        "action_default_at_fixed_action_revision"
+    )
 
 
 def test_prr_c01_r3_qualification_failures_are_registered_write_once():
@@ -480,7 +491,6 @@ def test_prr_c01_r3_qualification_failures_are_registered_write_once():
     assert [result["schema_version"] for result in results] == [3, 4, 5]
     assert all(result["result"] == "execution_failed" for result in results)
     assert all(result["quality_score"] is None for result in results)
-    assert qualification.validate_run_result(results[-1])
     assert [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths] == [
         "764981d1981ff8509efceada7c0dbfa3f054aefe3fd8ae751e87d4abe2b3fe85",
         "bf42c0c6cd343645e79a029210da45c6988c7548f91687949f4439747ce02968",
@@ -635,7 +645,7 @@ def test_baseline_prompt_r3_binds_satisfied_input_mapping():
     assert states["changed_file_content"] == "satisfied"
 
 
-def test_baseline_execution_parity_blocks_transformed_core_path():
+def test_baseline_execution_parity_r1_is_preserved_as_superseded_history():
     contract_path = (
         INSTANCE_ROOT / "contracts" / "baseline-execution-parity-r1.json"
     )
@@ -653,8 +663,12 @@ def test_baseline_execution_parity_blocks_transformed_core_path():
         check=True,
         capture_output=True,
     ).stdout
-    core_workflow_path = REPOSITORY_ROOT / core["workflow_path"]
-    core_workflow = core_workflow_path.read_bytes()
+    core_workflow = subprocess.run(
+        ["git", "show", f'29bb7edcac2908772bef7065c8a45ca670f3283d:{core["workflow_path"]}'],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
     profile_path = INSTANCE_ROOT / "profiles" / f'{core["profile_id"]}.json'
 
     assert contract["schema_version"] == (
@@ -713,7 +727,7 @@ def test_baseline_execution_parity_blocks_transformed_core_path():
         assert entry["classification"] == "execution_parity_diagnostic_only"
 
 
-def test_baseline_execution_parity_is_indexed_and_bound_to_admission_gate():
+def test_baseline_measurement_boundary_is_indexed_and_bound_to_active_profile():
     contracts_index = (INSTANCE_ROOT / "contracts" / "README.md").read_text(
         encoding="utf-8"
     )
@@ -724,13 +738,40 @@ def test_baseline_execution_parity_is_indexed_and_bound_to_admission_gate():
         INSTANCE_ROOT / "specifications" / "core-baseline-r1.md"
     ).read_text(encoding="utf-8")
     instance_index = (INSTANCE_ROOT / "README.md").read_text(encoding="utf-8")
+    boundary = json.loads(
+        (INSTANCE_ROOT / "contracts" / "baseline-measurement-boundary-r1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    profile = json.loads(qualification.PROFILE_PATH.read_text(encoding="utf-8"))
+    workflow = (REPOSITORY_ROOT / ".github/workflows/pr-review-measure-core.yml").read_text(
+        encoding="utf-8"
+    )
 
     assert "baseline-execution-parity-r1.json" in contracts_index
+    assert "baseline-measurement-boundary-r1.json" in contracts_index
     assert "baseline-execution-parity-r1.schema.json" in schemas_index
-    assert "実行互換監査" in baseline_design
-    assert "現在のCore経路は元workflowをそのまま移したBaselineではない" in baseline_design
-    assert "Core Baselineの追加runを発行しない" in baseline_design
-    assert "実行互換監査。`unsatisfied`" in instance_index
+    assert "baseline-measurement-boundary-r1.schema.json" in schemas_index
+    assert boundary["state"] == "satisfied"
+    assert boundary["baseline_definition"]["excluded_reference"].endswith(
+        ".github/workflows/claude-pr-review.yml"
+    )
+    assert boundary["prior_audit"]["effect"] == (
+        "履歴として保持するが、Core Baseline admissionのgateには使用しない"
+    )
+    assert profile["comparison_conditions"]["measurement_boundary"] == {
+        "path": "contracts/baseline-measurement-boundary-r1.json",
+        "sha256": hashlib.sha256(
+            (INSTANCE_ROOT / "contracts" / "baseline-measurement-boundary-r1.json").read_bytes()
+        ).hexdigest(),
+        "required_state": "satisfied",
+    }
+    assert "測定用の変更" in baseline_design
+    assert "インストール済みの`.github/workflows/claude-pr-review.yml`は、測定設計の比較元にしない" in baseline_design
+    assert "測定境界" in instance_index
+    assert "git init -q" in workflow
+    assert "test ! -d repository/.git" in workflow
+    assert "--max-turns" not in workflow
 
 
 def test_fixture_tool_matches_prr_c01_r2_logical_input(tmp_path: Path):
@@ -1478,8 +1519,10 @@ def test_workflow_is_fixed_to_first_read_only_qualification_slot():
     assert "pull-requests: write" not in workflow
     assert "gh pr comment" not in workflow
     assert "test ! -e oracle.json" in workflow
-    assert "test ! -d .git" in workflow
+    assert "git init -q" in workflow
+    assert 'git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"' in workflow
     assert "test ! -d repository/.git" in workflow
+    assert "--max-turns" not in workflow
     assert "test \"$REPETITION\" = \"1\"" in workflow
     assert profile["comparison_conditions"]["agent_environment"]["action_revision"] in workflow
     assert "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" in workflow

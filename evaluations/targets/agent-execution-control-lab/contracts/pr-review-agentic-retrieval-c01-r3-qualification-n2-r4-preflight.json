@@ -1,0 +1,117 @@
+{
+  "execution": {
+    "allowed_after_separate_authorization": "two sequential Core Baseline qualification slots only",
+    "authorization": "not_granted_by_preflight",
+    "state": "not_issued"
+  },
+  "forbidden_scope": [
+    "Candidate A",
+    "N=5 comparison",
+    "Integration measurement",
+    "quality or speed claim before terminal N=2 results",
+    "target repository write or GitHub comment"
+  ],
+  "planned_slots": [
+    {
+      "case_id": "PRR-C01",
+      "fixture_revision": "r3",
+      "repetition": 1,
+      "variant": "agentic-retrieval"
+    },
+    {
+      "case_id": "PRR-C01",
+      "fixture_revision": "r3",
+      "repetition": 2,
+      "variant": "agentic-retrieval"
+    }
+  ],
+  "predicates": {
+    "case_design_audit": "satisfied",
+    "case_specific_snapshot": "satisfied",
+    "fresh_n2_plan": "satisfied",
+    "profile_conditions": "satisfied",
+    "source_to_core_input_mapping": "satisfied"
+  },
+  "preflight_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4-preflight-r1",
+  "profile": {
+    "path": "profiles/pr-review-agentic-retrieval-c01-r3-qualification-n2-r4.json",
+    "profile_id": "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4",
+    "sha256": "9f3c82294474acf795ce9b2beaa04cecdba07d45290d1ead339b8b92afcfc79f"
+  },
+  "schema_version": "agent-execution-control-lab.pr-review-qualification-preflight/v1",
+  "state": "ready_not_executed",
+  "validation_tool": {
+    "path": "tools/pr_review_measurement.py",
+    "sha256": "224d674a5bfde8759bf045cc2b5be1446fbb24d2dc1fdb43364609351febb2db"
+  },
+  "verified_artifacts": [
+    {
+      "path": "cases/PRR-C01/r3/input.json",
+      "sha256": "8d51a4dc3bf9eba5486a08e4bb7099bcc85b2f23ee90acfa4cc0a8c0e4758ecf"
+    },
+    {
+      "path": "cases/PRR-C01/r3/oracle.json",
+      "sha256": "ce37506416d2309110bfbe2ef9eb4ea3fbcb8a58cf01a450238cddac3fac8089"
+    },
+    {
+      "path": "contracts/prr-c01-r3-case-design-audit-r1.json",
+      "sha256": "fbb0966615edf91d5ffee016681696f4c3161c2369a9a5800ff30639b95a4584"
+    },
+    {
+      "path": "contracts/baseline-input-mapping-r3.json",
+      "sha256": "eb1ef8c5373a7cfc3e28eb5ec6f0af4caa8eab980327e97c15bc5dcf51fb9cac"
+    },
+    {
+      "path": "contracts/baseline-repository-snapshot-prr-c01-r3-r1.json",
+      "sha256": "2aa1b6ea47ecbb4e78220bd353cb22b16259438ef41bd9d98d01f7aac4048a16"
+    },
+    {
+      "path": "tools/pr_review_repository_snapshot_r2.py",
+      "sha256": "692f488c7cd0ce8a93d0d5b257a7f8513403094ef51de88d8045d2da8c64d7ad"
+    },
+    {
+      "path": "contracts/baseline-measurement-boundary-r1.json",
+      "sha256": "bb3919c08d1944f90215a799988ccae259893c04aa25c6e792d0860ffb251c10"
+    },
+    {
+      "path": "contracts/baseline-authority-selection-r1.json",
+      "sha256": "8db6168ee5d8e97881c7ca7e2c7a71001a603bf2ff3c3d5aad966d5169f698e5"
+    },
+    {
+      "path": "prompts/baselines/claude-pr-review-core-r3/manifest.json",
+      "sha256": "5d06748acac944031edbf0d534533530fd9e1a2ef2c81a3ab625ce0f25523eda"
+    },
+    {
+      "path": "prompts/baselines/claude-pr-review-core-r3/core-prompt.md",
+      "sha256": "9a61d9f4a2ce386802ed561149dbbbc0969bb7ac97542f9ba160749144c6acfd"
+    },
+    {
+      "path": "rating-contracts/review-contract-r2.md",
+      "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"
+    },
+    {
+      "path": "schemas/review-output-r2.schema.json",
+      "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"
+    },
+    {
+      "path": "schemas/run-result-r6.schema.json",
+      "sha256": "38e1376c1ed9c513f2fd0d393fcb2012b85a3ccc38fa89bd15e26fed8ef98fa4"
+    },
+    {
+      "path": "tools/pr_review_qualification.py",
+      "sha256": "5e9d1ff5d88d9873a2a464d7737a89bb2f134d484bdef0648cfef5a4e79000ff"
+    },
+    {
+      "path": "rating-contracts/pr-review-finding-quality-v3.json",
+      "sha256": "657327caba77cdf94bf7ffbdfa81de595bbf89c9c5e32504f440834b7ad943c6"
+    },
+    {
+      "path": "tools/pr_review_fixture_tool_r3.py",
+      "sha256": "4796243d08cd1762c1b785a067c93799d743aa2b745d48990382838d3fe04c3b"
+    },
+    {
+      "path": ".github/workflows/pr-review-measure-core.yml",
+      "sha256": "52603df4601e9330d25405508ff48dc76cfa71dd7674e829b45fa78a0e2721a8"
+    }
+  ]
+}

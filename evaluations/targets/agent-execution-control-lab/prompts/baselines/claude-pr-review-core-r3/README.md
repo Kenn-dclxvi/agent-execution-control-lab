@@ -8,3 +8,5 @@
 - 入力対応: [`baseline-input-mapping-r3`](../../../contracts/baseline-input-mapping-r3.json)
 
 source-to-Core入力対応後、PRR-C01/r3の独立case設計監査とfresh N=2 preflightを別アーティファクトとして作成した。[初回条件](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)と[二回目の条件](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r2-preflight.json)は測定環境の問題で終了した。[三回目の条件](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r3-preflight.json)ではreviewerが動作したが、ターン上限までに構造化結果を返せなかった。後続の[`実行互換監査`](../../../contracts/baseline-execution-parity-r1.json)で、入力値は対応していても元workflowと実行条件が一致しないことを確認した。prompt manifest自体は代表receipt PRR-C01/r2へ固定した履歴identityのまま変更しない。Core Baselineの品質はまだ観測していない。
+
+比較元の再確認により、target repositoryへインストール済みのworkflowとの完全一致ではなく、Claude Code純正相当のレビュー条件を保持して測定可能にすることが目的だと確定した。[`測定境界`](../../../contracts/baseline-measurement-boundary-r1.json)を現在の正本とし、先の実行互換監査はadmission gateに使用しない。四回目の条件は[`r4 preflight`](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r4-preflight.json)へ固定した。

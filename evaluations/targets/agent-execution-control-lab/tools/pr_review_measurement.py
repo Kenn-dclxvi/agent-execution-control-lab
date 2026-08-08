@@ -31,6 +31,7 @@ QUALIFICATION_PROFILE_IDS = {
     "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1",
     "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2",
     "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3",
+    "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4",
 }
 
 CASE_IDS = tuple(f"PRR-C0{number}" for number in range(1, 7))
@@ -1083,6 +1084,11 @@ def validate_qualification_profile(value: Any) -> dict:
         ("quality_rating", "path", "contract_sha256", "quality rating"),
         ("permission", "fixture_tool_path", "fixture_tool_sha256", "fixture tool"),
     )
+    if profile_id == "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4":
+        bindings = (
+            ("measurement_boundary", "path", "sha256", "measurement boundary"),
+            *bindings,
+        )
     loaded: dict[str, Any] = {}
     for binding_name, path_key, sha_key, label in bindings:
         path, receipt = _bound_instance_artifact(
@@ -1109,10 +1115,19 @@ def validate_qualification_profile(value: Any) -> dict:
         != fixture["case_design_audit_path"]
     ):
         raise ValidationError("quality rating admission mismatch")
+    if profile_id == "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4":
+        measurement_boundary = loaded["measurement boundary"]
+        if (
+            measurement_boundary.get("audit_id") != "baseline-measurement-boundary-r1"
+            or measurement_boundary.get("state")
+            != conditions["measurement_boundary"].get("required_state")
+        ):
+            raise ValidationError("measurement boundary mismatch")
     expected_workflow_revision = {
         "pr-review-agentic-retrieval-c01-r3-qualification-n2-r1": "pr-review-qualify-core-r1",
         "pr-review-agentic-retrieval-c01-r3-qualification-n2-r2": "pr-review-qualify-core-r2",
         "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3": "pr-review-qualify-core-r3",
+        "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4": "pr-review-qualify-core-r4",
     }[profile_id]
     workflow = conditions.get("workflow")
     if workflow != {
@@ -1160,6 +1175,15 @@ def validate_qualification_profile(value: Any) -> dict:
         or executor.get("reviewer_job_timeout_seconds") != 900
     ):
         raise ValidationError("qualification profile executor parameters mismatch")
+    if profile_id == "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4":
+        if (
+            executor.get("max_turns") is not None
+            or executor.get("turn_limit_source")
+            != "action_default_at_fixed_action_revision"
+        ):
+            raise ValidationError("qualification turn limit mismatch")
+    elif executor.get("max_turns") != 12:
+        raise ValidationError("qualification historical turn limit mismatch")
     repetition = conditions.get("repetition_condition")
     if repetition != {
         "iterations": 2,

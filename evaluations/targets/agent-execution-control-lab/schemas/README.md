@@ -12,10 +12,12 @@
 - [authority packet r1](authority-packet-r1.schema.json)
 - [repository snapshot r1](repository-snapshot-r1.schema.json)
 - [baseline execution parity r1](baseline-execution-parity-r1.schema.json)
+- [baseline measurement boundary r1](baseline-measurement-boundary-r1.schema.json)
 - [diagnostic run result r1](run-result-r1.schema.json)
 - [qualification以後のrun result r2](run-result-r2.schema.json)
 - [PRR-C01/r3 Core Baseline qualification run result r3](run-result-r3.schema.json)
 - [PRR-C01/r3 Core Baseline qualification recovery run result r4](run-result-r4.schema.json)
 - [PRR-C01/r3 Core Baseline qualification recovery run result r5](run-result-r5.schema.json)
+- [PRR-C01/r3 Core Baseline Action-workspace recovery run result r6](run-result-r6.schema.json)
 
-r1は診断経路の履歴schemaである。`fixture-oracle-r2`と`review-output-r2`は複数path finding identityを扱うcase設計で導入した。`fixture-input-r3`と`fixture-oracle-r3`は独立監査済みPRR-C01/r3を既存revisionから分離した。`run-result-r3`は初回実行の条件を、`run-result-r4`は固定commitを取得できるようにした条件を保持する。`run-result-r5`はreviewerの読取り権限と結果回収経路を修正した条件である。過去のschemaとresultは事後変換しない。
+r1は診断経路の履歴schemaである。`fixture-oracle-r2`と`review-output-r2`は複数path finding identityを扱うcase設計で導入した。`fixture-input-r3`と`fixture-oracle-r3`は独立監査済みPRR-C01/r3を既存revisionから分離した。`run-result-r3`は初回実行の条件を、`run-result-r4`は固定commitを取得できるようにした条件を、`run-result-r5`はreviewerの読取り権限と結果回収経路を修正した条件を保持する。`run-result-r6`はAction用git workspaceとAction既定turn条件を使用する条件である。過去のschemaとresultは事後変換しない。

@@ -17,19 +17,19 @@ import pr_review_measurement as measurement
 
 INSTANCE_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-PROFILE_ID = "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3"
+PROFILE_ID = "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4"
 PROFILE_PATH = INSTANCE_ROOT / "profiles" / f"{PROFILE_ID}.json"
 PREFLIGHT_PATH = (
     INSTANCE_ROOT
     / "contracts"
-    / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r3-preflight.json"
+    / "pr-review-agentic-retrieval-c01-r3-qualification-n2-r4-preflight.json"
 )
 SNAPSHOT_RECEIPT_PATH = (
     INSTANCE_ROOT
     / "contracts"
     / "baseline-repository-snapshot-prr-c01-r3-r1.json"
 )
-WORKFLOW_REVISION = "pr-review-qualify-core-r3"
+WORKFLOW_REVISION = "pr-review-qualify-core-r4"
 COMPARISON_REVISION = "pr-review-core-baseline-qualification-r1"
 
 
@@ -272,7 +272,7 @@ def validate_run_result(value: Any) -> dict:
         "quality_rating_contract": "pr-review-finding-quality-v1",
         "fixture_revision": "r1",
     })
-    if value.get("schema_version") != 5:
+    if value.get("schema_version") != 6:
         raise QualificationError("qualification result schema mismatch")
     if value.get("comparison_revision") != COMPARISON_REVISION:
         raise QualificationError("qualification comparison identity mismatch")
@@ -351,7 +351,7 @@ def grade_run(
     )
     conditions = profile["comparison_conditions"]
     run = {
-        "schema_version": 5,
+        "schema_version": 6,
         "comparison_revision": COMPARISON_REVISION,
         "profile_id": PROFILE_ID,
         "quality_rating_contract": "pr-review-finding-quality-v3",
@@ -412,7 +412,7 @@ def record_terminal(
     fixture_path, _ = measurement._fixture_paths("PRR-C01", "r3")
     fixture = measurement.validate_fixture_input(_load_json(fixture_path), "PRR-C01")
     run = {
-        "schema_version": 5,
+        "schema_version": 6,
         "comparison_revision": COMPARISON_REVISION,
         "profile_id": PROFILE_ID,
         "quality_rating_contract": "pr-review-finding-quality-v3",
