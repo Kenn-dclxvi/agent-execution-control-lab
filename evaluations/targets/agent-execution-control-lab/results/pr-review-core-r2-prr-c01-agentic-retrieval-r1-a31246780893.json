@@ -1,0 +1,69 @@
+{
+  "attempt": 31246780893,
+  "base_sha": "1111111111111111111111111111111111111111",
+  "case_id": "PRR-C01",
+  "comparison_revision": "pr-review-core-r2",
+  "fixture_revision": "r1",
+  "github_run_id": "31246780893",
+  "head_sha": "1111111111111111111111111111111111111112",
+  "model": {
+    "reported": "claude-sonnet-5",
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-agentic-retrieval-c01-qualification-n2-r1",
+  "quality": {
+    "category_accuracy": 0,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 1,
+    "false_positive": 2,
+    "line_accuracy": 1,
+    "observed": true,
+    "path_accuracy": 1,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": true,
+    "true_positive": 0
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v1",
+  "quality_score": 1,
+  "repetition": 1,
+  "result": "quality_failed",
+  "result_id": "pr-review-core-r2:PRR-C01:agentic-retrieval:r1:a31246780893",
+  "reviewer_executor": {
+    "claude_authentication": "claude_code_oauth_token",
+    "github_authentication": "job_scoped_github_token",
+    "identity": "anthropics/claude-code-action",
+    "permission_profile": "review-read-only-r1",
+    "resolved_at": "2026-08-08",
+    "resolved_from": "refs/tags/v1^{}",
+    "revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "sandbox": "claude-code-action-default",
+    "timeout_seconds": 900,
+    "tool_policies": {
+      "agentic-retrieval": "fixture-tool-read-only-r1",
+      "deterministic-input": "prepared-input-read-only-r1"
+    },
+    "type": "github_action"
+  },
+  "runtime": {
+    "input_tokens": 103899,
+    "output_tokens": 7238,
+    "reported_cost_usd": 0.1498427,
+    "total_tokens": 111137,
+    "turns": 4
+  },
+  "schema_version": 2,
+  "timing": {
+    "action_step_ms": 96207,
+    "e2e_ms": null,
+    "execution_ms": 96207,
+    "input_ms": 0,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": 76657,
+    "setup_ms": null
+  },
+  "variant": "agentic-retrieval",
+  "workflow_revision": "pr-review-measure-core-r2"
+}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -123,6 +124,28 @@ def test_qualification_profile_binds_only_planned_baseline_slots():
         measurement.validate_profile(
             PROFILE_ID, "PRR-C01", "agentic-retrieval", 3, "claude-sonnet-5"
         )
+
+
+def test_qualification_results_are_write_once_indexed_and_stop_below_four():
+    results_root = INSTANCE_ROOT / "results"
+    paths = sorted(results_root.glob("pr-review-core-r2-*.json"))
+    results = [
+        measurement.validate_run_result(json.loads(path.read_text(encoding="utf-8")))
+        for path in paths
+    ]
+    index = (results_root / "README.md").read_text(encoding="utf-8")
+
+    assert [result["repetition"] for result in results] == [1, 2]
+    assert [result["quality_score"] for result in results] == [1, 4]
+    assert all(result["profile_id"] == PROFILE_ID for result in results)
+    assert all(result["runtime"]["total_tokens"] for result in results)
+    assert all(result["timing"]["execution_ms"] for result in results)
+    assert [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths] == [
+        "524596702724620a511e8686286afdfc2ec14ea003d6bd22f213619b514a6d50",
+        "86a80ebddab68a4efd67999f6a7dcdf81ac102e9ec8dc8af232e8b19af9fe85b",
+    ]
+    assert "qualification不成立" in index
+    assert "pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md" in index
 
 
 def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):

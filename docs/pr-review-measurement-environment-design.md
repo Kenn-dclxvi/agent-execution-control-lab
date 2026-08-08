@@ -2,7 +2,7 @@
 
 ## 位置付け
 
-この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは`evaluations/targets/agent-execution-control-lab/`のnamespacedインスタンスへ配置している。PRR-C01の両variantによるprobeは新インスタンス登録前のdiagnostic runで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。そのr1を上書きせず、r2でquality rating contractとPRR-C01 agentic-retrieval N=2 qualification profileを固定した。qualification、正式result、残り5 case、Candidate A、N=5、Integrationは未実行・未評価である。
+この文書は、GitHub上のAI PRレビューを高速化する前に、現行方式と代替方式を同一条件で比較するための**測定環境設計**を固定する文書である。2026-08-08時点で、Phase 0〜3のcontract、固定fixture、collector、grader、Core Review workflowは`evaluations/targets/agent-execution-control-lab/`のnamespacedインスタンスへ配置している。PRR-C01の両variantによるprobeは新インスタンス登録前のdiagnostic runで、最終attemptの`deterministic-input`がquality gateを通過しなかったため停止している。そのr1を上書きせず、r2でquality rating contractとPRR-C01 agentic-retrieval N=2 qualification profileを固定して実行した。scoreが`1 / 4`だったためqualificationは不成立で停止し、残り5 case、Candidate A、N=5、Integrationは未実行・未評価である。
 
 現在の自動レビューは`.github/workflows/claude-pr-review.yml`で`anthropics/claude-code-action@v1`を使用している。現行workflowは、PR差分・説明の取得、適用規則の確認、レビュー判断、inline comment、総括commentまでをClaude Codeの一つのagent operationとして実行する。
 
@@ -31,17 +31,22 @@ Codex reviewer、別モデル、直接API、self-hosted runner、自動修正は
 | アーティファクト | 役割 | 現在状態 |
 |---|---|---|
 | `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r1.json` | comparison、Action、model、quality gateのidentity | `pilot_probe_blocked` |
-| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r2.json` | qualification以後のprofile、rating、3 KPI identity | 実行前 |
+| `evaluations/targets/agent-execution-control-lab/contracts/pr-review-core-r2.json` | qualification以後のprofile、rating、3 KPI identity | 固定済み |
 | `evaluations/targets/agent-execution-control-lab/rating-contracts/pr-review-finding-quality-v1.json` | hard gateを0〜4の`quality_score`へ写像 | 固定済み |
-| `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-qualification-n2-r1.json` | PRR-C01 baselineの独立2反復条件 | 実行前 |
+| `evaluations/targets/agent-execution-control-lab/profiles/pr-review-agentic-retrieval-c01-qualification-n2-r1.json` | PRR-C01 baselineの独立2反復条件 | 不成立（score `1 / 4`） |
 | `evaluations/targets/agent-execution-control-lab/cases/PRR-C01/r1`〜`PRR-C06/r1` | model-visible入力とmodel-invisible oracle | 6件固定済み・未qualification |
 | `evaluations/targets/agent-execution-control-lab/schemas/` | fixture、review output、run resultのschema | r1実装済み |
 | `evaluations/targets/agent-execution-control-lab/tools/pr_review_measurement.py` | fixture検証、入力生成、許可field抽出、採点、集計 | 実装済み |
 | `evaluations/targets/agent-execution-control-lab/tools/pr_review_fixture_tool.py` | Core Baseline用のread-only入力取得 | 実装済み |
-| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | PRR-C01 probe実行済み |
+| `evaluations/targets/agent-execution-control-lab/results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md` | PRR-C01 baseline qualificationの一次result索引 | 不成立・停止 |
+| `.github/workflows/pr-review-measure-core.yml` | 手動起動のprepare / review / grade | PRR-C01 qualification実行済み |
 | `tests/test_pr_review_measurement.py` | model-visible境界、hard gate、terminal status、workflow境界の回帰検証 | 実装済み |
 
 Core Review workflowは、prepare jobだけでrepositoryをcheckoutし、reviewer jobへはmodel-visible artifactだけを渡す。reviewer jobには`.git`と`oracle.json`が存在しないことを開始前に検証する。grader jobはreviewer終了後に別checkoutを行い、sanitized review outputだけをoracleへ照合する。r2ではdispatch時の`profile_id`をcase、variant、model、repetitionへ機械照合し、run JSONへ`quality_score`、`total_tokens`、`execution_ms`を保存する。
+
+## Qualification result
+
+PRR-C01のagentic-retrieval baselineを独立2反復で実行し、2件ともmodel identityと3 KPIを取得した。一方、quality scoreは`1 / 4`で、反復1にrequired finding miss 1件があった。2 / 2件score `4`のgateを満たさないためqualificationは不成立とし、後続スロットを発行しない。一次resultは[`PRR-C01 agentic-retrieval baseline qualification N=2`](../evaluations/targets/agent-execution-control-lab/results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)を正本とする。
 
 ## 現在の観測値
 
