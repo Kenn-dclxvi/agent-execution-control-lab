@@ -1,0 +1,69 @@
+{
+  "attempt": 31265402558,
+  "base_sha": "3333333333333333333333333333333333333331",
+  "case_id": "PRR-C01",
+  "comparison_revision": "pr-review-claude-code-core-qualification-r1",
+  "fixture_revision": "r4",
+  "github_run_id": "31265402558",
+  "head_sha": "3333333333333333333333333333333333333332",
+  "model": {
+    "reported": null,
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-claude-code-core-c01-r4-qualification-n2-r3",
+  "quality": {
+    "category_accuracy": 0,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 0,
+    "false_positive": 0,
+    "line_accuracy": 0,
+    "observed": false,
+    "path_accuracy": 0,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": false,
+    "true_positive": 0
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v5",
+  "quality_score": null,
+  "repetition": 1,
+  "result": "execution_failed",
+  "result_id": "pr-review-claude-code-core-qualification-r1:PRR-C01:claude-code-review-core:r1:a31265402558",
+  "reviewer_executor": {
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "authentication": "claude_code_oauth_token",
+    "claude_cli": "reported_by_action",
+    "runner": "ubuntu-latest",
+    "session_mode": "one_root_action_with_subagents_per_run"
+  },
+  "runtime": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "reported_cost_usd": null,
+    "total_tokens": null,
+    "turns": null
+  },
+  "schema_version": 9,
+  "timing": {
+    "action_step_ms": null,
+    "e2e_ms": null,
+    "execution_ms": null,
+    "input_ms": null,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": null,
+    "setup_ms": null
+  },
+  "variant": "claude-code-review-core",
+  "workflow_revision": "pr-review-qualify-claude-code-core-r3",
+  "workflow_trace": {
+    "complete": false,
+    "fixture_tool_permission_denials": 0,
+    "permission_denials_by_tool": {},
+    "reviewer_agent_batch_observed": false,
+    "reviewer_fixture_access_observed": false,
+    "reviewer_lifecycle_overlap_observed": false
+  }
+}
