@@ -9,5 +9,7 @@
 | [`baseline-input-mapping-r3`](baseline-input-mapping-r3.json) | `satisfied` | `.git`なしread-only snapshot接続後のsource-to-Core入力対応 |
 | [`baseline-authority-selection-r1`](baseline-authority-selection-r1.json) | 選択・接続済み | 固定target treeのroot `CLAUDE.md`解決とchanged path局所`AGENTS.md`の適用順・content identity |
 | [`baseline-repository-snapshot-r1`](baseline-repository-snapshot-r1.json) | 固定済み | target treeとPRR-C01/r2 overlayから生成するrepository snapshot identity |
+| [`baseline-repository-snapshot-prr-c01-r3-r1`](baseline-repository-snapshot-prr-c01-r3-r1.json) | 固定済み・未実行 | target treeと独立監査済みPRR-C01/r3 overlayから生成するqualification用snapshot identity |
+| [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json) | `ready_not_executed` | fresh N=2 Core Baseline機能qualificationの全入力と2 slotを固定。実行許可は含まない |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。

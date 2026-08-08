@@ -7,4 +7,4 @@
 - [`manifest.json`](manifest.json): snapshot receipt、materializer、fixture tool r3、schema、content hash
 - 入力対応: [`baseline-input-mapping-r3`](../../../contracts/baseline-input-mapping-r3.json)
 
-source-to-Core入力対応は成立した。これはBaseline qualification、profile、preflight、evaluation slotの成立を意味しない。次のblockはcase設計の独立qualificationである。
+source-to-Core入力対応後、PRR-C01/r3の独立case設計監査と[fresh N=2 preflight](../../../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)が別アーティファクトとして成立した。prompt manifest自体は代表receipt PRR-C01/r2へ固定した履歴identityのまま変更しない。Core Baselineの機能qualification結果は未観測であり、slotも未発行である。

@@ -1,0 +1,21 @@
+{
+  "schema_version": 3,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r3",
+  "clean_control": false,
+  "expected_findings": [
+    {
+      "category": "repository_discipline",
+      "rule_id": "prompt_evaluation_separation",
+      "paths": [
+        "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+        "evaluations/profiles/heldout-review.json"
+      ],
+      "locations": [
+        {"path": "prompts/candidates/heldout-review/files/AGENTS.md.txt", "line_start": 1, "line_end": 1},
+        {"path": "evaluations/profiles/heldout-review.json", "line_start": 1, "line_end": 1}
+      ],
+      "severity": "major"
+    }
+  ]
+}

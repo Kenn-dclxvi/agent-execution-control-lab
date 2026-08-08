@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "case_id": "PRR-C01",
+  "fixture_revision": "r3",
+  "review_contract_revision": "pr-review-contract-r2",
+  "pr": {
+    "title": "レビュー制御と実行profileの同時更新",
+    "body": "レビュー出力の制御と、その比較に使う実行条件を一つの変更として更新する。",
+    "base_sha": "2222222222222222222222222222222222222221",
+    "head_sha": "2222222222222222222222222222222222222222"
+  },
+  "changed_paths": [
+    "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+    "evaluations/profiles/heldout-review.json"
+  ],
+  "changes": [
+    {
+      "path": "prompts/candidates/heldout-review/files/AGENTS.md.txt",
+      "patch": "@@ -1 +1 @@\n-既存のレビュー制御。\n+レビュー出力を構造化JSONへ固定する。",
+      "content_after": "レビュー出力を構造化JSONへ固定する。\n"
+    },
+    {
+      "path": "evaluations/profiles/heldout-review.json",
+      "patch": "@@ -1 +1 @@\n-{\"max_workers\":12,\"timeout_seconds\":900}\n+{\"max_workers\":24,\"timeout_seconds\":600}",
+      "content_after": "{\"max_workers\":24,\"timeout_seconds\":600}\n"
+    }
+  ],
+  "rules": [
+    {
+      "source": "AGENTS.md",
+      "scope": "/",
+      "rules": [
+        {"rule_id": "prompt_evaluation_separation", "text": "prompt変更と評価条件変更を同じ比較単位へ混ぜない。"},
+        {"rule_id": "state_separation", "text": "artifact、evaluation、release、projectionを別状態として扱う。"},
+        {"rule_id": "no_secrets", "text": "secret、credential、非公開の生logをcommitしない。"},
+        {"rule_id": "japanese_default", "text": "文書は原則として日本語で記述する。"}
+      ]
+    }
+  ]
+}
