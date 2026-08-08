@@ -79,6 +79,56 @@ def test_all_measurement_json_files_are_syntactically_valid():
         assert json.loads(path.read_text(encoding="utf-8")) is not None, path
 
 
+def test_execution_file_uses_final_result_usage_with_cache_tokens(tmp_path: Path):
+    execution_file = tmp_path / "execution.json"
+    execution_file.write_text(
+        json.dumps(
+            [
+                {
+                    "type": "system",
+                    "subtype": "init",
+                    "model": "claude-sonnet-5",
+                },
+                {
+                    "type": "assistant",
+                    "message": {
+                        "usage": {
+                            "input_tokens": 2,
+                            "cache_creation_input_tokens": 100,
+                            "cache_read_input_tokens": 200,
+                            "output_tokens": 9,
+                        }
+                    },
+                },
+                {
+                    "type": "result",
+                    "duration_ms": 1234,
+                    "num_turns": 4,
+                    "total_cost_usd": 0.02,
+                    "usage": {
+                        "input_tokens": 3,
+                        "cache_creation_input_tokens": 400,
+                        "cache_read_input_tokens": 500,
+                        "output_tokens": 40,
+                    },
+                },
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    runtime = measurement._parse_execution_file(execution_file)
+
+    assert runtime == {
+        "duration_ms": 1234,
+        "turns": 4,
+        "input_tokens": 903,
+        "output_tokens": 40,
+        "reported_cost_usd": 0.02,
+        "model": "claude-sonnet-5",
+    }
+
+
 @pytest.mark.parametrize("variant", measurement.VARIANTS)
 def test_prepare_input_excludes_oracle_and_is_read_only_packet(tmp_path: Path, variant: str):
     output = tmp_path / variant
