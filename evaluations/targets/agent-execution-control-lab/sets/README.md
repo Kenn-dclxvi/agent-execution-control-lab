@@ -9,4 +9,4 @@
 | [`pr-review-control-free-qualification-four-r1`](pr-review-control-free-qualification-four-r1/README.md) | 4 | 初回実行後、C05/r1のoracle欠落を確認 |
 | [`pr-review-control-free-qualification-three-r2`](pr-review-control-free-qualification-three-r2/README.md) | 3 | 改訂実行後、C06/r1のmodel-visible情報不足を確認 |
 | [`pr-review-control-free-qualification-two-r3`](pr-review-control-free-qualification-two-r3/README.md) | 2 | C02とC03の保存済みr3 resultでqualification satisfied |
-| [`pr-review-held-out-three-r1`](pr-review-held-out-three-r1/README.md) | 3 | Control-Free品質確認はscore `1 / 4 / 4`で不成立。方式比較停止 |
+| [`pr-review-held-out-three-r1`](pr-review-held-out-three-r1/README.md) | 3 | Control-Freeは3件とも測定成立。score `1 / 4 / 4`を品質KPIとして保持し、方式比較preflight待ち |

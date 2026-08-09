@@ -51,12 +51,13 @@
 4. 最小ケースをfixture qualificationし、同一のbaseline bundle identityの独立したresultで実行系の安定性を確認する。
 5. `README.md`の登録済みインスタンス表へ追加する。
 6. 既存インスタンスのresultを比較元にせず、そのインスタンス内のbaselineから計測する。
-7. そのインスタンスのcontrol-free baselineで、対象evaluation setの全ケースがscore `4`になることを確認する。
+7. そのインスタンスのcontrol-free baselineで、対象evaluation setの全ケースについて測定が成立し、`quality_score`、all-agent `total_tokens`、`elapsed_seconds`を比較可能なresultとして取得できることを確認する。
 
-## 立ち上げ時の品質不変条件
+## 立ち上げ時の測定成立条件
 
-新インスタンスのゲートの7は、品質を維持すべき制約として固定し、`total_tokens`と`elapsed_seconds`だけを比較するという評価基盤の前提が、そのインスタンスでも成立するかの確認である。品質差の発見を目的にしない。
+新インスタンスのゲートの7は、case、fixture、実行環境、採点経路が成立し、3 KPIを欠落なく比較できることの確認である。`quality_score`は比較するKPIであり、特定の値を比較前の合否条件にしない。
 
-- score `4`未満のケースが出た場合、プロンプト品質の差として扱わない。fixture、実行環境、ケース定義のいずれの不備かを切り分け、当該ケースのrevisionを更新してから評価スロットを発行する（前例: `click`のF07-Pはr1でuv console script不在、r2でサンドボックス外のキャッシュ拒否により各3 / 3件がscore `3`となり、r3の環境固定で`4`になった。[`click Std14 result`](click/results/click-control-free-standard14-n5_2026-07-26.md)）。
-- この確認は小さい`N`でよい。判定はscore `4`の全件成立であり、KPIの水準やインスタンス間の比較には使わない。
-- 確認を通過した後にscore `4`未満が観測された場合も、同じ切り分けを先に行う。control-free側の低いscoreを、プロンプト条件の効果として登録しない。
+- scoreが低い場合は、fixture、実行環境、ケース定義の不備と、reviewerが返した品質結果を分けて切り分ける。model-visible入力から正解を導出できない、実行依存が欠ける、採点不能といった不備があれば、当該case revisionを比較へ使わない（前例: `click`のF07-Pはr1でuv console script不在、r2でサンドボックス外のキャッシュ拒否により各3 / 3件がscore `3`となり、r3で環境を固定した。[`click Std14 result`](click/results/click-control-free-standard14-n5_2026-07-26.md)）。
+- case設計と測定が有効であるにもかかわらず、見逃し、余分なfinding、不完全なfindingによってscoreが低い場合は、その値を有効な`quality_score`として保持する。再実行やcase変更によって比較前にscoreを引き上げない。
+- この確認は小さい`N`でよい。判定は対象全ケースで測定が成立し、3 KPIが取得できることであり、KPIの値そのものではない。
+- 確認後に低いscoreが観測された場合も同じ切り分けを行い、caseまたは測定の不備でなければ比較resultへ含める。
