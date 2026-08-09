@@ -4647,3 +4647,28 @@ def test_c02_consumer_bound_terminal_result_uses_r23(tmp_path: Path):
     jsonschema.Draft202012Validator(schema).validate(result)
     assert result["repetition"] == 3
     assert result["evidence_control_diagnostics"]["state"] == "unobserved"
+
+
+def test_candidate171_saved_results_are_schema_valid_and_indexed():
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r23.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected = [
+        (1, "31302081024", 1, 650719),
+        (2, "31302081051", 4, 560749),
+        (3, "31302081026", 1, 378709),
+    ]
+    index = (INSTANCE_ROOT / "results/README.md").read_text(encoding="utf-8")
+    for repetition, attempt, score, tokens in expected:
+        path = INSTANCE_ROOT / "results" / (
+            "pr-review-measurement-c02-consumer-bound-evidence-r1-prr-c02-"
+            f"consumer-bound-evidence-r{repetition}-a{attempt}.json"
+        )
+        result = json.loads(path.read_text(encoding="utf-8"))
+        jsonschema.Draft202012Validator(schema).validate(result)
+        assert result["measurement_qualification"]["state"] == "satisfied"
+        assert result["quality_score"] == score
+        assert result["runtime"]["total_tokens"] == tokens
+        assert path.name in index

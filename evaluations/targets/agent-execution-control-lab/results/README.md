@@ -22,6 +22,10 @@
 
 [Candidate170診断の成立Result](pr-review-measurement-c02-evidence-diagnostic-r4-prr-c02-prompt-evidence-scope-r1-a31300109132.json)は測定成立条件を満たし、quality scoreは`1`、all-agent tokenは`611,050`、executionは`266.321秒`だった。必須7件は共同発行されたが、操作名を特定できない追加accessが1件あり、mechanismは`unsatisfied`となった。token価格区分と品質の解釈は[診断測定の分析](pr-review-measurement-c02-evidence-diagnostic-r4_2026-08-09.md)に記録する。
 
+## Candidate171 C02開発測定
+
+[repetition 1](pr-review-measurement-c02-consumer-bound-evidence-r1-prr-c02-consumer-bound-evidence-r1-a31302081024.json)、[repetition 2](pr-review-measurement-c02-consumer-bound-evidence-r1-prr-c02-consumer-bound-evidence-r2-a31302081051.json)、[repetition 3](pr-review-measurement-c02-consumer-bound-evidence-r1-prr-c02-consumer-bound-evidence-r3-a31302081026.json)は、3件とも測定成立条件を満たした。quality scoreは`1 / 4 / 1`、all-agent tokenは`650,719 / 560,749 / 378,709`、executionは`205.994 / 280.957 / 284.726秒`だった。複数path identityが2件で不完全だったため、低コストでC02の精度を上げる目標は未達である。数値、品質、診断の解釈は[Candidate171 C02開発測定](pr-review-measurement-c02-consumer-bound-evidence-r1_2026-08-09.md)に記録する。
+
 ## held-out Workflow Free / Opus関係レビュー役比較
 
 全体の数値と境界は[`held-out Workflow Free / Opus関係レビュー役比較`](pr-review-held-out-workflow-topology-comparison_2026-08-09.md)に記録する。Opus側3件はすべて測定成立し、quality scoreは`0 / 4 / 4`だった。保存済みControl-Freeの`1 / 4 / 4`と同じ3 KPIで比較し、再実行は行わない。
