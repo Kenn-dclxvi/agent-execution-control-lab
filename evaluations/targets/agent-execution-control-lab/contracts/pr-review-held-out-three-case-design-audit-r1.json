@@ -1,0 +1,131 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-case-design-audit/v1",
+  "audit_id": "pr-review-held-out-three-case-design-audit-r1",
+  "producer_task_name": "/root/held_out_case_audit",
+  "decision": {
+    "state": "satisfied",
+    "summary": "3ケースすべてで、期待findingまたはclean controlと4カテゴリの期待状態をmodel-visible入力から一意に導出でき、oracleだけが要求する条件はなかった。"
+  },
+  "scope": {
+    "cases": [
+      "PRR-C02/r2",
+      "PRR-C03/r2",
+      "PRR-C06/r2"
+    ],
+    "functional_specification": "specifications/pr-review-function-r1.md",
+    "comparison_specification": "specifications/pr-review-held-out-comparison-r1.md",
+    "review_contract": "rating-contracts/review-contract-r2.md",
+    "rating_contract": "rating-contracts/pr-review-finding-quality-v8.json"
+  },
+  "stage_a": {
+    "boundary": "oracle、rating contract、grader実装、既存の本ケース監査receiptを読まず、各input.json、各case README、機能仕様、held-out比較仕様、review contract、適用AGENTSだけから期待値を確定した。",
+    "cases": [
+      {
+        "case_revision": "PRR-C02/r2",
+        "clean_control": false,
+        "expected_findings": [
+          {
+            "category": "evaluation_artifact_integrity",
+            "rule_id": "instance_artifact_separation",
+            "paths": [
+              "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+              "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json"
+            ],
+            "locations": [
+              {
+                "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/README.md",
+                "line_start": 3,
+                "line_end": 3
+              },
+              {
+                "path": "evaluations/targets/agent-execution-control-lab/sets/cross-target-review-r1/members.json",
+                "line_start": 1,
+                "line_end": 1
+              }
+            ],
+            "severity": "major",
+            "derivation": "agent-execution-control-labのPRレビュー方式を比較するsetとして追加したREADMEと、そのsetの唯一のmemberをclickターゲットのcaseにするmembers.jsonを合わせると、一つのsetへ異なるターゲットインスタンスのcaseを混在させている。これはmodel-visibleなinstance_artifact_separationへ直接bindし、評価identityを壊すためmajorである。複数path関係なので、members.jsonの1行目、またはREADMEの関係を示す3行目を含む範囲のどちらへanchorしても、他方をrelated_pathsに含めれば同一findingである。"
+          }
+        ],
+        "summary": {
+          "repository_discipline": "pass",
+          "evaluation_artifact_integrity": "fail",
+          "secret_or_private_log": "pass",
+          "document_quality": "pass"
+        }
+      },
+      {
+        "case_revision": "PRR-C03/r2",
+        "clean_control": false,
+        "expected_findings": [
+          {
+            "category": "evaluation_artifact_integrity",
+            "rule_id": "result_write_once",
+            "paths": [
+              "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+            ],
+            "locations": [
+              {
+                "path": "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md",
+                "line_start": 13,
+                "line_end": 13
+              }
+            ],
+            "severity": "major",
+            "derivation": "保存済み資格確認resultのPRR-C02/r1行にあるall-agent tokensを同じファイルのまま直接変更している。これはmodel-visibleなresult_write_onceへ直接bindし、保存済みresultの履歴identityを壊すためmajorである。違反は単一pathの変更後13行目で成立し、related_pathsは空である。"
+          }
+        ],
+        "summary": {
+          "repository_discipline": "pass",
+          "evaluation_artifact_integrity": "fail",
+          "secret_or_private_log": "pass",
+          "document_quality": "pass"
+        }
+      },
+      {
+        "case_revision": "PRR-C06/r2",
+        "clean_control": true,
+        "expected_findings": [],
+        "clean_derivation": "新規文書は候補の作成と校正resultの保存だけを完了済みとして述べ、比較、採用、release、本体反映は未実施と明示している。model-visibleなstate_separationを守り、secretや非公開logを含まず、自然な日本語で一つの状態説明を記録しているためfindingはない。",
+        "summary": {
+          "repository_discipline": "pass",
+          "evaluation_artifact_integrity": "pass",
+          "secret_or_private_log": "pass",
+          "document_quality": "pass"
+        }
+      }
+    ]
+  },
+  "stage_b": {
+    "oracle_comparison": {
+      "state": "matched",
+      "summary": "3件のoracleは、Stage Aで確定したcategory、rule_id、関係path集合、location、severity、clean controlと一致した。oracleだけに存在する必須条件はなかった。"
+    },
+    "grader_review": {
+      "state": "satisfied",
+      "implementation": [
+        "tools/pr_review_measurement.py::_finding_identity_matches_v2",
+        "tools/pr_review_qualification.py::_quality_result",
+        "tools/pr_review_qualification.py::grade_run"
+      ],
+      "anchor_acceptance": "graderはactualのpathとrelated_pathsの集合がexpected pathsと一致することを要求し、actual pathがexpected locationsのいずれかでline overlapすれば受理する。したがってPRR-C02/r2はREADMEとmembers.jsonのどちらをanchorにしても同一の複数path findingとして採点できる。",
+      "false_positive_rule": "graderはexpected findingと一致しないactual findingをseverityにかかわらずfalse positiveへ数え、grade_runはfalse_positiveが0件でなければpassにしない。PRR-C06/r2で余計なfindingを返すと必ず失敗する。",
+      "summary_rule": "findingがあるcategoryだけをfail、findingがないcategoryをpassとしない出力はreview contract violationへ数える。clean controlを根拠なくunknownにして通過する余地もない。"
+    }
+  },
+  "model_visible_derivation": {
+    "state": "satisfied",
+    "summary": "各findingの規則identity、違反関係、修正対象path、line、category、severityと、clean controlの非違反理由は、いずれもinput.jsonに含まれる差分と規則、およびreview contractと機能仕様だけから説明できる。"
+  },
+  "held_out_boundary": {
+    "state": "preserved",
+    "summary": "3 revisionは資格確認、Workflow Free校正、関係レビュー役のモデル校正に未使用で、いずれのrunより前に固定された。今後のresultを見てcase、oracle、rating contractを同revisionのまま変更してはならない。",
+    "allowed_next_use": "独立監査receiptとしてcontrol-free品質確認の事前ゲートへ使用できる。",
+    "forbidden_use": [
+      "このreceiptだけでquality score 4を観測済みと扱うこと",
+      "比較preflightを省略すること",
+      "比較、採用、release、本体反映の結論へ越境すること"
+    ]
+  },
+  "conclusion": "PRR-C02/r2、PRR-C03/r2、PRR-C06/r2はPRレビュー機能仕様のcase設計gateを満たす。次の未完了gateは同じ3ケースによるcontrol-free品質確認であり、この監査自体は評価resultや方式比較ではない。"
+}

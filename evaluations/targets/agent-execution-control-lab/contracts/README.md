@@ -38,6 +38,7 @@
 | [`pr-review-control-free-three-qualification-n1-r3-preflight`](pr-review-control-free-three-qualification-n1-r3-preflight.json) | 実行条件の履歴 | C02とC03はscore 4、C06は情報不足をunknownとしてcase不備を観測 |
 | [`pr-review-r1-case-qualification-audit-r3`](pr-review-r1-case-qualification-audit-r3.json) | `partially_satisfied` | C06/r1の情報不足を確認し、C02とC03だけを資格確認へ許可 |
 | [`pr-review-control-free-two-qualification-admission-r1`](pr-review-control-free-two-qualification-admission-r1.json) | `satisfied` | r3のcase単位resultを再実行せず、2ケース最小setのcontrol-free資格確認成立を固定 |
+| [`pr-review-held-out-three-case-design-audit-r1`](pr-review-held-out-three-case-design-audit-r1.json) | `satisfied` | 未使用3ケースの期待findingとclean controlをmodel-visible入力から独立に導出し、oracleとgraderへ照合 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 
