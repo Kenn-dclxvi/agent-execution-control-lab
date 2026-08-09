@@ -3804,3 +3804,27 @@ def test_c02_finding_admission_grade_uses_r18_schema(tmp_path: Path):
     assert result["quality_score"] == 4
     assert result["result"] == "pass"
     assert result["runtime"]["total_tokens"] == 120
+
+
+def test_c02_finding_admission_saved_result():
+    filename = (
+        "pr-review-c02-finding-admission-calibration-r1-prr-c02-"
+        "c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json"
+    )
+    path = INSTANCE_ROOT / "results" / filename
+    value = json.loads(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r18.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(value)
+    assert value["measurement_qualification"]["state"] == "satisfied"
+    assert value["quality_score"] == 4
+    assert value["result"] == "pass"
+    assert value["runtime"]["total_tokens"] == 763825
+    assert value["timing"]["execution_ms"] == 218789
+    assert filename in (INSTANCE_ROOT / "results/README.md").read_text(
+        encoding="utf-8"
+    )
