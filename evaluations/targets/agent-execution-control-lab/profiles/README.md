@@ -1,10 +1,10 @@
 # agent-execution-control-lab PRレビュープロファイル索引
 
-登録済みProfileは次の19件である。
+登録済みProfileは次の20件である。
 
 機械的な全件索引:
 
-- [`001–012`](index/profiles-001-012.md)
+- [`001–020`](index/profiles-001-020.md)
 
 - [`pr-review-agentic-retrieval-c01-qualification-n2-r1`](pr-review-agentic-retrieval-c01-qualification-n2-r1.json): PRR-C01のagentic-retrieval baselineを独立2反復で確認する最小qualification profile。不成立（score `1 / 4`）。一次resultは[`results/`](../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)
 - [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json): 独立監査済みPRR-C01/r3を使った初回profile。repetition 1は[GitHub Actions run 31253512886](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31253512886)でreviewer開始前に`execution_failed`となった。profileと[preflight](../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)は変更せず履歴として残す
@@ -24,7 +24,8 @@
 - [`pr-review-held-out-control-free-three-n1-r1`](pr-review-held-out-control-free-three-n1-r1.json): 独立監査済みの未使用3ケースをWorkflow Free条件で各1回確認した履歴profile。[result](../results/pr-review-held-out-control-free-qualification_2026-08-09.md)は3件とも測定成立、quality scoreは`1 / 4 / 4`。後続の[admission r2](../contracts/pr-review-held-out-control-free-three-admission-r2.json)により、再実行せず比較KPIとして再利用する
 - [`pr-review-held-out-relationship-reviewer-opus-three-n1-r1`](pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json): 同じheld-out 3ケースを、関係レビュー役1人・Opus固定で各1回測定する比較profile。[result](../results/pr-review-held-out-workflow-topology-comparison_2026-08-09.md)は3件とも測定成立、quality scoreは`0 / 4 / 4`
 - Profile [`pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1`](pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json): 保存済みのC02 Opus Run Resultを基準に、findingの採用と同一性確認だけを変えて1回測定する。実行済みであり、held-out evidenceには使わない
-- Profile [`pr-review-measurement-c02-evidence-scope-n1-r1`](pr-review-measurement-c02-evidence-scope-n1-r1.json): Candidate170をCase PRR-C02/r2で1回測り、3 KPIと独立read共同発行mechanismを分けて記録する。未実行
+- Profile [`pr-review-measurement-c02-evidence-scope-n1-r1`](pr-review-measurement-c02-evidence-scope-n1-r1.json): Candidate170をCase PRR-C02/r2で1回測り、3 KPIと独立read共同発行mechanismを分けて記録した履歴Profile。[Run Result](../results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json)は測定成立・quality 4・mechanism不成立
+- Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r2`](pr-review-measurement-c02-evidence-diagnostic-n1-r2.json): Candidate170のpromptを変えず、追加readの操作種別とtoken価格区分を内容非保存で1回診断する。未実行
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 

@@ -1,0 +1,62 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v9",
+  "profile_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r2",
+  "display_role": "Profile",
+  "measurement_series": "pr-review-measurement-c02-evidence-diagnostic-r2",
+  "state": "frozen_not_executed",
+  "purpose": "c02_evidence_scope_development_measurement",
+  "diagnostic_purpose": "classify Candidate170 additional reads and price-class token composition without changing the prompt",
+  "cases": [{"id": "PRR-C02", "revision": "r2"}],
+  "evaluation_set": {"set_id": "pr-review-c02-development-benchmark-r1", "revision": "r1", "held_out": false, "coverage": "one fixed previously observed Case"},
+  "comparison_conditions": {
+    "variant": "prompt-evidence-scope",
+    "prompt_variant": "pr-review-prompt-evidence-scope-r1",
+    "candidate_number": 170,
+    "relationship_reviewer_model": "opus",
+    "comparison_axis": "diagnostic observation only; Candidate170 prompt unchanged",
+    "target_repository_ref": {"repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git", "commit": "16f9637d33791abd839d5c7d57b6616e03930949", "tree": "c6d21c0bba62f5065c9e685f021a90ae2f004290"},
+    "task_spec": {"source": "cases/<case_id>/r2/input.json and rating-contracts/review-contract-r2.md", "functional_specification": "specifications/pr-review-function-r1.md", "comparison_specification": "specifications/pr-review-measurement-c02-evidence-diagnostic-r2.md", "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す"},
+    "prompt": {"identity": "pr-review-prompt-evidence-scope-r1", "manifest_path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json", "manifest_sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056", "content_path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md", "content_sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"},
+    "quality_rating": {"contract_id": "pr-review-finding-quality-v9", "path": "rating-contracts/pr-review-finding-quality-v9.json", "contract_sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc", "policy_supersession": "contracts/pr-review-held-out-control-free-three-admission-r2.json"},
+    "review_contract": {"revision": "pr-review-contract-r2", "path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    "review_output_schema": {"revision": "review-output-r2", "path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    "run_result_schema": {"revision": "run-result-r20", "path": "schemas/run-result-r20.schema.json", "sha256": "e0757f6ccb9b2edfe45e7331d0dfbe0f3eea447ec7f7a4df99a0d23324fa683c"},
+    "case_bindings": {
+      "PRR-C02": {
+        "input": {"path": "cases/PRR-C02/r2/input.json", "sha256": "5e3e15cd40f006bb88db0152cc1a56afe70d1cd806be722f42560d4fd5a0b5b6"},
+        "oracle": {"path": "cases/PRR-C02/r2/oracle.json", "sha256": "90a9a791c3b742f79fa177c7293fb414119b74f4f7ab3f5da4a1055d31235630"},
+        "snapshot": {"path": "contracts/held-out-repository-snapshot-prr-c02-r2-r1.json", "sha256": "fd97bae67735bc8a22e4ebfe24ef53a4dad3b5c33070bce862ab5e30a707cad7"},
+        "authority": {"path": "contracts/held-out-authority-selection-prr-c02-r2-r1.json", "sha256": "8b4dc424aa0c33f504270cf62d9c029a26c5f77bcbba22ec2c3b879e937312ed"},
+        "eligibility": {"path": "contracts/held-out-review-eligibility-prr-c02-r2-r1.json", "sha256": "9d56cae529158cafdb4cea3e4388099e9297d4678dd5c262f5da59f35a7cbd06"}
+      }
+    },
+    "baseline_result": {"result_id": "pr-review-c02-finding-admission-calibration-r1:PRR-C02:c02-relationship-reviewer-opus-finding-admission:r1:a31295440716", "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json", "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427"},
+    "diagnostic_source_result": {"result_id": "pr-review-measurement-c02-evidence-scope-r1:PRR-C02:prompt-evidence-scope:r1:a31298190204", "path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json", "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6"},
+    "model": {"requested": "claude-sonnet-5", "reported_identity_required": true, "reasoning": "action_default_at_fixed_action_revision", "review_topology": "one_relationship_reviewer", "relationship_reviewer": "opus"},
+    "agent_environment": {"action": "anthropics/claude-code-action", "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975", "claude_cli": "reported_by_action", "runner": "ubuntu-latest", "session_mode": "one_root_action_with_exactly_one_relationship_reviewer_per_case", "authentication": "claude_code_oauth_token"},
+    "permission": {"github": "contents:read", "repository_write": false, "github_comment_write": false, "tool_policy": "fixture-tool-and-one-agent-read-only-snapshot-r1", "fixture_tool_path": "tools/pr_review_fixture_tool_r5.py", "fixture_tool_sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+    "executor_parameters": {"max_attempts_per_case": 2, "max_turns": null, "turn_limit_source": "action_default_at_fixed_action_revision", "max_workers": 24, "internal_review_topology": "one_relationship_reviewer", "dispatch_concurrency": 1, "actual_planned_slots": 1, "schedule_policy": "one_fixed_workflow_dispatch", "action_timeout_seconds": 1200, "reviewer_job_timeout_seconds": 1500, "token_accounting": {"revision": "claude-code-action-execution-message-usage-sum-v1", "scope": "root_and_subagent_assistant_messages", "subagent_inclusion_required": true}},
+    "repetition_condition": {"iterations_per_case": 1, "external_failure_policy": "repeat_same_case_with_new_attempt_identity", "result_reuse": "saved Candidate170 Run Result retained; one fresh diagnostic replay"},
+    "measurement_gate": {"individual_pass_condition": {"action_completed": true, "structured_output_valid": true, "reported_root_model_matches_requested": true, "all_agent_tokens_complete": true, "elapsed_time_complete": true, "exactly_one_relationship_reviewer": true, "relationship_reviewer_model_matches": true, "relationship_reviewer_fixture_access": true, "root_fixture_tool_access_count": 0, "fixture_permission_denials": 0}, "quality_score_is_kpi_not_stop_condition": true, "quality_miss_stops_other_cases": false},
+    "mechanism_gate": {"required_initial_read_count": 7, "joint_initial_read_observed": true, "additional_fixture_read_count": 0, "separate_from_measurement_qualification": true},
+    "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "diagnostics": ["content-free fixture operation identity and outcome by batch", "root and subagent input token classes", "reported cost", "fixture tool calls by agent", "subagent model groups"],
+    "bound_artifacts": [
+      {"path": "sets/pr-review-c02-development-benchmark-r1/README.md", "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"},
+      {"path": "specifications/pr-review-measurement-c02-evidence-diagnostic-r2.md", "sha256": "29f4605ce34fbf8d15b68b28f22bc88e5d66fc06a4543b4ecda7e32756cc499e"},
+      {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json", "sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056"},
+      {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md", "sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"},
+      {"path": "rating-contracts/pr-review-finding-quality-v9.json", "sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc"},
+      {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+      {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+      {"path": "schemas/run-result-r20.schema.json", "sha256": "e0757f6ccb9b2edfe45e7331d0dfbe0f3eea447ec7f7a4df99a0d23324fa683c"},
+      {"path": "tools/pr_review_measurement_c02_evidence_diagnostic.py", "sha256": "6a3767a8ecc94f1900fec6e58171d13eb48f38e63982ddc914538b33fb6ac9b4"},
+      {"path": "tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+      {"path": "tools/pr_review_subagent_hook_r3.py", "sha256": "236fa137a3c02ffffbec8ab74937c9e57fcf9ad12cdab1fc019ded2300310592"},
+      {"path": ".github/workflows/pr-review-measure-c02-evidence-diagnostic-r2.yml", "sha256": "b5742d9c8393c9afabf6835f2c6eba0e2e1d42b4aae53e7cebbd30bdcb0e0ba3"},
+      {"path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json", "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6"}
+    ]
+  },
+  "execution": {"planned_slots": 1, "max_workers": 24, "actual_concurrency": 1, "state": "not_issued"},
+  "scope": {"measurement": "authorized_after_preflight", "diagnostic_only": true, "held_out": "not_claimed", "adoption": "not_decided", "release": "not_decided", "runtime_projection": "not_authorized"}
+}
