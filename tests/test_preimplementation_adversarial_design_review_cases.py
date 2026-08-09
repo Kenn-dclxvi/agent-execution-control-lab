@@ -3,6 +3,8 @@ import json
 import unittest
 from pathlib import Path
 
+from scripts.evaluation_loop import QUALITY_RATING_V14, validate_comparison_conditions
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "evaluations" / "cases"
@@ -20,6 +22,7 @@ CASE_IDS = [
     "TC-ADR08",
     "TC-ADR09",
 ]
+PROFILE_R2 = ROOT / "evaluations/profiles/candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json"
 
 
 def revision(case_id: str) -> Path:
@@ -43,6 +46,14 @@ def seeded_fixture(case_id: str):
 
 
 class PreimplementationAdversarialDesignReviewCasesTest(unittest.TestCase):
+    def test_execution_profile_r2_uses_supported_rating_contract(self):
+        profile = load_json(PROFILE_R2)
+        self.assertEqual(profile["comparison_conditions"]["quality_rating"], QUALITY_RATING_V14)
+        self.assertEqual(
+            validate_comparison_conditions(profile["comparison_conditions"])["quality_rating"],
+            QUALITY_RATING_V14,
+        )
+
     def test_all_nine_cases_bind_fixed_identities(self):
         self.assertEqual(len(CASE_IDS), 9)
         for case_id in CASE_IDS:
