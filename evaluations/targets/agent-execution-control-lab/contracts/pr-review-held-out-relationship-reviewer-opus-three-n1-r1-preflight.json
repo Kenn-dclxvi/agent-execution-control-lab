@@ -1,0 +1,67 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-comparison-preflight/v1",
+  "preflight_id": "pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-held-out-relationship-reviewer-opus-three-n1-r1", "path": "profiles/pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json", "sha256": "74b8f0712ca35e9a4ba19c3088e96ad53d3328c8540b5abaf95ac47aa3121618"},
+  "baseline": {
+    "profile": {"profile_id": "pr-review-held-out-control-free-three-n1-r1", "path": "profiles/pr-review-held-out-control-free-three-n1-r1.json", "sha256": "70ef51a7dba2192310a6956b11d4e3d78a71612455c17b1d5ab5eb7e24b8e55a"},
+    "admission": {"path": "contracts/pr-review-held-out-control-free-three-admission-r2.json", "sha256": "86e4b3a7ed26ac2ad91e9ca9862b4f901d36c6ed6bc1bc4d51e49900a6e5fb4b", "state": "satisfied_for_comparison_preflight"},
+    "result_reuse": "required_without_rerun",
+    "quality_scores": [1, 4, 4]
+  },
+  "predicates": {
+    "independent_case_design_audit": "satisfied",
+    "control_free_measurement_three_of_three": "satisfied",
+    "three_kpis_available_for_control_free": "satisfied",
+    "opus_role_fixed": "satisfied",
+    "all_agent_token_accounting": "fixed",
+    "fresh_n1_per_case_for_opus": "satisfied",
+    "quality_score_is_kpi_not_gate": "satisfied"
+  },
+  "compatibility": {
+    "changed_axis": "review topology and its prompt",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "evaluation set and all three case revisions",
+      "target repository commit and tree",
+      "case input, oracle, repository snapshot, authority, and eligibility identities",
+      "TaskSpec required outcome, review contract, and structured review output schema",
+      "quality rating contract",
+      "root model and Claude Code Action revision",
+      "runner and read-only permission boundary",
+      "N=1 per case, timeout, max_workers=24, and dispatch concurrency=3",
+      "all-agent token accounting revision"
+    ],
+    "allowed_differences": [
+      "profile and variant identities",
+      "review prompt identity and content",
+      "model-selected review topology versus one fixed Opus relationship reviewer",
+      "tool and workflow identities implementing the changed topology",
+      "run-result schema constants needed for the new immutable result identity"
+    ],
+    "excluded_conditions": ["Claude Code Core"]
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r2", "variant": "held-out-relationship-reviewer-opus", "repetition": 1},
+    {"case_id": "PRR-C03", "fixture_revision": "r2", "variant": "held-out-relationship-reviewer-opus", "repetition": 1},
+    {"case_id": "PRR-C06", "fixture_revision": "r2", "variant": "held-out-relationship-reviewer-opus", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "contracts/pr-review-held-out-three-case-design-audit-r1.json", "sha256": "61e6eaf117908c24db850bc6b70f7a81795c44e3ab778c0afba5272df3c8aef7"},
+    {"path": "contracts/pr-review-held-out-control-free-three-admission-r2.json", "sha256": "86e4b3a7ed26ac2ad91e9ca9862b4f901d36c6ed6bc1bc4d51e49900a6e5fb4b"},
+    {"path": "specifications/pr-review-held-out-comparison-r3.md", "sha256": "ff05e48de4a2bba19d0993a50251e6e3cedeb9100700191b7e48f86873285d67"},
+    {"path": "rating-contracts/pr-review-finding-quality-v9.json", "sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc"},
+    {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    {"path": "schemas/run-result-r17.schema.json", "sha256": "eeeafbb39453b3e0a58a85a1cad41aa4b2bc5a329a2d86c2d42aea9ddc04aabb"},
+    {"path": "tools/pr_review_held_out_relationship_reviewer.py", "sha256": "b4a22aa109b94b1e257e14b151698635fa76299e04d70543decf285017238dd1"},
+    {"path": "tools/pr_review_repository_snapshot_r4.py", "sha256": "b4732f5b54b5a173ab36ef52a0536b22caa72109a9a6be8ae1127f3e5c23c736"},
+    {"path": "prompts/candidates/pr-review-relationship-role-r1/manifest.json", "sha256": "4e3fccf321d1a44ddfb2dd30c9ba33c84a9a01ba6745c5a3c88350745394b574"},
+    {"path": "prompts/candidates/pr-review-relationship-role-r1/core-prompt-template.md", "sha256": "3013c3352380364253e5431435450f484ded73f7d8b8d7484523aadd2a64ee70"},
+    {"path": ".github/workflows/pr-review-measure-held-out-relationship-reviewer-opus.yml", "sha256": "f80eaae3c6eb5ab8946d4d5ed79b7abec6fb31c606b4f9f28badcf2c45785fb4"},
+    {"path": "results/pr-review-held-out-control-free-qualification-r1-prr-c02-held-out-control-free-r1-a31290559295.json", "sha256": "0b037704641bdb9bd6ee04fd567a112ef9f2ad30af530dcee68aa959e9a6bdf4"},
+    {"path": "results/pr-review-held-out-control-free-qualification-r1-prr-c03-held-out-control-free-r1-a31290559229.json", "sha256": "b480091ca7f95b8d9578494c782ac24b4fe666766d3741ef7240ad9ad4d363b9"},
+    {"path": "results/pr-review-held-out-control-free-qualification-r1-prr-c06-held-out-control-free-r1-a31290559290.json", "sha256": "dc794bbc22f411ee0da769c7efa0df95c051d8e2eb3a8eb44106434847aadafd"}
+  ],
+  "execution": {"state": "not_issued", "quality_miss_stops_other_cases": false, "environment_or_measurement_failure_allows_same_case_retry_only": true},
+  "scope": "保存済みControl-Freeと新規Opus関係レビュー役のheld-out比較だけを許可する。Core、採用、release、本体反映は許可しない。"
+}

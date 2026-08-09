@@ -1,0 +1,19 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-comparison-admission/v1",
+  "admission_id": "pr-review-held-out-opus-comparison-admission-r1",
+  "state": "ready_for_external_execution",
+  "supersedes_scope": "pr-review-held-out-comparison-r2",
+  "comparison_specification": {"path": "specifications/pr-review-held-out-comparison-r3.md", "sha256": "ff05e48de4a2bba19d0993a50251e6e3cedeb9100700191b7e48f86873285d67"},
+  "profile": {"path": "profiles/pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json", "sha256": "74b8f0712ca35e9a4ba19c3088e96ad53d3328c8540b5abaf95ac47aa3121618"},
+  "preflight": {"path": "contracts/pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight.json", "sha256": "86de54acf8985d5d73902e10124c7e61e6a79c68277597da207808a66670eee9", "state": "ready_not_executed"},
+  "baseline": {"variant": "held-out-control-free", "result_count": 3, "reuse": "required_without_rerun", "quality_scores": [1, 4, 4]},
+  "new_execution": {"variant": "held-out-relationship-reviewer-opus", "case_count": 3, "repetition_per_case": 1, "issued": false},
+  "decision": {
+    "comparison_scope": "Control-Free versus one fixed Opus relationship reviewer",
+    "core_condition": "excluded",
+    "quality_score_gate": "not_used",
+    "case_or_measurement_invalidity_gate": "required",
+    "external_execution": "may be issued only from the fixed profile and preflight"
+  },
+  "scope": "Opus側3件の外部実行準備が成立したことだけを固定する。実行完了、比較結果、採用、release、本体反映を意味しない。"
+}

@@ -35,6 +35,7 @@ import pr_review_repository_snapshot_r2 as repository_snapshot_r2
 import pr_review_repository_snapshot_r3 as repository_snapshot_r3
 import pr_review_repository_snapshot_r4 as repository_snapshot_r4
 import pr_review_held_out_control_free as held_out_control_free
+import pr_review_held_out_relationship_reviewer as held_out_relationship_reviewer
 
 
 @pytest.fixture
@@ -3529,3 +3530,125 @@ def test_quality_is_a_comparison_kpi_not_a_precomparison_gate():
     for result in admission["results"]:
         path = INSTANCE_ROOT / result["result_path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]
+
+
+@pytest.mark.parametrize("case_id", held_out_relationship_reviewer.CASES)
+def test_held_out_opus_comparison_preflight_is_reproducible(case_id: str, tmp_path: Path):
+    profile, preflight = held_out_relationship_reviewer.validate_preflight(case_id)
+
+    assert profile["comparison_conditions"]["relationship_reviewer_model"] == "opus"
+    assert profile["scope"]["core_condition"] == "not_in_scope"
+    assert profile["comparison_conditions"]["measurement_gate"][
+        "quality_score_is_kpi_not_stop_condition"
+    ] is True
+    assert preflight["compatibility"]["mechanical_diff_state"] == "satisfied"
+    assert preflight["baseline"]["result_reuse"] == "required_without_rerun"
+    assert preflight["baseline"]["quality_scores"] == [1, 4, 4]
+    assert preflight["execution"]["quality_miss_stops_other_cases"] is False
+
+    try:
+        metadata = held_out_relationship_reviewer.prepare_input(case_id, tmp_path)
+        assert metadata["case_id"] == case_id
+        assert metadata["relationship_reviewer_model"] == "opus"
+        assert "{{RELATIONSHIP_REVIEWER_MODEL}}" not in (
+            tmp_path / "core-prompt.md"
+        ).read_text(encoding="utf-8")
+        assert (tmp_path / "pr_review_held_out_relationship_reviewer.py").is_file()
+        assert (tmp_path / "pr_review_relationship_role_calibration.py").is_file()
+        assert not (tmp_path / "oracle.json").exists()
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+def test_held_out_opus_workflow_matches_effective_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-measure-held-out-relationship-reviewer-opus.yml"
+    ).read_text(encoding="utf-8")
+    template = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-relationship-role-r1/core-prompt-template.md"
+    ).read_text(encoding="utf-8")
+    expected = template.replace("{{RELATIONSHIP_REVIEWER_MODEL}}", "opus").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+
+    assert textwrap.dedent(inline).strip() == expected
+    assert "schemas/review-output-r2.schema.json" in workflow
+    assert "pr-review-held-out-relationship-reviewer-opus-three-n1-r1" in workflow
+
+
+def test_held_out_opus_comparison_admission_binds_preflight():
+    admission = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-held-out-opus-comparison-admission-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    profile_path = INSTANCE_ROOT / admission["profile"]["path"]
+    preflight_path = INSTANCE_ROOT / admission["preflight"]["path"]
+    set_index = (INSTANCE_ROOT / "sets/README.md").read_text(encoding="utf-8")
+
+    assert admission["state"] == "ready_for_external_execution"
+    assert admission["decision"]["core_condition"] == "excluded"
+    assert admission["decision"]["quality_score_gate"] == "not_used"
+    assert admission["new_execution"]["issued"] is False
+    assert hashlib.sha256(profile_path.read_bytes()).hexdigest() == admission["profile"]["sha256"]
+    assert hashlib.sha256(preflight_path.read_bytes()).hexdigest() == admission["preflight"]["sha256"]
+    assert "score `1 / 4 / 4`を品質KPIとして保持" in set_index
+
+
+def test_held_out_opus_grade_uses_same_quality_contract(tmp_path: Path):
+    case_id = "PRR-C03"
+    fixture, oracle = held_out_control_free._fixture_and_oracle(case_id)
+    findings = []
+    for expected in oracle["expected_findings"]:
+        location = expected["locations"][0]
+        findings.append(
+            {
+                "category": expected["category"],
+                "rule_id": expected["rule_id"],
+                "path": location["path"],
+                "related_paths": [path for path in expected["paths"] if path != location["path"]],
+                "line_start": location["line_start"],
+                "line_end": location["line_end"],
+                "severity": expected["severity"],
+                "message": "固定規則に反する変更関係を修正する必要がある。",
+            }
+        )
+    review_path = tmp_path / "review.json"
+    review_path.write_text(json.dumps({"findings": findings, "summary": _summary_for(findings)}), encoding="utf-8")
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {"model": "claude-sonnet-5", "turns": 2, "input_tokens": 100, "output_tokens": 20, "duration_ms": 1000, "reported_cost_usd": None},
+                "workflow_trace": {
+                    "complete": True,
+                    "fixture_tool_access_observed": True,
+                    "fixture_tool_permission_denials": 0,
+                    "subagent_start_count": 1,
+                    "subagent_stop_count": 1,
+                    "relationship_reviewer_model_matches": True,
+                    "relationship_reviewer_fixture_access_count": 1,
+                    "root_fixture_tool_access_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(json.dumps({"profile_id": held_out_relationship_reviewer.PROFILE_ID, "case_id": case_id, "input_ms": 10}), encoding="utf-8")
+    result = held_out_relationship_reviewer.grade_run(
+        case_id, 1000, "claude-sonnet-5", review_path, metadata_path,
+        prepared_path, tmp_path / "result.json", "1000"
+    )
+    schema = json.loads((INSTANCE_ROOT / "schemas/run-result-r17.schema.json").read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "pass"
+    assert result["quality_score"] == 4
+    assert result["runtime"]["total_tokens"] == 120
