@@ -63,6 +63,10 @@ Candidate173の[Rating v14 Medium Standard14 N=5](candidate173-concrete-countere
 
 同じatomic poolを[Standard14 N=50](candidate173-concrete-counterexample-adjudication-v14-medium-standard14-atomic-n50-cli0146_2026-08-10.md)へ拡張し、既存70件を再利用して不足630件だけを発行した。700 / 700件はScore `4`で品質条件を通過したが、F02の1件でcriterion owner文字列から独立producerを選ぶreview過剰起動を観測した。状態は`quality_passed / review_admission_mechanism_failed_1_of_700`とし、採用へ進めない。
 
+Candidate173の[ADR9 r2 N=50](candidate173-concrete-counterexample-adjudication-adr9-r2-n50_2026-08-10.md)は既存45件を再利用し、不足405件だけを発行した。450 / 450 valid、Score `4 / 1 = 446 / 4`だった。ADR05の過剰停止2件、ADR06の禁止canary配送1件、ADR07の過剰停止1件を保持し、`quality_failed / mechanism_failed`として採用へ進めない。
+
+Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
+
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 
 Candidate148の[`Free比較 Standard14 N=5`](candidate148-free-five-point-execution-control-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ`GOAL / START / SEARCH / SPLIT / FINISH`の5項目だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`-17.21%`、all-agent total token中央値`-21.76%`、elapsed中央値`-3.63%`だった。一方、両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、START制御は成立しなかった。Candidate148は品質gate不通過として`not_adopted`で停止する。

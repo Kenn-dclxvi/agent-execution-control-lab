@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json)
+- [`candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
 - [`candidate35-root-control-only-owner-producer-v7-expanded12-global-m24-n5-r1.json`](../candidate35-root-control-only-owner-producer-v7-expanded12-global-m24-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate6-expanded12-global-m24-n5-r1.json`](../candidate6-expanded12-global-m24-n5-r1.json)
 - [`candidate60-operation-method-capsule-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json`](../candidate60-operation-method-capsule-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json)
 - [`candidate61-atomic-spec-operation-gate-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate61-atomic-spec-operation-gate-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate62-task-closed-read-route-ambiguity-a02-v10-global-m1-n1-catalog-fixed-r1.json`](../candidate62-task-closed-read-route-ambiguity-a02-v10-global-m1-n1-catalog-fixed-r1.json)

@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
+- [`candidate62-task-closed-read-route-ambiguity-a02-v10-global-m1-n1-catalog-fixed-r1.json`](../candidate62-task-closed-read-route-ambiguity-a02-v10-global-m1-n1-catalog-fixed-r1.json)
 - [`candidate62-task-closed-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate62-task-closed-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate62-task-closed-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate62-task-closed-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate63-fixed-evidence-route-projection-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate63-fixed-evidence-route-projection-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate81-observation-delivery-control-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-observation-delivery-control-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate81-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate81-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate81-planning-first-producer-selection-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-planning-first-producer-selection-v14-reasoning-medium-f02-global-m5-n5-r1.json)
-- [`candidate81-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate81-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json)
-- [`candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)

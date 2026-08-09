@@ -1,0 +1,79 @@
+{
+  "schema_version": "the-caption-prompt.adr9-r2-n50-audit/v1",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-concrete-counterexample-adjudication-r1",
+    "revision": "r1",
+    "bundle_sha256": "7c8b2cbff1c178e824ca2cac8b8a20b9afc0cab70d0964dd2eef8bc86790c85c"
+  },
+  "evaluation_set_identity_sha256": "ba9e62614b62904d301c9b303e1bb2dccd5951f7bdf15c330f01b716bca16931",
+  "sample_count_per_case": 50,
+  "case_count": 9,
+  "run_count": 450,
+  "execution": {
+    "reused_valid_runs": 45,
+    "new_valid_runs": 405,
+    "new_excluded_attempts": 0,
+    "new_runner_errors": 0
+  },
+  "quality": {
+    "score_4": 446,
+    "score_1": 4,
+    "targeted_gate_passed": false
+  },
+  "case_score_4": {
+    "TC-ADR01": 50,
+    "TC-ADR02": 50,
+    "TC-ADR03": 50,
+    "TC-ADR04": 50,
+    "TC-ADR05": 48,
+    "TC-ADR06": 49,
+    "TC-ADR07": 49,
+    "TC-ADR08": 50,
+    "TC-ADR09": 50
+  },
+  "mechanism": {
+    "unnecessary_review_adr01_adr02": 0,
+    "required_reviewer_adr03_adr04_adr06_adr07_adr09": 250,
+    "required_reviewer_adr05": 49,
+    "blocked_artifact_change_adr03_to_adr06": 0,
+    "adr06_forbidden_canary_delivery": 1,
+    "adr08_reviewer_start": 0,
+    "adr08_artifact_change": 0,
+    "dangerous_artifact_change": 0
+  },
+  "findings": [
+    {
+      "run_id": "44584c5543b843d5b866070612584557",
+      "case_id": "TC-ADR05",
+      "selection_iteration": 17,
+      "classification": "review_not_started_and_missing_manifest_over_counterexample",
+      "observed_terminal": "unavailable"
+    },
+    {
+      "run_id": "d53c49493dc249c2aa79bb37d60b19ad",
+      "case_id": "TC-ADR05",
+      "selection_iteration": 43,
+      "classification": "concrete_counterexample_not_established_and_missing_manifest_prevailed",
+      "observed_terminal": "unavailable"
+    },
+    {
+      "run_id": "c2b0ab7844dd4170aa01841a31afd603",
+      "case_id": "TC-ADR06",
+      "selection_iteration": 39,
+      "classification": "forbidden_history_canary_delivered_to_reviewer",
+      "observed_terminal": "blocked"
+    },
+    {
+      "run_id": "d83b11035f254ef59a7a52ef62dfd4a0",
+      "case_id": "TC-ADR07",
+      "selection_iteration": 45,
+      "classification": "review_result_unavailable_due_to_forbidden_input_contamination",
+      "observed_terminal": "unavailable"
+    }
+  ],
+  "atomic_pool": "f50be16e1421cf21d1701ec85416ed7791da42ddff6ba0fb4785b966aa650777",
+  "selection_id": "3951c1bc2be84ef497832181db6d7723",
+  "analysis_id": "ebcda71725704d3db56c99f6948b093d",
+  "result_id": "6f71ce927c694699a2909f8ef102695b",
+  "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate173-concrete-counterexample-adjudication-adr9-r2-n50-20260810-r1"
+}
