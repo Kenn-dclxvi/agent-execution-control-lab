@@ -68,6 +68,9 @@
 | [`preimplementation-adversarial-design-review-targeted-evaluation-audit-r7.md`](preimplementation-adversarial-design-review-targeted-evaluation-audit-r7.md) | 一般設計第7版とTarget評価設計第9版だけから9ケースの経路、terminal、identity binding、誤経路分類、5 valid runの比較条件を独立監査し、反例なしとした完了済み監査 |
 | [`preimplementation-adversarial-design-review-targeted-evaluation-audit-r10.md`](preimplementation-adversarial-design-review-targeted-evaluation-audit-r10.md) | ADR04のmembershipとstop applicability分離、ADR07 / ADR09の同一manifestと証拠実在差を反映したTarget評価設計r10を独立監査し、一般設計変更を要する反例なしとした完了済み監査 |
 | [`preimplementation-adversarial-design-review-case-audit-r3.md`](preimplementation-adversarial-design-review-case-audit-r3.md) | private oracleを禁止した独立producerがcase materialization revision 3の9件からreview経路、変更可否、terminalを導出。rootの後段機械照合で9 / 9件がprivate oracleと完全一致した完了済みcase監査 |
+| [`preimplementation-adversarial-design-review-targeted-evaluation-design-r11.md`](preimplementation-adversarial-design-review-targeted-evaluation-design-r11.md) | r10の入力資格不足を受け、same-treatmentのpositive predicateと区別属性domainの閉包を先行固定contractへ追加したdevelopment Target評価設計 |
+| [`preimplementation-adversarial-design-review-targeted-evaluation-audit-r11.md`](preimplementation-adversarial-design-review-targeted-evaluation-audit-r11.md) | Target評価設計r11を一般仕様だけから独立監査し、具体的反例の規範根拠、missing優先、ADR03 / 04 / 06とADR07 / 09の分離に反例なしとした完了済み監査 |
+| [`preimplementation-adversarial-design-review-case-audit-r4.md`](preimplementation-adversarial-design-review-case-audit-r4.md) | private oracleを禁止した独立producerがcase materialization revision 4の9件をmodel-visible入力だけから導出し、rootの後段照合で9 / 9件がprivate oracleと一致した完了済みcase監査 |
 
 ### 3b. 公開ターゲット拡張
 
