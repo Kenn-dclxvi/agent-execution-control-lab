@@ -12,6 +12,8 @@
 
 全体の解釈は[`held-out Control-Free品質確認`](pr-review-held-out-control-free-qualification_2026-08-09.md)に記録する。3件とも測定は成立したが、quality scoreはPRR-C02/r2が`1`、PRR-C03/r2とPRR-C06/r2が`4`だった。3件すべてのscore `4`を要求する品質条件が不成立のため、Claude Code純正相当CoreとOpus関係レビュー役の比較は開始しない。
 
+後続の[admission r2](../contracts/pr-review-held-out-control-free-three-admission-r2.json)で、quality scoreを比較前の合否条件にした設計を改めた。3件はすべて測定成立resultとして再実行せずに保持し、score `1 / 4 / 4`を品質KPIとして方式比較へ接続する。r1当時の停止判断と一次resultは変更しない。
+
 [PRR-C02/r2](pr-review-held-out-control-free-qualification-r1-prr-c02-held-out-control-free-r1-a31290559295.json)、[PRR-C03/r2](pr-review-held-out-control-free-qualification-r1-prr-c03-held-out-control-free-r1-a31290559229.json)、[PRR-C06/r2](pr-review-held-out-control-free-qualification-r1-prr-c06-held-out-control-free-r1-a31290559290.json)は、all-agent tokenが順に`2,313,350 / 4,192,816 / 1,659,245`、elapsedが`278.730 / 266.190 / 344.698秒`だった。
 
 ## Control-Free資格確認

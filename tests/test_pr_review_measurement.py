@@ -3499,3 +3499,33 @@ def test_held_out_control_free_admission_stops_comparison():
     for result in admission["results"]:
         path = INSTANCE_ROOT / result["result_path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]
+
+
+def test_quality_is_a_comparison_kpi_not_a_precomparison_gate():
+    target_instructions = (
+        REPOSITORY_ROOT / "evaluations/targets/AGENTS.md"
+    ).read_text(encoding="utf-8")
+    specification = (
+        INSTANCE_ROOT / "specifications/pr-review-held-out-comparison-r2.md"
+    ).read_text(encoding="utf-8")
+    admission = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-held-out-control-free-three-admission-r2.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert "`quality_score`は比較するKPI" in target_instructions
+    assert "特定の値を比較前の合否条件にしない" in target_instructions
+    assert "quality scoreの値は2と3の成立条件に含めない" in specification
+    assert admission["state"] == "satisfied_for_comparison_preflight"
+    assert admission["admission"]["measurement_validity"] == (
+        "satisfied for 3 of 3 cases"
+    )
+    assert admission["admission"]["quality_observation"] == (
+        "1 / 4 / 4; retained as comparison KPI"
+    )
+    assert admission["next_gate"]["comparison_preflight"] == "required"
+    for result in admission["results"]:
+        path = INSTANCE_ROOT / result["result_path"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]

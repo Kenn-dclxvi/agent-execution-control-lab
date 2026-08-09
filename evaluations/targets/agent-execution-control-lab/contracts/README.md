@@ -41,6 +41,7 @@
 | [`pr-review-held-out-three-case-design-audit-r1`](pr-review-held-out-three-case-design-audit-r1.json) | `satisfied` | 未使用3ケースの期待findingとclean controlをmodel-visible入力から独立に導出し、oracleとgraderへ照合 |
 | [`pr-review-held-out-control-free-three-n1-r1-preflight`](pr-review-held-out-control-free-three-n1-r1-preflight.json) | `ready_not_executed` | 独立監査済み3ケースのControl-Free品質確認を各1回に固定し、比較実行は全件score 4まで禁止 |
 | [`pr-review-held-out-control-free-three-admission-r1`](pr-review-held-out-control-free-three-admission-r1.json) | `unsatisfied` | 3件とも測定成立、C03とC06はscore 4、C02は複数path identityが不完全でscore 1となり方式比較を停止 |
+| [`pr-review-held-out-control-free-three-admission-r2`](pr-review-held-out-control-free-three-admission-r2.json) | `satisfied_for_comparison_preflight` | 3件の測定成立をgateとし、score `1 / 4 / 4`は品質KPIとして保持。比較は新しい互換性preflight待ち |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 
