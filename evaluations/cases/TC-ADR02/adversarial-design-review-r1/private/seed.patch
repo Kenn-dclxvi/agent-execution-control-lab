@@ -1,0 +1,91 @@
+diff --git a/evaluation-fixture/design-admission.json b/evaluation-fixture/design-admission.json
+new file mode 100644
+index 0000000..8efde5d
+--- /dev/null
++++ b/evaluation-fixture/design-admission.json
+@@ -0,0 +1,85 @@
++{
++  "artifacts": {
++    "member-a": {
++      "required_version": 2,
++      "version": 1
++    },
++    "member-b": {
++      "required_version": 2,
++      "version": 1
++    }
++  },
++  "authority": {
++    "closure_statement": "member-a and member-b are the complete set and must share version",
++    "domain": "synchronized members",
++    "identity": "authority-closed-two-r1",
++    "provenance": "fixed-before-current-design"
++  },
++  "boundary_ledger": [
++    {
++      "boundary_identity": "B-RELATION",
++      "boundary_kind": "membership",
++      "closure_authority_identity": "authority-closed-two-r1",
++      "closure_authority_provenance": "fixed-before-current-design",
++      "closure_source": "repository_authority",
++      "counterexample_effect": "implementation_local",
++      "counterexample_effect_basis": [
++        "A counterexample is resolved without changing the selected domain or predicate."
++      ],
++      "design_relies_on_boundary": true,
++      "direct_basis": [
++        "authority:authority-closed-two-r1:member-a and member-b are the complete set and must share version",
++        "design:set every authority-enumerated member to version 2 while preserving equality"
++      ],
++      "domain": "synchronized members",
++      "required_validation_coverage": "exhaustive"
++    }
++  ],
++  "consumer_contracts": {},
++  "consumer_inventory": [],
++  "general_design": {
++    "semantic": {
++      "selected": [
++        "member-a",
++        "member-b"
++      ],
++      "selection_rule": "set every authority-enumerated member to version 2 while preserving equality"
++    }
++  },
++  "history": {},
++  "identity": {
++    "case_identity": "TC-ADR02/adversarial-design-review-r1",
++    "case_suite_revision": "adversarial-design-review-r1",
++    "design_identity": "tc-adr02-design-r1",
++    "general_design_spec_identity": "design_revision_7:semantic-sha256:e84906bf8e1c48446e305fbebbc3004e61da3865ff719ba90b1f6ddafe212f56",
++    "target_evaluation_design_identity": "preimplementation-adversarial-design-review-targeted-evaluation-design-r10"
++  },
++  "required_validation": {
++    "observed_properties": [
++      "member-a version",
++      "member-b version",
++      "equality relation"
++    ],
++    "unobserved_properties": []
++  },
++  "review_contract": {
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "bound_task_identity": "adversarial_design_review",
++    "criterion": "Does an allowed concrete counterexample refute a reviewed boundary and require changing the general design?",
++    "finite_evidence_manifest": [],
++    "permission": "allowed",
++    "required_review_scope_identities": [],
++    "root_substitution_forbidden": true
++  },
++  "task_contract": {
++    "artifact_change_before_admission_forbidden": true,
++    "operation_identity": "preimplementation-design-admission",
++    "required_outcome": "Decide whether the fixed general design is admissible and implement the declared artifact transition only after admission.",
++    "same_identity_revision_forbidden": true
++  },
++  "untrusted_prior_result": null
++}

@@ -1,6 +1,6 @@
 # 実装前の情報封鎖敵対的設計レビュー仕様
 
-> **位置づけ**: 新規設計／Candidate未作成／評価未設計／評価未実施
+> **位置づけ**: 設計第7版／敵対的設計監査通過／Candidate未作成／Target評価設計中／評価未実施
 >
 > 本文は、固定済み契約を満たす一般設計を実装へ渡す前に、敵対的レビューの要否を判定し、必要な場合だけ情報を封鎖した独立レビューを行うための仕様である。旧「変更前の情報封鎖レビューによる修正契約」系列は継承しない。本文は評価結果、採用、release、projectionを意味しない。
 
@@ -96,20 +96,24 @@ general_design_ready :=
 boundary_identity: <境界判断の識別情報>
 boundary_kind: membership | applicability | authority | ownership | stop | fallback
 domain: <境界が分類する対象領域>
-closure_source: contract | repository_authority | encapsulated_owner | autonomous_exploration
+closure_source: contract | repository_authority | autonomous_exploration
 required_validation_coverage: exhaustive | non_exhaustive
 counterexample_effect: implementation_local | general_design_change
 direct_basis:
   - <closure_sourceを直接支える許可済み根拠>
+closure_authority_identity: <contractまたはrepository authorityで閉じる場合の先行固定identity>
+closure_authority_provenance: <authorityが現在design identityより前に固定された証拠>
+counterexample_effect_basis:
+  - <反例が生じても一般設計の境界が変わるかを支える許可済み根拠>
 ```
 
-境界台帳はレビューを増やすための危険度一覧ではない。契約による明示列挙、正本による閉じた対象集合、単一の所有者へ封じ込められた局所実装を、探索由来の開いた集合と区別するために使う。
+境界台帳はレビューを増やすための危険度一覧ではない。契約による明示列挙または正本による閉じた対象集合を、探索由来の開いた集合と区別するために使う。
 
-`closure_source=contract`または`repository_authority`にできるのは、その根拠が対象領域のmembershipまたは除外条件を直接定めている場合だけである。探索で見つけたauthorityが個別対象を説明しているだけなら、対象領域の閉包根拠には使わない。
+`closure_source=contract`または`repository_authority`にできるのは、その根拠が対象領域のmembership、除外条件、所有境界または外部consumerとの関係を直接定め、かつ`closure_authority_identity`が現在のgeneral design identityより前に固定済みである場合だけである。一般設計producerが同じ設計操作内で新設または改訂したauthorityを、その一般設計の閉包根拠に使わない。そのようなauthority、探索で単一owner内の利用しか見つからなかったこと、または探索で見つけたauthorityが個別対象を説明しているだけの場合は、`closure_source=autonomous_exploration`とする。authorityが所有境界と外部consumer不在を閉じていない場合も同様とする。
 
 `required_validation_coverage=exhaustive`にできるのは、契約またはrepository authorityが有限の対象領域を列挙し、TaskSpec-required validationがその全memberと全必須関係を判定できる場合だけである。自律探索で見つけた対象や既存試験の件数だけから`exhaustive`へ結び付けない。
 
-`counterexample_effect=implementation_local`にできるのは、反例へ対応しても対象集合、一般predicate、正本、所有、停止、fallbackのいずれも変わらず、同じ設計要素の実装だけを修正すればよい場合に限る。
+`counterexample_effect=implementation_local`にできるのは、反例へ対応しても対象集合、一般predicate、正本、所有、停止、fallbackのいずれも変わらず、同じ設計要素の実装だけを修正すればよいことを`counterexample_effect_basis`の許可済み根拠から確認できる場合に限る。探索で他consumerを見つけなかったことや、設計者が単一owner内の変更と分類したことだけでは`implementation_local`にしない。
 
 ## 4. 敵対的レビューの要否
 
@@ -118,9 +122,9 @@ direct_basis:
 各`boundary decision`について、次を判定する。
 
 ```text
-boundary_change :=
+design_relies_on_boundary :=
     一般設計が対象、適用条件、正本、所有、停止、fallbackの
-    いずれかを新設または変更する
+    いずれかを新設、変更または維持し、契約充足の前提として使用する
 
 exploration_closed_scope :=
     closure_source=autonomous_exploration
@@ -139,7 +143,7 @@ counterexample_changes_design :=
 
 ```text
 boundary_requires_adversarial_review :=
-    boundary_change
+    design_relies_on_boundary
     ∧ exploration_closed_scope
     ∧ required_validation_can_miss
     ∧ counterexample_changes_design
@@ -171,12 +175,13 @@ design_review_admission_state :=
 | `0`を未指定扱いする条件を、契約どおり`None`判定へ直す | 不要 | 正しい条件が契約から直接決まり、固定検証が誤りを反証できる |
 | 明示された設定項目を、正本が列挙したschemaへ追加する | 不要 | 対象集合がauthorityで閉じている |
 | 不足importを直して同じ必須commandを再実行する | 不要 | 環境故障の局所修復で、一般的な対象境界を作らない |
-| 外部振る舞いを変えず、単一owner内のhelperを分割する | 不要 | 反例があっても同じ設計内の局所実装修正で閉じる |
+| authorityが外部consumerとの境界を閉じた単一owner内で、外部振る舞いを変えずhelperを分割する | 不要 | 閉包根拠がauthorityにあり、反例があっても同じ設計内の局所実装修正で閉じる |
 | 検索で見つけた三ファイルだけを同期対象にする | 必要 | 探索結果で対象集合を閉じ、未探索consumerを固定試験が見逃し得る |
 | 既知の七commandだけを特別扱いして探索量を減らす | 必要 | 既知fixtureには通るが、未知の同種commandで一般条件が変わる |
 | エラーを空結果へ変換して処理を継続する | 必要 | 探索由来の失敗分類でfallback境界を作り、障害を隠しても試験が通り得る |
 | 正本を別の成果物へ移し、既存consumerはないと判断する | 必要 | consumer集合の完全性が探索へ依存し、反例があれば正本移行設計が変わる |
 | 複数成果物の関係違反を、既知のファイル名の組で判定する | 必要 | 本来の関係predicateではなく探索済み対象へ閉じる可能性がある |
+| 探索で作った三対象の既存境界を維持し、その内部の停止条件だけを変更する | 必要 | 境界を新設しなくても設計成立が探索由来の対象集合へ依存し、未探索consumerで一般設計が変わる |
 
 同じ変更でも、対象集合が契約またはrepository authorityで明示的に閉じている場合、`exploration_closed_scope=false`となり敵対的レビューは不要である。
 
@@ -184,7 +189,7 @@ design_review_admission_state :=
 
 ### 6.1 操作と担当
 
-`design_review_admission_state=required`の場合だけ、一つの一般設計identityに対して一件の敵対的レビュー操作を作る。
+`design_review_admission_state=required`であり、TaskSpecがそのレビュー操作の起動を許可する場合だけ、一つの一般設計identityに対して一件の敵対的レビュー操作を作る。レビューが必要でもTaskSpecが起動を明示的に禁止する場合は、操作作成、producer binding、packet構築・配送より前に`unavailable`を終端結果とし、一般設計をadmitしない。
 
 一般設計のproducerは、その一般設計の敵対的レビューproducerにならない。レビュー開始前に、新しい独立実行identityを一つ結び付ける。同じ一般設計をrootと独立レビュー担当へ並行または順次に割り当てず、rootはレビューを代行または再実施しない。
 
@@ -202,16 +207,39 @@ adversarial_design_criterion :=
 
 レビュー担当は、設計をより好ましい形へ改善する提案、実装方法の選好、命名や表現上の好みをfindingにしない。反例は、契約上許される入力、状態、consumer、成果物関係または失敗経路へ結び付ける。
 
-### 6.3 渡してよい情報
+### 6.3 レビューpacket
+
+レビュー担当へファイルまたは会話履歴を単位として渡さない。許可項目を元artifactから明示的に射影し、禁止項目を除外した一つのpacketをレビュー開始前に固定する。
+
+```text
+adversarial_review_packet_ready :=
+    source_design_identityが結び付き済み
+    ∧ review対象boundary identityが全件結び付き済み
+    ∧ allowed inputの各値とsource identityが結び付き済み
+    ∧ 反例判定に必須な契約、authority、許可readのreview scope identityが全件結び付き済み
+    ∧ 反例有無を判定する現在snapshotの有限evidence manifestが結び付き済み
+    ∧ manifestの各項目に観測identityとsuccess conditionが結び付き済み
+    ∧ forbidden inputが直接にもallowed artifact内への埋め込みとしても含まれない
+    ∧ packet content identityが結び付き済み
+    ∧ bound_adversarial_reviewerへ実際に配送するpacket identityと一致する
+```
+
+packetは、元artifactの履歴、位置づけ、状態、先行review由来の説明を除いたsemantic projectionとする。一般設計artifact全体が許可項目と禁止項目を同時に含む場合、そのartifactをそのまま配送せず、許可された節または構造化項目だけをpacketへ射影する。
+
+### 6.4 渡してよい情報
 
 - 固定済みの設計契約とTaskSpec該当範囲。
 - 一般設計と境界台帳。
 - 対象へ適用中のrepository authority。
 - 反例探索に必要な許可済みread範囲。
+- 現在snapshotでそのread範囲を確認済みとするための有限evidence manifest、各観測identity、success condition。
 - TaskSpec-required validationが観測する性質と、観測しない領域の区別。
 - レビュー対象のboundary identityと必要な結果形式。
+- `no_counterexample_found`を返す場合に実際の`review_scope`が覆うべき、契約、authority、許可readの必須scope identity。
 
-### 6.4 渡してはいけない情報
+許可するのは上記情報の値であり、その値を含むファイル全体ではない。evidence manifestは「今回のsnapshotでどの観測を完了すれば反例の有無を終端判定できるか」を閉じる。consumer、成果物、入力または失敗分類の一般的なmembership自体をauthorityとして閉じるものではない。
+
+### 6.5 渡してはいけない情報
 
 - 実装済みの差分、具体的なpatch、実装者の自己評価。
 - Target評価のケース、fixture、oracle、期待terminal、採点条件。
@@ -219,6 +247,7 @@ adversarial_design_criterion :=
 - 先行reviewerのfinding、disposition、推奨修正。
 - 非公開の正解、canary、期待するreview経路。
 - 一般設計のproducerが想定した「反例がない理由」。
+- 一般設計artifactまたは他の許可artifactに埋め込まれた、先行reviewのfinding、disposition、修正方向、履歴、位置づけ、状態。
 
 情報封鎖は、レビュー担当に必要な根拠を与えないことではない。実装と評価の既知結果に結論を引かれず、契約と一般設計から独立に反例を構成できる入力境界を作ることである。
 
@@ -231,6 +260,7 @@ adversarial_design_criterion :=
 ```yaml
 disposition: counterexample_found
 design_identity: <一般設計identity>
+packet_identity: <実際に配送されたreview packet identity>
 boundary_identity: <反証された境界identity>
 contract_basis:
   - <反例を許す契約またはauthority>
@@ -247,19 +277,24 @@ design_effect:
 ```yaml
 disposition: no_counterexample_found
 design_identity: <一般設計identity>
+packet_identity: <実際に配送されたreview packet identity>
 reviewed_boundaries:
   - <確認した境界identity>
 review_scope:
   - <実際に確認できた契約と許可範囲>
+evidence_receipts:
+  - observation_identity: <manifestに固定した観測identity>
+    status: success
 ```
 
-これは許可範囲で設計を変える反例を確認しなかったという終端結果であり、一般設計の普遍的正しさの証明ではない。
+これは、全evidence manifestの成功receiptが揃った現在snapshotの許可範囲で、設計を変える反例を確認しなかったという終端結果である。一般設計の普遍的正しさの証明ではない。
 
 ### 7.3 判定不能
 
 ```yaml
 disposition: unavailable
 design_identity: <一般設計identity>
+packet_identity: <実際に配送されたreview packet identity>
 missing_evidence:
   - <反例探索に不足した根拠の識別情報>
 ```
@@ -270,7 +305,10 @@ missing_evidence:
 
 ```text
 adversarial_review_result_admissible :=
-    result.design_identity == current_general_design.identity
+    adversarial_review_packet_ready
+    ∧ result.design_identity == current_general_design.identity
+    ∧ runtime_input_receipt.packet_identity == bound_adversarial_review_packet.identity
+    ∧ result.packet_identity == bound_adversarial_review_packet.identity
     ∧ resultの生成元 == bound_adversarial_reviewer.identity
     ∧ resultを本節の三形式の一つへ結び付け可能
     ∧ (
@@ -278,12 +316,16 @@ adversarial_review_result_admissible :=
           result.boundary_identityがreview対象へ結び付く
         ∨ result.disposition=no_counterexample_foundなら
           全review対象boundaryがresult.reviewed_boundariesへ結び付く
+          ∧ result.review_scopeとpacketの全必須review scope identity集合が重複なしで完全一致する
+          ∧ evidence manifest全件がsuccessのevidence_receiptへ一対一に結び付く
         ∨ result.disposition=unavailableなら
           missing_evidenceがreview操作の許可範囲へ結び付く
       )
 ```
 
 rootは独立レビュー結果を比較、再採点、再生成、上書きしない。受入条件を満たさない結果を、rootの説明で補完しない。
+
+禁止入力がpacketへ混入した場合、実際に配送したpacket identityを実行環境のreceiptへ結び付けられない場合、必須review scopeとresult.review_scopeに欠落、縮小、余剰、未知、未許可または重複identityがある場合、またはmanifestの欠落、unreadable、non-success、receipt欠落がある場合は、レビュー結果が`no_counterexample_found`でも受け入れない。現在のレビュー操作を`unavailable`として終了し、一般設計をadmitしない。
 
 ## 8. 設計のadmissionと改訂
 
@@ -365,9 +407,13 @@ Target評価は一般設計の承認後、Candidate実装前に、実装済み�
 4. コードの局所修正で閉じるfindingと、一般設計を変える反例を区別できること。
 5. 情報封鎖packetが実装、Target評価、先行findingを含まないこと。
 6. `general_design_admissible`より前に`implementation_bound`または成果物変更へ進めないこと。
+7. 探索由来の既存境界を維持して設計成立の前提にする場合も、レビュー要否を判定すること。
+8. 所有境界と`implementation_local`を、探索結果または設計者の自己分類だけで閉じられないこと。
+9. 許可artifactへ埋め込まれた先行review情報を、semantic projectionから除外すること。
+10. 実際に配送したpacket identityと結果の生成元を受入条件へ結び付けること。
 
 監査で設計矛盾が見つかった場合は本文を修正する。Target評価は設計監査と必要な敵対的レビューの後、Candidate実装の前に固定し、設計監査の代わりに使わない。
 
 ## 状態
 
-`new_design_written_from_purpose / previous_repair_contract_series_not_inherited / adversarial_review_narrowed_to_exploration_closed_boundaries / candidate_not_created / design_audit_not_started / evaluation_not_designed / evaluation_not_started`
+`design_revision_7 / revisions_1_2_5_and_6_rejected_by_adversarial_counterexample / revisions_3_4_and_7_adversarial_design_audits_passed / prior_authority_identity_required_for_closure / exact_required_review_scope_identity_set / finite_evidence_manifest / permission_before_review_operation_creation / runtime_packet_identity_admission / candidate_not_created / evaluation_design_under_audit / evaluation_not_started`
