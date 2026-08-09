@@ -1,0 +1,57 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "pr-review-consumer-bound-evidence-r1",
+  "artifact_role": "development_candidate",
+  "display_role": "Prompt Variant",
+  "state": "frozen_not_executed",
+  "base": {
+    "identity": "pr-review-prompt-evidence-scope-r1",
+    "manifest_path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json",
+    "manifest_sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056"
+  },
+  "creation_gate": {
+    "shortest_normal_path": "one Opus relationship reviewer binds each evidence request to an unobserved review predicate, jointly issues only known independent requests, and returns one structured review",
+    "observed_error_path": "Candidate170 reduced the transferred control to seven fixed reads; its two measured C02 runs used additional accesses and produced quality scores 4 and 1, with the latter omitting one path required to establish the violation",
+    "existing_boundary_insufficient": "a fixed read list does not express the consumer predicate, missing observation, result effect scope, dependent-read boundary, or terminal invalidation that govern C147 evidence admission",
+    "replaced_predicate": "allow evidence only when a nonterminal unobserved review predicate, its missing observation, and a result capable of binding that observation are identified",
+    "removed_decision_points": "case-specific read-count admission, interface discovery as an evidence reason, confirmation-only rereads, and blanket reopening of already bound review predicates",
+    "new_decision_points": "joint issuance for requests whose results cannot change each other and one-result-bound exception admission for genuinely unresolved predicates",
+    "quality_check": "the complete path set used to establish a violation must equal path plus related_paths before a finding becomes terminal",
+    "mechanism_check": "each additional evidence request is attributable to a permitted preceding result and no evidence is issued after every required review predicate is terminal",
+    "stop_condition": "do not claim C147 effect transfer, held-out generalization, adoption, release, or runtime projection from artifact creation or C02 development calibration"
+  },
+  "change_axis": "consumer_bound_review_evidence",
+  "control_source": {
+    "identity": "the-caption-3ce91a4-result-effect-scope-r1",
+    "path": "prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt",
+    "sha256": "46ed3811aa798fec6356cf53feb7403ff15bf75c71a9c76af6d6893b05fb8fc7",
+    "translated_clauses": [
+      "TERMINAL",
+      "CONTEXT",
+      "EVIDENCE_GATE",
+      "DECISION_BOUNDARY"
+    ],
+    "excluded_clauses": [
+      "VALIDATION_CLOSURE",
+      "VALIDATION_PLAN"
+    ],
+    "transfer": "target-specific semantic translation for PR review evidence; not a verbatim copy or an effect claim"
+  },
+  "core": {
+    "path": "core-prompt.md",
+    "content_sha256": "dcf95716cf1043d1af810fdac5d124224e8eb0cfab724db0fcba6fbe85172955"
+  },
+  "fixed": [
+    "Candidate169 finding admission and identity normalization",
+    "one Opus relationship reviewer",
+    "root passthrough without fixture access",
+    "read-only review and untrusted-input boundary",
+    "review contract and structured output schema"
+  ],
+  "non_goals": [
+    "fixed fixture command list or fixed read count",
+    "case-specific expected answer, path, or oracle hint",
+    "fixture-tool payload or command change",
+    "fresh held-out effect, generalization, adoption, release, or runtime projection"
+  ]
+}

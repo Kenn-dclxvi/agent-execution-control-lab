@@ -10,6 +10,7 @@
 - Candidate167 [`pr-review-workflow-free-r1`](candidates/pr-review-workflow-free-r1/README.md): 同じ入力、権限、成果条件を保持し、review手順、担当分割、並列数、model role、validation方法の指定だけを外した校正用Free。校正実行済み
 - Candidate168 [`pr-review-relationship-role-r1`](candidates/pr-review-relationship-role-r1/README.md): Candidate167を親とし、関係レビュー役を1人に固定する。SonnetとOpusは同じCandidateの測定条件として比較した。校正実行済み
 - Candidate169 [`pr-review-relationship-role-finding-admission-r1`](candidates/pr-review-relationship-role-finding-admission-r1/README.md): Candidate168のOpus条件を基準に、最終findingの採用と同一性確認だけを厳格化する。C02開発校正済み
-- Candidate170 [`pr-review-prompt-evidence-scope-r1`](candidates/pr-review-prompt-evidence-scope-r1/README.md): Candidate169を親とし、7件の独立read共同発行と未確定の判定を動かせない再読の禁止を加える。未実行
+- Candidate170 [`pr-review-prompt-evidence-scope-r1`](candidates/pr-review-prompt-evidence-scope-r1/README.md): Candidate169を親とし、7件の独立read共同発行と未確定の判定を動かせない再読の禁止を加える。C02開発測定と診断を実行済み
+- Candidate171 [`pr-review-consumer-bound-evidence-r1`](candidates/pr-review-consumer-bound-evidence-r1/README.md): Candidate170の固定7 read制御を、未確定predicateと欠けた観測値へ証拠を結び付ける一般条件へ置き換える。未実行
 
 prompt artifactが存在することは、Baseline admission、評価済み、採用済み、または通常workflowへの反映を意味しない。

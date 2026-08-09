@@ -1,0 +1,7 @@
+# Candidate171
+
+Candidate170を親とし、固定7 readの列挙へ狭めた証拠取得制御を、C147のconsumer-bound evidenceとdecision boundaryに対応する一般条件へ置き換える。正式なprompt identityは`pr-review-consumer-bound-evidence-r1`である。
+
+証拠取得は、未確定のreview predicate、現在欠けている観測値、そのresultがpredicateを確定できる理由を対応付けられる場合だけ許可する。既知で相互に独立した取得は共同発行できるが、固定Caseのread数やfixture commandを一般条件にしない。追加取得は許可済みresultが示した具体的な不足へ一件ずつ結び付け、terminal後の取得を失効させる。
+
+Candidate169のfinding採用条件、Opus関係レビュー役1人、rootのpass-through、read-only境界、review contract、出力schemaは保持する。C02固有のpath、期待finding、oracle、command一覧は含めない。artifact作成だけでは評価済み、採用済み、release済み、本体反映済みを意味しない。
