@@ -39,6 +39,7 @@ import pr_review_held_out_relationship_reviewer as held_out_relationship_reviewe
 import pr_review_c02_finding_admission as c02_finding_admission
 import pr_review_measurement_c02_evidence_scope as c02_evidence_scope
 import pr_review_measurement_c02_evidence_diagnostic as c02_evidence_diagnostic
+import pr_review_measurement_c02_evidence_diagnostic_r2 as c02_evidence_diagnostic_r2
 import pr_review_subagent_hook_r3 as subagent_hook_r3
 
 
@@ -4153,6 +4154,38 @@ def test_c02_evidence_diagnostic_workflow_keeps_candidate170_prompt():
     assert "pr-review-measurement-c02-evidence-diagnostic-n1-r2" in workflow
 
 
+def test_c02_evidence_diagnostic_environment_recovery_packet(tmp_path: Path):
+    profile, preflight = c02_evidence_diagnostic_r2.validate_preflight("PRR-C02")
+    assert profile["profile_id"] == c02_evidence_diagnostic_r2.PROFILE_ID
+    assert preflight["failed_attempt"]["run_result"]["result"] == "execution_failed"
+
+    try:
+        metadata = c02_evidence_diagnostic_r2.prepare_input("PRR-C02", tmp_path)
+        assert metadata["profile_id"] == c02_evidence_diagnostic_r2.PROFILE_ID
+        assert (tmp_path / "pr_review_measurement_c02_evidence_scope.py").is_file()
+        assert (tmp_path / "pr_review_measurement_c02_evidence_diagnostic.py").is_file()
+        assert (tmp_path / "pr_review_measurement_c02_evidence_diagnostic_r2.py").is_file()
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+def test_c02_evidence_diagnostic_recovery_workflow_keeps_candidate170_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-measure-c02-evidence-diagnostic-r3.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    assert textwrap.dedent(inline).strip() == prompt
+    assert "pr-review-measurement-c02-evidence-diagnostic-n1-r3" in workflow
+    assert "pr_review_measurement_c02_evidence_diagnostic_r2.py" in workflow
+
+
 def test_candidate170_saved_result_and_r20_schema():
     saved = (
         INSTANCE_ROOT
@@ -4280,3 +4313,37 @@ def test_c02_evidence_diagnostic_grade_uses_r20_schema(tmp_path: Path):
     assert result["quality_score"] == 4
     assert result["mechanism_qualification"]["state"] == "satisfied"
     assert result["workflow_trace"]["token_diagnostics"]["complete"] is True
+
+
+def test_c02_evidence_diagnostic_failed_result_and_recovery_schema(tmp_path: Path):
+    failed_path = (
+        INSTANCE_ROOT
+        / "results/pr-review-measurement-c02-evidence-diagnostic-r2-prr-c02-prompt-evidence-scope-r1-a31299292912.json"
+    )
+    failed = json.loads(failed_path.read_text(encoding="utf-8"))
+    r20 = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r20.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(r20).validate(failed)
+    assert failed["result"] == "execution_failed"
+    assert failed["workflow_trace"]["token_diagnostics"]["complete"] is False
+
+    output = tmp_path / "run-result.json"
+    recovered = c02_evidence_diagnostic_r2.record_terminal(
+        "PRR-C02",
+        2000,
+        "claude-sonnet-5",
+        "execution_failed",
+        output,
+        "2000",
+    )
+    r21 = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r21.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(r21).validate(recovered)
+    assert recovered["schema_version"] == 21
+    assert recovered["profile_id"] == c02_evidence_diagnostic_r2.PROFILE_ID
