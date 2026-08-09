@@ -4419,3 +4419,16 @@ def test_c02_evidence_diagnostic_failed_result_and_recovery_schema(tmp_path: Pat
     )
     jsonschema.Draft202012Validator(r22).validate(r4_terminal)
     assert r4_terminal["schema_version"] == 22
+
+    completed_path = (
+        INSTANCE_ROOT
+        / "results/pr-review-measurement-c02-evidence-diagnostic-r4-prr-c02-prompt-evidence-scope-r1-a31300109132.json"
+    )
+    completed = json.loads(completed_path.read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator(r22).validate(completed)
+    assert completed["measurement_qualification"]["state"] == "satisfied"
+    assert completed["quality_score"] == 1
+    assert completed["workflow_trace"]["token_diagnostics"]["complete"] is True
+    assert completed_path.name in (INSTANCE_ROOT / "results/README.md").read_text(
+        encoding="utf-8"
+    )
