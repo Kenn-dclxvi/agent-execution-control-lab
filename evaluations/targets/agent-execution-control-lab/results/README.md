@@ -8,6 +8,12 @@
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
 
+## held-out Control-Free品質確認
+
+全体の解釈は[`held-out Control-Free品質確認`](pr-review-held-out-control-free-qualification_2026-08-09.md)に記録する。3件とも測定は成立したが、quality scoreはPRR-C02/r2が`1`、PRR-C03/r2とPRR-C06/r2が`4`だった。3件すべてのscore `4`を要求する品質条件が不成立のため、Claude Code純正相当CoreとOpus関係レビュー役の比較は開始しない。
+
+[PRR-C02/r2](pr-review-held-out-control-free-qualification-r1-prr-c02-held-out-control-free-r1-a31290559295.json)、[PRR-C03/r2](pr-review-held-out-control-free-qualification-r1-prr-c03-held-out-control-free-r1-a31290559229.json)、[PRR-C06/r2](pr-review-held-out-control-free-qualification-r1-prr-c06-held-out-control-free-r1-a31290559290.json)は、all-agent tokenが順に`2,313,350 / 4,192,816 / 1,659,245`、elapsedが`278.730 / 266.190 / 344.698秒`だった。
+
 ## Control-Free資格確認
 
 [`Control-Free資格確認`](pr-review-control-free-qualification_2026-08-09.md)では、PRR-C02/r1とPRR-C03/r1が同じr3条件で測定成立・quality score `4`となり、2ケースの最小setについて資格確認が成立した。PRR-C05/r1とPRR-C06/r1は実行後監査でcase不備を確認したため、モデル品質として集約しない。
