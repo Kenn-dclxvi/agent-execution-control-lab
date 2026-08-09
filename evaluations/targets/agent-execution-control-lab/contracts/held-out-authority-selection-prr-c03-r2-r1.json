@@ -1,0 +1,88 @@
+{
+  "authorities": [
+    {
+      "applies_to": [
+        "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+      ],
+      "authority_role": "root",
+      "content_bytes": 17600,
+      "content_sha256": "43994924951de6ed57afe829e2395eb2d55b74221ccbcd5287a5a4d8359da0b9",
+      "resolved_blob_sha1": "b5f81467ae3cfa14eddbd3bd540df410d834485c",
+      "resolved_mode": "100644",
+      "resolved_path": "AGENTS.md",
+      "source_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "source_mode": "120000",
+      "source_path": "CLAUDE.md",
+      "symlink_target": "AGENTS.md"
+    },
+    {
+      "applies_to": [
+        "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+      ],
+      "authority_role": "local",
+      "content_bytes": 13876,
+      "content_sha256": "bc7590873d5a56936e0cb426d1e341d9aa4325a72d37ec46350895842dba365c",
+      "resolved_blob_sha1": "c5c76969262d5140ea4192e79d5b2110f2805c09",
+      "resolved_mode": "100644",
+      "resolved_path": "evaluations/AGENTS.md",
+      "source_blob_sha1": "c5c76969262d5140ea4192e79d5b2110f2805c09",
+      "source_mode": "100644",
+      "source_path": "evaluations/AGENTS.md",
+      "symlink_target": null
+    },
+    {
+      "applies_to": [
+        "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+      ],
+      "authority_role": "local",
+      "content_bytes": 6894,
+      "content_sha256": "fe4550dfe40021396cc30cfad259131b3c4cd58114fd7cb3615021c787ffcf90",
+      "resolved_blob_sha1": "0cdd46629389c01cc0c83694dcd0cd9e22c5273c",
+      "resolved_mode": "100644",
+      "resolved_path": "evaluations/targets/AGENTS.md",
+      "source_blob_sha1": "0cdd46629389c01cc0c83694dcd0cd9e22c5273c",
+      "source_mode": "100644",
+      "source_path": "evaluations/targets/AGENTS.md",
+      "symlink_target": null
+    },
+    {
+      "applies_to": [
+        "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+      ],
+      "authority_role": "local",
+      "content_bytes": 1579,
+      "content_sha256": "a2e5e5d758b8c83be9deb3f37cdb8c4e04a929bba596774092a8e2a5010f32f6",
+      "resolved_blob_sha1": "40270a19f6436bdd8316697fc07534ad73fac78d",
+      "resolved_mode": "100644",
+      "resolved_path": "evaluations/targets/agent-execution-control-lab/AGENTS.md",
+      "source_blob_sha1": "40270a19f6436bdd8316697fc07534ad73fac78d",
+      "source_mode": "100644",
+      "source_path": "evaluations/targets/agent-execution-control-lab/AGENTS.md",
+      "symlink_target": null
+    }
+  ],
+  "changed_paths": [
+    "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+  ],
+  "collector_revision": "pr-review-authority-collector-r1",
+  "path_bindings": [
+    {
+      "applicable_authorities": [
+        "CLAUDE.md",
+        "evaluations/AGENTS.md",
+        "evaluations/targets/AGENTS.md",
+        "evaluations/targets/agent-execution-control-lab/AGENTS.md"
+      ],
+      "changed_path": "evaluations/targets/agent-execution-control-lab/results/pr-review-control-free-qualification_2026-08-09.md"
+    }
+  ],
+  "schema_version": "agent-execution-control-lab.pr-review-authority-selection/v1",
+  "selection_rule": {
+    "local": "for each changed path, apply ancestor AGENTS.md files from shallow to deep",
+    "root": "resolve root CLAUDE.md and apply it first"
+  },
+  "target_repository_ref": {
+    "commit": "16f9637d33791abd839d5c7d57b6616e03930949",
+    "tree": "c6d21c0bba62f5065c9e685f021a90ae2f004290"
+  }
+}

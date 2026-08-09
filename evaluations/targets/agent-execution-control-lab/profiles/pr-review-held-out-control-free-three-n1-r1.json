@@ -1,0 +1,278 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v6",
+  "profile_id": "pr-review-held-out-control-free-three-n1-r1",
+  "state": "frozen_not_executed",
+  "purpose": "held_out_control_free_qualification",
+  "cases": [
+    {
+      "id": "PRR-C02",
+      "revision": "r2"
+    },
+    {
+      "id": "PRR-C03",
+      "revision": "r2"
+    },
+    {
+      "id": "PRR-C06",
+      "revision": "r2"
+    }
+  ],
+  "evaluation_set": {
+    "set_id": "pr-review-held-out-three-r1",
+    "revision": "r1",
+    "held_out": true,
+    "coverage": "three fixed cases"
+  },
+  "comparison_conditions": {
+    "variant": "held-out-control-free",
+    "target_repository_ref": {
+      "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+      "commit": "16f9637d33791abd839d5c7d57b6616e03930949",
+      "tree": "c6d21c0bba62f5065c9e685f021a90ae2f004290"
+    },
+    "task_spec": {
+      "source": "cases/<case_id>/r2/input.json and rating-contracts/review-contract-r2.md",
+      "functional_specification": "specifications/pr-review-function-r1.md",
+      "qualification_specification": "specifications/pr-review-held-out-comparison-r1.md",
+      "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す"
+    },
+    "prompt": {
+      "identity": "pr-review-workflow-free-r1",
+      "manifest_path": "prompts/candidates/pr-review-workflow-free-r1/manifest.json",
+      "manifest_sha256": "879642181a0eab913cbd9af885332b48ce8baa115cd2c948dfecccb0f4c4a0b7",
+      "content_path": "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md",
+      "content_sha256": "2bff83c1a8dbab8891beba4a791ca0d8e982d94d3b6b9e06d2a26a5678692fb4"
+    },
+    "quality_rating": {
+      "contract_id": "pr-review-finding-quality-v9",
+      "path": "rating-contracts/pr-review-finding-quality-v9.json",
+      "required_state": "independent_case_design_audit_satisfied"
+    },
+    "review_contract": {
+      "revision": "pr-review-contract-r2",
+      "path": "rating-contracts/review-contract-r2.md"
+    },
+    "review_output_schema": {
+      "revision": "review-output-r2",
+      "path": "schemas/review-output-r2.schema.json"
+    },
+    "run_result_schema": {
+      "revision": "run-result-r16",
+      "path": "schemas/run-result-r16.schema.json"
+    },
+    "case_bindings": {
+      "PRR-C02": {
+        "input": {
+          "path": "cases/PRR-C02/r2/input.json",
+          "sha256": "5e3e15cd40f006bb88db0152cc1a56afe70d1cd806be722f42560d4fd5a0b5b6"
+        },
+        "oracle": {
+          "path": "cases/PRR-C02/r2/oracle.json",
+          "sha256": "90a9a791c3b742f79fa177c7293fb414119b74f4f7ab3f5da4a1055d31235630"
+        },
+        "snapshot": {
+          "path": "contracts/held-out-repository-snapshot-prr-c02-r2-r1.json",
+          "sha256": "fd97bae67735bc8a22e4ebfe24ef53a4dad3b5c33070bce862ab5e30a707cad7"
+        },
+        "authority": {
+          "path": "contracts/held-out-authority-selection-prr-c02-r2-r1.json",
+          "sha256": "8b4dc424aa0c33f504270cf62d9c029a26c5f77bcbba22ec2c3b879e937312ed"
+        },
+        "eligibility": {
+          "path": "contracts/held-out-review-eligibility-prr-c02-r2-r1.json",
+          "sha256": "9d56cae529158cafdb4cea3e4388099e9297d4678dd5c262f5da59f35a7cbd06"
+        }
+      },
+      "PRR-C03": {
+        "input": {
+          "path": "cases/PRR-C03/r2/input.json",
+          "sha256": "e40bb301c9eac9e67f06b8e02384162f2c284dac47c966806ee794a7a438f660"
+        },
+        "oracle": {
+          "path": "cases/PRR-C03/r2/oracle.json",
+          "sha256": "f4458d4194d510293ddd86d803033a7ab376e6452e14e32410e93730b6c8d2aa"
+        },
+        "snapshot": {
+          "path": "contracts/held-out-repository-snapshot-prr-c03-r2-r1.json",
+          "sha256": "3840471434c77e6439f8e9e192bd6ea3d6a38d05d5ea29611414120ce62a3aaa"
+        },
+        "authority": {
+          "path": "contracts/held-out-authority-selection-prr-c03-r2-r1.json",
+          "sha256": "9aadd4dfc6cacb3ef8816288e45eb7c4aee0f6d82d71ffe93e6c86ea2e13997b"
+        },
+        "eligibility": {
+          "path": "contracts/held-out-review-eligibility-prr-c03-r2-r1.json",
+          "sha256": "6ab536bb32aa8ae89cedc6c8a3cafece8a15a1cf73a6828c94a2301b562fa37f"
+        }
+      },
+      "PRR-C06": {
+        "input": {
+          "path": "cases/PRR-C06/r2/input.json",
+          "sha256": "02a7eb8b951684a074d8301b855b1d81adf510ad5c7d0365aa18f4a184b5bcae"
+        },
+        "oracle": {
+          "path": "cases/PRR-C06/r2/oracle.json",
+          "sha256": "b7eb8b362a3a4ef798612d82bd12319124819186ce8d2ccf7aa85604cde1e0e6"
+        },
+        "snapshot": {
+          "path": "contracts/held-out-repository-snapshot-prr-c06-r2-r1.json",
+          "sha256": "ed0cf9ba20332d62f014436614529ab4446b1acb9d25ae2b0f36210c156ffe2b"
+        },
+        "authority": {
+          "path": "contracts/held-out-authority-selection-prr-c06-r2-r1.json",
+          "sha256": "256a97610bb5e5612af745bfd425bfe3a9986d40a3300fca600a3ead4ca407bb"
+        },
+        "eligibility": {
+          "path": "contracts/held-out-review-eligibility-prr-c06-r2-r1.json",
+          "sha256": "1ff14573379a4db0f4261ccb4854bd99580db4ab11cc52c14c7ad492ef91bfe4"
+        }
+      }
+    },
+    "model": {
+      "requested": "claude-sonnet-5",
+      "reported_identity_required": true,
+      "review_topology": "model_selected"
+    },
+    "agent_environment": {
+      "action": "anthropics/claude-code-action",
+      "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+      "claude_cli": "reported_by_action",
+      "runner": "ubuntu-latest",
+      "session_mode": "one_root_action_per_case",
+      "authentication": "claude_code_oauth_token"
+    },
+    "permission": {
+      "github": "contents:read",
+      "repository_write": false,
+      "github_comment_write": false,
+      "tool_policy": "fixture-tool-read-only-snapshot-r2",
+      "fixture_tool_path": "tools/pr_review_fixture_tool_r5.py"
+    },
+    "executor_parameters": {
+      "max_attempts_per_case": 2,
+      "max_turns": null,
+      "turn_limit_source": "action_default_at_fixed_action_revision",
+      "max_workers": 24,
+      "dispatch_concurrency": 3,
+      "actual_planned_slots": 3,
+      "schedule_policy": "three_independent_workflow_dispatches",
+      "action_timeout_seconds": 1200,
+      "reviewer_job_timeout_seconds": 1500,
+      "token_accounting": {
+        "revision": "claude-code-action-execution-message-usage-sum-v1",
+        "scope": "root_and_subagent_assistant_messages",
+        "subagent_inclusion_required": true
+      }
+    },
+    "repetition_condition": {
+      "iterations_per_case": 1,
+      "external_failure_policy": "repeat_same_case_with_new_attempt_identity",
+      "result_reuse": "forbidden"
+    },
+    "qualification_gate": {
+      "individual_pass_condition": {
+        "result": "pass",
+        "quality_score": 4,
+        "required_finding_miss": 0,
+        "false_positive": 0,
+        "review_contract_violation": 0,
+        "reported_model_matches_requested": true,
+        "all_agent_tokens_complete": true,
+        "elapsed_time_complete": true,
+        "fixture_access_observed": true,
+        "fixture_permission_denials": 0
+      },
+      "aggregate_pass_condition": "all three cases satisfy individual_pass_condition"
+    },
+    "kpis": [
+      "quality_score",
+      "all_agent_total_tokens",
+      "elapsed_seconds"
+    ],
+    "diagnostics": [
+      "fixture tool calls",
+      "model steps",
+      "subagent topology",
+      "root and subagent usage records"
+    ],
+    "bound_artifacts": [
+      {
+        "path": "contracts/pr-review-held-out-three-case-design-audit-r1.json",
+        "sha256": "61e6eaf117908c24db850bc6b70f7a81795c44e3ab778c0afba5272df3c8aef7"
+      },
+      {
+        "path": "rating-contracts/pr-review-finding-quality-v9.json",
+        "sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc"
+      },
+      {
+        "path": "sets/pr-review-held-out-three-r1/README.md",
+        "sha256": "bb3649b40a1e6d6517a379af45c11ffdc15295e349a075b8f0b7fa2464039268"
+      },
+      {
+        "path": "specifications/pr-review-held-out-comparison-r1.md",
+        "sha256": "42b28b3a8afc1f1eb24c4322a5a730e6e315b03edcba228aee43489d348e5ca4"
+      },
+      {
+        "path": "prompts/candidates/pr-review-workflow-free-r1/manifest.json",
+        "sha256": "879642181a0eab913cbd9af885332b48ce8baa115cd2c948dfecccb0f4c4a0b7"
+      },
+      {
+        "path": "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md",
+        "sha256": "2bff83c1a8dbab8891beba4a791ca0d8e982d94d3b6b9e06d2a26a5678692fb4"
+      },
+      {
+        "path": "rating-contracts/review-contract-r2.md",
+        "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"
+      },
+      {
+        "path": "schemas/review-output-r2.schema.json",
+        "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"
+      },
+      {
+        "path": "schemas/run-result-r16.schema.json",
+        "sha256": "25651e443ce8226fe8398f9d6184b3d7737b72109b4623509858bb052b62f1b8"
+      },
+      {
+        "path": "tools/pr_review_held_out_control_free.py",
+        "sha256": "78771c756f3294caea2e91dff2019a763caf35a4d53913920d4b2bc6a6c4c830"
+      },
+      {
+        "path": "tools/pr_review_repository_snapshot_r4.py",
+        "sha256": "b4732f5b54b5a173ab36ef52a0536b22caa72109a9a6be8ae1127f3e5c23c736"
+      },
+      {
+        "path": "tools/pr_review_authority_packet.py",
+        "sha256": "cc3f34e12f362460f9467f6ea4bf518ab7347142bec51762ae0fb5773cc4ed4d"
+      },
+      {
+        "path": "tools/pr_review_authority_collector.py",
+        "sha256": "5848dadba4e548689aef90aabc8d4b2e5e0912f41267197c4026851ea1614d98"
+      },
+      {
+        "path": "tools/pr_review_fixture_tool_r5.py",
+        "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"
+      },
+      {
+        "path": "tools/pr_review_subagent_hook.py",
+        "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce"
+      },
+      {
+        "path": ".github/workflows/pr-review-qualify-held-out-control-free.yml",
+        "sha256": "f9b019b67121542b2a1de04d4da12e5c108d5327a51541167f590a767d1d2b46"
+      }
+    ]
+  },
+  "execution": {
+    "planned_slots": 3,
+    "max_workers": 24,
+    "actual_concurrency": 3,
+    "state": "not_issued"
+  },
+  "scope": {
+    "qualification": "authorized_after_preflight",
+    "comparison": "forbidden_until_qualification_satisfied",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "authorities": [
+    {
+      "applies_to": [
+        "docs/pr-review-candidate-status.md"
+      ],
+      "authority_role": "root",
+      "content_bytes": 17600,
+      "content_sha256": "43994924951de6ed57afe829e2395eb2d55b74221ccbcd5287a5a4d8359da0b9",
+      "resolved_blob_sha1": "b5f81467ae3cfa14eddbd3bd540df410d834485c",
+      "resolved_mode": "100644",
+      "resolved_path": "AGENTS.md",
+      "source_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "source_mode": "120000",
+      "source_path": "CLAUDE.md",
+      "symlink_target": "AGENTS.md"
+    },
+    {
+      "applies_to": [
+        "docs/pr-review-candidate-status.md"
+      ],
+      "authority_role": "local",
+      "content_bytes": 4724,
+      "content_sha256": "2ca5a0c7e7da0737c42d9156aa5608d6c4612a197e73ffcd51c485404d952bbf",
+      "resolved_blob_sha1": "c60a69de978c72645c7f0302414d6af8c576ac6f",
+      "resolved_mode": "100644",
+      "resolved_path": "docs/AGENTS.md",
+      "source_blob_sha1": "c60a69de978c72645c7f0302414d6af8c576ac6f",
+      "source_mode": "100644",
+      "source_path": "docs/AGENTS.md",
+      "symlink_target": null
+    }
+  ],
+  "changed_paths": [
+    "docs/pr-review-candidate-status.md"
+  ],
+  "collector_revision": "pr-review-authority-collector-r1",
+  "path_bindings": [
+    {
+      "applicable_authorities": [
+        "CLAUDE.md",
+        "docs/AGENTS.md"
+      ],
+      "changed_path": "docs/pr-review-candidate-status.md"
+    }
+  ],
+  "schema_version": "agent-execution-control-lab.pr-review-authority-selection/v1",
+  "selection_rule": {
+    "local": "for each changed path, apply ancestor AGENTS.md files from shallow to deep",
+    "root": "resolve root CLAUDE.md and apply it first"
+  },
+  "target_repository_ref": {
+    "commit": "16f9637d33791abd839d5c7d57b6616e03930949",
+    "tree": "c6d21c0bba62f5065c9e685f021a90ae2f004290"
+  }
+}

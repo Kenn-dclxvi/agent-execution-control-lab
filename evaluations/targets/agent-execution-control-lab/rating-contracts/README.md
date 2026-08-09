@@ -8,6 +8,7 @@
 - [`pr-review-finding-quality-v6`](pr-review-finding-quality-v6.json): 現行仕様へ適合したPRR-C02、C03、C05、C06のcontrol-free資格確認専用contract。[case監査](../contracts/pr-review-r1-case-qualification-audit-r1.json)済み・未実行
 - [`pr-review-finding-quality-v7`](pr-review-finding-quality-v7.json): 初回出力でoracle欠落を確認したC05/r1を除き、PRR-C02、C03、C06だけを扱うcontrol-free資格確認専用contract
 - [`pr-review-finding-quality-v8`](pr-review-finding-quality-v8.json): PRR-C02/r2、C03/r2、C06/r2のheld-out比較候補を監査前状態で固定した履歴contract。後続の[独立case設計監査](../contracts/pr-review-held-out-three-case-design-audit-r1.json)は成立したが、このrevision自体は実行へ使わない
+- [`pr-review-finding-quality-v9`](pr-review-finding-quality-v9.json): 独立監査済みのPRR-C02/r2、C03/r2、C06/r2をControl-Free条件で品質確認するcontract。方式比較は全件score 4の確認まで禁止
 - [r1 diagnostic review contract](review-contract-r1.md): r1 runでClaudeへ提示したfinding構造
 - [r2 review contract](review-contract-r2.md): `related_paths`を含む機能仕様r1準拠のmodel-visible契約
 
