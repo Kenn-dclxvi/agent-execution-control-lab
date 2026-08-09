@@ -1,0 +1,109 @@
+{
+  "attempt": 31299704268,
+  "base_sha": "7777777777777777777777777777777777777771",
+  "case_id": "PRR-C02",
+  "comparison_revision": "pr-review-measurement-c02-evidence-diagnostic-r3",
+  "fixture_revision": "r2",
+  "github_run_id": "31299704268",
+  "head_sha": "7777777777777777777777777777777777777772",
+  "measurement_qualification": {
+    "state": "unsatisfied"
+  },
+  "mechanism_qualification": {
+    "additional_fixture_read_count": null,
+    "fixture_tool_max_batch_size": null,
+    "joint_initial_read_observed": false,
+    "required_initial_read_count": 7,
+    "state": "unobserved"
+  },
+  "model": {
+    "reported": null,
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r3",
+  "quality": {
+    "category_accuracy": 0,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 1,
+    "false_positive": 0,
+    "line_accuracy": 0,
+    "observed": false,
+    "path_accuracy": 0,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": false,
+    "true_positive": 0
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v9",
+  "quality_score": null,
+  "relationship_reviewer_model": "opus",
+  "repetition": 1,
+  "result": "execution_failed",
+  "result_id": "pr-review-measurement-c02-evidence-diagnostic-r3:PRR-C02:prompt-evidence-scope:r1:a31299704268",
+  "reviewer_executor": {
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "authentication": "claude_code_oauth_token",
+    "claude_cli": "reported_by_action",
+    "runner": "ubuntu-latest",
+    "session_mode": "one_root_action_with_exactly_one_relationship_reviewer_per_case"
+  },
+  "runtime": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "reported_cost_usd": null,
+    "total_tokens": null,
+    "turns": null
+  },
+  "schema_version": 21,
+  "timing": {
+    "action_step_ms": null,
+    "e2e_ms": null,
+    "execution_ms": null,
+    "input_ms": null,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": null,
+    "setup_ms": null
+  },
+  "variant": "prompt-evidence-scope",
+  "workflow_revision": "pr-review-measure-c02-evidence-diagnostic-r3",
+  "workflow_trace": {
+    "complete": false,
+    "evidence_diagnostics": {
+      "batches": [],
+      "content_saved": false,
+      "operation_counts": {},
+      "unbatched_calls": []
+    },
+    "token_diagnostics": {
+      "complete": false,
+      "tokens": {
+        "all": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "root": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "subagent": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        }
+      },
+      "usage_records": {
+        "all": 0,
+        "root": 0,
+        "subagent": 0
+      }
+    }
+  }
+}

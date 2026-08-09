@@ -1,0 +1,180 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-development-measurement-preflight/v2",
+  "preflight_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r4-preflight",
+  "state": "ready_not_executed",
+  "measurement_series": "pr-review-measurement-c02-evidence-diagnostic-r4",
+  "profile": {
+    "profile_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r4",
+    "path": "profiles/pr-review-measurement-c02-evidence-diagnostic-n1-r4.json",
+    "sha256": "53cc8b3f58e2d8cb749a99ca30023ead2051ebc8d452365ad03726533f05a999"
+  },
+  "baseline": {
+    "prompt_variant": "pr-review-relationship-role-finding-admission-r1",
+    "run_result": {
+      "result_id": "pr-review-c02-finding-admission-calibration-r1:PRR-C02:c02-relationship-reviewer-opus-finding-admission:r1:a31295440716",
+      "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json",
+      "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427",
+      "measurement_state": "satisfied",
+      "quality_score": 4
+    },
+    "result_reuse": "required_without_rerun"
+  },
+  "diagnostic_source": {
+    "candidate_number": 170,
+    "prompt_identity": "pr-review-prompt-evidence-scope-r1",
+    "run_result": {
+      "result_id": "pr-review-measurement-c02-evidence-scope-r1:PRR-C02:prompt-evidence-scope:r1:a31298190204",
+      "path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json",
+      "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6",
+      "measurement_state": "satisfied",
+      "quality_score": 4,
+      "mechanism_state": "unsatisfied"
+    }
+  },
+  "predicates": {
+    "candidate170_prompt_unchanged": "satisfied",
+    "case_revision_unchanged": "satisfied",
+    "model_and_topology_unchanged": "satisfied",
+    "permission_boundary_unchanged": "satisfied",
+    "content_free_diagnostic_hook": "satisfied",
+    "price_class_token_diagnostic": "satisfied",
+    "prior_result_write_once": "satisfied",
+    "development_case_not_held_out": "explicit",
+    "environment_failure_before_model_start": "satisfied",
+    "same_slot_environment_recovery_only": "satisfied",
+    "missing_measurement_tool_transfer_repaired": "satisfied",
+    "packet_local_collector_import_repaired": "satisfied",
+    "packet_cli_execution_tested": "satisfied"
+  },
+  "compatibility": {
+    "changed_axis": "collector import recovery only",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "Candidate170 prompt identity and content SHA-256",
+      "Case PRR-C02/r2 input, oracle, repository snapshot, authority, and eligibility identities",
+      "target repository commit and tree",
+      "TaskSpec source, functional specification, and required outcome",
+      "quality rating, review contract, and structured review output schema",
+      "root Sonnet model and one Opus relationship reviewer topology",
+      "Claude Code Action revision, runner, authentication, and read-only permission boundary",
+      "fixture-tool payload and command interface",
+      "turn condition, timeout, max_workers=24, and existing all-agent token accounting",
+      "measurement qualification, mechanism state, and three KPI definitions"
+    ],
+    "allowed_differences": [
+      "diagnostic Profile, workflow, recovery tool, Run Result schema, and result identities",
+      "the packet-local base collector is restored after packet preparation"
+    ],
+    "excluded_claims": [
+      "formal Candidate169 KPI comparison",
+      "fresh held-out effect",
+      "generalization",
+      "model ranking",
+      "winner",
+      "adoption",
+      "release",
+      "runtime projection"
+    ]
+  },
+  "planned_slots": [
+    {
+      "case_id": "PRR-C02",
+      "fixture_revision": "r2",
+      "variant": "prompt-evidence-scope",
+      "repetition": 1
+    }
+  ],
+  "verified_artifacts": [
+    {
+      "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json",
+      "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427"
+    },
+    {
+      "path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json",
+      "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6"
+    },
+    {
+      "path": "sets/pr-review-c02-development-benchmark-r1/README.md",
+      "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"
+    },
+    {
+      "path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json",
+      "sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056"
+    },
+    {
+      "path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md",
+      "sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"
+    },
+    {
+      "path": "tools/pr_review_measurement_c02_evidence_diagnostic.py",
+      "sha256": "6a3767a8ecc94f1900fec6e58171d13eb48f38e63982ddc914538b33fb6ac9b4"
+    },
+    {
+      "path": "tools/pr_review_subagent_hook_r3.py",
+      "sha256": "236fa137a3c02ffffbec8ab74937c9e57fcf9ad12cdab1fc019ded2300310592"
+    },
+    {
+      "path": "tools/pr_review_measurement_c02_evidence_scope.py",
+      "sha256": "0a8be1e676526152fccff25515522dc686156c611b3bd19045a2873b7ee1549c"
+    },
+    {
+      "path": "results/pr-review-measurement-c02-evidence-diagnostic-r2-prr-c02-prompt-evidence-scope-r1-a31299292912.json",
+      "sha256": "c9f3ea5117234edeef7e3bd2711cb9a72b412084ba7b24eda773a35d928595e6"
+    },
+    {
+      "path": "specifications/pr-review-measurement-c02-evidence-diagnostic-r4.md",
+      "sha256": "4517c3a1bf9e260e350d49677376a842501d623211ce74c8566804d6e5dec81b"
+    },
+    {
+      "path": "schemas/run-result-r22.schema.json",
+      "sha256": "6128eafef167d54d3a3fc08625f48e338db333eeeb42a1abdcad1563948d092d"
+    },
+    {
+      "path": "tools/pr_review_measurement_c02_evidence_diagnostic_r3.py",
+      "sha256": "47e0cdeb2a5adab951200b9d45755f628c04c128215974c12757025054927488"
+    },
+    {
+      "path": ".github/workflows/pr-review-measure-c02-evidence-diagnostic-r4.yml",
+      "sha256": "2e5ac3f0044c275a8a7831bc2d177c334de62f5c14e5ac423d48ecbd478ca878"
+    },
+    {
+      "path": "results/pr-review-measurement-c02-evidence-diagnostic-r3-prr-c02-prompt-evidence-scope-r1-a31299704268.json",
+      "sha256": "7d2dc636d63fe55a315a02bff7f99e73a926b57e7bdeb13ca7613186a62c2033"
+    }
+  ],
+  "execution": {
+    "state": "not_issued",
+    "measurement_failure_allows_same_slot_environment_recovery_only": true,
+    "source_run_id": "31299704268"
+  },
+  "scope": "Candidate170を変更せず、Case PRR-C02/r2の同じ反復1をcollector修復として再実行する。packet内の基底collector復元以外は変えず、新Candidate、held-out evidence、採用、release、本体反映を許可しない。",
+  "failed_attempts": [
+    {
+      "run_result": {
+        "result_id": "pr-review-measurement-c02-evidence-diagnostic-r2:PRR-C02:prompt-evidence-scope:r1:a31299292912",
+        "path": "results/pr-review-measurement-c02-evidence-diagnostic-r2-prr-c02-prompt-evidence-scope-r1-a31299292912.json",
+        "sha256": "c9f3ea5117234edeef7e3bd2711cb9a72b412084ba7b24eda773a35d928595e6",
+        "result": "execution_failed",
+        "measurement_state": "unsatisfied"
+      },
+      "classification": "environment transfer failure before model start",
+      "missing_artifact": "pr_review_measurement_c02_evidence_scope.py"
+    },
+    {
+      "run_result": {
+        "result_id": "pr-review-measurement-c02-evidence-diagnostic-r3:PRR-C02:prompt-evidence-scope:r1:a31299704268",
+        "path": "results/pr-review-measurement-c02-evidence-diagnostic-r3-prr-c02-prompt-evidence-scope-r1-a31299704268.json",
+        "sha256": "7d2dc636d63fe55a315a02bff7f99e73a926b57e7bdeb13ca7613186a62c2033",
+        "result": "execution_failed",
+        "measurement_state": "unsatisfied"
+      },
+      "classification": "collector import failure after model review",
+      "model_review_completed": true,
+      "unavailable_observations": [
+        "execution trace",
+        "token classes",
+        "hook operation batches"
+      ]
+    }
+  ]
+}
