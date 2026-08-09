@@ -13,6 +13,6 @@ PRレビュー実行経路の診断用固定ケースを引くための索引で
 | [`PRR-C04/r1`](PRR-C04/r1/README.md) | 文書の日本語既定 | severity不整合のため資格確認対象外 |
 | [`PRR-C05/r1`](PRR-C05/r1/README.md) | 複数finding処理 | oracleが有効なsingle_artifact_unit findingを欠くため資格確認対象外 |
 | [`PRR-C06/r1`](PRR-C06/r1/README.md) | clean control | 参照先を読めずdocument_qualityをpassに確定できないため資格確認対象外 |
-| [`PRR-C02/r2`](PRR-C02/r2/README.md) | 異なるターゲットインスタンスのcaseを同じsetへ混在 | held-out候補・独立case設計監査待ち・未実行 |
-| [`PRR-C03/r2`](PRR-C03/r2/README.md) | 保存済みresultのKPI上書き | held-out候補・独立case設計監査待ち・未実行 |
-| [`PRR-C06/r2`](PRR-C06/r2/README.md) | 状態を分離したclean control | held-out候補・独立case設計監査待ち・未実行 |
+| [`PRR-C02/r2`](PRR-C02/r2/README.md) | 異なるターゲットインスタンスのcaseを同じsetへ混在 | held-out候補・独立case設計監査済み・未実行 |
+| [`PRR-C03/r2`](PRR-C03/r2/README.md) | 保存済みresultのKPI上書き | held-out候補・独立case設計監査済み・未実行 |
+| [`PRR-C06/r2`](PRR-C06/r2/README.md) | 状態を分離したclean control | held-out候補・独立case設計監査済み・未実行 |

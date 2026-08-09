@@ -3279,7 +3279,7 @@ def test_held_out_three_patches_match_fixed_target_tree():
             assert f"+++ b/{change['path']}\n" in change["patch"]
 
 
-def test_held_out_three_is_not_executable_before_independent_audit():
+def test_held_out_three_independent_audit_is_satisfied_before_qualification():
     rating = json.loads(
         (INSTANCE_ROOT / "rating-contracts/pr-review-finding-quality-v8.json").read_text(
             encoding="utf-8"
@@ -3291,6 +3291,12 @@ def test_held_out_three_is_not_executable_before_independent_audit():
     specification = (
         INSTANCE_ROOT / "specifications/pr-review-held-out-comparison-r1.md"
     ).read_text(encoding="utf-8")
+    audit = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-held-out-three-case-design-audit-r1.json"
+        ).read_text(encoding="utf-8")
+    )
 
     assert rating["state"] == "case_design_audit_pending"
     assert rating["admission"] == {
@@ -3299,6 +3305,12 @@ def test_held_out_three_is_not_executable_before_independent_audit():
         "comparison_preflight": "not_created",
         "comparison_execution": "forbidden",
     }
+    assert audit["producer_task_name"] == "/root/held_out_case_audit"
+    assert audit["decision"]["state"] == "satisfied"
+    assert audit["stage_b"]["oracle_comparison"]["state"] == "matched"
+    assert audit["held_out_boundary"]["allowed_next_use"] == (
+        "独立監査receiptとしてcontrol-free品質確認の事前ゲートへ使用できる。"
+    )
     assert "スロットを発行しない" in set_readme
     assert "全件で測定が成立し、quality score `4`" in specification
     assert "`quality_score`、all-agent `total_tokens`、`elapsed_seconds`" in specification
