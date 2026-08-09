@@ -1,0 +1,68 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-development-measurement-preflight/v1",
+  "preflight_id": "pr-review-measurement-c02-evidence-scope-n1-r1-preflight",
+  "state": "ready_not_executed",
+  "measurement_series": "pr-review-measurement-c02-evidence-scope-r1",
+  "profile": {"profile_id": "pr-review-measurement-c02-evidence-scope-n1-r1", "path": "profiles/pr-review-measurement-c02-evidence-scope-n1-r1.json", "sha256": "d643c6385b17939538f36f2aeb8e70cf40e899f371619f0887350d94d567b179"},
+  "baseline": {
+    "prompt_variant": "pr-review-relationship-role-finding-admission-r1",
+    "profile": {"profile_id": "pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1", "path": "profiles/pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json", "sha256": "5fb1ea38d760e31958de8048491eda5e5f70054579b36c4143bb6daff37ecf66"},
+    "run_result": {"result_id": "pr-review-c02-finding-admission-calibration-r1:PRR-C02:c02-relationship-reviewer-opus-finding-admission:r1:a31295440716", "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json", "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427", "measurement_state": "satisfied", "quality_score": 4},
+    "result_reuse": "required_without_rerun"
+  },
+  "predicates": {
+    "case_revision_unchanged": "satisfied",
+    "saved_baseline_measurement": "satisfied",
+    "saved_baseline_quality_reference": "score_4",
+    "finding_admission_predicate_unchanged": "satisfied",
+    "one_opus_relationship_reviewer": "fixed",
+    "all_agent_token_accounting": "fixed",
+    "measurement_and_mechanism_states_separate": "satisfied",
+    "development_case_not_held_out": "explicit"
+  },
+  "compatibility": {
+    "changed_axis": "review evidence scheduling only",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "Case PRR-C02/r2 input, oracle, repository snapshot, authority, and eligibility identities",
+      "target repository commit and tree",
+      "TaskSpec source, functional specification, and required outcome",
+      "Finding Admission r1 final finding predicate",
+      "quality rating, review contract, and structured review output schema",
+      "root Sonnet model and one Opus relationship reviewer topology",
+      "Claude Code Action revision, runner, authentication, and read-only permission boundary",
+      "fixture-tool payload and command interface",
+      "turn condition, timeout, max_workers=24, and all-agent token accounting revision",
+      "measurement qualification and three KPI definitions"
+    ],
+    "allowed_differences": [
+      "Prompt Variant, Measurement Series, Profile, workflow, tool, and immutable Run Result identities",
+      "joint issuance and additional-read admission instructions",
+      "sanitized fixture-tool batch diagnostics derived from the existing lifecycle hook"
+    ],
+    "excluded_claims": ["C147 numeric effect transfer", "fresh held-out effect", "generalization", "model ranking", "winner", "adoption", "release", "runtime projection"]
+  },
+  "mechanism_gate": {
+    "required_initial_read_count": 7,
+    "joint_initial_read_observed": true,
+    "additional_fixture_read_count": 0,
+    "effect_on_measurement_qualification": "none; stored separately"
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r2", "variant": "prompt-evidence-scope", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "profiles/pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json", "sha256": "5fb1ea38d760e31958de8048491eda5e5f70054579b36c4143bb6daff37ecf66"},
+    {"path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json", "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427"},
+    {"path": "sets/pr-review-c02-development-benchmark-r1/README.md", "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"},
+    {"path": "specifications/pr-review-measurement-c02-evidence-scope-r1.md", "sha256": "b514a69f1eda56a3548b174770bc0d11638573cd7ed416e443a50364922d65e4"},
+    {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json", "sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056"},
+    {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md", "sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"},
+    {"path": "schemas/run-result-r19.schema.json", "sha256": "d30b5aa0285723771ff2f62494b4d9a88bab85f538c405b9621f2253efa47b2f"},
+    {"path": "tools/pr_review_measurement_c02_evidence_scope.py", "sha256": "0a8be1e676526152fccff25515522dc686156c611b3bd19045a2873b7ee1549c"},
+    {"path": "tools/pr_review_subagent_hook.py", "sha256": "9e6fd3c5c325d751602d99cc127374f5003c35cb0f26559485be5254b82d5cce"},
+    {"path": ".github/workflows/pr-review-measure-c02-evidence-scope.yml", "sha256": "a53146eee665a6b0cde59239f5b40e5508c2c6192bc804efebc3a83f39c37626"}
+  ],
+  "execution": {"state": "not_issued", "measurement_failure_allows_same_slot_environment_recovery_only": true},
+  "scope": "Prompt Variant Evidence Scope r1をCase PRR-C02/r2で1回測るMeasurement Seriesだけを許可する。C147の効果転用、held-out evidence、採用、release、本体反映を許可しない。"
+}

@@ -10,3 +10,10 @@
 - 生のAction出力、非公開log、credentialをcommitしない。診断receiptへは許可済みfieldとGitHub run identityだけを保持する。
 - Core ReviewではGitHubへcommentを書き込まない。GitHub反映はquality gate通過後に別のIntegration測定として設計する。
 - エラー、schema不適合、quality失敗、timeout、取消、計測不完全を別statusとして保持する。
+
+## 利用者向けの呼称
+
+- 試験問題は`Case`、一つの比較目的と条件を固定する単位は`Measurement Series`、実行条件JSONは`Profile`、各実行の一次結果は`Run Result`と呼ぶ。
+- PRレビュー方法の版を利用者向けに識別するときは、機能名を略した呼称ではなく、リポジトリ全体で一意な連番の`Candidate<number>`を使う。機能名は変更内容の説明にだけ使い、版の略称にはしない。
+- Candidate番号は一度割り当てたprompt identityから別identityへ付け替えない。modelやCaseなどの測定条件はCandidate番号へ含めず、ProfileまたはRun Resultで区別する。
+- 正式なprompt identityと既存の不変identityは改称しない。Candidate番号との対応は`prompts/README.md`を正本とする。
