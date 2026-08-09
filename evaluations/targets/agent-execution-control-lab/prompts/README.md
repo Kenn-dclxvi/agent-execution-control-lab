@@ -9,5 +9,6 @@
 - [`pr-review-control-free-qualification-r1`](baselines/pr-review-control-free-qualification-r1/README.md): r1 fixture toolと出力schemaへ合わせ、review方法をモデルへ委ねる4ケース資格確認専用baseline。未実行
 - [`pr-review-workflow-free-r1`](candidates/pr-review-workflow-free-r1/README.md): 同じ入力、権限、成果条件を保持し、review手順、担当分割、並列数、model role、validation方法の指定だけを外した校正用Free候補。校正実行済み
 - [`pr-review-relationship-role-r1`](candidates/pr-review-relationship-role-r1/README.md): 関係レビュー役を1人に固定し、その役のmodel aliasだけをSonnetまたはOpusへ変える校正候補。校正実行済み
+- [`pr-review-relationship-role-finding-admission-r1`](candidates/pr-review-relationship-role-finding-admission-r1/README.md): 保存済みC02 Opus resultの誤経路に対し、最終findingの採用と同一性確認だけを厳格化する開発用候補。未実行
 
 prompt artifactが存在することは、Baseline admission、評価済み、採用済み、または通常workflowへの反映を意味しない。

@@ -10,3 +10,4 @@
 | [`pr-review-control-free-qualification-three-r2`](pr-review-control-free-qualification-three-r2/README.md) | 3 | 改訂実行後、C06/r1のmodel-visible情報不足を確認 |
 | [`pr-review-control-free-qualification-two-r3`](pr-review-control-free-qualification-two-r3/README.md) | 2 | C02とC03の保存済みr3 resultでqualification satisfied |
 | [`pr-review-held-out-three-r1`](pr-review-held-out-three-r1/README.md) | 3 | Control-Free `1 / 4 / 4`とOpus関係レビュー役 `0 / 4 / 4`の3 KPIを[測定済み](../results/pr-review-held-out-workflow-topology-comparison_2026-08-09.md) |
+| [`pr-review-c02-development-benchmark-r1`](pr-review-c02-development-benchmark-r1/README.md) | 1 | 結果確認済みC02を変更せず、finding採用条件の開発校正に再利用。held-outではない |

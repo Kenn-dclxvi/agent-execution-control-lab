@@ -1,6 +1,6 @@
 # agent-execution-control-lab PRレビュープロファイル索引
 
-登録済みprofileは次の17件である。
+登録済みprofileは次の18件である。
 
 機械的な全件索引:
 
@@ -23,6 +23,7 @@
 - [`pr-review-control-free-three-qualification-n1-r3`](pr-review-control-free-three-qualification-n1-r3.json): C05/r1を除外し、複合command内のfixture-tool呼出しを内容非保存で計測した3ケース資格確認profile。[result](../results/pr-review-control-free-qualification_2026-08-09.md)ではC02とC03が測定成立・score 4、C06はcase不備を観測
 - [`pr-review-held-out-control-free-three-n1-r1`](pr-review-held-out-control-free-three-n1-r1.json): 独立監査済みの未使用3ケースをWorkflow Free条件で各1回確認した履歴profile。[result](../results/pr-review-held-out-control-free-qualification_2026-08-09.md)は3件とも測定成立、quality scoreは`1 / 4 / 4`。後続の[admission r2](../contracts/pr-review-held-out-control-free-three-admission-r2.json)により、再実行せず比較KPIとして再利用する
 - [`pr-review-held-out-relationship-reviewer-opus-three-n1-r1`](pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json): 同じheld-out 3ケースを、関係レビュー役1人・Opus固定で各1回測定する比較profile。[result](../results/pr-review-held-out-workflow-topology-comparison_2026-08-09.md)は3件とも測定成立、quality scoreは`0 / 4 / 4`
+- [`pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1`](pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json): 保存済みのC02 Opus resultを基準に、findingの採用と同一性確認だけを変えて1回測定する開発用profile。未実行であり、held-out evidenceには使わない
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 

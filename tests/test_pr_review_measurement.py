@@ -36,6 +36,7 @@ import pr_review_repository_snapshot_r3 as repository_snapshot_r3
 import pr_review_repository_snapshot_r4 as repository_snapshot_r4
 import pr_review_held_out_control_free as held_out_control_free
 import pr_review_held_out_relationship_reviewer as held_out_relationship_reviewer
+import pr_review_c02_finding_admission as c02_finding_admission
 
 
 @pytest.fixture
@@ -3701,3 +3702,105 @@ def test_held_out_opus_results_admission_binds_primary_results():
         value = json.loads(path.read_text(encoding="utf-8"))
         assert hashlib.sha256(path.read_bytes()).hexdigest() == result["sha256"]
         assert value["measurement_qualification"]["state"] == "satisfied"
+
+
+def test_c02_finding_admission_preflight_is_reproducible(tmp_path: Path):
+    profile, preflight = c02_finding_admission.validate_preflight("PRR-C02")
+
+    assert profile["evaluation_set"]["held_out"] is False
+    assert profile["comparison_conditions"]["comparison_axis"] == (
+        "finding admission and identity normalization only"
+    )
+    assert preflight["compatibility"]["mechanical_diff_state"] == "satisfied"
+    assert preflight["baseline"]["result_reuse"] == "required_without_rerun"
+    assert "fresh held-out effect" in preflight["compatibility"]["excluded_claims"]
+
+    try:
+        metadata = c02_finding_admission.prepare_input("PRR-C02", tmp_path)
+        assert metadata["profile_id"] == c02_finding_admission.PROFILE_ID
+        assert metadata["variant"] == c02_finding_admission.VARIANT
+        assert (tmp_path / "pr_review_c02_finding_admission.py").is_file()
+        assert (tmp_path / "pr_review_held_out_relationship_reviewer.py").is_file()
+        assert not (tmp_path / "oracle.json").exists()
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+def test_c02_finding_admission_workflow_matches_candidate_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-calibrate-c02-finding-admission.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-relationship-role-finding-admission-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+
+    assert textwrap.dedent(inline).strip() == prompt
+    assert "PRR-C02" in workflow
+    assert "PRR-C03" not in workflow
+    assert "PRR-C02" not in prompt
+    assert "evaluations/targets/agent-execution-control-lab/sets/" not in prompt
+
+
+def test_c02_finding_admission_grade_uses_r18_schema(tmp_path: Path):
+    fixture, oracle = held_out_control_free._fixture_and_oracle("PRR-C02")
+    expected = oracle["expected_findings"][0]
+    location = expected["locations"][0]
+    finding = {
+        "category": expected["category"],
+        "rule_id": expected["rule_id"],
+        "path": location["path"],
+        "related_paths": [path for path in expected["paths"] if path != location["path"]],
+        "line_start": location["line_start"],
+        "line_end": location["line_end"],
+        "severity": expected["severity"],
+        "message": "固定されたインスタンス境界に反するため、アーティファクトを分離する必要がある。",
+    }
+    review_path = tmp_path / "review.json"
+    review_path.write_text(
+        json.dumps({"findings": [finding], "summary": _summary_for([finding])}),
+        encoding="utf-8",
+    )
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {"model": "claude-sonnet-5", "turns": 2, "input_tokens": 100, "output_tokens": 20, "duration_ms": 1000, "reported_cost_usd": None},
+                "workflow_trace": {
+                    "complete": True,
+                    "fixture_tool_access_observed": True,
+                    "fixture_tool_permission_denials": 0,
+                    "subagent_start_count": 1,
+                    "subagent_stop_count": 1,
+                    "relationship_reviewer_model_matches": True,
+                    "relationship_reviewer_fixture_access_count": 1,
+                    "root_fixture_tool_access_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(
+        json.dumps({"profile_id": c02_finding_admission.PROFILE_ID, "case_id": "PRR-C02", "input_ms": 10}),
+        encoding="utf-8",
+    )
+
+    result = c02_finding_admission.grade_run(
+        "PRR-C02", 1000, "claude-sonnet-5", review_path, metadata_path,
+        prepared_path, tmp_path / "result.json", "1000"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r18.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["quality_score"] == 4
+    assert result["result"] == "pass"
+    assert result["runtime"]["total_tokens"] == 120
