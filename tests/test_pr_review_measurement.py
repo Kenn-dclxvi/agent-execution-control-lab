@@ -3847,6 +3847,7 @@ def test_pr_review_user_facing_candidate_numbers_are_stable():
         (168, "pr-review-relationship-role-r1"),
         (169, "pr-review-relationship-role-finding-admission-r1"),
         (170, "pr-review-prompt-evidence-scope-r1"),
+        (171, "pr-review-consumer-bound-evidence-r1"),
     )
     positions = []
     for number, identity in expected:
@@ -3854,6 +3855,41 @@ def test_pr_review_user_facing_candidate_numbers_are_stable():
         assert marker in prompt_index
         positions.append(prompt_index.index(marker))
     assert positions == sorted(positions)
+
+
+def test_candidate171_translates_c147_without_fixture_overfit():
+    prompt_root = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-consumer-bound-evidence-r1"
+    )
+    manifest = json.loads((prompt_root / "manifest.json").read_text(encoding="utf-8"))
+    prompt = (prompt_root / "core-prompt.md").read_text(encoding="utf-8")
+    content_sha256 = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+
+    assert manifest["prompt_identity"] == "pr-review-consumer-bound-evidence-r1"
+    assert manifest["core"]["content_sha256"] == content_sha256
+    source = REPOSITORY_ROOT / manifest["control_source"]["path"]
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == (
+        manifest["control_source"]["sha256"]
+    )
+    assert manifest["control_source"]["translated_clauses"] == [
+        "TERMINAL",
+        "CONTEXT",
+        "EVIDENCE_GATE",
+        "DECISION_BOUNDARY",
+    ]
+    assert "未確定のreview predicate" not in prompt
+    assert "nonterminalなpredicate" in prompt
+    assert "現在欠けている観測値" in prompt
+    assert "stop condition" in prompt
+    assert "toolやcommandの存在確認" in prompt
+    assert "両者の集合が確定した集合と一致" in prompt
+    assert "worker packetと許可されたreadだけ" in prompt
+    assert "正規rule catalog result" in prompt
+    assert "関係レビュー役のinvocationまたはsessionがnonterminal" in prompt
+    assert "7件" not in prompt
+    assert "PRR-C02" not in prompt
+    assert "cross-target-review" not in prompt
 
 
 def test_c02_evidence_scope_preflight_and_packet(tmp_path: Path):
