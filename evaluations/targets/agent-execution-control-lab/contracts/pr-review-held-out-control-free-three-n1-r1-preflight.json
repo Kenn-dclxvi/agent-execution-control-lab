@@ -1,0 +1,66 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-qualification-preflight/v1",
+  "preflight_id": "pr-review-held-out-control-free-three-n1-r1-preflight",
+  "state": "ready_not_executed",
+  "profile": {
+    "profile_id": "pr-review-held-out-control-free-three-n1-r1",
+    "path": "profiles/pr-review-held-out-control-free-three-n1-r1.json",
+    "sha256": "70ef51a7dba2192310a6956b11d4e3d78a71612455c17b1d5ab5eb7e24b8e55a"
+  },
+  "predicates": {
+    "independent_case_design_audit": "satisfied",
+    "held_out_revisions_unused": "satisfied",
+    "control_free_prompt_fixed": "satisfied",
+    "all_agent_token_accounting": "fixed",
+    "fresh_n1_per_case": "satisfied",
+    "comparison_execution": "forbidden_until_all_three_score_4"
+  },
+  "planned_slots": [
+    {
+      "case_id": "PRR-C02",
+      "fixture_revision": "r2",
+      "variant": "held-out-control-free",
+      "repetition": 1
+    },
+    {
+      "case_id": "PRR-C03",
+      "fixture_revision": "r2",
+      "variant": "held-out-control-free",
+      "repetition": 1
+    },
+    {
+      "case_id": "PRR-C06",
+      "fixture_revision": "r2",
+      "variant": "held-out-control-free",
+      "repetition": 1
+    }
+  ],
+  "verified_artifacts": [
+    {
+      "path": "contracts/pr-review-held-out-three-case-design-audit-r1.json",
+      "sha256": "61e6eaf117908c24db850bc6b70f7a81795c44e3ab778c0afba5272df3c8aef7"
+    },
+    {
+      "path": "rating-contracts/pr-review-finding-quality-v9.json",
+      "sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc"
+    },
+    {
+      "path": "schemas/run-result-r16.schema.json",
+      "sha256": "25651e443ce8226fe8398f9d6184b3d7737b72109b4623509858bb052b62f1b8"
+    },
+    {
+      "path": "tools/pr_review_held_out_control_free.py",
+      "sha256": "78771c756f3294caea2e91dff2019a763caf35a4d53913920d4b2bc6a6c4c830"
+    },
+    {
+      "path": "tools/pr_review_repository_snapshot_r4.py",
+      "sha256": "b4732f5b54b5a173ab36ef52a0536b22caa72109a9a6be8ae1127f3e5c23c736"
+    },
+    {
+      "path": ".github/workflows/pr-review-qualify-held-out-control-free.yml",
+      "sha256": "f9b019b67121542b2a1de04d4da12e5c108d5327a51541167f590a767d1d2b46"
+    }
+  ],
+  "stop_condition": "3件のうち一件でも測定不成立またはquality score 4未満なら、CoreとOpusの比較profileおよび比較スロットを発行しない",
+  "scope": "held-out setのControl-Free品質確認だけを許可し、方式比較、採用、release、本体反映を許可しない"
+}

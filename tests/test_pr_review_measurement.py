@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import sys
+import textwrap
 from pathlib import Path
 
 import pytest
@@ -32,6 +33,8 @@ import pr_review_authority_packet as authority_packet
 import pr_review_repository_snapshot as repository_snapshot
 import pr_review_repository_snapshot_r2 as repository_snapshot_r2
 import pr_review_repository_snapshot_r3 as repository_snapshot_r3
+import pr_review_repository_snapshot_r4 as repository_snapshot_r4
+import pr_review_held_out_control_free as held_out_control_free
 
 
 @pytest.fixture
@@ -3314,3 +3317,135 @@ def test_held_out_three_independent_audit_is_satisfied_before_qualification():
     assert "スロットを発行しない" in set_readme
     assert "全件で測定が成立し、quality score `4`" in specification
     assert "`quality_score`、all-agent `total_tokens`、`elapsed_seconds`" in specification
+
+
+@pytest.mark.parametrize("case_id", held_out_control_free.CASES)
+def test_held_out_control_free_preflight_and_snapshot(case_id: str, tmp_path: Path):
+    profile, preflight = held_out_control_free.validate_preflight(case_id)
+    assert profile["execution"] == {
+        "planned_slots": 3,
+        "max_workers": 24,
+        "actual_concurrency": 3,
+        "state": "not_issued",
+    }
+    assert preflight["predicates"]["comparison_execution"] == (
+        "forbidden_until_all_three_score_4"
+    )
+
+    binding = profile["comparison_conditions"]["case_bindings"][case_id]
+    try:
+        metadata = held_out_control_free.prepare_input(case_id, tmp_path)
+        expected = json.loads(
+            (INSTANCE_ROOT / binding["snapshot"]["path"]).read_text(
+                encoding="utf-8"
+            )
+        )
+        assert metadata["snapshot_sha256"] == expected["snapshot_sha256"]
+        assert not (tmp_path / "repository/.git").exists()
+        assert not (tmp_path / "oracle.json").exists()
+        assert (tmp_path / "authority-input.json").is_file()
+        assert (tmp_path / "review-eligibility.json").is_file()
+        assert (tmp_path / "pr_review_held_out_control_free.py").is_file()
+        assert all(
+            not (path.stat().st_mode & 0o222)
+            for path in (tmp_path / "repository").rglob("*")
+        )
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+@pytest.mark.parametrize("case_id", held_out_control_free.CASES)
+def test_held_out_control_free_grades_fixed_oracle(case_id: str, tmp_path: Path):
+    fixture, oracle = held_out_control_free._fixture_and_oracle(case_id)
+    findings = []
+    for expected in oracle["expected_findings"]:
+        location = expected["locations"][0]
+        findings.append(
+            {
+                "category": expected["category"],
+                "rule_id": expected["rule_id"],
+                "path": location["path"],
+                "related_paths": [
+                    path for path in expected["paths"] if path != location["path"]
+                ],
+                "line_start": location["line_start"],
+                "line_end": location["line_end"],
+                "severity": expected["severity"],
+                "message": "固定規則に反する変更関係を修正する必要がある。",
+            }
+        )
+    review = {"findings": findings, "summary": _summary_for(findings)}
+    review_path = tmp_path / "review.json"
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    metadata = {
+        "schema_version": 1,
+        "action_conclusion": "success",
+        "output_valid": True,
+        "validation_error": None,
+        "model_requested": "claude-sonnet-5",
+        "action_step_ms": 1200,
+        "runtime": {
+            "model": "claude-sonnet-5",
+            "turns": 2,
+            "input_tokens": 100,
+            "output_tokens": 20,
+            "duration_ms": 1000,
+            "reported_cost_usd": None,
+        },
+        "workflow_trace": {
+            "complete": True,
+            "fixture_tool_access_observed": True,
+            "fixture_tool_permission_denials": 0,
+        },
+    }
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(
+        json.dumps(
+            {
+                "profile_id": held_out_control_free.PROFILE_ID,
+                "case_id": case_id,
+                "input_ms": 10,
+            }
+        ),
+        encoding="utf-8",
+    )
+    result_path = tmp_path / "result.json"
+    result = held_out_control_free.grade_run(
+        case_id,
+        1000,
+        "claude-sonnet-5",
+        review_path,
+        metadata_path,
+        prepared_path,
+        result_path,
+        "1000",
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r16.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["result"] == "pass"
+    assert result["quality_score"] == 4
+    assert result["runtime"]["total_tokens"] == 120
+
+
+def test_held_out_control_free_workflow_exports_nonempty_r2_schema():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-qualify-held-out-control-free.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-workflow-free-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    assert 'del(."$schema")' in workflow
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    assert textwrap.dedent(inline).strip() == prompt
+    assert "schemas/review-output-r2.schema.json" in workflow
+    assert "--allowedTools \"Agent,Bash(./fixture-tool:*)\"" in workflow

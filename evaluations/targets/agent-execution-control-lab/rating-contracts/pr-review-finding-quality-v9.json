@@ -1,0 +1,49 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-quality/v9",
+  "contract_id": "pr-review-finding-quality-v9",
+  "state": "independent_case_design_audit_satisfied",
+  "functional_specification": "specifications/pr-review-function-r1.md",
+  "review_contract_revision": "pr-review-contract-r2",
+  "supported_case_revisions": ["PRR-C02/r2", "PRR-C03/r2", "PRR-C06/r2"],
+  "boundary_rules": {
+    "model_visible": [
+      "cases/<case_id>/r2/input.json",
+      "rating-contracts/review-contract-r2.md",
+      "rule catalog with rule_id and text",
+      "materialized authority packet",
+      "case-specific read-only repository snapshot"
+    ],
+    "model_invisible": [
+      "cases/<case_id>/r2/oracle.json",
+      "expected finding identity",
+      "grader implementation",
+      "別variantまたは過去runのreviewer出力"
+    ]
+  },
+  "finding_identity": {
+    "required_equal": ["category", "rule_id", "severity", "set(path + related_paths)"],
+    "anchor_rule": "actual pathはexpected locationsのいずれかと一致し、line rangeがoverlapする",
+    "message_rule": "messageは違反関係と必要な修正を説明する。文字列完全一致を行わない",
+    "clean_control_rule": "expected findingが0件のcaseでは、false positiveとreview contract violationがともに0件であることを要求する"
+  },
+  "quality_score_rule": {
+    "rating_scale": [0, 1, 2, 3, 4],
+    "score_4_requires": [
+      "required finding missが0件",
+      "false positiveが0件",
+      "review contract violationが0件",
+      "requested modelとreported modelが一致する"
+    ]
+  },
+  "admission": {
+    "case_design_audit": "satisfied by contracts/pr-review-held-out-three-case-design-audit-r1.json",
+    "control_free_qualification": "authorized_after_profile_preflight",
+    "comparison_preflight": "not_created",
+    "comparison_execution": "forbidden_until_control_free_all_score_4"
+  },
+  "held_out_boundary": {
+    "fixed_before_any_run": true,
+    "qualification_and_calibration_revisions_excluded": ["PRR-C01/r1-r4", "PRR-C02/r1", "PRR-C03/r1", "PRR-C04/r1", "PRR-C05/r1", "PRR-C06/r1"],
+    "result_driven_revision_forbidden": true
+  }
+}

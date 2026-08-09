@@ -1,6 +1,6 @@
 # agent-execution-control-lab PRレビュープロファイル索引
 
-登録済みprofileは次の15件である。
+登録済みprofileは次の16件である。
 
 機械的な全件索引:
 
@@ -21,6 +21,7 @@
 - [`pr-review-control-free-four-qualification-n1-r1`](pr-review-control-free-four-qualification-n1-r1.json): 現行仕様へ適合したPRR-C02、C03、C05、C06を各1回実行するcontrol-free資格確認profile。4件ともschema出力とcollector依存の移植漏れによりreview開始前に`execution_failed`
 - [`pr-review-control-free-four-qualification-n1-r2`](pr-review-control-free-four-qualification-n1-r2.json): 初回4件のschema出力とcollector依存の移植漏れを直したenvironment recovery profile。4件ともレビューと採点は完了したが、C03、C05、C06はfixture access計測が不成立。C05は有効な3件目をoracleが欠くcase不備も観測
 - [`pr-review-control-free-three-qualification-n1-r3`](pr-review-control-free-three-qualification-n1-r3.json): C05/r1を除外し、複合command内のfixture-tool呼出しを内容非保存で計測した3ケース資格確認profile。[result](../results/pr-review-control-free-qualification_2026-08-09.md)ではC02とC03が測定成立・score 4、C06はcase不備を観測
+- [`pr-review-held-out-control-free-three-n1-r1`](pr-review-held-out-control-free-three-n1-r1.json): 独立監査済みの未使用3ケースをWorkflow Free条件で各1回確認するprofile。全件で測定成立・score 4になった場合だけ方式比較へ進む
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 
