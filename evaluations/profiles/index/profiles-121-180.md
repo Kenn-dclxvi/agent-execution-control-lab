@@ -36,6 +36,7 @@
 - [`candidate172-preimplementation-design-admission-targeted-r1-medium-m24-n5-cli0146.json`](../candidate172-preimplementation-design-admission-targeted-r1-medium-m24-n5-cli0146.json)
 - [`candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json)
 - [`candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n5-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n5-cli0146.json)
+- [`candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate2-expanded12-global-m24-n1-r1.json`](../candidate2-expanded12-global-m24-n1-r1.json)
 - [`candidate2-expanded12-global-m24-n5-r1.json`](../candidate2-expanded12-global-m24-n5-r1.json)
 - [`candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json)
 - [`candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
-- [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)

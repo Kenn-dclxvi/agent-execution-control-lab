@@ -1,0 +1,47 @@
+{
+  "schema_version": "the-caption-prompt.standard14-review-route-audit/v1",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-concrete-counterexample-adjudication-r1",
+    "revision": "r1",
+    "bundle_sha256": "7c8b2cbff1c178e824ca2cac8b8a20b9afc0cab70d0964dd2eef8bc86790c85c"
+  },
+  "evaluation_set_identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+  "run_count": 70,
+  "session_count": {
+    "one": 70,
+    "more_than_one": 0
+  },
+  "independent_reviewer_spawn": {
+    "run_count": 0,
+    "event_match_count": 0,
+    "patterns": [
+      "spawn_agent",
+      "collaboration.spawn_agent",
+      "recipient_name.*spawn_agent",
+      "tool_name=spawn_agent"
+    ],
+    "source": "cycle/layer2/extensions/<run_id>/codex-adapter/codex-events.jsonl"
+  },
+  "owner_producer_evidence_status": {
+    "available": 0,
+    "not_applicable": 15,
+    "failed": 55
+  },
+  "case_summary": [
+    {"case_id": "TC-A01-LATENT-MODE-POLICY", "run_count": 5, "owner_status": "not_applicable", "reviewer_spawn_count": 0},
+    {"case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING", "run_count": 5, "owner_status": "not_applicable", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY", "run_count": 5, "owner_status": "not_applicable", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F05-CLARIFY-UNITS-MODE", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F07-CANONICAL-V4-RUNNER", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0},
+    {"case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW", "run_count": 5, "owner_status": "failed", "reviewer_spawn_count": 0}
+  ],
+  "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate173-concrete-counterexample-adjudication-v14-medium-standard14-n5-cli0146-20260810-r1"
+}
