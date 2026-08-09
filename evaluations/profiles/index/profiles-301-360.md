@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-global-m24-n5-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json)
@@ -61,4 +62,3 @@
 - [`control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
 - [`control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`revision-2-core9-global-m4-r2.json`](../revision-2-core9-global-m4-r2.json)
-- [`revision-2-expanded12-global-m24-n1-r1.json`](../revision-2-expanded12-global-m24-n1-r1.json)

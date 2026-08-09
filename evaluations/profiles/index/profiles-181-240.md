@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate35-root-control-only-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate35-root-control-only-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-v13-standard14-global-m24-n5-r1.json`](../candidate35-root-control-only-v13-standard14-global-m24-n5-r1.json)
 - [`candidate37-exact-evidence-location-owner-producer-v8-expanded12-f04r2-global-m24-n5-r1.json`](../candidate37-exact-evidence-location-owner-producer-v8-expanded12-f04r2-global-m24-n5-r1.json)
 - [`candidate37-exact-evidence-location-owner-producer-v8-targeted2-global-m10-n5-r1.json`](../candidate37-exact-evidence-location-owner-producer-v8-targeted2-global-m10-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate62-task-closed-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate62-task-closed-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate63-fixed-evidence-route-projection-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate63-fixed-evidence-route-projection-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate64-self-contained-execution-paths-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
