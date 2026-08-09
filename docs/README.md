@@ -56,6 +56,7 @@
 | [`candidate166-prior-evaluation-review-admission-design.md`](candidate166-prior-evaluation-review-admission-design.md) | C165の過大発動に対し、アーティファクト実装・調査を独立SA切替条件から外した一変更。Review4はroute / closure 20 / 20、oracle一致18 / 20。HR03のケース設計不備によりquality未判定、Standard14未実施 |
 | [`candidate166-review4-case-validity-analysis.md`](candidate166-review4-case-validity-analysis.md) | C166 Review4のHR03を再監査し、raw response不在のまま観測表現を強めたため期待terminalが一意でないと判定。18 / 20をquality failureへ使わず、r2 case revisionの事前条件を固定 |
 | [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | プロンプト内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存ケースを再分類。次gateを7ケース × N=5へ固定するケース設計 |
+| [`prechange-information-sealed-repair-contract-spec.md`](prechange-information-sealed-repair-contract-spec.md) | 同じ判定条件の先行評価を受けた修正作業で、最初の成果物変更より前に、情報を封鎖した独立レビュー担当が修正の要否と修正後に満たす条件を修正契約として確定する仕様。候補、評価ケース、評価は未作成 |
 
 ### 3b. 公開ターゲット拡張
 
