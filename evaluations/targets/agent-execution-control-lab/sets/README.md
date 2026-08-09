@@ -9,4 +9,4 @@
 | [`pr-review-control-free-qualification-four-r1`](pr-review-control-free-qualification-four-r1/README.md) | 4 | 初回実行後、C05/r1のoracle欠落を確認 |
 | [`pr-review-control-free-qualification-three-r2`](pr-review-control-free-qualification-three-r2/README.md) | 3 | 改訂実行後、C06/r1のmodel-visible情報不足を確認 |
 | [`pr-review-control-free-qualification-two-r3`](pr-review-control-free-qualification-two-r3/README.md) | 2 | C02とC03の保存済みr3 resultでqualification satisfied |
-| [`pr-review-held-out-three-r1`](pr-review-held-out-three-r1/README.md) | 3 | Control-Freeは3件とも測定成立。score `1 / 4 / 4`を品質KPIとして保持し、[Opus比較preflight](../contracts/pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight.json)済み・外部実行前 |
+| [`pr-review-held-out-three-r1`](pr-review-held-out-three-r1/README.md) | 3 | Control-Free `1 / 4 / 4`とOpus関係レビュー役 `0 / 4 / 4`の3 KPIを[測定済み](../results/pr-review-held-out-workflow-topology-comparison_2026-08-09.md) |

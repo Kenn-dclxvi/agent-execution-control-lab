@@ -1,0 +1,52 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-comparison-results-admission/v1",
+  "admission_id": "pr-review-held-out-opus-comparison-results-admission-r1",
+  "state": "measurement_satisfied",
+  "preflight": {
+    "path": "contracts/pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight.json",
+    "sha256": "86de54acf8985d5d73902e10124c7e61e6a79c68277597da207808a66670eee9"
+  },
+  "results": [
+    {
+      "case_id": "PRR-C02",
+      "github_run_id": "31292887371",
+      "path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json",
+      "sha256": "839938e2e84dc2be74e25f4e94e84179203e64f2a0a7de76afaa6cb26aa015b1",
+      "measurement": "satisfied",
+      "quality_score": 0,
+      "all_agent_total_tokens": 989441,
+      "elapsed_seconds": 300.931
+    },
+    {
+      "case_id": "PRR-C03",
+      "github_run_id": "31292887236",
+      "path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c03-held-out-relationship-reviewer-opus-r1-a31292887236.json",
+      "sha256": "099cb027571ea6d7bd4aa7511f82c7502ed955020f21b460121cb4240771e02c",
+      "measurement": "satisfied",
+      "quality_score": 4,
+      "all_agent_total_tokens": 418414,
+      "elapsed_seconds": 143.202
+    },
+    {
+      "case_id": "PRR-C06",
+      "github_run_id": "31292887213",
+      "path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c06-held-out-relationship-reviewer-opus-r1-a31292887213.json",
+      "sha256": "7517f1aa592549bb329c1eb99f9dbefca054bdaeb092345c92cd30048f7df0d8",
+      "measurement": "satisfied",
+      "quality_score": 4,
+      "all_agent_total_tokens": 657515,
+      "elapsed_seconds": 317.662
+    }
+  ],
+  "comparison": {
+    "control_free_quality_scores": [1, 4, 4],
+    "opus_quality_scores": [0, 4, 4],
+    "control_free_total_tokens": 8165411,
+    "opus_total_tokens": 2065370,
+    "control_free_elapsed_seconds_sum": 889.618,
+    "opus_elapsed_seconds_sum": 761.795,
+    "quality_score_is_kpi_not_gate": true,
+    "same_slot_rerun": "forbidden"
+  },
+  "scope": "3ケースの測定成立とKPIだけを固定する。winner、KPI優先順位、採用、release、本体反映を決めない。"
+}

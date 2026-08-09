@@ -3596,7 +3596,7 @@ def test_held_out_opus_comparison_admission_binds_preflight():
     assert admission["new_execution"]["issued"] is False
     assert hashlib.sha256(profile_path.read_bytes()).hexdigest() == admission["profile"]["sha256"]
     assert hashlib.sha256(preflight_path.read_bytes()).hexdigest() == admission["preflight"]["sha256"]
-    assert "score `1 / 4 / 4`を品質KPIとして保持" in set_index
+    assert "Control-Free `1 / 4 / 4`とOpus関係レビュー役 `0 / 4 / 4`" in set_index
 
 
 def test_held_out_opus_grade_uses_same_quality_contract(tmp_path: Path):
@@ -3652,3 +3652,52 @@ def test_held_out_opus_grade_uses_same_quality_contract(tmp_path: Path):
     assert result["result"] == "pass"
     assert result["quality_score"] == 4
     assert result["runtime"]["total_tokens"] == 120
+
+
+@pytest.mark.parametrize(
+    ("case_id", "run_id", "score", "total_tokens", "elapsed_ms"),
+    [
+        ("PRR-C02", 31292887371, 0, 989441, 300931),
+        ("PRR-C03", 31292887236, 4, 418414, 143202),
+        ("PRR-C06", 31292887213, 4, 657515, 317662),
+    ],
+)
+def test_held_out_opus_saved_results(
+    case_id: str, run_id: int, score: int, total_tokens: int, elapsed_ms: int
+):
+    path = (
+        INSTANCE_ROOT
+        / "results"
+        / f"pr-review-held-out-workflow-topology-comparison-r1-{case_id.lower()}-held-out-relationship-reviewer-opus-r1-a{run_id}.json"
+    )
+    value = json.loads(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r17.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(value)
+    assert value["measurement_qualification"]["state"] == "satisfied"
+    assert value["quality_score"] == score
+    assert value["runtime"]["total_tokens"] == total_tokens
+    assert value["timing"]["execution_ms"] == elapsed_ms
+
+
+def test_held_out_opus_results_admission_binds_primary_results():
+    admission = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-held-out-opus-comparison-results-admission-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert admission["state"] == "measurement_satisfied"
+    assert admission["comparison"]["control_free_quality_scores"] == [1, 4, 4]
+    assert admission["comparison"]["opus_quality_scores"] == [0, 4, 4]
+    assert admission["comparison"]["same_slot_rerun"] == "forbidden"
+    for result in admission["results"]:
+        path = INSTANCE_ROOT / result["path"]
+        value = json.loads(path.read_text(encoding="utf-8"))
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == result["sha256"]
+        assert value["measurement_qualification"]["state"] == "satisfied"

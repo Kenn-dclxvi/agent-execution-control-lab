@@ -8,6 +8,16 @@
 - `pass`以外のterminal resultも削除せず、成功runとは分けて保持する。
 - pilot result、N=5 result、Integration resultを同一状態として混ぜない。
 
+## held-out Workflow Free / Opus関係レビュー役比較
+
+全体の数値と境界は[`held-out Workflow Free / Opus関係レビュー役比較`](pr-review-held-out-workflow-topology-comparison_2026-08-09.md)に記録する。Opus側3件はすべて測定成立し、quality scoreは`0 / 4 / 4`だった。保存済みControl-Freeの`1 / 4 / 4`と同じ3 KPIで比較し、再実行は行わない。
+
+[PRR-C02/r2](pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json)はscore `0`、all-agent token `989,441`、elapsed `300.931秒`だった。期待finding 1件のmiss、false positive 3件、review contract violation 2件を記録した。
+
+[PRR-C03/r2](pr-review-held-out-workflow-topology-comparison-r1-prr-c03-held-out-relationship-reviewer-opus-r1-a31292887236.json)はscore `4`、all-agent token `418,414`、elapsed `143.202秒`だった。
+
+[PRR-C06/r2](pr-review-held-out-workflow-topology-comparison-r1-prr-c06-held-out-relationship-reviewer-opus-r1-a31292887213.json)はclean controlでscore `4`、all-agent token `657,515`、elapsed `317.662秒`だった。
+
 ## held-out Control-Free品質確認
 
 全体の解釈は[`held-out Control-Free品質確認`](pr-review-held-out-control-free-qualification_2026-08-09.md)に記録する。3件とも測定は成立したが、quality scoreはPRR-C02/r2が`1`、PRR-C03/r2とPRR-C06/r2が`4`だった。3件すべてのscore `4`を要求する品質条件が不成立のため、Claude Code純正相当CoreとOpus関係レビュー役の比較は開始しない。
