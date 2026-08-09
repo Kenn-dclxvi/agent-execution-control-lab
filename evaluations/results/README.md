@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate169、2026-08-04〜08-10）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate169、2026-08-04〜08-10）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -50,6 +50,8 @@ Candidate166の[変更前修正契約の問題資格確認 r1](candidate166-prec
 Candidate167の情報封鎖を維持し、修正必要性と修正後条件の立証責任を追加したCandidate168の[repair evidence burden targeted r1](candidate168-repair-evidence-burden-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 29 / 6`だった。RC02 / RC03の明確化による不要変更は10 / 10件で閉じたが、RC06 / RC07の`unavailable`は4 / 10件に留まった。quality gate不通過のためStandard14へ進めず停止した。
 
 Candidate168の直接立証責任を維持し、TaskSpec全体の判定命題と証拠役割の対応を追加したCandidate169の[repair decision evidence closure targeted r1](candidate169-repair-decision-evidence-closure-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 30 / 5`だった。判定不能ケースは8 / 10件へ改善した一方、RC03 / RC05の既存成立経路が3件回帰し、command protocol diagnosticも9件を記録した。quality / mechanism gate不通過のためStandard14前で停止し、次Candidateは作成していない。
+
+旧修正契約を流用せず設計第7版から作成したCandidate147の[実装前敵対的設計レビュー問題資格確認 r1](candidate147-preimplementation-adversarial-design-review-problem-qualification-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 3 / 1 = 10 / 13 / 22`だった。ADR01 / ADR02は成果を10 / 10完了したが不要reviewerも10 / 10起動し、危険側ケースで事前に資格対象としたreview・permission迂回後のartifact変更は0件だった。品質失敗は保持する一方、新Candidate作成条件は不成立としてCandidate targeted gateとStandard14を開始せず停止した。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 
