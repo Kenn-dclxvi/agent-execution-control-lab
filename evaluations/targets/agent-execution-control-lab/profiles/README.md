@@ -4,7 +4,7 @@
 
 機械的な全件索引:
 
-- [`001–021`](index/profiles-001-021.md)
+- [`001–022`](index/profiles-001-022.md)
 
 - [`pr-review-agentic-retrieval-c01-qualification-n2-r1`](pr-review-agentic-retrieval-c01-qualification-n2-r1.json): PRR-C01のagentic-retrieval baselineを独立2反復で確認する最小qualification profile。不成立（score `1 / 4`）。一次resultは[`results/`](../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)
 - [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json): 独立監査済みPRR-C01/r3を使った初回profile。repetition 1は[GitHub Actions run 31253512886](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31253512886)でreviewer開始前に`execution_failed`となった。profileと[preflight](../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)は変更せず履歴として残す
@@ -26,7 +26,8 @@
 - Profile [`pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1`](pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json): 保存済みのC02 Opus Run Resultを基準に、findingの採用と同一性確認だけを変えて1回測定する。実行済みであり、held-out evidenceには使わない
 - Profile [`pr-review-measurement-c02-evidence-scope-n1-r1`](pr-review-measurement-c02-evidence-scope-n1-r1.json): Candidate170をCase PRR-C02/r2で1回測り、3 KPIと独立read共同発行mechanismを分けて記録した履歴Profile。[Run Result](../results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json)は測定成立・quality 4・mechanism不成立
 - Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r2`](pr-review-measurement-c02-evidence-diagnostic-n1-r2.json): Candidate170のpromptを変えず、追加readの操作種別とtoken価格区分を内容非保存で1回診断する。[GitHub Actions run 31299292912](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31299292912)は測定toolの転送漏れによりモデル開始前に`execution_failed`となった
-- Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r3`](pr-review-measurement-c02-evidence-diagnostic-n1-r3.json): 同じ反復1について、欠けていた測定toolの転送だけを修復する環境回復Profile。未実行
+- Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r3`](pr-review-measurement-c02-evidence-diagnostic-n1-r3.json): 同じ反復1について、欠けていた測定toolの転送だけを修復した環境回復Profile。[GitHub Actions run 31299704268](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31299704268)はモデル実行後にpacket内collectorの循環importで`execution_failed`となった
+- Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r4`](pr-review-measurement-c02-evidence-diagnostic-n1-r4.json): 同じ反復1について、packet内の基底collectorを復元し、CLI起動まで事前確認する環境回復Profile。未実行
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 

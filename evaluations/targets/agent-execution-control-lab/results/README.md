@@ -18,6 +18,8 @@
 
 [Candidate170診断の初回失敗Result](pr-review-measurement-c02-evidence-diagnostic-r2-prr-c02-prompt-evidence-scope-r1-a31299292912.json)は、測定toolがreview packetへ転送されず、モデル開始前に`execution_failed`となった記録である。品質、token、経過時間、証拠取得操作は未観測であり、Candidate170の品質または効率の結果には含めない。
 
+[Candidate170診断のcollector失敗Result](pr-review-measurement-c02-evidence-diagnostic-r3-prr-c02-prompt-evidence-scope-r1-a31299704268.json)は、モデルが構造化レビューを返した後、packet内collectorの循環importで`execution_failed`となった記録である。レビュー出力はworkflow logで観測したが、実行記録とhook記録を収集できていないため、品質、token、経過時間、証拠取得操作の測定結果には含めない。
+
 ## held-out Workflow Free / Opus関係レビュー役比較
 
 全体の数値と境界は[`held-out Workflow Free / Opus関係レビュー役比較`](pr-review-held-out-workflow-topology-comparison_2026-08-09.md)に記録する。Opus側3件はすべて測定成立し、quality scoreは`0 / 4 / 4`だった。保存済みControl-Freeの`1 / 4 / 4`と同じ3 KPIで比較し、再実行は行わない。
