@@ -7,5 +7,8 @@
 - [`workflow-free-r1.md`](workflow-free-r1.md): Core Baselineに対するFreeの境界、品質と測定成立の分離、review体制とmodel選択への校正順序
 - [`relationship-reviewer-model-calibration-r1.md`](relationship-reviewer-model-calibration-r1.md): 関係レビュー役を1人に固定し、その役のSonnet／Opusだけを変える校正条件
 - [`control-free-four-qualification-r1.md`](control-free-four-qualification-r1.md): 現行仕様へ適合した既存4ケースを使うcontrol-free baseline資格確認条件
+- [`pr-review-held-out-comparison-r1.md`](pr-review-held-out-comparison-r1.md): held-out 3ケースの初期比較条件を固定した履歴仕様
+- [`pr-review-held-out-comparison-r2.md`](pr-review-held-out-comparison-r2.md): quality scoreを比較前の合否条件からKPIへ戻した履歴仕様
+- [`pr-review-held-out-comparison-r3.md`](pr-review-held-out-comparison-r3.md): 保存済みControl-FreeとOpus関係レビュー役だけを比較する現行仕様
 
 仕様revisionが変わる場合は既存revisionを上書きせず、新しいrevisionを追加する。既存case、oracle、rating contract、profile、resultを新仕様へ遡及適合させない。
