@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run-result-r23.schema.json",
+  "type": "object",
+  "required": ["schema_version", "comparison_revision", "profile_id", "quality_rating_contract", "result_id", "case_id", "fixture_revision", "variant", "relationship_reviewer_model", "repetition", "attempt", "base_sha", "head_sha", "model", "reviewer_executor", "workflow_revision", "workflow_trace", "measurement_qualification", "evidence_control_diagnostics", "github_run_id", "timing", "runtime", "quality", "quality_score", "result"],
+  "properties": {
+    "schema_version": {"const": 23},
+    "comparison_revision": {"const": "pr-review-measurement-c02-consumer-bound-evidence-r1"},
+    "profile_id": {"const": "pr-review-measurement-c02-consumer-bound-evidence-n3-r1"},
+    "quality_rating_contract": {"const": "pr-review-finding-quality-v9"},
+    "result_id": {"type": "string", "minLength": 1},
+    "case_id": {"const": "PRR-C02"},
+    "fixture_revision": {"const": "r2"},
+    "variant": {"const": "consumer-bound-evidence"},
+    "relationship_reviewer_model": {"const": "opus"},
+    "repetition": {"type": "integer", "minimum": 1, "maximum": 3},
+    "attempt": {"type": "integer", "minimum": 1},
+    "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "model": {"type": "object"},
+    "reviewer_executor": {"type": "object"},
+    "workflow_revision": {"const": "pr-review-measure-c02-consumer-bound-evidence-r1"},
+    "workflow_trace": {"type": "object", "required": ["evidence_diagnostics", "token_diagnostics"]},
+    "measurement_qualification": {"type": "object"},
+    "evidence_control_diagnostics": {
+      "type": "object",
+      "required": ["state", "fixed_read_count_gate", "consumer_binding_machine_verifiable", "fixture_tool_access_count", "recognized_operation_access_count", "unclassified_access_count"],
+      "properties": {
+        "state": {"enum": ["observed_not_machine_qualified", "unobserved"]},
+        "fixed_read_count_gate": {"const": false},
+        "consumer_binding_machine_verifiable": {"const": false},
+        "fixture_tool_access_count": {"type": ["integer", "null"], "minimum": 0},
+        "recognized_operation_access_count": {"type": "integer", "minimum": 0},
+        "unclassified_access_count": {"type": ["integer", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "github_run_id": {"type": "string"},
+    "timing": {"type": "object"},
+    "runtime": {"type": "object"},
+    "quality": {"type": "object"},
+    "quality_score": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+    "result": {"enum": ["pass", "quality_failed", "invalid_output", "execution_failed", "timeout", "cancelled", "measurement_incomplete"]}
+  },
+  "additionalProperties": false
+}

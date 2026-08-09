@@ -1,0 +1,141 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-development-measurement-preflight/v3",
+  "preflight_id": "pr-review-measurement-c02-consumer-bound-evidence-n3-r1-preflight",
+  "state": "ready_not_executed",
+  "measurement_series": "pr-review-measurement-c02-consumer-bound-evidence-r1",
+  "profile": {
+    "profile_id": "pr-review-measurement-c02-consumer-bound-evidence-n3-r1",
+    "path": "profiles/pr-review-measurement-c02-consumer-bound-evidence-n3-r1.json",
+    "sha256": "08b4810122e680e9fdec7e824f936b8453704970aebdb148bab1758a5a896f06"
+  },
+  "baseline": {
+    "candidate_number": 170,
+    "prompt_identity": "pr-review-prompt-evidence-scope-r1",
+    "run_result": {
+      "result_id": "pr-review-measurement-c02-evidence-diagnostic-r4:PRR-C02:prompt-evidence-scope:r1:a31300109132",
+      "path": "results/pr-review-measurement-c02-evidence-diagnostic-r4-prr-c02-prompt-evidence-scope-r1-a31300109132.json",
+      "sha256": "dfb5974458f51d0365f2de00ba6ca145ea0ec4f0740f29f1db1833f5ad9b4f6c",
+      "measurement_state": "satisfied",
+      "quality_score": 1
+    },
+    "result_reuse": "required_without_rerun"
+  },
+  "secondary_reference": {
+    "candidate_number": 169,
+    "run_result": {
+      "result_id": "pr-review-c02-finding-admission-calibration-r1:PRR-C02:c02-relationship-reviewer-opus-finding-admission:r1:a31295440716",
+      "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json",
+      "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427",
+      "measurement_state": "satisfied",
+      "quality_score": 4
+    }
+  },
+  "predicates": {
+    "candidate171_prompt_identity_fixed": "satisfied",
+    "case_revision_unchanged": "satisfied",
+    "model_and_topology_unchanged": "satisfied",
+    "permission_boundary_unchanged": "satisfied",
+    "action_and_token_accounting_unchanged": "satisfied",
+    "fixed_read_count_removed_from_pass_gate": "satisfied",
+    "consumer_binding_machine_qualification": "unavailable_in_current_hook",
+    "development_case_not_held_out": "explicit",
+    "packet_dependency_transfer": "satisfied",
+    "three_independent_repetitions_fixed": "satisfied"
+  },
+  "compatibility": {
+    "changed_axis": "Candidate171 prompt identity; Run Result identity records evidence-control diagnostics without a fixed-read-count gate",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "Case PRR-C02/r2 input, oracle, repository snapshot, authority, and eligibility identities",
+      "target repository commit and tree",
+      "TaskSpec source, functional specification, and required outcome",
+      "quality rating, review contract, and structured review output schema",
+      "root Sonnet model and one Opus relationship reviewer topology",
+      "Claude Code Action revision, runner, authentication, and read-only permission boundary",
+      "fixture-tool payload and command interface",
+      "turn condition, timeout, max_workers=24, and all-agent token accounting",
+      "measurement qualification and three KPI definitions"
+    ],
+    "allowed_differences": [
+      "Candidate171 prompt manifest and content",
+      "Measurement Series, Profile, workflow, tool, Run Result schema, and result identities",
+      "three repetition identities instead of the saved baseline repetition",
+      "evidence-control diagnostics replace Candidate170 fixed-read mechanism qualification"
+    ],
+    "excluded_claims": [
+      "fresh held-out effect",
+      "generalization",
+      "model ranking",
+      "winner",
+      "adoption",
+      "release",
+      "runtime projection"
+    ]
+  },
+  "planned_slots": [
+    {
+      "case_id": "PRR-C02",
+      "fixture_revision": "r2",
+      "variant": "consumer-bound-evidence",
+      "repetition": 1
+    },
+    {
+      "case_id": "PRR-C02",
+      "fixture_revision": "r2",
+      "variant": "consumer-bound-evidence",
+      "repetition": 2
+    },
+    {
+      "case_id": "PRR-C02",
+      "fixture_revision": "r2",
+      "variant": "consumer-bound-evidence",
+      "repetition": 3
+    }
+  ],
+  "verified_artifacts": [
+    {
+      "path": "prompts/candidates/pr-review-consumer-bound-evidence-r1/manifest.json",
+      "sha256": "0cd165ed119a6fe4d8c1d38de701e0ec18b20beb52d7073fc104fb360d196d53"
+    },
+    {
+      "path": "prompts/candidates/pr-review-consumer-bound-evidence-r1/core-prompt.md",
+      "sha256": "dcf95716cf1043d1af810fdac5d124224e8eb0cfab724db0fcba6fbe85172955"
+    },
+    {
+      "path": "specifications/pr-review-measurement-c02-consumer-bound-evidence-r1.md",
+      "sha256": "77d9ee799728b22c29da065d144d62def6a791097bde7718c14d7fba14c8539a"
+    },
+    {
+      "path": "schemas/run-result-r23.schema.json",
+      "sha256": "4b98d8e187d451aa5abdc8013cc1a15e8ce3a64b80d9e17ad107860ab60b0d5b"
+    },
+    {
+      "path": "tools/pr_review_measurement_c02_consumer_bound.py",
+      "sha256": "c47c8fc0c01d26e185fc6d0d9f633c8ca81152a9b5f789cc497ffd4950e58d1a"
+    },
+    {
+      "path": "tools/pr_review_measurement_c02_evidence_diagnostic_r3.py",
+      "sha256": "47e0cdeb2a5adab951200b9d45755f628c04c128215974c12757025054927488"
+    },
+    {
+      "path": ".github/workflows/pr-review-measure-c02-consumer-bound-evidence.yml",
+      "sha256": "464aea318e0adf51562d93cb0f23fe9374cc56186c65813929c8d3a253412a21"
+    },
+    {
+      "path": "results/pr-review-measurement-c02-evidence-diagnostic-r4-prr-c02-prompt-evidence-scope-r1-a31300109132.json",
+      "sha256": "dfb5974458f51d0365f2de00ba6ca145ea0ec4f0740f29f1db1833f5ad9b4f6c"
+    },
+    {
+      "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json",
+      "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427"
+    }
+  ],
+  "execution": {
+    "state": "not_issued",
+    "planned_dispatches": 3,
+    "dispatch_concurrency": 3,
+    "quality_miss_stops_remaining_repetitions": false,
+    "environment_failure_requires_separate_recovery_revision": true
+  },
+  "scope": "Candidate171を既知のCase PRR-C02/r2で3反復測定する。固定read数を合否条件にせず、品質、all-agent token、経過時間を比較する。fresh held-out効果、一般化、採用、release、本体反映を許可しない。"
+}
