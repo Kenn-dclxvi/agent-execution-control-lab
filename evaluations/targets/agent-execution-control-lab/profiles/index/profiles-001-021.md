@@ -1,4 +1,4 @@
-# Profile index 001-020
+# Profile index 001-021
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
@@ -18,6 +18,7 @@
 - [`pr-review-held-out-control-free-three-n1-r1.json`](../pr-review-held-out-control-free-three-n1-r1.json)
 - [`pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json`](../pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json)
 - [`pr-review-measurement-c02-evidence-diagnostic-n1-r2.json`](../pr-review-measurement-c02-evidence-diagnostic-n1-r2.json)
+- [`pr-review-measurement-c02-evidence-diagnostic-n1-r3.json`](../pr-review-measurement-c02-evidence-diagnostic-n1-r3.json)
 - [`pr-review-measurement-c02-evidence-scope-n1-r1.json`](../pr-review-measurement-c02-evidence-scope-n1-r1.json)
 - [`pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json`](../pr-review-relationship-reviewer-opus-c01-r4-calibration-n3-r1.json)
 - [`pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json`](../pr-review-relationship-reviewer-sonnet-c01-r4-calibration-n3-r1.json)

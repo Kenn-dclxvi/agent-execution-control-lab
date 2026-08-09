@@ -16,6 +16,8 @@
 
 [Candidate170の初回Run Result](pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json)は測定成立条件を満たし、quality scoreは`4`、all-agent tokenは`595,146`、Action経過時間は`192.789秒`だった。初回7件の共同readは成立したが、その後に4件の追加readがあり、mechanismは`unsatisfied`である。結果確認済みC02の開発測定であり、fresh held-out evidenceまたは一般化の根拠にはしない。
 
+[Candidate170診断の初回失敗Result](pr-review-measurement-c02-evidence-diagnostic-r2-prr-c02-prompt-evidence-scope-r1-a31299292912.json)は、測定toolがreview packetへ転送されず、モデル開始前に`execution_failed`となった記録である。品質、token、経過時間、証拠取得操作は未観測であり、Candidate170の品質または効率の結果には含めない。
+
 ## held-out Workflow Free / Opus関係レビュー役比較
 
 全体の数値と境界は[`held-out Workflow Free / Opus関係レビュー役比較`](pr-review-held-out-workflow-topology-comparison_2026-08-09.md)に記録する。Opus側3件はすべて測定成立し、quality scoreは`0 / 4 / 4`だった。保存済みControl-Freeの`1 / 4 / 4`と同じ3 KPIで比較し、再実行は行わない。
