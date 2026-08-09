@@ -3449,3 +3449,53 @@ def test_held_out_control_free_workflow_exports_nonempty_r2_schema():
     assert textwrap.dedent(inline).strip() == prompt
     assert "schemas/review-output-r2.schema.json" in workflow
     assert "--allowedTools \"Agent,Bash(./fixture-tool:*)\"" in workflow
+
+
+@pytest.mark.parametrize(
+    ("case_id", "attempt", "score", "result"),
+    [
+        ("PRR-C02", 31290559295, 1, "quality_failed"),
+        ("PRR-C03", 31290559229, 4, "pass"),
+        ("PRR-C06", 31290559290, 4, "pass"),
+    ],
+)
+def test_held_out_control_free_saved_results(
+    case_id: str, attempt: int, score: int, result: str
+):
+    path = (
+        INSTANCE_ROOT
+        / "results"
+        / f"pr-review-held-out-control-free-qualification-r1-{case_id.lower()}-held-out-control-free-r1-a{attempt}.json"
+    )
+    value = json.loads(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r16.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(value)
+    assert value["quality_score"] == score
+    assert value["result"] == result
+    assert value["measurement_qualification"]["state"] == "satisfied"
+    assert value["runtime"]["total_tokens"] is not None
+
+
+def test_held_out_control_free_admission_stops_comparison():
+    admission = json.loads(
+        (
+            INSTANCE_ROOT
+            / "contracts/pr-review-held-out-control-free-three-admission-r1.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert admission["state"] == "unsatisfied"
+    assert admission["gate"]["measurement_condition"] == "satisfied for 3 of 3 cases"
+    assert admission["gate"]["quality_condition"] == (
+        "unsatisfied; 2 of 3 cases have quality score 4"
+    )
+    assert admission["failure"]["classification"] == (
+        "incomplete multi-path finding identity"
+    )
+    assert admission["stop_effect"]["core_opus_comparison"] == "forbidden"
+    for result in admission["results"]:
+        path = INSTANCE_ROOT / result["result_path"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == result["result_sha256"]

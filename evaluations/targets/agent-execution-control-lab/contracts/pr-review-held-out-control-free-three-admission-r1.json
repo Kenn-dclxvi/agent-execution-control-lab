@@ -1,0 +1,63 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-held-out-control-free-admission/v1",
+  "admission_id": "pr-review-held-out-control-free-three-admission-r1",
+  "state": "unsatisfied",
+  "profile": {
+    "profile_id": "pr-review-held-out-control-free-three-n1-r1",
+    "preflight_id": "pr-review-held-out-control-free-three-n1-r1-preflight"
+  },
+  "evaluation_set": {
+    "set_id": "pr-review-held-out-three-r1",
+    "revision": "r1",
+    "cases": ["PRR-C02/r2", "PRR-C03/r2", "PRR-C06/r2"]
+  },
+  "results": [
+    {
+      "case_id": "PRR-C02",
+      "github_run_id": "31290559295",
+      "result_path": "results/pr-review-held-out-control-free-qualification-r1-prr-c02-held-out-control-free-r1-a31290559295.json",
+      "result_sha256": "0b037704641bdb9bd6ee04fd567a112ef9f2ad30af530dcee68aa959e9a6bdf4",
+      "measurement": "satisfied",
+      "quality_score": 1,
+      "result": "quality_failed"
+    },
+    {
+      "case_id": "PRR-C03",
+      "github_run_id": "31290559229",
+      "result_path": "results/pr-review-held-out-control-free-qualification-r1-prr-c03-held-out-control-free-r1-a31290559229.json",
+      "result_sha256": "b480091ca7f95b8d9578494c782ac24b4fe666766d3741ef7240ad9ad4d363b9",
+      "measurement": "satisfied",
+      "quality_score": 4,
+      "result": "pass"
+    },
+    {
+      "case_id": "PRR-C06",
+      "github_run_id": "31290559290",
+      "result_path": "results/pr-review-held-out-control-free-qualification-r1-prr-c06-held-out-control-free-r1-a31290559290.json",
+      "result_sha256": "dc794bbc22f411ee0da769c7efa0df95c051d8e2eb3a8eb44106434847aadafd",
+      "measurement": "satisfied",
+      "quality_score": 4,
+      "result": "pass"
+    }
+  ],
+  "gate": {
+    "measurement_condition": "satisfied for 3 of 3 cases",
+    "quality_condition": "unsatisfied; 2 of 3 cases have quality score 4",
+    "required_condition": "all three cases have satisfied measurement and quality score 4"
+  },
+  "failure": {
+    "case_id": "PRR-C02",
+    "classification": "incomplete multi-path finding identity",
+    "observed": "reviewerはinstance_artifact_separation違反をmembers.jsonの1行目へ正しく指摘したが、同じ違反を成立させるREADMEをrelated_pathsへ含めなかった。",
+    "quality_effect": "期待する2 path集合と一致しないためrequired findingはfalse negative 1件、返した単一path findingはfalse positive 1件となった。",
+    "environment_check": "要求model、構造化出力、all-agent token、経過時間、fixture access、権限拒否0件はすべて確認済みである。",
+    "case_check": "独立case設計監査は2 path関係と両anchorをmodel-visible入力から導出し、oracleとgraderの一致を確認済みである。"
+  },
+  "stop_effect": {
+    "core_opus_comparison": "forbidden",
+    "same_revision_retry_for_quality": "forbidden",
+    "case_or_oracle_revision_after_result": "forbidden",
+    "reason": "Control-Free品質不変条件が未成立であり、この結果を方式差へ混ぜられない。"
+  },
+  "next_decision": "現行の品質不変条件を維持して別のdevelopment caseでreview体制を開発し、新しい未使用setを固定するか、品質を比較結果として扱う別の評価設計へ変更するかを、次の作業として明示的に決める。"
+}
