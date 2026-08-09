@@ -44,6 +44,7 @@
 | [`pr-review-held-out-control-free-three-admission-r2`](pr-review-held-out-control-free-three-admission-r2.json) | `satisfied_for_comparison_preflight` | 3件の測定成立をgateとし、score `1 / 4 / 4`は品質KPIとして保持。比較は新しい互換性preflight待ち |
 | [`pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight`](pr-review-held-out-relationship-reviewer-opus-three-n1-r1-preflight.json) | `ready_not_executed` | 保存済みControl-FreeとOpus関係レビュー役の条件を照合し、review topologyとprompt以外を一致させた3 slotを固定 |
 | [`pr-review-held-out-opus-comparison-admission-r1`](pr-review-held-out-opus-comparison-admission-r1.json) | `ready_for_external_execution` | Coreを比較から外し、Opus側3件だけを外部実行できる状態を固定 |
+| [`pr-review-held-out-opus-comparison-results-admission-r1`](pr-review-held-out-opus-comparison-results-admission-r1.json) | `measurement_satisfied` | Opus側3件の測定成立、quality `0 / 4 / 4`、token、elapsed、一次result hashを固定 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 
