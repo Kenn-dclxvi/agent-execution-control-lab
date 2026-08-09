@@ -1,0 +1,308 @@
+{
+  "attempt": 31302081051,
+  "base_sha": "7777777777777777777777777777777777777771",
+  "case_id": "PRR-C02",
+  "comparison_revision": "pr-review-measurement-c02-consumer-bound-evidence-r1",
+  "evidence_control_diagnostics": {
+    "consumer_binding_machine_verifiable": false,
+    "fixed_read_count_gate": false,
+    "fixture_tool_access_count": 13,
+    "recognized_operation_access_count": 16,
+    "state": "observed_not_machine_qualified",
+    "unclassified_access_count": 0
+  },
+  "fixture_revision": "r2",
+  "github_run_id": "31302081051",
+  "head_sha": "7777777777777777777777777777777777777772",
+  "measurement_qualification": {
+    "action_completed": true,
+    "all_agent_tokens_complete": true,
+    "elapsed_time_complete": true,
+    "exactly_one_relationship_reviewer": true,
+    "fixture_access_observed": true,
+    "fixture_permission_denials": 0,
+    "relationship_reviewer_fixture_access": true,
+    "relationship_reviewer_model_matches": true,
+    "reported_model_matches_requested": true,
+    "root_fixture_tool_access_count": 0,
+    "state": "satisfied",
+    "structured_output_valid": true
+  },
+  "model": {
+    "reported": "claude-sonnet-5",
+    "requested": "claude-sonnet-5"
+  },
+  "profile_id": "pr-review-measurement-c02-consumer-bound-evidence-n3-r1",
+  "quality": {
+    "category_accuracy": 1,
+    "clean_control_major_false_positive": 0,
+    "expected_findings": 1,
+    "false_negative": 0,
+    "false_positive": 0,
+    "line_accuracy": 1,
+    "observed": true,
+    "path_accuracy": 1,
+    "review_contract_violation": 0,
+    "scope_violation_count": 0,
+    "summary_complete": true,
+    "true_positive": 1
+  },
+  "quality_rating_contract": "pr-review-finding-quality-v9",
+  "quality_score": 4,
+  "relationship_reviewer_model": "opus",
+  "repetition": 2,
+  "result": "pass",
+  "result_id": "pr-review-measurement-c02-consumer-bound-evidence-r1:PRR-C02:consumer-bound-evidence:r2:a31302081051",
+  "reviewer_executor": {
+    "action": "anthropics/claude-code-action",
+    "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975",
+    "authentication": "claude_code_oauth_token",
+    "claude_cli": "reported_by_action",
+    "runner": "ubuntu-latest",
+    "session_mode": "one_root_action_with_exactly_one_relationship_reviewer_per_case"
+  },
+  "runtime": {
+    "input_tokens": 560650,
+    "output_tokens": 99,
+    "reported_cost_usd": 0.8138110499999999,
+    "total_tokens": 560749,
+    "turns": 3
+  },
+  "schema_version": 23,
+  "timing": {
+    "action_step_ms": 280957,
+    "e2e_ms": null,
+    "execution_ms": 280957,
+    "input_ms": 1873,
+    "queue_ms": null,
+    "report_ms": null,
+    "review_ms": 267604,
+    "setup_ms": null
+  },
+  "variant": "consumer-bound-evidence",
+  "workflow_revision": "pr-review-measure-c02-consumer-bound-evidence-r1",
+  "workflow_trace": {
+    "additional_fixture_read_count": 6,
+    "agent_model_groups": [
+      [
+        "opus"
+      ]
+    ],
+    "all_agent_input_tokens": 560650,
+    "all_agent_output_tokens": 99,
+    "complete": true,
+    "evidence_diagnostics": {
+      "batches": [
+        {
+          "calls": [
+            {
+              "operations": [
+                "workflow",
+                "eligibility"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "contract",
+                "metadata",
+                "changed-paths",
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "diff"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        },
+        {
+          "calls": [
+            {
+              "operations": [
+                "rules"
+              ],
+              "outcome": "success"
+            }
+          ]
+        }
+      ],
+      "content_saved": false,
+      "operation_counts": {
+        "changed-paths": {
+          "success": 1
+        },
+        "contract": {
+          "success": 1
+        },
+        "diff": {
+          "success": 1
+        },
+        "eligibility": {
+          "success": 1
+        },
+        "metadata": {
+          "success": 1
+        },
+        "rules": {
+          "success": 10
+        },
+        "workflow": {
+          "success": 1
+        }
+      },
+      "unbatched_calls": []
+    },
+    "fixture_tool_access_count": 13,
+    "fixture_tool_access_observed": true,
+    "fixture_tool_batch_count": 13,
+    "fixture_tool_batch_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "fixture_tool_max_batch_size": 1,
+    "fixture_tool_permission_denials": 0,
+    "hook_event_count": 34,
+    "joint_initial_read_observed": false,
+    "permission_denials_by_tool": {},
+    "relationship_reviewer_fixture_access_count": 13,
+    "relationship_reviewer_ids_observed": 1,
+    "relationship_reviewer_model_matches": true,
+    "required_initial_read_count": 7,
+    "root_fixture_tool_access_count": 0,
+    "subagent_start_count": 1,
+    "subagent_stop_count": 1,
+    "subagent_usage_observed": true,
+    "token_diagnostics": {
+      "complete": true,
+      "tokens": {
+        "all": {
+          "cache_creation_input_tokens": 53996,
+          "cache_read_input_tokens": 506611,
+          "input_tokens": 43,
+          "output_tokens": 99
+        },
+        "root": {
+          "cache_creation_input_tokens": 21690,
+          "cache_read_input_tokens": 203928,
+          "input_tokens": 12,
+          "output_tokens": 18
+        },
+        "subagent": {
+          "cache_creation_input_tokens": 32306,
+          "cache_read_input_tokens": 302683,
+          "input_tokens": 31,
+          "output_tokens": 81
+        }
+      },
+      "usage_records": {
+        "all": 22,
+        "root": 6,
+        "subagent": 16
+      }
+    },
+    "usage_records": 22
+  }
+}
