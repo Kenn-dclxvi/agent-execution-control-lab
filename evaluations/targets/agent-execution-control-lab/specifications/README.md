@@ -15,5 +15,6 @@
 - [`pr-review-measurement-c02-evidence-diagnostic-r2.md`](pr-review-measurement-c02-evidence-diagnostic-r2.md): Candidate170を変更せず、追加readの操作種別とtoken価格区分を内容非保存で1回診断する仕様
 - [`pr-review-measurement-c02-evidence-diagnostic-r3.md`](pr-review-measurement-c02-evidence-diagnostic-r3.md): 同じ診断枠で欠けていた測定toolの転送だけを修復する仕様
 - [`pr-review-measurement-c02-evidence-diagnostic-r4.md`](pr-review-measurement-c02-evidence-diagnostic-r4.md): 同じ診断枠でpacket内collectorの循環importだけを修復する仕様
+- Measurement Series [`pr-review-measurement-c02-consumer-bound-evidence-r1.md`](pr-review-measurement-c02-consumer-bound-evidence-r1.md): Candidate171をCase PRR-C02/r2で3回測り、固定read数ではなく未確定predicateとの対応を診断する開発測定仕様
 
 仕様revisionが変わる場合は既存revisionを上書きせず、新しいrevisionを追加する。既存case、oracle、rating contract、profile、resultを新仕様へ遡及適合させない。

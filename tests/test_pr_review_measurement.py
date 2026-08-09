@@ -41,6 +41,7 @@ import pr_review_measurement_c02_evidence_scope as c02_evidence_scope
 import pr_review_measurement_c02_evidence_diagnostic as c02_evidence_diagnostic
 import pr_review_measurement_c02_evidence_diagnostic_r2 as c02_evidence_diagnostic_r2
 import pr_review_measurement_c02_evidence_diagnostic_r3 as c02_evidence_diagnostic_r3
+import pr_review_measurement_c02_consumer_bound as c02_consumer_bound
 import pr_review_subagent_hook_r3 as subagent_hook_r3
 
 
@@ -4468,3 +4469,181 @@ def test_c02_evidence_diagnostic_failed_result_and_recovery_schema(tmp_path: Pat
     assert completed_path.name in (INSTANCE_ROOT / "results/README.md").read_text(
         encoding="utf-8"
     )
+
+
+@pytest.mark.parametrize("repetition", [1, 2, 3])
+def test_c02_consumer_bound_preflight_and_packet(tmp_path: Path, repetition: int):
+    profile, preflight = c02_consumer_bound.validate_preflight(
+        "PRR-C02", repetition
+    )
+    assert profile["profile_id"] == c02_consumer_bound.PROFILE_ID
+    assert profile["comparison_conditions"]["candidate_number"] == 171
+    assert preflight["planned_slots"][repetition - 1]["repetition"] == repetition
+
+    output = tmp_path / f"packet-{repetition}"
+    try:
+        metadata = c02_consumer_bound.prepare_input(
+            "PRR-C02", repetition, output
+        )
+        assert metadata["profile_id"] == c02_consumer_bound.PROFILE_ID
+        assert metadata["repetition"] == repetition
+        assert (
+            output / "pr_review_measurement_c02_evidence_diagnostic_r3.py"
+        ).is_file()
+        process = subprocess.run(
+            [
+                sys.executable,
+                str(output / "pr_review_measurement_c02_consumer_bound.py"),
+                "--help",
+            ],
+            cwd=output,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert process.returncode == 0, process.stderr
+        assert "validate-preflight" in process.stdout
+    finally:
+        repository_snapshot._make_cleanup_writable(output / "repository")
+
+
+def test_c02_consumer_bound_rejects_unplanned_repetition():
+    with pytest.raises(c02_consumer_bound.MeasurementError):
+        c02_consumer_bound.validate_preflight("PRR-C02", 4)
+
+
+def test_c02_consumer_bound_workflow_keeps_candidate171_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-measure-c02-consumer-bound-evidence.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-consumer-bound-evidence-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    assert textwrap.dedent(inline).strip() == prompt
+    assert c02_consumer_bound.PROFILE_ID in workflow
+    assert 'repetition: "${{ inputs.repetition }}"' not in workflow
+    assert "evidence-diagnostic-input" not in workflow
+    assert "pr_review_measurement_c02_evidence_diagnostic_r3.py" in workflow
+
+
+def test_c02_consumer_bound_grade_uses_r23_without_fixed_read_gate(tmp_path: Path):
+    _, oracle = held_out_control_free._fixture_and_oracle("PRR-C02")
+    expected = oracle["expected_findings"][0]
+    location = expected["locations"][0]
+    finding = {
+        "category": expected["category"],
+        "rule_id": expected["rule_id"],
+        "path": location["path"],
+        "related_paths": [
+            path for path in expected["paths"] if path != location["path"]
+        ],
+        "line_start": location["line_start"],
+        "line_end": location["line_end"],
+        "severity": expected["severity"],
+        "message": "固定されたインスタンス境界に反するため分離が必要である。",
+    }
+    review_path = tmp_path / "review.json"
+    review_path.write_text(
+        json.dumps({"findings": [finding], "summary": _summary_for([finding])}),
+        encoding="utf-8",
+    )
+    trace = {
+        "complete": True,
+        "fixture_tool_access_observed": True,
+        "fixture_tool_permission_denials": 0,
+        "subagent_start_count": 1,
+        "subagent_stop_count": 1,
+        "relationship_reviewer_model_matches": True,
+        "relationship_reviewer_fixture_access_count": 8,
+        "root_fixture_tool_access_count": 0,
+        "fixture_tool_access_count": 8,
+        "fixture_tool_batch_count": 2,
+        "fixture_tool_batch_sizes": [7, 1],
+        "fixture_tool_max_batch_size": 7,
+        "required_initial_read_count": 7,
+        "joint_initial_read_observed": True,
+        "additional_fixture_read_count": 1,
+        "evidence_diagnostics": {
+            "content_saved": False,
+            "operation_counts": {"rules": {"success": 1}, "file": {"success": 7}},
+            "batches": [],
+            "unbatched_calls": [],
+        },
+        "token_diagnostics": {
+            "complete": True,
+            "usage_records": {"root": 1, "subagent": 1, "all": 2},
+            "tokens": {},
+        },
+    }
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {
+                    "model": "claude-sonnet-5",
+                    "turns": 2,
+                    "input_tokens": 100,
+                    "output_tokens": 20,
+                    "duration_ms": 1000,
+                    "reported_cost_usd": None,
+                },
+                "workflow_trace": trace,
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(
+        json.dumps(
+            {
+                "profile_id": c02_consumer_bound.PROFILE_ID,
+                "case_id": "PRR-C02",
+                "repetition": 2,
+                "input_ms": 10,
+            }
+        ),
+        encoding="utf-8",
+    )
+    result = c02_consumer_bound.grade_run(
+        "PRR-C02", 2, 4000, "claude-sonnet-5", review_path,
+        metadata_path, prepared_path, tmp_path / "result.json", "4000"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r23.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["quality_score"] == 4
+    assert "mechanism_qualification" not in result
+    assert result["evidence_control_diagnostics"] == {
+        "state": "observed_not_machine_qualified",
+        "fixed_read_count_gate": False,
+        "consumer_binding_machine_verifiable": False,
+        "fixture_tool_access_count": 8,
+        "recognized_operation_access_count": 8,
+        "unclassified_access_count": 0,
+    }
+
+
+def test_c02_consumer_bound_terminal_result_uses_r23(tmp_path: Path):
+    result = c02_consumer_bound.record_terminal(
+        "PRR-C02", 3, 5000, "claude-sonnet-5", "execution_failed",
+        tmp_path / "result.json", "5000"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r23.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["repetition"] == 3
+    assert result["evidence_control_diagnostics"]["state"] == "unobserved"

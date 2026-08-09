@@ -4,7 +4,7 @@
 
 機械的な全件索引:
 
-- [`001–022`](index/profiles-001-022.md)
+- [`001–023`](index/profiles-001-023.md)
 
 - [`pr-review-agentic-retrieval-c01-qualification-n2-r1`](pr-review-agentic-retrieval-c01-qualification-n2-r1.json): PRR-C01のagentic-retrieval baselineを独立2反復で確認する最小qualification profile。不成立（score `1 / 4`）。一次resultは[`results/`](../results/pr-review-agentic-retrieval-c01-qualification-n2_2026-08-08.md)
 - [`pr-review-agentic-retrieval-c01-r3-qualification-n2-r1`](pr-review-agentic-retrieval-c01-r3-qualification-n2-r1.json): 独立監査済みPRR-C01/r3を使った初回profile。repetition 1は[GitHub Actions run 31253512886](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31253512886)でreviewer開始前に`execution_failed`となった。profileと[preflight](../contracts/pr-review-agentic-retrieval-c01-r3-qualification-n2-r1-preflight.json)は変更せず履歴として残す
@@ -28,6 +28,7 @@
 - Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r2`](pr-review-measurement-c02-evidence-diagnostic-n1-r2.json): Candidate170のpromptを変えず、追加readの操作種別とtoken価格区分を内容非保存で1回診断する。[GitHub Actions run 31299292912](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31299292912)は測定toolの転送漏れによりモデル開始前に`execution_failed`となった
 - Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r3`](pr-review-measurement-c02-evidence-diagnostic-n1-r3.json): 同じ反復1について、欠けていた測定toolの転送だけを修復した環境回復Profile。[GitHub Actions run 31299704268](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31299704268)はモデル実行後にpacket内collectorの循環importで`execution_failed`となった
 - Profile [`pr-review-measurement-c02-evidence-diagnostic-n1-r4`](pr-review-measurement-c02-evidence-diagnostic-n1-r4.json): 同じ反復1について、packet内の基底collectorを復元し、CLI起動まで事前確認した環境回復Profile。[GitHub Actions run 31300109132](https://github.com/Kenn-dclxvi/agent-execution-control-lab/actions/runs/31300109132)は測定成立、quality score `1`。token価格区分と追加accessは[診断測定の分析](../results/pr-review-measurement-c02-evidence-diagnostic-r4_2026-08-09.md)に記録する
+- Profile [`pr-review-measurement-c02-consumer-bound-evidence-n3-r1`](pr-review-measurement-c02-consumer-bound-evidence-n3-r1.json): Candidate171を既知のCase PRR-C02/r2で3回測る開発用Profile。固定read数を合否条件にせず、品質、all-agent token、経過時間を測定する
 
 一覧の先頭にある旧profileは、PRレビュー機能仕様とCore Baseline admission gateより先に固定されていた。profile JSONとrunは履歴として変更せず、対応runを[`diagnostic evidenceへ再分類`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)する。新しい正式profileの基準にはしない。
 
