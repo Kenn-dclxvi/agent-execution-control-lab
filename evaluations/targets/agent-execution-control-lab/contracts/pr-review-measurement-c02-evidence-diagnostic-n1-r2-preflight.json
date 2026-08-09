@@ -1,0 +1,66 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-development-measurement-preflight/v2",
+  "preflight_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r2-preflight",
+  "state": "ready_not_executed",
+  "measurement_series": "pr-review-measurement-c02-evidence-diagnostic-r2",
+  "profile": {"profile_id": "pr-review-measurement-c02-evidence-diagnostic-n1-r2", "path": "profiles/pr-review-measurement-c02-evidence-diagnostic-n1-r2.json", "sha256": "948f6a544f8bb1a66ed1bf81720a809671ae87e216f624fd7fe22bd5e2faba06"},
+  "baseline": {
+    "prompt_variant": "pr-review-relationship-role-finding-admission-r1",
+    "run_result": {"result_id": "pr-review-c02-finding-admission-calibration-r1:PRR-C02:c02-relationship-reviewer-opus-finding-admission:r1:a31295440716", "path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json", "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427", "measurement_state": "satisfied", "quality_score": 4},
+    "result_reuse": "required_without_rerun"
+  },
+  "diagnostic_source": {
+    "candidate_number": 170,
+    "prompt_identity": "pr-review-prompt-evidence-scope-r1",
+    "run_result": {"result_id": "pr-review-measurement-c02-evidence-scope-r1:PRR-C02:prompt-evidence-scope:r1:a31298190204", "path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json", "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6", "measurement_state": "satisfied", "quality_score": 4, "mechanism_state": "unsatisfied"}
+  },
+  "predicates": {
+    "candidate170_prompt_unchanged": "satisfied",
+    "case_revision_unchanged": "satisfied",
+    "model_and_topology_unchanged": "satisfied",
+    "permission_boundary_unchanged": "satisfied",
+    "content_free_diagnostic_hook": "satisfied",
+    "price_class_token_diagnostic": "satisfied",
+    "prior_result_write_once": "satisfied",
+    "development_case_not_held_out": "explicit"
+  },
+  "compatibility": {
+    "changed_axis": "diagnostic observation only",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "Candidate170 prompt identity and content SHA-256",
+      "Case PRR-C02/r2 input, oracle, repository snapshot, authority, and eligibility identities",
+      "target repository commit and tree",
+      "TaskSpec source, functional specification, and required outcome",
+      "quality rating, review contract, and structured review output schema",
+      "root Sonnet model and one Opus relationship reviewer topology",
+      "Claude Code Action revision, runner, authentication, and read-only permission boundary",
+      "fixture-tool payload and command interface",
+      "turn condition, timeout, max_workers=24, and existing all-agent token accounting",
+      "measurement qualification, mechanism state, and three KPI definitions"
+    ],
+    "allowed_differences": [
+      "diagnostic Profile, workflow, collector, hook, Run Result schema, and result identities",
+      "content-free fixture operation and outcome labels",
+      "root and subagent token price-class aggregates"
+    ],
+    "excluded_claims": ["formal Candidate169 KPI comparison", "fresh held-out effect", "generalization", "model ranking", "winner", "adoption", "release", "runtime projection"]
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r2", "variant": "prompt-evidence-scope", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "results/pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json", "sha256": "ff17e5f78db0e2170259e161ca7933e51e29b9bf3ba446e3457ae82319e72427"},
+    {"path": "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json", "sha256": "6aa8798091354ad5b20ab85e6c2a7207b90c467d8b29808d581d7bc12df4a5e6"},
+    {"path": "sets/pr-review-c02-development-benchmark-r1/README.md", "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"},
+    {"path": "specifications/pr-review-measurement-c02-evidence-diagnostic-r2.md", "sha256": "29f4605ce34fbf8d15b68b28f22bc88e5d66fc06a4543b4ecda7e32756cc499e"},
+    {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/manifest.json", "sha256": "eb5442f56179a9e8508917c18b07b20ca8c41aca587f13558097a8f9f93b8056"},
+    {"path": "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md", "sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"},
+    {"path": "schemas/run-result-r20.schema.json", "sha256": "e0757f6ccb9b2edfe45e7331d0dfbe0f3eea447ec7f7a4df99a0d23324fa683c"},
+    {"path": "tools/pr_review_measurement_c02_evidence_diagnostic.py", "sha256": "6a3767a8ecc94f1900fec6e58171d13eb48f38e63982ddc914538b33fb6ac9b4"},
+    {"path": "tools/pr_review_subagent_hook_r3.py", "sha256": "236fa137a3c02ffffbec8ab74937c9e57fcf9ad12cdab1fc019ded2300310592"},
+    {"path": ".github/workflows/pr-review-measure-c02-evidence-diagnostic-r2.yml", "sha256": "b5742d9c8393c9afabf6835f2c6eba0e2e1d42b4aae53e7cebbd30bdcb0e0ba3"}
+  ],
+  "execution": {"state": "not_issued", "measurement_failure_allows_same_slot_environment_recovery_only": true},
+  "scope": "Candidate170を変更せず、Case PRR-C02/r2で内容非保存の追加read分類とtoken価格区分を1回診断する。新Candidate、held-out evidence、採用、release、本体反映を許可しない。"
+}

@@ -12,6 +12,10 @@
 
 [PRR-C02/r2の開発校正result](pr-review-c02-finding-admission-calibration-r1-prr-c02-c02-relationship-reviewer-opus-finding-admission-r1-a31295440716.json)は測定成立条件を満たした。期待finding 1件を過不足なく返し、quality scoreは`4`、all-agent tokenは`763,825`、Action経過時間は`218.789秒`だった。結果確認済みのC02を使った開発校正であり、fresh held-out evidenceまたは一般化の根拠にはしない。
 
+## Candidate170 C02開発測定
+
+[Candidate170の初回Run Result](pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json)は測定成立条件を満たし、quality scoreは`4`、all-agent tokenは`595,146`、Action経過時間は`192.789秒`だった。初回7件の共同readは成立したが、その後に4件の追加readがあり、mechanismは`unsatisfied`である。結果確認済みC02の開発測定であり、fresh held-out evidenceまたは一般化の根拠にはしない。
+
 ## held-out Workflow Free / Opus関係レビュー役比較
 
 全体の数値と境界は[`held-out Workflow Free / Opus関係レビュー役比較`](pr-review-held-out-workflow-topology-comparison_2026-08-09.md)に記録する。Opus側3件はすべて測定成立し、quality scoreは`0 / 4 / 4`だった。保存済みControl-Freeの`1 / 4 / 4`と同じ3 KPIで比較し、再実行は行わない。

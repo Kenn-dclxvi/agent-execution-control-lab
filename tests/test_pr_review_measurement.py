@@ -38,6 +38,8 @@ import pr_review_held_out_control_free as held_out_control_free
 import pr_review_held_out_relationship_reviewer as held_out_relationship_reviewer
 import pr_review_c02_finding_admission as c02_finding_admission
 import pr_review_measurement_c02_evidence_scope as c02_evidence_scope
+import pr_review_measurement_c02_evidence_diagnostic as c02_evidence_diagnostic
+import pr_review_subagent_hook_r3 as subagent_hook_r3
 
 
 @pytest.fixture
@@ -3994,3 +3996,287 @@ def test_c02_evidence_scope_grade_uses_r19_schema(tmp_path: Path):
     assert result["quality_score"] == 4
     assert result["mechanism_qualification"]["state"] == "satisfied"
     assert result["runtime"]["total_tokens"] == 120
+
+
+def test_subagent_hook_r3_records_only_fixture_operation_and_outcome():
+    record = subagent_hook_r3.sanitize_event(
+        {
+            "hook_event_name": "PostToolUse",
+            "agent_id": "reviewer",
+            "tool_name": "Bash",
+            "tool_use_id": "tool-1",
+            "tool_input": {
+                "command": "./fixture-tool file evaluations/private/example.md"
+            },
+        }
+    )
+
+    assert record["fixture_tool_operations"] == ["file"]
+    assert record["outcome"] == "success"
+    serialized = json.dumps(record)
+    assert "evaluations/private/example.md" not in serialized
+
+
+def test_c02_evidence_diagnostic_groups_operations_by_batch():
+    events = [
+        {
+            "event": "PostToolUse",
+            "tool_use_id": "tool-1",
+            "fixture_tool_operations": ["rules"],
+            "outcome": "success",
+        },
+        {
+            "event": "PostToolUseFailure",
+            "tool_use_id": "tool-2",
+            "fixture_tool_operations": ["file"],
+            "outcome": "failure",
+        },
+        {"event": "PostToolBatch", "tool_use_ids": ["tool-1", "tool-2"]},
+    ]
+
+    diagnostic = c02_evidence_diagnostic._evidence_diagnostics(events)
+    assert diagnostic == {
+        "content_saved": False,
+        "operation_counts": {
+            "rules": {"success": 1},
+            "file": {"failure": 1},
+        },
+        "batches": [
+            {
+                "calls": [
+                    {"operations": ["rules"], "outcome": "success"},
+                    {"operations": ["file"], "outcome": "failure"},
+                ]
+            }
+        ],
+        "unbatched_calls": [],
+    }
+
+
+def test_c02_evidence_diagnostic_preserves_cache_token_classes(tmp_path: Path):
+    execution_file = tmp_path / "execution.json"
+    execution_file.write_text(
+        json.dumps(
+            [
+                {
+                    "type": "assistant",
+                    "parent_tool_use_id": None,
+                    "message": {
+                        "usage": {
+                            "input_tokens": 10,
+                            "cache_creation_input_tokens": 20,
+                            "cache_read_input_tokens": 30,
+                            "output_tokens": 4,
+                        }
+                    },
+                },
+                {
+                    "type": "assistant",
+                    "parent_tool_use_id": "agent-1",
+                    "message": {
+                        "usage": {
+                            "input_tokens": 100,
+                            "cache_creation_input_tokens": 200,
+                            "cache_read_input_tokens": 300,
+                            "output_tokens": 40,
+                        }
+                    },
+                },
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    diagnostic = c02_evidence_diagnostic._token_diagnostics(execution_file)
+    assert diagnostic["complete"] is True
+    assert diagnostic["usage_records"] == {"root": 1, "subagent": 1, "all": 2}
+    assert diagnostic["tokens"]["root"] == {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 20,
+        "cache_read_input_tokens": 30,
+        "output_tokens": 4,
+    }
+    assert diagnostic["tokens"]["subagent"] == {
+        "input_tokens": 100,
+        "cache_creation_input_tokens": 200,
+        "cache_read_input_tokens": 300,
+        "output_tokens": 40,
+    }
+    assert diagnostic["tokens"]["all"] == {
+        "input_tokens": 110,
+        "cache_creation_input_tokens": 220,
+        "cache_read_input_tokens": 330,
+        "output_tokens": 44,
+    }
+
+
+def test_c02_evidence_diagnostic_preflight_and_packet(tmp_path: Path):
+    profile, preflight = c02_evidence_diagnostic.validate_preflight("PRR-C02")
+    assert profile["profile_id"] == c02_evidence_diagnostic.PROFILE_ID
+    assert profile["comparison_conditions"]["candidate_number"] == 170
+    assert preflight["compatibility"]["changed_axis"] == "diagnostic observation only"
+
+    try:
+        metadata = c02_evidence_diagnostic.prepare_input("PRR-C02", tmp_path)
+        assert metadata["profile_id"] == c02_evidence_diagnostic.PROFILE_ID
+        settings = json.loads(
+            (tmp_path / "claude-project-settings.json").read_text(encoding="utf-8")
+        )
+        hook_scripts = [
+            hook["args"][0]
+            for groups in settings["hooks"].values()
+            for group in groups
+            for hook in group["hooks"]
+        ]
+        assert hook_scripts
+        assert all("pr_review_subagent_hook_r3.py" in item for item in hook_scripts)
+        assert (tmp_path / "pr_review_measurement_c02_evidence_diagnostic.py").is_file()
+        assert (tmp_path / "pr_review_subagent_hook_r3.py").is_file()
+        assert not (tmp_path / "oracle.json").exists()
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+def test_c02_evidence_diagnostic_workflow_keeps_candidate170_prompt():
+    workflow = (
+        REPOSITORY_ROOT
+        / ".github/workflows/pr-review-measure-c02-evidence-diagnostic-r2.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+    assert textwrap.dedent(inline).strip() == prompt
+    assert "pr-review-measurement-c02-evidence-diagnostic-n1-r2" in workflow
+
+
+def test_candidate170_saved_result_and_r20_schema():
+    saved = (
+        INSTANCE_ROOT
+        / "results/pr-review-measurement-c02-evidence-scope-r1-prr-c02-prompt-evidence-scope-r1-a31298190204.json"
+    )
+    result = json.loads(saved.read_text(encoding="utf-8"))
+    r19 = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r19.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(r19).validate(result)
+    assert result["quality_score"] == 4
+    assert result["mechanism_qualification"]["state"] == "unsatisfied"
+    assert saved.name in (INSTANCE_ROOT / "results/README.md").read_text(
+        encoding="utf-8"
+    )
+
+    r20 = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r20.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert r20["properties"]["schema_version"]["const"] == 20
+    required_trace = r20["properties"]["workflow_trace"]["required"]
+    assert required_trace == ["evidence_diagnostics", "token_diagnostics"]
+
+
+def test_c02_evidence_diagnostic_grade_uses_r20_schema(tmp_path: Path):
+    _, oracle = held_out_control_free._fixture_and_oracle("PRR-C02")
+    expected = oracle["expected_findings"][0]
+    location = expected["locations"][0]
+    finding = {
+        "category": expected["category"],
+        "rule_id": expected["rule_id"],
+        "path": location["path"],
+        "related_paths": [
+            path for path in expected["paths"] if path != location["path"]
+        ],
+        "line_start": location["line_start"],
+        "line_end": location["line_end"],
+        "severity": expected["severity"],
+        "message": "固定されたインスタンス境界に反するため分離が必要である。",
+    }
+    review_path = tmp_path / "review.json"
+    review_path.write_text(
+        json.dumps({"findings": [finding], "summary": _summary_for([finding])}),
+        encoding="utf-8",
+    )
+    trace = {
+        "complete": True,
+        "fixture_tool_access_observed": True,
+        "fixture_tool_permission_denials": 0,
+        "subagent_start_count": 1,
+        "subagent_stop_count": 1,
+        "relationship_reviewer_model_matches": True,
+        "relationship_reviewer_fixture_access_count": 7,
+        "root_fixture_tool_access_count": 0,
+        "fixture_tool_batch_count": 1,
+        "fixture_tool_batch_sizes": [7],
+        "fixture_tool_max_batch_size": 7,
+        "required_initial_read_count": 7,
+        "joint_initial_read_observed": True,
+        "additional_fixture_read_count": 0,
+        "evidence_diagnostics": {
+            "content_saved": False,
+            "operation_counts": {},
+            "batches": [],
+            "unbatched_calls": [],
+        },
+        "token_diagnostics": {
+            "complete": True,
+            "usage_records": {"root": 1, "subagent": 1, "all": 2},
+            "tokens": {},
+        },
+    }
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {
+                    "model": "claude-sonnet-5",
+                    "turns": 2,
+                    "input_tokens": 100,
+                    "output_tokens": 20,
+                    "duration_ms": 1000,
+                    "reported_cost_usd": None,
+                },
+                "workflow_trace": trace,
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(
+        json.dumps(
+            {
+                "profile_id": c02_evidence_diagnostic.PROFILE_ID,
+                "case_id": "PRR-C02",
+                "input_ms": 10,
+            }
+        ),
+        encoding="utf-8",
+    )
+    output = tmp_path / "result.json"
+    result = c02_evidence_diagnostic.grade_run(
+        "PRR-C02",
+        1000,
+        "claude-sonnet-5",
+        review_path,
+        metadata_path,
+        prepared_path,
+        output,
+        "1000",
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r20.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["quality_score"] == 4
+    assert result["mechanism_qualification"]["state"] == "satisfied"
+    assert result["workflow_trace"]["token_diagnostics"]["complete"] is True
