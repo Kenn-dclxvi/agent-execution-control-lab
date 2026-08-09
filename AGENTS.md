@@ -24,6 +24,23 @@
 
 会話、利用者向け説明、質問、作業計画、要約、PRの題名・本文、リポジトリ内の文書は、別の言語を明示的に指定されない限り、自然な日本語で書く。英語は、制御の正確な対応関係を保つために必要な識別子、状態値、スキーマ項目、コマンド、API名、製品名、ファイル名に限る。工程、役割、判断、状態、成果物を表す一般語は日本語で記し、日本語文へ不要な英単語を混在させない。既存の履歴アーティファクト、固定済み原文、機械的互換性を保つ必要がある値は、この表記規則だけを理由に書き換えない。
 
+## 比較試験の実行前ゲート
+
+- 保存済みresultを基準に品質、トークン、経過時間、採用可否を比較する試験では、評価スロットを一件でも発行する前に基準resultを一意にbindし、宣言したprompt identity以外の互換条件が完全一致することを証明するpreflight receiptを保存する。
+- 一項目でも不一致、未固定、未確認があれば、評価スロットを一件も発行しない。不一致の値と理由を報告して停止する。実行後に不一致を発見して結果を参考値へ降格する進め方を禁止する。
+- 試験ごとに実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。
+- 照合する互換条件の内訳、preflight command、Layer 1再利用、atomic run経路、並列上限の固定値は`evaluations/AGENTS.md`を正本とする。
+
+## 共通の変更規律
+
+- 一つの変更では一つの判断または一つの`アーティファクト単位`を扱う。この項の`変更`と`アーティファクト単位`は、ケース、プロファイル、セット、rating contract、プロンプトバンドル、release、resultなど評価アーティファクトとプロンプトアーティファクトの変更単位を指す。gitのcommit、branch、PRの粒度を定める規則ではなく、docsとdescriptorだけの変更にこの単位規則を適用しない。
+- 依頼が要求しないアーティファクトを変更しない。
+- 既存アーティファクトと周辺経路を破壊しない。
+- 正本と履歴を区別する。
+- 履歴アーティファクトを現在解釈へその場で書き換えない。
+- プロンプト変更と評価条件変更を同じ比較単位へ混ぜない。
+- ルートの`README.md`は入口と要約に限定し、詳細な履歴やCandidate全系譜を戻さない（配下READMEの詳細一覧は対象外）。
+
 ## Agent execution discipline
 
 このリポジトリで作業するエージェントは、次の制御をそのまま適用する。本文はCandidate147（`the-caption-3ce91a4-result-effect-scope-r1`）で本体へ採用された制御原文`prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt`からの逐語転記であり、要約、緩和、リポジトリ向けの調整を加えていない。上の表記規則もこの条項本文へは適用しない。転記元のreleaseが変わる場合は、release identityを更新して全文を差し替える。
@@ -45,20 +62,3 @@
 - VALIDATION_PLAN: artifact変更後の検証開始前に、required validationと完了判定に必要と確定しているdiff / status等を一つの実行票へ順にbindする。TaskSpecまたはcommand evidence protocolがexact commandを明示しない場合、その未固定commandをmissing validation identityまたはrepository evidenceの開放条件にせず、既に受領したTaskSpec / 適用中instruction / target evidenceの範囲から`METHOD`として選び、実行票発行時にcommandへbindする。検証success後はmodelへ戻らず実行票の残りを発行し、全result受領後に一度だけ完了を判断する。実行票完了後はTaskSpec追加要求またはresult失効がない限りtoolを追加しない。validation wrapperがcell ID付きnonterminal resultを返した場合、その返却を実行票の完了判定へ使わず、実行票全体がterminalになるまで同じcell IDへのwaitだけを発行する。commentary / 進捗報告 / 判断 / 別toolを先に発行しない。
 - METHOD: TaskSpec明示手段だけを固定する。未固定手段はpredicateを変えずpermission内でexecutorが選び、validationでは既に受領したTaskSpec / 適用中instruction / target evidenceの範囲から選択して実行票発行時にcommandへbindする。exact commandの選択だけを理由にrepository evidenceを追加しない。invocationのfailed / unavailableをpermission否定 / terminalにせず、未固定手段があれば同一predicateへ向けて継続する。明示禁止 / permission否定は停止し、回避しない。
 - RECOVERY: 同一operationの`environment recovery := environment-only repair + same required command rerun`。組の開始時だけ`environment_recovery_max`を消費し、未固定手段の選択は数えない。
-
-## 比較試験の実行前ゲート
-
-- 保存済みresultを基準に品質、トークン、経過時間、採用可否を比較する試験では、評価スロットを一件でも発行する前に基準resultを一意にbindし、宣言したprompt identity以外の互換条件が完全一致することを証明するpreflight receiptを保存する。
-- 一項目でも不一致、未固定、未確認があれば、評価スロットを一件も発行しない。不一致の値と理由を報告して停止する。実行後に不一致を発見して結果を参考値へ降格する進め方を禁止する。
-- 試験ごとに実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。
-- 照合する互換条件の内訳、preflight command、Layer 1再利用、atomic run経路、並列上限の固定値は`evaluations/AGENTS.md`を正本とする。
-
-## 共通の変更規律
-
-- 一つの変更では一つの判断または一つの`アーティファクト単位`を扱う。この項の`変更`と`アーティファクト単位`は、ケース、プロファイル、セット、rating contract、プロンプトバンドル、release、resultなど評価アーティファクトとプロンプトアーティファクトの変更単位を指す。gitのcommit、branch、PRの粒度を定める規則ではなく、docsとdescriptorだけの変更にこの単位規則を適用しない。
-- 依頼が要求しないアーティファクトを変更しない。
-- 既存アーティファクトと周辺経路を破壊しない。
-- 正本と履歴を区別する。
-- 履歴アーティファクトを現在解釈へその場で書き換えない。
-- プロンプト変更と評価条件変更を同じ比較単位へ混ぜない。
-- ルートの`README.md`は入口と要約に限定し、詳細な履歴やCandidate全系譜を戻さない（配下READMEの詳細一覧は対象外）。
