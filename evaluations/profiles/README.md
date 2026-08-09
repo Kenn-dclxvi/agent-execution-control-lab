@@ -18,6 +18,10 @@ Candidate147のinformation closureとCandidate164〜166のreview admission系列
 | autonomous routing | [`C147`](candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json) / [`C164`](candidate164-autonomous-review-admission-routing-r1-medium-m24-n5-cli0146.json) | review operationの自律routing / admission | [`C147`](../results/candidate147-information-closure-autonomous-routing-r1_2026-08-04.md) / [`C164`](../results/candidate164-autonomous-review-admission-routing-r1_2026-08-04.md) |
 | result admission | [`C165 targeted`](candidate165-review-result-admission-r1-medium-m24-n5-cli0146.json) / [`C165 Standard14`](candidate165-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json) | review result authority gateと既存Standard14 quality確認 | [`targeted`](../results/candidate165-review-result-admission-r1_2026-08-04.md) / [`Standard14`](../results/candidate165-review-result-admission-v14-medium-standard14-atomic-n5-cli0146_2026-08-04.md) |
 | prior evaluation admission | [`C166 preservation gate`](candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json) | prior evaluationを含むReview4 preservation | [`result`](../results/candidate166-prior-evaluation-review-admission-r1_2026-08-04.md) |
+| repair contract problem qualification | [`C166 problem qualification`](candidate166-prechange-repair-contract-problem-qualification-r1-medium-m24-n5-cli0146.json) | 新Candidate作成前に、修正操作で先行評価が判定へ混入する誤経路の実在を確認 | [35件評価済み、Candidate作成条件不成立](../results/candidate166-prechange-repair-contract-problem-qualification-r1_2026-08-09.md) |
+| repair contract targeted gate | [`C167 repair contract admission`](candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json) | 固定済み7ケースで、変更前修正契約のqualityとmechanismを確認 | [35 / 35 valid、Score 4 / 1 = 21 / 14、停止](../results/candidate167-prechange-repair-contract-admission-r1_2026-08-09.md) |
+| repair evidence burden targeted gate | [`C168 repair evidence burden`](candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json) | 同じ固定済み7ケースで、修正必要性と修正後条件の立証責任を確認 | [35 / 35 valid、Score 4 / 1 = 29 / 6、停止](../results/candidate168-repair-evidence-burden-r1_2026-08-09.md) |
+| repair decision evidence closure targeted gate | [`C169 repair decision evidence closure`](candidate169-repair-decision-evidence-closure-r1-medium-m24-n5-cli0146.json) | 同じ固定済み7ケースで、TaskSpec全体の判定命題と証拠役割の対応を確認 | [35 / 35 valid、Score 4 / 1 = 30 / 5、停止](../results/candidate169-repair-decision-evidence-closure-r1_2026-08-09.md) |
 | held-out generalization | [`C147 held-out`](candidate147-information-closure-heldout-r1-medium-m24-n5-cli0146.json) | development pairを流用しないheld-out確認 | [`result`](../results/candidate147-information-closure-heldout-r1_2026-08-04.md) |
 
 ケースの妥当性や現在解釈はこのREADMEへ上書きせず、対応resultと[`docs/`](../../docs/README.md)の分析文書を参照する。
@@ -65,7 +69,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`121–180`](index/profiles-121-180.md)
 - [`181–240`](index/profiles-181-240.md)
 - [`241–300`](index/profiles-241-300.md)
-- [`301–355`](index/profiles-301-355.md)
+- [`301–359`](index/profiles-301-359.md)
 
 このシャードと上のリンクは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。プロファイル追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、ディレクトリ実体、READMEから辿れる索引シャード、profile JSONのリンクの集合一致として固定する。
 

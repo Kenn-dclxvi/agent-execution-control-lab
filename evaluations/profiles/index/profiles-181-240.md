@@ -2,6 +2,10 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate37-exact-evidence-location-owner-producer-v8-targeted2-global-m10-n5-r1.json`](../candidate37-exact-evidence-location-owner-producer-v8-targeted2-global-m10-n5-r1.json)
+- [`candidate38-result-unit-evidence-binding-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate38-result-unit-evidence-binding-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
+- [`candidate38-result-unit-evidence-binding-owner-producer-v8-targeted2-global-m10-n5-r1.json`](../candidate38-result-unit-evidence-binding-owner-producer-v8-targeted2-global-m10-n5-r1.json)
+- [`candidate39-owner-aligned-result-unit-owner-producer-v8-targeted2-global-m10-n5-r1.json`](../candidate39-owner-aligned-result-unit-owner-producer-v8-targeted2-global-m10-n5-r1.json)
 - [`candidate4-expanded12-global-m24-n5-r1.json`](../candidate4-expanded12-global-m24-n5-r1.json)
 - [`candidate40-operation-result-projection-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate40-operation-result-projection-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
 - [`candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
@@ -58,7 +62,3 @@
 - [`candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate64-self-contained-execution-paths-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate65-shared-operation-core-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate65-shared-operation-core-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate65-shared-operation-core-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate65-shared-operation-core-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
-- [`candidate65-shared-operation-core-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate65-shared-operation-core-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate66-topology-preserving-compression-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate66-topology-preserving-compression-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate66-topology-preserving-compression-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate66-topology-preserving-compression-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)

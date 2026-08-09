@@ -1,8 +1,8 @@
 # 変更前の情報封鎖レビューによる修正契約仕様
 
-> **位置づけ**: 仕様確定／候補未作成／評価ケース未設計／評価未開始
+> **位置づけ**: 破棄済み旧設計／現行設計へ継承しない
 >
-> 本文は、将来Candidate147へ組み込む機能の設計仕様である。候補、評価結果、採用、リリース、投影のいずれでもない。既存のCandidate147、Candidate164〜166、評価ケース、結果は変更しない。
+> 本文はC167〜C169系列が使用した当時の仕様として保持する。修正の要否と修正後条件を変更前レビューで決める設計は破棄し、現行設計は[`preimplementation-information-sealed-adversarial-design-review-spec.md`](preimplementation-information-sealed-adversarial-design-review-spec.md)へ一から書き起こした。本文を現行仕様または次Candidateの親として使用しない。
 
 ## 1. 目的
 
@@ -38,7 +38,7 @@
 ```text
 repair_operation_ready :=
     spec_ready
-    ∧ TaskSpecが対象成果物の欠陥または意味不整合の是正を必須成果として要求する
+    ∧ TaskSpecが対象成果物の欠陥または意味不整合の有無を確定し、存在する場合は是正することを必須成果として要求する
     ∧ 対象の識別情報が結び付き済み
     ∧ 修正の判定条件が結び付き済み
     ∧ 権限と保持条件が結び付き済み
@@ -63,11 +63,13 @@ repair_contract_state :=
     | unavailable
 ```
 
-- `not_applicable`: 必須の機械判定結果だけで、修正の要否と修正後に満たす全条件を決められる。
+- `not_applicable`: 必須の機械判定結果だけで修正が必要と確定し、修正後に満たす全条件も決められるため、修正契約の人的判定が適用されない。
 - `unobserved`: 人による意味判断に相当する判定が必要だが、受け入れ可能な結果がまだない。
 - `no_repair_required`: 閲覧を許可された根拠が、現在の成果物は判定条件を満たしていると示す。
 - `ready`: 受け入れ可能な修正契約が結び付き済みである。
 - `unavailable`: 閲覧を許可された根拠だけでは、修正の要否または必要な修正後条件を確定できない。
+
+初期状態は、必須の機械判定結果だけで修正が必要と確定できる場合は`not_applicable`、現在の成果物が判定条件を満たすと確定できる場合は`no_repair_required`、非機械的な判定が必要な場合は`unobserved`とする。`unobserved`からは、受け入れ可能な結果一件によって`no_repair_required`、`ready`、`unavailable`のいずれか一つにだけ遷移する。終端状態を同じ操作で再評価しない。
 
 ## 4. 修正契約の受入判定
 
@@ -82,7 +84,9 @@ repair_contract_required :=
     ∧ 受け入れ可能な修正契約が存在しない
 ```
 
-`repair_contract_required=false`なら、独立レビュー操作を作らない。機械的な根拠だけで閉じられる修正は、C147の既存の実装選択と検証へ進む。
+`repair_contract_required`は、修正契約操作のadmission時に一度だけ判定し、同じ修正操作の識別情報へ結び付ける。後から受け入れ可能な修正契約を受領しても、この結び付けを`false`へ再評価しない。
+
+admission時に`repair_contract_required=false`なら、修正契約の人的判定操作を作らない。機械的な根拠だけで修正必要と閉じられる修正は、C147の既存の実装選択と検証へ進む。機械的な根拠が現在の成果物は判定条件を満たすと示す場合は`no_repair_required`へ結び付け、修正差分を作らない。
 
 ### 4.2 同じ判定条件に対する先行評価
 
@@ -107,18 +111,18 @@ relevant_prior_evaluation_received :=
 ```text
 repair_context_clean := ¬relevant_prior_evaluation_received
 
-repair_contract_producer :=
+bound_repair_contract_producer :=
     none                    if repair_contract_required=false
     root                    if repair_contract_required=true ∧ repair_context_clean=true
     independent_reviewer    if repair_contract_required=true ∧ repair_context_clean=false
 ```
 
-実行担当は、最初の修正判定より前に一つだけ決める。同じ修正契約を`root`と独立レビュー担当へ並行または順次に割り当てない。担当を変更する場合は以前の結び付きを失効させ、新しい操作として扱う。
+実行担当は、最初の修正判定より前に一つだけ決め、修正操作の識別情報へ`bound_repair_contract_producer`として結び付ける。結果受領後もその結び付きを再評価しない。同じ修正契約を`root`と独立レビュー担当へ並行または順次に割り当てない。担当を変更する場合は以前の結び付きを失効させ、新しい操作として扱う。
 
 ### 4.4 レビューを発行できる条件
 
 ```text
-repair_review_consumer_ready :=
+repair_contract_consumer_ready :=
     repair_contract_required
     ∧ repair_contract_state=unobserved
     ∧ 修正判定条件と対象識別情報が結び付き済み
@@ -126,7 +130,7 @@ repair_review_consumer_ready :=
     ∧ 要求する結果によってrepair_contract_stateを確定できる
 ```
 
-独立レビュー担当は、`repair_review_consumer_ready=true`の場合だけ起動する。レビュー前に根拠が十分だと推測する必要はない。根拠が不足していた場合は`unavailable`として確定する。
+`bound_repair_contract_producer=root`の場合も`independent_reviewer`の場合も、`repair_contract_consumer_ready=true`の場合だけ修正判定を開始する。独立レビュー担当は、この条件がtrueかつ自身が`bound_repair_contract_producer`へ結び付き済みの場合だけ起動する。判定前に根拠が十分だと推測する必要はない。根拠が不足していた場合は`unavailable`として確定する。
 
 ## 5. 独立レビュー担当へ渡す情報
 
@@ -217,10 +221,12 @@ reason:
 ```text
 repair_contract_admissible :=
     result.operation_identity == current_repair_operation.identity
-    ∧ result.producer == repair_contract_producer
+    ∧ resultの生成元 == bound_repair_contract_producerの実行識別情報
     ∧ root以外の担当では結果の生成元を担当の実行識別情報へ結び付けられる
     ∧ resultを第6節の形式へ結び付けられる
 ```
+
+`結果の生成元`は結果本文の自己申告項目ではなく、実行環境が保持する生成元の識別情報とする。
 
 - 受け入れ可能な結果だけを`repair_contract_state`へ結び付ける。
 - 先行評価は`relevant_prior_evaluation_received`を成立させられるが、修正判断、修正後条件、停止条件、実装方法には使わない。
@@ -275,6 +281,8 @@ postchange_review_required :=
 ```
 
 `postchange_review_required=true`の場合だけ、修正担当とは別の新しい独立レビュー担当を一つ選ぶ。修正契約、変更後の成果物、リポジトリ上の根拠、必須の機械判定結果、閲覧許可範囲は渡してよい。修正担当の自己評価、先行レビューの処置判断、期待する終了状態は渡さない。
+
+変更後レビューの操作識別情報、判定条件、担当の実行識別情報、必要な結果形式を起動前に結び付ける。変更後レビュー結果は、Candidate166の`RESULT_ADMISSION`が求める生成元と操作の一致を満たし、かつ結果を「修正後条件を満たす」、「重大な不一致」、「閲覧許可範囲だけでは判定不能」のいずれか一つへ結び付けられる場合だけ受け入れる。生成元、操作、結果形式のいずれかを確認できない場合は、`root`が代行せず現在の修正操作を`blocked`で終了する。
 
 変更後のレビュー担当は修正しない。重大な不一致を返した場合は、そのレビュー操作を終了して停止する。同じ操作の中で自動修正へ戻らない。追加修正を行う場合は、新しい修正操作の識別情報、担当の結び付け、修正契約の状態から始める。
 
