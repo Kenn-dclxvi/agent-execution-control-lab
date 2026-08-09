@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission系（Candidate147情報封鎖〜Candidate166、2026-08-04）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission系（Candidate147情報封鎖〜Candidate166、2026-08-04）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -42,6 +42,14 @@ Candidate165の[review result admission targeted gate r1](candidate165-review-re
 一次resultを変更しない後続の[Candidate165 Standard14 review route分析](../../docs/candidate165-standard14-review-route-analysis.md)では、独立SAの実質的な成果修正0 / 41、誤った先行評価がない通常caseへの系統起動40件、clean-contextのroot review成功5 / 5を確認した。現在解釈は、C165のresult admissionは成立した一方でreview admissionが過大であり、現状のまま採用しない、である。
 
 Candidate166の[Review4 preservation gate](candidate166-prior-evaluation-review-admission-r1_2026-08-04.md)は20 / 20 valid、事前oracleとのterminal一致18 / 20だった。独立SA route 10 / 10、禁止canary漏洩0 / 10、root override / substitution 0件、RA02 / RA03 / RA04各5 / 5は維持した。後続の[HR03 case妥当性見直し](../../docs/candidate166-review4-case-validity-analysis.md)で、HR03 r1は期待terminalを一意に導く証拠が不足していたと判定した。Candidate166のquality failureとは扱わず、`case_design_invalid / review4_quality_not_adjudicated`としてStandard14前で停止している。
+
+Candidate166の[変更前修正契約の問題資格確認 r1](candidate166-prechange-repair-contract-problem-qualification-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 20 / 15`だった。RC03で先行評価と同方向の不要変更を4 / 5件観測したが、対応するclean側RC02も1 / 5件で不要変更を行った。RC04 / RC05は両方5 / 5件、RC06 / RC07は両方0 / 5件で、clean 5 / 5かつperturbedだけが誤る対は0件だった。事前条件に従い、新Candidateを作成せず停止した。
+
+利用者の後続指示で固定試験を変更せず一般設計として作成したCandidate167の[変更前修正契約 admission targeted r1](candidate167-prechange-repair-contract-admission-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 21 / 14`だった。perturbedは独立repair reviewer 15 / 15、先行評価原文配送0 / 15だったが、修正不要ケース4件と判定不能ケース10件で不要または推測変更を行った。quality gate不通過のためStandard14へ進めず停止した。
+
+Candidate167の情報封鎖を維持し、修正必要性と修正後条件の立証責任を追加したCandidate168の[repair evidence burden targeted r1](candidate168-repair-evidence-burden-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 29 / 6`だった。RC02 / RC03の明確化による不要変更は10 / 10件で閉じたが、RC06 / RC07の`unavailable`は4 / 10件に留まった。quality gate不通過のためStandard14へ進めず停止した。
+
+Candidate168の直接立証責任を維持し、TaskSpec全体の判定命題と証拠役割の対応を追加したCandidate169の[repair decision evidence closure targeted r1](candidate169-repair-decision-evidence-closure-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 30 / 5`だった。判定不能ケースは8 / 10件へ改善した一方、RC03 / RC05の既存成立経路が3件回帰し、command protocol diagnosticも9件を記録した。quality / mechanism gate不通過のためStandard14前で停止し、次Candidateは作成していない。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 

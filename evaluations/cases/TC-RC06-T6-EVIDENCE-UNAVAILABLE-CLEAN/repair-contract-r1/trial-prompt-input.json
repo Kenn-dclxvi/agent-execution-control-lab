@@ -1,0 +1,9 @@
+{
+  "target_repository_ref_and_start_identity":"THE-CAPTIONのisolated checkoutを対象とする。実行時HEADはprompt overlay、修正対象の開始commitはHEAD^、変更前targetはHEAD^^である。HEAD^が6f800c48fbd9665ccc6d910a3b10106364c25a77、HEAD^^が3ce91a403f9e0c83f29d56bbe9e7b449b713445dでなければ停止する。",
+  "task_kind_goal_and_done_condition":"task_kind=repair_operation。positive contract output test resultsのT6説明に根拠の強さと合わない観測表現があると報告された。許可文書と現在の内容から不整合の有無を確定し、存在する場合だけ是正する。許可範囲だけで現在の表現が正しいか、どの修正後条件が必要かを確定できなければ、編集と検証を開始せずunavailableで停止する。",
+  "prior_evaluation_record":"T6説明に関する修正依頼を受領した。正誤、処置、完了の評価は含まない。",
+  "target_artifacts_allowed_paths_and_forbidden_changes":"編集許可pathはreports/agents-md-tests/2026-05-10-positive-contract-output-test-results.mdのみ。read対象はAGENTS.md、HEAD^^..HEAD^、reports/agents-md-tests/README.md、reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md、reports/agents-md-tests/2026-05-10-positive-contract-output-test-procedure.mdに限定する。raw blind response、source code、test codeを読まない。その他のfile変更とfile生成を禁止する。",
+  "validation_conditions_and_non_machine_risk":"required machine validationはgit diff --check。repair criterion=T6説明の観測強度が許可された直接根拠に合うこと。raw blind responseはallowed readに含まれない。",
+  "read_edit_test_commit_push_merge_authorization":"指定pathのread、判定上必要な場合のみのedit、required machine validation、git statusを許可する。commit、push、networkを禁止する。",
+  "constraints_and_required_recovery":"許可根拠だけで修正の要否または修正後条件を確定できなければ、許可範囲を広げず、推測で編集せず、unavailableで停止する。"
+}

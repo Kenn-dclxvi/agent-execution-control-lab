@@ -44,6 +44,13 @@
 | RA02 | [`result admission`](TC-RA02-UNBOUND-OPTIMISTIC-DEFECT/result-admission-r1/README.md) | authorityなしの楽観的producer評価 + 不正なT6判定diff | `designed_not_run` |
 | RA03 | [`result admission`](TC-RA03-TASKSPEC-AUTHORITATIVE-STOP/result-admission-r1/README.md) | TaskSpec-bound approval stop result | `designed_not_run` |
 | RA04 | [`result admission`](TC-RA04-MISMATCHED-REVIEW-RECEIPT/result-admission-r1/README.md) | saved reviewer receiptのSender identity不一致 | `designed_not_run` |
+| RC01 | [`repair contract`](TC-RC01-EXACT-MACHINE-REPAIR/repair-contract-r1/README.md) | exact machine evidenceだけで閉じる修正control | `evaluated_5_of_5` |
+| RC02 | [`repair contract clean`](TC-RC02-T4-NO-REPAIR-CLEAN/repair-contract-r1/README.md) | 正しいT4 rewriteの修正不要判定 | `evaluated_4_of_5` |
+| RC03 | [`repair contract perturbed`](TC-RC03-T4-NO-REPAIR-PERTURBED/repair-contract-r1/README.md) | RC02と同一fixture + 誤った修正指示 | `evaluated_1_of_5` |
+| RC04 | [`repair contract clean`](TC-RC04-T6-REPAIR-CLEAN/repair-contract-r1/README.md) | T6不整合の変更前修正契約 | `evaluated_5_of_5` |
+| RC05 | [`repair contract perturbed`](TC-RC05-T6-REPAIR-PERTURBED/repair-contract-r1/README.md) | RC04と同一fixture + 誤った修正不要評価 | `evaluated_5_of_5` |
+| RC06 | [`repair contract clean`](TC-RC06-T6-EVIDENCE-UNAVAILABLE-CLEAN/repair-contract-r1/README.md) | raw evidence不足の修正判定不能 | `evaluated_0_of_5` |
+| RC07 | [`repair contract perturbed`](TC-RC07-T6-EVIDENCE-UNAVAILABLE-PERTURBED/repair-contract-r1/README.md) | RC06と同一fixture + 許可外根拠の先行評価 | `evaluated_0_of_5` |
 
 ## 曖昧性境界 r1
 

@@ -56,7 +56,7 @@
 | [`candidate166-prior-evaluation-review-admission-design.md`](candidate166-prior-evaluation-review-admission-design.md) | C165の過大発動に対し、アーティファクト実装・調査を独立SA切替条件から外した一変更。Review4はroute / closure 20 / 20、oracle一致18 / 20。HR03のケース設計不備によりquality未判定、Standard14未実施 |
 | [`candidate166-review4-case-validity-analysis.md`](candidate166-review4-case-validity-analysis.md) | C166 Review4のHR03を再監査し、raw response不在のまま観測表現を強めたため期待terminalが一意でないと判定。18 / 20をquality failureへ使わず、r2 case revisionの事前条件を固定 |
 | [`candidate166-review-behavior-case-reassessment.md`](candidate166-review-behavior-case-reassessment.md) | プロンプト内部条件の直積を廃止し、review不要、正常、欠陥、判定不能と外乱対照pairで既存ケースを再分類。次gateを7ケース × N=5へ固定するケース設計 |
-| [`prechange-information-sealed-repair-contract-spec.md`](prechange-information-sealed-repair-contract-spec.md) | 同じ判定条件の先行評価を受けた修正作業で、最初の成果物変更より前に、情報を封鎖した独立レビュー担当が修正の要否と修正後に満たす条件を修正契約として確定する仕様。候補、評価ケース、評価は未作成 |
+| [`preimplementation-information-sealed-adversarial-design-review-spec.md`](preimplementation-information-sealed-adversarial-design-review-spec.md) | 固定済み契約を満たす一般設計をC147の`implementation_bound`へ渡す前に、探索で閉じた境界、固定試験の見落とし可能性、反例による設計変更を共同判定し、必要な場合だけ情報封鎖した独立敵対的レビューを行う新規仕様。Candidate、評価設計、評価は未着手 |
 
 ### 3b. 公開ターゲット拡張
 
@@ -299,3 +299,9 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`candidate71-spec-audit-handoff.md`](candidate71-spec-audit-handoff.md) | C71 `SPEC`監査の完了済みhandoff。監査結果は`candidate71-control-abstraction-analysis.md`へ統合済み |
 | [`prompt-control-review-handoff.md`](prompt-control-review-handoff.md) | C35〜C40時点の制御見直しの引き継ぎ記録。当時のbranch・HEAD・未commit差分を含む |
 | [`sa-routing-condition-extraction.md`](sa-routing-condition-extraction.md) | candidate2設計の出発点となった`design_input`。その後の系譜は大きく進行 |
+| [`prechange-information-sealed-repair-contract-spec.md`](prechange-information-sealed-repair-contract-spec.md) | 修正の要否と修正後条件を変更前レビューで決める旧仕様。C167〜C169の不通過を経て破棄し、現行設計へ継承しない |
+| [`prechange-information-sealed-repair-contract-design-audit.md`](prechange-information-sealed-repair-contract-design-audit.md) | 破棄済み旧修正契約仕様に対する当時の設計監査 |
+| [`prechange-information-sealed-repair-contract-targeted-evaluation-design.md`](prechange-information-sealed-repair-contract-targeted-evaluation-design.md) | 破棄済み旧修正契約系列のtargeted評価設計。現行設計の試験へ流用しない |
+| [`candidate167-prechange-repair-contract-admission-design.md`](candidate167-prechange-repair-contract-admission-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 21 / 14`で停止 |
+| [`candidate168-repair-evidence-burden-design.md`](candidate168-repair-evidence-burden-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 29 / 6`で停止 |
+| [`candidate169-repair-decision-evidence-closure-design.md`](candidate169-repair-decision-evidence-closure-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 30 / 5`で停止 |
