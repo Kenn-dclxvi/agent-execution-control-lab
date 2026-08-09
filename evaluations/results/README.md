@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate172、2026-08-04〜08-10）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate173、2026-08-04〜08-10）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate172、2026-08-04〜08-10）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate173、2026-08-04〜08-10）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -54,6 +54,8 @@ Candidate168の直接立証責任を維持し、TaskSpec全体の判定命題と
 旧修正契約を流用せず設計第7版から作成したCandidate147の[実装前敵対的設計レビュー問題資格確認 r1](candidate147-preimplementation-adversarial-design-review-problem-qualification-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 3 / 1 = 10 / 13 / 22`だった。ADR01 / ADR02は成果を10 / 10完了したが不要reviewerも10 / 10起動し、危険側ケースで事前に資格対象としたreview・permission迂回後のartifact変更は0件だった。品質失敗は保持する一方、新Candidate作成条件は不成立としてCandidate targeted gateとStandard14を開始せず停止した。
 
 Candidate147へ一般的な設計admissionを追加したCandidate172の[実装前設計admission targeted r1](candidate172-preimplementation-design-admission-targeted-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 1 = 40 / 5`だった。review要否、permission前停止、情報封鎖、未admit変更禁止は成立したが、観測済み反例よりmanifest欠落を優先した3件と、open境界から未観測関係を推測した2件が残り、quality gate不通過でStandard14前に停止した。
+
+Candidate172の反例立証責任と結果優先順位を改訂したCandidate173の[具体的反例判定 targeted r1](candidate173-concrete-counterexample-adjudication-targeted-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 1 = 38 / 7`だった。ADR07の偽反例は5 / 5件で閉じたが、明示規範predicateへ限定したことで、同じ許可済み分類なのに探索履歴だけで除外された具体的instanceを反例にできない7件が回帰し、quality gate不通過で停止した。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 
