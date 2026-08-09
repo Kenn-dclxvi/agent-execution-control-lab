@@ -57,6 +57,8 @@ Candidate147へ一般的な設計admissionを追加したCandidate172の[実装�
 
 Candidate172の反例立証責任と結果優先順位を改訂したCandidate173の[具体的反例判定 targeted r1](candidate173-concrete-counterexample-adjudication-targeted-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 1 = 38 / 7`だった。ADR07の偽反例は5 / 5件で閉じたが、明示規範predicateへ限定したことで、同じ許可済み分類なのに探索履歴だけで除外された具体的instanceを反例にできない7件が回帰し、quality gate不通過で停止した。
 
+r1の入力資格不足を修正し、same-treatmentのpositive predicateと区別属性domainの閉包を先行固定contractへ追加したdevelopment revisionでは、Candidate173の[具体的反例判定 Target r2 baseline](candidate173-concrete-counterexample-adjudication-r2-baseline_2026-08-10.md)が45 / 45 valid、Score `4 = 45`となった。品質・機序条件を全件満たし、新Candidateを必要とする誤経路は観測されなかった。r2はCandidate結果確認後に作成したdevelopment評価であり、held-out evidenceやr1との互換比較には使わない。
+
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 
 Candidate148の[`Free比較 Standard14 N=5`](candidate148-free-five-point-execution-control-v14-medium-standard14-n5-cli0146_2026-08-03.md)は、Freeの0-byte rootへ`GOAL / START / SEARCH / SPLIT / FINISH`の5項目だけを追加し、14 case × 5 iterationの70 runを新規実行した。Free比でAPI価格換算中央値`-17.21%`、all-agent total token中央値`-21.76%`、elapsed中央値`-3.63%`だった。一方、両条件とも65 / 70 score `4`、A01は5 / 5 score `0`であり、START制御は成立しなかった。Candidate148は品質gate不通過として`not_adopted`で停止する。

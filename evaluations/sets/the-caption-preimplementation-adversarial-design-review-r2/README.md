@@ -28,6 +28,6 @@ ADR07とADR09は、design contract、`boundary_normative_contract`、一般設�
 
 ## 実行前ゲート
 
-Target評価設計r11の独立監査とcase materialization revision 4の独立case監査は完了し、model-visible入力からの導出とprivate oracleが9 / 9件で一致した。次はCandidate173を各case 5 valid runで先に実行し、事前固定した同一`error_route_identity`が2 / 5以上で再現した場合だけ新Candidateを作る。preflight receiptを保存するまでbaseline slotを発行しない。
+Target評価設計r11の独立監査とcase materialization revision 4の独立case監査は完了し、model-visible入力からの導出とprivate oracleが9 / 9件で一致した。Candidate173 baselineは各case 5 / 5 valid、合計45 / 45 Score `4`で品質・機序条件を通過した。新Candidateを必要とする誤経路は観測されなかった。一次結果は[`candidate173-concrete-counterexample-adjudication-r2-baseline_2026-08-10.md`](../../results/candidate173-concrete-counterexample-adjudication-r2-baseline_2026-08-10.md)を参照する。
 
-このsetはCandidate172〜174設計監査後に作成したdevelopment Layer 1 artifactであり、held-out evidenceではない。作成だけを評価実施、Candidate作成許可、採用、releaseまたはprojectionとみなさない。
+このsetはCandidate172〜174設計監査後に作成したdevelopment Layer 1 artifactであり、held-out evidenceではない。評価通過を採用、releaseまたはprojectionとみなさない。
