@@ -1,0 +1,38 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "pr-review-relationship-role-finding-admission-r1",
+  "artifact_role": "development_candidate",
+  "state": "frozen_not_executed",
+  "base": {
+    "identity": "pr-review-relationship-role-r1:opus",
+    "manifest_path": "prompts/candidates/pr-review-relationship-role-r1/manifest.json",
+    "manifest_sha256": "4e3fccf321d1a44ddfb2dd30c9ba33c84a9a01ba6745c5a3c88350745394b574"
+  },
+  "creation_gate": {
+    "shortest_normal_path": "one Opus relationship reviewer reads all model-visible inputs and returns one structured review; root passes it through unchanged",
+    "observed_error_path": "one supported violation was categorized incorrectly while two unsupported rule identities were admitted as separate findings",
+    "existing_boundary_insufficient": "the base prompt requires a catalog rule identity and high confidence but does not require exact catalog membership, contract-based category selection, or deduplication before admission",
+    "replaced_predicate": "admit a finding only when its rule identity exists in the catalog and its category and complete path set consistently identify one verified violation",
+    "removed_decision_points": "inventing a rule identity, selecting category from authority location, and splitting one violation into multiple findings",
+    "new_decision_points": "one final consistency check over category, rule identity, and the complete changed-path set",
+    "quality_check": "PRR-C02/r2 development benchmark against the saved Opus result; quality score remains a KPI without a pass threshold",
+    "stop_condition": "stop after the fixed C02 repetition if measurement is incomplete; do not claim held-out effect or generalization from this case"
+  },
+  "change_axis": "finding_admission_and_identity_normalization",
+  "core": {
+    "path": "core-prompt.md",
+    "content_sha256": "8e19b8038419054e956c7ac520b56845495aad77c89617b78f1260e07e06b603"
+  },
+  "fixed": [
+    "one Opus relationship reviewer",
+    "root does not access fixture tool or reassess findings",
+    "same model-visible inputs, permissions, review contract, and output schema",
+    "same rating and three KPI measurement"
+  ],
+  "non_goals": [
+    "fixture-tool call reduction",
+    "case-specific expected answer or path hint",
+    "fresh held-out quality claim",
+    "generalization, winner, adoption, release, or runtime projection"
+  ]
+}

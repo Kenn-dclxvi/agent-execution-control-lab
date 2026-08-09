@@ -1,0 +1,54 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-profile/v7",
+  "profile_id": "pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1",
+  "state": "frozen_not_executed",
+  "purpose": "c02_finding_admission_development_calibration",
+  "cases": [{"id": "PRR-C02", "revision": "r2"}],
+  "evaluation_set": {"set_id": "pr-review-c02-development-benchmark-r1", "revision": "r1", "held_out": false, "coverage": "one fixed previously observed case"},
+  "comparison_conditions": {
+    "variant": "c02-relationship-reviewer-opus-finding-admission",
+    "relationship_reviewer_model": "opus",
+    "comparison_axis": "finding admission and identity normalization only",
+    "target_repository_ref": {"repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git", "commit": "16f9637d33791abd839d5c7d57b6616e03930949", "tree": "c6d21c0bba62f5065c9e685f021a90ae2f004290"},
+    "task_spec": {"source": "cases/<case_id>/r2/input.json and rating-contracts/review-contract-r2.md", "functional_specification": "specifications/pr-review-function-r1.md", "comparison_specification": "specifications/pr-review-c02-finding-admission-calibration-r1.md", "required_outcome": "model-visible入力から確度の高いfindingだけを構造化して返す"},
+    "prompt": {"identity": "pr-review-relationship-role-finding-admission-r1", "manifest_path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/manifest.json", "manifest_sha256": "bda6592001a076055031515f2afa318fc8c524650fb438bdb59df1aa0e294730", "content_path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/core-prompt.md", "content_sha256": "8e19b8038419054e956c7ac520b56845495aad77c89617b78f1260e07e06b603"},
+    "quality_rating": {"contract_id": "pr-review-finding-quality-v9", "path": "rating-contracts/pr-review-finding-quality-v9.json", "contract_sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc", "policy_supersession": "contracts/pr-review-held-out-control-free-three-admission-r2.json"},
+    "review_contract": {"revision": "pr-review-contract-r2", "path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+    "review_output_schema": {"revision": "review-output-r2", "path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+    "run_result_schema": {"revision": "run-result-r18", "path": "schemas/run-result-r18.schema.json", "sha256": "5a96f7b096f2ffed0f5dfdb56b0f1692e6e9c21a3b8e479b084ecec53c6f0858"},
+    "case_bindings": {
+      "PRR-C02": {
+        "input": {"path": "cases/PRR-C02/r2/input.json", "sha256": "5e3e15cd40f006bb88db0152cc1a56afe70d1cd806be722f42560d4fd5a0b5b6"},
+        "oracle": {"path": "cases/PRR-C02/r2/oracle.json", "sha256": "90a9a791c3b742f79fa177c7293fb414119b74f4f7ab3f5da4a1055d31235630"},
+        "snapshot": {"path": "contracts/held-out-repository-snapshot-prr-c02-r2-r1.json", "sha256": "fd97bae67735bc8a22e4ebfe24ef53a4dad3b5c33070bce862ab5e30a707cad7"},
+        "authority": {"path": "contracts/held-out-authority-selection-prr-c02-r2-r1.json", "sha256": "8b4dc424aa0c33f504270cf62d9c029a26c5f77bcbba22ec2c3b879e937312ed"},
+        "eligibility": {"path": "contracts/held-out-review-eligibility-prr-c02-r2-r1.json", "sha256": "9d56cae529158cafdb4cea3e4388099e9297d4678dd5c262f5da59f35a7cbd06"}
+      }
+    },
+    "baseline_result": {"result_id": "pr-review-held-out-workflow-topology-comparison-r1:PRR-C02:held-out-relationship-reviewer-opus:r1:a31292887371", "path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json", "sha256": "839938e2e84dc2be74e25f4e94e84179203e64f2a0a7de76afaa6cb26aa015b1"},
+    "model": {"requested": "claude-sonnet-5", "reported_identity_required": true, "reasoning": "action_default_at_fixed_action_revision", "review_topology": "one_relationship_reviewer", "relationship_reviewer": "opus"},
+    "agent_environment": {"action": "anthropics/claude-code-action", "action_revision": "6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975", "claude_cli": "reported_by_action", "runner": "ubuntu-latest", "session_mode": "one_root_action_with_exactly_one_relationship_reviewer_per_case", "authentication": "claude_code_oauth_token"},
+    "permission": {"github": "contents:read", "repository_write": false, "github_comment_write": false, "tool_policy": "fixture-tool-and-one-agent-read-only-snapshot-r1", "fixture_tool_path": "tools/pr_review_fixture_tool_r5.py", "fixture_tool_sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+    "executor_parameters": {"max_attempts_per_case": 2, "max_turns": null, "turn_limit_source": "action_default_at_fixed_action_revision", "max_workers": 24, "internal_review_topology": "one_relationship_reviewer", "dispatch_concurrency": 1, "actual_planned_slots": 1, "schedule_policy": "one_fixed_workflow_dispatch", "action_timeout_seconds": 1200, "reviewer_job_timeout_seconds": 1500, "token_accounting": {"revision": "claude-code-action-execution-message-usage-sum-v1", "scope": "root_and_subagent_assistant_messages", "subagent_inclusion_required": true}},
+    "repetition_condition": {"iterations_per_case": 1, "external_failure_policy": "repeat_same_case_with_new_attempt_identity", "result_reuse": "saved Opus baseline required; candidate run fresh"},
+    "measurement_gate": {"individual_pass_condition": {"action_completed": true, "structured_output_valid": true, "reported_root_model_matches_requested": true, "all_agent_tokens_complete": true, "elapsed_time_complete": true, "exactly_one_relationship_reviewer": true, "relationship_reviewer_model_matches": true, "relationship_reviewer_fixture_access": true, "root_fixture_tool_access_count": 0, "fixture_permission_denials": 0}, "quality_score_is_kpi_not_stop_condition": true, "quality_miss_stops_other_cases": false},
+    "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+    "diagnostics": ["fixture tool calls by agent", "model steps", "subagent count", "subagent model groups", "root and subagent usage records"],
+    "bound_artifacts": [
+      {"path": "sets/pr-review-c02-development-benchmark-r1/README.md", "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"},
+      {"path": "specifications/pr-review-c02-finding-admission-calibration-r1.md", "sha256": "ab8bcc3c57d131e2dfcdd98b3feb0b0720407b9c863d3bf221c149e52b6e083d"},
+      {"path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/manifest.json", "sha256": "bda6592001a076055031515f2afa318fc8c524650fb438bdb59df1aa0e294730"},
+      {"path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/core-prompt.md", "sha256": "8e19b8038419054e956c7ac520b56845495aad77c89617b78f1260e07e06b603"},
+      {"path": "rating-contracts/pr-review-finding-quality-v9.json", "sha256": "329b7dfefc3faabf56c8ee19f0c76276df19b522de70a3131557accf53deebdc"},
+      {"path": "rating-contracts/review-contract-r2.md", "sha256": "89a24c6c48480ba6bc5facb592dc8feeb2ee578bfeb0dc7e7095b1a5e1c587c9"},
+      {"path": "schemas/review-output-r2.schema.json", "sha256": "109c9608a2ff85e85b84b88aa21d63175bed690b108709a2ad107f8925e24788"},
+      {"path": "schemas/run-result-r18.schema.json", "sha256": "5a96f7b096f2ffed0f5dfdb56b0f1692e6e9c21a3b8e479b084ecec53c6f0858"},
+      {"path": "tools/pr_review_c02_finding_admission.py", "sha256": "7089e06e876cd2f90d735357a15ed563940d41fee072693418fb88d1c00dea79"},
+      {"path": "tools/pr_review_fixture_tool_r5.py", "sha256": "9ec5baaace002cffe69f8a43af8fd4ca54cf323f49afc9e86f4e4e3870762717"},
+      {"path": ".github/workflows/pr-review-calibrate-c02-finding-admission.yml", "sha256": "5628a66e00fa5e89117226f6c77083467f2429afa5c2251a050c28cd45a60bb4"},
+      {"path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json", "sha256": "839938e2e84dc2be74e25f4e94e84179203e64f2a0a7de76afaa6cb26aa015b1"}
+    ]
+  },
+  "execution": {"planned_slots": 1, "max_workers": 24, "actual_concurrency": 1, "state": "not_issued"},
+  "scope": {"comparison": "development_calibration_after_preflight", "held_out": "not_claimed", "adoption": "not_decided", "release": "not_decided", "runtime_projection": "not_authorized"}
+}

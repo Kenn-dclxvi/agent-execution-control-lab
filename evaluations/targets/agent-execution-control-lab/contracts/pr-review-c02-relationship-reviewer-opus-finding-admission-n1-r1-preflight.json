@@ -1,0 +1,55 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-development-calibration-preflight/v1",
+  "preflight_id": "pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1-preflight",
+  "state": "ready_not_executed",
+  "profile": {"profile_id": "pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1", "path": "profiles/pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1.json", "sha256": "5fb1ea38d760e31958de8048491eda5e5f70054579b36c4143bb6daff37ecf66"},
+  "baseline": {
+    "profile": {"profile_id": "pr-review-held-out-relationship-reviewer-opus-three-n1-r1", "path": "profiles/pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json", "sha256": "74b8f0712ca35e9a4ba19c3088e96ad53d3328c8540b5abaf95ac47aa3121618"},
+    "result": {"result_id": "pr-review-held-out-workflow-topology-comparison-r1:PRR-C02:held-out-relationship-reviewer-opus:r1:a31292887371", "path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json", "sha256": "839938e2e84dc2be74e25f4e94e84179203e64f2a0a7de76afaa6cb26aa015b1", "measurement_state": "satisfied", "quality_score": 0},
+    "result_reuse": "required_without_rerun"
+  },
+  "predicates": {
+    "case_revision_unchanged": "satisfied",
+    "saved_baseline_measurement": "satisfied",
+    "one_opus_relationship_reviewer": "fixed",
+    "all_agent_token_accounting": "fixed",
+    "quality_score_is_kpi_not_gate": "satisfied",
+    "development_case_not_held_out": "explicit"
+  },
+  "compatibility": {
+    "changed_axis": "finding admission and identity normalization only",
+    "mechanical_diff_state": "satisfied",
+    "common_conditions": [
+      "PRR-C02/r2 input, oracle, repository snapshot, authority, and eligibility identities",
+      "target repository commit and tree",
+      "TaskSpec source, functional specification, and required outcome",
+      "quality rating, review contract, and structured review output schema",
+      "root Sonnet model and one Opus relationship reviewer topology",
+      "Claude Code Action revision, runner, authentication, and read-only permission boundary",
+      "turn condition, timeout, max_workers=24, and all-agent token accounting revision",
+      "measurement qualification and three KPI definitions"
+    ],
+    "allowed_differences": [
+      "profile, variant, prompt, tool, workflow, and immutable run-result identities",
+      "one fixed C02 dispatch instead of the historical three-case schedule",
+      "finding admission and identity normalization instructions"
+    ],
+    "excluded_claims": ["fresh held-out effect", "generalization", "model ranking", "winner", "adoption", "release", "runtime projection"]
+  },
+  "planned_slots": [
+    {"case_id": "PRR-C02", "fixture_revision": "r2", "variant": "c02-relationship-reviewer-opus-finding-admission", "repetition": 1}
+  ],
+  "verified_artifacts": [
+    {"path": "profiles/pr-review-held-out-relationship-reviewer-opus-three-n1-r1.json", "sha256": "74b8f0712ca35e9a4ba19c3088e96ad53d3328c8540b5abaf95ac47aa3121618"},
+    {"path": "results/pr-review-held-out-workflow-topology-comparison-r1-prr-c02-held-out-relationship-reviewer-opus-r1-a31292887371.json", "sha256": "839938e2e84dc2be74e25f4e94e84179203e64f2a0a7de76afaa6cb26aa015b1"},
+    {"path": "sets/pr-review-c02-development-benchmark-r1/README.md", "sha256": "e7f098a5dc3d18659e9baacc0dfb9524bd6a2d1a1fd6e92ef747b416265efcfa"},
+    {"path": "specifications/pr-review-c02-finding-admission-calibration-r1.md", "sha256": "ab8bcc3c57d131e2dfcdd98b3feb0b0720407b9c863d3bf221c149e52b6e083d"},
+    {"path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/manifest.json", "sha256": "bda6592001a076055031515f2afa318fc8c524650fb438bdb59df1aa0e294730"},
+    {"path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/core-prompt.md", "sha256": "8e19b8038419054e956c7ac520b56845495aad77c89617b78f1260e07e06b603"},
+    {"path": "schemas/run-result-r18.schema.json", "sha256": "5a96f7b096f2ffed0f5dfdb56b0f1692e6e9c21a3b8e479b084ecec53c6f0858"},
+    {"path": "tools/pr_review_c02_finding_admission.py", "sha256": "7089e06e876cd2f90d735357a15ed563940d41fee072693418fb88d1c00dea79"},
+    {"path": ".github/workflows/pr-review-calibrate-c02-finding-admission.yml", "sha256": "5628a66e00fa5e89117226f6c77083467f2429afa5c2251a050c28cd45a60bb4"}
+  ],
+  "execution": {"state": "not_issued", "measurement_failure_allows_same_slot_environment_recovery_only": true},
+  "scope": "C02/r2を使う開発用Candidateの1回測定だけを許可する。同じケースをheld-out evidenceとして扱わず、採用、release、本体反映を許可しない。"
+}
