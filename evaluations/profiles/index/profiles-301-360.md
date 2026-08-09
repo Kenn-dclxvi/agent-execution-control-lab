@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json)
 - [`candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json)
 - [`candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)
 - [`control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`control-free-repository-v13-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-standard14-global-m24-n5-r1.json)
