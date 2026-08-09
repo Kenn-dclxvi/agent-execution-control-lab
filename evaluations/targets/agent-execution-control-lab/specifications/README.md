@@ -11,5 +11,6 @@
 - [`pr-review-held-out-comparison-r2.md`](pr-review-held-out-comparison-r2.md): quality scoreを比較前の合否条件からKPIへ戻した履歴仕様
 - [`pr-review-held-out-comparison-r3.md`](pr-review-held-out-comparison-r3.md): 保存済みControl-FreeとOpus関係レビュー役だけを比較する現行仕様
 - [`pr-review-c02-finding-admission-calibration-r1.md`](pr-review-c02-finding-admission-calibration-r1.md): 結果確認済みC02を開発用固定ベンチマークとして使い、Opus関係レビュー役のfinding採用条件だけを測定する仕様
+- Measurement Series [`pr-review-measurement-c02-evidence-scope-r1.md`](pr-review-measurement-c02-evidence-scope-r1.md): Candidate170をCase PRR-C02/r2で測り、C147から翻訳した証拠取得mechanismと3 KPIを分けて観測する仕様
 
 仕様revisionが変わる場合は既存revisionを上書きせず、新しいrevisionを追加する。既存case、oracle、rating contract、profile、resultを新仕様へ遡及適合させない。

@@ -1,0 +1,44 @@
+{
+  "schema_version": "agent-execution-control-lab.pr-review-prompt/v2",
+  "prompt_identity": "pr-review-prompt-evidence-scope-r1",
+  "artifact_role": "development_candidate",
+  "display_role": "Prompt Variant",
+  "state": "frozen_not_executed",
+  "base": {
+    "identity": "pr-review-relationship-role-finding-admission-r1",
+    "manifest_path": "prompts/candidates/pr-review-relationship-role-finding-admission-r1/manifest.json",
+    "manifest_sha256": "bda6592001a076055031515f2afa318fc8c524650fb438bdb59df1aa0e294730"
+  },
+  "creation_gate": {
+    "shortest_normal_path": "one Opus relationship reviewer jointly reads seven fixed inputs, decides once, and returns one structured review",
+    "observed_error_path": "the successful C02 development run used 18 fixture-tool accesses for seven fixed input classes and accumulated 30 usage records",
+    "existing_boundary_insufficient": "the parent fixes required inputs but leaves read scheduling, reread admission, and the decision boundary between results unspecified",
+    "replaced_predicate": "issue all known independent required reads in the first tool-use step and admit an additional read only when its result can bind a specifically unobserved review judgment",
+    "removed_decision_points": "intermediate judgment after each independent read and confirmation-only rereads after a review field is bound",
+    "new_decision_points": "one post-wave decision plus an exception decision for missing, unreadable, or concretely contradictory evidence",
+    "quality_check": "PRR-C02/r2 development benchmark retains the Finding Admission r1 quality contract",
+    "mechanism_check": "the first fixture-tool batch contains the seven required reads and no additional fixture read occurs on the fixed complete packet",
+    "stop_condition": "stop after the fixed C02 repetition if measurement or mechanism evidence is incomplete; do not claim C147 effect transfer or held-out generalization"
+  },
+  "change_axis": "review_evidence_scheduling",
+  "control_source": {
+    "identity": "the-caption-3ce91a4-result-effect-scope-r1",
+    "transfer": "target-specific translation of consumer-bound evidence and joint issuance; not a copy and not an effect claim"
+  },
+  "core": {
+    "path": "core-prompt.md",
+    "content_sha256": "75eff6851b110d090b32631f3c3dca9308080fee95b3ca11c125b0c488021704"
+  },
+  "fixed": [
+    "Finding Admission r1 final finding predicate",
+    "one Opus relationship reviewer",
+    "root passthrough without fixture access",
+    "same Case, model-visible inputs, permissions, rating, and three KPI measurement"
+  ],
+  "non_goals": [
+    "authority content reduction",
+    "fixture-tool payload or command change",
+    "finding admission change",
+    "fresh held-out effect, generalization, adoption, release, or runtime projection"
+  ]
+}

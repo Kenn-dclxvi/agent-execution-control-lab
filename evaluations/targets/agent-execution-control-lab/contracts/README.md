@@ -46,6 +46,7 @@
 | [`pr-review-held-out-opus-comparison-admission-r1`](pr-review-held-out-opus-comparison-admission-r1.json) | `ready_for_external_execution` | Coreを比較から外し、Opus側3件だけを外部実行できる状態を固定 |
 | [`pr-review-held-out-opus-comparison-results-admission-r1`](pr-review-held-out-opus-comparison-results-admission-r1.json) | `measurement_satisfied` | Opus側3件の測定成立、quality `0 / 4 / 4`、token、elapsed、一次result hashを固定 |
 | [`pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1-preflight`](pr-review-c02-relationship-reviewer-opus-finding-admission-n1-r1-preflight.json) | `ready_not_executed` | 保存済みC02 Opus resultとprompt以外の実効条件を照合し、finding採用条件だけを変える開発用1 slotを固定 |
+| [`pr-review-measurement-c02-evidence-scope-n1-r1-preflight`](pr-review-measurement-c02-evidence-scope-n1-r1-preflight.json) | `ready_not_executed` | 保存済みCandidate169 Run Resultを基準に、Candidate170だけを変えるMeasurement Series 1 slotを固定 |
 
 r1は新インスタンス登録前に固定された診断アーティファクトであり、profileまたはrating contractへ事後昇格しない。r2はr1を上書きせず、PRR-C01 N=2へ適用した。後続の仕様監査で機能仕様とBaseline admission gateの欠落を確認したため、r2の`qualification_ready`は現在の実行許可ではない。既存JSONを上書きせず、[`diagnostic再分類receipt`](../results/pr-review-core-r2-diagnostic-reclassification_2026-08-08.md)で現在解釈を固定する。
 

@@ -37,6 +37,7 @@ import pr_review_repository_snapshot_r4 as repository_snapshot_r4
 import pr_review_held_out_control_free as held_out_control_free
 import pr_review_held_out_relationship_reviewer as held_out_relationship_reviewer
 import pr_review_c02_finding_admission as c02_finding_admission
+import pr_review_measurement_c02_evidence_scope as c02_evidence_scope
 
 
 @pytest.fixture
@@ -3828,3 +3829,168 @@ def test_c02_finding_admission_saved_result():
     assert filename in (INSTANCE_ROOT / "results/README.md").read_text(
         encoding="utf-8"
     )
+
+
+def test_pr_review_user_facing_candidate_numbers_are_stable():
+    instructions = (INSTANCE_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    prompt_index = (INSTANCE_ROOT / "prompts/README.md").read_text(encoding="utf-8")
+
+    for role in ("Case", "Measurement Series", "Profile", "Run Result"):
+        assert f"`{role}`" in instructions
+    assert "`Candidate<number>`" in instructions
+    expected = (
+        (167, "pr-review-workflow-free-r1"),
+        (168, "pr-review-relationship-role-r1"),
+        (169, "pr-review-relationship-role-finding-admission-r1"),
+        (170, "pr-review-prompt-evidence-scope-r1"),
+    )
+    positions = []
+    for number, identity in expected:
+        marker = f"Candidate{number} [`{identity}`]"
+        assert marker in prompt_index
+        positions.append(prompt_index.index(marker))
+    assert positions == sorted(positions)
+
+
+def test_c02_evidence_scope_preflight_and_packet(tmp_path: Path):
+    profile, preflight = c02_evidence_scope.validate_preflight("PRR-C02")
+
+    assert profile["display_role"] == "Profile"
+    assert profile["measurement_series"] == (
+        "pr-review-measurement-c02-evidence-scope-r1"
+    )
+    assert profile["comparison_conditions"]["prompt_variant"] == (
+        "pr-review-prompt-evidence-scope-r1"
+    )
+    assert preflight["compatibility"]["changed_axis"] == (
+        "review evidence scheduling only"
+    )
+    assert preflight["baseline"]["result_reuse"] == "required_without_rerun"
+
+    try:
+        metadata = c02_evidence_scope.prepare_input("PRR-C02", tmp_path)
+        assert metadata["profile_id"] == c02_evidence_scope.PROFILE_ID
+        assert metadata["prompt_variant"] == "pr-review-prompt-evidence-scope-r1"
+        assert (tmp_path / "pr_review_measurement_c02_evidence_scope.py").is_file()
+        assert (tmp_path / "pr_review_c02_finding_admission.py").is_file()
+        assert not (tmp_path / "oracle.json").exists()
+    finally:
+        repository_snapshot._make_cleanup_writable(tmp_path / "repository")
+
+
+def test_c02_evidence_scope_workflow_matches_prompt_variant():
+    workflow = (
+        REPOSITORY_ROOT / ".github/workflows/pr-review-measure-c02-evidence-scope.yml"
+    ).read_text(encoding="utf-8")
+    prompt = (
+        INSTANCE_ROOT
+        / "prompts/candidates/pr-review-prompt-evidence-scope-r1/core-prompt.md"
+    ).read_text(encoding="utf-8").strip()
+    inline = workflow.split("          prompt: |\n", 1)[1].split(
+        "          claude_args:", 1
+    )[0]
+
+    assert textwrap.dedent(inline).strip() == prompt
+    assert "pr-review-measurement-c02-evidence-scope-n1-r1" in workflow
+    assert "PRR-C03" not in workflow
+    assert "PRR-C02" not in prompt
+
+
+def test_c02_evidence_scope_batch_metrics_observe_joint_read():
+    events = [{"event": "SubagentStart", "agent_id": "reviewer"}]
+    tool_ids = []
+    for index in range(7):
+        tool_id = f"tool-{index}"
+        tool_ids.append(tool_id)
+        events.append(
+            {
+                "event": "PostToolUse",
+                "agent_id": "reviewer",
+                "tool_name": "Bash",
+                "tool_use_id": tool_id,
+                "fixture_tool_command": True,
+            }
+        )
+    events.append(
+        {
+            "event": "PostToolBatch",
+            "agent_id": "reviewer",
+            "tool_use_ids": tool_ids,
+        }
+    )
+
+    metrics = c02_evidence_scope._fixture_batch_metrics(events)
+    assert metrics == {
+        "fixture_tool_batch_count": 1,
+        "fixture_tool_batch_sizes": [7],
+        "fixture_tool_max_batch_size": 7,
+        "required_initial_read_count": 7,
+        "joint_initial_read_observed": True,
+        "additional_fixture_read_count": 0,
+    }
+
+
+def test_c02_evidence_scope_grade_uses_r19_schema(tmp_path: Path):
+    _, oracle = held_out_control_free._fixture_and_oracle("PRR-C02")
+    expected = oracle["expected_findings"][0]
+    location = expected["locations"][0]
+    finding = {
+        "category": expected["category"],
+        "rule_id": expected["rule_id"],
+        "path": location["path"],
+        "related_paths": [path for path in expected["paths"] if path != location["path"]],
+        "line_start": location["line_start"],
+        "line_end": location["line_end"],
+        "severity": expected["severity"],
+        "message": "固定されたインスタンス境界に反するため、アーティファクトを分離する必要がある。",
+    }
+    review_path = tmp_path / "review.json"
+    review_path.write_text(
+        json.dumps({"findings": [finding], "summary": _summary_for([finding])}),
+        encoding="utf-8",
+    )
+    metadata_path = tmp_path / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "action_conclusion": "success",
+                "output_valid": True,
+                "action_step_ms": 1200,
+                "runtime": {"model": "claude-sonnet-5", "turns": 2, "input_tokens": 100, "output_tokens": 20, "duration_ms": 1000, "reported_cost_usd": None},
+                "workflow_trace": {
+                    "complete": True,
+                    "fixture_tool_access_observed": True,
+                    "fixture_tool_permission_denials": 0,
+                    "subagent_start_count": 1,
+                    "subagent_stop_count": 1,
+                    "relationship_reviewer_model_matches": True,
+                    "relationship_reviewer_fixture_access_count": 7,
+                    "root_fixture_tool_access_count": 0,
+                    "fixture_tool_batch_count": 1,
+                    "fixture_tool_batch_sizes": [7],
+                    "fixture_tool_max_batch_size": 7,
+                    "required_initial_read_count": 7,
+                    "joint_initial_read_observed": True,
+                    "additional_fixture_read_count": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    prepared_path = tmp_path / "prepared.json"
+    prepared_path.write_text(
+        json.dumps({"profile_id": c02_evidence_scope.PROFILE_ID, "case_id": "PRR-C02", "input_ms": 10}),
+        encoding="utf-8",
+    )
+
+    result = c02_evidence_scope.grade_run(
+        "PRR-C02", 1000, "claude-sonnet-5", review_path, metadata_path,
+        prepared_path, tmp_path / "result.json", "1000"
+    )
+    schema = json.loads(
+        (INSTANCE_ROOT / "schemas/run-result-r19.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(schema).validate(result)
+    assert result["quality_score"] == 4
+    assert result["mechanism_qualification"]["state"] == "satisfied"
+    assert result["runtime"]["total_tokens"] == 120
