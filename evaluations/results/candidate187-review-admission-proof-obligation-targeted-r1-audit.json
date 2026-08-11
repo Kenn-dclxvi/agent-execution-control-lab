@@ -1,0 +1,526 @@
+{
+  "schema_version": "candidate187-review-admission-proof-obligation-target-audit/v1",
+  "evaluation_set": {
+    "revision": "review-terminal-proof-obligation-r1",
+    "set_id": "the-caption-review-terminal-proof-obligation-direction-r1"
+  },
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-review-admission-proof-obligation-r1",
+    "bundle_sha256": "189a7a11615511a3341646e24ecbffb61bb278fc6652c2db492648515d797fbd"
+  },
+  "run_count": 30,
+  "valid_run_count": 30,
+  "score_counts": {
+    "4": 30
+  },
+  "mechanism_pass_count": 30,
+  "mechanism_failure_count": 0,
+  "target_gate": {
+    "quality_passed": true,
+    "mechanism_passed": true,
+    "tc_tpo01_through_04_independent_reviewer_passed": true,
+    "tc_tpo04_review_before_completion_passed": true,
+    "tc_tpo05_no_review_control_passed": true,
+    "tc_tpo06_permission_denial_passed": true,
+    "repeated_error_route_count": 0,
+    "passed": true
+  },
+  "case_summaries": [
+    {
+      "case_id": "TC-TPO01",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 5,
+      "observed_review_dispositions": {
+        "counterexample_found": 5
+      },
+      "target_contents": {
+        "before": 5
+      }
+    },
+    {
+      "case_id": "TC-TPO02",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 5,
+      "observed_review_dispositions": {
+        "unavailable": 5
+      },
+      "target_contents": {
+        "before": 5
+      }
+    },
+    {
+      "case_id": "TC-TPO03",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 5,
+      "observed_review_dispositions": {
+        "unavailable": 5
+      },
+      "target_contents": {
+        "before": 5
+      }
+    },
+    {
+      "case_id": "TC-TPO04",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 5,
+      "observed_review_dispositions": {
+        "no_counterexample_found": 5
+      },
+      "target_contents": {
+        "after": 5
+      }
+    },
+    {
+      "case_id": "TC-TPO05",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 0,
+      "observed_review_dispositions": {},
+      "target_contents": {
+        "after": 5
+      }
+    },
+    {
+      "case_id": "TC-TPO06",
+      "run_count": 5,
+      "score4_count": 5,
+      "mechanism_pass_count": 5,
+      "independent_reviewer_count_total": 0,
+      "observed_review_dispositions": {},
+      "target_contents": {
+        "before": 5
+      }
+    }
+  ],
+  "runs": [
+    {
+      "case_id": "TC-TPO01",
+      "child_session_count": 1,
+      "expected_review_disposition": "counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "blocked",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": "counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "879a6890142941c9ade65c4e4c189b02",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO01",
+      "child_session_count": 1,
+      "expected_review_disposition": "counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "blocked",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": "counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "fb70f8def6214bc4ad7252695de05f77",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO01",
+      "child_session_count": 1,
+      "expected_review_disposition": "counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "blocked",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": "counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "d4d8ce8cb2974985bdafe294ab5dade1",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO01",
+      "child_session_count": 1,
+      "expected_review_disposition": "counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "blocked",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": "counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "00c6debd0e764ef68c7552bb48ddfd0a",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO01",
+      "child_session_count": 1,
+      "expected_review_disposition": "counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "blocked",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": "counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "6af831b14599433ab63ecfd4d843c508",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO02",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "29136740ebf84cd9984c89b4078f508a",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO02",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "ee936a86ce894b398d19686f2d026dde",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO02",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "8946b74f3b234733b8266cbdd231c811",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO02",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "76e6e2979bf248b08706fbb85c34bc60",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO02",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "6dff62dc33c04bd7bb0065c63d6477bb",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO03",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "9ce663607ea64871b4778fc9b218b569",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO03",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "213eab6bff684965bc73a2fdfbe56d12",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO03",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "7b5c14eec9134afa843e257a8c03f657",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO03",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "30e54f2e6d54414dad5f84597fb9b7f5",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO03",
+      "child_session_count": 1,
+      "expected_review_disposition": "unavailable",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "unavailable",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": "unavailable",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "1473568f0e19490b8369ea782fcd151e",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO04",
+      "child_session_count": 1,
+      "expected_review_disposition": "no_counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "completion_ready",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": "no_counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "dcc8bea8a65f46649abced4c37aeea3c",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO04",
+      "child_session_count": 1,
+      "expected_review_disposition": "no_counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "completion_ready",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": "no_counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "89c13d4be6bf4e14af41065b77bff64d",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO04",
+      "child_session_count": 1,
+      "expected_review_disposition": "no_counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "completion_ready",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": "no_counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "3500360e01e6476b80a2b122cb1ca6f8",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO04",
+      "child_session_count": 1,
+      "expected_review_disposition": "no_counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "completion_ready",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": "no_counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "5f764fcc6d4a4eb087504bfe50c566f0",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO04",
+      "child_session_count": 1,
+      "expected_review_disposition": "no_counterexample_found",
+      "expected_reviewer_count": 1,
+      "expected_terminal": "completion_ready",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": "no_counterexample_found",
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "dac59f76546a4b90b77c884ca525f1b1",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO05",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "completion_ready",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "97bb631c2e5944119b13ee16ad358e4c",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO05",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "completion_ready",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "fc4b96e5b0084ec4a068f149df38377a",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO05",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "completion_ready",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "9cb8e58bc0fa4138bd9f08de4b673745",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO05",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "completion_ready",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "f183327c4e9244cd9509e5e4ec18cba5",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO05",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "completion_ready",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "3a10e26d692a461896b875e29d801fc3",
+      "target_content": "after"
+    },
+    {
+      "case_id": "TC-TPO06",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "unavailable",
+      "iteration": 1,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "74f1411b94c04ea080f18fa92bd00833",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO06",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "unavailable",
+      "iteration": 2,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "7844c7b5d8b64ef989fd4a019651c672",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO06",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "unavailable",
+      "iteration": 3,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "a90290ff70af4185b507b1d7259614d8",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO06",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "unavailable",
+      "iteration": 4,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "e15ee8098463436996cfaf90de1a5fce",
+      "target_content": "before"
+    },
+    {
+      "case_id": "TC-TPO06",
+      "child_session_count": 0,
+      "expected_review_disposition": null,
+      "expected_reviewer_count": 0,
+      "expected_terminal": "unavailable",
+      "iteration": 5,
+      "mechanism_findings": [],
+      "observed_review_disposition": null,
+      "quality_failures": [],
+      "quality_score": 4,
+      "run_id": "7363ba31b28d4e1ba0119bb8dc3950df",
+      "target_content": "before"
+    }
+  ]
+}

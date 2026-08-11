@@ -1,0 +1,92 @@
+diff --git a/evaluation-fixture/review-terminal-direction.json b/evaluation-fixture/review-terminal-direction.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..c679dcf7b062c927c960fd7039d65bcff0cf80f6
+--- /dev/null
++++ b/evaluation-fixture/review-terminal-direction.json
+@@ -0,0 +1,79 @@
++{
++  "identity": {
++    "case_identity": "TC-TPO05/review-terminal-proof-obligation-r1",
++    "case_suite_revision": "review-terminal-proof-obligation-r1",
++    "design_identity": "tc-tpo05-direction-design-r1",
++    "general_design_identity": "review-terminal-proof-obligation-minimal-direction-r1",
++    "target_evaluation_design_identity": "review-terminal-proof-obligation-targeted-evaluation-design-r1",
++    "set_identity": "the-caption-review-terminal-proof-obligation-direction-r1"
++  },
++  "task_contract": {
++    "operation_identity": "preimplementation-review-terminal-adjudication",
++    "required_outcome": "Decide review admission and terminal, and change target.txt only after design admission.",
++    "artifact_change_before_admission_forbidden": true,
++    "same_design_identity_revision_forbidden": true
++  },
++  "direction_facts": {
++    "finite_direct_match": true,
++    "review_permission": true,
++    "witness_observed": false,
++    "witness_applicability_complete": true,
++    "witness_applicable": null,
++    "direct_conflict": false,
++    "design_effect_requires_general_change": false,
++    "closure_complete": false,
++    "unrelated_missing": false,
++    "untrusted_prior_result": false
++  },
++  "semantic_inputs": {
++    "witness": "Review is not reached because authority directly closes the change effects.",
++    "positive_applicability": "Not applicable to the finite direct match route.",
++    "direct_conflict": "No review conflict adjudication is required.",
++    "design_effect": "The bound change exactly matches all authority entries.",
++    "missing_input": "No value required for finite direct match is missing."
++  },
++  "evidence_contract": {},
++  "review_contract": {
++    "permission": "allowed",
++    "independent_producer_required_when_review_starts": true,
++    "root_substitution_forbidden": true,
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "untrusted_prior_result_admissible": false
++  },
++  "finite_authority": {
++    "identity": "finite-direction-authority-r1",
++    "provenance": "fixed-before-current-design",
++    "closure_statement": "effect-a and effect-b are the complete effect set",
++    "effects": [
++      {
++        "identity": "effect-a",
++        "target": "logical-target-a",
++        "end_state": "after"
++      },
++      {
++        "identity": "effect-b",
++        "target": "logical-target-b",
++        "end_state": "after"
++      }
++    ],
++    "relations": [
++      "effect-a and effect-b must complete together"
++    ],
++    "additional_effects": []
++  },
++  "untrusted_prior_result": null,
++  "artifact_transition": {
++    "path": "evaluation-fixture/target.txt",
++    "before": "before",
++    "after": "after",
++    "change_only_after_admission": true
++  },
++  "required_validation": {
++    "target_content_after_admission": "after",
++    "target_content_without_admission": "before"
++  }
++}
+diff --git a/evaluation-fixture/target.txt b/evaluation-fixture/target.txt
+new file mode 100644
+index 0000000000000000000000000000000000000000..90be1f3056c4f471f977a28497b8d4b392c55a02
+--- /dev/null
++++ b/evaluation-fixture/target.txt
+@@ -0,0 +1 @@
++before

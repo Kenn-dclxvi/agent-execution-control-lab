@@ -1,0 +1,55 @@
+{
+  "schema_version": "review-terminal-direction-probe-oracle-v1",
+  "set_identity": "review-terminal-proof-obligation-direction-r1",
+  "visibility": "model_invisible",
+  "expected": {
+    "Q1": {
+      "review_required": true,
+      "review_started": true,
+      "review_disposition": "counterexample_found",
+      "artifact_change_allowed": false,
+      "terminal": "blocked",
+      "reason": "counterexample_certificate_satisfied"
+    },
+    "Q2": {
+      "review_required": true,
+      "review_started": true,
+      "review_disposition": "unavailable",
+      "artifact_change_allowed": false,
+      "terminal": "unavailable",
+      "reason": "witness_applicability_missing"
+    },
+    "Q3": {
+      "review_required": true,
+      "review_started": true,
+      "review_disposition": "unavailable",
+      "artifact_change_allowed": false,
+      "terminal": "unavailable",
+      "reason": "closure_incomplete"
+    },
+    "Q4": {
+      "review_required": true,
+      "review_started": true,
+      "review_disposition": "no_counterexample_found",
+      "artifact_change_allowed": true,
+      "terminal": "completion_ready",
+      "reason": "closure_complete"
+    },
+    "Q5": {
+      "review_required": false,
+      "review_started": false,
+      "review_disposition": null,
+      "artifact_change_allowed": true,
+      "terminal": "completion_ready",
+      "reason": "finite_direct_match"
+    },
+    "Q6": {
+      "review_required": true,
+      "review_started": false,
+      "review_disposition": null,
+      "artifact_change_allowed": false,
+      "terminal": "unavailable",
+      "reason": "permission_denied"
+    }
+  }
+}

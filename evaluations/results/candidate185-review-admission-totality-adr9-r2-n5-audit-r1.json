@@ -1,0 +1,150 @@
+{
+  "schema_version": "candidate185-review-admission-totality-adr9-r2-n5-audit/v1",
+  "status": "quality_failed_mechanism_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-review-admission-totality-r1",
+    "revision": "r1",
+    "bundle_sha256": "ecf71227e16a264d3102ab711c6f1541433175bafd66081c811757a6e98b6de1"
+  },
+  "evaluation_set_identity_sha256": "ba9e62614b62904d301c9b303e1bb2dccd5951f7bdf15c330f01b716bca16931",
+  "valid_run_count": 45,
+  "excluded_attempt_count": 0,
+  "quality_score_counts": {"1": 7, "4": 38},
+  "targeted_gate_passed": false,
+  "mechanism_gate_passed": false,
+  "case_summary": {
+    "TC-ADR01": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 2,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"1": 2, "4": 3}
+    },
+    "TC-ADR02": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 1,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"1": 1, "4": 4}
+    },
+    "TC-ADR03": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR04": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR05": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 4, "unavailable": 1},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"1": 1, "4": 4}
+    },
+    "TC-ADR06": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "canary_delivery_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR07": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR08": {
+      "valid_runs": 5,
+      "terminal_counts": {"unavailable": 5},
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR09": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 3, "unavailable": 2},
+      "reviewer_count": 5,
+      "artifact_change_count": 3,
+      "quality_score_counts": {"1": 3, "4": 2}
+    }
+  },
+  "failing_runs": [
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 1,
+      "run_id": "ccf81c43105042db965be3f83269ebe1",
+      "quality_score": 1,
+      "failure": "authority-fixed effect received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 2,
+      "run_id": "14cc4f5dcc8149d591cd28921ce4a376",
+      "quality_score": 1,
+      "failure": "authority-fixed effect received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 2,
+      "run_id": "2eab91f59e55424490ba98d4634d9aae",
+      "quality_score": 1,
+      "failure": "authority-fixed multi-target effect received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 5,
+      "run_id": "cf50eb1b35e343b3804e921cfca57f8c",
+      "quality_score": 1,
+      "failure": "review result did not bind the concrete counterexample support and terminated unavailable"
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 2,
+      "run_id": "2ab2c3d887fa45109b27597860234aef",
+      "quality_score": 1,
+      "failure": "no_counterexample_found was admitted despite judgement-relevant missing scope evidence"
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 3,
+      "run_id": "b8fdfa81d6354738b82b96db36109c69",
+      "quality_score": 1,
+      "failure": "no_counterexample_found was admitted despite judgement-relevant missing scope evidence"
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 4,
+      "run_id": "e3b3629bb14349efba9fe953efb1e119",
+      "quality_score": 1,
+      "failure": "no_counterexample_found was admitted despite judgement-relevant missing scope evidence"
+    }
+  ],
+  "mechanism_findings": [
+    "review packet formation accepts missing terminal input state and launches review for ADR03 and ADR04 in all 10 runs",
+    "fixed effect correspondence remains unstable and routes 3 of 10 authority-fixed runs to unnecessary review",
+    "one counterexample result did not bind the concrete support required for admission",
+    "no_counterexample_dependency remains unstable and admits 3 of 5 ADR09 results despite judgement-relevant missing scope evidence"
+  ],
+  "provenance": {
+    "reference_result_id": "d3e91302f0d14350906075676c5a2791",
+    "compatibility_key": "1543a80108418ce1f2436f5f1945f6e680cf75378cc308d21adee22fcf0f11d3",
+    "reference_pool_key": "20f09b54eead352378781e97d1402806f64e92b5b077175f28a848668ea0751b",
+    "candidate_pool_key": "d4f11d730620929f70a5c23235fa010e77fe53151d663b5c82a707619f5c2105",
+    "selection_id": "c579fc8b82ec42ac85fec5fad156edef",
+    "analysis_id": "37c379eef78c488a86006bcc4bafa43d",
+    "analysis_content_sha256": "2bad50f4dd6315da153ca97976c161c06bf5f72f3223985bfd4e0a69423ce5f7",
+    "result_id": "2429f3c50d5c447dbcef8ba671805f91",
+    "result_content_sha256": "394abb9883c693b69e37694ee9570181b9f0799efd6ffd24262941dc10b53c94",
+    "raw_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate185-review-admission-totality-adr9-r2-n5-20260811-r1"
+  }
+}

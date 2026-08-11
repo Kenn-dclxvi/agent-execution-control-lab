@@ -1,0 +1,191 @@
+# 判断結果の効果境界設計 第2版
+
+> 状態: `pre_candidate_design_revision_2 / adversarial_review_not_started / candidate_not_created`
+
+## 結論
+
+この設計はCandidate147を直接の基準とし、変更predicateについて独立reviewが必要かを決める判断と、review resultがどの未発行判断およびartifact変更へ影響できるかを一つの境界として追加する。
+
+追加する制御は`judgement_result_effect_boundary`だけである。Candidate147がbindしたoperation、producer、terminal result、evidence consumer、`implementation_bound`および`result_effect_scope`の単位を変更しない。変更predicateを意味解釈で細分化せず、review工程のtool、read順、回数、file、schema、record形式または実行方法を固定しない。
+
+本設計はCandidate bundleではない。情報封鎖した実装前敵対的reviewが`no_counterexample_found`で終端するまでCandidate番号、prompt bundle、profile、Target評価、採用、releaseまたはprojectionを作成しない。
+
+## 基準と非継承
+
+直接の基準はCandidate147 `the-caption-3ce91a4-result-effect-scope-r1`とする。後続Candidateの本文、構造、identity体系、registry、canonical locator、完全coverage条件、未来集合の閉包条件およびresult schemaは継承しない。
+
+Candidate147の`implementation_bound=true`を前提とする。TaskSpecが要求する全change effect、artifact間relation、実行可能な変更predicateおよび保持constraintが一つのimplementation choiceへbindされていなければ、本境界を開始せずCandidate147の変更前gateで停止する。本境界は不完全な`implementation_bound`を補完、再探索または独立に証明しない。
+
+## 判断subjectと同時発行集合
+
+`judgement_subject`は、Candidate147のterminal resultが一つの実行可能な変更predicateとしてbindしたidentityとする。一つのpredicateが複数effectを持っていてもrootまたはreview producerは細分化しない。Candidate147が複数predicateを個別にbindした場合だけ複数subjectとして扱う。
+
+artifact変更invocationを発行する前に、そのpayloadが同時に生成し得る全subject identityを一つの`coemission_set(invocation)`へ過不足なくbindする。payload、subject identity、適用順または保持constraintのいずれかが変われば新しいcoemission identityとする。予定していないsubject集合または未来の全組合せは列挙しない。
+
+read-only operation、validation operationおよび別required outcomeはsubjectにしない。
+
+## review不要の固定対応
+
+独立reviewを省略できるのは、既存の許可済みmachine-bound resultから`authority_fixed_effect=true`を直接bindできる場合だけである。
+
+`finite_authority_fixed_effect(subject) := TaskSpecまたは適用中authorityが有限な全対象identityを固定済み ∧ 各対象へ適用する決定的変換または終状態を固定済み ∧ Candidate147のimplementation_boundへbind済み変更predicateの対象・変換・保持constraintがその固定値と機械的に一致 ∧ 選択規則、fallback、正規化または固定範囲外へ届く規則を追加しない`
+
+open classへ届く変更は、class predicate identityと決定的変換が固定されているだけではreview不要にしない。次の式を満たす既存resultがある場合だけ固定対応にできる。
+
+`class_authority_fixed_effect(subject) := TaskSpecまたは適用中authorityが定義・versionを含むclass predicate identityと決定的変換を固定済み ∧ 既存の許可済みmachine-bound resultが同じclass predicate identity・変換identity・全保持constraint identityへbindされ、その変換が当該classの任意の入力で各保持constraintを維持するresultを直接持つ ∧ Candidate147のimplementation_boundへbind済み変更predicateがそのidentityと機械的に一致 ∧ 別の選択規則、fallbackまたは正規化を追加しない`
+
+`authority_fixed_effect(subject) := finite_authority_fixed_effect(subject) ∨ class_authority_fixed_effect(subject)`
+
+rootは既存identityと値の一致だけを確認する。変更が小さい、対象が現在一件、producerが機械的変更と説明した、現在観測値でconstraintを満たした、反例がまだ見つかっていない、またはvalidationが予定されているという理由では成立させない。open classで保持resultが存在しない場合、そのresultを得るための追加探索、証明、分類operationまたは未来入力列挙を作らず`authority_fixed_effect=false`としてreview対象にする。
+
+`authority_fixed_effect=true`のsubjectは個別subjectについて`individual_admission_ready=true`とし、独立reviewを作らない。別subjectがreview対象でも、この固定subjectを個別reviewへ混ぜない。後続resultが対象、変換、定義・version、保持constraintまたはclass保持resultのidentityを実際に変えた場合だけ固定対応を失効する。
+
+## 個別subjectのreview発行判断
+
+`authority_fixed_effect=false`の未発行subjectには、情報封鎖した独立producerのterminal judgementを一つbindするreview operationを発行する。
+
+個別review発行判断の入力は次に限定する。
+
+- `implementation_bound=true`
+- subject identity
+- `authority_fixed_effect=false`
+- review permission
+- 情報封鎖したproducerをbind可能か
+
+repository evidenceの完全性、input domainの開閉、具体的反例の有無、反例探索の完了度、missing、unreadableまたはnon-successはreview発行判断へ入れない。許可入力に値があれば値を、存在しなければ`missing`、読めなければ`unreadable`、取得がterminal failureならそのstateをreview入力として渡す。これらをpacket readiness不足としてreview発行前に停止しない。
+
+明示的なpermission denialまたは情報封鎖したproducerをpermission内でbind不能な場合だけ、subjectを`unavailable`にする。起動方法の失敗はCandidate147の`METHOD`と`RECOVERY`に従い、permission denialへ読み替えない。
+
+review producerはimplementation choiceを生成したproducerと異なるexecution identityへbindし、TaskSpec、適用中authority、Candidate147が許可したrepository evidence、bind済みimplementation choice、subject、保持constraint、および許可入力のterminal stateだけを受け取る。評価case、fixture、oracle、rating、過去finding、旧Candidate、期待terminal、修正案および会話履歴は渡さない。
+
+## 同時発行集合のreview境界
+
+`coemission_set`が一subjectだけを含む場合、組合せreviewは不要である。複数subjectを含む場合は、artifact変更前に次の排他的stateを一つbindする。
+
+- `joint_effect_independent`
+- `combination_no_counterexample_found`
+- `combination_counterexample_found`
+- `combination_unavailable`
+
+`joint_effect_independent`は、Candidate147へ既にbind済みのartifact間relation、変更predicate、適用順および保持constraintから、各subjectの出力・適用条件・保持constraintが他subjectの有無または結果で変わらず、全joint constraintが個別constraintへ分解済みであることをmachine-bound resultとして直接確認できる場合だけ成立する。rootは意味推測で独立性を補完しない。
+
+複数subjectで`joint_effect_independent`を直接bindできなければ、実際の`coemission_set`全体を一つの`combination_subject`として、情報封鎖した独立producerへreviewを発行する。形成は必須であり、個別subjectのterminal judgementが揃っていることでは代替できない。全subsetを事前列挙せず、review producerが具体的反例を見つけた場合だけ、反例を成立させる最小subject集合をresultへbindする。
+
+combination reviewにも個別reviewと同じpermission、producer分離、許可入力、missing配送および禁止入力を適用する。`combination_no_counterexample_found`は、発行時のcoemission identity、適用順、全subject predicate、artifact間relation、保持constraintおよび判断を変え得るterminal inputへbindする。判断を変え得る特定のmissing等があれば`combination_unavailable`とする。
+
+## 個別subjectの三つのterminal judgement
+
+個別review producerは各subjectへ、次の排他的なterminal judgementを一つだけ返す。
+
+- `counterexample_found`
+- `no_counterexample_found`
+- `unavailable`
+
+rootはproducer identity、terminal性、subject identity、result identityおよび後述するdependency bindingだけを確認する。反例の意味、missingの関連性または反例なしの十分性を再判定、補完、比較または再採点しない。
+
+### `counterexample_found`
+
+`counterexample_found`は、具体的入力または状態、subjectの出力または処遇、TaskSpec・authority・保持constraintとの直接矛盾をbindした場合だけ成立する。
+
+producerは、反例の各成立条件を変え得る受領入力identityと値だけを`counterexample_support`へbindする。受領したという理由だけで全入力をsupportへ入れない。supportに入らないmissing、unreadable、failure、別subject resultまたは将来入力は、成立済み反例を失効できない。
+
+### `no_counterexample_found`
+
+`no_counterexample_found`は未来全域の不存在証明ではない。review producerが、発行時に受領した現在のTaskSpec、authority、subject、保持constraintおよび許可入力のterminal stateに対して具体的反例を探し、反例を見つけず、かつ現在missing等の入力のうち値が得られれば同じ判断を変え得るものがないと判定したterminal resultである。
+
+producerは、値またはidentityが変われば当該判断を変え得る入力だけを`no_counterexample_dependency`へbindする。domainが開いている、未来のinstanceを列挙できない、または現在の対象集合が有限であるという理由だけでdependencyを追加しない。
+
+現在missing、unreadableまたはfailureの特定入力が、値によっては同じsubjectの具体的反例を成立させ得る場合、producerは`no_counterexample_found`を返さず、その入力identityと変わり得る反例predicateを`unavailable_dependency`へbindして`unavailable`を返す。
+
+### `unavailable`
+
+`unavailable`は、明示的なreview permission denial、情報封鎖したproducerのbind不能、terminal judgementを変え得る特定のmissing等、または必要なsubject・authority・保持constraint・dependency identityの対応不能へbindする。producerは原因identityを`unavailable_dependency`へbindする。open domain、完全coverageの不存在、未来集合の未列挙または一般的な不確実性だけでは`unavailable`にしない。
+
+## judgement resultの効果範囲
+
+review operation発行前に`judgement_result_effect_scope`をbindする。
+
+`judgement_result_effect_scope(result) := resultがadmission、停止、失効または再reviewの要否を変え得る未発行judgement subject、coemission setおよびartifact変更invocationの集合`
+
+scopeはCandidate147へbind済みのsubject、coemission identity、artifact間relation、保持constraintおよび明示dependencyから作る。相互非依存を既存resultから直接確認できる対象は除外する。確認できない関係を意味推測で除外するための探索、分類operationまたは専用schemaを作らない。
+
+各resultの効果を次へ限定する。
+
+- 個別`counterexample_found`: 対応subjectを含む未発行artifact変更だけを停止する。
+- 個別`no_counterexample_found`: 対応subjectを個別にadmit可能にする。他subjectまたはcoemission setへ成功を投影しない。
+- 個別`unavailable`: 対応subjectを含む未発行artifact変更だけを停止する。
+- `combination_counterexample_found`: bind済み最小subject集合を同時に含む未発行artifact変更だけを停止する。集合内subjectの個別stateを変更しない。
+- `combination_no_counterexample_found`: 対応coemission identityだけをadmit可能にする。
+- `combination_unavailable`: 対応coemission identityを持つ未発行artifact変更だけを停止する。
+
+停止subjectまたはcoemission setを除くとrequired outcome、artifact間relation、実行可能性または保持constraintを満たせない場合、Candidate147の当該implementation choiceを失効する。この失効を別subjectのreview resultへ複製しない。別implementation choiceを作る場合はCandidate147の変更前gateから新identityとしてやり直す。
+
+## artifact変更のadmission
+
+`individual_admission_ready(subject) := authority_fixed_effect=true ∨ admissibleなno_counterexample_foundがsubjectへbind済み`
+
+`joint_admission_ready(invocation) := coemission_setが一subjectだけを含む ∨ joint_effect_independentがcoemission identityへbind済み ∨ admissibleなcombination_no_counterexample_foundが同じcoemission identityへbind済み`
+
+artifact変更invocationは、生成し得る全変更predicateがCandidate147のbind済みsubjectへ過不足なく対応し、全subjectで`individual_admission_ready=true`、同じpayloadで`joint_admission_ready=true`、当該invocationをscopeへ含む全review operationがterminal、かつ有効な個別またはcombination停止resultに該当しない場合だけ発行する。
+
+`counterexample_found`または`unavailable`のsubjectをpayloadから除外できないinvocationは発行しない。subjectを分離するとCandidate147の保持constraintまたは実行可能性を壊す場合は、一部だけを発行せずimplementation choiceを失効する。
+
+## 局所失効
+
+後続の許可済みresultは、次のdependencyを実際に変更した場合だけ旧judgementを失効できる。
+
+- `finite_authority_fixed_effect`: 対象、変換または保持constraint
+- `class_authority_fixed_effect`: class predicateの定義・version、変換、保持constraintまたはclass保持result
+- 個別`counterexample_found`: `counterexample_support`内のidentityまたは値
+- 個別`no_counterexample_found`: `no_counterexample_dependency`内のidentityまたは値
+- 個別`unavailable`: `unavailable_dependency`内のidentity、permissionまたはterminal state
+- `joint_effect_independent`: coemission identity、適用順、subject predicate、artifact間relation、保持constraintまたは独立性result
+- combination judgement: coemission identity、適用順、全subject predicate、artifact間relation、保持constraintまたはbind済み判断dependency
+
+support外のmissing解消、別subjectの結果、同じ値の再取得、full packet identityの変化または無関係なrepository変更では失効しない。失効後もrootは旧resultを再解釈せず、新しいbasis identityへ情報封鎖したproducerを一つbindしてterminal judgementを得る。
+
+## 最短経路
+
+利用者または適用中authorityが有限な一つの設定identityを`false`から`true`へ変えることを直接固定し、Candidate147のimplementation choiceもその対象と値だけを変更し、保持constraintが他の入力へ届く規則の不変をbindしている場合、`finite_authority_fixed_effect=true`となる。coemission setも一subjectだけなので、独立reviewを作らずCandidate147のartifact変更経路へ進む。
+
+## missingの三つの扱い
+
+同じmissing inputでも、消費する判断により効果は異なる。
+
+1. 個別またはcombination reviewの発行では、missingはterminal入力であり発行を阻害しない。
+2. `counterexample_found`または`combination_counterexample_found`では、missingがbind済みsupportに含まれない限り成立済み反例を失効しない。
+3. `no_counterexample_found`または`combination_no_counterexample_found`では、missingの値が同じ判断の具体的反例を成立させ得る場合だけ対応対象を`unavailable`にする。
+
+missingを常に許可、常に停止または完全性不足へ一括分類しない。
+
+## Candidate作成前gate
+
+情報封鎖した独立producerへ、次の三文書だけを渡して敵対的reviewを行う。
+
+- Candidate147の制御原文
+- `docs/prompt-control-design-principles.md`
+- この設計
+
+Candidate実装、評価設計、評価case、fixture、oracle、rating、保存済みresult、旧Candidate、先行review findingおよび会話履歴は渡さない。
+
+review producerは一般入力で次の反例を探す。
+
+1. finiteなauthority固定変更に不要reviewを要求できる。
+2. open classへ届く変更を、同じclass・変換・全保持constraintへbindされた既存machine resultなしでreview不要にできる。
+3. missing等をpacket readiness不足としてreview発行前に停止できる。
+4. support外のmissingで成立済み反例を失効できる。
+5. 判断を変え得るmissingがあるまま個別またはcombinationの`no_counterexample_found`をadmitできる。
+6. open domainまたは未来instance未列挙だけで`unavailable`へ停止できる。
+7. 一subjectまたはcoemission setの失敗を無関係なsubject、read-only operationまたはtask全体へ伝播できる。
+8. rootが反例、missing関連性、独立性または反例なしを意味再判定できる。
+9. 複数subjectを同時発行するとき、machine-boundな`joint_effect_independent`も同じcoemission setのcombination judgementもないまま変更をadmitできる。
+10. 固定tool、file、schema、locator、read順またはreview回数がなければ実行不能になる。
+11. 後続resultがdependencyを変えていないのに旧judgementを失効できる、またはdependencyを変えたのに旧judgementを維持できる。
+
+一件でも具体的反例が成立した場合は`counterexample_found`としてこのdesign identityを停止し、修正版を新しいdesign revisionとして再reviewする。全観点で具体的反例が成立しない場合だけ`no_counterexample_found`とし、Candidate147を直接親とする一つのCandidate bundleを作成できる。
+
+## 後続境界
+
+設計reviewの通過は、実装一致、Target評価、採用、releaseまたはprojectionを意味しない。
+
+Candidate作成後は、Candidate147とprompt identity以外が完全一致する固定Target評価をpreflightし、保存済み基準runを再実行せず新Candidateの不足runだけを発行する。品質とmechanismを別gateにし、正しいterminalだけでなくreview起動、情報封鎖、canary非配送、support receipt、missingの判断別効果、coemission setのjoint admissionおよびartifact変更有無を個別に監査する。

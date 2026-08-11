@@ -1,24 +1,24 @@
-# long-run storage拡張
+# 試験storage seal拡張
 
 ## 目的
 
-8時間程度の反復実行でストレージ枯渇を起こさないため、バッチのdispatch前の容量ガード、Layer 1のclonefile必須化、実行直後のevidence seal、登録後の最終圧縮を提供する。評価基盤のLayer、KPI、schema、比較条件は変更しない。
+通常の複数run試験と8時間程度の反復実行でストレージ枯渇を起こさないため、dispatch前の容量ガード、Layer 1のclonefile必須化、実行後のevidence seal、登録後の最終圧縮を提供する。評価基盤のLayer、KPI、schema、比較条件は変更しない。directory名とCLIの`batch`表記は履歴互換のため保持するが、直下に`cycle/`を持つ通常の試験rootにも同じsealとcompactを適用できる。
 
 この拡張が作るアーカイブとreceiptは生のエビデンスであり、評価済み、採用済み、release済みを意味しない。非公開の生アーカイブはcommitしない。
 
-## 長期コントローラへの組み込み順
+## 試験controllerへの組み込み順
 
-各バッチについて、次の順序を固定する。
+通常試験では試験root、長期runでは各batchについて、次の順序を固定する。
 
 1. `guard`で次バッチを投入できるか確認する。
-2. `materialize-layer1`で前バッチのLayer 1をAPFS clonefileとして複製する。
+2. `materialize-layer1`または`THE_CAPTION_EVAL_COPY_MODE=clonefile`を使い、Layer 1とworkspaceの物理複製をAPFS clonefileへ限定する。
 3. Layer 2を実行し、全スロットをterminalにする。
 4. `seal-batch`でvalid runのall-agent usageとrating viewを検証する。
 5. 完全なワークスペースとLayer 1 fixtureを含むsealアーカイブをストリーミング生成し、圧縮後の全メンバーのhash検証後にだけワークスペースのlive copyを削除する。Layer 1 fixtureは次バッチのclone元として保持する。
 6. 削除記録に含まれるワークスペースと完全一致するCodexの`projects`設定だけを削除する。
 7. Layer 3採点とLayer 4 result登録後に`compact-batch`を実行する。
 
-前バッチの`cycle/layer1`を通常のコピーで複製するコントローラは使わない。clonefileを利用できない場合はバッチを開始せず停止する。
+Layer 1またはworkspaceを通常のコピーで暗黙に複製するcontrollerは使わない。clonefileを利用できない場合は試験または次batchを開始せず停止する。
 
 ## 容量ガード
 
@@ -48,7 +48,7 @@ python3 layer2/extensions/long_run_storage/long_run_storage.py materialize-layer
 
 ```bash
 python3 layer2/extensions/long_run_storage/long_run_storage.py seal-batch \
-  --batch /absolute/path/to/batch-001
+  --batch /absolute/path/to/trial-or-batch-root
 ```
 
 標準では`$CODEX_HOME/config.toml`、未設定時は`~/.codex/config.toml`も保守する。対象は、このバッチの`execution-prune-receipt.json`に記録されたワークスペースのパスとの完全一致だけである。別評価や通常のプロジェクトの存在しないパスは削除しない。設定は有効なTOMLであることを更新前後に確認し、同時更新を検出した場合は最大3回再試行する。結果は`compact/codex-project-config-prune-receipt.json`へwrite-onceで記録する。この保守に失敗してもexecution sealと評価結果は失効させず、command結果へ`warning`を返す。
@@ -88,7 +88,7 @@ Layer 3採点とLayer 4 result登録が完了したバッチだけを最終圧�
 
 ```bash
 python3 layer2/extensions/long_run_storage/long_run_storage.py compact-batch \
-  --batch /absolute/path/to/batch-001
+  --batch /absolute/path/to/trial-or-batch-root
 ```
 
 `cycle/layer4/result-registration.json`とexecution seal receiptを必須とし、Layer 2〜4のlive evidenceを`compact/final-evidence.tar.zst`へ保存してhash検証する。検証後はLayer 2〜3とrunner evidenceを削除し、次を直接参照可能な状態で残す。
