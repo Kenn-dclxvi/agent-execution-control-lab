@@ -1,0 +1,85 @@
+# Candidate180 一般設計境界の設計監査
+
+## 第1版
+
+- review input: Candidate147制御原文、一般設計原則、Candidate180設計第1版
+- forbidden input: 実装、Target評価、評価case、fixture、oracle、rating、旧Candidate、先行finding、会話履歴
+- result: `counterexample_found`
+- candidate: `not_created`
+
+独立reviewで、artifact変更可否またはterminalを誤らせる一般反例が4件成立した。
+
+1. 利用者のTaskSpecに独立execution identityがないだけで、permissionがある通常入力も`unavailable`へ過剰停止できた。
+2. 起動時に選んだ有限対象を読み終えただけで、対象外の既存または将来の反例を残したまま`no_counterexample_found`を一般設計全体へ投影できた。
+3. 設計変更の可能性をrootが直接観測できない場合にfalseへ落とし、openな一般設計をreviewなしで自己承認できた。
+4. 利用者がpatchまたはalgorithm自体をreview対象の一般設計として渡した場合に、許可する「設計」と禁止する「実装案」が同じartifactとなり、必要入力を渡す経路が閉じた。
+
+第1版は不採用とした。第2版では、review operation自身が独立producer roleを固定し、具体的identityの選択は明示指定がない限りmethodへ残した。設計変更への露出を`present / absent / unobserved`へ分け、`unobserved`をreview不要へ落とさない。`no_counterexample_found`の効力を、一般設計が受け入れる全実例の判断差を閉じるscopeへ限定した。情報境界はartifact種別ではなく、現在設計の意味内容か、反証後の解決案または評価固有情報かという役割で分けた。
+
+## 第2版
+
+第2版も別の情報封鎖reviewで`counterexample_found`となり、不採用とした。変更後に全件を動的列挙するvalidationが予定されているだけで変更前reviewを不要にでき、一般設計上の具体的反例をartifact変更後の失敗としてしか検出できない反例が成立した。
+
+第3版では、変更後validationをreview不要根拠から除外した。変更前にterminalとなった許可済みresultが、現在設計の適用範囲または共通判断に必要な関係を直接閉じた場合だけreview不要にできる。また、複数実例だけでなく、一つの対象の将来状態または関係へ一般判断を投影する設計も境界対象に含めた。
+
+## 第3版の停止状態
+
+第3版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。第一に、将来の実例を閉じる正本があっても現在の具体的反例を除外しないため、`present`と`absent`が同時に成立してreviewを省略できた。第二に、rootによる全適用範囲の閉包確認を結果種別に関係なく要求したため、一件で成立する`counterexample_found`を不完全として失効できた。
+
+第4版では、`design_change_exposure`を`present`優先の排他的三値とし、`absent`には現在の全適用実例に反例がないことと将来部分の直接閉包をともに要求した。結果受入は非対称にし、`counterexample_found`は一件の直接不両立、`no_counterexample_found`だけは全適用範囲の閉包を独立producerのpredicateとした。rootはproducer、design、operation、resultのidentity bindingだけを行い、意味を再判定しない。
+
+## 第4版の停止状態
+
+第4版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。設計が自己宣言した対象境界だけをreviewの適用範囲にしたため、要求または正本上の対象を設計から除外すれば、その対象を反例にも`no_counterexample_found`の閉包対象にも含めずに済む循環が成立した。
+
+第5版では、設計宣言境界と、要求または適用中の正本が設計へ求める規範上の対象境界を分離した。規範上の対象を設計が除外すること自体を`counterexample_found`に含め、`no_counterexample_found`には規範上の対象境界全体の包含と判断差の閉包を要求した。
+
+## 第5版の停止状態
+
+第5版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。第一に、有限に閉じた対象で具体的反例が`present`として成立しても、open条件がfalseならreview不要となり、その反例を拒否条件へ結び付けずadmitできた。第二に、`no_counterexample_found`を規範境界と反例関連snapshotの状態へbindしておらず、review後の入力変更へ古い閉包結果を投影できた。
+
+第6版では、`present`を対象境界にかかわらない現在designの不採用、`absent`をreview不要、`unobserved`かつ一般境界がopenな場合だけを独立review必要とした。review resultの効力を、判定に使ったdesign、規範上の対象境界、反例関連snapshotの状態へ限定し、その入力を変えたresultだけが対応resultを局所的に失効できるようにした。
+
+## 第6版の停止状態
+
+第6版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。規範境界または反例関連snapshotの変更による局所失効を`no_counterexample_found`へだけ定めたため、古い入力で成立した`absent / not_required`と設計受入を維持し、変更後の規範対象へ古い受入結果を投影できた。
+
+第7版では、Candidate180が作る`present / absent / unobserved`、review要否、独立review result、設計受入の全状態を同じ判定基盤へbindした。artifact変更前にその基盤を変えるresultを受領した場合は、依存するCandidate180の状態だけを失効させ、現在入力から受入境界を判断し直す。
+
+## 第7版の停止状態
+
+第7版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。`present`が規範上の対象所属と現在設計との直接不両立を要求していなかったため、対象外の事実や要求を満たす別の改善案だけで正しい設計を`blocked`にできた。
+
+第8版では、`present`を独立review後の`counterexample_found`と同じ意味境界へ揃えた。規範上その一般判断を受ける対象または必要な関係に属し、現在設計と直接両立せず、要求を満たすために設計変更が必要な具体的事実だけを成立条件とした。
+
+## 第8版の停止状態
+
+第8版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。第一に、結果一覧の`not_required / no_counterexample_found`が受入式の`implementation_bound`を上書きできた。第二に、実装方法が汎用というだけで規範上閉じた単一対象にもreviewを要求できた。第三に、`unavailable`の原因であるpermissionまたはproducer到達性が変わっても、古い結果を失効できなかった。
+
+第9版では、review側の結果を`review_gate_satisfied`へ限定し、完全な受入式以外から`general_design_admissible=true`を代入しない。一般設計性とopen性を規範上の対象・関係だけから判定し、実装の再利用可能範囲を除外した。`unavailable`の効力を必要入力の到達可能性、permission、producer availability、result配送状態へもbindした。さらに`present`は変更前evidence producerが明示規範または明示事実前提との直接矛盾をterminal resultへbindした場合に限定し、意味判定が必要なら独立reviewへ残した。
+
+## 第9版の停止状態
+
+第9版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。規範が一般判断を要求する場合だけをreview要件としたため、規範は単一対象へ閉じていても、提案設計が共有既定動作を変えて規範対象外の現在または将来の実例へ意味上の効果を広げる一般化をreviewなしでadmitできた。
+
+第10版では、規範上の対象境界と提案設計の意味上の変更効果境界を合わせた`review_governing_boundary`を設けた。単なる実装の再利用可能性は除外し、規範対象外へ実際に及ぶ観測可能な変更効果はreview対象に含めた。review要否、反例、`no_counterexample_found`、結果の効力と失効を同じ境界へ結び付けた。
+
+## 第10版の停止状態
+
+第10版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。意味上の変更効果境界を許可済み観測から確定できない場合に、第1条件をfalseとして`not_required`へ落とせたため、共有既定動作の影響範囲が未観測のままartifact変更へ進めた。
+
+第11版では、規範上の対象境界、意味上の変更効果境界、両者から決まる`review_governing_boundary`、review要否の全件終端を`review_boundary_ready`として完全受入式へ追加した。必要入力の不足または未終端はfalseへ変換せず、現在設計を`unavailable`にする。
+
+## 第11版の停止状態
+
+第11版も新しい情報封鎖reviewで`counterexample_found`となり、不採用とした。独立producerへ規範上の対象境界は渡せても、その対象に適用される規範predicateまたは保持constraintを許可入力へ含めていなかったため、到達可能な具体的反例を直接不両立へ結べず`unavailable`へ過剰停止できた。
+
+第12版では、`review_governing_boundary`内の一般判断へ適用される規範predicate、保持constraint、必要な関係と各入力の帰属を独立producerの許可入力へ追加した。反証後の修正案、評価固有情報、過去findingの禁止は維持した。
+
+## 第12版の停止状態
+
+第12版は新しい情報封鎖reviewで`no_counterexample_found`となった。閉じた単一対象、openな一般設計、既知の具体的矛盾、完全受入式、境界入力のready状態、規範境界と意味上の変更効果境界、独立producerとroot、許可入力と禁止情報、局所失効、変更後validationとの分離、方法非固定を一般入力で確認し、artifact変更可否またはterminalを誤らせる具体的反例は成立しなかった。
+
+設計review gateを通過したため、Candidate147を直接親とするCandidate bundleの実装を開始できる。Target評価、評価profile、採用、release、projectionはまだ開始しない。
+
+`revision_1_rejected / revision_2_rejected / revision_3_rejected / revision_4_rejected / revision_5_rejected / revision_6_rejected / revision_7_rejected / revision_8_rejected / revision_9_rejected / revision_10_rejected / revision_11_rejected / revision_12_review_passed / candidate_implementation_started / target_evaluation_not_started`

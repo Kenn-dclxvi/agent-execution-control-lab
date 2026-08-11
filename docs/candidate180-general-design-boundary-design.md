@@ -1,0 +1,149 @@
+# Candidate180 一般設計境界の設計
+
+> 状態: `design_revision_12 / adversarial_review_passed / candidate_implemented / implementation_audit_passed / target_evaluation_failed / candidate_stopped`
+
+## 結論
+
+Candidate180はCandidate147を直接の親とし、一般設計を実装へ渡してよいかを決める一つの境界を追加する。Candidate172からCandidate179までの文章、構造、結果形式は継承しない。そこまでの試験で判明した失敗は、設計条件の反証材料としてだけ用いる。
+
+追加する制御は処理手順ではない。読む回数、読む順序、使用するtool、記録形式、固定field、正本locator、reviewの途中経過を規定しない。固定するのは、一般設計が依存する区別を誰のどの終端結果で閉じ、どの状態なら実装を発行できるかという境界だけである。
+
+## 何を防ぐ設計か
+
+要求から自律的に対象や関係を探索して実装すること自体は許す。問題は、探索で選んだ対象集合や共通条件が要求または正本で閉じておらず、通常試験もその全域を覆わないのに、その探索結果を一般設計として確定する場合である。この状態では、既知の試験を通す実装を作れても、同じ設計が扱うべき未観測の実例が現れたときに、対象集合、共通条件、正本、所有者、停止条件またはfallbackを変えなければならない。
+
+例えば、要求が一つの明示ファイルだけを変更すると定め、正本もそのファイルを一意に指定しているなら、別の対象があり得るという理由だけで独立reviewを要求しない。一方、agentが探索して「この種類の生成物はすべて同じ規則で扱う」という設計を作り、要求も正本も対象集合を閉じず、試験が既知の一部しか観測しないなら、未観測の同種生成物が一般条件に反する可能性を実装前に独立して攻撃する必要がある。
+
+これは、PR reviewで差し戻される原因を「試験不足」へ還元しないための境界である。差し戻しの対象は、既知ケースへ合わせた処理ではなく、未観測の実例にも同じ判断を適用してよいとした一般設計上の根拠である。
+
+## Candidate作成前gate
+
+1. 親prompt setはCandidate147 `the-caption-3ce91a4-result-effect-scope-r1`とする。
+2. 最短正常経路は、要求または適用中の正本が実装対象と必要な関係を閉じている場合に、追加reviewを作らず、C147の`implementation_bound`から変更と検証へ進む経路である。
+3. 保存済みの観測誤経路は、Candidate147のADR9 r2 N=50で、閉じた境界の66件が不要reviewへ進み、reviewが必要なケースでは196件が具体的反例を確定できず`unavailable`へ過剰停止し、25件が必要reviewを起動しなかった経路である。危険な成果物変更は0件であり、本Candidateの目的を危険変更の抑止とはしない。
+4. C147の`SPEC`、`EVIDENCE_GATE`、`DECISION_BOUNDARY`は、個々のoperationの要求、証拠消費、結果影響範囲を閉じる。しかし、探索から作った一般設計そのものについて、未観測の適用対象が既知試験を通過したまま一般判断を変え得るかを、`implementation_bound`の入力として区別していない。
+5. 追加するpredicateは`general_design_admissible`だけとする。
+6. このpredicateにより、閉じた境界へ念のためreviewを追加する判断経路と、openな一般設計をrootが自己承認する判断経路を除く。
+7. 新しく必要になる判断は、一般設計が実装後も維持しなければならない区別が閉じているか、閉じていない場合に独立した反証結果を受け入れられるかだけである。新しい探索手順、証拠形式、例外表は追加しない。
+8. 品質保持対象は、明示された単一対象、正本による有限列挙、owner語列だけを含む通常作業、permission否定、review不要な検証、既に成立した具体的反例、反例なしの完全な独立review、必要な観測が成立しないreviewである。
+9. 情報封鎖した敵対的reviewで一般入力に対する具体的反例が一件でも成立した場合はCandidateを作成しない。`no_counterexample_found`の場合だけC147からCandidate bundleを作る。
+
+## 一つの受入境界
+
+`general_design_admissible`を次で定める。
+
+```text
+review_boundary_ready :=
+  normative_target_boundaryがterminal resultへbind済み
+  and semantic_change_effect_boundaryがterminal resultへbind済み
+  and review_governing_boundaryを両者から決定可能
+  and general_design_review_requiredがterminal resultを持つ
+
+review_gate_satisfied :=
+  general_design_review_required = false
+  or admissible_independent_review_result = no_counterexample_found
+
+general_design_admissible :=
+  implementation_bound
+  and review_boundary_ready
+  and design_change_exposure != present
+  and review_gate_satisfied
+```
+
+`review_boundary_ready=false`では、未固定または未終端の入力を条件不成立へ写像せず、現在設計の受入を`unavailable`にする。`not_required`は、規範上の対象境界と意味上の変更効果境界がともに終端し、`review_governing_boundary`に対してreview不要が具体的にbindされた場合だけ成立する。必要入力が到達不能なら、review不要とは扱わない。
+
+`general_design_review_required=true`となるのは、`design_change_exposure=unobserved`であり、次の条件が共同で成立する場合だけである。
+
+1. 要求または適用中の正本が、閉じた一つの具体値を越えて現在または将来の実例、状態、関係へ共通判断を保持することをartifact変更へ要求するか、提案設計の意味上の変更効果が規範で閉じた対象を越えて共通判断を適用する。
+2. 規範上の対象境界と、提案設計の意味上の変更効果が及ぶ境界を合わせたreview対象について、その実例集合または共通判断に必要な関係が、明示された要求、適用中の正本、または許可済みの有限な全件観測で閉じていない。
+
+以下、この二つを合わせた範囲を`review_governing_boundary`とする。共通関数、汎用algorithmまたは再利用可能なmoduleを使っていても、その意味上の変更効果が規範で閉じた対象だけに限定されるなら、実装の再利用可能性だけではこの境界を広げない。既定動作、共有状態または全域規則の変更により、規範対象外の現在または将来の実例の観測可能な判断も変える場合は、その意味上の効果範囲を境界へ含める。
+
+`design_change_exposure`は次の排他的な三値とし、上から順に成立を決める。
+
+- `present`: 変更前evidence operationのterminal resultが、許可済みの具体的事実について、`review_governing_boundary`上は現在設計の一般判断または意味上の変更効果を受ける対象か必要な関係に属し、明示された規範、保持constraintまたは設計が明示した必要事実と直接矛盾し、要求を満たすには対象集合、一般条件、正本、所有、停止条件またはfallbackのいずれかを変える必要があることをbindしている。review対象外を仮に含めた場合だけ変更を要する事実、現在設計も要求を満たすまま別の改善案を可能にする事実、またはrootによる自由な意味推定は含めない。直接矛盾をterminal resultへbindできず意味上の判定が必要なら`unobserved`とする。
+- `absent`: 現在の全適用実例について`present`を成立させる具体的事実がなく、かつ明示された要求、適用中の正本、または許可済みの有限な全件観測が、将来の適用実例を含む残る開いた部分にも上の設計変更が不要であることを直接閉じている。
+- `unobserved`: `present`が成立せず、`absent`をbindする直接根拠もない。
+
+`design_change_exposure=present`なら、対象境界のopen / closedにかかわらず現在の一般設計をadmitせず、成立した具体的事実にbindした結果としてそのdesign identityを`blocked`にする。既に成立した反例を再reviewへ送らない。`design_change_exposure=absent`ならreviewを作らず、C147の他のpredicateが成立した場合に限りadmitできる。
+
+`design_change_exposure=unobserved`の場合だけ二条件を判断する。二条件が成立すればreviewを必要とし、一つでも成立しなければreviewを作らない。実装方法が将来の別用途にも使えるというだけでは第1条件を成立させないが、提案設計が規範対象外へ実際に持つ意味上の変更効果は除外しない。規範外の副作用を防ぐ必要がある場合は、要求または正本の保持constraintとしてbindされている範囲も`review_governing_boundary`へ含める。`unobserved`を`absent`へ読み替えないが、要求または正本で閉じた一つの具体値だけを扱い、意味上の効果もそこへ閉じる非一般設計へ、証拠不在を理由とするreviewは追加しない。境界が開いているという事実だけ、対象名の類似、owner語列、証拠記載の不在、未知の対象があり得るという一般論だけから具体的反例を確定しない。
+
+artifact変更後に実行する予定のvalidation、そのcommand identity、またはその網羅性は、変更前の`general_design_review_required`をfalseにしない。開いた部分を閉じる許可済み観測がartifact変更前にterminalとなり、そのresultが現在設計の適用範囲または共通判断に必要な関係を直接閉じた場合だけ、第2条件をfalseまたは`design_change_exposure=absent`にできる。変更後validationは、admit済み設計の実装結果を検証するC147の`VALIDATION_PLAN`と`VALIDATION_CLOSURE`にだけ用いる。
+
+この判定はreviewの仕事ではない。C147の変更前evidence operationが許可済みresultから`implementation_bound`を作るときに、一般設計の受入入力として固定する。必要性をreviewerへ自己判定させたり、review結果から事後に書き換えたりしない。
+
+## 独立reviewの境界
+
+reviewが不要ならreview operation、専用packet、独立producerを作らない。
+
+reviewが必要なら、この境界が新しいreview operationのTaskSpecへnon-rootの独立producer roleをrequired constraintとして固定する。利用者のTaskSpecが特定の独立execution identityをrequired outcomeとして指定した場合はそのidentityをbindし、指定しない場合はpermission内でexecutorが一つのnon-root execution identityをpredicate前にbindする。criterion owner語列はどちらの根拠にも使わない。producer binding、terminal、sender identity、rootの役割にはC147の`PRODUCER`、`TERMINAL`、`OWNER_ROLE`、`ROOT`をそのまま使う。rootは独立producerの結果を再生成、補完、意味の再判定をしない。permission否定または利用可能なnon-root producerの不在でbindできなければ`unavailable`であり、rootを代替producerにしない。
+
+独立producerへ渡せるのは、現在の一般設計の意味内容、一般設計が適用すると宣言した境界、要求または適用中の正本がその設計へ要求する規範上の対象境界、`review_governing_boundary`内の一般判断へ適用される規範predicate・保持constraint・必要な関係、提案設計の意味上の変更効果が及ぶ境界、反証に必要な現在snapshotの許可済み観測、および各入力の帰属だけである。設計宣言境界、規範上の対象境界、適用規範、意味上の変更効果境界は別の入力として保持し、一つの自己宣言から他を狭めない。利用者がpatch、algorithmまたは実装artifactそのものをreview対象の一般設計として指定した場合、その一般判断を表す意味内容は許可入力である。禁止するのは、反証後に作られた修正案または代替実装、Candidate本文、評価ケース、fixture、oracle、rating、過去のreview finding、過去Candidateの解決法、無関係な会話履歴である。artifactの名前や形式ではなくreviewで果たす情報の役割で区別する。禁止入力を読めることはpermissionにならない。
+
+この入力境界は、情報の取得方法や提示形式を固定しない。必要な意味と帰属を保持できれば、file、packet、tool、記録schemaのいずれも設計条件にしない。
+
+## review結果の受入境界
+
+独立reviewの終端は次の三つに限る。
+
+- `counterexample_found`: 許可済みの具体的事実が、`review_governing_boundary`上は現在設計の一般判断または意味上の変更効果を受ける実例であるのに設計宣言境界から除外されているか、設計へ含まれていても適用中の規範、保持constraintまたは設計が明示した必要事実と直接両立せず、対応には一般設計の対象集合、一般条件、正本、所有、停止条件またはfallbackの変更が必要である。
+- `no_counterexample_found`: `review_governing_boundary`の全実例について、設計判断を変え得る区別が要求または正本の不変条件、全件観測、または未知の区別に依存しない設計上の扱いによって閉じており、その閉じたreview scopeに必要な観測がすべて終端し、対象漏れと具体的反例のいずれも成立しなかった。
+- `unavailable`: 反例の有無を変え得る必要入力またはproducer resultを受領できず、上の二結果のどちらにもbindできない。
+
+具体的反例は、使用した規範と具体的事実だけで成立する。成立後に無関係な観測の欠落、失敗または追加があっても失効させない。反対に`no_counterexample_found`は、単に設計が自己宣言した有限な対象を読み終えたことでは成立しない。`review_governing_boundary`にある既存または将来の実例が設計宣言境界から漏れず、新しい設計判断も要求しないことまでreview scopeが閉じていなければ受け入れない。openなreview対象集合では、正本の不変条件または未知の区別へ依存しない一般的な扱いがこの閉包を与えない限り`unavailable`とする。
+
+open boundary、名称、記載の欠落、未観測対象の可能性から、共通判断違反を推測しない。明示された規範に反する具体的事実、または一般設計がその判断に必要だと明示した事実前提を直接否定する具体的事実だけを反例にできる。
+
+結果の意味predicateは独立producerだけが実行する。`counterexample_found`では、一つの具体的事実が`review_governing_boundary`の対象なのに設計から漏れるか、設計の共通判断と直接両立しないと独立producerがbindした終端結果だけで成立し、他の適用範囲の閉包を要求しない。`no_counterexample_found`では、`review_governing_boundary`全体を設計が包含し、判断差も閉じたことを同じproducerがbindした終端結果を要求する。review対象の一部にしか効力を持たない`no_counterexample_found`を一般設計全体へ投影しない。
+
+rootが確認するのは、bind済みproducerから終端結果が届き、producer execution identity、現在のdesign identity、review operation identityおよびresult identityを結合できることだけである。反例の直接不両立またはscope閉包をrootが再判定、補完または再生成しない。特定のfield集合、locator、列挙順、重複検査、記録identityの再構成を要求しない。
+
+Candidate180が作る`review_boundary_ready`、`design_change_exposure`、`general_design_review_required`、`review_gate_satisfied`、独立review resultおよび`general_design_admissible`の効力は、判定対象のdesign identity、規範上の対象境界の状態、意味上の変更効果境界の状態、反例の有無を変え得るsnapshot入力の状態へbindする。これは`absent / not_required`を含む全受入経路へ同じく適用する。`unavailable`はさらに、その原因となった必要入力の到達可能性、review permission、bind可能なnon-root producerおよびproducer resultの配送状態へ効力をbindする。
+
+artifact変更発行前に、受領resultがこれらのbind済み入力を変えた場合は、その入力に依存するCandidate180の状態だけを失効させ、現在入力から`present / absent / unobserved`、review要否、review resultの必要性および設計受入を判断し直す。`unavailable`の原因が解消した場合は、その`unavailable`と依存する受入状態だけを失効させ、同じdesign identityに新しいreview operationとproducer bindingを作れる。失効は入力を変えたoperationへ局所化し、無関係な変更、別設計または入力が変わっていない既存resultへ伝播させない。`counterexample_found`も、その成立を直接支えた規範または具体的事実を変えるbind済みresultだけが失効でき、別scopeの欠落、追加または変更では失効させない。このbindingに固定field、path、locatorまたはrecord schemaを要求しない。
+
+## 結果が変える境界
+
+- `not_required`: `review_gate_satisfied=true`。`implementation_bound`と`design_change_exposure != present`を別に満たす場合だけ`general_design_admissible=true`となる。
+- `review_boundary_ready=false`: `general_design_admissible=false`。未観測を`not_required`へ変換せず、欠けた境界入力へbindした`unavailable`とする。
+- `design_change_exposure=present`: `general_design_admissible=false`。成立済みの具体的反例として現在のdesign identityを`blocked`にし、独立reviewを作らない。
+- `no_counterexample_found`: `review_gate_satisfied=true`。`implementation_bound`と`design_change_exposure != present`を別に満たす場合だけ、そのreviewが対象にした現在の一般設計を実装へ渡せる。
+- `counterexample_found`: `general_design_admissible=false`。現在の一般設計のartifact変更を発行せず、その設計identityを`blocked`にする。別設計は別operation identityで作り直す。
+- `unavailable`: `general_design_admissible=false`。欠陥を確定したとは扱わず、現在の設計を実装へ渡さない。
+
+この停止効果をtask全体、無関係なread、別の一般設計、既に成立したresultへ広げない。結果の影響範囲はC147の`DECISION_BOUNDARY`で未発行の現在設計の実装operation classへbindする。
+
+## 処理制御として固定しないもの
+
+次はこの設計の構成要素にしない。
+
+- repositoryを何回、どの順序で読むか
+- どのtool、subagent数、呼出し順、並列数を使うか
+- review packetや結果をJSON等の固定schemaにすること
+- file path、canonical locator、record identityを結果の成立条件にすること
+- 全sourceを先に分類してから反例判定する等の途中工程
+- 試験名やcaseごとの分岐
+- Scoreを上げるための既知oracle固有条件
+
+これらはpredicateを変えない実行方法であり、C147の`METHOD`の範囲に残す。
+
+## 設計reviewと実装の停止条件
+
+この文書、Candidate147の制御原文、一般設計原則だけを独立producerへ渡す。実装、Target評価、ADR9、旧Candidate、先行findingは渡さない。reviewerは、一般入力で次のいずれかを成立させる具体的反例を探す。
+
+- 閉じた設計に不要reviewを要求する。
+- openな一般設計を独立reviewなしでadmitする。
+- 具体的反例を無関係な欠落で失効させる。
+- 反例不成立のまま不完全な観測から`no_counterexample_found`をadmitする。
+- rootが独立producerを代行または再判定できる。
+- 禁止情報なしではreview結果を構成できない。
+- file、tool、順序、件数またはschemaを固定しないと実行できず、境界制御として成立しない。
+
+一件でも成立すれば、この設計identityはrejectし、設計を一般条件から改訂して再reviewする。試験、fixture、oracle、ratingを変更して解消しない。`no_counterexample_found`を受領するまでCandidate bundle、評価profile、Target評価を作らない。
+
+## 実装後の固定gate
+
+設計review通過後に限り、Candidate147のbundleを直接親として一つのpredicateを組み込む。Target評価では既存ADR9 r2のcase、TaskSpec、fixture、oracle、ratingを変更しない。最初のCandidate gateは各ケースN=5とし、保存済みC147 N=50はbaseline evidenceとしてのみ用いる。Candidate側の既存atomic runがなければ新規発行し、valid不足だけを補充する。
+
+品質だけでなく、不要review、必要reviewの未起動、禁止入力配送、root代行、具体的反例の失効、不完全な`no_counterexample_found`、誤った`blocked`を個別に監査する。一件でも一般機序違反があればStandard14、採用、release、projectionへ進めず、試験固有修正をせず設計境界へ戻る。

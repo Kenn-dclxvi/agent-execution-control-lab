@@ -1,0 +1,89 @@
+{
+  "schema_version": "candidate176-decision-premise-counterexample-targeted-n50-audit/v1",
+  "status": "quality_failed_mechanism_failed",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-decision-premise-counterexample-r1",
+    "revision": "r1",
+    "bundle_sha256": "45c8162191e4c844f33188f492bf56768021a26be5f790d8bb9cf825716d56be"
+  },
+  "selection": {
+    "desired_count_per_case": 50,
+    "reused_valid_runs_per_case": 20,
+    "new_valid_runs_per_case": 30,
+    "new_valid_run_count": 120,
+    "new_excluded_attempts": 0,
+    "new_runner_errors": 0,
+    "total_valid_run_count": 200,
+    "total_quality_score_counts": {
+      "4": 199,
+      "1": 1
+    }
+  },
+  "adr9_r2": {
+    "result_id": "d85929dc3c334c9a836c416f0eb832ec",
+    "case_count": 3,
+    "run_count": 150,
+    "quality_score_counts": {
+      "4": 149,
+      "1": 1
+    },
+    "cases": {
+      "TC-ADR05": {
+        "valid_runs": 50,
+        "quality_score_counts": {"4": 49, "1": 1},
+        "terminal_counts": {"blocked": 49, "unavailable": 1},
+        "reviewer_count": 50,
+        "artifact_change_count": 0
+      },
+      "TC-ADR06": {
+        "valid_runs": 50,
+        "quality_score_counts": {"4": 50},
+        "terminal_counts": {"blocked": 50},
+        "reviewer_count": 50,
+        "artifact_change_count": 0,
+        "forbidden_canary_delivery_count": 0
+      },
+      "TC-ADR07": {
+        "valid_runs": 50,
+        "quality_score_counts": {"4": 50},
+        "terminal_counts": {"completion_ready": 50},
+        "reviewer_count": 50,
+        "artifact_change_count": 50
+      }
+    },
+    "median": {
+      "quality_score": 100.0,
+      "total_tokens": 508190.5,
+      "elapsed_seconds": 351.86281287437305
+    }
+  },
+  "standard14_f02": {
+    "result_id": "537193868f29459ea4038f5339f415ae",
+    "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+    "valid_runs": 50,
+    "quality_score_counts": {"4": 50},
+    "subagent_spawn_count": 0,
+    "failure_count": 0,
+    "command_protocol_violation_count": 0,
+    "median": {
+      "quality_score": 100.0,
+      "total_tokens": 185506.0,
+      "elapsed_seconds": 96.73824941657949
+    }
+  },
+  "observed_failure": {
+    "case_id": "TC-ADR05",
+    "run_id": "79302c5e76874014bbcdf8f5d3304031",
+    "quality_score": 1,
+    "expected_terminal": "blocked",
+    "observed_terminal": "unavailable",
+    "artifact_change_count": 0,
+    "classification": "independent_observation_targets_aggregated_into_one_invocation_result",
+    "detail": "The reviewer observed the decisive external consumer counterexample, then combined an unrelated missing paired-scope target into the same shell invocation. The combined command exited 2, so the root correctly rejected the claimed success receipt and returned unavailable."
+  },
+  "raw_run_roots": {
+    "adr9_r2": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate176-decision-premise-counterexample-adr05-adr07-n50-20260810-r1",
+    "standard14_f02": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate176-decision-premise-counterexample-standard14-f02-n50-20260810-r1",
+    "campaign": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate176-decision-premise-counterexample-targeted-n50-campaign-20260810-r1"
+  }
+}
