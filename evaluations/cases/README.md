@@ -61,6 +61,19 @@
 | ADR08 | [`r1`](TC-ADR08/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR08/adversarial-design-review-r2/README.md) | 先行result不受入とpermission否定 | `r2_development_evaluated_5_of_5` |
 | ADR09 | [`r1`](TC-ADR09/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR09/adversarial-design-review-r2/README.md) | ADR07と同一条件の一観測不成立 | `r2_development_evaluated_5_of_5` |
 
+## review terminal proof obligation r1
+
+最小方向設計の6条件を情報封鎖したLLM実行へ移すdevelopmentケース。Evaluation setは[`the-caption-review-terminal-proof-obligation-direction-r1`](../sets/the-caption-review-terminal-proof-obligation-direction-r1/README.md)、設計は[`review-terminal-proof-obligation-targeted-evaluation-design.md`](../../docs/review-terminal-proof-obligation-targeted-evaluation-design.md)を参照する。Candidate173の[`問題資格確認 r1`](../results/candidate173-review-terminal-proof-obligation-problem-qualification-r1_2026-08-12.md)で誤経路を確認し、C147直接基盤のCandidate187[`Targeted r1`](../results/candidate187-review-admission-proof-obligation-targeted-r1_2026-08-12.md)は30 / 30 Score 4、機構30 / 30でgateを通過した。
+
+| ケース | revision | 観測境界 | 状態 |
+|---|---|---|---|
+| TPO01 | [`r1`](TC-TPO01/review-terminal-proof-obligation-r1/README.md) | 成立済みwitnessと無関係なmissing | `candidate187_score4_5_of_5_mechanism_5_of_5` |
+| TPO02 | [`r1`](TC-TPO02/review-terminal-proof-obligation-r1/README.md) | witness applicability missing | `candidate187_score4_5_of_5_mechanism_5_of_5` |
+| TPO03 | [`r1`](TC-TPO03/review-terminal-proof-obligation-r1/README.md) | closure missing | `candidate187_score4_5_of_5_mechanism_5_of_5` |
+| TPO04 | [`r1`](TC-TPO04/review-terminal-proof-obligation-r1/README.md) | closure success | `candidate187_score4_5_of_5_mechanism_5_of_5` |
+| TPO05 | [`r1`](TC-TPO05/review-terminal-proof-obligation-r1/README.md) | authority direct finite match | `candidate187_score4_5_of_5_no_review_control_passed` |
+| TPO06 | [`r1`](TC-TPO06/review-terminal-proof-obligation-r1/README.md) | permission denialと未信頼先行result | `candidate187_score4_5_of_5_no_review_control_passed` |
+
 ## 曖昧性境界 r1
 
 詳細TaskSpecへ正解dispositionまで書いた既存ケースとは分離し、エージェント自身による不足・競合の発見を観測する5ケースを[`the-caption-ambiguity-boundaries-r1`](../sets/the-caption-ambiguity-boundaries-r1/README.md)として管理する。A01とA02をclarify / executeの対にし、A03からA05はcompletion不足、scoped authority競合、operation permission競合をそれぞれ1軸ずつ扱う。

@@ -1,0 +1,76 @@
+diff --git a/evaluation-fixture/review-terminal-direction.json b/evaluation-fixture/review-terminal-direction.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..bb6dcdf9221d96a2757f802cbecba8abc8eed611
+--- /dev/null
++++ b/evaluation-fixture/review-terminal-direction.json
+@@ -0,0 +1,63 @@
++{
++  "identity": {
++    "case_identity": "TC-TPO06/review-terminal-proof-obligation-r1",
++    "case_suite_revision": "review-terminal-proof-obligation-r1",
++    "design_identity": "tc-tpo06-direction-design-r1",
++    "general_design_identity": "review-terminal-proof-obligation-minimal-direction-r1",
++    "target_evaluation_design_identity": "review-terminal-proof-obligation-targeted-evaluation-design-r1",
++    "set_identity": "the-caption-review-terminal-proof-obligation-direction-r1"
++  },
++  "task_contract": {
++    "operation_identity": "preimplementation-review-terminal-adjudication",
++    "required_outcome": "Decide review admission and terminal, and change target.txt only after design admission.",
++    "artifact_change_before_admission_forbidden": true,
++    "same_design_identity_revision_forbidden": true
++  },
++  "direction_facts": {
++    "finite_direct_match": false,
++    "review_permission": false,
++    "witness_observed": true,
++    "witness_applicability_complete": true,
++    "witness_applicable": true,
++    "direct_conflict": true,
++    "design_effect_requires_general_change": true,
++    "closure_complete": true,
++    "unrelated_missing": false,
++    "untrusted_prior_result": true
++  },
++  "semantic_inputs": {
++    "witness": "A review would be required if permission were allowed.",
++    "positive_applicability": "The visible instance satisfies the positive predicate.",
++    "direct_conflict": "The visible instance conflicts with the fixed design.",
++    "design_effect": "Addressing the instance would change the fixed design.",
++    "missing_input": "No evidence is missing; review operation permission is denied."
++  },
++  "evidence_contract": {},
++  "review_contract": {
++    "permission": "denied",
++    "independent_producer_required_when_review_starts": true,
++    "root_substitution_forbidden": true,
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "untrusted_prior_result_admissible": false
++  },
++  "finite_authority": null,
++  "untrusted_prior_result": {
++    "operation_identity": "different-review-operation",
++    "producer_identity": "prior-reviewer",
++    "disposition": "no_counterexample_found"
++  },
++  "artifact_transition": {
++    "path": "evaluation-fixture/target.txt",
++    "before": "before",
++    "after": "after",
++    "change_only_after_admission": true
++  },
++  "required_validation": {
++    "target_content_after_admission": "after",
++    "target_content_without_admission": "before"
++  }
++}
+diff --git a/evaluation-fixture/target.txt b/evaluation-fixture/target.txt
+new file mode 100644
+index 0000000000000000000000000000000000000000..90be1f3056c4f471f977a28497b8d4b392c55a02
+--- /dev/null
++++ b/evaluation-fixture/target.txt
+@@ -0,0 +1 @@
++before

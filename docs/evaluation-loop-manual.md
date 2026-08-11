@@ -596,7 +596,23 @@ v3 resultは`import-result`でcase rowごとのatomic runへ索引化できる�
 
 ## 13. Storage maintenance
 
-検証cloneのcopy mode、容量監査、期限切れscratchのguarded GCは[`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md)を参照する。登録済みresultまたはrepositoryから参照するraw evidenceは自動GCしない。
+ローカルの新規試験では、Layer 1とLayer 2の物理複製を通常copyへ退避させないため、実行controllerへ`THE_CAPTION_EVAL_COPY_MODE=clonefile`を渡す。clonefileを使用できなければ、その試験はworkspaceを作らず停止する。別filesystemでの通常copyは、必要容量を別途確認して明示的に許可した試験だけで使う。
+
+複数runを持つ通常試験も、8時間runと同じstorage sealを使用する。全Layer 2 runがterminalになり、all-agent usage、command evidence、owner-producer evidenceなど採点に必要なviewをworkspace削除前に固定した後、試験root（直下に`cycle/`があるdirectory）を`--batch`へ渡す。
+
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py seal-batch \
+  --batch /absolute/path/to/trial-root
+```
+
+`seal-batch`は完全なworkspaceと自己完結fixtureを1つの検証済み`tar.zst`へ保存してから、live workspaceだけを削除する。Layer 3採点とLayer 4 result登録が完了したら、同じrootを最終圧縮する。
+
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py compact-batch \
+  --batch /absolute/path/to/trial-root
+```
+
+この順序を通常試験の完了条件とし、未登録の途中runや、採点用viewをまだ固定していないworkspaceを削除しない。検証cloneのcopy mode、容量監査、復元方法、期限切れscratchのguarded GCは[`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md)を参照する。登録済みresultまたはrepositoryから参照するraw evidenceは自動GCしない。
 
 ## 14. Self-test
 

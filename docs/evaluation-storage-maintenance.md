@@ -96,9 +96,9 @@ python3 scripts/evaluation_storage.py gc \
 
 `manifest`と`receipt`は上書きしない。登録済みresult、文書から参照するraw evidence、共有fixtureの参照先は自動GC対象外である。
 
-## 8時間runのrolling sealと圧縮
+## 通常試験と8時間runのseal・圧縮
 
-多数batchを1つの長期run配下へ保存する場合は、直下run単位のGCではなく`layer2/extensions/long_run_storage/`を使う。容量guard、clonefile必須のLayer 1作成、実行直後のworkspace pruning、登録後の`tar.zst`圧縮をbatch単位で行う。
+複数workspaceを持つ通常試験と、多数batchを1つの長期run配下へ保存する試験は、直下run単位のGCではなく`layer2/extensions/long_run_storage/`を使う。通常試験では試験root、長期runでは各batch rootを同じ`--batch`引数へ渡す。容量guard、clonefile必須の物理複製、実行後のworkspace pruning、登録後の`tar.zst`圧縮を行う。
 
 実行直後のsealはblind rating用成果を先に固定し、完全なworkspaceと自己完結fixtureを含むarchiveをstreaming生成する。圧縮後のmember hashと`zstd -t`を検証してからworkspaceのlive copyだけを削除し、Layer 1 fixtureは次batchのclone元かつ固定済みartifactとして保持する。再生成契約をその代替にしない。Layer 3/4に必要なartifactは直接参照できる状態で残す。result登録後の最終compactはLayer 2〜4のevidenceを再度sealし、Layer 1、`result-registration.json`、最小summaryを直接参照できる状態で残す。完全な復元にはexecution archiveとfinal archiveの両方を使用する。
 
@@ -107,9 +107,10 @@ python3 scripts/evaluation_storage.py gc \
 ## 維持手順
 
 1. 大規模runの前後に`audit`する。
-2. 通常実行は`auto`のままにし、qualificationでclonefileと通常copyのfixture identity一致、source / destinationの変更分離を確認する。
+2. ローカルの新規試験は`THE_CAPTION_EVAL_COPY_MODE=clonefile`でfail closedし、qualificationでclonefileと通常copyのfixture identity一致、source / destinationの変更分離を確認する。別filesystemで通常copyが必要な場合だけ、必要容量を確認したうえで`auto`または`copy`を明示する。
 3. auditでGit pack重複が増えた場合は`deduplicate-packs`をdry-run、適用する。
 4. 週次に標準3日保持でGC manifestを作り、候補と参照状態を確認してから適用する。
 5. 3 GiB超過ではunreferenced scratchと外部runtime複製を調べ、5 GiB超過またはfree 40 GiB未満では新規大規模runを止めて監査する。
 6. registry、公開済み評価文書、v1 / v2履歴artifactはこのGCで変更しない。
-7. 8時間runでは各batchの直前にcapacity guard、実行直後にexecution seal、result登録後にfinal compactを行う。
+7. 複数runを持つ通常試験では、採点に必要なviewの固定後にexecution seal、result登録後にfinal compactを行う。
+8. 8時間runでは各batchの直前にcapacity guard、実行直後にexecution seal、result登録後にfinal compactを行う。

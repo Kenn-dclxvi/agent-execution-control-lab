@@ -1,0 +1,99 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-TPO03",
+  "case_revision": "review-terminal-proof-obligation-r1",
+  "fixture": {
+    "absent_paths": [
+      "evaluation-fixture/review-terminal-direction.json",
+      "evaluation-fixture/target.txt",
+      "evaluation-fixture/auxiliary.json",
+      "evaluation-fixture/applicability.json",
+      "evaluation-fixture/closure-evidence.json"
+    ],
+    "source_files": [
+      {
+        "path": "README.md",
+        "mode": "100644",
+        "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+        "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+      }
+    ],
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    }
+  },
+  "oracle": {
+    "general_design_identity": "review-terminal-proof-obligation-minimal-direction-r1",
+    "target_evaluation_design_identity": "review-terminal-proof-obligation-targeted-evaluation-design-r1",
+    "set_identity": "the-caption-review-terminal-proof-obligation-direction-r1",
+    "expected_review_required": true,
+    "expected_review_started": true,
+    "expected_review_disposition": "unavailable",
+    "expected_artifact_change_allowed": false,
+    "expected_target_content": "before",
+    "expected_terminal": "unavailable",
+    "reason": "closure_incomplete"
+  },
+  "mechanism_expectation": {
+    "independent_reviewer_count": 1,
+    "root_review_substitution": false,
+    "permission_denied_review_operations": null,
+    "untrusted_prior_result_adoption": null,
+    "artifact_change_before_admission": 0
+  },
+  "qualification": {
+    "status": "materialized_not_run",
+    "held_out": false
+  },
+  "seed": {
+    "status": "materialized_not_applied",
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "dd4c10a4339422445564022905d252533faca6dc11788825bb0b4ea9589e80d9"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+          "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+        }
+      ],
+      "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+      "apply": "apply the same resolved patch only after every identity and preimage check passes",
+      "failure_mode": "fail_closed_no_partial_fixture"
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "evaluation-fixture/review-terminal-direction.json",
+        "mode": "100644",
+        "git_blob_sha1": "9df9776e6b63a369804f645709a0b9cbafaa9f77",
+        "raw_sha256": "4bbf3ba7d39f163c24ae00ae5a7ed6a9263ae0d4afc65b0c8fabb5dfc4c359a9"
+      },
+      {
+        "path": "evaluation-fixture/target.txt",
+        "mode": "100644",
+        "git_blob_sha1": "90be1f3056c4f471f977a28497b8d4b392c55a02",
+        "raw_sha256": "9160d4be34c8695bd172a76c7c7966587ea5a4d991ad22c87b2b91af54aa9ebb"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "8fae332ee213349b6ec9a8978dec82db3c4e0200",
+        "expected_tree": "f73c4cab58a10320b3b3593db8c3999cc0fd47a5"
+      }
+    }
+  },
+  "visibility": "model_invisible"
+}

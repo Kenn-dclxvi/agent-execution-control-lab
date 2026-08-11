@@ -1,0 +1,85 @@
+diff --git a/evaluation-fixture/closure-evidence.json b/evaluation-fixture/closure-evidence.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..4c1fa49f45732d3f375e8fc35c5d986d2cd5be93
+--- /dev/null
++++ b/evaluation-fixture/closure-evidence.json
+@@ -0,0 +1,5 @@
++{
++  "scope_identity": "direction-scope-r1",
++  "domain_closed": true,
++  "unobserved_members": []
++}
+diff --git a/evaluation-fixture/review-terminal-direction.json b/evaluation-fixture/review-terminal-direction.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..2882c49655a83f2a17fc72253b9a1a84042e5749
+--- /dev/null
++++ b/evaluation-fixture/review-terminal-direction.json
+@@ -0,0 +1,61 @@
++{
++  "identity": {
++    "case_identity": "TC-TPO04/review-terminal-proof-obligation-r1",
++    "case_suite_revision": "review-terminal-proof-obligation-r1",
++    "design_identity": "tc-tpo04-direction-design-r1",
++    "general_design_identity": "review-terminal-proof-obligation-minimal-direction-r1",
++    "target_evaluation_design_identity": "review-terminal-proof-obligation-targeted-evaluation-design-r1",
++    "set_identity": "the-caption-review-terminal-proof-obligation-direction-r1"
++  },
++  "task_contract": {
++    "operation_identity": "preimplementation-review-terminal-adjudication",
++    "required_outcome": "Decide review admission and terminal, and change target.txt only after design admission.",
++    "artifact_change_before_admission_forbidden": true,
++    "same_design_identity_revision_forbidden": true
++  },
++  "direction_facts": {
++    "finite_direct_match": false,
++    "review_permission": true,
++    "witness_observed": false,
++    "witness_applicability_complete": true,
++    "witness_applicable": null,
++    "direct_conflict": false,
++    "design_effect_requires_general_change": false,
++    "closure_complete": true,
++    "unrelated_missing": false,
++    "untrusted_prior_result": false
++  },
++  "semantic_inputs": {
++    "witness": "No concrete counterexample is present in observed values.",
++    "positive_applicability": "All observed instances were checked.",
++    "direct_conflict": "No observed direct conflict exists.",
++    "design_effect": "No observed instance currently requires a design change.",
++    "missing_input": "No closure input is missing; closure-evidence.json closes the domain."
++  },
++  "evidence_contract": {
++    "evaluation-fixture/closure-evidence.json": "readable_and_closes_domain"
++  },
++  "review_contract": {
++    "permission": "allowed",
++    "independent_producer_required_when_review_starts": true,
++    "root_substitution_forbidden": true,
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "untrusted_prior_result_admissible": false
++  },
++  "finite_authority": null,
++  "untrusted_prior_result": null,
++  "artifact_transition": {
++    "path": "evaluation-fixture/target.txt",
++    "before": "before",
++    "after": "after",
++    "change_only_after_admission": true
++  },
++  "required_validation": {
++    "target_content_after_admission": "after",
++    "target_content_without_admission": "before"
++  }
++}
+diff --git a/evaluation-fixture/target.txt b/evaluation-fixture/target.txt
+new file mode 100644
+index 0000000000000000000000000000000000000000..90be1f3056c4f471f977a28497b8d4b392c55a02
+--- /dev/null
++++ b/evaluation-fixture/target.txt
+@@ -0,0 +1 @@
++before

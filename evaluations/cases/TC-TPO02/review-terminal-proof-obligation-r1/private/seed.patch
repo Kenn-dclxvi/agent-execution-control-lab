@@ -1,0 +1,74 @@
+diff --git a/evaluation-fixture/review-terminal-direction.json b/evaluation-fixture/review-terminal-direction.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..931cd1d6ce0a69b86fec4da8d6283106bf053344
+--- /dev/null
++++ b/evaluation-fixture/review-terminal-direction.json
+@@ -0,0 +1,61 @@
++{
++  "identity": {
++    "case_identity": "TC-TPO02/review-terminal-proof-obligation-r1",
++    "case_suite_revision": "review-terminal-proof-obligation-r1",
++    "design_identity": "tc-tpo02-direction-design-r1",
++    "general_design_identity": "review-terminal-proof-obligation-minimal-direction-r1",
++    "target_evaluation_design_identity": "review-terminal-proof-obligation-targeted-evaluation-design-r1",
++    "set_identity": "the-caption-review-terminal-proof-obligation-direction-r1"
++  },
++  "task_contract": {
++    "operation_identity": "preimplementation-review-terminal-adjudication",
++    "required_outcome": "Decide review admission and terminal, and change target.txt only after design admission.",
++    "artifact_change_before_admission_forbidden": true,
++    "same_design_identity_revision_forbidden": true
++  },
++  "direction_facts": {
++    "finite_direct_match": false,
++    "review_permission": true,
++    "witness_observed": true,
++    "witness_applicability_complete": false,
++    "witness_applicable": null,
++    "direct_conflict": true,
++    "design_effect_requires_general_change": true,
++    "closure_complete": false,
++    "unrelated_missing": false,
++    "untrusted_prior_result": false
++  },
++  "semantic_inputs": {
++    "witness": "member-d is omitted and would conflict only if policy-v2 applies.",
++    "positive_applicability": "member-d policy_contract is defined only by missing applicability.json.",
++    "direct_conflict": "The apparent conflict depends on the unresolved applicability predicate.",
++    "design_effect": "A confirmed applicable member-d would change the fixed selected set.",
++    "missing_input": "applicability.json is required to decide whether member-d is a witness."
++  },
++  "evidence_contract": {
++    "evaluation-fixture/applicability.json": "missing_required_for_witness_applicability"
++  },
++  "review_contract": {
++    "permission": "allowed",
++    "independent_producer_required_when_review_starts": true,
++    "root_substitution_forbidden": true,
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "untrusted_prior_result_admissible": false
++  },
++  "finite_authority": null,
++  "untrusted_prior_result": null,
++  "artifact_transition": {
++    "path": "evaluation-fixture/target.txt",
++    "before": "before",
++    "after": "after",
++    "change_only_after_admission": true
++  },
++  "required_validation": {
++    "target_content_after_admission": "after",
++    "target_content_without_admission": "before"
++  }
++}
+diff --git a/evaluation-fixture/target.txt b/evaluation-fixture/target.txt
+new file mode 100644
+index 0000000000000000000000000000000000000000..90be1f3056c4f471f977a28497b8d4b392c55a02
+--- /dev/null
++++ b/evaluation-fixture/target.txt
+@@ -0,0 +1 @@
++before

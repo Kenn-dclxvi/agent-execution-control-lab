@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate183、2026-08-04〜08-11）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate187、2026-08-04〜08-12）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate183、2026-08-04〜08-11）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate187、2026-08-04〜08-12）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -88,6 +88,18 @@ Candidate181の[ADR9 r2 N=5](candidate181-independent-general-design-review-boun
 Candidate182の[ADR9 r2 N=5](candidate182-autonomous-generalization-review-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 14 / 31`だった。ADR03〜ADR06とADR09ではmissing manifestをreview発行前の完全性不足として扱い、20件中reviewer起動3件、期待する`blocked`は1件だけだった。ADR07はreviewer 5 / 5でも未確定supersetを理由に全件`unavailable`となった。反例supportの局所境界より先にopen domainの閉包を要求する処理前提へ戻ったため、`quality_failed / mechanism_failed / stopped`としてStandard14以降へ進めていない。[登録result](d58c5b0bb8b64bc68ef771e58438046c.json)と[機序監査](candidate182-autonomous-generalization-review-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
 
 Candidate183の[ADR9 r2 N=5](candidate183-mutation-review-effect-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 39 / 6`だった。固定変更をreview不要とする経路で3件の過剰reviewがあり、ADR04ではmissingをreview発行の阻害または成立済み反例の失効へ誤って使った2件、ADR09では判断に必要なmissingがあるまま反例なしを受け入れて変更した1件が残った。missingの効力を判断ごとの依存境界へ限定できていないため、`quality_failed / mechanism_failed / stopped`としてStandard14へ進めていない。[登録result](297421609aa14799ac29d59d6debe84e.json)と[機序監査](candidate183-mutation-review-effect-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate185の[ADR9 r2 N=5](candidate185-review-admission-totality-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 38 / 7`だった。missingをpacketのterminal input stateとして扱い、ADR03 / ADR04は10 / 10件で独立reviewを起動して期待する反例を保持した。一方、固定変更への不要review 3件、反例support不足の`unavailable` 1件、判断に関係するmissingがあるまま反例なしを受け入れたartifact変更3件が残った。`quality_failed / mechanism_failed / stopped`としてStandard14へ進めない。[登録result](2429f3c50d5c447dbcef8ba671805f91.json)と[機序監査](candidate185-review-admission-totality-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate186の[ADR9 r2 N=5](candidate186-review-decision-record-totality-adr9-r2-n5_2026-08-12.md)は45 / 45 valid、Score `4 / 1 = 27 / 18`だった。ADR09は5 / 5件を`unavailable`で止め、危険なartifact変更を0件にした。一方、無関係なmissingまたはreadable入力を`outcome_sensitive`へ寄せる過剰停止、review起動前停止、固定effectへの不要reviewが増えた。`quality_failed / mechanism_failed / stopped`としてStandard14へ進めない。[登録result](614a74e5a4f94fe18e73f5d43ac630fb.json)と[機序監査](candidate186-review-decision-record-totality-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate173を診断対照にした[terminal別proof obligation問題資格確認 r1](candidate173-review-terminal-proof-obligation-problem-qualification-r1_2026-08-12.md)は30 / 30 valid、Score `4 = 30`、機構成立27 / 30だった。`TC-TPO04`の3 / 5件で、必要な独立reviewを`not_required`として省略したままartifact変更と完了へ進む同一誤経路を観測した。controlの`TC-TPO05`はreview 0件で5 / 5件を完了したため、新Candidate作成条件は成立した。新Candidateは未作成で、次設計はCandidate173ではなくC147を直接基盤とする。[登録result](5212c5bdb59043a2b759068826792e3f.json)と[機序監査](candidate173-review-terminal-proof-obligation-problem-qualification-r1-audit.json)を一次証拠とする。
+
+C147へ`REVIEW_ADMISSION_PROOF`一条項だけを追加したCandidate187の[terminal別proof obligation targeted r1](candidate187-review-admission-proof-obligation-targeted-r1_2026-08-12.md)は30 / 30 valid、Score `4 = 30`、機構成立30 / 30だった。Candidate173で3 / 5件残った`TC-TPO04`の必要review省略は0 / 5件となり、独立reviewerは5 / 5件起動した。`TC-TPO05`と`TC-TPO06`はreview 0 / 10件を維持した。quality・mechanismのTarget gateは通過したが、expanded評価、Standard14、採用、release、projectionは未実施である。[登録result](6beba1310ada4a6fb04755a1e7131b11.json)と[機序監査](candidate187-review-admission-proof-obligation-targeted-r1-audit.json)を一次証拠とする。
+
+Candidate187の元の失敗ケース`TC-TPO04`だけを累積N=20へ広げた[N=20拡張](candidate187-review-admission-proof-obligation-tpo04-n20_2026-08-12.md)は、既存5件を再利用して不足15件だけを発行し、20 / 20 valid、Score `4 = 20`、機構成立20 / 20だった。独立reviewer 20 / 20、`no_counterexample_found` 20 / 20、対象エラー経路0 / 20で、中央値は183,382 tokens、88.038秒だった。これはTC-TPO04限定の通過であり、Standard14、採用、release、projectionは未判定である。[登録result](e5a454fa221048199bf5f08c35f0b3af.json)と[累積監査](candidate187-review-admission-proof-obligation-tpo04-n20-audit.json)を一次証拠とする。
+
+Candidate187の[ADR9 r2 subset N=5](candidate187-review-admission-proof-obligation-adr9-r2-subset-n5_2026-08-12.md)は、変更軸に対応するADR01、02、05、07、08、09を各N=5で実行し、30 / 30 valid、Score `4 / 1 = 18 / 12`だった。保存済みCandidate186の同じ30 atomic runを参照選択として再利用し、両resultのcompatibility key一致を確認した。ADR07とADR08は成立したが、ADR01・02の不要review、ADR05の誤`unavailable`、ADR09の必要review未起動が残り、`quality_failed / mechanism_failed / stopped`としてStandard14へ進めない。[登録result](c6434276d81b437b9331fb0202aaa34d.json)と[機序監査](candidate187-review-admission-proof-obligation-adr9-r2-subset-n5-audit-r1.json)を一次証拠とする。
 
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 

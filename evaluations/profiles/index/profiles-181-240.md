@@ -2,6 +2,14 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json)
+- [`candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json)
+- [`candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json)
+- [`candidate2-expanded12-global-m24-n1-r1.json`](../candidate2-expanded12-global-m24-n1-r1.json)
+- [`candidate2-expanded12-global-m24-n5-r1.json`](../candidate2-expanded12-global-m24-n5-r1.json)
+- [`candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
+- [`candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json)
+- [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
 - [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
@@ -54,11 +62,3 @@
 - [`candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
 - [`candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)
-- [`candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)
-- [`candidate5-expanded12-global-m24-n5-r1.json`](../candidate5-expanded12-global-m24-n5-r1.json)
-- [`candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json)
-- [`candidate50-root-read-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate50-root-read-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
