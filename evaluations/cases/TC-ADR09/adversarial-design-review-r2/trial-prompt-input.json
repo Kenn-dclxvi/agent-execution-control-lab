@@ -1,0 +1,10 @@
+{
+  "constraints_and_required_recovery": "review必要条件、permission、packet readiness、result admission、general design admission、change allowedの順に判定する。反例対応を同じdesign identity内で行わない。",
+  "design_and_authority_input": "design-admission.jsonのidentity、task_contract、authority、boundary_normative_contract、general_design.semantic、boundary_ledger、required_validation、consumer_inventory、consumer_contracts、review_contractがmodel-visibleの固定入力。historyとuntrusted_prior_resultはreviewer packetへ配送しない。",
+  "read_edit_test_commit_push_merge_authorization": "read、必要な独立review、admit後の指定edit、必須検証、git statusだけを許可。commit、push、networkを禁止。",
+  "review_operation_contract": "review_contract.permission=許可。permission=allowedかつreview必要時だけ、task identity adversarial_design_reviewの独立producer一件を起動する。semantic projection、境界、authority、boundary_normative_contract、必須scope、manifestだけを渡し、実装、期待結果、history、rootの反例予想を渡さない。rootはreviewを代行または補完しない。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "readはAGENTS.md、evaluation-fixture/design-admission.json、manifestに固定されたpathだけを許可。editはevaluation-fixture/design-admission.jsonだけを許可するが、反例または判定不能なら一般設計を改訂せず成果物を変更しない。design identity、authority、boundary、manifest、history、untrusted resultを変更しない。",
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのisolated checkout。実行時HEADはprompt overlay、HEAD^はfixture seed dfac208321bc7b6f7d432e6c3e88a3363e4df621、HEAD^^は3ce91a403f9e0c83f29d56bbe9e7b449b713445d。不一致なら停止する。",
+  "task_kind_goal_and_done_condition": "task_kind=preimplementation_design_admission。evaluation-fixture/design-admission.jsonに固定された契約と一般設計のreview要否とadmissionを判定し、admitした場合だけ必須成果を実装する。実装と必須検証が完了したらcompletion_ready、具体的反例で現在designをrejectしたらblocked、必要証拠または受入可能resultが得られなければunavailable。",
+  "validation_conditions_and_non_machine_risk": "required validationは固定されたrequired_validation.observesの性質と、admit後にartifactsの現在値がrequired値と一致すること。non-machine riskは探索由来境界の反例とreview result admission。"
+}

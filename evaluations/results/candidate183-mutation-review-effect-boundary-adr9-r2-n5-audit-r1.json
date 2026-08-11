@@ -1,0 +1,146 @@
+{
+  "schema_version": "candidate183-mutation-review-effect-boundary-adr9-r2-n5-audit/v1",
+  "status": "quality_failed_mechanism_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-mutation-review-effect-boundary-r1",
+    "revision": "r1",
+    "bundle_sha256": "fbe5c4fbc196d1ce25603bd12953ac8d595aac80f9b23de025bec896a4f10edc"
+  },
+  "evaluation_set_identity_sha256": "ba9e62614b62904d301c9b303e1bb2dccd5951f7bdf15c330f01b716bca16931",
+  "valid_run_count": 45,
+  "excluded_attempt_count": 0,
+  "quality_score_counts": {
+    "1": 6,
+    "4": 39
+  },
+  "targeted_gate_passed": false,
+  "mechanism_gate_passed": false,
+  "case_summary": {
+    "TC-ADR01": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 2,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"1": 2, "4": 3}
+    },
+    "TC-ADR02": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 1,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"1": 1, "4": 4}
+    },
+    "TC-ADR03": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR04": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 3, "unavailable": 2},
+      "reviewer_count": 4,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"1": 2, "4": 3}
+    },
+    "TC-ADR05": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR06": {
+      "valid_runs": 5,
+      "terminal_counts": {"blocked": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "canary_delivery_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR07": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 5},
+      "reviewer_count": 5,
+      "artifact_change_count": 5,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR08": {
+      "valid_runs": 5,
+      "terminal_counts": {"unavailable": 5},
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {"4": 5}
+    },
+    "TC-ADR09": {
+      "valid_runs": 5,
+      "terminal_counts": {"completion_ready": 1, "unavailable": 4},
+      "reviewer_count": 5,
+      "artifact_change_count": 1,
+      "quality_score_counts": {"1": 1, "4": 4}
+    }
+  },
+  "failing_runs": [
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 1,
+      "run_id": "9f3508cc371e4bc48c333e11c0a56e8f",
+      "quality_score": 1,
+      "failure": "authority-fixed mutation received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 4,
+      "run_id": "13bd319a83bc4230bd226bd9690aad92",
+      "quality_score": 1,
+      "failure": "authority-fixed mutation received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 2,
+      "run_id": "b89e6a4289ed4944a839134b983dc11a",
+      "quality_score": 1,
+      "failure": "authority-fixed mutation received an unnecessary independent review"
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 3,
+      "run_id": "eeb011f0ba5a4e32ac0130444f95322b",
+      "quality_score": 1,
+      "failure": "a concrete counterexample for consumer-d was discarded because paired-scope-evidence.json was missing"
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 4,
+      "run_id": "386cc837c8644dad86bb1db8d0bf1af2",
+      "quality_score": 1,
+      "failure": "missing paired-scope evidence was treated as a review packet readiness failure and review was not launched"
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 5,
+      "run_id": "911be495a1cf47adb150e3a4b79e214f",
+      "quality_score": 1,
+      "failure": "no_counterexample_found was admitted despite judgement-relevant missing scope evidence, causing artifact mutation"
+    }
+  ],
+  "mechanism_findings": [
+    "fixed_effect_correspondence is unstable and sometimes routes authority-fixed mutations to review",
+    "missing input is sometimes treated as a review-launch blocker even though it is a terminal review input state",
+    "missing input sometimes invalidates an already-supported counterexample that does not depend on it",
+    "judgement-relevant missing input sometimes fails to make no_counterexample_found unavailable"
+  ],
+  "provenance": {
+    "reference_result_id": "d3e91302f0d14350906075676c5a2791",
+    "compatibility_key": "1543a80108418ce1f2436f5f1945f6e680cf75378cc308d21adee22fcf0f11d3",
+    "reference_pool_key": "114f51f97a96756ff31085b8e08438277dabb14c688c68223e75bb1bcd6211b4",
+    "candidate_pool_key": "15aaedf90655294aa8d3d68a7fd5bc8d84e54f3ff9945aad398dcbca6db45e9a",
+    "selection_id": "026b8516457b49cdb1cb9e0b78ce168e",
+    "analysis_id": "66d5294c21d24c34bd515fa366ca1aa8",
+    "analysis_content_sha256": "f3bf8a959f427ec37b2e652220f31f8088f6c77819c8dad7d5998d00ebf6fd30",
+    "result_id": "297421609aa14799ac29d59d6debe84e",
+    "result_content_sha256": "ba6163e5f57e0581e34f7898b9a130035f489c35ccd3e1f27ba7a24f61f98a21",
+    "raw_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate183-mutation-review-effect-boundary-adr9-r2-n5-20260811-r1"
+  }
+}

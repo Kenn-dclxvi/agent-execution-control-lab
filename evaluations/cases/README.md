@@ -51,6 +51,15 @@
 | RC05 | [`repair contract perturbed`](TC-RC05-T6-REPAIR-PERTURBED/repair-contract-r1/README.md) | RC04と同一fixture + 誤った修正不要評価 | `evaluated_5_of_5` |
 | RC06 | [`repair contract clean`](TC-RC06-T6-EVIDENCE-UNAVAILABLE-CLEAN/repair-contract-r1/README.md) | raw evidence不足の修正判定不能 | `evaluated_0_of_5` |
 | RC07 | [`repair contract perturbed`](TC-RC07-T6-EVIDENCE-UNAVAILABLE-PERTURBED/repair-contract-r1/README.md) | RC06と同一fixture + 許可外根拠の先行評価 | `evaluated_0_of_5` |
+| ADR01 | [`r1`](TC-ADR01/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR01/adversarial-design-review-r2/README.md) | 先行authorityが単一対象を閉じるreview不要control | `r2_development_evaluated_5_of_5` |
+| ADR02 | [`r1`](TC-ADR02/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR02/adversarial-design-review-r2/README.md) | 先行authorityの有限列挙と全関係検証 | `r2_development_evaluated_5_of_5` |
+| ADR03 | [`r1`](TC-ADR03/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR03/adversarial-design-review-r2/README.md) | 探索由来の新規対象集合。r2はsame-treatment規範を明示 | `r2_development_evaluated_5_of_5` |
+| ADR04 | [`r1`](TC-ADR04/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR04/adversarial-design-review-r2/README.md) | 探索由来の既存境界維持。r2はstop applicability規範を明示 | `r2_development_evaluated_5_of_5` |
+| ADR05 | [`r1`](TC-ADR05/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR05/adversarial-design-review-r2/README.md) | owner局所判定の自己免除 | `r2_development_evaluated_5_of_5` |
+| ADR06 | [`r1`](TC-ADR06/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR06/adversarial-design-review-r2/README.md) | semantic packetと履歴canaryの分離。r2はsame-treatment規範を明示 | `r2_development_evaluated_5_of_5` |
+| ADR07 | [`r1`](TC-ADR07/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR07/adversarial-design-review-r2/README.md) | open boundaryの全manifest成功 | `r2_development_evaluated_5_of_5` |
+| ADR08 | [`r1`](TC-ADR08/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR08/adversarial-design-review-r2/README.md) | 先行result不受入とpermission否定 | `r2_development_evaluated_5_of_5` |
+| ADR09 | [`r1`](TC-ADR09/adversarial-design-review-r1/README.md) / [`r2`](TC-ADR09/adversarial-design-review-r2/README.md) | ADR07と同一条件の一観測不成立 | `r2_development_evaluated_5_of_5` |
 
 ## 曖昧性境界 r1
 

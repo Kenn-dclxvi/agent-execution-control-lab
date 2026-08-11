@@ -1,0 +1,703 @@
+{
+  "schema_version": "candidate182-autonomous-generalization-review-boundary-adr9-r2-n5-audit/v1",
+  "status": "quality_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-autonomous-generalization-review-boundary-r1",
+    "revision": "r1",
+    "bundle_sha256": "361af2ee1c8fcd63a7ce751bb6bf62cc109ed36144a975f4f3d3d67069970225"
+  },
+  "evaluation_set_identity_sha256": "ba9e62614b62904d301c9b303e1bb2dccd5951f7bdf15c330f01b716bca16931",
+  "valid_run_count": 45,
+  "excluded_attempt_count": 0,
+  "quality_score_counts": {
+    "1": 31,
+    "4": 14
+  },
+  "targeted_gate_passed": false,
+  "case_summary": {
+    "TC-ADR01": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "completion_ready": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 5,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR02": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "completion_ready": 4,
+        "unclassified": 1
+      },
+      "reviewer_count": 1,
+      "artifact_change_count": 5,
+      "quality_score_counts": {
+        "1": 2,
+        "4": 3
+      }
+    },
+    "TC-ADR03": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 5
+      }
+    },
+    "TC-ADR04": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 1,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 5
+      }
+    },
+    "TC-ADR05": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "blocked": 1,
+        "unavailable": 4
+      },
+      "reviewer_count": 2,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 4,
+        "4": 1
+      }
+    },
+    "TC-ADR06": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 5
+      }
+    },
+    "TC-ADR07": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 5
+      }
+    },
+    "TC-ADR08": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR09": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "1": 5
+      }
+    }
+  },
+  "runs": [
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 1,
+      "run_id": "a8320649a5e2478b85247b60e4c8f7ea",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 2,
+      "run_id": "4c95000f423745a2b5f2118e5c80861e",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 3,
+      "run_id": "fc7b191128a648659a69666424a8b4dc",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 4,
+      "run_id": "44605a53705d4e02837099d4543df661",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR01",
+      "iteration": 5,
+      "run_id": "a54fb7f567614c3db84fda126a1ddf57",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 1,
+      "run_id": "0b6080b97df04588bb24d737e2c9b12e",
+      "reviewer_thread_ids": [
+        "019fefb8-353a-7061-b328-a8dc527b30b4"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 2,
+      "run_id": "48c4fcb7f3bd4409a2553ce699fd63c5",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 3,
+      "run_id": "3c12eb09c4df48eeb7862d3cfbb01d6e",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unclassified",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 4,
+      "run_id": "1b6aa18abb9e4f11aa68885b25474999",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR02",
+      "iteration": 5,
+      "run_id": "18299fbc4f364399bca61d0217f615a5",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "completion_ready",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [
+        "evaluation-fixture/design-admission.json"
+      ],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 1,
+      "run_id": "d5188d4ea3b846d6bf3b9817bea64cc8",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 2,
+      "run_id": "952315fd25d24143a19f38148fc94a9d",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 3,
+      "run_id": "84072b146a36415bb5aa12fc9bbea691",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 4,
+      "run_id": "6406af037be74b8bbdceff079f67aebd",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 5,
+      "run_id": "f203fadc44bc414a88c6099f7b3e0cd5",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 1,
+      "run_id": "667aa7fba4bf4c73b2b4095960f20512",
+      "reviewer_thread_ids": [
+        "019fefb8-6f25-7201-bb84-f2db61a11124"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 2,
+      "run_id": "2a26b37144934a529321452077e63032",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 3,
+      "run_id": "e0f6a30461da42c49544064320a89877",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 4,
+      "run_id": "e71e6b74b2214ed2a5521848826545e7",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 5,
+      "run_id": "162362eb35a24e5eb210169e67573776",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 1,
+      "run_id": "d8d6ba9e0642453b836a0ecf119b1ccf",
+      "reviewer_thread_ids": [
+        "019fefb8-6e96-7e81-9319-1e6917d9fbd0"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "blocked",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 2,
+      "run_id": "3477a603ffaa48e4926da629a5d32841",
+      "reviewer_thread_ids": [
+        "019fefb8-74c6-7180-9758-78c9441006cb"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 3,
+      "run_id": "164de630fdfc45d894574aa107e6f22f",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 4,
+      "run_id": "76e3f4a39989458c85ccdae9f1d74ad3",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 5,
+      "run_id": "82f11a42bab94a099878fbf6b7b8165c",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 1,
+      "run_id": "5cb1beb559084d90acdbca4bbd6ee678",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 2,
+      "run_id": "7fcfe55108c84ca0a58194a40bf09276",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 3,
+      "run_id": "1419982291a74191a676797137859cb2",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 4,
+      "run_id": "80862062171446a68324cecaa0be019e",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 5,
+      "run_id": "b1a571d4b218496fbe07b6db0b8863c6",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 1,
+      "run_id": "4639a24eec11442da64db3cd528ff2d0",
+      "reviewer_thread_ids": [
+        "019fefb8-7cff-7fa1-90c6-2ade3d46809d"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 2,
+      "run_id": "08fdcd9ab2f543e4a83e6f5b66a0778d",
+      "reviewer_thread_ids": [
+        "019fefb8-84a2-7e90-8550-88e9026cdfe6"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 3,
+      "run_id": "03777c3abfbe494aab0b0fcf90ab48eb",
+      "reviewer_thread_ids": [
+        "019fefb8-7b78-7892-8a22-948a1c984f04"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 4,
+      "run_id": "c8a23c5df0974fe79320370496824dba",
+      "reviewer_thread_ids": [
+        "019fefb9-3979-7493-b466-a675e726169f"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 5,
+      "run_id": "484988d184b045b0bb2c60d0852b2589",
+      "reviewer_thread_ids": [
+        "019fefb9-8dc8-71b2-81c7-4e68fc857006"
+      ],
+      "reviewer_count": 1,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "completion_ready",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR08",
+      "iteration": 1,
+      "run_id": "7740c522208c413e8efbf04d09dff8c0",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR08",
+      "iteration": 2,
+      "run_id": "81512a7d003548deb16abedf076c1fcc",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR08",
+      "iteration": 3,
+      "run_id": "4760bd6d961b4cd8a84a12c91b4ea950",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR08",
+      "iteration": 4,
+      "run_id": "4be14e2250b644c4b13195fe068ec3f3",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR08",
+      "iteration": 5,
+      "run_id": "55122a87cd4b454daf57b31920f40dc0",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 4
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 1,
+      "run_id": "2cf1e70cf0b5467193e52d616cb5779c",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 2,
+      "run_id": "e86dc1011cba4678a3dc4e878d4da37f",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 3,
+      "run_id": "dc2347eef3d942bcb61115f321a8fe42",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 4,
+      "run_id": "af4d927e3b6e433d9f51c286a781d590",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 5,
+      "run_id": "54cae605835d4f38b4ca1e4816bd38e6",
+      "reviewer_thread_ids": [],
+      "reviewer_count": 0,
+      "observed_terminal": "unavailable",
+      "expected_terminal": "unavailable",
+      "changed_paths": [],
+      "canary_delivered_to_reviewer": false,
+      "quality_score": 1
+    }
+  ]
+}
+

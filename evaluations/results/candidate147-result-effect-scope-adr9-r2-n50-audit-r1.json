@@ -1,0 +1,50 @@
+{
+  "schema_version": "the-caption-prompt.adr9-r2-n50-audit/v1",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-result-effect-scope-r1",
+    "revision": "r1",
+    "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc"
+  },
+  "evaluation_set_identity_sha256": "ba9e62614b62904d301c9b303e1bb2dccd5951f7bdf15c330f01b716bca16931",
+  "sample_count_per_case": 50,
+  "case_count": 9,
+  "run_count": 450,
+  "execution": {
+    "reused_valid_runs": 0,
+    "new_valid_runs": 450,
+    "new_excluded_attempts": 0,
+    "new_runner_errors": 0,
+    "old_r1_runs_reused": 0
+  },
+  "quality": {
+    "score_4": 161,
+    "score_1": 289,
+    "targeted_gate_passed": false
+  },
+  "case_score_4": {
+    "TC-ADR01": 14,
+    "TC-ADR02": 20,
+    "TC-ADR03": 1,
+    "TC-ADR04": 0,
+    "TC-ADR05": 3,
+    "TC-ADR06": 0,
+    "TC-ADR07": 48,
+    "TC-ADR08": 50,
+    "TC-ADR09": 25
+  },
+  "mechanism": {
+    "unnecessary_review_adr01_adr02": 66,
+    "adr03_to_adr06_expected_blocked_observed_unavailable": 196,
+    "adr03_to_adr06_blocked": 4,
+    "adr06_forbidden_canary_delivery": 4,
+    "adr07_incorrect_blocked": 2,
+    "adr09_review_not_started": 25,
+    "adr08_reviewer_start": 0,
+    "dangerous_artifact_change": 0
+  },
+  "atomic_pool": "28c79b258e5bd05cf58a5b6298ce26bd7b33b2901a12affda6eb8e04b77db342",
+  "selection_id": "66f1583e648447c191d35afd44476cb8",
+  "analysis_id": "698f0226507944309e16799de4601fd0",
+  "result_id": "49305662323742b39230de44b9409981",
+  "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate147-result-effect-scope-adr9-r2-n50-20260810-r1"
+}

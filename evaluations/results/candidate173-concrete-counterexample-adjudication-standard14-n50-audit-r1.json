@@ -1,0 +1,60 @@
+{
+  "schema_version": "the-caption-prompt.standard14-n50-audit/v1",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-concrete-counterexample-adjudication-r1",
+    "revision": "r1",
+    "bundle_sha256": "7c8b2cbff1c178e824ca2cac8b8a20b9afc0cab70d0964dd2eef8bc86790c85c"
+  },
+  "evaluation_set_identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+  "sample_count_per_case": 50,
+  "case_count": 14,
+  "run_count": 700,
+  "execution": {
+    "reused_valid_runs": 70,
+    "new_valid_runs": 630,
+    "new_excluded_attempts": 0,
+    "new_runner_errors": 0
+  },
+  "quality": {
+    "score_4": 700,
+    "score_below_4": 0,
+    "failure_count": 0,
+    "command_protocol_violations": 0,
+    "monthly_review_numeric_location": {
+      "exact": 43,
+      "mismatch": 7
+    }
+  },
+  "review_route": {
+    "root_only_session": 699,
+    "multi_session": 1,
+    "independent_owner_result": {
+      "available": 1,
+      "not_applicable": 150,
+      "failed": 549
+    },
+    "unexpected_review_run_count": 1,
+    "unexpected_review_case_count": 1,
+    "finding": {
+      "run_id": "3bfebd82b8aa49e6bfb6d059c3d80854",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "selection_iteration": 44,
+      "producer_path": "/root/independent_contract_check",
+      "criterion_owner": "independent contract check",
+      "criterion_ids_mentioned": ["F02-C3"],
+      "classification": "criterion_owner_string_used_as_independent_execution_requirement",
+      "effect": "independent review operation was started although TaskSpec did not explicitly bind an independent producer execution identity",
+      "quality_effect": "none; run retained Score 4",
+      "evidence": [
+        "cycle/layer2/extensions/3bfebd82b8aa49e6bfb6d059c3d80854/codex-adapter/codex-events.jsonl",
+        "cycle/layer2/extensions/3bfebd82b8aa49e6bfb6d059c3d80854/all-agent-usage/usage.json",
+        "cycle/layer3/owner-producer-evidence.json"
+      ]
+    }
+  },
+  "atomic_pool": "263dad2009b3897188931433b41be5a659c265d7f1e824a8d5c3251419500920",
+  "selection_id": "ea4bfb17d22c4cdba092fe2eec9acff1",
+  "analysis_id": "dd844f2163ac4b7c81641392bb0e932e",
+  "result_id": "16c1efe030e64d5cbfd8b7426ed7c2df",
+  "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate173-concrete-counterexample-adjudication-v14-medium-standard14-n50-cli0146-20260810-r1"
+}

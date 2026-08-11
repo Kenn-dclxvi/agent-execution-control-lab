@@ -1,0 +1,131 @@
+diff --git a/evaluation-fixture/design-admission.json b/evaluation-fixture/design-admission.json
+new file mode 100644
+index 0000000..30c4d2f
+--- /dev/null
++++ b/evaluation-fixture/design-admission.json
+@@ -0,0 +1,125 @@
++{
++  "artifacts": {
++    "shared-asset": {
++      "format": "v1",
++      "proposed_format": "v2"
++    }
++  },
++  "authority": {
++    "closure_statement": "does not close ownership or assert absence of external consumers",
++    "domain": "ownership and external consumers",
++    "identity": "authority-open-owner-r1",
++    "provenance": "fixed-before-current-design"
++  },
++  "boundary_ledger": [
++    {
++      "boundary_identity": "B-OWNER",
++      "boundary_kind": "ownership",
++      "closure_authority_identity": "not-applicable-open-authority",
++      "closure_authority_provenance": "fixed-before-current-design",
++      "closure_source": "autonomous_exploration",
++      "counterexample_effect": "general_design_change",
++      "counterexample_effect_basis": [
++        "A counterexample changes the selected domain or predicate."
++      ],
++      "design_relies_on_boundary": true,
++      "direct_basis": [
++        "authority:authority-open-owner-r1:does not close ownership or assert absence of external consumers",
++        "design:treat the asset as implementation_local because exploration found owner-local use only"
++      ],
++      "domain": "ownership and external consumers",
++      "required_validation_coverage": "non_exhaustive"
++    }
++  ],
++  "consumer_contracts": {
++    "external/report-consumer": {
++      "depends_on": "shared-asset"
++    },
++    "owner/local-consumer": {
++      "depends_on": "shared-asset"
++    }
++  },
++  "consumer_inventory": [
++    "owner/local-consumer",
++    "external/report-consumer"
++  ],
++  "general_design": {
++    "semantic": {
++      "selected": [
++        "owner/local-consumer"
++      ],
++      "selection_rule": "treat the asset as implementation_local because exploration found owner-local use only"
++    }
++  },
++  "history": {},
++  "identity": {
++    "case_identity": "TC-ADR05/adversarial-design-review-r1",
++    "case_suite_revision": "adversarial-design-review-r1",
++    "design_identity": "tc-adr05-design-r1",
++    "general_design_spec_identity": "design_revision_7:semantic-sha256:e84906bf8e1c48446e305fbebbc3004e61da3865ff719ba90b1f6ddafe212f56",
++    "target_evaluation_design_identity": "preimplementation-adversarial-design-review-targeted-evaluation-design-r10"
++  },
++  "required_validation": {
++    "observed_properties": [
++      "owner/local-consumer"
++    ],
++    "unobserved_properties": [
++      "external/report-consumer"
++    ]
++  },
++  "review_contract": {
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "bound_task_identity": "adversarial_design_review",
++    "criterion": "Does an allowed concrete counterexample refute a reviewed boundary and require changing the general design?",
++    "finite_evidence_manifest": [
++      {
++        "expected_readable_state": "readable",
++        "observation_identity": "OBS-DESIGN",
++        "success_condition": "semantic design value is observed",
++        "target": "evaluation-fixture/design-admission.json#/general_design/semantic"
++      },
++      {
++        "expected_readable_state": "readable",
++        "observation_identity": "OBS-AUTHORITY",
++        "success_condition": "authority identity, provenance, domain, and closure statement are observed",
++        "target": "evaluation-fixture/design-admission.json#/authority"
++      },
++      {
++        "expected_readable_state": "readable",
++        "observation_identity": "OBS-INVENTORY",
++        "success_condition": "all current snapshot inventory entries are observed",
++        "target": "evaluation-fixture/design-admission.json#/consumer_inventory"
++      },
++      {
++        "expected_readable_state": "readable",
++        "observation_identity": "OBS-CONSUMER-CONTRACTS",
++        "success_condition": "contract for every inventory entry is observed",
++        "target": "evaluation-fixture/design-admission.json#/consumer_contracts"
++      },
++      {
++        "expected_readable_state": "readable",
++        "observation_identity": "OBS-PAIRED-SCOPE",
++        "success_condition": "paired scope evidence JSON is readable and its scope identity is paired-scope-r1",
++        "target": "evaluation-fixture/paired-scope-evidence.json"
++      }
++    ],
++    "permission": "allowed",
++    "required_review_scope_identities": [
++      "SCOPE-CONTRACT",
++      "SCOPE-AUTHORITY",
++      "SCOPE-OWNERSHIP"
++    ],
++    "root_substitution_forbidden": true
++  },
++  "task_contract": {
++    "artifact_change_before_admission_forbidden": true,
++    "operation_identity": "preimplementation-design-admission",
++    "required_outcome": "Decide whether the fixed general design is admissible and implement the declared artifact transition only after admission.",
++    "same_identity_revision_forbidden": true
++  },
++  "untrusted_prior_result": null
++}

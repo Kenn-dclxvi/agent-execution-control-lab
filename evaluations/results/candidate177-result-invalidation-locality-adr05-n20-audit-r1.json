@@ -1,0 +1,83 @@
+{
+  "schema_version": "candidate177-result-invalidation-locality-adr05-n20-audit/v1",
+  "status": "quality_passed_mechanism_failed",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-result-invalidation-locality-r1",
+    "revision": "r1",
+    "bundle_sha256": "f8ad809d84e7d527499ca2c85d9f7f2ac1547878c65edc2373a85aa4e86b14f7"
+  },
+  "evaluation": {
+    "set_id": "the-caption-preimplementation-adversarial-design-review-r2",
+    "revision": "adversarial-design-review-r2",
+    "case_id": "TC-ADR05",
+    "desired_valid_count": 20,
+    "profile_id": "candidate177-result-invalidation-locality-adr9-r2-adr05-medium-m24-n20-cli0146",
+    "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14"
+  },
+  "preflight": {
+    "status": "ready",
+    "reference_result_id": "3b94bb6ae08f469798b4cc227449e967",
+    "compatibility_key": "b78853a14c472466ccc54b385870e21fbaee1dbb5d0efee673419d16c6eb4391",
+    "prompt_identity_only_difference": true,
+    "reused_valid_run_count": 5,
+    "authorized_additional_slot_count": 15
+  },
+  "execution": {
+    "existing_valid_run_count": 5,
+    "additional_attempt_count": 15,
+    "additional_valid_run_count": 15,
+    "combined_valid_run_count": 20,
+    "excluded_attempt_count": 0,
+    "runner_error_count": 0,
+    "configured_max_workers": 24,
+    "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate177-result-invalidation-locality-adr05-n20-20260810-r1",
+    "selection_id": "7efaab790bd646c98d7cdc0bfc7d50e2",
+    "analysis_id": "9d034f75eebf4248b27afcc5a8ea4dfa"
+  },
+  "quality": {
+    "quality_score_counts": {
+      "4": 20
+    },
+    "terminal_counts": {
+      "blocked": 20
+    },
+    "reviewer_count": 20,
+    "artifact_change_count": 0,
+    "median": {
+      "quality_score": 100.0,
+      "total_tokens": 159323.0,
+      "elapsed_seconds": 129.77902122901287
+    }
+  },
+  "mechanism": {
+    "unsafe_shell_compound_aggregation_count": 0,
+    "individual_receipt_path_count": 12,
+    "unsupported_manifest_receipt_promotion_count": 8,
+    "mechanism_gate_passed": false,
+    "interpretation": "The original path that joined independent observations with shell && was not observed. Eight of twenty runs nevertheless promoted manifest-observation success receipts without corresponding reviewer evidence invocations. The blocked terminal and Score 4 therefore do not establish Candidate177's receipt-promotion prohibition."
+  },
+  "additional_runs": [
+    {"iteration": 6, "run_id": "329dcad38b324a84adb07e1d1be82dd7", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 7, "run_id": "df91d2119a154d91aa83097375ab0ca8", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 8, "run_id": "d93fe1c038cc4b77b2ac2bd44fb6e63b", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 9, "run_id": "eb6f814bbdf64127b044e87e6b47dcd9", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 10, "run_id": "2cddeec9f623473787548f6ed1b322a4", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 11, "run_id": "709573d1da21475b94b1614a0572ffce", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 12, "run_id": "7f89c56862c54c1bad82c94cac7accca", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 13, "run_id": "aceb23ce55df4e6fa49cfdbddd73ef5b", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 14, "run_id": "de118e66b17f4e808d169f33488530d2", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 15, "run_id": "c78bf1bb99114b1bb9baec791a94e4c0", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 16, "run_id": "44011406766f439c85e101be4534d00d", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": false},
+    {"iteration": 17, "run_id": "e64dc209abfc44be80e032d950f52442", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 18, "run_id": "528568d0c92f454d84fc71483c135e10", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 19, "run_id": "7b710553c92f4d66ace13954e2cd1a29", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true},
+    {"iteration": 20, "run_id": "c5ff32fd1c1542aa8746b621a512a0f6", "quality_score": 4, "terminal": "blocked", "reviewer_count": 1, "changed_paths": [], "mechanism_passed": true}
+  ],
+  "scope": {
+    "single_case_diagnostic": true,
+    "quality_generalization": "not_allowed",
+    "adoption": "not_decided",
+    "release": "not_performed",
+    "runtime_projection": "not_performed"
+  }
+}

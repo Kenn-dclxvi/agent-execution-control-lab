@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate183、2026-08-04〜08-11）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate167、2026-08-04〜08-09）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate183、2026-08-04〜08-11）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -50,6 +50,46 @@ Candidate166の[変更前修正契約の問題資格確認 r1](candidate166-prec
 Candidate167の情報封鎖を維持し、修正必要性と修正後条件の立証責任を追加したCandidate168の[repair evidence burden targeted r1](candidate168-repair-evidence-burden-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 29 / 6`だった。RC02 / RC03の明確化による不要変更は10 / 10件で閉じたが、RC06 / RC07の`unavailable`は4 / 10件に留まった。quality gate不通過のためStandard14へ進めず停止した。
 
 Candidate168の直接立証責任を維持し、TaskSpec全体の判定命題と証拠役割の対応を追加したCandidate169の[repair decision evidence closure targeted r1](candidate169-repair-decision-evidence-closure-r1_2026-08-09.md)は35 / 35 valid、Score `4 / 1 = 30 / 5`だった。判定不能ケースは8 / 10件へ改善した一方、RC03 / RC05の既存成立経路が3件回帰し、command protocol diagnosticも9件を記録した。quality / mechanism gate不通過のためStandard14前で停止し、次Candidateは作成していない。
+
+旧修正契約を流用せず設計第7版から作成したCandidate147の[実装前敵対的設計レビュー問題資格確認 r1](candidate147-preimplementation-adversarial-design-review-problem-qualification-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 3 / 1 = 10 / 13 / 22`だった。ADR01 / ADR02は成果を10 / 10完了したが不要reviewerも10 / 10起動し、危険側ケースで事前に資格対象としたreview・permission迂回後のartifact変更は0件だった。品質失敗は保持する一方、新Candidate作成条件は不成立としてCandidate targeted gateとStandard14を開始せず停止した。
+
+Candidate147へ一般的な設計admissionを追加したCandidate172の[実装前設計admission targeted r1](candidate172-preimplementation-design-admission-targeted-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 1 = 40 / 5`だった。review要否、permission前停止、情報封鎖、未admit変更禁止は成立したが、観測済み反例よりmanifest欠落を優先した3件と、open境界から未観測関係を推測した2件が残り、quality gate不通過でStandard14前に停止した。
+
+Candidate172の反例立証責任と結果優先順位を改訂したCandidate173の[具体的反例判定 targeted r1](candidate173-concrete-counterexample-adjudication-targeted-r1_2026-08-10.md)は45 / 45 valid、Score `4 / 1 = 38 / 7`だった。ADR07の偽反例は5 / 5件で閉じたが、明示規範predicateへ限定したことで、同じ許可済み分類なのに探索履歴だけで除外された具体的instanceを反例にできない7件が回帰し、quality gate不通過で停止した。
+
+r1の入力資格不足を修正し、same-treatmentのpositive predicateと区別属性domainの閉包を先行固定contractへ追加したdevelopment revisionでは、Candidate173の[具体的反例判定 Target r2 baseline](candidate173-concrete-counterexample-adjudication-r2-baseline_2026-08-10.md)が45 / 45 valid、Score `4 = 45`となった。品質・機序条件を全件満たし、新Candidateを必要とする誤経路は観測されなかった。r2はCandidate結果確認後に作成したdevelopment評価であり、held-out evidenceやr1との互換比較には使わない。
+
+Candidate173の[Rating v14 Medium Standard14 N=5](candidate173-concrete-counterexample-adjudication-v14-medium-standard14-atomic-n5-cli0146_2026-08-10.md)は70 / 70 valid、Score `4 = 70`で品質条件を通過した。独立reviewer spawnは0 / 70で、Candidate165で観測した広いreview起動を再現しなかった。Candidate147比はquality同値、token中央値`+10.09%`、elapsed中央値`+0.85%`だった。採用、release、projectionは未決定・未実施である。
+
+同じatomic poolを[Standard14 N=50](candidate173-concrete-counterexample-adjudication-v14-medium-standard14-atomic-n50-cli0146_2026-08-10.md)へ拡張し、既存70件を再利用して不足630件だけを発行した。700 / 700件はScore `4`で品質条件を通過したが、F02の1件でcriterion owner文字列から独立producerを選ぶreview過剰起動を観測した。状態は`quality_passed / review_admission_mechanism_failed_1_of_700`とし、採用へ進めない。
+
+Candidate173の[ADR9 r2 N=50](candidate173-concrete-counterexample-adjudication-adr9-r2-n50_2026-08-10.md)は既存45件を再利用し、不足405件だけを発行した。450 / 450 valid、Score `4 / 1 = 446 / 4`だった。ADR05の過剰停止2件、ADR06の禁止canary配送1件、ADR07の過剰停止1件を保持し、`quality_failed / mechanism_failed`として採用へ進めない。
+
+Candidate175の[ADR9 r2 / Standard14 N=5](candidate175-review-operation-admission-closure-adr9-standard14-n5_2026-08-10.md)は、review operation仕様、専用producer binding、allow-list semantic projectionを一軸で追加した。ADR9は45 / 45、Standard14は70 / 70がScore `4`で、ADR06の禁止canary配送0 / 5、Standard14の独立reviewer起動0 / 70を確認した。Candidate173比の中央値はADR9でtoken`-2.05%`・elapsed`+3.14%`、Standard14でtoken`+6.48%`・elapsed`-5.08%`だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
+
+Candidate176の[ADR9 r2 / Standard14 N=5](candidate176-decision-premise-counterexample-adr9-standard14-n5_2026-08-10.md)は、固定一般設計の明示判断前提を許可済み具体的事実が直接反証する経路を追加した。ADR05は5 / 5で`blocked`、reviewer 5 / 5、artifact変更0 / 5となり、ADR9全体は45 / 45、Standard14は70 / 70がScore `4`だった。Candidate175比の中央値はADR9でtoken`+9.81%`・elapsed`+18.01%`、Standard14でtoken`-2.51%`・elapsed`+19.06%`だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
+
+Candidate176の[失敗観測4ケース targeted N=20](candidate176-decision-premise-counterexample-targeted-n20_2026-08-10.md)は、既存N=5を再利用し、C173で誤経路を観測したADR05・ADR06・ADR07とStandard14 F02だけへ各15件を追加した。4ケース合計80 / 80がScore `4`で、ADR05・ADR06は`blocked`、ADR07は`completion_ready`、ADR06のcanary配送0、F02のサブエージェント起動0だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
+
+Candidate176の[同4ケース targeted N=50](candidate176-decision-premise-counterexample-targeted-n50_2026-08-10.md)は、既存N=20を再利用して各30件、合計120件を追加した。追加分は120 / 120 validだったが、ADR05の1件で期待する`blocked`ではなく`unavailable`となり、4ケース合計はScore `4`が199 / 200、Score `1`が1 / 200だった。独立した観測対象を一つのinvocation resultへ束ね、無関係なmissing evidenceによって決定的証拠のsuccess receiptも成立しなかった一般的な操作境界の失敗である。F02は50 / 50 Score `4`、サブエージェント起動0だった。品質・機序gateは不通過で、採用、release、projectionへ進めていない。
+
+Candidate177の[ADR05 N=5](candidate177-result-invalidation-locality-adr05-n5-audit-r1.json)は5 / 5 valid、Score `4`が5 / 5、terminalは`blocked`が5 / 5、reviewer 5 / 5、artifact変更0 / 5だった。元のshell `&&`によるunsafe aggregateは0件だったが、2件でreviewer自身の対応するevidence invocationなしにmanifest observationのsuccess receiptを結果へ記載した。品質ratingは通過した一方、receipt昇格禁止の機序gateは2 / 5不成立として停止し、採用、release、projectionへ進めていない。
+
+Candidate177の[ADR05 N=20](candidate177-result-invalidation-locality-adr05-n20-audit-r1.json)は、上記5件を再利用して不足15件だけを追加した。20 / 20 valid、Score `4`が20 / 20、terminalは`blocked`が20 / 20、reviewer 20 / 20、artifact変更0 / 20だった。一方、対応するreviewer evidence invocationなしにmanifest observationのsuccess receiptを昇格した実行は合計8 / 20となり、個別receipt経路は12 / 20にとどまった。品質ratingは通過したが機序gateは不通過のため、採用、release、projectionへ進めていない。
+
+Candidate178の[ADR9 r2 N=5](candidate178-support-source-contract-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 39 / 6`だった。ADR06で禁止canary配送1件と誤`unavailable` 1件、ADR07で誤`unavailable` 1件、ADR09で必要reviewer未起動3件を観測した。初回gateは`quality_failed / mechanism_failed / stopped`であり、Standard14、採用、release、projectionへ進めていない。
+
+Candidate179の[ADR9 r2 N=5](candidate179-review-evidence-interface-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 40 / 5`だった。Candidate177のADR05 receipt迂回は5 / 5件で閉じ、ADR06の禁止canary配送とADR09のreviewer未起動も0件だった。一方、assessment recordのidentity、集合またはlocator表現を過剰に棄却した誤`unavailable`がADR03、ADR05、ADR06、ADR07に計5件残り、`quality_failed / mechanism_failed / stopped`としてStandard14以降へ進めていない。[登録result](4d20ff8653d3458e9e1471d20e25ba35.json)と[機序監査](candidate179-review-evidence-interface-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate180の[ADR9 r2 N=5](candidate180-general-design-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 18 / 27`だった。ADR01 / ADR02 / ADR08は15 / 15がScore `4`だったが、ADR03〜ADR06は独立reviewer起動3 / 20、ADR07はreviewer 5 / 5でも完了0 / 5、ADR09はreviewer起動2 / 5だった。root側の直接`present`判定によるreview省略と、open universeの全域閉包要求による過剰停止が残り、`quality_failed / mechanism_failed / stopped`としてStandard14以降へ進めていない。[登録result](4a061bdb49d4411c8c352f3a20e5e23f.json)と[機序監査](candidate180-general-design-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate181の[ADR9 r2 N=5](candidate181-independent-general-design-review-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 42 / 3`だった。ADR01〜ADR05とADR08は30 / 30がScore `4`で、ADR06〜ADR09のうち17 / 20も所定経路へ到達した。一方、現在の変更対象を一件へ縮退して開いたmembership判断のreviewを省略したADR07 / ADR09各1件と、具体的反例を無関係なmissingで`unavailable`へ落としたADR06 1件が残った。`quality_failed / mechanism_failed / stopped`としてStandard14以降へ進めていない。[登録result](4954b7ec8f3c4552850dec05e7ddc649.json)と[機序監査](candidate181-independent-general-design-review-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate182の[ADR9 r2 N=5](candidate182-autonomous-generalization-review-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 14 / 31`だった。ADR03〜ADR06とADR09ではmissing manifestをreview発行前の完全性不足として扱い、20件中reviewer起動3件、期待する`blocked`は1件だけだった。ADR07はreviewer 5 / 5でも未確定supersetを理由に全件`unavailable`となった。反例supportの局所境界より先にopen domainの閉包を要求する処理前提へ戻ったため、`quality_failed / mechanism_failed / stopped`としてStandard14以降へ進めていない。[登録result](d58c5b0bb8b64bc68ef771e58438046c.json)と[機序監査](candidate182-autonomous-generalization-review-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate183の[ADR9 r2 N=5](candidate183-mutation-review-effect-boundary-adr9-r2-n5_2026-08-11.md)は45 / 45 valid、Score `4 / 1 = 39 / 6`だった。固定変更をreview不要とする経路で3件の過剰reviewがあり、ADR04ではmissingをreview発行の阻害または成立済み反例の失効へ誤って使った2件、ADR09では判断に必要なmissingがあるまま反例なしを受け入れて変更した1件が残った。missingの効力を判断ごとの依存境界へ限定できていないため、`quality_failed / mechanism_failed / stopped`としてStandard14へ進めていない。[登録result](297421609aa14799ac29d59d6debe84e.json)と[機序監査](candidate183-mutation-review-effect-boundary-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 

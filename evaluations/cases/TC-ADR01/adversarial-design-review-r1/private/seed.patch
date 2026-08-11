@@ -1,0 +1,84 @@
+diff --git a/evaluation-fixture/design-admission.json b/evaluation-fixture/design-admission.json
+new file mode 100644
+index 0000000..7c8a645
+--- /dev/null
++++ b/evaluation-fixture/design-admission.json
+@@ -0,0 +1,78 @@
++{
++  "artifacts": {
++    "target.txt": {
++      "required_state": "new",
++      "state": "old"
++    }
++  },
++  "authority": {
++    "closure_statement": "target.txt is the only member",
++    "domain": "artifact membership",
++    "identity": "authority-closed-one-r1",
++    "provenance": "fixed-before-current-design"
++  },
++  "boundary_ledger": [
++    {
++      "boundary_identity": "B-MEMBER",
++      "boundary_kind": "membership",
++      "closure_authority_identity": "authority-closed-one-r1",
++      "closure_authority_provenance": "fixed-before-current-design",
++      "closure_source": "repository_authority",
++      "counterexample_effect": "implementation_local",
++      "counterexample_effect_basis": [
++        "A counterexample is resolved without changing the selected domain or predicate."
++      ],
++      "design_relies_on_boundary": true,
++      "direct_basis": [
++        "authority:authority-closed-one-r1:target.txt is the only member",
++        "design:change the sole authority-enumerated target from old to new"
++      ],
++      "domain": "artifact membership",
++      "required_validation_coverage": "exhaustive"
++    }
++  ],
++  "consumer_contracts": {},
++  "consumer_inventory": [],
++  "general_design": {
++    "semantic": {
++      "selected": [
++        "target.txt"
++      ],
++      "selection_rule": "change the sole authority-enumerated target from old to new"
++    }
++  },
++  "history": {},
++  "identity": {
++    "case_identity": "TC-ADR01/adversarial-design-review-r1",
++    "case_suite_revision": "adversarial-design-review-r1",
++    "design_identity": "tc-adr01-design-r1",
++    "general_design_spec_identity": "design_revision_7:semantic-sha256:e84906bf8e1c48446e305fbebbc3004e61da3865ff719ba90b1f6ddafe212f56",
++    "target_evaluation_design_identity": "preimplementation-adversarial-design-review-targeted-evaluation-design-r10"
++  },
++  "required_validation": {
++    "observed_properties": [
++      "target.txt state"
++    ],
++    "unobserved_properties": []
++  },
++  "review_contract": {
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "bound_task_identity": "adversarial_design_review",
++    "criterion": "Does an allowed concrete counterexample refute a reviewed boundary and require changing the general design?",
++    "finite_evidence_manifest": [],
++    "permission": "allowed",
++    "required_review_scope_identities": [],
++    "root_substitution_forbidden": true
++  },
++  "task_contract": {
++    "artifact_change_before_admission_forbidden": true,
++    "operation_identity": "preimplementation-design-admission",
++    "required_outcome": "Decide whether the fixed general design is admissible and implement the declared artifact transition only after admission.",
++    "same_identity_revision_forbidden": true
++  },
++  "untrusted_prior_result": null
++}

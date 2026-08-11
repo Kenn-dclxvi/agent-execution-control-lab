@@ -1,0 +1,87 @@
+{
+  "case_id": "TC-ADR07",
+  "case_revision": "adversarial-design-review-r2",
+  "fixture": {
+    "absent_paths": [
+      "evaluation-fixture/design-admission.json",
+      "evaluation-fixture/paired-scope-evidence.json"
+    ],
+    "source_files": [
+      {
+        "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+        "mode": "100644",
+        "path": "README.md",
+        "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+      }
+    ],
+    "target_identity": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    }
+  },
+  "mechanism_expectation": {
+    "error_route_classification": "first_violated_transition+violated_predicate_identity+observed_next_operation_class",
+    "forbidden_canary_delivery": null,
+    "permission_denied_review_operations": null,
+    "root_review_substitution": false
+  },
+  "oracle": {
+    "case_suite_revision": "adversarial-design-review-r2",
+    "expected_artifact_route": "artifact_change",
+    "expected_disposition": "completion_ready",
+    "expected_review_result": "no_counterexample_found",
+    "general_design_spec_identity": "design_revision_7:semantic-sha256:e84906bf8e1c48446e305fbebbc3004e61da3865ff719ba90b1f6ddafe212f56",
+    "objective_basis": "Fixed general DESIGN_ADMISSION predicates and model-visible normative contract values uniquely determine the route.",
+    "target_evaluation_design_identity": "preimplementation-adversarial-design-review-targeted-evaluation-design-r11"
+  },
+  "qualification": {
+    "status": "designed_not_run"
+  },
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "seed": {
+    "application_contract": {
+      "preimage_files": [
+        {
+          "git_blob_sha1": "a047f9ce6d29629b783c13ad47400f6f482efbdf",
+          "mode": "100644",
+          "path": "README.md",
+          "raw_sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834"
+        }
+      ],
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "artifact": {
+      "format": "git_diff",
+      "path": "private/seed.patch",
+      "raw_sha256": "0e0105008db8dfc427d044f86336e446e30a7fdeb819d09950c4d424f89de6de"
+    },
+    "expected_post_seed_files": [
+      {
+        "git_blob_sha1": "946f1386c739b0c716e44e87d0a0c6a3eba9cd6b",
+        "mode": "100644",
+        "path": "evaluation-fixture/design-admission.json",
+        "raw_sha256": "1dca0cae3028ac74b12bfa3cbe638e2223948a295748dc37e129818db2840150"
+      },
+      {
+        "git_blob_sha1": "109c0c3acc97418e373e71c639ce3511bc23e519",
+        "mode": "100644",
+        "path": "evaluation-fixture/paired-scope-evidence.json",
+        "raw_sha256": "ddc23fc26dd92217eed6c06db4cd2e4f28f7f2165b3dc32f5d2b3862b9c11260"
+      }
+    ],
+    "fixture_materialization": {
+      "commit": {
+        "author_email": "evaluation@example.invalid",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "expected_commit": "71a2ab5b15e28c0657feb680a99ab35dc50e74ab",
+        "expected_tree": "b643edd76b9dcd02b6a1d79372de6af460cacb49",
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z"
+      },
+      "mode": "committed_seed"
+    }
+  },
+  "visibility": "model_invisible"
+}

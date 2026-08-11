@@ -1,0 +1,113 @@
+{
+  "schema_version": "candidate177-result-invalidation-locality-adr05-n5-audit/v1",
+  "status": "quality_passed_mechanism_failed",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-result-invalidation-locality-r1",
+    "revision": "r1",
+    "bundle_sha256": "f8ad809d84e7d527499ca2c85d9f7f2ac1547878c65edc2373a85aa4e86b14f7"
+  },
+  "evaluation": {
+    "set_id": "the-caption-preimplementation-adversarial-design-review-r2",
+    "revision": "adversarial-design-review-r2",
+    "case_id": "TC-ADR05",
+    "desired_valid_count": 5,
+    "profile_id": "candidate177-result-invalidation-locality-adr9-r2-adr05-medium-m24-n5-cli0146",
+    "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14"
+  },
+  "preflight": {
+    "status": "ready",
+    "reference_result_id": "3b94bb6ae08f469798b4cc227449e967",
+    "compatibility_key": "b78853a14c472466ccc54b385870e21fbaee1dbb5d0efee673419d16c6eb4391",
+    "prompt_identity_only_difference": true,
+    "authorized_slot_count": 5
+  },
+  "execution": {
+    "attempt_count": 5,
+    "valid_run_count": 5,
+    "excluded_attempt_count": 0,
+    "runner_error_count": 0,
+    "configured_max_workers": 24,
+    "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate177-result-invalidation-locality-adr05-n5-20260810-r2"
+  },
+  "quality": {
+    "quality_score_counts": {
+      "4": 5
+    },
+    "terminal_counts": {
+      "blocked": 5
+    },
+    "reviewer_count": 5,
+    "artifact_change_count": 0,
+    "median": {
+      "quality_score": 100.0,
+      "total_tokens": 171257,
+      "elapsed_seconds": 130.6859437499661
+    }
+  },
+  "mechanism": {
+    "unsafe_shell_compound_aggregation_count": 0,
+    "individual_receipt_path_count": 3,
+    "unsupported_manifest_receipt_promotion_count": 2,
+    "mechanism_gate_passed": false,
+    "interpretation": "The original path that joined independent observations with shell && was not observed. In two runs the reviewer nevertheless returned manifest_observation success receipts for inventory and consumer-contract supports without corresponding reviewer evidence invocations. The correct blocked terminal therefore does not establish Candidate177's receipt-promotion prohibition."
+  },
+  "runs": [
+    {
+      "iteration": 1,
+      "run_id": "2deb00c8bd5b43bf813f0379fdb6a1e6",
+      "quality_score": 4,
+      "terminal": "blocked",
+      "reviewer_count": 1,
+      "changed_paths": [],
+      "result_locality_path": "parallel_child_results_with_individual_identity_status_and_output",
+      "mechanism_passed": true
+    },
+    {
+      "iteration": 2,
+      "run_id": "11c5d485f2624b3a9b9671d7ee8829a4",
+      "quality_score": 4,
+      "terminal": "blocked",
+      "reviewer_count": 1,
+      "changed_paths": [],
+      "result_locality_path": "separate_individual_observations_before_counterexample",
+      "mechanism_passed": true
+    },
+    {
+      "iteration": 3,
+      "run_id": "8ccdd648d60347e782e19bb3586b69ad",
+      "quality_score": 4,
+      "terminal": "blocked",
+      "reviewer_count": 1,
+      "changed_paths": [],
+      "result_locality_path": "missing_paired_scope_observation_then_unobserved_success_receipt_claim",
+      "mechanism_passed": false
+    },
+    {
+      "iteration": 4,
+      "run_id": "ba8d785fab204dd0a82a4ef2e86daefa",
+      "quality_score": 4,
+      "terminal": "blocked",
+      "reviewer_count": 1,
+      "changed_paths": [],
+      "result_locality_path": "parallel_child_results_with_individual_command_and_exit_receipts",
+      "mechanism_passed": true
+    },
+    {
+      "iteration": 5,
+      "run_id": "e31a55fccbd641e0909be7f2c45625e6",
+      "quality_score": 4,
+      "terminal": "blocked",
+      "reviewer_count": 1,
+      "changed_paths": [],
+      "result_locality_path": "no_reviewer_evidence_invocation_then_unobserved_success_receipt_claim",
+      "mechanism_passed": false
+    }
+  ],
+  "scope": {
+    "single_case_diagnostic": true,
+    "quality_generalization": "not_allowed",
+    "adoption": "not_decided",
+    "release": "not_performed",
+    "runtime_projection": "not_performed"
+  }
+}

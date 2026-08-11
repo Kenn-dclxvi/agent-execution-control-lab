@@ -1,0 +1,130 @@
+diff --git a/evaluation-fixture/design-admission.json b/evaluation-fixture/design-admission.json
+new file mode 100644
+index 0000000..60916e9
+--- /dev/null
++++ b/evaluation-fixture/design-admission.json
+@@ -0,0 +1,124 @@
++{
++  "artifacts": {
++    "known-consumer": {
++      "required_state": "new",
++      "state": "old"
++    }
++  },
++  "authority": {
++    "closure_statement": "does not close all consumers or failure classes",
++    "domain": "consumer and failure applicability",
++    "identity": "authority-open-failures-r1",
++    "provenance": "fixed-before-current-design"
++  },
++  "boundary_ledger": [
++    {
++      "boundary_identity": "B-MEMBERSHIP",
++      "boundary_kind": "membership",
++      "closure_authority_identity": "not-applicable-open-authority",
++      "closure_authority_provenance": "fixed-before-current-design",
++      "closure_source": "autonomous_exploration",
++      "counterexample_effect": "general_design_change",
++      "counterexample_effect_basis": [
++        "A counterexample changes the selected domain or predicate."
++      ],
++      "design_relies_on_boundary": true,
++      "direct_basis": [
++        "authority:authority-open-failures-r1:does not close all consumers or failure classes",
++        "design:retain discovered consumer membership and discovered fallback classes"
++      ],
++      "domain": "consumer and failure applicability",
++      "required_validation_coverage": "non_exhaustive"
++    },
++    {
++      "boundary_identity": "B-FALLBACK",
++      "boundary_kind": "applicability",
++      "closure_authority_identity": "not-applicable-open-authority",
++      "closure_authority_provenance": "fixed-before-current-design",
++      "closure_source": "autonomous_exploration",
++      "counterexample_effect": "general_design_change",
++      "counterexample_effect_basis": [
++        "A counterexample changes the selected domain or predicate."
++      ],
++      "design_relies_on_boundary": true,
++      "direct_basis": [
++        "authority:authority-open-failures-r1:does not close all consumers or failure classes",
++        "design:retain discovered consumer membership and discovered fallback classes"
++      ],
++      "domain": "consumer and failure applicability",
++      "required_validation_coverage": "non_exhaustive"
++    }
++  ],
++  "consumer_contracts": {
++    "known-consumer": {
++      "contract": "open consumer contract"
++    }
++  },
++  "consumer_inventory": [
++    "known-consumer"
++  ],
++  "general_design": {
++    "semantic": {
++      "fallback_classes": [
++        "known-timeout"
++      ],
++      "selected": [
++        "known-consumer"
++      ],
++      "selection_rule": "retain discovered consumer membership and discovered fallback classes"
++    }
++  },
++  "history": {},
++  "identity": {
++    "case_identity": "TC-ADR08/adversarial-design-review-r2",
++    "case_suite_revision": "adversarial-design-review-r2",
++    "design_identity": "tc-adr08-design-r1",
++    "general_design_spec_identity": "design_revision_7:semantic-sha256:e84906bf8e1c48446e305fbebbc3004e61da3865ff719ba90b1f6ddafe212f56",
++    "target_evaluation_design_identity": "preimplementation-adversarial-design-review-targeted-evaluation-design-r11"
++  },
++  "required_validation": {
++    "observed_properties": [
++      "known-consumer",
++      "normal path",
++      "known-timeout"
++    ],
++    "unobserved_properties": [
++      "other consumers",
++      "other failures"
++    ]
++  },
++  "review_contract": {
++    "allowed_dispositions": [
++      "counterexample_found",
++      "no_counterexample_found",
++      "unavailable"
++    ],
++    "bound_task_identity": "adversarial_design_review",
++    "criterion": "Does an allowed concrete counterexample refute a reviewed boundary and require changing the general design?",
++    "finite_evidence_manifest": [],
++    "permission": "denied",
++    "required_review_scope_identities": [
++      "SCOPE-CONTRACT",
++      "SCOPE-AUTHORITY",
++      "SCOPE-CONSUMERS",
++      "SCOPE-FAILURES"
++    ],
++    "root_substitution_forbidden": true
++  },
++  "task_contract": {
++    "artifact_change_before_admission_forbidden": true,
++    "operation_identity": "preimplementation-design-admission",
++    "required_outcome": "Decide whether the fixed general design is admissible and implement the declared artifact transition only after admission.",
++    "same_identity_revision_forbidden": true
++  },
++  "untrusted_prior_result": {
++    "design_identity": "tc-adr08-design-r1",
++    "disposition": "no_counterexample_found",
++    "packet_identity": "stale-packet-r0",
++    "reviewed_boundaries": [
++      "B-MEMBERSHIP"
++    ],
++    "runtime_input_receipt_packet_identity": "stale-packet-r0",
++    "sender_identity": "stale-reviewer"
++  }
++}
