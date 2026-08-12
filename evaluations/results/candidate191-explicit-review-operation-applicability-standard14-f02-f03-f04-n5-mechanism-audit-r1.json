@@ -1,0 +1,26 @@
+{
+  "schema_version": "the-caption-prompt.standard14-targeted-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-explicit-review-operation-applicability-r1",
+  "result_id": "6cbac394f6dc46aea5da398c867df2f5",
+  "reference_result_id": "e2e0857903fb48bc961cb4a53ec250cc",
+  "run_count": 15,
+  "valid_run_count": 15,
+  "score_4_count": 15,
+  "mechanism_status": "passed",
+  "target_cases": {
+    "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 5,
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP": 5,
+    "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": 5
+  },
+  "unwanted_review_producer_run_count": 0,
+  "single_session_run_count": 15,
+  "child_agent_run_count": 0,
+  "command_count": 147,
+  "successful_command_count": 147,
+  "failed_command_count": 0,
+  "command_protocol_violation_count": 0,
+  "quality_failure_count": 0,
+  "unexpected_changed_path_count": 0,
+  "mechanism_gate_passed": true,
+  "conclusion": "Candidate190で不要review producerを起動したF02、F03、F04だけを各5件確認し、15 / 15 valid、Score 4、単一session、子agent 0、command protocol violation 0となった。限定されたStandard14退行確認は通過する。"
+}

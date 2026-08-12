@@ -54,3 +54,9 @@ Candidate173はScore 4件数が446 / 450、Candidate147は161 / 450である。�
 - adoption: `not_decided`
 - release: `not_created`
 - runtime projection: `not_projected`
+
+## 後続のcommand evidence再判定
+
+2026-08-12に、collectorの違反件数ではなく実際の`exec_command` invocationとwrapper outputのmachine-bound resultを対応付け直した。[訂正機構監査r2](candidate147-result-effect-scope-adr9-r2-n50-mechanism-reassessment-r2.json)では、報告44件のうち20件をcollector誤検出、24件・21 runを真正なexit code欠落と判定した。terminal不一致、不要review、review未起動および禁止canary配送も独立して残るため、`mechanism_failed`は維持する。
+
+今後の比較では、登録result `49305662323742b39230de44b9409981`だけで機序状態を推定せず、同resultと訂正機構監査r2を一組としてbindする。既存run、score、KPIおよび当時の監査は変更していない。

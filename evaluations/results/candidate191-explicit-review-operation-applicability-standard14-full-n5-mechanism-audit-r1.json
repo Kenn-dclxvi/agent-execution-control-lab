@@ -1,0 +1,51 @@
+{
+  "schema_version": "the-caption-prompt.standard14-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-explicit-review-operation-applicability-r1",
+  "result_id": "da6ada84ac07426d8c66dddddcb08fdc",
+  "reference_result_id": "a0702207f03a4cb18c8b501329b74023",
+  "run_count": 70,
+  "valid_run_count": 70,
+  "score_4_count": 70,
+  "mechanism_status": "passed",
+  "failure_class": null,
+  "reused_run_count": 15,
+  "new_run_count": 55,
+  "unwanted_review_producer_run_count": 0,
+  "single_session_run_count": 70,
+  "child_agent_run_count": 0,
+  "command_count": 562,
+  "successful_command_count": 561,
+  "failed_command_count": 1,
+  "failed_command_scope": {
+    "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+      "count": 1,
+      "classification": "non_required_read_only_locator_command",
+      "required_command_failure": false,
+      "terminal_or_quality_effect": false
+    }
+  },
+  "command_protocol_violation_count": 0,
+  "terminal_completion_failure_count": 0,
+  "context_leakage_count": 0,
+  "validation_order_violation_count": 0,
+  "result_effect_overpropagation_count": 0,
+  "dangerous_artifact_change_count": 0,
+  "quality_failure_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "owner_producer_diagnostic": {
+    "available": 0,
+    "failed": 55,
+    "not_applicable": 15,
+    "score_4_owner_evidence_eligible": 15,
+    "score_4_owner_evidence_ineligible": 55,
+    "quality_policy": "diagnostic_only"
+  },
+  "candidate_diagnostics": {
+    "monthly_review_numeric_location": {
+      "exact": 5
+    }
+  },
+  "mechanism_gate_passed": true,
+  "conclusion": "既存の限定Standard14 15件を再利用し、不足11ケース55件だけを追加した。累積70 / 70 validかつScore 4で、全70件が単一session、子agent 0、不要review producer 0、command protocol violation 0だった。terminal補完、context漏洩、検証順序違反、result効果の過剰伝播、危険なartifact変更も0件であり、M7の品質・機序完了条件を満たす。"
+}

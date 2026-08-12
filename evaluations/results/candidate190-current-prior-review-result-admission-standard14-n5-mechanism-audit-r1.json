@@ -1,0 +1,50 @@
+{
+  "schema_version": "the-caption-prompt.standard14-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-current-prior-review-result-admission-r1",
+  "result_id": "333508e7f37545218bea8f71fc9d3d1c",
+  "reference_result_id": "a0702207f03a4cb18c8b501329b74023",
+  "run_count": 70,
+  "valid_run_count": 70,
+  "score_4_count": 70,
+  "mechanism_status": "failed",
+  "failure_class": "criterion_owner_promoted_to_unrequested_review_operation",
+  "unwanted_review_producer_run_count": 8,
+  "unwanted_review_producer_cases": {
+    "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 3,
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP": 1,
+    "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": 4
+  },
+  "command_protocol_violation_count": 37,
+  "command_protocol_violation_reason_counts": {
+    "missing_machine_bound_exit_code": 37
+  },
+  "command_protocol_violation_source_counts": {
+    "descendant_rollout_tool_call": 37
+  },
+  "owner_producer_diagnostic": {
+    "available": 10,
+    "failed": 45,
+    "not_applicable": 15,
+    "score_4_owner_evidence_eligible": 25,
+    "score_4_owner_evidence_ineligible": 45,
+    "quality_policy": "diagnostic_only"
+  },
+  "reference_diagnostics": {
+    "command_protocol_violation_count": 0,
+    "owner_producer_evidence_ineligible": 55,
+    "monthly_review_numeric_location": {
+      "exact": 5
+    }
+  },
+  "candidate_diagnostics": {
+    "monthly_review_numeric_location": {
+      "exact": 4,
+      "mismatch": 1
+    },
+    "monthly_review_mismatch_affects_quality_score": false
+  },
+  "quality_failure_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "conclusion": "70 / 70 validかつScore 4だが、ownerまたはnon_machine_riskの語列だけを独立review operationの明示指定として扱い、8 runで不要なreview producerを起動した。M7の機序完了条件に反するためresultを保持して停止する。"
+}

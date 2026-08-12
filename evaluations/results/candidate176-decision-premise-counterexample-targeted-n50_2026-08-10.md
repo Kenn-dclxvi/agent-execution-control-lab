@@ -49,3 +49,9 @@ run `79302c5e76874014bbcdf8f5d3304031`では、reviewerは外部consumerとい�
 - adoption: `not_progressed`
 - release: `not_created`
 - runtime projection: `not_projected`
+
+## 後続のcommand evidence再判定
+
+2026-08-12の[訂正機構監査r2](candidate176-decision-premise-counterexample-mechanism-reassessment-r2.json)では、ADR追加90 runに対するcollector報告13件のうち11件を誤検出、ADR05 run `f8c034a143a145dea5c6efbdc8ca5277`とADR07 run `cf169fdbb35e434aabff31c921de7d98`の2件を真正なmachine-bound exit code欠落と判定した。
+
+ADR05 run `79302c5e76874014bbcdf8f5d3304031`はこのcollector誤検出とは別である。exit code `2`は機械記録されており、独立観測を一つのshell invocationへ束ねた結果、期待`blocked`ではなく`unavailable`になった真正なterminal失敗として維持する。今後の比較では登録resultと訂正機構監査r2を一組としてbindする。

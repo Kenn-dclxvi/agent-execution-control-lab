@@ -49,3 +49,9 @@ F02はC173 N=50で観測した独立producer過剰起動を0 / 20に抑えた。
 - adoption: `not_decided`
 - release: `not_created`
 - runtime projection: `not_projected`
+
+## 後続のcommand evidence再判定
+
+2026-08-12の[訂正機構監査r2](candidate176-decision-premise-counterexample-mechanism-reassessment-r2.json)では、ADR追加45 runに対するcollector報告19件のうち17件を誤検出、ADR05 run `159b3cf3ab6f4b48962e0946a8c2faa8`とADR07 run `07264470f1114e9dba541604616aa536`の2件を真正なmachine-bound exit code欠落と判定した。
+
+80 / 80 Score 4と各terminalは保持するが、targeted N=20の現在の機序解釈は`mechanism_failed`である。今後は登録resultと訂正機構監査r2を一組としてbindし、旧`targeted mechanism: passed`を比較基準にしない。

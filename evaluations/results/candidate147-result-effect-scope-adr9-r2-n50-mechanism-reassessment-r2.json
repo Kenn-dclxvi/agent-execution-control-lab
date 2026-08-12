@@ -1,0 +1,55 @@
+{
+  "schema_version": "review-control-command-evidence-reassessment/v1",
+  "reassessment_id": "candidate147-result-effect-scope-adr9-r2-n50-mechanism-reassessment-r2",
+  "candidate": "Candidate147",
+  "registered_result_id": "49305662323742b39230de44b9409981",
+  "evaluation_scope": "ADR9 r2 N=50",
+  "source_audit": "candidate147-result-effect-scope-adr9-r2-n50-audit-r1.json",
+  "raw_run_root": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate147-result-effect-scope-adr9-r2-n50-20260810-r1",
+  "collector_reported_violation_count": 44,
+  "collector_false_positive_count": 20,
+  "collector_false_positive_breakdown": {
+    "non_command_literal": 15,
+    "machine_bound_result_present_but_unmatched": 5
+  },
+  "genuine_missing_machine_bound_exit_code_count": 24,
+  "genuine_affected_run_count": 21,
+  "genuine_affected_run_score_counts": {
+    "4": 8,
+    "1": 13
+  },
+  "genuine_affected_run_case_counts": {
+    "TC-ADR03": 2,
+    "TC-ADR05": 6,
+    "TC-ADR06": 5,
+    "TC-ADR07": 6,
+    "TC-ADR09": 2
+  },
+  "genuine_affected_run_ids": [
+    "027fb54a8d714c6a99105ee4615e1063",
+    "053c0fe73b434ef6ae21e1234a3060c5",
+    "0e14498965be43f6b208a6ed65289480",
+    "19d76e1943114ae289b5788be626ff9b",
+    "1ae1d509c6f64f088a0e5966b22802a4",
+    "1be372a179e243fd90bc7ed8d770e074",
+    "23b75cbd2bc84d51b5c7a24a30258582",
+    "2a0bc3c1c24a4db0a5c38881c6c40610",
+    "63462cd4cd5848d7934186623a141396",
+    "6b1617d5e9fd4d2f87bc69fdc76c1538",
+    "6b5c86c0bc914fb39bb63696cd87f861",
+    "7018f81852b843228bb83d973667f06b",
+    "8b5fb14d59ec422aaa387c7159087357",
+    "8b88f3c59aa347b18b1d75ab3944497d",
+    "8e7358b801614adca724c83c57cb018a",
+    "9069b4cb987f4103b8628f4547c9ec0e",
+    "ac3ca878b4b04578bca06cd1ee51d3ef",
+    "b3dfc5c684ab47218f8a6802de0a161e",
+    "b86e88149c5b47e1a896c14a695c736b",
+    "c653eb9c93a04cc8a12bc634616dad25",
+    "e5c5705f3d954ce6b6b9581bc7f6fd9e"
+  ],
+  "independent_terminal_failures_remain": true,
+  "mechanism_gate_passed": false,
+  "status": "mechanism_failed_reassessed",
+  "future_comparison_binding": "registered_result_plus_this_reassessment"
+}

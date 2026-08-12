@@ -1,0 +1,181 @@
+{
+  "schema_version": "candidate191-complexity-efficiency-audit/v1",
+  "candidate": {
+    "prompt_identity": "the-caption-3ce91a4-explicit-review-operation-applicability-r1",
+    "bundle_sha256": "6ff3f31585185ca2f08fd63eb19e4d75156425aecc1e1a6da63753768b24a163"
+  },
+  "status": "m8_completed_reassessed_m9_not_ready",
+  "measurement_policy": {
+    "new_evaluation_runs_issued": 0,
+    "candidate_content_changed": false,
+    "quality_mechanism_and_cost_separated": true,
+    "prompt_static_method": "UTF-8 decoded Python character count, raw byte count, top-level bullet count, and backtick-delimited := definition count",
+    "state_method": "Count only explicitly finite named state or result domains. C147 has required_predicate_state. Candidate191 additionally has review_requirement, review_execution_permission, observation terminal state, and review judgement result kind.",
+    "command_method": "Count machine-bound command invocations as successful plus nonzero command results after excluding corrected collector false positives. This combines repository evidence, implementation, and validation commands because stored evidence does not label every command by lifecycle role.",
+    "recovery_method": "Count only environment-only repair plus rerun pairs. Nonzero observation results and method alternatives are not recovery."
+  },
+  "static_complexity": {
+    "candidate147": {
+      "characters": 7090,
+      "utf8_bytes": 10772,
+      "top_level_clauses": 13,
+      "named_definitions": 9,
+      "explicit_state_domains": 1,
+      "state_literal_occurrences": 3
+    },
+    "candidate191": {
+      "characters": 12301,
+      "utf8_bytes": 17989,
+      "top_level_clauses": 19,
+      "named_definitions": 28,
+      "explicit_state_domains": 5,
+      "state_literal_occurrences": 15
+    },
+    "candidate191_minus_candidate147": {
+      "characters": 5211,
+      "characters_percent": 73.49788434414668,
+      "utf8_bytes": 7217,
+      "utf8_bytes_percent": 66.99777200148533,
+      "top_level_clauses": 6,
+      "top_level_clauses_percent": 46.153846153846146,
+      "named_definitions": 19,
+      "named_definitions_percent": 211.11111111111111,
+      "explicit_state_domains": 4,
+      "state_literal_occurrences": 12
+    },
+    "responsibility_audit": {
+      "implemented_clauses": 19,
+      "common_execution_core_clauses": 12,
+      "review_specific_clauses": 7,
+      "conflicting_transition_owner_count": 0,
+      "unsafe_duplicate_deletion_candidate_count": 0,
+      "intentional_boundary_restatements": [
+        {
+          "boundary": "owner metadata does not create a producer or review operation",
+          "locations": [
+            "PRODUCER_BINDING",
+            "OWNER_ROLE",
+            "REVIEW_REQUIREMENT"
+          ],
+          "classification": "non_conflicting_cross_boundary_guard",
+          "reason": "Candidate190 removed the independent OWNER_ROLE responsibility and reproduced an unwanted review producer in eight Standard14 runs."
+        },
+        {
+          "boundary": "review non-applicability creates no review artifacts",
+          "locations": [
+            "OWNER_ROLE",
+            "REVIEW_REQUIREMENT"
+          ],
+          "classification": "non_conflicting_effect_prohibition",
+          "reason": "OWNER_ROLE owns the non-authority interpretation; REVIEW_REQUIREMENT owns applicability and resulting artifact prohibition."
+        }
+      ]
+    }
+  },
+  "candidate191_kpi": {
+    "adr9_r2_full_n5": {
+      "result_id": "e599690689294c658b52a6a9e301697f",
+      "compatibility_key": "1543a80108418ce1f2436f5f1945f6e680cf75378cc308d21adee22fcf0f11d3",
+      "run_count": 45,
+      "quality_score_median": 100.0,
+      "all_agent_total_tokens_median": 1410389,
+      "elapsed_seconds_median": 921.6695667080094,
+      "review_producer_count": 30,
+      "child_session_count": 30,
+      "machine_bound_command_invocation_count": 302,
+      "nonzero_command_result_count": 26,
+      "genuine_command_protocol_violation_count": 0,
+      "environment_recovery_count": 0
+    },
+    "adr05_adr07_adr09_n20": {
+      "result_id": "43fa5e3f8fc54440ad36e849a6c91a59",
+      "compatibility_key": "b75add52e6adc8462f372a73e76b797ec42740390387321fdd4b2479a22491ec",
+      "run_count": 60,
+      "quality_score_median": 100.0,
+      "all_agent_total_tokens_median": 550016.5,
+      "elapsed_seconds_median": 373.549701583499,
+      "review_producer_count": 60,
+      "child_session_count": 60,
+      "machine_bound_command_invocation_count": 510,
+      "nonzero_command_result_count": 43,
+      "genuine_command_protocol_violation_count": 0,
+      "environment_recovery_count": 0
+    },
+    "standard14_full_n5": {
+      "result_id": "da6ada84ac07426d8c66dddddcb08fdc",
+      "compatibility_key": "cc0c022ac026b55c51597e82c4a7216d4b7fdf498250c6a299d24203f1027561",
+      "run_count": 70,
+      "quality_score_median": 100.0,
+      "all_agent_total_tokens_median": 1875286,
+      "elapsed_seconds_median": 932.7256169989923,
+      "review_producer_count": 0,
+      "child_session_count": 0,
+      "machine_bound_command_invocation_count": 562,
+      "nonzero_command_result_count": 1,
+      "genuine_command_protocol_violation_count": 0,
+      "environment_recovery_count": 0
+    }
+  },
+  "compatible_descriptive_comparisons": {
+    "standard14_candidate147_n5": {
+      "candidate147_registered_result_id": "f7baeadc5bd44399ac13cc0e0a8aff48",
+      "candidate147_all_agent_total_tokens_median": 1447626,
+      "candidate147_elapsed_seconds_median": 852.543,
+      "candidate191_token_delta": 427660,
+      "candidate191_token_delta_percent": 29.542160751464806,
+      "candidate191_elapsed_delta_seconds": 80.18261699899233,
+      "candidate191_elapsed_delta_percent": 9.405111179024672,
+      "interpretation": "Same Standard14 compatibility key and N=5. C147 is not a viable mechanism-equivalent substitute because its corrected ADR9 mechanism status remains failed."
+    },
+    "standard14_candidate176_n5": {
+      "candidate176_result_id": "a0702207f03a4cb18c8b501329b74023",
+      "candidate176_all_agent_total_tokens_median": 1649559,
+      "candidate176_elapsed_seconds_median": 958.3863402495626,
+      "candidate191_token_delta": 225727,
+      "candidate191_token_delta_percent": 13.684081624240175,
+      "candidate191_elapsed_delta_seconds": -25.6607232505703,
+      "candidate191_elapsed_delta_percent": -2.6774925907112057
+    },
+    "adr9_candidate176_n5": {
+      "candidate176_result_id": "d3e91302f0d14350906075676c5a2791",
+      "candidate176_all_agent_total_tokens_median": 1233829,
+      "candidate176_elapsed_seconds_median": 865.4268302097917,
+      "candidate191_token_delta": 176560,
+      "candidate191_token_delta_percent": 14.3099246329921,
+      "candidate191_elapsed_delta_seconds": 56.24273649821771,
+      "candidate191_elapsed_delta_percent": 6.498843638182983,
+      "interpretation": "The registered quality results are compatible, but Candidate176 corrected mechanism reassessment must be bound separately and is failed."
+    },
+    "adr05_adr07_adr09_candidate190_n20": {
+      "candidate190_result_id": "d3b75f599f024ab8802595311920a00e",
+      "candidate190_all_agent_total_tokens_median": 590698.0,
+      "candidate190_elapsed_seconds_median": 379.0934208334984,
+      "candidate191_token_delta": -40681.5,
+      "candidate191_token_delta_percent": -6.887021794554915,
+      "candidate191_elapsed_delta_seconds": -5.543719249999413,
+      "candidate191_elapsed_delta_percent": -1.4623622952386395
+    }
+  },
+  "decision": {
+    "quality_status": "passed_before_m8",
+    "mechanism_status": "standard14_failed_after_cost_trace_reassessment",
+    "complexity_status": "materially_larger_than_candidate147",
+    "efficiency_status": "higher_standard14_and_adr9_token_medians_than_historical_references",
+    "optimization_required_before_m9": false,
+    "m9_ready": false,
+    "reason": "No safely removable review responsibility was identified, but case-level trace reassessment found that Candidate191 regressed C147 co-issuance in nine Standard14 cases. This is a mechanism failure requiring causal analysis, not permission to compress review responsibilities.",
+    "future_optimization_boundary": "Any compression must use a new prompt identity, identify one removable redundancy with preserved ownership, and rerun every affected ADR9 and Standard14 gate."
+  },
+  "source_artifacts": [
+    "prompts/candidates/the-caption-3ce91a4-result-effect-scope-r1/files/AGENTS.md.txt",
+    "prompts/candidates/the-caption-3ce91a4-explicit-review-operation-applicability-r1/files/AGENTS.md.txt",
+    "evaluations/results/e599690689294c658b52a6a9e301697f.json",
+    "evaluations/results/43fa5e3f8fc54440ad36e849a6c91a59.json",
+    "evaluations/results/da6ada84ac07426d8c66dddddcb08fdc.json",
+    "evaluations/results/candidate191-explicit-review-operation-applicability-adr9-r2-full-n5-mechanism-audit-r1.json",
+    "evaluations/results/candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-mechanism-audit-r1.json",
+    "evaluations/results/candidate191-explicit-review-operation-applicability-standard14-full-n5-mechanism-audit-r1.json",
+    "evaluations/results/candidate125-candidate145-candidate147-result-effect-scope-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-08-02.md",
+    "evaluations/results/candidate191-standard14-cost-mechanism-reassessment-r1.json"
+  ]
+}

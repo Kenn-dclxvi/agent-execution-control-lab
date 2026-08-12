@@ -1,0 +1,52 @@
+{
+  "schema_version": "candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit/v3",
+  "status": "mechanism_passed_reassessed",
+  "registered_result_id": "b71bcb211b064977900bce9aa0132cd4",
+  "run_count": 30,
+  "case_count": 6,
+  "result_kind_counts": {
+    "counterexample_found": 20,
+    "no_counterexample_found": 5,
+    "unavailable": 5
+  },
+  "current_result_admission_count": 30,
+  "authentic_observation_result_count": 30,
+  "terminal_match_count": 30,
+  "artifact_boundary_match_count": 30,
+  "forbidden_canary_delivery_count": 0,
+  "collector_reported_violation_count": 83,
+  "collector_false_positive_count": 83,
+  "collector_false_positive_breakdown": {
+    "non_command_literal": 69,
+    "actual_command_result_unmatched": 14
+  },
+  "affected_wrapper_count": 8,
+  "affected_run_count": 8,
+  "actual_nested_command_count": 43,
+  "machine_bound_exit_code_count": 43,
+  "machine_bound_exit_code_distribution": {
+    "0": 37,
+    "2": 6
+  },
+  "genuine_missing_machine_bound_exit_code_count": 0,
+  "affected_run_ids": [
+    "0ba08cfa8b1e442e8024e46ec7137418",
+    "373eb1e0da8e4b04b34a0eef99f219e1",
+    "40a083427fe943979066f7edbba5b992",
+    "5022e131a29c424e932a528f64326601",
+    "66b9b9bbc8044ad5ba6b5950c6b56611",
+    "cf0e91acdb4f4f8fb5fad436f6e0b082",
+    "d825a1d06646447f87d5bca4cb8a7fe9",
+    "fda9161ef4324c7e8236c99d4a6f5643"
+  ],
+  "dependency_audit": {
+    "counterexample_found_uses_successful_decisive_observations": true,
+    "missing_paired_scope_is_non_dependency_for_adr03_to_adr06": true,
+    "adr07_all_required_observations_succeeded": true,
+    "adr09_missing_paired_scope_is_terminal_dependency": true
+  },
+  "mechanism_gate_passed": true,
+  "prior_result_runtime_path_observed": false,
+  "supersedes_interpretation_of": "candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit-r2.json",
+  "future_comparison_binding": "registered_result_plus_this_audit"
+}

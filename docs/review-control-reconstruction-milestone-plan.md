@@ -1,6 +1,6 @@
 # review制御再構成マイルストーン計画
 
-> **位置づけ**: 現行frontier／Candidate作成前／分析進行中／評価未開始
+> **位置づけ**: 現行frontier／Candidate191 M5・M6通過／M7機序再判定不通過／M1再開
 
 ## ゴール
 
@@ -52,7 +52,9 @@ Candidate147の本文、条項数、配置または語列は保持条件にし�
 
 ### 現在状態
 
-`in_progress`
+`complete`
+
+成果物は[`review制御再構成の因果分析`](review-control-reconstruction-causal-analysis.md)とする。ADR01〜ADR09を5種類のterminal別証明責務へ全件分類し、過去Candidateの狙い・実結果・反復原因、C147の13条項の保持・改訂・分割・統合後削除候補、およびM2へ渡す未解決predicateと必要観測を固定した。
 
 ## M2: 制御構造の再設計
 
@@ -68,6 +70,12 @@ C147の13条項を保持・改訂・分割・削除へ分類し、operation、pr
 - 実行方法の自由が独立観測resultの統合許可を意味しない。
 - 条項数、追加量または総量を理由に必要な制御を削らない。
 
+### 現在状態
+
+`complete`
+
+成果物は[`review制御再構成の責務設計`](review-control-reconstruction-responsibility-design.md)とする。operation specificationからouter terminalまでを10責務へ再配置し、review適用可否・要否・実行permission、packet形成と観測state、review judgementと保存result admission、dependencyとinvalidation、artifact変更許可を別々のownerへ固定した。M3で成立した5件の具体的反例を反映し、確認対象は8件へ固定した。
+
 ## M3: 設計方向の敵対的レビュー
 
 ### 目的
@@ -81,6 +89,12 @@ C147の13条項を保持・改訂・分割・削除へ分類し、operation、pr
 - 残余リスクが試験predicateと対象ケースへ対応している。
 - reviewの反復で当初の設計軸を増やしていない。
 
+### 現在状態
+
+`complete`
+
+成果物は[`review制御再構成の方向レビュー`](review-control-reconstruction-direction-review.md)とする。M2初稿へ具体的反例5件が成立したためM2へ戻り、review契約非適用、aggregate result contract、terminal後の新operation identity、finite relationのmachine-bound照合、保存result admissionと新規review permissionの分離を同じ10責務内で修正した。修正版8条件の再確認では未解決blocking counterexampleが0件となり、残余リスクをADR9とStandard14のmechanism predicateへ対応させた。
+
 ## M4: Candidate実装
 
 ### 目的
@@ -93,6 +107,14 @@ C147の13条項を保持・改訂・分割・削除へ分類し、operation、pr
 - 各責務の正本が一つで、旧定義との競合がない。
 - bundle identity、manifest、構造試験および実装一致監査が成功する。
 - Candidate、評価、採用、releaseおよびprojectionの状態が分離されている。
+
+### 現在状態
+
+`complete / candidate191_correction_implemented`
+
+Candidate188は静的再監査で停止した。Candidate189はcurrent resultへ保存result用`result_use_permission`を誤適用した一件で停止し、Candidate190でcurrent/prior admissionを分離した。Candidate190はM5とM6を通過したが、M7 Standard14の8 runでcriterion ownerを独立review operationへ昇格し、不要producerを起動したため停止した。この反例により、C147の`OWNER_ROLE`を統合後削除した分類を撤回し、独立責務として復元する。
+
+修正版の成果物は[`Candidate191 explicit review operation applicability実装監査`](candidate191-explicit-review-operation-applicability-implementation-audit.md)と、prompt bundle `the-caption-3ce91a4-explicit-review-operation-applicability-r1`とする。Candidate190を直接親とする単一修正で、reviewを必要な独立operationとして直接名指しした場合だけreview controlを適用し、owner、`non_machine_risk`、静的確認または独立確認の語列だけではoperation、producer、spawnおよびreview resultを作らない。限定Standard14では修正対象3ケースを通過した。ADR9 r2も30 / 30 Score 4となり、初回機序監査が報告した83件は後続再監査でcollector誤検出と確定したため、Candidate191のM5は訂正後に通過した。
 
 ## M5: ADR9 r2互換N=5
 
@@ -112,6 +134,24 @@ C147の13条項を保持・改訂・分割・削除へ分類し、operation、pr
 - 発行対象が全件validかつScore `4`となる。
 - caseごとのexpected terminal、reviewer cardinality、artifact変更可否、情報封鎖およびresult真正性が成立する。
 - qualityまたはmechanism不一致が一件でもあれば結果を保持して停止し、M6以降へ進まない。
+
+### 現在状態
+
+`candidate189_failed_and_stopped / candidate190_targeted_m5_passed / candidate191_full_M5_passed / candidate191_M6_passed`
+
+成果物は[`Candidate189 ADR9 r2 N=5 result`](../evaluations/results/candidate189-self-contained-review-control-adr9-r2-n5_2026-08-12.md)とする。保存済みCandidate176 resultへbindし、prompt identity以外の互換条件を維持してCandidate189の不足45件だけを発行した。45 / 45 validだったがScore `4 / 1 = 44 / 1`で、ADR07の1件が真正な新規review resultへ保存result用`result_use_permission`を誤適用した。結果を保持して停止し、M6とStandard14へ進まない。
+
+この原因修正はCandidate190へ分離した。Candidate190のM5は別の評価設計とcomparison preflightが`ready`になるまで開始せず、本修正ではslotを一件も発行していない。
+
+Candidate190は変更条項を消費するADR03〜ADR07・ADR09だけを各N=5で固定し、保存済みCandidate176 atomic runから同じ6ケースを互換基準へ選んだ。comparison preflightはCandidate190の不足30件だけを`ready`として許可し、現在の発行数は0件である。実行前状態は[`Candidate190実行準備監査`](candidate190-current-prior-review-result-admission-adr9-r2-n5-execution-preparation-audit.md)を正本とする。
+
+固定planの30件を発行した結果、30 / 30 valid、Score `4 = 30`となり、全件でcurrent resultの真正性、三result kind、terminal、dependency、artifact変更境界および情報封鎖が成立した。限定M5は通過する。prior result runtime経路は未観測であり、M6とStandard14は未開始である。結果は[`Candidate190 ADR9 r2変更効果6ケース N=5`](../evaluations/results/candidate190-current-prior-review-result-admission-adr9-r2-n5_2026-08-12.md)を正本とする。
+
+Candidate191は同じ6ケースだけをCandidate190の登録resultへ互換bindし、不足30件を発行した。30 / 30 valid、Score `4 = 30`で、reviewer cardinality、result kind、outer terminal、current result admission、dependency、artifact変更境界および情報封鎖は30 / 30成立した。初回機序監査r2は83件を`missing_machine_bound_exit_code`として停止したが、生trace再監査では8 wrapperの43 commandすべてにmachine-bound exit codeがあり、83件全件がcollector誤検出だった。[訂正機序監査r3](../evaluations/results/candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit-r3.json)により限定M5は`mechanism_passed_reassessed`とする。旧r2は判断履歴として保持し、M6以降の比較は登録resultとr3を一組としてbindする。
+
+その後、ADR9 r2全9ケースN=5の未評価範囲を閉じた。既存6ケース30件を再利用し、ADR01、ADR02およびADR08各5件、合計15件だけを新規発行した。追加15 / 15と累積45 / 45はvalidかつScore `4`で、ADR01・ADR02はreview非適用の`completion_ready`、ADR08はpermission denialの`unavailable`を各5 / 5成立させた。全45件でproducer、dependency、terminalおよびartifact変更境界が一致したため、[Candidate191 ADR9 r2全9ケースN=5](../evaluations/results/candidate191-explicit-review-operation-applicability-adr9-r2-full-n5_2026-08-12.md)をM5の現在正本とし、`full_M5_passed`とする。先行6ケースresultと訂正機序監査r3は再利用根拠として保持する。
+
+C147とC176も同じ基準で再監査した。[横断再判定](../evaluations/results/review-control-command-evidence-reassessment-c147-c176-c191_2026-08-12.md)により、C147は誤検出20件を除いても真正違反24件とterminal不一致が残るため機序不通過を維持する。C176はADR9 N=5と対象N=20の旧`mechanism_passed`を撤回し、品質・terminal成功と機序不通過を分ける。以後、C147・C176の保存runを使う比較も登録resultと各訂正機構監査を一組としてbindする。
 
 ## M6: 高リスクケースの拡張
 
@@ -134,6 +174,16 @@ N=5では検出しにくい低頻度失敗を、過去結果と変更内容か�
 - 全runでqualityとmechanismが成立する。
 - 失敗runは再実行で置き換えず、原因分析へ戻す。
 
+### 現在状態
+
+`candidate190_completed_historical / candidate191_completed`
+
+Candidate190ではADR05、ADR07、ADR09だけを選び、M5の既存各5件を再利用して不足各15件、合計45件だけを発行した。追加45 / 45、累積60 / 60がvalidかつScore `4`で、`counterexample_found`、`no_counterexample_found`および`unavailable`は各20件成立した。これはCandidate190の履歴結果として保持する。結果は[`Candidate190 ADR05・ADR07・ADR09 N=20`](../evaluations/results/candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20_2026-08-12.md)を正本とする。
+
+Candidate191はprompt identityが異なるため、Candidate190のM6通過を継承しなかった。[M6評価設計](candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-evaluation-design.md)によりADR05、ADR07、ADR09だけを固定し、Candidate191 M5の登録済み各5件を再利用して不足各15件、合計45件だけを発行した。追加45 / 45、累積60 / 60がvalidかつScore `4`で、三result kind、current result admission、期待terminal、artifact変更境界、producer/sender、実観測、certificateおよびdependencyが成立した。既存collectorが新規45件へ報告した41件は、call ID対応監査で81 / 81実コマンドに終了状態があることを確認し、全件を誤検出と判定した。真正なcommand evidence欠落は0件である。結果は[`Candidate191 ADR05・ADR07・ADR09 N=20`](../evaluations/results/candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20_2026-08-12.md)を正本とする。
+
+ADR01・ADR02はCandidate190変更が有限固定効果のreview不要判定へ及ばず、ADR08はpermission denialのcontrolであるため追加しなかった。TPOを別比較系列として増やしていない。N=20で結論を変え得る新しい低頻度失敗を観測しなかったため、N=50は発行しない。
+
 ## M7: Standard14互換N=5
 
 ### 目的
@@ -145,6 +195,14 @@ ADR9拡張通過後、C147までに成立していた一般実行制御を退行
 - 70 / 70 validかつScore `4`となる。
 - 不要producer起動、terminal補完、context漏洩、検証順序違反、result効果の過剰伝播および危険なartifact変更がない。
 - 不一致が一件でもあれば評価結果を保持して停止する。
+
+Candidate190はCandidate176の保存済み同条件resultへbindし、14ケース各5件、合計70件を発行した。70 / 70 valid、Score `4 = 70`だったが、F02の3件、F03の1件、F04の4件で不要review producerを起動し、子agent read 37件が`missing_machine_bound_exit_code`となった。品質は通過しても機序条件に一件以上の不一致があるためM7を停止する。結果は[`Candidate190 Standard14 N=5`](../evaluations/results/candidate190-current-prior-review-result-admission-standard14-n5_2026-08-12.md)を正本とする。
+
+M1へ戻った原因分析では、Candidate190がC147の独立`OWNER_ROLE`を他責務へ統合して削除し、`REVIEW_REQUIREMENT`の正の適用条件も抽象化したため、owner metadataから欠けたreview operation fieldを補完できたことを原因とした。Candidate191で独立`OWNER_ROLE`と`explicit_review_operation_fixed`を復元し、新identityの別preflightで変更効果を評価した。Candidate190 resultを再実行で置き換えていない。
+
+Candidate191はまずCandidate190で不要producerを起動したF02、F03、F04だけを各5件確認し、15 / 15 valid、Score `4 = 15`、子agent 0、command protocol violation 0となった。[限定Standard14退行確認](../evaluations/results/candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-n5_2026-08-12.md)を通過した後、その15件を再利用して他11ケースの不足55件だけを発行した。[Standard14全14ケースN=5](../evaluations/results/candidate191-explicit-review-operation-applicability-standard14-full-n5_2026-08-12.md)は追加55 / 55、累積70 / 70 validかつScore `4`だった。
+
+後続の[コスト機序再判定](candidate191-standard14-cost-mechanism-reassessment.md)では、C147が成立させた開始identityと許可済みreadの共同発行を9 / 14ケース、45 run中44件で退行させたことを確認した。この9ケースが総token増分の86.74%を占めるため、単なる効率tradeoffではなく機序不一致とする。M7は`quality_passed / mechanism_failed_reassessed`へ訂正し、M1の原因分析へ戻る。
 
 ## M8: 複雑性と効率の評価
 
@@ -164,6 +222,14 @@ ADR9拡張通過後、C147までに成立していた一般実行制御を退行
 
 - 品質・機序結果と複雑性・効率結果を分けて記録する。
 - 圧縮または最適化が必要な場合は新しいprompt identityとし、影響する互換試験を再実施する。
+
+### 現在状態
+
+`complete / causal_analysis_reopened / M9_not_ready`
+
+成果物は[`Candidate191 複雑性・効率評価`](candidate191-complexity-efficiency-evaluation.md)とする。C147比でpromptは`+7,217 bytes`（`+67.00%`）、条項は`13 → 19`となり、Candidate191のADR9 r2全9ケースN=5、ADR05・ADR07・ADR09 N=20、Standard14全14ケースN=5のquality、tokenおよびelapsed中央値を別々に記録した。保存traceからreview producer、子session、machine-bound command、nonzero result、真正protocol違反およびenvironment recoveryも集計した。
+
+静的監査では競合ownerと安全に削除できる重複責務を0件としたが、後続のケース別trace再集計で共同発行の退行を確認した。Candidate190で失敗した独立`OWNER_ROLE`の削除は再実施せず、共同発行の優先関係とconsumerなし開始観測禁止を別の一変更軸として原因分析へ戻す。M8ではprompt identityを変更せず、追加評価runも発行していない。
 
 ## M9: 評価確定と採用判断
 
@@ -187,4 +253,4 @@ ADR9拡張通過後、C147までに成立していた一般実行制御を退行
 
 ## 現在位置
 
-`M1_in_progress / candidate_not_created / evaluation_not_started / adoption_not_decided / release_not_created / projection_not_performed`
+`M1_reopened_for_coissuance_cause / OWNER_ROLE_restore_retained / candidate188_stopped / candidate189_evaluated_stopped / candidate190_targeted_m5_passed / candidate190_M6_passed_historical / candidate190_M7_quality_passed_mechanism_failed / candidate191_full_M5_passed / candidate191_M6_passed / candidate191_N50_not_issued / candidate191_M7_quality_passed_mechanism_failed_reassessed / M8_completed / M9_not_ready / adoption_not_decided / release_not_created / projection_not_performed`

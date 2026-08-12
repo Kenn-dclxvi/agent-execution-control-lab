@@ -1,0 +1,93 @@
+{
+  "schema_version": "candidate191-standard14-cost-mechanism-reassessment/v1",
+  "candidate": "the-caption-3ce91a4-explicit-review-operation-applicability-r1",
+  "candidate_result_id": "da6ada84ac07426d8c66dddddcb08fdc",
+  "reference_candidate": "the-caption-3ce91a4-result-effect-scope-r1",
+  "reference_result_id": "f7baeadc5bd44399ac13cc0e0a8aff48",
+  "compatibility_key": "cc0c022ac026b55c51597e82c4a7216d4b7fdf498250c6a299d24203f1027561",
+  "status": "mechanism_failed_reassessed",
+  "new_evaluation_runs_issued": 0,
+  "quality_status": "passed_70_of_70_score_4",
+  "mechanism_failure": {
+    "predicate": "When the start-identity result cannot change an already allowed read target or permission, issue the identity check and read in the same model step; do not issue a start observation with no result consumer.",
+    "affected_cases": [
+      "TC-A01-LATENT-MODE-POLICY",
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "TC-F07-CANONICAL-V4-RUNNER",
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW"
+    ],
+    "affected_case_count": 9,
+    "candidate191_run_count_with_extra_prechange_step": 44,
+    "candidate191_affected_run_count": 45,
+    "candidate147_prechange_step_medians": {
+      "TC-A01-LATENT-MODE-POLICY": 0,
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 1,
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 1,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 1,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 1,
+      "TC-F07-CANONICAL-V4-RUNNER": 1,
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": 1,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 1,
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": 3
+    },
+    "candidate191_prechange_step_medians": {
+      "TC-A01-LATENT-MODE-POLICY": 1,
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 2,
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 2,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 2,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 2,
+      "TC-F07-CANONICAL-V4-RUNNER": 2,
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": 2,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 2,
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": 4
+    }
+  },
+  "token_totals": {
+    "candidate147": 7217373,
+    "candidate191": 9414985,
+    "delta": 2197612,
+    "delta_percent": 30.448918186714202,
+    "affected_nine_cases_candidate147": 4830651,
+    "affected_nine_cases_candidate191": 6736894,
+    "affected_nine_cases_delta": 1906243,
+    "affected_nine_cases_delta_percent": 39.461410066676315,
+    "affected_nine_cases_share_of_total_delta_percent": 86.74156311487195,
+    "unaffected_five_cases_delta_percent": 12.20791529134939
+  },
+  "case_token_medians": {
+    "TC-A01-LATENT-MODE-POLICY": {"candidate147": 19195, "candidate191": 41095, "delta_percent": 114.09},
+    "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {"candidate147": 129085, "candidate191": 186555, "delta_percent": 44.52},
+    "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {"candidate147": 107202, "candidate191": 194049, "delta_percent": 81.01},
+    "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {"candidate147": 128236, "candidate191": 272478, "delta_percent": 112.48},
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP": {"candidate147": 104320, "candidate191": 160492, "delta_percent": 53.85},
+    "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {"candidate147": 151170, "candidate191": 150344, "delta_percent": -0.55},
+    "TC-F05-CLARIFY-UNITS-MODE": {"candidate147": 37242, "candidate191": 40260, "delta_percent": 8.10},
+    "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {"candidate147": 37366, "candidate191": 42075, "delta_percent": 12.60},
+    "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {"candidate147": 151542, "candidate191": 155616, "delta_percent": 2.69},
+    "TC-F07-CANONICAL-V4-RUNNER": {"candidate147": 102504, "candidate191": 129068, "delta_percent": 25.92},
+    "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {"candidate147": 87284, "candidate191": 111203, "delta_percent": 27.40},
+    "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {"candidate147": 113067, "candidate191": 126193, "delta_percent": 11.61},
+    "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {"candidate147": 87934, "candidate191": 115611, "delta_percent": 31.47},
+    "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {"candidate147": 93096, "candidate191": 106351, "delta_percent": 14.24}
+  },
+  "usage_decomposition_for_runs_with_both_traces": {
+    "run_count_per_candidate": 55,
+    "input_tokens_delta_percent": 25.474012802293245,
+    "cached_input_tokens_delta_percent": 25.771157395201683,
+    "output_tokens_delta_percent": 2.2167113720329867,
+    "reasoning_output_tokens_delta_percent": 4.039024390243906,
+    "interpretation": "The increase is concentrated in repeated input context from an extra model step, not output or reasoning growth."
+  },
+  "decision": {
+    "m7_status": "quality_passed_mechanism_failed_reassessed",
+    "m8_status": "completed_and_reopened_causal_analysis",
+    "m9_ready": false,
+    "candidate_change_authorized": false,
+    "next_required_action": "Return to causal analysis and define one correction axis for co-issuing start identity with already allowed reads and denying start observations with no consumer. Any implementation requires a new candidate identity and affected compatibility tests."
+  }
+}
