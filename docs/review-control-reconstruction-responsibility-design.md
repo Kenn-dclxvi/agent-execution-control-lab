@@ -1,27 +1,28 @@
 # review制御再構成の責務設計
 
-> **位置づけ**: M3具体的反例、M4自己完結性監査およびCandidate189 M5反例を反映した責務設計／Candidate190へ実装済み
+> **位置づけ**: M3具体的反例、Candidate189・190・191の後続反例およびCandidate192発行遷移失敗を反映したM2設計記録。Candidate193後の現在解釈は末尾注記を参照する
 
 ## 結論
 
-review制御を、次の10責務へ再構成する。
+review制御とそれを支える共通execution coreを、次の11責務へ再構成する。
 
 1. operation specification
 2. producer binding
 3. review requirement
 4. review execution permission
 5. packet formation
-6. observation result
-7. review judgement
-8. result admission
-9. result effect and invalidation
-10. artifact change and outer terminal
+6. dispatch transition
+7. observation result
+8. review judgement
+9. result admission
+10. result effect and invalidation
+11. artifact change and outer terminal
 
-各状態遷移は一つの責務だけが所有する。review要否、permission、packet、観測、judgement、result受入、失効、artifact変更許可および外側terminalを一つの`admission`、`record`または`proof`へ縮約しない。
+各状態遷移は一つの責務だけが所有する。review要否、permission、packet、発行集合、観測、judgement、result受入、失効、artifact変更許可および外側terminalを一つの`admission`、`record`または`proof`へ縮約しない。発行資格の論理判定と実際のtool-call発行も別責務にせず、`DISPATCH_TRANSITION`の一つのterminal遷移として扱う。
 
 C147の不変条件は責務へ再配置するが、13条項の本文、条項数、順序または語列は保持条件にしない。新しい汎用schema、registry、canonical locator、全入力分類mapまたはreview admission専用workerは作らない。実装時の条項数とprompt量はM8で測る結果であり、本設計の入力制約にしない。
 
-この設計はCandidate本文ではない。M3で方向を変える具体的反例がないことを確認するまでCandidate bundleを作らず、ADR9またはStandard14のrunも発行しない。
+この設計はCandidate本文ではない。Candidate192後の限定M3では方向を変える具体的反例が0件となったが、Candidate bundleは未作成であり、ADR9またはStandard14のrunも発行していない。
 
 ## Candidate実装topology
 
@@ -29,7 +30,7 @@ Candidate bundleは親promptをruntimeで暗黙継承しないfull bundleであ�
 
 実装は次の二層を同じ本文内に持つ。
 
-1. 共通execution core: operation specification、producer binding、producer result、operation terminal、全worker context、evidence admission、result effect、validation、methodおよびrecovery
+1. 共通execution core: operation specification、producer binding、producer result、operation terminal、全worker context、evidence admission、dispatch transition、result effect、validation、methodおよびrecovery
 2. review責務: review requirement、review execution permission、review packet、observation result、review judgement、review result admissionおよびchange admission
 
 この二層は別promptを参照する継承関係ではない。review責務は共通coreの`implementation_bound`、producer、terminal、worker packetおよびresult effectを入力として使うが、それらを再定義しない。共通coreもreview固有terminalを推測しない。review非適用では共通coreだけが作動する。
@@ -111,6 +112,7 @@ terminal stateは`value | missing | unreadable | terminal_failure`のいずれ�
 | `REVIEW_REQUIREMENT` | subjectの`unbound -> not_applicable | not_required | required` | root | permission、packet、review terminal |
 | `REVIEW_EXECUTION_PERMISSION` | required subjectの新規review実行permissionの`unbound -> allowed | denied` | rootがTaskSpec／authority resultをbind | 保存result利用permission、method failure、reviewer不在result |
 | `PACKET_FORMATION` | packetの`unbound -> ready | unavailable` | root | observation値、review judgement |
+| `DISPATCH_TRANSITION` | consumerを持つ発行可能invocation集合の`unbound -> frontier_bound -> issued -> collected`、空集合の`unbound -> no_dispatch` | invocationを発行する現在producer | evidence資格、result意味、別invocationへのresult統合 |
 | `OBSERVATION_RESULT` | atomの`unobserved -> value | missing | unreadable | terminal_failure` | atomへbind済みproducerの実result | 別atomのstate、review terminal |
 | `REVIEW_JUDGEMENT` | review operationの`nonterminal -> counterexample_found | no_counterexample_found | unavailable` | bind済み独立reviewer | outer terminal、artifact変更 |
 | `RESULT_ADMISSION` | review resultの`unchecked -> admitted | inadmissible` | rootの機械照合 | reviewerの意味判断の再実施 |
@@ -211,7 +213,49 @@ packetは評価case、private oracle、期待terminal、過去finding、旧Candi
 
 observation targetが存在すること、readが成功すること、全atomが`value`になることは`packet_ready`の条件ではない。identity自体が未固定、semantic projectionを作れない、permission内のallowed readを固定できない、または禁止情報を分離できない場合だけpacketを`unavailable`にする。この`unavailable`はroot producerの外側admission resultであり、reviewer resultではない。
 
-### 6. observation issuance and atomicity
+### 6. dispatch transition
+
+evidence資格を得たことだけではinvocationを発行しない。各発行cycleのtool callより前に、現在producerは候補invocationごとにconsumerと未解決dependencyを固定する。
+
+```text
+dispatch_candidate(i) :=
+  iが未発行
+  ∧ iのevidenceまたはrequired command資格が成立
+  ∧ i.requested_resultを消費するbind済みoperationがnonterminal
+  ∧ requested_resultがそのconsumerの未確定predicate、target、permission、method、
+    stop conditionまたはterminal stateの少なくとも一つをbind可能
+```
+
+開始identityまたは開始状態がTaskSpecに明示されていること、drift可能性、一般的安全確認、許可済みreadの存在または進捗報告上の有用性はconsumerを作らない。
+
+```text
+dispatch_predecessor(i, j) :=
+  j.resultが未受領
+  ∧ j.resultがiのtarget、permission、method、stop condition、
+    requested result contractまたは発行可否を変え得る
+
+dispatch_frontier :=
+  現在producerが同一model responseから個別tool callとして発行可能な
+  全dispatch_candidate iのうち、未解決dispatch_predecessor(i, j)がない集合
+```
+
+operation identity、lifecycle、predicate、consumerまたはresult格納先が異なることだけでは`dispatch_predecessor`を作らない。先行identityのdriftがartifact変更だけを禁止し、固定済みreadのtarget、permission、method、result contractまたは発行可否を変えない場合、そのidentity確認とreadは同じfrontierへ入る。drift時にread自体が禁止されるかread target等が変わり得る場合だけ、readは次cycleへ置く。
+
+```text
+dispatch_transition_terminal(frontier) :=
+  frontierが空なら、現在responseからtool callを一件も発行せずno_dispatch
+  otherwise、現在responseのtool-call集合がfrontierの全identityと一対一一致
+  ∧ frontier外のinvocationを含まない
+  ∧ 各invocationを個別result contractを持つ別tool callとして発行
+  ∧ 全invocationがterminal resultを返すまでmodel判断を再開しない
+  ∧ 各resultを元のinvocation identityとconsumerへbind
+```
+
+frontierの一部だけを発行してresultをmodelへ返し、残りを次responseから発行してはならない。共同発行をshell compound command、wrapper内の一aggregate resultまたは一tool callへ統合してはならない。明示された同時発行上限または利用可能toolのため同じresponseから発行不能なinvocationはfrontierへ入れず、上限未固定を理由に任意の一部集合を選ばない。上限内で複数のfrontier候補がある場合は、TaskSpecで固定された順序、なければoperation specificationで固定した順序から決定し、result受領後に都合よく選び直さない。
+
+tool callがcell ID付きnonterminal resultを返した場合、そのinvocationは未収集のままである。同じcell IDへのwait以外のtool、判断、commentaryまたは別cycleを先に発行しない。一invocationのfailed resultは同cycleの他invocationから受領済みの個別resultを失効させず、各consumerのdependencyに従って次cycleまたはterminalを決める。
+
+### 7. observation issuance and atomicity
 
 evidenceは、未確定review predicateと現在欠けている観測値へ直接bindできる場合だけ発行する。
 
@@ -223,7 +267,7 @@ observation_consumer_ready(atom) :=
   ∧ requested resultがそのpredicateをbind可能
 ```
 
-相互非依存のready atomは同じmodel stepから発行できる。ただし、実行方法の自由はresult統合の自由を意味しない。
+相互非依存のready atomは`DISPATCH_TRANSITION`が同じmodel responseから発行する。ただし、実行方法の自由はresult統合の自由を意味しない。
 
 ```text
 observation_integration_allowed(atom_a, atom_b) :=
@@ -237,7 +281,7 @@ observation_integration_allowed(atom_a, atom_b) :=
 
 一方、実invocationなしにsuccess receiptを昇格しない。これによりC177型の未観測receipt昇格を閉じる。
 
-### 7. review judgement
+### 8. review judgement
 
 reviewerはpacketと許可されたobservation resultだけから一terminal resultを形成する。
 
@@ -279,7 +323,7 @@ open boundaryというlabel、一般的不確実性、reviewerの慎重さ、pac
 
 reviewerは`counterexample_found`を形成できた時点で、certificate dependencyを変えない未発行observationを失効する。counterexampleが成立しない場合だけ、固定scope全体の`no_counterexample_found`を判定する。これはterminal値の一般的優先順位ではなく、存在証明が成立した後に全域証明を続けないという証明責務の順序である。
 
-### 8. result admission
+### 9. result admission
 
 rootはreviewerの意味判断を再実施しない。current review resultとsaved prior review resultを別predicateで機械照合する。
 
@@ -311,7 +355,7 @@ rootはcanonical locator、再構成した集合順、文字列表現または�
 
 inadmissible resultを別producerへ再割当てせず、同じresultをrootが補完しない。methodまたはenvironment failureで同じreview predicateを継続できる場合だけ、C147の`METHOD`と`RECOVERY`に従う。
 
-### 9. result effect and invalidation
+### 10. result effect and invalidation
 
 ```text
 result_dependency_set(result) :=
@@ -340,7 +384,7 @@ resultの効果は対応subjectを含む未発行artifact変更と外側admissio
 
 terminalになったreview operationを、dependency変更後に再開しない。admitted resultが失効し、同じreview criterionを再び判定する必要がある場合は、変更後dependencyを持つ新しいreview operation identity、packet identity、producer bindingおよびresult identityを形成する。TaskSpecが現在design identity内の再reviewまたは改訂を禁止する場合は新operationを作らず、外側admissionを`unavailable`または固定済みstop conditionへ閉じる。
 
-### 10. artifact change permission
+### 11. artifact change permission
 
 ```text
 subject_change_allowed(subject) :=
@@ -366,7 +410,7 @@ subject_change_denied(subject) :=
 
 一つのartifact変更invocationが複数subjectを含む場合は、全subjectで`subject_change_allowed=true`かつ全artifact間relationと保持constraintが成立する場合だけ発行する。禁止subjectをpayloadから除くとrequired outcome、relationまたは実行可能性を壊す場合は、一部変更せずC147のimplementation choiceを失効する。別implementation choiceを作る場合は新identityで変更前gateからやり直す。
 
-### 11. outer terminal
+### 12. outer terminal
 
 | 条件 | 外側admission result | artifact変更 | outer terminal |
 |---|---|---:|---|
@@ -412,7 +456,7 @@ Candidate名、case IDまたは期待terminalを参照せず、入力状態か�
 | `OWNER_ROLE` | `OPERATION_SPEC`、`PRODUCER_BINDING`、`RESULT_ADMISSION` | invariantを移し独立条項を削除 |
 | `ROOT` | `RESULT_ADMISSION`、`CHANGE_TERMINAL` | root非代行を直接組み込み独立条項を削除 |
 | `INDEPENDENCE` | operation dependency、observation atomicity | dependency形成へ改訂 |
-| `DECISION_BOUNDARY` | `RESULT_EFFECT` | subject、atom、dependency単位へ改訂 |
+| `DECISION_BOUNDARY` | `RESULT_EFFECT`、`DISPATCH_TRANSITION` | resultの局所効果とfrontierの挙動遷移へ分割して改訂 |
 | `VALIDATION_CLOSURE` | validation責務 | reviewから隔離して保持 |
 | `VALIDATION_PLAN` | validation責務 | reviewから隔離して保持 |
 | `METHOD` | observation state、method continuation | state区別を加えて改訂 |
@@ -437,12 +481,50 @@ M3は次の具体的状態で、設計のtarget、permission、methodまたはst
 
 ## M2完了判定
 
-- operation、predicate、evidence、producer、result、dependency、invalidation、terminalおよびartifact変更許可を10責務へ再配置した。
+- operation、predicate、evidence、producer、result、dependency、invalidation、terminalおよびartifact変更許可を、review責務を保持した10責務と共通coreの`DISPATCH_TRANSITION`へ再配置した。
 - 各状態遷移のownerを一つに限定した。
 - 5種類のterminalをCandidate名、case IDまたは期待terminalなしに導出した。
 - evidence発行、観測result真正性、terminal dependency、result admission、局所失効およびouter terminalを分離した。
 - method自由と独立observation atomの統合許可を分離した。
 - C147の13条項を新しい正本責務へ全件対応させた。
-- M3で方向を変え得るblocking counterexampleを8件へ限定した。
 
-Candidate188のM4静的再監査では、削除済み親経路への委譲、汎用worker context欠落および`OBSERVATION_RESULT`過密化が具体的反例として成立した。このため自己完結した実装identityをCandidate189へ分離した。Candidate189 M5でcurrent resultへprior用permissionを誤適用した反例を受け、第8節と第9節のpermission scopeをCandidate190へ実装した。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。
+## Candidate192発行責務の再判定
+
+Candidate191のStandard14保存traceでは、evidence資格を持つinvocationが別operation identityへ属することを理由に別model stepへ送られ、9ケース、45 run中44件で変更前stepが一つ増えた。A01では下流terminalを変えない開始identity観測も発行された。これはreviewの10責務を変える反例ではなく、共通execution core内で発行可否と共同発行を所有する責務が欠けていた反例である。
+
+Candidate192は共通coreへ`DISPATCH_ADMISSION`を追加し、次を一つの変更軸として所有させた。
+
+```text
+invocation_consumer_ready(i) :=
+  evidence_consumer_ready(i)
+  ∧ requested resultを消費するbind済みoperationがnonterminal
+  ∧ resultがconsumerのtarget / permission / method / stop conditionを変え得る
+
+dispatch_dependency(i, j) :=
+  i.resultがjのtarget / permission / method / stop conditionを変え得る
+
+coissuance_ready(S) :=
+  Sの全invocationがinvocation_consumer_ready
+  ∧ S内の任意の異なるi, jでdispatch_dependency(i, j)=false
+```
+
+- TaskSpecが開始状態を明示していても、結果consumerがなければ開始観測を発行しない。
+- 現在readyで相互非依存な最大集合を同じmodel stepから発行し、一部result受領後に残りを発行しない。
+- operation identity、lifecycle、predicate、consumerまたはresult格納先が別であることだけではdecision boundaryを作らない。
+- 同一model stepからの共同発行と、一つのinvocation resultへの統合を分ける。個別result contractが必要なら別tool callのまま共同発行する。
+- 開始identity resultがreadを禁止する、またはread target・permissionを変える場合は真正なdependencyとして別stepを維持する。
+
+`EVIDENCE_ADMISSION`は証拠資格、`RESULT_EFFECT`はresultの局所効果と失効、`DISPATCH_ADMISSION`は発行可否と共同発行だけを所有するとした。`OWNER_ROLE`、review適用、result admission、terminal、validationおよびrecoveryは変更しなかった。
+
+### 評価後の反例
+
+対象Standard14 N=5では、A01以外の退行8ケース40件中39件が、`coissuance_ready(S)`を実際の同一model step発行へ変換しなかった。A01でも2 / 5件がconsumerなし開始identityを発行した。したがって、上記補遺は発行集合の妥当性を定義しているが、その集合を現在のmodel responseで必ず発行する遷移ownerを持たず、挙動を拘束できない。
+
+本改訂ではCandidate192を直接基盤にせず、Candidate191の成立経路へ第6節`DISPATCH_TRANSITION`だけを接続する。`coissuance_ready(S)`という判定結果を残さず、`dispatch_frontier`を現在responseの全tool-call identityへ一対一bindし、全result収集までを一つのterminal遷移にした。consumerなしならfrontierに入らず、frontierが空ならtool callは0件となる。consumerがある相互非依存invocationは、一件でも現在responseから欠ければ遷移自体がnonterminalであり、その部分発行resultを正しいdispatch completionへ昇格しない。単一shell commandへのresult集約は解決に使わない。
+Candidate192後の限定M3は、空frontier、真正dependency、同時発行上限、個別result、nonterminal tool、部分発行およびcompound代用を確認し、当時の設計入力上はblocking counterexample 0件で完了した。
+
+その後のCandidate193 ADR9 r2 N=5では、全9ケースで開始identity不一致が後続readを禁止する真正dependencyだったにもかかわらず、28 / 45件で両者を同じmodel stepから発行した。正しい初回frontierは17 / 45件に留まり、同一ケース内でも挙動が変動した。ただし同じ基準のCandidate191は越境36 / 45、正しい分離9 / 45であり、Candidate193は直接親から8件改善した。したがって第6節は成立済み設計ではないが、無作用として全削除できる仮説でもない。
+
+残すのはconsumer・真正dependency・個別result contract・compound command禁止である。`dispatch_candidate`、`dispatch_predecessor`、`dispatch_frontier`、独立条項化および次Candidateの直接基盤はM1で保留する。捨てるのは、自己terminal宣言だけで現在responseのtool-call選択を一意に強制できるという十分性仮定である。ADR05・ADR06のterminal不一致は、発行遷移との直接因果を推定せず、certificate dependencyとobservation target bindingの問題として別に分析する。
+
+Candidate188のM4静的再監査では、削除済み親経路への委譲、汎用worker context欠落および`OBSERVATION_RESULT`過密化が具体的反例として成立した。このため自己完結した実装identityをCandidate189へ分離した。Candidate189 M5でcurrent resultへprior用permissionを誤適用した反例を受け、第8節と第9節のpermission scopeをCandidate190へ実装した。Candidate193評価後はM1へ戻っており、本書の第6節を修正して次Candidateを作る段階にはない。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。

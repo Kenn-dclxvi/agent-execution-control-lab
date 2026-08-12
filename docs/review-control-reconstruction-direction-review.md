@@ -1,5 +1,7 @@
 # review制御再構成の方向レビュー
 
+> **現在解釈**: 初回10責務の方向レビュー完了後、Candidate192の発行遷移失敗に限定した再開M3を追記済み
+
 > **位置づけ**: M3固定成果物／M2修正反映済み／M4への入力
 
 ## 結論
@@ -145,4 +147,50 @@ activeかつ利用許可済みのadmitted prior resultがない場合だけ、�
 - 残余リスクをADR9およびStandard14のmechanism predicateへ対応させた。
 - review反復でschema、registry、locator、producer roleまたは比較系列を増やしていない。
 
-この成果物の固定時点は`M1_complete / M2_complete / M3_complete / M4_not_started`とする。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。
+この成果物の初回固定時点は`M1_complete / M2_complete / M3_complete / M4_not_started`とする。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。
+
+## Candidate192後の発行遷移限定レビュー
+
+### 対象と境界
+
+Candidate192の保存traceで否定されたのはreview terminal設計ではなく、発行集合の論理判定を実際のmodel responseへ拘束する仮定である。再開M3は、改訂した[`責務設計`](review-control-reconstruction-responsibility-design.md)の`DISPATCH_TRANSITION`が一般入力で成立不能となり、target、permission、methodまたはstop conditionの変更を必要とする具体的反例だけを確認した。
+
+直接基盤はCandidate191とし、C192の`DISPATCH_ADMISSION`本文は設計入力にしない。C192からはconsumer、dependency、個別result contract、真正dependency非越境および次の保存反例だけを使った。
+
+- A01のconsumerなし開始identity 2 / 5
+- 共同発行対象8ケースのidentity/read同一step 1 / 40
+- 退行9ケースの追加変更前roundなし 4 / 45
+- 共同発行3件中1件のcompound result
+
+### 方向を変える反例の確認
+
+| 状態 | 改訂設計の導出 | 判定 |
+|---|---|---|
+| required outcome未固定でclarificationだけがterminal。TaskSpecに開始identityはあるが、そのresultを消費するoperationがない | `dispatch_candidate=false`となりfrontierは空。現在responseのtool callを0件にして`no_dispatch`とする | 反例不成立 |
+| identity drift時にartifact変更は禁止されるが、固定済みreadのtarget、permission、methodおよびresult contractは変わらない | identity確認とreadに相互predecessorがないため同じfrontierへ入り、現在responseから個別tool callで全件発行する | 反例不成立 |
+| identity drift時にread自体が禁止される、またはread targetが変わる | identity resultをreadの`dispatch_predecessor`へ固定し、identityだけを先行cycleへ置く。安全性のための別stepを退行扱いにしない | 反例不成立 |
+| ready invocation数が明示された同時発行上限を超える | 上限とoperation specificationの固定順序で現在frontierを一意に切り、frontier全件を同一responseから発行する。result受領後の便宜的選び直しを許さない | 反例不成立 |
+| 同じfrontierの一commandがfailed、他commandがsuccess | 個別tool callとmachine-bound resultを保持し、failed resultはそのconsumerだけへ効く。success済みresultをaggregate failureで失効しない | 反例不成立 |
+| 一tool callがcell ID付きnonterminal resultを返す | dispatch cycleを未収集のまま保持し、同じcell IDへのwait以外を発行しない。別invocationの完了だけでcycle terminalにしない | 反例不成立 |
+| producerがfrontierの一部だけを発行し、残りを次responseへ送ろうとする | 現在responseのtool-call identity集合がfrontierと一致しないため`dispatch_transition_terminal=false`。部分発行resultを正しいdispatch completionへ昇格できない | 反例不成立 |
+| producerが同時発行を一つのshell compound commandで代用する | frontier identityとtool-call identityが一対一一致せず、個別result contractも欠くため遷移不成立 | 反例不成立 |
+
+### 結論
+
+未解決blocking counterexampleは0件である。C192の判定軸だけを残し、次の3段階を一つの`dispatch_transition_terminal`へ閉じたことで、C192の「判定は成立するが挙動が変わらない」という経路を設計上は閉じた。
+
+1. consumerを持つ候補と未解決predecessorからfrontierを固定する。
+2. 現在model responseの個別tool-call集合をfrontierへ一対一bindする。
+3. 全result受領まで判断を再開せず、各resultを元consumerへbindする。
+
+review適用、`OWNER_ROLE`、current/prior result admission、terminal kind、artifact変更permissionおよびvalidationは変更していない。新しいschema、registry、producer role、result kindまたは比較系列も追加していない。完全性と選択安定性は試験で確認し、本reviewの成功をCandidate実装または評価成功へ一般化しない。
+
+再開M3の状態は`dispatch_transition_direction_review_complete / blocking_counterexample_zero / next_candidate_not_created`とする。
+
+## Candidate193評価後の訂正
+
+Candidate193 ADR9 r2 N=5は、上記レビューが見落とした具体的反例を実測した。全9ケースで開始identity不一致時には後続read自体を停止するため、identity resultはreadの発行可否を変える。それにもかかわらず28 / 45件でidentityとreadが同じmodel stepから発行され、正しい初回frontierは17 / 45件だけだった。
+
+同じ新基準でCandidate191の保存45件を再集計すると越境36件、正しい分離9件だった。Candidate193は直接親に対して正しい分離を8件増やしているため、発行遷移が無作用だったとはいえない。一方、ケース内で挙動が変動し、ADR05・ADR06では計3件悪化した。したがって、論理判定と実挙動を同じterminal名へ入れれば分離不能になるという上記の十分性結論だけを撤回する。各primitiveの有効性まで一括棄却しない。
+
+consumer、真正dependency、個別result contract、compound command禁止は方向を変えない安全境界として残す。`dispatch_candidate`、`dispatch_predecessor`、`dispatch_frontier`、独立条項化およびCandidate193を次の親にするかは保留する。捨てるのは、`dispatch_transition_terminal`という自己宣言だけで現在responseのtool-call選択を一意に強制できるという仮定である。現在状態は`candidate193_counterexample_found / dispatch_transition_sufficiency_rejected / primitives_pending / M1_reopened`とする。

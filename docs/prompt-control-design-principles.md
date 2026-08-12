@@ -261,16 +261,18 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 新しいcandidateを作る前に、次をすべて記録する。
 
 1. 基準prompt setと、その状態での最短正常経路。
-2. 保存済みtraceで確認した一つの誤経路。semantic auditの指摘だけではこの項目を満たさない。
+2. 保存済みtraceで確認し、同じ失敗機序または再構成目的へbindした具体的な誤経路。semantic auditの指摘だけではこの項目を満たさない。
 3. 既存のTaskSpec、repository authority、repository stateで防げない理由と、promptが制御を置く正しい層である理由。
-4. 追加または置換する一つのpredicate。その発火条件は、明示input、repository authority、machine-bound resultのいずれかから直接判定できること。
-5. そのpredicateが消す具体的な判断点またはcontext伝播。
+4. 追加、置換または削除するpredicateと責務境界の全件集合。各発火条件は、明示input、repository authority、machine-bound resultのいずれかから直接判定できること。
+5. 各変更が消す具体的な判断点、context伝播または責務競合と、変更同士を同じcandidateで扱う因果関係。
 6. 新たに増える判断点、label参照、例外条件。
 7. 成果品質を維持したことを判定するcaseとscore分布。
 8. 想定するtoken、tool call、model step、worker routingの変化。
 9. 期待と逆の結果になった場合に、candidate追加を止める条件。
 
 一項でも未定義なら、candidate bundleと評価profileを先に作らない。まず既存traceと制御graphを確認する。
+
+candidateの範囲は、一つの局所的な失敗機序、または一貫した制御構造を成立させるため分離不能な一つの再構成目的へ閉じる。局所問題を理由に無関係な責務や将来不安まで加えない。一方、責務の分割・統合・所有移動・依存関係の再配置など、構造を整合させるため複数predicateの同時変更が必要な場合は、一predicateまたは一条項へ縮退させない。変更集合を個別candidateへ分けると中間状態が不整合になる理由、保持する正常経路、各変更を消費するcaseおよび停止条件を実装前に固定する。
 
 ## 現時点の検討方針
 

@@ -146,6 +146,68 @@ Candidate190の`PRODUCER_BINDING`はcriterion ownerだけでproducerを選ばな
 
 これはC147以前の最適化失敗と同型である。条項数を減らすこと自体ではなく、異なるconsumerを持つowner metadata境界とreview適用境界を一つの責務へ圧縮したことで、禁止が適用判定まで届かなかった。修正では`OWNER_ROLE`を独立責務として復元し、reviewを必要な独立operationとして直接名指しした場合だけ`review_control_applicable=true`とする。owner、`non_machine_risk`、静的確認または独立確認だけではreview成果物を一切作らない。
 
+### 10. operation分離とmodel step分離の混同
+
+Candidate191は外側admission、観測、変更およびvalidationを別operation identityへ分けたが、evidence資格、result効果、実際の発行集合の所有者を分け切らなかった。`RESULT_EFFECT`には相互非依存invocationの共同発行が書かれていたものの、operation分離後の発行predicateより優先されず、Standard14の9ケース、45 run中44件で変更前model stepが一つ増えた。A01ではclarificationを変えない開始identity観測まで発行した。
+
+原因は条項数やreview責務の多さではなく、evidenceが許可されていることを発行理由へ昇格し、result consumerの存在と同一step closureを一つの責務が所有していなかったことである。修正では、requested resultでtarget、permission、methodまたはstop conditionが変わり得るbind済みnonterminal operationを要求し、相互にdecision boundaryでないready invocationを同じmodel stepへ閉じる。`OWNER_ROLE`、review result admissionまたはterminal責務は変更しない。
+
+### 11. 発行集合の論理判定と挙動遷移の分離
+
+Candidate192は`invocation_consumer_ready`と`coissuance_ready(S)`を一つの`DISPATCH_ADMISSION`へ置き、consumerのない開始観測を禁止し、相互非依存なready invocationの最大集合を同じmodel stepから発行すると定義した。設計時の仮定は、発行資格と集合を一意に定義すれば、その真偽がexecutorの次のtool-call集合を拘束するというものだった。
+
+実結果はこの仮定を否定した。対象50件は全件Score 4で、不要review producer、terminal不一致、dependency越境および危険なartifact変更は0件だった。一方、A01ではconsumerのない開始identityが2 / 5に残り、共同発行対象8ケースではidentityとreadの同一step発行が1 / 40、退行9ケースでは追加変更前roundなしが4 / 45に留まった。共同発行3件中1件は個別tool resultではなくcompound invocationへ統合され、C176型の個別result contract違反も残った。
+
+したがって不足していたのは新しい発行資格ではない。`ready setを求めるpredicate`、`その集合を一つのmodel responseのtool-call集合へbindするtransition`、`全resultを受け取るまでmodel判断へ戻らないclosure`が別々に解釈可能だったことが原因である。論理定義の正しさを、実際の発行完了receiptの代用にしていた。
+
+C192から保持するのは次の境界だけである。
+
+- requested resultを消費するbind済みnonterminal operationがないinvocationは発行しない。
+- 先行resultが後続のtarget、permission、methodまたはstop conditionを変え得る場合だけ発行dependencyを置く。
+- operation identity、lifecycle、predicateまたはresult格納先の分離だけでは発行dependencyを作らない。
+- 共同発行はcompound invocationへの統合を意味せず、各invocationのmachine-bound result contractを保持する。
+- 真正dependencyを越えないこと、`OWNER_ROLE`、review適用、current/prior admissionおよびterminal経路は非変更constraintとする。
+
+C192から継承しないのは、独立した抽象gateとしての`DISPATCH_ADMISSION`と、その定義だけでexecutor挙動が変わるという仮定である。次設計の直接基盤はCandidate191とし、C192は判定軸、安全境界および失敗反例としてだけ使う。次設計では`dispatch_set_ready`と`dispatch_set_issued`を別責務へ戻さず、`dispatch_transition_terminal := ready setの全invocationが同一model responseから個別tool callとして発行済み ∧ 全invocation result受領まで別model判断なし`を一つのterminal predicateとして固定する。空集合ではtoolを発行せず、その非発行自体をdispatch transitionのterminal resultとする。
+
+### 12. 発行遷移をterminal化すれば挙動を拘束できるという仮定
+
+Candidate193はCandidate191を直接親とし、C192のconsumer・dependency判定を`dispatch_frontier`へ移した。さらに、frontierと現在responseのtool-call identity集合の一対一一致、個別tool call、全result収集を一つの`dispatch_transition_terminal`へ閉じた。設計時の仮定は、発行集合の判定と発行完了を一つのterminal predicateへ統合すれば、C192で分離していた論理判定と実挙動が分離不能になるというものだった。
+
+ADR9 r2全9ケース45件は、この仮定の十分性を否定した。全TaskSpecで開始identity不一致時には後続read自体を停止するため、開始identity resultはreadの発行可否を変える真正なpredecessorである。それにもかかわらずCandidate193は28 / 45件でidentity確認とreadを同じmodel stepから発行し、正しい初回frontierは17 / 45件だけだった。同じケース内でも分離と共同発行が混在したため、`dispatch_transition_terminal`は実際のtool-call集合を一意に拘束していない。
+
+ただし、同じADR9 r2 TaskSpecとtrace判定をCandidate191の保存45件へ適用すると、identity/read越境は36 / 45件、正しい分離は9 / 45件だった。Candidate193は直接親Candidate191に対して越境を8件減らしている。ケース別ではADR03、ADR04、ADR07、ADR08およびADR09で計11件改善し、ADR05とADR06で計3件退行、ADR01とADR02は不変だった。したがって「全く作用しなかった」でも「機序が成立した」でもない。発行順序への部分効果は観測したが、case内反復を一意に拘束するまでには至らなかった、と限定する。
+
+参考として同じ開始停止文言を持つ保存traceを同じ方法で読むと、Candidate176 ADR9 r2はidentity/read越境42 / 45、Candidate147 ADR9 r1は40 / 45だった。Candidate176、Candidate191およびCandidate193はADR9 r2だがprompt変更軸が異なるため、Candidate191からCandidate193への直接差分以外を`DISPATCH_TRANSITION`の因果効果にはしない。Candidate147はcase revisionもr1であり、方向診断にだけ使い、互換比較へ入れない。
+
+品質面でもADR05とADR06の各1件が期待`blocked`ではなく`unavailable`になった。ADR05では`OBS-PAIRED-SCOPE=missing`を、すでに`OBS-DESIGN`、`OBS-AUTHORITY`、`OBS-INVENTORY`および`OBS-CONSUMER-CONTRACTS`だけで成立する具体的witness certificateへ誤って依存させた。これは`REVIEW_JUDGEMENT`のcertificate dependency過大化である。ADR06ではreviewerが`positive_applicability_predicate`ではないfieldを繰り返し観測し、値を取得していないのにpositive applicabilityを主張した。rootの不受入は`REVIEW_RESULT_ADMISSION`どおりであり、失敗点はreview producerの観測target bindingと真正certificate形成である。
+
+両失敗はCandidate193で観測したprompt-level regressionだが、identity/read共同発行との直接dependencyはtrace上成立しない。ADR05失敗runはidentity/readを正しく分離しており、ADR06失敗runは越境していたものの、越境resultがfield identityを変えた証拠はない。Candidate193の唯一差分が長い`DISPATCH_TRANSITION`追加であることから、注意配分または命令競合の間接影響は仮説に残るが、発行遷移の直接故障としては分類しない。
+
+Candidate193から確定して残すものは次のとおりである。
+
+- ADR9 r2では9ケースすべてで開始identityと後続readに真正dependencyがあり、共同発行対象ではないという訂正済み判定。
+- consumer、target、permission、method、stop conditionおよびresult contractからpredecessorを判定する軸。
+- 共同発行可能な一般経路でもcompound commandへ統合せず、個別tool callとmachine-bound resultを保持する境界。Candidate193ではcompound identity/read commandは0件だった。
+- reviewer cardinality 45 / 45、artifact境界45 / 45、required command 15 / 15、forbidden canary delivery 0件という非退行部分。
+- ADR05とADR06のScore 1を、certificate dependencyとresult admission後のouter terminalを再分析する保存反例として残すこと。
+- Candidate193の登録result、品質監査および機序監査を、再実行で置換しない履歴証拠として残すこと。
+
+次設計を固定する前に保留するものは次のとおりである。
+
+- `dispatch_candidate`、`dispatch_predecessor`および`dispatch_frontier`の分解。ADR9ではpartial effectを観測したが、consumerなし空frontier、同時発行上限、cell ID付きnonterminalおよび真正な共同発行経路はこの評価で判定していない。
+- `DISPATCH_TRANSITION`を独立条項にするか、C147の`DECISION_BOUNDARY`へ優先規則として戻すか。条項名や配置ではなく、C191比の8件改善と28件残存失敗を同時に説明できる設計が必要である。
+- Candidate193を次Candidateの直接親にするか、Candidate191へ戻して必要成分だけを再構成するか。現時点ではどちらも固定しない。
+- ADR05・ADR06が長い発行条項の注意干渉で増えたのか、N=5で顕在化した既存review経路の低頻度変動なのか。追加runではなく保存traceと条項競合の分析を先に行う。
+
+反証されたため次設計へ持ち込まないものは次のとおりである。
+
+- `dispatch_transition_terminal`と名付けて発行完了を宣言するだけで、現在responseのtool-call選択を一意に強制できるという十分性仮定。
+- 17 / 45の正しいfrontierを、機序成立またはM5通過へ昇格すること。
+- 機序監査r2の全fieldを訂正済み正本として使うこと。同監査は旧品質監査を入力にしたためADR06 iteration 2・3の`quality_score`が登録resultのScore 4ではなくScore 1になっている。さらに`result_kind_counts`は観測値でなく期待値を数え、review path判定の一部は文字列存在とterminal一致で近似している。28 / 45のdispatch集計とcommand call-ID再監査は利用できるが、品質とreview pathは登録result、品質監査r2および生traceを正とする。
+
+したがって、次の直接基盤はまだ固定しない。Candidate191はreview・terminal経路と比較基準を提供し、Candidate193は発行分離の部分効果と新しい品質反例を提供する。C192はconsumer／dependency判定軸と抽象gate不十分の反例を提供する。M1では、C147の`DECISION_BOUNDARY`を含む既存命令間の優先関係、C193で部分効果を生んだ語義、およびADR05・ADR06のcertificate dependencyを分けて再確認する。
+
 ## C147の13条項の分類
 
 この分類はM1からM2へ渡す責務分類であり、次Candidateの条項名、数、配置または語列を固定しない。
@@ -160,13 +222,13 @@ Candidate190の`PRODUCER_BINDING`はcriterion ownerだけでproducerを選ばな
 | `OWNER_ROLE` | 改訂して復元 | owner語列はproducer指定ではない。delegated resultはspawn identityとsender identityへbindする | Standard14の退行証拠により統合後削除を撤回する。owner metadataはreview適用条件、operation identity、producerおよびspawnを成立させない独立責務として保持する |
 | `ROOT` | 統合後削除 | rootは非producer operationの意味resultを再生成しない | producer/result authenticity/terminal集約へ直接組み込み、独立した重複条項を残さない |
 | `INDEPENDENCE` | 改訂 | 先行resultを対象にする別operationは別predicate、producerを持つ | operation dependencyの形成規則へ改め、同一predicate再割当て禁止だけでなく、どのresult atomが何へ依存するかを固定する |
-| `DECISION_BOUNDARY` | 改訂 | result効果をtarget、permission、method、stop conditionが変わり得る未発行範囲へ限定する | operation classだけでなくsubject、result atom、dependency edge単位へ適用し、C176型のaggregate失効を防ぐ |
+| `DECISION_BOUNDARY` | 改訂方法を保留 | result効果をtarget、permission、method、stop conditionが変わり得る未発行範囲へ限定し、真正dependencyを越えない | result effectの局所性と発行順序の区別は保つ。C193はC191比で正しい分離を9件から17件へ増やしたが一意拘束には失敗したため、独立`DISPATCH_*`責務への分割も元条項への再統合もまだ決めない |
 | `VALIDATION_CLOSURE` | 保持 | required validationのproducer、順序、個別result、早期停止 | review findingへ流用しない現行除外も保持し、review再構成から隔離する |
 | `VALIDATION_PLAN` | 保持 | 変更後に一つの実行票へ検証をbindし、完了後に追加toolを出さない | review admissionのpacketまたはevidence探索へ混ぜず維持する |
 | `METHOD` | 改訂 | 未固定手段の失敗をpermission否定へ読み替えず、同じpredicateへ継続する | tool failure、観測対象の`missing`、permission denial、review resultの`unavailable`を別stateにする |
 | `RECOVERY` | 保持 | environment-only repairとsame command rerunを一組として数える | review判断の再実行やresult再生成をenvironment recoveryに含めないことを明示して維持する |
 
-集計は、保持3件、改訂5件、分割4件、統合後削除1件である。C147の不変条件を無条件に削除する候補はない。`ROOT`は対応責務へ統合できるが、`OWNER_ROLE`はCandidate190 Standard14の具体的退行により独立責務へ戻す。
+暫定集計は、保持3件、改訂4件、改訂方法を保留1件、分割4件、統合後削除1件である。C147の不変条件を無条件に削除する候補はない。`ROOT`は対応責務へ統合できるが、`OWNER_ROLE`はCandidate190 Standard14の具体的退行により独立責務へ戻す。`DECISION_BOUNDARY`は局所result effectと真正dependencyを保持し、C193の部分効果と残存変動を説明できるまで配置だけを保留する。
 
 ## M2へ渡す未解決predicateと必要観測
 
@@ -184,6 +246,7 @@ Candidate190の`PRODUCER_BINDING`はcriterion ownerだけでproducerを選ばな
 | `current_result_admissible` | current review operationのexecution permission、producer、sender、allowed kind、observation、certificate | 保存result用`result_use_permission`を追加要求しない |
 | `prior_result_admissible` | prior identity利用許可、current subject等価性、`result_use_permission`、`result_still_valid` | 新規review execution permissionを要求しない |
 | `result_still_valid` | certificate dependencyを変えた新resultの有無 | 無関係resultでは失効しない |
+| `dispatch_order_ready` | consumerを持つinvocation、各resultが変え得るtarget・permission・method・stop condition、invocation間の真正dependency、既存命令の優先関係 | predecessor resultが発行可否を変える場合は後続を発行しない。抽象gateまたは自己terminal宣言だけで成立扱いにしない |
 | `artifact_change_allowed` | finite direct matchまたはadmissible review terminal、permission、保持relation、禁止subject集合 | 一件でも未解決なら変更しない |
 | `outer_terminal_ready` | 全required predicateのbind済みproducer resultとartifact/validation result | progressやfinal responseで補完しない |
 
@@ -197,6 +260,7 @@ review制御の再構成で、少なくとも次を退行させない。
 - rootはworker resultを代行、再採点、上書きしない。
 - worker packetへ禁止履歴または不要な全履歴を配送しない。
 - resultの停止効果をtask全体へ伝播させない。
+- consumerのない開始観測を発行せず、相互非依存なready invocationをoperation分離だけで別model stepへ送らない。
 - validationは個別result、順序、早期停止、実行票closureを維持する。
 - permission denialとmethod failureを混同しない。
 - artifact変更前に必要なadmission resultが揃っていなければ変更しない。
@@ -211,4 +275,8 @@ C175とC176のStandard14 70 / 70はこれらの正常経路が成立し得る診
 - C147の13条項を保持、改訂、分割、統合後削除へ全件分類した。
 - M2へ渡す未解決predicateと必要観測を列挙した。
 
-初回M1成果物は完了後にM2〜M5へ進んだ。Candidate189 M5の反例からcurrent/prior admissionを修正してCandidate190へ実装した。Candidate190はM5とM6を通過したが、Standard14でowner metadataをreview operationへ昇格する具体的退行を観測したためM1へ再度戻った。原因はC147の`OWNER_ROLE`を統合後削除した責務圧縮と、review適用の正の明示条件不足に特定した。Candidate191は限定Standard14とADR9のreview必要6ケースを通過し、初回機序監査の83件はcollector誤検出として訂正した。C147とC176も同じ基準で再監査し、登録resultと訂正機構監査を将来比較の一組へ固定した。その基準でCandidate191 M6も累積60 / 60 Score 4かつ機序通過となり、N=50を必要とする低頻度失敗は観測しなかった。さらに未評価だったADR01、ADR02、ADR08を各5件追加し、ADR9 r2全9ケース45 / 45 Score 4かつ機序通過へ閉じた。最後に限定Standard14の15件を再利用して不足55件だけを発行し、全14ケース70 / 70 Score 4、不要producer 0、command protocol violation 0でM7を通過した。現在状態は`M1_reassessment_complete / candidate191_full_M5_passed / candidate191_M6_passed / candidate191_full_M7_passed / M8_not_started`とする。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。
+初回M1成果物は完了後にM2〜M5へ進んだ。Candidate189 M5の反例からcurrent/prior admissionを修正してCandidate190へ実装した。Candidate190はM5とM6を通過したが、Standard14でowner metadataをreview operationへ昇格する具体的退行を観測したためM1へ再度戻った。原因はC147の`OWNER_ROLE`を統合後削除した責務圧縮と、review適用の正の明示条件不足に特定した。Candidate191はADR9全9ケースと高リスク拡張を通過し、Standard14も70 / 70 Score 4だったが、後続再判定で9ケースの共同発行退行が総token増分の86.74%を占めると確認した。原因をoperation分離とmodel step分離の混同、およびconsumerなし開始観測の許容へ特定した。
+
+Candidate192はこの発行境界だけを`DISPATCH_ADMISSION`として定義した。対象Standard14 50件はすべてScore 4だったが、A01のconsumerなし開始identityが2 / 5に残り、退行8ケースのidentity/read共同発行は1 / 40だけだった。新しい原因は、発行資格と集合を論理定義しても、executorが各operationを宣言してから一段ずつ発行する既定手順より優先する具体的な発行遷移になっていないことである。`coissuance_ready(S)`の真偽を求める責務と、真なら同じ応答から全invocationを発行する責務が再び分離していた。
+
+Candidate193はC192の判定軸を`DISPATCH_TRANSITION`へ移し、発行集合と収集closureを一つのterminalへ閉じたが、ADR9の真正dependencyを28 / 45件で越境し、ADR05・ADR06にも各1件のterminal不一致を残した。同じ新基準のCandidate191は越境36 / 45だったため部分効果はあるが、自己terminal化だけで挙動を一意拘束できるという十分性仮定は否定された。現在のM1は、上記の「確定して残すもの」「保留するもの」「反証されて持ち込まないもの」を境界として、C147の`DECISION_BOUNDARY`の優先関係と2件のcertificate dependencyを再分析中である。M2、次Candidateおよび追加評価は開始しない。後続の現在位置は[`review制御再構成マイルストーン計画`](review-control-reconstruction-milestone-plan.md)を正とする。

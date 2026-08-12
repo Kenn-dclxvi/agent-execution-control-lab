@@ -1,0 +1,151 @@
+{
+  "schema_version": "candidate193-frontier-bound-dispatch-transition-adr9-r2-n5-mechanism-reassessment/v3",
+  "status": "mechanism_failed_stopped_partial_effect_observed",
+  "candidate193_result_id": "9630f826932c4abc91cc2a4598ca318d",
+  "candidate191_reference_result_id": "e599690689294c658b52a6a9e301697f",
+  "quality_source": "candidate193-frontier-bound-dispatch-transition-adr9-r2-n5-audit-r2.json",
+  "trace_source": "saved_codex_events",
+  "new_run_count": 0,
+  "dependency_oracle": {
+    "case_count": 9,
+    "rule": "Each model-visible ADR9 TaskSpec says to stop on start-identity mismatch, so an allowed read must not be issued before the identity result is received.",
+    "expected_initial_identity_read_coissuance_by_case": {
+      "TC-ADR01": false,
+      "TC-ADR02": false,
+      "TC-ADR03": false,
+      "TC-ADR04": false,
+      "TC-ADR05": false,
+      "TC-ADR06": false,
+      "TC-ADR07": false,
+      "TC-ADR08": false,
+      "TC-ADR09": false
+    }
+  },
+  "candidate191": {
+    "case_revision": "adversarial-design-review-r2",
+    "run_count": 45,
+    "identity_read_coissuance_count": 36,
+    "correct_initial_separation_count": 9,
+    "coissuance_by_case": {
+      "TC-ADR01": 3,
+      "TC-ADR02": 4,
+      "TC-ADR03": 5,
+      "TC-ADR04": 5,
+      "TC-ADR05": 3,
+      "TC-ADR06": 2,
+      "TC-ADR07": 5,
+      "TC-ADR08": 4,
+      "TC-ADR09": 5
+    }
+  },
+  "candidate193": {
+    "case_revision": "adversarial-design-review-r2",
+    "run_count": 45,
+    "identity_read_coissuance_count": 28,
+    "correct_initial_separation_count": 17,
+    "coissuance_by_case": {
+      "TC-ADR01": 3,
+      "TC-ADR02": 4,
+      "TC-ADR03": 3,
+      "TC-ADR04": 2,
+      "TC-ADR05": 4,
+      "TC-ADR06": 4,
+      "TC-ADR07": 3,
+      "TC-ADR08": 1,
+      "TC-ADR09": 4
+    },
+    "compound_identity_read_command_count": 0,
+    "quality_score_counts": {
+      "4": 43,
+      "1": 2
+    }
+  },
+  "direct_parent_delta": {
+    "identity_read_coissuance_count": -8,
+    "correct_initial_separation_count": 8,
+    "improved_cases": {
+      "TC-ADR03": 2,
+      "TC-ADR04": 3,
+      "TC-ADR07": 2,
+      "TC-ADR08": 3,
+      "TC-ADR09": 1
+    },
+    "regressed_cases": {
+      "TC-ADR05": 1,
+      "TC-ADR06": 2
+    },
+    "unchanged_cases": [
+      "TC-ADR01",
+      "TC-ADR02"
+    ],
+    "interpretation": "The only prompt difference from Candidate191 had a partial directional effect, but did not bind behavior consistently within a case."
+  },
+  "diagnostic_only_noncausal_context": {
+    "candidate176": {
+      "case_revision": "adversarial-design-review-r2",
+      "identity_read_coissuance_count": 42,
+      "correct_initial_separation_count": 3
+    },
+    "candidate147": {
+      "case_revision": "adversarial-design-review-r1",
+      "identity_read_coissuance_count": 40,
+      "correct_initial_separation_count": 5,
+      "compatibility": "not_compatible_with_r2_comparison"
+    },
+    "interpretation": "These saved traces use the same start-stop wording, but prompt and in Candidate147 also case revision differ. They are diagnostic context, not the causal estimate for Candidate193."
+  },
+  "quality_failure_classification": {
+    "TC-ADR05_iteration_5": {
+      "run_id": "29ec1617ce944e20aca6290305f885f8",
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "violated_responsibility": "review_judgement_certificate_dependency",
+      "finding": "OBS-PAIRED-SCOPE missing was incorrectly made a dependency of a concrete witness certificate already supported by design, authority, inventory, and consumer-contract values.",
+      "direct_dispatch_causation_observed": false
+    },
+    "TC-ADR06_iteration_5": {
+      "run_id": "49a0fa751c4847b9a539c54e834529ad",
+      "observed_terminal": "unavailable",
+      "expected_terminal": "blocked",
+      "violated_responsibility": "observation_target_binding_and_certificate_authenticity",
+      "finding": "The reviewer did not observe positive_applicability_predicate but claimed positive applicability; root correctly rejected the inadmissible result.",
+      "direct_dispatch_causation_observed": false
+    }
+  },
+  "prior_r2_audit_limitations": {
+    "quality_input": "candidate193-adr9-r2-n5-audit.json instead of candidate193-adr9-r2-n5-audit-r2.json",
+    "stale_quality_fields": [
+      "TC-ADR06_iteration_2",
+      "TC-ADR06_iteration_3"
+    ],
+    "result_kind_counts_are": "expected_counts_not_observed_counts",
+    "review_path_checks": "partly_string_presence_and_terminal_match_approximations",
+    "usable_fields": [
+      "initial_frontier_match_count",
+      "initial_coissuance_count",
+      "compound_identity_read_command_count",
+      "command_call_id_reaudit"
+    ]
+  },
+  "classification": {
+    "retain": [
+      "consumer_and_dependency_axes",
+      "genuine_predecessor_non_crossing",
+      "individual_machine_bound_results",
+      "compound_command_prohibition",
+      "saved_failures_and_results"
+    ],
+    "pending": [
+      "dispatch_candidate",
+      "dispatch_predecessor",
+      "dispatch_frontier",
+      "standalone_dispatch_clause",
+      "next_candidate_direct_parent",
+      "attention_interference_hypothesis"
+    ],
+    "reject": [
+      "self_declared_dispatch_terminal_is_sufficient_to_bind_current_response_tool_selection",
+      "partial_17_of_45_match_implies_mechanism_success"
+    ]
+  }
+}
