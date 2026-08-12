@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate191、2026-08-04〜08-12）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate193、2026-08-04〜08-12）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate191、2026-08-04〜08-12）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate192、2026-08-04〜08-12）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -124,6 +124,10 @@ Candidate191の[Standard14全14ケースN=5](candidate191-explicit-review-operat
 Candidate191の[M8複雑性・効率評価](../../docs/candidate191-complexity-efficiency-evaluation.md)は、C147比でpromptが`+7,217 bytes`（`+67.00%`）、条項が`13 → 19`であることを記録した。Candidate191のKPIはADR9 r2全9ケースN=5がquality `100.0`、token `1,410,389`、elapsed `921.670秒`、ADR05・ADR07・ADR09 N=20が`100.0`、`550,016.5`、`373.550秒`、Standard14全14ケースN=5が`100.0`、`1,875,286`、`932.726秒`である。系列間の絶対値は比較せず、互換系列内ではStandard14のtoken中央値がC147比`+29.54%`だった。競合ownerおよび安全に削除できる重複責務は0件と判定し、Candidateを変更せずM9へ進む。[構造化監査](candidate191-explicit-review-operation-applicability-m8-complexity-efficiency-audit-r1.json)を一次証拠とする。
 
 後続の[Candidate191 Standard14コスト機序再判定](candidate191-standard14-cost-mechanism-reassessment-r1.json)は、同一compatibility keyのC147とCandidate191、および保存済み生traceだけを再集計した。C147の共同発行が成立していた9ケースでCandidate191の変更前step中央値が各1増え、45 run中44件が逐次化した。この9ケースは総token差`+2,197,612`の`86.74%`を占める。70 / 70 Score 4は維持するが、M7を`quality_passed / mechanism_failed_reassessed`へ訂正し、M9へ進めない。新規評価runは0件である。
+
+Candidate192の[Standard14対象9ケース・F04対照 N=5](candidate192-consumer-bound-coissuance-standard14-targeted-n5_2026-08-12.md)は、Candidate191の同じ10ケース50 atomic runを基準へ再利用し、Candidate192の不足50件だけを発行した。50 / 50 validかつScore `4`、command protocol violation 0件だったが、A01のconsumerなし開始identityが2 / 5、退行8ケースのidentity/read同一model step発行が1 / 40だった。退行9ケース45件中41件が追加の変更前result roundを残したため、`quality_passed / mechanism_failed / stopped`とし、残り4ケースとADR9へ進めない。[登録result](f53d1494b2ec45d083fdd199ec04a14d.json)、[品質監査](candidate192-consumer-bound-coissuance-standard14-targeted-n5-audit-r1.json)および[機序監査](candidate192-consumer-bound-coissuance-standard14-targeted-n5-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate193の[ADR9 r2全9ケースN=5](candidate193-frontier-bound-dispatch-transition-adr9-r2-n5_2026-08-12.md)は45 / 45 valid、Score `4 / 1 = 43 / 2`だった。ADR05とADR06の各1件が期待`blocked`ではなく`unavailable`となった。さらに全9ケースで開始identity不一致時に停止する真正dependencyがあるのに、28 / 45件でidentityと後続readを同じmodel stepへ越境発行した。collector報告171件は37 / 37実commandに終了状態がある誤検出だったが、品質失敗2件とdependency越境28件が残るため`quality_failed / mechanism_failed / stopped`とし、M1へ戻る。後続の[慎重な機序再判定r3](candidate193-frontier-bound-dispatch-transition-adr9-r2-n5-mechanism-reassessment-r3.json)では同基準のCandidate191が越境36 / 45であり、Candidate193に8件の部分改善を確認したが、一意拘束の成立には格上げしない。[登録result](9630f826932c4abc91cc2a4598ca318d.json)と[訂正品質監査](candidate193-frontier-bound-dispatch-transition-adr9-r2-n5-audit-r2.json)を品質の一次証拠とする。[機序監査r2](candidate193-frontier-bound-dispatch-transition-adr9-r2-n5-mechanism-audit-r2.json)はdispatch集計とcommand再監査に限定し、同ファイル内の不整合な旧quality fieldと近似review-path fieldは現在判定に使わない。
 
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 

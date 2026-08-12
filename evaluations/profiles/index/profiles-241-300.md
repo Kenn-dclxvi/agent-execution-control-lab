@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
+- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
+- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate67-cross-label-predicate-deduplication-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate67-cross-label-predicate-deduplication-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate67-cross-label-predicate-deduplication-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate67-cross-label-predicate-deduplication-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate67-cross-label-predicate-deduplication-v10-standard14-global-m24-n5-r1.json`](../candidate67-cross-label-predicate-deduplication-v10-standard14-global-m24-n5-r1.json)
-- [`candidate68-independent-review-operation-removal-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate68-independent-review-operation-removal-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate68-independent-review-operation-removal-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate68-independent-review-operation-removal-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
-- [`candidate68-independent-review-operation-removal-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate68-independent-review-operation-removal-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)

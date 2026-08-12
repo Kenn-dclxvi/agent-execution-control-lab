@@ -78,7 +78,8 @@ class Candidate191M8ResultTest(unittest.TestCase):
         results_index = RESULTS_INDEX.read_text(encoding="utf-8")
         candidate_index = CANDIDATE_INDEX.read_text(encoding="utf-8")
 
-        self.assertIn("M7機序再判定不通過／M1再開", plan)
+        self.assertIn("Candidate193 ADR9 r2品質・発行遷移機序不通過／M1原因分析再開", plan)
+        self.assertIn("candidate193_M5_valid_45_score4_43_score1_2", plan)
         self.assertIn("M9_not_ready", plan)
         self.assertNotIn("M8_not_started", plan)
         self.assertIn("candidate191-explicit-review-operation-applicability-m8-complexity-efficiency-audit-r1.json", report)
