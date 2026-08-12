@@ -57,12 +57,18 @@ class Candidate193ResultTest(unittest.TestCase):
         plan = (ROOT / "docs/review-control-reconstruction-milestone-plan.md").read_text(encoding="utf-8")
         results_index = (ROOT / "evaluations/results/README.md").read_text(encoding="utf-8")
         docs_index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        candidate_index = (ROOT / "prompts/candidates/README.md").read_text(encoding="utf-8")
 
         self.assertIn("Score 4 = 43 / Score 1 = 2", report)
         self.assertIn("dispatch_dependency_crossing_28", report)
         self.assertIn("M1_reopened_for_candidate193_quality_and_dispatch_failures", plan)
         self.assertIn(REPORT.name, results_index)
+        self.assertIn("Candidate147〜Candidate193", results_index)
         self.assertIn(REPORT.name, docs_index)
+        self.assertIn(
+            "adr9_r2_n5_evaluated / quality_failed / mechanism_failed / stopped",
+            candidate_index,
+        )
 
 
 if __name__ == "__main__":
