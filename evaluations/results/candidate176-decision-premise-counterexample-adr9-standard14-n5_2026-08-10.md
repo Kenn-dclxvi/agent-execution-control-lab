@@ -111,3 +111,9 @@ N=5の記述値であり、cost差を一般的な効果へ一般化しない。
 - adoption: `not_decided`
 - release: `not_created`
 - runtime projection: `not_projected`
+
+## 後続のcommand evidence再判定
+
+2026-08-12にADR9の生traceを統一基準で再監査した。[訂正機構監査r2](candidate176-decision-premise-counterexample-mechanism-reassessment-r2.json)では、collector報告17件のうち16件は誤検出だったが、ADR09 run `30c3e517fba84368b4f9af759847cc44`のwrapperが`text(r.output)`だけを返し、machine-bound exit codeを失った真正違反1件を確認した。
+
+45 / 45 Score 4、terminal、reviewer cardinality、artifact境界およびStandard14結果は保持する。一方、ADR9 N=5の現在の機序解釈は`mechanism_failed`であり、上記の旧`mechanism_passed`を今後の比較基準にしない。登録result `d3e91302f0d14350906075676c5a2791`と訂正機構監査r2を一組としてbindする。

@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate187、2026-08-04〜08-12）
+1. Review admission・変更前修正契約系（Candidate147〜Candidate191、2026-08-04〜08-12）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate187、2026-08-04〜08-12）
+## 1. Review admission・変更前修正契約系（Candidate147〜Candidate191、2026-08-04〜08-12）
 
 FR-01の[文書課題development r1-r3](candidate147-information-closure-document-task-development-r1-r3_2026-08-04.md)は、report-only ID05でblind 5 / 5、context 0 / 5を記録した。情報封鎖効果を識別するdevelopment課題のqualificationであり、それ自体はheld-out、独立SA、自律routing、Candidateの証拠ではない。
 
@@ -100,6 +100,30 @@ C147へ`REVIEW_ADMISSION_PROOF`一条項だけを追加したCandidate187の[ter
 Candidate187の元の失敗ケース`TC-TPO04`だけを累積N=20へ広げた[N=20拡張](candidate187-review-admission-proof-obligation-tpo04-n20_2026-08-12.md)は、既存5件を再利用して不足15件だけを発行し、20 / 20 valid、Score `4 = 20`、機構成立20 / 20だった。独立reviewer 20 / 20、`no_counterexample_found` 20 / 20、対象エラー経路0 / 20で、中央値は183,382 tokens、88.038秒だった。これはTC-TPO04限定の通過であり、Standard14、採用、release、projectionは未判定である。[登録result](e5a454fa221048199bf5f08c35f0b3af.json)と[累積監査](candidate187-review-admission-proof-obligation-tpo04-n20-audit.json)を一次証拠とする。
 
 Candidate187の[ADR9 r2 subset N=5](candidate187-review-admission-proof-obligation-adr9-r2-subset-n5_2026-08-12.md)は、変更軸に対応するADR01、02、05、07、08、09を各N=5で実行し、30 / 30 valid、Score `4 / 1 = 18 / 12`だった。保存済みCandidate186の同じ30 atomic runを参照選択として再利用し、両resultのcompatibility key一致を確認した。ADR07とADR08は成立したが、ADR01・02の不要review、ADR05の誤`unavailable`、ADR09の必要review未起動が残り、`quality_failed / mechanism_failed / stopped`としてStandard14へ進めない。[登録result](c6434276d81b437b9331fb0202aaa34d.json)と[機序監査](candidate187-review-admission-proof-obligation-adr9-r2-subset-n5-audit-r1.json)を一次証拠とする。
+
+Candidate189の[ADR9 r2 N=5](candidate189-self-contained-review-control-adr9-r2-n5_2026-08-12.md)は45 / 45 valid、Score `4 / 1 = 44 / 1`だった。ADR01〜06、08、09は全件でterminal、reviewer cardinality、artifact変更境界および情報封鎖が成立した。ADR07の1件だけ、真正な新規`no_counterexample_found`へ保存result用`result_use_permission`を誤適用して`unavailable`となった。失敗runを保持して`quality_failed / mechanism_failed / stopped`とし、M6とStandard14へ進めない。[登録result](70652de440184e20bf54dea88b058c94.json)と[機序監査](candidate189-self-contained-review-control-adr9-r2-n5-audit-r1.json)を一次証拠とする。
+
+Candidate190の[ADR9 r2変更効果6ケース N=5](candidate190-current-prior-review-result-admission-adr9-r2-n5_2026-08-12.md)は30 / 30 valid、Score `4 = 30`だった。全30件でbind済みreviewer一件、真正な観測、期待result kind、terminalおよびartifact変更境界が成立し、ADR07のcurrent resultへのprior用permission誤適用は0 / 5だった。prior result runtime経路は未観測のまま分離し、限定M5を`quality_passed / mechanism_passed`とする。[登録result](2d8c2500cab64220ab1fe76b7e87adac.json)、[品質監査](candidate190-current-prior-review-result-admission-adr9-r2-n5-audit-r1.json)および[機序監査r2](candidate190-current-prior-review-result-admission-adr9-r2-n5-mechanism-audit-r2.json)を一次証拠とする。
+
+Candidate190の[ADR05・ADR07・ADR09 N=20拡張](candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20_2026-08-12.md)は、既存各5件を再利用し、不足各15件だけを発行した。追加45 / 45、累積60 / 60がvalidかつScore `4`で、三result kindは各20件、current result admission、terminalおよびartifact境界は60 / 60で成立した。M6を`quality_passed / mechanism_passed`とする。[登録result](d3b75f599f024ab8802595311920a00e.json)、[品質監査](candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20-audit-r1.json)および[機序監査](candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate190の[Standard14 N=5](candidate190-current-prior-review-result-admission-standard14-n5_2026-08-12.md)は70 / 70 valid、Score `4 = 70`で品質条件を満たした。しかしF02の3件、F03の1件、F04の4件でowner metadataを独立review operationの明示へ昇格し、不要review producerを8 runで起動した。子agent read 37件はmachine-bound exit codeを欠き、Candidate176の0件から退行した。M7を`quality_passed / mechanism_failed`で停止し、[登録result](333508e7f37545218bea8f71fc9d3d1c.json)、[品質監査](candidate190-current-prior-review-result-admission-standard14-n5-audit-r1.json)および[機序監査](candidate190-current-prior-review-result-admission-standard14-n5-mechanism-audit-r1.json)を保持する。
+
+Candidate191の[Standard14 F02・F03・F04 N=5](candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-n5_2026-08-12.md)は、Candidate190で不要producerを観測した3ケースだけを各5件確認した。15 / 15 valid、Score `4 = 15`、子agent 0件、command protocol violation 0件で、対象退行経路を閉じた。全14ケースのM7完了へ一般化せず、[登録result](6cbac394f6dc46aea5da398c867df2f5.json)、[品質監査](candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-n5-audit-r1.json)および[機序監査](candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-n5-mechanism-audit-r1.json)を保持する。
+
+Candidate191の[ADR9 r2 N=5](candidate191-explicit-review-operation-applicability-adr9-r2-n5_2026-08-12.md)は30 / 30 valid、Score `4 = 30`だった。bind済みreviewer、三result kind、terminal、current result admission、artifact変更境界および情報封鎖は30 / 30成立したが、reviewerのrepository evidence tool call 83件がmachine-bound exit codeを欠いた。terminal/result部分の成功とevidence経路の失敗を分離し、M5を`quality_passed / mechanism_failed`で停止する。[登録result](b71bcb211b064977900bce9aa0132cd4.json)、[品質・terminal監査](candidate191-explicit-review-operation-applicability-adr9-r2-n5-audit-r1.json)および[機序監査r2](candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit-r2.json)を一次証拠とする。
+
+後続の[C147・C176・C191 command evidence再判定](review-control-command-evidence-reassessment-c147-c176-c191_2026-08-12.md)は、実際の`exec_command` invocationとwrapper resultを対応付け直した。C147は報告44件中20件を誤検出として除いても真正違反24件とterminal不一致が残るため、[訂正機序監査r2](candidate147-result-effect-scope-adr9-r2-n50-mechanism-reassessment-r2.json)でも機序不通過を維持する。C176は[訂正機序監査r2](candidate176-decision-premise-counterexample-mechanism-reassessment-r2.json)により、ADR9 N=5の旧機序通過を真正違反1件、targeted N=20の旧機序通過を追加分2件により訂正し、N=50の真正terminal失敗も維持する。Candidate191は報告83件すべてが誤検出で、43 / 43実commandにmachine-bound exit codeがあるため[訂正機序監査r3](candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit-r3.json)を`mechanism_passed_reassessed`とする。今後の比較は各登録resultとCandidate別訂正機構監査を一組としてbindし、旧監査単独を現在のmechanism statusへ使用しない。
+
+Candidate191の[ADR05・ADR07・ADR09 N=20拡張](candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20_2026-08-12.md)は、M5の既存各5件を再利用し、不足各15件だけを発行した。追加45 / 45、累積60 / 60がvalidかつScore `4`で、三result kindは各20件、current result admission、terminalおよびartifact境界は60 / 60で成立した。新規45件へのcollector報告41件は、81 / 81実コマンドに終了状態があることをcall ID対応で確認し、真正欠落0件の誤検出と訂正した。M6を`quality_passed / mechanism_passed`とし、N=50は発行しない。[登録result](43fa5e3f8fc54440ad36e849a6c91a59.json)、[品質監査](candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-audit-r1.json)および[機序監査](candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate191の[ADR9 r2全9ケースN=5](candidate191-explicit-review-operation-applicability-adr9-r2-full-n5_2026-08-12.md)は、先行6ケース30件を再利用し、未評価だったADR01、ADR02およびADR08を各5件だけ追加した。追加15 / 15、累積45 / 45がvalidかつScore `4`で、全45件のproducer、dependency、terminalおよびartifact境界が成立した。review非適用15件でも不要producerは0件、required commandは10 / 10成功した。M5全体を`quality_passed / mechanism_passed`とする。[登録result](e599690689294c658b52a6a9e301697f.json)、[品質監査](candidate191-explicit-review-operation-applicability-adr9-r2-full-n5-audit-r1.json)および[機序監査](candidate191-explicit-review-operation-applicability-adr9-r2-full-n5-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate191の[Standard14全14ケースN=5](candidate191-explicit-review-operation-applicability-standard14-full-n5_2026-08-12.md)は、限定評価済みのF02、F03、F04各5件を再利用し、他11ケースの不足55件だけを発行した。追加55 / 55、累積70 / 70がvalidかつScore `4`で、不要review producer、terminal補完、context漏洩、検証順序違反、result効果の過剰伝播、危険なartifact変更およびcommand protocol violationは0件だった。M7を`quality_passed / mechanism_passed`とする。[登録result](da6ada84ac07426d8c66dddddcb08fdc.json)、[品質監査](candidate191-explicit-review-operation-applicability-standard14-full-n5-audit-r1.json)および[機序監査](candidate191-explicit-review-operation-applicability-standard14-full-n5-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate191の[M8複雑性・効率評価](../../docs/candidate191-complexity-efficiency-evaluation.md)は、C147比でpromptが`+7,217 bytes`（`+67.00%`）、条項が`13 → 19`であることを記録した。Candidate191のKPIはADR9 r2全9ケースN=5がquality `100.0`、token `1,410,389`、elapsed `921.670秒`、ADR05・ADR07・ADR09 N=20が`100.0`、`550,016.5`、`373.550秒`、Standard14全14ケースN=5が`100.0`、`1,875,286`、`932.726秒`である。系列間の絶対値は比較せず、互換系列内ではStandard14のtoken中央値がC147比`+29.54%`だった。競合ownerおよび安全に削除できる重複責務は0件と判定し、Candidateを変更せずM9へ進む。[構造化監査](candidate191-explicit-review-operation-applicability-m8-complexity-efficiency-audit-r1.json)を一次証拠とする。
+
+後続の[Candidate191 Standard14コスト機序再判定](candidate191-standard14-cost-mechanism-reassessment-r1.json)は、同一compatibility keyのC147とCandidate191、および保存済み生traceだけを再集計した。C147の共同発行が成立していた9ケースでCandidate191の変更前step中央値が各1増え、45 run中44件が逐次化した。この9ケースは総token差`+2,197,612`の`86.74%`を占める。70 / 70 Score 4は維持するが、M7を`quality_passed / mechanism_failed_reassessed`へ訂正し、M9へ進めない。新規評価runは0件である。
 
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 

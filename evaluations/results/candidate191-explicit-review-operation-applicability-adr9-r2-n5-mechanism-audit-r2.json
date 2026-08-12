@@ -1,0 +1,1096 @@
+{
+  "schema_version": "candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit/v2",
+  "status": "mechanism_failed_stopped",
+  "run_count": 30,
+  "case_count": 6,
+  "result_kind_counts": {
+    "counterexample_found": 20,
+    "no_counterexample_found": 5,
+    "unavailable": 5
+  },
+  "current_result_admission_count": 30,
+  "authentic_observation_result_count": 30,
+  "terminal_match_count": 30,
+  "artifact_boundary_match_count": 30,
+  "forbidden_canary_delivery_count": 0,
+  "command_protocol_violation_count": 83,
+  "command_protocol_violation_reason_counts": {
+    "missing_machine_bound_exit_code": 83
+  },
+  "command_protocol_violation_source_counts": {
+    "descendant_rollout_tool_call": 83
+  },
+  "mechanism_gate_passed": false,
+  "prior_result_runtime_path_observed": false,
+  "runs": [
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 1,
+      "run_id": "a346e293d0ea4c5b8c78f807ba91daa8",
+      "reviewer_thread_id": "019ff2e1-8120-75a3-9f17-973df4e0f349",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 2,
+      "run_id": "0ba08cfa8b1e442e8024e46ec7137418",
+      "reviewer_thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 14,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "INV-ADR9-OBS-DESIGN-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "IRC-EXEC-RAW-JSON-V1",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.general_design.semantic' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "INV-ADR9-OBS-AUTHORITY-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.authority' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "INV-ADR9-OBS-BOUNDARY-CONTRACT-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.boundary_normative_contract' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "INV-ADR9-OBS-INVENTORY-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.consumer_inventory' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "INV-ADR9-OBS-CONSUMER-CONTRACTS-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.consumer_contracts' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "INV-ADR9-OBS-PAIRED-SCOPE-01",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "IRC-EXEC-RAW-FILE-V1",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        },
+        {
+          "command": "jq -c '.' evaluation-fixture/paired-scope-evidence.json",
+          "parent_thread_id": "019ff2e0-96f1-77b1-83e5-5b810b318a8f",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-4bdb-7d00-bd10-1245cdc798bb"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 3,
+      "run_id": "c25aff5bb49c478caf457e834b8be5f1",
+      "reviewer_thread_id": "019ff2e1-30be-7072-bc82-1ba48103c693",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 4,
+      "run_id": "5022e131a29c424e932a528f64326601",
+      "reviewer_thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 31,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "OBS-DESIGN",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/design-admission.json#/general_design/semantic",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "semantic design value observed",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-DESIGN-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-DESIGN-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate191-explicit-review-operation-applicability-adr9-review-required-n5-20260812-r1/cycle/layer2/evidence/5022e131a29c424e932a528f64326601/workspace",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "OBS-AUTHORITY",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/design-admission.json#/authority",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "authority identity/provenance/domain/closure observed",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-AUTHORITY-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-AUTHORITY-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "OBS-BOUNDARY-NORMATIVE-CONTRACT",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/design-admission.json#/boundary_normative_contract",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "all normative fields and instance inputs observed",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-BOUNDARY-NORMATIVE-CONTRACT-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-BOUNDARY-NORMATIVE-CONTRACT-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "OBS-INVENTORY",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/design-admission.json#/consumer_inventory",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "all current snapshot entries observed",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-INVENTORY-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-INVENTORY-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "OBS-CONSUMER-CONTRACTS",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/design-admission.json#/consumer_contracts",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "contract for every inventory entry observed",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-CONSUMER-CONTRACTS-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-CONSUMER-CONTRACTS-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "OBS-PAIRED-SCOPE",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "evaluation-fixture/paired-scope-evidence.json",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "readable and scope_identity=paired-scope-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "INV-OBS-PAIRED-SCOPE-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        },
+        {
+          "command": "CONTRACT-OBS-PAIRED-SCOPE-value-or-nonvalue-r1",
+          "parent_thread_id": "019ff2e0-973a-7822-96bf-701b24a1ad08",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-5bc0-7a93-b064-694ae5797510"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR03",
+      "iteration": 5,
+      "run_id": "87d99e82263944b98f43ab877b2c0de7",
+      "reviewer_thread_id": "019ff2e1-3625-7471-8646-0dcfd99c9f41",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 1,
+      "run_id": "742eafa872fd4c7aad55616c45d1238c",
+      "reviewer_thread_id": "019ff2e1-40a7-74d3-8792-84e4cdb7a477",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 2,
+      "run_id": "c43c5e22c3d044a796164b1c915fbed4",
+      "reviewer_thread_id": "019ff2e1-4d27-7bc0-a2ec-6f2312e44fea",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 3,
+      "run_id": "cf0e91acdb4f4f8fb5fad436f6e0b082",
+      "reviewer_thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 6,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "OBS-DESIGN",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        },
+        {
+          "command": "OBS-AUTHORITY",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        },
+        {
+          "command": "OBS-BOUNDARY-NORMATIVE-CONTRACT",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        },
+        {
+          "command": "OBS-INVENTORY",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        },
+        {
+          "command": "OBS-CONSUMER-CONTRACTS",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        },
+        {
+          "command": "OBS-PAIRED-SCOPE",
+          "parent_thread_id": "019ff2e0-9579-7472-be3f-803652d0c887",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6a10-7c31-bbd2-0edff8106c38"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 4,
+      "run_id": "40a083427fe943979066f7edbba5b992",
+      "reviewer_thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 7,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "jq -c '.general_design.semantic' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "jq -c '.boundary_normative_contract' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "OBS-DESIGN",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "OBS-DESIGN-CONTRACT-r1: return stdout projection and individual exit_code; exit_code 0 authenticates a value observation",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate191-explicit-review-operation-applicability-adr9-review-required-n5-20260812-r1/cycle/layer2/evidence/40a083427fe943979066f7edbba5b992/workspace",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "OBS-BOUNDARY-NORMATIVE-CONTRACT",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        },
+        {
+          "command": "OBS-BOUNDARY-NORMATIVE-CONTRACT-CONTRACT-r1: return stdout projection and individual exit_code; exit_code 0 authenticates a value observation",
+          "parent_thread_id": "019ff2e0-967a-7fb2-a1d1-5eb11eb6d403",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-7469-72e0-8fa7-cdc73e256050"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR04",
+      "iteration": 5,
+      "run_id": "38b4568ec4754914a28f9e728ec472d3",
+      "reviewer_thread_id": "019ff2e1-bdff-7f62-8dae-ad304f90fcc7",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 1,
+      "run_id": "fbdd699ff2414ba4b2471ce6039c3590",
+      "reviewer_thread_id": "019ff2e1-5f37-7fe0-9f9f-9f55d8795ecf",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 2,
+      "run_id": "373eb1e0da8e4b04b34a0eef99f219e1",
+      "reviewer_thread_id": "019ff2e1-6732-7893-b093-96007c9bd690",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 5,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "OBS-DESIGN",
+          "parent_thread_id": "019ff2e0-95f6-7152-92ca-cf50ce4e04a3",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6732-7893-b093-96007c9bd690"
+        },
+        {
+          "command": "OBS-AUTHORITY",
+          "parent_thread_id": "019ff2e0-95f6-7152-92ca-cf50ce4e04a3",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6732-7893-b093-96007c9bd690"
+        },
+        {
+          "command": "OBS-INVENTORY",
+          "parent_thread_id": "019ff2e0-95f6-7152-92ca-cf50ce4e04a3",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6732-7893-b093-96007c9bd690"
+        },
+        {
+          "command": "OBS-CONSUMER-CONTRACTS",
+          "parent_thread_id": "019ff2e0-95f6-7152-92ca-cf50ce4e04a3",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6732-7893-b093-96007c9bd690"
+        },
+        {
+          "command": "OBS-PAIRED-SCOPE",
+          "parent_thread_id": "019ff2e0-95f6-7152-92ca-cf50ce4e04a3",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-6732-7893-b093-96007c9bd690"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 3,
+      "run_id": "bfc219fedff748bbb1a0a8ca01b2a0d6",
+      "reviewer_thread_id": "019ff2e1-6a6a-7682-b797-b11a9f8bebc7",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 4,
+      "run_id": "a6243ee83596457aa83727bd2ad68751",
+      "reviewer_thread_id": "019ff2e1-5977-7b23-84fc-e63691c1e71a",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR05",
+      "iteration": 5,
+      "run_id": "d2adbf3b48224b7885ab548c1875d508",
+      "reviewer_thread_id": "019ff2e1-c1ec-7c91-86e6-dbf776d02f0a",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 1,
+      "run_id": "0b79776b2b6a4265a1b4194ac94b373a",
+      "reviewer_thread_id": "019ff2e1-7e3a-78f3-b95a-4ffeb1e7a564",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 2,
+      "run_id": "786a4b676b644c0caef162e670dd00ba",
+      "reviewer_thread_id": "019ff2e1-be97-7172-8080-c3bcc5759258",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 3,
+      "run_id": "edc3f71753344bffbafea97c72558d5a",
+      "reviewer_thread_id": "019ff2e1-8809-77c2-a569-7b3464ff6746",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 4,
+      "run_id": "bfbf0d09aa494aa6962adab7a58378d6",
+      "reviewer_thread_id": "019ff2e1-5156-75b1-ad70-a1b7d52d7f33",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR06",
+      "iteration": 5,
+      "run_id": "d825a1d06646447f87d5bca4cb8a7fe9",
+      "reviewer_thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01",
+      "expected_result_kind": "counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 6,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "OBS-DESIGN",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        },
+        {
+          "command": "OBS-AUTHORITY",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        },
+        {
+          "command": "OBS-BOUNDARY-NORMATIVE-CONTRACT",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        },
+        {
+          "command": "OBS-INVENTORY",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        },
+        {
+          "command": "OBS-CONSUMER-CONTRACTS",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        },
+        {
+          "command": "OBS-PAIRED-SCOPE",
+          "parent_thread_id": "019ff2e0-952f-70e2-b2c2-d0c9df8260b8",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-622d-71e0-87c3-4ec2f3e69b01"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 1,
+      "run_id": "0fec2b4fd8d542afadac7d0104e74cb3",
+      "reviewer_thread_id": "019ff2e1-7476-7092-a247-f897c9a269e7",
+      "expected_result_kind": "no_counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 2,
+      "run_id": "fda9161ef4324c7e8236c99d4a6f5643",
+      "reviewer_thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5",
+      "expected_result_kind": "no_counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 8,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "jq -c '.general_design.semantic' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "jq -c '.authority' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "jq -c '.boundary_normative_contract' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "jq -c '.consumer_inventory' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "jq -c '.consumer_contracts' evaluation-fixture/design-admission.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "jq -c '.' evaluation-fixture/paired-scope-evidence.json",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "IRC-ADR07-JSON-PROJECTION-VALUE-R1",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        },
+        {
+          "command": "IRC-ADR07-JSON-DOCUMENT-VALUE-R1",
+          "parent_thread_id": "019ff2e0-951c-7b72-81b4-602cc506c507",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e1-3a61-7912-95e3-88b287b14eb5"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 3,
+      "run_id": "fe19397e0de84351945cbd5ac25d4951",
+      "reviewer_thread_id": "019ff2e1-65c3-75a1-8ef1-09ec3ea8a053",
+      "expected_result_kind": "no_counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 4,
+      "run_id": "451eaca4cb974717ac1c04a3169ac2de",
+      "reviewer_thread_id": "019ff2e1-5bf3-7932-8819-a5f48a86f50d",
+      "expected_result_kind": "no_counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR07",
+      "iteration": 5,
+      "run_id": "5697b24cd0a14c5685675d56d2fba44b",
+      "reviewer_thread_id": "019ff2e3-0607-72c3-b255-173ff5ead88a",
+      "expected_result_kind": "no_counterexample_found",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 1,
+      "run_id": "83ffab20999c46579b437f3ebdbf6c55",
+      "reviewer_thread_id": "019ff2e2-f082-7c61-b32e-461f0da7ed83",
+      "expected_result_kind": "unavailable",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 2,
+      "run_id": "66b9b9bbc8044ad5ba6b5950c6b56611",
+      "reviewer_thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821",
+      "expected_result_kind": "unavailable",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 6,
+      "command_protocol_ok": false,
+      "command_protocol_violations": [
+        {
+          "command": "INV-OBS-DESIGN",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        },
+        {
+          "command": "INV-OBS-AUTHORITY",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        },
+        {
+          "command": "INV-OBS-BOUNDARY-NORMATIVE-CONTRACT",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        },
+        {
+          "command": "INV-OBS-INVENTORY",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        },
+        {
+          "command": "INV-OBS-CONSUMER-CONTRACTS",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        },
+        {
+          "command": "INV-OBS-PAIRED-SCOPE",
+          "parent_thread_id": "019ff2e2-3822-7703-bf63-4a7220c48cfb",
+          "reason_code": "missing_machine_bound_exit_code",
+          "source": "descendant_rollout_tool_call",
+          "thread_id": "019ff2e2-ec7e-7e40-a598-7263f9e6a821"
+        }
+      ]
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 3,
+      "run_id": "b35d6771dffc45ccbf1ecac00ced1698",
+      "reviewer_thread_id": "019ff2e2-dd02-71e0-a75c-db62901e8ce0",
+      "expected_result_kind": "unavailable",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 4,
+      "run_id": "52f6bf7f2ec848fbb57a660b0c0695f8",
+      "reviewer_thread_id": "019ff2e3-3053-75b2-bf1e-db1299848235",
+      "expected_result_kind": "unavailable",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    },
+    {
+      "case_id": "TC-ADR09",
+      "iteration": 5,
+      "run_id": "dc6892b45d11473894d566809419b9e4",
+      "reviewer_thread_id": "019ff2e3-13c2-79d0-a980-837c00a1fc07",
+      "expected_result_kind": "unavailable",
+      "result_kind_ok": true,
+      "observation_evidence_ok": true,
+      "terminal_ok": true,
+      "current_result_admission_ok": true,
+      "artifact_boundary_ok": true,
+      "forbidden_canary_not_delivered": true,
+      "command_protocol_violation_count": 0,
+      "command_protocol_ok": true,
+      "command_protocol_violations": []
+    }
+  ]
+}

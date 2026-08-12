@@ -1,0 +1,37 @@
+{
+  "schema_version": "candidate191-explicit-review-operation-applicability-adr9-r2-full-n5-mechanism-audit/v1",
+  "status": "mechanism_passed",
+  "result_id": "e599690689294c658b52a6a9e301697f",
+  "run_count": 45,
+  "case_count": 9,
+  "review_required_run_count": 30,
+  "review_not_applicable_run_count": 15,
+  "result_kind_counts": {
+    "counterexample_found": 20,
+    "no_counterexample_found": 5,
+    "unavailable": 5
+  },
+  "non_review_control_path_counts": {
+    "finite_direct_match": 10,
+    "permission_denied": 5
+  },
+  "producer_path_match_count": 45,
+  "dependency_match_count": 45,
+  "current_result_admission_count": 30,
+  "authentic_observation_result_count": 30,
+  "terminal_match_count": 45,
+  "artifact_boundary_match_count": 45,
+  "review_non_applicability_match_count": 15,
+  "required_command_match_count": 10,
+  "command_protocol_violation_count": 0,
+  "reused_run_collector_reported_violation_count": 83,
+  "reused_run_collector_false_positive_count": 83,
+  "reused_run_actual_nested_command_count": 43,
+  "reused_run_machine_bound_exit_code_count": 43,
+  "genuine_missing_machine_bound_exit_code_count": 0,
+  "mechanism_gate_passed": true,
+  "prior_result_runtime_path_observed": false,
+  "reused_run_command_evidence_basis": "candidate191-explicit-review-operation-applicability-adr9-r2-n5-mechanism-audit-r3.json",
+  "new_run_audit_basis": "candidate191-adr9-r2-missing-three-n5-audit.json",
+  "audit_boundary": "The six reused review-required cases retain the corrected r3 command-evidence interpretation. The 15 new non-review cases use their generated v5 command evidence and command-protocol audit. Collector status alone is not used as the gate."
+}

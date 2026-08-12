@@ -1,0 +1,49 @@
+{
+  "schema_version": "review-control-command-evidence-reassessment/v1",
+  "reassessment_id": "candidate176-decision-premise-counterexample-mechanism-reassessment-r2",
+  "candidate": "Candidate176",
+  "source_results": {
+    "adr9_r2_n5": "d3e91302f0d14350906075676c5a2791",
+    "targeted_adr9_n20": "c5f3eb7b655941a3ac077566a735363e",
+    "targeted_adr9_n50": "d85929dc3c334c9a836c416f0eb832ec"
+  },
+  "scopes": {
+    "adr9_r2_n5": {
+      "collector_reported_violation_count": 17,
+      "collector_false_positive_count": 16,
+      "genuine_missing_machine_bound_exit_code_count": 1,
+      "genuine_affected_run_ids": [
+        "30c3e517fba84368b4f9af759847cc44"
+      ],
+      "historical_status": "mechanism_passed",
+      "reassessed_status": "mechanism_failed"
+    },
+    "targeted_adr9_n20_additional_runs": {
+      "collector_reported_violation_count": 19,
+      "collector_false_positive_count": 17,
+      "genuine_missing_machine_bound_exit_code_count": 2,
+      "genuine_affected_run_ids": [
+        "07264470f1114e9dba541604616aa536",
+        "159b3cf3ab6f4b48962e0946a8c2faa8"
+      ],
+      "historical_status": "mechanism_passed",
+      "reassessed_status": "mechanism_failed"
+    },
+    "targeted_adr9_n50_additional_runs": {
+      "collector_reported_violation_count": 13,
+      "collector_false_positive_count": 11,
+      "genuine_missing_machine_bound_exit_code_count": 2,
+      "genuine_affected_run_ids": [
+        "cf169fdbb35e434aabff31c921de7d98",
+        "f8c034a143a145dea5c6efbdc8ca5277"
+      ],
+      "independent_terminal_failure_run_id": "79302c5e76874014bbcdf8f5d3304031",
+      "independent_terminal_failure_classification": "independent_observation_targets_aggregated_into_one_invocation_result",
+      "reassessed_status": "mechanism_failed"
+    }
+  },
+  "standard14_results_changed": false,
+  "mechanism_gate_passed": false,
+  "status": "quality_results_preserved_mechanism_failed_reassessed",
+  "future_comparison_binding": "registered_result_selection_plus_this_reassessment"
+}

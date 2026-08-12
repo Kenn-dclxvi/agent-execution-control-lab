@@ -1,0 +1,379 @@
+{
+  "schema_version": "candidate191-explicit-review-operation-applicability-adr9-r2-full-n5-audit/v1",
+  "status": "quality_passed",
+  "result_id": "e599690689294c658b52a6a9e301697f",
+  "result_content_sha256": "2f969876645f5e2f3bfc37acaafab85b68a004dba474e21ec6b1055359d8edac",
+  "valid_run_count": 45,
+  "excluded_attempt_count": 0,
+  "quality_score_counts": {
+    "4": 45
+  },
+  "reused_run_count": 30,
+  "new_run_count": 15,
+  "case_summary": {
+    "TC-ADR01": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "completion_ready": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 5,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR02": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "completion_ready": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 5,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR03": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "blocked": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR04": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "blocked": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR05": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "blocked": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR06": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "blocked": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR07": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "completion_ready": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 5,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR08": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 0,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    },
+    "TC-ADR09": {
+      "valid_runs": 5,
+      "terminal_counts": {
+        "unavailable": 5
+      },
+      "reviewer_count": 5,
+      "artifact_change_count": 0,
+      "quality_score_counts": {
+        "4": 5
+      }
+    }
+  },
+  "new_run_audit": {
+    "schema_version": "candidate191-explicit-review-operation-applicability-adr9-r2-missing-three-n5-audit/v1",
+    "status": "quality_and_mechanism_passed",
+    "valid_run_count": 15,
+    "quality_score_counts": {
+      "4": 15
+    },
+    "case_counts": {
+      "TC-ADR01": 5,
+      "TC-ADR02": 5,
+      "TC-ADR08": 5
+    },
+    "terminal_match_count": 15,
+    "review_non_applicability_match_count": 15,
+    "artifact_boundary_match_count": 15,
+    "required_command_match_count": 10,
+    "command_protocol_violation_count": 0,
+    "runs": [
+      {
+        "case_id": "TC-ADR01",
+        "iteration": 1,
+        "run_id": "4aecbf991cd54008b99bc2f5f22fbf67",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR01",
+        "iteration": 2,
+        "run_id": "e613ca72a1574089a565bf55311818d8",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR01",
+        "iteration": 3,
+        "run_id": "a7cce10cb13f45bb82c2e81ccdda8ee7",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR01",
+        "iteration": 4,
+        "run_id": "f5db2fb907a54a7ea3be36ae1509b071",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR01",
+        "iteration": 5,
+        "run_id": "201e23d4268e4bdca9559ad21a131599",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR02",
+        "iteration": 1,
+        "run_id": "3422b697724d4008a2ed908cb2b7dfea",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR02",
+        "iteration": 2,
+        "run_id": "d25e480ede6648cfa44396d948a2d7ac",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR02",
+        "iteration": 3,
+        "run_id": "4a537a1e2a6343fc827d8ce4e7943626",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR02",
+        "iteration": 4,
+        "run_id": "5a7927dc401d441cb246596799501650",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR02",
+        "iteration": 5,
+        "run_id": "54305096b63a418b93bba9ee3918497d",
+        "observed_terminal": "completion_ready",
+        "expected_terminal": "completion_ready",
+        "reviewer_count": 0,
+        "changed_paths": [
+          "evaluation-fixture/design-admission.json"
+        ],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR08",
+        "iteration": 1,
+        "run_id": "640e87a602664d688a38086656938d5b",
+        "observed_terminal": "unavailable",
+        "expected_terminal": "unavailable",
+        "reviewer_count": 0,
+        "changed_paths": [],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR08",
+        "iteration": 2,
+        "run_id": "73412fc2544340ccbdc98308947466f6",
+        "observed_terminal": "unavailable",
+        "expected_terminal": "unavailable",
+        "reviewer_count": 0,
+        "changed_paths": [],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR08",
+        "iteration": 3,
+        "run_id": "db18789af4624ef0909be1432d2b4fdd",
+        "observed_terminal": "unavailable",
+        "expected_terminal": "unavailable",
+        "reviewer_count": 0,
+        "changed_paths": [],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR08",
+        "iteration": 4,
+        "run_id": "ac77992703634abf9a14d3351246c7af",
+        "observed_terminal": "unavailable",
+        "expected_terminal": "unavailable",
+        "reviewer_count": 0,
+        "changed_paths": [],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      },
+      {
+        "case_id": "TC-ADR08",
+        "iteration": 5,
+        "run_id": "88c15c805d15491bbad4225765885a02",
+        "observed_terminal": "unavailable",
+        "expected_terminal": "unavailable",
+        "reviewer_count": 0,
+        "changed_paths": [],
+        "command_protocol_violation_count": 0,
+        "required_command_ok": true,
+        "review_non_applicability_ok": true,
+        "artifact_boundary_ok": true,
+        "terminal_ok": true,
+        "quality_score": 4
+      }
+    ]
+  }
+}
