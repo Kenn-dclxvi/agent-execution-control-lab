@@ -1,0 +1,217 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "the-caption-3ce91a4-review-operation-admission-closure-r1",
+    "change_reason": "model-visible inputまたはadmission済みterminal resultに含まれるevidence identityを、値が変わるまでcurrentとして再利用する。",
+    "evaluation_status": "adr9_standard14_quality_passed_mechanism_passed_optimization_failed_stopped",
+    "non_goals": [
+      "改善の主張",
+      "採用判断",
+      "release判断",
+      "THE-CAPTION本体への反映"
+    ],
+    "problem": "C147 Standard14 N=100ではmodel-visibleなroot AGENTS.mdが多数のrunで再取得され、再取得しないScore 4 runも成立した。既存EVIDENCE_GATEには受領済みevidenceをcurrentへ移して失効まで再利用する正の関係がない。",
+    "scope": "Candidate175のroot AGENTS.mdにあるEVIDENCE_GATEだけへadmitted_evidence_current関係を追加する。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "5de383fad436407f9696e3ee79681ee89e1c695c8a9fd4e3cfdf4c3e326c5046",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "the-caption-3ce91a4-review-operation-admission-closure-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "e6ee9f356387ae9838c5528f43230a464011074a",
+      "mode": "100644",
+      "sha256": "091571ac44c2c82682ad5bee51676bee304009b9088faa175d4198b0e259d626",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "the-caption-3ce91a4-current-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-admitted-evidence-current-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/THE-CAPTION-PROMPT.git",
+    "construction_state": "uncommitted_working_tree",
+    "design_inputs": [
+      "docs/candidate206-admitted-evidence-current-design.md",
+      "docs/candidate206-admitted-evidence-current-direction-review.md",
+      "docs/c147-standard14-control-insufficiency-audit.md",
+      "evaluations/results/candidate175-review-operation-admission-closure-adr9-standard14-n5_2026-08-10.md",
+      "docs/candidate175-review-operation-admission-closure-design.md",
+      "docs/candidate175-review-operation-admission-closure-design-audit.md",
+      "evaluations/results/candidate173-concrete-counterexample-adjudication-adr9-r2-n50_2026-08-10.md",
+      "evaluations/results/candidate173-concrete-counterexample-adjudication-adr9-r2-n50-audit-r1.json",
+      "evaluations/results/candidate173-concrete-counterexample-adjudication-v14-medium-standard14-atomic-n50-cli0146_2026-08-10.md",
+      "evaluations/results/candidate173-concrete-counterexample-adjudication-standard14-n50-audit-r1.json",
+      "docs/candidate173-concrete-counterexample-adjudication-design.md",
+      "docs/preimplementation-information-sealed-adversarial-design-review-spec.md",
+      "docs/preimplementation-adversarial-design-review-targeted-evaluation-design.md",
+      "evaluations/results/candidate147-preimplementation-adversarial-design-review-problem-qualification-r1_2026-08-10.md",
+      "docs/candidate147-result-effect-scope-design.md",
+      "docs/candidate146-model-step-boundary-audit.md",
+      "docs/candidate145-f01-f02-f03-cost-causal-analysis.md",
+      "docs/candidate145-lifecycle-consumer-evidence-admission-design.md",
+      "evaluations/results/candidate143-candidate144-required-outcome-validation-method-boundary-v14-medium-a01-a02-f01-f02-f04-f07-atomic-n5-cli0146_2026-08-02.md",
+      "docs/candidate144-required-outcome-validation-method-boundary-design.md",
+      "docs/candidate143-required-outcome-implementation-bind-design.md",
+      "docs/candidate119-validation-predicate-method-boundary-design.md",
+      "evaluations/results/candidate142-initial-joint-effect-admission-v14-medium-f02-f04-f07-atomic-n5-stopped-cli0146_2026-08-02.md",
+      "evaluations/results/candidate141-prechange-relation-coverage-v14-medium-f02-f04-f07-atomic-n5-stopped-cli0146_2026-08-02.md",
+      "docs/candidate121-f02-evidence-route-analysis.md",
+      "docs/candidate118-implementation-bind-terminal-closure-design.md",
+      "docs/candidate116-outcome-implementation-boundary-design.md",
+      "evaluations/results/candidate116-outcome-implementation-boundary-v14-medium-a02-atomic-n20-cli0146_2026-07-31.md",
+      "docs/prompt-control-design-principles.md",
+      "docs/prompt-file-bundle.md"
+    ],
+    "design_status": "complete",
+    "evaluation_status": "adr9_standard14_quality_passed_mechanism_passed_optimization_failed_stopped",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "source_prompt_identity identifies Candidate175 as the comparison direct parent because its saved ADR9 and Standard14 results passed both quality and mechanism gates. Candidate206 preserves Candidate175 verbatim except for one EVIDENCE_GATE relation that reuses model-visible or admitted terminal evidence until an admitted result changes that identity. Candidate175 is only the evaluated carrier for measuring this axis; this does not adopt Candidate175, replace Candidate147, or inherit Candidate176 and later failed-lineage mechanisms."
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

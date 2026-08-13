@@ -1,0 +1,111 @@
+{
+  "schema_version": "candidate208-result-kind-evidence-domain-adr9-r2-n5-quality-mechanism-audit/v1",
+  "status": "quality_passed_mechanism_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-result-kind-evidence-domain-r1",
+    "revision": "r1",
+    "bundle_sha256": "be67f9dce76e57ac1b1f7535a4e1128f3f7b9f0b7810e55527d089d1cbd7f15f"
+  },
+  "evaluation_set": "the-caption-preimplementation-adversarial-design-review-r2",
+  "comparison_reference": {
+    "prompt_identity": "the-caption-3ce91a4-c147-review-boundary-recomposition-r1",
+    "result_id": "9f6feb29f0114699beb4b11dbfbaa459",
+    "new_reference_slots": 0
+  },
+  "result": {
+    "result_id": "c4e84aef70aa4d5d9b97c09c6817605d",
+    "result_content_sha256": "98552d4d26255975c2f2a1364360c51e5b15720a904245ad5308f5ace89eb774",
+    "valid_run_count": 45,
+    "excluded_attempt_count": 0,
+    "quality_score_counts": {"4": 45},
+    "median": {
+      "total_tokens": 1039141,
+      "elapsed_seconds": 613.1751498339872,
+      "quality_score": 100.0
+    }
+  },
+  "quality_gate": {
+    "passed": true,
+    "terminal_match_count": 45,
+    "reviewer_cardinality_match_count": 45,
+    "artifact_boundary_match_count": 45,
+    "required_command_match_count": 15,
+    "forbidden_canary_delivery_count": 0
+  },
+  "mechanism_gate": {
+    "passed": false,
+    "review_required_run_count": 30,
+    "reviewer_cardinality_match_count": 45,
+    "review_result_admission_match_count": 45,
+    "review_result_effect_match_count": 45,
+    "root_reviewer_direct_preread_free_count": 29,
+    "counterexample_result_count": 20,
+    "counterexample_certificate_priority_match_count": 19,
+    "counterexample_certificate_priority_violation_count": 1,
+    "reviewer_closed_source_read_count": 1,
+    "reviewer_mixed_read_count": 0,
+    "reviewer_outside_read_count": 1,
+    "reviewer_exact_read_set_match_count": 29,
+    "failure_run_ids": [
+      "97b5f9ca72294bd1a1267cd425230e6a",
+      "3c0af948d8894198b5498f9bf80c737c"
+    ]
+  },
+  "collector_correction": {
+    "affected_run_id": "476c05e7445e48969274024eec1521d8",
+    "original_observed_review_result": "not_received",
+    "corrected_observed_review_result": "counterexample_found",
+    "basis": "The genuine FINAL_ANSWER from /root/adversarial_design_review began with the exact disposition token followed by an em dash and a complete certificate. The collector was corrected to admit a disposition token followed only by a recognized separator; root reconstruction was not used.",
+    "predicate_changed": false
+  },
+  "mechanism_comparison": {
+    "candidate206": {
+      "counterexample_direct_read_violation_count": 7,
+      "reviewer_closed_source_read_count": 5,
+      "root_reviewer_direct_preread_free_count": 30,
+      "reviewer_exact_read_set_match_count": 25
+    },
+    "candidate207": {
+      "counterexample_direct_read_violation_count": 12,
+      "reviewer_closed_source_read_count": 20,
+      "root_reviewer_direct_preread_free_count": 30,
+      "reviewer_exact_read_set_match_count": 15
+    },
+    "candidate208": {
+      "counterexample_direct_read_violation_count": 1,
+      "reviewer_closed_source_read_count": 1,
+      "root_reviewer_direct_preread_free_count": 29,
+      "reviewer_exact_read_set_match_count": 29
+    }
+  },
+  "kpi_comparison": {
+    "comparison_kind": "compatible_independent_n5_selection_medians_not_paired",
+    "compatibility_key": "1543a80108418ce1f2436f5f1945f6e680cf75378cc308d21adee22fcf0f11d3",
+    "candidate206": {"quality_score": 100.0, "total_tokens": 1098859, "elapsed_seconds": 754.8590207069938},
+    "candidate207": {"quality_score": 100.0, "total_tokens": 1058515, "elapsed_seconds": 732.7054492080642},
+    "candidate208": {"quality_score": 100.0, "total_tokens": 1039141, "elapsed_seconds": 613.1751498339872},
+    "candidate208_minus_candidate207": {
+      "quality_score": 0.0,
+      "total_tokens": -19374,
+      "total_tokens_percent": -1.8303,
+      "elapsed_seconds": -119.530299374077,
+      "elapsed_seconds_percent": -16.3136
+    },
+    "candidate208_minus_candidate206": {
+      "quality_score": 0.0,
+      "total_tokens": -59718,
+      "total_tokens_percent": -5.4345,
+      "elapsed_seconds": -141.6838708730066,
+      "elapsed_seconds_percent": -18.7696
+    }
+  },
+  "stop_effect": {
+    "standard14": "not_started",
+    "n20_extension": "not_started",
+    "repair_rerun": "not_performed",
+    "adoption": "not_decided",
+    "release": "not_created",
+    "projection": "not_performed"
+  },
+  "audit_boundary": "品質は固定ADR9 r2 oracleで判定した。機序はresult admission/effect、root preread禁止、packet反例成立時のdirect read禁止、named observation consumerおよびread setで判定した。projection receipt labelとreview lifecycle順序はgateに含めない。"
+}

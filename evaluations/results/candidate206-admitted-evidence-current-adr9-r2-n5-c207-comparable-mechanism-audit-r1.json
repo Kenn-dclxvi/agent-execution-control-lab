@@ -1,0 +1,54 @@
+{
+  "schema_version": "candidate206-admitted-evidence-current-adr9-r2-n5-c207-comparable-mechanism-audit/v1",
+  "status": "retrospective_c207_read_gate_failed",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-admitted-evidence-current-r1",
+    "revision": "r1",
+    "bundle_sha256": "5de383fad436407f9696e3ee79681ee89e1c695c8a9fd4e3cfdf4c3e326c5046"
+  },
+  "source": {
+    "result_id": "aee4cdf149ef43de9305b1a3138ebe59",
+    "saved_run_count": 45,
+    "new_evaluation_slots": 0,
+    "audit_mode": "retrospective_same_predicates_as_candidate207"
+  },
+  "original_candidate206_decision": {
+    "mechanism_gate": "passed",
+    "scope": "admitted_evidence_current relation and root instruction reread suppression",
+    "historical_decision_preserved": true
+  },
+  "c207_comparable_read_gate": {
+    "passed": false,
+    "review_required_run_count": 30,
+    "reviewer_cardinality_match_count": 45,
+    "review_result_admission_match_count": 45,
+    "review_result_effect_match_count": 45,
+    "root_reviewer_direct_preread_free_count": 30,
+    "counterexample_result_count": 20,
+    "counterexample_certificate_priority_match_count": 13,
+    "counterexample_certificate_priority_violation_count": 7,
+    "reviewer_closed_source_read_count": 5,
+    "reviewer_mixed_read_count": 2,
+    "reviewer_outside_read_count": 3,
+    "reviewer_exact_read_set_match_count": 25,
+    "failure_run_ids": [
+      "2b5f8e4cd8f848df91771e8f45bb3ab7",
+      "64d24df417084a64881616a1b3beb60f",
+      "8317e9e436a04b2a928c05c455996f01",
+      "9b175f8a90f847a7bce99a290e8faa81",
+      "8e629972de054b359ea354b3e930f65d",
+      "ce670b819fe742d9bdaebdd6633b7229",
+      "01b6ee6576fa40c49aeba4b4f9adf98b",
+      "61ab6fb3af3d45e0af7c9b63bfb32142",
+      "6d784a2265f84fdf8260a25f43a7e216",
+      "5a7f8b2655d44b99a822e3af20aaed2e",
+      "d50cfa7fc655452a9be50f5d0bb4f04d",
+      "2826f57a6cd540eba1bca911d5f373f5",
+      "7ca0506d39134afca761feefebd8d8b6",
+      "0bc5931fb52e440c835fb8297fbeae97",
+      "20b6dea409724dca89a822902bde4812",
+      "e2669734257744af8d07b0684b7134fb"
+    ]
+  },
+  "audit_boundary": "C207-comparable read audit over saved C206 traces: root preread, exact manifest direct-target read, packet-established counterexample before read, and named direct observation for no_counterexample_found or unavailable. Projection receipt and C206 lifecycle sequencing are diagnostics only."
+}

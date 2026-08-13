@@ -1,0 +1,89 @@
+{
+  "schema_version": "candidate206-admitted-evidence-current-mechanism-audit/v1",
+  "status": "mechanism_passed_optimization_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-admitted-evidence-current-r1",
+    "revision": "r1",
+    "bundle_sha256": "5de383fad436407f9696e3ee79681ee89e1c695c8a9fd4e3cfdf4c3e326c5046"
+  },
+  "comparison_prompt_set_identity": {
+    "name": "the-caption-3ce91a4-review-operation-admission-closure-r1",
+    "revision": "r1",
+    "bundle_sha256": "251afdef36802c6ea3f2c4def3616288fa9054a22c028896c16418ba3e8a5061"
+  },
+  "adr9": {
+    "candidate_result_id": "aee4cdf149ef43de9305b1a3138ebe59",
+    "reference_result_id": "eba0a4bc1d0e4391afa631462b8daccb",
+    "valid_runs": 45,
+    "score_4_runs": 45,
+    "excluded_attempts": 0,
+    "required_reviewer_runs": 25,
+    "required_reviewer_started": 25,
+    "unnecessary_reviewer_starts": 0,
+    "forbidden_canary_deliveries": 0,
+    "unadmitted_changes": 0,
+    "candidate_root_instruction_content_read_runs": 0,
+    "reference_root_instruction_content_read_runs": 7,
+    "mechanism_gate": "passed"
+  },
+  "standard14": {
+    "candidate_result_id": "0aba77ffad0848e5be7e635f96293070",
+    "reference_result_id": "c31b560bce92400293c7b3bc40715246",
+    "valid_runs": 70,
+    "score_4_runs": 70,
+    "excluded_attempts": 0,
+    "command_protocol_violations": 0,
+    "monthly_numeric_location_exact": 5,
+    "candidate_root_instruction_content_read_runs": 0,
+    "reference_root_instruction_content_read_runs": 7,
+    "reference_root_instruction_content_reads_by_case": {
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": 5,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 1,
+      "TC-F07-CANONICAL-V4-RUNNER": 1
+    },
+    "candidate_path_local_instruction_read_runs": {
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": 5,
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": 5,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 5,
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 1
+    },
+    "reference_path_local_instruction_read_runs": {
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": 5,
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": 5,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 5,
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 1
+    },
+    "mechanism_gate": "passed"
+  },
+  "kpi": {
+    "adr9_median_difference_candidate_minus_reference": {
+      "quality_score": 0.0,
+      "total_tokens": -24757,
+      "total_tokens_percent": -2.2033,
+      "elapsed_seconds": 21.490954831970157,
+      "elapsed_seconds_percent": 2.9304
+    },
+    "standard14_median_difference_candidate_minus_reference": {
+      "quality_score": 0.0,
+      "total_tokens": -131449,
+      "total_tokens_percent": -7.7686,
+      "elapsed_seconds": 99.83598325174535,
+      "elapsed_seconds_percent": 12.4030
+    },
+    "standard14_f10_monthly_case_median_difference_candidate_minus_reference": {
+      "total_tokens": -9506,
+      "total_tokens_percent": -8.9,
+      "elapsed_seconds": 9.527,
+      "elapsed_seconds_percent": 20.3
+    },
+    "optimization_gate": "failed_no_kpi_dominance"
+  },
+  "decision": {
+    "admitted_evidence_current_relation": "mechanism_supported",
+    "candidate_adoption": "not_authorized",
+    "release": "not_created",
+    "runtime_projection": "not_projected",
+    "next_candidate_parentage": "not_granted",
+    "reason": "品質と意図した再取得抑止は成立したが、token低下とelapsed増加が同時に観測され、現在の一律追加文言は支配的なcost改善にならなかった。"
+  }
+}

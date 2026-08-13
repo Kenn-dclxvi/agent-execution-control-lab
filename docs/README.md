@@ -26,7 +26,7 @@
 | [`repository-contract.md`](repository-contract.md) | リポジトリ契約の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md) | 評価基盤のレイヤーと境界の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`evaluation-loop-manual.md`](evaluation-loop-manual.md) | 評価実行方法の正本 | [`docs/AGENTS.md`](AGENTS.md) |
-| [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | プロンプト制御の設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
+| [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | プロンプト制御の原因分析、成功・失敗比較、Candidate設計および再構成へ進む前に全文を読む設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-file-bundle.md`](prompt-file-bundle.md) | prompt file bundle形式・manifest・格納の正本 | [`scripts/AGENTS.md`](../scripts/AGENTS.md) |
 
 ## 2. 現在地・研究全体像
@@ -45,10 +45,57 @@
 
 現在進行中の研究軸を、別軸の作業を混ぜず因果系列ごとに並べる。
 
-### 3a. 機能見直し・review admission
+### 3a. C147共通core再構成とreview admission履歴
 
 | 文書 | 役割 |
 |---|---|
+| [`c147-functional-decomposition-reanalysis.md`](c147-functional-decomposition-reanalysis.md) | C147全13条項を文単位の判定・選択・発行・収集・反映・完了機能へ分解し、旧M1/M2の完了撤回、C147 15件とC205 15件の強いイベント順序差、次Candidate前の閉包条件を固定した現行分析 |
+| [`c147-control-group-overlap-optimality-audit.md`](c147-control-group-overlap-optimality-audit.md) | C147の13条項を現在のまとまりのまま、制御対象、内部closure、境界重複、成立経緯、証拠状態およびStandard14で未評価の最適化仮説へ分類した現行監査 |
+| [`c147-f06-authority-route-causal-audit.md`](c147-f06-authority-route-causal-audit.md) | F06 N=100の旧authority lookup 21件をpath-local instruction 17件、root-only 2件、discovery-only 2件へ分解し、必要readとlocator最適化候補を分離した原因監査 |
+| [`c147-validation-control-overlap-causal-audit.md`](c147-validation-control-overlap-causal-audit.md) | C147のrequired-validation保存run 190件に加えてfull Standard14で検出したvalidation後続発行22件の元rolloutを再監査し、二条項の重なりを意図的handoff・局所強化、22件を既存closureからの逸脱と判定した原因監査 |
+| [`c147-runtime-surface-portability-audit.md`](c147-runtime-surface-portability-audit.md) | C147のruntime固有に見える語を、役割名、機械観測点、発行境界、設定名へ分け、発行・来歴・継続の意味拘束と名称だけのportable置換余地を区別したH3監査 |
+| [`c147-standard14-control-insufficiency-audit.md`](c147-standard14-control-insufficiency-audit.md) | C147 Standard14 N=100の一次result、3 KPI、診断および保存event 1,385件から、品質維持のcost削減候補と、結果改善を伴わない過剰品質案を分離した現行最適性監査 |
+| [`c147-review-free-portable-core-causal-reclassification.md`](c147-review-free-portable-core-causal-reclassification.md) | 条項単位分類では正の発行遷移と結果収集障壁を落としていたためM1完了を撤回した旧再分類 |
+| [`c147-review-free-portable-core-design.md`](c147-review-free-portable-core-design.md) | C147の機能coverageが不完全だったためM2完了を撤回した旧12責任設計 |
+| [`c147-review-free-portable-core-direction-audit.md`](c147-review-free-portable-core-direction-audit.md) | 入力M1/M2の機能coverage不足によりCandidate作成許可を撤回した旧M3方向監査 |
+| [`candidate204-portable-execution-core-implementation-audit.md`](candidate204-portable-execution-core-implementation-audit.md) | C147直接childのCandidate204へ12責任のportable coreを実装し、Review責任0件、Codex固有表面語0件、root以外18 target不変および未評価状態を固定したM4監査 |
+| [`candidate204-portable-execution-core-f01-f02-f03-n5-evaluation-design.md`](candidate204-portable-execution-core-f01-f02-f03-n5-evaluation-design.md) | Candidate204の初回gateをF01〜F03各N=5へ限定し、品質、portable mechanism、KPI、互換preflight、Standard14前の停止条件を固定した評価設計 |
+| [`candidate204-portable-execution-core-f01-f02-f03-n5-execution-preparation-audit.md`](candidate204-portable-execution-core-f01-f02-f03-n5-execution-preparation-audit.md) | Candidate175保存runの3ケースselectionと保存Layer 1へbindし、Candidate204不足15件だけをM=24で許可した発行前監査 |
+| [`candidate204-m5-causal-analysis.md`](candidate204-m5-causal-analysis.md) | 開始identity単独発行15件を正の遷移owner欠落一原因へ狭めすぎたためsupersedeした旧原因分析 |
+| [`post-candidate204-portable-issuance-frontier-design.md`](post-candidate204-portable-issuance-frontier-design.md) | `ISSUANCE`一責任だけではC147機能を復元できなかったCandidate205の旧M2設計 |
+| [`post-candidate204-portable-issuance-frontier-direction-review.md`](post-candidate204-portable-issuance-frontier-direction-review.md) | 入力設計の機能coverage不足により通過判断を撤回したCandidate205旧M3方向レビュー |
+| [`candidate205-portable-issuance-frontier-implementation-audit.md`](candidate205-portable-issuance-frontier-implementation-audit.md) | C147直接childのCandidate205へ13責任を実装し、Review責任0件、Codex固有表面語0件およびroot以外18 target不変を確認したM4監査 |
+| [`candidate205-portable-issuance-frontier-f01-f02-f03-n5-evaluation-design.md`](candidate205-portable-issuance-frontier-f01-f02-f03-n5-evaluation-design.md) | Candidate205のF01〜F03各N=5で品質と初回issuance frontierの15 / 15通過を要求した評価設計 |
+| [`candidate205-portable-issuance-frontier-f01-f02-f03-n5-execution-preparation-audit.md`](candidate205-portable-issuance-frontier-f01-f02-f03-n5-execution-preparation-audit.md) | Candidate147保存selectionとLayer 1へbindし、Candidate205不足15件だけを許可した発行前監査 |
+| [`candidate205-portable-issuance-frontier-f01-f02-f03-n5_2026-08-13.md`](../evaluations/results/candidate205-portable-issuance-frontier-f01-f02-f03-n5_2026-08-13.md) | Candidate205の15 / 15 Score 4、強いcommand event順では共同発行0 / 15、機構不通過およびStandard14停止を記録した結果 |
+| [`candidate205-m5-causal-analysis.md`](candidate205-m5-causal-analysis.md) | 原因をexact eligible invocation setへ狭めすぎ、共同発行1件も強いイベント順序では不成立だったためsupersedeした旧原因分析 |
+| [`candidate206-admitted-evidence-current-design.md`](candidate206-admitted-evidence-current-design.md) | Candidate175を比較用carrierに限定し、受領済みevidenceを失効まで再利用するH1一軸、ADR9先行、Standard14、品質・機序・cost停止条件を固定した設計 |
+| [`candidate206-admitted-evidence-current-direction-review.md`](candidate206-admitted-evidence-current-direction-review.md) | H1が`EVIDENCE_GATE`一節だけに閉じ、path-local instructionと失効後再観測を保持することを確認した変更前監査 |
+| [`candidate206-admitted-evidence-current-implementation-audit.md`](candidate206-admitted-evidence-current-implementation-audit.md) | Candidate175との差分がroot `EVIDENCE_GATE`一節だけであることを確認した実装監査 |
+| [`candidate206-admitted-evidence-current-adr9-r2-n5-execution-preparation-audit.md`](candidate206-admitted-evidence-current-adr9-r2-n5-execution-preparation-audit.md) | Candidate175 ADR9 resultへbindし、Candidate206不足45件だけを許可した発行前監査 |
+| [`candidate206-admitted-evidence-current-adr9-standard14-n5_2026-08-13.md`](../evaluations/results/candidate206-admitted-evidence-current-adr9-standard14-n5_2026-08-13.md) | ADR9 45 / 45、Standard14 70 / 70 Score 4、root本文再取得7件から0件、token低下とelapsed増加、最適化gate不通過を記録した結果 |
+| [`candidate206-review-control-cost-representation-analysis.md`](candidate206-review-control-cost-representation-analysis.md) | C147〜C206の静的制御量、同一互換Standard14への常時cost、ADR9で得たreview便益、C175/C206の巨大`DESIGN_ADMISSION`と現在の責務分離方針の不一致を分け、C206 N=20停止と再構成条件を固定した分析 |
+| [`candidate207-c147-review-boundary-recomposition-plan.md`](candidate207-c147-review-boundary-recomposition-plan.md) | C147を直接基盤に有効なreview境界だけを既存13制御群へ接続し、手順制御と`admitted_evidence_current`を除外して、ADR9・Standard14をN=5資格確認後に累積N=20まで検証するC207計画 |
+| [`candidate207-c147-review-boundary-recomposition-draft.md`](candidate207-c147-review-boundary-recomposition-draft.md) | C147→C206全追加文の処分、ADR9入力所有権・九ケース状態、およびC147既存制御群へ接続したC207 root制御差分本文案を固定し、手順化禁止を監査した実施順1〜3の記録 |
+| [`candidate207-c147-review-boundary-recomposition-direction-review.md`](candidate207-c147-review-boundary-recomposition-direction-review.md) | C147/C173/C175/C191/C202/C203の保存誤経路へC207本文案を当て、初回direct-read eligibility反例を境界修正してCandidate作成を許可した実施順4の事前反証 |
+| [`candidate207-c147-review-boundary-recomposition-implementation-audit.md`](candidate207-c147-review-boundary-recomposition-implementation-audit.md) | C147直接childとしてroot `AGENTS.md`だけへreview境界を実装し、非root 18 target、C147共同発行および手順制御非継承を確認したCandidate207実装監査 |
+| [`candidate208-result-kind-evidence-domain-design.md`](candidate208-result-kind-evidence-domain-design.md) | C207保存traceの反例成立後readだけを対象に、三review result kindの必要証拠集合、reviewer ownershipおよびread consumerを一つの境界へ対応させるCandidate208作成前設計 |
+| [`candidate208-result-kind-evidence-domain-implementation-audit.md`](candidate208-result-kind-evidence-domain-implementation-audit.md) | C207から三制御群だけを置換したCandidate208のidentity、+208文字、手順化禁止、ADR9品質通過、不要read 1件とroot preread 1件による機序停止を記録した実装監査 |
+| [`candidate208-result-kind-evidence-domain-adr9-r2-n5_2026-08-13.md`](../evaluations/results/candidate208-result-kind-evidence-domain-adr9-r2-n5_2026-08-13.md) | 45 / 45 Score 4、C207比の反例成立後read 12件から1件、KPI中央値低下、残る二つの証拠境界およびStandard14停止を記録した結果 |
+| [`candidate208-result-kind-evidence-domain-standard14-n5-evaluation-design.md`](candidate208-result-kind-evidence-domain-standard14-n5-evaluation-design.md) | ADR9機序不通過を保持した明示的リスク受容として、C206保存結果へbindするStandard14通常経路測定を固定した設計 |
+| [`candidate208-result-kind-evidence-domain-standard14-n5-execution-preparation-audit.md`](candidate208-result-kind-evidence-domain-standard14-n5-execution-preparation-audit.md) | Candidate206保存Layer 1との完全互換、Candidate208不足70件、M=24および発行0件を確認した実行前監査 |
+| [`candidate208-result-kind-evidence-domain-standard14-n5_2026-08-13.md`](../evaluations/results/candidate208-result-kind-evidence-domain-standard14-n5_2026-08-13.md) | 70 / 70 Score 4、C206比token増・elapsed減、通常経路品質とADR9機序を分離したCandidate208 Standard14結果 |
+| [`candidate208-result-kind-evidence-domain-adr9-standard14-n50-extension-design.md`](candidate208-result-kind-evidence-domain-adr9-standard14-n50-extension-design.md) | 既存N=5を再利用し、ADR9不足405件とStandard14不足630件を順に累積N=50へ延長する境界と停止条件 |
+| [`candidate208-result-kind-evidence-domain-adr9-r2-n50-execution-preparation-audit.md`](candidate208-result-kind-evidence-domain-adr9-r2-n50-execution-preparation-audit.md) | Candidate208 N=5 resultと保存Layer 1へbindし、ADR9不足405件・M=24・発行0件を確認した実行前監査 |
+| [`candidate208-result-kind-evidence-domain-adr9-r2-n50_2026-08-13.md`](../evaluations/results/candidate208-result-kind-evidence-domain-adr9-r2-n50_2026-08-13.md) | 449 / 450 Score 4、機序不通過23件、Standard14 N=50未発行を記録したCandidate208累積N=50結果 |
+| [`candidate209-named-certificate-deficit-design.md`](candidate209-named-certificate-deficit-design.md) | Candidate208のScore 1と反例成立後readを根拠に、名前付きcertificate欠損、排他的観測依存、`unavailable`証拠を一つの境界へ固定したCandidate209作成前設計 |
+| [`candidate209-named-certificate-deficit-implementation-audit.md`](candidate209-named-certificate-deficit-implementation-audit.md) | Candidate208から`TERMINAL`と`EVIDENCE_GATE`だけを置換したCandidate209のidentity、+400文字、非変更18 target、手順化禁止および未評価状態を記録した実装監査 |
+| [`candidate209-named-certificate-deficit-adr9-r2-n5-execution-preparation-audit.md`](candidate209-named-certificate-deficit-adr9-r2-n5-execution-preparation-audit.md) | Candidate208 N=5 resultと保存Layer 1へbindし、Candidate209不足45件、M=24、互換条件一致および発行0件を確認したADR9実行前監査 |
+| [`candidate209-named-certificate-deficit-adr9-r2-n5_2026-08-13.md`](../evaluations/results/candidate209-named-certificate-deficit-adr9-r2-n5_2026-08-13.md) | 45 / 45 valid、Score 4 / 1 = 42 / 3、必要read欠落によるADR07退行3件、機序不通過7件および後続停止を記録したCandidate209 ADR9結果 |
+| [`candidate210-review-evidence-state-closure-design.md`](candidate210-review-evidence-state-closure-design.md) | Candidate208とCandidate209の双方向の失敗を反証として、descriptor供給経路、四観測状態および固定frontierへ再構成したCandidate210作成前設計 |
+| [`candidate210-review-evidence-state-closure-implementation-audit.md`](candidate210-review-evidence-state-closure-implementation-audit.md) | Candidate207を直接基盤に`TERMINAL / CONTEXT / EVIDENCE_GATE`だけを置換したCandidate210のidentity、手順化禁止および静的検証を記録した実装監査 |
+| [`candidate210-review-evidence-state-closure-adr9-r2-n5-execution-preparation-audit.md`](candidate210-review-evidence-state-closure-adr9-r2-n5-execution-preparation-audit.md) | Candidate207保存resultとLayer 1へbindし、Candidate210不足45件、M=24、互換条件一致および発行0件を確認したADR9実行前監査 |
+| [`candidate210-review-evidence-state-closure-adr9-r2-n5_2026-08-13.md`](../evaluations/results/candidate210-review-evidence-state-closure-adr9-r2-n5_2026-08-13.md) | 45 / 45 Score 4、packet反例成立後read 9 / 20、result admission不一致3件、機序不通過12件および後続停止を記録したCandidate210 ADR9結果 |
 | [`review-control-reconstruction-milestone-plan.md`](review-control-reconstruction-milestone-plan.md) | C147の逐語維持や既存Candidate再現をゴールにせず、過去結果の因果分析、制御構造再設計、方向レビュー、ADR9互換試験、高リスク拡張、Standard14、成立後の複雑性評価、採用判断までを分離した現行マイルストーン計画 |
 | [`review-control-reconstruction-causal-analysis.md`](review-control-reconstruction-causal-analysis.md) | ADR9 r2の9ケースをterminal別証明責務へ分類し、C147〜C193の狙い・実結果・反復原因、C193の部分効果、品質失敗2件、C147の13条項の確定・保留境界を扱う再開M1成果物 |
 | [`candidate194-c147-direct-review-control-reconstruction-preimplementation-design.md`](candidate194-c147-direct-review-control-reconstruction-preimplementation-design.md) | C147を直接基盤としてreview制御を再構成するCandidate194作成前設計。実試験の経路、24責任、二段階評価、停止条件を固定する |

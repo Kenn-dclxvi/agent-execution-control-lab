@@ -1,0 +1,25 @@
+{
+  "candidate": "Candidate208",
+  "result_id": "7922b5fec056420bb558dd03e502ef66",
+  "schema_version": "the-caption-prompt.candidate208-standard14-mechanism-diagnostic/v1",
+  "status": "diagnostic_only",
+  "standard14": {
+    "valid_run_count": 70,
+    "score_4_count": 70,
+    "command_protocol_violation_count": 0,
+    "monthly_review_numeric_location_exact_count": 5,
+    "owner_producer_evidence_inadmissible_count": 55,
+    "c206_owner_producer_evidence_inadmissible_count": 55,
+    "owner_producer_evidence_delta_vs_c206": 0,
+    "review_named_case_run_count": 10,
+    "review_named_case_admissible_producer_count": 0
+  },
+  "interpretation": {
+    "quality": "passed",
+    "new_candidate208_failure_observed": false,
+    "candidate208_result_kind_boundary_isolated": false,
+    "reason": "Standard14は通常経路の品質とcostを測定したが、Candidate208が対象とする明示review result kindの証拠境界を単独では識別しない。owner/producer診断55件はCandidate206と同数であり、Candidate208追加文による増分とは帰属できない。",
+    "adr9_mechanism_status": "failed_unchanged",
+    "adoption_effect": "none"
+  }
+}

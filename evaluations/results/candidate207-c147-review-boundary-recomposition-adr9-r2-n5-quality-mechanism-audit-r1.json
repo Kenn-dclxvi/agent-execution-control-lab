@@ -1,0 +1,154 @@
+{
+  "schema_version": "candidate207-c147-review-boundary-recomposition-adr9-r2-n5-quality-mechanism-audit/v1",
+  "status": "quality_passed_mechanism_failed_stopped",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-c147-review-boundary-recomposition-r1",
+    "revision": "r1",
+    "bundle_sha256": "b37800172decfd0b44e161bbb69fe36a3bb24d7271d68e946966f09014516bed"
+  },
+  "evaluation_set": "the-caption-preimplementation-adversarial-design-review-r2",
+  "comparison_reference": {
+    "prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1",
+    "result_id": "2b3aa86fd9a440d78bc078307fd5fa45",
+    "selection_id": "c3acdc276e36446497b180f80ab0f675",
+    "new_baseline_slots": 0
+  },
+  "result": {
+    "result_id": "9f6feb29f0114699beb4b11dbfbaa459",
+    "result_content_sha256": "bb99ef57108a9d36116015db1cb843e6ecfd635a4f5e6fd54b6ffb5473c212f7",
+    "valid_run_count": 45,
+    "excluded_attempt_count": 0,
+    "quality_score_counts": {
+      "4": 45
+    },
+    "median": {
+      "total_tokens": 1058515,
+      "elapsed_seconds": 732.7054492080642,
+      "quality_score": 100
+    }
+  },
+  "quality_gate": {
+    "passed": true,
+    "terminal_match_count": 45,
+    "reviewer_cardinality_match_count": 45,
+    "artifact_boundary_match_count": 45,
+    "required_command_match_count": 15,
+    "forbidden_canary_delivery_count": 0
+  },
+  "mechanism_gate": {
+    "passed": false,
+    "review_required_run_count": 30,
+    "reviewer_cardinality_match_count": 45,
+    "review_result_admission_match_count": 45,
+    "review_result_effect_match_count": 45,
+    "root_reviewer_direct_preread_free_count": 30,
+    "counterexample_result_count": 20,
+    "counterexample_certificate_priority_match_count": 8,
+    "counterexample_certificate_priority_violation_count": 12,
+    "reviewer_closed_source_read_count": 20,
+    "reviewer_mixed_read_count": 13,
+    "reviewer_outside_read_count": 7,
+    "reviewer_exact_read_set_match_count": 15,
+    "failure_run_ids": [
+      "590a1065b95f4512a22a468e53411bce",
+      "093fb68eeada418b8b90264aa54f7ac0",
+      "e170be0fdb10403eb0f136855a1586af",
+      "003bacfdebbf477e9c99591f72a6dc3b",
+      "b7bc5d0db308473c9f9d1002e0134461",
+      "7d246f88552f49ed81c4a434f5d45970",
+      "f4c5083ce1a74a168d011718804151d0",
+      "f9104744b2a64e9ab0163736870e5ea5",
+      "7448ebb3bcb4419d9b7c5c17016d601c",
+      "f15ed8ee065342958fb0832b51bebddd",
+      "991df49ae56b4887af13cae7a55b7bd2",
+      "0b04ca72876e48d6959781b069052c4e",
+      "fe0dae4415e24c0aae94018f7be42c7f",
+      "c97f088571374561942e013da7608cf8",
+      "4721999aa3c144a49d1f33eab867c3dd",
+      "b377169aa56049679ff410c54c31d44c",
+      "547ad8bdf4e74524addd0cc1fbd2cdd8",
+      "115f0a94846443f6a2d4d4b214b8d3ae",
+      "60e38f94fe114b47a63af8b45e263b22",
+      "ca0f300885d04348a7d8a46c17ce1dfd"
+    ]
+  },
+  "candidate206_comparable_mechanism": {
+    "source_result_id": "aee4cdf149ef43de9305b1a3138ebe59",
+    "new_evaluation_slots": 0,
+    "audit_mode": "retrospective_same_predicates_as_candidate207",
+    "historical_candidate206_mechanism_decision_preserved": true,
+    "c207_read_gate_passed": false,
+    "review_required_run_count": 30,
+    "reviewer_cardinality_match_count": 45,
+    "review_result_admission_match_count": 45,
+    "review_result_effect_match_count": 45,
+    "root_reviewer_direct_preread_free_count": 30,
+    "counterexample_result_count": 20,
+    "counterexample_certificate_priority_match_count": 13,
+    "counterexample_certificate_priority_violation_count": 7,
+    "reviewer_closed_source_read_count": 5,
+    "reviewer_mixed_read_count": 2,
+    "reviewer_outside_read_count": 3,
+    "reviewer_exact_read_set_match_count": 25
+  },
+  "candidate207_minus_candidate206_mechanism_delta": {
+    "counterexample_certificate_priority_match_count": -5,
+    "counterexample_certificate_priority_violation_count": 5,
+    "reviewer_closed_source_read_count": 15,
+    "reviewer_mixed_read_count": 11,
+    "reviewer_outside_read_count": 4,
+    "reviewer_exact_read_set_match_count": -10
+  },
+  "kpi_comparison": {
+    "comparison_kind": "compatible_independent_n5_selection_medians_not_paired",
+    "compatibility_key": "1543a80108418ce1f2436f5f1945f6e680cf75378cc308d21adee22fcf0f11d3",
+    "candidate147": {
+      "result_id": "2b3aa86fd9a440d78bc078307fd5fa45",
+      "quality_score": 50.0,
+      "total_tokens": 1027294,
+      "elapsed_seconds": 518.1085423741024
+    },
+    "candidate206": {
+      "result_id": "aee4cdf149ef43de9305b1a3138ebe59",
+      "quality_score": 100.0,
+      "total_tokens": 1098859,
+      "elapsed_seconds": 754.8590207069938
+    },
+    "candidate207": {
+      "result_id": "9f6feb29f0114699beb4b11dbfbaa459",
+      "quality_score": 100.0,
+      "total_tokens": 1058515,
+      "elapsed_seconds": 732.7054492080642
+    },
+    "candidate207_minus_candidate206": {
+      "quality_score": 0.0,
+      "total_tokens": -40344,
+      "total_tokens_percent": -3.6714,
+      "elapsed_seconds": -22.153571498929523,
+      "elapsed_seconds_percent": -2.9348
+    },
+    "candidate207_minus_candidate147": {
+      "quality_score": 50.0,
+      "total_tokens": 31221,
+      "total_tokens_percent": 3.0391,
+      "elapsed_seconds": 214.59690683396184,
+      "elapsed_seconds_percent": 41.4193
+    },
+    "candidate206_minus_candidate147": {
+      "quality_score": 50.0,
+      "total_tokens": 71565,
+      "total_tokens_percent": 6.9664,
+      "elapsed_seconds": 236.75047833289136,
+      "elapsed_seconds_percent": 45.6952
+    }
+  },
+  "stop_effect": {
+    "standard14": "not_started",
+    "n20_extension": "not_started",
+    "repair_rerun": "not_performed",
+    "adoption": "not_decided",
+    "release": "not_created",
+    "projection": "not_performed"
+  },
+  "audit_boundary": "品質は固定ADR9 r2 oracle、terminal、artifact、required command、forbidden inputで判定した。機序はC207で固定したreview cardinality、result admission/effect、root preread禁止、packet反例成立時のdirect read禁止、named observation consumer、packet供給元再読禁止で判定した。projection receipt labelやreview lifecycleの手順順序はC207 gateに含めない。"
+}

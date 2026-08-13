@@ -25,6 +25,8 @@
 
 ## Candidate
 
+新しいcandidateの検討または既存candidateの再構成を始める前に、`docs/prompt-control-design-principles.md`の全文を読む。特に保存traceの成功・失敗差から次案を導く場合は、成功動作を手順として転記せず、到達可能な誤経路の辺を閉じる分析を先に行う。以下の固定項目は同文書の`Candidate作成前の検討gate`を置き換えず、candidate artifactへ適用する局所要件として併用する。
+
 新しいcandidateの作成前に、次を固定する。
 
 1. 基準プロンプトセット

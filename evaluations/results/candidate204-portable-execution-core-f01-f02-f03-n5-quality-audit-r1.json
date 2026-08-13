@@ -1,0 +1,26 @@
+{
+  "schema_version": "candidate204-portable-execution-core-f01-f02-f03-n5-quality-audit/v1",
+  "candidate": "the-caption-3ce91a4-portable-execution-core-r1",
+  "result_id": "15313d0d0ffc4dffa3a2e18edff25c2d",
+  "result_content_sha256": "fb1f3e0195e5f4b3417589db7b4c70e044555f7db31eb623b5b17f931024535a",
+  "requested_run_count": 15,
+  "valid_run_count": 15,
+  "excluded_attempt_count": 0,
+  "score_4_count": 15,
+  "score_3_or_lower_count": 0,
+  "command_count": 114,
+  "successful_command_count": 114,
+  "failed_command_count": 0,
+  "command_protocol_violation_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "single_session_run_count": 15,
+  "owner_producer_diagnostic": {
+    "failed": 10,
+    "not_applicable": 5,
+    "quality_policy": "diagnostic_only",
+    "interpretation": "TaskSpecは独立producer executionを要求していないため、owner metadataだけから別producerを作らない経路は期待される。"
+  },
+  "quality_gate_passed": true,
+  "conclusion": "15 / 15 validかつScore 4で、required command failure、command protocol違反、許可外変更およびexternal exclusionは0件だった。これはF01〜F03 N=5の品質通過であり、portable mechanism、Standard14、採用、releaseまたはprojectionを意味しない。"
+}
