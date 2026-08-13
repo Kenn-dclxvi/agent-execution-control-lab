@@ -12,7 +12,7 @@
 
 ## 目次
 
-1. Review admission・変更前修正契約系（Candidate147〜Candidate203、2026-08-04〜08-13）
+1. Review admission・共通実行制御再構成系（Candidate147〜Candidate208、2026-08-04〜08-13）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
 4. Candidate108〜Candidate147（Rating v14 Medium、atomic run、2026-07-31〜08-02）
@@ -25,7 +25,7 @@
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
-## 1. Review admission・変更前修正契約系（Candidate147〜Candidate203、2026-08-04〜08-13）
+## 1. Review admission・共通実行制御再構成系（Candidate147〜Candidate208、2026-08-04〜08-13）
 
 Candidate147〜Candidate196までの既存履歴を変更せず、既存のCandidate197以降へCandidate198、Candidate199、Candidate200、Candidate201、Candidate202およびCandidate203の結果を追記している。
 
@@ -150,6 +150,22 @@ Candidate201の[ADR9 r2全9ケースN=5](candidate201-review-input-partition-adr
 Candidate202の[ADR9 r2全9ケースN=5](candidate202-review-admission-routing-receipt-adr9-r2-n5_2026-08-13.md)は45 / 45 validかつScore `4`だった。required reviewer 30 / 30、routing 30 / 30、projection receipt acknowledgement 30 / 30、exact read set 30 / 30となり、closed source read、mixed read、root先読みおよびcanary配送は各0件だった。一方、投影済み観測だけでcounterexampleが成立した20件のうち9件で、終端判定前に不要なdirect targetを読んだ。品質は通過したが機構は不通過である。[登録result](0a509a780f0e40ae857ea602f00ff89b.json)、[品質監査r2](candidate202-review-admission-routing-receipt-adr9-r2-n5-quality-audit-r2.json)および[機構監査r2](candidate202-review-admission-routing-receipt-adr9-r2-n5-mechanism-audit-r2.json)を一次証拠とする。その後、利用者の別実行許可で行った[Standard14全14ケースN=5](candidate202-review-admission-routing-receipt-standard14-n5_2026-08-13.md)は70 / 70 validかつScore 4だったが、readを禁止しない9実装ケースで開始identity単独発行が31 / 45となり、C175の1 / 45から退行した。Standard14も`quality_passed / mechanism_failed`として保持する。[Standard14登録result](08c295a44f7b4a70873c7fc1c503f9e8.json)、[品質監査](candidate202-review-admission-routing-receipt-standard14-n5-quality-audit-r1.json)、[機構監査](candidate202-review-admission-routing-receipt-standard14-n5-mechanism-audit-r1.json)および[C175比較](candidate202-review-admission-routing-receipt-standard14-n5-comparison-c175-r1.json)を一次証拠とする。
 
 Candidate203の[ADR9 r2全9ケースN=5](candidate203-certificate-gated-review-read-adr9-r2-n5_2026-08-13.md)は45 / 45 validかつScore `4`だった。required reviewer 30 / 30、routing 30 / 30、必要direct observation 10 / 10を満たし、Candidate202のcounterexample前direct readを9 / 20から2 / 20へ減らした。一方、review不要時に8 / 15でreviewerを起動し、projection receipt完全一致は22 / 30、projection-first terminalは18 / 20だったため機構は不通過である。[登録result](e491ba8149374cff8ebb74cf3d031414.json)、[品質監査r2](candidate203-certificate-gated-review-read-adr9-r2-n5-quality-audit-r2.json)および[機構監査r3](candidate203-certificate-gated-review-read-adr9-r2-n5-mechanism-audit-r3.json)を一次証拠とし、Standard14は開始していない。
+
+Candidate204の[F01 / F02 / F03各N=5](candidate204-portable-execution-core-f01-f02-f03-n5_2026-08-13.md)は15 / 15 validかつScore 4だったが、開始identity単独発行が15 / 15だった。eligible invocationをissuedへ進めるownerが再構成から落ちていたため、`quality_passed / mechanism_failed / stopped`として保持し、Standard14を開始していない。
+
+Candidate205の[F01 / F02 / F03各N=5](candidate205-portable-issuance-frontier-f01-f02-f03-n5_2026-08-13.md)は15 / 15 validかつScore 4だった。command event順の再監査では15 / 15件がidentity command完了後に許可readを別発行しており、旧agent message境界で共同発行とした1件はfalse positiveだった。C147の機能鎖が復元されていないため機構は不通過で、Standard14を開始していない。[登録result](b37d060fcf6c4fb7abb668b2cb89a754.json)、[品質監査](candidate205-portable-issuance-frontier-f01-f02-f03-n5-quality-audit-r1.json)および[機構監査](candidate205-portable-issuance-frontier-f01-f02-f03-n5-mechanism-audit-r1.json)を一次証拠とする。
+
+Candidate207の[ADR9 r2全9ケースN=5](candidate207-c147-review-boundary-recomposition-adr9-r2-n5_2026-08-13.md)は45 / 45 validかつ45 / 45 Score `4`で、reviewer cardinality、terminal、artifactおよびresult effectも全件一致した。一方、packetだけで反例が成立した20件のうち12件でreviewer-direct readを先行し、packet供給元の`design-admission.json`も20件で再読した。C206保存traceへの[同一機序監査](candidate206-admitted-evidence-current-adr9-r2-n5-c207-comparable-mechanism-audit-r1.json)では同じ値が7 / 20件と5件であり、C207はそれぞれ+5件、+15件退行した。互換する独立N=5集約ではC207はC206比でtoken`-3.67%`、elapsed`-2.93%`、品質中央値同値だが、機序退行のため優位とは判定しない。`quality_passed / mechanism_failed / stopped`として[登録result](9f6feb29f0114699beb4b11dbfbaa459.json)と[品質・機序監査](candidate207-c147-review-boundary-recomposition-adr9-r2-n5-quality-mechanism-audit-r1.json)を保存し、Standard14とN=20は開始していない。比較基準はC147保存N=50 poolを新規実行なしでN=5へ再選択した[result](2b3aa86fd9a440d78bc078307fd5fa45.json)である。
+
+Candidate208の[ADR9 r2全9ケースN=5](candidate208-result-kind-evidence-domain-adr9-r2-n5_2026-08-13.md)は45 / 45 validかつ45 / 45 Score `4`で、reviewer cardinality、terminal、result admission/effectおよびartifact境界も全件一致した。C207で12 / 20だったpacket反例成立後readは1 / 20、packet供給元再読は20件から1件へ減った。一方、ADR05の1件で投影済みfactを閉じたsourceから再読し、ADR09の1件でrootがreviewer-owned targetを起動前に先読みした。互換する独立N=5集約ではC207比でtoken`-1.83%`、elapsed`-16.31%`、品質中央値同値だが、固定機序gateは不通過である。`quality_passed / mechanism_failed / stopped`として[登録result](c4e84aef70aa4d5d9b97c09c6817605d.json)と[品質・機序監査](candidate208-result-kind-evidence-domain-adr9-r2-n5-quality-mechanism-audit-r1.json)を保存し、Standard14、N=20およびrepair rerunは開始していない。
+
+その後、利用者が二つの残差を明示的に受容して通常経路の測定を再開した。[Standard14全14ケースN=5](candidate208-result-kind-evidence-domain-standard14-n5_2026-08-13.md)は70 / 70 validかつ70 / 70 Score `4`、command protocol違反0件だった。互換するCandidate206比では品質中央値100.0を維持し、全agent token中央値は1,605,899で`+2.90%`、経過時間中央値は864.158秒で`-4.49%`だった。tokenとelapsedが逆方向のため、一方向のcost優位とは判定しない。[登録result](7922b5fec056420bb558dd03e502ef66.json)、[品質監査](candidate208-result-kind-evidence-domain-standard14-n5-quality-audit-r1.json)、[C206比較](candidate208-result-kind-evidence-domain-standard14-n5-comparison-c206-r1.json)および[機序診断](candidate208-result-kind-evidence-domain-standard14-n5-mechanism-diagnostic-r1.json)を保存した。Standard14はADR9の明示review result kind境界を識別しないため、ADR9の`mechanism_failed`は変更していない。
+
+さらに[ADR9 r2累積N=50](candidate208-result-kind-evidence-domain-adr9-r2-n50_2026-08-13.md)へ延長した。既存45件を再利用し、不足405件だけを発行して450 / 450 validを得たが、`TC-ADR05`の1件が期待`blocked`に対して`unavailable`を返し、449 / 450 Score `4`で品質gate不通過となった。機序も累積23件で不通過し、反例成立後read 10 / 199件、root preread 3 / 300件、reviewer closed-source read 20件へ拡大した。[登録result](2429806ecd95438280eb995f289a2468.json)、[累積summary](candidate208-result-kind-evidence-domain-adr9-r2-n50-summary-audit-r1.json)、[追加405件品質監査](candidate208-result-kind-evidence-domain-adr9-r2-n50-additional-quality-audit-r1.json)および[追加405件機序監査](candidate208-result-kind-evidence-domain-adr9-r2-n50-additional-mechanism-audit-r1.json)を保存した。Standard14 N=50はADR9品質gateで一件も発行していない。
+
+Candidate208のScore 1を名前付きcertificate欠損と排他的観測依存で閉じるCandidate209は、[ADR9 r2 N=5](candidate209-named-certificate-deficit-adr9-r2-n5_2026-08-13.md)を45 / 45 valid、Score `4 / 1 = 42 / 3`で完了した。3件はいずれも`TC-ADR07`で、反例certificate欠損が空であることを全manifest consumerのfalseへ直結したため、`no_counterexample_found`に必要なdirect observationを取得できず`unavailable`へ停止した。機序も反例成立後read 3件、必要read欠落3件、missing未観測の架空success receipt 1件を含む7 runで不通過だった。[登録result](095076f0eb7540c397dc298745b6cac4.json)、[品質監査](candidate209-named-certificate-deficit-adr9-r2-n5-quality-audit-r1.json)および[機序監査](candidate209-named-certificate-deficit-adr9-r2-n5-mechanism-audit-r1.json)を保存し、`quality_failed / mechanism_failed / stopped`としてADR9 N=20とStandard14を開始していない。
+
+Candidate208とCandidate209の双方向の失敗をdescriptor routeと四観測状態へ再構成したCandidate210は、[ADR9 r2 N=5](candidate210-review-evidence-state-closure-adr9-r2-n5_2026-08-13.md)を45 / 45 valid、45 / 45 Score 4で完了した。品質は通過したが、packet反例成立後read 9 / 20、review result admission不一致3件を含む12 runで機序不通過だった。[登録result](9ac8eb53cf79463f9c7ae446c61b625a.json)、[品質監査](candidate210-review-evidence-state-closure-adr9-r2-n5-quality-audit-r1.json)および[機序監査](candidate210-review-evidence-state-closure-adr9-r2-n5-mechanism-audit-r1.json)を保存し、`quality_passed / mechanism_failed / stopped`としてADR9 N=20とStandard14を開始していない。
 
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 

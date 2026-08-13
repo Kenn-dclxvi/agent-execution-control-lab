@@ -1,0 +1,40 @@
+{
+  "schema_version": "candidate204-portable-execution-core-f01-f02-f03-n5-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-portable-execution-core-r1",
+  "result_id": "15313d0d0ffc4dffa3a2e18edff25c2d",
+  "reference_result_id": "a205f69159464c0da704d8e3a362d0c3",
+  "run_count": 15,
+  "valid_run_count": 15,
+  "score_4_count": 15,
+  "mechanism_status": "failed",
+  "failure_class": "eligibility_without_issuance_transition",
+  "mechanism_failure": {
+    "predicate": "開始identity resultが許可readのtarget、permission、methodまたはstop conditionを変えない場合、許可readへ偽dependencyを作らず、identity resultを判断へ消費する前にreadを発行する。",
+    "audited_case_scope": [
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP"
+    ],
+    "audited_run_count": 15,
+    "isolated_identity_run_count": 15,
+    "coissued_identity_and_read_run_count": 0,
+    "isolated_identity_by_case": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 5,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 5,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 5
+    },
+    "evidence_basis": "保存済みroot rolloutの最初のagent message後から次のagent message前までを一つの初回command groupとして監査した。全15件でgroupは開始identity commandだけを含み、許可readはidentity result受領後の次groupへ置かれた。"
+  },
+  "single_session_run_count": 15,
+  "child_agent_run_count": 0,
+  "unwanted_producer_run_count": 0,
+  "command_count": 114,
+  "successful_command_count": 114,
+  "failed_command_count": 0,
+  "command_protocol_violation_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "mechanism_gate_passed": false,
+  "standard14_authorized": false,
+  "conclusion": "Candidate204はF01〜F03の成果品質を15 / 15で満たしたが、全15件で開始identityだけを先行発行した。M2のINVOCATIONはeligible判定と偽dependency禁止を所有する一方、eligibleからissuedへの正の遷移ownerを持たない。C147の成立済み非直列化経路を保持できていないためmechanism_failedとして停止する。"
+}

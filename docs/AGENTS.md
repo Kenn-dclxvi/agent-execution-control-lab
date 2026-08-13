@@ -8,6 +8,7 @@
 - 評価基盤のレイヤーと境界は`docs/prompt-comparison-workflow.md`を正本とする。
 - 評価実行方法は`docs/evaluation-loop-manual.md`を正本とする。
 - プロンプト制御の設計原則は`docs/prompt-control-design-principles.md`を正本とする。
+- prompt制御の原因分析、成功runと失敗runの比較、Candidate設計、制御再構成または次案を扱う文書へ着手する前に、`docs/prompt-control-design-principles.md`の全文を読む。対象文書の一次参照へリンクを置くだけでは、この読了を満たさない。
 - `docs/README.md`は`docs/`配下文書の現在の分類・配置・読む順序を示す索引とする。分類の意味と更新規則はこの`AGENTS.md`を正本とする。
 - 新規文書の追加、文書の役割変更、研究状態の遷移があった場合は、必要に応じて`docs/README.md`の所属と説明を同じ変更で追従させる。
 

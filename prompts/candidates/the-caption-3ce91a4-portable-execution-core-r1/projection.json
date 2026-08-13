@@ -1,0 +1,65 @@
+{
+  "authorization": {
+    "date": "2026-08-03",
+    "scope": [
+      "write",
+      "push",
+      "pull_request",
+      "merge",
+      "public_repository_projection"
+    ],
+    "source": "explicit_user_request"
+  },
+  "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc",
+  "projection": {
+    "baseline_commit": "3b6013e0850d0f9ebbec72e534c0b644602ca880",
+    "merge_commit": "3119a91d3fad63180884f80ac6b742fbae328afe",
+    "merged_at": "2026-08-02T16:21:47Z",
+    "production_checkout_status": "not_updated",
+    "pull_request": "https://github.com/Kenn-dclxvi/the-caption/pull/13",
+    "rollback_identity": "3b6013e0850d0f9ebbec72e534c0b644602ca880",
+    "runtime_activation": {
+      "mechanism": "merge_to_public_repository_main",
+      "status": "repository_main_projected"
+    }
+  },
+  "release_identity": "the-caption-3ce91a4-result-effect-scope-release-r1",
+  "schema_version": "the-caption-prompt.projection/v1",
+  "scope": {
+    "effective_path_count": 1,
+    "effective_paths": [
+      "AGENTS.md"
+    ],
+    "manifest_target_count": 19,
+    "matched_manifest_target_count": 15,
+    "preserved_target_drift": [
+      {
+        "path": "docs/AGENTS.md",
+        "reason": "public migration update outside Candidate147"
+      },
+      {
+        "path": "docs/how-to/index.md",
+        "reason": "target updates and public migration update outside Candidate147"
+      },
+      {
+        "path": "docs/reference/project-contexts/the-caption.txt",
+        "reason": "public migration update outside Candidate147"
+      },
+      {
+        "path": "src/AGENTS.md",
+        "reason": "public migration update outside Candidate147"
+      }
+    ]
+  },
+  "target_repository": "https://github.com/Kenn-dclxvi/the-caption.git",
+  "validation": {
+    "command": "bash scripts/dev/verify_change_set.sh",
+    "git_diff_check": "passed",
+    "post_merge_effective_path_match": "1/1",
+    "post_merge_manifest_match": "15/19",
+    "post_merge_out_of_scope_paths": 0,
+    "public_ci": "Secret Scan gitleaks passed",
+    "result": "passed",
+    "summary": "382 passed in 7.12s"
+  }
+}

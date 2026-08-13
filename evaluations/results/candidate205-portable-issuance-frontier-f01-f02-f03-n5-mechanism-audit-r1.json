@@ -1,0 +1,49 @@
+{
+  "schema_version": "candidate205-portable-issuance-frontier-f01-f02-f03-n5-mechanism-audit/v2",
+  "candidate": "the-caption-3ce91a4-portable-issuance-frontier-r1",
+  "result_id": "b37d060fcf6c4fb7abb668b2cb89a754",
+  "reference_result_id": "a205f69159464c0da704d8e3a362d0c3",
+  "run_count": 15,
+  "valid_run_count": 15,
+  "score_4_count": 15,
+  "mechanism_status": "failed",
+  "failure_class": "c147_functional_chain_not_preserved",
+  "mechanism_failure": {
+    "predicate": "開始identity resultが許可readのtarget、permission、methodまたはstop conditionを変えない場合、許可readを同じ初回issuance frontierで発行する。",
+    "audited_case_scope": [
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP"
+    ],
+    "audited_run_count": 15,
+    "isolated_identity_run_count": 15,
+    "coissued_identity_and_read_run_count": 0,
+    "isolated_identity_by_case": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 5,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 5,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 5
+    },
+    "coissued_identity_and_read_by_case": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 0,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 0,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 0
+    },
+    "previous_agent_message_boundary_false_positive_run_id": "c62f31d690124e26833046aa99e6ce22",
+    "event_order_oracle": "開始identity commandがterminalになる前に許可read commandが開始され、かつそのどちらのresultも次の発行選択へ消費されていないこと。",
+    "evidence_basis": "保存済みroot rolloutをcommand event順で再監査した。15件すべてで開始identity commandがterminalになった後に許可read commandが開始された。旧v1で共同発行とした1件は二つのcommand間にagent messageがなかっただけで、identity command完了後の別tool発行だった。"
+  },
+  "identity_result_before_artifact_change_count": 15,
+  "identity_result_before_required_validation_count": 15,
+  "single_session_run_count": 15,
+  "child_agent_run_count": 0,
+  "unwanted_producer_run_count": 0,
+  "command_count": 147,
+  "successful_command_count": 147,
+  "failed_command_count": 0,
+  "command_protocol_violation_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "mechanism_gate_passed": false,
+  "standard14_authorized": false,
+  "conclusion": "Candidate205はF01〜F03の成果品質を15 / 15で満たしたが、強いcommand event順序基準では15 / 15件が開始identity result受領後に許可readへ進んだ。旧agent message境界の1件はfalse positiveだった。ISSUANCE一責任の追加だけではC147の発行集合構成、result消費前発行、収集障壁を復元できたと判定できず、mechanism_failedとして停止する。"
+}

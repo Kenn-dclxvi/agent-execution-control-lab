@@ -49,6 +49,7 @@
 - [`candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json`](../candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json)
 - [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json)
+- [`candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json`](../candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json)
 - [`candidate147-result-effect-scope-adr9-r2-medium-m24-n50-cli0146.json`](../candidate147-result-effect-scope-adr9-r2-medium-m24-n50-cli0146.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-global-m24-n5-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-r2-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-r2-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n100-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n100-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n29-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n29-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n53-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n53-cli0146-r1.json)

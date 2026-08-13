@@ -204,6 +204,23 @@ LLM promptは形式仕様ではない。本文上の余白、重複、既定値�
 
 局所caseで得たroute改善を共通promptへ昇格する前に、非対象caseへ同じ制御の読解、探索、確認costが流入しないことを確認する。対象caseだけの改善と標準集合全体の改善を分けて評価する。
 
+### 10.1 成功動作を実行手順へ転記せず、誤経路の到達可能性を閉じる
+
+同一case、同一model-visible入力および同一permissionで成功runと失敗runが分かれた場合、成功runのtool順、判断順、説明順またはmodel stepを正常手順としてpromptへ転記しない。成功runは「その追加動作なしでもrequired resultが成立した」という反証であり、成功時の動作列自体が制御仕様なのではない。
+
+分析では、成功runと失敗runの最終resultだけでなく、各時点でprompt上許可されていたoperation、evidence consumer、result admissionおよびterminal dependencyを対照する。そのうえで、失敗runが取った経路が既存predicate上で禁止されていたのか、それとも別解釈として到達可能なままだったのかを区別する。
+
+失敗経路が到達可能なままであれば、成功率の高さ、成功runの自然な判断順または「通常は先に判定する」という期待を機序成立の根拠にしない。変更対象は成功動作の推奨ではなく、誤経路を開くpermission、再分類、dependencyまたはresult admissionの辺とする。変更後も同じ誤経路をprompt準拠として構成できるなら、その経路は閉じていない。
+
+経路を閉じる際は、次を一組で確認する。
+
+- 保存済み失敗runへ至るpermissionまたはdependencyの辺を特定したこと。
+- その辺を削除または狭く置換し、成功runの動作順を新しい義務にしていないこと。
+- 同じ辺が必要な別terminal result、正常なevidence取得または非対象operationまで閉じていないこと。
+- case内の成功runが残ることだけでなく、対象の失敗経路の再発件数、基準promptからの変化および結果への影響を、実行前に固定した機序gateで判定すること。再発一件を常に機序不通過とする一般則は置かず、zero-toleranceが必要な経路だけ、その理由と停止条件をCandidate作成前に固定すること。
+
+「先にAを判定し、成立しなければBを行う」のような順序指定は、TaskSpecがその順序自体をrequired methodとして固定した場合を除き、この経路閉鎖の代用にしない。順序を変えれば回避できる誤経路でも、別順序を合法にする境界が残るなら、制御すべき対象は順序ではなくその境界である。
+
 ### 11. 制御を強制可能な層へ置く
 
 観測した問題ごとに、制御を置く層を先に決める。
@@ -264,11 +281,11 @@ Candidate40はoperationとresult projectionの境界を明確にしたが、F10�
 2. 保存済みtraceで確認し、同じ失敗機序または再構成目的へbindした具体的な誤経路。semantic auditの指摘だけではこの項目を満たさない。
 3. 既存のTaskSpec、repository authority、repository stateで防げない理由と、promptが制御を置く正しい層である理由。
 4. 追加、置換または削除するpredicateと責務境界の全件集合。各発火条件は、明示input、repository authority、machine-bound resultのいずれかから直接判定できること。
-5. 各変更が消す具体的な判断点、context伝播または責務競合と、変更同士を同じcandidateで扱う因果関係。
+5. 各変更が消す具体的な判断点、context伝播、責務競合または到達可能な誤経路の辺と、変更同士を同じcandidateで扱う因果関係。成功runの動作列を新しい実行順序へ転記せずに、その辺を閉じること。
 6. 新たに増える判断点、label参照、例外条件。
 7. 成果品質を維持したことを判定するcaseとscore分布。
 8. 想定するtoken、tool call、model step、worker routingの変化。
-9. 期待と逆の結果になった場合に、candidate追加を止める条件。
+9. 期待と逆の結果になった場合、および対象の誤経路が再観測された場合に、その件数、基準頻度、重大性およびresult effectをどう判定するかを含む停止条件。zero-toleranceを採る場合は、一件で停止する理由を実行前に明示する。
 
 一項でも未定義なら、candidate bundleと評価profileを先に作らない。まず既存traceと制御graphを確認する。
 

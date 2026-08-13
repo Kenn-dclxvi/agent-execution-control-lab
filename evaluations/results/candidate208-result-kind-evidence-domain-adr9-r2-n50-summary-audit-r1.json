@@ -1,0 +1,66 @@
+{
+  "schema_version": "the-caption-prompt.candidate208-adr9-r2-n50-summary-audit/v1",
+  "candidate": "Candidate208",
+  "result_id": "2429806ecd95438280eb995f289a2468",
+  "quality_gate": {
+    "status": "failed",
+    "valid_run_count": 450,
+    "score_counts": {
+      "4": 449,
+      "1": 1
+    },
+    "terminal_match_count": 449,
+    "reviewer_cardinality_match_count": 450,
+    "artifact_boundary_match_count": 450,
+    "required_command_match_count": 150,
+    "forbidden_canary_delivery_count": 0,
+    "failure_run_ids": [
+      "3eb2bcdb4605471daac50ab70dba953d"
+    ]
+  },
+  "mechanism_gate": {
+    "status": "failed",
+    "run_count": 450,
+    "review_required_run_count": 300,
+    "reviewer_cardinality_match_count": 450,
+    "review_result_admission_match_count": 448,
+    "review_result_effect_match_count": 449,
+    "routing_complete_count": 300,
+    "root_reviewer_direct_preread_free_count": 297,
+    "reviewer_exact_read_set_match_count": 282,
+    "reviewer_closed_source_read_count": 20,
+    "reviewer_mixed_read_count": 8,
+    "reviewer_outside_read_count": 12,
+    "counterexample_result_count": 199,
+    "counterexample_certificate_priority_match_count": 189,
+    "counterexample_certificate_priority_violation_count": 10,
+    "failure_run_count": 23
+  },
+  "kpi": {
+    "n5": {
+      "quality_score_median": 100.0,
+      "total_tokens_median": 1039141,
+      "elapsed_seconds_median": 613.1751498339872
+    },
+    "n50": {
+      "quality_score_median": 100.0,
+      "total_tokens_median": 1005150.0,
+      "elapsed_seconds_median": 591.1708713739936
+    },
+    "n50_minus_n5_percent": {
+      "total_tokens": -3.2710671602795,
+      "elapsed_seconds": -3.5885796196977577
+    }
+  },
+  "component_artifacts": {
+    "n5_audit": "candidate208-result-kind-evidence-domain-adr9-r2-n5-quality-mechanism-audit-r1.json",
+    "additional_quality_audit": "candidate208-result-kind-evidence-domain-adr9-r2-n50-additional-quality-audit-r1.json",
+    "additional_mechanism_audit": "candidate208-result-kind-evidence-domain-adr9-r2-n50-additional-mechanism-audit-r1.json"
+  },
+  "stop_effect": {
+    "standard14_n50": "not_started_at_adr9_quality_gate",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}
