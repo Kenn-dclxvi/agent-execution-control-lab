@@ -1,0 +1,166 @@
+{
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "profile_id": "candidate202-review-admission-routing-receipt-adr9-r2-medium-m24-n5-cli0146",
+  "evaluation_set": {
+    "set_id": "the-caption-preimplementation-adversarial-design-review-r2",
+    "revision": "adversarial-design-review-r2"
+  },
+  "cases": [
+    {
+      "id": "TC-ADR01",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR02",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR03",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR04",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR05",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR06",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR07",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR08",
+      "revision": "adversarial-design-review-r2"
+    },
+    {
+      "id": "TC-ADR09",
+      "revision": "adversarial-design-review-r2"
+    }
+  ],
+  "iterations": 5,
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-review-admission-routing-receipt-r1",
+    "revision": "r1",
+    "bundle_sha256": "425208248292cd147e6a005d73912e5268856c3ab34e2ae14ad4b39f1893cca4"
+  },
+  "comparison_conditions": {
+    "target_repository_ref": {
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-preimplementation-adversarial-design-review-r2",
+      "evaluation_set_revision": "adversarial-design-review-r2",
+      "source": "preimplementation-adversarial-design-review-targeted-evaluation-design-r11"
+    },
+    "model": "gpt-5.6-sol",
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.146.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted"
+    },
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+      "contract_sha256": "9d01b7ee77bbc7b6e5bde23f57bafbcf304f4a82020da5c3150b7ffb129011b1",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "terminal_state_evidence_required_cases": [
+        "TC-A01-LATENT-MODE-POLICY"
+      ],
+      "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "executor_parameters": {
+      "reasoning_effort": "medium",
+      "max_workers": 24,
+      "max_attempts": 3,
+      "monitor_interval_seconds": 5,
+      "schedule_policy": "global_queue",
+      "environment_adjustment": "none",
+      "duration_hint_method": "fixed_preimplementation_adversarial_design_review_hint",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      },
+      "command_evidence_protocol": {
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1",
+        "mode": "separate_required_commands_with_structured_exit",
+        "required_command_groups_by_case": {
+          "TC-ADR01": [
+            [
+              "git",
+              "diff",
+              "--check"
+            ]
+          ],
+          "TC-ADR02": [
+            [
+              "git",
+              "diff",
+              "--check"
+            ]
+          ],
+          "TC-ADR03": [],
+          "TC-ADR04": [],
+          "TC-ADR05": [],
+          "TC-ADR06": [],
+          "TC-ADR07": [
+            [
+              "git",
+              "diff",
+              "--check"
+            ]
+          ],
+          "TC-ADR08": [],
+          "TC-ADR09": []
+        }
+      }
+    }
+  },
+  "execution": {
+    "duration_hints_seconds": {
+      "TC-ADR01": 180,
+      "TC-ADR02": 180,
+      "TC-ADR03": 180,
+      "TC-ADR04": 180,
+      "TC-ADR05": 180,
+      "TC-ADR06": 180,
+      "TC-ADR07": 180,
+      "TC-ADR08": 120,
+      "TC-ADR09": 180
+    },
+    "max_workers": 24,
+    "max_attempts": 3,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "scope": {
+    "adoption": "not_applicable",
+    "release": "not_applicable",
+    "runtime_projection": "not_authorized",
+    "preflight_revision_note": "Candidate202の最初の挙動評価としてADR9 r2全9ケースN=5を固定する。Candidate201の登録済み45件と保存Layer 1はprompt identity以外の互換条件照合にのみ使い、Candidate202の不足45件だけを候補とする。preflight通過前にslotを発行しない。"
+  }
+}
+
+

@@ -1,0 +1,70 @@
+{
+  "schema_version": "the-caption-prompt.standard14-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-review-admission-routing-receipt-r1",
+  "result_id": "08c295a44f7b4a70873c7fc1c503f9e8",
+  "reference_result_id": "c31b560bce92400293c7b3bc40715246",
+  "run_count": 70,
+  "valid_run_count": 70,
+  "score_4_count": 70,
+  "mechanism_status": "failed",
+  "failure_class": "start_identity_isolated_from_already_allowed_reads",
+  "mechanism_failure": {
+    "predicate": "開始identityの不一致がartifact変更またはrequired commandだけを禁止し、現在必要なreadのtarget、permission、methodまたはstop conditionを変えない場合、identity確認とreadを同じmodel stepから発行する。",
+    "audited_case_scope": [
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "TC-F07-CANONICAL-V4-RUNNER",
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC"
+    ],
+    "audited_run_count": 45,
+    "isolated_identity_run_count": 31,
+    "coissued_identity_and_read_run_count": 14,
+    "isolated_identity_by_case": {
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 3,
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 2,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 1,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 3,
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": 4,
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": 5,
+      "TC-F07-CANONICAL-V4-RUNNER": 5,
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": 4,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 4
+    },
+    "reference_candidate175_isolated_identity_run_count": 1,
+    "reference_candidate175_coissued_identity_and_read_run_count": 44,
+    "evidence_basis": "同一compatibility keyのCandidate175とCandidate202について、保存済みroot rolloutの最初のtool-call groupを照合した。identity commandだけのgroupと、identity commandにtargetまたは適用instructionのreadを含むgroupを区別した。"
+  },
+  "single_session_run_count": 70,
+  "child_agent_run_count": 0,
+  "unwanted_review_producer_run_count": 0,
+  "command_count": 459,
+  "successful_command_count": 459,
+  "failed_command_count": 0,
+  "command_protocol_violation_count": 0,
+  "terminal_completion_failure_count": 0,
+  "forbidden_input_delivery_count": 0,
+  "unexpected_changed_path_count": 0,
+  "external_exclusion_count": 0,
+  "owner_producer_diagnostic": {
+    "available": 0,
+    "failed": 55,
+    "not_applicable": 15,
+    "quality_policy": "diagnostic_only",
+    "interpretation": "Standard14は独立review operationを指定していないため、owner語列からproducerを作らないことが期待結果である。"
+  },
+  "candidate_diagnostics": {
+    "monthly_review_numeric_location": {
+      "exact": 4,
+      "mismatch": 1,
+      "quality_effect": false
+    }
+  },
+  "adr9_mechanism_status_retained": "failed",
+  "mechanism_gate_passed": false,
+  "conclusion": "70 / 70 validかつScore 4で、子agent、不要review producer、command protocol違反、terminal補完および許可外変更は0件だった。一方、readが開始identity mismatch時にも許可される9実装ケース45件のうち31件で、identityを単独発行してからreadへ進んだ。C175の1 / 45から退行し、Candidate202自身の共同発行predicateにも反するため、品質通過と機構不通過を分離して保持する。"
+}
