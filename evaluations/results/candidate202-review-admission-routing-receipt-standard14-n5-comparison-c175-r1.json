@@ -1,0 +1,32 @@
+{
+  "schema_version": "candidate202-standard14-n5-comparison-c175/v1",
+  "compatibility_key": "cc0c022ac026b55c51597e82c4a7216d4b7fdf498250c6a299d24203f1027561",
+  "candidate_result_id": "08c295a44f7b4a70873c7fc1c503f9e8",
+  "reference_result_id": "c31b560bce92400293c7b3bc40715246",
+  "median": {
+    "quality_score": {
+      "candidate202": 100.0,
+      "candidate175": 100.0,
+      "delta": 0.0
+    },
+    "total_tokens": {
+      "candidate202": 1918118,
+      "candidate175": 1692063,
+      "delta": 226055,
+      "delta_percent": 13.359727149639228
+    },
+    "elapsed_seconds": {
+      "candidate202": 938.0808899969707,
+      "candidate175": 804.9396316662896,
+      "delta": 133.141258330681,
+      "delta_percent": 16.540527151715455
+    }
+  },
+  "mechanism": {
+    "candidate202_isolated_identity_before_allowed_read": 31,
+    "candidate175_isolated_identity_before_allowed_read": 1,
+    "audited_runs_per_candidate": 45,
+    "candidate202_status": "failed"
+  },
+  "decision": "KPIは同一条件の記述統計として保存する。Candidate202はADR9とStandard14の機構がともに不通過なので、品質100を採用、releaseまたはprojection判断へ接続しない。"
+}

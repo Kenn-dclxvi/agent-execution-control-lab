@@ -61,9 +61,12 @@ class Candidate193ResultTest(unittest.TestCase):
 
         self.assertIn("Score 4 = 43 / Score 1 = 2", report)
         self.assertIn("dispatch_dependency_crossing_28", report)
-        self.assertIn("M1_reopened_for_candidate193_quality_and_dispatch_failures", plan)
+        self.assertIn("candidate193_M5_valid_45_score4_43_score1_2", plan)
+        self.assertIn("candidate193_dispatch_dependency_crossing_28", plan)
+        self.assertIn("candidate194_M5_stage1_completed", plan)
+        self.assertIn("candidate194_quality_failed", plan)
         self.assertIn(REPORT.name, results_index)
-        self.assertIn("Candidate147〜Candidate193", results_index)
+        self.assertIn("Candidate147〜Candidate196", results_index)
         self.assertIn(REPORT.name, docs_index)
         self.assertIn(
             "adr9_r2_n5_evaluated / quality_failed / mechanism_failed / stopped",

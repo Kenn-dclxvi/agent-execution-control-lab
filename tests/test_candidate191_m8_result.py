@@ -78,8 +78,18 @@ class Candidate191M8ResultTest(unittest.TestCase):
         results_index = RESULTS_INDEX.read_text(encoding="utf-8")
         candidate_index = CANDIDATE_INDEX.read_text(encoding="utf-8")
 
-        self.assertIn("Candidate193 ADR9 r2品質・発行遷移機序不通過／M1原因分析再開", plan)
+        self.assertIn(
+            "Candidate203 ADR9 r2 N=5品質通過・機構不通過・停止・C147直接基盤維持",
+            plan,
+        )
+        self.assertIn("candidate195_static_verification_passed", plan)
+        self.assertIn("candidate195_M5_completed", plan)
+        self.assertIn("candidate195_quality_failed", plan)
         self.assertIn("candidate193_M5_valid_45_score4_43_score1_2", plan)
+        self.assertIn("candidate194_M5_stage1_completed", plan)
+        self.assertIn("candidate194_quality_failed", plan)
+        self.assertIn("Candidate195のM5後にもM1を再開し、9件を", plan)
+        self.assertIn("Candidate196結果", plan)
         self.assertIn("M9_not_ready", plan)
         self.assertNotIn("M8_not_started", plan)
         self.assertIn("candidate191-explicit-review-operation-applicability-m8-complexity-efficiency-audit-r1.json", report)
