@@ -193,6 +193,8 @@ source availabilityとobservable output admissionを分けたCandidate220は、[
 
 TaskSpec-declared structural targetへproducer別source authorityを分けたCandidate221は、[ADR9 r2 N=5](candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md)を45 / 45 valid、Score `4 / 1 = 29 / 16`で完了した。review不要時のreviewer起動とmanifest外readは各0件だったが、root reviewer-owned prereadとmixed-owner admissionがADR03〜ADR06の20 / 20 runで再発した。whole design containerをroot operationへ含める自己分類が合法なままで、C214のroute closureを保持できなかった。[登録result](4511cbb39fb04bb2ad47d6219a12cf7e.json)、[品質監査](candidate221-review-source-authority-closure-adr9-r2-n5-quality-audit-r1.json)および[機序監査](candidate221-review-source-authority-closure-adr9-r2-n5-mechanism-audit-r1.json)を保存し、`quality_failed / mechanism_failed / stopped / next_candidate_not_created`としてStandard14を開始していない。
 
+実際のbaseline `current-r2`を初めて[ADR9 r2全9ケース各N=5](baseline-current-r2-adr9-r2-n5_2026-08-14.md)で測定した。45 / 45 valid、Score `4 / 1 = 23 / 22`で、必要reviewerは5 / 30、期待review結果の受領は4 / 30だった。ADR03〜ADR06は20 / 20件でreviewerを起動せず、期待`blocked`ではなく`unavailable`となった。[登録result](ef38491a294548609ad477d9d3a4c571.json)、[品質監査](baseline-current-r2-adr9-r2-n5-quality-audit-r1.json)および[review義務監査](baseline-current-r2-adr9-r2-n5-review-obligation-audit-r1.json)を保存し、`review_obligations_not_satisfied / empirical_baseline_established`とする。これはCandidateを前提にしないbaselineの経験的基準であり、試験通過または採用判断ではない。
+
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
