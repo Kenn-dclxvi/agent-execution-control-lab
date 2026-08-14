@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json)
+- [`candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json`](../candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json)
+- [`candidate224-review-source-exclusive-authority-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate224-review-source-exclusive-authority-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
 - [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)
 - [`candidate5-expanded12-global-m24-n5-r1.json`](../candidate5-expanded12-global-m24-n5-r1.json)
-- [`candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json)
-- [`candidate50-root-read-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate50-root-read-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
