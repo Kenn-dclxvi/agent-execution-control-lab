@@ -4,7 +4,7 @@
 
 この文書は、THE-CAPTION向けのプロンプトへ制御を追加、変更、削除する前に確認する設計原則の正本である。評価基盤のLayer、KPI、スキーマは対象としない。また、特定のCandidateを採用するか、リリースするか、THE-CAPTION本体へ反映するかも、この文書だけでは決めない。
 
-現在の内容には、ControlFreeRepositoryからCandidate220までの保存済み結果を反映している。Candidateごとの詳細は[`candidate-history.md`](candidate-history.md)と[`prompts/candidates/README.md`](../prompts/candidates/README.md)、Candidate125からCandidate147までの因果関係は[`Candidate125からCandidate147までのプロンプト制御知見`](candidate125-candidate147-control-findings-synthesis.md)を参照する。少数回の試験で得た結果を、未評価の条件へ一般化してはならない。
+現在の内容には、ControlFreeRepositoryからCandidate222までの保存済み結果と、Candidate214のsource delivery再監査を反映している。Candidateごとの詳細は[`candidate-history.md`](candidate-history.md)と[`prompts/candidates/README.md`](../prompts/candidates/README.md)、Candidate125からCandidate147までの因果関係は[`Candidate125からCandidate147までのプロンプト制御知見`](candidate125-candidate147-control-findings-synthesis.md)を参照する。少数回の試験で得た結果を、未評価の条件へ一般化してはならない。
 
 試行回数は`N`で表す。新しい試験や文書では、`B`を試行回数の意味で使わない。過去のファイル名や題名に残る`B20`は、履歴上の識別子としてそのまま残す。
 
@@ -39,9 +39,9 @@
 
 ここで示しているのは、評価対象のプロンプトへ「停止せよ」と書く制御例ではない。Candidateを設計する側が、その案を評価へ進めてよいかを判断するための原則である。必要な`carrier`を事前に一つへ定められない案は、C214で禁止した元資料全体の読み取りを再び許してしまうため、`prompt_control_not_demonstrated / candidate_not_created`として棄却する。
 
-ただし、棄却するのはその案だけであり、問題の検討を終了するわけではない。問題は未解決の設計課題として残し、読み取り対象の粒度、情報の取得者、パケットの作り方、rootへ返す出力の範囲を分解し直す。C214の経路閉鎖を維持した別の構造を見つけるまで、条件文を足したCandidateの作成や評価には進まない。
+ただし、棄却するのはその案だけであり、問題の検討を終了するわけではない。問題は未解決の設計課題として残し、読み取り対象の粒度、情報の取得者、パケットの作り方、rootへ返す出力の範囲を分解し直す。C214のreviewer-side局所境界を維持し、未閉鎖の初回deliveryも閉じる別の構造を見つけるまで、条件文を足したCandidateの作成や評価には進まない。
 
-レビュー制御では、Candidate214で実現した「パケットの作成に使った元資料を再読しない」「rootが元資料を先読みしない」という制御を維持する。必要な情報まで遮断した問題だけを、情報の取得者、受け渡し経路、読める範囲、受け取れる出力を限定して解消する。現在の詳しい方針は[`Candidate214経路閉鎖の再制御方針`](candidate214-route-closure-recontrol-direction.md)に記録する。
+レビュー制御では、Candidate214で実現した「packet構築後にreviewerが投影元を再読しない」と「別containerの必要観測を残す」という局所境界を維持する。後続のdelivery再監査では、Candidate214でもrootがreview開始前にwhole sourceを受領していたため、rootへの初回mixed-owner deliveryは禁止できていなかった。必要な情報まで遮断した問題と初回deliveryの未閉鎖を、情報の取得者、受け渡し経路、読める範囲、受け取れる出力をsource取得前に限定して解消する。現在の詳しい方針は[`Candidate214経路閉鎖の再制御方針`](candidate214-route-closure-recontrol-direction.md)と[`review carrier bootstrap authority監査`](review-carrier-bootstrap-authority-audit.md)に記録する。
 
 ## 設計時に守ること
 
@@ -146,7 +146,7 @@ baselineを新しく実行するのは、Candidateが品質と機序の判定を
 | C194–C203 | C199は、レビュー内部の責務を分けてもmodel stepを増やさず、44 / 45件をScore 4まで回復した。C200は、パケットへ投影済みの元資料を再読する経路を0件にした。C202とC203は45 / 45件がScore 4だった | ticket、ledger、machine receipt、最小操作集合、「先にcertificateを判定する」という指示は、操作の許可そのものを制限しなければ制御にならない。C200は必要なレビュー担当まで遮断した。C202とC203は品質を満たしたが、不要な読み取りと不要なレビュー担当が残り、機序は成立しなかった |
 | C204–C206 | 一度採用した証拠を、値が変わるまで有効としたC206では、rootによる本文の再取得が7件から0件になった | C147の機能を責務名で言い換えても、相互に独立した処理の同時発行は回復しなかった。C204とC205は品質を通過したが機序を通過しなかった。C206もStandard14全体で優位なコスト改善を示せなかった |
 | C207–C213 | 結果の種類ごとに必要な証拠と、その証拠を読む実行者を分けると、C207で12 / 20件あった反例発見後の読み取りは、C208 N=5で1件まで減った。パケットの作成元を記録すると、同じ資料を別名で読み直す範囲を狭められる | 状態名、範囲名、処理区分、certificateをモデルに選ばせるだけでは、読み取り権限は閉じない。C208 N=50は449 / 450件がScore 4だったが、23 / 450件で機序が成立しなかった。C209–C213も、必要な読み取りの欠落と不要な読み取りの両方を解消できなかった |
-| C214–C220 | C214は、パケット作成元の再読とrootの先読みを0件にした。C216は、パケットと重複する範囲の読み取りを0件に保ちながら、必要で重複しない範囲の読み取りを残した。C220は、レビュー不要時のレビュー担当起動を9件から1件へ減らした | C214は元資料全体を遮断したため、必要な範囲まで失った。C215とC216は「必要な場合」という判断で読み取り権限を再び開いた。C217は、モデルから見える入力と、パケットへ合法的に渡せる入力を混同した。C218–C220のownership、ticket、observable outputは、元資料全体を読む権限を閉じなかった |
+| C214–C222 | C214はpacket構築後の投影元再readを0件にし、別containerの必要paired observationを残した。C216はpacketと重複する範囲の読み取りを0件に保ちながら、必要で重複しない範囲の読み取りを残した。C220はレビュー不要時のreviewer起動を9件から1件へ減らした | C214はrootがwhole sourceを受領した後にcontainer全体をreviewerへ閉じたため、同一containerの必要値carrierを失った。後続再監査ではC214のroot初回whole-source deliveryも未閉鎖だった。C215とC216は「必要な場合」という判断でread permissionを再び開き、C217はmodel-visible inputとpacketへ合法的に渡せる入力を混同した。C218–C220のownership、ticket、observable output、C221のproducer別集合、C222のobservation view定義は、最初のroot whole-source permissionを閉じなかった |
 
 成功したCandidateは、後続Candidateが全文を引き継ぐ親として扱わない。そのCandidateが実証した局所的な境界の証拠として使う。失敗したCandidateも、修正条件を足すための親にはしない。再び開いてはいけない許可、必要な処理まで止めた過剰遮断、情報の受け渡し経路の矛盾、モデル任せで強制できなかった分類を示す反例として使う。
 
@@ -168,9 +168,11 @@ baselineを新しく実行するのは、Candidateが品質と機序の判定を
 
 ## 現在の方針
 
-レビュー制御はC147を直接の基盤とし、C214で実現した「元資料の再読」と「rootの先読み」の禁止を維持する。C215からC220までで試した、必要性、operand、ownership、ticket、work item、observable outputをモデルに分類させる方法は、解決策として引き継がない。
+レビュー制御はC147を直接の基盤とし、C214で実現したpacket構築後のreviewer再read閉鎖と別containerの必要観測を維持する。C214でもroot初回whole-source deliveryは閉じていなかったため、同Candidateの文面またはroot preread 0件という歴史的集計を、source delivery全体の閉鎖として引き継がない。C215からC222までで試した、必要性、operand、ownership、ticket、work item、observable output、producer別集合またはobservation viewをモデルに分類させる方法は、解決策として引き継がない。
 
-次のCandidate作成へ進めるのは、C214で品質を満たせなかった4件について、必要な情報の取得者、限定した受け渡し経路、実行者ごとの読み取り権限、受け取れる出力を、実行前に確定できる場合だけである。確定できない案は棄却し、条件付きで元資料の読み取り権限を戻すCandidateは作成しない。その場合も問題の検討は続け、情報の所有と受け渡しの構造を分解し直して別案を作る。
+次のCandidate作成へ進めるのは、最初のreview source取得より前に、既存入力だけからrootへ返せるexact projection、reviewerが直接観測するexact target、各resultを受領できるproducerおよびpacket carrierを一意に固定でき、whole-source invocationがprompt準拠で構成できない場合だけである。その境界を閉じた後も、C214とC222で品質を満たせなかった必要値がreviewerへ届き、必要reviewを完遂できなければならない。確定できない案は棄却し、条件付きでwhole-source permissionを戻すCandidateは作成しない。TaskSpec、case、fixtureまたはoracleの変更で不足を補わず、prompt内で閉じられる情報の所有と受け渡し構造を分解し直す。
+
+C222はC221の`root_operation_set`をpre-review authorityから削除してもroot whole-source deliveryが20 / 20に残ったため、同集合への再分類を唯一の原因とする仮説を棄却した。現在は、packet構築に必要なliteral値がreviewer専有値と同じcontainerにあり、rootのreadがprojectionとwhole outputの両方を実行できる結合を未閉鎖の辺として扱う。以後の結果は[`review carrier bootstrap authority監査`](review-carrier-bootstrap-authority-audit.md)の累積閉鎖台帳へ、検証仮説、反証経路、棄却範囲、残存辺、正常carrierへの影響を追記して次へ接続する。
 
 ## 主要な一次参照
 
@@ -187,9 +189,12 @@ baselineを新しく実行するのは、Candidateが品質と機序の判定を
 - [Candidate191 ADR9 r2 N=5](../evaluations/results/candidate191-explicit-review-operation-applicability-adr9-r2-n5_2026-08-12.md)
 - [Candidate200 ADR9 r2 N=5](../evaluations/results/candidate200-projected-review-read-closure-adr9-r2-n5_2026-08-13.md)
 - [Candidate202 ADR9 r2 N=5](../evaluations/results/candidate202-review-admission-routing-receipt-adr9-r2-n5_2026-08-13.md)
-- [Candidate204からCandidate220までの系譜](../prompts/candidates/README.md)
+- [Candidate204からCandidate222までの系譜](../prompts/candidates/README.md)
 - [Candidate208 ADR9 r2 N=50](../evaluations/results/candidate208-result-kind-evidence-domain-adr9-r2-n50_2026-08-13.md)
 - [Candidate214 ADR9 r2 N=5](../evaluations/results/candidate214-packet-source-container-closure-adr9-r2-n5_2026-08-14.md)
 - [Candidate216 ADR9 r2 N=5](../evaluations/results/candidate216-packet-construction-projection-adr9-r2-n5_2026-08-14.md)
 - [Candidate217 ADR9 r2 N=5](../evaluations/results/candidate217-review-proposition-operand-closure-adr9-r2-n5_2026-08-14.md)
 - [Candidate220 ADR9 r2 N=5](../evaluations/results/candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate221 ADR9 r2 N=5](../evaluations/results/candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate222 ADR9 r2 N=5](../evaluations/results/candidate222-review-source-observation-view-adr9-r2-n5_2026-08-14.md)
+- [review carrier bootstrap authority監査](review-carrier-bootstrap-authority-audit.md)

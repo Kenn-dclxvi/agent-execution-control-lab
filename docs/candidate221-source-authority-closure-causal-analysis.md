@@ -10,9 +10,9 @@
 
 ## 分析対象
 
-Candidate221で解こうとした課題は、Candidate214で成立した二つの経路閉鎖を維持しながら、同Candidateが遮断した必要なreviewer観測だけを回復できるかである。
+Candidate221で解こうとした課題は、Candidate214実行時の消費・admission監査で成立した二つの局所閉鎖を維持しながら、同Candidateが遮断した必要なreviewer観測だけを回復できるかである。
 
-Candidate214は、packet作成元sourceの再readとrootによるreviewer-owned値の先行取得を0件にした。一方で、packetへ実際に投影した範囲ではなくsource container全体を閉じたため、ADR03、ADR05およびADR06の4 runでcurrent inventory membershipまたはconsumer contractをreviewerが観測できず、期待`blocked`が`unavailable`になった。
+Candidate214の当時の監査は、packet作成元sourceのreviewer再readとrootによるreviewer-owned値のadmissionを0件と判定した。一方で、packetへ実際に投影した範囲ではなくsource container全体を閉じたため、ADR03、ADR05およびADR06の4 runでcurrent inventory membershipまたはconsumer contractをreviewerが観測できず、期待`blocked`が`unavailable`になった。後続のdelivery境界監査で、初回whole-source result自体はrootへ配送されていたことが判明している。
 
 したがって課題は、readの必要性を正しく判断させることではない。source取得前に、次の値と経路を相互に重ならない形で固定することである。
 
@@ -29,7 +29,7 @@ Candidate221はCandidate147を直接基盤とし、TaskSpecが列挙するpacket
 2. root-owned operationのtarget
 3. reviewerが直接観測するtarget
 
-この仮説が成立するなら、rootはpacket構築に必要なexact regionだけを取得し、reviewerはpacketへ運べないmanifest上のexact targetだけを直接観測できる。whole-source resultが複数ownerの値を含む場合はrootへ返せないため、Candidate214の経路閉鎖を保持しながら過剰遮断だけを解消できるはずだった。
+この仮説が成立するなら、rootはpacket構築に必要なexact regionだけを取得し、reviewerはpacketへ運べないmanifest上のexact targetだけを直接観測できる。whole-source resultが複数ownerの値を含む場合はrootへ返せないため、Candidate214で観測したreviewer-sideの局所閉鎖を保持しながら過剰遮断だけを解消できるはずだった。
 
 ## 実行結果
 
@@ -82,9 +82,9 @@ reviewer-owned値がrootへ配送された時点で経路閉鎖は不成立で�
 
 ## 現行frontierへの反映
 
-Candidate221はCandidate214の経路閉鎖を保持できなかったため、次Candidateの親にしない。Candidate221と同じ三集合または自己分類条件へlabelや確認順を追加した案も作成しない。
+Candidate221はCandidate214で観測したreviewer-sideの局所閉鎖を保持できなかったため、次Candidateの親にしない。Candidate221と同じ三集合または自己分類条件へlabelや確認順を追加した案も作成しない。
 
-現行frontierは引き続きCandidate214で実証した経路閉鎖である。次の設計へ進む前に、少なくとも次を一次アーティファクトとmodel-visible inputから固定する必要がある。
+現行frontierで保持できるのは、Candidate214で実証したpacket構築後のreviewer再read閉鎖と別containerの必要観測である。root初回deliveryは未閉鎖であるため、次の設計へ進む前に、少なくとも次を一次アーティファクトとmodel-visible inputから固定する必要がある。
 
 1. invocationがrootへ返せる正確なobservable output。
 2. outputを受領できるproducerと、packetへ運べる値の対応。
@@ -92,7 +92,13 @@ Candidate221はCandidate214の経路閉鎖を保持できなかったため、�
 4. その境界を閉じた後も、ADR03、ADR05およびADR06の必要値がreviewerへ到達する合法なcarrier。
 5. target帰属をmodelの読後分類、owner宣言、ticketまたは処理順へ委ねないこと。
 
-これらを固定できない設計案は`prompt_control_not_demonstrated / candidate_not_created`として棄却する。ただし、問題全体の検討終了とは扱わない。owner、read対象の粒度、packet構築およびrootへ返るoutputの構造を再分解し、Candidate214の閉鎖を維持できる別案の検討へ戻る。
+これらを固定できない設計案は`prompt_control_not_demonstrated / candidate_not_created`として棄却する。ただし、問題全体の検討終了とは扱わない。owner、read対象の粒度、packet構築およびrootへ返るoutputの構造を再分解し、Candidate214のreviewer-side局所境界を維持しながら初回deliveryも閉じる別案の検討へ戻る。
+
+## 後続のdelivery境界監査による限定
+
+この文書でいうCandidate214の二つの経路閉鎖は、Candidate214実行時に固定した消費・admission監査の範囲を指す。後続のseal済みrollout再監査では、Candidate214でもrootがreview開始前に`design-admission.json`全体を受領しており、ADR03からADR06の20 / 20 runでpacket配送禁止のinventoryとcontractsがroot outputに含まれていたことを確認した。
+
+したがって現在は、Candidate214からpacket構築後のreviewer再read閉鎖と別containerの必要観測だけを保持し、root初回whole-source deliveryまで閉じたとは扱わない。次のfrontierは、reviewer readを後から開く条件ではなく、最初のsource取得からroot projectionとreviewer direct observationを別carrierへ固定する`source bootstrap projection`である。詳しくは[`review carrier bootstrap authority監査`](review-carrier-bootstrap-authority-audit.md)を参照する。
 
 ## 状態境界
 
@@ -107,3 +113,4 @@ Candidate221はCandidate214の経路閉鎖を保持できなかったため、�
 - [Candidate221方向監査](candidate221-review-source-authority-closure-direction-audit.md)
 - [Candidate214経路閉鎖の再制御方針](candidate214-route-closure-recontrol-direction.md)
 - [Prompt制御の検討原則](prompt-control-design-principles.md)
+- [review carrier bootstrap authority監査](review-carrier-bootstrap-authority-audit.md)
