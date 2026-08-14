@@ -2,9 +2,11 @@
 
 ## 状態
 
-- `current_frontier`
-- `candidate_not_created`
-- `evaluation_not_started`
+- `candidate221_evaluated`
+- `candidate221_quality_failed`
+- `candidate221_mechanism_failed`
+- `candidate221_stopped`
+- `next_candidate_redesign_required`
 
 ## 結論
 
@@ -55,7 +57,7 @@ ADR9のTaskSpec、case、fixture、schemaおよびoracleは比較条件として
 
 Candidate215からCandidate220までの保存済みresultは、上記パターンを再導入しないための反例として使う。各Candidateの制御文を継承し、その上へ修正条件を追加するために使わない。
 
-## 次Candidate作成前の停止gate
+## 次Candidate作成前の設計gate
 
 次の全件を一次アーティファクトとmodel-visible inputで固定できるまで、Candidate bundle、profileまたは評価slotを作成しない。
 
@@ -63,9 +65,13 @@ Candidate215からCandidate220までの保存済みresultは、上記パター�
 2. packet投影元sourceの再readとrootによるreviewer-owned値の先行観測を合法にしている権限辺の全件。
 3. 権限辺を削除した後も、ADR03、ADR05およびADR06の必要値が誤経路なしにreviewerへ到達すること。
 4. モデルが判断順、必要性分類または自己申告を変えても、対象の失敗invocationがprompt準拠として構成できないこと。
-5. 必要値のcarrierを現行prompt境界で強制できない場合に、別条件でread permissionを再開せず`prompt_control_not_demonstrated / candidate_not_created`で停止できること。
+5. 必要値のcarrierを現行prompt境界で強制できない案は、別条件でread permissionを再開せず`prompt_control_not_demonstrated / candidate_not_created`として棄却し、owner、read対象、packet構築、observable output境界を分解し直した別案の検討へ戻れること。
 
-現時点では、TaskSpecがCandidate214の4失敗で必要だったcurrent valueのpacket carrierを許すか、またはrootへwhole-container outputを返さずreviewerだけが観測できるexact targetをpromptが発行前に一意化できるかが未固定である。したがって次Candidateは作成しない。
+後続の一次入力監査で、TaskSpecのpacket permission、finite evidence manifest、exact structural targetおよびroot substitution禁止から、packet配送値はroot構築、packet非許可のmanifest targetはreviewer direct observationへ発行前に分離できることを確認した。Candidate221はこのproducer別source authorityだけをCandidate147へ加えた。効果は未評価であり、ADR9 r2 N=5のpreflight通過前に成立を主張しない。
+
+ADR9 r2 N=5の実行では、この分離は成立しなかった。ADR03からADR06の20 / 20 runでrootがreviewer-owned targetを先行取得し、mixed-owner resultを受領した。TaskSpec-declared集合を追加しても、whole design containerをroot operationへ含める自己分類がprompt準拠として残ったためである。Candidate221はC214のroute closureを保持できず、`quality_failed / mechanism_failed / stopped`とした。
+
+現行のmodel-visible inputから必要carrierと禁止targetをpromptだけで実行不能な境界へ固定できることは実証されていない。このため、Candidate221と同じ自己分類条件を継承した次Candidateは作成しない。一方で問題の検討は終了せず、owner、read対象の粒度、packet構築、rootが受け取れるoutputを再分解し、C214の経路閉鎖を維持できる別の構造を設計する。
 
 ## 参照
 
@@ -76,3 +82,4 @@ Candidate215からCandidate220までの保存済みresultは、上記パター�
 - [Candidate216 ADR9 r2 N=5結果](../evaluations/results/candidate216-packet-construction-projection-adr9-r2-n5_2026-08-14.md)
 - [Candidate217 ADR9 r2 N=5結果](../evaluations/results/candidate217-review-proposition-operand-closure-adr9-r2-n5_2026-08-14.md)
 - [Candidate220 ADR9 r2 N=5結果](../evaluations/results/candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate221 ADR9 r2 N=5結果](../evaluations/results/candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md)

@@ -191,6 +191,8 @@ repository evidence requestをconsumer-bound ticketへ接続したCandidate219�
 
 source availabilityとobservable output admissionを分けたCandidate220は、[ADR9 r2 N=5](candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md)を45 / 45 valid、Score `4 / 1 = 41 / 4`で完了した。不要reviewerはCandidate219の9件から1件へ減り、reviewer cardinality一致43 / 45、基本機序通過40 / 45へ改善した。一方、root mixed-owner outputは20 / 20 packet caseに残った。[登録result](8e128045822042ff9a14b23fbc12e6c4.json)、[品質監査](candidate220-review-observable-output-closure-adr9-r2-n5-quality-audit-r1.json)および[機序監査](candidate220-review-observable-output-closure-adr9-r2-n5-mechanism-audit-r1.json)を保存し、`quality_failed / mechanism_failed / stopped`としてStandard14を開始していない。
 
+TaskSpec-declared structural targetへproducer別source authorityを分けたCandidate221は、[ADR9 r2 N=5](candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md)を45 / 45 valid、Score `4 / 1 = 29 / 16`で完了した。review不要時のreviewer起動とmanifest外readは各0件だったが、root reviewer-owned prereadとmixed-owner admissionがADR03〜ADR06の20 / 20 runで再発した。whole design containerをroot operationへ含める自己分類が合法なままで、C214のroute closureを保持できなかった。[登録result](4511cbb39fb04bb2ad47d6219a12cf7e.json)、[品質監査](candidate221-review-source-authority-closure-adr9-r2-n5-quality-audit-r1.json)および[機序監査](candidate221-review-source-authority-closure-adr9-r2-n5-mechanism-audit-r1.json)を保存し、`quality_failed / mechanism_failed / stopped / next_candidate_not_created`としてStandard14を開始していない。
+
 Candidate147の[ADR9 r2 N=50](candidate147-result-effect-scope-adr9-r2-n50_2026-08-10.md)は旧r1結果を再利用せず450件を新規発行し、450 / 450 valid、Score `4 / 1 = 161 / 289`だった。不要review 66件、ADR03〜06の`unavailable` 196件、ADR06 canary配送4件、ADR07誤`blocked` 2件、ADR09 review未起動25件を観測した。危険な成果物変更は0件だった。
 
 ## 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）

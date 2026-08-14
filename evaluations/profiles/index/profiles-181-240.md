@@ -60,5 +60,5 @@
 - [`candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
+- [`candidate221-review-source-authority-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate221-review-source-authority-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
-- [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
