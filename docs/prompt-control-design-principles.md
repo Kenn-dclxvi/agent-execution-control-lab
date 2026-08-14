@@ -1,331 +1,195 @@
 # Prompt制御の検討原則
 
-## 位置付け
+## この文書の役割
 
-この文書は、THE-CAPTION向けpromptへ制御を追加、置換、削除する前に使う設計原則を定める。
+この文書は、THE-CAPTION向けのプロンプトへ制御を追加、変更、削除する前に確認する設計原則の正本である。評価基盤のLayer、KPI、スキーマは対象としない。また、特定のCandidateを採用するか、リリースするか、THE-CAPTION本体へ反映するかも、この文書だけでは決めない。
 
-評価基盤のLayer、KPI、schemaを変更しない。特定candidateの採用、release承認、THE-CAPTION本体への反映も判断しない。
+現在の内容には、ControlFreeRepositoryからCandidate220までの保存済み結果を反映している。Candidateごとの詳細は[`candidate-history.md`](candidate-history.md)と[`prompts/candidates/README.md`](../prompts/candidates/README.md)、Candidate125からCandidate147までの因果関係は[`Candidate125からCandidate147までのプロンプト制御知見`](candidate125-candidate147-control-findings-synthesis.md)を参照する。少数回の試験で得た結果を、未評価の条件へ一般化してはならない。
 
-試験の試行回数は`N`で表す。新規の試験、設計、結果では`B`を試行回数の表記に使わない。`N=20`は同一互換条件で選択した20 atomic runを意味する。過去artifactのpathや題名に残る`B20`は履歴identityとして保持するが、新規文書ではその意味を`N`へ読み替えず、実際のrun数を確認して`N=<run数>`と記録する。batch数を示す必要がある場合は`batch count`と明記する。
+試行回数は`N`で表す。新しい試験や文書では、`B`を試行回数の意味で使わない。過去のファイル名や題名に残る`B20`は、履歴上の識別子としてそのまま残す。
 
-以下は、ControlFreeRepository、Candidate11、Candidate23、Candidate35からCandidate40まで、およびCandidate43からCandidate125までの保存済み観測から得た現時点の設計原則である。Candidate81以降の横断整理は[`Candidate81からCandidate125までのprompt制御知見`](candidate81-candidate125-control-findings-synthesis.md)を参照する。少数反復の数値を範囲外へ一般化せず、今後の互換試験で更新する。
+## 最優先の原則
 
-## 結論
+制御の目的は、モデルに望ましい判断をさせることではない。意図しない動作を実行できる許可、またはその動作へつながる依存関係をなくすことである。
 
-制御は、規則を増やすためではなく、将来の不要な判断経路を先に消すために追加する。
+同じ入力を与えられたモデルが、判断や処理順序を変えるだけで問題のある操作をプロンプトの規則に違反せず実行できるなら、その経路は閉じていない。成功率、Score 4の件数、トークン、経過時間が良くても、その制御が効いたとは判定しない。
 
-良い制御は、制御自体の読解と確認に使うtokenより、回避できる探索、context継承、再読、再試行、手戻りのtokenを大きくする。同じ成果品質を維持したまま、実行を最短の有効経路へ収束させる。
+設計は次の順で進める。
 
-追加条件が誤経路を減らす以上に、label間の関係、例外、確認点を増やす場合、その制御は追加しない。既存条件の置換、統合、削除を先に検討する。
+1. 保存済みtraceから、実際に起きた問題のある操作を特定する。
+2. その操作を許していた記述や、そこへ到達させた依存関係を特定する。
+3. その許可を削除するか、正常な処理に必要な範囲だけへ狭める。成功した実行のツール順や判断順を、新しい手順として転記してはならない。
+4. 正常終了に必要な情報について、誰が持ち、どの経路で渡し、誰がどこまで読めるのかを確認する。問題のある経路を再び開かなくても、その情報が届く必要がある。
+5. 問題のある操作をまだプロンプトの規則に違反せず実行できる場合や、正常な処理に必要な情報まで届かなくなる場合は、Candidateを作成しない。
 
-## 最優先gate: 行動誘導ではなく経路を閉じる
+### 必要な情報まで遮断した場合の直し方
 
-意図しない動作に対して、モデルが正しい条件を判定し、正しい順序、owner、sourceまたはresultを選ぶよう促すことを制御としない。同じmodel-visible inputで条件判定を変えれば失敗経路をprompt準拠のまま実行できる場合、その経路は閉じていない。成功率、Score 4件数、tokenまたは経過時間が良くても、機序成立としない。
+たとえば、元資料全体の再読を禁止した結果、レビューに必要な一部分まで読めなくなったとする。このとき、「必要な場合だけ元資料を読んでよい」「先に必要性を判定する」と書き足してはいけない。その書き方では元資料を読む許可が残り、読むかどうかを再びモデルの判断に委ねることになる。
 
-新しいCandidateは、対象の失敗経路に対して次を先に示す。
+代わりに、実行前に次の内容を決める。
 
-1. 失敗operationを合法にしている具体的なpermissionまたはdependencyの辺。
-2. その辺を削除または狭く置換した後は、モデルの判断、順序または自己申告が変わっても同じ失敗operationを発行できないこと。
-3. 正常terminalに必要な入力のowner、carrier、read permissionとobservable output範囲が実行前に一意であり、失敗経路の再開なしに必要値が到達すること。
+- 必要な値を誰が取得するのか。
+- 元資料のどの範囲だけを読めるのか。
+- 取得した値を、どの入力としてレビュー担当へ渡すのか。
+- rootやレビュー担当が、元資料全体を受け取れないようにする方法。
 
-過剰遮断を解消するときも、「必要な場合だけ読む」「先に判定してから読む」「当該ownerだけが消費する」などの条件付き行動指示でpermissionを開き直さない。必要値の合法なcarrierをTaskSpec、schema、repository authorityまたはpromptのmodel-visible境界で実行前に一意化できなければ、制御を弱めず`prompt_control_not_demonstrated / candidate_not_created`で停止する。
+つまり、「元資料を読む必要があるかを正しく判断させる」のではなく、「必要な人へ、必要な部分だけが最初から届く形にする」。
 
-review制御の現行適用では、Candidate214で実証したpacket投影元sourceの再readとroot先読みの経路閉鎖を保持対象とする。同Candidateの過剰遮断は、経路を条件付きで再開せず、必要値の合法なcarrierとobservable output permissionを先に固定することだけで解消する。詳細は[`Candidate214経路閉鎖の再制御方針`](candidate214-route-closure-recontrol-direction.md)を現行frontierとする。
+このように限定した情報の受け渡し経路を、この文書では`carrier`と呼ぶ。
 
-## 基準とする基本挙動
+ここで示しているのは、評価対象のプロンプトへ「停止せよ」と書く制御例ではない。Candidateを設計する側が、その案を評価へ進めてよいかを判断するための原則である。必要な`carrier`を事前に一つへ定められない案は、C214で禁止した元資料全体の読み取りを再び許してしまうため、`prompt_control_not_demonstrated / candidate_not_created`として棄却する。
 
-最初の基準は、root `AGENTS.md`を0-byteとし、path-scoped repository instructionを保持した`the-caption-3ce91a4-control-free-repository-r1`とする。
+ただし、棄却するのはその案だけであり、問題の検討を終了するわけではない。問題は未解決の設計課題として残し、読み取り対象の粒度、情報の取得者、パケットの作り方、rootへ返す出力の範囲を分解し直す。C214の経路閉鎖を維持した別の構造を見つけるまで、条件文を足したCandidateの作成や評価には進まない。
 
-この条件でも、実行は次の三層から制御される。
+レビュー制御では、Candidate214で実現した「パケットの作成に使った元資料を再読しない」「rootが元資料を先読みしない」という制御を維持する。必要な情報まで遮断した問題だけを、情報の取得者、受け渡し経路、読める範囲、受け取れる出力を限定して解消する。現在の詳しい方針は[`Candidate214経路閉鎖の再制御方針`](candidate214-route-closure-recontrol-direction.md)に記録する。
 
-1. TaskSpecがrequired outcome、permission、allowed path、required validation、停止条件を定める。
-2. path-scoped repository authorityが正規path、禁止されたlegacy path、配置規則を定める。
-3. source、test、diff、repository stateが採用可能な事実と結果を限定する。
+## 設計時に守ること
 
-root制御を検討するときは、まずこの三層だけで成立する最短経路を記述する。その経路で再現する具体的な不足がない限り、rootへ同じ意味をlabel化して重ねない。
+### どの層で制御するか
 
-## 制御の価値
+比較の出発点は、root `AGENTS.md`を0-byteにし、各パスに適用されるリポジトリの指示だけを残した`the-caption-3ce91a4-control-free-repository-r1`とする。この状態でも、TaskSpecは利用者が求める結果、許可された操作、必要な検証、停止条件を定める。リポジトリ上の正本は正しいパスや配置規則を定め、リポジトリの現在状態は採用できる事実を限定する。これらだけで正常に完了できる処理へ、同じ意味の全体共通labelを重ねてはならない。
 
-tokenへの正味の影響は、次の関係として扱う。
+制御を置く場所は、次のように分ける。
+
+- 利用者が求める結果、許可、必須操作が未確定なら、TaskSpecまたはスキーマで明示する。
+- リポジトリから一意に決まるパス、コマンド、配置規則は、リポジトリ上の正本に置く。
+- 操作を発行する時点でモデルから見える条件に基づく許可、依存関係、結果の採用条件、結果の失効条件は、プロンプトで制御できる。
+- ツール結果の配送、出力量の上限、操作の不可分性、runtime hookは、プロンプトでは強制できない。これらがなければ解決できない案は`candidate_not_created`として棄却するが、問題を解決済みまたは検討終了とは扱わない。リポジトリ内で制御できる境界へ問題を分解し直す。
+- 正しい成果が採点規則のために低得点になる問題は、採点規則で修正する。
+
+### 利用者が求める結果、証拠、変更を分ける
+
+- 利用者が決める結果と、AIが選ぶ実装方法を分ける。未確定の結果をリポジトリの内容から推測して補ってはならない。結果が確定している場合は、リポジトリ上の正本から実装方法を選べる。
+- 証拠が十分かどうかを、バイト数、行数、読み取り回数、対象数、呼び出し回数、ラウンド数では判定しない。その証拠を使う判断に必要な事実を観測できたかで判定する。
+- `satisfied / unsatisfied / unobserved`を混同しない。`unobserved`は判断材料が足りない状態であり、`unsatisfied`は必要な事実を確認したうえで条件を満たしていない状態である。両者では次に行う処理が異なる。
+- 複数の変更結果、対象、相互関係があるタスクでは、個々の変更を始める前に、必要な結果全体を一つの実装方針へ結び付ける。その実装方針には、変更対象、変更条件、維持すべき条件を含める。
+- リポジトリを読むのは、未確認の判断項目と、現在不足している事実が特定され、その読み取り結果によって判断を進められる場合に限る。「念のため」の再読、実装方法を選ぶだけの探索、確定済み判断の再確認は行わない。
+- 変更の失敗や不足した結果によって無効になるのは、その影響を受けた判断だけである。別の変更結果や、すでに成立した別の操作結果まで一括して未確認へ戻さない。
+
+### 実行者、結果、レビューの責任範囲を分ける
+
+- 各操作には実行者を一つだけ割り当てる。同じ判断を別の実行者へ割り当て直さない。判断責任者やrisk labelを、実際の実行者の指定として扱ってはならない。
+- **Worker選択とコスト判定**: TaskSpecが独立したworkerによる実行を成果条件として明示していない限り、workerを使うかどうかは実装方法である。worker数や役割名そのものを制御の成果にせず、rootが実行する場合にも同じ判断条件、許可、結果の対応関係を保つ。
+- rootが実行者でない操作では、rootは入力の準備、受け取った結果の対応付け、最終状態の集約だけを行う。判断をやり直したり、欠けた結果を推測で補ったりしない。
+- 結果は、誰が、どの操作で、どの入力に基づいて生成したのか、どの種類の結果なのかを識別できるようにする。条件を満たさなかったという結果も、その操作の確定結果として保持する。
+- レビューの`counterexample_found`、`no_counterexample_found`、`unavailable`では、必要な証拠の範囲が異なる。一件の具体的な反例で確定できる結果に、対象全体の完全性や無関係な情報の不足を要求してはならない。
+- パケットで渡す情報、レビュー担当が自分で読む情報、rootが受け取る情報を、元資料を読む前に分ける。入力がモデルから見えるというだけで、その情報をパケットへ複製してよいことや、rootへ元資料全体を返してよいことにはならない。
+- 元資料が存在すること、依頼の目的、ticket、ownership labelは、読める範囲を制限しない。実際に誰へ何が渡るかを限定していなければ、読み取り権限を制御したことにはならない。
+
+### 結果の影響範囲、検証、完了を分ける
+
+- ある結果によって後続処理を止めるのは、その結果が対象、許可、方法、停止条件を変え得る操作だけにする。タスク全体や、互いに独立していて実行を許可済みの読み取りまで止めてはならない。
+- 変更後は、必要な検証項目、実行順、各項目の合格条件、失敗時の停止条件を一つの実行票へまとめる。TaskSpecが正確なコマンドを指定していないことを理由に、リポジトリを追加で探索してはならない。
+- 必要な検証結果をすべて受け取ってから、一度だけ完了を判断する。検証成功後に新しい要求が加わっておらず、既存結果も失効していないなら、読み取り、検証、レビューを追加しない。
+- 検証していない成果を、成功、完了、採用可能として報告しない。
+
+### 制御文を増やしすぎない
+
+- 一つのlabelには、一つの不変条件だけを持たせる。owner、実行者、runtime identity、結果、証拠、失効条件を一つのlabelへ連結しない。
+- 条件を追加するときは、その条件によってなくなる具体的な分岐、再読、再試行、コンテキストの受け渡し、責務の競合を示す。なくなるものを説明できない条件は追加しない。
+- 既存の制御と同じ問題を扱う場合は、新しい条件を並べる前に、既存条件の置き換え、統合、削除を検討する。
+- 同じ意味に見える文でも、文字列が似ているという理由だけで削除しない。実行判断の近くにある再記述が、その場で必要な制約として働いている場合がある。削除前後の実行経路を比べ、意味が保たれることを確認する。
+- 文面が整っていること、抽象的な名前を付けたこと、文字数を減らしたことだけを改善の根拠にしない。
+
+## 経路ごとに分けて評価する
+
+次の分類は、プロンプト内でモデルに選ばせる分岐ではない。保存済みtraceを診断し、変更対象外への悪影響を調べるために使う。
+
+| 経路 | 正常な最短経路 | 主な問題経路 |
+| --- | --- | --- |
+| 利用者が求める結果が未確定 | 未確定の値だけを利用者へ確認する | リポジトリを読んで値を推測する |
+| 実装方法だけが未確定 | リポジトリ上の正本から実装方法を決め、変更へ進む | 正本のパスが未記載というだけで停止する、決定後も探索を続ける |
+| 実装と検証 | 必要な証拠を確認して変更し、必要な検証をすべて終える | 一部だけ変更する、検証途中で判断へ戻る、不要な再実行をする |
+| 読み取りだけのレビュー | 必要な入力だけを使い、指摘あり、指摘なし、判定不能のいずれかを返す | パケット作成済みの元資料を再読する、対象外を探索する、結果確定後も読む |
+| 変更せず終了 | TaskSpecだけで終了を判断する | 不要なリポジトリ探索、変更、試験を始める |
+
+対象経路の改善と、非対象経路の悪化を相殺してはならない。まず経路ごとに品質と機序を判定する。変更対象外の経路で、新しい分類、探索、再開、再読、再試行が増えていないことを確認した後に、Standard14の3つのKPIを集計する。
+
+## 制御の価値と評価順序
+
+制御によるトークンの増減は、次の関係で考える。
 
 ```text
-正味token差
-= 制御文の読解cost
- + 追加された判断・確認cost
- - 回避できた探索・context継承・再読・再試行・手戻りcost
+トークンの正味差
+= 制御文を理解するためのコスト
+ + 追加された判断と確認のコスト
+ - 回避できた探索、コンテキストの受け渡し、再読、再試行、手戻りのコスト
 ```
 
-token削減だけを成功としない。必要な確認や成果を省略してtokenが減った場合は、制御による収束ではない。
+評価は次の順で行う。
 
-| 成果品質 | token | 設計上の読み方 |
+1. **実行有効性**: 結果が`valid`か、採点可能か、比較条件が一致しているかを確認する。
+2. **品質**: 利用者が求める結果、正しい終了状態、アーティファクトの境界を満たしているかを確認する。
+3. **機序**: 変更した条件が、対象とした問題経路を実際に閉じたかを確認する。
+4. **対象外への影響**: 変更対象外の経路へ、新しいコストや問題経路を移していないかを確認する。
+5. **KPI**: 比較可能な`quality_score`、全エージェントの`total_tokens`、`elapsed_seconds`を比較する。
+6. **安定性**: 実行前に決めたN拡張と停止条件を使い、低頻度の失敗がないかを確認する。
+7. **採用、リリース、本体反映**: 評価とは分けて、明示的に判断する。
+
+品質やKPIが良くても機序が成立していなければ、改善を制御差分の効果として扱わない。N=5の全件成功だけでは、低頻度の失敗がないとは判断しない。品質の中央値が100でも、個別の低Scoreを相殺してはならない。
+
+`N=20`は、同じ比較条件で選んだ20件のatomic runを意味する。wave数やbatch数を試行回数として扱わない。model、reasoning effort、runtime、rating、case set、token accountingは比較条件に含める。これらが異なる結果の差を、プロンプトの差へ帰属してはならない。
+
+baselineを新しく実行するのは、Candidateが品質と機序の判定を通過した後に限る。まず、同じimmutable identityと比較条件を持つ保存済みresultを再利用し、不足するslotだけを実行する。コストを合否判定に使う場合は、比較するbaseline、比較条件、許容幅、集計単位を結果を見る前に固定する。
+
+## Candidate125以降から得た、今後も使う知見
+
+この節は、当時の採用判断を書き換えるものではない。今後の設計判断に再利用できる因果関係と、繰り返してはいけない失敗をまとめる。
+
+| 観測したCandidate | 今後も使う知見 | 繰り返してはいけないこと |
 | --- | --- | --- |
-| 維持または向上 | 減少 | 誤経路または不要なcontextを減らした可能性がある |
-| 向上 | 増加 | 品質または安全のためのcostとして妥当性を別途判断する |
-| 同じ | 増加 | 制御処理だけを追加した可能性を先に疑う |
-| 低下 | 増加 | 解釈負荷または最短経路の阻害を疑う |
-| 低下 | 減少 | 必要な実行や成果を省略していないか確認する |
-
-## 制御経路の分類と評価単位
-
-共通promptの一つの効率制御を全taskへ水平適用すると、対象経路の判断を減らす一方で、非対象経路へ新しい分類、確認、再入を追加することがある。制御設計と評価では、少なくともambiguity系（A系）とfulfillment系（F系）を分ける。さらに、正常経路が異なる下位区分を分離する。
-
-この分類は、保存traceを分析し、targeted gateと非対象経路へのspilloverを判定するための設計上の分類である。prompt本文へ`A_MODE`、`F_MODE`、case ID、固定path、固定commandの分岐を追加する根拠にはしない。promptが分岐に使えるのは、TaskSpec、repository authority、repository state、bind済みresultから直接観測できる状態だけである。
-
-### A系: required outcomeとimplementation choiceの解決
-
-A系は、変更開始前に何が未解決かによって二つへ分ける。
-
-| 経路 | 開始状態 | 最短の正常経路 | 閉じるべき誤経路 |
-| --- | --- | --- | --- |
-| outcome unresolved型（A01型） | 利用者に観測可能なrequired outcome valueが未固定 | TaskSpec明示の開始状態をbindし、変更・試験前に一度のclarificationへ停止 | target、test、history、authorityを読んで未固定outcomeを推測する経路 |
-| implementation resolvable型（A02型） | required outcomeは固定済みだがimplementation choiceが未解決 | repository authorityからchoiceを解決し、choiceがbindされた時点で変更前evidence operationをterminalにして変更へ進む | authority path未記載だけによる誤停止と、choice確定後の追加探索・再入 |
-
-outcomeの確定とimplementation choiceの解決を同じauthority判定へまとめない。一般的なallowed readをoutcome決定委譲へ読み替えず、repository evidenceで未固定outcomeを事後補完しない。一方、outcomeが固定済みでrepositoryからimplementationを一意に解決できる場合は、必要なauthority探索をclarificationへ置換しない。
-
-### F系: 成果生成、review、terminal disposition
-
-F系は、成果の性質によって少なくとも三つへ分ける。
-
-| 経路 | 主なoperation | 最短の正常経路 | 主な制御対象 |
-| --- | --- | --- | --- |
-| 実装・validation型 | artifact変更とrequired validation | 独立した変更前evidenceを必要十分なwaveで取得し、変更後はrequired validation全体を一度発行してterminal resultを集約 | evidence間の不要なmodel再入、validation途中return、再取得、再実行 |
-| read-only review型 | 固定diff、source、inventoryの判定 | 判定に必要なevidenceを取得し、findingまたは根拠あるno-findingを一度返す | 固定済みevidenceの再読、対象外探索、finding確定後の追加確認 |
-| 変更なしterminal型 | clarification、refusal、scope外停止 | TaskSpecだけでterminal dispositionを決められる場合はrepository evidenceを開かず停止 | 不要なrepository探索、変更・試験の開始、停止後の再入 |
-
-F系の効率制御をA系のauthority解決へ流入させず、A系のauthority admission条件をF系の通常実装へ流入させない。例えば、read batchが固定evidence reviewを短縮しても探索型A02のread集合を広げるなら、共通制御として採用しない。逆に、A01 / A02のauthority分類を追加してF系の全caseへ分類costと再入を増やすなら、そのA系改善をStandard14集約値だけで採用しない。
-
-### 共通promptへ残す不変条件
-
-A系とF系を分けても、次の品質・安全境界は共通promptの不変条件として維持する。
-
-- required outcome、permission、constraintを推測で補完しない。
-- operationごとにproducerをbindし、producerのterminal resultを待つ。
-- bind済みresultを、明示的な失効またはevidence不足なしに再び問題にしない。
-- artifact変更後はrequired validation全体を確定し、全result受領後に一度だけ成否を判断する。
-- 未検証の成果を成功、完了、採用可能として報告しない。
-
-共通部分は不変条件に限定する。経路固有の効率制御、探索範囲、review方法、validation配送方法を、別経路にも常時解釈させるglobal proseとして重ねない。
-
-### 経路別gateとspillover判定
-
-新しいcandidateは、変更対象経路のtargeted gateだけでなく、非対象経路へ追加costを移していないことを確認する。
-
-1. outcome unresolved型のqualityと停止挙動を判定する。
-2. implementation resolvable型のquality、canonical成果、choice確定前後の探索を判定する。
-3. F実装・validation型のquality、required validation、validation再入を判定する。
-4. F read-only review型と変更なしterminal型のquality、不要read、停止後再入を判定する。
-5. 変更対象外の区分でmodel step、tool call、探索範囲、再読、再試行が増えていないかspilloverを判定する。
-6. 各区分のgate通過後にだけStandard14の3 KPIを集約する。
-
-Standard14集約値は最終的な横断KPIであり、経路間のcost移動を相殺してよいという意味ではない。結果報告ではA系subtotal、F系subtotal、下位区分のcase別値を併記する。
-
-token増加は次のように扱う。
-
-- qualityが維持され、保存trace上の経路、model step、探索範囲が変わらない増加は、反復変動の可能性を残して記述する。
-- 品質回復または必要なcanonical成果の復元に伴う増加は、必要costとして理由と対象経路を分離する。
-- 新しい探索、分類、再入、再読、retryを伴う増加は、全体tokenが減っていてもspillover失敗とする。
-- 対象経路の削減を非対象経路の増加で相殺した値だけをcandidate成功の根拠にしない。
-
-### 保存済み結果から得た境界
-
-過去の主な観測は次のとおりである。比率は各resultで固定した比較単位に従い、互換条件の異なる行同士を直接比較しない。
-
-| 比較 | 観測 | 設計上の読み方 |
-| --- | --- | --- |
-| Candidate43 → Candidate50 targeted | F05 / F10 token合計`-40.08%`、A01 / A02`+15.70%`、20 run全体`-2.49%` | Fのread batchは成立したが、A02のcommand `38 → 84`、model step `48 → 54`を伴う探索拡大のため停止。全体削減はspilloverを打ち消さない |
-| Candidate43 → Candidate69 Standard14 | A系token合計`-12.39%`、F系`-24.07%`。A01中央値は増加 | model再入削減は横断効果を示したがcase別方向は一様でない。Candidate69自体はF10 quality gateで停止 |
-| Candidate69 → Candidate71 Standard14 | A01 token合計`+1.12%`だがtool call / model stepは不変。A02とF 12 caseはtoken減少 | A01増加を新しい誤経路とせず、validation closureの経路削減を採用判断材料にした |
-| Candidate98 → Candidate104 Standard14 | A01中央値`+23.63%`、A02`-25.02%`、A系token合計`-22.12%` | 一つのA caseの増加だけでA系全体を失敗としない。targeted A02 / F07 mechanismと非対象経路を分けて判定 |
-| Candidate108 → Candidate116 Standard14 | A02中央値`+19.72%`だがA系token合計`-8.47%`、F系`-9.68%` | A02増加は誤停止せずcanonical implementationを解決する必要costを含む。outcome / implementation境界は成立 |
-| Candidate116 → Candidate117 Standard14 | A系token合計`-23.16%`、F系`+19.91%`、全体`+12.80%`。A01 / A02の再入13件減に対し他caseで26件増 | A向けauthority admission分類がFへ判断costを移した。Aの局所改善をglobal predicateとして採用せず停止 |
-| Candidate116 → Candidate118 | A02 `N=20`のbind後・変更前再入は5件から0件。Standard14はtoken中央値`+7.44%`、elapsed`-14.37%`で、tokenは11 / 14 caseで増加。completed commandは11件減ったがinput token合計は`+9.67%` | terminal遷移のmechanism成立と全体cost改善を分離する。機構通過だけでは採用せず、command数へ帰属できないinput context costとKPI優先順位を別判断へ残す |
-
-この履歴から、許容されてきたのは「A系ならtoken増加してよい」という規則ではない。正しい挙動を維持し、新しい探索・再入へbindできない局所増加、または品質回復に必要なcostだけを理由付きで許容してきた。経路拡大へbindできる増加は、F側の削減やStandard14全体の削減があっても停止条件とする。
-
-数値と当時の判断の一次記録は、[`Candidate43 / Candidate50 targeted`](../evaluations/results/candidate43-candidate50-root-read-batch-targeted-n5_2026-07-21.md)、[`Candidate43 / Candidate69 Standard14`](../evaluations/results/candidate43-candidate69-model-reentry-decision-boundary-v10-standard14-n5_2026-07-22.md)、[`Candidate69 / Candidate71 Standard14`](../evaluations/results/candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)、[`Candidate98 / Candidate104 Standard14`](../evaluations/results/candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)、[`Candidate108 / Candidate116 Standard14`](../evaluations/results/candidate108-candidate116-outcome-implementation-boundary-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate117 Standard14`](../evaluations/results/candidate116-candidate117-implementation-authority-delegation-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)、[`Candidate116 / Candidate118`](../evaluations/results/candidate116-candidate118-implementation-bind-terminal-closure-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)に置く。
-
-評価では中央値だけでなく、score分布、case別token、tool call、model step、worker数、context継承方法を確認する。token差をprompt文面の長短だけへ帰属させない。
-
-### Worker選択とコスト判定
-
-Workerの起動要否は、TaskSpecが別execution identityをrequired outcomeにする場合を除き、executor methodとする。promptはWorkerの期待価値を完全なboolean predicateとして列挙しない。
-
-producer選択はoperation分解後へ後付けしない。ただし、単一operationをrootが完了できる場合まで完全なoperation graphや明示planを要求しない。この場合は実行前にrootへ直接bindする。複数operation、別execution identityのresult、またはworker固有capabilityが必要な場合だけ、scope、dependency、result consumer、producer、execution waveを展開してから実行する。
-
-producer関連入力は、required outcomeが別execution identityのresultを必要とするhard constraint、実行手段への希望、owner / risk / roleなどのmetadataへ分ける。hard constraintだけがAIのproducer選択を制約する。Worker利用の指示を含む希望とmetadataはproducer非決定情報として扱い、未制約operationはAIがroot／Workerを選ぶ。
-
-readyなroot operationとWorker operationは同じwaveで開始する。未受領Worker resultが次operationのdependencyで、ほかにreadyなroot operationがない場合だけ待つ。実行開始後は、plan前提の失効なしにproducerを再選択しない。
-
-Worker数、child token、並列／逐次実行、再割当て、rootによる再確認はdiagnosticである。これらを単独の品質またはコスト失敗条件へ昇格しない。Workerを含む実行全体を、互換条件を満たす`quality_score`、all-agent `total_tokens`、`elapsed_seconds`で判定する。
-
-candidateのコストgateは、直接baseline、compatibility key、token / elapsed tolerance、比較単位をcandidate result確認前に固定した場合だけ有効とする。未固定なら、実測値とroute診断を記録してもコスト通過または失敗を確定しない。詳細は[`Worker委譲のコスト判定と制御再設計`](delegation-cost-control-redesign.md)を正本とする。
-
-## 制御追加の原則
-
-### 1. 観測された誤経路だけを対象にする
-
-新しい制御には、保存済みtraceで再現した誤経路を一つ対応させる。将来起こりそうという理由だけで条件を追加しない。
-
-### 2. 最短の正常経路を先に固定する
-
-誤経路だけでなく、制御追加後も残す正常経路を一つ明示する。正しいresultが既に存在する場合に、追加のowner探索、再取得、再検証を要求しない。
-
-### 3. 実行前に分岐を減らす
-
-正規path、permission、必要なcontext、明示された停止条件など、実行前に選択肢を減らせる条件を優先する。成果取得後のidentity照合や多段bindingは、それが防ぐ具体的な誤採用が確認されている場合だけ使う。
-
-### 4. 一つのlabelに一つの不変条件を持たせる
-
-labelは説明を圧縮するために使う。同じlabelへowner、producer、runtime identity、result、evidence、invalidationなど複数の独立条件を接続しない。
-
-labelを読むたびに複数条件の展開が必要になる場合、そのlabelは圧縮ではなく間接参照になっている。条件の削除または直接記述を検討する。
-
-### 5. 条件の追加数ではなく、消す判断点を数える
-
-追加するpredicateごとに、どの探索分岐、再読、retry、context伝播を消すかを記録する。消す対象を示せないpredicateは追加しない。
-
-### 6. 境界制御と方法制御を混同しない
-
-境界制御は、誰が何を生成できるか、どのresultを受け取れるか、失効がどこまで伝播するかを定める。tool、読取り回数、実行順序は原則として固定しない。
-
-ただし、境界を追加しても実行経路が減らない場合は、境界の文言を重ねない。必要なのがcontext流入の遮断、terminal stateの確定、または明示的な方法制約のどれかを分離して判断する。
-
-### 7. 確定済みresultを再び問題にしない
-
-有効なproducer terminal resultが既にrequired evidenceを含む場合、後続処理はそのresultを入力として扱う。projectionや表示形式の違いだけを理由にproducer operationを再開しない。
-
-再開を許すのは、TaskSpecが追加のoperationを要求した場合、resultが明示条件で失効した場合、または必要なevidenceが欠けている場合に限る。
-
-### 8. 新規追加より置換と削除を優先する
-
-既存制御で同じ誤経路を扱っている場合は、条件を並置しない。既存predicateを狭く置換するか、不要になった記述を削除する。
-
-candidateのroot promptが短くなったこと自体を効率化としない。意味上の判断点と参照関係が減ったことを確認する。
-
-### 9. semantic auditをCandidate作成根拠にしない
-
-prompt本文だけを読んで見つけた未定義、複数解釈、論理上の非対称性は、説明上のriskとして記録できる。ただし、互換なbaselineの保存済み実行結果で対応する誤経路を観測していない限り、それだけを制御追加またはCandidate作成の根拠にしない。
-
-LLM promptは形式仕様ではない。本文上の余白、重複、既定値の未記載が、実行時には正常経路を選ぶための注意配分または裁量として働く場合がある。論理的な完全化によって新しいstate、分類、clarification条件を導入すると、未観測だった判断経路を新たに発火させる可能性がある。
-
-低頻度または確率的な誤経路を一般制御へ昇格する場合は、単発traceの事後説明だけで原因を確定しない。同じbaseline identityとcompatibility条件で再現性を確認するか、別の観測証拠によって変更対象predicateとの因果境界を固定する。
-
-### 10. 実行結果から必要な制御を逆算する
-
-制御設計では、prompt本文の完全性ではなく、baselineの実行結果を出発点にする。最初に、正常経路、誤経路、余分なmodel再入、不要なtool call、欠落したresult、誤った停止を保存済みtraceへbindする。その後で、観測した差を消す最小の制御を選ぶ。
-
-追加する制御は、モデルへ新しい意味判定を要求するのではなく、既存の選択肢またはmodel再入を一つ以上減らすものとする。例えば「non-machine judgmentが必要かを判断する」のようなmeta-predicateは、それ自体が新しい非機械的判断になる。明示input、repository authority、machine-bound resultなど、実行時に直接観測できる値へ変換できない場合はprompt predicateにしない。
-
-局所caseで得たroute改善を共通promptへ昇格する前に、非対象caseへ同じ制御の読解、探索、確認costが流入しないことを確認する。対象caseだけの改善と標準集合全体の改善を分けて評価する。
-
-### 10.1 成功動作を実行手順へ転記せず、誤経路の到達可能性を閉じる
-
-同一case、同一model-visible入力および同一permissionで成功runと失敗runが分かれた場合、成功runのtool順、判断順、説明順またはmodel stepを正常手順としてpromptへ転記しない。成功runは「その追加動作なしでもrequired resultが成立した」という反証であり、成功時の動作列自体が制御仕様なのではない。
-
-分析では、成功runと失敗runの最終resultだけでなく、各時点でprompt上許可されていたoperation、evidence consumer、result admissionおよびterminal dependencyを対照する。そのうえで、失敗runが取った経路が既存predicate上で禁止されていたのか、それとも別解釈として到達可能なままだったのかを区別する。
-
-失敗経路が到達可能なままであれば、成功率の高さ、成功runの自然な判断順または「通常は先に判定する」という期待を機序成立の根拠にしない。変更対象は成功動作の推奨ではなく、誤経路を開くpermission、再分類、dependencyまたはresult admissionの辺とする。変更後も同じ誤経路をprompt準拠として構成できるなら、その経路は閉じていない。
-
-経路を閉じる際は、次を一組で確認する。
-
-- 保存済み失敗runへ至るpermissionまたはdependencyの辺を特定したこと。
-- その辺を削除または狭く置換し、成功runの動作順を新しい義務にしていないこと。
-- 同じ辺が必要な別terminal result、正常なevidence取得または非対象operationまで閉じていないこと。
-- case内の成功runが残ることだけでなく、対象の失敗経路の再発件数、基準promptからの変化および結果への影響を、実行前に固定した機序gateで判定すること。再発一件を常に機序不通過とする一般則は置かず、zero-toleranceが必要な経路だけ、その理由と停止条件をCandidate作成前に固定すること。
-
-「先にAを判定し、成立しなければBを行う」のような順序指定は、TaskSpecがその順序自体をrequired methodとして固定した場合を除き、この経路閉鎖の代用にしない。順序を変えれば回避できる誤経路でも、別順序を合法にする境界が残るなら、制御すべき対象は順序ではなくその境界である。
-
-### 11. 制御を強制可能な層へ置く
-
-観測した問題ごとに、制御を置く層を先に決める。
-
-- requested outcome value、permission、required operationの未固定はTaskSpecまたはschemaで明示する。
-- repositoryから一意に解決できるpath、command、配置規則はrepository authorityへ置く。
-- モデルが観測可能な条件に基づく判断、停止、具体的なtool発行順はpromptで制御する。
-- tool result配送、output cap、atomicity、dispatch順、modelへ戻る前の処理はexecutorで強制する。
-- 正しい成果を誤って低得点にする問題はrating contractで修正する。
-
-モデルが発行時点で観測できないruntime stateや、tool adapterがresultを返す前にしか変更できない挙動をpromptへ記述しない。prompt文面で希望するだけでは強制できない制御は、このリポジトリではscope外の制約として記録して停止する。
-
-### 11.1 repository外対応を解決方法にしない
-
-このリポジトリのprompt制御研究では、repository外のexecutor、Codex CLI、tool adapter、runtime hook、外部wrapper、target runtimeの変更を、Candidateの解決策、次案、backlog、または再開条件にしない。正しい強制層がexecutorであるという分類は、外部変更を提案する権限や理由へ変換しない。
-
-repository外の挙動や過去のexecutor試験は、保存済みresultの原因を分類するread-only診断証拠としてだけ利用する。例えば、同じpromptでresult配送方法だけを変えた過去試験は、token増加がprompt判断とoutput配送のどちらに対応するかを切り分ける証拠にはできる。しかし、その観測から外部hook、wrapper、CLI改修をこのrepositoryの次候補として導かない。
-
-promptだけで強制できない問題は、無理に方法指定をpromptへ書かず、かつ外部対応へ作業を広げず、`prompt_control_not_demonstrated / candidate_not_created`として停止する。再開できるのは、保存済み互換traceからmodel-visibleな新しいprompt判断点が確認された場合、またはユーザーが評価基盤保守を別作業として明示した場合だけである。後者をprompt Candidateの系譜、採用判断、releaseへ混ぜない。
-
-### 12. 意味上の重複を行動上の冗長性と区別する
-
-同じpredicateが別labelにも書かれていることだけを理由に削除しない。LLM promptでは、実行判断を行う位置の近くにある再記述が、注意喚起または誤変換を防ぐ局所的な制約として働く場合がある。
-
-重複を削除、統合、移動する場合は、文字列または論理式の一致ではなく、削除前後の実行routeで同じ判断が維持されることを確認する。意味上の正規化は、単独ではprompt改善ではない。
-
-### 13. mechanism gateの前にbaselineを再実行しない
-
-candidate固有の狙った経路変化は、candidateの保存traceだけで先に確認する。qualityまたはmechanism gateが不通過なら、KPI比較用baselineを新規実行しない。
-
-gate通過後にbaselineが必要になった場合も、同じimmutable identityとcompatibility keyを持つ保存済みresultを先に再利用する。必要なresultが欠ける場合だけ新規slotを作る。複数prompt setの不足slotは別cycleのまま一つのglobal queueへ入れ、推定所要時間の長い順に最大24 workerまで使用する。baseline完了後にcandidateを開始する直列化は、先行resultが後続の発行条件を変える場合だけ許す。
-
-## 参照例
-
-### 有効な方向: worker context sufficiency
-
-Candidate11は、worker packetとallowed readで担当criterionを処理できる場合に`fork_turns=none`とし、不足時だけ必要最小限の履歴を継承した。
-
-workerの起動要否、worker数、担当criterionは固定せず、不要な親contextの流入だけを実行前に遮断した。F07では必要な2 workerを各runで維持し、10 spawnすべてが`fork_turns=none`となった。保存済みN=5ではC10比のF07 token中央値が`-1,009,985`で、Candidate11全体は60 / 60がscore `4`だった。
-
-この例では、短い境界の読解costより、回避した親contextの反復inputが大きかった。
-
-### 注意する方向: result / owner条件の積み重ね
-
-Candidate38からCandidate40では、result unit、producer terminal result、owner identity、evidence、invalidationの関係を追加または明確化した。
-
-Candidate38はCandidate35と同じv9 targeted N=5で成果score `4`を10 / 10満たした一方、10 run token合計は`+255,767`だった。差の99.34%はinput tokenで、90.50%はF10に集中した。
-
-Candidate40はoperationとresult projectionの境界を明確にしたが、F10のtool call、model step、token合計をCandidate38から減らさなかった。score分布は`4 / 1 = 9 / 1`だった。
-
-この観測は、論理境界を詳しくするだけでは実行経路が減らず、label間の解釈と確認を増やす場合があることを示す。次のcandidateを追加する根拠ではなく、既存制御を圧縮する入力として扱う。
-
-## Candidate作成前の検討gate
-
-新しいcandidateを作る前に、次をすべて記録する。
-
-1. 基準prompt setと、その状態での最短正常経路。
-2. 保存済みtraceで確認し、同じ失敗機序または再構成目的へbindした具体的な誤経路。semantic auditの指摘だけではこの項目を満たさない。
-3. 既存のTaskSpec、repository authority、repository stateで防げない理由と、promptが制御を置く正しい層である理由。
-4. 追加、置換または削除するpredicateと責務境界の全件集合。各発火条件は、明示input、repository authority、machine-bound resultのいずれかから直接判定できること。
-5. 各変更が消す具体的な判断点、context伝播、責務競合または到達可能な誤経路の辺と、変更同士を同じcandidateで扱う因果関係。成功runの動作列を新しい実行順序へ転記せずに、その辺を閉じること。
-6. 新たに増える判断点、label参照、例外条件。
-7. 成果品質を維持したことを判定するcaseとscore分布。
-8. 想定するtoken、tool call、model step、worker routingの変化。
-9. 期待と逆の結果になった場合、および対象の誤経路が再観測された場合に、その件数、基準頻度、重大性およびresult effectをどう判定するかを含む停止条件。zero-toleranceを採る場合は、一件で停止する理由を実行前に明示する。
-
-一項でも未定義なら、candidate bundleと評価profileを先に作らない。まず既存traceと制御graphを確認する。
-
-candidateの範囲は、一つの局所的な失敗機序、または一貫した制御構造を成立させるため分離不能な一つの再構成目的へ閉じる。局所問題を理由に無関係な責務や将来不安まで加えない。一方、責務の分割・統合・所有移動・依存関係の再配置など、構造を整合させるため複数predicateの同時変更が必要な場合は、一predicateまたは一条項へ縮退させない。変更集合を個別candidateへ分けると中間状態が不整合になる理由、保持する正常経路、各変更を消費するcaseおよび停止条件を実装前に固定する。
-
-## 現時点の検討方針
-
-> [!IMPORTANT]
-> **この節はCandidate35〜Candidate40時点の方針であり、以降の項目は当時の記述として保持する。** `C35からC40までのlabel / predicateの棚卸し`は[`prompt-control-graph-review.md`](prompt-control-graph-review.md)で実施し、そこで合意した一つのpredicateはCandidate41として実装・評価済みである。「次candidateを作成しない」も当時の停止条件であり、その後系譜はCandidate95まで進んだ（系譜は[`candidate-history.md`](candidate-history.md)）。ただしcandidateごとの評価状態は個別であり、bundleの存在は評価済みを意味しない（Candidate36は`not_evaluated`である。評価状態の正本は各candidateの独立evaluation / diagnostic result、未実施分は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列）。現在の未完了項目は[`research-backlog.md`](research-backlog.md)を参照する。上記「制御追加の原則」1〜12とCandidate作成前gateは、時点に依存しない規範として引き続き正本である。
-
-- ControlFreeRepositoryの自然な最短経路を比較基準に含める。
-- C35からC40までに追加されたlabelとpredicateを、必要性、重複、参照関係で棚卸しする。
-- 次の変更は条件追加を前提にせず、不要なresult unit制御の削除または既存terminal制御への統合を候補にする。
-- 次candidateは、上記gateを満たす一つの変更predicateが定まるまで作成しない。
-- expandedまたはcontinuous試験は、targeted試験で成果品質の維持と狙った実行経路の変化を確認してから行う。
-
-## Evidence
-
-- [Control-free repository N=5](../evaluations/results/control-free-generic-repository-expanded12-global-m24-n5_2026-07-16.md)
-- [Candidate11 worker context sufficiency N=5](../evaluations/results/candidate11-sa-context-boundary-expanded12-global-m24-n5_2026-07-16.md)
-- [ControlFreeRepository / Candidate23 operation boundary N=5](../evaluations/results/control-free-repository-candidate23-operation-boundary-expanded12-global-m24-n5_2026-07-17.md)
-- [Candidate35 / Candidate38 v9 targeted N=5](../evaluations/results/candidate35-candidate38-outcome-quality-owner-diagnostic-v9-targeted2-n5_2026-07-19.md)
-- [Candidate35 / Candidate38 token trace analysis](../evaluations/results/candidate35-candidate38-v9-targeted2-n5-token-trace-analysis_2026-07-19.md)
-- [Candidate40 targeted N=5](../evaluations/results/candidate40-operation-result-projection-boundary-v9-targeted2-n5_2026-07-19.md)
-- [Candidate69 / Candidate71 validation closure Standard14 B18](../evaluations/results/candidate69-candidate71-validation-closure-v12-standard14-continuous-n5-b18_2026-07-22.md)
-- [Candidate71 / Candidate74 typed execution state machine Standard14 N=5](../evaluations/results/candidate71-candidate74-typed-execution-state-machine-v12-standard14-n5_2026-07-23.md)
-- [Candidate71 / Candidate79 ordered validation wave F04 N=5](../evaluations/results/candidate71-candidate79-ordered-validation-wave-v13-medium-f04-n5_2026-07-26.md)
-- [Candidate71 / Candidate81 validation wrapper precedence Standard14 N=5](../evaluations/results/candidate71-candidate81-validation-wrapper-precedence-v13-medium-standard14-n5_2026-07-26.md)
-- [Candidate81 / Candidate95 required judgment owner boundary Standard14 B20](../evaluations/results/candidate81-candidate95-required-judgment-owner-boundary-v14-medium-standard14-continuous-n5-b20-cli0146_2026-07-30.md)
+| C125–C142 | 証拠が十分かどうかは取得量ではなく、判断に必要な事実を確認できたかで決める。変更に失敗しても、未達の必要結果は維持する | 証拠の有無、結果の達成状態、変更の組み立て、復旧処理を一つの全体条件へまとめない。下流の条件を強くするだけでは、部分変更が誤停止に変わる |
+| C143–C147 | 必要な結果全体を上流で一つの実装方針へ結び付ける。使い手のいない証拠取得を禁止し、結果の停止効果を影響する操作だけへ限定する。C147はStandard14 N=100で1,400 / 1,400件がScore 4だった | 品質やKPIが良くても、追加した制御の機序が成立しなかったC146は停止した。失敗したCandidateへ条件を足し続けず、最後に機序が成立したCandidateへ戻る |
+| C148–C163 | 利用者が求める結果と実装方法の分離、変更前調査の限定、実行者と結果の対応、検証実行票は、個別に行動差を確認してから統合できる。C163はStandard14 N=5で70 / 70件がScore 4だった | 読みやすい一般論を一括して追加しない。C148とC156はコストが改善または同等でも、A01を5 / 5件失敗した。個別に効果を確認していない文を統合しない |
+| C164–C176 | レビューの要否、専用の実行者、参照禁止の入力、結果の採用条件、3種類の終了結果を、通常の実装処理と分ける。具体的な反例が一件見つかれば、その判定はそこで確定できる | 明示された規範がない差を、一般知識だけで反例にしない。N=5の通過だけでは、低頻度のcanary混入、無関係な情報不足の優先、結果の汚染を防げたとはいえない。C173 N=50は446 / 450件、C175 N=50は447 / 450件がScore 4で停止した |
+| C177–C193 | 情報不足、失敗、先行結果の影響は、その結果によって変わる判断と操作だけへ限定する。対象ケースでは、レビューの証明責任や結果の採用条件を局所化する機序が成立した。C187のTC-TPO04 N=20全件成功は、そのケースに限った証拠として保持する | レビューの外側にある操作、観測、変更、終了を、責務名だけで分割しない。限定ケースの成功をADR9やStandard14へ一般化しない。C191–C193は、C147が実現していた相互に独立した呼び出しの同時発行を維持できず、品質改善と機序成立を両立できなかった |
+| C194–C203 | C199は、レビュー内部の責務を分けてもmodel stepを増やさず、44 / 45件をScore 4まで回復した。C200は、パケットへ投影済みの元資料を再読する経路を0件にした。C202とC203は45 / 45件がScore 4だった | ticket、ledger、machine receipt、最小操作集合、「先にcertificateを判定する」という指示は、操作の許可そのものを制限しなければ制御にならない。C200は必要なレビュー担当まで遮断した。C202とC203は品質を満たしたが、不要な読み取りと不要なレビュー担当が残り、機序は成立しなかった |
+| C204–C206 | 一度採用した証拠を、値が変わるまで有効としたC206では、rootによる本文の再取得が7件から0件になった | C147の機能を責務名で言い換えても、相互に独立した処理の同時発行は回復しなかった。C204とC205は品質を通過したが機序を通過しなかった。C206もStandard14全体で優位なコスト改善を示せなかった |
+| C207–C213 | 結果の種類ごとに必要な証拠と、その証拠を読む実行者を分けると、C207で12 / 20件あった反例発見後の読み取りは、C208 N=5で1件まで減った。パケットの作成元を記録すると、同じ資料を別名で読み直す範囲を狭められる | 状態名、範囲名、処理区分、certificateをモデルに選ばせるだけでは、読み取り権限は閉じない。C208 N=50は449 / 450件がScore 4だったが、23 / 450件で機序が成立しなかった。C209–C213も、必要な読み取りの欠落と不要な読み取りの両方を解消できなかった |
+| C214–C220 | C214は、パケット作成元の再読とrootの先読みを0件にした。C216は、パケットと重複する範囲の読み取りを0件に保ちながら、必要で重複しない範囲の読み取りを残した。C220は、レビュー不要時のレビュー担当起動を9件から1件へ減らした | C214は元資料全体を遮断したため、必要な範囲まで失った。C215とC216は「必要な場合」という判断で読み取り権限を再び開いた。C217は、モデルから見える入力と、パケットへ合法的に渡せる入力を混同した。C218–C220のownership、ticket、observable outputは、元資料全体を読む権限を閉じなかった |
+
+成功したCandidateは、後続Candidateが全文を引き継ぐ親として扱わない。そのCandidateが実証した局所的な境界の証拠として使う。失敗したCandidateも、修正条件を足すための親にはしない。再び開いてはいけない許可、必要な処理まで止めた過剰遮断、情報の受け渡し経路の矛盾、モデル任せで強制できなかった分類を示す反例として使う。
+
+## Candidateを作成する前の確認事項
+
+新しいCandidateを作る前に、次の内容をすべて記録する。
+
+1. 比較の基準にするプロンプト集合と、その状態で正常に完了する最短経路。
+2. 保存済みtraceで実際に確認した問題経路と、その結果が後続処理へ与えた影響。文面だけを読んだ指摘では代用しない。
+3. 問題経路を許している記述または依存関係と、TaskSpec、リポジトリ上の正本、リポジトリの現在状態だけでは防げない理由。
+4. 追加、変更、削除する条件と責任範囲の全件。各条件は、明示された入力、リポジトリ上の正本、機械的に対応付けられた結果から直接判定できる必要がある。
+5. 各変更によって実行できなくなる具体的な問題経路。モデルが判断順を変えても、同じ問題操作を実行できないこと。
+6. 維持する正常経路。必要な情報を誰が持ち、どの経路で渡し、誰がどこまで読めるのか。
+7. 新しく増える判断、label参照、例外条件と、変更対象外の経路への影響。
+8. 品質、機序、KPI、安定性を別々に判定する評価ケース、比較単位、比較条件。
+9. 予想と逆の結果、問題経路の再発、正常経路の欠落が起きた場合の停止条件。一件で停止する場合は、その理由を実行前に明示する。
+
+一項でも決まっていなければ、Candidateのbundle、profile、評価枠を作成しない。一つのCandidateでは、一つの局所的な失敗機序、または分離できない一つの再構成目的だけを扱う。失敗したCandidateへ修正条件を追加し続けず、最後に機序が成立したCandidateへ戻って、差分を必要最小限にする。
+
+## 現在の方針
+
+レビュー制御はC147を直接の基盤とし、C214で実現した「元資料の再読」と「rootの先読み」の禁止を維持する。C215からC220までで試した、必要性、operand、ownership、ticket、work item、observable outputをモデルに分類させる方法は、解決策として引き継がない。
+
+次のCandidate作成へ進めるのは、C214で品質を満たせなかった4件について、必要な情報の取得者、限定した受け渡し経路、実行者ごとの読み取り権限、受け取れる出力を、実行前に確定できる場合だけである。確定できない案は棄却し、条件付きで元資料の読み取り権限を戻すCandidateは作成しない。その場合も問題の検討は続け、情報の所有と受け渡しの構造を分解し直して別案を作る。
+
+## 主要な一次参照
+
+- [Candidate43 / Candidate50 targeted](../evaluations/results/candidate43-candidate50-root-read-batch-targeted-n5_2026-07-21.md)
+- [Candidate69 / Candidate71 validation closure](../evaluations/results/candidate69-candidate71-validation-closure-v10-standard14-n5_2026-07-22.md)
+- [Candidate98 / Candidate104 evidence admission](../evaluations/results/candidate98-candidate104-staged-evidence-admission-v14-medium-standard14-n5-cli0146_2026-07-30.md)
+- [Candidate116 / Candidate118 implementation bind terminal closure](../evaluations/results/candidate116-candidate118-implementation-bind-terminal-closure-v14-medium-standard14-atomic-reuse-n5-cli0146_2026-07-31.md)
+- [Candidate125からCandidate147までのprompt制御知見](candidate125-candidate147-control-findings-synthesis.md)
+- [Candidate147 Standard14 N=100](../evaluations/results/candidate147-result-effect-scope-v14-medium-standard14-atomic-reuse-n100-cli0146_2026-08-02.md)
+- [Candidate163 Standard14 N=5](../evaluations/results/candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md)
+- [Candidate173 ADR9 r2 N=50](../evaluations/results/candidate173-concrete-counterexample-adjudication-adr9-r2-n50_2026-08-10.md)
+- [Candidate175 ADR9 r2 N=50](../evaluations/results/candidate175-review-operation-admission-closure-adr9-r2-n50_2026-08-14.md)
+- [Candidate187 TC-TPO04 N=20](../evaluations/results/candidate187-review-admission-proof-obligation-tpo04-n20_2026-08-12.md)
+- [Candidate191 ADR9 r2 N=5](../evaluations/results/candidate191-explicit-review-operation-applicability-adr9-r2-n5_2026-08-12.md)
+- [Candidate200 ADR9 r2 N=5](../evaluations/results/candidate200-projected-review-read-closure-adr9-r2-n5_2026-08-13.md)
+- [Candidate202 ADR9 r2 N=5](../evaluations/results/candidate202-review-admission-routing-receipt-adr9-r2-n5_2026-08-13.md)
+- [Candidate204からCandidate220までの系譜](../prompts/candidates/README.md)
+- [Candidate208 ADR9 r2 N=50](../evaluations/results/candidate208-result-kind-evidence-domain-adr9-r2-n50_2026-08-13.md)
+- [Candidate214 ADR9 r2 N=5](../evaluations/results/candidate214-packet-source-container-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate216 ADR9 r2 N=5](../evaluations/results/candidate216-packet-construction-projection-adr9-r2-n5_2026-08-14.md)
+- [Candidate217 ADR9 r2 N=5](../evaluations/results/candidate217-review-proposition-operand-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate220 ADR9 r2 N=5](../evaluations/results/candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md)

@@ -6,7 +6,7 @@
 |---|---|---|
 | **正本（canonical）** | 他文書が参照authorityとして引く契約・原則 | 統合・要約せず維持。正本指定は各領域の`AGENTS.md`（下表参照） |
 | **現在地・研究全体像** | 研究の目的、系譜、横断知見、未完了項目、長期方向 | 現在地点を把握する最初の起点 |
-| **現行frontier** | 現在進行中の研究軸と、その直近の設計・診断 | 因果系列ごとに追い、完了済み成果と混ぜない |
+| **現行frontier** | 現在進行中の研究軸と、その直近の設計・診断 | 因果系列ごとに追い、完了済み成果と混ぜない。設計案の棄却やCandidate未作成だけでは完了扱いにしない |
 | **研究成果・統合知見** | 固定版の技術報告、総説、横断分析、統合知見 | 現在有効な研究成果として読む。数値・状態は各文書が示す一次アーティファクトを正本とする |
 | **実務者向け解説** | 研究成果を実務へ翻訳した読み物 | 研究アーティファクトの代替ではなく、実務から理解する入口として扱う |
 | **評価・運用基盤** | 評価インフラ、実行環境、運用仕様 | 研究内容そのものではなく、測定・運用を成立させる基盤として扱う |
@@ -49,7 +49,7 @@
 
 | 文書 | 役割 |
 |---|---|
-| [`candidate214-route-closure-recontrol-direction.md`](candidate214-route-closure-recontrol-direction.md) | Candidate214で成立した誤経路の閉鎖を最優先で保持し、過剰遮断は条件付き誘導で緩めず、必要値のowner、合法なcarrier、read permissionおよびobservable output境界の実行前固定だけで解く現行frontier |
+| [`candidate214-route-closure-recontrol-direction.md`](candidate214-route-closure-recontrol-direction.md) | Candidate214で成立した誤経路の閉鎖を最優先で保持する現行frontier。条件付き誘導へ戻す案は棄却するが、問題の検討は終了しない。必要値のowner、合法なcarrier、read permissionおよびobservable output境界を分解し直し、経路閉鎖を維持できる別の構造を設計する |
 | [`c147-functional-decomposition-reanalysis.md`](c147-functional-decomposition-reanalysis.md) | C147全13条項を文単位の判定・選択・発行・収集・反映・完了機能へ分解し、旧M1/M2の完了撤回、C147 15件とC205 15件の強いイベント順序差、次Candidate前の閉包条件を固定した現行分析 |
 | [`c147-control-group-overlap-optimality-audit.md`](c147-control-group-overlap-optimality-audit.md) | C147の13条項を現在のまとまりのまま、制御対象、内部closure、境界重複、成立経緯、証拠状態およびStandard14で未評価の最適化仮説へ分類した現行監査 |
 | [`c147-f06-authority-route-causal-audit.md`](c147-f06-authority-route-causal-audit.md) | F06 N=100の旧authority lookup 21件をpath-local instruction 17件、root-only 2件、discovery-only 2件へ分解し、必要readとlocator最適化候補を分離した原因監査 |
@@ -157,6 +157,12 @@
 | [`candidate220-review-observable-output-closure-adr9-r2-n5-evaluation-design.md`](candidate220-review-observable-output-closure-adr9-r2-n5-evaluation-design.md) | Candidate220の初回試験をADR9 r2全9ケースN=5へ限定し、root observable result 0件、不要reviewer 0件、必要reviewer observation、paired-only routeおよび品質・機序gateを事前固定した評価設計 |
 | [`candidate220-review-observable-output-closure-adr9-r2-n5-execution-preparation-audit.md`](candidate220-review-observable-output-closure-adr9-r2-n5-execution-preparation-audit.md) | Candidate210保存resultとCandidate147保存Layer 1へbindし、Candidate220不足45件、M=24、互換条件一致、preflight readyおよび発行0件を固定した実行準備監査 |
 | [`candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md`](../evaluations/results/candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md) | 45 / 45 valid、Score 4 / 1 = 41 / 4、不要reviewer 1件への改善、root mixed-owner output 20 / 20残存と、失敗routeを合法にする権限辺の次期監査を記録したCandidate220 ADR9結果 |
+| [`candidate221-review-source-authority-closure-design.md`](candidate221-review-source-authority-closure-design.md) | C214で閉じたrouteを保持し、root packet constructionとreviewer direct observationのsource authorityをTaskSpec-declared structural targetへ分離するCandidate221作成前設計 |
+| [`candidate221-review-source-authority-closure-direction-audit.md`](candidate221-review-source-authority-closure-direction-audit.md) | ADR9 r2全9ケースのpacket permission、finite manifest、exact observation targetおよびroot substitution禁止から必要carrierを固定した方向監査 |
+| [`candidate221-review-source-authority-closure-implementation-audit.md`](candidate221-review-source-authority-closure-implementation-audit.md) | Candidate147直接base、root `AGENTS.md`だけの変更、非継承境界および静的検証状態を記録する実装監査 |
+| [`candidate221-review-source-authority-closure-adr9-r2-n5-evaluation-design.md`](candidate221-review-source-authority-closure-adr9-r2-n5-evaluation-design.md) | Candidate221の初回試験をADR9 r2全9ケースN=5へ限定し、品質、producer別source authority、必要direct observationおよび停止条件を事前固定した評価設計 |
+| [`candidate221-review-source-authority-closure-adr9-r2-n5-execution-preparation-audit.md`](candidate221-review-source-authority-closure-adr9-r2-n5-execution-preparation-audit.md) | Candidate210保存resultとCandidate147保存Layer 1へbindし、Candidate221不足45件、M=24、互換条件一致、preflight readyおよび発行0件を固定した実行準備監査 |
+| [`candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md`](../evaluations/results/candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md) | 45 / 45 valid、Score 4 / 1 = 29 / 16、root reviewer-owned prereadとmixed-owner admissionが20 / 20で再発し、C214の閉鎖を保持できなかったCandidate221 ADR9停止結果 |
 | [`review-control-reconstruction-milestone-plan.md`](review-control-reconstruction-milestone-plan.md) | C147の逐語維持や既存Candidate再現をゴールにせず、過去結果の因果分析、制御構造再設計、方向レビュー、ADR9互換試験、高リスク拡張、Standard14、成立後の複雑性評価、採用判断までを分離した現行マイルストーン計画 |
 | [`review-control-reconstruction-causal-analysis.md`](review-control-reconstruction-causal-analysis.md) | ADR9 r2の9ケースをterminal別証明責務へ分類し、C147〜C193の狙い・実結果・反復原因、C193の部分効果、品質失敗2件、C147の13条項の確定・保留境界を扱う再開M1成果物 |
 | [`candidate194-c147-direct-review-control-reconstruction-preimplementation-design.md`](candidate194-c147-direct-review-control-reconstruction-preimplementation-design.md) | C147を直接基盤としてreview制御を再構成するCandidate194作成前設計。実試験の経路、24責任、二段階評価、停止条件を固定する |
