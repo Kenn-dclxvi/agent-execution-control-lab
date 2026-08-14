@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`baseline-current-r2-adr9-r2-medium-m24-n5-cli0146-r1.json`](../baseline-current-r2-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`baseline-current-r2-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../baseline-current-r2-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`baseline-current-r2-v13-standard14-global-m24-n5-r1.json`](../baseline-current-r2-v13-standard14-global-m24-n5-r1.json)
 - [`baseline-current-r2-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../baseline-current-r2-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json)
