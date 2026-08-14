@@ -50,6 +50,7 @@
 | 文書 | 役割 |
 |---|---|
 | [`candidate214-route-closure-recontrol-direction.md`](candidate214-route-closure-recontrol-direction.md) | Candidate214で成立した誤経路の閉鎖を最優先で保持する現行frontier。条件付き誘導へ戻す案は棄却するが、問題の検討は終了しない。必要値のowner、合法なcarrier、read permissionおよびobservable output境界を分解し直し、経路閉鎖を維持できる別の構造を設計する |
+| [`candidate221-source-authority-closure-causal-analysis.md`](candidate221-source-authority-closure-causal-analysis.md) | Candidate221でroot reviewer-owned prereadとmixed-owner admissionが20 / 20で再発した原因を、target帰属のmodel-side分類とroot whole-source permissionの残存へbindし、C214閉鎖を維持する次設計前のauthority・carrier・observable output条件を固定した現行分析 |
 | [`c147-functional-decomposition-reanalysis.md`](c147-functional-decomposition-reanalysis.md) | C147全13条項を文単位の判定・選択・発行・収集・反映・完了機能へ分解し、旧M1/M2の完了撤回、C147 15件とC205 15件の強いイベント順序差、次Candidate前の閉包条件を固定した現行分析 |
 | [`c147-control-group-overlap-optimality-audit.md`](c147-control-group-overlap-optimality-audit.md) | C147の13条項を現在のまとまりのまま、制御対象、内部closure、境界重複、成立経緯、証拠状態およびStandard14で未評価の最適化仮説へ分類した現行監査 |
 | [`c147-f06-authority-route-causal-audit.md`](c147-f06-authority-route-causal-audit.md) | F06 N=100の旧authority lookup 21件をpath-local instruction 17件、root-only 2件、discovery-only 2件へ分解し、必要readとlocator最適化候補を分離した原因監査 |

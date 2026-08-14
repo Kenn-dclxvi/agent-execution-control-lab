@@ -83,3 +83,4 @@ ADR9 r2 N=5の実行では、この分離は成立しなかった。ADR03からA
 - [Candidate217 ADR9 r2 N=5結果](../evaluations/results/candidate217-review-proposition-operand-closure-adr9-r2-n5_2026-08-14.md)
 - [Candidate220 ADR9 r2 N=5結果](../evaluations/results/candidate220-review-observable-output-closure-adr9-r2-n5_2026-08-14.md)
 - [Candidate221 ADR9 r2 N=5結果](../evaluations/results/candidate221-review-source-authority-closure-adr9-r2-n5_2026-08-14.md)
+- [Candidate221 source authority closure原因分析](candidate221-source-authority-closure-causal-analysis.md)
