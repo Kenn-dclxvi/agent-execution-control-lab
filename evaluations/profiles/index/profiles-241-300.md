@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
 - [`candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
 - [`candidate29-owner-role-identity-binding-owner-producer-v2-targeted5-global-m24-n5-r1.json`](../candidate29-owner-role-identity-binding-owner-producer-v2-targeted5-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate51-root-operation-completion-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
 - [`candidate52-root-independence-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate52-root-independence-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate53-purpose-separated-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate53-purpose-separated-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)

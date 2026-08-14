@@ -13,6 +13,8 @@
 
 ## Prompt制御研究の設計原則
 
+- **最優先は、意図しない動作を正しい条件判断へ誘導することではなく、その動作へ至るpermissionまたはdependencyの辺を閉じることとする。** 誤経路をprompt準拠のまま実行でき、モデルが条件を正しく判定した場合だけ回避できる制御は、品質KPIや成功率が高くても機序成立としない。誤経路の実行不能性を確認する前に、条件、順序、自己判定、ticket、ownership labelまたは処理手順を追加しない。
+- review制御の現行再設計はCandidate214で実証した経路閉鎖を出発点とし、同Candidateの過剰遮断だけを、実行前に一意なowner、carrier、read permissionおよびobservable output境界で解消する。Candidate215からCandidate220までの条件付き判断、必要性の自己分類、ticketまたはownership宣言は、誤経路を閉じなかった反例として扱い、次Candidateの親または追加条件の材料にしない。必要な正常経路の合法なcarrierをpromptで固定できない場合は、閉鎖を弱めず`candidate_not_created`で停止する。現行方針の内訳は`docs/candidate214-route-closure-recontrol-direction.md`を参照する。
 - 保存済みresultまたはtraceからprompt制御上の原因を分析し、その分析から制御文、Candidate、再構成または次案を導く作業では、着手前に`docs/prompt-control-design-principles.md`の全文を読む。文書の所在を知っていること、過去Candidateからリンクされていること、または一部の原則を記憶していることを読了の代わりにしない。
 - 成功runと失敗runの比較から次の制御を検討する場合は、同文書の「成功動作を実行手順へ転記せず、誤経路の到達可能性を閉じる」を分析から提案へ移る前に適用する。成功時のtool順、判断順またはmodel stepを、そのまま新しい実行義務へ変換しない。
 - Candidate bundleまたはCandidate本文を作成する場合は、同文書の`Candidate作成前の検討gate`を満たした設計記録を先に固定する。評価resultの記録、品質採点またはKPI集計だけを行い、次の制御案を導かない作業には、この追加読了を必須化しない。

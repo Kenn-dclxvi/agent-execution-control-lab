@@ -1,0 +1,63 @@
+{
+  "schema_version": "the-caption-prompt.candidate175-candidate208-adr9-r2-n50-mechanism-comparison/v1",
+  "comparison_kind": "same_adr9_r2_n50_current_c208_mechanism_definitions",
+  "compatibility_key": "59e262605082e0c4900a81aa58e9789bc67283053b927d8aec13bd7cf18d7a8e",
+  "coverage": {
+    "case_count": 9,
+    "samples_per_case": 50,
+    "run_count_per_candidate": 450,
+    "review_required_run_count_per_candidate": 300
+  },
+  "candidate175": {
+    "quality_score_4_count": 447,
+    "mechanism_failure_run_count": 138,
+    "reviewer_cardinality_match_count": 449,
+    "review_result_admission_match_count": 449,
+    "review_result_effect_match_count": 447,
+    "routing_complete_count": 299,
+    "root_reviewer_direct_preread_free_count": 298,
+    "reviewer_exact_read_set_match_count": 191,
+    "reviewer_closed_source_read_count": 139,
+    "reviewer_mixed_read_count": 66,
+    "reviewer_outside_read_count": 73,
+    "counterexample_result_count": 199,
+    "counterexample_certificate_priority_match_count": 101,
+    "counterexample_certificate_priority_violation_count": 98
+  },
+  "candidate208": {
+    "quality_score_4_count": 449,
+    "mechanism_failure_run_count": 23,
+    "reviewer_cardinality_match_count": 450,
+    "review_result_admission_match_count": 448,
+    "review_result_effect_match_count": 449,
+    "routing_complete_count": 300,
+    "root_reviewer_direct_preread_free_count": 297,
+    "reviewer_exact_read_set_match_count": 282,
+    "reviewer_closed_source_read_count": 20,
+    "reviewer_mixed_read_count": 8,
+    "reviewer_outside_read_count": 12,
+    "counterexample_result_count": 199,
+    "counterexample_certificate_priority_match_count": 189,
+    "counterexample_certificate_priority_violation_count": 10
+  },
+  "candidate208_minus_candidate175": {
+    "quality_score_4_count": 2,
+    "mechanism_failure_run_count": -115,
+    "reviewer_cardinality_match_count": 1,
+    "review_result_admission_match_count": -1,
+    "review_result_effect_match_count": 2,
+    "routing_complete_count": 1,
+    "root_reviewer_direct_preread_free_count": -1,
+    "reviewer_exact_read_set_match_count": 91,
+    "reviewer_closed_source_read_count": -119,
+    "reviewer_mixed_read_count": -58,
+    "reviewer_outside_read_count": -61,
+    "counterexample_certificate_priority_match_count": 88,
+    "counterexample_certificate_priority_violation_count": -88
+  },
+  "interpretation_boundary": "The Candidate208 mechanism predicates are applied retrospectively to Candidate175 to compare observable routes. This does not rewrite Candidate175's original N=5 gate or establish that every C175 direct read was forbidden by its historical candidate contract. Counts overlap and must not be summed as independent failures.",
+  "artifacts": {
+    "candidate175_mechanism_audit": "candidate175-review-operation-admission-closure-adr9-r2-n50-mechanism-audit-r1.json",
+    "candidate208_summary_audit": "candidate208-result-kind-evidence-domain-adr9-r2-n50-summary-audit-r1.json"
+  }
+}

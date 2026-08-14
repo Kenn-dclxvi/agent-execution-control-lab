@@ -43,6 +43,7 @@
 - [`candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n50-cli0146-r1.json`](../candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n50-cli0146-r1.json)
 - [`candidate173-review-terminal-proof-obligation-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate173-review-terminal-proof-obligation-problem-qualification-r1-medium-m24-n5-cli0146.json)
 - [`candidate175-review-operation-admission-closure-adr9-r2-medium-m24-n5-cli0146.json`](../candidate175-review-operation-admission-closure-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate175-review-operation-admission-closure-adr9-r2-medium-m24-n50-cli0146-r1.json`](../candidate175-review-operation-admission-closure-adr9-r2-medium-m24-n50-cli0146-r1.json)
 - [`candidate175-review-operation-admission-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate175-review-operation-admission-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate176-decision-premise-counterexample-adr9-r2-adr05-adr07-medium-m24-n20-cli0146.json`](../candidate176-decision-premise-counterexample-adr9-r2-adr05-adr07-medium-m24-n20-cli0146.json)
 - [`candidate176-decision-premise-counterexample-adr9-r2-adr05-adr07-medium-m24-n50-cli0146.json`](../candidate176-decision-premise-counterexample-adr9-r2-adr05-adr07-medium-m24-n50-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate183-mutation-review-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate183-mutation-review-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate184-judgement-result-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate184-judgement-result-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json)

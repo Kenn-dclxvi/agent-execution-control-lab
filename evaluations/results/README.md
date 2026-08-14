@@ -69,6 +69,10 @@ Candidate173の[ADR9 r2 N=50](candidate173-concrete-counterexample-adjudication-
 
 Candidate175の[ADR9 r2 / Standard14 N=5](candidate175-review-operation-admission-closure-adr9-standard14-n5_2026-08-10.md)は、review operation仕様、専用producer binding、allow-list semantic projectionを一軸で追加した。ADR9は45 / 45、Standard14は70 / 70がScore `4`で、ADR06の禁止canary配送0 / 5、Standard14の独立reviewer起動0 / 70を確認した。Candidate173比の中央値はADR9でtoken`-2.05%`・elapsed`+3.14%`、Standard14でtoken`+6.48%`・elapsed`-5.08%`だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
 
+Candidate175の[ADR9 r2累積N=50](candidate175-review-operation-admission-closure-adr9-r2-n50_2026-08-14.md)は、保存済みN=5を再利用して不足405件だけを追加した。累積450件はScore `4 / 1 = 447 / 3`で、ADR03に2件、ADR04に1件の誤`unavailable`を確認し、`quality_failed / stopped`とした。token中央値は1,136,198、elapsed中央値は704.785秒で、採用、release、projectionは未判断・未実施である。
+
+[Candidate175 / Candidate208 ADR9 r2累積N=50機序比較](candidate175-candidate208-adr9-r2-n50-mechanism-comparison_2026-08-14.md)は、Candidate208で固定した機序定義をCandidate175へ遡及適用した。機序不通過はC175の138 / 450に対してC208は23 / 450、反例成立後readは98 / 199対10 / 199、closed-source readは139件対20件だった。両Candidateとも機序不通過であり、C175の当時のgateを履歴上書きしない。
+
 Candidate176の[ADR9 r2 / Standard14 N=5](candidate176-decision-premise-counterexample-adr9-standard14-n5_2026-08-10.md)は、固定一般設計の明示判断前提を許可済み具体的事実が直接反証する経路を追加した。ADR05は5 / 5で`blocked`、reviewer 5 / 5、artifact変更0 / 5となり、ADR9全体は45 / 45、Standard14は70 / 70がScore `4`だった。Candidate175比の中央値はADR9でtoken`+9.81%`・elapsed`+18.01%`、Standard14でtoken`-2.51%`・elapsed`+19.06%`だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
 
 Candidate176の[失敗観測4ケース targeted N=20](candidate176-decision-premise-counterexample-targeted-n20_2026-08-10.md)は、既存N=5を再利用し、C173で誤経路を観測したADR05・ADR06・ADR07とStandard14 F02だけへ各15件を追加した。4ケース合計80 / 80がScore `4`で、ADR05・ADR06は`blocked`、ADR07は`completion_ready`、ADR06のcanary配送0、F02のサブエージェント起動0だった。品質・機序gateは通過したが、採用、release、projectionは未判断・未実施である。
