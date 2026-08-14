@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate187-review-admission-proof-obligation-adr9-r2-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json)
 - [`candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
 - [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
-- [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)

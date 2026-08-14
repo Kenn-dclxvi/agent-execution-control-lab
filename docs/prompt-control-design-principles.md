@@ -18,6 +18,20 @@
 
 追加条件が誤経路を減らす以上に、label間の関係、例外、確認点を増やす場合、その制御は追加しない。既存条件の置換、統合、削除を先に検討する。
 
+## 最優先gate: 行動誘導ではなく経路を閉じる
+
+意図しない動作に対して、モデルが正しい条件を判定し、正しい順序、owner、sourceまたはresultを選ぶよう促すことを制御としない。同じmodel-visible inputで条件判定を変えれば失敗経路をprompt準拠のまま実行できる場合、その経路は閉じていない。成功率、Score 4件数、tokenまたは経過時間が良くても、機序成立としない。
+
+新しいCandidateは、対象の失敗経路に対して次を先に示す。
+
+1. 失敗operationを合法にしている具体的なpermissionまたはdependencyの辺。
+2. その辺を削除または狭く置換した後は、モデルの判断、順序または自己申告が変わっても同じ失敗operationを発行できないこと。
+3. 正常terminalに必要な入力のowner、carrier、read permissionとobservable output範囲が実行前に一意であり、失敗経路の再開なしに必要値が到達すること。
+
+過剰遮断を解消するときも、「必要な場合だけ読む」「先に判定してから読む」「当該ownerだけが消費する」などの条件付き行動指示でpermissionを開き直さない。必要値の合法なcarrierをTaskSpec、schema、repository authorityまたはpromptのmodel-visible境界で実行前に一意化できなければ、制御を弱めず`prompt_control_not_demonstrated / candidate_not_created`で停止する。
+
+review制御の現行適用では、Candidate214で実証したpacket投影元sourceの再readとroot先読みの経路閉鎖を保持対象とする。同Candidateの過剰遮断は、経路を条件付きで再開せず、必要値の合法なcarrierとobservable output permissionを先に固定することだけで解消する。詳細は[`Candidate214経路閉鎖の再制御方針`](candidate214-route-closure-recontrol-direction.md)を現行frontierとする。
+
 ## 基準とする基本挙動
 
 最初の基準は、root `AGENTS.md`を0-byteとし、path-scoped repository instructionを保持した`the-caption-3ce91a4-control-free-repository-r1`とする。
