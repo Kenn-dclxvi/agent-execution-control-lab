@@ -1,0 +1,338 @@
+{
+  "case_results": [
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "elapsed_seconds": 107.25663433299633,
+      "iteration": 1,
+      "quality_score": 4,
+      "run_id": "5157b27201d141c18e39b84a76d9da7c",
+      "total_tokens": 268665
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "elapsed_seconds": 106.78880733301048,
+      "iteration": 2,
+      "quality_score": 4,
+      "run_id": "6abca8eb9ab84009a62ff16be9bdc048",
+      "total_tokens": 207120
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "elapsed_seconds": 101.77152708300855,
+      "iteration": 3,
+      "quality_score": 4,
+      "run_id": "7be4aed2ce254ddc970eb976319f6fb9",
+      "total_tokens": 227508
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "elapsed_seconds": 92.4832632500038,
+      "iteration": 4,
+      "quality_score": 4,
+      "run_id": "833f9df89b6a4e73969602c0382ca06f",
+      "total_tokens": 219027
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "elapsed_seconds": 92.47170170798199,
+      "iteration": 5,
+      "quality_score": 4,
+      "run_id": "c15f53f803df44c5983aab9ac0a8d3bf",
+      "total_tokens": 171172
+    }
+  ],
+  "compatibility": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.146.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted"
+    },
+    "coverage": {
+      "case_ids": [
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND"
+      ],
+      "iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "evaluation_set": {
+      "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+      "revision": "r1",
+      "set_id": "the-caption-standard14-r1"
+    },
+    "executor_parameters": {
+      "adapter_owned_teardown": {
+        "failure_policy": "exclude_as_external_failure",
+        "paths_by_case": {
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            "src/web/market_units_editor/node_modules",
+            "src/web/market_units_editor/dist"
+          ]
+        },
+        "schema_version": "the-caption-prompt.adapter-owned-teardown/v1"
+      },
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [
+          "TC-A01-LATENT-MODE-POLICY",
+          "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
+        ],
+        "required_command_groups_by_case": {
+          "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F03-ATOMIC-CONTEXT-CLEANUP": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "TC-F07-CANONICAL-V4-RUNNER": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F07-DEPENDENCY-PROVENANCE-PAIR": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ]
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "max_per_case_from_existing_f12_and_a01_a02_history",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "medium",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "fixtures": {
+      "TC-A01-LATENT-MODE-POLICY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5099f9cc77572f47fa9666fbfe09aedc6cec329247e8c5c23e906528e0e6d5ab"
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "d97bc408f4039cb02cce46d7d4427875516d2c991427d81066b1f61404f14e66"
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5fbbf3e5de7bdb51b8d9586707a63ce6e88b3fad3286f5b00fa984cf080aa52e"
+      },
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "775d76d3d31b2b0814c96dab431e9c1733545fabb287be49f397fd3d8257b443"
+      },
+      "TC-F05-CLARIFY-UNITS-MODE": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fac9ce123bd9c4b883d7b9419bbd0f86d88aa5227ba910213d5bf5f30206ebf7"
+      },
+      "TC-F07-CANONICAL-V4-RUNNER": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "35a203ed28d239b0e2b4c9e591e16978acd84283ae14f218b42ae406df6c7f80"
+      },
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fa8a4bb732ab3d54b650d9c3d404e920c54cb5dfaa74b892d77e0332bf9dc709"
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "261dfd727616c53823a4ca95512ee9f1754c7f2c9bc301e5baed634b87938bf4"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+      "contract_sha256": "9d01b7ee77bbc7b6e5bde23f57bafbcf304f4a82020da5c3150b7ffb129011b1",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+      "terminal_state_evidence_required_cases": [
+        "TC-A01-LATENT-MODE-POLICY"
+      ],
+      "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-standard14-r1",
+      "evaluation_set_revision": "r1",
+      "source": "各項目の版と実行役へ提示するTaskSpecを第1段階で固定する"
+    }
+  },
+  "compatibility_key": "b5d172c7fb388438dadd19cea0fd7b87118685232c74be49af77e4b0e965ac7b",
+  "created_at": "2026-08-14T15:55:55.018948+00:00",
+  "excluded_attempts": [],
+  "iterations": [
+    {
+      "elapsed_seconds": 107.25663433299633,
+      "iteration": 1,
+      "quality_score": 100.0,
+      "total_tokens": 268665
+    },
+    {
+      "elapsed_seconds": 106.78880733301048,
+      "iteration": 2,
+      "quality_score": 100.0,
+      "total_tokens": 207120
+    },
+    {
+      "elapsed_seconds": 101.77152708300855,
+      "iteration": 3,
+      "quality_score": 100.0,
+      "total_tokens": 227508
+    },
+    {
+      "elapsed_seconds": 92.4832632500038,
+      "iteration": 4,
+      "quality_score": 100.0,
+      "total_tokens": 219027
+    },
+    {
+      "elapsed_seconds": 92.47170170798199,
+      "iteration": 5,
+      "quality_score": 100.0,
+      "total_tokens": 171172
+    }
+  ],
+  "median": {
+    "elapsed_seconds": 101.77152708300855,
+    "quality_score": 100.0,
+    "total_tokens": 219027
+  },
+  "prompt_set_identity": {
+    "bundle_sha256": "561983cde70b6eea16fbb334692e4d00e9c058467ae21b2731a4bde68bc4eb7e",
+    "name": "the-caption-3ce91a4-compact-owner-admission-r1",
+    "revision": "r1"
+  },
+  "prompt_set_identity_sha256": "f186ea56ed0990d9bca00d5bc61dad02f5f1561070e779cc3c3cae6fd94e40ab",
+  "result_content_sha256": "bc7b6c88d5686f1371b5454d8159a888ee00ff1c64c5f658d08fac95dc555a28",
+  "result_id": "5da23b15726c4069826e65c2895ba431",
+  "schema_version": "the-caption-prompt.prompt-set-result/v2",
+  "source_selection": {
+    "selection_content_sha256": "3d610f6017dc47620768faf6ee245456aa7354c4f8461f729b094c5671860532",
+    "selection_id": "437e054074a14d378dbb36e39471bb4e"
+  },
+  "token_accounting": {
+    "revision": "v1",
+    "scope": "all_agents",
+    "source": "codex_rollout_final_usage_by_workspace"
+  }
+}

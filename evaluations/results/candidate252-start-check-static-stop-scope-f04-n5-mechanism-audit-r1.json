@@ -1,0 +1,34 @@
+{
+  "gates": {
+    "start_check_static_stop_scope_joint_issuance": {
+      "failure_count": 4,
+      "pass_count": 1,
+      "runs": [
+        {"first_issuance_included_necessary_read": false, "iteration": 1, "result": "failed", "run_id": "0de69fe30ca14287a00a41db4cbbd14b"},
+        {"first_issuance_included_necessary_read": true, "iteration": 2, "result": "passed", "run_id": "7b28ee57cebf4fe8958f172d688732df"},
+        {"first_issuance_included_necessary_read": false, "iteration": 3, "result": "failed", "run_id": "98ecec32bc324ac1a93bba7bc525a83d"},
+        {"first_issuance_included_necessary_read": false, "iteration": 4, "result": "failed", "run_id": "ecbba461eeee4276a24ff87a16c1217f"},
+        {"first_issuance_included_necessary_read": false, "iteration": 5, "result": "failed", "run_id": "f5d507a722814573bd2c053008ab5a43"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "runs": [
+        {"iteration": 1, "result": "passed", "run_id": "0de69fe30ca14287a00a41db4cbbd14b", "validation_custom_tool_calls": 1},
+        {"iteration": 2, "result": "passed", "run_id": "7b28ee57cebf4fe8958f172d688732df", "validation_custom_tool_calls": 1},
+        {"iteration": 3, "result": "passed", "run_id": "98ecec32bc324ac1a93bba7bc525a83d", "validation_custom_tool_calls": 1},
+        {"iteration": 4, "result": "passed", "run_id": "ecbba461eeee4276a24ff87a16c1217f", "validation_custom_tool_calls": 1},
+        {"iteration": 5, "result": "passed", "run_id": "f5d507a722814573bd2c053008ab5a43", "validation_custom_tool_calls": 1}
+      ],
+      "status": "passed"
+    },
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.start-check-static-stop-scope-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

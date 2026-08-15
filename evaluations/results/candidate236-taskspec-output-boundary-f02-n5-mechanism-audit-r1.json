@@ -1,0 +1,43 @@
+{
+  "diagnostics": {
+    "nonterminal_validation_wait": {
+      "count": 3,
+      "run_ids": [
+        "b158a85ceb644991895c793a15504e9c",
+        "ce61ef0bb9b340dc8327c98590a002c7",
+        "d517d215f561459db26929b4d65e40ed"
+      ]
+    },
+    "no_wait_total_tokens": [
+      136196,
+      180024
+    ],
+    "registration_duplicate": {
+      "non_authoritative_result_id": "386a952204ca48baafb9b2ff8a4844d0",
+      "reason": "The first registration succeeded before its cycle receipt could be written. The same fixed selection was registered once more after removing an empty receipt file. The cycle-bound result cfc9678fda814da3a6f8eea818cb4335 is authoritative."
+    }
+  },
+  "gates": {
+    "criterion_owner_did_not_create_producer": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "observed_value_was_not_reread_or_researched": {
+      "failure_count": 1,
+      "failed_run_ids": [
+        "78d40f56ff5e4e10beb4981d433db6b7"
+      ],
+      "pass_count": 4,
+      "status": "failed"
+    },
+    "taskspec_internal_fields_were_not_itemized_as_progress": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    }
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.taskspec-output-boundary-mechanism-audit/v1",
+  "status": "targeted_output_passed_retained_reread_failed_mechanism_failed"
+}

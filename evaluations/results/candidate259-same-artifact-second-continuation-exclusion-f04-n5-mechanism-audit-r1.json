@@ -1,0 +1,25 @@
+{
+  "gates": {
+    "start_check_same_model_step_joint_issuance": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "independent_checks_same_model_step": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "same_artifact_second_continuation_exclusion": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "runs": [
+        {"additional_prechange_same_artifact_read_count": 1, "iteration": 1, "result": "passed", "run_id": "36fb86f658b741c7b07c1eba8575ad4f"},
+        {"additional_prechange_same_artifact_read_count": 1, "iteration": 2, "result": "passed", "run_id": "bc0563bba6b84ecdb04a365032ebb5f1"},
+        {"additional_prechange_same_artifact_read_count": 1, "iteration": 3, "result": "passed", "run_id": "7acf7670917346b4a98ef67fa36fb486"},
+        {"additional_prechange_same_artifact_read_count": 0, "iteration": 4, "result": "passed", "run_id": "e3a99a4b767943a18225721f98248177"},
+        {"additional_prechange_same_artifact_read_count": 1, "iteration": 5, "result": "passed", "run_id": "1677642f0d0346399882a0a551c80ffb"}
+      ],
+      "status": "passed"
+    },
+    "required_validation_single_issuance_decision": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.same-artifact-second-continuation-exclusion-mechanism-audit/v1",
+  "status": "mechanism_passed"
+}

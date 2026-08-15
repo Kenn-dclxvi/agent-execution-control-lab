@@ -1,0 +1,40 @@
+{
+  "gates": {
+    "criterion_owner_did_not_create_producer": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {
+          "iteration": 1,
+          "producer_path": "/root/independent_contract_check",
+          "result": "failed",
+          "run_id": "184db49ae91940008a0d3130125461ea"
+        },
+        {"iteration": 2, "result": "passed", "run_id": "458c18bb7a8a43778bb29d4cb197baef"},
+        {"iteration": 3, "result": "passed", "run_id": "2d93004a964747729775602b1286d9d8"},
+        {"iteration": 4, "result": "passed", "run_id": "d9ddbc16353f43ee8f33f02879f9ea55"},
+        {"iteration": 5, "result": "passed", "run_id": "fee5b4dcd3a9404aac8cb75e5a2b80b4"}
+      ],
+      "status": "failed"
+    },
+    "same_decision_additional_investigation": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"iteration": 1, "result": "passed", "run_id": "184db49ae91940008a0d3130125461ea"},
+        {"iteration": 2, "result": "passed", "run_id": "458c18bb7a8a43778bb29d4cb197baef"},
+        {
+          "iteration": 3,
+          "result": "failed",
+          "run_id": "2d93004a964747729775602b1286d9d8"
+        },
+        {"iteration": 4, "result": "passed", "run_id": "d9ddbc16353f43ee8f33f02879f9ea55"},
+        {"iteration": 5, "result": "passed", "run_id": "fee5b4dcd3a9404aac8cb75e5a2b80b4"}
+      ],
+      "status": "diagnostic_failed"
+    }
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.compact-evidence-admission-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

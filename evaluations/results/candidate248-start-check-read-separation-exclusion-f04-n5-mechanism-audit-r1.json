@@ -1,0 +1,34 @@
+{
+  "gates": {
+    "start_check_read_separation_exclusion": {
+      "failure_count": 5,
+      "pass_count": 0,
+      "runs": [
+        {"iteration": 1, "necessary_read_separated_from_start_check": true, "result": "failed", "run_id": "58359fd20eac4e6e805745d2a258357b"},
+        {"iteration": 2, "necessary_read_separated_from_start_check": true, "result": "failed", "run_id": "6d3252d665d9474eab530b8a4d901681"},
+        {"iteration": 3, "necessary_read_separated_from_start_check": true, "result": "failed", "run_id": "c2f7623cdeb4471faae19fae1f38f60d"},
+        {"iteration": 4, "necessary_read_separated_from_start_check": true, "result": "failed", "run_id": "e66a82c8de364e47ad364a7fa48f5c9a"},
+        {"iteration": 5, "necessary_read_separated_from_start_check": true, "result": "failed", "run_id": "e85171d009f940e2b941ba60f0de1599"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"iteration": 1, "result": "passed", "run_id": "58359fd20eac4e6e805745d2a258357b", "validation_custom_tool_calls": 1},
+        {"iteration": 2, "result": "passed", "run_id": "6d3252d665d9474eab530b8a4d901681", "validation_custom_tool_calls": 1},
+        {"iteration": 3, "result": "passed", "run_id": "c2f7623cdeb4471faae19fae1f38f60d", "validation_custom_tool_calls": 1},
+        {"iteration": 4, "result": "passed", "run_id": "e66a82c8de364e47ad364a7fa48f5c9a", "validation_custom_tool_calls": 1},
+        {"iteration": 5, "result": "failed", "run_id": "e85171d009f940e2b941ba60f0de1599", "validation_custom_tool_calls": 3}
+      ],
+      "status": "failed"
+    },
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.start-check-read-separation-exclusion-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}
