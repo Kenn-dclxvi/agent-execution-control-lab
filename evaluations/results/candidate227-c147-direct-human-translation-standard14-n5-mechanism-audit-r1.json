@@ -1,0 +1,47 @@
+{
+  "gates": {
+    "a01_required_value_boundary": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "a02_result_effect_scope": {
+      "failure_count": 3,
+      "pass_count": 2,
+      "runs": [
+        {"iteration": 1, "result": "failed", "run_id": "c5b30678f08c4c5692b126bfc1054e18"},
+        {"iteration": 2, "result": "passed", "run_id": "f6c8d942f5c146008f36418f1cd7bf66"},
+        {"iteration": 3, "result": "passed", "run_id": "255a58659885489491afddb71ce07add"},
+        {"iteration": 4, "result": "failed", "run_id": "12ae657b73eb47f1aa7e0eaa562c8592"},
+        {"iteration": 5, "result": "failed", "run_id": "a48835990a224c5e9d9899203109b927"}
+      ],
+      "status": "failed"
+    },
+    "criterion_owner_did_not_create_producer": {
+      "failure_count": 3,
+      "runs": [
+        {"case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND", "iteration": 1, "run_id": "e8d621d7e12a4ae68ed4a6ed4b3d1366"},
+        {"case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND", "iteration": 3, "run_id": "5dd62d122866487490e64fb7cae6027d"},
+        {"case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP", "iteration": 1, "run_id": "51688fd1edcd4480ba5e9eeceab79c52"}
+      ],
+      "status": "failed"
+    },
+    "required_command_protocol": {
+      "failure_count": 0,
+      "pass_count": 60,
+      "status": "passed"
+    },
+    "post_validation_tool_closure": {
+      "status": "not_observed"
+    },
+    "permission_denial_boundary": {
+      "status": "not_exercised"
+    },
+    "environment_recovery_boundary": {
+      "status": "not_exercised"
+    }
+  },
+  "run_count": 70,
+  "schema_version": "the-caption-prompt.c147-direct-human-translation-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

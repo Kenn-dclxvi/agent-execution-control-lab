@@ -1,0 +1,338 @@
+{
+  "case_results": [
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "elapsed_seconds": 77.89422991703032,
+      "iteration": 1,
+      "quality_score": 4,
+      "run_id": "07cea977c4dd47489db230036572ab6c",
+      "total_tokens": 254089
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "elapsed_seconds": 90.93027937499573,
+      "iteration": 2,
+      "quality_score": 4,
+      "run_id": "3bf90b75ddbb4182aa98da43de3bb4e6",
+      "total_tokens": 196372
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "elapsed_seconds": 92.91157799999928,
+      "iteration": 3,
+      "quality_score": 4,
+      "run_id": "b02443c0f15641589b579360c7359d26",
+      "total_tokens": 382761
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "elapsed_seconds": 81.23060604097554,
+      "iteration": 4,
+      "quality_score": 4,
+      "run_id": "bbab2003a133441d9d2ff9467c40e96b",
+      "total_tokens": 235009
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "elapsed_seconds": 81.18513362499652,
+      "iteration": 5,
+      "quality_score": 4,
+      "run_id": "d3e19d4d2f314fe58db99a5200a64005",
+      "total_tokens": 300075
+    }
+  ],
+  "compatibility": {
+    "agent_environment": {
+      "agents_max_threads": 4,
+      "codex_cli": "0.146.0",
+      "memories": false,
+      "multi_agent": true,
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted"
+    },
+    "coverage": {
+      "case_ids": [
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY"
+      ],
+      "iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "evaluation_set": {
+      "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+      "revision": "r1",
+      "set_id": "the-caption-standard14-r1"
+    },
+    "executor_parameters": {
+      "adapter_owned_teardown": {
+        "failure_policy": "exclude_as_external_failure",
+        "paths_by_case": {
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            "src/web/market_units_editor/node_modules",
+            "src/web/market_units_editor/dist"
+          ]
+        },
+        "schema_version": "the-caption-prompt.adapter-owned-teardown/v1"
+      },
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [
+          "TC-A01-LATENT-MODE-POLICY",
+          "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
+        ],
+        "required_command_groups_by_case": {
+          "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F03-ATOMIC-CONTEXT-CLEANUP": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "TC-F07-CANONICAL-V4-RUNNER": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F07-DEPENDENCY-PROVENANCE-PAIR": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ]
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "duration_hint_method": "max_per_case_from_existing_f12_and_a01_a02_history",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "medium",
+      "schedule_policy": "global_queue",
+      "token_accounting": {
+        "revision": "v1",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_workspace"
+      }
+    },
+    "fixtures": {
+      "TC-A01-LATENT-MODE-POLICY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5099f9cc77572f47fa9666fbfe09aedc6cec329247e8c5c23e906528e0e6d5ab"
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "d97bc408f4039cb02cce46d7d4427875516d2c991427d81066b1f61404f14e66"
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5fbbf3e5de7bdb51b8d9586707a63ce6e88b3fad3286f5b00fa984cf080aa52e"
+      },
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "775d76d3d31b2b0814c96dab431e9c1733545fabb287be49f397fd3d8257b443"
+      },
+      "TC-F05-CLARIFY-UNITS-MODE": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fac9ce123bd9c4b883d7b9419bbd0f86d88aa5227ba910213d5bf5f30206ebf7"
+      },
+      "TC-F07-CANONICAL-V4-RUNNER": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "35a203ed28d239b0e2b4c9e591e16978acd84283ae14f218b42ae406df6c7f80"
+      },
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fa8a4bb732ab3d54b650d9c3d404e920c54cb5dfaa74b892d77e0332bf9dc709"
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "261dfd727616c53823a4ca95512ee9f1754c7f2c9bc301e5baed634b87938bf4"
+      }
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+      "contract_id": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+      "contract_sha256": "9d01b7ee77bbc7b6e5bde23f57bafbcf304f4a82020da5c3150b7ffb129011b1",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+      "terminal_state_evidence_required_cases": [
+        "TC-A01-LATENT-MODE-POLICY"
+      ],
+      "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-standard14-r1",
+      "evaluation_set_revision": "r1",
+      "source": "各項目の版と実行役へ提示するTaskSpecを第1段階で固定する"
+    }
+  },
+  "compatibility_key": "1a3b75ac2311cda9630a15db6ee0ab8c3d8e51bb46d4c63c44954fc5a958c24a",
+  "created_at": "2026-08-15T05:38:46.828155+00:00",
+  "excluded_attempts": [],
+  "iterations": [
+    {
+      "elapsed_seconds": 77.89422991703032,
+      "iteration": 1,
+      "quality_score": 100.0,
+      "total_tokens": 254089
+    },
+    {
+      "elapsed_seconds": 90.93027937499573,
+      "iteration": 2,
+      "quality_score": 100.0,
+      "total_tokens": 196372
+    },
+    {
+      "elapsed_seconds": 92.91157799999928,
+      "iteration": 3,
+      "quality_score": 100.0,
+      "total_tokens": 382761
+    },
+    {
+      "elapsed_seconds": 81.23060604097554,
+      "iteration": 4,
+      "quality_score": 100.0,
+      "total_tokens": 235009
+    },
+    {
+      "elapsed_seconds": 81.18513362499652,
+      "iteration": 5,
+      "quality_score": 100.0,
+      "total_tokens": 300075
+    }
+  ],
+  "median": {
+    "elapsed_seconds": 81.23060604097554,
+    "quality_score": 100.0,
+    "total_tokens": 254089
+  },
+  "prompt_set_identity": {
+    "bundle_sha256": "bedfb4f5b91c1d65300950bdeef10972e0502be3e8da05f6b2f6739a5453a0e0",
+    "name": "the-caption-3ce91a4-start-check-read-interposed-boundary-exclusion-r1",
+    "revision": "r1"
+  },
+  "prompt_set_identity_sha256": "86a8ebc868890a1e73ff2b29f1d352baa54574e9bc1a97b2b6297b0e461f6178",
+  "result_content_sha256": "ba80fcea09e086da94a4d9371ff7ca84dccc550fba644ce5bcef8388b69f43f8",
+  "result_id": "ddc840b8bba54a75b63d681d8e4f34ec",
+  "schema_version": "the-caption-prompt.prompt-set-result/v2",
+  "source_selection": {
+    "selection_content_sha256": "2f35b03fa00c86f4e221d281d93c2676bea587666efa0beabeeb5881114061cc",
+    "selection_id": "0668233d4b5740158a05992a1cbe8540"
+  },
+  "token_accounting": {
+    "revision": "v1",
+    "scope": "all_agents",
+    "source": "codex_rollout_final_usage_by_workspace"
+  }
+}

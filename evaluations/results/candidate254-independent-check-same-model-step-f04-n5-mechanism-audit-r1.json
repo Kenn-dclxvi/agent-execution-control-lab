@@ -1,0 +1,24 @@
+{
+  "gates": {
+    "start_check_same_model_step_joint_issuance": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "independent_checks_same_model_step": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"independent_followup_split_count": 0, "iteration": 1, "result": "passed", "run_id": "ce54b55b8da14fdbbdab9578d5a916d9"},
+        {"independent_followup_split_count": 0, "iteration": 2, "result": "passed", "run_id": "8737133d1caa45beb6a32ffe0c629ed2"},
+        {"independent_followup_split_count": 1, "iteration": 3, "result": "failed", "run_id": "342cf77221a14660908dbb7e6cf6cc27"},
+        {"independent_followup_split_count": 0, "iteration": 4, "result": "passed", "run_id": "3cb8553f5c1b439c9124e7bdc562f7f4"},
+        {"independent_followup_split_count": 0, "iteration": 5, "result": "passed", "run_id": "ad218ade8e2d4cda85e8a1c8a1284b30"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.independent-check-same-model-step-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

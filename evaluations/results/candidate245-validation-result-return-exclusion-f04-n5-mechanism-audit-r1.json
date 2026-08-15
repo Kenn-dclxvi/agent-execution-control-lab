@@ -1,0 +1,57 @@
+{
+  "gates": {
+    "required_validation_single_issuance_decision": {
+      "failure_count": 4,
+      "pass_count": 1,
+      "runs": [
+        {
+          "iteration": 1,
+          "result": "failed",
+          "run_id": "34995feb60a04de7a6e0374987f8664b",
+          "validation_custom_tool_calls": 3
+        },
+        {
+          "iteration": 2,
+          "result": "failed",
+          "run_id": "3540319527184afc83c743f03364f7bb",
+          "validation_custom_tool_calls": 3
+        },
+        {
+          "iteration": 3,
+          "result": "passed",
+          "run_id": "8e20e4327b6f48308c6b629dc88b256c",
+          "validation_custom_tool_calls": 1
+        },
+        {
+          "iteration": 4,
+          "result": "failed",
+          "run_id": "b6192e79177e4130bbc535390c85d184",
+          "validation_custom_tool_calls": 3
+        },
+        {
+          "iteration": 5,
+          "result": "failed",
+          "run_id": "da1877fb382640e4aa3ee8a56ac91eb8",
+          "validation_custom_tool_calls": 3
+        }
+      ],
+      "status": "failed"
+    },
+    "required_command_identity_and_order": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "required_command_shell_compound_exclusion": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "failure_dependent_followup_exclusion": {
+      "status": "not_exercised"
+    }
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.validation-result-return-exclusion-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

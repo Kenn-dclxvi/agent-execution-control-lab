@@ -1,0 +1,34 @@
+{
+  "gates": {
+    "start_check_only_issuance_exclusion": {
+      "failure_count": 5,
+      "pass_count": 0,
+      "runs": [
+        {"first_issuance_included_necessary_read": false, "iteration": 1, "result": "failed", "run_id": "29ba0a60cd8743898a3991ba9b93f371"},
+        {"first_issuance_included_necessary_read": false, "iteration": 2, "result": "failed", "run_id": "69b0d91266284760ba9cb7c028f6bcc5"},
+        {"first_issuance_included_necessary_read": false, "iteration": 3, "result": "failed", "run_id": "847a7c7ad07f432696b2e452806c301f"},
+        {"first_issuance_included_necessary_read": false, "iteration": 4, "result": "failed", "run_id": "aeb07b14197545fcaac85cc55a9cc6d7"},
+        {"first_issuance_included_necessary_read": false, "iteration": 5, "result": "failed", "run_id": "e2dd645af2a1455499f1f86bebcd8396"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"iteration": 1, "result": "passed", "run_id": "29ba0a60cd8743898a3991ba9b93f371", "validation_custom_tool_calls": 1},
+        {"iteration": 2, "result": "passed", "run_id": "69b0d91266284760ba9cb7c028f6bcc5", "validation_custom_tool_calls": 1},
+        {"iteration": 3, "result": "passed", "run_id": "847a7c7ad07f432696b2e452806c301f", "validation_custom_tool_calls": 1},
+        {"iteration": 4, "result": "failed", "run_id": "aeb07b14197545fcaac85cc55a9cc6d7", "validation_custom_tool_calls": 3},
+        {"iteration": 5, "result": "passed", "run_id": "e2dd645af2a1455499f1f86bebcd8396", "validation_custom_tool_calls": 1}
+      ],
+      "status": "failed"
+    },
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.start-check-only-issuance-exclusion-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

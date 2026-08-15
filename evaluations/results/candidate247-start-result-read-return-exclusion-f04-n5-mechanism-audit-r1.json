@@ -1,0 +1,34 @@
+{
+  "gates": {
+    "start_result_read_return_exclusion": {
+      "failure_count": 5,
+      "pass_count": 0,
+      "runs": [
+        {"iteration": 1, "necessary_read_started_before_start_result_return": false, "result": "failed", "run_id": "1122948572a8436aa007ab58bfb7c79a"},
+        {"iteration": 2, "necessary_read_started_before_start_result_return": false, "result": "failed", "run_id": "3ec8acff3fd64966bc581b757ff20701"},
+        {"iteration": 3, "necessary_read_started_before_start_result_return": false, "result": "failed", "run_id": "7fe3773302804c39b26f8ccd78898f13"},
+        {"iteration": 4, "necessary_read_started_before_start_result_return": false, "result": "failed", "run_id": "96095915502041c681ec536bf410a652"},
+        {"iteration": 5, "necessary_read_started_before_start_result_return": false, "result": "failed", "run_id": "b7c3829662dd474e814589dd1bfde084"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {
+      "failure_count": 3,
+      "pass_count": 2,
+      "runs": [
+        {"iteration": 1, "result": "failed", "run_id": "1122948572a8436aa007ab58bfb7c79a", "validation_custom_tool_calls": 3},
+        {"iteration": 2, "result": "failed", "run_id": "3ec8acff3fd64966bc581b757ff20701", "validation_custom_tool_calls": 3},
+        {"iteration": 3, "result": "passed", "run_id": "7fe3773302804c39b26f8ccd78898f13", "validation_custom_tool_calls": 1},
+        {"iteration": 4, "result": "failed", "run_id": "96095915502041c681ec536bf410a652", "validation_custom_tool_calls": 3},
+        {"iteration": 5, "result": "passed", "run_id": "b7c3829662dd474e814589dd1bfde084", "validation_custom_tool_calls": 1}
+      ],
+      "status": "failed"
+    },
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.start-result-read-return-exclusion-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

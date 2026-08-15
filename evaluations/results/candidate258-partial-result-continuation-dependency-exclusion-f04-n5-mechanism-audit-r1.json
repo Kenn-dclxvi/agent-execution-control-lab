@@ -1,0 +1,36 @@
+{
+  "gates": {
+    "start_check_same_model_step_joint_issuance": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "independent_checks_same_model_step": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"independent_followup_split_count": 0, "iteration": 1, "result": "passed", "run_id": "215b8fc82717422aae72f67cd3d1eeac"},
+        {"independent_followup_split_count": 0, "iteration": 2, "result": "passed", "run_id": "3ac73820f7b84d6587d0dd2638bdf98b"},
+        {"independent_followup_split_count": 0, "iteration": 3, "result": "passed", "run_id": "b08c0911abfe44f9988c8181a2e533d9"},
+        {"independent_followup_split_count": 1, "iteration": 4, "result": "failed", "run_id": "cecace75ac6744e1879cc6c610f8abed"},
+        {"independent_followup_split_count": 0, "iteration": 5, "result": "passed", "run_id": "dc0037dd1c6c4a59b950a0b7143a8853"}
+      ],
+      "status": "failed"
+    },
+    "partial_result_continuation_dependency_exclusion": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"partial_result_to_remaining_read_dependency_count": 0, "iteration": 1, "result": "passed", "run_id": "215b8fc82717422aae72f67cd3d1eeac"},
+        {"partial_result_to_remaining_read_dependency_count": 0, "iteration": 2, "result": "passed", "run_id": "3ac73820f7b84d6587d0dd2638bdf98b"},
+        {"partial_result_to_remaining_read_dependency_count": 0, "iteration": 3, "result": "passed", "run_id": "b08c0911abfe44f9988c8181a2e533d9"},
+        {"partial_result_to_remaining_read_dependency_count": 1, "iteration": 4, "result": "failed", "run_id": "cecace75ac6744e1879cc6c610f8abed", "first_read": "App.tsx:260-620", "dependent_read": "App.tsx:620-980"},
+        {"partial_result_to_remaining_read_dependency_count": 0, "iteration": 5, "result": "passed", "run_id": "dc0037dd1c6c4a59b950a0b7143a8853"}
+      ],
+      "status": "failed"
+    },
+    "required_validation_single_issuance_decision": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_identity_and_order": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "required_command_shell_compound_exclusion": {"failure_count": 0, "pass_count": 5, "status": "passed"},
+    "failure_dependent_followup_exclusion": {"status": "not_exercised"}
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.partial-result-continuation-dependency-exclusion-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}
