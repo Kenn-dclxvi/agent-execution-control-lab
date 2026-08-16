@@ -1,0 +1,192 @@
+{
+  "schema_version": "the-caption-prompt.candidate266-mechanism-audit/v1",
+  "candidate_prompt_identity": {
+    "name": "the-caption-3ce91a4-declared-instruction-descendant-read-dependency-r1",
+    "revision": "r1",
+    "bundle_sha256": "274217c1f7adbaadbbb7bbec31a3443bdd336f53b5794ef99d799f8509dbc4b4"
+  },
+  "direct_reference_prompt_identity": {
+    "name": "the-caption-3ce91a4-result-effect-scope-r1",
+    "revision": "r1",
+    "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc"
+  },
+  "diagnostic_comparison_prompt_identity": {
+    "name": "the-caption-3ce91a4-start-identity-result-effect-scope-restoration-r1",
+    "revision": "r1",
+    "bundle_sha256": "9b33e94432ede3ee0c278d876e743ec07f123ba5478c8c8df84dcf4d159ab930"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate147_reference": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate264_diagnostic": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate266": {
+        "pass_count": 5,
+        "failure_count": 0
+      }
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate147_reference": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate264_diagnostic": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate266": {
+        "pass_count": 5,
+        "failure_count": 0
+      }
+    },
+    "f03_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate147_reference": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate264_diagnostic": {
+        "pass_count": 5,
+        "failure_count": 0
+      },
+      "candidate266": {
+        "pass_count": 5,
+        "failure_count": 0
+      }
+    },
+    "f10_instruction_terminal_result_preceded_descendant_listing_and_content": {
+      "candidate147_reference": {
+        "pass_count": 2,
+        "failure_count": 3
+      },
+      "candidate264_diagnostic": {
+        "pass_count": 2,
+        "failure_count": 3
+      },
+      "candidate266": {
+        "pass_count": 5,
+        "failure_count": 0,
+        "runs": [
+          {
+            "iteration": 1,
+            "run_id": "18273c050a474978b75579c6745f8190",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T15-20-10-01a0093a-4a44-7e20-aca0-1dd732e4d25d.jsonl"
+          },
+          {
+            "iteration": 2,
+            "run_id": "8e36f0fd7d5b410abf531036668c1ea4",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T15-20-10-01a0093a-4a4d-7520-8c36-4d4f2a4bc839.jsonl"
+          },
+          {
+            "iteration": 3,
+            "run_id": "74f48353439b40498e8f170d26b3e20f",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T15-20-10-01a0093a-4a44-7e40-b833-ad82bb0cc943.jsonl"
+          },
+          {
+            "iteration": 4,
+            "run_id": "ce514b95c3504c4685c90ddbd2ed8f9f",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T15-20-10-01a0093a-4a5a-7150-8c21-3ee168798180.jsonl"
+          },
+          {
+            "iteration": 5,
+            "run_id": "6abac2a0635f4eb793b7113a6c396486",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T15-20-10-01a0093a-4a4a-7423-8bd7-9d4f03dcec4c.jsonl"
+          }
+        ]
+      },
+      "interpretation": "exact src/AGENTS.md readのterminal success outputがraw rolloutへ記録された後にだけsrc/app/entrypoints配下readを発行した。内容の必要性・適用性・影響範囲の自己分類は開放条件に使っていない。"
+    },
+    "f10_required_descendant_read_completed_after_instruction_result": {
+      "candidate266": {
+        "pass_count": 5,
+        "failure_count": 0
+      }
+    }
+  },
+  "validation_reentry_diagnostic": {
+    "candidate266_runs_with_wait_by_case": {
+      "F01": 0,
+      "F02": 0,
+      "F03": 0,
+      "F10": 0,
+      "total": 0
+    },
+    "candidate266_wait_invocations_by_case": {
+      "F01": 0,
+      "F02": 0,
+      "F03": 0,
+      "F10": 0,
+      "total": 0
+    },
+    "interpretation": "20件すべてvalidation wrapperが最初のtool returnでterminalとなり、cell ID waitによるmodel再入は発生しなかった。対象機序の開放条件には使わない。"
+  },
+  "kpi": {
+    "candidate147": {
+      "quality_score": 100,
+      "total_tokens": 494706,
+      "elapsed_seconds": 302.9288048748858
+    },
+    "candidate264": {
+      "quality_score": 100,
+      "total_tokens": 484121,
+      "elapsed_seconds": 307.71029866696335
+    },
+    "candidate266": {
+      "quality_score": 100,
+      "total_tokens": 476908,
+      "elapsed_seconds": 291.48144308297196
+    },
+    "candidate266_minus_candidate147": {
+      "quality_score": 0,
+      "total_tokens": -17798,
+      "total_tokens_percent": -3.5976923667794614,
+      "elapsed_seconds": -11.447361791913863,
+      "elapsed_percent": -3.7788951092458167
+    },
+    "candidate266_minus_candidate264": {
+      "quality_score": 0,
+      "total_tokens": -7213,
+      "total_tokens_percent": -1.4899167770040962,
+      "elapsed_seconds": -16.22885558399139,
+      "elapsed_percent": -5.274069686421505
+    }
+  },
+  "operational_deviation": {
+    "capacity_guard_timing": "issued_after_20_slots_completed",
+    "observed_free_bytes": 36379435008,
+    "dispatch_stop_bytes": 26843545600,
+    "hard_floor_bytes": 21474836480,
+    "result_effect": "comparison conditions and run evidence unchanged; protocol deviation retained and not hidden by rerun"
+  },
+  "registered_result_id": "5ca7e3a68e444ccbad70ecf50a82236a",
+  "status": "mechanism_probe_passed_quality_passed_n5_only_not_candidate264_replacement_not_adopted",
+  "disposition": {
+    "use": "isolated mechanical dependency evidence",
+    "not_use": "Candidate264またはCandidate254系の有効制御を保持した改善Candidateの代替",
+    "next_candidate": "not_created"
+  }
+}

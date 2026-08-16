@@ -87,3 +87,9 @@ F01、F02、F03では開始確認と許可済みreadの分離を診断する。F
 ## 現在状態
 
 現在状態は`design_complete / candidate_created / targeted_n5_completed / quality_passed / target_mechanism_passed / normal_route_regressed / unjustified_cost_regression / stopped / standard14_not_started / adoption_not_approved / release_not_created / projection_not_performed`とする。評価結果は[`evaluations/results/candidate264-start-identity-result-effect-scope-restoration-f01-f02-f03-f10-entrypoint-n5_2026-08-16.md`](../evaluations/results/candidate264-start-identity-result-effect-scope-restoration-f01-f02-f03-f10-entrypoint-n5_2026-08-16.md)を正本とする。
+
+## 利用者の明示的判断によるN=20後続観測
+
+2026-08-16に、利用者の明示的な判断により、停止済みのCandidate264を同じ四ケースだけ各N=20まで観測した。この後続観測は上記N=5停止判断を遡及変更せず、Standard14、採用、releaseまたはprojectionを許可しない。
+
+既存20件を再利用して不足60件だけを発行し、80 / 80件がScore `4`だった。F01、F02、F03の共同発行は各20 / 20件で成立したが、F10の必要なinstruction result境界は2 / 20件にとどまり、追加15件では0 / 15件だった。C147同数比較に対しtokenは`+7.45%`、elapsedは`+5.52%`となったため、Candidate264は引き続き`normal_route_regressed / unjustified_cost_regression / stopped`とする。後続結果は[`Candidate264 F01・F02・F03・F10 entrypoint N=20`](../evaluations/results/candidate264-start-identity-result-effect-scope-restoration-f01-f02-f03-f10-entrypoint-n20_2026-08-16.md)を参照する。

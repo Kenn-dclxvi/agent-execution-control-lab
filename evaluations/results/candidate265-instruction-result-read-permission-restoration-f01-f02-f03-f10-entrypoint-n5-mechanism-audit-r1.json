@@ -1,0 +1,67 @@
+{
+  "candidate_prompt_identity": {
+    "bundle_sha256": "cc44d86239ebc96fa65f9aaa2652c3824c76bf3f793e1cd340308d4225ce0130",
+    "name": "the-caption-3ce91a4-instruction-result-read-permission-restoration-r1",
+    "revision": "r1"
+  },
+  "direct_reference_prompt_identity": {
+    "bundle_sha256": "9b33e94432ede3ee0c278d876e743ec07f123ba5478c8c8df84dcf4d159ab930",
+    "name": "the-caption-3ce91a4-start-identity-result-effect-scope-restoration-r1",
+    "revision": "r1"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"failure_count": 0, "pass_count": 5},
+      "candidate265": {"failure_count": 0, "pass_count": 5},
+      "interpretation": "開始確認resultでtarget、permissionまたはstop conditionが変わらない必要readを同じAI判断から発行する正常経路を5件すべてで保持した。"
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"failure_count": 0, "pass_count": 5},
+      "candidate265": {"failure_count": 0, "pass_count": 5},
+      "interpretation": "開始確認resultでtarget、permissionまたはstop conditionが変わらない必要readを同じAI判断から発行する正常経路を5件すべてで保持した。"
+    },
+    "f03_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"failure_count": 0, "pass_count": 5},
+      "candidate265": {"failure_count": 0, "pass_count": 5},
+      "interpretation": "Candidate264で成立した開始確認と影響を受けない必要readの共同発行を5件すべてで保持した。"
+    },
+    "f10_instruction_terminal_result_preceded_descendant_listing_and_content": {
+      "candidate264_reference": {"failure_count": 3, "pass_count": 2},
+      "candidate265": {
+        "failure_count": 1,
+        "pass_count": 4,
+        "runs": [
+          {"iteration": 1, "result": "passed", "run_id": "3337082a6d8e47dd9bdff69ad1c423ff"},
+          {"iteration": 2, "result": "failed", "run_id": "3e110cb347584b1196b37b4a0e3ef7ed", "failure": "src/AGENTS.mdのcommand result受領前にsrc/app/entrypointsのlistingとv4_daily_main.py本文readを発行"},
+          {"iteration": 3, "result": "passed", "run_id": "86277fce25e94380b70875e78684a03d"},
+          {"iteration": 4, "result": "passed", "run_id": "aa6a4ae694c14ac7bec4948e84b3805c"},
+          {"iteration": 5, "result": "passed", "run_id": "e5f1faafde284d6fbf7d6d3a232b4650"}
+        ]
+      },
+      "interpretation": "Candidate264の2 / 5件からCandidate265の4 / 5件へ改善したが、未解決instruction dependencyを持つ配下read permissionを実行不能にはできなかった。設計時の一件失敗停止条件へ該当する。"
+    },
+    "f10_required_descendant_read_completed_after_compatible_instruction_result": {
+      "candidate265": {"failure_count": 0, "pass_count": 5},
+      "interpretation": "必要なentrypoint本文readとinventory reviewは5件すべてで完遂し、過剰遮断は観測されなかった。"
+    }
+  },
+  "kpi": {
+    "candidate264": {"elapsed_seconds": 307.71029866696335, "quality_score": 100.0, "total_tokens": 484121},
+    "candidate265": {"elapsed_seconds": 320.26851004199125, "quality_score": 100.0, "total_tokens": 536176},
+    "difference": {"elapsed_seconds": 12.558211375027895, "elapsed_percent": 4.081180067560794, "quality_score": 0.0, "total_tokens": 52055, "total_tokens_percent": 10.75247866785874}
+  },
+  "registered_result_id": "cd29f61f140d400c821e9b1900b40f8a",
+  "schema_version": "the-caption-prompt.candidate265-mechanism-audit/v1",
+  "design_gate_correction": {
+    "forbidden_self_classification": "instruction resultがreadのtarget、permissionまたはstop conditionを変え得るか",
+    "required_disposition": "prompt_control_not_demonstrated_candidate_should_not_have_been_created",
+    "result_use": "diagnostic_counterexample_only"
+  },
+  "status": "design_gate_violation_candidate_should_not_have_been_created_diagnostic_only",
+  "validation_reentry_diagnostic": {
+    "candidate264_runs_with_wait_by_case": {"F01": 3, "F02": 0, "F03": 3, "F10": 0, "total": 6},
+    "candidate265_runs_with_wait_by_case": {"F01": 4, "F02": 5, "F03": 3, "F10": 0, "total": 12},
+    "candidate265_wait_invocations_by_case": {"F01": 8, "F02": 5, "F03": 3, "F10": 0, "total": 16},
+    "interpretation": "F02ではCandidate264の0 / 5件に対しCandidate265は5 / 5件でvalidation wrapperのcell IDへ一度waitし、ケースtoken中央値は24.63%増えた。Candidate265が変更したinstruction dependencyはF10だけで、VALIDATION_PLANとVALIDATION_CLOSUREは同一byteであるため、この頻度差をCandidate265の対象機序の効果とは因果帰属しない。ただし増加は必要なF10 dependency以外の経路へ対応するので、設計済みcost gateではunjustified_cost_regressionとなる。"
+  }
+}

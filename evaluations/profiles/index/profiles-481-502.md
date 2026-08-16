@@ -1,7 +1,12 @@
-# Profile index 481-497
+# Profile index 481-502
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate93-result-classification-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate93-result-classification-v14-reasoning-medium-f02-global-m5-n5-r1.json)
+- [`candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
+- [`candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
+- [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate96-successful-validation-result-projection-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate96-successful-validation-result-projection-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
 - [`candidate97-decision-round-closure-r2-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate97-decision-round-closure-r2-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
 - [`candidate97-decision-round-closure-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate97-decision-round-closure-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
