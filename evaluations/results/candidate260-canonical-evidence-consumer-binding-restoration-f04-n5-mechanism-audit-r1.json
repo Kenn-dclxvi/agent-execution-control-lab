@@ -1,0 +1,126 @@
+{
+  "audit_definition": {
+    "counting_unit": "先行resultの受領後に新しく作られた必要判定、欠けた観測値、取得結果の組が、発行前から同一だった必要判定を満たす一件以上の残りのreadを許可した一まとまりを1件と数える。",
+    "failure_recovery_exception": "missing、unreadable、固定済み値または制約との具体的矛盾、許可範囲内で充足不能、適用中instructionによる別authorityの明示へ直接対応する追加readは数えない。",
+    "iteration_field": "execution bindingのdispatch iteration。selection resultの集計用iterationとは別であり、run_idを対応の正本とする。",
+    "read_count_excluded": true
+  },
+  "gates": {
+    "start_check_same_model_step_joint_issuance": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "independent_checks_same_model_step": {
+      "failure_count": 1,
+      "pass_count": 4,
+      "runs": [
+        {"independent_followup_split_count": 0, "iteration": 1, "result": "passed", "run_id": "69949b48d8f84eaba33fa9d1b60d1409"},
+        {"independent_followup_split_count": 0, "iteration": 2, "result": "passed", "run_id": "d6aa72ab30ed42279a2ad2b047b1233d"},
+        {"independent_followup_split_count": 0, "iteration": 3, "result": "passed", "run_id": "49f6be3b606746318fa035c424ba3cc2"},
+        {"independent_followup_split_count": 1, "iteration": 4, "result": "failed", "run_id": "c611ce78e6e24edd8ae315c9a7f2e6eb"},
+        {"independent_followup_split_count": 0, "iteration": 5, "result": "passed", "run_id": "64d6b43aa5ba4c148cd2fd22633c36cd"}
+      ],
+      "status": "failed"
+    },
+    "post_result_consumer_rebinding_exclusion": {
+      "failure_count": 4,
+      "pass_count": 1,
+      "post_result_consumer_rebinding_total": 5,
+      "runs": [
+        {
+          "event_evidence": [
+            {
+              "completed_command_record": 11,
+              "result_message_record": 9,
+              "summary": "App.tsx 1〜260行の正常result受領後に、hasAuditKey、Audit Key、colSpanの利用箇所を検索した。"
+            }
+          ],
+          "failure_recovery_exception_applied": false,
+          "iteration": 1,
+          "post_result_consumer_rebinding_count": 1,
+          "result": "failed",
+          "run_id": "69949b48d8f84eaba33fa9d1b60d1409"
+        },
+        {
+          "event_evidence": [
+            {
+              "completed_command_records": [19, 21],
+              "result_message_record": 17,
+              "summary": "App.tsx 1〜260行の正常result受領後に、描画部分が含まれなかったことを新しい不足として扱い、261〜940行を読んだ。"
+            }
+          ],
+          "failure_recovery_exception_applied": false,
+          "iteration": 2,
+          "post_result_consumer_rebinding_count": 1,
+          "result": "failed",
+          "run_id": "d6aa72ab30ed42279a2ad2b047b1233d"
+        },
+        {
+          "event_evidence": [
+            {
+              "completed_command_record": 19,
+              "result_message_record": 17,
+              "summary": "App.tsx 1〜260行の正常result受領後に、残りの描画部分を新しい不足として扱い、261〜760行を読んだ。"
+            }
+          ],
+          "failure_recovery_exception_applied": false,
+          "iteration": 3,
+          "post_result_consumer_rebinding_count": 1,
+          "result": "failed",
+          "run_id": "49f6be3b606746318fa035c424ba3cc2"
+        },
+        {
+          "event_evidence": [
+            {
+              "completed_command_record": 11,
+              "result_message_record": 9,
+              "summary": "App.tsx 1〜260行の正常result受領後に、表とcolSpanの残りを新しい不足として扱い、261〜700行を読んだ。"
+            },
+            {
+              "completed_command_record": 14,
+              "result_message_record": 12,
+              "summary": "261〜700行の正常result受領後に、row cellと空表示直後をさらに新しい不足として扱い、700〜850行を読んだ。"
+            }
+          ],
+          "failure_recovery_exception_applied": false,
+          "iteration": 4,
+          "post_result_consumer_rebinding_count": 2,
+          "result": "failed",
+          "run_id": "c611ce78e6e24edd8ae315c9a7f2e6eb"
+        },
+        {
+          "event_evidence": [],
+          "failure_recovery_exception_applied": false,
+          "iteration": 5,
+          "post_result_consumer_rebinding_count": 0,
+          "result": "passed",
+          "run_id": "64d6b43aa5ba4c148cd2fd22633c36cd",
+          "summary": "開始状態確認、Node定義、App.tsx 1〜760行を最初のmodel stepから発行し、result受領後の変更前readはなかった。"
+        }
+      ],
+      "status": "failed"
+    },
+    "required_command_identity_and_order": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "required_command_shell_compound_exclusion": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "required_validation_single_issuance_decision": {
+      "failure_count": 0,
+      "pass_count": 5,
+      "status": "passed"
+    },
+    "failure_dependent_followup_exclusion": {
+      "status": "not_exercised"
+    }
+  },
+  "run_count": 5,
+  "schema_version": "the-caption-prompt.canonical-evidence-consumer-binding-restoration-mechanism-audit/v1",
+  "status": "mechanism_failed"
+}

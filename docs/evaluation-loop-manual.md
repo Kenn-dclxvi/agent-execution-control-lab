@@ -176,7 +176,9 @@ python3 "$ATOMIC" register-selection-result \
   --profile /path/to/matching-reference-profile.json
 ```
 
-candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。mechanism gate不通過時はbaseline KPI比較へ進まない。gate通過後にbaselineが必要になった場合は保存済み互換resultを優先し、存在しない場合だけbaseline slotを追加する。
+candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。candidate resultが有効かつ採点可能になった後は、mechanismの成否と分離して、保存済み互換baselineがある場合は3 KPI比較を主結果へ含める。mechanism不通過はKPI比較を止める条件にしない。
+
+mechanismへ100％成立を要求するのは、そのmechanismの成立・不成立と品質再現性の成否が常に一致し、相関が100％であることを互換する証拠で確認した場合だけとする。この対応が確認されていないcost経路のmechanism成立率は原因診断に使う観測値であり、1件の不成立を追加NまたはStandard14の自動停止条件にしない。品質を維持したうえで、all-agent `total_tokens`と`elapsed_seconds`がともに減った場合はcost改善方向とする。一方が増えた場合は、その増加をまずcost退行として記録し、追加costが品質、必要な正常経路または明示された制約を維持するために必要だったかをtraceで監査する。必要性を確認できない場合は`unjustified_cost_regression`とし、減少した別指標で相殺しない。必要性を確認できた場合だけ`tradeoff_requires_human_judgement`として人間へ交換条件を提示する。保存済み互換baselineがない場合はKPI比較未完了を明示し、baseline slotを新規発行するかを別途固定する。この扱いは[Candidate110で固定した訂正](candidate110-validation-ticket-decision-boundary-design.md)に従う。
 
 保存済みresultを基準にする比較cycleは、次の順序で準備する。
 

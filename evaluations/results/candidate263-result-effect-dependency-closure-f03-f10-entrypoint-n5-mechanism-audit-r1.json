@@ -1,0 +1,54 @@
+{
+  "candidate_prompt_identity": {
+    "bundle_sha256": "4fd4bb75be18f7882df98368898d38759a9a37336269e61f4f0eef6d77f4841e",
+    "name": "the-caption-3ce91a4-result-effect-dependency-closure-r1",
+    "revision": "r1"
+  },
+  "direct_reference_prompt_identity": {
+    "bundle_sha256": "7cd564be0904efb5cee59ce8d72935971d080282686e5ff7be9e85e62aa0fd52",
+    "name": "the-caption-3ce91a4-independent-check-same-model-step-r1",
+    "revision": "r1"
+  },
+  "gates": {
+    "f03_unaffected_start_result_did_not_delay_required_read": {
+      "candidate263": {
+        "failure_count": 2,
+        "pass_count": 3,
+        "runs": [
+          {"iteration": 1, "result": "passed", "run_id": "07f7fe63d63f4fc786a14ae2f42b3e33"},
+          {"iteration": 2, "result": "failed", "run_id": "0f581b62f457401ebe03ec9cc967bb1e"},
+          {"iteration": 3, "result": "passed", "run_id": "18304f9575e94267a1af6ea0055d92f8"},
+          {"iteration": 4, "result": "failed", "run_id": "25cd8af1c9d44c7282a4e541c4085a89"},
+          {"iteration": 5, "result": "passed", "run_id": "7981d06f42814484ba666b9beb8e0f76"}
+        ]
+      },
+      "candidate254_reference": {
+        "failure_count": 2,
+        "pass_count": 3
+      },
+      "interpretation": "Candidate263でも開始確認だけのresultをAIへ返してから必要readを別判断で発行したrunが2件あり、Candidate254の2件から減っていない。"
+    },
+    "f10_instruction_result_preceded_entrypoint_content_when_permission_could_change": {
+      "candidate263": {
+        "failure_count": 2,
+        "pass_count": 3,
+        "runs": [
+          {"iteration": 1, "result": "failed", "run_id": "70344673b5824c0fb412ec5498ec44e5"},
+          {"iteration": 2, "result": "passed", "run_id": "ad6cfe656ac84daea638b453a2d77e87"},
+          {"iteration": 3, "result": "passed", "run_id": "b690b125036843d4bccf5582d7b60296"},
+          {"iteration": 4, "result": "passed", "run_id": "be1987d536ed4afd86d4595923bfcd5a"},
+          {"iteration": 5, "result": "failed", "run_id": "d48c72b9baef42a6a8f04875539e50b4"}
+        ]
+      },
+      "candidate254_reference": {
+        "failure_count": 2,
+        "pass_count": 3
+      },
+      "interpretation": "src/AGENTS.mdとentrypoint一覧までを同じ判断から確認し、そのresult後に三つのentrypoint本文を読む正常経路をpassとした。Candidate263はCandidate254と同じ3件だけ成立し、必要な依存関係の保持率も改善していない。"
+    }
+  },
+  "quality_correlation": "not_100_percent",
+  "registered_result_id": "478d39fb4327490e8d9c2202bff66e43",
+  "schema_version": "the-caption-prompt.candidate263-mechanism-audit/v1",
+  "status": "mechanism_failed_no_rate_improvement"
+}

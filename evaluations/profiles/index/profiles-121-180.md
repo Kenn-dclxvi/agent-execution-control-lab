@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate147-result-effect-scope-v14-reasoning-medium-f06-global-m24-n77-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-f06-global-m24-n77-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n100-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n100-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n29-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n29-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate179-review-evidence-interface-adr9-r2-medium-m24-n5-cli0146.json`](../candidate179-review-evidence-interface-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate180-general-design-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate180-general-design-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate181-independent-general-design-review-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate181-independent-general-design-review-boundary-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate182-autonomous-generalization-review-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate182-autonomous-generalization-review-boundary-adr9-r2-medium-m24-n5-cli0146.json)

@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate182-autonomous-generalization-review-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate182-autonomous-generalization-review-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate183-mutation-review-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate183-mutation-review-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate184-judgement-result-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json`](../candidate184-judgement-result-effect-boundary-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate217-review-proposition-operand-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate217-review-proposition-operand-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate218-review-input-carrier-ownership-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate218-review-input-carrier-ownership-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json)
-- [`candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json)
