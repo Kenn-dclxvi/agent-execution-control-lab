@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import unittest
+from collections import Counter
 from pathlib import Path
 
 from scripts.export_prompt_bundle import verify_bundle
@@ -15,6 +16,9 @@ PROFILE = ROOT / "evaluations/profiles/candidate259-same-artifact-second-continu
 RESULT = ROOT / "evaluations/results/7453ee7e3e0147d5871918a633d1a134.json"
 QUALITY_AUDIT = ROOT / "evaluations/results/candidate259-same-artifact-second-continuation-exclusion-f04-n5-quality-audit-r1.json"
 MECHANISM_AUDIT = ROOT / "evaluations/results/candidate259-same-artifact-second-continuation-exclusion-f04-n5-mechanism-audit-r1.json"
+STANDARD14_PROFILE = ROOT / "evaluations/profiles/candidate259-same-artifact-second-continuation-exclusion-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json"
+STANDARD14_RESULT = ROOT / "evaluations/results/1d27ee8fc6b74946aa76132aee5478aa.json"
+STANDARD14_QUALITY_AUDIT = ROOT / "evaluations/results/candidate259-same-artifact-second-continuation-exclusion-standard14-n5-quality-audit-r1.json"
 
 
 class Candidate259Test(unittest.TestCase):
@@ -58,6 +62,53 @@ class Candidate259Test(unittest.TestCase):
         self.assertEqual(audit["gates"]["independent_checks_same_model_step"]["pass_count"], 5)
         self.assertEqual(audit["gates"]["same_artifact_second_continuation_exclusion"]["pass_count"], 5)
         self.assertEqual(audit["gates"]["required_validation_single_issuance_decision"]["pass_count"], 5)
+
+    def test_standard14_profile(self) -> None:
+        profile = json.loads(STANDARD14_PROFILE.read_text(encoding="utf-8"))
+        self.assertEqual(len(profile["cases"]), 14)
+        self.assertEqual(profile["iterations"], 5)
+        self.assertEqual(profile["execution"]["max_workers"], 24)
+        self.assertEqual(
+            profile["prompt_set_identity"],
+            {
+                "bundle_sha256": "93d1874f285dc1381122248fd4786a13c05ce04ef976d39050cb8892f9616eac",
+                "name": "the-caption-3ce91a4-same-artifact-second-continuation-exclusion-r1",
+                "revision": "r1",
+            },
+        )
+
+    def test_standard14_n5_result_and_quality(self) -> None:
+        result = json.loads(STANDARD14_RESULT.read_text(encoding="utf-8"))
+        quality = json.loads(STANDARD14_QUALITY_AUDIT.read_text(encoding="utf-8"))
+
+        self.assertEqual(result["result_id"], "1d27ee8fc6b74946aa76132aee5478aa")
+        self.assertEqual(
+            result["result_content_sha256"],
+            "ef7981f7481bab264b3bc6c68cab1c3f5bb8705df97d41ec04589ce224206a3a",
+        )
+        self.assertEqual(
+            result["compatibility_key"],
+            "cc0c022ac026b55c51597e82c4a7216d4b7fdf498250c6a299d24203f1027561",
+        )
+        self.assertEqual(len(result["case_results"]), 70)
+        self.assertEqual(
+            Counter(item["case_id"] for item in result["case_results"]),
+            Counter({case: 5 for case in result["compatibility"]["coverage"]["case_ids"]}),
+        )
+        self.assertTrue(all(item["quality_score"] == 4 for item in result["case_results"]))
+        self.assertEqual(result["median"]["quality_score"], 100.0)
+        self.assertEqual(result["median"]["total_tokens"], 1510151)
+        self.assertAlmostEqual(result["median"]["elapsed_seconds"], 795.3871456260094)
+
+        self.assertEqual(quality["run_count"], 70)
+        self.assertEqual(quality["rateable_runs"], 70)
+        self.assertEqual(quality["score_counts"], {"4": 70})
+        self.assertEqual(quality["failure_counts"], {})
+        self.assertEqual(quality["diagnostic_counts"]["command_protocol_violations"], 0)
+        self.assertEqual(
+            {(item["run_id"], item["case_id"]) for item in result["case_results"]},
+            {(item["run_id"], item["case_id"]) for item in quality["runs"]},
+        )
 
 
 if __name__ == "__main__":

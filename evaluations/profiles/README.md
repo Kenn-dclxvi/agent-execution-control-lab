@@ -76,7 +76,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`301–360`](index/profiles-301-360.md)
 - [`361–420`](index/profiles-361-420.md)
 - [`421–480`](index/profiles-421-480.md)
-- [`481–485`](index/profiles-481-485.md)
+- [`481–497`](index/profiles-481-497.md)
 
 このシャードと上のリンクは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。プロファイル追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、ディレクトリ実体、READMEから辿れる索引シャード、profile JSONのリンクの集合一致として固定する。
 

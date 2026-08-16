@@ -1,0 +1,165 @@
+{
+  "schema_version": "the-caption-prompt.c147-result-effect-scope-mechanism-reassessment/v1",
+  "reassessment_id": "candidate260-c147-result-effect-scope-mechanism-reassessment-r2",
+  "candidate": "Candidate260",
+  "registered_result_id": "8f3ef2f0104f4514aa6942c5824e8d2e",
+  "evaluation_scope": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY r2 N=5",
+  "source_mechanism_audit": "candidate260-canonical-evidence-consumer-binding-restoration-f04-n5-mechanism-audit-r1.json",
+  "design_authorities": [
+    "../../docs/candidate145-f01-f02-f03-cost-causal-analysis.md",
+    "../../docs/candidate147-result-effect-scope-design.md",
+    "../../docs/candidate253-c147-f04-token-step-causal-audit.md",
+    "../../docs/candidate254-partial-evidence-result-failure-audit.md"
+  ],
+  "original_candidate260_mechanism": {
+    "status": "mechanism_failed",
+    "post_result_consumer_rebinding_exclusion_pass_count": 1,
+    "post_result_consumer_rebinding_exclusion_failure_count": 4,
+    "preserved": true
+  },
+  "reassessment_criterion": "先行resultが未発行operationの対象、許可、証拠取得方法または停止条件を変え得る場合は結果依存判断を維持する。いずれも変わらない既知の残りの取得を別model stepへ分けた場合だけ、C147のcost最適化目的に反する不要な依存関係とする。",
+  "runs": [
+    {
+      "dispatch_iteration": 1,
+      "run_id": "69949b48d8f84eaba33fa9d1b60d1409",
+      "result_effects": {
+        "target_changed": false,
+        "permission_changed": false,
+        "method_changed": true,
+        "stop_condition_changed": false
+      },
+      "evidence": "App.tsx 1〜260行のresult受領後、残り全体の連続readではなくhasAuditKey、Audit Key、colSpanの局所検索へ変更した。",
+      "unchanged_method_dependency_observation_count": 0,
+      "classification": "c147_legal_result_dependent_method_change"
+    },
+    {
+      "dispatch_iteration": 2,
+      "run_id": "d6aa72ab30ed42279a2ad2b047b1233d",
+      "result_effects": {
+        "target_changed": false,
+        "permission_changed": false,
+        "method_changed": true,
+        "stop_condition_changed": false
+      },
+      "evidence": "App.tsx 1〜260行にtable描画がないresultから残りの描画領域取得へ移り、261〜620行と621〜940行を同じ次のmodel stepから共同発行した。",
+      "unchanged_method_dependency_observation_count": 0,
+      "classification": "c147_legal_result_dependent_method_change"
+    },
+    {
+      "dispatch_iteration": 3,
+      "run_id": "49f6be3b606746318fa035c424ba3cc2",
+      "result_effects": {
+        "target_changed": false,
+        "permission_changed": false,
+        "method_changed": true,
+        "stop_condition_changed": false
+      },
+      "evidence": "App.tsx 1〜260行のresultから残りの描画領域取得へ移り、261〜760行を一回発行した。",
+      "unchanged_method_dependency_observation_count": 0,
+      "classification": "c147_legal_result_dependent_method_change"
+    },
+    {
+      "dispatch_iteration": 4,
+      "run_id": "c611ce78e6e24edd8ae315c9a7f2e6eb",
+      "result_effects": {
+        "target_changed": false,
+        "permission_changed": false,
+        "method_changed": false,
+        "stop_condition_changed": false
+      },
+      "evidence": "261〜700行の正常result受領後、同じ連続範囲readのまま700〜850行を別model stepで発行した。F04-C1/C2の必要観測は発行前から既知で、対象、許可、証拠取得方法、停止条件は変わっていない。",
+      "unchanged_method_dependency_observation_count": 1,
+      "classification": "c147_unnecessary_unchanged_method_dependency"
+    },
+    {
+      "dispatch_iteration": 5,
+      "run_id": "64d6b43aa5ba4c148cd2fd22633c36cd",
+      "result_effects": {
+        "target_changed": false,
+        "permission_changed": false,
+        "method_changed": false,
+        "stop_condition_changed": false
+      },
+      "evidence": "開始identity、Node定義、App.tsx 1〜760行を最初のmodel stepから発行し、変更前の後続readはなかった。",
+      "unchanged_method_dependency_observation_count": 0,
+      "classification": "c147_legal_joint_issuance"
+    }
+  ],
+  "summary": {
+    "run_count": 5,
+    "quality_score_4_count": 5,
+    "c147_result_effect_scope_conforming_count": 4,
+    "c147_result_effect_scope_nonconforming_count": 1,
+    "unchanged_method_dependency_observation_total": 1,
+    "candidate260_blanket_post_result_exclusion_matches_c147_purpose": false,
+    "mechanism_failure_quality_reproducibility_loss_correlation_100_percent": false
+  },
+  "kpi_comparison_preserved": {
+    "candidate147_quality_median": 100,
+    "candidate260_quality_median": 100,
+    "candidate147_total_tokens_median": 151170,
+    "candidate260_total_tokens_median": 176103,
+    "total_tokens_delta_percent": 16.49,
+    "candidate147_elapsed_seconds_median": 91.430904542,
+    "candidate260_elapsed_seconds_median": 65.195924625,
+    "elapsed_seconds_delta_percent": -28.69
+  },
+  "token_regression_trace_audit": {
+    "candidate147_prompt_bytes": 10772,
+    "candidate260_prompt_bytes": 13821,
+    "prompt_byte_delta": 3049,
+    "candidate147_model_reentry_median": 5,
+    "candidate260_model_reentry_median": 6,
+    "candidate147_nonterminal_validation_wait_run_count": 2,
+    "candidate260_nonterminal_validation_wait_run_count": 3,
+    "candidate260_median_run_id": "49f6be3b606746318fa035c424ba3cc2",
+    "candidate260_median_run_wait_only_reentry_tokens": 32440,
+    "candidate147_median_run_id": "af0d3316d0da498684b8bb1aca8b05c0",
+    "same_required_outcome": true,
+    "same_quality_score_4_count": 5,
+    "same_one_line_implementation_effect": true,
+    "same_required_validation_set": true,
+    "additional_quality_or_required_outcome_from_candidate260": false,
+    "required_processing_justification_established": false,
+    "candidate260_prompt_delta_causal_attribution_established": false,
+    "classification": "unjustified_token_regression"
+  },
+  "replacement_selection_audit": {
+    "audit_document": "../../docs/candidate260-c147-minimal-delta-reduction-audit.md",
+    "candidate147_nonterminal_validation_wait_run_count": 2,
+    "candidate260_nonterminal_validation_wait_run_count": 3,
+    "nonterminal_wait_is_candidate147_prohibited": false,
+    "candidate260_specific_evidence_gate_preserves_c147_legal_adaptive_read": false,
+    "remaining_route_requires_method_prescription_to_force_closure": true,
+    "valid_new_delta_count": 0,
+    "existing_replacement_candidate": "Candidate254",
+    "replacement_bytes_equal_candidate254": true,
+    "duplicate_candidate261_created": false,
+    "candidate254_standard14_profile_created": true,
+    "candidate254_standard14_result_id": "59117fe7924f4b718df4ff32491551cc",
+    "candidate254_standard14_quality_score_4_count": 70,
+    "candidate254_standard14_total_tokens_delta_percent": 6.29,
+    "candidate254_standard14_elapsed_seconds_delta_percent": -4.26,
+    "candidate254_replacement_adopted": false,
+    "candidate254_replacement_rejection_reason": "unjustified_token_regression"
+  },
+  "interpretation": {
+    "original_result_and_mechanism_status_preserved": true,
+    "original_mechanism_status_role": "historical_prefixed_gate_result",
+    "mechanism_100_percent_requirement_justified_for_current_cost_judgement": false,
+    "mechanism_rate_role": "cost_path_diagnostic",
+    "candidate260_effect_attribution_established": false,
+    "effect_attribution_reason": "N=5の記述的比較だけではtoken増加とelapsed短縮を生んだ制御差分を分離できない。機序成立率が100％未満であること自体は因果効果を否定する理由にしない。",
+    "upfront_all_read_route_selected_as_success_procedure": false,
+    "kpi_direction": "unjustified_token_regression",
+    "elapsed_improvement_offsets_token_regression": false,
+    "human_tradeoff_judgement_ready": false,
+    "replacement_candidate_selected": "Candidate254",
+    "duplicate_candidate261_created": false,
+    "replacement_candidate_standard14_completed": true,
+    "replacement_candidate_adopted": false,
+    "candidate260_improvement_resolved": false,
+    "next_design_requirement": "改善対象はCandidate260のままとする。Candidate254はStandard14品質を維持したがtoken退行を必要処理として正当化できず置換案として採用しない。AIへread方法、範囲、tool順、判断順、model stepまたは特定yieldを指示せず、prompt内で閉じられる別の不要なpermissionまたはdependencyを証拠から特定する。"
+  },
+  "status": "historical_mechanism_failed_preserved_existing_candidate254_replacement_evaluated_quality_passed_unjustified_token_regression_replacement_not_adopted_candidate260_improvement_unresolved"
+}

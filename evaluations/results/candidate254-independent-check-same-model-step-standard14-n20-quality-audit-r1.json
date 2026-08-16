@@ -1,0 +1,49 @@
+{
+  "batch": "candidate254-independent-check-same-model-step-standard14-n20",
+  "candidate_prompt_identity": {
+    "bundle_sha256": "7cd564be0904efb5cee59ce8d72935971d080282686e5ff7be9e85e62aa0fd52",
+    "name": "the-caption-3ce91a4-independent-check-same-model-step-r1",
+    "revision": "r1"
+  },
+  "candidate147_reference": {
+    "n100_result_id": "e6fc6e10dedd47f5a1d59d114e6e0f57",
+    "n20_analysis_id": "8468f192f0284fe3b5173c0a6d1789d2",
+    "n20_elapsed_seconds_median": 830.9304088142235,
+    "n20_quality_median": 100.0,
+    "n20_total_tokens_median": 1383838.0
+  },
+  "candidate254_n20_difference_from_candidate147_n20": {
+    "elapsed_seconds": -53.88574302318739,
+    "elapsed_seconds_percent": -6.484988688774173,
+    "quality_score": 0.0,
+    "total_tokens": 129045.0,
+    "total_tokens_percent": 9.325152221575069
+  },
+  "diagnostic_counts": {
+    "command_protocol_violations": 0,
+    "f02_runs_with_completion_wait": 7,
+    "f02_completion_wait_count": 13,
+    "f02_completion_wait_tokens": 479174,
+    "f03_runs_with_completion_wait": 9,
+    "f03_completion_wait_count": 19,
+    "f03_completion_wait_tokens": 488719,
+    "f03_start_check_and_read_split": 6,
+    "monthly_review_numeric_location": {
+      "exact": 18,
+      "mismatch": 2
+    },
+    "owner_producer_evidence_inadmissible_new_runs": 165
+  },
+  "new_run_count": 210,
+  "new_run_score_counts": {
+    "4": 210
+  },
+  "registered_result_id": "2e40123a1b0642e3bbddb1812ba4414e",
+  "reused_run_count": 70,
+  "schema_version": "the-caption-prompt.candidate254-standard14-n20-quality-audit/v1",
+  "selected_run_count": 280,
+  "selected_score_counts": {
+    "4": 280
+  },
+  "status": "quality_passed_token_regressed_elapsed_improved_cost_instability_confirmed"
+}

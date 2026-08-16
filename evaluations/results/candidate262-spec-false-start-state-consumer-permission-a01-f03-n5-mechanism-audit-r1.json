@@ -1,0 +1,74 @@
+{
+  "schema_version": "candidate262-spec-false-start-state-consumer-permission-a01-f03-n5-mechanism-audit/v1",
+  "candidate_result_id": "d060b792b7c1498480a39fb78519bfaa",
+  "reference_result_id": "ea9b4bfba2054405896a886be25fe6b1",
+  "score_4_count": 10,
+  "a01": {
+    "case_id": "TC-A01-LATENT-MODE-POLICY",
+    "run_count": 5,
+    "repository_command_count_by_run": {
+      "66a46fd10d804c2e93f0e364769da9c2": 0,
+      "727438407bd545eda5ed478379f19566": 0,
+      "b79bc0786c6b42e99294a094452099f7": 0,
+      "bd2eb81aec0742b5827eec8fcb58304a": 0,
+      "c61bc3b0e73a40789db83d6071eda40a": 0
+    },
+    "no_start_state_check_count": 5,
+    "required_clarification_returned_count": 5,
+    "interpretation": "未指定mode、質問permission、質問operationのstop conditionを変えない開始状態resultには合法な受け取り先がなく、5件すべてでrepository evidenceを発行せずに必要な値だけを質問した。"
+  },
+  "f03": {
+    "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+    "run_count": 5,
+    "reference_coissued_count": 5,
+    "candidate_coissued_count": 4,
+    "candidate_coissued_run_ids": [
+      "07be81dfc34e44eba70b368993f6d536",
+      "098947f4a5ef49ad86cd05f17293d0bd",
+      "3a9aa3caf6054e72b4dfe27e9aef41c9",
+      "8d2f5bfe15ee49cb8298a8b19e7ea51b"
+    ],
+    "candidate_separated_run_ids": [
+      "635d8cbc83cf44d19431da52e64ddcaf"
+    ],
+    "separated_route": "開始identityのpwd、branch、HEAD、statusを個別commandで完了して結果を報告した後、対象sourceとtestを別の判断から発行した。",
+    "interpretation": "F03はspec_ready=trueでありCandidate262の変更対象外である。Candidate147の初回発行関係を4件で再現したが1件では再現しなかった。成立率だけを品質または採否へ直結させず、非対象経路の診断値として保持する。"
+  },
+  "kpi": {
+    "aggregate": {
+      "reference_total_tokens_median": 138564,
+      "candidate_total_tokens_median": 119402,
+      "total_tokens_change_percent": -13.828988770532025,
+      "reference_elapsed_seconds_median": 90.76473762397654,
+      "candidate_elapsed_seconds_median": 81.38943979202304,
+      "elapsed_seconds_change_percent": -10.329229255081229
+    },
+    "TC-A01-LATENT-MODE-POLICY": {
+      "reference_total_tokens_median": 19195,
+      "candidate_total_tokens_median": 18709,
+      "total_tokens_change_percent": -2.531909351393591,
+      "reference_elapsed_seconds_median": 12.148337333928794,
+      "candidate_elapsed_seconds_median": 14.746185750002041,
+      "elapsed_seconds_change_percent": 21.38439479135783
+    },
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+      "reference_total_tokens_median": 104320,
+      "candidate_total_tokens_median": 100693,
+      "total_tokens_change_percent": -3.4768021472392663,
+      "reference_elapsed_seconds_median": 70.86572379106656,
+      "candidate_elapsed_seconds_median": 66.643254042021,
+      "elapsed_seconds_change_percent": -5.95840911961143
+    }
+  },
+  "judgement": {
+    "quality": "passed",
+    "target_permission_boundary": "observed_5_of_5",
+    "non_target_route": "c147_initial_issuance_relation_observed_4_of_5",
+    "aggregate_cost": "tokens_and_elapsed_reduced",
+    "a01_cost": "tradeoff_requires_human_judgement",
+    "expand_n": false,
+    "standard14_authorized": false,
+    "adoption_approved": false,
+    "reason": "合算ではtokenと時間がともに減ったが、A01単体はtokenが2.53%減る一方で時間が21.38%、絶対値で2.60秒増えた。一方が増える場合の人間判断が未完了なので、自動で追加NまたはStandard14へ進めない。"
+  }
+}

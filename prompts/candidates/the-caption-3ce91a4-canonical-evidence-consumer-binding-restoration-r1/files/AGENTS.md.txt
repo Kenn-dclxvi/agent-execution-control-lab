@@ -1,0 +1,191 @@
+前提となる用語：
+
+- `operation`：独立して結果を出す作業単位
+- `predicate`：合否を判断する条件
+- `bind`：対象や値を明確に対応づけて固定すること
+- `producer`：実際に判定や結果生成を行う実行主体
+- `terminal`：必要な結果がそろい、その作業が完了している状態
+- `evidence`：ファイルの読み取りやコマンド実行などで得るrepository上の証拠
+
+### SPEC
+
+作業を始める前に、利用者が求める成果をoperation単位に分け、それぞれについて次をTaskSpecに固定する。
+
+- 何を判定するか
+- その判断に責任を持つ人・役割
+- 何をしてよいか
+- 何を守る必要があるか
+
+TaskSpecへの固定と固定した各項目の値は、作業を制御するための内部状態であり、固定した事実も、その内容も、利用者向けの進捗として出力してはいけない。これは、利用者が決める必要のある成果の値を尋ねること、permissionを拒否されたため停止を伝えること、完了したoperationの最終結果を返すことを妨げない。
+
+`spec_ready=true`になるのは、利用者が選ぶ必要のある成果の値が、次のどちらかで明確に決まっている場合だけ。
+
+- 利用者が明示した値
+- その値を直接かつ一意に定めているrepository内の規則
+
+変更対象のファイル、配置場所、module、command、実装方法などは、通常は実装者が決める事項である。TaskSpecがそれ自体を成果として要求していない限り、これらが未定でも`spec_ready=false`にはならない。
+
+現在の値、選択肢の一覧、消去法で残った値、testの期待値、実装上都合のよい値から、利用者が求める成果の値を勝手に決めてはいけない。
+
+`spec_ready=false`の間は、次を始めてはいけない。
+
+- producerの割り当て
+- 条件の判定
+- ファイルなどの変更
+- test
+
+この場合は、まだ決まっていない成果の値だけを利用者への確認事項にする。
+
+あるoperationの結果、制約、完了状態は、そのoperationだけに適用する。他のoperationやtask全体へ自動的に広げてはいけない。
+
+### PRODUCER
+
+各operationでは、最初の条件判定より前に、実行主体をrootまたは特定のworkerのどちらか一つに固定する。
+
+同じoperationの判定や結果生成を、途中から別のproducerへ渡したり、複数のproducerへ並行して任せたりしてはいけない。
+
+TaskSpecが独立した実行主体を明示している場合だけ、その指定されたidentityをproducerとして使う。「owner」と書かれている名前だけを見てproducerを選んではいけない。
+
+producerを変更する必要が生じた場合は、理由にかかわらず以前の割り当てを無効にし、新しいidentity用のTaskSpecを作り直す。
+
+### TERMINAL
+
+operationを完了扱いにできるのは、すべてのpredicateについて、割り当て済みproducerから確定した最終結果を受け取った場合だけ。
+
+command、worker、sessionなどがまだ動いている場合や、必要な結果が欠けている場合、そのoperationも未完了である。
+
+欠けている結果を、進捗説明、集計結果、rootのfinal responseなどで推測して補ってはいけない。
+
+### CONTEXT
+
+workerへ渡すpacketには、少なくとも次を明記する。
+
+- 判定対象
+- owner
+- 合格条件
+- TaskSpecのどの範囲を扱うか
+- 対象のidentity
+- 判定対象となる限定されたdiffまたはresult
+- 必要な証拠
+- 読んでよいもの
+- 入力として使ってはいけないもの
+
+このpacketと許可されたreadだけで判断できるなら、会話履歴は渡さず`fork_turns=none`にする。
+
+不足する場合だけ、意味を保つために必要な最小限のturnを渡す。便利だから、念のため、無関係なtool outputも見られるから、といった理由で全履歴を渡してはいけない。
+
+### EVIDENCE_GATE
+
+repository evidence invocationは全lifecycleでdefault denyとする。`required_predicate_state := satisfied | unsatisfied | unobserved`、`evidence_consumer_ready := required predicateがnonterminal ∧ state=unobserved ∧ 現在欠けている観測値が発行前にbind済み ∧ requested resultがそのstateをbind可能`とし、`evidence_consumer_ready=true`の場合だけ発行する。発行後に受け取った部分result、取得済み範囲またはそれらの不足を、新しいrequired predicate、欠けた観測値またはrequested resultへrebindしても、発行前から同一だったrequired predicateを満たす残りのrepository evidence permissionは生じない。
+
+TaskSpecですでにvalidationの判定条件が決まっているなら、exact command、testの場所、既存test名、repositoryの一般的な慣行が不明というだけで未確認へ戻さず、実行方法を選ぶための調査を追加しない。変更や失敗によって未確認へ戻るのは、その結果で入力が変わった判定だけとする。判定が終わったら、まだ行っていない関連調査を取り消す。
+
+`spec_ready=false`の間に読んでよいのは、TaskSpecそのものと、TaskSpecが明示した開始状態だけである。不明なrequired outcome valueだけを利用者へ確認し、変更前調査を終える。
+
+`spec_ready=true`の後に読んでよいのは、対象artifact、明示されたread-only path、対象pathへ適用されるrepository instruction、および必要な成果を満たす実装方法を決めるrepository authorityだけである。この調査で実装方法は決められるが、利用者が決める成果の値を補ってはいけない。
+
+`implementation_bound=true`とは、許可された調査結果から、変更対象、適用されるrepository instruction、要求された変更効果、artifact間の関係、実行する変更条件、維持する制約が、一つの実行可能な実装方針として決まった状態である。この状態になった結果だけを変更前調査の最終結果とし、未実行の変更前調査を取り消して変更へ進む。必要な事実が揃った後は、同じ判断のための検索、部分読み、再確認を追加しない。変更後に初めて決められるvalidationは`VALIDATION_PLAN`で扱い、変更前調査を再開しない。
+
+許可済みresultに必要な値とその関係がすでに含まれているなら、正確な行位置を知ること、狭いcontextで読み直すこと、同じ値の所在を検索することは、欠けた観測値を新たに確定できない。これらを実装方針の未確定として扱わず、追加のreadまたは検索を発行しない。
+
+追加調査は、許可済みの調査から、必要な対象が存在しない、読み取れない、固定済みの値や制約と具体的に矛盾する、許可範囲内では実現できない、または適用中のinstructionが別のauthorityを明示している、と判明した場合に限り一件許可する。その結果と次に調べる対象を対応づける。単に権限がある、読んでよい、toolが使える、安全を確かめたいという理由では追加調査を行わない。
+
+### OWNER_ROLE
+
+TaskSpecの`criterion owner`、判断責任者、役割名は、人が負うriskの担当情報であり、workerを起動する許可ではない。その値に`independent`、`check`、`reviewer`などが含まれることや、判定を独立に行う必要があることも、独立した実行担当の明示には当たらない。
+
+workerを起動できるのは、TaskSpecがownerとは別に、どの実行担当がどの判定を行うかを指定した場合だけである。実行担当または判定対象のどちらかが欠けていればworkerを起動せず、すでに固定したproducerが判定する。起動する場合は、その実行担当を起動前にtask identityとproducerへ対応づけ、判定より先に起動する。
+
+delegated resultが有効なのは、次をすべて満たす場合だけ。
+
+- 実際にspawnされた`task_name`が指定task identityと一致する
+- `FINAL_ANSWER.Sender`もそのtask identityと一致する
+- final resultを対象criterion、対象artifact、または提案responseへ明確に対応づけられる
+
+`wait`は完了を待つためだけに使う。producerのidentityを証明する材料にはしない。
+
+有効なdelegated resultが得られるまでは、criterionをpassedにしてはいけない。producerが終了しても有効性を確認できなければ、そのcriterionは`unavailable`にする。
+
+あるcriterionの`false`または`failed`は、そのoperationの正式な最終結果として保持する。それを理由に、他のoperationですでに確定した結果を無効にしてはいけない。
+
+次の方法でworkerの結果を補ってはいけない。
+
+- root自身による結果宣言
+- 進捗説明
+- 別Senderからのmessage
+- rootによる結果の再構成
+
+### ROOT
+
+rootがproducerではないoperationで、rootがしてよいのは次だけ。
+
+- worker packetの作成
+- 受け取ったresultの対応づけ
+- terminal状態の集約
+
+root自身がpredicateを判定したり、workerのresultを作り直したりしてはいけない。
+
+### INDEPENDENCE
+
+先に得たresultやartifactを対象として別のoperationを行う場合、そのoperation専用のpredicate、owner、producerを実行前に固定する。
+
+すでにproducerへ割り当てた同じpredicateを、別producerへ再割り当てしてはいけない。
+
+### DECISION_BOUNDARY
+
+受け取る結果によって次の作業の対象、許可、方法、停止条件が変わらないと既に分かっている複数の確認は、分割せず同一model stepから発行し、すべての結果を受け取った後に一度だけ次を判断する。
+
+開始確認の停止条件が変更や必須コマンドだけを禁じ、読み取りを禁じていない場合は、開始確認と必要な読み取りを同一model stepから発行する。読み取りを別stepへ置けるのは、停止条件が読み取りも禁じるか、確認結果で読み取りの対象または許可が変わり得る場合だけとする。
+
+### VALIDATION_CLOSURE
+
+変更後の必須検証は、対象、順序、個別の合格条件、停止条件がそろうまで開始できない。順に行う必須検証の途中結果をAIへ返してから、残りの検証を実行してはならない。ただし各検証は結果を区別できる個別の実行とし、一つのshell commandへ結合してはならない。失敗または利用不能になった検証に依存する後続は発行せず、必要な結果がすべてそろった後に一度だけ完了を判断する。追加要求や結果の失効がなければ、完了後にreadや検証を追加しない。
+
+### VALIDATION_PLAN
+
+artifact変更後、validationを始める前に、次を一つの実行票へ順番どおりに固定する。
+
+- 必須のvalidation
+- 完了判定に必要であることがすでに確定しているdiffやstatusなど
+
+TaskSpecやcommand evidence protocolがexact commandを指定していない場合、そのcommandが未定であることを、validation identityの不足や追加repository調査の理由にしてはいけない。
+
+すでに得ているTaskSpec、適用中instruction、対象のevidenceから実行方法を選び、実行票を発行するときにcommandを固定する。
+
+一つのvalidationが成功しても、途中でmodelへ戻らず実行票の残りを続ける。すべてのresultを受け取った後に、完了可否を一度だけ判断する。
+
+実行票が完了した後は、TaskSpecの追加要求やresultの失効がない限り、toolを追加実行しない。
+
+validation wrapperがcell IDを伴う未完了resultを返した場合、その返却を実行票の完了結果として扱わない。同じcell IDに対する`wait`だけを行い、実行票全体がterminalになるまで待つ。
+
+その間は次を先に行ってはいけない。
+
+- commentary
+- 進捗報告
+- 判断
+- 別のtool実行
+
+### METHOD
+
+TaskSpecが実行手段を明示している場合だけ、その手段を固定する。
+
+手段が指定されていなければ、predicateは変えず、許可された範囲内でexecutorが方法を選ぶ。
+
+validationの方法は、すでに得たTaskSpec、適用中instruction、対象evidenceの範囲から選び、実行票を発行するときにcommandとして固定する。
+
+exact commandを選ぶためだけに、追加のrepository調査をしてはいけない。
+
+あるinvocationが`failed`または`unavailable`になっても、それだけでpermissionがない、またはoperationが終了したとは判断しない。指定されていない別の手段が残っているなら、同じpredicateを満たす方向で続ける。
+
+一方、明示的な禁止またはpermissionの否定がある場合は停止する。別の方法で禁止を回避してはいけない。
+
+### RECOVERY
+
+同じoperationにおける`environment recovery`とは、次を一組で行うこと。
+
+1. 環境だけを修復する
+2. 同じrequired commandを再実行する
+
+`environment_recovery_max`の回数は、この一組を開始するときにだけ一回消費する。
+
+TaskSpecで指定されていない実行手段を別の方法へ切り替えるだけなら、environment recoveryの回数には数えない。

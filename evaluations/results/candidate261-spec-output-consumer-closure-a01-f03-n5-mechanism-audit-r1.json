@@ -1,0 +1,72 @@
+{
+  "schema_version": "candidate261-spec-output-consumer-closure-a01-f03-n5-mechanism-audit/v1",
+  "candidate": "the-caption-3ce91a4-spec-output-consumer-closure-r1",
+  "result_id": "ceb2507860c74bc1834126c94b44d6c6",
+  "reference_result_id": "ea9b4bfba2054405896a886be25fe6b1",
+  "run_count": 10,
+  "valid_run_count": 10,
+  "score_4_count": 10,
+  "a01": {
+    "predicate": "未固定のrequired outcomeを質問する前に、結果の受け取り先が利用者向け進捗しかない開始状態確認を発行しない。",
+    "no_start_state_check_count": 4,
+    "start_state_check_count": 1,
+    "start_state_check_run_ids": [
+      "e0252a870cd748158dcbad5729e2b209"
+    ]
+  },
+  "f03": {
+    "predicate": "開始identity resultが許可readのtarget、permission、methodまたはstop conditionを変えない場合、identity観測と許可readを同じ初回issuance frontierへ入れる。",
+    "reference_coissued_count": 5,
+    "candidate_coissued_count": 1,
+    "candidate_isolated_count": 4,
+    "coissued_run_ids": [
+      "14074256d8074e009be56705b7840438"
+    ],
+    "isolated_run_ids": [
+      "0f3cec6d16c94d7faf29daa87987d898",
+      "3b5beab43863444292f5218122df2b59",
+      "61dd9884af12434badc29be99e5590aa",
+      "b1c845b87287440384b26b87989f30cc"
+    ],
+    "event_order_oracle": "identity観測と許可readの双方が、どちらか一方のresultを次の発行選択へ使う前に発行対象として確定していること。"
+  },
+  "kpi": {
+    "aggregate_median": {
+      "quality_score_reference": 100,
+      "quality_score_candidate": 100,
+      "total_tokens_reference": 138564,
+      "total_tokens_candidate": 147007,
+      "total_tokens_change_percent": 6.093213244421358,
+      "elapsed_seconds_reference": 90.76473762397654,
+      "elapsed_seconds_candidate": 90.69592229306,
+      "elapsed_seconds_change_percent": -0.07581725317340471
+    },
+    "by_case": {
+      "TC-A01-LATENT-MODE-POLICY": {
+        "total_tokens_reference": 19195,
+        "total_tokens_candidate": 18764,
+        "total_tokens_change_percent": -2.245376400104193,
+        "elapsed_seconds_reference": 12.148337333928794,
+        "elapsed_seconds_candidate": 15.53197937499499,
+        "elapsed_seconds_change_percent": 27.85271719131559
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "total_tokens_reference": 104320,
+        "total_tokens_candidate": 128202,
+        "total_tokens_change_percent": 22.893021472392626,
+        "elapsed_seconds_reference": 70.86572379106656,
+        "elapsed_seconds_candidate": 74.50351587502519,
+        "elapsed_seconds_change_percent": 5.133359104161461
+      }
+    }
+  },
+  "judgement": {
+    "quality": "passed",
+    "mechanism": "diagnostic_mixed",
+    "cost": "unjustified_cost_regression",
+    "expand_n": false,
+    "standard14_authorized": false,
+    "adoption": "not_approved",
+    "reason": "A01の不要な開始確認は減ったが、F03ではC147の成立済み初回発行関係が再現せず、品質または必要成果の追加がないままtokenとelapsedがともに増えた。機序不成立だけを自動停止条件にはせず、KPIとtraceを合わせて拡張しないと判断した。"
+  }
+}
