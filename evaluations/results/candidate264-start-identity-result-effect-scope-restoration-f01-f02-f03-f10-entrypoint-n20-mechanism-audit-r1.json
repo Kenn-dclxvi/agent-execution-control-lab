@@ -1,0 +1,191 @@
+{
+  "candidate_prompt_identity": {
+    "bundle_sha256": "9b33e94432ede3ee0c278d876e743ec07f123ba5478c8c8df84dcf4d159ab930",
+    "name": "the-caption-3ce91a4-start-identity-result-effect-scope-restoration-r1",
+    "revision": "r1"
+  },
+  "candidate_result_id": "92467093897544f98eb526e018757abb",
+  "comparison_results": {
+    "candidate147_four_case_n20_result_id": "a1910bf71a474153947dabfc4582991a",
+    "candidate147_standard14_n100_result_id": "e6fc6e10dedd47f5a1d59d114e6e0f57",
+    "candidate264_original_n5_result_id": "1a64c1b2429c4e89aff3aedd6836944e"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate147_n100": {
+        "failure_count": 1,
+        "pass_count": 99
+      },
+      "candidate264_n20": {
+        "failure_count": 0,
+        "pass_count": 20
+      }
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate147_n100": {
+        "failure_count": 0,
+        "pass_count": 100
+      },
+      "candidate264_n20": {
+        "failure_count": 0,
+        "pass_count": 20
+      }
+    },
+    "f03_unaffected_start_result_did_not_delay_required_read": {
+      "candidate147_n100": {
+        "failure_count": 2,
+        "pass_count": 98
+      },
+      "candidate264_n20": {
+        "failure_count": 0,
+        "pass_count": 20
+      }
+    },
+    "f10_instruction_result_preceded_entrypoint_content_when_permission_could_change": {
+      "candidate147_n100": {
+        "failure_count": 48,
+        "pass_count": 52
+      },
+      "candidate264_n20": {
+        "added_n15_failure_count": 15,
+        "failure_count": 18,
+        "pass_count": 2,
+        "pass_run_ids": [
+          "b46717a6e7a7419cbc5019f47d19b0b4",
+          "cba3c16c9e0445e1977cafa636c2f016"
+        ]
+      }
+    }
+  },
+  "kpi_comparison_to_candidate147_n20": {
+    "candidate147": {
+      "elapsed_seconds_median": 289.9632092709653,
+      "quality_score_median": 100.0,
+      "total_tokens_median": 478811.5
+    },
+    "candidate264": {
+      "elapsed_seconds_median": 305.9575353744731,
+      "quality_score_median": 100.0,
+      "total_tokens_median": 514485.0
+    },
+    "difference": {
+      "elapsed_seconds": 15.994326103507774,
+      "elapsed_seconds_percent": 5.515984646369867,
+      "quality_score": 0.0,
+      "total_tokens": 35673.5,
+      "total_tokens_percent": 7.45042673369374
+    }
+  },
+  "quality_correlation": "not_100_percent",
+  "schema_version": "the-caption-prompt.candidate264-n20-mechanism-audit/v1",
+  "status": "target_mechanism_passed_normal_route_regressed_cost_regressed_stopped",
+  "validation_wait_reentry": {
+    "attribution": "追加waitはvalidation wrapperがcell ID付きnonterminal resultを返した場合の再入であり、C147とCandidate264の双方で発生する。一方、発生率はC147の同一四ケース400件で15.00%、Candidate264の80件で41.25%と大きく異なり、token増加経路にも対応するため、C147からCandidate264までのprompt全体構造差と無関係とは扱わない。Candidate264はCandidate254系列の展開本文、validation境界の表現および固定context量を含めてC147と構造が異なる。ただし実行時間とwrapper返却時機も混在するため、差の全量をCandidate264の局所DECISION_BOUNDARY変更だけへ帰属しない。",
+    "candidate147_n100_same_four_cases": {
+      "case_stats": {
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+          "median_tokens_no_wait": 108197.0,
+          "median_tokens_wait": 149093.0,
+          "run_count": 100,
+          "runs_with_wait": 19,
+          "wait_call_count": 24,
+          "wait_distribution": {
+            "0": 81,
+            "1": 14,
+            "2": 5
+          }
+        },
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+          "median_tokens_no_wait": 126579.0,
+          "median_tokens_wait": 181365.0,
+          "run_count": 100,
+          "runs_with_wait": 17,
+          "wait_call_count": 23,
+          "wait_distribution": {
+            "0": 83,
+            "1": 11,
+            "2": 6
+          }
+        },
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+          "median_tokens_no_wait": 98559.5,
+          "median_tokens_wait": 127319.0,
+          "run_count": 100,
+          "runs_with_wait": 24,
+          "wait_call_count": 30,
+          "wait_distribution": {
+            "0": 76,
+            "1": 18,
+            "2": 6
+          }
+        },
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+          "run_count": 100,
+          "runs_with_wait": 0,
+          "wait_call_count": 0,
+          "wait_distribution": {
+            "0": 100
+          }
+        }
+      },
+      "rollout_count": 400,
+      "runs_with_wait": 60,
+      "wait_call_count": 77,
+      "wait_run_rate": 0.15
+    },
+    "candidate264_n20": {
+      "case_stats": {
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+          "median_tokens_no_wait": 114271.0,
+          "median_tokens_wait": 153285.0,
+          "run_count": 20,
+          "runs_with_wait": 10,
+          "wait_call_count": 13,
+          "wait_distribution": {
+            "0": 10,
+            "1": 9,
+            "4": 1
+          }
+        },
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+          "median_tokens_no_wait": 130979.0,
+          "median_tokens_wait": 186219.0,
+          "run_count": 20,
+          "runs_with_wait": 10,
+          "wait_call_count": 15,
+          "wait_distribution": {
+            "0": 10,
+            "1": 6,
+            "2": 3,
+            "3": 1
+          }
+        },
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+          "median_tokens_no_wait": 108920.0,
+          "median_tokens_wait": 134486.0,
+          "run_count": 20,
+          "runs_with_wait": 13,
+          "wait_call_count": 16,
+          "wait_distribution": {
+            "0": 7,
+            "1": 10,
+            "2": 3
+          }
+        },
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+          "run_count": 20,
+          "runs_with_wait": 0,
+          "wait_call_count": 0,
+          "wait_distribution": {
+            "0": 20
+          }
+        }
+      },
+      "rollout_count": 80,
+      "runs_with_wait": 33,
+      "wait_call_count": 44,
+      "wait_run_rate": 0.4125
+    },
+    "definition": "保存root rolloutのfunction_call name=waitを、cell ID付きnonterminal validation result後の追加model reentryとして数える。"
+  }
+}

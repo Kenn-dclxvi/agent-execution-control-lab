@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
+- [`candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-route-gate-r2.json`](../candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-route-gate-r2.json)
+- [`candidate55-prebound-operation-graph-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json`](../candidate55-prebound-operation-graph-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json)
+- [`candidate56-resolved-fixed-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate56-resolved-fixed-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
+- [`candidate56-resolved-fixed-read-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate56-resolved-fixed-read-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate57-task-enumerated-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate57-task-enumerated-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate57-task-enumerated-read-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate57-task-enumerated-read-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate58-purpose-bound-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate58-purpose-bound-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
@@ -57,8 +62,3 @@
 - [`candidate71-validation-closure-v13-reasoning-xhigh-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-reasoning-xhigh-standard14-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v13-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-standard14-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate71-validation-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate72-closed-validation-state-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate72-closed-validation-state-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
-- [`candidate73-terminal-closure-preserving-compression-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate73-terminal-closure-preserving-compression-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
-- [`candidate74-typed-execution-state-machine-v12-standard14-global-m24-n5-r1.json`](../candidate74-typed-execution-state-machine-v12-standard14-global-m24-n5-r1.json)
-- [`candidate74-typed-execution-state-machine-v12-validation-fast-path-f06-global-m5-n5-r1.json`](../candidate74-typed-execution-state-machine-v12-validation-fast-path-f06-global-m5-n5-r1.json)
-- [`candidate75-authority-bound-validation-fast-path-v12-validation-fast-path-f06-global-m5-n5-r1.json`](../candidate75-authority-bound-validation-fast-path-v12-validation-fast-path-f06-global-m5-n5-r1.json)
