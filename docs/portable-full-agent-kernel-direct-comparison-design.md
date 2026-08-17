@@ -54,14 +54,14 @@ multi-actor能力がないsurfaceを`unavailable`へ閉じるroot-only本文は�
 ## 比較条件と順序
 
 1. C147 referenceとportable full-agent Candidateを、それぞれtarget固有の自己完結したprompt bundleとして登録する。
-2. control-free r4と同じtarget、held-out r1、TaskSpec wrapper、oracle、rating、Codex CLI 0.146.0、GPT-5.6 Sol、reasoning `medium`、permission、instruction isolation、schema transport r3、token accounting v2およびelapsed境界をbindする。
-3. prompt identity以外の完全一致をpreflight receiptで証明する。どのslotもpreflight前に発行しない。
-4. C147 reference 14 Case N=1とportable Candidate 14 Case N=1を、各atomic runのidentityを分けて実行する。control-freeは再実行しない。
+2. portable Candidateだけに、control-free r4と同じtarget、held-out r1、TaskSpec wrapper、oracle、rating、Codex CLI 0.146.0、GPT-5.6 Sol、reasoning `medium`、permission、instruction isolation、schema transport r3、token accounting v2およびelapsed境界をbindしたProfileを作る。
+3. portable Candidateのprompt identity以外がcontrol-free r4と完全一致することをpreflight receiptで証明し、14 Case N=1を実行する。どのslotもpreflight前に発行しない。
+4. portable Candidateが14 / 14 score 4を満たした場合だけ、同じ条件のC147 reference Profileと比較preflightを作り、不足するreference 14 Case N=1を実行する。Candidateがquality gateを通らなければreference Profileとrunを発行しない。control-freeは再実行しない。
 5. 両方の全resultを受領してから、Case別quality、all-agent tokenおよびelapsedを対応づける。
 
 ## 判定と停止条件
 
-- preflight不一致、未固定field、prompt bundle driftまたはruntime driftが一件でもあれば、両条件のslotを発行しない。
+- portable Candidateのpreflight不一致、未固定field、prompt bundle driftまたはruntime driftが一件でもあれば、Candidate slotを発行しない。後段のC147 referenceにも同じ独立preflightを要求する。
 - schema不適合、一次token欠落、elapsed欠落または採点不能が一件でもあれば、その条件を`invalid`としてN拡張しない。
 - portable Candidateにscore 4未満が一件でもあれば`quality_failed`としてN拡張しない。機序診断だけを独立した停止条件にしない。
 - C147 referenceにscore 4未満があれば、portable Candidate自体のqualityは記録できるが、品質維持後の効率比較は`comparison_reference_not_qualified`として判定しない。
