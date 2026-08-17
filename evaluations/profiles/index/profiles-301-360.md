@@ -2,11 +2,14 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
+- [`candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
 - [`candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
 - [`candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)
 - [`candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)
-- [`candidate5-expanded12-global-m24-n5-r1.json`](../candidate5-expanded12-global-m24-n5-r1.json)

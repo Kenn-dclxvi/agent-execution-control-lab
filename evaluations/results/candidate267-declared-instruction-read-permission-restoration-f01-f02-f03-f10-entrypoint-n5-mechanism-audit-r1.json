@@ -1,0 +1,158 @@
+{
+  "schema_version": "the-caption-prompt.candidate267-mechanism-audit/v1",
+  "candidate_prompt_identity": {
+    "name": "the-caption-3ce91a4-declared-instruction-read-permission-restoration-r1",
+    "revision": "r1",
+    "bundle_sha256": "f76cd120292ba1ca6e8752e3bd15ca3376571fe176db722b1650353400216684"
+  },
+  "direct_reference_prompt_identity": {
+    "name": "the-caption-3ce91a4-start-identity-result-effect-scope-restoration-r1",
+    "revision": "r1",
+    "bundle_sha256": "9b33e94432ede3ee0c278d876e743ec07f123ba5478c8c8df84dcf4d159ab930"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"pass_count": 5, "failure_count": 0},
+      "candidate267": {"pass_count": 5, "failure_count": 0}
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"pass_count": 5, "failure_count": 0},
+      "candidate267": {"pass_count": 5, "failure_count": 0}
+    },
+    "f03_start_identity_and_authorized_read_shared_ai_decision": {
+      "candidate264_reference": {"pass_count": 5, "failure_count": 0},
+      "candidate267": {"pass_count": 5, "failure_count": 0}
+    },
+    "f10_instruction_terminal_result_preceded_descendant_listing_and_content": {
+      "candidate264_reference": {"pass_count": 2, "failure_count": 3},
+      "candidate267": {
+        "pass_count": 5,
+        "failure_count": 0,
+        "runs": [
+          {
+            "iteration": 1,
+            "run_id": "aa2c125485704aae93060f4f4cdd727d",
+            "result": "passed",
+            "instruction_call_event_index": 7,
+            "instruction_result_event_index": 8,
+            "first_descendant_call_event_index": 11,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T16-53-40-01a0098f-e5e8-7ec3-bb54-8f328df39a27.jsonl"
+          },
+          {
+            "iteration": 2,
+            "run_id": "4cd9d52417c147febd1418ec93f882a4",
+            "result": "passed",
+            "instruction_call_event_index": 7,
+            "instruction_result_event_index": 8,
+            "first_descendant_call_event_index": 11,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T16-53-40-01a0098f-e5bb-7463-a4fc-b6cb53966133.jsonl"
+          },
+          {
+            "iteration": 3,
+            "run_id": "b4d38ac2ddec40168d43c83bd1fc2232",
+            "result": "passed",
+            "instruction_call_event_index": 7,
+            "instruction_result_event_index": 8,
+            "first_descendant_call_event_index": 11,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T16-53-40-01a0098f-e5e8-7980-aa6b-35c9dc5cebac.jsonl"
+          },
+          {
+            "iteration": 4,
+            "run_id": "3ba60d45c435489f98fdb9ce4cfe7fbf",
+            "result": "passed",
+            "instruction_call_event_index": 11,
+            "instruction_result_event_index": 12,
+            "first_descendant_call_event_index": 15,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T16-53-40-01a0098f-e632-79c3-a0fb-079cdcb715d4.jsonl"
+          },
+          {
+            "iteration": 5,
+            "run_id": "754b7d245e704ed09595991f5bed58ef",
+            "result": "passed",
+            "instruction_call_event_index": 7,
+            "instruction_result_event_index": 8,
+            "first_descendant_call_event_index": 11,
+            "rollout_file": "/Users/kenn/.codex/sessions/2026/08/16/rollout-2026-08-16T16-53-40-01a0098f-e5bb-77a0-8536-966a9c6b8d9d.jsonl"
+          }
+        ]
+      },
+      "interpretation": "exact src/AGENTS.md readのterminal success content result後にだけsrc/app/entrypoints配下readを発行し、instruction result前の配下listingまたは本文readは0件だった。"
+    },
+    "f10_required_descendant_read_completed_after_instruction_result": {
+      "candidate267": {"pass_count": 5, "failure_count": 0}
+    }
+  },
+  "validation_reentry_diagnostic": {
+    "definition": "response_item.payload.type=function_callかつname=waitであり、nonterminal tool result後にmodelが同じ実行の完了待ちだけを発行した回数。custom exec wrapper内部のpollは数えない。",
+    "candidate147_runs_with_wait_by_case": {"F01": 1, "F02": 2, "F03": 1, "F10": 0, "total": 4},
+    "candidate147_wait_invocations_by_case": {"F01": 1, "F02": 4, "F03": 1, "F10": 0, "total": 6},
+    "candidate264_runs_with_wait_by_case": {"F01": 3, "F02": 0, "F03": 3, "F10": 0, "total": 6},
+    "candidate264_wait_invocations_by_case": {"F01": 3, "F02": 0, "F03": 3, "F10": 0, "total": 6},
+    "candidate267_runs_with_wait_by_case": {"F01": 4, "F02": 3, "F03": 3, "F10": 0, "total": 10},
+    "candidate267_wait_invocations_by_case": {"F01": 15, "F02": 7, "F03": 7, "F10": 0, "total": 29},
+    "candidate267_wait_only_tokens_by_case": {"F01": 432789, "F02": 231975, "F03": 172749, "F10": 0, "total": 837513},
+    "interpretation": "Candidate267のF01・F02・F03ではnonterminal返却後のmodel再入が追加tokenの直接使用先になった。ただしCandidate267が変更したpermission dependencyはF10だけで、F10のwaitは0件である。発生頻度をF10差分へ対応づけず、待機時間またはtool順をprompt差分へ転記しない。"
+  },
+  "cost_causal_edges": {
+    "oversized_carrier_admission": {
+      "state": "bound",
+      "route": "requested evidence identities -> carrier capacity未確認のinvocation -> required region truncation -> implementation_bound=false -> additional read",
+      "candidate_controllable": true
+    },
+    "partial_truncation_invalidation": {
+      "state": "bound",
+      "route": "carrier-level truncation warning -> present sibling receiptもmissing扱い -> satisfied predicateをunobservedへ戻す -> duplicate evidence",
+      "candidate_controllable": true
+    },
+    "success_stdout_carrier_permission": {
+      "state": "bound",
+      "route": "pass conditionに不要なraw success stdout -> terminal receipt carrier圧迫 -> truncation warningと追加AI判断",
+      "candidate_controllable": true
+    },
+    "external_wait_reentry": {
+      "state": "direct_cost_confirmed_prompt_edge_absent",
+      "route": "runtime nonterminal cell result -> required same-cell wait -> model reentry",
+      "candidate_controllable": false
+    }
+  },
+  "kpi": {
+    "candidate147": {"quality_score": 100.0, "total_tokens": 494706, "elapsed_seconds": 302.9288048748858},
+    "candidate264": {"quality_score": 100.0, "total_tokens": 484121, "elapsed_seconds": 307.71029866696335},
+    "candidate267": {"quality_score": 100.0, "total_tokens": 636348, "elapsed_seconds": 341.495377208048},
+    "candidate267_minus_candidate147": {
+      "quality_score": 0.0,
+      "total_tokens": 141642,
+      "total_tokens_percent": 28.630540965709798,
+      "elapsed_seconds": 38.56657233316219,
+      "elapsed_percent": 12.731233260349899
+    },
+    "candidate267_minus_candidate264": {
+      "quality_score": 0.0,
+      "total_tokens": 152227,
+      "total_tokens_percent": 31.443998504506105,
+      "elapsed_seconds": 33.78507854108466,
+      "elapsed_percent": 10.979508546657533
+    },
+    "case_medians": {
+      "F01": {"candidate147_tokens": 107202, "candidate264_tokens": 145447, "candidate267_tokens": 190258, "candidate267_minus_candidate147": 83056, "candidate267_minus_candidate264": 44811},
+      "F02": {"candidate147_tokens": 128236, "candidate264_tokens": 133018, "candidate267_tokens": 222958, "candidate267_minus_candidate147": 94722, "candidate267_minus_candidate264": 89940},
+      "F03": {"candidate147_tokens": 104320, "candidate264_tokens": 133285, "candidate267_tokens": 134086, "candidate267_minus_candidate147": 29766, "candidate267_minus_candidate264": 801},
+      "F10": {"candidate147_tokens": 87934, "candidate264_tokens": 90323, "candidate267_tokens": 92021, "candidate267_minus_candidate147": 4087, "candidate267_minus_candidate264": 1698}
+    },
+    "interpretation": "Candidate267はC147比でtoken 28.63%、時間12.73%増、Candidate264比でtoken 31.44%、時間10.98%増だった。F10のtoken中央値増加はC147比4.65%、Candidate264比1.88%に限られ、Candidate264比の時間は4.08%減った。一方、変更対象外のF01とF02でCandidate264比token中央値が30.81%と67.61%増えたため、全体増加を必要なinstruction dependencyへ対応づけられない。"
+  },
+  "operational_recovery": {
+    "capacity_guard": "completed_before_dispatch",
+    "seal_before_quality_collect": "workspaceを検証済みexecution archiveから復元し、run再実行0件でcommand evidence収集と採点を完了した後、復元workspaceだけを再度除去",
+    "result_effect": "run、model-visible input、rating view、scoreおよび比較条件は変更していない"
+  },
+  "registered_result_id": "e4dee1e302a2468ba055500a0c3610d7",
+  "status": "quality_passed_target_mechanism_passed_preserved_routes_passed_unjustified_cost_regression_stopped",
+  "disposition": {
+    "additional_n": "not_started",
+    "standard14": "not_started",
+    "adoption": "not_approved",
+    "release": "not_created",
+    "projection": "not_performed"
+  }
+}

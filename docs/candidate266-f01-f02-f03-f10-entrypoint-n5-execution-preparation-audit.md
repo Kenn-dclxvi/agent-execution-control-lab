@@ -2,6 +2,8 @@
 
 > **目的対応の訂正（2026-08-16）**: 比較互換preflightは成立したが、Candidate266は固定すべきCandidate254改善系列の`task_objective`に対応していなかった。比較条件が一致することは、派生operationが利用者目的を直接進めることを証明しない。本来は不足20件を発行せず、同じ目的を満たすCandidate254基盤の設計へ進むべきだった。以下は実際に発行した履歴と手順逸脱を保存する監査であり、現在系列の実行許可根拠には使わない。
 
+> **Candidate267方針（2026-08-16）**: 後続の明示判断では、Candidate267の直接基盤をCandidate264へ固定した。Candidate264の本文とF01・F02・F03の成立効果を保持し、F10のpermission edgeだけを閉じる。上の当時の訂正文と実行履歴は変更せず、Candidate266をCandidate267の親、必須gateまたは成功根拠にはしない。
+
 ## 結論
 
 C147の保存済みStandard14 poolから対象四ケース各5件を選び、基準result `29cf98307448409f820a739b2d008f7b`へ固定した。Candidate266とのprompt identity以外の条件は一致し、比較前receiptは`ready`、不足20件だけを許可した。C147の新規runは発行していない。

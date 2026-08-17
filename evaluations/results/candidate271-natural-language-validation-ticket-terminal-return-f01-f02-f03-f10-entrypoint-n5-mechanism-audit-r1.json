@@ -1,0 +1,135 @@
+{
+  "schema_version": "the-caption-prompt.candidate271-mechanism-audit/v1",
+  "candidate": {
+    "number": 271,
+    "prompt_set_name": "the-caption-3ce91a4-natural-language-validation-ticket-terminal-return-r1",
+    "bundle_sha256": "368d6e420b08ab1675834a15b828558c7ad4842e7c1d9155a870c1defc72ee89",
+    "direct_implementation_parent": "Candidate269",
+    "failed_counterexample_only": "Candidate270"
+  },
+  "registered_result_id": "baf01e47d8d8432bbe2dc92a961287cb",
+  "comparison_reference_result_id": "2398d22125bd4e658fe5b653679167b5",
+  "quality": {
+    "valid_runs": 20,
+    "excluded_attempts": 0,
+    "score_counts": {
+      "4": 20
+    }
+  },
+  "kpi": {
+    "same_iteration_four_case_median": {
+      "candidate147": {
+        "total_tokens": 494706,
+        "elapsed_seconds": 302.929
+      },
+      "candidate269": {
+        "total_tokens": 569253,
+        "elapsed_seconds": 368.19264324905816
+      },
+      "candidate270": {
+        "total_tokens": 532952,
+        "elapsed_seconds": 286.1858518750523
+      },
+      "candidate271": {
+        "total_tokens": 568890,
+        "elapsed_seconds": 303.78136733401334
+      },
+      "candidate271_delta_from_candidate269": {
+        "total_tokens": -363,
+        "total_tokens_percent": -0.06,
+        "elapsed_seconds": -64.41127591504483,
+        "elapsed_seconds_percent": -17.49
+      },
+      "candidate271_delta_from_candidate147": {
+        "total_tokens": 74184,
+        "total_tokens_percent": 14.99,
+        "elapsed_seconds": 0.8523673340133473,
+        "elapsed_seconds_percent": 0.28
+      }
+    },
+    "case_medians": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "candidate147_total_tokens": 107202,
+        "candidate269_total_tokens": 163264,
+        "candidate270_total_tokens": 121788,
+        "candidate271_total_tokens": 147496,
+        "candidate271_elapsed_seconds": 65.24868962500477
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "candidate147_total_tokens": 128236,
+        "candidate269_total_tokens": 166758,
+        "candidate270_total_tokens": 138017,
+        "candidate271_total_tokens": 171806,
+        "candidate271_elapsed_seconds": 78.5538400420337
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "candidate147_total_tokens": 104320,
+        "candidate269_total_tokens": 133527,
+        "candidate270_total_tokens": 128806,
+        "candidate271_total_tokens": 134431,
+        "candidate271_elapsed_seconds": 66.82147870800691
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "candidate147_total_tokens": 87934,
+        "candidate147_purpose_achieved_route_total_tokens": 108454,
+        "candidate269_total_tokens": 115122,
+        "candidate270_total_tokens": 114084,
+        "candidate271_total_tokens": 114860,
+        "candidate271_elapsed_seconds": 72.66442449996248
+      }
+    }
+  },
+  "mechanism": {
+    "f01_f02_outer_validation_wrapper": {
+      "observed_runs": 0,
+      "total_runs": 10
+    },
+    "f01_f02_ticket_nonterminal_child_result_not_returned_to_ai": {
+      "observed_runs": 0,
+      "total_runs": 10,
+      "candidate147_gate": {
+        "F01": "5 / 5",
+        "F02": "4 / 5 or greater"
+      }
+    },
+    "f01_f02_required_validation_results_returned_between_commands": {
+      "observed_runs": 10,
+      "total_runs": 10
+    },
+    "f01_f02_post_validation_diff_or_status_outer_call": {
+      "observed_runs": 10,
+      "total_runs": 10
+    },
+    "f01_f02_prebound_ticket_terminal_result_route": {
+      "observed_runs": 0,
+      "total_runs": 10,
+      "reason": "全runが一回の外側validation wrapperを迂回したため、実行前bindingとticket terminal返却を一体で実行したrouteは観測されなかった"
+    },
+    "f01_f02_candidate269_all_issued_output_carrier": {
+      "observed_runs": 0,
+      "total_runs": 10,
+      "reason": "過大carrierを修正したのではなくwrapper自体を迂回した"
+    },
+    "f03_start_identity_and_unaffected_read_joint_issuance": {
+      "observed_runs": 2,
+      "total_runs": 5,
+      "candidate147_gate": "5 / 5"
+    },
+    "f10_instruction_result_dependency": {
+      "observed_runs": 5,
+      "total_runs": 5,
+      "candidate147_gate": "2 / 5 or greater"
+    },
+    "f10_required_read_completion": {
+      "observed_runs": 5,
+      "total_runs": 5,
+      "candidate147_gate": "5 / 5"
+    }
+  },
+  "registration_note": {
+    "non_comparison_selection_result_id": "3c28d737d2ff475b8119b8bd2a717d93",
+    "reason": "reference resultとcycle receiptをbindせず作成したため直接比較には使用しない"
+  },
+  "conclusion": "quality_passed_but_target_route_not_exercised_and_token_not_improved",
+  "state": "mechanism_failed / no_n20_extension / stopped"
+}
