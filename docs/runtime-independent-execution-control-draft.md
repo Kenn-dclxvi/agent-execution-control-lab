@@ -135,12 +135,13 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 
 ## Candidate作成前の残件
 
-管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。現時点では次が未完了なので、Candidate bundle、profileまたは評価slotを作成しない。
+管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定した。現時点ではbundle identityが未登録なので、profileまたは評価slotを作成しない。
 
-1. control-free baselineの測定成立。
-2. 各surfaceで同一bytesが読み込まれたことのreceipt。
-3. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
-4. formal target identity、直接の基準、allowed deltaおよび非目標の固定。
+1. C147 referenceとportable full-agent Candidateのtarget固有bundle登録。
+2. Codex Profileで両bundleの一枚bytesをisolated workspaceへ配送したreceipt。
+3. prompt identity以外を完全一致させた比較preflight。
+
+他surfaceのreceiptは、そのsurfaceを正式runtimeとして登録する別系列で要求する。Codexのfull-agent比較へ未登録surfaceを混ぜない。品質、機序、対象外影響、KPI、安定性、直接の基準、allowed deltaおよび非目標はfull-agentについて直接比較設計へ固定済みである。
 
 control-free測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、Codex N=1 Profile、Structured Outputs subsetへの意味保存投影、thread-bound永続一次tokenおよび計画限定の実行入口を固定した。r4資格確認は14件すべて有効で、score 4と機序通過は各5/14だった。次の作業はこの基準へprompt identityだけを変えたportable kernelを比較する設計であり、成功動作のtool順を実行義務へ転記しない。
 
