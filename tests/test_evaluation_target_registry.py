@@ -10,7 +10,9 @@ from scripts.evaluation_loop import SUPPORTED_QUALITY_RATINGS
 ROOT = Path(__file__).resolve().parents[1]
 TARGETS = ROOT / "evaluations/targets"
 REGISTRY_README = TARGETS / "README.md"
-SCHEMA_VERSION = "the-caption-prompt.evaluation-target/v1"
+SCHEMA_VERSION_V1 = "the-caption-prompt.evaluation-target/v1"
+SCHEMA_VERSION_V2 = "the-caption-prompt.evaluation-target/v2"
+SCHEMA_VERSIONS = {SCHEMA_VERSION_V1, SCHEMA_VERSION_V2}
 LAYOUTS = ("legacy_root", "namespaced")
 LEGACY_ROOT_TARGET_ID = "the-caption"
 
@@ -29,7 +31,7 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
     def test_descriptor_identity_and_layout(self) -> None:
         for directory, descriptor in descriptors():
             with self.subTest(target=directory):
-                self.assertEqual(descriptor["schema_version"], SCHEMA_VERSION)
+                self.assertIn(descriptor["schema_version"], SCHEMA_VERSIONS)
                 self.assertEqual(descriptor["target_id"], directory)
                 self.assertIn(descriptor["layout"], LAYOUTS)
                 self.assertIn(descriptor["visibility"], ("private", "public"))
@@ -75,9 +77,22 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
                 self.assertIn("current_rating_contract", descriptor)
                 if contract is None:
                     continue
-                self.assertIn(contract, supported)
                 roots = descriptor["artifact_roots"]["rating_contracts"]
-                self.assertTrue((ROOT / roots / f"{contract}.json").is_file())
+                contract_path = ROOT / roots / f"{contract}.json"
+                self.assertTrue(contract_path.is_file())
+                if descriptor["schema_version"] == SCHEMA_VERSION_V1:
+                    self.assertIn(contract, supported)
+                else:
+                    target_contract = json.loads(contract_path.read_text(encoding="utf-8"))
+                    self.assertEqual(target_contract["contract_id"], contract)
+                    self.assertEqual(
+                        target_contract["schema_version"],
+                        "portable-instruction-semantic-rating/v1",
+                    )
+                    self.assertIn(
+                        "scripts/portable_semantic_conformance.py",
+                        descriptor["target_specific_modules"],
+                    )
 
     def test_null_rating_contract_has_no_registered_results(self) -> None:
         for directory, descriptor in descriptors():

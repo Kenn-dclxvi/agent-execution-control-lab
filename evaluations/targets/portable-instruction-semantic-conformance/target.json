@@ -1,0 +1,38 @@
+{
+  "schema_version": "the-caption-prompt.evaluation-target/v2",
+  "target_id": "portable-instruction-semantic-conformance",
+  "target_kind": "semantic_protocol",
+  "layout": "namespaced",
+  "visibility": "public",
+  "third_party_reproducible": true,
+  "target_subject": {
+    "kind": "semantic_protocol",
+    "protocol_id": "portable-instruction-semantic-conformance",
+    "protocol_revision": "response-r2",
+    "interaction_mode": "single_response_operation_ledger",
+    "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076",
+    "subject_authority": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r1/response.schema.json"
+  },
+  "executor_binding": "profile",
+  "artifact_roots": {
+    "cases": "evaluations/targets/portable-instruction-semantic-conformance/cases",
+    "sets": "evaluations/targets/portable-instruction-semantic-conformance/sets",
+    "profiles": "evaluations/targets/portable-instruction-semantic-conformance/profiles",
+    "rating_contracts": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts",
+    "prompt_bundles": "evaluations/targets/portable-instruction-semantic-conformance/prompts",
+    "published_results": "evaluations/targets/portable-instruction-semantic-conformance/results"
+  },
+  "current_rating_contract": "portable-instruction-semantic-exact-v1",
+  "target_specific_modules": [
+    "scripts/portable_semantic_conformance.py",
+    "scripts/materialize_semantic_protocol_case.py",
+    "scripts/semantic_protocol_comparison_preflight.py",
+    "scripts/semantic_protocol_codex_adapter.py"
+  ],
+  "authority_notes": {
+    "registration": "registration.jsonがsource commit a544769とnamespaced copyのbyte一致を固定する",
+    "case_boundary": "PIC-H01からPIC-H14だけをheld-out-r1として登録し、Q01からQ08を含めない",
+    "runtime_boundary": "runtime、model、reasoning、permissionおよびtoken accountingはProfileへ固定し、target identityへ含めない",
+    "repository_boundary": "repository commitまたはtreeを評価対象に見せかけないsemantic protocol targetである"
+  }
+}

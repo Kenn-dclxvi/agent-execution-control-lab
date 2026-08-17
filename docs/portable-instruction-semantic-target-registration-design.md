@@ -1,9 +1,9 @@
 # Portable instruction semantic target登録設計
 
 > [!IMPORTANT]
-> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / target_draft_valid / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / zero_byte_control_free_draft_fixed / execution_entrypoint_disabled / source_commit_unbound / v1_unchanged / formal_target_not_created / baseline_not_started`
+> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / execution_entrypoint_disabled / profile_not_registered / v1_unchanged / baseline_not_started`
 >
-> 本書はportable instruction semantic conformanceを既存repository targetと誤って互換扱いしないための登録前設計である。正式target、Profile、control-free baseline、Candidate、評価slotまたはresultではない。
+> 本書はportable instruction semantic conformanceを既存repository targetと誤って互換扱いしないための登録設計である。後続の正式登録は[`evaluations/targets/portable-instruction-semantic-conformance/`](../evaluations/targets/portable-instruction-semantic-conformance/)を正本とする。本書自体はProfile、Candidate、評価slotまたはresultではない。
 
 ## 結論
 
@@ -33,7 +33,7 @@ Codexを最初に使うことはtargetをCodex専用にしない。Claude Code�
 
 `executor_binding`は`profile`に固定する。v1のようにtarget descriptorへ単一executorを書かない。これは同じprotocolを複数runtimeで測るためであり、runtime間互換を意味しない。
 
-登録候補は[`portable-instruction-semantic-target-draft.json`](portable-instruction-semantic-target-draft.json)へ置いた。正式pathへ配置せず、`current_rating_contract=null`、artifact directory未作成のまま保持する。
+登録候補は[`portable-instruction-semantic-target-draft.json`](portable-instruction-semantic-target-draft.json)へ履歴草案として保持する。commit `a544769`でsource bytesを固定した後、正式descriptorを[`target.json`](../evaluations/targets/portable-instruction-semantic-conformance/target.json)へ登録し、rating contractとnamespaced artifact rootsをbindした。
 
 ## compatibility contract v2
 
@@ -101,7 +101,7 @@ response schemaを守るためのTaskSpec wrapperは両条件へ同じbytesで�
 
 一件だけをmodel-visible packetへ出すmaterializer、private receipt、v2 subject/runtime comparison preflight、Codex CLI `0.146.0`向けadapter coreおよび0-byte control-free prompt draftは実装済みである。preflightはprompt identity以外の完全一致を要求し、`target_repository_ref`、`unbound`、runtime drift、Case driftおよびtranscript accountingと両立しない`ephemeral` sessionを拒否する。adapterはisolated workspaceへ`AGENTS.md`だけを配置し、user config、rules、memory、skills、apps、pluginsおよびmulti-agent capabilityを無効化する。tokenはterminal eventの一次`total_tokens`がある場合だけ受理し、内訳や文字数から補完しない。
 
-ただし、現在のcontrol-free artifactは`source_commit=null`の登録前草案であり、adapterには実行入口がない。次に許可するのは、この変更を含むcommitからsource identityをbindし、namespaced formal target、rating contract、model、reasoning、capability catalog、private transcript回収方法および共通TaskSpec wrapper bytesを一つのProfileへ固定する登録変更である。それまではdispatch、qualificationまたはbaseline runを発行しない。
+commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contractおよび0-byte control-free baselineは登録済みである。ただしadapterには実行入口がなく、Profileも存在しない。次に許可するのは、model、reasoning、Codex CLI runtime、capability catalog、private transcript回収方法、permissionおよび共通TaskSpec wrapper bytesを一つのProfileへ固定し、そのProfileとadapter contractの一致を静的検証する変更である。それまではdispatch、qualificationまたはbaseline runを発行しない。
 
 ## 参照
 

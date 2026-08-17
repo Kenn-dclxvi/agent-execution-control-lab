@@ -1,0 +1,40 @@
+{
+  "artifact": {
+    "artifact_role": "baseline",
+    "description": "runtime既定instructionと共通TaskSpec wrapperを保持し、追加portable instructionだけを0 bytesにしたsemantic protocol比較元。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "runtime hidden/default instruction不在の主張",
+      "TaskSpec wrapper不在の主張",
+      "品質、tokenまたは時間の優劣主張",
+      "採用、releaseまたはruntime projection"
+    ],
+    "problem": "portable kernel追加効果を同一runtime条件で比較できる固定prompt identityが必要である。",
+    "prompt_set_name": "control_free",
+    "scope": "isolated workspace rootのAGENTS.md一件だけ。",
+    "state": "registered"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9",
+  "files": [
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "initial_path_set",
+    "source_prompt_identity": null
+  },
+  "prompt_identity": "portable-semantic-a544769-control-free-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "a544769660bb2a8ee8722d5a42fef8d734f93ab3",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "6919c62641c84609d9333d641586fc56231c6caf"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

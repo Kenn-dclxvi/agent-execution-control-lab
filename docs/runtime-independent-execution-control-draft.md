@@ -142,7 +142,7 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 3. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
 4. formal target identity、直接の基準、allowed deltaおよび非目標の固定。
 
-control-free baseline前の測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)と単一Case packet materializerまで固定した。次の作業はv2 subject/runtime compatibility preflightである。成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を採点可能なまま保持する。
+control-free baseline前の測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflightおよびformal target登録まで固定した。次の作業はCodex runtime、model、reasoning、capability catalog、共通TaskSpec wrapperおよびprivate transcript回収境界を一つのProfileへbindすることである。成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を採点可能なまま保持する。
 
 Claude Code自身によるC147の静的適用可能性報告は[`C147 Claude Code自己評価のtriage`](c147-claude-code-self-assessment-triage.md)へ記録した。Codex固有field、wrapper、継続identityおよびambient recovery/protocol不足はsurface mismatchとして採用し、EVIDENCE_GATEの有害性、形式記法の実効および5項目だけが有効という集約はdynamic probe待ちとする。
 
