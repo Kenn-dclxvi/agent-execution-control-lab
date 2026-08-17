@@ -135,11 +135,11 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 
 ## Candidate作成前の残件
 
-管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定した。現時点ではbundle identityが未登録なので、profileまたは評価slotを作成しない。
+管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定し、C147 referenceとportable Candidateの自己完結した一枚をtarget固有bundleへ登録した。現時点ではCandidate Profileとpreflightが未作成なので、評価slotを発行しない。
 
-1. C147 referenceとportable full-agent Candidateのtarget固有bundle登録。
-2. Codex Profileで両bundleの一枚bytesをisolated workspaceへ配送したreceipt。
-3. prompt identity以外を完全一致させた比較preflight。
+1. portable full-agent CandidateのCodex Profile登録。
+2. Candidate bundleの一枚bytesをisolated workspaceへ配送できることをbindしたpreflight。
+3. control-free r4からprompt identity以外を変えないCandidate quality gate。
 
 他surfaceのreceiptは、そのsurfaceを正式runtimeとして登録する別系列で要求する。Codexのfull-agent比較へ未登録surfaceを混ぜない。品質、機序、対象外影響、KPI、安定性、直接の基準、allowed deltaおよび非目標はfull-agentについて直接比較設計へ固定済みである。
 

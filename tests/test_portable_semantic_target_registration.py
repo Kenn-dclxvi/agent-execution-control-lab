@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 
 from scripts.export_prompt_bundle import verify_bundle
+from scripts.compose_prompt import verify_bundle_binding
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +72,39 @@ def test_control_free_bundle_is_registered_and_zero_byte() -> None:
     assert receipt["prompt_identity"] == "portable-semantic-a544769-control-free-r1"
     assert receipt["files"][0]["sha256"] == hashlib.sha256(b"").hexdigest()
     assert (bundle / "files/AGENTS.md.txt").read_bytes() == b""
+
+
+def test_full_agent_reference_and_candidate_bundles_are_registered() -> None:
+    registration = load(TARGET / "prompts/full-agent-bundle-registration-r1.json")
+    reference = TARGET / "prompts/baselines/portable-semantic-c147-full-agent-reference-r1"
+    candidate = TARGET / "prompts/candidates/portable-semantic-c147-portable-full-agent-r1"
+    reference_manifest = verify_bundle(reference)
+    candidate_manifest = verify_bundle(candidate)
+
+    assert reference_manifest["prompt_identity"] == registration["direct_parent"]["prompt_identity"]
+    assert reference_manifest["bundle_sha256"] == registration["direct_parent"]["bundle_sha256"]
+    assert candidate_manifest["prompt_identity"] == registration["candidate"]["prompt_identity"]
+    assert candidate_manifest["bundle_sha256"] == registration["candidate"]["bundle_sha256"]
+    for key in ("direct_parent", "candidate"):
+        reference_record = registration[key]
+        assert sha256(ROOT / reference_record["manifest_path"]) == reference_record["manifest_sha256"]
+
+    source = ROOT / "prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1/files/AGENTS.md.txt"
+    assert (reference / "files/AGENTS.md.txt").read_bytes() == source.read_bytes()
+    composition = ROOT / registration["composition_binding"]["composition_manifest_path"]
+    assert sha256(composition) == registration["composition_binding"]["composition_manifest_sha256"]
+    receipt = verify_bundle_binding(composition, candidate)
+    assert receipt["binding_status"] == "verified"
+    assert receipt["output_sha256"] == registration["candidate"]["content_sha256"]
+    assert registration["state"] == {
+        "candidate_bundle_registered": True,
+        "candidate_evaluation_started": False,
+        "candidate_profile_created": False,
+        "reference_bundle_registered": True,
+        "reference_evaluation_started": False,
+        "reference_profile_created": False,
+        "root_only_bundle_registered": False,
+    }
 
 
 def test_profile_is_registered_but_result_execution_has_not_started() -> None:

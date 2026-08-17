@@ -26,6 +26,8 @@ Q01〜Q08の静的反例監査で初回草案の4境界を修正した。修正�
 
 `render`と既知bytesへの`check`は許可するが、`verify-bundle`は必ず拒否する。Candidate作成前gateを通過して新しいfull bundleとprompt identityを作るまでは、評価profileまたは対象platformへ渡さない。
 
+full-agentはCandidate作成前gate通過後もdraft manifestを変更せず、同じcomponent集合とoutput bytesを新prompt identityへbindする[`full-agent.candidate.composition.json`](full-agent.candidate.composition.json)を別identityとして追加した。target固有bundleはこのCandidate用manifestでだけ`verify-bundle`を通し、root-only draftへ昇格を一般化しない。
+
 ## render
 
 ```bash

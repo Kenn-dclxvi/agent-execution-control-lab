@@ -1,7 +1,7 @@
 # C147 portable kernel一枚化草案
 
 > [!IMPORTANT]
-> **状態**: `exact_draft_written / root_only_dependency_closed / full_agent_dependency_closed / primitive_coverage_81_of_81 / q01_q08_static_counterexamples_repaired / full_agent_candidate_precreation_gate_fixed / prompt_identity_unbound / candidate_not_created / evaluation_not_started`
+> **状態**: `exact_draft_written / root_only_dependency_closed / full_agent_dependency_closed / primitive_coverage_81_of_81 / q01_q08_static_counterexamples_repaired / full_agent_candidate_precreation_gate_fixed / full_agent_candidate_bundle_registered / root_only_prompt_identity_unbound / evaluation_not_started`
 >
 > 本書は、C147由来のruntime非依存本文をcomponentから自己完結した一枚へ構成できるところまで固定する。生成物は管理用草案であり、Candidate、評価result、採用、releaseまたはprojectionではない。
 

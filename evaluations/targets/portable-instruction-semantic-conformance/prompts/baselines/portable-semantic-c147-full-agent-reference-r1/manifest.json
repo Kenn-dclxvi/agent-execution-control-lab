@@ -1,0 +1,45 @@
+{
+  "artifact": {
+    "artifact_role": "baseline",
+    "description": "portable full-agent Candidateの意味保持と効率を直接比較するため、Candidate147の既存root AGENTS.md一枚だけをsemantic protocol targetへ登録したreference。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "Candidate147のTHE-CAPTION評価結果をsemantic targetへ一般化すること",
+      "control-free qualification resultの置換",
+      "採用、releaseまたはruntime projection"
+    ],
+    "problem": "control-freeは品質5 / 14であり、品質維持後のportable再構成costを比較する直接の親にならない。",
+    "prompt_set_name": "c147_full_agent_reference",
+    "scope": "isolated workspace rootへ配送するAGENTS.md一件だけ。",
+    "state": "registered"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "d330421521b231d6029e69e8cd6d4e175fb46b06254e80b3d2f4d8f8f3a55d9f",
+  "files": [
+    {
+      "git_blob_sha1": "54b1ca99fad87d0935d28229c810a734c85f08a7",
+      "mode": "100644",
+      "sha256": "46ed3811aa798fec6356cf53feb7403ff15bf75c71a9c76af6d6893b05fb8fc7",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "target_scoped_single_file_reference",
+    "source_prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1"
+  },
+  "prompt_identity": "portable-semantic-c147-full-agent-reference-r1",
+  "provenance": {
+    "direct_parent_identity": "the-caption-3ce91a4-result-effect-scope-r1",
+    "source_release": "prompts/releases/the-caption-3ce91a4-result-effect-scope-release-r1",
+    "source_target": "AGENTS.md",
+    "source_target_sha256": "46ed3811aa798fec6356cf53feb7403ff15bf75c71a9c76af6d6893b05fb8fc7"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "f993c82fe514f32b76410875592aee56805864a9",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "981b872d2860164882be76e10745ff1111a42ec5"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

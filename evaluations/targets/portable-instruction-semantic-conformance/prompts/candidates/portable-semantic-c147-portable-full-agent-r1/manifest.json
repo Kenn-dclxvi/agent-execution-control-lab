@@ -1,0 +1,53 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "portable-semantic-c147-full-agent-reference-r1",
+    "change_reason": "C147の81 primitiveを保持したままplatform非依存語と機能blockへ再構成し、自己完結したfull-agent一枚として測定する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "root-only capabilityの評価",
+      "prompt短縮または文字数だけによる効率主張",
+      "case、oracle、TaskSpec、runtimeまたはtoken accountingの変更",
+      "採用、releaseまたは各platformへのprojection"
+    ],
+    "problem": "C147の成立済み実行制御をplatform名へ依存せず、機能blockから一枚へ構成できる形で保持する必要がある。",
+    "prompt_set_name": "c147_portable_full_agent",
+    "scope": "isolated workspace rootへ配送する自己完結したAGENTS.md一件だけ。",
+    "state": "registered_not_evaluated"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "platform_neutral_full_agent_recomposition",
+    "source_prompt_identity": "portable-semantic-c147-full-agent-reference-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "abb35eae60139f81ba3eded98794a4ae9936727a",
+      "mode": "100644",
+      "sha256": "3d3733a4ec0bb531a5be8eb53922e92fafe37b479b6190d24a8176ae452805e3",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+  "provenance": {
+    "allowed_delta": "81 primitiveを削除または追加せず、platform非依存vocabulary、actor capability blockおよび機能別dependencyへ再構成する",
+    "composition_identity": "c147-portable-kernel-full-agent-candidate-composition-r1",
+    "composition_sha256": "4d3617ad39c52a590a2af00e0976db25aca678987c646f1f28e594be5247ce38",
+    "direct_parent_identity": "the-caption-3ce91a4-result-effect-scope-r1",
+    "primitive_coverage": "81_of_81",
+    "source_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent.candidate.composition.json",
+    "source_draft_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent.composition.json"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "a544769660bb2a8ee8722d5a42fef8d734f93ab3",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "6919c62641c84609d9333d641586fc56231c6caf"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}
