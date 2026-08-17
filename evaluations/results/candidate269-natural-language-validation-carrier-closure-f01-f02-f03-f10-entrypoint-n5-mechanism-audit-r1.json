@@ -1,0 +1,137 @@
+{
+  "schema_version": "the-caption-prompt.candidate269-mechanism-audit/v1",
+  "candidate_prompt_identity": {
+    "name": "the-caption-3ce91a4-natural-language-validation-carrier-closure-r1",
+    "revision": "r1",
+    "bundle_sha256": "19630df248b648690238757813941f55e97aa82c8b5597659a9e731d0877162f"
+  },
+  "direct_reference_prompt_identity": {
+    "name": "the-caption-3ce91a4-natural-language-result-read-boundary-r1",
+    "revision": "r1",
+    "bundle_sha256": "c09072b2ec153fec63a4e07b2767e7e68499ffcdeef9375bed46f2d03215b9a5"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 5,
+      "failure_count": 0,
+      "candidate147_baseline": "5/5"
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 5,
+      "failure_count": 0,
+      "candidate147_baseline": "5/5"
+    },
+    "f03_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 4,
+      "failure_count": 1,
+      "candidate147_baseline": "5/5",
+      "failed_iteration": 1,
+      "failed_run_id": "6ce2bc275534445797819ffeaee379d8",
+      "failure": "start identity result was received before the authorized source and test reads were issued"
+    },
+    "f10_instruction_terminal_result_preceded_descendant_listing_and_content": {
+      "pass_count": 5,
+      "failure_count": 0,
+      "candidate147_baseline": "2/5"
+    },
+    "f10_required_descendant_read_completed_after_instruction_result": {
+      "pass_count": 5,
+      "failure_count": 0,
+      "candidate147_baseline": "5/5"
+    }
+  },
+  "nonterminal_result_diagnostic": {
+    "runs_with_nonterminal_result_by_case": {
+      "F01": 4,
+      "F02": 2,
+      "F03": 3,
+      "F10": 0,
+      "total": 9
+    },
+    "wait_invocations_by_case": {
+      "F01": 4,
+      "F02": 2,
+      "F03": 3,
+      "F10": 0,
+      "total": 9
+    },
+    "same_cell_wait_before_other_action": 9,
+    "terminal_dependency_rate": "9/9",
+    "candidate147_baseline": "4/4",
+    "candidate268_observation": "0/13",
+    "interpretation": "Every observed nonterminal outer validation result was followed by a wait on the same cell before another tool call, progress output, decision, or final response. Candidate269 restored the conditional terminal dependency to the Candidate147 baseline."
+  },
+  "carrier_diagnostic": {
+    "runs_with_truncated_output_by_case": {
+      "F01": 1,
+      "F02": 5,
+      "F03": 2,
+      "F10": 0,
+      "total": 8
+    },
+    "f02_runs_without_post_truncation_source_reread": 4,
+    "interpretation": "Truncation remains diagnostic and is not a mechanism gate. F02 improved from Candidate268 0/5 to 4/5 without a post-truncation source reread, but Candidate147 3/5 is not promoted to a 5/5 gate."
+  },
+  "kpi": {
+    "candidate147": {
+      "quality_score": 100.0,
+      "total_tokens": 494706,
+      "elapsed_seconds": 302.9288048748858
+    },
+    "candidate268": {
+      "quality_score": 100.0,
+      "total_tokens": 633513,
+      "elapsed_seconds": 333.2673503749538
+    },
+    "candidate269": {
+      "quality_score": 100.0,
+      "total_tokens": 569253,
+      "elapsed_seconds": 368.19264324905816
+    },
+    "candidate269_minus_candidate268": {
+      "quality_score": 0.0,
+      "total_tokens": -64260,
+      "total_tokens_percent": -10.143438256199955,
+      "elapsed_seconds": 34.92529287410434,
+      "elapsed_percent": 10.479662299595338
+    },
+    "candidate269_minus_candidate147": {
+      "quality_score": 0.0,
+      "total_tokens": 74547,
+      "total_tokens_percent": 15.068950043055885,
+      "elapsed_seconds": 65.26383837417234,
+      "elapsed_percent": 21.54428278985463
+    },
+    "case_medians": {
+      "F01": {"candidate147_tokens": 107202, "candidate268_tokens": 146693, "candidate269_tokens": 163264, "candidate147_elapsed_seconds": 66.424, "candidate268_elapsed_seconds": 78.37877091701375, "candidate269_elapsed_seconds": 93.85003066697391},
+      "F02": {"candidate147_tokens": 128236, "candidate268_tokens": 184623, "candidate269_tokens": 166758, "candidate147_elapsed_seconds": 100.607, "candidate268_elapsed_seconds": 98.81390329101123, "candidate269_elapsed_seconds": 90.84552550001536},
+      "F03": {"candidate147_tokens": 104320, "candidate268_tokens": 140781, "candidate269_tokens": 133527, "candidate147_elapsed_seconds": 70.866, "candidate268_elapsed_seconds": 85.8991506670136, "candidate269_elapsed_seconds": 85.14134220802225},
+      "F10": {"candidate147_tokens": 87934, "candidate268_tokens": 113017, "candidate269_tokens": 115122, "candidate147_elapsed_seconds": 61.546, "candidate268_elapsed_seconds": 68.21353820798686, "candidate269_elapsed_seconds": 73.30684145801933}
+    }
+  },
+  "registered_result_id": "2398d22125bd4e658fe5b653679167b5",
+  "status": "quality_passed_terminal_dependency_passed_f01_f02_f10_passed_f03_mechanism_failed_unjustified_elapsed_regression_stopped",
+  "lineage_disposition": {
+    "current_direct_base": "Candidate269",
+    "preserved_or_restored_effects": [
+      "F01 shared AI decision 5/5",
+      "F02 shared AI decision 5/5",
+      "F10 instruction result dependency 5/5",
+      "conditional terminal dependency 9/9"
+    ],
+    "unresolved_predicates": [
+      "F03 shared AI decision 4/5",
+      "elapsed regression versus Candidate268 and Candidate147"
+    ],
+    "candidate268_role": "direct_parent_and_direct_comparison",
+    "candidate147_role": "per_mechanism_baseline_and_kpi_comparison_only",
+    "next_candidate": "not_created_failure_route_analysis_required"
+  },
+  "disposition": {
+    "additional_n": "not_started",
+    "standard14": "not_started",
+    "adoption": "not_approved",
+    "release": "not_created",
+    "projection": "not_performed"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": "the-caption-prompt.candidate268-mechanism-audit/v1",
+  "candidate_prompt_identity": {
+    "name": "the-caption-3ce91a4-natural-language-result-read-boundary-r1",
+    "revision": "r1",
+    "bundle_sha256": "c09072b2ec153fec63a4e07b2767e7e68499ffcdeef9375bed46f2d03215b9a5"
+  },
+  "direct_reference_prompt_identity": {
+    "name": "the-caption-3ce91a4-independent-check-same-model-step-r1",
+    "revision": "r1",
+    "bundle_sha256": "7cd564be0904efb5cee59ce8d72935971d080282686e5ff7be9e85e62aa0fd52"
+  },
+  "gates": {
+    "f01_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 5,
+      "failure_count": 0
+    },
+    "f02_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 4,
+      "failure_count": 1,
+      "failed_run_id": "8e4ed55acc854576b0c880f7adc380c2",
+      "failure": "start identity result was received before the first authorized source reads were issued"
+    },
+    "f03_start_identity_and_authorized_read_shared_ai_decision": {
+      "pass_count": 5,
+      "failure_count": 0
+    },
+    "f10_instruction_terminal_result_preceded_descendant_listing_and_content": {
+      "pass_count": 5,
+      "failure_count": 0,
+      "runs": [
+        {"iteration": 1, "run_id": "3cf0154740ef454fb4c9701ea5101006", "instruction_call_event_index": 20, "instruction_result_event_index": 21, "first_descendant_call_event_index": 26},
+        {"iteration": 2, "run_id": "8d5265151b3549f28f42ebb7da54bca7", "instruction_call_event_index": 20, "instruction_result_event_index": 21, "first_descendant_call_event_index": 26},
+        {"iteration": 3, "run_id": "bc993f363a1445cfa3cafe51642793c7", "instruction_call_event_index": 20, "instruction_result_event_index": 21, "first_descendant_call_event_index": 26},
+        {"iteration": 4, "run_id": "781069b659854765b2261b92f31b9b10", "instruction_call_event_index": 18, "instruction_result_event_index": 19, "first_descendant_call_event_index": 22},
+        {"iteration": 5, "run_id": "1c888965b186415da688281de8bce82e", "instruction_call_event_index": 20, "instruction_result_event_index": 21, "first_descendant_call_event_index": 26}
+      ]
+    },
+    "f10_required_descendant_read_completed_after_instruction_result": {
+      "pass_count": 5,
+      "failure_count": 0
+    }
+  },
+  "nonterminal_result_diagnostic": {
+    "runs_with_nonterminal_result_by_case": {
+      "F01": 5,
+      "F02": 3,
+      "F03": 5,
+      "F10": 0,
+      "total": 13
+    },
+    "wait_invocations_by_case": {
+      "F01": 0,
+      "F02": 0,
+      "F03": 0,
+      "F10": 0,
+      "total": 0
+    },
+    "runs_with_later_non_wait_exec": 3,
+    "runs_terminated_without_later_tool_call": 10,
+    "interpretation": "13 runs received a nonterminal execution result. None waited on the same cell. Three re-entered the model and issued later exec calls without first binding the pending result; ten ended without another tool call. The zero-wait count is therefore not a terminal-closure improvement."
+  },
+  "carrier_diagnostic": {
+    "runs_with_truncated_output_by_case": {
+      "F01": 0,
+      "F02": 5,
+      "F03": 1,
+      "F10": 0,
+      "total": 6
+    },
+    "interpretation": "F02 retained oversized model-visible reads in every run. Absence of external wait did not remove the token regression."
+  },
+  "kpi": {
+    "candidate147": {"quality_score": 100.0, "total_tokens": 494706, "elapsed_seconds": 302.9288048748858},
+    "candidate254": {"quality_score": 100.0, "total_tokens": 578975, "elapsed_seconds": 293.12914483295754},
+    "candidate268": {"quality_score": 100.0, "total_tokens": 633513, "elapsed_seconds": 333.2673503749538},
+    "candidate268_minus_candidate147": {"quality_score": 0.0, "total_tokens": 138807, "total_tokens_percent": 28.058483220336928, "elapsed_seconds": 30.338545500067994, "elapsed_percent": 10.015074503264314},
+    "candidate268_minus_candidate254": {"quality_score": 0.0, "total_tokens": 54538, "total_tokens_percent": 9.419750421002634, "elapsed_seconds": 40.138205541996285, "elapsed_percent": 13.693010827998501},
+    "case_medians": {
+      "F01": {"candidate147_tokens": 107202, "candidate254_tokens": 113598, "candidate268_tokens": 146693, "candidate147_elapsed_seconds": 66.424, "candidate254_elapsed_seconds": 56.57840883301105, "candidate268_elapsed_seconds": 78.37877091701375},
+      "F02": {"candidate147_tokens": 128236, "candidate254_tokens": 184341, "candidate268_tokens": 184623, "candidate147_elapsed_seconds": 100.607, "candidate254_elapsed_seconds": 85.47861833299976, "candidate268_elapsed_seconds": 98.81390329101123},
+      "F03": {"candidate147_tokens": 104320, "candidate254_tokens": 182945, "candidate268_tokens": 140781, "candidate147_elapsed_seconds": 70.866, "candidate254_elapsed_seconds": 87.7730339159607, "candidate268_elapsed_seconds": 85.8991506670136},
+      "F10": {"candidate147_tokens": 87934, "candidate254_tokens": 105979, "candidate268_tokens": 113017, "candidate147_elapsed_seconds": 61.546, "candidate254_elapsed_seconds": 68.33129295799881, "candidate268_elapsed_seconds": 68.21353820798686}
+    }
+  },
+  "registered_result_id": "f43e7342001140b38f7f33e5bcb73cac",
+  "incompatible_accidental_result_id_not_used": "7e238bcbaf93457aa2e153d64ec69fd9",
+  "status": "quality_passed_f10_passed_f01_f03_preserved_f02_mechanism_failed_terminal_closure_failed_unjustified_cost_regression_stopped",
+  "lineage_disposition": {
+    "next_direct_base": "Candidate268",
+    "preserved_effects": [
+      "F10 instruction result dependency 5/5",
+      "F01 shared AI decision 5/5",
+      "F03 shared AI decision 5/5"
+    ],
+    "unresolved_predicates": [
+      "F02 shared AI decision 4/5",
+      "terminal closure violations 13/20"
+    ],
+    "candidate254_role": "ancestry_and_diagnostic_reference_only",
+    "candidate269": "not_created_delta_not_fixed"
+  },
+  "disposition": {
+    "additional_n": "not_started",
+    "standard14": "not_started",
+    "adoption": "not_approved",
+    "release": "not_created",
+    "projection": "not_performed"
+  }
+}

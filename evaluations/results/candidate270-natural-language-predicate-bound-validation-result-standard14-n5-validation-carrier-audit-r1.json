@@ -1,0 +1,1781 @@
+{
+  "conclusion": {
+    "all_sources_passed": true,
+    "states": {
+      "C270": "passed"
+    }
+  },
+  "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+  "scope": {
+    "cases": [
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "TC-F07-CANONICAL-V4-RUNNER",
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR"
+    ],
+    "iterations": 5,
+    "new_evaluation_runs": 0,
+    "source_policy": "fixed bundles, write-once results, profiles, and local persisted rollouts only"
+  },
+  "sources": [
+    {
+      "cases": [
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "TC-F07-CANONICAL-V4-RUNNER",
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR"
+      ],
+      "failed_run_count": 0,
+      "iterations": 5,
+      "label": "C270",
+      "mechanism_state": "passed",
+      "passed_run_count": 35,
+      "profile_path": "evaluations/profiles/candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json",
+      "profile_sha256": "d50c307c06813ff3a97ce6ea118d5c1c56cdfd88f86db2707386524a03fef841",
+      "prompt_set_identity": {
+        "bundle_sha256": "481a035966f1cc6ad8faba7fd05b07baf357d29e0a75dccc563963878547c439",
+        "name": "the-caption-3ce91a4-natural-language-predicate-bound-validation-result-r1",
+        "revision": "r1"
+      },
+      "result_id": "3658861abc824d52b2fd49dbba6900d3",
+      "result_path": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/result-registry-v4/results/3658861abc824d52b2fd49dbba6900d3.json",
+      "result_sha256": "fc75dc3304f322433b36c10482a791936e250019b537e5a140635145306bf5bb",
+      "run_count": 35,
+      "runs": [
+        {
+          "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/068fcd2220f9406996f5ce3d3af3a446/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_MBE2dmZwjN09L2exvQVACIgy"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_MBE2dmZwjN09L2exvQVACIgy",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "90b8a1e521115bf0b49545caf038bdf4304606b381803bdef4c64d65a8fbecf0",
+          "outer_call_source_sha256": "8635678aadc54bb8daa0745db2c5863bd46538422b080e7f628cdf7de842a639",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_MBE2dmZwjN09L2exvQVACIgy"
+            ],
+            [
+              "call_MBE2dmZwjN09L2exvQVACIgy"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f014-7aa2-9c62-c054553218f0.jsonl",
+          "rollout_sha256": "f727550f2a3c1e540891f6c1e7e5fd19318f37daa29562483bc49c8faf1551ec",
+          "run_id": "068fcd2220f9406996f5ce3d3af3a446",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_MBE2dmZwjN09L2exvQVACIgy",
+          "thread_id": "01a00b2e-f014-7aa2-9c62-c054553218f0"
+        },
+        {
+          "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+          "continuation_wait_call_ids": [
+            "call_SXI2DyhO4Gxk1MdJTgZ5gxln",
+            "call_vJXPLNpKggb0VfFHSmGPBBIO"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/4bb715abcc7b4e1780dfe3c1d661efdf/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_mzZwiwXIld2CalzgNIbJvX4V"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 2,
+          "observable": true,
+          "outer_call_id": "call_mzZwiwXIld2CalzgNIbJvX4V",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "e41f1f234628769c7228c21b5e0d5bd67245d15d4cb58a8a2dd396d70c53518f",
+          "outer_call_source_sha256": "6bab4b388fc732b41b84fa52ca4dabc6a82bf57d9499d7c85e9eed6f1ae6f9b6",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_mzZwiwXIld2CalzgNIbJvX4V"
+            ],
+            [
+              "call_mzZwiwXIld2CalzgNIbJvX4V"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f028-79d3-99ea-9c8b6b67556e.jsonl",
+          "rollout_sha256": "dd0deff3f5352e2d7aab152987dc79ec37bdac9b32ca9dfb94c3665038855900",
+          "run_id": "4bb715abcc7b4e1780dfe3c1d661efdf",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_vJXPLNpKggb0VfFHSmGPBBIO",
+          "thread_id": "01a00b2e-f028-79d3-99ea-9c8b6b67556e"
+        },
+        {
+          "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/928e6d41503142dda981ffee784cd4f9/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_PwVHeAeWjbuISdxf5uJrtqx4"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_PwVHeAeWjbuISdxf5uJrtqx4",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "e54fd65a002b34855a5af7906e67aec03300b594b783471247117ed5e04724ba",
+          "outer_call_source_sha256": "d54fd661ad5b68e39df9940f43c6b516e903c8350019c35a0b873d5ba1936c4f",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_PwVHeAeWjbuISdxf5uJrtqx4"
+            ],
+            [
+              "call_PwVHeAeWjbuISdxf5uJrtqx4"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f018-7e40-89ef-fb6c468e05c3.jsonl",
+          "rollout_sha256": "f580d3d7430e1e9fbb84f480a9f5c69456f739853337f7825369a4b77be22722",
+          "run_id": "928e6d41503142dda981ffee784cd4f9",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_PwVHeAeWjbuISdxf5uJrtqx4",
+          "thread_id": "01a00b2e-f018-7e40-89ef-fb6c468e05c3"
+        },
+        {
+          "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+          "continuation_wait_call_ids": [
+            "call_Fq5pQ238zkXRIpVhXtjorQqO"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/bff790f695e54d0f801c5f4231fae840/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_QYsVRGdQvwe5X8hbVxVvs0B5"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_QYsVRGdQvwe5X8hbVxVvs0B5",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "d144cbebb8547012df7bd3c4d30fc26ed2af591947040fb06d106b538dbd2b2c",
+          "outer_call_source_sha256": "656c0da47d9b222c01a938a8971159611fb0e953c9ed78352bbda238a8906816",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_QYsVRGdQvwe5X8hbVxVvs0B5"
+            ],
+            [
+              "call_QYsVRGdQvwe5X8hbVxVvs0B5"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f043-7cb0-b55d-fb371d46bf16.jsonl",
+          "rollout_sha256": "8ef611e7cd430a6632b1baadce5004710c5de1d63da8dc8771c015f7553be4cd",
+          "run_id": "bff790f695e54d0f801c5f4231fae840",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_Fq5pQ238zkXRIpVhXtjorQqO",
+          "thread_id": "01a00b2e-f043-7cb0-b55d-fb371d46bf16"
+        },
+        {
+          "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/edf84a04512a44398b5ad655f5f47abc/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_nHBAhOCGrs41m9AjQviXsxxZ"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_nHBAhOCGrs41m9AjQviXsxxZ",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "e8cbfc82a12f1d8bf68d074d814e2b79a2b66c15f01e0891fb37538d1f84bf9d",
+          "outer_call_source_sha256": "391abecb1904505545a6cd48371c394fcc9e11bcd3c096d09253ecc4a274fef6",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_nHBAhOCGrs41m9AjQviXsxxZ"
+            ],
+            [
+              "call_nHBAhOCGrs41m9AjQviXsxxZ"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f042-7241-8f11-5a8bd7970ec1.jsonl",
+          "rollout_sha256": "cc27ca206d443a23e9b84265ea7f574aa81326fda5c5d21c2919ced7e349953d",
+          "run_id": "edf84a04512a44398b5ad655f5f47abc",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_nHBAhOCGrs41m9AjQviXsxxZ",
+          "thread_id": "01a00b2e-f042-7241-8f11-5a8bd7970ec1"
+        },
+        {
+          "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/610c17272a6245e1b780201cd6cb6774/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_5J22RyKa0HjJNk9GGGzzhofm"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_5J22RyKa0HjJNk9GGGzzhofm",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "1e1c5137ddf0d55cfb179ca3e205e16fb561bf3c59016c61f760c59b8b5a9a51",
+          "outer_call_source_sha256": "7784621f8bf3f3be233107a32f94be766380d01e337c6080cd5b790fe450b0e4",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_5J22RyKa0HjJNk9GGGzzhofm"
+            ],
+            [
+              "call_5J22RyKa0HjJNk9GGGzzhofm"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f02f-7163-b3ae-0ed73753e255.jsonl",
+          "rollout_sha256": "afb9621357beff1d4a7fb60c2d73bcf80e9fbe23cb02e36b7898040eb765bad3",
+          "run_id": "610c17272a6245e1b780201cd6cb6774",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_5J22RyKa0HjJNk9GGGzzhofm",
+          "thread_id": "01a00b2e-f02f-7163-b3ae-0ed73753e255"
+        },
+        {
+          "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/6f3b3e9a2192425992fd8c9c656e1d5b/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_11udGNiyMJoxgsNwxmKpdyXT"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_11udGNiyMJoxgsNwxmKpdyXT",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "dd4c820da96d2d78f5270e7c32e53be6589b0273fb8cbcc684317cb86c925f56",
+          "outer_call_source_sha256": "d2e714b96e3127b57a90a16fc28472502a43ef093ac6ab68d89de9adbdb36ede",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_11udGNiyMJoxgsNwxmKpdyXT"
+            ],
+            [
+              "call_11udGNiyMJoxgsNwxmKpdyXT"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f054-7b21-9aaf-3a1f07e1e7d6.jsonl",
+          "rollout_sha256": "784e9dd6ea7e9b6346ca48df26e1f88e8c06dfd63b3def2f13e429a06bea28f0",
+          "run_id": "6f3b3e9a2192425992fd8c9c656e1d5b",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_11udGNiyMJoxgsNwxmKpdyXT",
+          "thread_id": "01a00b2e-f054-7b21-9aaf-3a1f07e1e7d6"
+        },
+        {
+          "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+          "continuation_wait_call_ids": [
+            "call_xYSJF0tVjYoElGnT6pu5jZeN"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/b70f191eeeb5413dab2b2a2544da7d0d/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_7YMpJZcgUIA03bVWGhWn0yGK"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_7YMpJZcgUIA03bVWGhWn0yGK",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "08a43cd947b6f688930ccdf6aaacf12113946108b75c83df29053ed9b5135b95",
+          "outer_call_source_sha256": "8dbb4af7150c2126c88eb22e461a8f01a66b083a9a4fb0a5bac8330c337aa233",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_7YMpJZcgUIA03bVWGhWn0yGK"
+            ],
+            [
+              "call_7YMpJZcgUIA03bVWGhWn0yGK"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f054-7203-83e2-fd994fda9d5a.jsonl",
+          "rollout_sha256": "266f7f25fac8160347b9e7af81a417e19878503addd94ae12a8bac1a799a1002",
+          "run_id": "b70f191eeeb5413dab2b2a2544da7d0d",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_xYSJF0tVjYoElGnT6pu5jZeN",
+          "thread_id": "01a00b2e-f054-7203-83e2-fd994fda9d5a"
+        },
+        {
+          "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+          "continuation_wait_call_ids": [
+            "call_7jwgE2n7czBRZJZvVqVOtFjZ"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/bb72c1a5265245779a4e7477993f81de/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_v5isY8m8pS7mQ5lMKxrjmlUd"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_v5isY8m8pS7mQ5lMKxrjmlUd",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "7355559fa97f025a7bc57fbda091a330946b7cfee9f83db98c74a7412a712a7a",
+          "outer_call_source_sha256": "6d71d55cda4c92aa1c3af4a147d916fd5e643d9b46fd89c1a2d2dffaa0bcddac",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_v5isY8m8pS7mQ5lMKxrjmlUd"
+            ],
+            [
+              "call_v5isY8m8pS7mQ5lMKxrjmlUd"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f02e-7b70-81d6-419ae101b979.jsonl",
+          "rollout_sha256": "7a608bdc26dc63cca124f4ef854ae1fa3604aaed329df6e73a81bcebee6e3e73",
+          "run_id": "bb72c1a5265245779a4e7477993f81de",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_7jwgE2n7czBRZJZvVqVOtFjZ",
+          "thread_id": "01a00b2e-f02e-7b70-81d6-419ae101b979"
+        },
+        {
+          "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/cf611b5df0334f8db1677ad6059b3a2a/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_R1obswr5wpmOLtmnRLp8X6UQ"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_R1obswr5wpmOLtmnRLp8X6UQ",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "d8182e646873bb5f4cb09e6fcf0e1ffac6a3da73464fe6232a50d1d3f094fd44",
+          "outer_call_source_sha256": "ce04da8b7a54432f1407e4aa5752b52b606d04187675834b91eb27051f35fe3f",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_R1obswr5wpmOLtmnRLp8X6UQ"
+            ],
+            [
+              "call_R1obswr5wpmOLtmnRLp8X6UQ"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f097-7ea0-a91e-a55bf87ef91f.jsonl",
+          "rollout_sha256": "bc3fbf5f8c79bd2fbd92bf18eea3454f460e4a520345a4fb1a6298604dffd052",
+          "run_id": "cf611b5df0334f8db1677ad6059b3a2a",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_R1obswr5wpmOLtmnRLp8X6UQ",
+          "thread_id": "01a00b2e-f097-7ea0-a91e-a55bf87ef91f"
+        },
+        {
+          "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/255c1c9600c9493abd1446577226b0e7/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_kNg0Dz9GFZW5Qpn2YrmxXmKt"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_kNg0Dz9GFZW5Qpn2YrmxXmKt",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "c502d1f1404ff443eeb0b842bc6139a314bc6ccdeb1479e7253d430949b2a412",
+          "outer_call_source_sha256": "f7fe943116a909755e8b1aafeb761cdc9517ad6505ece6b3a60856f6c647f9f8",
+          "required_command_groups": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_kNg0Dz9GFZW5Qpn2YrmxXmKt"
+            ],
+            [
+              "call_kNg0Dz9GFZW5Qpn2YrmxXmKt"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f045-7772-be4a-56ca2237b520.jsonl",
+          "rollout_sha256": "3605de94dcba8f02356e6b170d418a0081b23df634078cd5738ec9ee0fde0f15",
+          "run_id": "255c1c9600c9493abd1446577226b0e7",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_kNg0Dz9GFZW5Qpn2YrmxXmKt",
+          "thread_id": "01a00b2e-f045-7772-be4a-56ca2237b520"
+        },
+        {
+          "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/74aaf75a6d4c4c82941516d9eb844718/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_10EWW0gHWGOHYhGDCyB85Va4"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_10EWW0gHWGOHYhGDCyB85Va4",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "792702770bcb0def7960a25659ec41bb8f098b0fb12c6e3824272b99572337bf",
+          "outer_call_source_sha256": "7203214cdf81b61b61e334a06b0d2d0b648c587992047d9dee69acaed6e1ef29",
+          "required_command_groups": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_10EWW0gHWGOHYhGDCyB85Va4"
+            ],
+            [
+              "call_10EWW0gHWGOHYhGDCyB85Va4"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f008-7002-871c-ada537b8d479.jsonl",
+          "rollout_sha256": "8eceab1fd8e4a8dd9d091c87116412460e72eed90ada11338713230f5d3f4a53",
+          "run_id": "74aaf75a6d4c4c82941516d9eb844718",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_10EWW0gHWGOHYhGDCyB85Va4",
+          "thread_id": "01a00b2e-f008-7002-871c-ada537b8d479"
+        },
+        {
+          "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/d7f21d7414084dfca824d1598918a739/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_X66bwlFc5yjWfldr06z4c3OW"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_X66bwlFc5yjWfldr06z4c3OW",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "7839ab5f00172d9a31f90b539186be7ebba06ef389339cf0fd0555e839826243",
+          "outer_call_source_sha256": "f0aa06b38d85322a3686a051a88748aa89e0fac01607ea2b07b272b5d7464f7e",
+          "required_command_groups": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_X66bwlFc5yjWfldr06z4c3OW"
+            ],
+            [
+              "call_X66bwlFc5yjWfldr06z4c3OW"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f008-7171-89d1-1b516e18224f.jsonl",
+          "rollout_sha256": "02c70218f7927a5f1823d25d7c437126d11a98f7dd0044cd3d74e523f79b309c",
+          "run_id": "d7f21d7414084dfca824d1598918a739",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_X66bwlFc5yjWfldr06z4c3OW",
+          "thread_id": "01a00b2e-f008-7171-89d1-1b516e18224f"
+        },
+        {
+          "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/dbb4446cf8a54451b3c7c07c20fcfeec/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_SQ1lv92msipUveUvJ6tfGPmv"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_SQ1lv92msipUveUvJ6tfGPmv",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "e14847355eeaa92e0e2dea3ffdbcc6ff66716b805566b1a502998ab1d8e193f4",
+          "outer_call_source_sha256": "d52e3ba56463b85228d45f0eacab374893d11cd924ab58f6250c1ff5ac879966",
+          "required_command_groups": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_SQ1lv92msipUveUvJ6tfGPmv"
+            ],
+            [
+              "call_SQ1lv92msipUveUvJ6tfGPmv"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f028-75f0-bba9-1655259ad2ed.jsonl",
+          "rollout_sha256": "b2b28edf224741d062e4c5ff8848f0a9dfbc624e6cee5626e30824b7f4c22ec4",
+          "run_id": "dbb4446cf8a54451b3c7c07c20fcfeec",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_SQ1lv92msipUveUvJ6tfGPmv",
+          "thread_id": "01a00b2e-f028-75f0-bba9-1655259ad2ed"
+        },
+        {
+          "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+          "continuation_wait_call_ids": [
+            "call_2vibmPBAiwvGHt5jB4iOKSSu",
+            "call_evrRKtJ93WNNXVL0VEuZyYrQ"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-f01-f02-f03-f10-entrypoint-n5-cli0146-20260817-r4/cycle/layer2/evidence/ebdca3001f0c4270a89078f2009048b8/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_PzGsSU8wHkra3rEpLJ2d9N8r"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 2,
+          "observable": true,
+          "outer_call_id": "call_PzGsSU8wHkra3rEpLJ2d9N8r",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "1ebf45c8f8986c9ffc4c23d996eb6318f8f7772940aa50a72a06c150bd60d065",
+          "outer_call_source_sha256": "ece34df023e3d250c881d62bf0fffb679d58dcd4135d44858ed04a34a8e732f1",
+          "required_command_groups": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_PzGsSU8wHkra3rEpLJ2d9N8r"
+            ],
+            [
+              "call_PzGsSU8wHkra3rEpLJ2d9N8r"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T00-27-00-01a00b2e-f03c-7703-9b9a-f99f240b049b.jsonl",
+          "rollout_sha256": "f18906d11c0b57f3459377940483699eb1a546122ca1375603cde9a18c9360c9",
+          "run_id": "ebdca3001f0c4270a89078f2009048b8",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_evrRKtJ93WNNXVL0VEuZyYrQ",
+          "thread_id": "01a00b2e-f03c-7703-9b9a-f99f240b049b"
+        },
+        {
+          "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+          "continuation_wait_call_ids": [
+            "call_htYqtJnrfBSg01WhLTvEUq2o"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/0587a9ce7bba4ae6a6523eeba750ec87/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_lBpBCfoWCTeHuFNeoLVHSO9m"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_lBpBCfoWCTeHuFNeoLVHSO9m",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "d43423f1f912d7f33344a663b8c4660aac8d66887abf2fd7f5f9ce7eb18feb90",
+          "outer_call_source_sha256": "f61f3a1503834030033bced615db1742939b41ad1a8aa67932c9f9ef783a690d",
+          "required_command_groups": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_lBpBCfoWCTeHuFNeoLVHSO9m"
+            ],
+            [
+              "call_lBpBCfoWCTeHuFNeoLVHSO9m"
+            ],
+            [
+              "call_lBpBCfoWCTeHuFNeoLVHSO9m"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7917-72f3-9e31-41e59079d7fd.jsonl",
+          "rollout_sha256": "e8abaaff285da07b23eb9a27de0c8af0a98603108c51afb612edde1c596979a0",
+          "run_id": "0587a9ce7bba4ae6a6523eeba750ec87",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_htYqtJnrfBSg01WhLTvEUq2o",
+          "thread_id": "01a00d3c-7917-72f3-9e31-41e59079d7fd"
+        },
+        {
+          "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+          "continuation_wait_call_ids": [
+            "call_B0Rq3yTiGcX9Dv5mmH1WY6xd"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/09626783facd4ae28a6aabd2e10836fe/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_S7jKk24C2p55WFZSkUbgyLuQ"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_S7jKk24C2p55WFZSkUbgyLuQ",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "c1c3ee11d62754eb8166a79dac49ba206ccd205931fc10683a7541aaf5ecd5bd",
+          "outer_call_source_sha256": "d20cd1cf5ed7577bf3556cfd3812f1b30b289cff691063638b2237f6fb40927e",
+          "required_command_groups": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_S7jKk24C2p55WFZSkUbgyLuQ"
+            ],
+            [
+              "call_S7jKk24C2p55WFZSkUbgyLuQ"
+            ],
+            [
+              "call_S7jKk24C2p55WFZSkUbgyLuQ"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7a3e-7633-9cdc-d88526d99dab.jsonl",
+          "rollout_sha256": "9fb76e972cae64e8a9a27dbf3b277795f9c5996eeff90f886807c92bf57d74ae",
+          "run_id": "09626783facd4ae28a6aabd2e10836fe",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_B0Rq3yTiGcX9Dv5mmH1WY6xd",
+          "thread_id": "01a00d3c-7a3e-7633-9cdc-d88526d99dab"
+        },
+        {
+          "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+          "continuation_wait_call_ids": [
+            "call_J5vaMb8n03KPs8SjFnfc95CA"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/3a9c69654d444efdb86b88df0544f238/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_hH8gvkloPTS5mGWzcAgDCEU1"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_hH8gvkloPTS5mGWzcAgDCEU1",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "868a58758581b95ac5f881e91c117f87715b86097f2048662bfccf7e8ff202d3",
+          "outer_call_source_sha256": "991fe955eee153d3fa360e98fd5e736eac8e9c0ac6ea5734cbc831e2567c4205",
+          "required_command_groups": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_hH8gvkloPTS5mGWzcAgDCEU1"
+            ],
+            [
+              "call_hH8gvkloPTS5mGWzcAgDCEU1"
+            ],
+            [
+              "call_hH8gvkloPTS5mGWzcAgDCEU1"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7a49-7143-af21-c589bc1fbd89.jsonl",
+          "rollout_sha256": "6cb961392da2ce04b57d7f2b532a6e538af09fc6c00a0716bd35fd47e40bdc00",
+          "run_id": "3a9c69654d444efdb86b88df0544f238",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_J5vaMb8n03KPs8SjFnfc95CA",
+          "thread_id": "01a00d3c-7a49-7143-af21-c589bc1fbd89"
+        },
+        {
+          "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+          "continuation_wait_call_ids": [
+            "call_4o99tUzpmpsgh7qut4eQbET0"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/3dc304ae700c43e2b8b4f69fed01ca98/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_6jy95BSbuTewWS75z1IqMAWT"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_6jy95BSbuTewWS75z1IqMAWT",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "6db4df153915a44c21bc78001c4bfc3118cd0430b4fd508d3b0d1b25a96b7771",
+          "outer_call_source_sha256": "d21a97bf141d3a2b60d153569caba13d6e5ce5f2195df3fe4143b43336ae3e3b",
+          "required_command_groups": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_6jy95BSbuTewWS75z1IqMAWT"
+            ],
+            [
+              "call_6jy95BSbuTewWS75z1IqMAWT"
+            ],
+            [
+              "call_6jy95BSbuTewWS75z1IqMAWT"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7ae8-7dc1-ba33-9411e0bf7812.jsonl",
+          "rollout_sha256": "8f2a0c2392d0f7ca50c323adc495fbe8a588b7b802f5836b7e104399f2528631",
+          "run_id": "3dc304ae700c43e2b8b4f69fed01ca98",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_4o99tUzpmpsgh7qut4eQbET0",
+          "thread_id": "01a00d3c-7ae8-7dc1-ba33-9411e0bf7812"
+        },
+        {
+          "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+          "continuation_wait_call_ids": [
+            "call_HccPvnjbxHSIWtPhtxx5Um4d"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/cf2060b55b2141bbb2364e8a6d84ed91/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_1HXuYnGSUvU7hRPtNV2Mc2xP"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_1HXuYnGSUvU7hRPtNV2Mc2xP",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "c5cdc672ef82c8228a7c13b0493d0ba70b9fc4e23a5ac5906d7e82c5fea29b82",
+          "outer_call_source_sha256": "7f2fb4d15a6be649f192857a1ca89d2d1f62d8d8304445bb892feba9e99e9c5c",
+          "required_command_groups": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_1HXuYnGSUvU7hRPtNV2Mc2xP"
+            ],
+            [
+              "call_1HXuYnGSUvU7hRPtNV2Mc2xP"
+            ],
+            [
+              "call_1HXuYnGSUvU7hRPtNV2Mc2xP"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-786a-7be1-9888-66b72106966c.jsonl",
+          "rollout_sha256": "df5e25d45ac2058250c2ff2136540ac057aea6042edeb9b51e5a87d923b30e5c",
+          "run_id": "cf2060b55b2141bbb2364e8a6d84ed91",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_HccPvnjbxHSIWtPhtxx5Um4d",
+          "thread_id": "01a00d3c-786a-7be1-9888-66b72106966c"
+        },
+        {
+          "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/108b0dc642a441a584dba9e95f00643a/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_NzeZ0LMuRdV17zaetRcKkuwL"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_NzeZ0LMuRdV17zaetRcKkuwL",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "ab609860ccaa0723adf0735a20d7e8926377192b88bc0bb3ea84eaae6b92b1f0",
+          "outer_call_source_sha256": "b3fbc8022a95da18922c178ad6e2d7e08e27744278e01f68e3d8d9816588766f",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_NzeZ0LMuRdV17zaetRcKkuwL"
+            ],
+            [
+              "call_NzeZ0LMuRdV17zaetRcKkuwL"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-19-01a00d3d-a5f7-7b41-b4d1-20a7b024b84b.jsonl",
+          "rollout_sha256": "69492e40aa5e76a5b4647119435015881a48bd40cf7cac7ae26edd880b35fa65",
+          "run_id": "108b0dc642a441a584dba9e95f00643a",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_NzeZ0LMuRdV17zaetRcKkuwL",
+          "thread_id": "01a00d3d-a5f7-7b41-b4d1-20a7b024b84b"
+        },
+        {
+          "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+          "continuation_wait_call_ids": [
+            "call_RUXGzpsCdn3AI28fuDIBOWXF"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/164e5f5807fc41ec9de2d0632503444e/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_CvthVG6YPPRv0hS0VJoTfLPa"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_CvthVG6YPPRv0hS0VJoTfLPa",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "67db1f8829263002ea474e2f54a954e6050999238b1b6dadf82705a2e0ae7b92",
+          "outer_call_source_sha256": "90c61f93a9ff1b8a813cd2bd5859fb2e4665196875f802522e62260f9b5525a7",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_CvthVG6YPPRv0hS0VJoTfLPa"
+            ],
+            [
+              "call_CvthVG6YPPRv0hS0VJoTfLPa"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7911-7802-848a-ae66151c0ab2.jsonl",
+          "rollout_sha256": "33e5347aad93dcab280d4f9cad1bc89e3a2c626a47f227bd5c30b374b4311e45",
+          "run_id": "164e5f5807fc41ec9de2d0632503444e",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_RUXGzpsCdn3AI28fuDIBOWXF",
+          "thread_id": "01a00d3c-7911-7802-848a-ae66151c0ab2"
+        },
+        {
+          "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+          "continuation_wait_call_ids": [
+            "call_1n0dtSEbaZbQ76xnWfjgXA55"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/344d30dedfd847e7bb0a75345c80562e/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_0YUIcjHyXRL75eaP3hV7pxCf"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_0YUIcjHyXRL75eaP3hV7pxCf",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "a954958421d3799b9a28ddae218fabadec115404f8b1d53998a216bf78fcdca8",
+          "outer_call_source_sha256": "7546c085917d8a4763ea76cb10c13c22a748039af9541be9aaf064c92c86ff75",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_0YUIcjHyXRL75eaP3hV7pxCf"
+            ],
+            [
+              "call_0YUIcjHyXRL75eaP3hV7pxCf"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-79eb-72f3-9668-04056789442c.jsonl",
+          "rollout_sha256": "80572f23e9c6fc2c4afd60213b88c27cd1d0cf814fd7dd41a4a54b1557cd77fc",
+          "run_id": "344d30dedfd847e7bb0a75345c80562e",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_1n0dtSEbaZbQ76xnWfjgXA55",
+          "thread_id": "01a00d3c-79eb-72f3-9668-04056789442c"
+        },
+        {
+          "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+          "continuation_wait_call_ids": [
+            "call_W11xAeFwTYYIaZ4hfqcMsFYe",
+            "call_UIgs6jzzwZzhByqU9vYLhglm",
+            "call_h1yUQ5uQ15JPnCzVow711SM2",
+            "call_0ivriOJWYGMjLKL3MGQufGKT",
+            "call_8NU76fcgagmkbq3v0noYQOOr",
+            "call_zOlEgWS6UmJIdXyKGjLhrTKK"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/955d84264c6a46238c7e6955cb63da81/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_ONXm87Ep7z66ebTmM9v0OZw3"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 6,
+          "observable": true,
+          "outer_call_id": "call_ONXm87Ep7z66ebTmM9v0OZw3",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "d736a4f94ea46bcce8180d6fc5fbecc09ba3911e4d60e14f8f5b16107cc08870",
+          "outer_call_source_sha256": "68e84c2805a132988e0bf6a245e4a54fda41607da6d641eec7ad756c64890243",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_ONXm87Ep7z66ebTmM9v0OZw3"
+            ],
+            [
+              "call_ONXm87Ep7z66ebTmM9v0OZw3"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-78a7-77f2-b5f2-ba08157e5eea.jsonl",
+          "rollout_sha256": "b36e31fccee1eeeecfcf17540ae4006b784d4534838de27a793e2a4891cfb796",
+          "run_id": "955d84264c6a46238c7e6955cb63da81",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_zOlEgWS6UmJIdXyKGjLhrTKK",
+          "thread_id": "01a00d3c-78a7-77f2-b5f2-ba08157e5eea"
+        },
+        {
+          "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+          "continuation_wait_call_ids": [
+            "call_30ZOPRj0sKwuVtY3UqP1VqIU"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/e15c268e64904289a1ab24963d2621f8/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_B7bbFYOCyVjHuahJzbHoX13j"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_B7bbFYOCyVjHuahJzbHoX13j",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "cf87f98499f35824f43eb2142c587701344f533e0ec24d0d019a41c70312c63d",
+          "outer_call_source_sha256": "45e52444e24ba9e286caf26708ca530cedb738996f983543f5bdc8f9a72ca262",
+          "required_command_groups": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_B7bbFYOCyVjHuahJzbHoX13j"
+            ],
+            [
+              "call_B7bbFYOCyVjHuahJzbHoX13j"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7a43-7b60-b948-49af7d1f6a26.jsonl",
+          "rollout_sha256": "b731f399fc5c71806a9d68d46cb695ed798d32c86a43f1c388baab8a05bdb5c4",
+          "run_id": "e15c268e64904289a1ab24963d2621f8",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_30ZOPRj0sKwuVtY3UqP1VqIU",
+          "thread_id": "01a00d3c-7a43-7b60-b948-49af7d1f6a26"
+        },
+        {
+          "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+          "continuation_wait_call_ids": [
+            "call_6XJZOAtX62jS3XZF3lYiiXB1"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/2ebc1c4d3c9843e5a7046d2cba95481b/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_9wgkyzRt73LwV6aHK5ZXScyM"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_9wgkyzRt73LwV6aHK5ZXScyM",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "bbc0b081fedef5bcb03f85e1ca0c9b0636b3d5066735a9f363ad314be4fb6192",
+          "outer_call_source_sha256": "e07297544312900256930a30613e325cae25347751d6a050c924aae5fd4ed312",
+          "required_command_groups": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_9wgkyzRt73LwV6aHK5ZXScyM"
+            ],
+            [
+              "call_9wgkyzRt73LwV6aHK5ZXScyM"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7918-7542-992b-f4b651de857d.jsonl",
+          "rollout_sha256": "237af464d735f25a64a9a794f094f37f87daa95de0702602c708f77c0297b9eb",
+          "run_id": "2ebc1c4d3c9843e5a7046d2cba95481b",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_6XJZOAtX62jS3XZF3lYiiXB1",
+          "thread_id": "01a00d3c-7918-7542-992b-f4b651de857d"
+        },
+        {
+          "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+          "continuation_wait_call_ids": [
+            "call_1e7Qfpy38X0dVNK6uaQeyy2x"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/33f53893153e4151a6b9c15271f58d5b/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_mHvBZ90ezVfAqacQ4NsDauff"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_mHvBZ90ezVfAqacQ4NsDauff",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "4c0568aafc3d5ead5817a57187ac9f4b7587a64f6e1aa115fb69d684c3885ca0",
+          "outer_call_source_sha256": "ef3aade834b023b9ca4bad83ec4a9a50dd591decac41fbbb22503f1bbb6d15b5",
+          "required_command_groups": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_mHvBZ90ezVfAqacQ4NsDauff"
+            ],
+            [
+              "call_mHvBZ90ezVfAqacQ4NsDauff"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-78d7-7791-ba80-ab718a7df198.jsonl",
+          "rollout_sha256": "8ab20bf2421aaca309f3b65f4c59201123528cefb1dd86223a79fa48fc921d99",
+          "run_id": "33f53893153e4151a6b9c15271f58d5b",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_1e7Qfpy38X0dVNK6uaQeyy2x",
+          "thread_id": "01a00d3c-78d7-7791-ba80-ab718a7df198"
+        },
+        {
+          "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+          "continuation_wait_call_ids": [
+            "call_KY4XX65H4W8X4Z0Eguy68arF"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/40d692742d334e888f5ad3b9b4abfb73/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_Lps5a3OflXlz6zjzrGNTeTFk"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_Lps5a3OflXlz6zjzrGNTeTFk",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "14b962c3ab8e5b5abccde51f8797d04e7477d57619993f1f9ada8bec4fb9953a",
+          "outer_call_source_sha256": "61b510d748407e95973201afa29c1db929c41d66e47f3fe6cdf8ba6c5f2d7c36",
+          "required_command_groups": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_Lps5a3OflXlz6zjzrGNTeTFk"
+            ],
+            [
+              "call_Lps5a3OflXlz6zjzrGNTeTFk"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-01-01a00d3c-780d-7cb1-98e4-74ad7b4992a1.jsonl",
+          "rollout_sha256": "b371d6eb94e68ca1c272ebfa0e606e1e8bb9d7ed4b8a6efced6a59d9e9599291",
+          "run_id": "40d692742d334e888f5ad3b9b4abfb73",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_KY4XX65H4W8X4Z0Eguy68arF",
+          "thread_id": "01a00d3c-780d-7cb1-98e4-74ad7b4992a1"
+        },
+        {
+          "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+          "continuation_wait_call_ids": [
+            "call_9YQSbDxhruVNDvnkTi6kHANV"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/9c7c682aed6745d696ff52a5e5d3ed8f/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_Rz7OI2Lz6ppfcZ6O9lBvduVc"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_Rz7OI2Lz6ppfcZ6O9lBvduVc",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "cc93dd3959ad2acdf178bc80c05a0989e6a95c199faf7d158bf20903fb4a49c3",
+          "outer_call_source_sha256": "cc5ad035ee8aae57263a2705c542df2e0c27f0e96e8558ae109cf9be5955c307",
+          "required_command_groups": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_Rz7OI2Lz6ppfcZ6O9lBvduVc"
+            ],
+            [
+              "call_Rz7OI2Lz6ppfcZ6O9lBvduVc"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-790b-74b2-9147-5d8ef66a2ef0.jsonl",
+          "rollout_sha256": "b8317947401dbbfb99af9821dfa22f94efeb0e9018f1a44319cd4ae3cd531c53",
+          "run_id": "9c7c682aed6745d696ff52a5e5d3ed8f",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_9YQSbDxhruVNDvnkTi6kHANV",
+          "thread_id": "01a00d3c-790b-74b2-9147-5d8ef66a2ef0"
+        },
+        {
+          "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+          "continuation_wait_call_ids": [
+            "call_394HujcMAGx3qztg1ZbttvLk"
+          ],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/cefbccedacb64ff68b1136041a630596/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_BKFva08ql50bbuisY8wwULIZ"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 1,
+          "observable": true,
+          "outer_call_id": "call_BKFva08ql50bbuisY8wwULIZ",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "6715d13dd8211c33202f2508d988266bb06b59022e3a5204ba7273f82bec0a4f",
+          "outer_call_source_sha256": "89cdc631cbf3e7532fe7d5d1d289c9c4357ca1c7856e973566675470bee1a4d1",
+          "required_command_groups": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_BKFva08ql50bbuisY8wwULIZ"
+            ],
+            [
+              "call_BKFva08ql50bbuisY8wwULIZ"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-01-02-01a00d3c-7918-70c3-bd24-13d5e5845b0c.jsonl",
+          "rollout_sha256": "0a16f9528d40af7d7a742b44315dc3ea247c30bd3cb29257e07ddcde7d120022",
+          "run_id": "cefbccedacb64ff68b1136041a630596",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_394HujcMAGx3qztg1ZbttvLk",
+          "thread_id": "01a00d3c-7918-70c3-bd24-13d5e5845b0c"
+        },
+        {
+          "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/10e134fb382b4d098a983c0cab53bb85/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 1,
+          "matching_call_ids": [
+            "call_Tzcu0bc0EmTt4CD06LjFRKNi"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_Tzcu0bc0EmTt4CD06LjFRKNi",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "0a63caec0fdabf780a6937d569af80b227609f40defade3ee7146224d0d8abf1",
+          "outer_call_source_sha256": "27c2db183dee89f0a038a9334ca7c943fc0fea507f3eccf6dcb516bf19d4249d",
+          "required_command_groups": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_Tzcu0bc0EmTt4CD06LjFRKNi"
+            ],
+            [
+              "call_Tzcu0bc0EmTt4CD06LjFRKNi"
+            ],
+            [
+              "call_Tzcu0bc0EmTt4CD06LjFRKNi"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-23-01a00d3d-b71c-7242-88bf-f070a2800673.jsonl",
+          "rollout_sha256": "a82f9d1d26386335a2be9f3ea4ae86f1973f696b6c0119a986da69962a93359e",
+          "run_id": "10e134fb382b4d098a983c0cab53bb85",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_Tzcu0bc0EmTt4CD06LjFRKNi",
+          "thread_id": "01a00d3d-b71c-7242-88bf-f070a2800673"
+        },
+        {
+          "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/32ed1ae5814f49f28b30b2a963b12a61/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 2,
+          "matching_call_ids": [
+            "call_PppGGRq0gxJaxOKQKpqer9zT"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_PppGGRq0gxJaxOKQKpqer9zT",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "0a63caec0fdabf780a6937d569af80b227609f40defade3ee7146224d0d8abf1",
+          "outer_call_source_sha256": "5591a8504b866948d72175011712d3e0dbbdb18a85cc67c6f0e30f4da8831791",
+          "required_command_groups": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_PppGGRq0gxJaxOKQKpqer9zT"
+            ],
+            [
+              "call_PppGGRq0gxJaxOKQKpqer9zT"
+            ],
+            [
+              "call_PppGGRq0gxJaxOKQKpqer9zT"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-19-01a00d3d-a5dc-7c93-bc9b-74db950790f3.jsonl",
+          "rollout_sha256": "8ba438f78d6c6c2709727eed2dca887e73dca0b16b97db5c60d927e7d223ad92",
+          "run_id": "32ed1ae5814f49f28b30b2a963b12a61",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_PppGGRq0gxJaxOKQKpqer9zT",
+          "thread_id": "01a00d3d-a5dc-7c93-bc9b-74db950790f3"
+        },
+        {
+          "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/32fdf3e4fb334cf1b977e277ec2f0568/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 3,
+          "matching_call_ids": [
+            "call_S5AE0h92FIMfk1FsZvL9zcSF"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_S5AE0h92FIMfk1FsZvL9zcSF",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "24e66b1ed60c3a76864c2214e007c59374c28428b2e43b6b24244b4eb2be4341",
+          "outer_call_source_sha256": "fae2d7f4b9d220402b2cadb215c7369a4fc4e789c635ee7c8554aaff21f7ad77",
+          "required_command_groups": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_S5AE0h92FIMfk1FsZvL9zcSF"
+            ],
+            [
+              "call_S5AE0h92FIMfk1FsZvL9zcSF"
+            ],
+            [
+              "call_S5AE0h92FIMfk1FsZvL9zcSF"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-19-01a00d3d-a5d9-7c03-bbbe-8d6826e4c0a6.jsonl",
+          "rollout_sha256": "81d3afbb10f63303865f0ee592534791a039905cb153a4ce62374af185e0cad9",
+          "run_id": "32fdf3e4fb334cf1b977e277ec2f0568",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_S5AE0h92FIMfk1FsZvL9zcSF",
+          "thread_id": "01a00d3d-a5d9-7c03-bbbe-8d6826e4c0a6"
+        },
+        {
+          "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/95adfce2024644ad9a32495bd07800a9/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 4,
+          "matching_call_ids": [
+            "call_YLLAZzXFM6G3rGtkGyXsqVdl"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_YLLAZzXFM6G3rGtkGyXsqVdl",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "39770adef4e0eaaab52b29a9fadd6d40c7dc27ff71cae9c602c38e71869a0c7c",
+          "outer_call_source_sha256": "7e3b9808633e7b06a5517e8652abd2002858e908fe185325ec2f16845b4550ff",
+          "required_command_groups": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_YLLAZzXFM6G3rGtkGyXsqVdl"
+            ],
+            [
+              "call_YLLAZzXFM6G3rGtkGyXsqVdl"
+            ],
+            [
+              "call_YLLAZzXFM6G3rGtkGyXsqVdl"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-19-01a00d3d-a5d9-74b3-b090-0ff6a0db3795.jsonl",
+          "rollout_sha256": "28833f62c0afa261ed8744169c671709010ca7001c3390759bbef6be8027280c",
+          "run_id": "95adfce2024644ad9a32495bd07800a9",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_YLLAZzXFM6G3rGtkGyXsqVdl",
+          "thread_id": "01a00d3d-a5d9-74b3-b090-0ff6a0db3795"
+        },
+        {
+          "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+          "continuation_wait_call_ids": [],
+          "cwd": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate270-natural-language-predicate-bound-validation-result-v14-medium-standard14-n5-cli0146-20260817-r1/cycle/layer2/evidence/c582fbf30b4c459b9312b6af4d4b7c0c/workspace",
+          "intermediate_validation_output_bytes": 0,
+          "interposed_model_item_types": [],
+          "iteration": 5,
+          "matching_call_ids": [
+            "call_Ekwv3062hSYQI6NJV2M7bZTL"
+          ],
+          "mechanism_passed": true,
+          "no_interposed_model_item_passed": true,
+          "nonterminal_receipt_count": 0,
+          "observable": true,
+          "outer_call_id": "call_Ekwv3062hSYQI6NJV2M7bZTL",
+          "outer_call_output_count": 1,
+          "outer_call_output_sha256": "a9a0e5464b2920549c7618f273ba45e38a0191f1a83e89707bde95d188aaea82",
+          "outer_call_source_sha256": "a2561eadb0bc83a77b64ad989e13bed9f7505c8f9a80a37f6864b955b813d055",
+          "required_command_groups": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ],
+          "required_group_call_ids": [
+            [
+              "call_Ekwv3062hSYQI6NJV2M7bZTL"
+            ],
+            [
+              "call_Ekwv3062hSYQI6NJV2M7bZTL"
+            ],
+            [
+              "call_Ekwv3062hSYQI6NJV2M7bZTL"
+            ]
+          ],
+          "rollout": "/Users/kenn/.codex/sessions/2026/08/17/rollout-2026-08-17T10-02-24-01a00d3d-bc2e-70e2-84e5-51e5cb52f68e.jsonl",
+          "rollout_sha256": "211752c9406243e79f771062078f8b3d61d6f7e25be81a418bdd0d09067b2d0e",
+          "run_id": "c582fbf30b4c459b9312b6af4d4b7c0c",
+          "schema_version": "the-caption-prompt.validation-carrier-audit/v1",
+          "single_outer_call_passed": true,
+          "single_terminal_output_passed": true,
+          "terminal_output_call_id": "call_Ekwv3062hSYQI6NJV2M7bZTL",
+          "thread_id": "01a00d3d-bc2e-70e2-84e5-51e5cb52f68e"
+        }
+      ],
+      "unobserved_run_count": 0
+    }
+  ]
+}
+
