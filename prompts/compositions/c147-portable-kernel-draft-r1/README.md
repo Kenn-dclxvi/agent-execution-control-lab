@@ -11,6 +11,8 @@
 
 両variantは`actor-core`と`actor-input`を共有し、`single-actor`または`multi-actor`のどちらか一方だけを選ぶ。各variantの`provides / requires`は閉じており、81 primitiveの逆引きは`primitive-coverage.json`に固定する。
 
+full-agentの機能block別bytes、primitive、tuning Caseおよび削除不可境界は[`functional-block-cost-ledger.json`](functional-block-cost-ledger.json)へ固定する。byte比率は効率KPIや削除優先度ではない。
+
 静的なbytes差は効率改善の証拠ではない。品質維持後のall-agent `total_tokens`と`elapsed_seconds`を互換条件で測定するまでcost改善を主張しない。
 
 Q01〜Q08の静的反例監査で初回草案の4境界を修正した。修正後の初回静的反例は0件だが、Q01〜Q08は本文作成に使ったtuning Caseなので評価通過とは扱わない。

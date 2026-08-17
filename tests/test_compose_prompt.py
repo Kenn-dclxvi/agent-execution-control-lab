@@ -25,11 +25,39 @@ DRAFT_ROOT = ROOT / "prompts/compositions/c147-portable-kernel-draft-r1"
 DRAFT_ROOT_ONLY = DRAFT_ROOT / "root-only.composition.json"
 DRAFT_FULL_AGENT = DRAFT_ROOT / "full-agent.composition.json"
 DRAFT_COVERAGE = DRAFT_ROOT / "primitive-coverage.json"
+DRAFT_COST_LEDGER = DRAFT_ROOT / "functional-block-cost-ledger.json"
 C147 = ROOT / "prompts/candidates/the-caption-3ce91a4-result-effect-scope-r1/files/AGENTS.md.txt"
 C147_BUNDLE = ROOT / "prompts/candidates/the-caption-3ce91a4-result-effect-scope-r1"
 
 
 class ComposePromptTest(unittest.TestCase):
+    def test_full_agent_cost_ledger_partitions_all_bytes_and_primitives(self) -> None:
+        manifest = json.loads((DRAFT_ROOT / "full-agent.candidate.composition.json").read_text())
+        coverage = json.loads(DRAFT_COVERAGE.read_text())
+        ledger = json.loads(DRAFT_COST_LEDGER.read_text())
+        components = {item["id"]: item for item in manifest["components"]}
+        statement_counts: dict[str, int] = {}
+        entries = coverage["common"] + coverage["variants"]["full-agent"]
+        for entry in entries:
+            component_id = entry["statement"].split(":", 1)[0]
+            statement_counts[component_id] = statement_counts.get(component_id, 0) + 1
+
+        listed_components = [
+            component_id for block in ledger["blocks"] for component_id in block["components"]
+        ]
+        assert sorted(listed_components) == sorted(components)
+        assert len(listed_components) == len(set(listed_components))
+        assert sum(block["bytes"] for block in ledger["blocks"]) == 10781
+        assert sum(block["primitive_count"] for block in ledger["blocks"]) == 81
+        assert all(block["removable"] is False for block in ledger["blocks"])
+        for block in ledger["blocks"]:
+            assert block["bytes"] == sum(
+                (DRAFT_ROOT / components[item]["path"]).stat().st_size for item in block["components"]
+            )
+            assert block["primitive_count"] == sum(
+                statement_counts.get(item, 0) for item in block["components"]
+            )
+
     def test_c147_full_agent_composition_is_byte_identical(self) -> None:
         output, receipt = compose(COMPOSITION)
 
