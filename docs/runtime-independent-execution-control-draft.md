@@ -1,7 +1,7 @@
 # C147由来のruntime非依存portable instruction設計
 
 > [!IMPORTANT]
-> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_exact_draft_written / q01_q08_static_counterexamples_repaired / semantic_target_registered / control_free_dispatch_preflight_ready / authorized_14 / issued_0 / candidate_not_created / evaluation_not_started`
+> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_exact_draft_written / q01_q08_static_counterexamples_repaired / semantic_target_registered / control_free_measurement_gate_passed / valid_14 / score4_5 / mechanism_passed_5 / candidate_not_created`
 >
 > 利用者が2026-08-14に、C147のCodex依存をなくし、ChatGPT Projectのproject instructions、Codex、Claude Code、CursorおよびGemini Gemで使える形へ進めることを明示した。本書はその要求、境界および作成前gateを固定する。Candidate本文、評価結果、採用、releaseまたはprojectionではない。
 
@@ -142,7 +142,7 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 3. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
 4. formal target identity、直接の基準、allowed deltaおよび非目標の固定。
 
-control-free baseline前の測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、persisted all-agent transcript contract、Codex N=1 Profile、14 Caseのwrite-once計画、Profile事前確認票および計画限定の実行入口まで固定した。現在は14件を許可し、発行数は0件である。次の作業は固定済みcontrol-free資格確認の実行と採点であり、成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を採点可能なまま保持する。
+control-free測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、Codex N=1 Profile、Structured Outputs subsetへの意味保存投影、thread-bound永続一次tokenおよび計画限定の実行入口を固定した。r4資格確認は14件すべて有効で、score 4と機序通過は各5/14だった。次の作業はこの基準へprompt identityだけを変えたportable kernelを比較する設計であり、成功動作のtool順を実行義務へ転記しない。
 
 Claude Code自身によるC147の静的適用可能性報告は[`C147 Claude Code自己評価のtriage`](c147-claude-code-self-assessment-triage.md)へ記録した。Codex固有field、wrapper、継続identityおよびambient recovery/protocol不足はsurface mismatchとして採用し、EVIDENCE_GATEの有害性、形式記法の実効および5項目だけが有効という集約はdynamic probe待ちとする。
 

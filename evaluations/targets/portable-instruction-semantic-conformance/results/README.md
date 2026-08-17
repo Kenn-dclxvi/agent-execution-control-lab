@@ -1,3 +1,5 @@
 # Results
 
-正式resultは0件である。target登録、baseline登録または後続のqualificationを、比較resultや採用判断として扱わない。
+control-free資格確認の正本は[`portable-semantic-control-free-heldout-r1-n1-qualification-r4.json`](portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)である。14 Caseすべてでschema適合応答、all-agent一次tokenおよびelapsedを取得し、測定成立gateを通過した。score 4と機序通過は各5/14だが、qualificationでは記述値であり合否条件ではない。
+
+このresultはcontrol-freeの比較基準を固定するもので、portable kernelの効果、採用、releaseまたはruntime projectionを意味しない。生応答と実行証跡はrepository外へ保持する。

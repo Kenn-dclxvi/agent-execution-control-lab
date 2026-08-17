@@ -8,9 +8,11 @@ from pathlib import Path
 from scripts.all_agent_usage import (
     AllAgentUsageError,
     TOKEN_ACCOUNTING,
+    TOKEN_ACCOUNTING_V2,
     index_sessions,
     parse_root_thread_id,
     summarize_workspace_usage,
+    summarize_workspace_usage_by_root,
 )
 
 
@@ -137,6 +139,19 @@ class AllAgentUsageTest(unittest.TestCase):
 
             with self.assertRaisesRegex(AllAgentUsageError, "lacks final token usage"):
                 summarize_workspace_usage(indexed[str(workspace)], 100, "root")
+
+    def test_thread_bound_accounting_uses_persisted_primary_total_without_inference(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            workspace.mkdir()
+            write_session(root / "root.jsonl", "root", workspace, 100)
+            write_session(root / "child.jsonl", "child", workspace, 40, "root")
+            indexed = index_sessions(root)
+            usage = summarize_workspace_usage_by_root(indexed[str(workspace)], "root")
+            self.assertEqual(usage["token_accounting"], TOKEN_ACCOUNTING_V2)
+            self.assertEqual(usage["root_total_tokens"], 100)
+            self.assertEqual(usage["all_agent_total_tokens"], 140)
 
     def test_parses_exec_root_thread_id(self) -> None:
         self.assertEqual(

@@ -1,7 +1,7 @@
 # Portable instruction semantic target登録設計
 
 > [!IMPORTANT]
-> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / persisted_all_agent_usage_bound / codex_profile_registered_not_qualified / dispatch_plan_fixed / profile_preflight_ready / plan_limited_entrypoint_enabled / authorized_14 / issued_0 / v1_unchanged / baseline_not_started`
+> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / profile_r4_measurement_qualified / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / v1_unchanged / baseline_qualification_complete`
 >
 > 本書はportable instruction semantic conformanceを既存repository targetと誤って互換扱いしないための登録設計である。後続の正式登録は[`evaluations/targets/portable-instruction-semantic-conformance/`](../evaluations/targets/portable-instruction-semantic-conformance/)を正本とする。本書自体はProfile、Candidate、評価slotまたはresultではない。
 
@@ -101,9 +101,11 @@ response schemaを守るためのTaskSpec wrapperは両条件へ同じbytesで�
 
 一件だけをmodel-visible packetへ出すmaterializer、private receipt、v2 subject/runtime comparison preflight、Codex CLI `0.146.0`向けadapter coreおよび0-byte control-free prompt draftは実装済みである。preflightはprompt identity以外の完全一致を要求し、`target_repository_ref`、`unbound`、runtime drift、Case driftおよびtranscript accountingと両立しない`ephemeral` sessionを拒否する。adapterはisolated workspaceへ`AGENTS.md`だけを配置し、user config、rules、memory、skills、apps、pluginsおよびmulti-agent capabilityを無効化する。tokenはterminal eventの一次`total_tokens`がある場合だけ受理し、内訳や文字数から補完しない。
 
-commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contract、0-byte control-free baseline、共通TaskSpec wrapper、capability catalog、persisted all-agent transcript contractおよびCodex CLI 0.146.0 / GPT-5.6 Sol / reasoning `medium` / N=1 Profileは登録済みである。adapterはProfileから参照する全file hash、target subject、prompt bundleおよびruntime contractを静的検証し、root JSONL usageとroot・descendant transcript usageが一致する場合だけtokenを受理する。
+commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contract、0-byte control-free baseline、共通TaskSpec wrapper、capability catalog、thread-bound persisted all-agent transcript contractおよびCodex CLI 0.146.0 / GPT-5.6 Sol / reasoning `medium` / N=1 Profileは登録済みである。adapterはProfileから参照する全file hash、target subject、prompt bundleおよびruntime contractを静的検証し、execのthread identityを同じworkspaceの永続sessionへbindでき、保存済みterminal usageに一次`total_tokens`がある場合だけtokenを受理する。exec JSONLの内訳は合算しない。
 
-14 Caseのwrite-once計画とProfile事前確認票は[`plans/`](../evaluations/targets/portable-instruction-semantic-conformance/plans/)へ固定した。[`run_semantic_protocol_qualification.py`](../scripts/run_semantic_protocol_qualification.py)は、計画、事前確認票、共通adapter、実行入口、Codex versionおよび出力先を発行直前に再検証し、確認票に一度だけ現れる未発行スロット以外を拒否する。現在は`authorized_slot_count=14 / issued_slot_count=0`であり、qualificationまたはbaseline runはまだ発行していない。次の別アーティファクト単位は、この固定入力を変更せずに行うcontrol-free資格確認の実行と非公開証跡の採点である。
+14 Caseのwrite-once計画とProfile事前確認票は[`plans/`](../evaluations/targets/portable-instruction-semantic-conformance/plans/)へ固定した。[`run_semantic_protocol_qualification.py`](../scripts/run_semantic_protocol_qualification.py)は、計画、事前確認票、共通adapter、実行入口、Codex versionおよび出力先を発行直前に再検証し、確認票に一度だけ現れる未発行スロット以外を拒否する。
+
+r1からr3でschema transportとtoken accountingの非互換を切り分け、r4では14件すべてでschema適合応答、all-agent一次tokenおよびelapsedを取得した。[`qualification result`](../evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)は`measurement_gate=passed / score4=5 / mechanism_passed=5`である。次の別アーティファクト単位は、r4条件を維持してprompt identityだけをportable kernelへ変更する比較設計である。
 
 ## 参照
 

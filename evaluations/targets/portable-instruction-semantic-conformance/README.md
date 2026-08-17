@@ -1,6 +1,6 @@
 # Portable instruction semantic conformance target
 
-> **状態**: `registered / namespaced / control_free_baseline_registered / codex_profile_registered_not_qualified / dispatch_plan_fixed / profile_preflight_ready / authorized_14 / issued_0 / qualification_not_started / formal_results_0`
+> **状態**: `registered / namespaced / control_free_baseline_registered / codex_profile_r4_measurement_qualified / dispatch_plan_fixed / profile_preflight_ready / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / formal_results_1`
 
 固定operation ledgerへ一回のJSON応答を返すsemantic protocolの評価インスタンスである。repository snapshotを対象とする既存targetとは別型であり、`target_repository_ref`を持たない。
 
@@ -13,8 +13,8 @@
 | rating | [`rating-contracts/portable-instruction-semantic-exact-v1.json`](rating-contracts/portable-instruction-semantic-exact-v1.json) | exact集合rating |
 | prompt | [`prompts/baselines/portable-semantic-a544769-control-free-r1/`](prompts/baselines/portable-semantic-a544769-control-free-r1/) | 追加instruction 0 bytes |
 | runtime contracts | [`contracts/`](contracts/) | TaskSpec wrapper、capability catalog、all-agent transcript accountingを固定 |
-| profile | [`profiles/README.md`](profiles/README.md) | Codex CLI 0.146.0 / GPT-5.6 Sol / reasoning medium / N=1を登録、未qualification |
-| dispatch | [`plans/README.md`](plans/README.md) | 14スロットを固定、事前確認済み、発行0件 |
-| results | [`results/README.md`](results/README.md) | 0件 |
+| profile | [`profiles/README.md`](profiles/README.md) | r4でschema transportとthread-bound一次tokenを固定、測定成立 |
+| dispatch | [`plans/README.md`](plans/README.md) | r4の14スロットを発行、有効14件 |
+| results | [`results/README.md`](results/README.md) | control-free資格確認1件 |
 
-target、Profile、計画または事前確認票の登録は評価済み、採用、releaseまたはruntime projectionを意味しない。実行入口は事前確認票に固定した14スロット以外を拒否し、現時点では一件も発行していない。
+資格確認は測定成立だけを通過した。品質はscore 4が5/14、機序通過も5/14であり、portable kernelの効果、採用、releaseまたはruntime projectionは未判断である。

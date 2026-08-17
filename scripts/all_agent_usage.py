@@ -17,6 +17,11 @@ TOKEN_ACCOUNTING = {
     "revision": "v1",
     "source": "codex_rollout_final_usage_by_workspace",
 }
+TOKEN_ACCOUNTING_V2 = {
+    "scope": "all_agents",
+    "revision": "v2",
+    "source": "codex_rollout_final_usage_by_thread_bound_workspace",
+}
 USAGE_SCHEMA_VERSION = "the-caption-prompt.all-agent-usage/v1"
 
 
@@ -186,6 +191,39 @@ def summarize_workspace_usage(
     }
 
 
+def summarize_workspace_usage_by_root(
+    records: list[dict[str, Any]],
+    root_thread_id: str,
+) -> dict[str, Any]:
+    if not records:
+        raise AllAgentUsageError("no Codex sessions found for evaluation workspace")
+    selected = root_and_descendants(records, root_thread_id)
+    incomplete = [record["thread_id"] for record in selected if not isinstance(record.get("usage"), dict)]
+    if incomplete:
+        raise AllAgentUsageError("Codex session lacks final token usage: " + ", ".join(incomplete))
+    root = next(record for record in selected if record["thread_id"] == root_thread_id)
+    root_total = root["usage"].get("total_tokens")
+    if not isinstance(root_total, int):
+        raise AllAgentUsageError("persisted root session lacks primary total_tokens")
+    all_agent_total = sum(record["usage"]["total_tokens"] for record in selected)
+    return {
+        "schema_version": USAGE_SCHEMA_VERSION,
+        "token_accounting": TOKEN_ACCOUNTING_V2,
+        "root_thread_id": root_thread_id,
+        "root_total_tokens": root_total,
+        "all_agent_total_tokens": all_agent_total,
+        "child_and_additional_tokens": all_agent_total - root_total,
+        "session_count": len(selected),
+        "sessions": [
+            {
+                key: record[key]
+                for key in ("rollout_file", "thread_id", "parent_thread_id", "source", "usage")
+            }
+            for record in selected
+        ],
+    }
+
+
 def collect_workspace_usage(
     session_root: Path,
     workspace: Path,
@@ -196,3 +234,14 @@ def collect_workspace_usage(
     indexed = index_sessions(session_root, modified_since)
     records = indexed.get(str(workspace.resolve()), [])
     return summarize_workspace_usage(records, root_total_tokens, root_thread_id)
+
+
+def collect_workspace_usage_by_root(
+    session_root: Path,
+    workspace: Path,
+    root_thread_id: str,
+    modified_since: float | None = None,
+) -> dict[str, Any]:
+    indexed = index_sessions(session_root, modified_since)
+    records = indexed.get(str(workspace.resolve()), [])
+    return summarize_workspace_usage_by_root(records, root_thread_id)

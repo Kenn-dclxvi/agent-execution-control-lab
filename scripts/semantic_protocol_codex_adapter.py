@@ -20,6 +20,7 @@ try:
         AllAgentUsageError,
         TOKEN_ACCOUNTING as ALL_AGENT_TOKEN_ACCOUNTING,
         collect_workspace_usage,
+        collect_workspace_usage_by_root,
     )
     from .export_prompt_bundle import BundleError, verify_bundle
 except ImportError:
@@ -27,6 +28,7 @@ except ImportError:
         AllAgentUsageError,
         TOKEN_ACCOUNTING as ALL_AGENT_TOKEN_ACCOUNTING,
         collect_workspace_usage,
+        collect_workspace_usage_by_root,
     )
     from export_prompt_bundle import BundleError, verify_bundle
 
@@ -40,7 +42,22 @@ TOKEN_ACCOUNTING = {
     "revision": "v1",
     "source": "codex_rollout_final_usage_by_workspace",
 }
+TOKEN_ACCOUNTING_V2 = {
+    "scope": "all_agents",
+    "revision": "v2",
+    "source": "codex_rollout_final_usage_by_thread_bound_workspace",
+}
 ELAPSED_BOUNDARY = "adapter_start_to_terminal_process_result_monotonic"
+OUTPUT_SCHEMA_TRANSPORT_R2 = {
+    "revision": "codex-structured-output-projection-r2",
+    "api_schema_projection": "remove_uniqueItems_only",
+    "canonical_post_validation": True,
+}
+OUTPUT_SCHEMA_TRANSPORT_R3 = {
+    "revision": "codex-structured-output-supported-subset-r3",
+    "api_schema_projection": "supported_subset_semantic_equivalence",
+    "canonical_post_validation": True,
+}
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -157,7 +174,17 @@ def validate_registered_profile(
         "capability_catalog": references["capability_catalog"],
         "elapsed_boundary": ELAPSED_BOUNDARY,
     }
-    if runtime != expected_runtime:
+    allowed_runtimes = [
+        expected_runtime,
+        {**expected_runtime, "output_schema_transport": OUTPUT_SCHEMA_TRANSPORT_R2},
+        {**expected_runtime, "output_schema_transport": OUTPUT_SCHEMA_TRANSPORT_R3},
+        {
+            **expected_runtime,
+            "token_accounting": TOKEN_ACCOUNTING_V2,
+            "output_schema_transport": OUTPUT_SCHEMA_TRANSPORT_R3,
+        },
+    ]
+    if runtime not in allowed_runtimes:
         raise SemanticCodexAdapterError("profile runtime differs from adapter contract")
     if profile.get("execution") != {
         "max_workers": 24,
@@ -260,6 +287,14 @@ def build_command(
 
 
 def parse_codex_jsonl(value: bytes) -> dict[str, Any]:
+    parsed = parse_codex_jsonl_identity(value)
+    total_tokens = parsed["raw_usage"].get("total_tokens")
+    if total_tokens is None:
+        raise SemanticCodexAdapterError("Codex usage lacks primary total_tokens")
+    return {**parsed, "root_total_tokens": total_tokens}
+
+
+def parse_codex_jsonl_identity(value: bytes) -> dict[str, Any]:
     thread_ids: list[str] = []
     completed_usage: list[dict[str, int]] = []
     failures: list[str] = []
@@ -289,10 +324,7 @@ def parse_codex_jsonl(value: bytes) -> dict[str, Any]:
         raise SemanticCodexAdapterError("Codex JSONL must contain one thread.started")
     if len(completed_usage) != 1:
         raise SemanticCodexAdapterError("Codex JSONL must contain one turn.completed usage")
-    total_tokens = completed_usage[0].get("total_tokens")
-    if total_tokens is None:
-        raise SemanticCodexAdapterError("Codex usage lacks primary total_tokens")
-    return {"root_thread_id": thread_ids[0], "root_total_tokens": total_tokens, "raw_usage": completed_usage[0]}
+    return {"root_thread_id": thread_ids[0], "raw_usage": completed_usage[0]}
 
 
 def collect_accounted_usage(
@@ -321,6 +353,30 @@ def collect_accounted_usage(
         raise SemanticCodexAdapterError("all-agent usage uses an unsupported accounting identity")
     if usage.get("all_agent_total_tokens") is None:
         raise SemanticCodexAdapterError("all-agent usage lacks primary total_tokens")
+    return usage
+
+
+def collect_accounted_usage_persisted(
+    *,
+    session_root: Path,
+    workspace: Path,
+    codex_jsonl: bytes,
+    modified_since: float | None,
+) -> dict[str, Any]:
+    root = parse_codex_jsonl_identity(codex_jsonl)
+    try:
+        usage = collect_workspace_usage_by_root(
+            session_root.resolve(),
+            workspace.resolve(),
+            root["root_thread_id"],
+            modified_since=modified_since,
+        )
+    except AllAgentUsageError as error:
+        raise SemanticCodexAdapterError("thread-bound persisted usage is incomplete") from error
+    if usage.get("token_accounting") != TOKEN_ACCOUNTING_V2:
+        raise SemanticCodexAdapterError("thread-bound usage uses an unsupported accounting identity")
+    if usage.get("all_agent_total_tokens") is None:
+        raise SemanticCodexAdapterError("thread-bound all-agent usage lacks primary total_tokens")
     return usage
 
 

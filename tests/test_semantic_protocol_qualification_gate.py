@@ -1,4 +1,5 @@
 import copy
+import json
 from pathlib import Path
 
 import pytest
@@ -10,6 +11,7 @@ from scripts.run_semantic_protocol_qualification import (
     canonical_bytes,
     content_identity,
     generate_plan,
+    project_response_schema,
     validate_plan,
     validate_preflight,
     write_once,
@@ -154,3 +156,46 @@ def test_write_once_refuses_overwrite(tmp_path: Path) -> None:
     with pytest.raises(QualificationGateError, match="refusing to overwrite"):
         write_once(path, b"second")
     assert path.read_bytes() == b"first"
+
+
+def test_transport_projection_removes_only_unique_items_and_keeps_canonical_validation(tmp_path: Path) -> None:
+    canonical = TARGET_ROOT / "cases/heldout-r1/response.schema.json"
+    output = tmp_path / "transport.schema.json"
+    receipt = project_response_schema(
+        canonical,
+        output,
+        {
+            "revision": "codex-structured-output-projection-r2",
+            "api_schema_projection": "remove_uniqueItems_only",
+            "canonical_post_validation": True,
+        },
+    )
+    canonical_value = json.loads(canonical.read_text(encoding="utf-8"))
+    projected_value = json.loads(output.read_text(encoding="utf-8"))
+    assert canonical_value["$defs"]["unique_ids"].pop("uniqueItems") is True
+    assert projected_value == canonical_value
+    assert receipt["removed_keywords"] == ["$defs.unique_ids.uniqueItems"]
+
+
+def test_r3_transport_projection_uses_supported_subset_and_keeps_canonical_validation(tmp_path: Path) -> None:
+    canonical = TARGET_ROOT / "cases/heldout-r1/response.schema.json"
+    output = tmp_path / "transport-r3.schema.json"
+    receipt = project_response_schema(
+        canonical,
+        output,
+        {
+            "revision": "codex-structured-output-supported-subset-r3",
+            "api_schema_projection": "supported_subset_semantic_equivalence",
+            "canonical_post_validation": True,
+        },
+    )
+    projected = json.loads(output.read_text(encoding="utf-8"))
+    assert not {"$schema", "$id", "title"}.intersection(projected)
+    assert "uniqueItems" not in projected["$defs"]["unique_ids"]
+    assert "minLength" not in projected["$defs"]["unique_ids"]["items"]
+    assert "minLength" not in projected["properties"]["case_id"]
+    assert projected["properties"]["schema_id"] == {
+        "type": "string",
+        "enum": ["portable-instruction-control-response/r2"],
+    }
+    assert receipt["transformations"] == ["properties.schema_id.const_to_typed_single_enum"]

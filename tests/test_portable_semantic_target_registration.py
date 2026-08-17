@@ -81,14 +81,18 @@ def test_profile_is_registered_but_result_execution_has_not_started() -> None:
         for item in documents
         if item.get("schema_version") == "portable-instruction-semantic-profile-registration/v1"
     ]
-    assert len(profiles) == 1
-    assert len(registrations) == 1
-    assert profiles[0]["lifecycle_state"] == "registered_not_qualified"
-    assert registrations[0]["state"]["adapter_execution_entrypoint_enabled"] is False
-    for key in ("profile", "adapter"):
-        reference = registrations[0][key]
+    assert len(profiles) == 4
+    assert len(registrations) == 4
+    assert {profile["profile_id"][-2:] for profile in profiles} == {"r1", "r2", "r3", "r4"}
+    assert all(profile["lifecycle_state"] == "registered_not_qualified" for profile in profiles)
+    latest_registration = next(item for item in registrations if item["registration_id"].endswith("r4"))
+    assert latest_registration["state"]["adapter_execution_entrypoint_enabled"] is True
+    for key in ("profile", "adapter", "runner"):
+        reference = latest_registration[key]
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
-    assert list((TARGET / "results").glob("*.json")) == []
+    assert list((TARGET / "results").glob("*.json")) == [
+        TARGET / "results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json"
+    ]
     assert list((TARGET / "results").glob("*.md")) == [TARGET / "results/README.md"]
 
 
@@ -104,11 +108,29 @@ def test_qualification_plan_and_preflight_authorize_fourteen_but_issue_zero() ->
     assert preflight["issued_slot_count"] == 0
     assert preflight["dispatch_allowed"] is True
     assert sha256(ROOT / preflight["plan"]["path"]) == preflight["plan"]["sha256"]
-    for reference in preflight["execution_code"].values():
-        assert sha256(ROOT / reference["path"]) == reference["sha256"]
+    assert preflight["preflight_id"].endswith("r1")
+    failure = load(TARGET / "plans/portable-semantic-control-free-heldout-r1-n1-attempt-r1-external-failure.json")
+    assert failure["issued_slot_count"] == 14
+    assert failure["valid_result_count"] == 0
+    assert failure["classification"] == "profile_transport_incompatible"
 
 
 def test_target_registers_dispatch_root_and_plan_limited_runner() -> None:
     target = load(TARGET / "target.json")
     assert target["artifact_roots"]["dispatch_plans"].endswith("/plans")
     assert "scripts/run_semantic_protocol_qualification.py" in target["target_specific_modules"]
+
+
+def test_control_free_qualification_passes_measurement_not_adoption() -> None:
+    result = load(TARGET / "results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json")
+    assert result["summary"]["valid_results"] == 14
+    assert result["summary"]["schema_valid_results"] == 14
+    assert result["summary"]["score4_results"] == 5
+    assert result["summary"]["mechanism_passed_results"] == 5
+    assert result["qualification"] == {
+        "measurement_gate": "passed",
+        "quality_gate": "descriptive_not_an_admission_gate",
+        "adoption": "not_decided",
+        "release": "not_decided",
+        "runtime_projection": "not_authorized",
+    }

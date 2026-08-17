@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -19,7 +20,9 @@ try:
         SemanticCodexAdapterError,
         build_command,
         collect_accounted_usage,
+        collect_accounted_usage_persisted,
         load_object,
+        parse_codex_jsonl_identity,
         prepare_instruction_workspace,
         validate_final_response,
         validate_registered_profile,
@@ -31,7 +34,9 @@ except ImportError:
         SemanticCodexAdapterError,
         build_command,
         collect_accounted_usage,
+        collect_accounted_usage_persisted,
         load_object,
+        parse_codex_jsonl_identity,
         prepare_instruction_workspace,
         validate_final_response,
         validate_registered_profile,
@@ -42,6 +47,7 @@ PLAN_SCHEMA = "portable-instruction-semantic-dispatch-plan/v1"
 PREFLIGHT_SCHEMA = "portable-instruction-semantic-profile-preflight/v1"
 DISPATCH_SCHEMA = "portable-instruction-semantic-dispatch-receipt/v1"
 EXECUTION_SCHEMA = "portable-instruction-semantic-execution-observation/v1"
+FAILURE_SUMMARY_SCHEMA = "portable-instruction-semantic-external-failure-summary/v1"
 
 
 class QualificationGateError(Exception):
@@ -192,9 +198,12 @@ def generate_plan(
         }
         for item in cases
     ]
+    profile_revision = profile["profile_id"].rsplit("-", 1)[-1]
+    if profile_revision not in {"r1", "r2", "r3", "r4"}:
+        raise QualificationGateError("unsupported qualification Profile revision")
     plan = {
         "schema_version": PLAN_SCHEMA,
-        "plan_id": "portable-semantic-control-free-heldout-r1-n1-dispatch-r1",
+        "plan_id": f"portable-semantic-control-free-heldout-r1-n1-dispatch-{profile_revision}",
         "target": {
             "path": str(target_path.relative_to(repository_root)),
             "sha256": sha256_file(target_path),
@@ -293,7 +302,7 @@ def build_preflight(
         raise QualificationGateError("Codex version differs from Profile")
     receipt = {
         "schema_version": PREFLIGHT_SCHEMA,
-        "preflight_id": "portable-semantic-control-free-heldout-r1-n1-preflight-r1",
+        "preflight_id": plan["plan_id"].replace("dispatch", "preflight"),
         "plan": {
             "path": str(plan_path.relative_to(repository_root)),
             "sha256": sha256_file(plan_path),
@@ -419,6 +428,63 @@ def render_model_input(wrapper_path: Path, packet_path: Path) -> bytes:
     return wrapper.replace("{{MODEL_PACKET_JSON}}", packet).encode("utf-8")
 
 
+def project_response_schema(
+    canonical_path: Path,
+    output_path: Path,
+    transport_contract: dict[str, Any],
+) -> dict[str, Any]:
+    r2_contract = {
+        "revision": "codex-structured-output-projection-r2",
+        "api_schema_projection": "remove_uniqueItems_only",
+        "canonical_post_validation": True,
+    }
+    r3_contract = {
+        "revision": "codex-structured-output-supported-subset-r3",
+        "api_schema_projection": "supported_subset_semantic_equivalence",
+        "canonical_post_validation": True,
+    }
+    if transport_contract not in (r2_contract, r3_contract):
+        raise QualificationGateError("unsupported output schema transport contract")
+    canonical = load_object(canonical_path)
+    projected = copy.deepcopy(canonical)
+    unique_ids = (projected.get("$defs") or {}).get("unique_ids")
+    if not isinstance(unique_ids, dict) or unique_ids.get("uniqueItems") is not True:
+        raise QualificationGateError("canonical uniqueItems transport boundary is unavailable")
+    removed = unique_ids.pop("uniqueItems")
+    removed_keywords = ["$defs.unique_ids.uniqueItems"]
+    transformations: list[str] = []
+    if transport_contract == r3_contract:
+        for key in ("$schema", "$id", "title"):
+            if key not in projected:
+                raise QualificationGateError(f"canonical schema metadata is unavailable: {key}")
+            projected.pop(key)
+            removed_keywords.append(key)
+        for path, node in (
+            ("$defs.unique_ids.items.minLength", unique_ids.get("items")),
+            ("properties.case_id.minLength", (projected.get("properties") or {}).get("case_id")),
+        ):
+            if not isinstance(node, dict) or node.pop("minLength", None) != 1:
+                raise QualificationGateError(f"canonical string boundary is unavailable: {path}")
+            removed_keywords.append(path)
+        schema_id = (projected.get("properties") or {}).get("schema_id")
+        expected_schema_id = "portable-instruction-control-response/r2"
+        if not isinstance(schema_id, dict) or schema_id != {"const": expected_schema_id}:
+            raise QualificationGateError("canonical schema_id const boundary is unavailable")
+        schema_id.clear()
+        schema_id.update({"type": "string", "enum": [expected_schema_id]})
+        transformations.append("properties.schema_id.const_to_typed_single_enum")
+    if removed is not True or projected == canonical:
+        raise QualificationGateError("output schema transport projection made no change")
+    write_once(output_path, canonical_bytes(projected))
+    return {
+        "contract": transport_contract,
+        "canonical_sha256": sha256_file(canonical_path),
+        "projected_sha256": sha256_file(output_path),
+        "removed_keywords": removed_keywords,
+        "transformations": transformations,
+    }
+
+
 def execute_slot(
     *,
     receipt_path: Path,
@@ -472,12 +538,18 @@ def execute_slot(
             slot_root / "materialized/model-visible/input.json",
         )
         final_response = slot_root / "private/final-response.json"
+        command_schema_path = response_schema_path
+        schema_transport = profile["runtime_ref"].get("output_schema_transport")
+        if schema_transport:
+            command_schema_path = slot_root / "private/transport-response.schema.json"
+            projection = project_response_schema(response_schema_path, command_schema_path, schema_transport)
+            write_once(slot_root / "private/schema-projection-receipt.json", canonical_bytes(projection))
         command = build_command(
             codex=receipt["runtime"]["executable"],
             workspace=workspace,
             model=profile["runtime_ref"]["model"],
             reasoning_effort=profile["runtime_ref"]["reasoning_effort"],
-            response_schema=response_schema_path,
+            response_schema=command_schema_path,
             final_response=final_response,
         )
         started_wall = time.time()
@@ -489,7 +561,12 @@ def execute_slot(
         if completed.returncode != 0:
             raise QualificationGateError("Codex process did not exit successfully")
         validate_final_response(final_response, response_schema_path)
-        usage = collect_accounted_usage(
+        usage_collector = (
+            collect_accounted_usage_persisted
+            if profile["runtime_ref"]["token_accounting"].get("revision") == "v2"
+            else collect_accounted_usage
+        )
+        usage = usage_collector(
             session_root=session_root,
             workspace=workspace,
             codex_jsonl=completed.stdout,
@@ -525,6 +602,161 @@ def execute_slot(
         raise
 
 
+def summarize_schema_transport_failure(
+    *,
+    plan_path: Path,
+    preflight_path: Path,
+    output_root: Path,
+) -> dict[str, Any]:
+    plan_path = plan_path.resolve()
+    output_root = output_root.resolve()
+    plan = load_object(plan_path)
+    preflight_path = preflight_path.resolve()
+    preflight = load_object(preflight_path)
+    if preflight.get("plan", {}).get("plan_id") != plan.get("plan_id"):
+        raise QualificationGateError("failure summary preflight and plan differ")
+    observations = []
+    for slot in plan.get("slots", []):
+        slot_id = slot["slot_id"]
+        private = output_root / slot_id / "private"
+        if not private.parent.exists():
+            continue
+        dispatch_path = private / "dispatch-receipt.json"
+        failure_path = private / "execution-failure.json"
+        events_path = private / "codex-events.jsonl"
+        if not all(path.is_file() for path in (dispatch_path, failure_path, events_path)):
+            raise QualificationGateError(f"failure evidence is incomplete: {slot_id}")
+        dispatch = load_object(dispatch_path)
+        failure = load_object(failure_path)
+        if dispatch.get("slot") != slot or failure.get("slot") != slot:
+            raise QualificationGateError(f"failure evidence slot binding mismatch: {slot_id}")
+        if failure.get("status") != "excluded_external_failure":
+            raise QualificationGateError(f"slot is not an excluded external failure: {slot_id}")
+        messages = []
+        for line in events_path.read_text(encoding="utf-8").splitlines():
+            event = json.loads(line)
+            if event.get("type") in {"error", "turn.failed"}:
+                messages.append(json.dumps(event, ensure_ascii=False, sort_keys=True))
+        joined = "\n".join(messages)
+        if "invalid_json_schema" not in joined:
+            raise QualificationGateError(f"slot failure does not match schema transport signature: {slot_id}")
+        if "'uniqueItems' is not permitted" in joined:
+            reason_code = "codex_output_schema_unique_items_unsupported"
+        elif "schema must have a 'type' key" in joined:
+            reason_code = "codex_output_schema_untyped_const_unsupported"
+        else:
+            raise QualificationGateError(f"slot failure has an unknown schema transport signature: {slot_id}")
+        if (private / "final-response.json").exists() or (private / "execution-observation.json").exists():
+            raise QualificationGateError(f"failed slot unexpectedly contains a valid observation: {slot_id}")
+        observations.append(
+            {
+                "slot_id": slot_id,
+                "status": "excluded_external_failure",
+                "reason_code": reason_code,
+                "dispatch_receipt_sha256": sha256_file(dispatch_path),
+                "failure_receipt_sha256": sha256_file(failure_path),
+                "events_sha256": sha256_file(events_path),
+            }
+        )
+    if not observations:
+        raise QualificationGateError("failure summary has no issued slots")
+    revision = plan["plan_id"].rsplit("-", 1)[-1]
+    summary = {
+        "schema_version": FAILURE_SUMMARY_SCHEMA,
+        "summary_id": f"portable-semantic-control-free-heldout-r1-n1-attempt-{revision}-external-failure",
+        "plan": {"path": str(plan_path), "sha256": sha256_file(plan_path), "plan_id": plan["plan_id"]},
+        "preflight": {
+            "path": str(preflight_path),
+            "sha256": sha256_file(preflight_path),
+            "preflight_id": preflight["preflight_id"],
+        },
+        "private_output_root": str(output_root),
+        "observations": observations,
+        "issued_slot_count": len(observations),
+        "valid_result_count": 0,
+        "classification": "profile_transport_incompatible",
+        "raw_artifacts_private": True,
+        "case_or_oracle_change_authorized": False,
+    }
+    summary["summary_sha256"] = content_identity(summary, "summary_sha256")
+    return summary
+
+
+def summarize_token_accounting_failure(
+    *,
+    plan_path: Path,
+    preflight_path: Path,
+    output_root: Path,
+) -> dict[str, Any]:
+    plan_path = plan_path.resolve()
+    preflight_path = preflight_path.resolve()
+    output_root = output_root.resolve()
+    plan = load_object(plan_path)
+    preflight = load_object(preflight_path)
+    if preflight.get("plan", {}).get("plan_id") != plan.get("plan_id"):
+        raise QualificationGateError("token failure preflight and plan differ")
+    target_path = safe_repository_path(
+        Path.cwd(),
+        (plan.get("target") or {}).get("path"),
+        "target",
+    )
+    canonical_schema = target_path.parent / "cases/heldout-r1/response.schema.json"
+    observations = []
+    for slot in plan.get("slots", []):
+        private = output_root / slot["slot_id"] / "private"
+        if not private.parent.exists():
+            continue
+        dispatch_path = private / "dispatch-receipt.json"
+        failure_path = private / "execution-failure.json"
+        events_path = private / "codex-events.jsonl"
+        response_path = private / "final-response.json"
+        if not all(path.is_file() for path in (dispatch_path, failure_path, events_path, response_path)):
+            raise QualificationGateError(f"token failure evidence is incomplete: {slot['slot_id']}")
+        failure = load_object(failure_path)
+        if failure.get("status") != "excluded_external_failure" or failure.get("reason") != "Codex usage lacks primary total_tokens":
+            raise QualificationGateError(f"slot is not the expected token accounting failure: {slot['slot_id']}")
+        identity = parse_codex_jsonl_identity(events_path.read_bytes())
+        if identity["raw_usage"].get("total_tokens") is not None:
+            raise QualificationGateError(f"exec event unexpectedly has primary total_tokens: {slot['slot_id']}")
+        validate_final_response(response_path, canonical_schema)
+        if (private / "execution-observation.json").exists():
+            raise QualificationGateError(f"token-failed slot unexpectedly contains a valid observation: {slot['slot_id']}")
+        observations.append(
+            {
+                "slot_id": slot["slot_id"],
+                "status": "excluded_external_failure",
+                "reason_code": "codex_exec_usage_primary_total_missing",
+                "root_thread_id": identity["root_thread_id"],
+                "dispatch_receipt_sha256": sha256_file(dispatch_path),
+                "failure_receipt_sha256": sha256_file(failure_path),
+                "events_sha256": sha256_file(events_path),
+                "schema_valid_response_sha256": sha256_file(response_path),
+            }
+        )
+    if not observations:
+        raise QualificationGateError("token failure summary has no issued slots")
+    revision = plan["plan_id"].rsplit("-", 1)[-1]
+    summary = {
+        "schema_version": FAILURE_SUMMARY_SCHEMA,
+        "summary_id": f"portable-semantic-control-free-heldout-r1-n1-attempt-{revision}-external-failure",
+        "plan": {"path": str(plan_path), "sha256": sha256_file(plan_path), "plan_id": plan["plan_id"]},
+        "preflight": {
+            "path": str(preflight_path),
+            "sha256": sha256_file(preflight_path),
+            "preflight_id": preflight["preflight_id"],
+        },
+        "private_output_root": str(output_root),
+        "observations": observations,
+        "issued_slot_count": len(observations),
+        "valid_result_count": 0,
+        "classification": "profile_token_accounting_incompatible",
+        "raw_artifacts_private": True,
+        "case_or_oracle_change_authorized": False,
+    }
+    summary["summary_sha256"] = content_identity(summary, "summary_sha256")
+    return summary
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     commands = result.add_subparsers(dest="command", required=True)
@@ -553,6 +785,16 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--slot-id", required=True)
     run.add_argument("--output-root", type=Path, required=True)
     run.add_argument("--session-root", type=Path, required=True)
+    summarize = commands.add_parser("summarize-schema-transport-failure")
+    summarize.add_argument("--plan", type=Path, required=True)
+    summarize.add_argument("--preflight", type=Path, required=True)
+    summarize.add_argument("--output-root", type=Path, required=True)
+    summarize.add_argument("--output", type=Path, required=True)
+    token_failure = commands.add_parser("summarize-token-accounting-failure")
+    token_failure.add_argument("--plan", type=Path, required=True)
+    token_failure.add_argument("--preflight", type=Path, required=True)
+    token_failure.add_argument("--output-root", type=Path, required=True)
+    token_failure.add_argument("--output", type=Path, required=True)
     return result
 
 
@@ -590,7 +832,7 @@ def main() -> int:
                 "authorized_slot_count": receipt["authorized_slot_count"],
                 "dispatch_allowed": True,
             }
-        else:
+        elif args.command == "run-slot":
             value = execute_slot(
                 receipt_path=args.receipt,
                 repository_root=args.repository_root,
@@ -599,6 +841,20 @@ def main() -> int:
                 output_root=args.output_root,
                 session_root=args.session_root,
             )
+        elif args.command == "summarize-schema-transport-failure":
+            value = summarize_schema_transport_failure(
+                plan_path=args.plan,
+                preflight_path=args.preflight,
+                output_root=args.output_root,
+            )
+            write_once(args.output.resolve(), canonical_bytes(value))
+        else:
+            value = summarize_token_accounting_failure(
+                plan_path=args.plan,
+                preflight_path=args.preflight,
+                output_root=args.output_root,
+            )
+            write_once(args.output.resolve(), canonical_bytes(value))
     except (
         BundleError,
         MaterializationError,
