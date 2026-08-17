@@ -1,0 +1,208 @@
+{
+  "schema_version": "the-caption-prompt.candidate269-n20-quality-route-audit/v1",
+  "candidate_prompt_identity": {
+    "name": "the-caption-3ce91a4-natural-language-validation-carrier-closure-r1",
+    "revision": "r1",
+    "bundle_sha256": "19630df248b648690238757813941f55e97aa82c8b5597659a9e731d0877162f"
+  },
+  "registered_result_id": "544afbe7e2444037932c7313da4489b6",
+  "reference_result_id": "a1910bf71a474153947dabfc4582991a",
+  "coverage": {
+    "case_count": 4,
+    "iterations_per_case": 20,
+    "run_count": 80,
+    "reused_run_count": 20,
+    "new_run_count": 60,
+    "valid_new_run_count": 60,
+    "excluded_attempt_count": 0,
+    "score_counts": {
+      "4": 80
+    }
+  },
+  "kpi": {
+    "aggregate_iteration_medians": {
+      "candidate147_total_tokens": 478811.5,
+      "candidate269_total_tokens": 532210.0,
+      "total_tokens_percent": 11.1523,
+      "candidate147_elapsed_seconds": 289.9632092709653,
+      "candidate269_elapsed_seconds": 297.98295639498974,
+      "elapsed_seconds_percent": 2.7658,
+      "quality_score_candidate147": 100.0,
+      "quality_score_candidate269": 100.0
+    },
+    "case_medians": {
+      "F01": {
+        "candidate147_total_tokens": 107010.5,
+        "candidate269_total_tokens": 118667.5,
+        "total_tokens_percent": 10.89,
+        "candidate147_elapsed_seconds": 62.10665733355563,
+        "candidate269_elapsed_seconds": 71.96062947899918,
+        "elapsed_seconds_percent": 15.87
+      },
+      "F02": {
+        "candidate147_total_tokens": 134960.0,
+        "candidate269_total_tokens": 167606.0,
+        "total_tokens_percent": 24.19,
+        "candidate147_mean_total_tokens": 168726.3,
+        "candidate269_mean_total_tokens": 164879.8,
+        "mean_total_tokens_percent": -2.28,
+        "candidate147_elapsed_seconds": 79.76318418758456,
+        "candidate269_elapsed_seconds": 85.06303358351579,
+        "elapsed_seconds_percent": 6.64
+      },
+      "F03": {
+        "candidate147_total_tokens": 98746.0,
+        "candidate269_total_tokens": 109342.5,
+        "total_tokens_percent": 10.73,
+        "candidate147_elapsed_seconds": 70.78026747901458,
+        "candidate269_elapsed_seconds": 74.00151795800775,
+        "elapsed_seconds_percent": 4.55
+      },
+      "F10": {
+        "candidate147_total_tokens": 102345.0,
+        "candidate269_total_tokens": 113794.0,
+        "total_tokens_percent": 11.19,
+        "candidate147_elapsed_seconds": 66.84858302108478,
+        "candidate269_elapsed_seconds": 71.57104947901098,
+        "elapsed_seconds_percent": 7.06
+      }
+    }
+  },
+  "route_diagnostics": {
+    "F01": {
+      "wait_runs": 6,
+      "wait_invocations": 7,
+      "additional_outer_call_runs": 5,
+      "completion_result_loss_runs": 3,
+      "focused_followup_read_runs": 1,
+      "validation_split_runs": 1
+    },
+    "F02": {
+      "candidate147_upper_distribution_runs": 10,
+      "candidate147_wait_runs": 6,
+      "candidate147_wait_invocations": 10,
+      "candidate147_prechange_followup_read_runs": 7,
+      "candidate147_final_evidence_followup_runs": 2,
+      "candidate147_validation_split_runs": 1,
+      "wait_runs": 9,
+      "wait_invocations": 9,
+      "additional_outer_call_runs": 5,
+      "wait_or_additional_outer_call_runs": 11,
+      "final_evidence_followup_runs": 3,
+      "prechange_followup_read_runs": 3
+    },
+    "F03": {
+      "wait_runs": 6,
+      "wait_invocations": 7,
+      "additional_outer_call_runs": 4,
+      "wait_or_additional_outer_call_runs": 9,
+      "start_only_runs": 1,
+      "final_evidence_followup_runs": 2,
+      "validation_split_runs": 1
+    },
+    "F10": {
+      "normal_route_runs": 18,
+      "post_instruction_read_split_runs": 1,
+      "start_identity_sequential_split_runs": 1
+    }
+  },
+  "interpretation": {
+    "n5_frequency_overestimate": [
+      "F01 completion result loss was 3/5 and became 3/20",
+      "F03 start-only was 1/5 and became 1/20",
+      "F10 additional split was 1/5 and became 2/20 across two split classes"
+    ],
+    "f02_route_comparison": {
+      "normal_rpv": {
+        "candidate147_runs": 10,
+        "candidate269_runs": 9,
+        "candidate147_median_total_tokens": 123675.0,
+        "candidate269_median_total_tokens": 131556.0,
+        "total_tokens_percent": 6.37
+      },
+      "single_wait_rpvw": {
+        "candidate147_runs": 2,
+        "candidate269_runs": 6,
+        "candidate147_median_total_tokens": 157378.5,
+        "candidate269_median_total_tokens": 169543.5,
+        "total_tokens_percent": 7.73
+      },
+      "prechange_followup_rrpv": {
+        "candidate147_runs": 2,
+        "candidate269_runs": 1,
+        "candidate147_median_total_tokens": 168776.0,
+        "candidate269_median_total_tokens": 172918.0,
+        "total_tokens_percent": 2.45
+      },
+      "candidate147_double_wait_rrpvww_runs": 4,
+      "candidate269_double_wait_rrpvww_runs": 0,
+      "candidate147_validation_split_rpvvve_runs": 1,
+      "candidate269_validation_split_rpvvve_runs": 0
+    },
+    "f02_median_cause": {
+      "candidate147_median_total_tokens": 134960.0,
+      "candidate269_median_total_tokens": 167606.0,
+      "difference_total_tokens": 32646.0,
+      "upper_route_placement_effect_tokens": 16117.5,
+      "corresponding_route_cost_effect_tokens": 16528.5,
+      "candidate147_boundary_runs": [
+        128236,
+        141684
+      ],
+      "candidate269_actual_boundary_runs": [
+        166758,
+        168454
+      ],
+      "candidate269_corresponding_boundary_runs": [
+        136219,
+        166758
+      ],
+      "matched_wait_boundary_difference_tokens": 25074,
+      "matched_wait_final_model_step_difference_tokens": 15377,
+      "matched_wait_final_input_difference_tokens": 15624,
+      "candidate147_wait_max_tokens": 2000,
+      "candidate269_wait_max_tokens": 30000,
+      "candidate147_wait_output_characters": 8358,
+      "candidate269_wait_output_characters": 120906
+    },
+    "shared_carrier_cause": {
+      "current_candidate_difference": "Candidate269 changed completed predicate-bound results into all issued results in its local validation closure wording",
+      "permission_edge": "all output produced by an issued validation invocation is eligible for return under Candidate269 wording",
+      "dependency_edge": "completion is judged by reinterpreting required values from invocation-owned results instead of requiring every predicate-owned result to be bound",
+      "f02_effect": {
+        "matched_wait_final_input_difference_tokens": 15624,
+        "candidate147_wait_output_characters": 8358,
+        "candidate269_wait_output_characters": 120906
+      },
+      "f01_effect": {
+        "post_validation_evidence_followup_runs": 2,
+        "validation_reissue_runs": 1,
+        "followup_wait_output_characters": [
+          70096,
+          71783
+        ]
+      },
+      "matched_internal_output_characters": {
+        "candidate147_focused": 23550,
+        "candidate147_full": 158709,
+        "candidate269_focused": 23634,
+        "candidate269_full": 158840
+      },
+      "candidate147_counterexample": "one Candidate147 single-wait route returned 80595 characters, so Candidate147 did not absolutely prohibit large raw output",
+      "not_a_solution": [
+        "copy Candidate147 carrier token limits",
+        "prescribe a successful run tool order",
+        "repeat Candidate90-Candidate93 or Candidate96 output projection controls"
+      ]
+    },
+    "priority": "Suspect Candidate269 first: its current local wording widened completed predicate-bound results into all issued invocation results. Restore and analyze the Candidate147 result-binding relation before considering a successor. Output projection, byte caps, successful tool order, and additional N are not the next operation.",
+    "status": "quality_passed_distribution_precision_extended_cost_regression_persists_stopped"
+  },
+  "disposition": {
+    "additional_n": "completed_to_20_for_four_cases",
+    "standard14": "not_started",
+    "adoption": "not_approved",
+    "release": "not_created",
+    "projection": "not_performed"
+  }
+}
