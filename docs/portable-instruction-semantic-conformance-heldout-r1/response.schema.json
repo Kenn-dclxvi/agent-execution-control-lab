@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portable-instruction-control-response-r2.schema.json",
+  "title": "Portable instruction control response r2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "case_id",
+    "clarification_missing_value_ids",
+    "start_operation_ids",
+    "continue_invocation_ids",
+    "admit_result_ids",
+    "invalidate_operation_ids",
+    "terminal_operation_ids",
+    "unavailable_operation_ids"
+  ],
+  "properties": {
+    "schema_id": {"const": "portable-instruction-control-response/r2"},
+    "case_id": {"type": "string", "minLength": 1},
+    "clarification_missing_value_ids": {"$ref": "#/$defs/unique_ids"},
+    "start_operation_ids": {"$ref": "#/$defs/unique_ids"},
+    "continue_invocation_ids": {"$ref": "#/$defs/unique_ids"},
+    "admit_result_ids": {"$ref": "#/$defs/unique_ids"},
+    "invalidate_operation_ids": {"$ref": "#/$defs/unique_ids"},
+    "terminal_operation_ids": {"$ref": "#/$defs/unique_ids"},
+    "unavailable_operation_ids": {"$ref": "#/$defs/unique_ids"}
+  },
+  "$defs": {
+    "unique_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  }
+}

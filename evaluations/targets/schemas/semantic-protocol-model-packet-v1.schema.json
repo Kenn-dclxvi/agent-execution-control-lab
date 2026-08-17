@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "semantic-protocol-model-packet-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task_spec", "case"],
+  "properties": {
+    "schema_version": {"const": "portable-instruction-semantic-model-packet/v1"},
+    "task_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instruction", "response_schema"],
+      "properties": {
+        "instruction": {"const": "Return exactly one JSON object that satisfies response_schema for the supplied case. Do not add explanations or fields."},
+        "response_schema": {"type": "object"}
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": ["case_id", "case_revision", "request_contract", "operations", "received_results", "available_capabilities", "required_response_schema"]
+    }
+  }
+}

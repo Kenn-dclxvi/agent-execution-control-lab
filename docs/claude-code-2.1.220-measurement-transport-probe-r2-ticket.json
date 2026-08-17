@@ -1,0 +1,33 @@
+{
+  "schema_version": "claude-measurement-transport-ticket/v1",
+  "probe_id": "claude-measurement-transport-r2",
+  "expected_cli_version": "2.1.220 (Claude Code)",
+  "executable": "/Users/kenn/.local/bin/claude",
+  "arguments": [
+    "--print",
+    "--safe-mode",
+    "--no-session-persistence",
+    "--tools",
+    "",
+    "--permission-mode",
+    "dontAsk",
+    "--model",
+    "sonnet",
+    "--output-format",
+    "json",
+    "--json-schema",
+    "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"probe_status\":{\"const\":\"ok\"},\"nonce\":{\"const\":\"portable-measurement-transport-20260817-r2\"}},\"required\":[\"probe_status\",\"nonce\"]}",
+    "--system-prompt",
+    "Return only data that satisfies the supplied JSON schema. Do not add facts, explanations, or fields.",
+    "Return probe_status \"ok\" and nonce \"portable-measurement-transport-20260817-r2\"."
+  ],
+  "expected_structured_output": {
+    "probe_status": "ok",
+    "nonce": "portable-measurement-transport-20260817-r2"
+  },
+  "harness_path": "/Users/kenn/repos/agent-execution-control-lab/scripts/claude_measurement_transport_probe.py",
+  "harness_sha256": "197b8e0881dc09044948696ff5cd5ecd6081186298a035ddaf41a761d6af47b8",
+  "attempts": 1,
+  "timeout_seconds": 120
+}
+

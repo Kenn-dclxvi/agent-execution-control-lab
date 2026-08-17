@@ -1,12 +1,12 @@
 {
-  "schema_version": "agent-execution-control.prompt-composition/v1",
+  "schema_version": "agent-execution-control.prompt-composition/v2",
   "artifact": {
     "artifact_role": "composition_source",
     "evaluation_eligible": false,
     "model_visible": false
   },
   "composition_identity": "the-caption-c147-full-agent-composition-r1",
-  "composition_sha256": "3ca6d870d4069efb3a37e5f39e67681d9d320166be1749fd09c2fb55ad5e1bc7",
+  "composition_sha256": "b4fa993ca3895c24318b626636c36da89e39201ceb0cb01d3898930a377a4c5b",
   "source_prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1",
   "output_prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1",
   "output_target": "AGENTS.md",
@@ -18,19 +18,19 @@
     "execution"
   ],
   "components": [
-    {"id": "header", "functional_block": "core", "path": "components/00-header.md", "sha256": "eab4dad3f5b599d276e87041c65a8e691bd63b8dea77c99752b7f645c04da823"},
-    {"id": "spec", "functional_block": "core", "path": "components/10-spec.md", "sha256": "bc9f5aa71b0ae8a04eb47dd78fa717f835db87f9514ab16145ebc8d52541ca3f"},
-    {"id": "producer", "functional_block": "delegation", "path": "components/20-producer.md", "sha256": "274305b954cfb6e7b70a2d626c8db516ece07c9c2c2733c2c17bf318f7fffcb0"},
-    {"id": "terminal", "functional_block": "core", "path": "components/30-terminal.md", "sha256": "467d446540a648e22ac2aed0f4d39d9bab0b4de9139659e91eff1416a21b46f0"},
-    {"id": "context", "functional_block": "delegation", "path": "components/40-context.md", "sha256": "4c866563915df3d16c9d5a81220c3c13042c292a51748cb7bad78765d4407c19"},
-    {"id": "evidence-gate", "functional_block": "core", "path": "components/50-evidence-gate.md", "sha256": "fdac746e09e20e1432bc3a96cde2267c7721b917105c5168259e0167d2791412"},
-    {"id": "owner-role", "functional_block": "delegation", "path": "components/60-owner-role.md", "sha256": "66e9f611917ab7b5210973339277278c760ff7dc2af755acea7a899c49aa9d7e"},
-    {"id": "root", "functional_block": "delegation", "path": "components/70-root.md", "sha256": "1a745d7c8dc189ced29fe1492e932f97a5c7ea69fd0d21a1b7b7d934dfaae2ba"},
-    {"id": "independence", "functional_block": "delegation", "path": "components/80-independence.md", "sha256": "984b2f989df3e652c17aed0e4344162dd984354b243223e358d11c61d313a68a"},
-    {"id": "decision-boundary", "functional_block": "core", "path": "components/90-decision-boundary.md", "sha256": "8a47f07f25175fe2669f0cd1a6c63078aa5c873a0a3cf541e344c12384850c4d"},
-    {"id": "validation-closure", "functional_block": "validation", "path": "components/100-validation-closure.md", "sha256": "8658c1ccf1789a948c637ca2a149b751fd7a3ee45d1d194270f33020c72aa708"},
-    {"id": "validation-plan", "functional_block": "validation", "path": "components/110-validation-plan.md", "sha256": "f59e8b546eb1476eb827941e8c12be1f8b5d4e86e2e834457a22256c0111b430"},
-    {"id": "method", "functional_block": "execution", "path": "components/120-method.md", "sha256": "61a94289378827204a15e44c40ab82bb956dc437d478521ed749bc7fbded8f59"},
-    {"id": "recovery", "functional_block": "execution", "path": "components/130-recovery.md", "sha256": "514fd9f4a37395e224fa94bb258e4344fd5d9187f00b00ae368cd4d90e3f4dab"}
+    {"id": "header", "functional_block": "core", "path": "components/00-header.md", "provides": ["document.header"], "requires": [], "sha256": "eab4dad3f5b599d276e87041c65a8e691bd63b8dea77c99752b7f645c04da823"},
+    {"id": "spec", "functional_block": "core", "path": "components/10-spec.md", "provides": ["operation.contract", "outcome.binding", "permission.boundary", "criterion.owner", "spec.readiness", "result.locality"], "requires": ["document.header"], "sha256": "bc9f5aa71b0ae8a04eb47dd78fa717f835db87f9514ab16145ebc8d52541ca3f"},
+    {"id": "producer", "functional_block": "delegation", "path": "components/20-producer.md", "provides": ["actor.binding", "actor.single_assignment", "actor.worker_admission", "actor.rebinding"], "requires": ["operation.contract", "criterion.owner"], "sha256": "274305b954cfb6e7b70a2d626c8db516ece07c9c2c2733c2c17bf318f7fffcb0"},
+    {"id": "terminal", "functional_block": "core", "path": "components/30-terminal.md", "provides": ["operation.completion"], "requires": ["operation.contract", "actor.binding"], "sha256": "467d446540a648e22ac2aed0f4d39d9bab0b4de9139659e91eff1416a21b46f0"},
+    {"id": "context", "functional_block": "delegation", "path": "components/40-context.md", "provides": ["actor.input_boundary"], "requires": ["actor.worker_admission", "permission.boundary", "criterion.owner"], "sha256": "4c866563915df3d16c9d5a81220c3c13042c292a51748cb7bad78765d4407c19"},
+    {"id": "evidence-gate", "functional_block": "core", "path": "components/50-evidence-gate.md", "provides": ["observation.admission", "implementation.binding"], "requires": ["operation.contract", "spec.readiness", "permission.boundary", "operation.completion", "validation.plan"], "sha256": "fdac746e09e20e1432bc3a96cde2267c7721b917105c5168259e0167d2791412"},
+    {"id": "owner-role", "functional_block": "delegation", "path": "components/60-owner-role.md", "provides": ["delegated.provenance"], "requires": ["actor.binding", "actor.worker_admission", "actor.input_boundary", "criterion.owner"], "sha256": "66e9f611917ab7b5210973339277278c760ff7dc2af755acea7a899c49aa9d7e"},
+    {"id": "root", "functional_block": "delegation", "path": "components/70-root.md", "provides": ["coordinator.boundary"], "requires": ["actor.binding", "delegated.provenance"], "sha256": "1a745d7c8dc189ced29fe1492e932f97a5c7ea69fd0d21a1b7b7d934dfaae2ba"},
+    {"id": "independence", "functional_block": "delegation", "path": "components/80-independence.md", "provides": ["operation.independence"], "requires": ["operation.contract", "actor.binding", "criterion.owner", "result.locality"], "sha256": "984b2f989df3e652c17aed0e4344162dd984354b243223e358d11c61d313a68a"},
+    {"id": "decision-boundary", "functional_block": "core", "path": "components/90-decision-boundary.md", "provides": ["issuance.frontier"], "requires": ["operation.contract", "permission.boundary", "result.locality"], "sha256": "8a47f07f25175fe2669f0cd1a6c63078aa5c873a0a3cf541e344c12384850c4d"},
+    {"id": "validation-closure", "functional_block": "validation", "path": "components/100-validation-closure.md", "provides": ["validation.execution"], "requires": ["actor.binding", "operation.completion", "validation.plan"], "sha256": "8658c1ccf1789a948c637ca2a149b751fd7a3ee45d1d194270f33020c72aa708"},
+    {"id": "validation-plan", "functional_block": "validation", "path": "components/110-validation-plan.md", "provides": ["validation.plan"], "requires": ["observation.admission", "execution.method"], "sha256": "f59e8b546eb1476eb827941e8c12be1f8b5d4e86e2e834457a22256c0111b430"},
+    {"id": "method", "functional_block": "execution", "path": "components/120-method.md", "provides": ["execution.method"], "requires": ["operation.contract", "permission.boundary"], "sha256": "61a94289378827204a15e44c40ab82bb956dc437d478521ed749bc7fbded8f59"},
+    {"id": "recovery", "functional_block": "execution", "path": "components/130-recovery.md", "provides": ["execution.recovery"], "requires": ["operation.contract", "execution.method"], "sha256": "514fd9f4a37395e224fa94bb258e4344fd5d9187f00b00ae368cd4d90e3f4dab"}
   ]
 }

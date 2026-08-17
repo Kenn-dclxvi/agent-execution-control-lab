@@ -1,7 +1,7 @@
 # C147由来のruntime非依存portable instruction設計
 
 > [!IMPORTANT]
-> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_not_written / target_instance_not_created / candidate_not_created / evaluation_not_started`
+> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_exact_draft_written / q01_q08_static_counterexamples_repaired / target_instance_not_created / candidate_not_created / evaluation_not_started`
 >
 > 利用者が2026-08-14に、C147のCodex依存をなくし、ChatGPT Projectのproject instructions、Codex、Claude Code、CursorおよびGemini Gemで使える形へ進めることを明示した。本書はその要求、境界および作成前gateを固定する。Candidate本文、評価結果、採用、releaseまたはprojectionではない。
 
@@ -135,15 +135,14 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 
 ## Candidate作成前の残件
 
-現時点では次が未完了なので、portable kernel本文、Candidate bundle、profileまたは評価slotを作成しない。
+管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。現時点では次が未完了なので、Candidate bundle、profileまたは評価slotを作成しない。
 
-1. 81 primitiveのcoverage ledgerからportable clauseへの逆引き。
-2. 共通semantic conformance targetのcase、oracle、rating contractおよびmodel-visible境界。
-3. control-free baselineの測定成立。
-4. 各surfaceで同一bytesが読み込まれたことのreceipt。
-5. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
+1. control-free baselineの測定成立。
+2. 各surfaceで同一bytesが読み込まれたことのreceipt。
+3. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
+4. formal target identity、直接の基準、allowed deltaおよび非目標の固定。
 
-次の作業は1と2の設計監査である。成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を先に閉じる。
+control-free baseline前の測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)と単一Case packet materializerまで固定した。次の作業はv2 subject/runtime compatibility preflightである。成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を採点可能なまま保持する。
 
 Claude Code自身によるC147の静的適用可能性報告は[`C147 Claude Code自己評価のtriage`](c147-claude-code-self-assessment-triage.md)へ記録した。Codex固有field、wrapper、継続identityおよびambient recovery/protocol不足はsurface mismatchとして採用し、EVIDENCE_GATEの有害性、形式記法の実効および5項目だけが有効という集約はdynamic probe待ちとする。
 

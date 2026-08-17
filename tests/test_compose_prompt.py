@@ -21,6 +21,10 @@ from scripts.export_prompt_bundle import BundleError, verify_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
 COMPOSITION = ROOT / "prompts/compositions/the-caption-c147-full-agent-r1/composition.json"
+DRAFT_ROOT = ROOT / "prompts/compositions/c147-portable-kernel-draft-r1"
+DRAFT_ROOT_ONLY = DRAFT_ROOT / "root-only.composition.json"
+DRAFT_FULL_AGENT = DRAFT_ROOT / "full-agent.composition.json"
+DRAFT_COVERAGE = DRAFT_ROOT / "primitive-coverage.json"
 C147 = ROOT / "prompts/candidates/the-caption-3ce91a4-result-effect-scope-r1/files/AGENTS.md.txt"
 C147_BUNDLE = ROOT / "prompts/candidates/the-caption-3ce91a4-result-effect-scope-r1"
 
@@ -35,8 +39,15 @@ class ComposePromptTest(unittest.TestCase):
         self.assertFalse(receipt["model_visible"])
         self.assertEqual(
             receipt["composition_sha256"],
-            "3ca6d870d4069efb3a37e5f39e67681d9d320166be1749fd09c2fb55ad5e1bc7",
+            "b4fa993ca3895c24318b626636c36da89e39201ceb0cb01d3898930a377a4c5b",
         )
+        self.assertEqual(receipt["dependency_closure"], "verified")
+        self.assertEqual(
+            receipt["schema_version"],
+            "agent-execution-control.prompt-composition-receipt/v2",
+        )
+        self.assertIn("actor.worker_admission", receipt["provided_capabilities"])
+        self.assertIn("validation.execution", receipt["provided_capabilities"])
         self.assertEqual(receipt["bytes"], 10772)
         self.assertEqual(
             receipt["output_sha256"],
@@ -154,3 +165,134 @@ class ComposePromptTest(unittest.TestCase):
 
             with self.assertRaisesRegex(CompositionError, "unsafe component path"):
                 compose(root / "composition.json")
+
+    def test_v1_composition_remains_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            copied = Path(tmp) / "composition"
+            shutil.copytree(COMPOSITION.parent, copied)
+            path = copied / "composition.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["schema_version"] = "agent-execution-control.prompt-composition/v1"
+            for component in manifest["components"]:
+                component.pop("provides")
+                component.pop("requires")
+            manifest["composition_sha256"] = composition_sha256(manifest)
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            output, receipt = compose(path)
+
+            self.assertEqual(output, C147.read_bytes())
+            self.assertNotIn("dependency_closure", receipt)
+            self.assertEqual(
+                receipt["schema_version"],
+                "agent-execution-control.prompt-composition-receipt/v1",
+            )
+
+    def test_rejects_unresolved_component_dependency(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            copied = Path(tmp) / "composition"
+            shutil.copytree(COMPOSITION.parent, copied)
+            path = copied / "composition.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["components"][0]["requires"] = ["missing.capability"]
+            manifest["composition_sha256"] = composition_sha256(manifest)
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            with self.assertRaisesRegex(CompositionError, "unresolved component capabilities"):
+                compose(path)
+
+    def test_rejects_ambiguous_component_provider(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            copied = Path(tmp) / "composition"
+            shutil.copytree(COMPOSITION.parent, copied)
+            path = copied / "composition.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["components"][1]["provides"].append("document.header")
+            manifest["composition_sha256"] = composition_sha256(manifest)
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            with self.assertRaisesRegex(CompositionError, "is provided by both"):
+                compose(path)
+
+    def test_portable_draft_variants_render_one_file_without_prompt_identity(self) -> None:
+        root_output, root_receipt = compose(DRAFT_ROOT_ONLY)
+        full_output, full_receipt = compose(DRAFT_FULL_AGENT)
+
+        self.assertEqual(len(root_output), 10418)
+        self.assertEqual(len(full_output), 10781)
+        self.assertEqual(
+            root_receipt["output_sha256"],
+            "0e625b4c527e8b520c676cee15424ba222576ebc0e29d6f37eeea1ec08166a36",
+        )
+        self.assertEqual(
+            full_receipt["output_sha256"],
+            "3d3733a4ec0bb531a5be8eb53922e92fafe37b479b6190d24a8176ae452805e3",
+        )
+        for receipt in (root_receipt, full_receipt):
+            self.assertEqual(receipt["lifecycle_state"], "draft")
+            self.assertFalse(receipt["bundle_binding_eligible"])
+            self.assertIsNone(receipt["output_prompt_identity"])
+            self.assertEqual(receipt["dependency_closure"], "verified")
+            self.assertEqual(
+                receipt["schema_version"],
+                "agent-execution-control.prompt-composition-receipt/v3",
+            )
+        self.assertIn(b"SINGLE_ACTOR", root_output)
+        self.assertNotIn(b"MULTI_ACTOR", root_output)
+        self.assertIn(b"MULTI_ACTOR", full_output)
+        self.assertNotIn(b"SINGLE_ACTOR", full_output)
+        for output in (root_output, full_output):
+            text = output.decode("utf-8")
+            self.assertIn("資格成立時はその一件を開始する", text)
+            self.assertIn("固定inputおよびresult kindへ対応できる場合だけadmitする", text)
+            self.assertIn("そのfrontierを`unavailable`にする", text)
+            self.assertIn("いずれかがなければ別methodまたは推測で補完せず`unavailable`にする", text)
+
+    def test_portable_draft_cannot_bind_to_bundle(self) -> None:
+        with self.assertRaisesRegex(CompositionError, "not eligible for bundle binding"):
+            verify_bundle_binding(DRAFT_ROOT_ONLY, C147_BUNDLE)
+
+    def test_portable_draft_coverage_maps_all_81_primitives_per_variant(self) -> None:
+        ledger = json.loads(DRAFT_COVERAGE.read_text(encoding="utf-8"))
+        expected = {
+            *(f"S{i}" for i in range(1, 9)),
+            *(f"P{i}" for i in range(1, 6)),
+            *(f"T{i}" for i in range(1, 4)),
+            *(f"C{i}" for i in range(1, 5)),
+            *(f"E{i}" for i in range(1, 16)),
+            *(f"O{i}" for i in range(1, 8)),
+            *(f"R{i}" for i in range(1, 3)),
+            *(f"I{i}" for i in range(1, 3)),
+            *(f"D{i}" for i in range(1, 12)),
+            *(f"VC{i}" for i in range(1, 10)),
+            *(f"VP{i}" for i in range(1, 7)),
+            *(f"M{i}" for i in range(1, 7)),
+            *(f"RC{i}" for i in range(1, 4)),
+        }
+        common = ledger["common"]
+        self.assertEqual(ledger["required_primitive_count"], 81)
+
+        for variant, manifest_path in {
+            "root-only": DRAFT_ROOT_ONLY,
+            "full-agent": DRAFT_FULL_AGENT,
+        }.items():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            component_paths = {
+                entry["id"]: DRAFT_ROOT / entry["path"] for entry in manifest["components"]
+            }
+            entries = [*common, *ledger["variants"][variant]]
+            ids = [entry["id"] for entry in entries]
+            self.assertEqual(len(ids), 81)
+            self.assertEqual(set(ids), expected)
+            self.assertEqual(len(ids), len(set(ids)))
+            for entry in entries:
+                component_id, raw_ordinal = entry["statement"].split(":", 1)
+                self.assertIn(component_id, component_paths)
+                statements = [
+                    line
+                    for line in component_paths[component_id].read_text(encoding="utf-8").splitlines()
+                    if line.startswith("- ") or line.startswith("  ")
+                ]
+                ordinal = int(raw_ordinal)
+                self.assertGreaterEqual(ordinal, 1)
+                self.assertLessEqual(ordinal, len(statements))

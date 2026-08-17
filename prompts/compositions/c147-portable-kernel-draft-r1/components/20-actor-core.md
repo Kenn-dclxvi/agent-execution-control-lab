@@ -1,0 +1,5 @@
+- ACTOR_CORE: 各operationは初回predicate前に一つのactor identityへbindする。
+  同じoperationのpredicateまたはresult生成を別actorへ順次・並行に再割当てせず、同じpredicateを別actorへ割り当て直さない。
+  actorを変更する場合は旧bindingを失効させ、新しいoperation specificationで固定し直す。
+  bind済みの`false / failed`は当該operationのterminal resultとして保持し、別operationのresultを失効させない。
+  受領resultはoperation、bind済みactor、固定inputおよびresult kindへ対応できる場合だけadmitする。

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "the-caption-prompt.evaluation-target-v2.schema.json",
+  "title": "Evaluation target descriptor v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_id",
+    "target_kind",
+    "layout",
+    "visibility",
+    "third_party_reproducible",
+    "target_subject",
+    "executor_binding",
+    "artifact_roots",
+    "current_rating_contract",
+    "target_specific_modules",
+    "authority_notes"
+  ],
+  "properties": {
+    "schema_version": {"const": "the-caption-prompt.evaluation-target/v2"},
+    "target_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "target_kind": {"enum": ["repository", "semantic_protocol"]},
+    "layout": {"const": "namespaced"},
+    "visibility": {"enum": ["private", "public"]},
+    "third_party_reproducible": {"type": "boolean"},
+    "target_subject": {"oneOf": [{"$ref": "#/$defs/repository_subject"}, {"$ref": "#/$defs/semantic_protocol_subject"}]},
+    "executor_binding": {"const": "profile"},
+    "artifact_roots": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1},
+      "required": ["cases", "sets", "profiles", "rating_contracts", "prompt_bundles", "published_results"]
+    },
+    "current_rating_contract": {"type": ["string", "null"]},
+    "target_specific_modules": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "authority_notes": {"type": "object", "additionalProperties": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"target_kind": {"const": "repository"}}},
+      "then": {"properties": {"target_subject": {"$ref": "#/$defs/repository_subject"}}}
+    },
+    {
+      "if": {"properties": {"target_kind": {"const": "semantic_protocol"}}},
+      "then": {"properties": {"target_subject": {"$ref": "#/$defs/semantic_protocol_subject"}}}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "git_object": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "repository_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "repository", "primary_ref", "additional_refs", "ref_authority"],
+      "properties": {
+        "kind": {"const": "repository"},
+        "repository": {"type": "string", "minLength": 1},
+        "primary_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["commit", "tree"],
+          "properties": {"commit": {"$ref": "#/$defs/git_object"}, "tree": {"$ref": "#/$defs/git_object"}}
+        },
+        "additional_refs": {"type": "array", "items": {"type": "object"}},
+        "ref_authority": {"type": "string", "minLength": 1}
+      }
+    },
+    "semantic_protocol_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "protocol_id", "protocol_revision", "interaction_mode", "response_schema_sha256", "subject_authority"],
+      "properties": {
+        "kind": {"const": "semantic_protocol"},
+        "protocol_id": {"type": "string", "minLength": 1},
+        "protocol_revision": {"type": "string", "minLength": 1},
+        "interaction_mode": {"const": "single_response_operation_ledger"},
+        "response_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "subject_authority": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

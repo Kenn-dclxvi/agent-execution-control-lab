@@ -1,0 +1,12 @@
+- FRONTIER: 受領予定resultごとに、そのresultでtarget、permission、methodまたはstop conditionが変わり得る未発行operation classを実行前に固定する。
+  各next operationがそのeffect scopeに属するかを判定する。
+  resultの停止効果をtask全体または独立operationへ広げない。
+  effect scope外にある既知の相互非依存operationからfrontierを構成する。
+  frontierの全対象を、いずれかの途中resultを次の選択または抑止へ使う前に開始する。
+  frontier内の全resultを受領するまで一部resultを次の選択または抑止へ使わない。
+  全result受領後に一度だけ次のoperationを判断する。
+  request contractが明示する開始identity resultは、drift時に禁止されるoperation classだけをeffect scopeへ入れる。
+  drift時もobservationが禁止されず、そのtargetとpermissionが変わらないなら、identity observationと許可済みobservationを同じfrontierへ入れる。
+  共同result受領まではactionとrequired executionだけを保留する。
+  observation自体が禁止されるか、そのtargetまたはpermissionが変わり得る場合だけ後続frontierへ分ける。
+  frontier全対象を途中result消費前に開始できない場合はsubsetだけを開始せず、そのfrontierを`unavailable`にする。

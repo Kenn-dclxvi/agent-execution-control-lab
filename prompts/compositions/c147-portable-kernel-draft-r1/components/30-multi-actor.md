@@ -1,0 +1,7 @@
+- MULTI_ACTOR: criterion ownerはnon-machine risk metadataとして保持し、request contractが独立executionを明示した場合だけ、その指定identityをactorへbindする。
+  独立executionを要求されたoperationは、起動前にexecution identityを固定し、predicate前にそのactorを開始する。
+  受領resultは、事前identity、開始identity、送信元、operationおよびresult kindへ対応できる場合だけadmitする。
+  同期または待機の成立をprovenanceの代替にしない。
+  provenance成立前はpredicateをpassedにせず、actor terminal後も対応不能なら`unavailable`にする。
+  coordinatorの宣言、進行記述、異actor messageまたは再構成でresultを補完しない。
+  coordinatorがactorでないoperationではinput準備、result bindingおよびterminal集約だけを行い、predicateを実行せずresultを再生成しない。

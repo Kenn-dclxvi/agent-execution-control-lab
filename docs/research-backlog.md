@@ -294,6 +294,8 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - model名を明示したresultは`gpt-5.6-sol`が主で、2026-07-31のCandidate125 model-axis測定で`gpt-5.6-terra`と`gpt-5.6-luna`が加わった（[`Candidate125 Sol / Terra / Luna model-axis N=5`](../evaluations/results/candidate125-model-sol-terra-luna-v14-medium-standard14-n5-cli0146_2026-07-31.md)）。いずれもCodex CLI経路であり、Claude系modelでの測定は0件である（[`execution-control-research-paper.md`](execution-control-research-paper.md)の限界節）。この項目はその限界に接するが、この項目自体はmodel比較を目的としない。executor置換の成立条件だけを扱う。
 - 再開条件: Claude Code系列へ着手する明示判断と、Phase 0で採用する認証方式の選択が揃った場合だけ再開する。
 
+2026-08-17のportable instruction作業再開では、正式adapter系列やPhase 1を再開せず、既存subscription認証を採用決定しないtransport限定の非評価probeだけを別identityで実施した。[`measurement transport probe r2`](claude-code-2.1.220-measurement-transport-probe-r2-result.md)でstdout / stderr分離は成立したが、認証方式とall-agent token完全性は未決のため、このbacklogのadapter保留は解除しない。
+
 ## 9. root `AGENTS.md`へのrepository index参照追加の効果（実施済み・停止）
 
 **2026-07-26にCandidate78として実施し、停止した。** 投影済みCandidate71を直接sourceとし、root `AGENTS.md`へ条件付き`PROJECT_INDEX`一labelだけを追加した。index本文、残り18 target、評価条件は変更していない。

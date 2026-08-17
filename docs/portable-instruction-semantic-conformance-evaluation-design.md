@@ -1,7 +1,7 @@
 # Portable instruction semantic conformance評価設計
 
 > [!IMPORTANT]
-> **状態**: `common_case_contract_fixed / tuning_cases_8_fixed / held_out_cases_not_fixed / surface_load_receipts_not_collected / formal_target_not_created / execution_not_started`
+> **状態**: `common_case_contract_r2_fixed / tuning_cases_8_fixed / held_out_cases_14_fixed / surface_load_receipts_not_collected / formal_target_not_created / execution_not_started`
 >
 > 本書は、C147由来portable kernelのsemantic portabilityとbehavioral portabilityをsurface別に診断する共通Caseを固定する。exact prompt本文、Candidate、正式なtarget instance、評価result、採用、releaseまたはprojectionではない。
 
@@ -57,12 +57,7 @@ tokenを推定、文字数から換算または別modelのtokenizerで補正し�
   "operations": [],
   "received_results": [],
   "available_capabilities": [],
-  "required_response_schema": {
-    "state": "clarification | start | wait | admit | invalidate | terminal | unavailable",
-    "operation_ids": [],
-    "result_ids": [],
-    "missing_value_ids": []
-  }
+  "required_response_schema": "portable-instruction-control-response/r2"
 }
 ```
 
@@ -84,20 +79,38 @@ tokenを推定、文字数から換算または別modelのtokenizerで補正し�
 
 Case本文は期待state、期待operation、禁止operation、scoreまたはoracle説明を含まない。authorityは成果値またはpermissionを直接固定するliteralだけを持ち、一般知識で補完させない。
 
+単一の`state`は使わない。局所失効と独立operation開始、result admissionとfail-fastなど、相互に独立な効果を同じ応答で表せないためである。応答は次の全fieldを必須とし、配列順を無視した集合として判定する。
+
+```json
+{
+  "schema_id": "portable-instruction-control-response/r2",
+  "case_id": "PIC-H04",
+  "clarification_missing_value_ids": [],
+  "start_operation_ids": [],
+  "continue_invocation_ids": [],
+  "admit_result_ids": [],
+  "invalidate_operation_ids": [],
+  "terminal_operation_ids": [],
+  "unavailable_operation_ids": []
+}
+```
+
 ### model-visibleでないoracle
 
 oracleは次を別fieldで固定する。
 
 ```json
 {
-  "required_state": "start",
-  "required_operation_ids": [],
-  "forbidden_operation_ids": [],
-  "required_result_ids": [],
-  "required_missing_value_ids": [],
-  "cardinality": {
-    "operation_ids": "exact"
+  "expected_response": {
+    "clarification_missing_value_ids": [],
+    "start_operation_ids": [],
+    "continue_invocation_ids": [],
+    "admit_result_ids": [],
+    "invalidate_operation_ids": [],
+    "terminal_operation_ids": [],
+    "unavailable_operation_ids": []
   },
+  "major_violation_selectors": [],
   "mechanism_predicates": []
 }
 ```
@@ -212,7 +225,7 @@ qualityとmechanismを分ける。Score 4でも、対象mechanism predicateが�
 
 ## held-out境界
 
-Q01-Q08はkernel設計に使うためtuning Caseである。semantic conformanceの一般化を主張する前に、同じclauseを別literal、別operation cardinalityおよび別decoy配置で判定するheld-out revisionを固定する。
+Q01-Q08はkernel設計に使うためtuning Caseである。別literal、別operation cardinalityおよび別decoy配置で判定する14件のheld-out Caseを[`portable-instruction-semantic-conformance-heldout-r1/`](portable-instruction-semantic-conformance-heldout-r1/)へ固定した。
 
 - Q Caseの文字列置換だけにしない。
 - 同じ期待operation順を全Caseへ使わない。
@@ -221,7 +234,7 @@ Q01-Q08はkernel設計に使うためtuning Caseである。semantic conformance
 - validationはsuccess-only、middle failure、first failure、nonterminalを分ける。
 - held-out入力をkernel本文、例または方向reviewへ渡さない。
 
-held-out Caseが未固定の間はstability、一般的移植性、採用またはreleaseへ進まない。
+固定setは、outcome 2件、observation 1件、local effect 1件、provenance 1件、frontier 3件、validation 3件、nonterminal 1件およびrecovery 2件である。固定後はheld-out結果を見て現kernel草案を変更しない。失敗時は現草案をfailed lineageとして保持し、新しいdraft identityと新しいheld-out revisionを必要とする。
 
 ## surface load receipt
 
@@ -265,7 +278,7 @@ namespaced target instanceへformal profileを作るには、surface/runtimeご�
 
 ## 次の作業
 
-runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。次に許可するのは、Q01-Q08のmodel-visible `input.json`とmodel-invisible `oracle.json`の設計review、および同監査に定めたClaude Code 2.1.220のmeasurement-schema probe receipt作成である。まだ許可しない。
+runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。held-out r1のschema整合性、model-visible / private分離、Claude Codeの証跡transportおよびsemantic protocol用target v2草案は固定済みである。次に許可するのは、[`target登録設計`](portable-instruction-semantic-target-registration-design.md)に従うv2 subject/runtime compatibility preflightである。まだ許可しない。
 
 - target instance登録
 - exact portable kernel Candidate

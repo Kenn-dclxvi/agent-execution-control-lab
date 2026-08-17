@@ -1,7 +1,7 @@
 # Portable instruction runtime別測定成立監査
 
 > [!IMPORTANT]
-> **状態**: `local_runtime_inventory_observed / claude_schema_fields_observed / claude_probe_not_admitted / codex_existing_path_only / cursor_cli_unavailable / gemini_cli_unavailable / ui_surfaces_diagnostic_only / formal_target_not_created`
+> **状態**: `local_runtime_inventory_observed / claude_schema_fields_observed / claude_transport_observed / formal_token_completeness_unobserved / codex_existing_path_only / cursor_cli_unavailable / gemini_cli_unavailable / ui_surfaces_diagnostic_only / formal_target_not_created`
 >
 > 本書は2026-08-14時点のローカル実行面と、portable instructionの正式評価に必要な計測境界を監査する。portable kernel本文、Candidate、target instance、profile、評価slotまたはsurface設定変更ではない。
 
@@ -103,7 +103,9 @@ ChatGPT ProjectをOpenAI APIへ、Gemini GemをGemini APIへ、Cursor UIを別CL
 
 exact input、command、admissionおよび停止条件は[`Claude Code 2.1.220 measurement-schema probe実行票`](claude-code-2.1.220-measurement-schema-probe-plan.md)へ固定した。
 
-同実行票は一回発行され、schema適合応答、resolved model、root usageおよびterminal identityを観測した。ただしstdoutとstderrを個別保存できず、実行票のadmission条件を満たさなかった。再試行はせず、結果と次のtransport境界を[`Claude Code 2.1.220 measurement-schema probe観測結果`](claude-code-2.1.220-measurement-schema-probe-result.md)へ固定した。
+同実行票は一回発行され、schema適合応答、resolved model、root usageおよびterminal identityを観測した。ただしstdoutとstderrを個別保存できず、実行票のadmission条件を満たさなかった。再試行はせず、結果を[`measurement-schema probe観測結果`](claude-code-2.1.220-measurement-schema-probe-result.md)へ固定した。
+
+2026-08-17に別nonce、別ticketおよび別harness identityの[`measurement transport probe r2`](claude-code-2.1.220-measurement-transport-probe-r2-result.md)を一回発行した。stdout 1,469 bytesとstderr 0 bytesを別fileへmode `0600`で保存し、raw hash、process exit、単調時計、固定structured output、resolved model、usageおよびterminal identityを一つのreceiptへbindできた。これによりr1のtransport不足は閉じたが、root一応答だけなのでformal token完全性は未観測のままである。
 
 probe前に次を一つのreceiptへ固定する。
 
@@ -134,5 +136,6 @@ probeが一項目でも未固定ならmodel invocationを発行しない。probe
 - [`Claude Code CLI評価adapter設計`](claude-code-cli-evaluation-adapter-design.md)
 - [`Claude Code 2.1.220 measurement-schema probe実行票`](claude-code-2.1.220-measurement-schema-probe-plan.md)
 - [`Claude Code 2.1.220 measurement-schema probe観測結果`](claude-code-2.1.220-measurement-schema-probe-result.md)
+- [`Claude Code 2.1.220 measurement transport probe r2観測結果`](claude-code-2.1.220-measurement-transport-probe-r2-result.md)
 - [`evaluation foundation v4境界`](prompt-comparison-workflow.md)
 - [`target instance規則`](../evaluations/targets/AGENTS.md)
