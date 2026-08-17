@@ -139,8 +139,9 @@ def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
     for key in ("profile", "adapter", "runner", "prompt_bundle_registration"):
         reference = candidate_registration[key]
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
-    assert list((TARGET / "results").glob("*.json")) == [
-        TARGET / "results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json"
+    assert sorted(path.name for path in (TARGET / "results").glob("*.json")) == [
+        "portable-semantic-c147-portable-full-agent-heldout-r1-n1-qualification-r1.json",
+        "portable-semantic-control-free-heldout-r1-n1-qualification-r4.json",
     ]
     assert list((TARGET / "results").glob("*.md")) == [TARGET / "results/README.md"]
 
@@ -207,3 +208,16 @@ def test_control_free_qualification_passes_measurement_not_adoption() -> None:
         "release": "not_decided",
         "runtime_projection": "not_authorized",
     }
+
+
+def test_portable_candidate_quality_failure_does_not_authorize_reference() -> None:
+    result = load(
+        TARGET / "results/portable-semantic-c147-portable-full-agent-heldout-r1-n1-qualification-r1.json"
+    )
+    assert result["summary"]["valid_results"] == 14
+    assert result["summary"]["schema_valid_results"] == 14
+    assert result["summary"]["score4_results"] == 7
+    assert result["summary"]["mechanism_passed_results"] == 7
+    assert result["qualification"]["quality_gate"] == "failed"
+    assert result["qualification"]["quality_gate_contract"] == "exact_all_14_score4"
+    assert result["qualification"]["comparison_reference"] == "not_authorized"

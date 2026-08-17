@@ -135,15 +135,15 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 
 ## Candidate作成前の残件
 
-管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定し、C147 referenceとportable Candidateの自己完結した一枚をtarget固有bundleへ登録した。現時点ではCandidate Profileとpreflightが未作成なので、評価slotを発行しない。
+管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定し、C147 referenceとportable Candidateの自己完結した一枚をtarget固有bundleへ登録した。Candidate N=1は14 / 14 valid、7 / 14 score 4でquality gate不通過となり、C147 reference、N拡張およびprojectionを発行せず停止した。
 
-1. portable full-agent CandidateのCodex Profile登録。
-2. Candidate bundleの一枚bytesをisolated workspaceへ配送できることをbindしたpreflight。
-3. control-free r4からprompt identity以外を変えないCandidate quality gate。
+1. 既存tuning Q01〜Q08と81 primitive対応を使うblock別cost診断。
+2. 意味を削らない統合または表現圧縮候補と、固定instruction costへの対応づけ。
+3. 新しいCandidateを作る場合の新Candidate作成前gateと別held-out revisionの固定。
 
 他surfaceのreceiptは、そのsurfaceを正式runtimeとして登録する別系列で要求する。Codexのfull-agent比較へ未登録surfaceを混ぜない。品質、機序、対象外影響、KPI、安定性、直接の基準、allowed deltaおよび非目標はfull-agentについて直接比較設計へ固定済みである。
 
-control-free測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、Codex N=1 Profile、Structured Outputs subsetへの意味保存投影、thread-bound永続一次tokenおよび計画限定の実行入口を固定した。r4資格確認は14件すべて有効で、score 4と機序通過は各5/14だった。次の作業はこの基準へprompt identityだけを変えたportable kernelを比較する設計であり、成功動作のtool順を実行義務へ転記しない。
+control-free測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、Codex N=1 Profile、Structured Outputs subsetへの意味保存投影、thread-bound永続一次tokenおよび計画限定の実行入口を固定した。r4資格確認は14件すべて有効で、score 4と機序通過は各5/14だった。portable Candidateはqualityを7/14へ上げた一方、token中央値が約21%、elapsed中央値が約7%増え、quality gateを通過しなかった。この差を安定傾向または直接親に対する効率差とせず、固定costのblock別切り分けへ戻る。
 
 Claude Code自身によるC147の静的適用可能性報告は[`C147 Claude Code自己評価のtriage`](c147-claude-code-self-assessment-triage.md)へ記録した。Codex固有field、wrapper、継続identityおよびambient recovery/protocol不足はsurface mismatchとして採用し、EVIDENCE_GATEの有害性、形式記法の実効および5項目だけが有効という集約はdynamic probe待ちとする。
 

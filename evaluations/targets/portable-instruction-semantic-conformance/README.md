@@ -1,6 +1,6 @@
 # Portable instruction semantic conformance target
 
-> **状態**: `registered / namespaced / control_free_baseline_registered / codex_profile_r4_measurement_qualified / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / formal_results_1 / c147_reference_bundle_registered / portable_full_agent_candidate_bundle_registered / candidate_profile_registered / candidate_preflight_ready / candidate_issued_0`
+> **状態**: `registered / namespaced / control_free_measurement_qualified / control_free_score4_5 / c147_reference_bundle_registered / reference_profile_not_created / portable_full_agent_candidate_issued_14 / candidate_valid_14 / candidate_score4_7 / candidate_quality_failed / formal_results_2`
 
 固定operation ledgerへ一回のJSON応答を返すsemantic protocolの評価インスタンスである。repository snapshotを対象とする既存targetとは別型であり、`target_repository_ref`を持たない。
 
@@ -14,7 +14,7 @@
 | prompt | [`prompts/README.md`](prompts/README.md) | control-free、C147 full-agent reference、portable full-agent Candidateを別identityで登録 |
 | runtime contracts | [`contracts/`](contracts/) | TaskSpec wrapper、capability catalog、all-agent transcript accountingを固定 |
 | profile | [`profiles/README.md`](profiles/README.md) | r4でschema transportとthread-bound一次tokenを固定、測定成立 |
-| dispatch | [`plans/README.md`](plans/README.md) | r4の14スロットを発行、有効14件 |
-| results | [`results/README.md`](results/README.md) | control-free資格確認1件 |
+| dispatch | [`plans/README.md`](plans/README.md) | control-free r4とportable Candidate r1を各14件発行 |
+| results | [`results/README.md`](results/README.md) | control-free測定成立とportable Candidate quality gateの2件 |
 
-資格確認は測定成立だけを通過した。品質はscore 4が5/14、機序通過も5/14である。C147 referenceとportable full-agent Candidateの一枚bundleを登録し、Candidate Profileと14スロットのpreflightまで完了した。Candidate runは未発行である。portable kernelの効果、採用、releaseまたはruntime projectionは未判断である。
+control-free資格確認は測定成立だけを通過した。portable full-agent Candidateは14 / 14 validだったがscore 4は7 / 14でquality gateを通過しなかった。C147 reference Profileとrunは未発行であり、直接の効率比較は未判定である。採用、releaseおよびruntime projectionも未判断である。

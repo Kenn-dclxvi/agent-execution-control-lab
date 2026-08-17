@@ -105,7 +105,7 @@ commit `a544769`のsource identity、namespaced formal target、held-out r1、ra
 
 14 Caseのwrite-once計画とProfile事前確認票は[`plans/`](../evaluations/targets/portable-instruction-semantic-conformance/plans/)へ固定した。[`run_semantic_protocol_qualification.py`](../scripts/run_semantic_protocol_qualification.py)は、計画、事前確認票、共通adapter、実行入口、Codex versionおよび出力先を発行直前に再検証し、確認票に一度だけ現れる未発行スロット以外を拒否する。
 
-r1からr3でschema transportとtoken accountingの非互換を切り分け、r4では14件すべてでschema適合応答、all-agent一次tokenおよびelapsedを取得した。[`qualification result`](../evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)は`measurement_gate=passed / score4=5 / mechanism_passed=5`である。次の別アーティファクト単位は、r4条件を維持してprompt identityだけをportable kernelへ変更する比較設計である。
+r1からr3でschema transportとtoken accountingの非互換を切り分け、r4では14件すべてでschema適合応答、all-agent一次tokenおよびelapsedを取得した。[`qualification result`](../evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)は`measurement_gate=passed / score4=5 / mechanism_passed=5`である。同条件でprompt identityだけを変えたportable full-agent Candidateは14 / 14 valid、7 / 14 score 4でquality gate不通過となり、C147 referenceを発行せず停止した。[`Candidate result`](portable-full-agent-candidate-quality-gate-r1-result.md)を参照する。
 
 ## 参照
 
