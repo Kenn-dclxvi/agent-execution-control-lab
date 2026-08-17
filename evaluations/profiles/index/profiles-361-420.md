@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
 - [`candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)
 - [`candidate5-expanded12-global-m24-n5-r1.json`](../candidate5-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate71-validation-closure-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate71-validation-closure-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v13-reasoning-low-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-reasoning-low-standard14-global-m24-n5-r1.json)
-- [`candidate71-validation-closure-v13-reasoning-max-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-reasoning-max-standard14-global-m24-n5-r1.json)

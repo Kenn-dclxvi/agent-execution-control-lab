@@ -70,6 +70,18 @@
 - 適用条件、source identity、差分identity、合成後identityを固定する。
 - routeでのみ成立する結果を、共通プロンプト全体の一般的効果として扱わない。
 
+## Composition source
+
+- `compositions/`は、人が管理する逐語componentと`composition.json`を置く。bundle用の`manifest.json`をこの領域へ置かない。componentやcompositionを評価workspaceまたは対象platformへ配置せず、エージェントに追加readさせない。
+- 構成結果は、必要な本文を全文転写した自己完結の一枚のinstruction fileとする。生成後のinstruction fileからcomponent、manifestまたは別prompt sourceを参照させない。
+- composition identity、component順、機能分類、生成targetおよび期待する最終content SHA-256をmanifestへ固定する。
+- 各componentのcontent SHA-256、composition全体SHA-256、source prompt identityおよび生成後のoutput prompt identityを`composition.json`へ固定する。composition自体は`model_visible=false / evaluation_eligible=false`とし、profile、capsule、compatibility keyまたはLayer 1 identityへ入れない。
+- baseline、candidate、releaseへ使う場合は、構成済みの最終ファイルを既存のfull bundle形式へ保存する。prompt identityとbundle identityは最終ファイルのbytesを基準にし、composition sourceのidentityで置き換えない。
+- 評価profileを作る前に、構成結果のtarget、content SHA-256およびoutput prompt identityが、既存verifierを通過したfull bundleと一致するbinding receiptを作る。binding未検証のcomposition outputを評価経路へ渡さない。
+- 構成結果が既存promptとbyte一致する場合は既存prompt identityを維持し、composition作成だけを理由にCandidateまたは別prompt identityを作らない。bytesが変わる場合は、Candidate作成前gateを満たした新しいfull bundleとして扱う。
+- 既存bundleの本文をcomposition sourceから再生成してその場で上書きしない。既存bundleとのbyte一致確認はread-onlyの検証として行う。
+- component分離だけでは効率改善、評価済み、採用済み、release済みまたは本体反映済みを意味しない。
+
 ## Release
 
 - release作成だけでは採用承認またはTHE-CAPTION本体への反映を意味しない。

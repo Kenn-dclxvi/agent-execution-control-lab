@@ -144,3 +144,9 @@ Candidate147は15 run中3 runでnonterminal receiptへ合計76,012 bytesのvalid
 | 採用・release・本体反映 | not decided / not authorized | 評価と別の未実施operation |
 
 Candidate270から再利用できるのは、Candidate147までに固定されたvalidation wrapper境界を自然な日本語で保持し、確定resultとvalidation predicateの対応関係を追加した固定差分である。成功runのtool順は継承しない。外側wrapperとmodel-visible result配送を識別するoracleは、後続評価のKPI差を説明する診断に限定して再利用する。
+
+## 後続Standard14 N=20
+
+後続の[`Standard14 N=20`](../evaluations/results/candidate270-natural-language-predicate-bound-validation-result-standard14-n20_2026-08-17.md)では、登録済みN=5の70件を再利用し、不足210件だけを追加して累積280 / 280件がScore `4`となった。Candidate147の保存済みpoolから同じ規則で各20件を選んだ互換比較は、Candidate270のtoken中央値が`+18.75%`、elapsed中央値が`+7.58%`だった。
+
+required validationを持つ7項目140件のpersisted rollout監査では、単一validation carrierが134件で成立した一方、6件はrequired command群が別outer callへ分離した。N=5の35 / 35成立を累積N=20で再現できなかったため、現在状態は`validation_carrier_mechanism_gate_failed / candidate270_not_adopted / release_not_created / projection_not_performed`である。成功時のcommand順を次の義務へ転記せず、分離を許したpermissionまたはdependencyの辺もこの評価だけでは一意にbindできないため、次Candidateは作成していない。

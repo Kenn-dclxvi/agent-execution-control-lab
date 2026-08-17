@@ -1,0 +1,1 @@
+- TERMINAL: 全predicateにbind済みproducerのterminal resultがある場合だけoperationをterminalにする。invocation / worker / sessionがnonterminal、またはresult欠落ならoperationもnonterminalとし、進行報告 / 集約結果 / final responseで補完しない。

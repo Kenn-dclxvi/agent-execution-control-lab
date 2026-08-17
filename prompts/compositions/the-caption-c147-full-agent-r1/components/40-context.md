@@ -1,0 +1,1 @@
+- CONTEXT: worker packetへ`criterion / owner / pass condition / TaskSpec該当範囲 / target identity / scoped diffまたはresult / required evidence / allowed read / forbidden input`を固定する。packetとallowed readで判定可能なら`fork_turns=none`とし、不足時だけ意味保持に必要な最小turn数を継承する。利便性、念のため、無関係なtool outputの参照可能性を全履歴継承の理由にしない。

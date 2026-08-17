@@ -1,0 +1,1 @@
+- METHOD: TaskSpec明示手段だけを固定する。未固定手段はpredicateを変えずpermission内でexecutorが選び、validationでは既に受領したTaskSpec / 適用中instruction / target evidenceの範囲から選択して実行票発行時にcommandへbindする。exact commandの選択だけを理由にrepository evidenceを追加しない。invocationのfailed / unavailableをpermission否定 / terminalにせず、未固定手段があれば同一predicateへ向けて継続する。明示禁止 / permission否定は停止し、回避しない。
