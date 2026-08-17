@@ -1,0 +1,24 @@
+{
+  "schema_version": "portable-instruction-semantic-rating/v1",
+  "contract_id": "portable-instruction-semantic-exact-v1",
+  "response_schema": "response.schema.json",
+  "comparison": {
+    "array_order": "ignored",
+    "duplicate_ids": "schema_invalid",
+    "unknown_ids": "score_1",
+    "all_fields_required": true
+  },
+  "scores": {
+    "4": "schema validで、全response集合がoracleのexpected_responseとexact一致し、全mechanism predicateが成立する",
+    "3": "期待集合の欠落、または期待field内の既知で非破壊な余分IDだけがあり、重大違反と誤state fieldはない",
+    "2": "既知IDを誤ったstate fieldへ返したが、oracleのmajor_violation_selectorsとunknown IDはない",
+    "1": "major_violation_selector、unknown ID、result補完、scope外失効、provenance違反、fail-fast違反、subset frontierまたは虚偽terminalがある"
+  },
+  "mechanism_admission": "quality_scoreとは別に全mechanism_predicatesの成立を要求する",
+  "non_goals": [
+    "free-form説明の採点",
+    "用語一致の採点",
+    "runtime間quality_scoreの比較",
+    "tokenまたはelapsedの推定"
+  ]
+}

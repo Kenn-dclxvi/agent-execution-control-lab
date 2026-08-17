@@ -1,0 +1,97 @@
+{
+  "schema_version": "claude-measurement-transport-receipt/v1",
+  "probe_id": "claude-measurement-transport-r2",
+  "observed_date": "2026-08-17",
+  "status": "transport_probe_observed",
+  "formal_result": false,
+  "model_invocations": 1,
+  "identity": {
+    "cli": "/Users/kenn/.local/bin/claude",
+    "cli_version": "2.1.220 (Claude Code)",
+    "ticket_path": "docs/claude-code-2.1.220-measurement-transport-probe-r2-ticket.json",
+    "ticket_sha256": "d10e551eb80a0ca823930ed46ffc01bd184f660067c7c44746e19c4f1aeb83f3",
+    "harness_path": "scripts/claude_measurement_transport_probe.py",
+    "harness_sha256": "197b8e0881dc09044948696ff5cd5ecd6081186298a035ddaf41a761d6af47b8"
+  },
+  "process": {
+    "exit_code": 0,
+    "timed_out": false,
+    "monotonic_elapsed_ns": 3301951833
+  },
+  "raw_evidence": {
+    "repository_committed": false,
+    "directory": "/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/portable-claude-transport-r2-evidence.42ksb10t",
+    "directory_mode": "0700",
+    "stdout": {
+      "file": "stdout.raw",
+      "bytes": 1469,
+      "mode": "0600",
+      "sha256": "bb40689f358da0031d56890bf5787de858ceef6bfb6660ada108460c59287de5"
+    },
+    "stderr": {
+      "file": "stderr.raw",
+      "bytes": 0,
+      "mode": "0600",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "secret_marker_matches": []
+  },
+  "workdir": {
+    "directory": "/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/portable-claude-transport-r2-work._vhg3d2a",
+    "mode": "0700",
+    "entries_after_invocation": []
+  },
+  "terminal": {
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "terminal_reason": "completed",
+    "api_error_status": null,
+    "permission_denials": [],
+    "session_id": "41b10ca7-5523-4e38-b11b-63a82f9a2892",
+    "uuid": "66c1e141-53e0-4213-a359-e8ad8159d59e",
+    "structured_output": {
+      "probe_status": "ok",
+      "nonce": "portable-measurement-transport-20260817-r2"
+    },
+    "resolved_models": ["claude-sonnet-5"],
+    "usage": {
+      "input_tokens": 715,
+      "output_tokens": 93,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "iterations": 1
+    },
+    "model_usage": {
+      "claude-sonnet-5": {
+        "input_tokens": 715,
+        "output_tokens": 93,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "provider": "firstParty"
+      }
+    },
+    "num_turns": 2,
+    "stop_reason": "tool_use",
+    "duration_ms": 2260,
+    "duration_api_ms": 1859
+  },
+  "admission_checks": {
+    "process_exit_zero": true,
+    "stdout_is_single_json_object": true,
+    "structured_output_exact": true,
+    "terminal_fields_present": true,
+    "separate_stream_files": true,
+    "private_modes": true,
+    "monotonic_elapsed_nonnegative": true,
+    "secret_scan_passed": true
+  },
+  "boundaries": {
+    "total_tokens_admitted": false,
+    "all_agent_completeness_observed": false,
+    "formal_authentication_selected": false,
+    "prompt_isolation_proven": false,
+    "formal_target_created": false,
+    "control_free_baseline_started": false
+  }
+}

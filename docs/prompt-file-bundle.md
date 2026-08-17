@@ -66,6 +66,10 @@ agent-execution-control-lab/
 
 管理時にprompt本文を機能componentへ分離する場合も、評価へ投入するbundleは構成済みのfull bundleとする。componentと`composition.json`は`model_visible=false / evaluation_eligible=false`の管理用sourceであり、実行workspaceへ配置しない。`composition_identity`とcomposition全体SHA-256は管理sourceの再現性だけに使い、profileの`prompt_set_identity`、capsule、compatibility key、Layer 1 identityまたはresultへ入れない。
 
+composition schema `v2`の`provides / requires`は、選択したcomponent集合に未解決参照または複数providerがないことを構成前に確認する管理契約とする。これは意味の削除、実行順序、platform capabilityの存在またはCandidate作成gateの通過を証明しない。構成結果のbytesが変わる場合は、依存閉包済みであっても新しいfull bundleとCandidate作成前gateが必要である。
+
+composition schema `v3`は、新しいbytesの構成草案を既存prompt identityから分離する。`lifecycle_state=draft / bundle_binding_eligible=false / output_prompt_identity=null`を全件要求し、`render / check`だけを許可して`verify-bundle`を拒否する。`v3`草案のoutput SHA-256は再現性のため固定するが、prompt identity、bundle identity、compatibility conditionまたは評価資格として使用しない。
+
 `AGENTS.md`を構成する場合は、必要なcomponent本文を事前に全文転写した自己完結ファイルをbundleへ保存し、実行中のAgentにcomponent read、include解決または追加prompt取得を行わせない。評価profile作成前に、構成結果のtarget、content SHA-256およびoutput prompt identityが、既存bundle verifierを通過したfull bundleと一致することをbinding receiptで確認する。binding receipt自体もmodel-invisibleであり、互換条件へ追加しない。
 
 構成結果が既存prompt fileとbyte一致する場合は、既存prompt identityとbundle identityを維持し、composition sourceの追加をprompt revisionとして扱わない。構成結果のbytesが変わる場合は、管理sourceのrevisionだけでは評価へ進めず、Candidate作成前gateを満たした新しいfull bundle、prompt identityおよびbundle identityとして固定する。

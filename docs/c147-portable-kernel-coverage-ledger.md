@@ -1,7 +1,7 @@
 # C147 portable kernel coverage台帳
 
 > [!IMPORTANT]
-> **状態**: `primitive_inventory_81_bound / removal_justified_0 / portable_kernel_not_written / candidate_not_created / evaluation_not_started`
+> **状態**: `primitive_inventory_81_bound / exact_draft_coverage_81_of_81 / q01_q08_static_counterexamples_repaired / removal_justified_0 / candidate_not_created / evaluation_not_started`
 >
 > 本書は[`C147由来のruntime非依存portable instruction設計`](runtime-independent-execution-control-draft.md)の作成前gate 1を固定する。portable kernel本文、Candidate、評価結果、採用、releaseまたはprojectionではない。
 
@@ -173,9 +173,9 @@
 
 `unresolved_runtime_boundary`が0件なのは、全surfaceでnative mechanismが成立済みという意味ではない。`C`を持つprimitiveは、共通semantic conformance targetでは明示operation台帳の値として観測できるが、native executionではsurfaceごとに観測可能性を実証する必要がある。能力または観測値を供給できないsurfaceでは、そのoperationを補完せず`unavailable`にする。
 
-## 次のgate
+## 後続のgate
 
-次に許可するのは、81件を一つ以上のkernel clauseへ対応づけた**設計草案**と、各primitiveがどの文で保持されるかの逆引きである。文字数削減は作成条件にしない。次はまだ許可しない。
+後続の[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)と[`primitive-coverage.json`](../prompts/compositions/c147-portable-kernel-draft-r1/primitive-coverage.json)で、variantごとの設計草案と81 / 81件の文単位逆引きを固定した。Q01〜Q08の静的反証で初回の4境界を修正し、その後の変更禁止境界で[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)の14件、private oracle、ratingおよびhashを固定した。tuning Caseの無反例も未実行held-outも評価通過にしない。文字数削減は作成条件にしない。次はまだ許可しない。
 
 - Candidate bundle
 - profile、preflightまたは評価slot

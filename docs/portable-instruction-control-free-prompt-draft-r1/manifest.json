@@ -1,0 +1,38 @@
+{
+  "schema_version": "portable-instruction-prompt-draft/v1",
+  "draft_identity": "portable-instruction-control-free-r1",
+  "artifact_role": "baseline_draft",
+  "lifecycle_state": "pre_registration_draft",
+  "formal_prompt_identity_ready": false,
+  "delivery": {
+    "target": "AGENTS.md",
+    "source_path": "docs/portable-instruction-control-free-prompt-draft-r1/AGENTS.md.txt",
+    "type": "file",
+    "mode": "100644",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "definition": "runtime既定instructionと共通TaskSpec wrapperを保持し、追加portable instructionだけを0 bytesにする比較元",
+  "source_authority": {
+    "path": "docs/portable-instruction-semantic-target-registration-design.md",
+    "repository_commit": null,
+    "binding_state": "pending_commit"
+  },
+  "comparison_boundary": {
+    "same_between_prompt_conditions": [
+      "model-visible Case input",
+      "response schema TaskSpec wrapper",
+      "target_subject_ref",
+      "runtime_ref",
+      "rating_ref",
+      "repetition_condition"
+    ],
+    "changed_axis": "additional AGENTS.md bytes"
+  },
+  "non_goals": [
+    "runtime hidden/default instruction不在の主張",
+    "TaskSpec wrapper不在の主張",
+    "正式baseline登録",
+    "評価済み、採用、releaseまたはprojectionの主張"
+  ]
+}

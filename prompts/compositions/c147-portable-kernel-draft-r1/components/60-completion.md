@@ -1,0 +1,3 @@
+- COMPLETION: 全required predicateにbind済みactorの対応可能なterminal resultがある場合だけoperationをterminalにする。
+  invocation、actor executionまたはsessionがnonterminal、またはresultが欠ける場合はoperationもnonterminalのまま保持する。
+  進捗、要約、集約記述またはfinal responseで欠けたresultを補完しない。

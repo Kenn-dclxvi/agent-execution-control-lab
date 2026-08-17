@@ -1,0 +1,15 @@
+- OBSERVATION: observationは全lifecycleでdefault denyとする。
+  required predicateは`satisfied / unsatisfied / unobserved`で保持する。
+  required predicateがnonterminalかつ`unobserved`で、現在欠けている観測値が固定済みで、requested resultがその値をbindできる場合だけ一件のobservationを許可し、資格成立時はその一件を開始する。
+  同じ資格をtarget探索、変更前、action後、validation準備およびrecoveryへ適用する。
+  validation predicateが固定済みならexact methodまたはlocatorが未固定なだけで`unobserved`へ戻さない。
+  actionまたは失敗resultは入力が変わったpredicateだけを失効させる。
+  consumerがterminalになれば未発行observationを失効させる。
+  required outcome valueが未固定ならrequest contractと明示開始状態だけを観測可能とし、未固定値のclarification resultで変更前observationをterminalにする。
+  required outcome valueの固定後はtarget、明示read-only対象、適用中instructionおよびimplementation authorityだけを変更前observationにできる。
+  observationはimplementation choiceをbindできるが、required outcome valueを事後補完しない。
+  target、適用中instruction、全change effect、artifact relation、action predicateおよび保持constraintがadmission済みcurrent state上の一案へ揃った場合だけimplementationをreadyにする。
+  implementationがreadyになったら未発行の変更前observationを失効させ、actionを開始する。
+  action後に確定するvalidation identityは`VALIDATION_PLAN`へ渡し、変更前observationを再開しない。
+  追加observationは、許可済みresultが具体的なmissing、unreadable、既存bindingとの矛盾、allowed範囲内での充足不能または別authorityを観測した場合だけ、そのresultと次のobservationを対応づけて一件許可する。
+  permission、allowed observation、available capabilityまたは一般的安全確認を追加observationの開放条件にしない。

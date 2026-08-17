@@ -1,0 +1,33 @@
+{
+  "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+  "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+  "runtime": "codex-cli",
+  "version": "0.146.0",
+  "instruction_delivery": {
+    "workspace_entries": ["AGENTS.md"],
+    "target": "AGENTS.md",
+    "self_contained_file_required": true
+  },
+  "disabled_surfaces": [
+    "user_config",
+    "user_rules",
+    "memories",
+    "apps",
+    "plugins",
+    "plugin_sharing",
+    "multi_agent"
+  ],
+  "permission": {
+    "approval_policy": "never",
+    "sandbox": "read-only"
+  },
+  "session": {
+    "mode": "persisted_for_usage_collection",
+    "ephemeral": false
+  },
+  "tool_surface": {
+    "runtime_builtin_tools_may_be_advertised": true,
+    "workspace_contains_no_case_or_oracle_files": true,
+    "oracle_delivery": false
+  }
+}

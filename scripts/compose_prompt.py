@@ -24,8 +24,15 @@ else:
         verify_bundle,
     )
 
-SCHEMA_VERSION = "agent-execution-control.prompt-composition/v1"
-RECEIPT_SCHEMA_VERSION = "agent-execution-control.prompt-composition-receipt/v1"
+SCHEMA_VERSION_V1 = "agent-execution-control.prompt-composition/v1"
+SCHEMA_VERSION_V2 = "agent-execution-control.prompt-composition/v2"
+SCHEMA_VERSION_V3 = "agent-execution-control.prompt-composition/v3"
+SCHEMA_VERSION = SCHEMA_VERSION_V2
+SUPPORTED_SCHEMA_VERSIONS = {SCHEMA_VERSION_V1, SCHEMA_VERSION_V2, SCHEMA_VERSION_V3}
+DEPENDENCY_SCHEMA_VERSIONS = {SCHEMA_VERSION_V2, SCHEMA_VERSION_V3}
+RECEIPT_SCHEMA_VERSION_V1 = "agent-execution-control.prompt-composition-receipt/v1"
+RECEIPT_SCHEMA_VERSION_V2 = "agent-execution-control.prompt-composition-receipt/v2"
+RECEIPT_SCHEMA_VERSION_V3 = "agent-execution-control.prompt-composition-receipt/v3"
 
 
 class CompositionError(ValueError):
@@ -39,7 +46,7 @@ def _load_manifest(path: Path) -> dict[str, Any]:
         raise CompositionError(f"invalid composition manifest: {path}") from exc
     if not isinstance(value, dict):
         raise CompositionError("composition manifest root must be an object")
-    if value.get("schema_version") != SCHEMA_VERSION:
+    if value.get("schema_version") not in SUPPORTED_SCHEMA_VERSIONS:
         raise CompositionError("unsupported composition schema_version")
     return value
 
@@ -87,17 +94,27 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
     expected_sha256 = manifest.get("expected_output_sha256")
     blocks = manifest.get("functional_blocks")
     components = manifest.get("components")
+    is_draft = manifest["schema_version"] == SCHEMA_VERSION_V3
     if not isinstance(identity, str) or not identity:
         raise CompositionError("composition_identity must be a non-empty string")
-    if artifact != {
+    expected_artifact = {
         "artifact_role": "composition_source",
         "evaluation_eligible": False,
         "model_visible": False,
-    }:
+        **(
+            {"bundle_binding_eligible": False, "lifecycle_state": "draft"}
+            if is_draft
+            else {}
+        ),
+    }
+    if artifact != expected_artifact:
         raise CompositionError("composition artifact must be model-invisible and evaluation-ineligible")
     if not isinstance(source_prompt_identity, str) or not source_prompt_identity:
         raise CompositionError("source_prompt_identity must be a non-empty string")
-    if not isinstance(output_prompt_identity, str) or not output_prompt_identity:
+    if is_draft:
+        if output_prompt_identity is not None:
+            raise CompositionError("draft composition output_prompt_identity must be null")
+    elif not isinstance(output_prompt_identity, str) or not output_prompt_identity:
         raise CompositionError("output_prompt_identity must be a non-empty string")
     actual_composition_sha256 = composition_sha256(manifest)
     if declared_composition_sha256 != actual_composition_sha256:
@@ -124,6 +141,8 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
     component_ids: set[str] = set()
     component_paths: set[str] = set()
     used_blocks: set[str] = set()
+    provided_capabilities: dict[str, str] = {}
+    required_capabilities: dict[str, list[str]] = {}
     payload = bytearray()
     receipt_components: list[dict[str, Any]] = []
     for entry in components:
@@ -133,6 +152,8 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
         block = entry.get("functional_block")
         raw_path = entry.get("path")
         declared_component_sha256 = entry.get("sha256")
+        provides = entry.get("provides", [])
+        requires = entry.get("requires", [])
         if not isinstance(component_id, str) or not component_id:
             raise CompositionError("component id must be a non-empty string")
         if component_id in component_ids:
@@ -143,6 +164,27 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
             raise CompositionError("component path must be a non-empty string")
         if raw_path in component_paths:
             raise CompositionError(f"duplicate component path: {raw_path}")
+        if manifest["schema_version"] in DEPENDENCY_SCHEMA_VERSIONS:
+            if not isinstance(provides, list) or not provides or not all(
+                isinstance(value, str) and value for value in provides
+            ):
+                raise CompositionError(f"provides must be a non-empty string array for {component_id}")
+            if not isinstance(requires, list) or not all(
+                isinstance(value, str) and value for value in requires
+            ):
+                raise CompositionError(f"requires must be a string array for {component_id}")
+            if len(set(provides)) != len(provides):
+                raise CompositionError(f"duplicate provided capability for {component_id}")
+            if len(set(requires)) != len(requires):
+                raise CompositionError(f"duplicate required capability for {component_id}")
+            for capability in provides:
+                previous = provided_capabilities.get(capability)
+                if previous is not None:
+                    raise CompositionError(
+                        f"capability {capability} is provided by both {previous} and {component_id}"
+                    )
+                provided_capabilities[capability] = component_id
+            required_capabilities[component_id] = requires
         path = _component_path(root, raw_path)
         content = path.read_bytes()
         actual_component_sha256 = hashlib.sha256(content).hexdigest()
@@ -161,12 +203,25 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
                 "functional_block": block,
                 "id": component_id,
                 "path": raw_path,
+                **(
+                    {"provides": provides, "requires": requires}
+                    if manifest["schema_version"] in DEPENDENCY_SCHEMA_VERSIONS
+                    else {}
+                ),
                 "sha256": actual_component_sha256,
             }
         )
     if used_blocks != set(blocks):
         missing = sorted(set(blocks) - used_blocks)
         raise CompositionError(f"functional_blocks without components: {missing}")
+    if manifest["schema_version"] in DEPENDENCY_SCHEMA_VERSIONS:
+        unresolved = {
+            component_id: sorted(set(requires) - set(provided_capabilities))
+            for component_id, requires in required_capabilities.items()
+            if set(requires) - set(provided_capabilities)
+        }
+        if unresolved:
+            raise CompositionError(f"unresolved component capabilities: {unresolved}")
 
     output = bytes(payload)
     actual_sha256 = hashlib.sha256(output).hexdigest()
@@ -182,11 +237,32 @@ def compose(manifest_path: Path) -> tuple[bytes, dict[str, Any]]:
         "composition_sha256": actual_composition_sha256,
         "evaluation_eligible": False,
         "functional_blocks": blocks,
+        **(
+            {
+                "dependency_closure": "verified",
+                "provided_capabilities": sorted(provided_capabilities),
+            }
+            if manifest["schema_version"] in DEPENDENCY_SCHEMA_VERSIONS
+            else {}
+        ),
+        **(
+            {"bundle_binding_eligible": False, "lifecycle_state": "draft"}
+            if is_draft
+            else {}
+        ),
         "model_visible": False,
         "output_sha256": actual_sha256,
         "output_prompt_identity": output_prompt_identity,
         "output_target": output_target,
-        "schema_version": RECEIPT_SCHEMA_VERSION,
+        "schema_version": (
+            RECEIPT_SCHEMA_VERSION_V3
+            if is_draft
+            else (
+                RECEIPT_SCHEMA_VERSION_V2
+                if manifest["schema_version"] == SCHEMA_VERSION_V2
+                else RECEIPT_SCHEMA_VERSION_V1
+            )
+        ),
         "source_prompt_identity": source_prompt_identity,
     }
     return output, receipt
@@ -196,6 +272,8 @@ def verify_bundle_binding(manifest_path: Path, bundle_path: Path) -> dict[str, A
     """構成結果が検証済みfull bundleの指定targetとprompt identityへ一致することを確認する。"""
 
     output, composition_receipt = compose(manifest_path)
+    if composition_receipt.get("bundle_binding_eligible") is False:
+        raise CompositionError("draft composition is not eligible for bundle binding")
     try:
         bundle = verify_bundle(bundle_path.resolve())
     except (BundleError, OSError) as exc:

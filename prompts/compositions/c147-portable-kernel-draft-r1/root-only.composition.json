@@ -1,0 +1,31 @@
+{
+  "schema_version": "agent-execution-control.prompt-composition/v3",
+  "artifact": {
+    "artifact_role": "composition_source",
+    "evaluation_eligible": false,
+    "model_visible": false,
+    "bundle_binding_eligible": false,
+    "lifecycle_state": "draft"
+  },
+  "composition_identity": "c147-portable-kernel-root-only-draft-composition-r1",
+  "composition_sha256": "709846c53867337f11b737e47d3c87480e6d3914f8e5e30823172d74ca7b45d9",
+  "source_prompt_identity": "the-caption-3ce91a4-result-effect-scope-r1",
+  "output_prompt_identity": null,
+  "output_target": "AGENTS.md",
+  "expected_output_sha256": "0e625b4c527e8b520c676cee15424ba222576ebc0e29d6f37eeea1ec08166a36",
+  "functional_blocks": ["core", "actor", "observation", "frontier", "validation", "execution"],
+  "components": [
+    {"id": "header", "functional_block": "core", "path": "components/00-header.md", "provides": ["document.header"], "requires": [], "sha256": "2a81c433b046a38fb024cd2a5eef104f0b403343491bcf6ef2f4a3b319d8fc89"},
+    {"id": "vocabulary", "functional_block": "core", "path": "components/05-vocabulary.md", "provides": ["control.vocabulary"], "requires": ["document.header"], "sha256": "e3ba5e0c125c31c36262a45d962492f43a92b972d813104d76ccb61c067c3f01"},
+    {"id": "outcome", "functional_block": "core", "path": "components/10-outcome.md", "provides": ["operation.contract", "outcome.binding", "permission.boundary", "criterion.owner", "spec.readiness", "result.locality"], "requires": ["control.vocabulary"], "sha256": "971c02d88c94775700770102cea2ef0f7ec892ab9282c4c1dc161e2a9562878e"},
+    {"id": "actor-core", "functional_block": "actor", "path": "components/20-actor-core.md", "provides": ["actor.binding", "actor.single_assignment", "actor.rebinding"], "requires": ["operation.contract", "criterion.owner"], "sha256": "9967822dac7a0f451e71680b82da9d82b3a6fdfdaded5b1dfa70917832e23ca1"},
+    {"id": "actor-input", "functional_block": "actor", "path": "components/25-actor-input.md", "provides": ["actor.input_boundary"], "requires": ["actor.binding", "permission.boundary", "criterion.owner"], "sha256": "e96ab04256a81b996eff93049e619b32066da66928df8d099a5b9d28345ab71f"},
+    {"id": "single-actor", "functional_block": "actor", "path": "components/27-single-actor.md", "provides": ["actor.execution_mode", "actor.result_admission"], "requires": ["actor.binding", "actor.input_boundary", "operation.contract", "criterion.owner"], "sha256": "111d8fcc2cf1d638cb50d7d38cee330566ae72e8b45e88efe90fa61a8e7e73de"},
+    {"id": "observation", "functional_block": "observation", "path": "components/40-observation.md", "provides": ["observation.admission", "implementation.binding"], "requires": ["operation.contract", "spec.readiness", "permission.boundary", "validation.plan"], "sha256": "cf48845d8f84f2c8858a40ebe05383ed043109815f89918af31128246376073f"},
+    {"id": "frontier", "functional_block": "frontier", "path": "components/50-frontier.md", "provides": ["issuance.frontier"], "requires": ["operation.contract", "permission.boundary", "result.locality"], "sha256": "bd03b44dd750f78c976869bb29428cd02f79589ac7a74b83d2a56e9153999e9c"},
+    {"id": "completion", "functional_block": "core", "path": "components/60-completion.md", "provides": ["operation.completion"], "requires": ["operation.contract", "actor.binding", "actor.result_admission"], "sha256": "3f0a09d474e357a00f70d8c9ce2843c0d170871bf1129d17cbdbc39360ae868a"},
+    {"id": "validation-plan", "functional_block": "validation", "path": "components/70-validation-plan.md", "provides": ["validation.plan"], "requires": ["observation.admission", "execution.method"], "sha256": "fdd73c95984ea6b9e17ee7fe011fc71d3a18e576f5d457baa591e69c69044d5a"},
+    {"id": "validation-execution", "functional_block": "validation", "path": "components/80-validation-execution.md", "provides": ["validation.execution"], "requires": ["actor.binding", "actor.result_admission", "operation.completion", "validation.plan"], "sha256": "a331c1fb3b834a799518b001eed370df560b904cea0d99be19da80f1fed25b39"},
+    {"id": "method-recovery", "functional_block": "execution", "path": "components/90-method-recovery.md", "provides": ["execution.method", "execution.recovery"], "requires": ["operation.contract", "permission.boundary"], "sha256": "61f4204137b2f2e9b06a4966f12077b4bc7a927829f4fef3ef856c3ce84e6c7e"}
+  ]
+}

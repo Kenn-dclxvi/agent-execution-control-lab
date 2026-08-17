@@ -1,9 +1,9 @@
 # C147 portable kernel clause architecture
 
 > [!IMPORTANT]
-> **状態**: `clause_architecture_fixed / primitive_coverage_81_of_81 / exact_prompt_not_written / common_target_not_created / candidate_not_created / evaluation_not_started`
+> **状態**: `clause_architecture_fixed / primitive_coverage_81_of_81 / exact_prompt_draft_written / q01_q08_static_counterexamples_repaired / common_target_not_created / candidate_not_created / evaluation_not_started`
 >
-> 本書はC147の81 primitiveをruntime非依存のclauseへ対応づける設計記録である。exact prompt本文、Candidate、評価結果、採用、releaseまたはprojectionではない。
+> 本書はC147の81 primitiveをruntime非依存のclauseへ対応づける設計記録である。後続のexact管理用本文草案は[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)に固定した。本書自体はCandidate、評価結果、採用、releaseまたはprojectionではない。
 
 ## 結論
 
@@ -164,18 +164,15 @@ handoffをsurfaceの「推奨順序」として扱わない。前段resultが後
 | `RECOVERY` | 3 | `METHOD_RECOVERY` | 3 / 3 |
 | **合計** | **81** | 9 clause | **81 / 81** |
 
-これはsemantic coverageの設計上の対応であり、文面の機序成立を意味しない。exact prompt本文を作る場合は、各primitiveをどの文が直接拘束するかを文単位で再監査する。
+これはsemantic coverageの設計上の対応であり、文面の機序成立を意味しない。後続草案で各primitiveを直接拘束するsemantic statementへ文単位で再監査し、Q01〜Q08の静的反例4件を修正した。さらにkernel草案を変更しない境界で14件のheld-out r1とprivate oracleを固定したが、未実行なので機序成立は未確定である。
 
 ## Candidate作成前に残るgate
 
-次が未完了なのでexact prompt本文とCandidate bundleを作成しない。
+管理用のexact本文草案、81 primitive逆引き、held-out r1および採点契約は完了したが、次が未完了なのでCandidate bundleを作成しない。
 
-1. 共通semantic conformance targetのcaseと正常最短経路。
-2. 各caseで実際に防ぐ問題経路とresult effect。
-3. model-visible operation ledger、model-invisible oracleおよびrating contract。
-4. 9 clauseを消費するcase coverageと対象外影響。
-5. control-free baselineの測定成立。
-6. surface別のload receipt、capability boundaryおよび停止条件。
+1. control-free baselineの測定成立。
+2. surface別のload receipt、capability boundaryおよび停止条件。
+3. formal target identity、直接の基準、allowed deltaおよび停止条件のCandidate作成前固定。
 
 ## 参照
 
