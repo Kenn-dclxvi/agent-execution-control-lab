@@ -1,7 +1,7 @@
 # Portable instruction semantic conformance評価設計
 
 > [!IMPORTANT]
-> **状態**: `common_case_contract_r2_fixed / tuning_cases_8_fixed / held_out_cases_14_fixed / surface_load_receipts_not_collected / formal_target_not_created / execution_not_started`
+> **状態**: `common_case_contract_r2_fixed / tuning_cases_8_fixed / held_out_cases_14_fixed / surface_load_receipts_not_collected / formal_target_registered / codex_profile_registered / dispatch_plan_fixed / profile_preflight_ready / authorized_14 / issued_0 / execution_not_started`
 >
 > 本書は、C147由来portable kernelのsemantic portabilityとbehavioral portabilityをsurface別に診断する共通Caseを固定する。exact prompt本文、Candidate、正式なtarget instance、評価result、採用、releaseまたはprojectionではない。
 
@@ -278,7 +278,7 @@ namespaced target instanceへformal profileを作るには、surface/runtimeご�
 
 ## 次の作業
 
-runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。held-out r1のschema整合性、model-visible / private分離、Claude Codeの証跡transport、semantic protocol用target v2、comparison preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、persisted all-agent transcript contractおよびCodex N=1 Profileは固定済みである。次に許可するのは、[`target登録設計`](portable-instruction-semantic-target-registration-design.md)に従う14 Caseのwrite-once dispatch plan、Profile preflightおよびplan限定adapter entrypointである。baseline runはまだ許可しない。
+runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。held-out r1のschema整合性、model-visible / private分離、Claude Codeの証跡transport、semantic protocol用target v2、comparison preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、persisted all-agent transcript contract、Codex N=1 Profile、14 Caseのwrite-once計画、Profile事前確認票および計画限定の実行入口は固定済みである。現在は14件を許可し、発行数は0件である。次に許可するのは、この固定入力を変更しないcontrol-free資格確認の実行であり、正式比較、Candidate採用、releaseまたはruntime projectionではない。
 
 - target instance登録
 - exact portable kernel Candidate

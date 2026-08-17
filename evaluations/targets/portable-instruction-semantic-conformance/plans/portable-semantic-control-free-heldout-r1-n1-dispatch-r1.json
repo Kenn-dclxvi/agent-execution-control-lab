@@ -1,0 +1,211 @@
+{
+  "authorized_slot_count": 14,
+  "binding_receipt": {
+    "bound_files": {
+      "capability_catalog": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6",
+      "evaluation_set": "cb136b3993667195dcc495d2302a12fe72236cb66c34031ffa2500ef31cb2703",
+      "rating": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5",
+      "task_spec": "ad995d3c4b75b0fb8e541578b6da1561344856d41692ffce88e3e57ccb044ea7",
+      "transcript": "94d26c76f6b3ae9ca98d9432e2bebe978ef280a33da855b974efaf9cc11123a1"
+    },
+    "dispatch_allowed": false,
+    "profile_id": "portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r1",
+    "prompt_identity": "portable-semantic-a544769-control-free-r1",
+    "schema_version": "portable-instruction-semantic-profile-binding/v1",
+    "stop_reason": "adapter_execution_entrypoint_disabled",
+    "target_id": "portable-instruction-semantic-conformance"
+  },
+  "dispatch_state": "planned_not_issued",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/sets/heldout-r1/set.json",
+    "set_id": "portable-instruction-semantic-heldout-r1",
+    "set_revision": "r1",
+    "sha256": "cb136b3993667195dcc495d2302a12fe72236cb66c34031ffa2500ef31cb2703"
+  },
+  "execution": {
+    "dispatch_gate": "adapter_entrypoint_and_preflight_required",
+    "max_attempts_per_slot": 1,
+    "max_workers": 24,
+    "schedule_policy": "global_queue"
+  },
+  "issued_slot_count": 0,
+  "plan_id": "portable-semantic-control-free-heldout-r1-n1-dispatch-r1",
+  "plan_sha256": "dbdd20cbaac802356db488fb3915ea94391d38fac7713b1068db67637fc576d4",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r1.json",
+    "profile_id": "portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r1",
+    "sha256": "d577efdd0adaba07d0e07ca9e454c49aa00054b78888ca2d2884b92d435d07f7"
+  },
+  "prompt_set_identity": {
+    "name": "portable-semantic-a544769-control-free-r1",
+    "revision": "r1",
+    "sha256": "7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9"
+  },
+  "rating_ref": {
+    "contract_id": "portable-instruction-semantic-exact-v1",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+    "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+  },
+  "repetition_condition": {
+    "external_failure_policy": "exclude_without_case_change",
+    "iterations": 1,
+    "order": "case_id_ascending",
+    "valid_low_quality_policy": "retain"
+  },
+  "runtime_ref": {
+    "capability_catalog": {
+      "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-cli-0.146.0-capability-catalog-r1.json",
+      "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+      "sha256": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "instruction_isolation": {
+      "apps": false,
+      "ignore_rules": true,
+      "ignore_user_config": true,
+      "memory": false,
+      "multi_agent": false,
+      "plugin_sharing": false,
+      "plugins": false
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "read-only"
+    },
+    "reasoning_effort": "medium",
+    "runtime": "codex-cli",
+    "session_mode": "persisted_for_usage_collection",
+    "token_accounting": {
+      "revision": "v1",
+      "scope": "all_agents",
+      "source": "codex_rollout_final_usage_by_workspace"
+    },
+    "version": "0.146.0"
+  },
+  "schema_version": "portable-instruction-semantic-dispatch-plan/v1",
+  "slots": [
+    {
+      "case_id": "PIC-H01",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H01-i001"
+    },
+    {
+      "case_id": "PIC-H02",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H02-i001"
+    },
+    {
+      "case_id": "PIC-H03",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H03-i001"
+    },
+    {
+      "case_id": "PIC-H04",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H04-i001"
+    },
+    {
+      "case_id": "PIC-H05",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H05-i001"
+    },
+    {
+      "case_id": "PIC-H06",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H06-i001"
+    },
+    {
+      "case_id": "PIC-H07",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H07-i001"
+    },
+    {
+      "case_id": "PIC-H08",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H08-i001"
+    },
+    {
+      "case_id": "PIC-H09",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H09-i001"
+    },
+    {
+      "case_id": "PIC-H10",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H10-i001"
+    },
+    {
+      "case_id": "PIC-H11",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H11-i001"
+    },
+    {
+      "case_id": "PIC-H12",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H12-i001"
+    },
+    {
+      "case_id": "PIC-H13",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H13-i001"
+    },
+    {
+      "case_id": "PIC-H14",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "PIC-H14-i001"
+    }
+  ],
+  "target": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/target.json",
+    "sha256": "4c25db29d1ae72978a8f33f4a9a8ef96efd93db2c8b27b350b81f44078f22dd2",
+    "target_id": "portable-instruction-semantic-conformance",
+    "target_subject_ref": {
+      "interaction_mode": "single_response_operation_ledger",
+      "kind": "semantic_protocol",
+      "protocol_id": "portable-instruction-semantic-conformance",
+      "protocol_revision": "response-r2",
+      "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  },
+  "target_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/registration.json",
+    "registered_artifacts": {
+      "cases/heldout-r1/input-cases.json": "0267e6d508d389a348513d39ce67b05b6e26ee0e40c1ae7abaf71f40c89b6179",
+      "cases/heldout-r1/input-cases.schema.json": "e90b04095b4b97696531f1dae2aaf3263fcfe1c50303dcf96d16d1302f6e4380",
+      "cases/heldout-r1/oracle.json": "20d8207360e03ac9c4f46d544f8f11da5e0c8d887c3a3e743899838fa5a8c87d",
+      "cases/heldout-r1/oracle.schema.json": "59a441112a5ebcedbdd6ff1f4a0aa90bdf3c90e3fca0d7c3bb9da0df9a7c5479",
+      "cases/heldout-r1/response.schema.json": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076",
+      "cases/heldout-r1/source-freeze.json": "b70da558d7f004cf0537ecc96643043a2fd833c778789713bf77850cd261c8d9",
+      "prompts/baselines/portable-semantic-a544769-control-free-r1/files/AGENTS.md.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rating-contracts/portable-instruction-semantic-exact-v1.json": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+    },
+    "registration_id": "portable-instruction-semantic-conformance-registration-r1",
+    "sha256": "e58c0b1ddee3e3a2b1c0d38bb39db76307e85a024ec024707d348912456cae62"
+  },
+  "task_spec_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/task-spec-wrapper-r1.txt",
+    "revision": "semantic-single-json-r1",
+    "sha256": "ad995d3c4b75b0fb8e541578b6da1561344856d41692ffce88e3e57ccb044ea7"
+  },
+  "transcript_ref": {
+    "contract_id": "codex-rollout-final-usage-by-workspace-r1",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-rollout-token-accounting-r1.json",
+    "sha256": "94d26c76f6b3ae9ca98d9432e2bebe978ef280a33da855b974efaf9cc11123a1"
+  }
+}

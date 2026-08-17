@@ -90,3 +90,25 @@ def test_profile_is_registered_but_result_execution_has_not_started() -> None:
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
     assert list((TARGET / "results").glob("*.json")) == []
     assert list((TARGET / "results").glob("*.md")) == [TARGET / "results/README.md"]
+
+
+def test_qualification_plan_and_preflight_authorize_fourteen_but_issue_zero() -> None:
+    plan = load(TARGET / "plans/portable-semantic-control-free-heldout-r1-n1-dispatch-r1.json")
+    preflight = load(TARGET / "plans/portable-semantic-control-free-heldout-r1-n1-preflight-r1.json")
+    expected_slots = [f"PIC-H{number:02d}-i001" for number in range(1, 15)]
+    assert [slot["slot_id"] for slot in plan["slots"]] == expected_slots
+    assert plan["authorized_slot_count"] == 14
+    assert plan["issued_slot_count"] == 0
+    assert preflight["authorized_slots"] == plan["slots"]
+    assert preflight["authorized_slot_count"] == 14
+    assert preflight["issued_slot_count"] == 0
+    assert preflight["dispatch_allowed"] is True
+    assert sha256(ROOT / preflight["plan"]["path"]) == preflight["plan"]["sha256"]
+    for reference in preflight["execution_code"].values():
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
+
+
+def test_target_registers_dispatch_root_and_plan_limited_runner() -> None:
+    target = load(TARGET / "target.json")
+    assert target["artifact_roots"]["dispatch_plans"].endswith("/plans")
+    assert "scripts/run_semantic_protocol_qualification.py" in target["target_specific_modules"]
