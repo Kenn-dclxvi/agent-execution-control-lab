@@ -1,0 +1,1 @@
+- PRODUCER: 初回predicate前に各operationへrootまたはworkerのproducer execution identityを一つbindする。同一operationのpredicate実行 / result生成を他producerへ順次・並行に割り当てない。TaskSpecが独立したproducer executionを明示した場合だけ、その指定identityをproducer role identityへbindする。criterion owner語列だけでproducerを選ばない。producer変更は理由を問わず旧bindingを失効し、新identityのTaskSpecで行う。

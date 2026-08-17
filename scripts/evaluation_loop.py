@@ -480,6 +480,10 @@ def validate_prompt_set_identity(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise EvaluationError("binding.prompt_set_identity must be an object")
     identity = dict(value)
+    allowed = {"name", "revision", "bundle_sha256"}
+    unknown = sorted(set(identity) - allowed)
+    if unknown:
+        raise EvaluationError(f"binding.prompt_set_identity uses unsupported key: {unknown[0]}")
     require_non_empty_string(identity.get("name"), "binding.prompt_set_identity.name")
     revision = identity.get("revision")
     bundle_sha256 = identity.get("bundle_sha256")

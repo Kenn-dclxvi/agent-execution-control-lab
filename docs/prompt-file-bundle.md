@@ -64,6 +64,12 @@ agent-execution-control-lab/
 
 `files/`以下は、THE-CAPTIONへ配置するときの相対pathをそのまま表す。ただし`AGENTS.md`と`CLAUDE.md`は、at-rest格納時に`.txt`を付けた名前で保存し、実行workspaceへのoverlay時に本来のtarget名へ復元する。
 
+管理時にprompt本文を機能componentへ分離する場合も、評価へ投入するbundleは構成済みのfull bundleとする。componentと`composition.json`は`model_visible=false / evaluation_eligible=false`の管理用sourceであり、実行workspaceへ配置しない。`composition_identity`とcomposition全体SHA-256は管理sourceの再現性だけに使い、profileの`prompt_set_identity`、capsule、compatibility key、Layer 1 identityまたはresultへ入れない。
+
+`AGENTS.md`を構成する場合は、必要なcomponent本文を事前に全文転写した自己完結ファイルをbundleへ保存し、実行中のAgentにcomponent read、include解決または追加prompt取得を行わせない。評価profile作成前に、構成結果のtarget、content SHA-256およびoutput prompt identityが、既存bundle verifierを通過したfull bundleと一致することをbinding receiptで確認する。binding receipt自体もmodel-invisibleであり、互換条件へ追加しない。
+
+構成結果が既存prompt fileとbyte一致する場合は、既存prompt identityとbundle identityを維持し、composition sourceの追加をprompt revisionとして扱わない。構成結果のbytesが変わる場合は、管理sourceのrevisionだけでは評価へ進めず、Candidate作成前gateを満たした新しいfull bundle、prompt identityおよびbundle identityとして固定する。
+
 対象commitにprompt fileが存在しないこと自体を比較条件として固定する場合は、`files`を空配列としたempty bundleを使う。格納対象がないため`files/`は存在しなくてもよい。Layer 2ではtargetを変更せず、同一の固定metadataでempty overlay commitだけを作る。空の`AGENTS.md`を配置する条件とはprompt identityを分ける。
 
 ```text
