@@ -8,6 +8,7 @@ import copy
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import sys
 import time
@@ -48,6 +49,7 @@ PREFLIGHT_SCHEMA = "portable-instruction-semantic-profile-preflight/v1"
 DISPATCH_SCHEMA = "portable-instruction-semantic-dispatch-receipt/v1"
 EXECUTION_SCHEMA = "portable-instruction-semantic-execution-observation/v1"
 FAILURE_SUMMARY_SCHEMA = "portable-instruction-semantic-external-failure-summary/v1"
+CONTROL_FREE_DISPATCH_SERIES_ID = "portable-semantic-control-free-heldout-r1-n1"
 
 
 class QualificationGateError(Exception):
@@ -145,6 +147,19 @@ def validate_target_registration(target_path: Path) -> dict[str, Any]:
     }
 
 
+def dispatch_plan_identity(profile: dict[str, Any]) -> tuple[str, str]:
+    profile_id = profile.get("profile_id")
+    if not isinstance(profile_id, str) or not profile_id:
+        raise QualificationGateError("qualification Profile identity is unbound")
+    revision = profile_id.rsplit("-", 1)[-1]
+    if re.fullmatch(r"r[1-9][0-9]*", revision) is None:
+        raise QualificationGateError("unsupported qualification Profile revision")
+    series_id = profile.get("dispatch_series_id", CONTROL_FREE_DISPATCH_SERIES_ID)
+    if not isinstance(series_id, str) or re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", series_id) is None:
+        raise QualificationGateError("qualification dispatch series identity is invalid")
+    return f"{series_id}-dispatch-{revision}", revision
+
+
 def generate_plan(
     *,
     repository_root: Path,
@@ -198,12 +213,10 @@ def generate_plan(
         }
         for item in cases
     ]
-    profile_revision = profile["profile_id"].rsplit("-", 1)[-1]
-    if profile_revision not in {"r1", "r2", "r3", "r4"}:
-        raise QualificationGateError("unsupported qualification Profile revision")
+    plan_id, _profile_revision = dispatch_plan_identity(profile)
     plan = {
         "schema_version": PLAN_SCHEMA,
-        "plan_id": f"portable-semantic-control-free-heldout-r1-n1-dispatch-{profile_revision}",
+        "plan_id": plan_id,
         "target": {
             "path": str(target_path.relative_to(repository_root)),
             "sha256": sha256_file(target_path),

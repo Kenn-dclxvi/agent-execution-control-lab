@@ -10,6 +10,7 @@ from scripts.run_semantic_protocol_qualification import (
     build_preflight,
     canonical_bytes,
     content_identity,
+    dispatch_plan_identity,
     generate_plan,
     project_response_schema,
     validate_plan,
@@ -65,6 +66,28 @@ def test_plan_fixes_exactly_fourteen_write_once_slots() -> None:
     assert plan["dispatch_state"] == "planned_not_issued"
     assert "cases/heldout-r1/input-cases.json" in plan["target_registration"]["registered_artifacts"]
     assert "cases/heldout-r1/oracle.json" in plan["target_registration"]["registered_artifacts"]
+
+
+def test_dispatch_series_is_explicit_and_control_free_default_is_backward_compatible() -> None:
+    assert dispatch_plan_identity({"profile_id": "control-free-r4"}) == (
+        "portable-semantic-control-free-heldout-r1-n1-dispatch-r4",
+        "r4",
+    )
+    assert dispatch_plan_identity(
+        {
+            "profile_id": "portable-full-agent-r1",
+            "dispatch_series_id": "portable-semantic-c147-portable-full-agent-heldout-r1-n1",
+        }
+    ) == ("portable-semantic-c147-portable-full-agent-heldout-r1-n1-dispatch-r1", "r1")
+
+
+def test_dispatch_series_rejects_implicit_or_unsafe_identity() -> None:
+    with pytest.raises(QualificationGateError, match="revision"):
+        dispatch_plan_identity({"profile_id": "portable-full-agent-latest"})
+    with pytest.raises(QualificationGateError, match="series identity"):
+        dispatch_plan_identity(
+            {"profile_id": "portable-full-agent-r1", "dispatch_series_id": "../candidate"}
+        )
 
 
 def test_plan_rejects_tamper_even_with_recomputed_content_hash() -> None:

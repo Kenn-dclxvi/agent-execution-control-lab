@@ -107,7 +107,7 @@ def test_full_agent_reference_and_candidate_bundles_are_registered() -> None:
     }
 
 
-def test_profile_is_registered_but_result_execution_has_not_started() -> None:
+def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
     documents = [load(path) for path in (TARGET / "profiles").glob("*.json")]
     profiles = [item for item in documents if item.get("schema_version") == "portable-instruction-semantic-profile/v1"]
     registrations = [
@@ -121,9 +121,14 @@ def test_profile_is_registered_but_result_execution_has_not_started() -> None:
     assert all(profile["lifecycle_state"] == "registered_not_qualified" for profile in profiles)
     latest_registration = next(item for item in registrations if item["registration_id"].endswith("r4"))
     assert latest_registration["state"]["adapter_execution_entrypoint_enabled"] is True
-    for key in ("profile", "adapter", "runner"):
+    for key in ("profile", "adapter"):
         reference = latest_registration[key]
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
+    historical_preflight = load(
+        TARGET / "plans/portable-semantic-control-free-heldout-r1-n1-preflight-r4.json"
+    )
+    assert historical_preflight["execution_code"]["runner"] == latest_registration["runner"]
+    assert historical_preflight["execution_code"]["core_adapter"] == latest_registration["adapter"]
     assert list((TARGET / "results").glob("*.json")) == [
         TARGET / "results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json"
     ]
