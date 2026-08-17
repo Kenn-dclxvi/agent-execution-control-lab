@@ -278,7 +278,7 @@ namespaced target instanceへformal profileを作るには、surface/runtimeご�
 
 ## 次の作業
 
-runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。held-out r1のschema整合性、model-visible / private分離、Claude Codeの証跡transport、semantic protocol用target v2、comparison preflightおよびformal target登録は固定済みである。次に許可するのは、[`target登録設計`](portable-instruction-semantic-target-registration-design.md)に従いCodex runtime、model、reasoning、capability catalog、共通TaskSpec wrapperおよびprivate transcript回収境界を一つのProfileへbindすることである。baseline runはまだ許可しない。
+runtime別の測定成立監査は[`Portable instruction runtime別測定成立監査`](portable-instruction-runtime-measurement-feasibility-audit.md)へ固定した。held-out r1のschema整合性、model-visible / private分離、Claude Codeの証跡transport、semantic protocol用target v2、comparison preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、persisted all-agent transcript contractおよびCodex N=1 Profileは固定済みである。次に許可するのは、[`target登録設計`](portable-instruction-semantic-target-registration-design.md)に従う14 Caseのwrite-once dispatch plan、Profile preflightおよびplan限定adapter entrypointである。baseline runはまだ許可しない。
 
 - target instance登録
 - exact portable kernel Candidate

@@ -15,6 +15,21 @@ from typing import Any
 
 import jsonschema
 
+try:
+    from .all_agent_usage import (
+        AllAgentUsageError,
+        TOKEN_ACCOUNTING as ALL_AGENT_TOKEN_ACCOUNTING,
+        collect_workspace_usage,
+    )
+    from .export_prompt_bundle import BundleError, verify_bundle
+except ImportError:
+    from all_agent_usage import (
+        AllAgentUsageError,
+        TOKEN_ACCOUNTING as ALL_AGENT_TOKEN_ACCOUNTING,
+        collect_workspace_usage,
+    )
+    from export_prompt_bundle import BundleError, verify_bundle
+
 
 class SemanticCodexAdapterError(Exception):
     pass
@@ -63,6 +78,106 @@ def validate_prompt_draft(manifest_path: Path) -> tuple[dict[str, Any], bytes]:
     if sha256_bytes(content) != delivery.get("sha256"):
         raise SemanticCodexAdapterError("prompt draft SHA-256 mismatch")
     return manifest, content
+
+
+def validate_registered_profile(
+    *,
+    profile_path: Path,
+    target_path: Path,
+    bundle_path: Path,
+    repository_root: Path,
+) -> dict[str, Any]:
+    profile = load_object(profile_path.resolve())
+    target = load_object(target_path.resolve())
+    repository_root = repository_root.resolve()
+    if profile.get("schema_version") != "portable-instruction-semantic-profile/v1":
+        raise SemanticCodexAdapterError("unsupported semantic profile schema")
+    if profile.get("lifecycle_state") != "registered_not_qualified":
+        raise SemanticCodexAdapterError("semantic profile lifecycle state is invalid")
+    if target.get("schema_version") != "the-caption-prompt.evaluation-target/v2":
+        raise SemanticCodexAdapterError("semantic target is not registered as v2")
+    if profile.get("target_id") != target.get("target_id"):
+        raise SemanticCodexAdapterError("profile target identity mismatch")
+    subject = dict(target.get("target_subject") or {})
+    subject.pop("subject_authority", None)
+    if profile.get("target_subject_ref") != subject:
+        raise SemanticCodexAdapterError("profile target subject mismatch")
+    try:
+        bundle = verify_bundle(bundle_path.resolve())
+    except (BundleError, OSError) as error:
+        raise SemanticCodexAdapterError("registered prompt bundle is invalid") from error
+    prompt = profile.get("prompt_set_identity")
+    if not isinstance(prompt, dict) or prompt.get("name") != bundle.get("prompt_identity"):
+        raise SemanticCodexAdapterError("profile prompt identity mismatch")
+    if prompt.get("sha256") != bundle.get("bundle_sha256"):
+        raise SemanticCodexAdapterError("profile prompt bundle hash mismatch")
+
+    bound_files: dict[str, str] = {}
+    references = {
+        "task_spec": profile.get("task_spec_ref"),
+        "evaluation_set": profile.get("evaluation_set_ref"),
+        "rating": profile.get("rating_ref"),
+        "transcript": profile.get("transcript_ref"),
+        "capability_catalog": (profile.get("runtime_ref") or {}).get("capability_catalog"),
+    }
+    for label, reference in references.items():
+        if not isinstance(reference, dict):
+            raise SemanticCodexAdapterError(f"profile {label} reference is invalid")
+        raw_path = reference.get("path")
+        expected = reference.get("sha256")
+        if not isinstance(raw_path, str) or not isinstance(expected, str):
+            raise SemanticCodexAdapterError(f"profile {label} reference is unbound")
+        path = (repository_root / raw_path).resolve()
+        try:
+            path.relative_to(repository_root)
+        except ValueError as error:
+            raise SemanticCodexAdapterError(f"profile {label} path escapes repository") from error
+        if not path.is_file() or sha256_bytes(path.read_bytes()) != expected:
+            raise SemanticCodexAdapterError(f"profile {label} hash mismatch")
+        bound_files[label] = expected
+
+    runtime = profile.get("runtime_ref")
+    expected_runtime = {
+        "runtime": "codex-cli",
+        "version": "0.146.0",
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "medium",
+        "token_accounting": TOKEN_ACCOUNTING,
+        "session_mode": "persisted_for_usage_collection",
+        "instruction_isolation": {
+            "ignore_user_config": True,
+            "ignore_rules": True,
+            "memory": False,
+            "apps": False,
+            "plugins": False,
+            "plugin_sharing": False,
+            "multi_agent": False,
+        },
+        "permission": {"sandbox": "read-only", "approval_policy": "never"},
+        "capability_catalog": references["capability_catalog"],
+        "elapsed_boundary": ELAPSED_BOUNDARY,
+    }
+    if runtime != expected_runtime:
+        raise SemanticCodexAdapterError("profile runtime differs from adapter contract")
+    if profile.get("execution") != {
+        "max_workers": 24,
+        "schedule_policy": "global_queue",
+        "max_attempts_per_slot": 1,
+        "dispatch_gate": "adapter_entrypoint_and_preflight_required",
+    }:
+        raise SemanticCodexAdapterError("profile execution gate is invalid")
+    wrapper_path = repository_root / profile["task_spec_ref"]["path"]
+    if wrapper_path.read_text(encoding="utf-8").count("{{MODEL_PACKET_JSON}}") != 1:
+        raise SemanticCodexAdapterError("TaskSpec wrapper must contain one packet placeholder")
+    return {
+        "schema_version": "portable-instruction-semantic-profile-binding/v1",
+        "profile_id": profile["profile_id"],
+        "target_id": target["target_id"],
+        "prompt_identity": bundle["prompt_identity"],
+        "bound_files": bound_files,
+        "dispatch_allowed": False,
+        "stop_reason": "adapter_execution_entrypoint_disabled",
+    }
 
 
 def prepare_instruction_workspace(workspace: Path, prompt_bytes: bytes) -> dict[str, Any]:
@@ -180,6 +295,35 @@ def parse_codex_jsonl(value: bytes) -> dict[str, Any]:
     return {"root_thread_id": thread_ids[0], "root_total_tokens": total_tokens, "raw_usage": completed_usage[0]}
 
 
+def collect_accounted_usage(
+    *,
+    session_root: Path,
+    workspace: Path,
+    codex_jsonl: bytes,
+    modified_since: float | None,
+) -> dict[str, Any]:
+    """Bind exec JSONL root usage to the persisted root and descendant rollouts."""
+
+    if ALL_AGENT_TOKEN_ACCOUNTING != TOKEN_ACCOUNTING:
+        raise SemanticCodexAdapterError("all-agent token accounting contract mismatch")
+    root = parse_codex_jsonl(codex_jsonl)
+    try:
+        usage = collect_workspace_usage(
+            session_root.resolve(),
+            workspace.resolve(),
+            root["root_thread_id"],
+            root["root_total_tokens"],
+            modified_since=modified_since,
+        )
+    except AllAgentUsageError as error:
+        raise SemanticCodexAdapterError("all-agent persisted usage is incomplete") from error
+    if usage.get("token_accounting") != TOKEN_ACCOUNTING:
+        raise SemanticCodexAdapterError("all-agent usage uses an unsupported accounting identity")
+    if usage.get("all_agent_total_tokens") is None:
+        raise SemanticCodexAdapterError("all-agent usage lacks primary total_tokens")
+    return usage
+
+
 def validate_final_response(final_response: Path, response_schema: Path) -> dict[str, Any]:
     response = load_object(final_response)
     schema = load_object(response_schema)
@@ -202,4 +346,6 @@ def adapter_contract() -> dict[str, Any]:
         "elapsed_boundary": ELAPSED_BOUNDARY,
         "raw_evidence": ["Codex JSONL stdout", "stderr", "last response", "root and descendant private session transcripts"],
         "formal_target_required_before_execution": True,
+        "profile_required_before_execution": True,
+        "token_admission": "persisted root and recursive descendant final usage must match exec JSONL root usage",
     }

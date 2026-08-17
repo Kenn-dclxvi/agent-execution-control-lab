@@ -73,7 +73,20 @@ def test_control_free_bundle_is_registered_and_zero_byte() -> None:
     assert (bundle / "files/AGENTS.md.txt").read_bytes() == b""
 
 
-def test_profile_and_result_execution_have_not_started() -> None:
-    assert list((TARGET / "profiles").glob("*.json")) == []
+def test_profile_is_registered_but_result_execution_has_not_started() -> None:
+    documents = [load(path) for path in (TARGET / "profiles").glob("*.json")]
+    profiles = [item for item in documents if item.get("schema_version") == "portable-instruction-semantic-profile/v1"]
+    registrations = [
+        item
+        for item in documents
+        if item.get("schema_version") == "portable-instruction-semantic-profile-registration/v1"
+    ]
+    assert len(profiles) == 1
+    assert len(registrations) == 1
+    assert profiles[0]["lifecycle_state"] == "registered_not_qualified"
+    assert registrations[0]["state"]["adapter_execution_entrypoint_enabled"] is False
+    for key in ("profile", "adapter"):
+        reference = registrations[0][key]
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
     assert list((TARGET / "results").glob("*.json")) == []
     assert list((TARGET / "results").glob("*.md")) == [TARGET / "results/README.md"]

@@ -1,7 +1,7 @@
 # Portable instruction semantic target登録設計
 
 > [!IMPORTANT]
-> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / execution_entrypoint_disabled / profile_not_registered / v1_unchanged / baseline_not_started`
+> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / persisted_all_agent_usage_bound / codex_profile_registered_not_qualified / execution_entrypoint_disabled / v1_unchanged / baseline_not_started`
 >
 > 本書はportable instruction semantic conformanceを既存repository targetと誤って互換扱いしないための登録設計である。後続の正式登録は[`evaluations/targets/portable-instruction-semantic-conformance/`](../evaluations/targets/portable-instruction-semantic-conformance/)を正本とする。本書自体はProfile、Candidate、評価slotまたはresultではない。
 
@@ -101,7 +101,7 @@ response schemaを守るためのTaskSpec wrapperは両条件へ同じbytesで�
 
 一件だけをmodel-visible packetへ出すmaterializer、private receipt、v2 subject/runtime comparison preflight、Codex CLI `0.146.0`向けadapter coreおよび0-byte control-free prompt draftは実装済みである。preflightはprompt identity以外の完全一致を要求し、`target_repository_ref`、`unbound`、runtime drift、Case driftおよびtranscript accountingと両立しない`ephemeral` sessionを拒否する。adapterはisolated workspaceへ`AGENTS.md`だけを配置し、user config、rules、memory、skills、apps、pluginsおよびmulti-agent capabilityを無効化する。tokenはterminal eventの一次`total_tokens`がある場合だけ受理し、内訳や文字数から補完しない。
 
-commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contractおよび0-byte control-free baselineは登録済みである。ただしadapterには実行入口がなく、Profileも存在しない。次に許可するのは、model、reasoning、Codex CLI runtime、capability catalog、private transcript回収方法、permissionおよび共通TaskSpec wrapper bytesを一つのProfileへ固定し、そのProfileとadapter contractの一致を静的検証する変更である。それまではdispatch、qualificationまたはbaseline runを発行しない。
+commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contract、0-byte control-free baseline、共通TaskSpec wrapper、capability catalog、persisted all-agent transcript contractおよびCodex CLI 0.146.0 / GPT-5.6 Sol / reasoning `medium` / N=1 Profileは登録済みである。adapterはProfileから参照する全file hash、target subject、prompt bundleおよびruntime contractを静的検証し、root JSONL usageとroot・descendant transcript usageが一致する場合だけtokenを受理する。ただし実行入口はまだ無効である。次に許可するのは、14 Caseのwrite-once dispatch planとProfile preflightを固定し、adapter実行入口がそのplan以外を受け取れないようにする変更である。それまではqualificationまたはbaseline runを発行しない。
 
 ## 参照
 
