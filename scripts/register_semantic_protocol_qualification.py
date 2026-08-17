@@ -33,6 +33,30 @@ except ImportError:
 
 
 RESULT_SCHEMA = "portable-instruction-semantic-qualification-result/v1"
+CONTROL_FREE_PROMPT_IDENTITY = "portable-semantic-a544769-control-free-r1"
+
+
+def result_identity(plan: dict[str, Any]) -> str:
+    plan_id = plan.get("plan_id")
+    if not isinstance(plan_id, str) or plan_id.count("-dispatch-") != 1:
+        raise QualificationGateError("qualification plan identity cannot bind result identity")
+    return plan_id.replace("-dispatch-", "-qualification-", 1)
+
+
+def quality_gate_result(plan: dict[str, Any], scores: list[int]) -> dict[str, Any]:
+    prompt_identity = (plan.get("prompt_set_identity") or {}).get("name")
+    if prompt_identity == CONTROL_FREE_PROMPT_IDENTITY:
+        return {
+            "quality_gate": "descriptive_not_an_admission_gate",
+            "quality_gate_contract": "control_free_measurement_only",
+            "comparison_reference": "not_applicable",
+        }
+    passed = len(scores) == 14 and all(score == 4 for score in scores)
+    return {
+        "quality_gate": "passed" if passed else "failed",
+        "quality_gate_contract": "exact_all_14_score4",
+        "comparison_reference": "authorized_after_quality_gate" if passed else "not_authorized",
+    }
 
 
 def collect_qualification(
@@ -117,7 +141,7 @@ def build_result(
     elapsed = [row["elapsed_seconds"] for row in rows]
     result = {
         "schema_version": RESULT_SCHEMA,
-        "result_id": "portable-semantic-control-free-heldout-r1-n1-qualification-r4",
+        "result_id": result_identity(plan),
         "target": plan["target"],
         "profile": plan["profile"],
         "plan": {
@@ -156,7 +180,7 @@ def build_result(
         "cases": rows,
         "qualification": {
             "measurement_gate": "passed",
-            "quality_gate": "descriptive_not_an_admission_gate",
+            **quality_gate_result(plan, scores),
             "adoption": "not_decided",
             "release": "not_decided",
             "runtime_projection": "not_authorized",
