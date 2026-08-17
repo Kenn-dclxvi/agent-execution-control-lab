@@ -2,6 +2,8 @@
 
 > **設計gate違反の訂正（2026-08-16）**: この案は`instruction resultがreadのtarget、permissionまたはstop conditionを変え得る`という分類をモデルへ委ねていた。これは`docs/prompt-control-design-principles.md`の自己判定禁止と、Candidate作成前gate 4・5に違反する。本来はbundle、profile、評価枠を作らず`prompt_control_not_demonstrated / candidate_not_created`として棄却すべきだった。作成済みbundleとN=5結果は採用可能なCandidateとして扱わず、同じ設計ミスを再利用しない診断反例としてのみ保持する。
 
+> **直接比較元の範囲**: 上の訂正はCandidate265の設計gate違反と現在の評価上の位置づけを訂正するものであり、Candidate265作成時の直接比較元を遡及変更しない。Candidate265の履歴上の直接比較元はCandidate264であり、Candidate264の`DECISION_BOUNDARY`を含む本文と保持対象の効果を前提に、同境界だけへ追加差分を置いた設計だった。後続のCandidate267もCandidate264を直接の基盤とし、この保持関係を維持したまま、Candidate265で自己分類へ委ねたpermission edgeだけを機械的に閉じ直す。
+
 ## 結論
 
 Candidate265は、利用者が明示した改善順序に従い、停止済みCandidate264 `the-caption-3ce91a4-start-identity-result-effect-scope-restoration-r1`を直接の比較元とする。Candidate264の成功状態や採用可能性を継承するのではなく、F01、F02、F03で各20 / 20件成立した開始確認と影響を受けないreadの共同発行を保持したまま、F10で18 / 20件残ったinstruction result前の配下read permissionだけを閉じる。

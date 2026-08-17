@@ -1,0 +1,110 @@
+{
+  "schema_version": "the-caption-prompt.candidate272-mechanism-audit/v1",
+  "candidate": {
+    "number": 272,
+    "prompt_set_name": "the-caption-3ce91a4-natural-language-issued-result-permission-removal-r1",
+    "bundle_sha256": "6830ca4b0a48ffa96b6145bcf6f5ac48980cb3b1816878f682a25da2dc79e5f1",
+    "direct_implementation_parent": "Candidate269",
+    "failed_counterexamples_only": ["Candidate270", "Candidate271"]
+  },
+  "registered_result_id": "8048e02d1765434fa93155a256550ce7",
+  "comparison_reference_result_id": "2398d22125bd4e658fe5b653679167b5",
+  "quality": {
+    "valid_runs": 20,
+    "excluded_attempts": 0,
+    "score_counts": {"4": 20}
+  },
+  "kpi": {
+    "same_iteration_four_case_median": {
+      "candidate147": {"total_tokens": 494706, "elapsed_seconds": 302.929},
+      "candidate269": {"total_tokens": 569253, "elapsed_seconds": 368.19264324905816},
+      "candidate272": {"total_tokens": 675767, "elapsed_seconds": 309.9446484160144},
+      "candidate272_delta_from_candidate269": {
+        "total_tokens": 106514,
+        "total_tokens_percent": 18.71,
+        "elapsed_seconds": -58.24799483304376,
+        "elapsed_seconds_percent": -15.82
+      },
+      "candidate272_delta_from_candidate147": {
+        "total_tokens": 181061,
+        "total_tokens_percent": 36.60,
+        "elapsed_seconds": 7.015648416014395,
+        "elapsed_seconds_percent": 2.32
+      }
+    },
+    "case_medians": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "candidate147_total_tokens": 107202,
+        "candidate269_total_tokens": 163264,
+        "candidate272_total_tokens": 192719,
+        "candidate272_elapsed_seconds": 82.46232925000368,
+        "candidate269_delta_percent": 18.04
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "candidate147_total_tokens": 128236,
+        "candidate269_total_tokens": 166758,
+        "candidate272_total_tokens": 220371,
+        "candidate272_elapsed_seconds": 89.70390062499791,
+        "candidate269_delta_percent": 32.15
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "candidate147_total_tokens": 104320,
+        "candidate269_total_tokens": 133527,
+        "candidate272_total_tokens": 134981,
+        "candidate272_elapsed_seconds": 77.39707395900041,
+        "candidate269_delta_percent": 1.09
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "candidate147_total_tokens": 87934,
+        "candidate147_purpose_achieved_route_total_tokens": 108454,
+        "candidate269_total_tokens": 115122,
+        "candidate272_total_tokens": 114335,
+        "candidate272_elapsed_seconds": 68.40390937501797,
+        "candidate269_delta_percent": -0.68
+      }
+    }
+  },
+  "mechanism": {
+    "f01_validation_without_intermediate_model_return": {"observed_runs": 5, "total_runs": 5, "candidate147_gate": "5 / 5"},
+    "f02_validation_without_intermediate_model_return": {"observed_runs": 4, "total_runs": 5, "candidate147_gate": "4 / 5 or greater"},
+    "f01_same_reason_postvalidation_result_reacquisition_absent": {
+      "observed_runs": 4,
+      "total_runs": 5,
+      "candidate147_gate": "5 / 5",
+      "failed_iteration": 5,
+      "failed_run_id": "c09ed6fbd95d472cbd9c6d9b7a469b77",
+      "failure": "full-gate output buried the final diff/status result and the model issued the same diff/status command again"
+    },
+    "f03_start_identity_and_unaffected_read_joint_issuance": {
+      "observed_runs": 3,
+      "total_runs": 5,
+      "candidate147_gate": "5 / 5",
+      "failed_iterations": [1, 3],
+      "failed_run_ids": ["d712fb8d3ab14e66a1dbf8f6f548a313", "bc0f86718c384d41a9fc1688bbc8d861"],
+      "failure": "start identity and source reads were separate custom exec calls with separate model returns despite no intervening user-visible agent message"
+    },
+    "f10_instruction_result_dependency": {"observed_runs": 5, "total_runs": 5, "candidate269_gate": "5 / 5"},
+    "f10_required_read_completion": {"observed_runs": 5, "total_runs": 5, "candidate147_gate": "5 / 5"},
+    "nonterminal_same_cell_dependency": {
+      "runs_with_nonterminal_result_by_case": {"F01": 4, "F02": 3, "F03": 4, "F10": 0, "total": 11},
+      "wait_invocations_by_case": {"F01": 4, "F02": 6, "F03": 7, "F10": 0, "total": 17},
+      "same_cell_wait_before_other_action": 17,
+      "violations": 0,
+      "candidate147_baseline": "6 / 6"
+    },
+    "f01_f02_full_gate_raw_output_admitted_to_wrapper_carrier": {
+      "observed_runs": 10,
+      "total_runs": 10,
+      "inner_full_gate_output_chars_per_run": 158870,
+      "interpretation": "removing the phrase 'issued all results' did not close the default route that admitted successful raw command output to the wrapper carrier; the outer custom tool result could truncate this content before it became model-visible"
+    }
+  },
+  "causal_conclusion": {
+    "removed_explicit_permission": "the phrase 'issued all results' was absent",
+    "remaining_legal_route": "the replacement still required one result at wrapper completion without denying raw command results, so the default multi-command result carrier remained legal",
+    "observed_effect": "route shape was mostly restored, but all F01 and F02 runs still admitted the 158870-character inner full-gate output to the wrapper carrier and retained raw stdout in the outer result; one F01 run reacquired buried completion evidence",
+    "kpi_effect": "F01 and F02 token medians regressed instead of improving; prompt length is not the cause because Candidate272 is shorter than Candidate269"
+  },
+  "conclusion": "quality_passed_but_f03_joint_issuance_and_target_permission_closure_failed_and_token_regressed",
+  "state": "f03_mechanism_failed / target_permission_mechanism_failed / major_case_kpi_regression / no_n20_extension / stopped"
+}

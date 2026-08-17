@@ -1,0 +1,100 @@
+{
+  "schema_version": "the-caption-prompt.candidate270-mechanism-audit/v1",
+  "candidate": {
+    "number": 270,
+    "prompt_set_name": "the-caption-3ce91a4-natural-language-predicate-bound-validation-result-r1",
+    "bundle_sha256": "481a035966f1cc6ad8faba7fd05b07baf357d29e0a75dccc563963878547c439",
+    "direct_implementation_parent": "Candidate269"
+  },
+  "registered_result_id": "e34f3b5820d745f5912e5af82fede6aa",
+  "comparison_reference_result_id": "2398d22125bd4e658fe5b653679167b5",
+  "quality": {
+    "valid_runs": 20,
+    "excluded_attempts": 0,
+    "score_counts": {
+      "4": 20
+    }
+  },
+  "kpi": {
+    "same_iteration_four_case_median": {
+      "candidate269": {
+        "total_tokens": 569253,
+        "elapsed_seconds": 368.19264324905816
+      },
+      "candidate270": {
+        "total_tokens": 532952,
+        "elapsed_seconds": 286.1858518750523
+      },
+      "delta": {
+        "total_tokens": -36301,
+        "total_tokens_percent": -6.38,
+        "elapsed_seconds": -82.00679137400584,
+        "elapsed_seconds_percent": -22.27
+      }
+    },
+    "case_medians": {
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "candidate147_total_tokens": 107202,
+        "candidate269_total_tokens": 163264,
+        "candidate270_total_tokens": 121788,
+        "candidate269_elapsed_seconds": 93.85003066697391,
+        "candidate270_elapsed_seconds": 67.46466683299514
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "candidate147_total_tokens": 128236,
+        "candidate269_total_tokens": 166758,
+        "candidate270_total_tokens": 138017,
+        "candidate269_elapsed_seconds": 90.84552550001536,
+        "candidate270_elapsed_seconds": 76.97568158298964
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "candidate147_total_tokens": 104320,
+        "candidate269_total_tokens": 133527,
+        "candidate270_total_tokens": 128806,
+        "candidate269_elapsed_seconds": 85.14134220802225,
+        "candidate270_elapsed_seconds": 70.55432662495878
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "candidate147_total_tokens": 87934,
+        "candidate269_total_tokens": 115122,
+        "candidate270_total_tokens": 114084,
+        "candidate269_elapsed_seconds": 73.30684145801933,
+        "candidate270_elapsed_seconds": 64.03419479198055,
+        "candidate147_comparison_note": "Candidate147の中央値には現目的のinstruction result dependencyを満たさない安いrouteが含まれる"
+      }
+    }
+  },
+  "mechanism": {
+    "f01_f02_outer_validation_wrapper": {
+      "observed_runs": 0,
+      "total_runs": 10
+    },
+    "f01_f02_required_validation_results_returned_between_commands": {
+      "observed_runs": 10,
+      "total_runs": 10
+    },
+    "f01_f02_post_validation_diff_or_status_outer_call": {
+      "observed_runs": 10,
+      "total_runs": 10
+    },
+    "f01_f02_predicate_bound_result_inside_preserved_wrapper": {
+      "observed_runs": 0,
+      "total_runs": 10,
+      "reason": "全runがwrapperを迂回したため、設計対象のcarrier内result bindingとしては観測不能"
+    },
+    "f03_start_identity_and_unaffected_read_joint_issuance": {
+      "observed_runs": 0,
+      "total_runs": 5
+    },
+    "f10_instruction_result_dependency": {
+      "observed_runs": 5,
+      "total_runs": 5
+    }
+  },
+  "registration_note": {
+    "non_comparison_selection_result_id": "1c8953e487f844638925e52696dd69a3",
+    "reason": "reference resultをbindせず作成したため四ケースfixtureだけのcompatibilityとなり、直接比較resultには使用しない"
+  },
+  "conclusion": "quality_passed_but_target_mechanism_not_exercised",
+  "state": "mechanism_failed / no_n20_extension / stopped"
+}

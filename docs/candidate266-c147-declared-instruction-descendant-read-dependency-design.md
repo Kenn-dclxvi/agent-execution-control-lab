@@ -2,6 +2,15 @@
 
 > **目的対応の訂正（2026-08-16）**: この案を作成した時点の`task_objective`は、Candidate254系の有効制御を保持したまま、Candidate264で弱くなった制御を復元することだった。C147上の単独機序probeは、その目的に残る保持predicateまたは改善predicateを直接bindできず、Candidate254改善系列をC147直接系列へ置き換えていた。本来はこの派生operationを発行対象へ入れず、同じ`task_objective`のままCandidate254を直接の基盤とする別設計へ進むべきだった。作成済みbundleとN=5結果は、現在系列の改善根拠、親または必須gateにせず、`off_target_diagnostic_evidence`としてのみ保持する。
 
+> **Candidate267方針（2026-08-16）**: 上の訂正にある「Candidate254を直接の基盤とする別設計」は、Candidate265の履歴上の直接比較元とCandidate264までの本文をどう扱うかを分けておらず、後続設計の基盤として採用しない。利用者の明示判断により、Candidate267はCandidate264を直接の基盤とし、Candidate264の本文とF01・F02・F03で成立した共同発行を保持したまま、F10で残ったinstruction result前の配下read permissionだけを閉じる。Candidate266はexact path、配下path関係およびterminal success resultによる閉鎖の`off_target_diagnostic_evidence`に限定し、Candidate267の親、必須gateまたは成功根拠にしない。
+
+## 履歴上の直接比較元とCandidate267の基盤
+
+- Candidate265の履歴上の直接比較元はCandidate264である。Candidate265はCandidate264の他の本文を同一byteで保持し、`DECISION_BOUNDARY`だけへ追加差分を置いた。
+- Candidate267の直接の基盤もCandidate264とする。Candidate264の`DECISION_BOUNDARY`を含む本文とF01・F02・F03の成立効果を保持し、F10のpermission edgeだけを変更対象にする。
+- Candidate265は、意味の自己分類ではpermissionを閉じられなかった診断反例として使う。Candidate265のbundle、predicate、評価上の成功状態は継承しない。
+- Candidate266は、exact path関係とterminal success resultによる機械的な閉鎖の診断証拠としてだけ使う。C147直接という基盤、bundle、N=5通過はCandidate267へ継承しない。
+
 ## 結論
 
 Candidate266は、最後にStandard14 N=100で品質を実証したC147 `the-caption-3ce91a4-result-effect-scope-r1`を直接の基盤とする。停止済みCandidate264または作成前gate違反のCandidate265を親、追加条件の材料、成功状態の継承元として使わない。両者は、F10で残った誤経路と、自己分類でpermissionを閉じられなかった反例としてだけ参照する。
