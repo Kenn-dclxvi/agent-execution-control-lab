@@ -1,6 +1,6 @@
 # Portable instruction semantic conformance target
 
-> **状態**: `registered / namespaced / control_free_baseline_registered / codex_profile_r4_measurement_qualified / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / formal_results_1 / c147_reference_bundle_registered / portable_full_agent_candidate_bundle_registered / candidate_profile_not_created`
+> **状態**: `registered / namespaced / control_free_baseline_registered / codex_profile_r4_measurement_qualified / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / formal_results_1 / c147_reference_bundle_registered / portable_full_agent_candidate_bundle_registered / candidate_profile_registered / candidate_preflight_ready / candidate_issued_0`
 
 固定operation ledgerへ一回のJSON応答を返すsemantic protocolの評価インスタンスである。repository snapshotを対象とする既存targetとは別型であり、`target_repository_ref`を持たない。
 
@@ -17,4 +17,4 @@
 | dispatch | [`plans/README.md`](plans/README.md) | r4の14スロットを発行、有効14件 |
 | results | [`results/README.md`](results/README.md) | control-free資格確認1件 |
 
-資格確認は測定成立だけを通過した。品質はscore 4が5/14、機序通過も5/14である。C147 referenceとportable full-agent Candidateの一枚bundleは登録済みだが、Candidate Profileと評価は未開始である。portable kernelの効果、採用、releaseまたはruntime projectionは未判断である。
+資格確認は測定成立だけを通過した。品質はscore 4が5/14、機序通過も5/14である。C147 referenceとportable full-agent Candidateの一枚bundleを登録し、Candidate Profileと14スロットのpreflightまで完了した。Candidate runは未発行である。portable kernelの効果、採用、releaseまたはruntime projectionは未判断である。

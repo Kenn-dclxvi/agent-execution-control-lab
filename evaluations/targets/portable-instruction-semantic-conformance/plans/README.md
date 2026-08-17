@@ -7,3 +7,5 @@
 r1は14件すべてが`uniqueItems`非対応で推論前に外部失敗となった。r2は一件先行発行で型を伴わない`const`の非対応を確認し、残り13件を発行しなかった。r3は一件でschema適合応答まで得たが、exec JSONLに一次`total_tokens`がないため固定token contractを満たさず、残り13件を発行しなかった。各外部失敗は`attempt-r1`、`attempt-r2`、`attempt-r3`のsummaryへhash固定した。
 
 r4は公式Structured Outputs subsetへの意味保存投影、canonical事後検証およびthread-bound永続一次tokenを固定した。最初の一件で測定成立を確認後、残り13件を発行し、`authorized_slot_count=14 / issued_slot_count=14 / valid_result_count=14`となった。生の応答、イベント、標準エラー、token証跡および実行観測は公開領域へ保存しない。
+
+portable full-agent CandidateのN=1は[`dispatch-r1`](portable-semantic-c147-portable-full-agent-heldout-r1-n1-dispatch-r1.json)と[`preflight-r1`](portable-semantic-c147-portable-full-agent-heldout-r1-n1-preflight-r1.json)へ14スロットを固定した。発行数は0であり、Candidate quality gateをC147 referenceより先に実行する。reference planとProfileはまだ作成していない。

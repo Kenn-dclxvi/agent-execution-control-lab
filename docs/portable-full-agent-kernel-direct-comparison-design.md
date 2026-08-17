@@ -1,7 +1,7 @@
 # Portable full-agent kernel直接比較設計
 
 > [!IMPORTANT]
-> **状態**: `candidate_precreation_gate_fixed / direct_parent_c147 / measurement_control_r4_reused / c147_reference_bundle_registered / portable_candidate_bundle_registered / candidate_profile_not_created / evaluation_not_started / root_only_out_of_scope`
+> **状態**: `candidate_precreation_gate_fixed / direct_parent_c147 / measurement_control_r4_reused / c147_reference_bundle_registered / portable_candidate_bundle_registered / candidate_profile_registered / candidate_preflight_ready / candidate_issued_0 / root_only_out_of_scope`
 
 ## 結論
 
@@ -71,4 +71,4 @@ multi-actor能力がないsurfaceを`unavailable`へ閉じるroot-only本文は�
 
 ## 次のアーティファクト単位
 
-本文を変更せず、C147 reference bundleとportable full-agent Candidate bundleをsemantic targetへ登録した。次はportable CandidateだけのProfileとpreflightを作る。reference Profile、比較preflightおよびslotはCandidateの14 / 14 score 4通過後の別アーティファクト単位とする。
+本文を変更せず、C147 reference bundleとportable full-agent Candidate bundleをsemantic targetへ登録した。portable CandidateだけのProfileとpreflightも固定し、14スロットは未発行である。reference Profile、比較preflightおよびslotはCandidateの14 / 14 score 4通過後の別アーティファクト単位とする。

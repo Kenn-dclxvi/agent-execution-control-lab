@@ -5,3 +5,5 @@
 Profile記録上のlifecycle値は`registered_not_qualified`を履歴互換のため維持するが、r4の資格確認resultは14/14有効で測定成立gateを通過した。品質はscore 4が5/14で、採用gateではない。
 
 r1からr3はそれぞれ`uniqueItems`、型なし`const`、exec JSONL一次token欠落を観測した失敗Profileとして保持する。現行登録は[`profile-registration-r4.json`](profile-registration-r4.json)、発行許可は[`preflight-r4`](../plans/portable-semantic-control-free-heldout-r1-n1-preflight-r4.json)、結果は[`qualification-r4`](../results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)を正とする。
+
+portable full-agent Candidateは[`Profile r1`](portable-semantic-c147-portable-full-agent-codex-cli0146-sol-medium-heldout-r1-n1-r1.json)と[`registration`](profile-registration-portable-full-agent-r1.json)へ別系列で登録した。control-free r4からprompt identityと系列identityだけを変更し、runtime、Case、rating、schema transport、token accountingおよびN=1条件を維持する。C147 reference ProfileはCandidateのquality gate通過前なので未作成である。

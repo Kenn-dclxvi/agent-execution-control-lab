@@ -1,0 +1,42 @@
+{
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"
+  },
+  "allowed_delta": {
+    "effect": "replace the zero-byte control with the registered portable full-agent one-sheet while preserving every measurement condition",
+    "fields": [
+      "profile_id",
+      "dispatch_series_id",
+      "prompt_set_identity"
+    ]
+  },
+  "measurement_control": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json",
+    "sha256": "06490163959ce51fcaa1d9ac5db5b901df48ab5f2776f18550357dd134dd7ae5",
+    "valid_result_count": 14
+  },
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-portable-full-agent-codex-cli0146-sol-medium-heldout-r1-n1-r1.json",
+    "sha256": "2d48644ef0270927148200218991dcc4d29ca3929c1e39df13adeba6b7ffe1d9"
+  },
+  "prompt_bundle_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/full-agent-bundle-registration-r1.json",
+    "sha256": "8f0ad026dc732730b07171fddb9fb65cf14d32477ebe8daf8d5972d3a15cba03"
+  },
+  "registration_id": "portable-semantic-c147-portable-full-agent-profile-registration-r1",
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification.py",
+    "sha256": "1063d6df3e90b704c225f890a7aa85bc4728284f5175f79a054851a05e3c324f"
+  },
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "state": {
+    "adapter_execution_entrypoint_enabled": true,
+    "artifact_binding_required": true,
+    "dispatch_plan_created": true,
+    "preflight_ready": true,
+    "profile_registered": true,
+    "qualification_started": false,
+    "reference_profile_created": false
+  }
+}

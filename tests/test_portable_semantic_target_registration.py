@@ -115,9 +115,10 @@ def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
         for item in documents
         if item.get("schema_version") == "portable-instruction-semantic-profile-registration/v1"
     ]
-    assert len(profiles) == 4
-    assert len(registrations) == 4
-    assert {profile["profile_id"][-2:] for profile in profiles} == {"r1", "r2", "r3", "r4"}
+    assert len(profiles) == 5
+    assert len(registrations) == 5
+    control_profiles = [profile for profile in profiles if "control-free" in profile["profile_id"]]
+    assert {profile["profile_id"][-2:] for profile in control_profiles} == {"r1", "r2", "r3", "r4"}
     assert all(profile["lifecycle_state"] == "registered_not_qualified" for profile in profiles)
     latest_registration = next(item for item in registrations if item["registration_id"].endswith("r4"))
     assert latest_registration["state"]["adapter_execution_entrypoint_enabled"] is True
@@ -129,6 +130,15 @@ def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
     )
     assert historical_preflight["execution_code"]["runner"] == latest_registration["runner"]
     assert historical_preflight["execution_code"]["core_adapter"] == latest_registration["adapter"]
+    candidate_registration = next(
+        item
+        for item in registrations
+        if item["registration_id"].endswith("portable-full-agent-profile-registration-r1")
+    )
+    assert candidate_registration["state"]["preflight_ready"] is True
+    for key in ("profile", "adapter", "runner", "prompt_bundle_registration"):
+        reference = candidate_registration[key]
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
     assert list((TARGET / "results").glob("*.json")) == [
         TARGET / "results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json"
     ]
@@ -152,6 +162,30 @@ def test_qualification_plan_and_preflight_authorize_fourteen_but_issue_zero() ->
     assert failure["issued_slot_count"] == 14
     assert failure["valid_result_count"] == 0
     assert failure["classification"] == "profile_transport_incompatible"
+
+
+def test_portable_candidate_preflight_authorizes_only_candidate_series() -> None:
+    plan = load(
+        TARGET / "plans/portable-semantic-c147-portable-full-agent-heldout-r1-n1-dispatch-r1.json"
+    )
+    preflight = load(
+        TARGET / "plans/portable-semantic-c147-portable-full-agent-heldout-r1-n1-preflight-r1.json"
+    )
+    assert plan["plan_id"] == "portable-semantic-c147-portable-full-agent-heldout-r1-n1-dispatch-r1"
+    assert plan["prompt_set_identity"] == {
+        "name": "portable-semantic-c147-portable-full-agent-r1",
+        "revision": "r1",
+        "sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+    }
+    assert plan["authorized_slot_count"] == 14
+    assert plan["issued_slot_count"] == 0
+    assert preflight["plan"]["plan_id"] == plan["plan_id"]
+    assert preflight["authorized_slots"] == plan["slots"]
+    assert preflight["dispatch_allowed"] is True
+    assert preflight["issued_slot_count"] == 0
+    for key in ("core_adapter", "runner"):
+        reference = preflight["execution_code"][key]
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
 
 
 def test_target_registers_dispatch_root_and_plan_limited_runner() -> None:
