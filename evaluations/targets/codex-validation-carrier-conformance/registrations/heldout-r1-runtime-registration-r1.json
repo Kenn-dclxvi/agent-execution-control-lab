@@ -1,0 +1,44 @@
+{
+  "schema_version": "codex-validation-carrier-target-registration/v1",
+  "registration_id": "codex-validation-carrier-heldout-r1-runtime-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "target_descriptor": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/target.json",
+    "sha256": "8763022e2abfc98b26e672ca1f565c52260d60f93ee8f538f87388a1e037736b"
+  },
+  "evaluation_set": {
+    "set_id": "codex-validation-carrier-heldout-r1",
+    "set_revision": "r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/sets/heldout-r1/set.json",
+    "sha256": "63fd5f75162b831d214f89cbfec137378af39524b92e9e3437eea53081b4c4b9"
+  },
+  "active_rating_contract": {
+    "contract_id": "codex-validation-carrier-outcome-v1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/rating-contracts/codex-validation-carrier-outcome-v1.json",
+    "sha256": "b72aaf9761818863adcc9f99b8acd47217ec892af3e9e96cdee5476e3c82354a"
+  },
+  "runtime_implementation": {
+    "adapter": {"path": "evaluations/targets/codex-validation-carrier-conformance/runtime/adapter.py", "sha256": "9b133af0d7856ff5311eb5d8487a56d44e95fb76e3370421a10499d9ec7a489b"},
+    "runner": {"path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner.py", "sha256": "81b1bc723b4cb23ca775fa49a5f97a075dc0610cbb9ac8f68e7b741ae7b03224"}
+  },
+  "qualification_result": {
+    "result_id": "codex-validation-carrier-control-free-heldout-r1-n1-qualification-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/codex-validation-carrier-control-free-heldout-r1-n1-qualification-r1.json",
+    "sha256": "ed13b39dec4f750743bf72a26705ab71dc06226e2df2ba32af2d013a49625484",
+    "result_sha256": "6212a7f66145b88514af26304f02e88d31ebf8b1791e57a43117e37b46bdb368"
+  },
+  "qualification": {
+    "measurement_path": "passed",
+    "valid_results": 6,
+    "external_failures": 0,
+    "all_cases_have_three_kpis": true,
+    "low_quality_results_retained": true
+  },
+  "allowed_next_profile_class": "candidate_only_p002_gate",
+  "forbidden_profile_classes": [
+    "p001_p002_paired_comparison_before_candidate_gate",
+    "standard14_projection",
+    "release_projection"
+  ],
+  "state": "qualified_for_candidate_only_profile_registration"
+}

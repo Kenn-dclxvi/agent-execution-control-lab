@@ -177,6 +177,87 @@ class EvaluationStorageTest(unittest.TestCase):
             target.write_bytes(b"independent\n" + target.read_bytes())
             self.assertNotEqual(source.read_bytes(), target.read_bytes())
 
+    @unittest.skipUnless(sys.platform == "darwin", "clonefile is a macOS facility")
+    def test_stable_regular_files_are_rematerialized_and_archives_are_excluded(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "storage"
+            files = [root / "runs" / name / "fixture.bin" for name in ("one", "two")]
+            old = time.time() - 2 * 86400
+            for path in files:
+                path.parent.mkdir(parents=True)
+                path.write_bytes(b"same regular bytes\n" * 4096)
+                os.utime(path, (old, old))
+                archive = path.with_name("evidence.tar.zst")
+                archive.write_bytes(b"same archive bytes\n" * 4096)
+                os.utime(archive, (old, old))
+            manifest = Path(tmp) / "file-manifest.json"
+            receipt = Path(tmp) / "file-receipt.json"
+            planned = self.cli(
+                "deduplicate-files",
+                "--root",
+                str(root),
+                "--manifest",
+                str(manifest),
+                "--minimum-size-bytes",
+                "1",
+                "--minimum-age-hours",
+                "24",
+            )
+            plan = json.loads(planned.stdout)
+            self.assertEqual(plan["entry_count"], 1)
+            self.assertNotIn("tar.zst", manifest.read_text(encoding="utf-8"))
+            applied = self.cli(
+                "deduplicate-files",
+                "--root",
+                str(root),
+                "--manifest",
+                str(manifest),
+                "--apply",
+                "--receipt",
+                str(receipt),
+            )
+            self.assertEqual(json.loads(applied.stdout)["rematerialized_count"], 1)
+            self.assertEqual(files[0].read_bytes(), files[1].read_bytes())
+            files[1].write_bytes(b"independent\n" + files[1].read_bytes())
+            self.assertNotEqual(files[0].read_bytes(), files[1].read_bytes())
+
+    def test_file_dedup_refuses_content_changed_after_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "storage"
+            files = [root / "runs" / name / "fixture.bin" for name in ("one", "two")]
+            old = time.time() - 2 * 86400
+            for path in files:
+                path.parent.mkdir(parents=True)
+                path.write_bytes(b"same regular bytes\n" * 4096)
+                os.utime(path, (old, old))
+            manifest = Path(tmp) / "file-manifest.json"
+            receipt = Path(tmp) / "file-receipt.json"
+            self.cli(
+                "deduplicate-files",
+                "--root",
+                str(root),
+                "--manifest",
+                str(manifest),
+                "--minimum-size-bytes",
+                "1",
+                "--minimum-age-hours",
+                "24",
+            )
+            files[1].write_bytes(b"changed\n")
+            completed = self.cli(
+                "deduplicate-files",
+                "--root",
+                str(root),
+                "--manifest",
+                str(manifest),
+                "--apply",
+                "--receipt",
+                str(receipt),
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 2)
+            self.assertFalse(receipt.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

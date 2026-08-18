@@ -1,7 +1,7 @@
 # Portable instruction semantic target登録設計
 
 > [!IMPORTANT]
-> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / persisted_all_agent_usage_bound / codex_profile_registered_not_qualified / execution_entrypoint_disabled / v1_unchanged / baseline_not_started`
+> **状態**: `target_kind_gap_confirmed / descriptor_v2_schema_fixed / formal_target_registered / heldout_r1_registered / rating_registered / zero_byte_control_free_baseline_registered / source_commit_a544769_bound / single_case_packet_materializer_implemented / v2_comparison_preflight_implemented / codex_adapter_core_implemented / profile_r4_measurement_qualified / authorized_14 / issued_14 / valid_14 / score4_5 / mechanism_passed_5 / v1_unchanged / baseline_qualification_complete`
 >
 > 本書はportable instruction semantic conformanceを既存repository targetと誤って互換扱いしないための登録設計である。後続の正式登録は[`evaluations/targets/portable-instruction-semantic-conformance/`](../evaluations/targets/portable-instruction-semantic-conformance/)を正本とする。本書自体はProfile、Candidate、評価slotまたはresultではない。
 
@@ -77,7 +77,7 @@ response schemaを守るためのTaskSpec wrapperは両条件へ同じbytesで�
 ## 立ち上げ順
 
 1. v2 `target_subject_ref / runtime_ref`を既存v1から分離してpreflight可能にする。これは[`semantic_protocol_comparison_preflight.py`](../scripts/semantic_protocol_comparison_preflight.py)とunit testで実装済みである。
-2. Codex CLIの現在version、model、reasoning、token accounting、隔離optionおよびelapsed sourceを固定する。CLI `0.146.0`向けのcommand、一次`total_tokens`の受理、永続session transcript回収および単調時計境界は[`semantic_protocol_codex_adapter.py`](../scripts/semantic_protocol_codex_adapter.py)へ実装済みだが、modelとProfileは未固定で、実行入口は無効のままである。
+2. Codex CLIの現在version、model、reasoning、token accounting、隔離optionおよびelapsed sourceを固定する。CLI `0.146.0`向けのcommand、一次`total_tokens`の受理、永続session transcript回収および単調時計境界は[`semantic_protocol_codex_adapter.py`](../scripts/semantic_protocol_codex_adapter.py)へ実装し、modelとProfileは固定済みである。
 3. model-visible packet materializerが`input-cases.json`から一件だけを出し、oracle、rating、freezeおよび他Caseを除外することを機械検証する。これは[`materialize_semantic_protocol_case.py`](../scripts/materialize_semantic_protocol_case.py)と対応unit testで実装済みである。
 4. [`portable-instruction-control-free-prompt-draft-r1/`](portable-instruction-control-free-prompt-draft-r1/)の0-byte本文をsource commitへbindし、正式targetとProfileを登録する。
 5. control-freeの最小qualificationを、結果を見てCaseを変えない条件で実行する。
@@ -97,11 +97,15 @@ response schemaを守るためのTaskSpec wrapperは両条件へ同じbytesで�
 - 最小qualificationのscoreを上げるためCase、oracleまたはTaskSpecを変更する。
 - v2 preflightとpacket分離が未実装のままformal targetを登録する。
 
-## 次の実装gate
+## 実行準備gate
 
 一件だけをmodel-visible packetへ出すmaterializer、private receipt、v2 subject/runtime comparison preflight、Codex CLI `0.146.0`向けadapter coreおよび0-byte control-free prompt draftは実装済みである。preflightはprompt identity以外の完全一致を要求し、`target_repository_ref`、`unbound`、runtime drift、Case driftおよびtranscript accountingと両立しない`ephemeral` sessionを拒否する。adapterはisolated workspaceへ`AGENTS.md`だけを配置し、user config、rules、memory、skills、apps、pluginsおよびmulti-agent capabilityを無効化する。tokenはterminal eventの一次`total_tokens`がある場合だけ受理し、内訳や文字数から補完しない。
 
-commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contract、0-byte control-free baseline、共通TaskSpec wrapper、capability catalog、persisted all-agent transcript contractおよびCodex CLI 0.146.0 / GPT-5.6 Sol / reasoning `medium` / N=1 Profileは登録済みである。adapterはProfileから参照する全file hash、target subject、prompt bundleおよびruntime contractを静的検証し、root JSONL usageとroot・descendant transcript usageが一致する場合だけtokenを受理する。ただし実行入口はまだ無効である。次に許可するのは、14 Caseのwrite-once dispatch planとProfile preflightを固定し、adapter実行入口がそのplan以外を受け取れないようにする変更である。それまではqualificationまたはbaseline runを発行しない。
+commit `a544769`のsource identity、namespaced formal target、held-out r1、rating contract、0-byte control-free baseline、共通TaskSpec wrapper、capability catalog、thread-bound persisted all-agent transcript contractおよびCodex CLI 0.146.0 / GPT-5.6 Sol / reasoning `medium` / N=1 Profileは登録済みである。adapterはProfileから参照する全file hash、target subject、prompt bundleおよびruntime contractを静的検証し、execのthread identityを同じworkspaceの永続sessionへbindでき、保存済みterminal usageに一次`total_tokens`がある場合だけtokenを受理する。exec JSONLの内訳は合算しない。
+
+14 Caseのwrite-once計画とProfile事前確認票は[`plans/`](../evaluations/targets/portable-instruction-semantic-conformance/plans/)へ固定した。[`run_semantic_protocol_qualification.py`](../scripts/run_semantic_protocol_qualification.py)は、計画、事前確認票、共通adapter、実行入口、Codex versionおよび出力先を発行直前に再検証し、確認票に一度だけ現れる未発行スロット以外を拒否する。
+
+r1からr3でschema transportとtoken accountingの非互換を切り分け、r4では14件すべてでschema適合応答、all-agent一次tokenおよびelapsedを取得した。[`qualification result`](../evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-control-free-heldout-r1-n1-qualification-r4.json)は`measurement_gate=passed / score4=5 / mechanism_passed=5`である。同条件でprompt identityだけを変えたportable full-agent Candidateは14 / 14 valid、7 / 14 score 4でquality gate不通過となり、C147 referenceを発行せず停止した。[`Candidate result`](portable-full-agent-candidate-quality-gate-r1-result.md)を参照する。
 
 ## 参照
 

@@ -22,7 +22,8 @@
 | `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行インスタンス |
 | `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | Bundle A Std14とCandidate125水平適用N=5完了。採用は未実施 |
 | `agent-execution-control-lab` | `namespaced` | public | 可 | [`agent-execution-control-lab/target.json`](agent-execution-control-lab/target.json) | PRレビュー測定系列。機能仕様r1固定、Core Baseline未qualification、正式result 0件 |
-| `portable-instruction-semantic-conformance` | `namespaced` | public | 可 | [`portable-instruction-semantic-conformance/target.json`](portable-instruction-semantic-conformance/target.json) | semantic protocol target。held-out r1、control-free baseline、Codex N=1 Profileを登録済み、未qualification、正式result 0件 |
+| `portable-instruction-semantic-conformance` | `namespaced` | public | 可 | [`portable-instruction-semantic-conformance/target.json`](portable-instruction-semantic-conformance/target.json) | control-freeで測定成立。portable full-agent N=1は14 / 14 valid、7 / 14 score 4でquality停止し、C147 referenceは未発行 |
+| `codex-validation-carrier-conformance` | `namespaced` | public | 可 | [`codex-validation-carrier-conformance/target.json`](codex-validation-carrier-conformance/target.json) | heldout r1の6 runtime Caseと3 preflight negative fixtureをsource freeze。adapter・baseline未qualification、正式result 0件 |
 
 `the-caption`のvisibilityは、計測が固定した移行前treeの可視性を指す。2026-08-01〜08-03の移行で公開された[`Kenn-dclxvi/the-caption`](https://github.com/Kenn-dclxvi/the-caption)は履歴を切り出し直しており、このインスタンスが固定するcommit / treeを含まない。したがって公開版は既存インスタンスの現在状態ではなく、`click`と同格の別インスタンスとして登録する。登録時期はrelease計測が必要になった時点とし、それまでこの表へ追加しない。時間境界は[`docs/repository-overview.md`](../../docs/repository-overview.md)の「対象リポジトリの公開移行」を正本とする。
 
@@ -30,7 +31,9 @@
 
 `agent-execution-control-lab`は、このリポジトリ自身のPRレビュー実行経路を固定fixtureで診断するpublicインスタンスである。ターゲットrefと移行前probeの境界は[`target.json`](agent-execution-control-lab/target.json)、アーティファクトの所在と未qualification状態は[`README.md`](agent-execution-control-lab/README.md)を参照する。
 
-`portable-instruction-semantic-conformance`はrepository snapshotではなく、固定operation ledgerへの一回応答を対象とするsemantic protocolインスタンスである。`target_repository_ref`を持たず、subject、runtime、prompt identityを分ける。登録bytesと未qualification状態は[`README.md`](portable-instruction-semantic-conformance/README.md)を参照する。
+`portable-instruction-semantic-conformance`はrepository snapshotではなく、固定operation ledgerへの一回応答を対象とするsemantic protocolインスタンスである。`target_repository_ref`を持たず、subject、runtime、prompt identityを分ける。登録bytes、測定基盤qualificationと未決定の採用境界は[`README.md`](portable-instruction-semantic-conformance/README.md)を参照する。
+
+`codex-validation-carrier-conformance`は、同semantic protocolでは観測できない実際のnested validation、途中result ingress、fail-fast、continuationおよびterminal projectionをCodex実行traceで測るpublic repositoryインスタンスである。heldout r1 sourceは固定済みだが、adapter、grader、control-free qualificationおよび正式resultは未作成である。境界は[`README.md`](codex-validation-carrier-conformance/README.md)を参照する。
 
 ## layout
 

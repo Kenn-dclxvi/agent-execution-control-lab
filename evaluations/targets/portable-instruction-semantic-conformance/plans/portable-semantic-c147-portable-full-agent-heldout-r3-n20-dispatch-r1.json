@@ -1,0 +1,1445 @@
+{
+  "authorized_slot_count": 210,
+  "binding_receipt": {
+    "bound_files": {
+      "capability_catalog": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6",
+      "evaluation_set": "6a3a56f9c84ebaa89aef835a3393fe42eefdd4765a323ad6ef4e3d9e443c54da",
+      "rating": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5",
+      "task_spec": "04e04cafce88b3f093a38a1914464fcc2558859a7665558cc973376ac113495e",
+      "transcript": "fc1591abc8f144a8e41d0408ae78f585bdff31a3d4fbe9f3c2aa9964a13c166c"
+    },
+    "dispatch_allowed": false,
+    "profile_id": "portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n20-r1",
+    "prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "schema_version": "portable-instruction-semantic-profile-binding/v1",
+    "stop_reason": "adapter_execution_entrypoint_disabled",
+    "target_id": "portable-instruction-semantic-conformance"
+  },
+  "dispatch_iterations": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "dispatch_state": "planned_missing_iterations_not_issued",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/sets/heldout-r3/set.json",
+    "set_id": "portable-instruction-semantic-heldout-r3",
+    "set_revision": "r3",
+    "sha256": "6a3a56f9c84ebaa89aef835a3393fe42eefdd4765a323ad6ef4e3d9e443c54da"
+  },
+  "execution": {
+    "dispatch_gate": "adapter_entrypoint_and_preflight_required",
+    "max_attempts_per_slot": 1,
+    "max_workers": 24,
+    "schedule_policy": "global_queue"
+  },
+  "existing_iteration_result_required": true,
+  "issued_slot_count": 0,
+  "plan_id": "portable-semantic-c147-portable-full-agent-heldout-r3-n20-dispatch-r1",
+  "plan_sha256": "573512a714adfb8510fa7d15f8b21dd69f243721a6406803b760a9da12beb0ad",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n20-r1.json",
+    "profile_id": "portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n20-r1",
+    "sha256": "dee89b1e84814af3224160cfe2a481996c44accf7bb31fad112940dcf4b9749f"
+  },
+  "prompt_set_identity": {
+    "name": "portable-semantic-c147-portable-full-agent-r1",
+    "revision": "r1",
+    "sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0"
+  },
+  "qualification_artifacts": {
+    "cases": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/input-cases.json",
+      "sha256": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760"
+    },
+    "oracle": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/oracle.json",
+      "sha256": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c"
+    },
+    "rating": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+      "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+    },
+    "response_schema": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r1/response.schema.json",
+      "sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  },
+  "rating_ref": {
+    "contract_id": "portable-instruction-semantic-exact-v1",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+    "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+  },
+  "repetition_condition": {
+    "external_failure_policy": "exclude_without_case_change",
+    "iterations": 20,
+    "order": "case_id_then_iteration_ascending",
+    "valid_low_quality_policy": "retain"
+  },
+  "runtime_ref": {
+    "capability_catalog": {
+      "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-cli-0.146.0-capability-catalog-r1.json",
+      "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+      "sha256": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "instruction_isolation": {
+      "apps": false,
+      "ignore_rules": true,
+      "ignore_user_config": true,
+      "memory": false,
+      "multi_agent": false,
+      "plugin_sharing": false,
+      "plugins": false
+    },
+    "model": "gpt-5.6-sol",
+    "output_schema_transport": {
+      "api_schema_projection": "supported_subset_semantic_equivalence",
+      "canonical_post_validation": true,
+      "revision": "codex-structured-output-supported-subset-r3"
+    },
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "read-only"
+    },
+    "reasoning_effort": "medium",
+    "runtime": "codex-cli",
+    "session_mode": "persisted_for_usage_collection",
+    "token_accounting": {
+      "revision": "v2",
+      "scope": "all_agents",
+      "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+    },
+    "version": "0.146.0"
+  },
+  "schema_version": "portable-instruction-semantic-dispatch-plan/v1",
+  "slots": [
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H15-i006"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H15-i007"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H15-i008"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H15-i009"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H15-i010"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H15-i011"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H15-i012"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H15-i013"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H15-i014"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H15-i015"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H15-i016"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H15-i017"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H15-i018"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H15-i019"
+    },
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H15-i020"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H16-i006"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H16-i007"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H16-i008"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H16-i009"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H16-i010"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H16-i011"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H16-i012"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H16-i013"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H16-i014"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H16-i015"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H16-i016"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H16-i017"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H16-i018"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H16-i019"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H16-i020"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H17-i006"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H17-i007"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H17-i008"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H17-i009"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H17-i010"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H17-i011"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H17-i012"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H17-i013"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H17-i014"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H17-i015"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H17-i016"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H17-i017"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H17-i018"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H17-i019"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H17-i020"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H18-i006"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H18-i007"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H18-i008"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H18-i009"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H18-i010"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H18-i011"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H18-i012"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H18-i013"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H18-i014"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H18-i015"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H18-i016"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H18-i017"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H18-i018"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H18-i019"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H18-i020"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H19-i006"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H19-i007"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H19-i008"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H19-i009"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H19-i010"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H19-i011"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H19-i012"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H19-i013"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H19-i014"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H19-i015"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H19-i016"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H19-i017"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H19-i018"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H19-i019"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H19-i020"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H20-i006"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H20-i007"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H20-i008"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H20-i009"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H20-i010"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H20-i011"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H20-i012"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H20-i013"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H20-i014"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H20-i015"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H20-i016"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H20-i017"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H20-i018"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H20-i019"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H20-i020"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H21-i006"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H21-i007"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H21-i008"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H21-i009"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H21-i010"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H21-i011"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H21-i012"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H21-i013"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H21-i014"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H21-i015"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H21-i016"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H21-i017"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H21-i018"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H21-i019"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H21-i020"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H22-i006"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H22-i007"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H22-i008"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H22-i009"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H22-i010"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H22-i011"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H22-i012"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H22-i013"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H22-i014"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H22-i015"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H22-i016"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H22-i017"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H22-i018"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H22-i019"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H22-i020"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H23-i006"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H23-i007"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H23-i008"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H23-i009"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H23-i010"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H23-i011"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H23-i012"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H23-i013"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H23-i014"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H23-i015"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H23-i016"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H23-i017"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H23-i018"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H23-i019"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H23-i020"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H24-i006"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H24-i007"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H24-i008"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H24-i009"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H24-i010"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H24-i011"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H24-i012"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H24-i013"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H24-i014"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H24-i015"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H24-i016"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H24-i017"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H24-i018"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H24-i019"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H24-i020"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H25-i006"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H25-i007"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H25-i008"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H25-i009"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H25-i010"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H25-i011"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H25-i012"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H25-i013"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H25-i014"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H25-i015"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H25-i016"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H25-i017"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H25-i018"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H25-i019"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H25-i020"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H26-i006"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H26-i007"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H26-i008"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H26-i009"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H26-i010"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H26-i011"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H26-i012"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H26-i013"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H26-i014"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H26-i015"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H26-i016"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H26-i017"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H26-i018"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H26-i019"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H26-i020"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H27-i006"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H27-i007"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H27-i008"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H27-i009"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H27-i010"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H27-i011"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H27-i012"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H27-i013"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H27-i014"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H27-i015"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H27-i016"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H27-i017"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H27-i018"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H27-i019"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H27-i020"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 6,
+      "slot_id": "PIC-H28-i006"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 7,
+      "slot_id": "PIC-H28-i007"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 8,
+      "slot_id": "PIC-H28-i008"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 9,
+      "slot_id": "PIC-H28-i009"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 10,
+      "slot_id": "PIC-H28-i010"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 11,
+      "slot_id": "PIC-H28-i011"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 12,
+      "slot_id": "PIC-H28-i012"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 13,
+      "slot_id": "PIC-H28-i013"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 14,
+      "slot_id": "PIC-H28-i014"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 15,
+      "slot_id": "PIC-H28-i015"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 16,
+      "slot_id": "PIC-H28-i016"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 17,
+      "slot_id": "PIC-H28-i017"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 18,
+      "slot_id": "PIC-H28-i018"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 19,
+      "slot_id": "PIC-H28-i019"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 20,
+      "slot_id": "PIC-H28-i020"
+    }
+  ],
+  "target": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/target.json",
+    "sha256": "4c25db29d1ae72978a8f33f4a9a8ef96efd93db2c8b27b350b81f44078f22dd2",
+    "target_id": "portable-instruction-semantic-conformance",
+    "target_subject_ref": {
+      "interaction_mode": "single_response_operation_ledger",
+      "kind": "semantic_protocol",
+      "protocol_id": "portable-instruction-semantic-conformance",
+      "protocol_revision": "response-r2",
+      "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  },
+  "target_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/registrations/heldout-r3-registration-r1.json",
+    "qualification_artifacts": {
+      "cases": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/input-cases.json",
+        "sha256": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760"
+      },
+      "oracle": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/oracle.json",
+        "sha256": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c"
+      },
+      "rating": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+        "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+      },
+      "response_schema": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r1/response.schema.json",
+        "sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+      }
+    },
+    "registered_artifacts": {
+      "cases/heldout-r1/response.schema.json": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076",
+      "cases/heldout-r3/input-cases.json": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760",
+      "cases/heldout-r3/input-cases.schema.json": "8899df3c3a0ac77615dbe50b3385464f3eb38a928f6cfb63186ff383f30bd224",
+      "cases/heldout-r3/oracle.json": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c",
+      "cases/heldout-r3/oracle.schema.json": "6daadd2590f50f91966ed03893037b005de7aded5e6ec8f1032660d636bda86c",
+      "cases/heldout-r3/source-freeze.json": "871c29134379468e316ebc5d50c11258a323d934dc7ebbd8a97b035d4c74bc8b",
+      "rating-contracts/portable-instruction-semantic-exact-v1.json": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+    },
+    "registration_id": "portable-instruction-semantic-conformance-heldout-r3-registration-r1",
+    "sha256": "d5496940139564db68befa262d1e26209bf07db45d0161028009383deca408a0"
+  },
+  "task_spec_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/task-spec-wrapper-r4.txt",
+    "revision": "semantic-single-json-r4",
+    "sha256": "04e04cafce88b3f093a38a1914464fcc2558859a7665558cc973376ac113495e"
+  },
+  "transcript_ref": {
+    "contract_id": "codex-rollout-thread-bound-final-usage-r2",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-rollout-token-accounting-r2.json",
+    "sha256": "fc1591abc8f144a8e41d0408ae78f585bdff31a3d4fbe9f3c2aa9964a13c166c"
+  }
+}

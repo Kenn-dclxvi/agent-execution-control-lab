@@ -1,0 +1,38 @@
+{
+  "artifact_roots": {
+    "cases": "evaluations/targets/codex-validation-carrier-conformance/cases",
+    "contracts": "evaluations/targets/codex-validation-carrier-conformance/contracts",
+    "dispatch_plans": "evaluations/targets/codex-validation-carrier-conformance/plans",
+    "profiles": "evaluations/targets/codex-validation-carrier-conformance/profiles",
+    "prompt_bundles": "evaluations/targets/codex-validation-carrier-conformance/prompts",
+    "published_results": "evaluations/targets/codex-validation-carrier-conformance/results",
+    "rating_contracts": "evaluations/targets/codex-validation-carrier-conformance/rating-contracts",
+    "schemas": "evaluations/targets/codex-validation-carrier-conformance/schemas",
+    "sets": "evaluations/targets/codex-validation-carrier-conformance/sets"
+  },
+  "authority_notes": {
+    "case_boundary": "Case fixtureはtarget既存機能から独立した小さい作業directoryへ閉じ、validation planと必要evidenceをTaskSpec、期待resultと禁止routeをprivate oracleへ固定する",
+    "qualification_boundary": "case、rating、control-free baseline、target-specific adapterおよび3 KPI取得をqualificationするまでformal evaluation slotを発行しない",
+    "runtime_boundary": "Codex version、model、reasoning、permission、programmatic carrier capability receiptおよびtoken accountingはProfileへ固定する",
+    "semantic_target_boundary": "portable-instruction-semantic-conformanceの一回応答resultをruntime carrier resultまたは同一quality scaleへ混ぜない"
+  },
+  "current_rating_contract": null,
+  "executor": "codex",
+  "layout": "namespaced",
+  "naming_prefix": "codex-validation-carrier",
+  "schema_version": "the-caption-prompt.evaluation-target/v1",
+  "target_id": "codex-validation-carrier-conformance",
+  "target_license": "Apache-2.0",
+  "target_repository": {
+    "additional_refs": [],
+    "primary_ref": {
+      "commit": "660387978e8831bd3ca361c23800fcea2ca788e5",
+      "tree": "c0bd350a4923cc18fd51b319ec18f8b65e389afd"
+    },
+    "ref_authority": "target.jsonのprimary_ref、各Case fixture identityおよび各Profileのcomparison_conditions.target_repository_refを完全一致させる",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git"
+  },
+  "target_specific_modules": [],
+  "third_party_reproducible": true,
+  "visibility": "public"
+}

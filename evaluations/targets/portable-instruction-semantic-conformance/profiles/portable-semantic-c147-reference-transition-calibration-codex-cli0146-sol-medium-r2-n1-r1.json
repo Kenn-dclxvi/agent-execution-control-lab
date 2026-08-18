@@ -1,0 +1,95 @@
+{
+  "schema_version": "portable-instruction-semantic-profile/v1",
+  "profile_id": "portable-semantic-c147-reference-transition-calibration-codex-cli0146-sol-medium-r2-n1-r1",
+  "dispatch_series_id": "portable-semantic-c147-reference-transition-calibration-r2-n1",
+  "target_id": "portable-instruction-semantic-conformance",
+  "lifecycle_state": "registered_not_qualified",
+  "target_subject_ref": {
+    "kind": "semantic_protocol",
+    "protocol_id": "portable-instruction-semantic-conformance",
+    "protocol_revision": "response-r2",
+    "interaction_mode": "single_response_operation_ledger",
+    "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+  },
+  "prompt_set_identity": {
+    "name": "portable-semantic-c147-full-agent-reference-r1",
+    "revision": "r1",
+    "sha256": "d330421521b231d6029e69e8cd6d4e175fb46b06254e80b3d2f4d8f8f3a55d9f"
+  },
+  "runtime_ref": {
+    "runtime": "codex-cli",
+    "version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v2",
+      "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+    },
+    "session_mode": "persisted_for_usage_collection",
+    "instruction_isolation": {
+      "ignore_user_config": true,
+      "ignore_rules": true,
+      "memory": false,
+      "apps": false,
+      "plugins": false,
+      "plugin_sharing": false,
+      "multi_agent": false
+    },
+    "permission": {
+      "sandbox": "read-only",
+      "approval_policy": "never"
+    },
+    "capability_catalog": {
+      "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+      "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-cli-0.146.0-capability-catalog-r1.json",
+      "sha256": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "output_schema_transport": {
+      "revision": "codex-structured-output-supported-subset-r3",
+      "api_schema_projection": "supported_subset_semantic_equivalence",
+      "canonical_post_validation": true
+    }
+  },
+  "task_spec_ref": {
+    "revision": "semantic-single-json-r2",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/task-spec-wrapper-r2.txt",
+    "sha256": "a81f94ea0b662578caf42e2021bb8a032fa63ca90757cc3c14ce9c91a254375b"
+  },
+  "evaluation_set_ref": {
+    "set_id": "portable-instruction-semantic-reference-calibration-r2",
+    "set_revision": "r2",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/sets/reference-calibration-r2/set.json",
+    "sha256": "5f716a61bbed5d9f9e177614a24a1f019821e485c2bc3d2fd82211e1bd481947"
+  },
+  "rating_ref": {
+    "contract_id": "portable-instruction-semantic-exact-v1",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+    "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+  },
+  "transcript_ref": {
+    "contract_id": "codex-rollout-thread-bound-final-usage-r2",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-rollout-token-accounting-r2.json",
+    "sha256": "fc1591abc8f144a8e41d0408ae78f585bdff31a3d4fbe9f3c2aa9964a13c166c"
+  },
+  "repetition_condition": {
+    "iterations": 1,
+    "order": "case_id_ascending",
+    "valid_low_quality_policy": "retain",
+    "external_failure_policy": "exclude_without_case_change"
+  },
+  "execution": {
+    "max_workers": 24,
+    "schedule_policy": "global_queue",
+    "max_attempts_per_slot": 1,
+    "dispatch_gate": "adapter_entrypoint_and_preflight_required"
+  },
+  "scope": {
+    "qualification_only": true,
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}

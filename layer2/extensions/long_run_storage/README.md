@@ -51,6 +51,10 @@ python3 layer2/extensions/long_run_storage/long_run_storage.py seal-batch \
   --batch /absolute/path/to/trial-or-batch-root
 ```
 
+過去試験の保守で採点済み`rating-view`が存在する場合だけ、`--reuse-existing-rating-views`を指定できる。既存の3ファイル構造、validationとadapter evidence、final response、対応するLayer 3 ratingを照合し、`result.diff`を採点時の正本として上書きせずにarchiveへ含める。不一致または余分なentryがあればseal前に停止する。
+
+再試行履歴により正本cycleが`cycle-r3`などの別名で保存されている場合は、batch内の実ディレクトリを`--cycle-path cycle-r3`で明示する。絶対path、batch外、`..`、symlink経由は拒否する。`compact-batch`にも同じ`--cycle-path`を指定し、execution seal receiptとの一致を必須とする。
+
 標準では`$CODEX_HOME/config.toml`、未設定時は`~/.codex/config.toml`も保守する。対象は、このバッチの`execution-prune-receipt.json`に記録されたワークスペースのパスとの完全一致だけである。別評価や通常のプロジェクトの存在しないパスは削除しない。設定は有効なTOMLであることを更新前後に確認し、同時更新を検出した場合は最大3回再試行する。結果は`compact/codex-project-config-prune-receipt.json`へwrite-onceで記録する。この保守に失敗してもexecution sealと評価結果は失効させず、command結果へ`warning`を返す。
 
 一時的に保守を無効化する場合だけ`--skip-codex-config-cleanup`を指定する。別の設定を使う検証では`--codex-config /absolute/path/to/config.toml`を指定できる。

@@ -14,6 +14,7 @@ from layer2.extensions.long_run_storage.long_run_storage import (
     GIB,
     LongRunStorageError,
     compact_batch,
+    create_rating_view,
     evaluate_capacity,
     materialize_layer1,
     seal_batch,
@@ -258,6 +259,73 @@ class LongRunStorageTest(unittest.TestCase):
             with self.assertRaisesRegex(LongRunStorageError, "all-agent usage"):
                 seal_batch(batch)
             self.assertFalse((batch / "compact").exists())
+
+    @unittest.skipUnless(shutil.which("zstd"), "zstd is required")
+    def test_seal_reuses_only_matching_existing_rating_view(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            batch, run_id = self.make_batch(Path(temporary))
+            create_rating_view(batch / "cycle", run_id)
+            layer3 = batch / "cycle/layer3/ratings"
+            layer3.mkdir(parents=True)
+            (layer3 / f"{run_id}.json").write_text(
+                json.dumps({"run_id": run_id}), encoding="utf-8"
+            )
+            receipt = seal_batch(batch, reuse_existing_rating_views=True)
+            self.assertIn(
+                f"cycle/layer2/evidence/{run_id}/workspace",
+                receipt["pruned_paths"],
+            )
+
+        with tempfile.TemporaryDirectory() as temporary:
+            batch, run_id = self.make_batch(Path(temporary))
+            create_rating_view(batch / "cycle", run_id)
+            layer3 = batch / "cycle/layer3/ratings"
+            layer3.mkdir(parents=True)
+            (layer3 / f"{run_id}.json").write_text(
+                json.dumps({"run_id": run_id}), encoding="utf-8"
+            )
+            validation = (
+                batch / "cycle/layer2/evidence" / run_id / "rating-view/validation.json"
+            )
+            validation.write_text("{}\n", encoding="utf-8")
+            with self.assertRaisesRegex(LongRunStorageError, "validation mismatch"):
+                seal_batch(batch, reuse_existing_rating_views=True)
+            self.assertFalse((batch / "compact").exists())
+
+    @unittest.skipUnless(shutil.which("zstd"), "zstd is required")
+    def test_alternate_real_cycle_path_seals_and_compacts(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            batch, run_id = self.make_batch(Path(temporary))
+            alternate = batch / "cycle-r3"
+            (batch / "cycle").rename(alternate)
+            create_rating_view(alternate, run_id)
+            ratings = alternate / "layer3/ratings"
+            ratings.mkdir(parents=True)
+            (ratings / f"{run_id}.json").write_text(
+                json.dumps({"run_id": run_id}), encoding="utf-8"
+            )
+            layer4 = alternate / "layer4"
+            layer4.mkdir()
+            registration = layer4 / "result-registration.json"
+            registration.write_text('{"status":"registered"}\n', encoding="utf-8")
+            seal_batch(
+                batch,
+                cycle_path=Path("cycle-r3"),
+                reuse_existing_rating_views=True,
+            )
+            receipt = compact_batch(batch, cycle_path=Path("cycle-r3"))
+            self.assertFalse((alternate / "layer2").exists())
+            self.assertIn("cycle-r3/layer2", receipt["pruned_paths"])
+            self.assertTrue(registration.is_file())
+
+    def test_cycle_path_rejects_symlink(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            batch, _ = self.make_batch(Path(temporary))
+            (batch / "cycle-real").mkdir()
+            shutil.rmtree(batch / "cycle")
+            (batch / "cycle").symlink_to("cycle-real")
+            with self.assertRaisesRegex(LongRunStorageError, "real directory"):
+                seal_batch(batch)
 
     @unittest.skipUnless(shutil.which("zstd"), "zstd is required")
     def test_final_compact_requires_registration_and_keeps_receipt(self) -> None:

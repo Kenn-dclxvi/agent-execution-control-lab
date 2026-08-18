@@ -1,0 +1,24 @@
+{
+  "schema_version": "codex-validation-carrier-preflight-negative-fixtures/v1",
+  "model_visible": false,
+  "fixtures": [
+    {
+      "fixture_id": "VCC-PF01-missing-intermediate-ingress-denial",
+      "override": {"carrier_capabilities.intermediate_ingress_denial": false},
+      "expected_dispatch_state": "denied",
+      "expected_reason": "carrier_capability_set_incomplete"
+    },
+    {
+      "fixture_id": "VCC-PF02-continuation-identity-unobservable",
+      "override": {"continuation_identity_field": null},
+      "expected_dispatch_state": "denied",
+      "expected_reason": "continuation_identity_unbound"
+    },
+    {
+      "fixture_id": "VCC-PF03-required-evidence-field-unbound",
+      "override": {"terminal_status_field": null},
+      "expected_dispatch_state": "denied",
+      "expected_reason": "required_terminal_field_unbound"
+    }
+  ]
+}

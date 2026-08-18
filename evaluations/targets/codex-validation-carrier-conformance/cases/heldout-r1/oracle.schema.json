@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codex-validation-carrier-oracle-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "set_id", "model_visible", "cases"],
+  "properties": {
+    "schema_version": {"const": "codex-validation-carrier-oracle/v1"},
+    "set_id": {"const": "codex-validation-carrier-heldout-r1"},
+    "model_visible": {"const": false},
+    "cases": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/case"}}
+  },
+  "$defs": {
+    "string_array": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "case": {
+      "type": "object", "additionalProperties": false,
+      "required": ["case_id", "expected_event_lines", "forbidden_event_lines", "expected_response", "trace_diagnostics"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^VCC-H0[1-6]$"},
+        "expected_event_lines": {"$ref": "#/$defs/string_array"},
+        "forbidden_event_lines": {"$ref": "#/$defs/string_array"},
+        "expected_response": {"type": "object"},
+        "forbidden_terminal_output_substrings": {"$ref": "#/$defs/string_array"},
+        "trace_diagnostics": {"type": "object", "additionalProperties": {"type": ["boolean", "integer"]}}
+      }
+    }
+  }
+}

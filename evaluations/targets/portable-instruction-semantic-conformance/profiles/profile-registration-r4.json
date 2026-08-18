@@ -1,0 +1,35 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-control-free-codex-cli0146-profile-registration-r4",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r4.json",
+    "sha256": "e9ac8043ae476699271196b47e5f1c5359825c04a6ad0ff352cd69537ba6ac9c"
+  },
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"
+  },
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification.py",
+    "sha256": "31024d398d48f29fd5c107e9d5a243a1ff01e57ebaf9e321f36d66a3d5f6ddfd"
+  },
+  "prior_external_failure": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-control-free-heldout-r1-n1-attempt-r3-external-failure.json",
+    "sha256": "f1b8cc213096c6c18527afd883db3476ba67b3e9122486d0fba44dd033fb6a58",
+    "valid_result_count": 0
+  },
+  "allowed_delta": {
+    "fields": [
+      "runtime_ref.token_accounting",
+      "transcript_ref"
+    ],
+    "effect": "bind exec thread identity to persisted primary total_tokens without inferring from exec token components"
+  },
+  "state": {
+    "profile_registered": true,
+    "artifact_binding_required": true,
+    "adapter_execution_entrypoint_enabled": true,
+    "dispatch_plan_created": false,
+    "qualification_started": false
+  }
+}

@@ -36,9 +36,11 @@ baseline、candidate、release、evaluation resultは、該当する範囲で次
 ## 4. Evaluation boundary
 
 - 同一比較内ではprompt以外の条件を揃える。
+- 同一のprompt改善系列では固定benchmarkをCandidate間で再利用し、prompt identityだけを実験変数とする。benchmarkの結果を次Candidateの設計へ使ったことだけを理由に、case、set、TaskSpec、oracle、rating、profile条件またはruntimeを作り直さない。
 - workerへ見せる入力と、fixture seed、oracle、grader、expected resultを分離する。
 - coverageと同一caseのrepeatabilityを別軸で扱う。
-- tuningに使ったcaseを同じrevisionのheld-out evidenceとして扱わない。
+- 固定benchmarkの反復結果はそのbenchmark内の比較根拠であり、blindまたは未見の根拠とは区別する。blind検証は事前に独立gateとして要求された場合だけ追加し、Candidateごとに更新しない。
+- 評価契約の欠陥または目的変更でprompt以外を変える場合は別の評価系列とし、変更前後をprompt効果として比較しない。
 - environment failureをpromptまたはtask behaviorの失敗へ混ぜない。
 - 評価結果から言える範囲と、言えない範囲を併記する。
 

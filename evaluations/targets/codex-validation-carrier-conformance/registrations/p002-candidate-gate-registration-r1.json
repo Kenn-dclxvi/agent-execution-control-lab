@@ -1,0 +1,31 @@
+{
+  "schema_version": "codex-validation-carrier-candidate-gate-registration/v1",
+  "registration_id": "codex-validation-carrier-p002-candidate-gate-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "candidate_binding": {
+    "binding_id": "p002-portable-full-agent-codex-validation-carrier-composition-binding-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/p002-composition-binding-r1.json",
+    "sha256": "13ffbf6843a273740a17ccbb4d90492ef814d3abc0276867e8ad733ddf5fac52"
+  },
+  "candidate_result": {
+    "result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1.json",
+    "sha256": "db99bb30ceb06636c8abc81c354042c2e56dc3ee4a6e7bb5a22b8c2cf55d8ca2",
+    "result_sha256": "dfaa9904102dc0dfbe20b60402033a0c29584b116034a03dc76607c60a18eb72"
+  },
+  "gate": {
+    "valid_results": 6,
+    "external_failures": 0,
+    "score4": 6,
+    "mechanism_passed": 6,
+    "candidate_only_gate": "passed"
+  },
+  "allowed_next_profile_class": "p001_p002_paired_targeted_n5",
+  "forbidden_profile_classes": [
+    "standard14_projection_before_paired_targeted_gate",
+    "n20_extension_before_standard14_n5_gate",
+    "release_projection"
+  ],
+  "efficiency_boundary": "candidate-only resultとcontrol-free qualificationの差は診断値に限る。P001比の効率主張は同一paired targeted N=5 resultまで禁止する。",
+  "state": "candidate_gate_passed_paired_targeted_n5_allowed"
+}

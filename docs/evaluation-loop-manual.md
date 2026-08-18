@@ -607,6 +607,8 @@ python3 layer2/extensions/long_run_storage/long_run_storage.py seal-batch \
   --batch /absolute/path/to/trial-root
 ```
 
+採点後に遡ってsealする保守では、既存`rating-view`の構造、validation、final response、Layer 3 ratingとの対応を確認して採点時の`result.diff`を上書きせず保存する`--reuse-existing-rating-views`を明示する。再試行で正本cycleが別名の実ディレクトリに残る場合は`--cycle-path <relative-cycle-path>`をsealとcompactの両方へ同じ値で指定する。symlinkをcycleとして渡さない。
+
 `seal-batch`は完全なworkspaceと自己完結fixtureを1つの検証済み`tar.zst`へ保存してから、live workspaceだけを削除する。Layer 3採点とLayer 4 result登録が完了したら、同じrootを最終圧縮する。
 
 ```bash

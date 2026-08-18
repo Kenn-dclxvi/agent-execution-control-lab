@@ -1,0 +1,28 @@
+{
+  "schema_version": "portable-instruction-semantic-source-freeze/v2",
+  "freeze_id": "portable-instruction-semantic-heldout-r3-source-freeze-r1",
+  "set_id": "portable-instruction-semantic-heldout-r3",
+  "case_membership": ["PIC-H15", "PIC-H16", "PIC-H17", "PIC-H18", "PIC-H19", "PIC-H20", "PIC-H21", "PIC-H22", "PIC-H23", "PIC-H24", "PIC-H25", "PIC-H26", "PIC-H27", "PIC-H28"],
+  "artifacts": {
+    "input-cases.json": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760",
+    "input-cases.schema.json": "8899df3c3a0ac77615dbe50b3385464f3eb38a928f6cfb63186ff383f30bd224",
+    "oracle.json": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c",
+    "oracle.schema.json": "6daadd2590f50f91966ed03893037b005de7aded5e6ec8f1032660d636bda86c"
+  },
+  "shared_artifacts": {
+    "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076",
+    "rating_sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5",
+    "task_spec_r4_sha256": "04e04cafce88b3f093a38a1914464fcc2558859a7665558cc973376ac113495e"
+  },
+  "delta_from_heldout_r2": {
+    "PIC-H20": "frontier authority and bound outcome now include f3",
+    "PIC-H22": "frontier authority now includes s4"
+  },
+  "design_boundary": {
+    "portable_prompt_observed_during_design": false,
+    "portable_candidate_heldout": true,
+    "c147_must_run_first": true,
+    "portable_dispatch_requires_c147_score4_all_14": true
+  },
+  "state": "frozen_not_issued"
+}

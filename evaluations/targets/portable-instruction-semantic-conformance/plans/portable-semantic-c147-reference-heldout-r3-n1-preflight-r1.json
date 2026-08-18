@@ -1,0 +1,176 @@
+{
+  "authorized_slot_count": 14,
+  "authorized_slots": [
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H15-i001"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H16-i001"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H17-i001"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H18-i001"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H19-i001"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H20-i001"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H21-i001"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H22-i001"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H23-i001"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H24-i001"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H25-i001"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H26-i001"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H27-i001"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H28-i001"
+    }
+  ],
+  "dispatch_allowed": true,
+  "execution_code": {
+    "core_adapter": {
+      "path": "scripts/semantic_protocol_codex_adapter.py",
+      "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"
+    },
+    "runner": {
+      "path": "scripts/run_semantic_protocol_qualification_v2.py",
+      "sha256": "d4cfff05d01e12744fb70c92a79f9a88c65e7d3208c290c36fae9a459195bebf"
+    }
+  },
+  "issued_slot_count": 0,
+  "plan": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-heldout-r3-n1-dispatch-r1.json",
+    "plan_id": "portable-semantic-c147-reference-heldout-r3-n1-dispatch-r1",
+    "plan_sha256": "e830fff25ebc983377ad20271f75bd2090b165e672373dbf71abe50146214bc0",
+    "sha256": "e2e791c2946563938453a3d31e5b29e89c6b2aa1b4e52421b3cb3a08ce4a00fa"
+  },
+  "preflight_id": "portable-semantic-c147-reference-heldout-r3-n1-preflight-r1",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-reference-heldout-r3-codex-cli0146-sol-medium-n1-r1.json",
+    "profile_id": "portable-semantic-c147-reference-heldout-r3-codex-cli0146-sol-medium-n1-r1",
+    "sha256": "af45010ef8f83b8b77c209ae6c6643ec29ad11a8b5197fdfb6437ef1dd474389"
+  },
+  "receipt_sha256": "14d3b766f50f75a77a00edff3c6df4dea40f2a829def2de99064388bd993920e",
+  "runtime": {
+    "executable": "/Users/kenn/.codex/packages/standalone/releases/0.146.0-aarch64-apple-darwin/bin/codex",
+    "observed_version": "codex-cli 0.146.0",
+    "runtime_ref": {
+      "capability_catalog": {
+        "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-cli-0.146.0-capability-catalog-r1.json",
+        "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+        "sha256": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6"
+      },
+      "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+      "instruction_isolation": {
+        "apps": false,
+        "ignore_rules": true,
+        "ignore_user_config": true,
+        "memory": false,
+        "multi_agent": false,
+        "plugin_sharing": false,
+        "plugins": false
+      },
+      "model": "gpt-5.6-sol",
+      "output_schema_transport": {
+        "api_schema_projection": "supported_subset_semantic_equivalence",
+        "canonical_post_validation": true,
+        "revision": "codex-structured-output-supported-subset-r3"
+      },
+      "permission": {
+        "approval_policy": "never",
+        "sandbox": "read-only"
+      },
+      "reasoning_effort": "medium",
+      "runtime": "codex-cli",
+      "session_mode": "persisted_for_usage_collection",
+      "token_accounting": {
+        "revision": "v2",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+      },
+      "version": "0.146.0"
+    }
+  },
+  "schema_version": "portable-instruction-semantic-profile-preflight/v1",
+  "stop_conditions": [
+    "plan_hash_mismatch",
+    "profile_or_target_drift",
+    "execution_code_hash_mismatch",
+    "runtime_version_drift",
+    "slot_not_authorized",
+    "slot_output_exists"
+  ],
+  "target": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/target.json",
+    "sha256": "4c25db29d1ae72978a8f33f4a9a8ef96efd93db2c8b27b350b81f44078f22dd2",
+    "target_id": "portable-instruction-semantic-conformance",
+    "target_subject_ref": {
+      "interaction_mode": "single_response_operation_ledger",
+      "kind": "semantic_protocol",
+      "protocol_id": "portable-instruction-semantic-conformance",
+      "protocol_revision": "response-r2",
+      "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  }
+}

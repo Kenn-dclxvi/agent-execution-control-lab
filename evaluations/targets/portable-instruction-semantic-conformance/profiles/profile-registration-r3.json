@@ -1,0 +1,36 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-control-free-codex-cli0146-profile-registration-r3",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r3.json",
+    "sha256": "9ba5a3ac37e6c02e9f57e7077b55c1c4111ef29ed558094161c5f7608863783a"
+  },
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "61a483d480d39950a5268d7a78ce0da047b1fe837504faa21dc2e6e456da3f66"
+  },
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification.py",
+    "sha256": "fc40f103aaaa1a803810ad0e2766fca64b02576656a0f00673158a590fe92fa2"
+  },
+  "prior_external_failure": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-control-free-heldout-r1-n1-attempt-r2-external-failure.json",
+    "sha256": "f096e964c172c9a85701df38b99de643cd454d403a4fede3c8dcb80281770f8e",
+    "valid_result_count": 0
+  },
+  "allowed_delta": {
+    "field": "runtime_ref.output_schema_transport",
+    "value": {
+      "revision": "codex-structured-output-supported-subset-r3",
+      "api_schema_projection": "supported_subset_semantic_equivalence",
+      "canonical_post_validation": true
+    }
+  },
+  "state": {
+    "profile_registered": true,
+    "artifact_binding_required": true,
+    "adapter_execution_entrypoint_enabled": true,
+    "dispatch_plan_created": false,
+    "qualification_started": false
+  }
+}

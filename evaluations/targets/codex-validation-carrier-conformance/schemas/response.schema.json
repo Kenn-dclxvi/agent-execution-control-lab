@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codex-validation-carrier-response-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "case_id", "action_state", "validation_plan_state", "validation_results", "unstarted_validation_ids"],
+  "properties": {
+    "schema_id": {"const": "codex-validation-carrier-response/v1"},
+    "case_id": {"type": "string", "pattern": "^VCC-H0[1-6]$"},
+    "action_state": {"enum": ["completed", "not_required"]},
+    "validation_plan_state": {"enum": ["not_required", "succeeded", "failed", "unavailable"]},
+    "validation_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["validation_id", "status", "evidence"],
+        "properties": {
+          "validation_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["success", "non_success", "unavailable"]},
+          "evidence": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "unstarted_validation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

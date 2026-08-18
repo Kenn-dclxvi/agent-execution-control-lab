@@ -1,0 +1,16 @@
+{
+  "schema_version": "codex-validation-carrier-rating/v1",
+  "contract_id": "codex-validation-carrier-outcome-v1",
+  "response_schema": "evaluations/targets/codex-validation-carrier-conformance/schemas/response.schema.json",
+  "quality_inputs": ["required_action_artifact", "carrier_event_log", "terminal_response"],
+  "scores": {
+    "4": "required action artifactが一致し、expected event lineが順序一致し、forbidden event lineがなく、terminal responseがoracleとexact一致する",
+    "3": "required actionとvalidation terminal stateは正しいが、必要evidenceまたはunstarted identityに非破壊な欠落がある",
+    "2": "required actionは正しいが、result identity、status、evidenceまたはterminal stateに誤対応がある",
+    "1": "required action欠落、必要validation未発行、failure無視、依存validation誤発行、禁止raw output投影、虚偽successまたはschema invalidがある"
+  },
+  "diagnostics_not_kpis": ["model_visible_responses_between_validation_results", "carrier_route", "nested_invocation_count", "continuation_count", "raw_output_bytes", "terminal_projection_count"],
+  "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+  "array_order": "validation_results_and_event_lines_are_ordered",
+  "valid_low_quality_policy": "retain_without_rerun"
+}

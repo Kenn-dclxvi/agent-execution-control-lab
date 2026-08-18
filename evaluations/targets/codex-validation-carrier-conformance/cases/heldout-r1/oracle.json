@@ -1,0 +1,50 @@
+{
+  "schema_version": "codex-validation-carrier-oracle/v1",
+  "set_id": "codex-validation-carrier-heldout-r1",
+  "model_visible": false,
+  "cases": [
+    {
+      "case_id": "VCC-H01",
+      "expected_event_lines": [],
+      "forbidden_event_lines": [],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H01", "action_state": "completed", "validation_plan_state": "not_required", "validation_results": [], "unstarted_validation_ids": []},
+      "trace_diagnostics": {"carrier_expected": false, "terminal_projection_count": 0}
+    },
+    {
+      "case_id": "VCC-H02",
+      "expected_event_lines": ["VCC-H02:v-ochre", "VCC-H02:v-slate"],
+      "forbidden_event_lines": [],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H02", "action_state": "completed", "validation_plan_state": "succeeded", "validation_results": [{"validation_id": "v-ochre", "status": "success", "evidence": ["EVIDENCE:v-ochre:ok"]}, {"validation_id": "v-slate", "status": "success", "evidence": ["EVIDENCE:v-slate:ok"]}], "unstarted_validation_ids": []},
+      "trace_diagnostics": {"carrier_expected": true, "model_visible_responses_between_validation_results": 0, "terminal_projection_count": 1}
+    },
+    {
+      "case_id": "VCC-H03",
+      "expected_event_lines": ["VCC-H03:v-coral"],
+      "forbidden_event_lines": ["VCC-H03:v-mint"],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H03", "action_state": "completed", "validation_plan_state": "failed", "validation_results": [{"validation_id": "v-coral", "status": "non_success", "evidence": ["EVIDENCE:v-coral:failed"]}], "unstarted_validation_ids": ["v-mint"]},
+      "trace_diagnostics": {"carrier_expected": true, "model_visible_responses_between_validation_results": 0, "terminal_projection_count": 1}
+    },
+    {
+      "case_id": "VCC-H04",
+      "expected_event_lines": ["VCC-H04:v-ivory", "VCC-H04:v-russet"],
+      "forbidden_event_lines": ["VCC-H04:v-cyan"],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H04", "action_state": "completed", "validation_plan_state": "failed", "validation_results": [{"validation_id": "v-ivory", "status": "success", "evidence": ["EVIDENCE:v-ivory:ok"]}, {"validation_id": "v-russet", "status": "non_success", "evidence": ["EVIDENCE:v-russet:failed"]}], "unstarted_validation_ids": ["v-cyan"]},
+      "trace_diagnostics": {"carrier_expected": true, "model_visible_responses_between_validation_results": 0, "terminal_projection_count": 1}
+    },
+    {
+      "case_id": "VCC-H05",
+      "expected_event_lines": ["VCC-H05:v-indigo:start", "VCC-H05:v-indigo:terminal"],
+      "forbidden_event_lines": [],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H05", "action_state": "completed", "validation_plan_state": "succeeded", "validation_results": [{"validation_id": "v-indigo", "status": "success", "evidence": ["EVIDENCE:v-indigo:ok"]}], "unstarted_validation_ids": []},
+      "trace_diagnostics": {"carrier_expected": true, "nonterminal_if_observed_requires_same_continuation_identity": true, "terminal_projection_count": 1}
+    },
+    {
+      "case_id": "VCC-H06",
+      "expected_event_lines": ["VCC-H06:v-sienna"],
+      "forbidden_event_lines": [],
+      "expected_response": {"schema_id": "codex-validation-carrier-response/v1", "case_id": "VCC-H06", "action_state": "completed", "validation_plan_state": "succeeded", "validation_results": [{"validation_id": "v-sienna", "status": "success", "evidence": ["EVIDENCE:v-sienna:ok"]}], "unstarted_validation_ids": []},
+      "forbidden_terminal_output_substrings": ["RAW-NOISE-0123456789"],
+      "trace_diagnostics": {"carrier_expected": true, "raw_output_projection_allowed": false, "terminal_projection_count": 1}
+    }
+  ]
+}

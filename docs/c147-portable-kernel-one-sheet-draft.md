@@ -1,7 +1,7 @@
 # C147 portable kernel一枚化草案
 
 > [!IMPORTANT]
-> **状態**: `exact_draft_written / root_only_dependency_closed / full_agent_dependency_closed / primitive_coverage_81_of_81 / q01_q08_static_counterexamples_repaired / prompt_identity_unbound / candidate_not_created / evaluation_not_started`
+> **状態**: `exact_draft_written / root_only_dependency_closed / full_agent_dependency_closed / primitive_coverage_81_of_81 / q01_q08_static_counterexamples_repaired / full_agent_candidate_bundle_registered / full_agent_n1_valid_14_score4_7_quality_failed / c147_reference_not_authorized / root_only_prompt_identity_unbound`
 >
 > 本書は、C147由来のruntime非依存本文をcomponentから自己完結した一枚へ構成できるところまで固定する。生成物は管理用草案であり、Candidate、評価result、採用、releaseまたはprojectionではない。
 
@@ -85,7 +85,7 @@ Q01〜Q08は本文作成に使ったtuning Caseであり、修正後の静的反
 
 1. held-out inputをkernel本文または修正判断へ流入させない。
 2. control-free baselineでschema、3 KPIおよび実行経路の測定成立を確認する。
-3. formal target identityを登録する場合は、直接の基準、allowed delta、非目標、評価順および停止条件をCandidate作成前gateとして別途固定する。
+3. formal target identity、直接の基準、allowed delta、非目標、評価順および停止条件は、full-agent variantについて[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へCandidate作成前gateとして固定した。root-onlyにはこのgateを流用しない。
 
 評価へ進む場合も、現行review制御系列ではADR9 N=5を先に実行し、通過前にStandard14を発行しない。
 

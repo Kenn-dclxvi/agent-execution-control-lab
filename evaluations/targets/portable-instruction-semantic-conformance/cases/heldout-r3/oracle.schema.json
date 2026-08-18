@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portable-instruction-semantic-oracle-r3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "set_id",
+    "response_schema",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "portable-instruction-semantic-oracle/v1"
+    },
+    "set_id": {
+      "const": "portable-instruction-semantic-heldout-r3"
+    },
+    "response_schema": {
+      "const": "portable-instruction-control-response/r2"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/oracle_case"
+      }
+    }
+  },
+  "$defs": {
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "ids"
+      ],
+      "properties": {
+        "field": {
+          "enum": [
+            "clarification_missing_value_ids",
+            "start_operation_ids",
+            "continue_invocation_ids",
+            "admit_result_ids",
+            "invalidate_operation_ids",
+            "terminal_operation_ids",
+            "unavailable_operation_ids"
+          ]
+        },
+        "ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule",
+        "field"
+      ],
+      "properties": {
+        "rule": {
+          "const": "nonempty_proper_subset_of_expected"
+        },
+        "field": {
+          "enum": [
+            "start_operation_ids",
+            "unavailable_operation_ids"
+          ]
+        }
+      }
+    },
+    "oracle_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "expected_response",
+        "major_violation_selectors",
+        "major_violation_rules",
+        "mechanism_predicates"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^PIC-H(?:1[5-9]|2[0-8])$"
+        },
+        "expected_response": {
+          "type": "object"
+        },
+        "major_violation_selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/selector"
+          }
+        },
+        "major_violation_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "mechanism_predicates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
+

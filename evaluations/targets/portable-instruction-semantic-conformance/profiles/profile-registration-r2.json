@@ -1,0 +1,36 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-control-free-codex-cli0146-profile-registration-r2",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r2.json",
+    "sha256": "50a960554c6b435f14f64ec15263c1e12c09f03ae2904d78e9034a9341f4c8c2"
+  },
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "f9196cd0626d8416d6a66eb29193260e519b76543a82dc14be7da244a77a9ea8"
+  },
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification.py",
+    "sha256": "4ce7645f6bb933d400e173fd9b6badefb9b2d676d41af25988447e9472def958"
+  },
+  "prior_external_failure": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-control-free-heldout-r1-n1-attempt-r1-external-failure.json",
+    "sha256": "2451225b0aa258fff9d0680c34a9e8941ed33291f921accc989af3b5a1bbe48f",
+    "valid_result_count": 0
+  },
+  "allowed_delta": {
+    "field": "runtime_ref.output_schema_transport",
+    "value": {
+      "revision": "codex-structured-output-projection-r2",
+      "api_schema_projection": "remove_uniqueItems_only",
+      "canonical_post_validation": true
+    }
+  },
+  "state": {
+    "profile_registered": true,
+    "artifact_binding_required": true,
+    "adapter_execution_entrypoint_enabled": true,
+    "dispatch_plan_created": false,
+    "qualification_started": false
+  }
+}

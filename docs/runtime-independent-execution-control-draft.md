@@ -1,19 +1,22 @@
 # C147由来のruntime非依存portable instruction設計
 
 > [!IMPORTANT]
-> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_exact_draft_written / q01_q08_static_counterexamples_repaired / target_instance_not_created / candidate_not_created / evaluation_not_started`
+> **状態**: `frontier_reopened_by_user / required_outcome_bound / source_candidate_c147 / target_surfaces_chatgpt_codex_claude_cursor_gemini / portable_kernel_exact_draft_written / p001_cost_diagnosed / platform_capability_blocks_required / validation_carrier_separation_designed / candidate_not_created`
 >
 > 利用者が2026-08-14に、C147のCodex依存をなくし、ChatGPT Projectのproject instructions、Codex、Claude Code、CursorおよびGemini Gemで使える形へ進めることを明示した。本書はその要求、境界および作成前gateを固定する。Candidate本文、評価結果、採用、releaseまたはprojectionではない。
 
 ## 結論
 
-C147 `the-caption-3ce91a4-result-effect-scope-r1`を別runtime向けに単純改名しない。次の三つを分離する。
+C147 `the-caption-3ce91a4-result-effect-scope-r1`を別runtime向けに単純改名しない。P001の後続診断を受け、当初の「全環境へ同一kernel bytesを配送し、surface bindingは配置だけ」という境界は、実行能力を要する機能には適用しない。現在は次の四つを分離する。
 
-1. **portable kernel**: 全対象環境へ同一bytesで渡す、製品名とruntime API名を含まない制御本文。文字数削減自体を目的または作成gateにしない。
-2. **surface binding**: 同じkernelを各環境の指示面へ届ける配置だけを定める。制御条件を追加、削除または上書きしない。
-3. **runtime別result**: 同じ意味が成立したかを環境ごとに独立して測定する。別runtimeの結果を互換比較へ混ぜない。
+1. **semantic kernel**: operation、permission、dependency、result bindingおよびterminalの共通意味。文字数削減自体を目的または作成gateにしない。
+2. **platform capability block**: carrier、continuation identity、multi-actor provenanceなど、共通意味を実行するためにplatformが実際に提供する機能。
+3. **surface binding**: 選択済みのsemantic blockとcapability blockを各環境の指示面へ届ける配置。
+4. **runtime別result**: 構成した一枚で同じ意味が成立したかを環境ごとに独立して測定する。別runtimeの結果を互換比較へ混ぜない。
 
-portable kernelに共通の固定文字数上限を置かない。利用者が確認した現在のChatGPT Projectの8,000文字枠にはC147相当量を収容でき、Gemini Gemでは文字数制限を観測していない。これらはsurfaceの現在値であり、制御意味を削る理由やkernelのidentityにはしない。各surfaceへ同一bytesを配送できるかはload portabilityの事前確認とし、本文の長さは品質と機序が成立した後のコスト診断に限定する。
+最初に分離するcapabilityはvalidation carrierである。共通意味とplatform側の途中result ingress抑止を分ける現行境界は[`P001 validation carrier platform分離設計`](p001-validation-carrier-platform-separation-design.md)を正とする。
+
+semantic kernelに共通の固定文字数上限を置かない。利用者が確認した現在のChatGPT Projectの8,000文字枠にはC147相当量を収容でき、Gemini Gemでは文字数制限を観測していない。これらはsurfaceの現在値であり、制御意味を削る理由にはしない。各platformの最終成果は、必要なsemantic blockと提供可能なcapability blockを組み合わせた自己完結した一枚とし、Agentへ分割sourceを追加readさせない。本文の長さは品質と機序が成立した後のcost診断に限定する。
 
 ## 利用者が求める結果
 
@@ -62,7 +65,7 @@ C147は次のCodex固有表面を含む。
 
 | 段階 | 判定内容 | 他段階から自動継承しないこと |
 | --- | --- | --- |
-| load portability | 同じkernelが指示面へ欠落なく入る | 読み込まれたことは遵守や機序成立を意味しない |
+| load portability | platform用に選択したsemantic blockとcapability blockを一枚へ構成し、指示面へ欠落なく入れる | 読み込まれたことは遵守や機序成立を意味しない |
 | semantic portability | 製品固有語なしで同じpredicate、permission、result effect、terminalを表す | 文面類似は実際の経路閉鎖を意味しない |
 | behavioral portability | 固定caseで問題経路を閉じ、正常経路を維持する | 一runtimeの成功を他runtimeへ一般化しない |
 | enforcement portability | runtime permissionまたはhookが判断と独立に操作を禁止する | prompt-only系列の成果として主張しない |
@@ -71,17 +74,17 @@ C147は次のCodex固有表面を含む。
 
 ## surface binding
 
-2026-08-14時点の公式資料へ基づき、同一kernelの配送先を次へ固定する。今後の仕様変更は新しいbinding revisionで扱う。
+2026-08-14時点に確認した配送先を次へ保持する。配送先と機能構成を分け、capabilityは各platformで実証後に選択する。今後の仕様変更は新しいbinding revisionで扱う。
 
-| 環境 | 配送先 | bindingに許可する差 |
+| 環境 | 配送先 | 構成境界 |
 | --- | --- | --- |
-| ChatGPT Project | project instructionsへkernel本文を直接貼付 | なし |
-| Codex / Codex developer surfaces | root `AGENTS.md`または対応するglobal guidance | 配置だけ |
-| Claude Code | `CLAUDE.md`から同じ`AGENTS.md`をimport、または同一bytesを配置 | import指定だけ |
-| Cursor | root `AGENTS.md`、またはAlways適用のproject rule | 配置metadataだけ |
-| Gemini Gem | custom Gemのinstructionsへkernel本文を直接貼付 | なし |
+| ChatGPT Project | project instructionsへ構成済み本文を直接貼付 | chatで利用するsemantic blockと、実証済みcapability blockだけを一枚化 |
+| Codex / Codex developer surfaces | root `AGENTS.md`または対応するglobal guidance | full-agent用semantic blockとCodexで実証済みのcapability blockを一枚化 |
+| Claude Code | `CLAUDE.md`から構成済み`AGENTS.md`をimport、または同じ一枚を配置 | Claude Codeで実証済みのcapabilityだけを選択し、Codex bindingを流用しない |
+| Cursor | root `AGENTS.md`、またはAlways適用のproject rule | Cursorで実証済みのcapabilityだけを選択 |
+| Gemini Gem | custom Gemのinstructionsへ構成済み本文を直接貼付 | chatで利用するsemantic blockと、実証済みcapability blockだけを選択 |
 
-kernelに製品名、ファイル名、tool名、field名または「この環境では」の条件分岐を入れない。surface bindingにも制御条件を追加しない。同じ意味を成立させるため環境別の条件文が必要になった場合は、同一kernelのportability不成立として記録する。
+semantic kernelに製品名、ファイル名、tool名またはfield名を入れない。platform固有語はcapability blockだけに置き、そのblockが提供するinterfaceをsemantic kernelから変えない。surface bindingは選択済みblockの配置だけを担い、新しい制御条件を追加しない。
 
 ## C147 coverageの作成前gate
 
@@ -135,14 +138,15 @@ semantic conformance通過後に限り、Codex、Claude CodeおよびCursorで�
 
 ## Candidate作成前の残件
 
-管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。現時点では次が未完了なので、Candidate bundle、profileまたは評価slotを作成しない。
+管理用のportable kernel本文草案と81 primitive逆引きは[`C147 portable kernel一枚化草案`](c147-portable-kernel-one-sheet-draft.md)、14件のheld-out、private oracle、ratingおよび汎用graderは[`held-out r1`](portable-instruction-semantic-conformance-heldout-r1/)で固定した。full-agentのCandidate作成前gateは[`直接比較設計`](portable-full-agent-kernel-direct-comparison-design.md)へ固定し、C147 referenceとportable Candidateの自己完結した一枚をtarget固有bundleへ登録した。Candidate N=1は14 / 14 valid、7 / 14 score 4でquality gate不通過となり、C147 reference、N拡張およびprojectionを発行せず停止した。
 
-1. control-free baselineの測定成立。
-2. 各surfaceで同一bytesが読み込まれたことのreceipt。
-3. 品質、機序、対象外影響、KPIおよび安定性のruntime別停止条件。
-4. formal target identity、直接の基準、allowed deltaおよび非目標の固定。
+1. 既存tuning Q01〜Q08と81 primitive対応を使うblock別cost診断。
+2. 意味を削らない統合または表現圧縮候補と、固定instruction costへの対応づけ。
+3. 新しいCandidateを作る場合の新Candidate作成前gateと別held-out revisionの固定。
 
-control-free baseline前の測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、persisted all-agent transcript contractおよびCodex N=1 Profileまで固定した。次の作業は14 Caseのwrite-once dispatch planとProfile preflightを固定し、adapter実行入口をそのplanへ限定することである。成功動作のtool順を短い手順へ転記せず、C204/C205で消えた正の遷移、対象集合および収集障壁を採点可能なまま保持する。
+他surfaceのreceiptは、そのsurfaceを正式runtimeとして登録する別系列で要求する。Codexのfull-agent比較へ未登録surfaceを混ぜない。品質、機序、対象外影響、KPI、安定性、直接の基準、allowed deltaおよび非目標はfull-agentについて直接比較設計へ固定済みである。
+
+control-free測定成立監査では、repository target v1へprotocol identityを偽装しない[`semantic target登録設計`](portable-instruction-semantic-target-registration-design.md)、単一Case packet materializer、v2 subject/runtime compatibility preflight、formal target登録、共通TaskSpec wrapper、runtime capability catalog、Codex N=1 Profile、Structured Outputs subsetへの意味保存投影、thread-bound永続一次tokenおよび計画限定の実行入口を固定した。r4資格確認は14件すべて有効で、score 4と機序通過は各5/14だった。portable Candidateはqualityを7/14へ上げた一方、token中央値が約21%、elapsed中央値が約7%増え、quality gateを通過しなかった。この差を安定傾向または直接親に対する効率差とせず、固定costのblock別切り分けへ戻る。
 
 Claude Code自身によるC147の静的適用可能性報告は[`C147 Claude Code自己評価のtriage`](c147-claude-code-self-assessment-triage.md)へ記録した。Codex固有field、wrapper、継続identityおよびambient recovery/protocol不足はsurface mismatchとして採用し、EVIDENCE_GATEの有害性、形式記法の実効および5項目だけが有効という集約はdynamic probe待ちとする。
 

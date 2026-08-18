@@ -18,6 +18,8 @@
 
 `c147-portable-kernel-draft-r1`はその後続草案である。`actor-core / actor-input`を共通にし、`single-actor / multi-actor`を択一してroot-onlyとfull-agentを別の一枚へ構成する。schema `v3`の`draft / bundle_binding_eligible=false / output_prompt_identity=null`であり、renderはできるがfull bundleにはbindできない。
 
+P001 Standard14 N=5の後続診断により、`validation-execution`は共通semantic closureとplatform固有carrier能力を同じcomponentに持つことが分かった。Codex CLI 0.146.0の独立probeで7能力を確認した後、[`P001 validation carrier platform分離設計`](../../docs/p001-validation-carrier-platform-separation-design.md)に従う管理用r2 draftを追加した。`validation-plan-semantics-r2 / validation-result-closure-r2`と`validation-carrier-codex-r2`を分けるが、最終成果は自己完結した一枚である。既存r1は変更せず、r2もCandidateまたは評価入力へ昇格していない。
+
 確認command：
 
 ```bash

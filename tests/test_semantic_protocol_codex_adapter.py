@@ -5,10 +5,13 @@ from pathlib import Path
 import pytest
 
 from scripts.semantic_protocol_codex_adapter import (
+    OUTPUT_SCHEMA_TRANSPORT_R2,
+    OUTPUT_SCHEMA_TRANSPORT_R3,
     SemanticCodexAdapterError,
     adapter_contract,
     build_command,
     collect_accounted_usage,
+    collect_accounted_usage_persisted,
     parse_codex_jsonl,
     prepare_instruction_workspace,
     validate_final_response,
@@ -23,6 +26,9 @@ RESPONSE_SCHEMA = ROOT / "docs/portable-instruction-semantic-conformance-heldout
 ORACLE = ROOT / "docs/portable-instruction-semantic-conformance-heldout-r1/oracle.json"
 TARGET_ROOT = ROOT / "evaluations/targets/portable-instruction-semantic-conformance"
 FORMAL_PROFILE = TARGET_ROOT / "profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r1.json"
+FORMAL_PROFILE_R2 = TARGET_ROOT / "profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r2.json"
+FORMAL_PROFILE_R3 = TARGET_ROOT / "profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r3.json"
+FORMAL_PROFILE_R4 = TARGET_ROOT / "profiles/portable-semantic-control-free-codex-cli0146-sol-medium-heldout-r1-n1-r4.json"
 FORMAL_TARGET = TARGET_ROOT / "target.json"
 FORMAL_BUNDLE = TARGET_ROOT / "prompts/baselines/portable-semantic-a544769-control-free-r1"
 
@@ -63,6 +69,46 @@ def test_registered_profile_is_fully_bound_but_not_dispatchable() -> None:
     }
     assert receipt["dispatch_allowed"] is False
     assert receipt["stop_reason"] == "adapter_execution_entrypoint_disabled"
+
+
+def test_r2_profile_adds_only_bound_schema_transport_to_runtime() -> None:
+    receipt = validate_registered_profile(
+        profile_path=FORMAL_PROFILE_R2,
+        target_path=FORMAL_TARGET,
+        bundle_path=FORMAL_BUNDLE,
+        repository_root=ROOT,
+    )
+    assert receipt["profile_id"] == FORMAL_PROFILE_R2.stem
+    r1 = json.loads(FORMAL_PROFILE.read_text(encoding="utf-8"))
+    r2 = json.loads(FORMAL_PROFILE_R2.read_text(encoding="utf-8"))
+    transport = r2["runtime_ref"].pop("output_schema_transport")
+    assert transport == OUTPUT_SCHEMA_TRANSPORT_R2
+    r2["profile_id"] = r1["profile_id"]
+    assert r2 == r1
+
+    r3_receipt = validate_registered_profile(
+        profile_path=FORMAL_PROFILE_R3,
+        target_path=FORMAL_TARGET,
+        bundle_path=FORMAL_BUNDLE,
+        repository_root=ROOT,
+    )
+    assert r3_receipt["profile_id"] == FORMAL_PROFILE_R3.stem
+    r3 = json.loads(FORMAL_PROFILE_R3.read_text(encoding="utf-8"))
+    r3_transport = r3["runtime_ref"].pop("output_schema_transport")
+    assert r3_transport == OUTPUT_SCHEMA_TRANSPORT_R3
+    r3["profile_id"] = r1["profile_id"]
+    assert r3 == r1
+
+    r4_receipt = validate_registered_profile(
+        profile_path=FORMAL_PROFILE_R4,
+        target_path=FORMAL_TARGET,
+        bundle_path=FORMAL_BUNDLE,
+        repository_root=ROOT,
+    )
+    assert r4_receipt["profile_id"] == FORMAL_PROFILE_R4.stem
+    r4 = json.loads(FORMAL_PROFILE_R4.read_text(encoding="utf-8"))
+    assert r4["runtime_ref"]["token_accounting"]["revision"] == "v2"
+    assert r4["transcript_ref"]["contract_id"] == "codex-rollout-thread-bound-final-usage-r2"
 
 
 def test_command_fixes_isolation_schema_and_persisted_usage_boundary(tmp_path: Path) -> None:
@@ -183,6 +229,29 @@ def test_collect_accounted_usage_refuses_incomplete_persisted_usage(tmp_path: Pa
         )
 
 
+def test_thread_bound_persisted_usage_does_not_require_exec_total_tokens(tmp_path: Path) -> None:
+    sessions = tmp_path / "sessions"
+    workspace = tmp_path / "workspace"
+    sessions.mkdir()
+    workspace.mkdir()
+    write_session(sessions / "root.jsonl", thread_id="root-1", workspace=workspace, total_tokens=12)
+    events = b'\n'.join(
+        [
+            b'{"type":"thread.started","thread_id":"root-1"}',
+            b'{"type":"turn.completed","usage":{"input_tokens":10,"output_tokens":2}}',
+        ]
+    )
+    usage = collect_accounted_usage_persisted(
+        session_root=sessions,
+        workspace=workspace,
+        codex_jsonl=events,
+        modified_since=None,
+    )
+    assert usage["root_total_tokens"] == 12
+    assert usage["all_agent_total_tokens"] == 12
+    assert usage["token_accounting"]["revision"] == "v2"
+
+
 def test_final_response_schema_validation_uses_no_oracle(tmp_path: Path) -> None:
     response = json.loads(ORACLE.read_text(encoding="utf-8"))["cases"][0]["expected_response"]
     response_path = tmp_path / "response.json"
@@ -200,3 +269,16 @@ def test_adapter_contract_cannot_execute_before_profile() -> None:
     assert contract["formal_target_required_before_execution"] is True
     assert contract["profile_required_before_execution"] is True
     assert contract["session_mode"] == "persisted_for_usage_collection"
+
+
+def test_r2_output_schema_transport_contract_is_narrow() -> None:
+    assert OUTPUT_SCHEMA_TRANSPORT_R2 == {
+        "revision": "codex-structured-output-projection-r2",
+        "api_schema_projection": "remove_uniqueItems_only",
+        "canonical_post_validation": True,
+    }
+    assert OUTPUT_SCHEMA_TRANSPORT_R3 == {
+        "revision": "codex-structured-output-supported-subset-r3",
+        "api_schema_projection": "supported_subset_semantic_equivalence",
+        "canonical_post_validation": True,
+    }

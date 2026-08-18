@@ -65,6 +65,26 @@ python3 scripts/evaluation_storage.py deduplicate-packs \
 
 pathとbyte内容は維持され、置換後の各packは独立に変更できる。hardlink、Git alternates、共有object directoryは使わない。`du`は共有blockを各fileへ計上することがあるため、実際の回収量はreceiptのfilesystem free bytes差分で確認する。
 
+### 安定した通常ファイルの物理重複
+
+別APFS containerへの`rsync`でLayer 1やworkspace全体のclonefile関係が失われた場合は、Git pack以外の安定した通常ファイルも共有blockへ戻せる。標準では24時間以上更新されていない64 KiB以上のファイルだけを対象とし、`.tar.zst`、Git pack、hardlink、symlink、lockを除外する。dry-runは内容、mode、owner、flags、mtime、拡張属性をwrite-once manifestへ固定する。
+
+```bash
+python3 scripts/evaluation_storage.py deduplicate-files \
+  --root /Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement \
+  --manifest /tmp/evaluation-file-dedup-manifest.json
+```
+
+適用時は全source / targetを再検証し、各targetの置換直前と置換後にも内容と拡張属性を確認する。圧縮アーカイブを展開せず、pathと独立変更可能性を維持する。
+
+```bash
+python3 scripts/evaluation_storage.py deduplicate-files \
+  --root /Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement \
+  --manifest /tmp/evaluation-file-dedup-manifest.json \
+  --apply \
+  --receipt /tmp/evaluation-file-dedup-receipt.json
+```
+
 ## Guarded GC
 
 自動GC候補は、次をすべて満たす`<root>/runs/`直下directoryだけである。

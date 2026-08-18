@@ -1,0 +1,3 @@
+# Profiles
+
+qualification、candidate-onlyおよびpaired comparison Profileの索引を置く。control-free N=1 qualification Profileは[`codex-validation-carrier-control-free-heldout-r1-codex-cli0146-sol-medium-n1-r1.json`](codex-validation-carrier-control-free-heldout-r1-codex-cli0146-sol-medium-n1-r1.json)で6件のvalid resultを取得し、測定経路をqualificationした。P002 candidate-only N=1 Profileは[`codex-validation-carrier-p002-heldout-r1-codex-cli0146-sol-medium-n1-r1.json`](codex-validation-carrier-p002-heldout-r1-codex-cli0146-sol-medium-n1-r1.json)で6件のvalid、Score 4、mechanism passを取得した。VCC6 P001/P002 N=5は[`vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1.json`](vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1.json)でP002 iteration 1の6件を再利用し、新規54 slotを共通キューへ発行した。結果はcost gate不通過である。

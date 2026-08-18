@@ -1,0 +1,50 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-c147-reference-heldout-r2-profile-registration-r1",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-reference-heldout-r2-codex-cli0146-sol-medium-n1-r1.json",
+    "sha256": "9c4a2f011fccf91423a66f3479b5df493e53ad8ad7ebf168d31709e26e22e168"
+  },
+  "target_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/registrations/heldout-r2-registration-r1.json",
+    "sha256": "cdf972167df32798553f3bd1f4fe15b1ad4d0b26728eafbfeb9c77eadf7dc744"
+  },
+  "prompt_bundle_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/full-agent-bundle-registration-r1.json",
+    "sha256": "8f0ad026dc732730b07171fddb9fb65cf14d32477ebe8daf8d5972d3a15cba03"
+  },
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"
+  },
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification_v2.py",
+    "sha256": "d4cfff05d01e12744fb70c92a79f9a88c65e7d3208c290c36fae9a459195bebf"
+  },
+  "registrar": {
+    "path": "scripts/register_semantic_protocol_qualification_v2.py",
+    "sha256": "f2f84deca766e304f7a79db5eb7a033789054525ad6a506863d0ff9040119da2"
+  },
+  "plan": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-heldout-r2-n1-dispatch-r1.json",
+    "sha256": "c92b465f09acfc46f551cc0322f35118776f11ad4a33eea092bd68e9724197d3"
+  },
+  "preflight": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-heldout-r2-n1-preflight-r1.json",
+    "sha256": "45f93e208c44a9ad4b7e1ffe0eee98b0fc8b3aa44b0e16da1e9b2ac6983c8e5a"
+  },
+  "allowed_delta": {
+    "effect": "bind an independent heldout revision and an explicit versioned target registration while preserving all historical runner and registration bytes",
+    "fields": ["target_registration_ref", "evaluation_set_ref", "profile_id", "dispatch_series_id"]
+  },
+  "state": {
+    "profile_registered": true,
+    "artifact_binding_required": true,
+    "adapter_execution_entrypoint_enabled": true,
+    "dispatch_plan_created": true,
+    "preflight_ready": true,
+    "qualification_started": false,
+    "reference_first": true,
+    "portable_candidate_dispatch_authorized": false
+  }
+}

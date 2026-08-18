@@ -1,0 +1,3 @@
+# Contracts
+
+TaskSpecは[`task-spec-template-v1.txt`](task-spec-template-v1.txt)、capability欠落時のslot拒否fixtureは[`preflight-negative-fixtures-v1.json`](preflight-negative-fixtures-v1.json)に固定する。materializerとtrace診断は[`../runtime/adapter.py`](../runtime/adapter.py)へ実装済みである。実行条件は[`codex-cli-0.146.0-validation-carrier-workspace-write-r1.json`](codex-cli-0.146.0-validation-carrier-workspace-write-r1.json)、token accountingは[`codex-rollout-token-accounting-r1.json`](codex-rollout-token-accounting-r1.json)、structured output transportは[`codex-output-schema-transport-r1.json`](codex-output-schema-transport-r1.json)へ分離した。

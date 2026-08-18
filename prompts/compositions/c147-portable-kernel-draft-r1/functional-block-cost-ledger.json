@@ -1,0 +1,116 @@
+{
+  "artifact": {
+    "artifact_role": "static_cost_diagnostic",
+    "evaluation_eligible": false,
+    "model_visible": false
+  },
+  "blocks": [
+    {
+      "block": "core",
+      "bytes": 2221,
+      "components": [
+        "header",
+        "vocabulary",
+        "outcome",
+        "completion"
+      ],
+      "primitive_count": 12,
+      "removable": false,
+      "share_percent": 20.6,
+      "tuning_cases": [
+        "PIC-Q01",
+        "PIC-Q03",
+        "PIC-Q04",
+        "PIC-Q06",
+        "PIC-Q07"
+      ]
+    },
+    {
+      "block": "actor",
+      "bytes": 2097,
+      "components": [
+        "actor-core",
+        "actor-input",
+        "multi-actor"
+      ],
+      "primitive_count": 19,
+      "removable": false,
+      "share_percent": 19.5,
+      "tuning_cases": [
+        "PIC-Q04"
+      ]
+    },
+    {
+      "block": "observation",
+      "bytes": 2120,
+      "components": [
+        "observation"
+      ],
+      "primitive_count": 15,
+      "removable": false,
+      "share_percent": 19.7,
+      "tuning_cases": [
+        "PIC-Q02"
+      ]
+    },
+    {
+      "block": "frontier",
+      "bytes": 1393,
+      "components": [
+        "frontier"
+      ],
+      "primitive_count": 11,
+      "removable": false,
+      "share_percent": 12.9,
+      "tuning_cases": [
+        "PIC-Q03",
+        "PIC-Q05"
+      ]
+    },
+    {
+      "block": "validation",
+      "bytes": 1919,
+      "components": [
+        "validation-plan",
+        "validation-execution"
+      ],
+      "primitive_count": 15,
+      "removable": false,
+      "share_percent": 17.8,
+      "tuning_cases": [
+        "PIC-Q06",
+        "PIC-Q07"
+      ]
+    },
+    {
+      "block": "execution",
+      "bytes": 1031,
+      "components": [
+        "method-recovery"
+      ],
+      "primitive_count": 9,
+      "removable": false,
+      "share_percent": 9.6,
+      "tuning_cases": [
+        "PIC-Q01",
+        "PIC-Q08"
+      ]
+    }
+  ],
+  "candidate_output": {
+    "bytes": 10781,
+    "content_sha256": "3d3733a4ec0bb531a5be8eb53922e92fafe37b479b6190d24a8176ae452805e3",
+    "prompt_identity": "portable-semantic-c147-portable-full-agent-r1"
+  },
+  "diagnostic_boundary": {
+    "byte_share_is_not_efficiency": true,
+    "heldout_r1_not_used_to_select_text_edits": true,
+    "result_reference": "evaluations/targets/portable-instruction-semantic-conformance/results/portable-semantic-c147-portable-full-agent-heldout-r1-n1-qualification-r1.json",
+    "tuning_source": "docs/portable-instruction-semantic-conformance-evaluation-design.md#tuning-case"
+  },
+  "primitive_coverage": {
+    "count": 81,
+    "path": "prompts/compositions/c147-portable-kernel-draft-r1/primitive-coverage.json"
+  },
+  "schema_version": "agent-execution-control.functional-block-cost-ledger/v1"
+}
