@@ -1,0 +1,25 @@
+{
+  "schema_version": "codex-validation-carrier-set/v1",
+  "set_id": "codex-validation-carrier-heldout-r1",
+  "set_revision": "r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "case_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/cases/heldout-r1/input-cases.json", "sha256": "c9b614243ad5f66742d4314cb2d49b4e17e8d6b7ba66adeb459e66c7235dd45c"},
+  "oracle_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/cases/heldout-r1/oracle.json", "sha256": "a1b865d486d52610a0024c8bb6167c112d23f700d10038a895ea48cab41184ff"},
+  "response_schema_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/schemas/response.schema.json", "sha256": "2f9fbcba5e22f7c7a8caf5d6e4aa6548a3b676f5a68e74f5ad10279964535916"},
+  "rating_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/rating-contracts/codex-validation-carrier-outcome-v1.json", "sha256": "b72aaf9761818863adcc9f99b8acd47217ec892af3e9e96cdee5476e3c82354a"},
+  "task_spec_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/contracts/task-spec-template-v1.txt", "sha256": "526b5928109e46922bc74febaec2daa4b65936512d8ea4a8250ebeb90d43ea68"},
+  "preflight_negative_source": {"path": "evaluations/targets/codex-validation-carrier-conformance/contracts/preflight-negative-fixtures-v1.json", "sha256": "9047f3c514af7a586a417750faa9dcdf4118fbee357b5ffd49ce4726bc051496"},
+  "cases": [
+    {"case_id": "VCC-H01", "case_revision": "r1"},
+    {"case_id": "VCC-H02", "case_revision": "r1"},
+    {"case_id": "VCC-H03", "case_revision": "r1"},
+    {"case_id": "VCC-H04", "case_revision": "r1"},
+    {"case_id": "VCC-H05", "case_revision": "r1"},
+    {"case_id": "VCC-H06", "case_revision": "r1"}
+  ],
+  "order": "case_id_ascending",
+  "membership_frozen": true,
+  "use": "target_qualification_then_candidate_only_p002_gate_then_p001_pair_if_authorized",
+  "formal_kpi_cases": true,
+  "preflight_negative_fixtures_are_evaluation_slots": false
+}

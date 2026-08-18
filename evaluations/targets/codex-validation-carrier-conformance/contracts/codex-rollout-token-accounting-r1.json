@@ -1,0 +1,28 @@
+{
+  "schema_version": "codex-validation-carrier-transcript-accounting/v1",
+  "contract_id": "codex-validation-carrier-rollout-thread-bound-final-usage-r1",
+  "token_accounting": {
+    "scope": "all_agents",
+    "revision": "v2",
+    "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+  },
+  "root_binding": {
+    "exec_event": "thread.started.thread_id",
+    "exec_usage": "not_used_for_total_tokens",
+    "persisted_session": "first session_meta payload id equal to exec thread_id with exact workspace cwd",
+    "required_match": "persisted root session identity equals exec thread_id"
+  },
+  "total_source": "persisted event_msg token_count info total_token_usage total_tokens",
+  "descendant_scope": "recursive sessions whose parent_thread_id descends from the bound root",
+  "admission": {
+    "all_selected_sessions_require_final_usage": true,
+    "missing_session_policy": "exclude_run",
+    "missing_total_policy": "exclude_run",
+    "inference_from_exec_input_output_tokens": false,
+    "inference_from_text_length": false
+  },
+  "privacy": {
+    "raw_transcripts": "private",
+    "published_evidence": "session identities and usage totals only"
+  }
+}

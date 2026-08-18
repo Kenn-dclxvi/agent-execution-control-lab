@@ -1,0 +1,58 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "change_reason": "P001の非validation機能を保持し、Codexでvalidation planを一回のprogrammatic carrierへbindして途中resultをmodelへ戻さない境界だけを追加する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "P001の非validation機能、case、oracle、TaskSpec、rating contractまたはtoken accountingの変更",
+      "Compact系列または他platform carrierの作成",
+      "Standard14へのprojection",
+      "採用、releaseまたはtarget本体へのprojection"
+    ],
+    "problem": "P001の共通validation semanticsだけでは、Codex上で複数validationの途中resultがmodelへ戻る経路とraw outputの投影経路を閉じられない。",
+    "prompt_set_name": "p002_portable_full_agent_codex_validation_carrier",
+    "scope": "Codexのisolated workspace rootへ配送する自己完結したAGENTS.md一件だけ。",
+    "state": "registered_not_evaluated"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "2fa8a0d70c8f72788f58906bd4bde1c627ba00260c1db12f97cc6171b0dce66d",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "validation_carrier_only_replacement",
+    "source_prompt_identity": "portable-semantic-c147-portable-full-agent-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "99808a45394680a6e9766d62c17601d8808c697c",
+      "mode": "100644",
+      "sha256": "999d409cd90b83408739d0140ddb5dc4e052f5af40bc603834553df5a6a0ad0b",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "p002-portable-full-agent-codex-validation-carrier-r1",
+  "provenance": {
+    "allowed_delta": "P001の共通validation blockをplan semanticsとresult closureへ分割し、Codex carrier blockを一件追加する。既存の非validation 66 primitiveはbyte保持する。",
+    "candidate_design": "docs/p002-codex-validation-carrier-candidate-precreation-design.md",
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-carrier-candidate-composition-r1",
+    "composition_sha256": "3f0b4d8cbe01d9d7f1252cc7a9438c4ed28ef65ff5be975a8c197929d5329b16",
+    "direct_parent_bundle_sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+    "direct_parent_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "direct_parent_manifest_sha256": "f34c97a0e1b03d221d663c3b16984058f78851dfa0ac4eb0081aeee5dcda37ef",
+    "heldout_source_freeze_id": "codex-validation-carrier-heldout-r1-source-freeze-r1",
+    "nonvalidation_primitive_coverage": "66_of_66_byte_preserved",
+    "source_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-carrier-candidate-r1.composition.json",
+    "source_draft_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-carrier-draft-r2.composition.json",
+    "source_draft_composition_sha256": "f16ea05f43479fe28026a59d2e4c7bab74ce1809591fee323af2ac45a80e25e6"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "660387978e8831bd3ca361c23800fcea2ca788e5",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "c0bd350a4923cc18fd51b319ec18f8b65e389afd"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

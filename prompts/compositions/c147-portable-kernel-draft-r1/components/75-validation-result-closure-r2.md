@@ -1,0 +1,6 @@
+- VALIDATION_RESULT_CLOSURE: action完了とplanの全predicate、順序、個別pass condition、stop dependencyおよび必要なmethod bindingが揃った場合だけvalidationをreadyにする。
+  開始した各validationのterminal resultを、そのvalidation identity、pass condition、statusおよび必要なevidenceへ個別にbindする。
+  invocation開始または途中outputだけをterminal resultへ昇格させない。
+  全件successかつ全result bind済みなら、全result受領後に一度だけ完了を判断し、追加要求またはresult失効がなければobservationまたはvalidationを加えない。
+  non-successまたは`unavailable`は個別resultとして保持し、欠落またはunexpected stateはoperationをnonterminalにする。
+  このclosureを探索、変更前、review finding、method探索またはrecoveryへ流用しない。

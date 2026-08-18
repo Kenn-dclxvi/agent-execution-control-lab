@@ -111,6 +111,10 @@ AIが選べる処理方法を、評価で観測した成功runのcommand、read�
 
 ## 制御の価値と評価順序
 
+同一のprompt改善系列では、評価ケース、fixture、TaskSpec、oracle、rating、model、reasoning、runtime、permission、token accountingおよび集計方法を固定し、Candidateのprompt identityだけを変える。固定benchmarkの結果から失敗経路やcost原因を診断し、その診断を次Candidateの一般的なpermissionまたはdependency境界へ反映してよい。この反復利用によってbenchmarkの比較可能性は失われないが、初見またはblindという証拠属性は失われる。両者を混同して、Candidateごとに新しい試験を作ってはならない。
+
+新しいケースまたは評価系列を作るのは、固定benchmarkでは対象機序を観測できないことが事前に確認された場合、評価契約の欠陥を修正する場合、またはtask objective自体が変わった場合に限る。その場合、旧系列と新系列の差をprompt効果として比較しない。別途blind検証が必要なら独立した最終gateとして事前に固定し、各Candidateの設計サイクルとは分ける。固定benchmarkのcase ID、model-invisibleなliteral、oracleまたはexpected resultをpromptへ転記することは、反復利用ではなく試験への個別適合なので禁止する。
+
 制御によるトークンの増減は、次の関係で考える。
 
 ```text

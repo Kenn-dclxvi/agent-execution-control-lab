@@ -1,0 +1,14 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-c147-reference-heldout-r3-n5-profile-registration-r1",
+  "profile": {"path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-reference-heldout-r3-codex-cli0146-sol-medium-n5-r1.json", "sha256": "44a850505ddb2f293f128d149072f5473d3497fbc6a4eb84f1f0f7174f1f8707"},
+  "target_registration": {"path": "evaluations/targets/portable-instruction-semantic-conformance/registrations/heldout-r3-registration-r1.json", "sha256": "d5496940139564db68befa262d1e26209bf07db45d0161028009383deca408a0"},
+  "prompt_bundle_registration": {"path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/full-agent-bundle-registration-r1.json", "sha256": "8f0ad026dc732730b07171fddb9fb65cf14d32477ebe8daf8d5972d3a15cba03"},
+  "adapter": {"path": "scripts/semantic_protocol_codex_adapter.py", "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"},
+  "runner": {"path": "scripts/run_semantic_protocol_qualification_v3.py", "sha256": "1b732eee5733c152830c6bc88e0950f8c03700da1503a5e05ea67531d68b0dd2"},
+  "registrar": {"path": "scripts/register_semantic_protocol_qualification_v3.py", "sha256": "1b4b504b959edb9a5b509db41a1cbef0f1f05bcde992ace8ff6124ff748676a8"},
+  "plan": {"path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-heldout-r3-n5-dispatch-r1.json", "sha256": "ce96d0d217e2c21c81b2cbd11ae678ab6ea3df37903941816593d910a5fc08da"},
+  "preflight": {"path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-heldout-r3-n5-preflight-r1.json", "sha256": "987752db3b364ec3edbbc2d503c200784a5cccd2bfed170bfbe44bdf1f7551c9"},
+  "allowed_delta": {"effect": "extend the heldout-r3 C147 reference from N=1 to N=5 by reusing i001 and issuing only missing i002-i005", "fields": ["profile_id", "dispatch_series_id", "repetition_condition", "dispatch_iterations"]},
+  "state": {"profile_registered": true, "artifact_binding_required": true, "adapter_execution_entrypoint_enabled": true, "dispatch_plan_created": true, "preflight_ready": true, "qualification_completed": true, "external_failures_preserved": true, "quality_gate": "failed"}
+}

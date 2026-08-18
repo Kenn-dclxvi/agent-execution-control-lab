@@ -1,0 +1,31 @@
+{
+  "schema_version": "codex-validation-carrier-paired-comparison-registration/v1",
+  "registration_id": "vcc6-p001-p002-n5-comparison-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "profile": {
+    "profile_id": "vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1.json",
+    "sha256": "19f33cb25b5a825b7a25af1f9d6ee7386cdd81ecc76d556256ac869690c3a357"
+  },
+  "result": {
+    "result_id": "vcc6-p001-p002-n5-comparison-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p001-p002-n5-comparison-r1.json",
+    "sha256": "ebaffb4122141b8afddde9d448abd2a8a236a7082a05feb4aa2f516cd0746c7b",
+    "result_sha256": "eee1d9269290d908fdda5a4eeaf7ee1cbf3cfb88ecddb1380254b39060cb2cc1"
+  },
+  "gate": {
+    "validity": "passed_60_of_60",
+    "p002_quality": "passed_score4_30_of_30",
+    "tokens_delta_percent_p002_minus_p001": -9.47303752891294,
+    "elapsed_delta_percent_p002_minus_p001": 10.716259824274328,
+    "cost_improvement": "failed_elapsed_increased"
+  },
+  "allowed_next_profile_class": null,
+  "forbidden_profile_classes": [
+    "p002_standard14_n5",
+    "p002_n20_extension",
+    "release_projection"
+  ],
+  "diagnostic_next_operation": "保存済みtraceからelapsed増加をCase別に診断する。結果を見て同一Candidateのpromptを変更または追加Nを発行しない。",
+  "state": "paired_targeted_n5_cost_gate_failed_stop_before_standard14"
+}

@@ -3,6 +3,9 @@
 > [!IMPORTANT]
 > **結果**: `valid_14_of_14 / schema_valid_14 / score4_7 / mechanism_passed_7 / quality_failed / c147_reference_not_authorized / adoption_not_decided / release_not_decided / projection_not_authorized`
 
+> [!NOTE]
+> 上記は未資格のsemantic held-out r1へCandidateを先行発行した履歴結果である。後続のC147 referenceは同じsetでScore 4が6 / 14となり、set自体がC147同等性テストとして不適格と判定された。現在は7 / 14をportable再現率へ使わず、[`C147 reference先行資格確認r1結果`](portable-semantic-c147-reference-qualification-r1-result.md)を正とする。
+
 ## 結論
 
 portable full-agent CandidateはCodex CLI 0.146.0、GPT-5.6 Sol、reasoning `medium`、held-out r1全14 Case、N=1で、応答、all-agent一次tokenおよびelapsedを14件すべて欠落なく取得した。ただしscore 4は7 / 14であり、事前に固定した14 / 14のquality gateを通過しなかった。

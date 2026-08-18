@@ -1,0 +1,1206 @@
+{
+  "schema_version": "portable-instruction-semantic-cases/v1",
+  "set_id": "portable-instruction-semantic-heldout-r2",
+  "response_schema": "portable-instruction-control-response/r2",
+  "cases": [
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h15-retention_window",
+            "state": "unbound",
+            "value": null
+          },
+          {
+            "value_id": "h15-retention-format",
+            "state": "bound",
+            "value": "calendar-days"
+          }
+        ],
+        "authorities": [],
+        "permissions": [
+          "clarification:allowed",
+          "observation:denied",
+          "action:denied"
+        ],
+        "stop_conditions": [
+          "required_outcome_unbound"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h15-inspect-storage",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h15",
+          "permission": "denied",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h15-apply-policy",
+          "class": "action",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h15",
+          "permission": "denied",
+          "required_inputs": [
+            "retention_window"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h16-retention_window",
+            "state": "bound",
+            "value": "45_days"
+          }
+        ],
+        "authorities": [
+          "policy-owner:retention_window=45_days"
+        ],
+        "permissions": [
+          "action:allowed",
+          "method_selection:executor_choice"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h16-apply-policy",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h16",
+          "permission": "allowed",
+          "required_inputs": [
+            "retention_window"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h16-substitute-policy",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h16",
+          "permission": "denied",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h17-publish_manifest",
+            "state": "bound",
+            "value": "required"
+          }
+        ],
+        "authorities": [
+          "manifest-rule:checksum_required"
+        ],
+        "permissions": [
+          "observation:consumer_bound_only"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h17-read-checksum",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h17",
+          "permission": "allowed",
+          "required_inputs": [
+            "checksum"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [
+            "op-h17-publish"
+          ],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h17-read-theme",
+          "class": "observation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h17",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h17-read-history",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h17",
+          "permission": "denied",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h17-publish",
+          "class": "action",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h17",
+          "permission": "allowed",
+          "required_inputs": [
+            "checksum"
+          ],
+          "dependencies": [
+            "op-h17-read-checksum"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h18-artifact_a",
+            "state": "bound",
+            "value": "repair"
+          },
+          {
+            "value_id": "h18-artifact_b",
+            "state": "bound",
+            "value": "index"
+          }
+        ],
+        "authorities": [
+          "result-res-h18-a:effect_scope=op-h18-a2"
+        ],
+        "permissions": [
+          "independent_ready_operations:start_allowed"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h18-a1",
+          "class": "action",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h18",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [
+            "op-h18-a2"
+          ],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h18-a2",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h18",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-h18-a"
+          ],
+          "dependencies": [
+            "op-h18-a1"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h18-b1",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h18",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h18-c1",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h18",
+          "permission": "denied",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h18-a",
+          "operation_id": "op-h18-a1",
+          "actor_identity": "actor-primary-h18",
+          "terminal_state": "failed",
+          "result_effect_scope": [
+            "op-h18-a2"
+          ],
+          "result_kind": "operation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h19-review_result",
+            "state": "bound",
+            "value": "actor_bound_result"
+          }
+        ],
+        "authorities": [
+          "op-h19-review:actor=actor-saffron-h19",
+          "op-h19-review:result_kind=risk_assessment"
+        ],
+        "permissions": [
+          "matching_provenance:admit",
+          "mismatched_provenance:deny"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h19-review",
+          "class": "action",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-saffron-h19",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "terminal"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h19-amber",
+          "operation_id": "op-h19-review",
+          "actor_identity": "actor-amber-h19",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "risk_assessment",
+          "content_digest": "sha256:same-as-reference"
+        },
+        {
+          "result_id": "res-h19-saffron",
+          "operation_id": "op-h19-review",
+          "actor_identity": "actor-saffron-h19",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "risk_assessment",
+          "content_digest": "sha256:different-from-reference"
+        },
+        {
+          "result_id": "res-h19-copper",
+          "operation_id": "op-h19-review",
+          "actor_identity": "actor-tertiary-h19",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "review_result",
+          "content_digest": "same-digest"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h20-inventory",
+            "state": "bound",
+            "value": "two_sources"
+          }
+        ],
+        "authorities": [
+          "frontier:f1,f2"
+        ],
+        "permissions": [
+          "atomic_frontier:start_allowed"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h20-f1",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h20",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h20-f2",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h20",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h20-f3",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h20",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h21-migration_plan",
+            "state": "bound",
+            "value": "ready"
+          }
+        ],
+        "authorities": [
+          "identity_result_does_not_change_reads",
+          "action_depends_on_identity_result"
+        ],
+        "permissions": [
+          "atomic_frontier:start_allowed"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h21-identity",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [
+            "op-h21-apply"
+          ],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h21-read-alpha",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h21-read-beta",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h21-read-gamma",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h21-read-delta",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h21-apply",
+          "class": "action",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h21",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-identity"
+          ],
+          "dependencies": [
+            "op-h21-identity"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h22-parallel_snapshot",
+            "state": "bound",
+            "value": "all_or_unavailable"
+          }
+        ],
+        "authorities": [
+          "frontier:s1,s2,s3"
+        ],
+        "permissions": [
+          "subset_frontier:denied"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h22-s1",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h22",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h22-s2",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h22",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h22-s3",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h22",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h22-s4",
+          "class": "observation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h22",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": false,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h23-validation",
+            "state": "bound",
+            "value": "all_steps_success"
+          }
+        ],
+        "authorities": [
+          "validation_order:v1,v2"
+        ],
+        "permissions": [
+          "admit_bound_results:allowed"
+        ],
+        "stop_conditions": [
+          "all_steps_terminal_success"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h23-validation",
+          "class": "validation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h23",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-h23-v1",
+            "res-h23-v2",
+            "res-h23-v3"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "running"
+        },
+        {
+          "operation_id": "op-h23-v1",
+          "class": "validation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h23",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h23-v2",
+          "class": "validation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h23",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h23-v1"
+          ],
+          "result_effect_scope": [],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h23-v3",
+          "class": "validation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h23",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h23-v2"
+          ],
+          "result_effect_scope": [],
+          "status": "terminal"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h23-v1",
+          "operation_id": "op-h23-v1",
+          "actor_identity": "actor-primary-h23",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        },
+        {
+          "result_id": "res-h23-v2",
+          "operation_id": "op-h23-v2",
+          "actor_identity": "actor-primary-h23",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        },
+        {
+          "result_id": "res-h23-v3",
+          "operation_id": "op-h23-v3",
+          "actor_identity": "actor-primary-h23",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h24-validation",
+            "state": "bound",
+            "value": "ordered_fail_fast"
+          }
+        ],
+        "authorities": [
+          "validation_order:v1,v2,v3"
+        ],
+        "permissions": [
+          "post_failure_start:denied"
+        ],
+        "stop_conditions": [
+          "first_non_success"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h24-validation",
+          "class": "validation",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h24",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-h24-v1"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "running"
+        },
+        {
+          "operation_id": "op-h24-v1",
+          "class": "validation",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h24",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h24-v2",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h24",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h24-v1"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h24-v3",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h24",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h24-v2"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h24-v-extra",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h24",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h24-v3"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h24-v1",
+          "operation_id": "op-h24-v1",
+          "actor_identity": "actor-primary-h24",
+          "terminal_state": "failed",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h25-validation",
+            "state": "bound",
+            "value": "ordered_fail_fast"
+          }
+        ],
+        "authorities": [
+          "validation_order:v1,v2,v3,v4"
+        ],
+        "permissions": [
+          "post_failure_start:denied"
+        ],
+        "stop_conditions": [
+          "first_non_success"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h25-validation",
+          "class": "validation",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-h25-v1",
+            "res-h25-v2"
+          ],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "running"
+        },
+        {
+          "operation_id": "op-h25-v1",
+          "class": "validation",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h25-v2",
+          "class": "validation",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h25-v1"
+          ],
+          "result_effect_scope": [],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h25-v3",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h25-v2"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h25-v4",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h25-v3"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h25-v-extra",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h25",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [
+            "op-h25-v4"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h25-v1",
+          "operation_id": "op-h25-v1",
+          "actor_identity": "actor-primary-h25",
+          "terminal_state": "success",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        },
+        {
+          "result_id": "res-h25-v2",
+          "operation_id": "op-h25-v2",
+          "actor_identity": "actor-primary-h25",
+          "terminal_state": "failed",
+          "result_effect_scope": [],
+          "result_kind": "validation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h26-validation",
+            "state": "bound",
+            "value": "continue_existing_invocation"
+          }
+        ],
+        "authorities": [
+          "continuation_identity=invocation-h26-cobalt"
+        ],
+        "permissions": [
+          "same_invocation_continue:allowed",
+          "other_operation_start:denied"
+        ],
+        "stop_conditions": [
+          "invocation_terminal"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h26-v1",
+          "class": "validation",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h26",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "running",
+          "invocation_id": "invocation-h26-cobalt"
+        },
+        {
+          "operation_id": "op-h26-ready-decoy",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h26",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h26-ready-decoy-2",
+          "class": "action",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h26",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h27-required_execution",
+            "state": "bound",
+            "value": "exec-citrine"
+          }
+        ],
+        "authorities": [
+          "environment_recovery_allowance=unbound"
+        ],
+        "permissions": [
+          "recovery_without_allowance:denied"
+        ],
+        "stop_conditions": []
+      },
+      "operations": [
+        {
+          "operation_id": "op-h27-exec",
+          "class": "action",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h27",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [
+            "op-h27-recovery"
+          ],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h27-recovery",
+          "class": "recovery",
+          "predicate_state": "unobserved",
+          "actor_identity": "actor-primary-h27",
+          "permission": "denied",
+          "required_inputs": [
+            "res-h27-exec"
+          ],
+          "dependencies": [
+            "op-h27-exec"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h27-substitute-method",
+          "class": "recovery",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h27",
+          "permission": "denied",
+          "required_inputs": [
+            "res-h27-exec"
+          ],
+          "dependencies": [
+            "op-h27-exec"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h27-exec",
+          "operation_id": "op-h27-exec",
+          "actor_identity": "actor-primary-h27",
+          "terminal_state": "failed_environment",
+          "result_effect_scope": [
+            "op-h27-recovery"
+          ],
+          "result_kind": "operation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r2",
+      "request_contract": {
+        "required_outcomes": [
+          {
+            "value_id": "h28-required_execution",
+            "state": "bound",
+            "value": "exec-citrine"
+          }
+        ],
+        "authorities": [
+          "environment_recovery_allowance=1",
+          "recovery_pair=environment_only_repair+same_execution_rerun"
+        ],
+        "permissions": [
+          "bound_recovery:start_allowed",
+          "method_substitution:denied"
+        ],
+        "stop_conditions": [
+          "recovery_allowance_exhausted"
+        ]
+      },
+      "operations": [
+        {
+          "operation_id": "op-h28-exec",
+          "class": "action",
+          "predicate_state": "unsatisfied",
+          "actor_identity": "actor-primary-h28",
+          "permission": "allowed",
+          "required_inputs": [],
+          "dependencies": [],
+          "result_effect_scope": [
+            "op-h28-recovery"
+          ],
+          "status": "terminal"
+        },
+        {
+          "operation_id": "op-h28-recovery",
+          "class": "recovery",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h28",
+          "permission": "allowed",
+          "required_inputs": [
+            "res-h28-exec"
+          ],
+          "dependencies": [
+            "op-h28-exec"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h28-substitute-method",
+          "class": "recovery",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h28",
+          "permission": "denied",
+          "required_inputs": [
+            "res-h28-exec"
+          ],
+          "dependencies": [
+            "op-h28-exec"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        },
+        {
+          "operation_id": "op-h28-substitute-runtime",
+          "class": "recovery",
+          "predicate_state": "satisfied",
+          "actor_identity": "actor-primary-h28",
+          "permission": "denied",
+          "required_inputs": [
+            "res-h28-exec"
+          ],
+          "dependencies": [
+            "op-h28-exec"
+          ],
+          "result_effect_scope": [],
+          "status": "not_started"
+        }
+      ],
+      "received_results": [
+        {
+          "result_id": "res-h28-exec",
+          "operation_id": "op-h28-exec",
+          "actor_identity": "actor-primary-h28",
+          "terminal_state": "failed_environment",
+          "result_effect_scope": [
+            "op-h28-recovery"
+          ],
+          "result_kind": "operation_result"
+        }
+      ],
+      "available_capabilities": {
+        "actor_result_provenance": true,
+        "atomic_frontier_commit": true,
+        "continuation_identity": true,
+        "environment_recovery": true
+      },
+      "required_response_schema": "portable-instruction-control-response/r2"
+    }
+  ]
+}
+

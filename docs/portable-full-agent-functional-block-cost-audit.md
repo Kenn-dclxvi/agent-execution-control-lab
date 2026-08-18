@@ -3,6 +3,12 @@
 > [!IMPORTANT]
 > **状態**: `static_cost_partitioned / total_bytes_10781 / primitives_81_bound / tuning_q01_q08_bound / removable_blocks_0 / compact_candidate_not_created / new_evaluation_not_started`
 
+> [!NOTE]
+> この静的cost分割は履歴診断として有効だが、後続のC147 reference先行資格確認でsemantic held-out r1が不適格となったため、compact化は停止している。portable同等性を資格確認するまで、本書の統合候補からCandidateを作成しない。
+
+> [!NOTE]
+> 後続のP001 Standard14 N=5では、静的byte比率ではなくmodelへの途中result ingressを使ってcostを再分割した。主因をvalidation carrier、副因をfrontier carrierへ限定した現行診断は[`p001-standard14-n5-functional-block-cost-diagnostic.md`](p001-standard14-n5-functional-block-cost-diagnostic.md)を正とする。
+
 ## 結論
 
 portable full-agent一枚の固定instruction costは一つの巨大条項ではなく、core、actor、observation、frontier、validationおよびexecutionへ分散している。最大のcoreでも20.6%であり、最大blockを一つ削れば解決する構造ではない。

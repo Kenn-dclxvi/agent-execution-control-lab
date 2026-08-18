@@ -3,6 +3,9 @@
 > [!IMPORTANT]
 > **状態**: `candidate_precreation_gate_fixed / direct_parent_c147 / measurement_control_r4_reused / c147_reference_bundle_registered / portable_candidate_bundle_registered / candidate_issued_14 / candidate_valid_14 / candidate_score4_7 / quality_failed / c147_reference_not_authorized / root_only_out_of_scope`
 
+> [!NOTE]
+> この状態はCandidate-first順序で実施した当時の記録である。後続監査で、semantic set自体をC147 referenceで先に資格確認する必要があると訂正した。C147は14 / 14 validだがScore 4が6 / 14となったため、現在は[`C147 reference先行資格確認r1結果`](portable-semantic-c147-reference-qualification-r1-result.md)を正とし、held-out r1をportable同等性比較へ使わない。
+
 ## 結論
 
 portable full-agent kernelの効率は、control-freeとの絶対差ではなく、C147の既存full-agent一枚との直接比較で判定する。control-free r4は14 Caseすべてでschema、all-agent一次tokenおよびelapsedを取得できることを証明した測定基盤であり、品質はscore 4が5 / 14なので、品質維持後のcost比較基準にはしない。

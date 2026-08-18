@@ -263,7 +263,9 @@ def valid_all_agent_usage(cycle: Path, run_id: str) -> dict[str, Any]:
     return usage
 
 
-def create_rating_view(cycle: Path, run_id: str) -> dict[str, Any]:
+def create_rating_view(
+    cycle: Path, run_id: str, reuse_existing: bool = False
+) -> dict[str, Any]:
     evidence = cycle / "layer2" / "evidence" / run_id
     workspace = evidence / "workspace"
     extension = cycle / "layer2" / "extensions" / run_id / "codex-adapter"
@@ -283,20 +285,13 @@ def create_rating_view(cycle: Path, run_id: str) -> dict[str, Any]:
     if not (workspace / ".git").exists():
         raise LongRunStorageError(f"workspace is not an intact Git checkout: {run_id}")
 
-    rating_view = evidence / "rating-view"
-    if rating_view.exists() or rating_view.is_symlink():
-        raise LongRunStorageError(f"refusing to overwrite rating view: {rating_view}")
-    rating_view.mkdir()
     diff = result_diff(workspace, base_commit, visible_paths)
-    (rating_view / "result.diff").write_bytes(diff)
     final_response = extension / "final-response.txt"
     if not final_response.is_file():
         raise LongRunStorageError(f"adapter final response is missing: {run_id}")
-    shutil.copyfile(final_response, rating_view / "final-response.txt")
     unexpected = adapter.get("unexpected_changed_paths")
-    validation = {
+    validation_fields = {
         "schema_version": "the-caption-prompt.rating-view-validation/v1",
-        "generated_at": utc_now(),
         "run_id": run_id,
         "adapter_exit_code": adapter.get("codex_exit_code"),
         "final_changed_paths": sorted(final_paths),
@@ -305,7 +300,32 @@ def create_rating_view(cycle: Path, run_id: str) -> dict[str, Any]:
         "unexpected_changed_paths": unexpected if isinstance(unexpected, list) else [],
         "test_claim_source": "final-response.txt; no machine pass/fail inferred",
     }
-    write_json_once(rating_view / "validation.json", validation)
+    rating_view = evidence / "rating-view"
+    if rating_view.exists() or rating_view.is_symlink():
+        if not reuse_existing:
+            raise LongRunStorageError(f"refusing to overwrite rating view: {rating_view}")
+        if rating_view.is_symlink() or not rating_view.is_dir():
+            raise LongRunStorageError(f"existing rating view is not a directory: {rating_view}")
+        expected_names = {"result.diff", "final-response.txt", "validation.json"}
+        actual_names = {path.name for path in rating_view.iterdir()}
+        if actual_names != expected_names:
+            raise LongRunStorageError(f"existing rating view has unexpected entries: {run_id}")
+        if not (rating_view / "result.diff").is_file():
+            raise LongRunStorageError(f"existing rating view diff is missing: {run_id}")
+        if (rating_view / "final-response.txt").read_bytes() != final_response.read_bytes():
+            raise LongRunStorageError(f"existing rating view response mismatch: {run_id}")
+        existing_validation = load_object(rating_view / "validation.json")
+        generated_at = existing_validation.pop("generated_at", None)
+        if not isinstance(generated_at, str) or existing_validation != validation_fields:
+            raise LongRunStorageError(f"existing rating view validation mismatch: {run_id}")
+    else:
+        rating_view.mkdir()
+        (rating_view / "result.diff").write_bytes(diff)
+        shutil.copyfile(final_response, rating_view / "final-response.txt")
+        write_json_once(
+            rating_view / "validation.json",
+            {"generated_at": utc_now(), **validation_fields},
+        )
     return {
         "run_id": run_id,
         "result_paths": visible_paths,
@@ -504,9 +524,30 @@ def completed_executions(cycle: Path) -> tuple[list[str], list[str]]:
     return valid, excluded
 
 
-def seal_batch(batch: Path, zstd_level: int = 6) -> dict[str, Any]:
+def resolve_cycle(batch: Path, cycle_path: Path) -> tuple[Path, str]:
+    if cycle_path.is_absolute() or ".." in cycle_path.parts:
+        raise LongRunStorageError("cycle path must be relative and remain inside the batch")
+    cycle = batch / cycle_path
+    if cycle.is_symlink() or not cycle.is_dir():
+        raise LongRunStorageError("cycle path must be a real directory inside the batch")
+    resolved = cycle.resolve()
+    try:
+        relative = resolved.relative_to(batch)
+    except ValueError as exc:
+        raise LongRunStorageError("cycle path must remain inside the batch") from exc
+    if resolved != cycle:
+        raise LongRunStorageError("cycle path must not traverse symlinks")
+    return cycle, relative.as_posix()
+
+
+def seal_batch(
+    batch: Path,
+    zstd_level: int = 6,
+    cycle_path: Path = Path("cycle"),
+    reuse_existing_rating_views: bool = False,
+) -> dict[str, Any]:
     batch = batch.resolve()
-    cycle = batch / "cycle"
+    cycle, cycle_prefix = resolve_cycle(batch, cycle_path)
     if not (cycle / "layer1" / "set.json").is_file():
         raise LongRunStorageError(f"batch is not a frozen cycle: {batch}")
     compact = batch / "compact"
@@ -521,10 +562,17 @@ def seal_batch(batch: Path, zstd_level: int = 6) -> dict[str, Any]:
     ratings: list[dict[str, Any]] = []
     for run_id in valid:
         valid_all_agent_usage(cycle, run_id)
-        ratings.append(create_rating_view(cycle, run_id))
+        if reuse_existing_rating_views:
+            rating = load_object(cycle / "layer3" / "ratings" / f"{run_id}.json")
+            if rating.get("run_id") != run_id:
+                raise LongRunStorageError(f"existing rating does not match run: {run_id}")
+        ratings.append(
+            create_rating_view(cycle, run_id, reuse_existing_rating_views)
+        )
 
     archived_then_pruned = [
-        f"cycle/layer2/evidence/{run_id}/workspace" for run_id in (*valid, *excluded)
+        f"{cycle_prefix}/layer2/evidence/{run_id}/workspace"
+        for run_id in (*valid, *excluded)
     ]
     excluded_prefixes = ("compact",)
     entries = archive_entries(batch, excluded_prefixes)
@@ -533,6 +581,7 @@ def seal_batch(batch: Path, zstd_level: int = 6) -> dict[str, Any]:
         "schema_version": "the-caption-prompt.execution-evidence-seal/v1",
         "created_at": utc_now(),
         "batch": str(batch),
+        "cycle_path": cycle_prefix,
         "valid_run_ids": valid,
         "excluded_run_ids": excluded,
         "rating_views": ratings,
@@ -554,6 +603,7 @@ def seal_batch(batch: Path, zstd_level: int = 6) -> dict[str, Any]:
         "schema_version": "the-caption-prompt.execution-prune-receipt/v1",
         "created_at": utc_now(),
         "batch": str(batch),
+        "cycle_path": cycle_prefix,
         "seal_sha256": sha256_file(manifest_path),
         "archive_sha256": archive_result["archive_sha256"],
         "pruned_paths": pruned,
@@ -565,15 +615,20 @@ def seal_batch(batch: Path, zstd_level: int = 6) -> dict[str, Any]:
     return receipt
 
 
-def compact_batch(batch: Path, zstd_level: int = 9) -> dict[str, Any]:
+def compact_batch(
+    batch: Path, zstd_level: int = 9, cycle_path: Path = Path("cycle")
+) -> dict[str, Any]:
     batch = batch.resolve()
-    cycle = batch / "cycle"
+    cycle, cycle_prefix = resolve_cycle(batch, cycle_path)
     registration = cycle / "layer4" / "result-registration.json"
     if not registration.is_file():
         raise LongRunStorageError("final compact requires layer4/result-registration.json")
     execution_receipt = batch / "compact" / "execution-prune-receipt.json"
     if not execution_receipt.is_file():
         raise LongRunStorageError("final compact requires a completed execution seal")
+    recorded_cycle = load_object(execution_receipt).get("cycle_path", "cycle")
+    if recorded_cycle != cycle_prefix:
+        raise LongRunStorageError("final compact cycle path does not match execution seal")
     compact = batch / "compact"
     archive = compact / "final-evidence.tar.zst"
     manifest_path = compact / "final-compact-manifest.json"
@@ -581,12 +636,13 @@ def compact_batch(batch: Path, zstd_level: int = 9) -> dict[str, Any]:
     for output in (archive, manifest_path, receipt_path):
         if output.exists() or output.is_symlink():
             raise LongRunStorageError(f"refusing to overwrite compact output: {output}")
-    entries = archive_entries(batch, ("compact", "cycle/layer1"))
+    entries = archive_entries(batch, ("compact", f"{cycle_prefix}/layer1"))
     archive_result = create_verified_archive(batch, archive, entries, zstd_level)
     manifest = {
         "schema_version": "the-caption-prompt.final-evidence-seal/v1",
         "created_at": utc_now(),
         "batch": str(batch),
+        "cycle_path": cycle_prefix,
         "result_registration_sha256": sha256_file(registration),
         "entries": entries,
         **archive_result,
@@ -603,7 +659,7 @@ def compact_batch(batch: Path, zstd_level: int = 9) -> dict[str, Any]:
         path = cycle / name
         if path.is_dir() and not path.is_symlink():
             shutil.rmtree(path)
-            pruned.append(f"cycle/{name}")
+            pruned.append(f"{cycle_prefix}/{name}")
     for path in (cycle / "layer4").iterdir():
         if path != registration:
             if path.is_dir() and not path.is_symlink():
@@ -616,6 +672,7 @@ def compact_batch(batch: Path, zstd_level: int = 9) -> dict[str, Any]:
         "schema_version": "the-caption-prompt.final-compact-receipt/v1",
         "created_at": utc_now(),
         "batch": str(batch),
+        "cycle_path": cycle_prefix,
         "manifest_sha256": sha256_file(manifest_path),
         "archive_sha256": archive_result["archive_sha256"],
         "retained_uncompressed": [
@@ -623,8 +680,8 @@ def compact_batch(batch: Path, zstd_level: int = 9) -> dict[str, Any]:
             for path in (
                 "summary.json",
                 "plan.json",
-                "cycle/layer1",
-                "cycle/layer4/result-registration.json",
+                f"{cycle_prefix}/layer1",
+                f"{cycle_prefix}/layer4/result-registration.json",
             )
             if (batch / path).exists()
         ],
@@ -679,12 +736,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     seal = subparsers.add_parser("seal-batch", help="seal rating evidence and prune workspaces")
     seal.add_argument("--batch", type=Path, required=True)
+    seal.add_argument("--cycle-path", type=Path, default=Path("cycle"))
+    seal.add_argument("--reuse-existing-rating-views", action="store_true")
     seal.add_argument("--zstd-level", type=zstd_level, default=6)
     seal.add_argument("--codex-config", type=Path, default=default_codex_config())
     seal.add_argument("--skip-codex-config-cleanup", action="store_true")
 
     compact = subparsers.add_parser("compact-batch", help="compress a registered batch")
     compact.add_argument("--batch", type=Path, required=True)
+    compact.add_argument("--cycle-path", type=Path, default=Path("cycle"))
     compact.add_argument("--zstd-level", type=zstd_level, default=9)
     return parser
 
@@ -707,7 +767,12 @@ def main() -> int:
                 args.source, args.destination, args.receipt, args.allow_copy_fallback
             )
         elif args.command == "seal-batch":
-            result = seal_batch(args.batch, args.zstd_level)
+            result = seal_batch(
+                args.batch,
+                args.zstd_level,
+                args.cycle_path,
+                args.reuse_existing_rating_views,
+            )
             if not args.skip_codex_config_cleanup:
                 try:
                     result["codex_project_config_cleanup"] = maintain_codex_config_for_batch(
@@ -719,7 +784,7 @@ def main() -> int:
                         "error": str(exc),
                     }
         else:
-            result = compact_batch(args.batch, args.zstd_level)
+            result = compact_batch(args.batch, args.zstd_level, args.cycle_path)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
     except (LongRunStorageError, OSError) as exc:

@@ -1,0 +1,2794 @@
+{
+  "allowed_next_profile_class": null,
+  "arm_summary": {
+    "P001": {
+      "all_agent_total_tokens_median": 63927.0,
+      "all_agent_total_tokens_sum": 1787262,
+      "elapsed_seconds_median": 27.837788521,
+      "elapsed_seconds_sum": 806.971840792,
+      "external_failures": 0,
+      "mechanism_failed": 25,
+      "mechanism_passed": 5,
+      "quality_score_distribution": {
+        "1": 5,
+        "4": 25
+      },
+      "quality_score_mean": 3.5,
+      "quality_score_median": 4.0,
+      "valid_results": 30
+    },
+    "P002": {
+      "all_agent_total_tokens_median": 50574.0,
+      "all_agent_total_tokens_sum": 1617954,
+      "elapsed_seconds_median": 31.5309603335,
+      "elapsed_seconds_sum": 893.44903996,
+      "external_failures": 0,
+      "mechanism_failed": 0,
+      "mechanism_passed": 30,
+      "quality_score_distribution": {
+        "4": 30
+      },
+      "quality_score_mean": 4,
+      "quality_score_median": 4.0,
+      "valid_results": 30
+    }
+  },
+  "arms": {
+    "P001": {
+      "prompt_set_identity": {
+        "name": "portable-semantic-c147-portable-full-agent-r1",
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/candidates/portable-semantic-c147-portable-full-agent-r1",
+        "revision": "r1",
+        "sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0"
+      },
+      "requested_iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reuse": []
+    },
+    "P002": {
+      "prompt_set_identity": {
+        "name": "p002-portable-full-agent-codex-validation-carrier-r1",
+        "path": "evaluations/targets/codex-validation-carrier-conformance/prompts/candidates/p002-portable-full-agent-codex-validation-carrier-r1",
+        "revision": "r1",
+        "sha256": "2fa8a0d70c8f72788f58906bd4bde1c627ba00260c1db12f97cc6171b0dce66d"
+      },
+      "requested_iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reuse": [
+        {
+          "iteration": 1,
+          "path": "evaluations/targets/codex-validation-carrier-conformance/results/codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1.json",
+          "result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+          "result_sha256": "dfaa9904102dc0dfbe20b60402033a0c29584b116034a03dc76607c60a18eb72",
+          "sha256": "db99bb30ceb06636c8abc81c354042c2e56dc3ee4a6e7bb5a22b8c2cf55d8ca2"
+        }
+      ]
+    }
+  },
+  "case_comparison": [
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 171518,
+        "elapsed_seconds_sum": 93.543559292,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 160013,
+        "elapsed_seconds_sum": 65.741766583,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H01",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": -11505,
+        "elapsed_seconds_sum": -27.801792708999997
+      }
+    },
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 368310,
+        "elapsed_seconds_sum": 168.377982667,
+        "mechanism_passed": 0,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 320876,
+        "elapsed_seconds_sum": 185.587572126,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H02",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": -47434,
+        "elapsed_seconds_sum": 17.209589459
+      }
+    },
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 286772,
+        "elapsed_seconds_sum": 135.42036425,
+        "mechanism_passed": 0,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 285853,
+        "elapsed_seconds_sum": 172.080770959,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H03",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": -919,
+        "elapsed_seconds_sum": 36.660406709
+      }
+    },
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 321373,
+        "elapsed_seconds_sum": 143.343191042,
+        "mechanism_passed": 0,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 305977,
+        "elapsed_seconds_sum": 191.222648749,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H04",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": -15396,
+        "elapsed_seconds_sum": 47.879457707
+      }
+    },
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 350575,
+        "elapsed_seconds_sum": 156.856845458,
+        "mechanism_passed": 0,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 246279,
+        "elapsed_seconds_sum": 127.180490542,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H05",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": -104296,
+        "elapsed_seconds_sum": -29.676354916000008
+      }
+    },
+    {
+      "P001": {
+        "all_agent_total_tokens_sum": 288714,
+        "elapsed_seconds_sum": 109.429898083,
+        "mechanism_passed": 0,
+        "quality_score_distribution": {
+          "1": 5
+        },
+        "valid_results": 5
+      },
+      "P002": {
+        "all_agent_total_tokens_sum": 298956,
+        "elapsed_seconds_sum": 151.635791001,
+        "mechanism_passed": 5,
+        "quality_score_distribution": {
+          "4": 5
+        },
+        "valid_results": 5
+      },
+      "case_id": "VCC-H06",
+      "delta_p002_minus_p001": {
+        "all_agent_total_tokens_sum": 10242,
+        "elapsed_seconds_sum": 42.205892918
+      }
+    }
+  ],
+  "cases": [
+    {
+      "all_agent_total_tokens": 47306,
+      "elapsed_seconds": 24.449987958,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1716,
+          "sha256": "49ccc1a10414173e74beb0743c476bda5ae0f66c8f5969c6c88c8dccc6f67b79"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "84ccc7f4d455a3ed19b67b6024c86a452fba2f01bfaff4f7698a715832bbdf70"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "cb84d1de4ec54e473bb8bbb771d5cbde4a28bd1bef261ca3d7ffd5ba250e0c01"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "c0df096495f1cb4cbfcb3423eef6e77bcca87851beb856776b262d79f5851b5b"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H01-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31048,
+      "elapsed_seconds": 17.907058125,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1315,
+          "sha256": "8aa28c68c3486f4e1e61fbe8a29470e80ab090313696172da093963b01b0e0d3"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "cd2508d2473832c4f84643a9748d4000fea1a47e9bc0340171759091f2845d89"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "12133eb9e5a8c7274f712ee1f4a7f04c29b748f66c59d9759a420e0f36cf81ed"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "d4fa84bac7cf7caa4c32b9b35f8cfacd230ed459c55508aae2e9e6153ea49198"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H01-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31058,
+      "elapsed_seconds": 16.88758225,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1318,
+          "sha256": "df1919d20f471e7b9d8fecc12773b9f9f843d7c1521956dabd347252cd1141ef"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "536f992c5b3928441cb541f97ec2112402cba9ebd8b4070e0176dfd6f43fc409"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "362202cdcf63b3214315b67768f6316e4c90662baa211077e5c23fc95a4a9171"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "9990a43b99bb24df56831f27fb60acdb9540cdf4c153d8bf8b3d92ab1cf311d1"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H01-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31200,
+      "elapsed_seconds": 18.337380375,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1609,
+          "sha256": "ca789c8d2e0a3770920e672870a3b923b0d9c67bc4ec5aa1cf45cd580c2204a6"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "217a9bfd8034892a3318d7406dd9650da71720d1c7313866bc92459220581579"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "405bd998ff0e8d851176fa45d5470b23a766163ee2e27393998be1accc38aabb"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "69b0614bb0276851c7d5b97cae18929e913e5e3afb347da098e3fda348ed05f0"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H01-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 30906,
+      "elapsed_seconds": 15.961550584,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1020,
+          "sha256": "c6474674467059be8dd8e7464bdfcb0e7ba8a83b436d43e962570704b9cae076"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "411ea7a3c97284510567b798f759b2670358a16a7e8b5e1908637dd65b996d35"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "90144e12b166cb0b3fb4870efd55da09fb17a38e15fa5e03e27c627c8943fa81"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "45692954b2cf3ccde9bbfcfd6e221f311247d849257f4f370d08f1cb89e152c6"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H01-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 80411,
+      "elapsed_seconds": 33.520822375,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2697,
+          "sha256": "0fb8e966e217afaeb6eaada5c0032aa74b2447af4d76db0124eb90ea6649638a"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "3df2ee7dd1f06504cd0f8fb97979087a687307e9ca173b88fd2097a3bb3473ac"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "d9eadd202329f4a13f04e7886eb177e9cbac1fbf78b3a306f538787d25530380"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "5534c55b1c98478314394b302b114b01068590ba5bf64ddfa70244ac89a8c9f2"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "ae8af8034a0bf665c7f1d9ebd1034723d0eb0eb1ccac80f1187269a9a4553ccc"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H02-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 80450,
+      "elapsed_seconds": 30.588395042,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2676,
+          "sha256": "dc57c860b56e87e89ff2baac145a8e88b8cbf7adfaef2a46ccfa992eaf27005d"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "da5021f9f862fbe596fd2ff93b614a7bca1b48599069f2c304cce149ec2a9f0e"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "d9eadd202329f4a13f04e7886eb177e9cbac1fbf78b3a306f538787d25530380"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "ca8d7fd38ddd395fd6745bd5c23d8f071b8c0049a06cd8a008c7f5fc05ca5ddc"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "698a52f2b22e2045cd52a2817aac0aeb0aaa4e855dd9f1a0d9f68f8933b31b24"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H02-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63901,
+      "elapsed_seconds": 39.2712375,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2278,
+          "sha256": "d368b4eccbb52089ac38df263de2d1d0b16f4e7e3d0b3038bf8f89fa6453f2f8"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "72b64765874d834d9d0a111b02a4276f8d8ce3031cb4c0ea11be50566c40532b"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "d9eadd202329f4a13f04e7886eb177e9cbac1fbf78b3a306f538787d25530380"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "05dedd58c2cdb2d0a04701deb66272f35cb3cf1b2f02baf92d6ff41c5c0fa7f4"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "a8433a79b24725f3c3cece15ea1f811230d72e977d870dc3375bb8dd6f1ddca3"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H02-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 79595,
+      "elapsed_seconds": 34.20338475,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2296,
+          "sha256": "871eff9a64d5b5dfb545d053e97df80e0c8ebe12d50e067fcdf9bd084132cabe"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "b5b5b3ad5bc9c916823e2d0b6010c4db6085554d515dade2e86fcfe6892fb62f"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "d9eadd202329f4a13f04e7886eb177e9cbac1fbf78b3a306f538787d25530380"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "0362ac14058a51c99330f0680e45601f16dc42adbcec894bad1fe5d5516258a4"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "60e79a53afdfd818beb553f9f2365b37d9750fb95da221f4cd6cdeb4dca7edfa"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H02-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63953,
+      "elapsed_seconds": 30.794143,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2301,
+          "sha256": "f2682629624a2fff62d7d114aaeb38b7f3a6a707a5d79197a4f33423efa1615a"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "22a9cb360e3ba5c55578d5761bd3763acf0db769faea85d77095b108a15988fa"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "d9eadd202329f4a13f04e7886eb177e9cbac1fbf78b3a306f538787d25530380"
+        },
+        "observation": {
+          "bytes": 744,
+          "sha256": "ae1bd9026f72861f7061dfe1a74605993297f6c1ec9ca7160ea148768a61858a"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "b7cfd8bffb707cb42c0b7f1293ab4fcb208d0d4ddabd2f6d871d654593089538"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H02-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63974,
+      "elapsed_seconds": 30.066156583,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2213,
+          "sha256": "dda7c34530bb050ecfa8fcd015bb7b38ae4d40685fcb07b7f78adec62c4ebfc8"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "efd95cb68edbd49d1c2a6efb26c761957fc5cb1b7c32eb09e374a2fa78439c68"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "81a5d4c0eef3f4d40a56120fea4456a931b45c25e3c939aff4926b5a133ac77f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "4619a5de30dac07c7dec05ad9cb7a179982c7e377fd503c5e308647777bad604"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "16a0e8139fa39cd4f151ec3f310734baf88c6aa6b141f30e6019e307c45267b6"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H03-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63729,
+      "elapsed_seconds": 28.471713792,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2211,
+          "sha256": "b1f1b5a0938a2f5708180371e9bd1cca33b8f57711503659085a76c15f20fa55"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "37da7dd9254a5aeef4c784ae350ad7ee03a99683a08c854536bf2cde0e60034c"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "81a5d4c0eef3f4d40a56120fea4456a931b45c25e3c939aff4926b5a133ac77f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "b29c1ef93f1afe770d5f34f4c782cc5458c3224cb33d33f29d90828e7cc6844f"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "e7c606b40d77f8572dd323edc18d2a8861354abfd10ffbcd50b92150cd2e5fab"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H03-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 47642,
+      "elapsed_seconds": 24.135301125,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1832,
+          "sha256": "7e5ca130d9618f71ad13b3de1194584ee58c0833d3ee6d83ba64011b98b5ff98"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "1fe0c0478d13f8986bc9046809f053772ddd2c739db016f83c6c88fa93830f6b"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "81a5d4c0eef3f4d40a56120fea4456a931b45c25e3c939aff4926b5a133ac77f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "d1b5d7efed3112b55afb94ca2e2ae4a71422cd4a29374260eb2b56c61b3271ef"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "6d44e8eb302c5df584d589e5c8bb116b60029734e6dfbe85a583f7a6254281e1"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H03-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 47445,
+      "elapsed_seconds": 22.469137167,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1832,
+          "sha256": "73b552e29241c60ab6495d9741f1fe2badd93daf84c5d5a36a2ad51a470c78fb"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "4e993493d5214cddc988aed47fff62adf439bc9d9c25db0fc2e1643a3ba2c794"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "81a5d4c0eef3f4d40a56120fea4456a931b45c25e3c939aff4926b5a133ac77f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "9166bc2591f94cd05a36a16052a54526d29c2e29572e446b07fd9d15ca32efee"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "3597e896b312f75482dac8027bcaf6422f5ecd8591eb5cd12894acc97dbf839d"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H03-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63982,
+      "elapsed_seconds": 30.278055583,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2213,
+          "sha256": "f82cbf399aa26659ac0b4b665a516eb2fbf057444c550e2962ef1908a3c8a57b"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "2bf5624950ac9317b2081cf229bb9bd45835a42040186c4a752a0de9a0e11c5e"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "81a5d4c0eef3f4d40a56120fea4456a931b45c25e3c939aff4926b5a133ac77f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "5f29d6bd6098a5695080d440a7f542970ae0b809d0e5ba9abb2d02f93a9e9091"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "2b9058bc64f11f330f3f062a88ab081d422d77b4c967e326b483aaddf8340bb9"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H03-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63445,
+      "elapsed_seconds": 24.861102125,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2006,
+          "sha256": "de85f0d21989cb4ff756adce4d58aa5d028422864a20b26c714e65b88585860d"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "019db836de643735a10f21145b37ad2f4824db026720c51f5ce26cb5d2c3e126"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "3a448a5c5b6179ab20e531f853caad1a185c9d0629ea028e6dad5dda9bb4ca89"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "bfd62b209abce5f2033dab19d17accc2186ae70a39123a804b358c9273a73c8d"
+        },
+        "stderr": {
+          "bytes": 730,
+          "sha256": "e2e654f41641f1234802bc824d8db16ae5d1f6d5d3eb6f3f154ca88cd5e9cda6"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H04-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 64090,
+      "elapsed_seconds": 27.993941625,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2334,
+          "sha256": "b173575cb4f4378527a83c0552cb38962e1b188c7e07c48f16a1fadd677db899"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "9986152cf9573dd5e38d3ec4ddbb65a59357d74577f2b1a79e3ffa8ca41f637b"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "3a448a5c5b6179ab20e531f853caad1a185c9d0629ea028e6dad5dda9bb4ca89"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "9cf243237e31e169a1fc3c6f814b36dd25473771afe265fe573b97867193de56"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "920372c445d0d1e3df705f8ec509a4d61978de0586fdf6579914d34ae5dd8d0c"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H04-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 65189,
+      "elapsed_seconds": 33.584846667,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2293,
+          "sha256": "f3935dd99d8224ce778671043d72baa8f5e541cc0320327fe12e36aef0d40d6f"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "6b25eaf432b37c007016ebedf9e39f8a5a9b088702209e273791b73841d053c1"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "3a448a5c5b6179ab20e531f853caad1a185c9d0629ea028e6dad5dda9bb4ca89"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "05c356cf36500929d66b3816409a5bef4ca27cc62f84c117042458eaf005b020"
+        },
+        "stderr": {
+          "bytes": 292,
+          "sha256": "1e1b462ec99702823923a21bbc85c3dc7fa3122a15e1aa58e3038ba158afbd5d"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H04-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 64310,
+      "elapsed_seconds": 29.221665208,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2297,
+          "sha256": "582973c5e845f4298279226a563b2f01926a24bb8b7915941121c0066259ab92"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "3ac386ee141ae6b9384b69dff9a2f4310b6d80141bc008cc7bf3ba733012c509"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "3a448a5c5b6179ab20e531f853caad1a185c9d0629ea028e6dad5dda9bb4ca89"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "a97669b2273ad169626dad369c785b4a682d4284fdc2ce3947307493bc4d96d5"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "be0a24531e8630a7326b65c4e0b74ed251c07eb60f617029fe69ecbe255ebac5"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H04-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 64339,
+      "elapsed_seconds": 27.681635417,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2297,
+          "sha256": "7d45c48d4e09db8e4c04cf4902c61e30ff665593c98d8d6d998ab89efa32b359"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "7c0f18a61cf7674a4ce876d8e444ac23ba0e2e1d6126bc2229c487b3d7a4ccbc"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1046,
+          "sha256": "3a448a5c5b6179ab20e531f853caad1a185c9d0629ea028e6dad5dda9bb4ca89"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "3248658ef2bc96eb8e39910a179b51c805aa1335a8dab146f5e07acf0af8618f"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "c4202c474586fe74a1378774c4e73717a37cbde78bcbe3326110fbb57f747eb9"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H04-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 79645,
+      "elapsed_seconds": 31.564016083,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2199,
+          "sha256": "bbc8e3f9d22200f44782789586cbe81c62d8ab4c86ae3aa77d3ed53d6cd5323c"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "7e292102da6fb1635ff3b7e5e70d154c9e19fcc6156ccfc00568daa2a159c5a9"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1086,
+          "sha256": "aeec6c4566caf5dcb2abd80a00c6900574e70728a39cad0b1f095f2fa95fc76f"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "1b2478270e04629daaa6ddd90ffc021cbfc5a2bc22dbb3bd11c4a965b24a73d6"
+        },
+        "stderr": {
+          "bytes": 730,
+          "sha256": "8c19b0f0c970d4ade9f50ab8caaeed35fe596e2dc59b26bf9ab479f04a14d4c0"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H05-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 80752,
+      "elapsed_seconds": 39.343010083,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2202,
+          "sha256": "49a1b0394b00ee1b5c6f5dbb8499b0ece307808cb46b402aaa7619d4a9f10e82"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "13062916fdc0ebf141c860375f785c967bd18071c9a0257d745d0175ba2b4a48"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1086,
+          "sha256": "d909458b28bd3e86b95d08750c62be2598a27ad0f4c68145b46f44bb9b1f38d9"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "e454798f3cdeadd6cb63e579d23cfbbe3f58d3fcf3fec8920b0d089d4a1c66d3"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "9c792eaeac3a93031c1df740925f04488c71c8d75f46d1b749613a2c538fa69f"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H05-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 64054,
+      "elapsed_seconds": 31.463574083,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1802,
+          "sha256": "fa309ba51afea226028a68a47240bc3bed937f0e7275334afdcd2e5207611c16"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "c7f4bbcb08e935429b48c2faac12b7c5bbee373e113d823b0bb2bf878d710990"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1086,
+          "sha256": "ea0d2d71d81d430b755652791bf5359f1eb116d2f469a7ae5871f951c7ff7d37"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "a94f66c79344bbdc5245a3c82d9ca07b63e700a0a2c5a8e976d8564b8239ec90"
+        },
+        "stderr": {
+          "bytes": 438,
+          "sha256": "ac5e1df985d306b6982e27bbb5de91f11ef9203d6503db4f38665b3e8d5ae8b7"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H05-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63056,
+      "elapsed_seconds": 31.495547084,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1814,
+          "sha256": "3244c93f3438100b2515d24f6bd5ba45811940bea2371d222329a611bbfa1a81"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "cf7d92a3a5dc85558ae8f57260f05156b93f181c5cbe54336db8569491f18a08"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1086,
+          "sha256": "d3ee48e4245d372ab69ac1e27669a05f01f375174180c44a592dcc1def5b6136"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "40b3895a54f397d3d8138e8154f3310c3773e7ee55f616ad65a6badc61b3b399"
+        },
+        "stderr": {
+          "bytes": 584,
+          "sha256": "b9962d17248e846c211fa8c4a6ae976b40372e900f0564d87603b8a7fc9609bd"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H05-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 63068,
+      "elapsed_seconds": 22.990698125,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1797,
+          "sha256": "9fcd91da7aea774adaef49585d8cb1f545f61c8caefb6ea28b1689c546338aa0"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "894b0d3e3a9e0db23b27554360bbc720dbaa37507e948d1c01723ef050a1a815"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1086,
+          "sha256": "79dec3370795955265d33950965109ecdf420421a872320c01703174252a11b8"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "00a1e77aaa7ef50d35d08b27ee138e66662aceaa1c5be216466e1bc864c756bc"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "83287e8014cf21823d55d23c60793225f48bd85bb126b4e7e4f9bbec77b60248"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H05-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 51275,
+      "elapsed_seconds": 22.5287905,
+      "evidence": {
+        "codex_events": {
+          "bytes": 91923,
+          "sha256": "3a5a1cb189cd063b7e68b34b6d24d28c26505bf1e7fc61e131ef66c613d64836"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "031735f98b31481f350803b8f008baa36c7679118f0644dafff5ce8beaac7a2e"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1154,
+          "sha256": "3bbcf210a35b0552282381a65cfc7f48d9c435a8e661f3a9ba75a576768b2c53"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "1a7edb7829a9522ecee774a7384c1dff6887fac5dd6f13a92690162324ef3e56"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "410dbf052bbcb568addb3e8626804aa642f926cdd0ed5e0c7f5d5ea0a45b170c"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 1,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P001-VCC-H06-i001"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 51501,
+      "elapsed_seconds": 23.1800895,
+      "evidence": {
+        "codex_events": {
+          "bytes": 91914,
+          "sha256": "ca509b2ff0d14627ea7e57813778b06350d6b02910a0112f7c95ea2be5d3982e"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "3dd9926e694493b44f96cd05cb58b3ec4d2a7b5e84d635bf98d9bf165931314d"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1154,
+          "sha256": "7c319a0b4c702be8bf924f847db0e4c49dcce6a410b2d1da26b199fd6fb2422e"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "b09a75f3f8c5ae8c80af76dc406895ed4e357bcf12b58a741d3d461e45a79215"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "ddf5a45b8a7631e091fb3e4e558ce7ef71f1d5b1831123fe8369ddc616162882"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 1,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P001-VCC-H06-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50943,
+      "elapsed_seconds": 17.55211475,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92070,
+          "sha256": "1729d0b362053c5f0e209135a7b2f6465c100eecbeed71f9f9ce9cdc15df6d42"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "dcf7fab3b76ab9141f31bcafbfb8a1494069223a68b43ac88c30d4f3e98abd6b"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1154,
+          "sha256": "31dd89af3b9cc37be562857ba29842df930660138b3ba6ad6ca03093d07d6b9f"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "6e87211246b00771f81b4365cdca7d0950d37adae1e9df9b2eed5664d21615c0"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "a1ccbca174097469b47be60c81cde697f5c97f582e941029d08ac840a69fb754"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 1,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P001-VCC-H06-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67308,
+      "elapsed_seconds": 22.94320425,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92314,
+          "sha256": "50724b5fe97b9939ba6ff129cc9623a6a7d42d55d7a5e9e95ad8da21de290b0e"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "53e20afa7a5361778718abffa7f12a704f64f5bf948d25f32c3a53027c5523d5"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1154,
+          "sha256": "c672c22e1e41b6ce76533f311bed0e01908c04b2d34c85fbe9f3112619da9188"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "24270784931d52f58238b5004ae20fb6cde4b9ebdfb613d1fbaf15fdffc4b9a6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 1,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P001-VCC-H06-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67687,
+      "elapsed_seconds": 23.225699083,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92326,
+          "sha256": "89297832b6284a67bac5639b1e8d55615b52056caabd71bfb16ce809ebf2d82e"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "8748974c02a97443b4b430394786b868e046437d81832501f13f300cc90478d2"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1154,
+          "sha256": "c032f591955dfd837ef90ce9840cee3af0651b1a44e7028c70fdb2c9843ceca5"
+        },
+        "observation": {
+          "bytes": 747,
+          "sha256": "20813fffe387c36aed72dee06927a070b920d558d0b51e00362024a6743641a3"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": false,
+      "quality_score": 1,
+      "slot": {
+        "arm": "P001",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P001-VCC-H06-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31884,
+      "elapsed_seconds": 12.616325583,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1063,
+          "sha256": "3a62b726445d24439a899b2863166dec929199cfd35929385132d28bb9be9c4b"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "750b3286aff2a6723ac4de0370870c91543cf8ebddf9e4a7f5b5663148ea682a"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 715,
+          "sha256": "bf8a995f59afc67a71d93513e8b0885d541f358d93ce38166259b0f985cd75b2"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "ab83749bb129874ac3e68205033e5e856763036d9b9338cd7b99d37b1978fe24"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H01-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31949,
+      "elapsed_seconds": 11.883917291,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1318,
+          "sha256": "3f06afd3e599636a4ef97bc75db8f3d9eebcbef5a825a2c07c69d709e9463c0f"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "4403e3392503e48fc2215801655d7c8f7204b28defbccc6475067d646c829fde"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "d2db06f93b5e33dc309fb42c6432347d9b2facbe9f842ae69c68234c7bfcd86b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H01-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 32188,
+      "elapsed_seconds": 15.423924208,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1315,
+          "sha256": "b54c98ec06053d5d32db86b70daaf20869fbcebe518e78211b81a8651ed002fb"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "674b0818304a1db0584be6d7c19468d6d7f4316d646095184c7e77a6ea4b7ebe"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "16bae20414534f479e8f383d79cd37d9758fcebf8dc24956473976fdef33f145"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H01-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 32045,
+      "elapsed_seconds": 13.579216459,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1318,
+          "sha256": "195619a084c4218983ce25c4ef28681a47c95cbcbb3b078e37c4671dad436088"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "6c0315505e9f04a55d59288ca2fb42d3e6d5f97010123792390f130ae289c024"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "1fd34ce765be8deedaea9fd7ca2d4c0f0ce0c18df59e646ccb4b11fcc70a3088"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H01-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 31947,
+      "elapsed_seconds": 12.238383042,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1021,
+          "sha256": "2a1f8b075cb37d9f4672652fcd90a64d5ef8b4877b8770b1bab74c7a9b710a24"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "2e2a5476aa9c1d93f6ad4d0a60608feaf44ed80e3ac9aa3131c66e6e9e0e7d1a"
+        },
+        "final_response": {
+          "bytes": 192,
+          "sha256": "ad54f5fcc0cbf5ddf74a3ce19eb7130ee6d609a3a55d212fbf4d3feec005134a"
+        },
+        "grade": {
+          "bytes": 1044,
+          "sha256": "de5544e313db8baca0c25dbe0b9b5346ef406b3998ae108d12f7f0e6f12c2ba2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "df6b0f6aa3479e50e9dbd65ada523cdbf99c0f16a403fc27393108e7f3b9c0f4"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H01",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H01-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67592,
+      "elapsed_seconds": 39.139106334,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2724,
+          "sha256": "7244674e2347a009c49434dd0e28b1fff624352da2c43a8a289da07da161a58d"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "408243f7f0188e2c7a3d5ec579ae3acc6b6b32ccf6ba8b1c6fe4814039da0f58"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "e7f27a3535ba1ba50672b82a1f6f1f802367dae48b683df788879148666d5f23"
+        },
+        "observation": {
+          "bytes": 715,
+          "sha256": "0bc759f658a12a68fae14710dfe881af5d64c0dfce2b6e1900e95da166a07c33"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "54b0bc7837c87a844d833870dabcbec9813dddc2f8654472ec841e4725b341c2"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H02-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67898,
+      "elapsed_seconds": 41.196210459,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2410,
+          "sha256": "c5de30dd015eb9e69673c3bb7683affc87da028077c1907c0bfe3e994ac1ceac"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "22bde8c0800354005528916dfe079ba15534792663cc42fb2b1cd59f62f5c658"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "e2b170732055f570beda0ce97d6cb7db5c3d90169e910bcbdda6b3b42fa8a816"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "7271dc85fa0a2119caa0241f75773d7c1c3ee074eee3be57b600e80c12a85b18"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H02-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50083,
+      "elapsed_seconds": 28.384785875,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1986,
+          "sha256": "b927f6791c6b7486f11c8bc269f4d2433a50ed2b55c38a1f8f62ea7c193c2426"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "fd3c637e1218b18476fe44aabc37d5e69b98d7d37fe69232abdd7660067b6ef7"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "ded078341e5279f7e5bc3731f17d97b711c53462c87c7080a62013ae3ea42cd8"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "47b01b680c8e193aa64bf0cf9beb06e6eb136a8f1c36adf6190707f29a01f6b0"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H02-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67776,
+      "elapsed_seconds": 38.803533125,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2682,
+          "sha256": "f88c155f0d63211df4af4d441a89497e2c5b5911cb5401c91f083e08ee4aa412"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "08c863c3d72be65957219a2f98585407c5576038e9b3e8e5845aecdd1a5c8e58"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "6ccf244bbbc8b846d322f222c0e3bdccaa296adec5d24417474841a4a05f24ab"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "7de176031582109ef2117585c3503b4a8a7ec720fa90d01313269c29e082d1da"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H02-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67527,
+      "elapsed_seconds": 38.063936333,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2726,
+          "sha256": "e2fdf75b7ac8c78d5f007b53fc5c843e9137224009b4d6ee5f49d562717373eb"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "0ce1f9a26d31631bc9e1d4edfd43e12ead34b2e9048be89695e5811d8ea1faec"
+        },
+        "final_response": {
+          "bytes": 352,
+          "sha256": "af91af79cf0dda17a41adbd4740bf10899942a26c9d4f7ea96ef2c39cc8e9873"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "47eb5966b151da6bb0d066d43706ee42145cc6465e72d24c5a9dfba18fc86ce2"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "e6369bdd389e9fa71f27853b58ba26b55c06cafa056e49386ed528c0975e1502"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H02",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H02-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 68008,
+      "elapsed_seconds": 42.171326875,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2251,
+          "sha256": "0c6e2b0fe91060e19183e30deec2756a0a318dccf81c33de1dab563b42ccf94e"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "6476e6732257a2ebb5ebd7d60bfbcb42b18f6f7c1bf2025db35be5999ff50a67"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "93716e0ee891b5c2d4b3daad233d91c1cb20c9905cdeae828a118d21549af56a"
+        },
+        "observation": {
+          "bytes": 715,
+          "sha256": "bab84a7754fdb4fc382f967a296d1719653faa2b8217eb0c0ea01281b9afd3a2"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "b8b7dec4d891baeb6805136da084b39c83543539b294c527a514abe35a8000ba"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H03-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67348,
+      "elapsed_seconds": 31.822063792,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2628,
+          "sha256": "e8be2966c417245958165f85077374df0010aeeb084fc4f2011072dac8770249"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "257c574466bb9f21ed074f2915f6b283eab2b598ce476cad69dd5e64ef593e9a"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "76dd812f4df0a0881390c47cabc17334a474a988e0bdf03f31a6a5ed1e673df7"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "683462b6a0c9efc57424f553ce95a996e2387dde78a6246f630d8f754ac2b2d7"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H03-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 49654,
+      "elapsed_seconds": 25.931630167,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1813,
+          "sha256": "5ec83d567d86b0154f6b5fbd817f374d0d8d2df019c8da2fe64bb267e1c0ba59"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "40d1ee76420cd2c32612723100a57598f1b8afcdeccdfc75275bb017ad605550"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "ff84ac94a966906d2c60e26dd63e0aaa37e75cb89801e4b8f01dc5e2d4743882"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "2283b21d3406acae2282570223a8e8074bb6e250ba4a09f4f3b2811454957983"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H03-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50725,
+      "elapsed_seconds": 36.613940375,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1826,
+          "sha256": "008921c18699e2b356ce0f17c8031517e84d6bdf57c0c9b63964c2c2c1bc0cff"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "6d4abeac6df8bfb16f3b3e43b222198e83ae584173e39510eee93d04123e4677"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "15fa068495b7c08ab0a02e718d434ca8f4686105c7f8279dd47511a3bccb6bde"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "30f3fe3e39cea7b60436a8d644ca0590158ce27af5b21e67479184547e83977b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H03-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50118,
+      "elapsed_seconds": 35.54180975,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1840,
+          "sha256": "8ab505a52ff1cee3b13a41cb8fa70d7290de7f99e2c7d520c9fb7f46eda87e4f"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "6025b4ae9219e6090af93a801e46e586998d6c5b416ccd3801f2f60bf84095c6"
+        },
+        "final_response": {
+          "bytes": 283,
+          "sha256": "bb9a9bba8bb8910989371edfeb6cea265096602877003bc925dc87e3f6623056"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "53c21ad821e638824838e83be20b6c696de8e564151aeeb3f2c428b758b16b35"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "17f5e7b097e9aa99ef0af27c271e264d51d3e243168195472c3fb5f8b6fe94d4"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H03",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H03-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50838,
+      "elapsed_seconds": 34.383272541,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2377,
+          "sha256": "3745712c10eca4cc3bd439240c8c94050eba8d8f3bd140941908e8b03ee9aa5f"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "1e8f15c4d65f7c385fe931b80b0dfa788f7ed73ccf418721fb1f597480377950"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "f1a242245a8d4b87e5a78d375c91cc8f92297428f219f94f798e4a045ac62c14"
+        },
+        "observation": {
+          "bytes": 715,
+          "sha256": "ec5cdff297058ca3799cd7b065739a3246eeeceede4f5e9ae89dd98880b37a26"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "0930d6b578056b5608c6ee6e50246283214ea5dbf3bb9e3e0bcb574fbc221f49"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H04-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 67861,
+      "elapsed_seconds": 38.906010917,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2724,
+          "sha256": "0c911680492029f4529da93c0210218979495263185df35acfae489911884272"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "7c9a0034ed6b6c5ff4beeddd50d5f611a5996829f5e1f97e937c5c7ffcbfd1a7"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "7db3e031a1a10c9655b3c23416ad4cd9c9cb577df9b72948d81cf925ef48a107"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "4dad4ec2e72118a662a3ff9081cd49a1ff9453c54b2f16b4920aa35a2f35dca1"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H04-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50928,
+      "elapsed_seconds": 37.212725833,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2010,
+          "sha256": "3a608cebac72ce8d7ae47f18a4d8de0c98f1251644881b9cca29e46fd9526ef7"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "12532eaf1b1fc20ff44f5e3000a3dd0c87cb546bcffe83f81e429ba7d5a2e6a2"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "3ae7b32f757b1cde58c0c9c7c545e7af9ea1bc149181a5a6a30cdf48d5f192bf"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "af6b2c08e39b705e12f2a81e47b045040eb8e2a524a631d3a6e2ac997f135def"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H04-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 68237,
+      "elapsed_seconds": 39.043947208,
+      "evidence": {
+        "codex_events": {
+          "bytes": 3052,
+          "sha256": "69e272f7e9a4d145ae5f7dddb57622097ae79be51166bacfa58bc6177858a88d"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "74f6933dec8f32bc6eb315a8b213a15cafffb9e6390e8494b35d38b0fbb7671a"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "89addcb17841b4fc7361b0d11fd7c2309e4cbf0d528476e89856c75a894b9027"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "4dcd7664916164b1a4b78867d6960912dfa4443465a8efc139e7d74b91528afa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H04-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 68113,
+      "elapsed_seconds": 41.67669225,
+      "evidence": {
+        "codex_events": {
+          "bytes": 2431,
+          "sha256": "554fdaa4c095b1d9c95394baacbba70589de240cd5473c59a4ddb226695fdcc0"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "d62064d41526a206ced71c16150ae1060ef1ee2f956935316ef8607ce40744bd"
+        },
+        "final_response": {
+          "bytes": 367,
+          "sha256": "fd782136f3034d98d532578dee69cbfa80495c35f702516aa8563256316ca487"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "a186fbf7becc7920448531e4a49c720ec870b93ec9d6bf5f1e057a4fa988bb4e"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "21f8526bd5901704a4f054b416191c017f92d189c80892cc5ee135c508b02378"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H04",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H04-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 48849,
+      "elapsed_seconds": 23.769843,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1548,
+          "sha256": "92444eceb7b130ced8079a7954a49f324b65679edb374d6dbf96f82a220d1fed"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "5205ab41c15866f2f5fb6a05b0f35952ac518aa976ecb40fcc102913275ba4fb"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "6bf42d07d26d2540a0e9f8fe610fbd50c359f138ba42e63cf781c41972b732f9"
+        },
+        "observation": {
+          "bytes": 712,
+          "sha256": "bb604e0ac3b6c05d8b48477eefa1da5f393d32d2bcac90c2add34f3f4bdd5ab1"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "52338e42444ec41872efc19f541970f83215add6ddb3492f31c8192bffbade25"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H05-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 49252,
+      "elapsed_seconds": 26.190854459,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1802,
+          "sha256": "d84a5778d8feeeb1dfd647aff05fdc7dbf0b8a25a5af7df8d8889ab3a6f54bed"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "dc28478dce110218f564145f9bb32b6593fbd3253655eacddb5a006ea807a73b"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "6eed095a4a28778fd5f3de812e0cd58f1373ad39e74151e4efe37d6af17ba51f"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "ad70c5630e65f6e09491bc2196b9b46af514734f0c33c71adc86c338d34704ae"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H05-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50077,
+      "elapsed_seconds": 31.239856875,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1803,
+          "sha256": "16fcd1f0a641d3f63e99f14f70643cd7b84b71785a8728fb5dae81e8afb1104f"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "abe49a706b862a7fb632db6f4d7d1d624a16fa0de347289a8956203d28e10335"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "f4bfbe58f54e8a6ef86016b49f8906eb7d97daa12e15ed0b9cc3bdb4b58adce3"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "95e0e064fa6671c18b6b638c3c4f81717d91b87db830c586013fca525c82554d"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H05-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 48828,
+      "elapsed_seconds": 21.49592625,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1506,
+          "sha256": "78b27d60f96d303d553f00e749719c603f6ddb6f4b85626db6ac5bcf743d4c55"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "136a692f72949afa75d6a2bf55ac3e151917ab27cd3f354badbe0165a59ad981"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "1cf83ad955f91983343a5723fda694017bbbd39eaf1bb7e859d9fd346e397942"
+        },
+        "observation": {
+          "bytes": 745,
+          "sha256": "71577ae0122ca478495f97f067bae63e9b82266e01b238a195a74ae808bd898f"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H05-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 49273,
+      "elapsed_seconds": 24.484009958,
+      "evidence": {
+        "codex_events": {
+          "bytes": 1802,
+          "sha256": "63d659deb2c51f342bab7a7ae63f25686d8a141448e50894841a1673ea30f27c"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "bf2c0e75ad2d21277b5d08c40c90944a38d6c84393e6dd3c899b6f7f7efef154"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "24768c8b7ba4a0f2a92b86b869e01d426472c98e550f8b6c69958afaa8862d05"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "1aaacf938199fb2aad71780b3dabe51abb6b1d9988443bada6ad19b00e749ead"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "d0eb03aaf87ca8b2a8d68a676c022ff54a82ca26f311c79e786e356f7649ae52"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H05",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H05-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 49605,
+      "elapsed_seconds": 27.992295875,
+      "evidence": {
+        "codex_events": {
+          "bytes": 91963,
+          "sha256": "202ba906d1cf459e77b65e6186b426f5aed317df1c7237567bc6a6a665c1473e"
+        },
+        "dispatch_receipt": {
+          "bytes": 320,
+          "sha256": "990ab7bd95085d96e76a94f32572399277ceefd1ac76422b6580c67f21128f65"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "5904d0c0ca09ba94d21466460a9f0d82b608f7006aff521196ae41066ff87cfb"
+        },
+        "observation": {
+          "bytes": 715,
+          "sha256": "b31d14ae7ece25fda2aeac237d4603f9f9959341dd5876289e7f1f3efe071f24"
+        },
+        "stderr": {
+          "bytes": 146,
+          "sha256": "467e7c9dd32eb6bd34b529f0c0a2bbcbf63d77b4e1f9454f72d6b225344b6746"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 1,
+        "slot_id": "P002-VCC-H06-i001"
+      },
+      "source": "reused_candidate_only_n1",
+      "source_result_id": "codex-validation-carrier-p002-heldout-r1-n1-candidate-gate-r1",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 50423,
+      "elapsed_seconds": 33.075726583,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92005,
+          "sha256": "c0c344e3300e8ea9b833e097462a316c83fd3cc3d16f2e209d95addad0e97693"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "774d119fc57a2082925566415367be0ddc16e8b2676868b4f76399a8ab6c87aa"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "bef2064def03c57f697f487f148b64ec28a0f2b1b921053554f191ffd4166d9b"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "8522e6dd28951d9e762988a2dd4037334560a83da82b3ca759b379ffe514b599"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 2,
+        "slot_id": "P002-VCC-H06-i002"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 66416,
+      "elapsed_seconds": 33.005872375,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92315,
+          "sha256": "a87f6550123f7298faccada1ed3f01997f273239ec6e759966f4f7be616e97d5"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "5fd31697d01019d91dc424119581bd8b97ff9eefb891d6055e15cad39adfd581"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "bf103d83819fc8edd918dcc4f590685cc8ea32c25082462b3013c951af9aceca"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "11d2b63d6f632768853715eadfa0ab1f1b69e0b0aaa0740b54f4cb4582ad86fb"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 3,
+        "slot_id": "P002-VCC-H06-i003"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 66079,
+      "elapsed_seconds": 28.705123959,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92314,
+          "sha256": "2401092cd0a6e2e1464258caa24f82b5f34be2cac1a65cbbe6609337dcfa6d82"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "d843f0cab5dafcd89216a9eccaf372a508435075fcf62ba61cbeea2aa6bdd53e"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "ca0d928cca789001f893f0036933cb29731b8759d25ecb88ce11e5e469cb9814"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "0bc0323ce1c088465c7eff452da734c507c56a88ee51d593f66ef7cbd4534be1"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 4,
+        "slot_id": "P002-VCC-H06-i004"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 66433,
+      "elapsed_seconds": 28.856772209,
+      "evidence": {
+        "codex_events": {
+          "bytes": 92383,
+          "sha256": "4af2dddf80ae767acf9ebd2ecda9889135af0050f68db8caeb663a738ac2c499"
+        },
+        "dispatch_receipt": {
+          "bytes": 344,
+          "sha256": "b64344802e9c1587d4bd2c9e4246f225d62c41eba3cb348e149e85f1381ecdae"
+        },
+        "final_response": {
+          "bytes": 272,
+          "sha256": "79823fbb28c2db8752e99756aac236475b3f218ba64610dec7f667819bd54dd2"
+        },
+        "grade": {
+          "bytes": 1080,
+          "sha256": "1952aa866ff94c324ba6375f50cdb96afdc80bf5ce93af3c1f6880c69fdf1766"
+        },
+        "observation": {
+          "bytes": 746,
+          "sha256": "1adb4e6a424d73f917583b58d8d2fa1a0737a574b7f026144cdfcfb0778641c9"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mechanism_passed": true,
+      "quality_score": 4,
+      "slot": {
+        "arm": "P002",
+        "case_id": "VCC-H06",
+        "case_revision": "r1",
+        "iteration": 5,
+        "slot_id": "P002-VCC-H06-i005"
+      },
+      "source": "new_dispatch",
+      "status": "valid"
+    }
+  ],
+  "comparison": {
+    "cost_improvement_gate_passed": false,
+    "delta_p002_minus_p001": {
+      "all_agent_total_tokens_percent": -9.47303752891294,
+      "all_agent_total_tokens_sum": -169308,
+      "elapsed_seconds_percent": 10.716259824274328,
+      "elapsed_seconds_sum": 86.47719916800008
+    },
+    "p002_quality_gate_passed": true,
+    "primary_cost_aggregate": "sum_over_30_valid_runs_per_arm",
+    "standard14_next_gate_passed": false,
+    "validity_gate_passed": true
+  },
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/sets/heldout-r1/set.json",
+    "set_id": "codex-validation-carrier-heldout-r1",
+    "set_revision": "r1",
+    "sha256": "63fd5f75162b831d214f89cbfec137378af39524b92e9e3437eea53081b4c4b9",
+    "short_name": "VCC6"
+  },
+  "execution_code": {
+    "adapter": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/adapter.py",
+      "sha256": "9b133af0d7856ff5311eb5d8487a56d44e95fb76e3370421a10499d9ec7a489b"
+    },
+    "runner": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner_vcc6_paired.py",
+      "sha256": "baf0b62784604da1d822a5305ba5c08320bd1369a0d81d960dcf84cb6272c35f"
+    }
+  },
+  "logical_slot_count": 60,
+  "new_dispatch_slot_count": 54,
+  "plan": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-p002-n5-dispatch-r1.json",
+    "plan_id": "vcc6-p001-p002-n5-dispatch-r1",
+    "plan_sha256": "2140bb2ea5199a5c12ab9d7c99d0d56b96d637e33ac8c110bb963d41fba92f86",
+    "sha256": "6957b0d8177dec62e787ed69a50014ec29925ca2337fea1ba6b4fb8f1ca8c375"
+  },
+  "preflight": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-p002-n5-preflight-r1.json",
+    "preflight_id": "vcc6-p001-p002-n5-preflight-r1",
+    "receipt_sha256": "0cb01daf5596b50113dc3640b77743f2d8460308750fcf36349c7d76cdb277e6",
+    "sha256": "d09d483a77b318a77a8abc4d5fc3df9d0b5941508740ce35a642a4f67d80f0d9"
+  },
+  "private_evidence_root": "/Volumes/SN7100/_verification/vcc6-p001-p002-n5-r1",
+  "profile": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1.json",
+    "profile_id": "vcc6-p001-p002-codex-cli0146-sol-medium-n5-r1",
+    "sha256": "19f33cb25b5a825b7a25af1f9d6ee7386cdd81ecc76d556256ac869690c3a357"
+  },
+  "rating_ref": {
+    "contract_id": "codex-validation-carrier-outcome-v1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/rating-contracts/codex-validation-carrier-outcome-v1.json",
+    "sha256": "b72aaf9761818863adcc9f99b8acd47217ec892af3e9e96cdee5476e3c82354a"
+  },
+  "result_id": "vcc6-p001-p002-n5-comparison-r1",
+  "result_sha256": "eee1d9269290d908fdda5a4eeaf7ee1cbf3cfb88ecddb1380254b39060cb2cc1",
+  "reused_slot_count": 6,
+  "runtime_ref": {
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "instruction_isolation": {
+      "apps": false,
+      "ignore_rules": true,
+      "ignore_user_config": true,
+      "memory": false,
+      "multi_agent": false,
+      "plugin_sharing": false,
+      "plugins": false
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "workspace-write"
+    },
+    "reasoning_effort": "medium",
+    "runtime": "codex-cli",
+    "session_mode": "persisted_for_usage_collection",
+    "token_accounting": {
+      "revision": "v2",
+      "scope": "all_agents",
+      "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+    },
+    "version": "0.146.0"
+  },
+  "schema_version": "codex-validation-carrier-paired-comparison-result/v1",
+  "state": "paired_targeted_n5_cost_gate_failed_stop_before_standard14",
+  "target": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/target.json",
+    "sha256": "8763022e2abfc98b26e672ca1f565c52260d60f93ee8f538f87388a1e037736b",
+    "target_id": "codex-validation-carrier-conformance"
+  },
+  "token_accounting_ref": {
+    "contract_id": "codex-validation-carrier-rollout-thread-bound-final-usage-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-rollout-token-accounting-r1.json",
+    "sha256": "25a944ecad0969644eb6d0db4d40c4ecf5228043d2705d740c3a535ccddef541"
+  }
+}

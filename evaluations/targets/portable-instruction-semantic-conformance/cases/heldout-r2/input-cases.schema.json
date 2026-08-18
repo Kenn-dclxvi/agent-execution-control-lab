@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portable-instruction-semantic-cases-r2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "set_id",
+    "response_schema",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "portable-instruction-semantic-cases/v1"
+    },
+    "set_id": {
+      "const": "portable-instruction-semantic-heldout-r2"
+    },
+    "response_schema": {
+      "const": "portable-instruction-control-response/r2"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "string_array": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "case_revision",
+        "request_contract",
+        "operations",
+        "received_results",
+        "available_capabilities",
+        "required_response_schema"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^PIC-H(?:1[5-9]|2[0-8])$"
+        },
+        "case_revision": {
+          "const": "r2"
+        },
+        "request_contract": {
+          "$ref": "#/$defs/request_contract"
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "received_results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/result"
+          }
+        },
+        "available_capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "required_response_schema": {
+          "const": "portable-instruction-control-response/r2"
+        }
+      }
+    },
+    "required_outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value_id",
+        "state",
+        "value"
+      ],
+      "properties": {
+        "value_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "bound",
+            "unbound"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "request_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_outcomes",
+        "authorities",
+        "permissions",
+        "stop_conditions"
+      ],
+      "properties": {
+        "required_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/required_outcome"
+          }
+        },
+        "authorities": {
+          "$ref": "#/$defs/string_array"
+        },
+        "permissions": {
+          "$ref": "#/$defs/string_array"
+        },
+        "stop_conditions": {
+          "$ref": "#/$defs/string_array"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "class",
+        "predicate_state",
+        "actor_identity",
+        "permission",
+        "required_inputs",
+        "dependencies",
+        "result_effect_scope",
+        "status"
+      ],
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "enum": [
+            "clarification",
+            "observation",
+            "action",
+            "validation",
+            "recovery"
+          ]
+        },
+        "predicate_state": {
+          "enum": [
+            "satisfied",
+            "unsatisfied",
+            "unobserved"
+          ]
+        },
+        "actor_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permission": {
+          "enum": [
+            "allowed",
+            "denied"
+          ]
+        },
+        "required_inputs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "dependencies": {
+          "$ref": "#/$defs/string_array"
+        },
+        "result_effect_scope": {
+          "$ref": "#/$defs/string_array"
+        },
+        "status": {
+          "enum": [
+            "not_started",
+            "running",
+            "terminal"
+          ]
+        },
+        "invocation_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result_id",
+        "operation_id",
+        "actor_identity",
+        "terminal_state",
+        "result_effect_scope",
+        "result_kind"
+      ],
+      "properties": {
+        "result_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "terminal_state": {
+          "enum": [
+            "success",
+            "failed",
+            "failed_environment"
+          ]
+        },
+        "result_effect_scope": {
+          "$ref": "#/$defs/string_array"
+        },
+        "result_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_result_provenance",
+        "atomic_frontier_commit",
+        "continuation_identity",
+        "environment_recovery"
+      ],
+      "properties": {
+        "actor_result_provenance": {
+          "type": "boolean"
+        },
+        "atomic_frontier_commit": {
+          "type": "boolean"
+        },
+        "continuation_identity": {
+          "type": "boolean"
+        },
+        "environment_recovery": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+{
+  "schema_version": "codex-validation-carrier-runtime-capability-catalog/v1",
+  "catalog_id": "codex-cli-0.146.0-validation-carrier-workspace-write-r1",
+  "runtime": "codex-cli",
+  "version": "0.146.0",
+  "instruction_delivery": {
+    "target": "AGENTS.md",
+    "self_contained_file_required": true
+  },
+  "disabled_surfaces": [
+    "user_config",
+    "user_rules",
+    "memories",
+    "apps",
+    "plugins",
+    "plugin_sharing",
+    "multi_agent"
+  ],
+  "permission": {
+    "approval_policy": "never",
+    "sandbox": "workspace-write"
+  },
+  "session": {
+    "mode": "persisted_for_usage_collection",
+    "ephemeral": false
+  },
+  "carrier_capabilities": {
+    "single_admission": true,
+    "ordered_individual_execution": true,
+    "local_result_check": true,
+    "fail_fast_control": true,
+    "intermediate_ingress_denial": true,
+    "terminal_projection": true,
+    "continuation_identity": true
+  },
+  "tool_surface": {
+    "programmatic_exec_orchestrator_required": true,
+    "nested_exec_command_required": true,
+    "same_identity_continuation_required_when_nonterminal": true,
+    "oracle_delivery": false
+  }
+}

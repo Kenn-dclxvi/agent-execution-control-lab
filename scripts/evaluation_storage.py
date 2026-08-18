@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -21,6 +22,8 @@ MANIFEST_SCHEMA = "the-caption-prompt.storage-gc-manifest/v1"
 RECEIPT_SCHEMA = "the-caption-prompt.storage-gc-receipt/v1"
 PACK_MANIFEST_SCHEMA = "the-caption-prompt.storage-pack-dedup-manifest/v1"
 PACK_RECEIPT_SCHEMA = "the-caption-prompt.storage-pack-dedup-receipt/v1"
+FILE_MANIFEST_SCHEMA = "the-caption-prompt.storage-file-dedup-manifest/v1"
+FILE_RECEIPT_SCHEMA = "the-caption-prompt.storage-file-dedup-receipt/v1"
 TEXT_SUFFIXES = {
     ".json",
     ".md",
@@ -300,6 +303,290 @@ def file_sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(4 * 1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def macos_xattrs(path: Path) -> list[tuple[bytes, bytes]]:
+    libc = ctypes.CDLL(None, use_errno=True)
+    listxattr = libc.listxattr
+    listxattr.argtypes = [
+        ctypes.c_char_p,
+        ctypes.c_void_p,
+        ctypes.c_size_t,
+        ctypes.c_int,
+    ]
+    listxattr.restype = ctypes.c_ssize_t
+    getxattr = libc.getxattr
+    getxattr.argtypes = [
+        ctypes.c_char_p,
+        ctypes.c_char_p,
+        ctypes.c_void_p,
+        ctypes.c_size_t,
+        ctypes.c_uint32,
+        ctypes.c_int,
+    ]
+    getxattr.restype = ctypes.c_ssize_t
+    encoded_path = os.fsencode(path)
+    names_size = listxattr(encoded_path, None, 0, 0)
+    if names_size < 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), path)
+    if names_size == 0:
+        return []
+    names_buffer = ctypes.create_string_buffer(names_size)
+    names_size = listxattr(encoded_path, names_buffer, names_size, 0)
+    if names_size < 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), path)
+    result: list[tuple[bytes, bytes]] = []
+    for name in sorted(names_buffer.raw[:names_size].rstrip(b"\0").split(b"\0")):
+        value_size = getxattr(encoded_path, name, None, 0, 0, 0)
+        if value_size < 0:
+            error = ctypes.get_errno()
+            raise OSError(error, os.strerror(error), path)
+        value_buffer = ctypes.create_string_buffer(value_size)
+        value_size = getxattr(encoded_path, name, value_buffer, value_size, 0, 0)
+        if value_size < 0:
+            error = ctypes.get_errno()
+            raise OSError(error, os.strerror(error), path)
+        result.append((name, value_buffer.raw[:value_size]))
+    return result
+
+
+def xattr_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    if sys.platform == "darwin":
+        attributes = macos_xattrs(path)
+    else:
+        attributes = [
+            (
+                os.fsencode(name),
+                os.getxattr(path, name, follow_symlinks=False),
+            )
+            for name in sorted(os.listxattr(path, follow_symlinks=False))
+        ]
+    for name, value in attributes:
+        digest.update(name)
+        digest.update(b"\0")
+        digest.update(value)
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def regular_file_metadata(path: Path) -> dict[str, Any]:
+    metadata = path.lstat()
+    return {
+        "mode": stat.S_IMODE(metadata.st_mode),
+        "uid": metadata.st_uid,
+        "gid": metadata.st_gid,
+        "flags": getattr(metadata, "st_flags", 0),
+        "mtime_ns": metadata.st_mtime_ns,
+        "xattr_sha256": xattr_sha256(path),
+    }
+
+
+def is_git_pack(relative: Path) -> bool:
+    return (
+        relative.name.startswith("pack-")
+        and relative.name.endswith(".pack")
+        and ".git" in relative.parts
+        and "objects" in relative.parts
+        and "pack" in relative.parts
+    )
+
+
+def discover_regular_file_groups(
+    root: Path, minimum_size_bytes: int, minimum_age_hours: float
+) -> list[list[Path]]:
+    if minimum_size_bytes <= 0:
+        raise StorageError("minimum-size-bytes must be positive")
+    if minimum_age_hours < 0:
+        raise StorageError("minimum-age-hours must be zero or greater")
+    newest_allowed = datetime.now(timezone.utc).timestamp() - minimum_age_hours * 3600
+    candidates: dict[tuple[int, int, int, int, int], list[Path]] = {}
+    runs_root = root / "runs"
+    for directory, names, files in os.walk(runs_root, followlinks=False):
+        base = Path(directory)
+        names[:] = [name for name in names if not (base / name).is_symlink()]
+        for name in files:
+            path = base / name
+            try:
+                metadata = path.lstat()
+            except FileNotFoundError:
+                continue
+            if (
+                not stat.S_ISREG(metadata.st_mode)
+                or metadata.st_nlink != 1
+                or metadata.st_size < minimum_size_bytes
+                or metadata.st_mtime > newest_allowed
+                or name.endswith(".tar.zst")
+                or name.endswith(".lock")
+            ):
+                continue
+            relative = path.relative_to(root)
+            if is_git_pack(relative):
+                continue
+            key = (
+                metadata.st_size,
+                stat.S_IMODE(metadata.st_mode),
+                metadata.st_uid,
+                metadata.st_gid,
+                getattr(metadata, "st_flags", 0),
+            )
+            candidates.setdefault(key, []).append(path)
+    return [sorted(paths) for paths in candidates.values() if len(paths) > 1]
+
+
+def file_dedup_manifest(args: argparse.Namespace) -> dict[str, Any]:
+    root = Path(args.root).resolve()
+    if not (root / "runs").is_dir():
+        raise StorageError(f"storage root must contain runs/: {root}")
+    entries: list[dict[str, Any]] = []
+    for paths in discover_regular_file_groups(
+        root, args.minimum_size_bytes, args.minimum_age_hours
+    ):
+        content_groups: dict[tuple[str, str], list[Path]] = {}
+        for path in paths:
+            content_groups.setdefault((file_sha256(path), xattr_sha256(path)), []).append(path)
+        for (content_sha256, xattrs_sha256), matches in content_groups.items():
+            if len(matches) < 2:
+                continue
+            source = matches[0]
+            source_metadata = regular_file_metadata(source)
+            for target in matches[1:]:
+                target_metadata = regular_file_metadata(target)
+                entries.append(
+                    {
+                        "source_path": source.relative_to(root).as_posix(),
+                        "target_path": target.relative_to(root).as_posix(),
+                        "size_bytes": source.stat().st_size,
+                        "content_sha256": content_sha256,
+                        "xattr_sha256": xattrs_sha256,
+                        "source_metadata": source_metadata,
+                        "target_metadata": target_metadata,
+                    }
+                )
+    document = {
+        "schema_version": FILE_MANIFEST_SCHEMA,
+        "generated_at": utc_now(),
+        "root": str(root),
+        "policy": {
+            "minimum_size_bytes": args.minimum_size_bytes,
+            "minimum_age_hours": args.minimum_age_hours,
+            "archives_excluded": True,
+            "git_packs_excluded": True,
+            "hardlinks_excluded": True,
+        },
+        "entries": entries,
+        "reclaimable_logical_bytes": sum(item["size_bytes"] for item in entries),
+    }
+    manifest = {**document, "manifest_sha256": identity_sha256(document)}
+    manifest_path = Path(args.manifest).resolve()
+    write_json_once(manifest_path, manifest)
+    return {
+        "mode": "dry_run",
+        "manifest": str(manifest_path),
+        "entry_count": len(entries),
+        "reclaimable_logical_bytes": manifest["reclaimable_logical_bytes"],
+    }
+
+
+def verify_file_manifest(manifest: dict[str, Any]) -> None:
+    if manifest.get("schema_version") != FILE_MANIFEST_SCHEMA:
+        raise StorageError("unsupported file dedup manifest schema")
+    content = {key: value for key, value in manifest.items() if key != "manifest_sha256"}
+    if manifest.get("manifest_sha256") != identity_sha256(content):
+        raise StorageError("file dedup manifest content hash does not match")
+
+
+def validate_file_entry(
+    root: Path, entry: dict[str, Any]
+) -> tuple[Path, Path]:
+    source = (root / entry["source_path"]).resolve()
+    target = (root / entry["target_path"]).resolve()
+    runs_root = root / "runs"
+    if (
+        not path_within(source, runs_root)
+        or not path_within(target, runs_root)
+        or source.is_symlink()
+        or target.is_symlink()
+        or not source.is_file()
+        or not target.is_file()
+        or source.stat().st_nlink != 1
+        or target.stat().st_nlink != 1
+    ):
+        raise StorageError(f"invalid file dedup path: {entry}")
+    expected_size = entry.get("size_bytes")
+    if source.stat().st_size != expected_size or target.stat().st_size != expected_size:
+        raise StorageError(f"file size changed: {entry['target_path']}")
+    expected_hash = entry.get("content_sha256")
+    if file_sha256(source) != expected_hash or file_sha256(target) != expected_hash:
+        raise StorageError(f"file content changed: {entry['target_path']}")
+    expected_xattrs = entry.get("xattr_sha256")
+    if xattr_sha256(source) != expected_xattrs or xattr_sha256(target) != expected_xattrs:
+        raise StorageError(f"file xattrs changed: {entry['target_path']}")
+    if regular_file_metadata(source) != entry.get("source_metadata"):
+        raise StorageError(f"source metadata changed: {entry['source_path']}")
+    if regular_file_metadata(target) != entry.get("target_metadata"):
+        raise StorageError(f"target metadata changed: {entry['target_path']}")
+    return source, target
+
+
+def clone_regular_file(source: Path, target: Path, target_metadata: dict[str, Any]) -> None:
+    clone_pack(source, target)
+    os.chmod(target, target_metadata["mode"])
+    if hasattr(os, "chflags"):
+        os.chflags(target, target_metadata["flags"])
+    os.utime(target, ns=(target.stat().st_atime_ns, target_metadata["mtime_ns"]))
+
+
+def apply_file_dedup(args: argparse.Namespace) -> dict[str, Any]:
+    manifest_path = Path(args.manifest).resolve()
+    receipt_path = Path(args.receipt).resolve()
+    if receipt_path.exists():
+        raise StorageError(f"refusing to overwrite: {receipt_path}")
+    manifest = load_json(manifest_path)
+    verify_file_manifest(manifest)
+    root = Path(manifest["root"]).resolve()
+    if root != Path(args.root).resolve():
+        raise StorageError("file dedup manifest root does not match arguments")
+    entries = manifest.get("entries")
+    if not isinstance(entries, list):
+        raise StorageError("file dedup manifest entries must be an array")
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise StorageError("file dedup manifest entry is invalid")
+        validate_file_entry(root, entry)
+
+    free_before = shutil.disk_usage(root).free
+    rematerialized = 0
+    for entry in entries:
+        source, target = validate_file_entry(root, entry)
+        clone_regular_file(source, target, entry["target_metadata"])
+        if file_sha256(target) != entry["content_sha256"]:
+            raise StorageError(f"cloned file content mismatch: {entry['target_path']}")
+        if xattr_sha256(target) != entry["xattr_sha256"]:
+            raise StorageError(f"cloned file xattrs mismatch: {entry['target_path']}")
+        rematerialized += 1
+    free_after = shutil.disk_usage(root).free
+    receipt = {
+        "schema_version": FILE_RECEIPT_SCHEMA,
+        "applied_at": utc_now(),
+        "manifest": str(manifest_path),
+        "manifest_sha256": manifest["manifest_sha256"],
+        "rematerialized_count": rematerialized,
+        "logical_bytes": sum(entry["size_bytes"] for entry in entries),
+        "filesystem_free_bytes_before": free_before,
+        "filesystem_free_bytes_after": free_after,
+        "filesystem_free_bytes_delta": free_after - free_before,
+    }
+    write_json_once(receipt_path, receipt)
+    return {
+        "mode": "apply",
+        "receipt": str(receipt_path),
+        "rematerialized_count": rematerialized,
+        "logical_bytes": receipt["logical_bytes"],
+        "filesystem_free_bytes_delta": receipt["filesystem_free_bytes_delta"],
+    }
 
 
 def discover_pack_groups(root: Path) -> list[list[Path]]:
@@ -600,6 +887,20 @@ def parser() -> argparse.ArgumentParser:
     packs.add_argument("--receipt")
     packs.set_defaults(
         handler=lambda args: apply_pack_dedup(args) if args.apply else pack_dedup_manifest(args)
+    )
+
+    files = commands.add_parser(
+        "deduplicate-files",
+        help="rematerialize stable identical regular files with clonefile",
+    )
+    files.add_argument("--root", required=True)
+    files.add_argument("--manifest", required=True)
+    files.add_argument("--minimum-size-bytes", type=int, default=65536)
+    files.add_argument("--minimum-age-hours", type=float, default=24.0)
+    files.add_argument("--apply", action="store_true")
+    files.add_argument("--receipt")
+    files.set_defaults(
+        handler=lambda args: apply_file_dedup(args) if args.apply else file_dedup_manifest(args)
     )
     return result
 

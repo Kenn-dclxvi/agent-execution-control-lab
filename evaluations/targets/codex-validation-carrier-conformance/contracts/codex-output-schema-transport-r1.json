@@ -1,0 +1,15 @@
+{
+  "schema_version": "codex-validation-carrier-output-schema-transport/v1",
+  "contract_id": "codex-validation-carrier-supported-subset-r1",
+  "canonical_post_validation": true,
+  "projection": {
+    "remove_keywords": ["$schema", "$id", "title", "uniqueItems", "pattern", "minLength"],
+    "const_conversion": "typed_single_value_enum",
+    "recursive": true
+  },
+  "admission": {
+    "canonical_response_schema_required": true,
+    "projected_schema_used_only_for_transport": true,
+    "final_response_must_validate_against_canonical_schema": true
+  }
+}

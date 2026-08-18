@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codex-validation-carrier-cases-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "set_id", "response_schema", "target_repository_ref", "runtime_contract", "cases"],
+  "properties": {
+    "schema_version": {"const": "codex-validation-carrier-cases/v1"},
+    "set_id": {"const": "codex-validation-carrier-heldout-r1"},
+    "response_schema": {"const": "codex-validation-carrier-response/v1"},
+    "target_repository_ref": {"$ref": "#/$defs/repository_ref"},
+    "runtime_contract": {"$ref": "#/$defs/runtime_contract"},
+    "cases": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/case"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "repository_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "commit", "tree"],
+      "properties": {
+        "repository": {"const": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git"},
+        "commit": {"const": "660387978e8831bd3ca361c23800fcea2ca788e5"},
+        "tree": {"const": "c0bd350a4923cc18fd51b319ec18f8b65e389afd"}
+      }
+    },
+    "runtime_contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["carrier_capabilities", "nested_execution_initial_yield_ms", "terminal_status_field", "continuation_identity_field"],
+      "properties": {
+        "carrier_capabilities": {
+          "type": "object", "additionalProperties": false,
+          "required": ["single_admission", "ordered_individual_execution", "local_result_check", "fail_fast_control", "intermediate_ingress_denial", "terminal_projection", "continuation_identity"],
+          "properties": {
+            "single_admission": {"const": true}, "ordered_individual_execution": {"const": true}, "local_result_check": {"const": true}, "fail_fast_control": {"const": true}, "intermediate_ingress_denial": {"const": true}, "terminal_projection": {"const": true}, "continuation_identity": {"const": true}
+          }
+        },
+        "nested_execution_initial_yield_ms": {"const": 250},
+        "terminal_status_field": {"const": "exit_code"},
+        "continuation_identity_field": {"const": "session_id"}
+      }
+    },
+    "fixture_file": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "type", "mode", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "type": {"const": "file"},
+        "mode": {"enum": ["100644", "100755"]},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "validation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["validation_id", "argv", "depends_on", "pass_exit_codes", "required_evidence"],
+      "properties": {
+        "validation_id": {"type": "string", "minLength": 1},
+        "argv": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "depends_on": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "pass_exit_codes": {"type": "array", "minItems": 1, "items": {"type": "integer"}, "uniqueItems": true},
+        "required_evidence": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "case": {
+      "type": "object", "additionalProperties": false,
+      "required": ["case_id", "case_revision", "fixture", "required_action", "validation_plan", "required_terminal_state"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^VCC-H0[1-6]$"},
+        "case_revision": {"const": "r1"},
+        "fixture": {
+          "type": "object", "additionalProperties": false,
+          "required": ["root", "files"],
+          "properties": {
+            "root": {"type": "string", "pattern": "^fixtures/VCC-H0[1-6]$"},
+            "files": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/fixture_file"}}
+          }
+        },
+        "required_action": {
+          "type": "object", "additionalProperties": false,
+          "required": ["path", "expected_content", "expected_sha256"],
+          "properties": {"path": {"const": "subject.txt"}, "expected_content": {"type": "string"}, "expected_sha256": {"$ref": "#/$defs/sha256"}}
+        },
+        "validation_plan": {"type": "array", "items": {"$ref": "#/$defs/validation"}},
+        "required_terminal_state": {"enum": ["not_required", "succeeded", "failed"]}
+      }
+    }
+  }
+}

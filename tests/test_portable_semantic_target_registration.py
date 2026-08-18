@@ -115,8 +115,8 @@ def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
         for item in documents
         if item.get("schema_version") == "portable-instruction-semantic-profile-registration/v1"
     ]
-    assert len(profiles) == 5
-    assert len(registrations) == 5
+    assert len(profiles) == 16
+    assert len(registrations) == 16
     control_profiles = [profile for profile in profiles if "control-free" in profile["profile_id"]]
     assert {profile["profile_id"][-2:] for profile in control_profiles} == {"r1", "r2", "r3", "r4"}
     assert all(profile["lifecycle_state"] == "registered_not_qualified" for profile in profiles)
@@ -140,7 +140,18 @@ def test_control_free_profile_history_and_formal_result_are_preserved() -> None:
         reference = candidate_registration[key]
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
     assert sorted(path.name for path in (TARGET / "results").glob("*.json")) == [
+        "portable-semantic-c147-full-agent-reference-heldout-r1-n1-qualification-r1.json",
         "portable-semantic-c147-portable-full-agent-heldout-r1-n1-qualification-r1.json",
+        "portable-semantic-c147-portable-full-agent-heldout-r3-n1-qualification-r1.json",
+        "portable-semantic-c147-portable-full-agent-heldout-r3-n20-qualification-r1.json",
+        "portable-semantic-c147-portable-full-agent-heldout-r3-n5-qualification-r1.json",
+        "portable-semantic-c147-reference-heldout-r2-n1-qualification-r1.json",
+        "portable-semantic-c147-reference-heldout-r3-n1-qualification-r1.json",
+        "portable-semantic-c147-reference-heldout-r3-n20-qualification-r1.json",
+        "portable-semantic-c147-reference-heldout-r3-n5-qualification-r1.json",
+        "portable-semantic-c147-reference-transition-calibration-r2-n1-qualification-r1.json",
+        "portable-semantic-c147-reference-transition-calibration-r3-n1-qualification-r1.json",
+        "portable-semantic-c147-reference-transition-calibration-r4-n1-qualification-r1.json",
         "portable-semantic-control-free-heldout-r1-n1-qualification-r4.json",
     ]
     assert list((TARGET / "results").glob("*.md")) == [TARGET / "results/README.md"]
@@ -189,6 +200,80 @@ def test_portable_candidate_preflight_authorizes_only_candidate_series() -> None
         assert sha256(ROOT / reference["path"]) == reference["sha256"]
 
 
+def test_c147_reference_preflight_qualifies_the_set_before_portable_interpretation() -> None:
+    plan = load(
+        TARGET / "plans/portable-semantic-c147-full-agent-reference-heldout-r1-n1-dispatch-r1.json"
+    )
+    preflight = load(
+        TARGET / "plans/portable-semantic-c147-full-agent-reference-heldout-r1-n1-preflight-r1.json"
+    )
+    registration = load(TARGET / "profiles/profile-registration-c147-reference-r1.json")
+    assert plan["prompt_set_identity"] == {
+        "name": "portable-semantic-c147-full-agent-reference-r1",
+        "revision": "r1",
+        "sha256": "d330421521b231d6029e69e8cd6d4e175fb46b06254e80b3d2f4d8f8f3a55d9f",
+    }
+    assert plan["authorized_slot_count"] == 14
+    assert plan["issued_slot_count"] == 0
+    assert preflight["authorized_slots"] == plan["slots"]
+    assert preflight["dispatch_allowed"] is True
+    assert preflight["issued_slot_count"] == 0
+    assert registration["state"]["reference_profile_created"] is True
+    assert registration["state"]["preflight_ready"] is True
+    for key in ("profile", "plan", "preflight", "adapter", "runner", "prompt_bundle_registration"):
+        reference = registration[key]
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
+
+
+def test_transition_contract_r2_is_reference_calibration_only() -> None:
+    profile = load(
+        TARGET
+        / "profiles/portable-semantic-c147-reference-transition-calibration-codex-cli0146-sol-medium-r2-n1-r1.json"
+    )
+    registration = load(
+        TARGET / "profiles/profile-registration-c147-reference-transition-calibration-r2.json"
+    )
+    plan = load(
+        TARGET / "plans/portable-semantic-c147-reference-transition-calibration-r2-n1-dispatch-r1.json"
+    )
+    preflight = load(
+        TARGET / "plans/portable-semantic-c147-reference-transition-calibration-r2-n1-preflight-r1.json"
+    )
+    assert profile["prompt_set_identity"]["name"] == "portable-semantic-c147-full-agent-reference-r1"
+    assert profile["task_spec_ref"]["revision"] == "semantic-single-json-r2"
+    assert profile["evaluation_set_ref"]["set_id"] == "portable-instruction-semantic-reference-calibration-r2"
+    assert registration["state"]["reference_calibration_only"] is True
+    assert registration["state"]["portable_candidate_heldout"] is False
+    assert plan["authorized_slot_count"] == 14
+    assert plan["issued_slot_count"] == 0
+    assert preflight["authorized_slots"] == plan["slots"]
+    assert preflight["dispatch_allowed"] is True
+    for key in ("profile", "plan", "preflight", "adapter", "runner", "prompt_bundle_registration"):
+        reference = registration[key]
+        assert sha256(ROOT / reference["path"]) == reference["sha256"]
+
+
+def test_transition_contract_r4_qualifies_c147_without_becoming_portable_heldout() -> None:
+    profile = load(
+        TARGET
+        / "profiles/portable-semantic-c147-reference-transition-calibration-codex-cli0146-sol-medium-r4-n1-r1.json"
+    )
+    registration = load(
+        TARGET / "profiles/profile-registration-c147-reference-transition-calibration-r4.json"
+    )
+    result = load(
+        TARGET
+        / "results/portable-semantic-c147-reference-transition-calibration-r4-n1-qualification-r1.json"
+    )
+    assert profile["task_spec_ref"]["revision"] == "semantic-single-json-r4"
+    assert registration["state"]["reference_calibration_only"] is True
+    assert registration["state"]["portable_candidate_heldout"] is False
+    assert result["summary"]["valid_results"] == 14
+    assert result["summary"]["score4_results"] == 14
+    assert result["summary"]["mechanism_passed_results"] == 14
+    assert result["qualification"]["quality_gate"] == "passed"
+
+
 def test_target_registers_dispatch_root_and_plan_limited_runner() -> None:
     target = load(TARGET / "target.json")
     assert target["artifact_roots"]["dispatch_plans"].endswith("/plans")
@@ -221,3 +306,15 @@ def test_portable_candidate_quality_failure_does_not_authorize_reference() -> No
     assert result["qualification"]["quality_gate"] == "failed"
     assert result["qualification"]["quality_gate_contract"] == "exact_all_14_score4"
     assert result["qualification"]["comparison_reference"] == "not_authorized"
+
+
+def test_c147_reference_failure_disqualifies_semantic_set_for_equivalence() -> None:
+    result = load(
+        TARGET / "results/portable-semantic-c147-full-agent-reference-heldout-r1-n1-qualification-r1.json"
+    )
+    assert result["summary"]["valid_results"] == 14
+    assert result["summary"]["schema_valid_results"] == 14
+    assert result["summary"]["score4_results"] == 6
+    assert result["summary"]["mechanism_passed_results"] == 6
+    assert result["qualification"]["quality_gate"] == "failed"
+    assert result["qualification"]["quality_gate_contract"] == "exact_all_14_score4"

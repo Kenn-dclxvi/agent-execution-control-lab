@@ -24,6 +24,7 @@
 
 - アーティファクトが存在することと、評価済み、採用済み、release済み、本体反映済みであることを混同しない。
 - baseline、candidate、release、evaluation result、approval、projectionを別の状態とゲートとして扱う。
+- `PROMPT_ONLY_COMPARISON`: 同一のprompt改善系列では、固定済みのケース、fixture、TaskSpec、oracle、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、token accountingおよび集計方法をCandidate間で再利用し、事前に宣言したprompt identityだけを実験変数とする。固定試験のresultを次Candidateのprompt設計へ使ったことだけを理由に、新しいケース、set、profile条件または採点規則を作らない。blindまたは未見であることは別の証拠属性であり、固定条件でのprompt比較可能性と混同しない。評価契約の欠陥またはtask objectiveの変更によってprompt以外を変える場合は別の評価系列とし、変更前後の差をprompt効果として比較しない。
 - シークレット、クレデンシャル、非公開の生の実行ログ、一時worktreeをcommitしない。
 
 ## 内部メモの扱い

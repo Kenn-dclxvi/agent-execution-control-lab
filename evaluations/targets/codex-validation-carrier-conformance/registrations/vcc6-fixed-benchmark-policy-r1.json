@@ -1,0 +1,55 @@
+{
+  "schema_version": "fixed-benchmark-prompt-only-policy/v1",
+  "registration_id": "vcc6-fixed-benchmark-policy-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "improvement_series": "portable-full-agent-validation-carrier",
+  "benchmark": {
+    "short_name": "VCC6",
+    "set_id": "codex-validation-carrier-heldout-r1",
+    "set_revision": "r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/sets/heldout-r1/set.json",
+    "sha256": "63fd5f75162b831d214f89cbfec137378af39524b92e9e3437eea53081b4c4b9"
+  },
+  "policy": {
+    "experimental_variable": "prompt_identity_only",
+    "reuse_across_candidates": true,
+    "result_guided_prompt_design_allowed": true,
+    "candidate_specific_benchmark_replacement": false,
+    "blind_claim_after_result_guided_design": false,
+    "claim_scope": "comparison_within_vcc6",
+    "fixed_conditions": [
+      "case",
+      "fixture",
+      "task_spec",
+      "oracle",
+      "rating",
+      "model",
+      "reasoning",
+      "agent_runtime_cli",
+      "permission",
+      "executor_behavior",
+      "token_accounting",
+      "aggregation"
+    ],
+    "forbidden_prompt_inputs": [
+      "case_id",
+      "model_invisible_literal",
+      "oracle",
+      "expected_result"
+    ]
+  },
+  "historical_field_interpretation": {
+    "source_freeze.prompt_boundary.prompt_change_invalidates_candidate_selection_use": "invalidates_blind_candidate_selection_claim_only_not_fixed_benchmark_comparison"
+  },
+  "new_series_required_when": [
+    "task_objective_changes",
+    "benchmark_cannot_observe_target_mechanism",
+    "evaluation_contract_defect_requires_non_prompt_change"
+  ],
+  "historical_artifacts_preserved": [
+    "evaluations/targets/codex-validation-carrier-conformance/cases/heldout-r1/source-freeze.json",
+    "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p001-p002-n5-comparison-r1.json",
+    "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p001-p002-n5-comparison-registration-r1.json"
+  ],
+  "state": "active_fixed_benchmark_prompt_only_comparison_policy"
+}

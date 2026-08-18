@@ -1,0 +1,251 @@
+{
+  "authorized_slot_count": 14,
+  "binding_receipt": {
+    "bound_files": {
+      "capability_catalog": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6",
+      "evaluation_set": "6a3a56f9c84ebaa89aef835a3393fe42eefdd4765a323ad6ef4e3d9e443c54da",
+      "rating": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5",
+      "task_spec": "04e04cafce88b3f093a38a1914464fcc2558859a7665558cc973376ac113495e",
+      "transcript": "fc1591abc8f144a8e41d0408ae78f585bdff31a3d4fbe9f3c2aa9964a13c166c"
+    },
+    "dispatch_allowed": false,
+    "profile_id": "portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n1-r1",
+    "prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "schema_version": "portable-instruction-semantic-profile-binding/v1",
+    "stop_reason": "adapter_execution_entrypoint_disabled",
+    "target_id": "portable-instruction-semantic-conformance"
+  },
+  "dispatch_state": "planned_not_issued",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/sets/heldout-r3/set.json",
+    "set_id": "portable-instruction-semantic-heldout-r3",
+    "set_revision": "r3",
+    "sha256": "6a3a56f9c84ebaa89aef835a3393fe42eefdd4765a323ad6ef4e3d9e443c54da"
+  },
+  "execution": {
+    "dispatch_gate": "adapter_entrypoint_and_preflight_required",
+    "max_attempts_per_slot": 1,
+    "max_workers": 24,
+    "schedule_policy": "global_queue"
+  },
+  "issued_slot_count": 0,
+  "plan_id": "portable-semantic-c147-portable-full-agent-heldout-r3-n1-dispatch-r1",
+  "plan_sha256": "ee692fcce41a09f53868ffff0f1973f6d88b33f71b9caa8e643c3991495d8c03",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n1-r1.json",
+    "profile_id": "portable-semantic-c147-portable-full-agent-heldout-r3-codex-cli0146-sol-medium-n1-r1",
+    "sha256": "a94e4310f310685c776e98a27b7c2dc2e9b374c3b29db6550c3e66b5e758b493"
+  },
+  "prompt_set_identity": {
+    "name": "portable-semantic-c147-portable-full-agent-r1",
+    "revision": "r1",
+    "sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0"
+  },
+  "qualification_artifacts": {
+    "cases": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/input-cases.json",
+      "sha256": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760"
+    },
+    "oracle": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/oracle.json",
+      "sha256": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c"
+    },
+    "rating": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+      "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+    },
+    "response_schema": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r1/response.schema.json",
+      "sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  },
+  "rating_ref": {
+    "contract_id": "portable-instruction-semantic-exact-v1",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+    "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+  },
+  "repetition_condition": {
+    "external_failure_policy": "exclude_without_case_change",
+    "iterations": 1,
+    "order": "case_id_ascending",
+    "valid_low_quality_policy": "retain"
+  },
+  "runtime_ref": {
+    "capability_catalog": {
+      "catalog_id": "codex-cli-0.146.0-semantic-read-only-r1",
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-cli-0.146.0-capability-catalog-r1.json",
+      "schema_version": "portable-instruction-runtime-capability-catalog/v1",
+      "sha256": "e8e80f22aba395787c52a0874fe6088a7d765b5b5609da0bce2b70863287eec6"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "instruction_isolation": {
+      "apps": false,
+      "ignore_rules": true,
+      "ignore_user_config": true,
+      "memory": false,
+      "multi_agent": false,
+      "plugin_sharing": false,
+      "plugins": false
+    },
+    "model": "gpt-5.6-sol",
+    "output_schema_transport": {
+      "api_schema_projection": "supported_subset_semantic_equivalence",
+      "canonical_post_validation": true,
+      "revision": "codex-structured-output-supported-subset-r3"
+    },
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "read-only"
+    },
+    "reasoning_effort": "medium",
+    "runtime": "codex-cli",
+    "session_mode": "persisted_for_usage_collection",
+    "token_accounting": {
+      "revision": "v2",
+      "scope": "all_agents",
+      "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+    },
+    "version": "0.146.0"
+  },
+  "schema_version": "portable-instruction-semantic-dispatch-plan/v1",
+  "slots": [
+    {
+      "case_id": "PIC-H15",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H15-i001"
+    },
+    {
+      "case_id": "PIC-H16",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H16-i001"
+    },
+    {
+      "case_id": "PIC-H17",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H17-i001"
+    },
+    {
+      "case_id": "PIC-H18",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H18-i001"
+    },
+    {
+      "case_id": "PIC-H19",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H19-i001"
+    },
+    {
+      "case_id": "PIC-H20",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H20-i001"
+    },
+    {
+      "case_id": "PIC-H21",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H21-i001"
+    },
+    {
+      "case_id": "PIC-H22",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H22-i001"
+    },
+    {
+      "case_id": "PIC-H23",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H23-i001"
+    },
+    {
+      "case_id": "PIC-H24",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H24-i001"
+    },
+    {
+      "case_id": "PIC-H25",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H25-i001"
+    },
+    {
+      "case_id": "PIC-H26",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H26-i001"
+    },
+    {
+      "case_id": "PIC-H27",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H27-i001"
+    },
+    {
+      "case_id": "PIC-H28",
+      "case_revision": "r3",
+      "iteration": 1,
+      "slot_id": "PIC-H28-i001"
+    }
+  ],
+  "target": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/target.json",
+    "sha256": "4c25db29d1ae72978a8f33f4a9a8ef96efd93db2c8b27b350b81f44078f22dd2",
+    "target_id": "portable-instruction-semantic-conformance",
+    "target_subject_ref": {
+      "interaction_mode": "single_response_operation_ledger",
+      "kind": "semantic_protocol",
+      "protocol_id": "portable-instruction-semantic-conformance",
+      "protocol_revision": "response-r2",
+      "response_schema_sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+    }
+  },
+  "target_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/registrations/heldout-r3-registration-r1.json",
+    "qualification_artifacts": {
+      "cases": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/input-cases.json",
+        "sha256": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760"
+      },
+      "oracle": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r3/oracle.json",
+        "sha256": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c"
+      },
+      "rating": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/rating-contracts/portable-instruction-semantic-exact-v1.json",
+        "sha256": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+      },
+      "response_schema": {
+        "path": "evaluations/targets/portable-instruction-semantic-conformance/cases/heldout-r1/response.schema.json",
+        "sha256": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076"
+      }
+    },
+    "registered_artifacts": {
+      "cases/heldout-r1/response.schema.json": "ed50b2aef60bd8e07794ee0fa13b397989df2ec0e529e39e8c8068c9fcd06076",
+      "cases/heldout-r3/input-cases.json": "90b3567062a834a15cb957685b3ed147218b7d7ec099a556b0c82ec6d9cf1760",
+      "cases/heldout-r3/input-cases.schema.json": "8899df3c3a0ac77615dbe50b3385464f3eb38a928f6cfb63186ff383f30bd224",
+      "cases/heldout-r3/oracle.json": "f07b34cb285c547eaf009674e2cda467deff88ad2ab6682af7013bc9b402f97c",
+      "cases/heldout-r3/oracle.schema.json": "6daadd2590f50f91966ed03893037b005de7aded5e6ec8f1032660d636bda86c",
+      "cases/heldout-r3/source-freeze.json": "871c29134379468e316ebc5d50c11258a323d934dc7ebbd8a97b035d4c74bc8b",
+      "rating-contracts/portable-instruction-semantic-exact-v1.json": "0646efcc32a3631ec715b60f0efb4a7bade72466ff6ce19d636d74e8607c2ee5"
+    },
+    "registration_id": "portable-instruction-semantic-conformance-heldout-r3-registration-r1",
+    "sha256": "d5496940139564db68befa262d1e26209bf07db45d0161028009383deca408a0"
+  },
+  "task_spec_ref": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/task-spec-wrapper-r4.txt",
+    "revision": "semantic-single-json-r4",
+    "sha256": "04e04cafce88b3f093a38a1914464fcc2558859a7665558cc973376ac113495e"
+  },
+  "transcript_ref": {
+    "contract_id": "codex-rollout-thread-bound-final-usage-r2",
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/contracts/codex-rollout-token-accounting-r2.json",
+    "sha256": "fc1591abc8f144a8e41d0408ae78f585bdff31a3d4fbe9f3c2aa9964a13c166c"
+  }
+}

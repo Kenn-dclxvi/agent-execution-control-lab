@@ -1,0 +1,47 @@
+{
+  "schema_version": "portable-instruction-semantic-profile-registration/v1",
+  "registration_id": "portable-semantic-c147-reference-transition-calibration-profile-registration-r3",
+  "profile": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/profiles/portable-semantic-c147-reference-transition-calibration-codex-cli0146-sol-medium-r3-n1-r1.json",
+    "sha256": "7072ba8959213c4a2ab4cd8bd63320d6c63f3d91a40df03a81fa2e7d9f025e44"
+  },
+  "prompt_bundle_registration": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/full-agent-bundle-registration-r1.json",
+    "sha256": "8f0ad026dc732730b07171fddb9fb65cf14d32477ebe8daf8d5972d3a15cba03"
+  },
+  "adapter": {
+    "path": "scripts/semantic_protocol_codex_adapter.py",
+    "sha256": "2e7e0f0ac8fd517c3d21ff221f3bb40bbd188d122ee1c3f111cc86edf5590b25"
+  },
+  "runner": {
+    "path": "scripts/run_semantic_protocol_qualification.py",
+    "sha256": "1063d6df3e90b704c225f890a7aa85bc4728284f5175f79a054851a05e3c324f"
+  },
+  "plan": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-transition-calibration-r3-n1-dispatch-r1.json",
+    "sha256": "5771516da51b5d81f2a308f11041aee0d07f65faea43938a2080f8494b889b6d"
+  },
+  "preflight": {
+    "path": "evaluations/targets/portable-instruction-semantic-conformance/plans/portable-semantic-c147-reference-transition-calibration-r3-n1-preflight-r1.json",
+    "sha256": "390f7dbfac8eb85323903c8f24b29eaae274b755c7046346af085ec5be5319f7"
+  },
+  "allowed_delta": {
+    "effect": "clarify two inconsistent transition boundaries found by r2 calibration without changing cases, oracle, response schema, or C147",
+    "fields": [
+      "profile_id",
+      "dispatch_series_id",
+      "task_spec_ref",
+      "evaluation_set_ref"
+    ]
+  },
+  "state": {
+    "profile_registered": true,
+    "artifact_binding_required": true,
+    "adapter_execution_entrypoint_enabled": true,
+    "dispatch_plan_created": true,
+    "preflight_ready": true,
+    "qualification_started": false,
+    "reference_calibration_only": true,
+    "portable_candidate_heldout": false
+  }
+}

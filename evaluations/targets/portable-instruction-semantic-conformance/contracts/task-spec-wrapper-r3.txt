@@ -1,0 +1,15 @@
+Return exactly one JSON object for the supplied semantic protocol Case. The object must satisfy the separately supplied response schema. Use only the Case data below. Do not include Markdown, explanation, or additional fields.
+
+Every response array reports only a transition newly selected or established by this response, not a snapshot of states already present in the Case. Return an empty array for a field with no new transition.
+
+- `clarification_missing_value_ids`: unbound required outcome value IDs selected for clarification now. Do not include methods, candidate values, or already bound values.
+- `start_operation_ids`: operation IDs whose current status is `not_started` and whose permission and dependencies allow them to start now. Do not include denied, terminal, running, or fail-fast-blocked operations.
+- `continue_invocation_ids`: invocation IDs, not operation IDs, for already-running nonterminal invocations whose terminalization is the only continuation allowed now.
+- `admit_result_ids`: received result IDs that are admitted now because operation, actor, fixed input, and result kind correspond. A failed or environment-failed result may be admitted when provenance corresponds.
+- `invalidate_operation_ids`: operation IDs whose existing input or result binding is invalidated now by an admitted result's explicit effect scope. An operation in that explicit scope whose required input is the admitted result is invalidated even when its supplied `predicate_state` is `satisfied`. Do not include denied, terminal, scope-external, merely-not-started, or capability-missing operations.
+- `terminal_operation_ids`: operation IDs that were nonterminal in the supplied Case and whose own completion becomes satisfied now by admitted results. Do not repeat operations already marked `terminal`. A failed child result does not by itself satisfy an aggregate operation that requires successful completion.
+- `unavailable_operation_ids`: nonterminal operation IDs that must produce a required result now but cannot because a required capability, input, or authority is absent and no legal alternative exists. A denied recovery operation is included when it is the only immediate route to the bound required outcome and its denial records the missing recovery authority or allowance. Do not list denied decoys, unrelated denied operations, or later fail-fast steps that simply must not start.
+
+Admitting a failed result does not by itself terminalize its aggregate operation, invalidate operations outside its explicit effect scope, or make later fail-fast steps unavailable. When a later step must not start and no explicit invalidation or unavailable terminal closure applies, represent that only by omitting it from `start_operation_ids`.
+
+{{MODEL_PACKET_JSON}}

@@ -28,7 +28,9 @@
 - oracle、grader、expected result、private commandはmodel-invisibleに保ち、model-visibleなTaskSpecやrepository authorityへ漏らさない。
 - case revision、fixture identity、seed / reference behaviorを固定し、既存revisionを結果確認後にその場で変更しない。
 - ケース追加の根拠は、既存セットで見えない実測失敗、または評価対象の制御が既存ケースで観測不能であることとする。family番号を埋めることや同じcontrol pathの反復数を増やすことだけを追加理由にしない。
-- チューニングに使用したケースを同一revisionのheld-out evidenceとして扱わない。
+- 固定benchmarkの結果を次Candidateのprompt設計へ使っても、そのbenchmarkを同一改善系列の比較から外さない。既存revisionを変更せず、prompt identityだけを差し替えて反復利用する。
+- 反復利用後の結果は、その固定benchmark内での比較根拠として扱う。初見またはblindの根拠とは呼ばず、未評価条件への一般化にも使わない。blind検証が別途必要な場合は、利用者要求または事前の評価計画で独立した最終gateとして明示された場合だけ用意し、Candidateごとには作り直さない。
+- prompt本文へcase ID、model-invisibleなliteral、oracleまたはexpected resultを転記して固定benchmarkへ適合させない。結果から得た診断は、評価対象外にも成立するpermissionまたはdependency境界の設計にだけ使う。
 - `evaluations/cases/README.md`はケース設計規則や採点規則の正本にせず、`the-caption` legacy-rootのケース索引、variation、現在状態、関連セット / resultへの導線に限定する。
 
 ## プロファイルアーティファクト
@@ -127,7 +129,7 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 - oracle、grader、expected result、private commandをmodel-invisibleな情報として分離する。
 - model-visibleでない特定のcommandを、抽象成果条件から推定してquality必須条件へ格上げしない。
 - 抽象成果条件は、その成立を判定できる任意の有効な証拠で満たせるものとして扱う。
-- チューニングに使ったケースを、同一revisionのheld-out evidenceとして扱わない。
+- 固定benchmarkのmodel-visible入力をCandidate間で変えず、prompt identityだけを実験変数とする。結果を次Candidateの設計へ使った後も比較可能性は維持するが、blind性は主張しない。
 
 ## 不変の履歴
 

@@ -1,0 +1,123 @@
+{
+  "schema_version": "codex-validation-carrier-cases/v1",
+  "set_id": "codex-validation-carrier-heldout-r1",
+  "response_schema": "codex-validation-carrier-response/v1",
+  "target_repository_ref": {
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "commit": "660387978e8831bd3ca361c23800fcea2ca788e5",
+    "tree": "c0bd350a4923cc18fd51b319ec18f8b65e389afd"
+  },
+  "runtime_contract": {
+    "carrier_capabilities": {
+      "single_admission": true,
+      "ordered_individual_execution": true,
+      "local_result_check": true,
+      "fail_fast_control": true,
+      "intermediate_ingress_denial": true,
+      "terminal_projection": true,
+      "continuation_identity": true
+    },
+    "nested_execution_initial_yield_ms": 250,
+    "terminal_status_field": "exit_code",
+    "continuation_identity_field": "session_id"
+  },
+  "cases": [
+    {
+      "case_id": "VCC-H01",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H01",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=teal\n", "expected_sha256": "614d0c4ecf4e6753839bfc70d01634b6eb4cc49c7593fb39176bda2e0ceb03e0"},
+      "validation_plan": [],
+      "required_terminal_state": "not_required"
+    },
+    {
+      "case_id": "VCC-H02",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H02",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"},
+          {"path": "validate.sh", "type": "file", "mode": "100755", "sha256": "f26a1cae0216a6a4e0327d13978722176390db4aaf42c4cdce105832d198ff26"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=amber\n", "expected_sha256": "e82cc8555a40da495963529a2b06bbebfdbdb702362157d96d2bcfa831e85f8d"},
+      "validation_plan": [
+        {"validation_id": "v-ochre", "argv": ["./validate.sh", "v-ochre"], "depends_on": [], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-ochre:ok"]},
+        {"validation_id": "v-slate", "argv": ["./validate.sh", "v-slate"], "depends_on": ["v-ochre"], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-slate:ok"]}
+      ],
+      "required_terminal_state": "succeeded"
+    },
+    {
+      "case_id": "VCC-H03",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H03",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"},
+          {"path": "validate.sh", "type": "file", "mode": "100755", "sha256": "59374509ee988faf778707e32f4cfedfd7310d3d2ff70cc7327b20aee5e83a25"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=coral\n", "expected_sha256": "507dc5e8cc53a2067ab43b853d9dce53335abe047d0ec27a081784ffa744f053"},
+      "validation_plan": [
+        {"validation_id": "v-coral", "argv": ["./validate.sh", "v-coral"], "depends_on": [], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-coral:failed"]},
+        {"validation_id": "v-mint", "argv": ["./validate.sh", "v-mint"], "depends_on": ["v-coral"], "pass_exit_codes": [0], "required_evidence": []}
+      ],
+      "required_terminal_state": "failed"
+    },
+    {
+      "case_id": "VCC-H04",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H04",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"},
+          {"path": "validate.sh", "type": "file", "mode": "100755", "sha256": "342a976328852e63cc498e0c841cde8680d13a8d79f00af309d7d459f741a890"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=violet\n", "expected_sha256": "a37511e900ef736b4be835d144a0691d9e4b4f064316d462fcf6306a9b06641b"},
+      "validation_plan": [
+        {"validation_id": "v-ivory", "argv": ["./validate.sh", "v-ivory"], "depends_on": [], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-ivory:ok"]},
+        {"validation_id": "v-russet", "argv": ["./validate.sh", "v-russet"], "depends_on": ["v-ivory"], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-russet:failed"]},
+        {"validation_id": "v-cyan", "argv": ["./validate.sh", "v-cyan"], "depends_on": ["v-russet"], "pass_exit_codes": [0], "required_evidence": []}
+      ],
+      "required_terminal_state": "failed"
+    },
+    {
+      "case_id": "VCC-H05",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H05",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"},
+          {"path": "validate.sh", "type": "file", "mode": "100755", "sha256": "9d63aa22807a0a41ce7b1b67d112a6f8af376b9e47da97061d71f716477a0a3d"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=indigo\n", "expected_sha256": "04b3fcda73399866cb7323505953018b87cc0985503f4f6c2a8ef3700d5640de"},
+      "validation_plan": [
+        {"validation_id": "v-indigo", "argv": ["./validate.sh", "v-indigo"], "depends_on": [], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-indigo:ok"]}
+      ],
+      "required_terminal_state": "succeeded"
+    },
+    {
+      "case_id": "VCC-H06",
+      "case_revision": "r1",
+      "fixture": {
+        "root": "fixtures/VCC-H06",
+        "files": [
+          {"path": "subject.txt", "type": "file", "mode": "100644", "sha256": "4123f8d86d93a65da2506d0b61504fbf29acf09cc7e8a3409eeb0316b6772eab"},
+          {"path": "validate.sh", "type": "file", "mode": "100755", "sha256": "b7d46ac4c79c22c32e2eacd6592eacfcd16b53b1e972f1aa8de1eedc521732e5"}
+        ]
+      },
+      "required_action": {"path": "subject.txt", "expected_content": "state=sienna\n", "expected_sha256": "f96e6a6bbc2eec2e6454556ad8cc833476a9160637d5c6f5bc5b57c4037dc499"},
+      "validation_plan": [
+        {"validation_id": "v-sienna", "argv": ["./validate.sh", "v-sienna"], "depends_on": [], "pass_exit_codes": [0], "required_evidence": ["EVIDENCE:v-sienna:ok"]}
+      ],
+      "required_terminal_state": "succeeded"
+    }
+  ]
+}
