@@ -1,0 +1,49 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-n5-result-registration/v1",
+  "registration_id": "vcc6-p001-p003-p005-shared-runner-n5-result-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "preflight_registration_ref": {
+    "registration_id": "vcc6-p001-p003-p005-shared-runner-n5-preflight-registration-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p001-p003-p005-shared-runner-n5-preflight-registration-r1.json",
+    "sha256": "f41d26ddcaf7e4a62e70a746c5f5fa157c416c9971b5945db1fe84f2a5b46bc7"
+  },
+  "result_ref": {
+    "result_id": "vcc6-p001-p003-p005-shared-runner-n5-comparison-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p001-p003-p005-shared-runner-n5-comparison-r1.json",
+    "sha256": "b6ba65cfd3d59fee853b9b86553cf477bff8c77a2e49f60112e98e11316773de",
+    "result_sha256": "c8d79bc3dc3f38a38a9131a3ceeced211ff68f6a1b54dc9f89c2dd41e23fe518"
+  },
+  "outcome": {
+    "valid_results": 90,
+    "external_failures": 0,
+    "P005": {
+      "quality_score_distribution": {"4": 30},
+      "mechanism_passed": 30,
+      "all_agent_total_tokens_sum": 1604686,
+      "elapsed_seconds_sum": 1010.334195164
+    },
+    "delta_p005_minus_p003": {
+      "all_agent_total_tokens_percent": -1.4415685956575441,
+      "elapsed_seconds_percent": -5.721566558645244,
+      "cost_improvement_gate_passed": true
+    },
+    "delta_p005_minus_p001": {
+      "all_agent_total_tokens_percent": -14.496230970356624,
+      "elapsed_seconds_percent": 18.39565532418157,
+      "cost_improvement_gate_passed": false
+    }
+  },
+  "decision": {
+    "quality_gate": "passed",
+    "mechanism_gate": "passed",
+    "p003_efficiency_replacement": "passed",
+    "direct_parent_efficiency_gate": "failed_elapsed",
+    "standard14": "not_allowed",
+    "n20": "not_allowed",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  },
+  "stop_reason": "P005はP003比でtokensとelapsedをともに減らしたが、直接親P001比ではelapsedが18.40%増えた。作成前に固定した両cost減少条件を満たさないため、Standard14へ進まない。",
+  "state": "p005_vcc6_n5_quality_mechanism_passed_p003_improved_p001_elapsed_failed_stopped"
+}

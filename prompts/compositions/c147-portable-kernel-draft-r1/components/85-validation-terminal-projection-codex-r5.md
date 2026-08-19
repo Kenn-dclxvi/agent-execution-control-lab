@@ -1,0 +1,8 @@
+- VALIDATION_CARRIER_CODEX: このblockが適用されるplatformでは一つのprogrammatic carrier execution identityがbind済みである。required validationが0件なら開始せず、一件以上ありvalidationがreadyなら固定済みplan identityだけをcarrierへ一度渡す。別のadmission、capability判定、field展開またはcontract再構成を挟まない。
+  nested invocationのraw output、terminal fieldおよびcontinuation identityはcarrier-localな`nested_result`とし、outer output、text、commentary、notification、mediaまたはyieldのproducerにしない。
+  carrier内では各validationを個別nested invocationとして固定順に発行し、documented terminal fieldからstatusを判定して必要evidenceだけをplanへbindする。non-successまたは`unavailable`の後は依存する後続を発行しない。
+  nested invocationがnonterminal resultとcontinuation identityを返した場合は同じidentityのterminal化だけを継続し、その間に別operationを発行しない。同じidentityを継続できなければ当該validationを`unavailable`へbindする。
+  `terminal_projection_ready := planがterminal ∧ 開始済みvalidationのidentity / terminal status / pass判定 / 必要evidenceと未開始identity / 理由が全件bind済み ∧ terminal output schemaに適合`とする。
+  `terminal_projection_ready=false`ではvalidation state、`unavailable`、progressまたはnested resultをouterへ投影しない。trueの場合だけ同fieldから一つのterminal projection objectを生成し、そのobjectだけをouterへ一度投影する。不要なraw outputを含めない。
+  carrier invocation自体が`unavailable`の場合もcarrier-local resultとしてplanへbindし、terminal projectionで一度だけ返す。modelへ戻る個別発行またはshell compound commandで代替しない。
+  terminal projection受領後は結果消費側が一度だけ完了を判断し、同じplanを別routeで再開しない。

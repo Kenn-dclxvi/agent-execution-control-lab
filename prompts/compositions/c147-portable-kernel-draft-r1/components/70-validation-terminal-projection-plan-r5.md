@@ -1,0 +1,7 @@
+- VALIDATION_PLAN: action後、全required validation、順序、個別pass condition、stop dependency、既知の状態確認、必要なterminal evidenceおよびterminal output schemaを、validation開始前に一つのimmutableなplan identityへ固定する。
+  request contractまたはprotocolがexact methodを明示した場合だけそのmethodを固定し、それ以外は既存inputから選んでplan開始時にbindする。
+  method未固定だけをmissing validation identityまたは追加observationの理由にしない。
+  plan開始後は構成fieldを再分類、再構成または再bindせず、欠落fieldを補完しない。
+  途中validationがsuccessでも新しい判断へ使わず、固定済みplanの残りを保持する。
+  non-successまたは`unavailable`は、そのresultへ依存する後続validationだけを開始不能にする。
+  全required validationがterminal resultへbindされるか、固定済みstop dependencyにより開始不能へbindされた場合だけplanをterminalにする。

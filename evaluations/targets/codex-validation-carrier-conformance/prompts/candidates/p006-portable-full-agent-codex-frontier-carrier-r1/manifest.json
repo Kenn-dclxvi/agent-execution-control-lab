@@ -1,0 +1,65 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+    "change_reason": "P005で残ったfrontier全member発行前の個別result ingress permissionを閉じ、構成済みfrontierをCodexの一model outputへ全件commitするplatform carrierへbindする。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "P005の共通FRONTIER、validation、actor、observation、methodまたはrecoveryの変更",
+      "成功runのcommand順、tool実行順、read範囲、Case ID、oracleまたはraw trace literalの転記",
+      "Standard14、VCC6、fixture、TaskSpec、rating、runtime、runner、permissionまたはtoken accountingの変更",
+      "Compact系列、他platform carrier、採用、releaseまたはtarget本体へのprojection"
+    ],
+    "problem": "P005は共通FRONTIERの一部resultを選択や抑止へ使うことを禁じるが、全member発行前に個別resultをmodelへ配送し、使っていないと分類して残memberを後続model outputから発行できる。",
+    "prompt_set_name": "p006_portable_full_agent_codex_frontier_carrier",
+    "scope": "Codexのisolated workspace rootへ配送する自己完結したAGENTS.md一件だけ。",
+    "state": "registered_not_evaluated"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "9ccd6ce5279831828e9a20685fc2aa78f62043b32471003db37dd43e3114afce",
+  "content_relation": {
+    "changed_targets": ["AGENTS.md"],
+    "kind": "codex_frontier_result_ingress_permission_closure",
+    "source_prompt_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "abd143e69b55e6383ab3daa03b8e116db651b0c4",
+      "mode": "100644",
+      "sha256": "669a66d8350e250260922eb25706a11f0e75b5aeb1064ca323a62a9be26c5c91",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "p006-portable-full-agent-codex-frontier-carrier-r1",
+  "provenance": {
+    "allowed_delta": "P005の全13 componentをbyte保持し、構成済みfrontierの全member commit前に個別resultをmodel-visible consumerへ渡せないCodex frontier carrier component一件だけを追加する。",
+    "candidate_design": "docs/p006-frontier-carrier-codex-precreation-design.md",
+    "composition_identity": "c147-portable-kernel-full-agent-codex-frontier-carrier-candidate-composition-r1",
+    "composition_sha256": "6b255f88f5ccd980c3f5f3b1bc1a218d8039b38f6aecc09801886aa13b48d532",
+    "direct_parent_bundle_sha256": "519e61d60afbeb71b6302caa1cef62da152540f730ae51e7a0b7184bfa9c5649",
+    "direct_parent_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+    "direct_parent_manifest_sha256": "24fd6ba20099d3ebb45381010ce21dfdbb1db4e3675882b5b9fbb41872f0382a",
+    "counterexample_identities": [
+      "the-caption-3ce91a4-portable-issuance-frontier-r1",
+      "the-caption-3ce91a4-start-check-same-model-step-r1",
+      "the-caption-3ce91a4-independent-check-same-model-step-r1",
+      "the-caption-3ce91a4-partial-result-continuation-dependency-exclusion-r1"
+    ],
+    "fixed_benchmark_policy_id": "PROMPT_ONLY_COMPARISON",
+    "frontier_carrier_primitive_coverage": "8_of_8",
+    "parent_component_preservation": "13_of_13_byte_preserved",
+    "source_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-frontier-carrier-candidate-r1.composition.json",
+    "source_draft_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-frontier-carrier-draft-r6.composition.json",
+    "source_draft_composition_sha256": "3736f26bb59cff8ad8f4ccb85f57c8713ea186f44bb186e3dff9493322508705",
+    "static_audit": "docs/p006-frontier-carrier-codex-static-counterexample-audit-r1.md",
+    "standard14_reference_result_id": "28082254ecc6447f8d76d63e85062299"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "1f378c17239d6e91d40c1653ce9d640c6ce7b1ca",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "73e6dbbde674316d34b8e95c81f1b42bc696a263"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

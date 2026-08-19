@@ -1,0 +1,49 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-n5-preflight-registration/v1",
+  "registration_id": "vcc6-p001-p003-p005-shared-runner-n5-preflight-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "execution_gate_ref": {
+    "registration_id": "vcc6-p001-p003-p005-shared-runner-n5-foundation-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p001-p003-p005-shared-runner-n5-foundation-r1.json",
+    "sha256": "6162636c7c789191e4ee1e6ec0a741c3e948691922760cabae844fe8a471336e"
+  },
+  "arms": {
+    "P001": {
+      "role": "direct_parent_baseline",
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p001-shared-runner-sol-medium-n5-r1.json", "sha256": "161426f6032788dc52070b6b2122a10600a857bc3ca48fe70354bd682013645f"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n5-dispatch-r1.json", "sha256": "49fa96020df8ef02c6ff8b431c34a1c9e63a0033f305200ffa1a479a08d95407"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n5-preflight-r1.json", "sha256": "40a3363e7c7bbd2f3bd6bd4c82057266876ac7e26ff584d517abf055694463fb"},
+      "private_evidence_root": "/Volumes/SN7100/_verification/vcc6-p001-p003-p005-shared-runner-n5-r1/p001"
+    },
+    "P003": {
+      "role": "latest_quality_and_mechanism_passing_efficiency_reference",
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p003-shared-runner-sol-medium-n5-r1.json", "sha256": "2da92e692106d0603040fcff0645c3ecec4632d5083fe273953fc2ac738f14ec"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n5-dispatch-r1.json", "sha256": "676524172feeb4594295bd673a4e0fb967149f18293b950e9103639aab17cd1e"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n5-preflight-r1.json", "sha256": "fd9e2a9a9383805d439ac554486c7ea3cdb39c78a2f5c68c01b32c1a3f4e8e59"},
+      "private_evidence_root": "/Volumes/SN7100/_verification/vcc6-p001-p003-p005-shared-runner-n5-r1/p003"
+    },
+    "P005": {
+      "role": "candidate_under_evaluation",
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p005-shared-runner-sol-medium-n5-r1.json", "sha256": "cc2e450dd45018a90832280384c088fa54bf4682aba25a6cf0bd437dafc6888b"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p005-shared-runner-n5-dispatch-r1.json", "sha256": "62f6ef6d2ce61ecbf8dd6c2efc7c92f26be555d0ab100aadf698c77d353abe48"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p005-shared-runner-n5-preflight-r1.json", "sha256": "9358a849ae7c2b6bf3d8ad6041c0ee7a225907c61715fa387f215c706edd245e"},
+      "private_evidence_root": "/Volumes/SN7100/_verification/vcc6-p001-p003-p005-shared-runner-n5-r1/p005"
+    }
+  },
+  "compatibility": {
+    "prompt_identity_only": true,
+    "non_prompt_plan_conditions_equal": true,
+    "saved_result_reuse": false,
+    "fresh_slot_count": 90,
+    "slot_count_per_arm": 30,
+    "max_workers": 24,
+    "private_evidence_roots_absent_before_dispatch": true,
+    "runtime_version_observed": "codex-cli 0.146.0"
+  },
+  "dispatch": {
+    "authorized_slot_count": 90,
+    "issued_slot_count": 0,
+    "dispatch_allowed": true
+  },
+  "state": "three_arm_prompt_only_n5_preflight_passed_not_issued"
+}

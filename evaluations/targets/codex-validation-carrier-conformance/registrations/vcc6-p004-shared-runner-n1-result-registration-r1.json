@@ -1,0 +1,54 @@
+{
+  "schema_version": "codex-validation-carrier-candidate-result-registration/v1",
+  "registration_id": "vcc6-p004-shared-runner-n1-result-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "candidate_binding_ref": {
+    "binding_id": "p004-portable-full-agent-codex-validation-prebound-carrier-composition-binding-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/p004-composition-binding-r1.json"
+  },
+  "execution_gate_ref": {
+    "registration_id": "vcc6-p004-prompt-only-shared-runner-foundation-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p004-prompt-only-shared-runner-foundation-r1.json",
+    "sha256": "c6ee46b2756513a378b29200b58d6688a0d857807ff6233a9c2cc284e31dd4bc"
+  },
+  "profile_ref": {
+    "profile_id": "vcc6-p004-shared-runner-sol-medium-n1-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p004-shared-runner-sol-medium-n1-r1.json",
+    "sha256": "7cf41d7ec767fa1103e0776c7fdc5df7431373372021580406f336bed0066e25"
+  },
+  "plan_ref": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p004-shared-runner-n1-dispatch-r1.json",
+    "sha256": "5592393ccb2b5c2af86b8acb47b10d637f7aeb05a27b3ca6a6c8000a830f9796"
+  },
+  "preflight_ref": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p004-shared-runner-n1-preflight-r1.json",
+    "sha256": "b1333b3f77a8763c689c86c42797d87418f83829c8477cb3d8c50cee5631c363",
+    "dispatch_allowed": true,
+    "authorized_slot_count": 6,
+    "issued_slot_count_before_dispatch": 0
+  },
+  "result_ref": {
+    "result_id": "vcc6-p004-shared-runner-n1-candidate-gate-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p004-shared-runner-n1-candidate-gate-r1.json",
+    "sha256": "125a95658319b46084bb6b34936a69387e315a6d674b9b841a25811a4de03321",
+    "result_sha256": "c44a0f5a3f61e44891c71d4b49487707836228d88fa966d894d80c1d09edb657"
+  },
+  "outcome": {
+    "valid_results": 6,
+    "external_failures": 0,
+    "quality_score_distribution": {"1": 1, "4": 5},
+    "mechanism_passed": 5,
+    "mechanism_failed": 1,
+    "candidate_gate_passed": false,
+    "failed_case_id": "VCC-H06"
+  },
+  "stop_reason": "H06の最終responseはexactだったが、carrier terminal projectionがforbidden raw command outputを外へ返しScore 1となった。品質停止条件によりN=5を許可しない。",
+  "authorization": {
+    "n5_extension": "not_authorized",
+    "standard14_projection": "not_authorized",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  },
+  "state": "p004_candidate_gate_failed_stopped"
+}

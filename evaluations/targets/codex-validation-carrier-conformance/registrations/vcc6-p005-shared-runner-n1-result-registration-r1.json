@@ -1,0 +1,55 @@
+{
+  "schema_version": "codex-validation-carrier-candidate-result-registration/v1",
+  "registration_id": "vcc6-p005-shared-runner-n1-result-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "candidate_binding_ref": {
+    "binding_id": "p005-portable-full-agent-codex-validation-terminal-projection-composition-binding-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/p005-composition-binding-r1.json"
+  },
+  "execution_gate_ref": {
+    "registration_id": "vcc6-p005-prompt-only-shared-runner-foundation-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p005-prompt-only-shared-runner-foundation-r1.json",
+    "sha256": "a7a8b5e62904e137dc50ae63aca2a688bcac8185a21ec4c82d140c7f3c251287"
+  },
+  "profile_ref": {
+    "profile_id": "vcc6-p005-shared-runner-sol-medium-n1-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p005-shared-runner-sol-medium-n1-r1.json",
+    "sha256": "ab250aa700c390dbfc3c92a2603c492e6f052ba59e8ad71477dd6d4ff7cb3168"
+  },
+  "plan_ref": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p005-shared-runner-n1-dispatch-r1.json",
+    "sha256": "140598346c974ce5c30f798c60c8930cbe20e0de056262f1c44933f798341d31"
+  },
+  "preflight_ref": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p005-shared-runner-n1-preflight-r1.json",
+    "sha256": "3e8b3dbb53f6487739928a76326afc26c49d7a59c80d5db1d23c59d19721773e",
+    "dispatch_allowed": true,
+    "authorized_slot_count": 6,
+    "issued_slot_count_before_dispatch": 0
+  },
+  "result_ref": {
+    "result_id": "vcc6-p005-shared-runner-n1-candidate-gate-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p005-shared-runner-n1-candidate-gate-r1.json",
+    "sha256": "b9e5c37110e7dae7adb1691e4c4e63559226a5fe8d17e3730d0354a2a64ce216",
+    "result_sha256": "c5e59a09ecc5856cd54c38d3d31296849990f386175b87a0a0614e45b89f5519"
+  },
+  "outcome": {
+    "valid_results": 6,
+    "external_failures": 0,
+    "quality_score_distribution": {"4": 6},
+    "mechanism_passed": 6,
+    "mechanism_failed": 0,
+    "candidate_gate_passed": true,
+    "h06_raw_output_bytes": 342,
+    "h06_terminal_projection_count": 1
+  },
+  "interpretation": "P005はcandidate-only N=1 gateを通過した。P004 H06で観測したraw result外部投影routeはこのrunでは再現せず、N=5を実施できる。ただしN=1から効率差または安定傾向は主張しない。",
+  "authorization": {
+    "n5_extension": "allowed_not_started",
+    "standard14_projection": "not_authorized",
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  },
+  "state": "p005_candidate_gate_passed_n5_allowed"
+}

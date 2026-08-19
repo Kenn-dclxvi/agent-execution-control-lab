@@ -1,0 +1,72 @@
+{
+  "schema_version": "codex-validation-carrier-candidate-binding/v1",
+  "binding_id": "p005-portable-full-agent-codex-validation-terminal-projection-composition-binding-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "direct_parent": {
+    "prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "bundle_sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+    "manifest": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/candidates/portable-semantic-c147-portable-full-agent-r1/manifest.json",
+      "sha256": "f34c97a0e1b03d221d663c3b16984058f78851dfa0ac4eb0081aeee5dcda37ef"
+    },
+    "root_instruction_sha256": "3d3733a4ec0bb531a5be8eb53922e92fafe37b479b6190d24a8176ae452805e3"
+  },
+  "counterexamples": [
+    {"prompt_identity": "p002-portable-full-agent-codex-validation-carrier-r1", "role": "validation閉鎖を保持したがfield再bindでcostが増えた反例。直接親ではない。"},
+    {"prompt_identity": "p003-portable-full-agent-codex-validation-plan-identity-carrier-r1", "role": "immutable planで品質を維持したがtaskごとのadmission再判定が残った反例。直接親ではない。"},
+    {
+      "prompt_identity": "p004-portable-full-agent-codex-validation-prebound-carrier-r1",
+      "bundle_sha256": "669d21ebc91f7317ccef1607093a638ca449fc4be82d7aba7e7a88fef68f4a7c",
+      "result": {
+        "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p004-shared-runner-n1-candidate-gate-r1.json",
+        "sha256": "125a95658319b46084bb6b34936a69387e315a6d674b9b841a25811a4de03321"
+      },
+      "role": "H06でraw nested resultをouter outputへ投影し、invocation前の暫定unavailableも残った反例。直接親ではない。"
+    }
+  ],
+  "platform_contract": {
+    "capability_catalog": {"path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-cli-0.146.0-validation-carrier-workspace-write-r1.json", "sha256": "520092cb26dfc9da4cd53fa75e05e301d43dd8a9e3a0b97df2d332c3a7e46b17"},
+    "schema_transport": {"path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-output-schema-transport-r1.json", "sha256": "a468155a10199c62cd05b9ee458cbbb357714345c4c5006214933a76cc6c0eb8"},
+    "binding_semantics": "Codex block適用時点でcarrier identityとdocumented transportは成立済みであり、raw nested resultはcarrier-local、terminal projection objectだけがouter projection producerである。"
+  },
+  "candidate_composition": {
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-terminal-projection-candidate-composition-r1",
+    "composition_sha256": "88961d67f8fb21d0b5f25fa73c0eb2117c0b47a34855ad52c5533d951c7b654f",
+    "path": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-terminal-projection-candidate-r1.composition.json",
+    "sha256": "07b0d9d1ee76fc6eceed16fe8f624db943de108f14df9900b6c3870cc9223374"
+  },
+  "source_draft": {
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-terminal-projection-draft-composition-r5",
+    "composition_sha256": "dba200dcbdfd669191a6d7d3d1151df8060b0f9c6027f468b5f2bd962545b58a",
+    "path": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-terminal-projection-draft-r5.composition.json",
+    "sha256": "813a54066458dbefc899d5ff6912eb67beffe61d90071c8bc46f2083b22cb832"
+  },
+  "candidate_bundle": {
+    "prompt_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+    "bundle_sha256": "519e61d60afbeb71b6302caa1cef62da152540f730ae51e7a0b7184bfa9c5649",
+    "manifest": {"path": "evaluations/targets/codex-validation-carrier-conformance/prompts/candidates/p005-portable-full-agent-codex-validation-terminal-projection-r1/manifest.json", "sha256": "24fd6ba20099d3ebb45381010ce21dfdbb1db4e3675882b5b9fbb41872f0382a"},
+    "root_instruction": {"bytes": 12830, "git_blob_sha1": "3f4c07796d11a3c4e59058265246d384c6a5077d", "sha256": "2cb70ccd11fcfe605accf9b212050ed08b6db0eb0a522d502d35c33d58301681"}
+  },
+  "allowed_delta": "P001のvalidation blockを、raw nested resultをcarrier-localに閉じ、plan terminal後のterminal projection objectだけを一度外部投影できるplanとCodex carrierへ置換する。",
+  "preserved_boundary": {
+    "nonvalidation_primitives": "66_of_66_byte_preserved",
+    "validation_primitives": "15_of_15_covered",
+    "heldout_source_freeze_id": "codex-validation-carrier-heldout-r1-source-freeze-r1",
+    "fixed_benchmark_policy_id": "vcc6-fixed-benchmark-policy-r1",
+    "case_oracle_rating_runtime_changed": false
+  },
+  "not_inherited": [
+    "P002、P003またはP004の全文、直接親の役割および評価状態",
+    "P003のtaskごとのcapability・projection admission再判定",
+    "P004のraw nested result外部投影とpre-invocation暫定状態",
+    "P001からP004までの採用状態、C147の採用状態、他platformでのcarrier能力、Standard14の成績"
+  ],
+  "verification": {
+    "static_counterexample_classes": 14,
+    "remaining_blocking_counterexamples": 0,
+    "bundle_binding": "verified",
+    "dependency_closure": "verified",
+    "output_bytes_match": true
+  },
+  "state": "candidate_bundle_bound_not_evaluated"
+}
