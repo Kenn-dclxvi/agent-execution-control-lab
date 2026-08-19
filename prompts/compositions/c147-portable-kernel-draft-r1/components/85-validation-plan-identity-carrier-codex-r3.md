@@ -1,0 +1,7 @@
+- VALIDATION_CARRIER_CODEX: required validationが一件以上ありvalidationがreadyで、`single_admission / ordered_individual_execution / local_result_check / fail_fast_control / intermediate_ingress_denial / terminal_projection / continuation_identity`の全capabilityを一つのprogrammatic carrier execution identityへbindできる場合だけ、固定済みplan identityとterminal projection contractをそのidentityへbindする。required validationが0件なら開始しない。capabilityが一件でも欠ければvalidationを`unavailable`とし、modelへ戻る個別発行またはshell compound commandで代替しない。
+  `terminal projection contract := 必要なterminal evidence / documented result field / terminal output schema`を開始前にbindする。必要evidenceをfieldへbindできなければ`unavailable`にする。carrier inputは固定済みplan identityと同contractだけとし、plan構成fieldをcarrier admission用に再分類、再構成または再bindせず、欠落fieldを補完しない。
+  carrier内ではplanの各validationを個別nested invocationとして固定順に発行し、contractのfieldからterminal statusを判定する。non-successまたは`unavailable`の後は、そのresultへ依存する後続invocationを発行しない。
+  nested invocationがnonterminal resultとcontinuation identityを返した場合は、同じidentityのterminal化だけをcontinuation capabilityで継続し、その間に別operationを発行しない。同じidentityを観測または指定できなければresultを補完せず`unavailable`にする。
+  planがnonterminalの間は、carrier外へcommentary、text、notification、mediaまたはyieldを出さず、途中resultをcarrier-localに保持する。
+  planがterminalの場合だけ、開始した各validationのidentity、terminal status、pass判定、必要evidenceと、未開始identityおよび理由を、contractに従う一つのterminal outputとして一度だけ投影する。必要evidenceではないraw outputを追加しない。
+  terminal output後は結果消費側が一度だけ完了を判断し、同じplanをmodelへ戻る個別発行routeで再開しない。

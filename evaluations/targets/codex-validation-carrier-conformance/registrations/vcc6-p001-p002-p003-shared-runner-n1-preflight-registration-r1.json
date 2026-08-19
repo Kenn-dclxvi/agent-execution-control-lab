@@ -1,0 +1,46 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-global-preflight/v1",
+  "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-preflight-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "execution_gate_ref": {
+    "registration_id": "vcc6-prompt-only-shared-runner-foundation-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-prompt-only-shared-runner-foundation-r1.json",
+    "sha256": "3d58ab56f4010c59f92b44fc703dc287db221283fc3582a90650142622a0aa68"
+  },
+  "arms": {
+    "P001": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p001-shared-runner-sol-medium-n1-r1.json", "sha256": "b95e902ac28a3b144f4316704480fba042de1cca7e261835779c7af4e6d86c5a"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n1-dispatch-r1.json", "sha256": "7afbd289f71a6b4441080ce1369123a00a1c669ce4fedb11a284ab5b7c3e5f90", "plan_sha256": "c0ec52b757deac2a71bad6e46440f061858c967ce4a7f68fec37fb5473b8d576"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n1-preflight-r1.json", "sha256": "75222ecd73ad26ca3372aa48caa9bbbeca47095ecd9b4c298b6a18dba09c396f", "receipt_sha256": "7ba9e70a6552a925b827c7a43c9eafbc560db5e437548b13e13dee839226f6aa"}
+    },
+    "P002": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p002-shared-runner-sol-medium-n1-r1.json", "sha256": "ddd994efbac478f9a908a36d6eda6afd0fdc9f4727d8452b77e8b6a8e70a4778"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p002-shared-runner-n1-dispatch-r1.json", "sha256": "c5e0385a534c514aac8c1e0533c9ae28a77eaafe9d0fe7c70777c56face7cc73", "plan_sha256": "65d24d3bfb5790715c76a1a522ec631894a9951bdaf558116195b53a3b2d8f8b"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p002-shared-runner-n1-preflight-r1.json", "sha256": "48600a3be9f3f5d0e435b0c23dab1cef043e1a9c864278d42cf0975b6c0aad3d", "receipt_sha256": "c400de26d08d7c3f73c502cddfe855517f19f40b3b7e93c10c2dc6937eae1521"}
+    },
+    "P003": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p003-shared-runner-sol-medium-n1-r1.json", "sha256": "9b53b93d22381a404e589dcd401ff83b53373e28b78adda01d702e6b0055cdbe"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n1-dispatch-r1.json", "sha256": "b59b0c4eb02626aad7bd13b662d7c588e6008ebee99e6ebaef03db97fe17493c", "plan_sha256": "8498fe385820d333a9ee40a312361a68c4426012570911d57c13a4430ab522e1"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n1-preflight-r1.json", "sha256": "dbf7bd010b123aeaf1fe6a7f67624b0dfd4ff05d95949aa40ebf54f49aeadc7c", "receipt_sha256": "30e353c102ffb01c18d942202f938b885a77f5cbb60ddac35a745b9a00f23948"}
+    }
+  },
+  "compatibility": {
+    "prompt_identity_only": true,
+    "same_evaluation_set": true,
+    "same_case_fixture_task_spec_rating": true,
+    "same_runtime_model_reasoning_permission": true,
+    "same_token_accounting": true,
+    "same_execution_code": true,
+    "same_repetition_and_execution_contract": true,
+    "saved_result_reuse": false
+  },
+  "execution_code": {
+    "adapter_sha256": "9b133af0d7856ff5311eb5d8487a56d44e95fb76e3370421a10499d9ec7a489b",
+    "base_runner_sha256": "81b1bc723b4cb23ca775fa49a5f97a075dc0610cbb9ac8f68e7b741ae7b03224",
+    "prompt_only_runner_sha256": "1c85bfdb13791795e3fdc78b17c95702b4fda4f6e3183d46b8e52d087e8415c3"
+  },
+  "authorized_slot_count": 18,
+  "issued_slot_count": 0,
+  "dispatch_allowed": true,
+  "state": "prompt_only_shared_runner_n1_preflight_passed_not_issued"
+}

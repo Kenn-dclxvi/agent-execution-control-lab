@@ -20,6 +20,14 @@
 
 P001 Standard14 N=5の後続診断により、`validation-execution`は共通semantic closureとplatform固有carrier能力を同じcomponentに持つことが分かった。Codex CLI 0.146.0の独立probeで7能力を確認した後、[`P001 validation carrier platform分離設計`](../../docs/p001-validation-carrier-platform-separation-design.md)に従う管理用r2 draftを追加した。`validation-plan-semantics-r2 / validation-result-closure-r2`と`validation-carrier-codex-r2`を分けるが、最終成果は自己完結した一枚である。既存r1は変更せず、r2もCandidateまたは評価入力へ昇格していない。
 
+P002 VCC6 N=5のcost退行監査後、固定済みplanをcarrier admission用fieldへ再bindできるdependencyだけを閉じる管理用r3 draftを追加した。r2のplan semanticsとresult closureを保持し、Codex blockだけを`validation-plan-identity-carrier-codex-r3`へ置換する。r3自体はschema `v3`の管理用sourceであり、静的gate通過後に同一bytesをP003専用Candidate manifestとfull bundleへ別途bindした。
+
+P003 VCC6 N=1のtrace診断後、taskごとのcarrier capability・projection admission再判定を削除する管理用r4 draftを追加した。terminal投影要求をimmutable planへ移し、Codex blockのcontractをcomposition時に成立済みとする。r4自体はschema `v3`の管理用sourceであり、静的gate通過後に同一bytesをP004専用Candidate manifestとfull bundleへ別途bindした。
+
+P004 VCC6 N=1のH06 trace診断後、raw nested resultをcarrier-localへ閉じ、plan terminal後のterminal projection objectだけをouter output producerにする管理用r5 draftを追加した。r5自体はschema `v3`の管理用sourceであり、静的gate通過後に同一bytesをP005専用Candidate manifestとfull bundleへ別途bindした。
+
+P005 Standard14 N=5のC147移植損失監査後、共通`FRONTIER`の意味を変更せず、全member commit前の個別result ingressだけを閉じるCodex frontier carrierを管理用r6 draftへ追加した。r6自体はschema `v3`の管理用sourceであり、14 classの静的gate通過後に同一bytesをP006専用Candidate manifestとfull bundleへ別途bindした。
+
 確認command：
 
 ```bash

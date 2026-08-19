@@ -1,0 +1,209 @@
+{
+  "schema_version": "agent-execution-control.prompt-composition/v2",
+  "artifact": {
+    "artifact_role": "composition_source",
+    "evaluation_eligible": false,
+    "model_visible": false
+  },
+  "composition_identity": "c147-portable-kernel-full-agent-codex-validation-terminal-projection-candidate-composition-r1",
+  "composition_sha256": "88961d67f8fb21d0b5f25fa73c0eb2117c0b47a34855ad52c5533d951c7b654f",
+  "source_prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+  "output_prompt_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+  "output_target": "AGENTS.md",
+  "expected_output_sha256": "2cb70ccd11fcfe605accf9b212050ed08b6db0eb0a522d502d35c33d58301681",
+  "functional_blocks": [
+    "core",
+    "actor",
+    "observation",
+    "frontier",
+    "validation",
+    "execution",
+    "platform-capability"
+  ],
+  "components": [
+    {
+      "id": "header",
+      "functional_block": "core",
+      "path": "components/00-header.md",
+      "provides": [
+        "document.header"
+      ],
+      "requires": [],
+      "sha256": "2a81c433b046a38fb024cd2a5eef104f0b403343491bcf6ef2f4a3b319d8fc89"
+    },
+    {
+      "id": "vocabulary",
+      "functional_block": "core",
+      "path": "components/05-vocabulary.md",
+      "provides": [
+        "control.vocabulary"
+      ],
+      "requires": [
+        "document.header"
+      ],
+      "sha256": "e3ba5e0c125c31c36262a45d962492f43a92b972d813104d76ccb61c067c3f01"
+    },
+    {
+      "id": "outcome",
+      "functional_block": "core",
+      "path": "components/10-outcome.md",
+      "provides": [
+        "operation.contract",
+        "outcome.binding",
+        "permission.boundary",
+        "criterion.owner",
+        "spec.readiness",
+        "result.locality"
+      ],
+      "requires": [
+        "control.vocabulary"
+      ],
+      "sha256": "971c02d88c94775700770102cea2ef0f7ec892ab9282c4c1dc161e2a9562878e"
+    },
+    {
+      "id": "actor-core",
+      "functional_block": "actor",
+      "path": "components/20-actor-core.md",
+      "provides": [
+        "actor.binding",
+        "actor.single_assignment",
+        "actor.rebinding"
+      ],
+      "requires": [
+        "operation.contract",
+        "criterion.owner"
+      ],
+      "sha256": "9967822dac7a0f451e71680b82da9d82b3a6fdfdaded5b1dfa70917832e23ca1"
+    },
+    {
+      "id": "actor-input",
+      "functional_block": "actor",
+      "path": "components/25-actor-input.md",
+      "provides": [
+        "actor.input_boundary"
+      ],
+      "requires": [
+        "actor.binding",
+        "permission.boundary",
+        "criterion.owner"
+      ],
+      "sha256": "e96ab04256a81b996eff93049e619b32066da66928df8d099a5b9d28345ab71f"
+    },
+    {
+      "id": "multi-actor",
+      "functional_block": "actor",
+      "path": "components/30-multi-actor.md",
+      "provides": [
+        "actor.execution_mode",
+        "actor.result_admission"
+      ],
+      "requires": [
+        "actor.binding",
+        "actor.input_boundary",
+        "operation.contract",
+        "criterion.owner"
+      ],
+      "sha256": "4a6b864afdd38e2d54bb9a3038a7b168a0ea42992a7ae70cb6bc90b0c7bb8afe"
+    },
+    {
+      "id": "observation",
+      "functional_block": "observation",
+      "path": "components/40-observation.md",
+      "provides": [
+        "observation.admission",
+        "implementation.binding"
+      ],
+      "requires": [
+        "operation.contract",
+        "spec.readiness",
+        "permission.boundary",
+        "validation.plan"
+      ],
+      "sha256": "cf48845d8f84f2c8858a40ebe05383ed043109815f89918af31128246376073f"
+    },
+    {
+      "id": "frontier",
+      "functional_block": "frontier",
+      "path": "components/50-frontier.md",
+      "provides": [
+        "issuance.frontier"
+      ],
+      "requires": [
+        "operation.contract",
+        "permission.boundary",
+        "result.locality"
+      ],
+      "sha256": "bd03b44dd750f78c976869bb29428cd02f79589ac7a74b83d2a56e9153999e9c"
+    },
+    {
+      "id": "completion",
+      "functional_block": "core",
+      "path": "components/60-completion.md",
+      "provides": [
+        "operation.completion"
+      ],
+      "requires": [
+        "operation.contract",
+        "actor.binding",
+        "actor.result_admission"
+      ],
+      "sha256": "3f0a09d474e357a00f70d8c9ce2843c0d170871bf1129d17cbdbc39360ae868a"
+    },
+    {
+      "id": "validation-terminal-projection-plan-r5",
+      "functional_block": "validation",
+      "path": "components/70-validation-terminal-projection-plan-r5.md",
+      "provides": [
+        "validation.plan"
+      ],
+      "requires": [
+        "observation.admission",
+        "execution.method"
+      ],
+      "sha256": "28d9a41d5cc32917a698388267057ed9feb29b8830092f3c9664340b96e84538"
+    },
+    {
+      "id": "validation-result-closure-r2",
+      "functional_block": "validation",
+      "path": "components/75-validation-result-closure-r2.md",
+      "provides": [
+        "validation.result_closure"
+      ],
+      "requires": [
+        "actor.binding",
+        "actor.result_admission",
+        "operation.completion",
+        "validation.plan"
+      ],
+      "sha256": "a731f60e12724c8e416c0e0e0c9e6103fc5ef860647ab64a77b798874a5deae6"
+    },
+    {
+      "id": "validation-terminal-projection-codex-r5",
+      "functional_block": "platform-capability",
+      "path": "components/85-validation-terminal-projection-codex-r5.md",
+      "provides": [
+        "validation.execution",
+        "validation.carrier.codex"
+      ],
+      "requires": [
+        "validation.plan",
+        "validation.result_closure"
+      ],
+      "sha256": "44cd1435b20f4569c412cadff737a6c6e1816f2b05eac93c6600781d2477f024"
+    },
+    {
+      "id": "method-recovery",
+      "functional_block": "execution",
+      "path": "components/90-method-recovery.md",
+      "provides": [
+        "execution.method",
+        "execution.recovery"
+      ],
+      "requires": [
+        "operation.contract",
+        "permission.boundary"
+      ],
+      "sha256": "61f4204137b2f2e9b06a4966f12077b4bc7a927829f4fef3ef856c3ce84e6c7e"
+    }
+  ]
+}

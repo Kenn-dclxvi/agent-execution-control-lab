@@ -1,0 +1,28 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-n1-registration/v1",
+  "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-result-registration-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "result": {
+    "result_id": "vcc6-p001-p002-p003-shared-runner-n1-result-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p001-p002-p003-shared-runner-n1-result-r1.json",
+    "sha256": "dfee0d31dba8bfe7a37847d25fab4abfe136e12f2215e134307ef6f529b206a3",
+    "result_sha256": "37886d2c030448f2ee307fd5c31b1cdfde67014509b74b34d8661690cb9efb65"
+  },
+  "gate": {
+    "validity": "passed_18_of_18",
+    "quality": "passed_score4_18_of_18",
+    "p003_mechanism": "passed_6_of_6",
+    "p003_tokens_delta_percent_vs_p001": -29.965267514040793,
+    "p003_tokens_delta_percent_vs_p002": -10.388247308303287,
+    "p003_elapsed_delta_percent_vs_p001": 19.22133615648477,
+    "p003_elapsed_delta_percent_vs_p002": 5.638457946706171,
+    "stability_claim": false
+  },
+  "allowed_next_profile_class": "vcc6_prompt_only_shared_runner_n5",
+  "forbidden_profile_classes": [
+    "standard14_n5_before_vcc6_n5_gate",
+    "n20_before_standard14_n5_gate",
+    "release_projection"
+  ],
+  "state": "shared_runner_n1_gate_passed_n5_allowed"
+}

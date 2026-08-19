@@ -1,0 +1,65 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "change_reason": "P004で残ったraw nested resultと暫定状態のouter projection permissionを除き、carrier生成のterminal projection objectだけへ一回限りの外部出力権限を固定する。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "P001の非validation機能、VCC6のCase、oracle、TaskSpec、rating、runtimeまたはtoken accountingの変更",
+      "成功runのcommand順、wrapper code、tool順、Case IDまたはraw noise literalの転記",
+      "Compact系列、他platform carrier、Standard14、採用、releaseまたはtarget本体へのprojection"
+    ],
+    "problem": "P004は6件中5件でScore 4だったが、H06でraw nested result objectをouter custom tool outputへ投影し、forbidden raw outputをmodelへ配送した。invocation前の暫定unavailable投影も残った。",
+    "prompt_set_name": "p005_portable_full_agent_codex_validation_terminal_projection",
+    "scope": "Codexのisolated workspace rootへ配送する自己完結したAGENTS.md一件だけ。",
+    "state": "registered_not_evaluated"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "519e61d60afbeb71b6302caa1cef62da152540f730ae51e7a0b7184bfa9c5649",
+  "content_relation": {
+    "changed_targets": ["AGENTS.md"],
+    "kind": "validation_terminal_projection_producer_permission_move",
+    "source_prompt_identity": "portable-semantic-c147-portable-full-agent-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "3f4c07796d11a3c4e59058265246d384c6a5077d",
+      "mode": "100644",
+      "sha256": "2cb70ccd11fcfe605accf9b212050ed08b6db0eb0a522d502d35c33d58301681",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "prompt_identity": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+  "provenance": {
+    "allowed_delta": "P001のvalidation blockを、raw nested resultをcarrier-localに閉じ、plan terminal後のterminal projection objectだけを一度外部投影できるvalidation planとCodex carrierへ置換する。非validation 66 primitiveはbyte保持する。",
+    "candidate_design": "docs/p005-validation-terminal-projection-ownership-precreation-design.md",
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-terminal-projection-candidate-composition-r1",
+    "composition_sha256": "88961d67f8fb21d0b5f25fa73c0eb2117c0b47a34855ad52c5533d951c7b654f",
+    "direct_parent_bundle_sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+    "direct_parent_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "direct_parent_manifest_sha256": "f34c97a0e1b03d221d663c3b16984058f78851dfa0ac4eb0081aeee5dcda37ef",
+    "counterexample_identities": [
+      "p002-portable-full-agent-codex-validation-carrier-r1",
+      "p003-portable-full-agent-codex-validation-plan-identity-carrier-r1",
+      "p004-portable-full-agent-codex-validation-prebound-carrier-r1"
+    ],
+    "fixed_benchmark_policy_id": "vcc6-fixed-benchmark-policy-r1",
+    "heldout_source_freeze_id": "codex-validation-carrier-heldout-r1-source-freeze-r1",
+    "nonvalidation_primitive_coverage": "66_of_66_byte_preserved",
+    "platform_capability_contract": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-cli-0.146.0-validation-carrier-workspace-write-r1.json",
+    "schema_transport_contract": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-output-schema-transport-r1.json",
+    "source_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-terminal-projection-candidate-r1.composition.json",
+    "source_draft_composition": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-terminal-projection-draft-r5.composition.json",
+    "source_draft_composition_sha256": "813a54066458dbefc899d5ff6912eb67beffe61d90071c8bc46f2083b22cb832",
+    "static_audit": "docs/p005-validation-terminal-projection-ownership-static-counterexample-audit-r1.md",
+    "validation_primitive_coverage": "15_of_15"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "1f378c17239d6e91d40c1653ce9d640c6ce7b1ca",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "73e6dbbde674316d34b8e95c81f1b42bc696a263"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

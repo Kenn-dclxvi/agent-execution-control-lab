@@ -1,0 +1,133 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-execution-gate/v1",
+  "registration_id": "vcc6-p001-p003-p005-shared-runner-n5-foundation-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "objective": "P001、P003およびP005を同一runner bytesと固定Layer 1でfresh N=5実行し、品質・機序・tokens・elapsedをprompt identityだけの差として比較する。",
+  "authorization": {
+    "source": "user_request",
+    "scope": "P005 candidate-only N=1 gate通過後、直接親P001と直近品質通過対象P003を含む固定VCC6 N=5比較へ進む。"
+  },
+  "fixed_benchmark_policy_ref": {
+    "registration_id": "vcc6-fixed-benchmark-policy-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-fixed-benchmark-policy-r1.json",
+    "sha256": "aeff5d08c757cda9e1b96e5c92babe09ecb9b5d6b76c9d49e6777cdf645e18cf"
+  },
+  "allowed_prompt_set_identities": [
+    {
+      "name": "portable-semantic-c147-portable-full-agent-r1",
+      "revision": "r1",
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/candidates/portable-semantic-c147-portable-full-agent-r1",
+      "sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0"
+    },
+    {
+      "name": "p003-portable-full-agent-codex-validation-plan-identity-carrier-r1",
+      "revision": "r1",
+      "path": "evaluations/targets/codex-validation-carrier-conformance/prompts/candidates/p003-portable-full-agent-codex-validation-plan-identity-carrier-r1",
+      "sha256": "123b08c653af24cde9837692328739e74bf6199f9d3cf69a0cb44cc7351a1e1e"
+    },
+    {
+      "name": "p005-portable-full-agent-codex-validation-terminal-projection-r1",
+      "revision": "r1",
+      "path": "evaluations/targets/codex-validation-carrier-conformance/prompts/candidates/p005-portable-full-agent-codex-validation-terminal-projection-r1",
+      "sha256": "519e61d60afbeb71b6302caa1cef62da152540f730ae51e7a0b7184bfa9c5649"
+    }
+  ],
+  "execution_code": {
+    "adapter": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/adapter.py",
+      "sha256": "9b133af0d7856ff5311eb5d8487a56d44e95fb76e3370421a10499d9ec7a489b"
+    },
+    "base_runner": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner.py",
+      "sha256": "81b1bc723b4cb23ca775fa49a5f97a075dc0610cbb9ac8f68e7b741ae7b03224"
+    },
+    "prompt_only_runner": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner_prompt_only.py",
+      "sha256": "1c85bfdb13791795e3fdc78b17c95702b4fda4f6e3183d46b8e52d087e8415c3"
+    }
+  },
+  "fixed_conditions": {
+    "target": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/target.json",
+      "sha256": "8763022e2abfc98b26e672ca1f565c52260d60f93ee8f538f87388a1e037736b"
+    },
+    "evaluation_set": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/sets/heldout-r1/set.json",
+      "sha256": "63fd5f75162b831d214f89cbfec137378af39524b92e9e3437eea53081b4c4b9"
+    },
+    "task_spec": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/contracts/task-spec-template-v1.txt",
+      "sha256": "526b5928109e46922bc74febaec2daa4b65936512d8ea4a8250ebeb90d43ea68"
+    },
+    "rating": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/rating-contracts/codex-validation-carrier-outcome-v1.json",
+      "sha256": "b72aaf9761818863adcc9f99b8acd47217ec892af3e9e96cdee5476e3c82354a"
+    },
+    "token_accounting": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-rollout-token-accounting-r1.json",
+      "sha256": "25a944ecad0969644eb6d0db4d40c4ecf5228043d2705d740c3a535ccddef541"
+    },
+    "capability_catalog": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-cli-0.146.0-validation-carrier-workspace-write-r1.json",
+      "sha256": "520092cb26dfc9da4cd53fa75e05e301d43dd8a9e3a0b97df2d332c3a7e46b17"
+    },
+    "schema_transport": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/contracts/codex-output-schema-transport-r1.json",
+      "sha256": "a468155a10199c62cd05b9ee458cbbb357714345c4c5006214933a76cc6c0eb8"
+    }
+  },
+  "runtime_ref": {
+    "runtime": "codex-cli",
+    "version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "permission": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "session_mode": "persisted_for_usage_collection",
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v2",
+      "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+    },
+    "instruction_isolation": {
+      "ignore_user_config": true,
+      "ignore_rules": true,
+      "memory": false,
+      "apps": false,
+      "plugins": false,
+      "plugin_sharing": false,
+      "multi_agent": false
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic"
+  },
+  "profile_contract": {
+    "repetition_condition": {
+      "iterations": 5,
+      "order": "case_id_ascending",
+      "valid_low_quality_policy": "retain",
+      "external_failure_policy": "exclude_without_case_change"
+    },
+    "execution": {
+      "max_workers": 24,
+      "schedule_policy": "global_queue",
+      "max_attempts_per_slot": 1,
+      "dispatch_gate": "qualification_preflight_required"
+    },
+    "scope": {
+      "profile_class": "vcc6_prompt_only_shared_runner_n5",
+      "candidate_only": false,
+      "formal_comparison": true,
+      "saved_result_reuse": "not_authorized",
+      "standard14_projection": "not_authorized_until_n5_gate",
+      "n20_extension": "not_authorized",
+      "adoption": "not_decided",
+      "release": "not_decided",
+      "runtime_projection": "not_authorized"
+    }
+  },
+  "saved_result_reuse": "forbidden_fresh_three_arm_n5",
+  "dispatch_allowed": true,
+  "state": "prompt_only_execution_gate_registered_not_executed"
+}

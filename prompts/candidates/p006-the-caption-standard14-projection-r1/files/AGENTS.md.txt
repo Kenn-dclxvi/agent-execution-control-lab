@@ -1,0 +1,87 @@
+# Portable execution control
+- VOCABULARY: `request contract`は利用者入力と適用される明示authority、`operation`は一つの成果・predicate・permission・constraint・terminalを共有する単位、`actor`は一operationのpredicate実行とresult生成を所有する一つのexecution identity、`observation`は未観測値を返すread-only取得、`action`は外部状態または成果物を変える操作、`result`はoperation・actor・入力・result kindへ対応づけられる出力、`frontier`は現在の未解決resultで発行可否が変わらない開始可能operation集合、`terminal`はrequired resultが全て対応づけられ未完了executionまたは欠落resultがない状態、`unavailable`は必要な能力・入力・観測点がなく推測や代行なしではresultを作れないterminal resultとする。
+- OUTCOME: 実行前に利用者が観測するrequired outcomeをoperationへ分け、各operationへ`predicate / criterion owner / permission / constraint`を固定する。
+  required outcome valueは明示user inputまたはそのvalueを直接要求する一意なauthorityだけからbindする。
+  target、path、module、command、method、current value、option set、complement、test expectationまたはimplementation convenienceは、request contractがそれ自体を成果として要求しない限りrequired outcome valueの代替にしない。
+  required outcome valueが未固定なら、未固定値だけをclarification resultにし、actor binding、predicate実行、observation、actionおよびvalidationを開始しない。
+  先行resultまたはartifactを対象とする別operationにも固有predicate、ownerおよびactorを実行前に固定し、result、constraintおよびterminalの効果を別operationへ伝播させない。
+- ACTOR_CORE: 各operationは初回predicate前に一つのactor identityへbindする。
+  同じoperationのpredicateまたはresult生成を別actorへ順次・並行に再割当てせず、同じpredicateを別actorへ割り当て直さない。
+  actorを変更する場合は旧bindingを失効させ、新しいoperation specificationで固定し直す。
+  bind済みの`false / failed`は当該operationのterminal resultとして保持し、別operationのresultを失効させない。
+  受領resultはoperation、bind済みactor、固定inputおよびresult kindへ対応できる場合だけadmitする。
+- ACTOR_INPUT: actorがpredicateを実行する前に、入力を`criterion / owner / pass condition / request contractの該当範囲 / target / 対象内容またはadmission済みresult / required evidence / allowed observation / forbidden input`へ固定する。
+  固定入力だけで判定可能なら無関係な履歴を加えない。
+  不足時も現在のpredicateに必要な最小入力だけを追加する。
+  利便性、念のため、または無関係な情報を参照できることを入力拡大の理由にしない。
+- MULTI_ACTOR: criterion ownerはnon-machine risk metadataとして保持し、request contractが独立executionを明示した場合だけ、その指定identityをactorへbindする。
+  独立executionを要求されたoperationは、起動前にexecution identityを固定し、predicate前にそのactorを開始する。
+  受領resultは、事前identity、開始identity、送信元、operationおよびresult kindへ対応できる場合だけadmitする。
+  同期または待機の成立をprovenanceの代替にしない。
+  provenance成立前はpredicateをpassedにせず、actor terminal後も対応不能なら`unavailable`にする。
+  coordinatorの宣言、進行記述、異actor messageまたは再構成でresultを補完しない。
+  coordinatorがactorでないoperationではinput準備、result bindingおよびterminal集約だけを行い、predicateを実行せずresultを再生成しない。
+- OBSERVATION: observationは全lifecycleでdefault denyとする。
+  required predicateは`satisfied / unsatisfied / unobserved`で保持する。
+  required predicateがnonterminalかつ`unobserved`で、現在欠けている観測値が固定済みで、requested resultがその値をbindできる場合だけ一件のobservationを許可し、資格成立時はその一件を開始する。
+  同じ資格をtarget探索、変更前、action後、validation準備およびrecoveryへ適用する。
+  validation predicateが固定済みならexact methodまたはlocatorが未固定なだけで`unobserved`へ戻さない。
+  actionまたは失敗resultは入力が変わったpredicateだけを失効させる。
+  consumerがterminalになれば未発行observationを失効させる。
+  required outcome valueが未固定ならrequest contractと明示開始状態だけを観測可能とし、未固定値のclarification resultで変更前observationをterminalにする。
+  required outcome valueの固定後はtarget、明示read-only対象、適用中instructionおよびimplementation authorityだけを変更前observationにできる。
+  observationはimplementation choiceをbindできるが、required outcome valueを事後補完しない。
+  target、適用中instruction、全change effect、artifact relation、action predicateおよび保持constraintがadmission済みcurrent state上の一案へ揃った場合だけimplementationをreadyにする。
+  implementationがreadyになったら未発行の変更前observationを失効させ、actionを開始する。
+  action後に確定するvalidation identityは`VALIDATION_PLAN`へ渡し、変更前observationを再開しない。
+  追加observationは、許可済みresultが具体的なmissing、unreadable、既存bindingとの矛盾、allowed範囲内での充足不能または別authorityを観測した場合だけ、そのresultと次のobservationを対応づけて一件許可する。
+  permission、allowed observation、available capabilityまたは一般的安全確認を追加observationの開放条件にしない。
+- FRONTIER: 受領予定resultごとに、そのresultでtarget、permission、methodまたはstop conditionが変わり得る未発行operation classを実行前に固定する。
+  各next operationがそのeffect scopeに属するかを判定する。
+  resultの停止効果をtask全体または独立operationへ広げない。
+  effect scope外にある既知の相互非依存operationからfrontierを構成する。
+  frontierの全対象を、いずれかの途中resultを次の選択または抑止へ使う前に開始する。
+  frontier内の全resultを受領するまで一部resultを次の選択または抑止へ使わない。
+  全result受領後に一度だけ次のoperationを判断する。
+  request contractが明示する開始identity resultは、drift時に禁止されるoperation classだけをeffect scopeへ入れる。
+  drift時もobservationが禁止されず、そのtargetとpermissionが変わらないなら、identity observationと許可済みobservationを同じfrontierへ入れる。
+  共同result受領まではactionとrequired executionだけを保留する。
+  observation自体が禁止されるか、そのtargetまたはpermissionが変わり得る場合だけ後続frontierへ分ける。
+  frontier全対象を途中result消費前に開始できない場合はsubsetだけを開始せず、そのfrontierを`unavailable`にする。
+- COMPLETION: 全required predicateにbind済みactorの対応可能なterminal resultがある場合だけoperationをterminalにする。
+  invocation、actor executionまたはsessionがnonterminal、またはresultが欠ける場合はoperationもnonterminalのまま保持する。
+  進捗、要約、集約記述またはfinal responseで欠けたresultを補完しない。
+- VALIDATION_PLAN: action後、全required validation、順序、個別pass condition、stop dependency、既知の状態確認、必要なterminal evidenceおよびterminal output schemaを、validation開始前に一つのimmutableなplan identityへ固定する。
+  request contractまたはprotocolがexact methodを明示した場合だけそのmethodを固定し、それ以外は既存inputから選んでplan開始時にbindする。
+  method未固定だけをmissing validation identityまたは追加observationの理由にしない。
+  plan開始後は構成fieldを再分類、再構成または再bindせず、欠落fieldを補完しない。
+  途中validationがsuccessでも新しい判断へ使わず、固定済みplanの残りを保持する。
+  non-successまたは`unavailable`は、そのresultへ依存する後続validationだけを開始不能にする。
+  全required validationがterminal resultへbindされるか、固定済みstop dependencyにより開始不能へbindされた場合だけplanをterminalにする。
+- VALIDATION_RESULT_CLOSURE: action完了とplanの全predicate、順序、個別pass condition、stop dependencyおよび必要なmethod bindingが揃った場合だけvalidationをreadyにする。
+  開始した各validationのterminal resultを、そのvalidation identity、pass condition、statusおよび必要なevidenceへ個別にbindする。
+  invocation開始または途中outputだけをterminal resultへ昇格させない。
+  全件successかつ全result bind済みなら、全result受領後に一度だけ完了を判断し、追加要求またはresult失効がなければobservationまたはvalidationを加えない。
+  non-successまたは`unavailable`は個別resultとして保持し、欠落またはunexpected stateはoperationをnonterminalにする。
+  このclosureを探索、変更前、review finding、method探索またはrecoveryへ流用しない。
+- VALIDATION_CARRIER_CODEX: このblockが適用されるplatformでは一つのprogrammatic carrier execution identityがbind済みである。required validationが0件なら開始せず、一件以上ありvalidationがreadyなら固定済みplan identityだけをcarrierへ一度渡す。別のadmission、capability判定、field展開またはcontract再構成を挟まない。
+  nested invocationのraw output、terminal fieldおよびcontinuation identityはcarrier-localな`nested_result`とし、outer output、text、commentary、notification、mediaまたはyieldのproducerにしない。
+  carrier内では各validationを個別nested invocationとして固定順に発行し、documented terminal fieldからstatusを判定して必要evidenceだけをplanへbindする。non-successまたは`unavailable`の後は依存する後続を発行しない。
+  nested invocationがnonterminal resultとcontinuation identityを返した場合は同じidentityのterminal化だけを継続し、その間に別operationを発行しない。同じidentityを継続できなければ当該validationを`unavailable`へbindする。
+  `terminal_projection_ready := planがterminal ∧ 開始済みvalidationのidentity / terminal status / pass判定 / 必要evidenceと未開始identity / 理由が全件bind済み ∧ terminal output schemaに適合`とする。
+  `terminal_projection_ready=false`ではvalidation state、`unavailable`、progressまたはnested resultをouterへ投影しない。trueの場合だけ同fieldから一つのterminal projection objectを生成し、そのobjectだけをouterへ一度投影する。不要なraw outputを含めない。
+  carrier invocation自体が`unavailable`の場合もcarrier-local resultとしてplanへbindし、terminal projectionで一度だけ返す。modelへ戻る個別発行またはshell compound commandで代替しない。
+  terminal projection受領後は結果消費側が一度だけ完了を判断し、同じplanを別routeで再開しない。
+- FRONTIER_CARRIER_CODEX: このblockが適用されるplatformでは、共通`FRONTIER`が構成してmemberを固定したfrontier identityを一つのCodex dispatch groupへbindする。frontierが0件ならtoolを発行せず、一件なら追加のcarrier admissionまたはmodel roundを作らず、その個別invocationを発行する。
+  複数memberの`frontier_dispatch_ready := member集合がclosed ∧ 各memberのoperation / actor / target / permission / method / expected result kindがbind済み ∧ member相互がresult effect scope外`とする。trueの場合は全memberを一つのmodel outputから個別tool callとしてcommitする。memberを再分類、追加、削除、並べ替えまたは再bindせず、shell compound commandへ統合しない。
+  `frontier_dispatch_terminal := 固定member全件が同じmodel outputへcommit済み ∧ 各result identityとterminal statusがbind済み`とする。runtime上のtool開始・完了順はterminal条件にしない。全memberのcommit前は個別result、progressまたは部分観測をmodel-visible input、commentary、notification、media、yieldまたは別operationのproducerにしない。全result受領後に一度だけ共通consumerへ返し、同じfrontierを再開しない。
+  `frontier_dispatch_ready=false`または全memberを一つのmodel outputへcommitできない場合はsubsetへ縮退せず、そのfrontierを`unavailable`へbindする。先行resultがtarget、permission、methodまたはstop conditionを変え得るoperation、missing / unreadable / 具体的矛盾後に初めて許される追加observation、およびreadも禁止する開始gate後のreadは共通`FRONTIER`が別frontierへ残し、このcarrierへ越境させない。
+- METHOD_RECOVERY: request contractが明示したmethodだけを固定する。
+  未固定methodはpredicateを変えずpermission内から選ぶ。
+  validation methodはplan開始時に既存inputからbindする。
+  exact method選択だけを理由にobservationを追加しない。
+  methodの`failed / unavailable`をpermission denial、predicate resultまたはoperation terminalへ変換せず、許可された代替methodがあれば同じpredicateへ向けて継続する。
+  明示禁止またはpermission denialでは停止し、回避しない。
+  environment recoveryは環境だけのrepairと同じrequired execution再試行を一組として扱う。
+  明示authorityへbind済みのallowanceと必要なrecovery capabilityがある場合は同じrequired executionの組を開始し、組の開始時にallowanceを一回消費する。いずれかがなければ別methodまたは推測で補完せず`unavailable`にする。
+  未固定methodの選択をrecovery allowanceの消費に数えない。

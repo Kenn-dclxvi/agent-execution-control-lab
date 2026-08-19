@@ -1,0 +1,72 @@
+{
+  "schema_version": "codex-validation-carrier-candidate-binding/v1",
+  "binding_id": "p003-portable-full-agent-codex-validation-plan-identity-carrier-composition-binding-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "direct_parent": {
+    "prompt_identity": "portable-semantic-c147-portable-full-agent-r1",
+    "bundle_sha256": "6152e6ca546ef778eb59ad6ff0fe6883748ece469309ff627945777978e4faf0",
+    "manifest": {
+      "path": "evaluations/targets/portable-instruction-semantic-conformance/prompts/candidates/portable-semantic-c147-portable-full-agent-r1/manifest.json",
+      "sha256": "f34c97a0e1b03d221d663c3b16984058f78851dfa0ac4eb0081aeee5dcda37ef"
+    },
+    "root_instruction_sha256": "3d3733a4ec0bb531a5be8eb53922e92fafe37b479b6190d24a8176ae452805e3"
+  },
+  "failed_counterexample": {
+    "prompt_identity": "p002-portable-full-agent-codex-validation-carrier-r1",
+    "bundle_sha256": "2fa8a0d70c8f72788f58906bd4bde1c627ba00260c1db12f97cc6171b0dce66d",
+    "result": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/results/vcc6-p001-p002-n5-comparison-r1.json",
+      "sha256": "ebaffb4122141b8afddde9d448abd2a8a236a7082a05feb4aa2f516cd0746c7b"
+    },
+    "role": "品質とvalidation閉鎖の保持条件、およびcarrier admission用fieldへの再bindでelapsed costが増えた反例。直接親ではない。"
+  },
+  "candidate_composition": {
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-plan-identity-carrier-candidate-composition-r1",
+    "composition_sha256": "0b6fdd12f6fd64e69c6735a19e82304f7e1ad17fbc596d392b1346c68f90e9b2",
+    "path": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-plan-identity-carrier-candidate-r1.composition.json",
+    "sha256": "a5e47ee7b4df3e0e9b67b3cf151ed7207b9b8ba5bd28081cea20b904be95dc53"
+  },
+  "source_draft": {
+    "composition_identity": "c147-portable-kernel-full-agent-codex-validation-plan-identity-carrier-draft-composition-r3",
+    "composition_sha256": "af8968d0347495bf842dedc170834ff4aa91189c31dc30495a9f99807cf58f95",
+    "path": "prompts/compositions/c147-portable-kernel-draft-r1/full-agent-codex-validation-plan-identity-carrier-draft-r3.composition.json",
+    "sha256": "ec0bfe5fc71f863f58b81a34640cbe32af9d91937ec80e64432ffdd59b28387b"
+  },
+  "candidate_bundle": {
+    "prompt_identity": "p003-portable-full-agent-codex-validation-plan-identity-carrier-r1",
+    "bundle_sha256": "123b08c653af24cde9837692328739e74bf6199f9d3cf69a0cb44cc7351a1e1e",
+    "manifest": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/prompts/candidates/p003-portable-full-agent-codex-validation-plan-identity-carrier-r1/manifest.json",
+      "sha256": "9a692f6c7c13373b5aeb4fbcc02dcc2402f9a99bac1ddc79cb446749e342ac3b"
+    },
+    "root_instruction": {
+      "bytes": 12864,
+      "git_blob_sha1": "5bc5d060fbfc1780e9233f316bfa7462f7a421da",
+      "sha256": "caf7da152e1b7e2686a65dcc8b3ce4f5b40671ca75b9f8adde7d7b4432cce901"
+    }
+  },
+  "allowed_delta": "P001のvalidation blockを、P002で成立したplan semanticsとresult closureを保持しつつ、immutable plan identityとterminal projection contractだけをcarrier inputへ許可する一構造へ置換する。",
+  "preserved_boundary": {
+    "nonvalidation_primitives": "66_of_66_byte_preserved",
+    "validation_primitives": "15_of_15_covered",
+    "heldout_source_freeze_id": "codex-validation-carrier-heldout-r1-source-freeze-r1",
+    "fixed_benchmark_policy_id": "vcc6-fixed-benchmark-policy-r1",
+    "case_oracle_rating_runtime_changed": false
+  },
+  "not_inherited": [
+    "P002の全文、carrier inputの項目別bindingおよび直接親の役割",
+    "P002の評価結果または採用状態",
+    "P001の評価結果",
+    "C147の採用状態",
+    "他platformでのcarrier能力",
+    "Standard14の成績"
+  ],
+  "verification": {
+    "static_counterexample_classes": 11,
+    "remaining_blocking_counterexamples": 0,
+    "bundle_binding": "verified",
+    "dependency_closure": "verified",
+    "output_bytes_match": true
+  },
+  "state": "candidate_bundle_bound_not_evaluated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "codex-validation-carrier-external-issuance-failure/v1",
+  "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-issuance-failure-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "preflight_registration_ref": {
+    "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-preflight-registration-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p001-p002-p003-shared-runner-n1-preflight-registration-r1.json"
+  },
+  "private_evidence_root": "/Volumes/SN7100/_verification/vcc6-p001-p002-p003-shared-runner-n1-r1",
+  "issued_slot_count": 18,
+  "external_failure_count": 18,
+  "model_process_started_count": 0,
+  "execution_observation_count": 0,
+  "failure": {
+    "class": "fixture_mode_drift_before_materialization",
+    "expected_modes": ["100644", "100755"],
+    "observed_modes": ["100600", "100700"],
+    "affected_fixture_file_count": 11,
+    "prompt_dependent": false,
+    "runner_execution_reached": false
+  },
+  "disposition": {
+    "reuse": "forbidden",
+    "quality_or_cost_result": "not_created",
+    "same_slot_redispatch": "forbidden",
+    "recovery": "restore_declared_fixture_modes_and_issue_new_dispatch_series_revision"
+  },
+  "state": "excluded_external_failure_before_model_start"
+}

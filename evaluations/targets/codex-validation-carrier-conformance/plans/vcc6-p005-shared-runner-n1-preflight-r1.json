@@ -1,0 +1,120 @@
+{
+  "authorized_slot_count": 6,
+  "authorized_slots": [
+    {
+      "case_id": "VCC-H01",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H01-i001"
+    },
+    {
+      "case_id": "VCC-H02",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H02-i001"
+    },
+    {
+      "case_id": "VCC-H03",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H03-i001"
+    },
+    {
+      "case_id": "VCC-H04",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H04-i001"
+    },
+    {
+      "case_id": "VCC-H05",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H05-i001"
+    },
+    {
+      "case_id": "VCC-H06",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "VCC-H06-i001"
+    }
+  ],
+  "dispatch_allowed": true,
+  "execution_code": {
+    "adapter": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/adapter.py",
+      "sha256": "9b133af0d7856ff5311eb5d8487a56d44e95fb76e3370421a10499d9ec7a489b"
+    },
+    "base_runner": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner.py",
+      "sha256": "81b1bc723b4cb23ca775fa49a5f97a075dc0610cbb9ac8f68e7b741ae7b03224"
+    },
+    "prompt_only_runner": {
+      "path": "evaluations/targets/codex-validation-carrier-conformance/runtime/runner_prompt_only.py",
+      "sha256": "1c85bfdb13791795e3fdc78b17c95702b4fda4f6e3183d46b8e52d087e8415c3"
+    }
+  },
+  "issued_slot_count": 0,
+  "plan": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p005-shared-runner-n1-dispatch-r1.json",
+    "plan_id": "vcc6-p005-shared-runner-sol-medium-n1-r1-dispatch-plan-r1",
+    "plan_sha256": "3b4f1be5914af8ab59db347b5aa510fb54d00a14a7fa6df0d197a2a96bb79631",
+    "sha256": "140598346c974ce5c30f798c60c8930cbe20e0de056262f1c44933f798341d31"
+  },
+  "preflight_id": "vcc6-p005-shared-runner-sol-medium-n1-r1-dispatch-plan-r1-preflight-r1",
+  "profile": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p005-shared-runner-sol-medium-n1-r1.json",
+    "profile_id": "vcc6-p005-shared-runner-sol-medium-n1-r1",
+    "sha256": "ab250aa700c390dbfc3c92a2603c492e6f052ba59e8ad71477dd6d4ff7cb3168"
+  },
+  "profile_class": "vcc6_prompt_only_shared_runner_n1",
+  "prompt_difference_only": true,
+  "receipt_sha256": "2593901274b2111550bbbe5bd3db771d09f86957823b79bc4cc872d211191851",
+  "runtime": {
+    "executable": "/Users/kenn/.codex/packages/standalone/releases/0.146.0-aarch64-apple-darwin/bin/codex",
+    "observed_version": "codex-cli 0.146.0",
+    "runtime_ref": {
+      "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+      "instruction_isolation": {
+        "apps": false,
+        "ignore_rules": true,
+        "ignore_user_config": true,
+        "memory": false,
+        "multi_agent": false,
+        "plugin_sharing": false,
+        "plugins": false
+      },
+      "model": "gpt-5.6-sol",
+      "permission": {
+        "approval_policy": "never",
+        "sandbox": "workspace-write"
+      },
+      "reasoning_effort": "medium",
+      "runtime": "codex-cli",
+      "session_mode": "persisted_for_usage_collection",
+      "token_accounting": {
+        "revision": "v2",
+        "scope": "all_agents",
+        "source": "codex_rollout_final_usage_by_thread_bound_workspace"
+      },
+      "version": "0.146.0"
+    }
+  },
+  "saved_result_reuse": false,
+  "schema_version": "codex-validation-carrier-qualification-preflight/v1",
+  "stop_conditions": [
+    "plan_hash_mismatch",
+    "profile_or_target_drift",
+    "prompt_foundation_drift",
+    "non_prompt_compatibility_mismatch",
+    "execution_code_hash_mismatch",
+    "runtime_version_drift",
+    "capability_preflight_denied",
+    "slot_not_authorized",
+    "slot_output_exists"
+  ],
+  "target": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/target.json",
+    "sha256": "8763022e2abfc98b26e672ca1f565c52260d60f93ee8f538f87388a1e037736b",
+    "target_id": "codex-validation-carrier-conformance"
+  }
+}

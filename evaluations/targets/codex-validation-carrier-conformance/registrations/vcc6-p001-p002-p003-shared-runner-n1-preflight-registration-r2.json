@@ -1,0 +1,48 @@
+{
+  "schema_version": "codex-validation-carrier-prompt-only-global-preflight/v1",
+  "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-preflight-registration-r2",
+  "target_id": "codex-validation-carrier-conformance",
+  "supersedes_failed_dispatch": {
+    "registration_id": "vcc6-p001-p002-p003-shared-runner-n1-issuance-failure-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-p001-p002-p003-shared-runner-n1-issuance-failure-r1.json",
+    "sha256": "27aeca4885ae554b3a83e1ed2177d7aea3e39d4143614f5200ff5a0c717cc535"
+  },
+  "fixture_mode_recovery_ref": {
+    "receipt_id": "vcc6-heldout-r1-fixture-mode-recovery-receipt-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-heldout-r1-fixture-mode-recovery-receipt-r1.json",
+    "sha256": "2a7413ebc76514ca822612469d8b9b17c0b25d62d3a441a9e917195dc21109a5"
+  },
+  "execution_gate_ref": {
+    "registration_id": "vcc6-prompt-only-shared-runner-foundation-r1",
+    "path": "evaluations/targets/codex-validation-carrier-conformance/registrations/vcc6-prompt-only-shared-runner-foundation-r1.json",
+    "sha256": "3d58ab56f4010c59f92b44fc703dc287db221283fc3582a90650142622a0aa68"
+  },
+  "arms": {
+    "P001": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p001-shared-runner-sol-medium-n1-r2.json", "sha256": "e57e4b2b5253dcc1266dbe6fe8dd3627991ec025952c91745ba1b86f48b0c983"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n1-dispatch-r2.json", "sha256": "96649dcdd74de77f270be219f77ba0a32f796037283e162c37b642b102afb016", "plan_sha256": "dd22dfa92af260e1fbc37a804fd2dd4b65be4b1750b308442363250109bea15c"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p001-shared-runner-n1-preflight-r2.json", "sha256": "c24f672799a60a1423141935e8e2eeace8639860f286797e1ff8bd4359e69d23", "receipt_sha256": "04b45d849f82afe6db5af71fad4bf0a6e00ea9c0788373c863191b52b68062af"}
+    },
+    "P002": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p002-shared-runner-sol-medium-n1-r2.json", "sha256": "7a66460832b52e666bc0c73c77eca71c556ae4a1496085e7d8cf87b1f5d79b65"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p002-shared-runner-n1-dispatch-r2.json", "sha256": "3db59e65b5be88924dd904e7574d3d8264f6737bee172d7fff2d80a818e33068", "plan_sha256": "f8d580bec3b899d4ba1201fc0b72bb85f6cdccf10ce4bed6d6906dc50250f0e9"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p002-shared-runner-n1-preflight-r2.json", "sha256": "2b768a47762eb6d81ea507cfe20cfbe04b4420b1684173aa4411555ec1fd2ab8", "receipt_sha256": "46fc1d6466e6f70827d4affdbbf137a54946c8e874a515184bb72553eeb70836"}
+    },
+    "P003": {
+      "profile": {"path": "evaluations/targets/codex-validation-carrier-conformance/profiles/vcc6-p003-shared-runner-sol-medium-n1-r2.json", "sha256": "843720a7eaacdddccf8faad52f225afafe5da05879e4225f556b93ba7a0e0051"},
+      "plan": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n1-dispatch-r2.json", "sha256": "268d26d8893c47192803e66c05a65824512ca92bebc56a1ad2fb532e0f3df09a", "plan_sha256": "ec84d4aa27a6a7d46fcce9693e87c43cbe2bf053ea676a5ca622a4a280713da4"},
+      "preflight": {"path": "evaluations/targets/codex-validation-carrier-conformance/plans/vcc6-p003-shared-runner-n1-preflight-r2.json", "sha256": "e8d3f045744df038f9d1c018af5bc41d093f8a1b638f65d2426e96c5eab6d6b5", "receipt_sha256": "a1044c05c50659593e3828aa6e0c93dbf7d1aa8f48fdc645238d04a0cd3d6fca"}
+    }
+  },
+  "compatibility": {
+    "prompt_identity_only": true,
+    "fixture_modes_match_frozen_layer1": true,
+    "same_execution_code": true,
+    "same_non_prompt_conditions": true,
+    "saved_result_reuse": false
+  },
+  "authorized_slot_count": 18,
+  "issued_slot_count": 0,
+  "dispatch_allowed": true,
+  "state": "environment_recovered_prompt_only_shared_runner_n1_preflight_passed_not_issued"
+}

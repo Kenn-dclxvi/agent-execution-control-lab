@@ -1,0 +1,34 @@
+{
+  "schema_version": "codex-validation-carrier-fixture-mode-recovery-receipt/v1",
+  "receipt_id": "vcc6-heldout-r1-fixture-mode-recovery-receipt-r1",
+  "target_id": "codex-validation-carrier-conformance",
+  "source_freeze": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/cases/heldout-r1/source-freeze.json",
+    "sha256": "b6d4f03458328aa66a3c0b6c15f56257fba3c9ccc7fc48589d14fe80e85e9779"
+  },
+  "input_cases": {
+    "path": "evaluations/targets/codex-validation-carrier-conformance/cases/heldout-r1/input-cases.json",
+    "sha256": "c9b614243ad5f66742d4314cb2d49b4e17e8d6b7ba66adeb459e66c7235dd45c"
+  },
+  "recovery": {
+    "kind": "environment_only_mode_restoration",
+    "content_changed": false,
+    "case_oracle_task_spec_rating_runtime_changed": false,
+    "files_checked": 11,
+    "mode_mismatches_after_recovery": 0
+  },
+  "verified_modes": {
+    "VCC-H01/subject.txt": "100644",
+    "VCC-H02/subject.txt": "100644",
+    "VCC-H02/validate.sh": "100755",
+    "VCC-H03/subject.txt": "100644",
+    "VCC-H03/validate.sh": "100755",
+    "VCC-H04/subject.txt": "100644",
+    "VCC-H04/validate.sh": "100755",
+    "VCC-H05/subject.txt": "100644",
+    "VCC-H05/validate.sh": "100755",
+    "VCC-H06/subject.txt": "100644",
+    "VCC-H06/validate.sh": "100755"
+  },
+  "state": "fixture_modes_match_frozen_layer1"
+}
