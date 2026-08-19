@@ -19,9 +19,21 @@ from typing import Any
 
 if __package__:
     from .all_agent_usage import TOKEN_ACCOUNTING
+    from .codex_runtime_binding import (
+        CodexRuntimeBindingError,
+        resolve_runtime_from_conditions,
+        verify_codex_runtime_binding,
+        version_from_conditions,
+    )
     from .storage_copy import StorageCopyError, materialize_tree
 else:
     from all_agent_usage import TOKEN_ACCOUNTING
+    from codex_runtime_binding import (
+        CodexRuntimeBindingError,
+        resolve_runtime_from_conditions,
+        verify_codex_runtime_binding,
+        version_from_conditions,
+    )
     from storage_copy import StorageCopyError, materialize_tree
 
 
@@ -638,9 +650,15 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     case_id = binding_input["case_id"]
     iteration = binding_input["iteration"]
     atomic_preflight_authorized = False
+    runtime_binding: dict[str, Any] | None = None
     generation_receipt = cycle / "layer1" / "comparison-generation.json"
     if generation_receipt.exists():
         preflight = verify_comparison_preflight(cycle)
+        raw_runtime_binding = preflight.get("codex_runtime_binding")
+        if raw_runtime_binding is not None:
+            if not isinstance(raw_runtime_binding, dict):
+                raise EvaluationError("comparison preflight runtime binding is invalid")
+            runtime_binding = raw_runtime_binding
         if preflight.get("schema_version") == ATOMIC_COMPARISON_PREFLIGHT_SCHEMA:
             sample_id = require_non_empty_string(
                 binding_input.get("sample_id"), "binding.sample_id"
@@ -672,6 +690,17 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     case = find_case(cycle, case_id)
     validate_cycle_binding(existing_bindings(cycle), binding_input, conditions)
 
+    if runtime_binding is None:
+        try:
+            runtime_binding = resolve_runtime_from_conditions(conditions)
+        except CodexRuntimeBindingError as exc:
+            raise EvaluationError(str(exc)) from exc
+    if runtime_binding is not None:
+        try:
+            verify_codex_runtime_binding(runtime_binding)
+        except CodexRuntimeBindingError as exc:
+            raise EvaluationError(str(exc)) from exc
+
     run_id = uuid.uuid4().hex
     evidence = cycle / "layer2" / "evidence" / run_id
     workspace = evidence / "workspace"
@@ -696,6 +725,11 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     env["EVAL_USAGE_FILE"] = str(usage_report_path)
     env["EVAL_RUN_STATUS_FILE"] = str(status_report_path)
     env["EVAL_EXTENSION_DIR"] = str(extension_dir)
+    if runtime_binding is not None:
+        env["EVAL_CODEX_EXECUTABLE"] = runtime_binding["executable"]
+        env["EVAL_CODEX_RUNTIME_BINDING"] = json.dumps(
+            runtime_binding, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        )
     started_at = utc_now()
     started = time.perf_counter()
     completed = subprocess.run(command, cwd=workspace, env=env, capture_output=True, check=False)
@@ -1198,6 +1232,7 @@ def build_comparison_preflight_payload(
     registry: Path,
     reference_result_id: str,
     require_pristine: bool,
+    bound_codex_runtime: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     layer1 = cycle / "layer1"
     generation_receipt = load_json(layer1 / "comparison-generation.json")
@@ -1211,6 +1246,23 @@ def build_comparison_preflight_payload(
     profile = load_json(profile_path)
     prompt_identity = validate_prompt_set_identity(profile.get("prompt_set_identity"))
     conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+    try:
+        if bound_codex_runtime is None:
+            codex_runtime_binding = resolve_runtime_from_conditions(conditions)
+        else:
+            expected_version = version_from_conditions(conditions)
+            if expected_version is None:
+                raise CodexRuntimeBindingError(
+                    "Codex runtime binding is present without a Profile version"
+                )
+            verify_codex_runtime_binding(bound_codex_runtime)
+            if bound_codex_runtime.get("version_output") != f"codex-cli {expected_version}":
+                raise CodexRuntimeBindingError(
+                    "Codex runtime binding version differs from Profile"
+                )
+            codex_runtime_binding = bound_codex_runtime
+    except CodexRuntimeBindingError as exc:
+        raise EvaluationError(str(exc)) from exc
     coverage = profile_coverage(profile)
     profile_set = profile.get("evaluation_set")
     expected_profile_set = {
@@ -1353,6 +1405,8 @@ def build_comparison_preflight_payload(
         "max_workers": max_workers,
         "authorized_slots": authorized_slots,
     }
+    if codex_runtime_binding is not None:
+        result["codex_runtime_binding"] = codex_runtime_binding
     if atomic_dispatch:
         result.update(
             {
@@ -1406,6 +1460,7 @@ def verify_comparison_preflight(cycle: Path) -> dict[str, Any]:
         Path(payload["registry"]).resolve(),
         payload["reference_result_id"],
         require_pristine=False,
+        bound_codex_runtime=payload.get("codex_runtime_binding"),
     )
     difference = first_value_difference(expected, payload)
     if difference is not None:

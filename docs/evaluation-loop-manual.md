@@ -47,6 +47,10 @@
 
 capsuleへsecretやcredentialを直接保存しない。非公開のraw run evidenceをrepositoryへcommitしない。
 
+新規のCodex CLI試験では、Profileの`comparison_conditions.agent_environment.codex_cli`へ`x.y.z`形式のexact versionを固定する。`preflight-comparison`は`codex-runtime-infrastructure`のfixed alias（例: `codex-0.146`）をhost-local registryから検証し、absolute executable path、runtime ID、versionおよびentrypoint SHA-256を`comparison-preflight.json`へ保存する。各runはreceiptに固定されたabsolute pathだけを起動し、`PATH`の`codex`または`codex-current`へfallbackしない。
+
+runtime managerは通常、同じ`repos/`直下の`codex-runtime-infrastructure/bin/codex-runtime`から検出する。別配置の場合だけ`CODEX_RUNTIME_MANAGER`へabsolute pathを指定する。fixed aliasが未登録、bundle検証が失敗、Profile versionと観測versionが不一致、またはpreflight後にentrypoint hashが変化した場合は、評価slotを発行せず停止する。
+
 ## 4. Evaluation set source
 
 ```text
@@ -205,7 +209,7 @@ python3 "$CLI" preflight-comparison \
 python3 "$CLI" verify-comparison-preflight --cycle "$CYCLE"
 ```
 
-preflightは、prompt identity以外の全compatibility、設定上の`M`、発行対象case / iteration、各capsuleのidentityとcomparison conditionsを照合する。legacy planではprofileの全coverage、atomic planではhash固定したdispatch planの不足slot集合との一致を要求する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleを再検証するため、receipt欠落、改ざん、準備後の条件変更はadapter起動前に停止する。
+preflightは、prompt identity以外の全compatibility、設定上の`M`、発行対象case / iteration、各capsuleのidentityとcomparison conditionsに加え、Profileが要求するfixed Codex runtimeのabsolute path、runtime ID、versionおよびentrypoint SHA-256を照合する。legacy planではprofileの全coverage、atomic planではhash固定したdispatch planの不足slot集合との一致を要求する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleとruntime bindingを再検証するため、receipt欠落、改ざん、準備後の条件変更またはruntime driftはadapter起動前に停止する。
 
 複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。明示した`resource_class`が一致すれば、analysis condition、coverage、局所反復数が異なるplanも同じqueueへ入れられる。queueは同一case / sampleの比較対象を近接配置したうえでworkerを空けず、このhostでは`M=24`を上限とする。
 

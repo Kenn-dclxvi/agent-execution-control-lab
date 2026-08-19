@@ -20,6 +20,7 @@ from scripts.run_codex_evaluation import (
     capability_catalog_external_failure,
     capability_catalog_identity,
     capability_catalog_policy_from_conditions,
+    codex_runtime_from_environment,
     command_protocol_for_case,
     command_evidence_external_failure,
     detect_external_failure,
@@ -38,6 +39,34 @@ from scripts.run_codex_evaluation import (
 
 
 class RunCodexEvaluationTest(unittest.TestCase):
+    def test_requires_profile_bound_absolute_codex_runtime(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            executable = Path(tmp) / "codex"
+            executable.write_text("#!/bin/sh\necho 'codex-cli 0.146.0'\n", encoding="utf-8")
+            executable.chmod(0o755)
+            binding = {
+                "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+                "runtime_id": "test-runtime",
+                "alias": "codex-0.146",
+                "executable": str(executable.resolve()),
+                "version_output": "codex-cli 0.146.0",
+                "entrypoint_sha256": hashlib.sha256(executable.read_bytes()).hexdigest(),
+                "codesign_team_identifier": "2DC432GLL2",
+            }
+            environment = {
+                "EVAL_CODEX_EXECUTABLE": str(executable.resolve()),
+                "EVAL_CODEX_RUNTIME_BINDING": json.dumps(binding),
+            }
+            selected, observed = codex_runtime_from_environment(
+                {"agent_environment": {"codex_cli": "0.146.0"}}, environment
+            )
+            self.assertEqual(selected, executable.resolve())
+            self.assertEqual(observed, binding)
+            with self.assertRaisesRegex(AdapterError, "do not bind"):
+                codex_runtime_from_environment(
+                    {"agent_environment": {}}, environment
+                )
+
     def make_git_workspace(self) -> tuple[tempfile.TemporaryDirectory[str], Path, str]:
         temporary = tempfile.TemporaryDirectory()
         workspace = Path(temporary.name)

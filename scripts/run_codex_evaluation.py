@@ -40,6 +40,11 @@ try:
     )
     from observation_delivery_audit import audit as audit_observation_delivery
     from success_silent_delivery_audit import audit as audit_success_silent_delivery
+    from codex_runtime_binding import (
+        CodexRuntimeBindingError,
+        verify_codex_runtime_binding,
+        version_from_conditions,
+    )
 except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests.
     from scripts.export_prompt_bundle import (
         BundleError,
@@ -62,10 +67,48 @@ except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests
     )
     from scripts.observation_delivery_audit import audit as audit_observation_delivery
     from scripts.success_silent_delivery_audit import audit as audit_success_silent_delivery
+    from scripts.codex_runtime_binding import (
+        CodexRuntimeBindingError,
+        verify_codex_runtime_binding,
+        version_from_conditions,
+    )
 
 
 class AdapterError(Exception):
     pass
+
+
+def codex_runtime_from_environment(
+    conditions: dict[str, Any], environment: dict[str, str] | None = None
+) -> tuple[Path, dict[str, Any]]:
+    source = os.environ if environment is None else environment
+    try:
+        expected_version = version_from_conditions(conditions)
+    except CodexRuntimeBindingError as exc:
+        raise AdapterError(str(exc)) from exc
+    if expected_version is None:
+        raise AdapterError("comparison conditions do not bind an exact Codex CLI version")
+    executable = Path(
+        require_string(source.get("EVAL_CODEX_EXECUTABLE"), "EVAL_CODEX_EXECUTABLE")
+    ).resolve()
+    runtime_binding_raw = require_string(
+        source.get("EVAL_CODEX_RUNTIME_BINDING"), "EVAL_CODEX_RUNTIME_BINDING"
+    )
+    try:
+        runtime_binding = json.loads(runtime_binding_raw)
+    except json.JSONDecodeError as exc:
+        raise AdapterError("EVAL_CODEX_RUNTIME_BINDING is invalid JSON") from exc
+    if (
+        not isinstance(runtime_binding, dict)
+        or runtime_binding.get("executable") != str(executable)
+        or runtime_binding.get("version_output") != f"codex-cli {expected_version}"
+    ):
+        raise AdapterError("Codex runtime binding does not match Profile or executable")
+    try:
+        verify_codex_runtime_binding(runtime_binding)
+    except CodexRuntimeBindingError as exc:
+        raise AdapterError(str(exc)) from exc
+    return executable, runtime_binding
 
 
 EXTERNAL_FAILURE_EXIT_CODE = 75
@@ -1194,6 +1237,7 @@ def execute() -> int:
         },
     )
     conditions = require_object(capsule.get("comparison_conditions"), "run.comparison_conditions")
+    codex_executable, runtime_binding = codex_runtime_from_environment(conditions)
     agents_max_threads = agents_max_threads_from_conditions(conditions)
     capability_catalog_policy = capability_catalog_policy_from_conditions(conditions)
     executor_parameters = require_object(
@@ -1242,7 +1286,7 @@ def execute() -> int:
         boundary_evidence_sha256 = hashlib.sha256(boundary_evidence_bytes).hexdigest()
         write_json(extension_root / "boundary-evidence" / "evidence.json", boundary_evidence)
     command = [
-        "codex",
+        str(codex_executable),
         "exec",
         "--ignore-user-config",
         "--ignore-rules",
@@ -1532,7 +1576,7 @@ def execute() -> int:
         )
     final_paths = changed_paths(workspace)
     unexpected_paths = sorted(final_paths - allowed_result_paths)
-    codex_version = run(["codex", "--version"], workspace)
+    codex_version = run([str(codex_executable), "--version"], workspace)
     assert isinstance(codex_version, str)
     write_json(
         adapter_extension / "execution.json",
@@ -1545,6 +1589,7 @@ def execute() -> int:
             "bundle_sha256": expected_hash,
             "codex_exit_code": completed.returncode,
             "codex_version": codex_version,
+            "codex_runtime_binding": runtime_binding,
             "prompt_overlay_commit": commit,
             "prompt_overlay_tree": tree,
             "final_changed_paths": sorted(final_paths),
