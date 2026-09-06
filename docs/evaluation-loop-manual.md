@@ -326,7 +326,7 @@ executorは終了までに次を書く。
 }
 ```
 
-`total_tokens`はroot agentと全descendant SA sessionの最終usage合計でなければならない。基盤がKPIとして解釈するtoken値は0以上の整数`total_tokens`だけである。root / SA別値、input / output内訳、turn別値は`EVAL_EXTENSION_DIR/all-agent-usage/`または別featureへ保存し、rating、result登録、比較viewへ入力しない。全sessionの最終usageが揃わない場合は`codex_all_agent_usage_incomplete`として除外し、値を推定しない。`elapsed_seconds`は基盤が計測する。
+`total_tokens`はroot agentと全descendant SA sessionの最終usage合計でなければならない。基盤がKPIとして解釈するtoken値は0以上の整数`total_tokens`だけである。root / SA別値、input / output内訳、turn別値は`EVAL_EXTENSION_DIR/all-agent-usage/`または別featureへ保存し、rating、result登録、比較viewへ入力しない。全sessionの最終usageが揃わない場合は`codex_all_agent_usage_incomplete`として除外し、値を推定しない。`elapsed_seconds`は基盤が計測する。 時間内訳の保存・欠測・集計・過去ログ再解析は[実行時間の記録規則 r1](execution-time-recording-contract-r1.md)を参照する。診断collectorは既存実行記録確定後にextensionsへ追記し、既存resultの必須項目は変えない。
 
 promptまたはtask behaviorではない外部要因を客観的証跡から検出した場合だけ、executorは次を出力できる。
 

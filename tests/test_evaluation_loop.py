@@ -424,6 +424,14 @@ class EvaluationLoopTest(unittest.TestCase):
                 (cycle / "layer2" / "bindings" / f"{run_id}.json").read_text()
             )
             self.assertEqual(binding["sample_id"], "planned:test:sample-1")
+            timing = json.loads(
+                (cycle / "layer2" / "extensions" / run_id / "execution-time" / "diagnostic.json").read_text()
+            )
+            execution = json.loads((cycle / "layer2" / "evidence" / run_id / "execution.json").read_text())
+            self.assertEqual(timing["sample_id"], binding["sample_id"])
+            self.assertEqual(timing["run_id"], run_id)
+            self.assertEqual(timing["elapsed_seconds"], execution["elapsed_seconds"])
+            self.assertIsNone(timing["work_seconds"])
 
     def record_prompt_set(
         self,

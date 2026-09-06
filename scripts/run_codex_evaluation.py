@@ -1333,6 +1333,7 @@ def execute() -> int:
                 ),
             }
         )
+    cli_clock_started = time.perf_counter()
     try:
         completed = subprocess.run(
             command,
@@ -1343,6 +1344,19 @@ def execute() -> int:
             env=command_environment,
         )
     finally:
+        cli_clock_ended = time.perf_counter()
+        timing_dir = extension_root / "execution-time"
+        timing_dir.mkdir(parents=True, exist_ok=True)
+        with (timing_dir / "adapter-clock.json").open("x") as timing_stream:
+            json.dump({
+                "schema_version": "the-caption-prompt.adapter-clock/v1",
+                "run_id": extension_root.name,
+                "clock": "adapter_process_perf_counter",
+                "cli_started": cli_clock_started,
+                "cli_returned": cli_clock_ended,
+                "cli_elapsed_seconds": cli_clock_ended - cli_clock_started,
+                "boundary_semantics": "subprocess invocation to return or exception; not model work time",
+            }, timing_stream)
         finalize_success_delivery_runtime(success_delivery_runtime, extension_root)
     sys.stdout.buffer.write(completed.stdout)
     sys.stderr.buffer.write(completed.stderr)
