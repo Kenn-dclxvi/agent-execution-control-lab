@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [時間記録導入後のC147 Sol・C274 Astra（2026-09-06）](#time-recording-20260906)
+
+- [Candidate273・274の成果確定・探索制限再構成（Astra medium、2026-09-05）](#candidate273-astra-medium)
+
 1. Review admission・共通実行制御再構成系（Candidate147〜Candidate233、2026-08-04〜08-15）
 2. Free比較・可読5条件系（Candidate148〜Candidate163、2026-08-03〜08-04）
 3. 条件間の横断比較とCandidate147採用判断（2026-08-03）
@@ -40,6 +44,24 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="time-recording-20260906"></a>
+
+## 時間記録導入後のC147 Sol・C274 Astra（2026-09-06）
+
+[C147 Solの時間記録導入後N=5](7a4fac09816d4a37bb94c25ba50e1f06.json)は70件すべてScore 4、全エージェントトークン中央値1,407,693、総所要時間中央値1,259.77秒だった。[時間記録の取得状況と両条件の結果](c147-sol-c274-astra-time-recording-standard14-n5_2026-09-06.md)を保存した。計測機能導入後の別系列として登録し、採用判断は行っていない。
+
+[C274 Astraの時間記録導入後N=5](d2a5c2dbe2bd405c835a05afd2ddccae.json)は70件すべてScore 4、全エージェントトークン中央値1,457,971、総所要時間中央値969.76秒だった。[時間記録の取得状況と両条件の結果](c147-sol-c274-astra-time-recording-standard14-n5_2026-09-06.md)を保存した。計測機能導入後の別系列として登録し、採用判断は行っていない。
+
+<a id="candidate273-astra-medium"></a>
+
+## Candidate273・274の成果確定・探索制限再構成（Astra medium、2026-09-05）
+
+[6ケース各N=5](candidate273-c147-astra-medium-six-case-n5_2026-09-05.md)は30 / 30件がScore 4。C147比token +110.84%、elapsed +6.04%でコスト条件不通過、拡張停止。[Candidate273 result](4c15af38e95849db803ed0e6b2abbede.json)、[C147選択result](2c5c5b8c1576471b81f2c05947a92a08.json)、[比較](candidate273-c147-astra-medium-six-case-n5-comparison_2026-09-05.json)を保存した。
+
+[Candidate274の6ケース各N=5](candidate274-c147-astra-medium-six-case-n5_2026-09-05.md)は30 / 30件がScore 4。C273比token -52.19%・elapsed -9.69%、C147比token +0.80%・elapsed -4.24%で初回終了。[登録result](98288d00fabb41b5b73bfc71509fd5f4.json)、[C147比較](candidate274-c147-astra-medium-six-case-n5-comparison_2026-09-05.json)、[C273比較](candidate274-c273-astra-medium-six-case-n5-comparison_2026-09-05.json)、[診断](candidate274-c147-astra-medium-six-case-n5-diagnostic_2026-09-05.json)を保存した。
+
+[Candidate274のStandard14全体N=5](candidate274-c147-astra-medium-standard14-n5_2026-09-05.md)は既存30件と追加40件の70 / 70件がScore 4。C147比トークン -0.91%・経過時間 -26.52%で完了。[C274登録結果](e08fcf407d1244aca43f8a054fd993a8.json)、[C147基準結果](654d171e89a547d9af421ec9ee05ad96.json)、[比較](candidate274-c147-astra-medium-standard14-n5-comparison_2026-09-05.json)を保存した。
 
 ## 1. Review admission・共通実行制御再構成系（Candidate147〜Candidate233、2026-08-04〜08-15）
 
@@ -765,3 +787,12 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 - [`control-free-generic-repository-expanded12-global-m24-n5_2026-07-16.md`](control-free-generic-repository-expanded12-global-m24-n5_2026-07-16.md)
 - [`revision-2-core9-n1_2026-07-15.md`](revision-2-core9-n1_2026-07-15.md)
 - [`revision-2-core9-parallel-m2-n3_2026-07-15.md`](revision-2-core9-parallel-m2-n3_2026-07-15.md)
+
+- [0aba77ffad0848e5be7e635f96293070.json](0aba77ffad0848e5be7e635f96293070.json)
+- [candidate175-review-operation-admission-closure-adr9-r2-n5-comparison-c173-r1.json](candidate175-review-operation-admission-closure-adr9-r2-n5-comparison-c173-r1.json)
+- [candidate175-review-operation-admission-closure-standard14-n5-comparison-c173-r1.json](candidate175-review-operation-admission-closure-standard14-n5-comparison-c173-r1.json)
+- [candidate206-admitted-evidence-current-adr9-r2-n5-comparison-c175-r1.json](candidate206-admitted-evidence-current-adr9-r2-n5-comparison-c175-r1.json)
+- [candidate206-admitted-evidence-current-adr9-r2-n5-quality-mechanism-audit-r1.json](candidate206-admitted-evidence-current-adr9-r2-n5-quality-mechanism-audit-r1.json)
+- [candidate206-admitted-evidence-current-standard14-n5-comparison-c175-r1.json](candidate206-admitted-evidence-current-standard14-n5-comparison-c175-r1.json)
+- [candidate206-admitted-evidence-current-standard14-n5-quality-audit-r1.json](candidate206-admitted-evidence-current-standard14-n5-quality-audit-r1.json)
+- [candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json](candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json)

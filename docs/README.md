@@ -45,6 +45,24 @@
 
 現在進行中の研究軸を、別軸の作業を混ぜず因果系列ごとに並べる。
 
+### C147の成果確定・探索制限を中心に残す再構成
+
+- [C147 Solの旧環境と再計測の時間増加](c147-sol-cli0146-cli0153-time-drift-audit.md): 325.50秒増の区間を分解。初期準備とroot記録外が約69.8%を占め、終了待ちとモデル一覧更新タイムアウトを確認。
+
+- [編集前の読み取り分割の再監査](candidate274-preedit-read-split-audit.md): 45runで初回出力の欠落と適用ルールの後続取得を区別。C147 Astraにも同じ経路が存在した。
+
+- [C274 AstraとC147 Solの時間比較](candidate274-astra-c147-sol-time-comparison.md): 9月5日再計測Solとの比較。過去CLI 0.146のSolとの取り違えを本文末尾で訂正。
+
+- [Candidate274 Standard14 N=5続行](candidate274-standard14-n5-continuation.md): 利用者の続行指示により、既存30件と追加40件の全70件を評価完了。全件Score 4、C147比トークン0.91%減・経過時間26.52%減。
+
+- [Candidate274設計](candidate274-c147-execution-boundary-core-design.md): C147の検証・判断境界を原文で保持し、委任管理だけを削る。初回30件は全件Score 4、C273のコスト増加を解消したがC147比token +0.80%で追加評価は停止。
+
+- [Candidate273のトークン増加原因](candidate273-astra-n5-token-increase-causal-audit.md): 保存60runから、検証途中のモデル再入と履歴入力の反復を主因と特定。
+
+- [Candidate273 Astra計測準備](candidate273-astra-medium-n5-execution-record.md): 対象範囲の準備不一致を修正して30件を完了。全件Score 4、コスト退行により拡張停止。
+
+- [Candidate273設計](candidate273-c147-outcome-evidence-core-design.md): C147の13条項から依存関係込みの6条項を残した事前設計。Astra初回評価は上記計測記録を参照。
+
 ### 3a. C147共通core再構成とreview admission履歴
 
 | 文書 | 役割 |
@@ -558,6 +576,8 @@
 
 ## 4. 研究成果・統合知見
 
+- [Sol・Astraの計測推移と動作の特徴](sol-astra-c147-c274-measurement-synthesis-r1.md): 最初の4条件からC273・C274、Solの時間差監査、時間記録導入後までをまとめた2026年9月6日時点の統合記録。
+
 固定版の研究成果、総説、横断分析、現在有効な統合知見をまとめる。進行中のCandidate系列とは分けて読む。
 
 | 文書 | 役割 |
@@ -585,6 +605,8 @@
 | [`08_what-is-execution-control.md`](08_what-is-execution-control.md) | **シリーズ 8 / 8**。AIへの依頼とExecution Controlを分け、進行・停止・完了を制御する全体像をまとめる。 |
 
 ## 6. 評価・運用基盤
+
+- [C147 Sol・C274 Astra時間記録導入後N=5](c147-sol-time-recording-n5-execution.md): 計測コードを固定した別系列で各70件、計140件を実行。完了結果と記録の取得状況への導線。
 
 - [実行時間の記録規則 r1](execution-time-recording-contract-r1.md): 総所要時間を保持し、開始・作業・終了の境界、証拠区分、欠測、集計、履歴保持を固定。診断保存を実装。正式な作業時間は配送境界未観測のため欠測、代理区間を別記録。
 
