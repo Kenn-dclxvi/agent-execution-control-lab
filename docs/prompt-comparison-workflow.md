@@ -10,6 +10,8 @@
 - `total_tokens`: root agentと、そのrunから起動された全SA sessionの最終token usageの合計
 - `elapsed_seconds`: task開始から終了までの時間
 
+時間の内訳は[実行時間の記録規則 r1](execution-time-recording-contract-r1.md)に従う診断として扱う。現行elapsedと3 KPIは保持し、開始・終了の境界が未確認の値を作業時間へ昇格させない。実装状況と取得不能な境界は同規則の「実装追記」に記録する。
+
 Worker routing、child session数、root / child token内訳、並列／逐次実行、再割当てはdiagnosticであり、KPIへ追加しない。比較viewはこれらの診断値をKPI差の説明に使えるが、Worker起動の有無だけで品質またはコスト判定を反転させない。
 
 選択した各sampleの`total_tokens`と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は選択sampleの中央値である。数値差は明示したcandidate analysisからreference analysisを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。

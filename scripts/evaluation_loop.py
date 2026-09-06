@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 if __package__:
+    from .execution_time_recording import collect as collect_execution_time
     from .all_agent_usage import TOKEN_ACCOUNTING
     from .codex_runtime_binding import (
         CodexRuntimeBindingError,
@@ -27,6 +28,7 @@ if __package__:
     )
     from .storage_copy import StorageCopyError, materialize_tree
 else:
+    from execution_time_recording import collect as collect_execution_time
     from all_agent_usage import TOKEN_ACCOUNTING
     from codex_runtime_binding import (
         CodexRuntimeBindingError,
@@ -798,6 +800,7 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
         binding["sample_id"] = binding_input["sample_id"]
     write_json_once(evidence / "execution.json", execution)
     write_json_once(cycle / "layer2" / "bindings" / f"{run_id}.json", binding)
+    collect_execution_time(execution, binding, extension_dir, evidence / "execution.json")
     result = {"layer": 2, "run_id": run_id, "evidence": str(evidence), "status": status}
     if exclusion is not None:
         result["exclusion"] = exclusion

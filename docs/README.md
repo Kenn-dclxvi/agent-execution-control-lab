@@ -586,6 +586,8 @@
 
 ## 6. 評価・運用基盤
 
+- [実行時間の記録規則 r1](execution-time-recording-contract-r1.md): 総所要時間を保持し、開始・作業・終了の境界、証拠区分、欠測、集計、履歴保持を固定。診断保存を実装。正式な作業時間は配送境界未観測のため欠測、代理区間を別記録。
+
 | 文書 | 役割 |
 |---|---|
 | [`THE-CAPTION_execution-control_revision-instructions.md`](THE-CAPTION_execution-control_revision-instructions.md) | execution control修正指示（invocation_status等の定義） |
