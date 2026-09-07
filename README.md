@@ -55,6 +55,12 @@ Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比�
 | 全バンドルの現在状態と識別子 | [`prompts/candidates/README.md`](prompts/candidates/README.md) |
 | release / approval / projection状態と投影の実変更範囲 | [`prompts/releases/README.md`](prompts/releases/README.md) |
 
+## Astra分析の短評（2026年9月6日まで）
+
+THE-CAPTIONの固定評価では、Astraは共通制御を外した条件でもSolより未指定の成果を確認する例が多い一方、編集前に全文を広く取得し、出力の省略で必要情報を読み直す例がありました。C147は推測と不要探索を抑え、両モデルの品質とトークン量を近づけました。ただし、検証中の判断往復を抑える境界まで削ったC273ではAstraのトークンが増え、その境界を保持したC274で回復しています。
+
+C274のAstra medium・Standard14各N=5は70件すべてScore 4でした。時間には開始・終了前後の待ちも含まれるため、モデル単独の速度順位とは区別します。最初の4条件から再計測までの数値、モデルの特徴、比較条件と限界は[Sol・Astraの計測推移と動作の特徴](docs/sol-astra-c147-c274-measurement-synthesis-r1.md)にまとめています。同文書から個別の評価結果と原因監査へ進めます。
+
 ## 構成
 
 | パス | 役割 |
