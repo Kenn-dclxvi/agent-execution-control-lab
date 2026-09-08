@@ -47,7 +47,7 @@ Candidate147を本体へ投影した後は、次の2軸を進めています。�
 
 Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比較で、トークンは全エージェント合算の`total_tokens`。詳細と比較境界は[`evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md`](evaluations/results/baseline-free-c43-c71-c147-cross-environment-trend_2026-08-03.md)を参照。
 
-この表に出るCandidateは、構築した162件のバンドルの一部です。本体へ投影済みなのはCandidate41・43・71・81・125・147の6件（この順に積み上げ）で、Candidate125までは移行前のTHE-CAPTIONを対象とし、直近は2026-08-03にCandidate147を公開版`the-caption`（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）へ投影しました。
+この表に出るCandidateは、構築した162件のバンドルの一部です。本体への投影履歴はCandidate41・43・71・81・125・147・274の7件です。Candidate125までは移行前のTHE-CAPTIONを対象とし、公開版では2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。現在の共通制御と評価範囲は[Candidate274のrelease記録](prompts/releases/the-caption-3ce91a4-execution-boundary-core-release-r1/README.md)を参照してください。
 
 | 知りたいこと | 正本 |
 | --- | --- |

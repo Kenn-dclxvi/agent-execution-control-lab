@@ -1,0 +1,50 @@
+{
+  "schema_version": "the-caption-prompt.projection/v1",
+  "release_identity": "the-caption-3ce91a4-execution-boundary-core-release-r1",
+  "bundle_sha256": "7454c6921e60db3334d8308b9cc016833a6a8588bc2ca4c275d78197780e4e66",
+  "target_repository": "https://github.com/Kenn-dclxvi/the-caption.git",
+  "authorization": {
+    "date": "2026-09-08",
+    "source": "explicit_user_request",
+    "request": "C274 を the-captionに適用して。",
+    "scope": [
+      "write",
+      "commit",
+      "push",
+      "pull_request",
+      "merge",
+      "public_repository_projection",
+      "local_checkout_update"
+    ]
+  },
+  "scope": {
+    "effective_paths": [
+      "AGENTS.md"
+    ],
+    "effective_path_count": 1,
+    "manifest_target_count": 19,
+    "preserved_target_drift": [
+      "docs/AGENTS.md",
+      "docs/how-to/index.md",
+      "docs/reference/project-contexts/the-caption.txt",
+      "scripts/AGENTS.md",
+      "src/AGENTS.md",
+      "tests/AGENTS.md"
+    ]
+  },
+  "projection": {
+    "baseline_commit": "6b20adb5973f5d10173dcfb4866a792057ec77a5",
+    "rollback_identity": "6b20adb5973f5d10173dcfb4866a792057ec77a5",
+    "status": "approved_for_projection",
+    "production_checkout": "/Users/kenn/repos/the-caption"
+  },
+  "validation": {
+    "command": "bash scripts/dev/verify_change_set.sh",
+    "required": [
+      "full_test_success",
+      "AGENTS.md byte match",
+      "only AGENTS.md changed",
+      "root CLAUDE.md symlink retained"
+    ]
+  }
+}
