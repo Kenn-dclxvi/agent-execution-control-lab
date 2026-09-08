@@ -634,6 +634,8 @@
 
 ## 7. 完了済み研究記録
 
+- [Astra FreeのA01結果差の分析](astra-free-a01-reasoning-route-audit-r1.md): 15件を確認停止・現状テスト・推測編集へ分類。提示条件と採点条件の差、以前の減点説明の訂正を記録。
+
 ### 7a. Candidate設計記録
 
 各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
