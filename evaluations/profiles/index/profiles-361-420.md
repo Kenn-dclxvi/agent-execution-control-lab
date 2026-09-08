@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
+- [`candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
+- [`candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
+- [`candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json)
+- [`candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -57,8 +62,3 @@
 - [`candidate68-independent-review-operation-removal-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate68-independent-review-operation-removal-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate68-independent-review-operation-removal-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate68-independent-review-operation-removal-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate69-model-reentry-decision-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate69-model-reentry-decision-boundary-v10-standard14-global-m24-n5-r1.json)
-- [`candidate69-model-reentry-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json`](../candidate69-model-reentry-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json)
-- [`candidate69-model-reentry-decision-boundary-v11-standard14-global-m24-n5-r1.json`](../candidate69-model-reentry-decision-boundary-v11-standard14-global-m24-n5-r1.json)
-- [`candidate69-model-reentry-decision-boundary-v12-standard14-global-m24-n5-r1.json`](../candidate69-model-reentry-decision-boundary-v12-standard14-global-m24-n5-r1.json)
-- [`candidate70-machine-decision-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate70-machine-decision-boundary-v10-standard14-global-m24-n5-r1.json)
-- [`candidate70-machine-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json`](../candidate70-machine-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json)

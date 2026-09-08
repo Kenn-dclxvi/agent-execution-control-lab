@@ -576,6 +576,8 @@
 
 ## 4. 研究成果・統合知見
 
+- [C274を使うAstraの推論設定の推奨判定](candidate274-astra-reasoning-recommendation-r1.md): 5段階・計350件の品質、時間、トークン内訳と呼び出し履歴から通常設定lowを推奨。入力再送・待機・テスト選択のやり直し、maxの表記による減点を区別。
+
 - [Sol・Astraの計測推移と動作の特徴](sol-astra-c147-c274-measurement-synthesis-r1.md): 最初の4条件からC273・C274、Solの時間差監査、時間記録導入後までをまとめた2026年9月6日時点の統合記録。
 
 固定版の研究成果、総説、横断分析、現在有効な統合知見をまとめる。進行中のCandidate系列とは分けて読む。
@@ -605,6 +607,16 @@
 | [`08_what-is-execution-control.md`](08_what-is-execution-control.md) | **シリーズ 8 / 8**。AIへの依頼とExecution Controlを分け、進行・停止・完了を制御する全体像をまとめる。 |
 
 ## 6. 評価・運用基盤
+
+- [C274 Astra maxの比較計測](candidate274-astra-max-n5-execution.md): 推論設定maxでStandard14各N=5を実行し、low・直近medium・high・xhighと比較する範囲と結果。
+
+- [C274 Astra lowの比較計測](candidate274-astra-low-n5-execution.md): mediumの一段下でStandard14各N=5を実行し、直近medium・high・xhighと比較する範囲と結果。
+
+- [C274 Astra mediumの再計測](candidate274-astra-medium-remeasure-n5-execution.md): 前回mediumと同一条件の新規70件を、high・xhighに続いて再計測する範囲と結果。
+
+- [C274 Astra xhighの比較計測](candidate274-astra-xhigh-n5-execution.md): highの次の推論レベルでStandard14各N=5を実行し、high・mediumと比較する範囲と結果。
+
+- [C274 Astra highとmediumの比較計測](candidate274-astra-high-medium-n5-execution.md): 推論設定だけを変えたStandard14各N=5の実行範囲と結果への導線。
 
 - [C147 Sol・C274 Astra時間記録導入後N=5](c147-sol-time-recording-n5-execution.md): 計測コードを固定した別系列で各70件、計140件を実行。完了結果と記録の取得状況への導線。
 
