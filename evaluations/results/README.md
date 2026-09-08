@@ -28,6 +28,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C274 Astra maxの比較計測（2026-09-08）](#c274-reasoning-max)
+
+- [C274 Astra lowの比較計測（2026-09-08）](#c274-reasoning-low)
+
+- [C274 Astra mediumの再計測（2026-09-08）](#c274-medium-remeasure)
+
+- [C274 Astraの推論設定xhigh比較（2026-09-08）](#c274-reasoning-xhigh)
+
+- [C274 Astraの推論設定high・medium比較（2026-09-08）](#c274-reasoning-high-medium)
+
 - [時間記録導入後のC147 Sol・C274 Astra（2026-09-06）](#time-recording-20260906)
 
 - [Candidate273・274の成果確定・探索制限再構成（Astra medium、2026-09-05）](#candidate273-astra-medium)
@@ -44,6 +54,36 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c274-reasoning-max"></a>
+
+## C274 Astra maxの比較計測（2026-09-08）
+
+[C274 Astra max・Standard14各N=5](bd54e9b7c57b453db6d41f5fe22b7615.json)の70件を保存した。Score 2: 3件、Score 4: 67件、トークン中央値1,883,688、総所要時間中央値2,203.13秒。[low・直近medium・high・xhighとの比較](candidate274-astra-max-low-medium-high-xhigh-standard14-n5_2026-09-08.md)を参照。本体設定は変更していない。
+
+<a id="c274-reasoning-low"></a>
+
+## C274 Astra lowの比較計測（2026-09-08）
+
+[C274 Astra low・Standard14各N=5](441d4233560c47f089a2938935aa8d19.json)の70件を保存した。Score 4: 70件、トークン中央値1,474,356、総所要時間中央値631.48秒。[直近medium・high・xhighとの比較](candidate274-astra-low-medium-high-xhigh-standard14-n5_2026-09-08.md)を参照。本体設定は変更していない。
+
+<a id="c274-medium-remeasure"></a>
+
+## C274 Astra mediumの再計測（2026-09-08）
+
+[C274 Astra medium再計測・Standard14各N=5](0dfec297f0fe4d5f9d2d38fb2fff154e.json)の70件を保存した。70件すべてScore 4、トークン中央値1,494,822、総所要時間中央値659.69秒。[前回medium・high・xhighとの比較](candidate274-astra-medium-remeasure-high-xhigh-standard14-n5_2026-09-08.md)を参照。既存結果を保持し、本体設定は変更していない。
+
+<a id="c274-reasoning-xhigh"></a>
+
+## C274 Astraの推論設定xhigh比較（2026-09-08）
+
+[C274 Astra xhigh・Standard14各N=5](e162237faf0c415a8e7c39c1e63e7f4d.json)の70件を保存した。スコア分布は{'4': 70}、トークン中央値1,670,312、総所要時間中央値1,295.22秒。[medium・highとの比較と診断](candidate274-astra-medium-high-xhigh-standard14-n5_2026-09-08.md)を参照。本体設定は変更していない。
+
+<a id="c274-reasoning-high-medium"></a>
+
+## C274 Astraの推論設定high・medium比較（2026-09-08）
+
+[C274 Astra high・Standard14各N=5](9630aa4cdb514bc3bc5e89aaead56ce1.json)の70件を保存した。スコア分布は{'4': 70}、トークン中央値1,444,257、総所要時間中央値731.97秒。[mediumとの比較と条件・診断](candidate274-astra-high-medium-standard14-n5_2026-09-08.md)を参照。推論設定だけを変更した比較で、本体設定は変更していない。
 
 <a id="time-recording-20260906"></a>
 
