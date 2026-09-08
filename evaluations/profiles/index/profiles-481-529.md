@@ -1,4 +1,4 @@
-# Profile index 481-526
+# Profile index 481-529
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
@@ -34,6 +34,9 @@
 - [`candidate98-validation-completion-sheet-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json`](../candidate98-validation-completion-sheet-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate98-validation-completion-sheet-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate98-validation-completion-sheet-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate99-decision-evidence-boundary-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate99-decision-evidence-boundary-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
+- [`control-free-astra-high-standard14-n5-cli0153-r1.json`](../control-free-astra-high-standard14-n5-cli0153-r1.json)
+- [`control-free-astra-low-standard14-n5-cli0153-r1.json`](../control-free-astra-low-standard14-n5-cli0153-r1.json)
+- [`control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json`](../control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json)
 - [`control-free-generic-expanded12-global-m24-n5-r1.json`](../control-free-generic-expanded12-global-m24-n5-r1.json)
 - [`control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json`](../control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)

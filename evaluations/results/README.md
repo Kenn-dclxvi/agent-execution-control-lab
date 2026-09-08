@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Astra Freeのhigh・low計測（2026-09-08）](#astra-free-high-low)
+
 - [C274 Astra maxの比較計測（2026-09-08）](#c274-reasoning-max)
 
 - [C274 Astra lowの比較計測（2026-09-08）](#c274-reasoning-low)
@@ -54,6 +56,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="astra-free-high-low"></a>
+
+## Astra Freeのhigh・low計測（2026-09-08）
+
+[low](d1c0b33f13c84b17b77bb7665f7a3347.json)は70件すべてScore 4、トークン中央値2,033,901、総所要時間中央値777.51秒だった。[high](c492ea194e224f039bbbb2f797b5217d.json)はScore 4: 66件・Score 0: 4件、トークン中央値2,706,245、総所要時間中央値1,007.07秒だった。[計測結果](control-free-astra-high-low-standard14-n5_2026-09-08.md)と[集計・減点記録](control-free-astra-high-low-standard14-n5_2026-09-08.json)を保存した。全140件が有効、除外0件で、登録と証拠保存を完了した。
+
+[medium再計測](f308bc60da6e46f08cf1010c4609e317.json)はScore 4: 68件・Score 0: 2件、トークン中央値2,389,390、総所要時間中央値879.78秒だった。全70件が有効、除外0件で、登録と証拠保存を完了した。[low・medium・highの比較](control-free-astra-low-medium-high-standard14-n5_2026-09-08.md)と[集計・減点記録](control-free-astra-low-medium-high-standard14-n5_2026-09-08.json)を参照。
 
 <a id="c274-reasoning-max"></a>
 
@@ -782,6 +792,20 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 制御promptなし・repository情報ありとC15は、独立した[`ambiguity boundaries 5-case global M=10 N=3 comparison`](control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)として各15 runをappend-only resultへ登録した。互換な3 KPI、case別のclarify / execute / stopped境界、semanticな成果同等性を記録し、winner、採用、release判断は出力しない。
 
 ## 12. この索引に要約を持たないresult
+
+[baf01e47d8d8432bbe2dc92a961287cb.json](baf01e47d8d8432bbe2dc92a961287cb.json)
+
+[candidate206-admitted-evidence-current-adr9-standard14-n5_2026-08-13.md](candidate206-admitted-evidence-current-adr9-standard14-n5_2026-08-13.md)
+
+[candidate206-admitted-evidence-current-mechanism-audit-r1.json](candidate206-admitted-evidence-current-mechanism-audit-r1.json)
+
+[candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5_2026-08-17.md](candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5_2026-08-17.md)
+
+[candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json](candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json)
+
+[candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json](candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json)
+
+[candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5_2026-08-17.md](candidate271-natural-language-validation-ticket-terminal-return-f01-f02-f03-f10-entrypoint-n5_2026-08-17.md)
 
 2026-08-06時点の棚卸しで、このdirectoryに登録済みだが上記の節に要約を持たないresultは次の42件である。登録済み一次resultとして保持し、要約は未作成である。
 
