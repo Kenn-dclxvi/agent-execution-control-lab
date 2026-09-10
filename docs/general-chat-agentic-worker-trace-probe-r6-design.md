@@ -1,0 +1,7 @@
+# worker trace selector診断probe r6
+
+r6はr5を直接の前段とし、model input、runtime、worker task、結果oracleおよびusage条件を変えない。変更するのは、同じspawn call IDの`function_call_output`を再帰的に読み、runtime生成のchild thread IDとtask nameまたはcanonical agent pathを取り出すselectorと、message中の一意な固定JSON projectionを確認する方法だけである。
+
+`agent_path`単独、最終回答、子sessionの件数からidentityを補わない。spawn outputからchild IDとtask identityの組が一意に得られ、そのIDがchild sessionのID、root parent、canonical agent pathへ一致する場合だけterminal resultを採用する。messageは固定packetが一件だけ含まれ、禁止recordが0件の場合だけ合格とする。
+
+一回だけ発行し、retryしない。r6が通過しても、固定tool経路はr4で未成立のままであるため、agentic target全体の登録や評価へは進まない。

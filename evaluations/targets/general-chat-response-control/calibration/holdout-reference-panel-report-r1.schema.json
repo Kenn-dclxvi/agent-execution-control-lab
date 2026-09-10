@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-holdout-reference-panel-report-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_set_id", "evaluation_role", "ai_grader_count", "assertion_count", "consensus_labels", "disagreements", "reference_state", "human_alignment_state", "qualification_effect"],
+  "properties": {
+    "schema_version": {"const": "general-chat-holdout-reference-panel-report/v1"},
+    "holdout_set_id": {"const": "general-chat-semantic-qualification-holdout-r1"},
+    "evaluation_role": {"const": "holdout_reference_formation"},
+    "ai_grader_count": {"const": 3},
+    "assertion_count": {"const": 32},
+    "consensus_labels": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/consensus"}
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/disagreement"}
+    },
+    "reference_state": {"enum": ["multi_grader_consensus_reference", "ai_adjudication_required"]},
+    "human_alignment_state": {"const": "unmeasured"},
+    "qualification_effect": {"const": "none"}
+  },
+  "$defs": {
+    "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+    "consensus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["holdout_item_id", "assertion_id", "severity", "label"],
+      "properties": {
+        "holdout_item_id": {"type": "string", "pattern": "^GCH-[A-Z][0-9]{2}-[AB]$"},
+        "assertion_id": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["major", "required", "presentation"]},
+        "label": {"$ref": "#/$defs/label"}
+      }
+    },
+    "rating": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grader_execution_id", "label"],
+      "properties": {
+        "grader_execution_id": {"type": "string", "minLength": 1},
+        "label": {"$ref": "#/$defs/label"}
+      }
+    },
+    "disagreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["holdout_item_id", "assertion_id", "severity", "ratings"],
+      "properties": {
+        "holdout_item_id": {"type": "string", "pattern": "^GCH-[A-Z][0-9]{2}-[AB]$"},
+        "assertion_id": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["major", "required", "presentation"]},
+        "ratings": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/rating"}
+        }
+      }
+    }
+  }
+}

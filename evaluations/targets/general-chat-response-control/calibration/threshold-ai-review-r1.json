@@ -1,0 +1,14 @@
+{
+  "schema_version": "general-chat-threshold-ai-review/v1",
+  "review_id": "general-chat-semantic-threshold-independent-ai-review-r1",
+  "threshold_contract_id": "general-chat-semantic-grader-qualification-r1",
+  "reviewer_role": "independent-ai-reviewer",
+  "producer_execution_identity": "/root/threshold_ai_review",
+  "final_result_sender": "/root/threshold_ai_review",
+  "decision": "approved",
+  "holdout_result_seen": false,
+  "criteria_confirmed": true,
+  "findings": [],
+  "rationale": "pilotでは32 assertion中31件が3者一致し、唯一の不一致はpanel外AI adjudicatorがfailと裁定しており、全reference labelの形成過程と人間alignment未測定という限定が一貫して記録されている。閾値6項目は全誤判定を許容しないrisk policyと一致し、pilotの一致率から自動導出された値ではない。threshold contractは独立した人間reviewerの承認とfixed_atが未取得のためgovernance_decision_pending、数値項目はnull、fixed_before_holdout_qualificationはfalseに保たれており、holdout前固定の手順とも整合する。holdout結果は確認しておらず、結果後に同じholdout向けの閾値緩和を許す記述もない。なお、このAIレビューは文書が要求するindependent-human-reviewerの承認を代替しない。",
+  "recorded_at": "2026-08-20T10:30:33Z"
+}

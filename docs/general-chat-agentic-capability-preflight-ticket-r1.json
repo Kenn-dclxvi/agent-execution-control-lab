@@ -1,0 +1,72 @@
+{
+  "schema_version": "general-chat-agentic-capability-ticket/v1",
+  "probe_id": "general-chat-agentic-capability-preflight-r1",
+  "purpose": "non_evaluation_runtime_capability",
+  "contract_state": "fixed",
+  "issuance_authority": "not_authorized",
+  "runtime": {
+    "executable": "codex",
+    "version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "sandbox_mode": "workspace-write",
+    "approval_policy": "never",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "persist_session": true,
+    "descendant_rollout_export": true,
+    "trace_capabilities": {
+      "parent_thread_identity": true,
+      "task_identity": true,
+      "terminal_sender": true,
+      "all_agent_final_usage": true,
+      "tool_call_result_identity": true,
+      "safe_packet_projection": true
+    },
+    "instruction_isolation": {
+      "user_config": false,
+      "user_rules": false,
+      "memories": false,
+      "apps": false,
+      "plugins": false,
+      "plugin_sharing": false
+    },
+    "codex_home_scope": "per_probe_persisted_temporary"
+  },
+  "artifacts": {
+    "task": {
+      "path": "docs/general-chat-agentic-capability-preflight-task-r1.txt",
+      "sha256": "507504756a5178a096c4fc6a739ef374827fbb26c0582a82702731b3eb20dda8",
+      "bytes": 718
+    },
+    "fixture": {
+      "path": "docs/general-chat-agentic-capability-preflight-fixture-r1.json",
+      "sha256": "ec9814d603caf3fee94c61069e2dbb61828759ad160a31dd2daeb3e025afa369",
+      "bytes": 1140
+    }
+  },
+  "required_observations": [
+    "root_thread_identity",
+    "spawn_call_and_task_identity",
+    "worker_packet_projection",
+    "descendant_parent_and_task_binding",
+    "descendant_terminal_sender_and_result",
+    "root_tool_call_and_terminal_result",
+    "final_response_direct_binding",
+    "all_agent_final_usage",
+    "monotonic_elapsed",
+    "safe_projection_without_raw_transcript"
+  ],
+  "issuance_policy": {
+    "max_issues": 1,
+    "retry": false,
+    "overwrite": false,
+    "precondition": "issuance_authority=authorized_not_issued_and_all_static_checks_pass"
+  },
+  "storage_policy": {
+    "receipt_mode": "write_once",
+    "raw_rollout": "temporary_until_receipt_sealed",
+    "auth_material": "never_commit",
+    "raw_transcript": "never_commit"
+  }
+}

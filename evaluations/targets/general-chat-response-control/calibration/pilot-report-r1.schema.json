@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-pilot-report-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_set_id", "evaluation_role", "human_rater_count", "assertion_count", "metrics", "provisional_agreements", "disagreements", "adjudication_state", "qualification_effect"],
+  "properties": {
+    "schema_version": {"const": "general-chat-human-pilot-report/v1"},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "evaluation_role": {"const": "human_rubric_development_pilot"},
+    "human_rater_count": {"type": "integer", "minimum": 2},
+    "assertion_count": {"type": "integer", "minimum": 1},
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unanimous_assertion_count", "unanimous_assertion_rate", "pairwise_agreement_rate", "observed_disagreement", "expected_disagreement", "krippendorff_alpha_nominal", "label_assignment_counts"],
+      "properties": {
+        "unanimous_assertion_count": {"type": "integer", "minimum": 0},
+        "unanimous_assertion_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "pairwise_agreement_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "observed_disagreement": {"type": "number", "minimum": 0, "maximum": 1},
+        "expected_disagreement": {"type": "number", "minimum": 0, "maximum": 1},
+        "krippendorff_alpha_nominal": {"type": ["number", "null"], "maximum": 1},
+        "label_assignment_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pass", "fail", "unknown", "not_applicable"],
+          "properties": {
+            "pass": {"type": "integer", "minimum": 0},
+            "fail": {"type": "integer", "minimum": 0},
+            "unknown": {"type": "integer", "minimum": 0},
+            "not_applicable": {"type": "integer", "minimum": 0}
+          }
+        }
+      }
+    },
+    "provisional_agreements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/agreement"}
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/disagreement"}
+    },
+    "adjudication_state": {"enum": ["not_required", "required"]},
+    "qualification_effect": {"const": "none"}
+  },
+  "$defs": {
+    "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+    "agreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calibration_item_id", "assertion_id", "label"],
+      "properties": {
+        "calibration_item_id": {"type": "string", "minLength": 1},
+        "assertion_id": {"type": "string", "minLength": 1},
+        "label": {"$ref": "#/$defs/label"}
+      }
+    },
+    "rating": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rater_id", "label"],
+      "properties": {
+        "rater_id": {"type": "string", "minLength": 1},
+        "label": {"$ref": "#/$defs/label"}
+      }
+    },
+    "disagreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calibration_item_id", "assertion_id", "ratings"],
+      "properties": {
+        "calibration_item_id": {"type": "string", "minLength": 1},
+        "assertion_id": {"type": "string", "minLength": 1},
+        "ratings": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"$ref": "#/$defs/rating"}
+        }
+      }
+    }
+  }
+}

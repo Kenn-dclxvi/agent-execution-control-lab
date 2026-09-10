@@ -1,0 +1,46 @@
+{
+  "schema_version": "general-chat-agentic-exact-runtime-negative-fixtures/v1",
+  "base_ticket": {
+    "path": "docs/general-chat-agentic-capability-preflight-ticket-r2.json",
+    "sha256": "ea905672628d0c94be421ebbacb0cca0f05f15f34b1908d354767eaf55053035"
+  },
+  "mutation_format": "single_json_pointer_replace",
+  "cases": [
+    {
+      "case_id": "GCA-RUNTIME-N01",
+      "pointer": "/runtime_ref/alias/sha256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected_rejection": "ALIAS_SHA256_MISMATCH"
+    },
+    {
+      "case_id": "GCA-RUNTIME-N02",
+      "pointer": "/runtime_ref/manifest/sha256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected_rejection": "MANIFEST_SHA256_MISMATCH"
+    },
+    {
+      "case_id": "GCA-RUNTIME-N03",
+      "pointer": "/runtime_ref/bundle_path",
+      "value": "/nonexistent/general-chat-agentic-r2-bundle",
+      "expected_rejection": "MANIFEST_CONTRACT_MISMATCH"
+    },
+    {
+      "case_id": "GCA-RUNTIME-N04",
+      "pointer": "/runtime_ref/file_inventory/1/sha256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected_rejection": "BUNDLE_FILE_SHA256_MISMATCH"
+    },
+    {
+      "case_id": "GCA-RUNTIME-N05",
+      "pointer": "/runtime_ref/symlink_inventory/0/target",
+      "value": "../outside/codex",
+      "expected_rejection": "BUNDLE_SYMLINK_MISMATCH"
+    },
+    {
+      "case_id": "GCA-RUNTIME-N06",
+      "pointer": "/artifacts/task/bytes",
+      "value": 719,
+      "expected_rejection": "TASK_BYTES_MISMATCH"
+    }
+  ]
+}

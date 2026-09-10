@@ -1,0 +1,54 @@
+{
+  "schema_version": "general-chat-agentic-private-trace-adapter-input/v1",
+  "input_mode": "externally_selected_private_trace",
+  "trace_origin": "synthetic_shadow",
+  "trace_root_kind": "repository_shadow",
+  "probe_id": "general-chat-agentic-capability-preflight-r2",
+  "runtime_id": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9",
+  "workspace": "/synthetic/private-trace-shadow-r1",
+  "selection": {
+    "authority": "runner_manifest",
+    "discovery_allowed": false,
+    "root_events": {
+      "path": "root-events.jsonl",
+      "sha256": "91af06155af58b20c5fb4c0243c464e04d7bcd071ee4266a7e514bc345f214a1",
+      "bytes": 169
+    },
+    "root_thread_id": "root-thread-r2",
+    "sessions": [
+      {
+        "role": "root",
+        "thread_id": "root-thread-r2",
+        "parent_thread_id": null,
+        "file": {
+          "path": "root-session.jsonl",
+          "sha256": "226f784fde9bd6f203d5c8efebafde2a4c87161f937f26764722d682d72fa43d",
+          "bytes": 424
+        }
+      },
+      {
+        "role": "descendant",
+        "thread_id": "child-thread-r2",
+        "parent_thread_id": "root-thread-r2",
+        "file": {
+          "path": "child-session.jsonl",
+          "sha256": "aa3b1f6bc6108529654a0aa72e1b71bc7538e8043eac99db985401da16477011",
+          "bytes": 653
+        }
+      }
+    ]
+  },
+  "monotonic": {"started_ms": 2000, "ended_ms": 2450},
+  "normalized_output_schema": {
+    "path": "docs/general-chat-agentic-binding-extractor-input-r2.schema.json",
+    "sha256": "42a85185964df04ea0b085c25b13d155c06658d758c76f95f617e69730c167e8",
+    "bytes": 4917
+  },
+  "lifecycle": {
+    "trace_root_owner": "runner",
+    "adapter_mutation_allowed": false,
+    "adapter_cleanup_allowed": false,
+    "cleanup_required": true,
+    "cleanup_terminal": "receipt_sealed_or_terminal_failure"
+  }
+}

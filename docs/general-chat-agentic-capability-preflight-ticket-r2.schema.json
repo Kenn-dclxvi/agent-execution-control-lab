@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-preflight-ticket-r2.schema.json",
+  "title": "General chat agentic exact runtime preflight ticket r2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "probe_id",
+    "purpose",
+    "contract_state",
+    "issuance_authority",
+    "lineage",
+    "runtime_ref",
+    "artifacts",
+    "required_observations",
+    "real_trace_adapter_ready",
+    "issuance_policy",
+    "storage_policy"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-ticket/v2"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "purpose": {"const": "non_evaluation_runtime_capability"},
+    "contract_state": {"const": "fixed"},
+    "issuance_authority": {"const": "not_authorized"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direct_predecessor", "path", "sha256", "allowed_delta"],
+      "properties": {
+        "direct_predecessor": {"const": "general-chat-agentic-capability-preflight-r1"},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "allowed_delta": {"const": "exact_runtime_resolution_only"}
+      }
+    },
+    "runtime_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alias",
+        "manifest",
+        "runtime_id",
+        "product",
+        "version_output",
+        "target",
+        "bundle_path",
+        "bundle_sha256",
+        "entrypoint",
+        "entrypoint_sha256",
+        "codesign_team_identifier",
+        "file_inventory",
+        "symlink_inventory",
+        "model",
+        "reasoning_effort",
+        "sandbox_mode",
+        "approval_policy",
+        "multi_agent",
+        "agents_max_threads",
+        "persist_session",
+        "instruction_isolation",
+        "codex_home_scope"
+      ],
+      "properties": {
+        "alias": {"$ref": "#/$defs/file_identity"},
+        "manifest": {"$ref": "#/$defs/file_identity"},
+        "runtime_id": {"const": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9"},
+        "product": {"const": "codex-cli"},
+        "version_output": {"const": "codex-cli 0.146.0"},
+        "target": {"const": "aarch64-apple-darwin"},
+        "bundle_path": {"type": "string", "minLength": 1},
+        "bundle_sha256": {"const": "d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9"},
+        "entrypoint": {"const": "bin/codex"},
+        "entrypoint_sha256": {"const": "ae1d3ffe6d48aec6a4dc3f50e7eb8e0d11962485a6a9406c5a7012139383da02"},
+        "codesign_team_identifier": {"const": "2DC432GLL2"},
+        "file_inventory": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {"$ref": "#/$defs/relative_file_identity"}
+        },
+        "symlink_inventory": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {"$ref": "#/$defs/symlink_identity"}
+        },
+        "model": {"const": "gpt-5.6-sol"},
+        "reasoning_effort": {"const": "medium"},
+        "sandbox_mode": {"const": "workspace-write"},
+        "approval_policy": {"const": "never"},
+        "multi_agent": {"const": true},
+        "agents_max_threads": {"const": 4},
+        "persist_session": {"const": true},
+        "instruction_isolation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["user_config", "user_rules", "memories", "apps", "plugins", "plugin_sharing"],
+          "properties": {
+            "user_config": {"const": false},
+            "user_rules": {"const": false},
+            "memories": {"const": false},
+            "apps": {"const": false},
+            "plugins": {"const": false},
+            "plugin_sharing": {"const": false}
+          }
+        },
+        "codex_home_scope": {"const": "per_probe_persisted_temporary"}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task", "fixture"],
+      "properties": {
+        "task": {"$ref": "#/$defs/repository_file_identity"},
+        "fixture": {"$ref": "#/$defs/repository_file_identity"}
+      }
+    },
+    "required_observations": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "root_thread_identity"},
+        {"const": "spawn_call_and_task_identity"},
+        {"const": "worker_packet_projection"},
+        {"const": "descendant_parent_and_task_binding"},
+        {"const": "descendant_terminal_sender_and_result"},
+        {"const": "root_tool_call_and_terminal_result"},
+        {"const": "final_response_direct_binding"},
+        {"const": "all_agent_final_usage"},
+        {"const": "monotonic_elapsed"},
+        {"const": "safe_projection_without_raw_transcript"}
+      ],
+      "items": false,
+      "minItems": 10,
+      "maxItems": 10
+    },
+    "real_trace_adapter_ready": {"const": false},
+    "issuance_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_issues", "retry", "overwrite"],
+      "properties": {
+        "max_issues": {"const": 1},
+        "retry": {"const": false},
+        "overwrite": {"const": false}
+      }
+    },
+    "storage_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_mode", "raw_rollout", "auth_material", "raw_transcript"],
+      "properties": {
+        "receipt_mode": {"const": "write_once"},
+        "raw_rollout": {"const": "temporary_until_receipt_sealed"},
+        "auth_material": {"const": "never_commit"},
+        "raw_transcript": {"const": "never_commit"}
+      }
+    }
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "repository_file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "relative_file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "symlink_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "target"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+        "target": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

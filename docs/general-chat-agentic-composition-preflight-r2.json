@@ -1,0 +1,59 @@
+{
+  "schema_version": "general-chat-agentic-composition-preflight-input/v2",
+  "composition_id": "general-chat-agentic-composition-preflight-r2",
+  "probe_id": "general-chat-agentic-capability-preflight-r2",
+  "mode": "model_free_private_trace_shadow_composition",
+  "lineage": {
+    "direct_predecessor": "general-chat-agentic-composition-preflight-r1",
+    "artifact": {"path": "docs/general-chat-agentic-composition-preflight-r1.json", "sha256": "50a78828f9fb267ddd09592607de35db524168d70b7dfdf41ac82fc4b334463b", "bytes": 3341},
+    "allowed_delta": "synthetic_adapter_to_private_trace_shadow"
+  },
+  "output_schema": {"path": "docs/general-chat-agentic-composition-preflight-r2-output.schema.json", "sha256": "6794d86198ca437a6b545e120eb77d776ab9e11dba79e1c8b6dd8bf2dc6503c0", "bytes": 3446},
+  "runtime": {
+    "ticket": {"path": "docs/general-chat-agentic-capability-preflight-ticket-r2.json", "sha256": "ea905672628d0c94be421ebbacb0cca0f05f15f34b1908d354767eaf55053035", "bytes": 4293},
+    "schema": {"path": "docs/general-chat-agentic-capability-preflight-ticket-r2.schema.json", "sha256": "3227968030f960a79b572226aec1af438d6281be779f6cc28068980c988d1735", "bytes": 7083},
+    "validator": {"path": "scripts/general_chat_agentic_exact_runtime_preflight.py", "sha256": "8bdfa3dd6a2045ac7b4b1e2b10753b425a49155258c771f518fc501110ad2a2d", "bytes": 9761}
+  },
+  "adapter": {
+    "packet": {"path": "docs/general-chat-agentic-private-trace-shadow-packet-r1.json", "sha256": "9978774b59e1b52bb29412aac8b8a5358f1e35efc7a375c0526b2c3fe05c3e40", "bytes": 1870},
+    "input_schema": {"path": "docs/general-chat-agentic-private-trace-adapter-input.schema.json", "sha256": "c9ff2699a6f66749ee4477be1983ea6f8945d188df372d4aa48c382e3a90efe3", "bytes": 3893},
+    "output_schema": {"path": "docs/general-chat-agentic-private-trace-adapter-output.schema.json", "sha256": "09fa6f04fea6734191b12a806e1d7de18792a98cdd8c90897787f6b1ecf99f57", "bytes": 1744},
+    "validator": {"path": "scripts/general_chat_agentic_private_trace_adapter.py", "sha256": "a598bea5861d90b4fa9dd7924a1c6ce7213cab01f631edc18c66180fd12313eb", "bytes": 9979},
+    "shadow_root": "docs/general-chat-agentic-private-trace-shadow",
+    "normalizer": {"path": "scripts/general_chat_agentic_raw_normalizer.py", "sha256": "d923298fff6272adaf8e1d57e3153a2861176a4d857a16e0bf411b0ea76cb016", "bytes": 5874},
+    "synthetic_adapter_dependency": {"path": "scripts/general_chat_agentic_real_trace_adapter.py", "sha256": "47207cb8cc9845d0a4ebf34a88f8afda03dbf2f8d0f3fff2a5d83d74b0513507", "bytes": 9755},
+    "normalized_schema": {"path": "docs/general-chat-agentic-binding-extractor-input-r2.schema.json", "sha256": "42a85185964df04ea0b085c25b13d155c06658d758c76f95f617e69730c167e8", "bytes": 4917}
+  },
+  "binding": {
+    "evaluator": {"path": "scripts/general_chat_agentic_binding_extractor.py", "sha256": "ca9821be83b02a76a4c93841dac1ee47f1334c5c92824625d2da919530bef78d", "bytes": 17874},
+    "fixture": {"path": "docs/general-chat-agentic-capability-preflight-fixture-r1.json", "sha256": "ec9814d603caf3fee94c61069e2dbb61828759ad160a31dd2daeb3e025afa369", "bytes": 1140}
+  },
+  "expected": {
+    "runtime_identity_state": "verified",
+    "adapter_state": "private_trace_shadow_verified",
+    "trace_origin": "synthetic_shadow",
+    "projection_state": "synthetic_shadow_verified",
+    "private_projection_sha256": "dc98e18e655a83d2fa25d69b956063585aa586a9b3d701df85085755d38f2d6f",
+    "normalized_output_sha256": "b6c8f053df7811c3385dfe9484a1fc2b357ea34f0c8da29097ba841086b91d4a",
+    "binding_criteria": {
+      "root_thread_identity": "satisfied",
+      "spawn_call_and_task_identity": "unobserved",
+      "worker_packet_projection": "unobserved",
+      "descendant_parent_and_task_binding": "unobserved",
+      "descendant_terminal_sender_and_result": "unobserved",
+      "root_tool_call_and_terminal_result": "unobserved",
+      "final_response_direct_binding": "unobserved",
+      "all_agent_final_usage": "satisfied",
+      "monotonic_elapsed": "satisfied",
+      "safe_projection_without_raw_transcript": "satisfied"
+    },
+    "binding_admission": "agentic_runtime_capability_unavailable",
+    "dispatch_state": "denied",
+    "reasons": ["REAL_TRACE_ADAPTER_NOT_READY", "ISSUANCE_NOT_AUTHORIZED"],
+    "model_invocations": 0,
+    "real_trace_reads": 0,
+    "probe_issues": 0,
+    "mutation_performed": false,
+    "raw_path_count": 0
+  }
+}

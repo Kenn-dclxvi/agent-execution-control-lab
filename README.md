@@ -41,6 +41,11 @@ lowはmediumより時間が4.28%、トークンが1.37%少ないものの、時�
 
 推奨はこの固定評価の範囲に限ります。未知の設計・研究やAstra全般の優劣を判定したものではなく、総所要時間には開始・終了前後の待ちも含まれ、試験順も無作為化していません。詳しい根拠は[週末からの計測推移とSol・Astraの動作の特徴](docs/sol-astra-c147-c274-measurement-synthesis-r1.md)、[推論設定の推奨判定とトークン差の原因分析](docs/candidate274-astra-reasoning-recommendation-r1.md)を参照してください。
 
+
+共通制御を外したFreeでも、9月8日にAstraのlow・medium・highを同じStandard14各N=5で計測しました。Score 4は順に70/70・68/70・66/70件で、トークン・総所要時間はlow、medium、highの順に増えました。数値と固定条件は[Freeの3設定比較](evaluations/results/control-free-astra-low-medium-high-standard14-n5_2026-09-08.md)を参照してください。
+
+**Astraは仕様不足を認識しても、確認待ちで止まるとは限りません。** 変更先が未指定のA01では、lowは5件とも読み取り後に確認して止まりました。medium・highでは、確認前に現状テストを行う例と、既存の選択肢から変更先を推測して編集する例が増え、highには質問を表示した後も回答を待たず変更した例がありました。ただし、現状テストだけの実行もScore 0とする採点条件は、関連テストを許可する提示条件と差があります。推測による編集と同じ失敗にはまとめず、各5件の傾向をAstra全般へ一般化しません。詳しくは[A01の実行経路と採点上の限界](docs/astra-free-a01-reasoning-route-audit-r1.md)を参照してください。
+
 ## 実行制御で何が変わったか
 
 観測された効率改善の要点は次のとおり。詳細と因果は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)を参照。

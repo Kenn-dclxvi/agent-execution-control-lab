@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-threshold-ai-review-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "threshold_contract_id",
+    "reviewer_role",
+    "producer_execution_identity",
+    "final_result_sender",
+    "decision",
+    "holdout_result_seen",
+    "criteria_confirmed",
+    "findings",
+    "rationale",
+    "recorded_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "general-chat-threshold-ai-review/v1"
+    },
+    "review_id": {
+      "const": "general-chat-semantic-threshold-independent-ai-review-r1"
+    },
+    "threshold_contract_id": {
+      "const": "general-chat-semantic-grader-qualification-r1"
+    },
+    "reviewer_role": {
+      "const": "independent-ai-reviewer"
+    },
+    "producer_execution_identity": {
+      "const": "/root/threshold_ai_review"
+    },
+    "final_result_sender": {
+      "const": "/root/threshold_ai_review"
+    },
+    "decision": {
+      "enum": ["approved", "rejected"]
+    },
+    "holdout_result_seen": {
+      "const": false
+    },
+    "criteria_confirmed": {
+      "type": "boolean"
+    },
+    "findings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"decision": {"const": "approved"}},
+        "required": ["decision"]
+      },
+      "then": {
+        "properties": {
+          "criteria_confirmed": {"const": true},
+          "findings": {"maxItems": 0}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-response-control-r1.schema.json",
+  "title": "General chat response control r1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "case_id",
+    "assistant_message",
+    "clarification_value_ids",
+    "request_evidence_ids",
+    "answered_topic_ids",
+    "unresolved_topic_ids"
+  ],
+  "properties": {
+    "schema_id": {"const": "general-chat-response-control/r1"},
+    "case_id": {"type": "string", "minLength": 1},
+    "assistant_message": {"type": "string", "minLength": 1},
+    "clarification_value_ids": {"$ref": "#/$defs/unique_ids"},
+    "request_evidence_ids": {"$ref": "#/$defs/unique_ids"},
+    "answered_topic_ids": {"$ref": "#/$defs/unique_ids"},
+    "unresolved_topic_ids": {"$ref": "#/$defs/unique_ids"}
+  },
+  "$defs": {
+    "unique_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  }
+}

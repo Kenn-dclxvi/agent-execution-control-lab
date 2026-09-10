@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-semantic-judge-output-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_item_id", "grader_identity", "assertions"],
+  "properties": {
+    "schema_version": {"const": "general-chat-semantic-judge-output/v1"},
+    "calibration_item_id": {"type": "string", "minLength": 1},
+    "grader_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "prompt_sha256", "schema_sha256"],
+      "properties": {
+        "model": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "reasoning_effort": {"type": ["string", "null"]},
+        "temperature": {"type": ["number", "null"]},
+        "seed": {"type": ["integer", "null"]}
+      }
+    },
+    "assertions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/assertion_result"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "assertion_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertion_id", "label", "evidence_spans", "reason"],
+      "properties": {
+        "assertion_id": {"type": "string", "minLength": 1},
+        "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+        "evidence_spans": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "reason": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

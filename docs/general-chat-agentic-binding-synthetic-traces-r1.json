@@ -1,0 +1,225 @@
+{
+  "schema_version": "general-chat-agentic-binding-synthetic-fixtures/v1",
+  "input_schema": "docs/general-chat-agentic-binding-extractor-input.schema.json",
+  "output_schema": "docs/general-chat-agentic-binding-extractor-output.schema.json",
+  "base_trace": {
+    "schema_version": "general-chat-agentic-normalized-trace/v1",
+    "probe_id": "general-chat-agentic-capability-preflight-r1",
+    "root": {
+      "thread_started": ["root-thread-r1"],
+      "spawn_calls": [
+        {
+          "call_id": "spawn-call-r1",
+          "requested_task_identity": "parking_fact_check",
+          "packet": {
+            "task_identity": "parking_fact_check",
+            "record_id": "parking-saturday-r1",
+            "record": {
+              "title": "駐車場利用案内",
+              "text": "土曜日の駐車場利用時間は9時00分から18時30分までです。"
+            },
+            "required_result_shape": {
+              "type": "one_sentence",
+              "must_include": ["18時まで駐車できる", "18時30分まで"]
+            }
+          }
+        }
+      ],
+      "spawn_results": [
+        {
+          "call_id": "spawn-call-r1",
+          "returned_task_identity": "parking_fact_check",
+          "child_thread_id": "child-thread-r1"
+        }
+      ],
+      "tool_calls": [
+        {
+          "call_id": "tool-call-r1",
+          "tool_id": "fetch_branch_counter_hours",
+          "input": {"record_id": "branch-counter-hours-r1"}
+        }
+      ],
+      "tool_results": [
+        {
+          "call_id": "tool-call-r1",
+          "terminal_status": "success",
+          "result": {
+            "record_id": "branch-counter-hours-r1",
+            "day": "土曜日",
+            "opens_at": "10:00",
+            "closes_at": "17:00"
+          }
+        }
+      ],
+      "final_responses": [
+        "土曜日は18時まで駐車できる（利用時間は18時30分まで）。支店窓口は17時に終了します。"
+      ]
+    },
+    "descendants": [
+      {
+        "thread_id": "child-thread-r1",
+        "parent_thread_id": "root-thread-r1",
+        "task_identity": "parking_fact_check",
+        "terminal_events": [
+          {
+            "sender": "parking_fact_check",
+            "result": "土曜日は18時まで駐車できる（利用時間は18時30分まで）。"
+          }
+        ]
+      }
+    ],
+    "usage": {
+      "root_thread_id": "root-thread-r1",
+      "sessions": [
+        {
+          "thread_id": "root-thread-r1",
+          "parent_thread_id": null,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 20,
+          "total_tokens": 120
+        },
+        {
+          "thread_id": "child-thread-r1",
+          "parent_thread_id": "root-thread-r1",
+          "input_tokens": 50,
+          "cached_input_tokens": 10,
+          "output_tokens": 10,
+          "total_tokens": 60
+        }
+      ]
+    },
+    "monotonic": {"started_ms": 1000, "ended_ms": 1450},
+    "projection": {"raw_transcript_required": false}
+  },
+  "base_expected_criteria": {
+    "root_thread_identity": "satisfied",
+    "spawn_call_and_task_identity": "satisfied",
+    "worker_packet_projection": "satisfied",
+    "descendant_parent_and_task_binding": "satisfied",
+    "descendant_terminal_sender_and_result": "satisfied",
+    "root_tool_call_and_terminal_result": "satisfied",
+    "final_response_direct_binding": "satisfied",
+    "all_agent_final_usage": "satisfied",
+    "monotonic_elapsed": "satisfied",
+    "safe_projection_without_raw_transcript": "satisfied"
+  },
+  "cases": [
+    {
+      "case_id": "GCA-BIND-S01",
+      "mutation": null,
+      "expected_overrides": {},
+      "expected_admission": "agentic_runtime_capability_available"
+    },
+    {
+      "case_id": "GCA-BIND-N01",
+      "mutation": {"pointer": "/root/spawn_results/0/call_id", "value": "other-spawn-call"},
+      "expected_overrides": {
+        "spawn_call_and_task_identity": "unsatisfied",
+        "descendant_parent_and_task_binding": "unobserved",
+        "descendant_terminal_sender_and_result": "unobserved",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N02",
+      "mutation": {"pointer": "/root/spawn_results/0/returned_task_identity", "value": "other_task"},
+      "expected_overrides": {
+        "spawn_call_and_task_identity": "unsatisfied",
+        "descendant_parent_and_task_binding": "unobserved",
+        "descendant_terminal_sender_and_result": "unobserved",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N03",
+      "mutation": {"pointer": "/descendants/0/parent_thread_id", "value": "other-root"},
+      "expected_overrides": {
+        "descendant_parent_and_task_binding": "unsatisfied",
+        "descendant_terminal_sender_and_result": "unobserved",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N04",
+      "mutation": {"pointer": "/root/spawn_calls/0/packet/root_tool_record", "value": {"record_id": "branch-counter-hours-r1"}},
+      "expected_overrides": {"worker_packet_projection": "unsatisfied"},
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N05",
+      "mutation": {"pointer": "/descendants/0/terminal_events/0/sender", "value": null},
+      "expected_overrides": {
+        "descendant_terminal_sender_and_result": "unobserved",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N06",
+      "mutation": {
+        "pointer": "/descendants/0/terminal_events",
+        "value": [
+          {"sender": "parking_fact_check", "result": "土曜日は18時まで駐車できる（利用時間は18時30分まで）。"},
+          {"sender": "parking_fact_check", "result": "重複したterminal result"}
+        ]
+      },
+      "expected_overrides": {
+        "descendant_terminal_sender_and_result": "unsatisfied",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N07",
+      "mutation": {"pointer": "/root/tool_results/0/call_id", "value": "other-tool-call"},
+      "expected_overrides": {
+        "root_tool_call_and_terminal_result": "unsatisfied",
+        "final_response_direct_binding": "unobserved"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N08",
+      "mutation": {"pointer": "/root/final_responses/0", "value": "駐車場の確認結果は受け取れませんでした。支店窓口は17時に終了します。"},
+      "expected_overrides": {"final_response_direct_binding": "unsatisfied"},
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N09",
+      "mutation": {"pointer": "/root/final_responses/0", "value": "土曜日は18時まで駐車できる（利用時間は18時30分まで）。支店窓口の終了時刻は確認できませんでした。"},
+      "expected_overrides": {"final_response_direct_binding": "unsatisfied"},
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N10",
+      "mutation": {"pointer": "/usage/sessions/1/total_tokens", "value": null},
+      "expected_overrides": {"all_agent_final_usage": "unsatisfied"},
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N11",
+      "mutation": {"pointer": "/projection/raw_transcript_required", "value": true},
+      "expected_overrides": {
+        "worker_packet_projection": "unobserved",
+        "safe_projection_without_raw_transcript": "unsatisfied"
+      },
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    },
+    {
+      "case_id": "GCA-BIND-N12",
+      "mutation": {
+        "pointer": "/root/final_responses",
+        "value": [
+          "土曜日は18時まで駐車できる（利用時間は18時30分まで）。支店窓口は17時に終了します。",
+          "重複したroot final response"
+        ]
+      },
+      "expected_overrides": {"final_response_direct_binding": "unsatisfied"},
+      "expected_admission": "agentic_runtime_capability_unavailable"
+    }
+  ]
+}

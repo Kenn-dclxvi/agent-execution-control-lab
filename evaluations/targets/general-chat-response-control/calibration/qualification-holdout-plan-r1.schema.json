@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-holdout-plan-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plan_id",
+    "status",
+    "threshold",
+    "holdout",
+    "reference_generation",
+    "qualification_grader",
+    "issuance_order",
+    "stop_conditions",
+    "formal_evaluation_effect"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-holdout-plan/v1"},
+    "plan_id": {"const": "general-chat-semantic-qualification-holdout-plan-r1"},
+    "status": {"const": "sealed_reference_generation_not_issued"},
+    "threshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_id", "sha256", "status"],
+      "properties": {
+        "contract_id": {"const": "general-chat-semantic-grader-qualification-r1"},
+        "sha256": {"const": "afd12f677e5a8a5d8ab6492d47164b887123d908622e9edaa58c240f33915ea9"},
+        "status": {"const": "fixed"}
+      }
+    },
+    "holdout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["set_id", "path", "sha256", "item_count", "assertion_count", "pilot_overlap_count", "sealed_at"],
+      "properties": {
+        "set_id": {"const": "general-chat-semantic-qualification-holdout-r1"},
+        "path": {"const": "calibration/qualification-holdout-r1.json"},
+        "sha256": {"const": "9bc22536be3be9b2b5ed068f4beb41435cae4d63ceb9e32808c3e563bff2c678"},
+        "item_count": {"const": 16},
+        "assertion_count": {"const": 32},
+        "pilot_overlap_count": {"const": 0},
+        "sealed_at": {"const": "2026-08-20T10:57:14Z"}
+      }
+    },
+    "reference_generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["panel_members", "adjudicator", "reference_schema", "issued"],
+      "properties": {
+        "panel_members": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "adjudicator": {"type": "string", "minLength": 1},
+        "reference_schema": {"const": "calibration/qualification-reference-r1.schema.json"},
+        "issued": {"const": false}
+      }
+    },
+    "qualification_grader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grader_identity",
+        "execution_id",
+        "model",
+        "reasoning_effort",
+        "runtime_identity",
+        "prompt_path",
+        "prompt_sha256",
+        "output_schema_path",
+        "output_schema_sha256",
+        "independent_from_reference_panel",
+        "reference_labels_forbidden",
+        "run_count",
+        "issued"
+      ],
+      "properties": {
+        "grader_identity": {"const": "general-chat-semantic-grader-terra-medium-r1"},
+        "execution_id": {"const": "semantic-qualification-terra-r1"},
+        "model": {"const": "gpt-5.6-terra"},
+        "reasoning_effort": {"const": "medium"},
+        "runtime_identity": {"const": "codex-cli 0.148.0"},
+        "prompt_path": {"const": "rating-contracts/general-chat-semantic-panel-member-r1.txt"},
+        "prompt_sha256": {"const": "d01e50fc436bf26e0306d501df3767d89f2f8e4399490dc4bc5cad7c9cbd9fbd"},
+        "output_schema_path": {"const": "calibration/ai-grader-label-r1.schema.json"},
+        "output_schema_sha256": {"const": "061f4d2eefc3eb9fe4cda51d1c6a28055c223296871b6f9b6a03d14c26debc7a"},
+        "independent_from_reference_panel": {"const": true},
+        "reference_labels_forbidden": {"const": true},
+        "run_count": {"const": 1},
+        "issued": {"const": false}
+      }
+    },
+    "issuance_order": {
+      "const": [
+        "reference_panel",
+        "reference_adjudication_if_required",
+        "reference_seal",
+        "qualification_grader_once",
+        "threshold_comparison_once"
+      ]
+    },
+    "stop_conditions": {
+      "const": [
+        "threshold_identity_mismatch",
+        "holdout_identity_mismatch",
+        "reference_ambiguity",
+        "reference_not_sealed",
+        "qualification_grader_identity_mismatch",
+        "any_qualification_execution_already_issued"
+      ]
+    },
+    "formal_evaluation_effect": {"const": "none_before_qualification_report"}
+  }
+}

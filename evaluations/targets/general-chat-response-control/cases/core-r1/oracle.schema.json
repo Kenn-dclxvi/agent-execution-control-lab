@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-oracle-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "set_id", "cases"],
+  "properties": {
+    "schema_version": {"const": "general-chat-oracle/v1"},
+    "set_id": {"const": "general-chat-core-r1"},
+    "cases": {"type": "array", "minItems": 8, "maxItems": 8}
+  }
+}

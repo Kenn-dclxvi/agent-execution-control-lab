@@ -1,0 +1,53 @@
+{
+  "admission": {
+    "passed": false,
+    "state": "unavailable"
+  },
+  "evaluation_effect": {
+    "candidate_created": false,
+    "evaluation_slot_issued": false,
+    "qualification_result_changed": false
+  },
+  "fixed_input_sha256": "dcb58c7b59a44305510ac8dec1f15b663708bcfe30100d966b093132137c90c5",
+  "fixed_schema_sha256": "47fa10b61294dffe8a24817215a4fb5f285c25feb692fb36683307c7ffaf7261",
+  "issued_once": true,
+  "observation": {
+    "elapsed_seconds": 3.307969,
+    "error_messages": [
+      "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"invalid_json_schema\",\n    \"message\": \"Invalid schema for response_format 'codex_output_schema': In context=('properties', 'status'), schema must have a 'type' key.\",\n    \"param\": \"text.format.schema\"\n  },\n  \"status\": 400\n}",
+      "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"invalid_json_schema\",\n    \"message\": \"Invalid schema for response_format 'codex_output_schema': In context=('properties', 'status'), schema must have a 'type' key.\",\n    \"param\": \"text.format.schema\"\n  },\n  \"status\": 400\n}"
+    ],
+    "event_types": [
+      "thread.started",
+      "turn.started",
+      "error",
+      "turn.failed"
+    ],
+    "final_error": null,
+    "final_exists": false,
+    "final_schema_valid": false,
+    "final_sha256": null,
+    "invalid_json_lines": 0,
+    "process_exit_code": 1,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_tail": "",
+    "stdout_sha256": "1b7fcce448b4eff7ea6212033df476d788d5c851ea37658abb5530b989712d4b",
+    "terminal_usage": [],
+    "thread_ids": [
+      "01a01874-1cfe-7cc3-bb28-c1186418ba7a"
+    ]
+  },
+  "probe_id": "general-chat-isolated-home-transport-probe-r1",
+  "purpose": "non_evaluation_transport_diagnostic",
+  "result_sha256": "030ff084660d0662ac7623432a065420168ba22b4223a7a74e9017ab5199da9b",
+  "runtime": {
+    "auth_transport": "host_auth_symlink_not_persisted",
+    "codex_cli": "0.146.0",
+    "codex_home": "per_probe_temporary",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "runtime_adapter_path": "evaluations/targets/general-chat-response-control/runtime/probe_isolated_home_transport.py",
+    "runtime_adapter_sha256": "d5bd0567a6897b498f2ed757326157b7c720eb1ca448855b256cb563f52d7c0d"
+  },
+  "schema_version": "general-chat-transport-probe/v1"
+}

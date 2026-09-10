@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "evaluations/targets/schemas/evaluation-target-v2.schema.json"
 DRAFT = ROOT / "docs/portable-instruction-semantic-target-draft.json"
 FORMAL = ROOT / "evaluations/targets/portable-instruction-semantic-conformance/target.json"
+GENERAL_CHAT = ROOT / "evaluations/targets/general-chat-response-control/target.json"
 RESPONSE_SCHEMA = ROOT / "docs/portable-instruction-semantic-conformance-heldout-r1/response.schema.json"
 
 
@@ -60,11 +61,13 @@ def test_formal_target_preserves_draft_subject_without_repository_ref() -> None:
     assert f"`{formal['target_id']}`" in (ROOT / "evaluations/targets/README.md").read_text(encoding="utf-8")
 
 
-def test_existing_v1_descriptors_remain_v1_and_repository_bound() -> None:
+def test_v1_descriptors_remain_repository_bound_and_v2_descriptors_are_semantic() -> None:
     for path in sorted((ROOT / "evaluations/targets").glob("*/target.json")):
         descriptor = load(path)
-        if path == FORMAL:
+        if path in {FORMAL, GENERAL_CHAT}:
+            jsonschema.Draft202012Validator(load(SCHEMA)).validate(descriptor)
             assert descriptor["schema_version"] == "the-caption-prompt.evaluation-target/v2"
+            assert descriptor["target_kind"] == "semantic_protocol"
             assert "target_repository" not in descriptor
             continue
         assert descriptor["schema_version"] == "the-caption-prompt.evaluation-target/v1"

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-preflight-receipt.schema.json",
+  "title": "General chat agentic capability preflight receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "probe_id",
+    "ticket_sha256",
+    "runtime_observed",
+    "process",
+    "bindings",
+    "usage",
+    "criteria",
+    "admission",
+    "evaluation_effect",
+    "sensitive_material_saved"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-receipt/v1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r1"},
+    "ticket_sha256": {"$ref": "#/$defs/hash"},
+    "runtime_observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "model", "reasoning_effort", "sandbox_mode", "approval_policy", "multi_agent", "agents_max_threads"],
+      "properties": {
+        "version": {"type": "string"},
+        "model": {"type": "string"},
+        "reasoning_effort": {"type": "string"},
+        "sandbox_mode": {"type": "string"},
+        "approval_policy": {"type": "string"},
+        "multi_agent": {"type": "boolean"},
+        "agents_max_threads": {"type": "integer"}
+      }
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exit_code", "elapsed_ms", "root_thread_id"],
+      "properties": {
+        "exit_code": {"type": ["integer", "null"]},
+        "elapsed_ms": {"type": ["integer", "null"], "minimum": 0},
+        "root_thread_id": {"type": ["string", "null"]}
+      }
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spawn", "packet", "descendant", "root_tool", "final_response"],
+      "properties": {
+        "spawn": {"$ref": "#/$defs/spawn_binding"},
+        "packet": {"$ref": "#/$defs/packet_binding"},
+        "descendant": {"$ref": "#/$defs/descendant_binding"},
+        "root_tool": {"$ref": "#/$defs/tool_binding"},
+        "final_response": {"$ref": "#/$defs/final_binding"}
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "descendants", "all_agent_total", "complete", "duplicate_session_count"],
+      "properties": {
+        "root": {"$ref": "#/$defs/usage_value"},
+        "descendants": {"type": "array", "items": {"$ref": "#/$defs/usage_value"}},
+        "all_agent_total": {"$ref": "#/$defs/usage_value"},
+        "complete": {"type": "boolean"},
+        "duplicate_session_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "criteria": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"enum": ["satisfied", "unsatisfied", "unobserved"]},
+      "required": [
+        "root_thread_identity",
+        "spawn_call_and_task_identity",
+        "worker_packet_projection",
+        "descendant_parent_and_task_binding",
+        "descendant_terminal_sender_and_result",
+        "root_tool_call_and_terminal_result",
+        "final_response_direct_binding",
+        "all_agent_final_usage",
+        "monotonic_elapsed",
+        "safe_projection_without_raw_transcript"
+      ]
+    },
+    "admission": {"enum": ["agentic_runtime_capability_available", "agentic_runtime_capability_unavailable"]},
+    "evaluation_effect": {"const": false},
+    "sensitive_material_saved": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "admission": {"const": "agentic_runtime_capability_available"}
+        }
+      },
+      "then": {
+        "properties": {
+          "process": {
+            "properties": {
+              "exit_code": {"const": 0},
+              "root_thread_id": {"type": "string", "minLength": 1}
+            }
+          },
+          "bindings": {
+            "properties": {
+              "packet": {
+                "properties": {
+                  "forbidden_field_count": {"const": 0},
+                  "raw_transcript_required": {"const": false}
+                }
+              },
+              "final_response": {
+                "properties": {
+                  "worker_result_directly_carried": {"const": true},
+                  "root_tool_result_directly_carried": {"const": true}
+                }
+              }
+            }
+          },
+          "usage": {
+            "properties": {
+              "complete": {"const": true},
+              "duplicate_session_count": {"const": 0}
+            }
+          },
+          "criteria": {"$ref": "#/$defs/all_criteria_satisfied"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "admission": {"const": "agentic_runtime_capability_unavailable"}
+        }
+      },
+      "then": {
+        "properties": {
+          "criteria": {"not": {"$ref": "#/$defs/all_criteria_satisfied"}}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "spawn_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["call_id", "requested_task_identity", "returned_task_identity", "child_thread_id"],
+      "properties": {
+        "call_id": {"type": ["string", "null"]},
+        "requested_task_identity": {"type": ["string", "null"]},
+        "returned_task_identity": {"type": ["string", "null"]},
+        "child_thread_id": {"type": ["string", "null"]}
+      }
+    },
+    "packet_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "canonical_projection", "forbidden_field_count", "raw_transcript_required"],
+      "properties": {
+        "sha256": {"$ref": "#/$defs/hash"},
+        "canonical_projection": {"type": ["object", "null"]},
+        "forbidden_field_count": {"type": "integer", "minimum": 0},
+        "raw_transcript_required": {"type": "boolean"}
+      }
+    },
+    "descendant_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["thread_id", "parent_thread_id", "task_identity", "terminal_sender", "terminal_result_sha256"],
+      "properties": {
+        "thread_id": {"type": ["string", "null"]},
+        "parent_thread_id": {"type": ["string", "null"]},
+        "task_identity": {"type": ["string", "null"]},
+        "terminal_sender": {"type": ["string", "null"]},
+        "terminal_result_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "tool_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool_id", "call_id", "input_sha256", "terminal_status", "result_sha256"],
+      "properties": {
+        "tool_id": {"type": ["string", "null"]},
+        "call_id": {"type": ["string", "null"]},
+        "input_sha256": {"$ref": "#/$defs/hash"},
+        "terminal_status": {"enum": ["success", "failed", "unavailable", null]},
+        "result_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "final_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "worker_result_directly_carried", "root_tool_result_directly_carried"],
+      "properties": {
+        "sha256": {"$ref": "#/$defs/hash"},
+        "worker_result_directly_carried": {"type": "boolean"},
+        "root_tool_result_directly_carried": {"type": "boolean"}
+      }
+    },
+    "usage_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["thread_id", "input_tokens", "cached_input_tokens", "output_tokens", "total_tokens"],
+      "properties": {
+        "thread_id": {"type": ["string", "null"]},
+        "input_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "cached_input_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "output_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "total_tokens": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "all_criteria_satisfied": {
+      "type": "object",
+      "properties": {
+        "root_thread_identity": {"const": "satisfied"},
+        "spawn_call_and_task_identity": {"const": "satisfied"},
+        "worker_packet_projection": {"const": "satisfied"},
+        "descendant_parent_and_task_binding": {"const": "satisfied"},
+        "descendant_terminal_sender_and_result": {"const": "satisfied"},
+        "root_tool_call_and_terminal_result": {"const": "satisfied"},
+        "final_response_direct_binding": {"const": "satisfied"},
+        "all_agent_final_usage": {"const": "satisfied"},
+        "monotonic_elapsed": {"const": "satisfied"},
+        "safe_projection_without_raw_transcript": {"const": "satisfied"}
+      }
+    },
+    "extraction_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spawn", "packet", "descendant", "root_tool", "final_response"],
+      "properties": {
+        "spawn": {"$ref": "#/$defs/spawn_binding"},
+        "packet": {"$ref": "#/$defs/packet_binding"},
+        "descendant": {"$ref": "#/$defs/descendant_binding"},
+        "root_tool": {"$ref": "#/$defs/tool_binding"},
+        "final_response": {"$ref": "#/$defs/final_binding"}
+      }
+    },
+    "extraction_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "descendants", "all_agent_total", "complete", "duplicate_session_count"],
+      "properties": {
+        "root": {"$ref": "#/$defs/usage_value"},
+        "descendants": {"type": "array", "items": {"$ref": "#/$defs/usage_value"}},
+        "all_agent_total": {"$ref": "#/$defs/usage_value"},
+        "complete": {"type": "boolean"},
+        "duplicate_session_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "extraction_criteria": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"enum": ["satisfied", "unsatisfied", "unobserved"]},
+      "required": [
+        "root_thread_identity",
+        "spawn_call_and_task_identity",
+        "worker_packet_projection",
+        "descendant_parent_and_task_binding",
+        "descendant_terminal_sender_and_result",
+        "root_tool_call_and_terminal_result",
+        "final_response_direct_binding",
+        "all_agent_final_usage",
+        "monotonic_elapsed",
+        "safe_projection_without_raw_transcript"
+      ]
+    }
+  }
+}

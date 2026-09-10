@@ -1,0 +1,60 @@
+{
+  "schema_version": "general-chat-qualification-holdout-plan/v1",
+  "plan_id": "general-chat-semantic-qualification-holdout-plan-r1",
+  "status": "sealed_reference_generation_not_issued",
+  "threshold": {
+    "contract_id": "general-chat-semantic-grader-qualification-r1",
+    "sha256": "afd12f677e5a8a5d8ab6492d47164b887123d908622e9edaa58c240f33915ea9",
+    "status": "fixed"
+  },
+  "holdout": {
+    "set_id": "general-chat-semantic-qualification-holdout-r1",
+    "path": "calibration/qualification-holdout-r1.json",
+    "sha256": "9bc22536be3be9b2b5ed068f4beb41435cae4d63ceb9e32808c3e563bff2c678",
+    "item_count": 16,
+    "assertion_count": 32,
+    "pilot_overlap_count": 0,
+    "sealed_at": "2026-08-20T10:57:14Z"
+  },
+  "reference_generation": {
+    "panel_members": [
+      "semantic-holdout-reference-terra-r1-run-1",
+      "semantic-holdout-reference-terra-r1-run-2",
+      "semantic-holdout-reference-terra-r1-run-3"
+    ],
+    "adjudicator": "semantic-holdout-reference-adjudicator-terra-r1",
+    "reference_schema": "calibration/qualification-reference-r1.schema.json",
+    "issued": false
+  },
+  "qualification_grader": {
+    "grader_identity": "general-chat-semantic-grader-terra-medium-r1",
+    "execution_id": "semantic-qualification-terra-r1",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "medium",
+    "runtime_identity": "codex-cli 0.148.0",
+    "prompt_path": "rating-contracts/general-chat-semantic-panel-member-r1.txt",
+    "prompt_sha256": "d01e50fc436bf26e0306d501df3767d89f2f8e4399490dc4bc5cad7c9cbd9fbd",
+    "output_schema_path": "calibration/ai-grader-label-r1.schema.json",
+    "output_schema_sha256": "061f4d2eefc3eb9fe4cda51d1c6a28055c223296871b6f9b6a03d14c26debc7a",
+    "independent_from_reference_panel": true,
+    "reference_labels_forbidden": true,
+    "run_count": 1,
+    "issued": false
+  },
+  "issuance_order": [
+    "reference_panel",
+    "reference_adjudication_if_required",
+    "reference_seal",
+    "qualification_grader_once",
+    "threshold_comparison_once"
+  ],
+  "stop_conditions": [
+    "threshold_identity_mismatch",
+    "holdout_identity_mismatch",
+    "reference_ambiguity",
+    "reference_not_sealed",
+    "qualification_grader_identity_mismatch",
+    "any_qualification_execution_already_issued"
+  ],
+  "formal_evaluation_effect": "none_before_qualification_report"
+}

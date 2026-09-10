@@ -1,0 +1,45 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "chat-control-free-r1",
+    "change_reason": "baseline N=5で観測した保持必須値のcarrier欠落だけを閉じる。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "質問、根拠要求または独立話題制御の一般的な再設計",
+      "成功runの文章構成または処理順の固定",
+      "C147の制御原文または評価結果の継承",
+      "採用、releaseまたはprojection"
+    ],
+    "problem": "保持必須値を回答へ運ばないまま、その値に依存する話題を回答済みとして完了できる。",
+    "prompt_set_name": "required_value_carrier",
+    "scope": "isolated workspace rootのAGENTS.md一件だけ。",
+    "state": "registered"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "adb397bc9b1d5681ea923cee2c5a081f1a243134ec44289f337786b0c3f05971",
+  "content_relation": {
+    "allowed_delta": "利用者が与えた保持必須値を回答へ運ぶdependencyだけを追加する。",
+    "kind": "single_prompt_delta",
+    "source_prompt_identity": "chat-control-free-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "78201bc86e9d94b9fa0aaead34881b0d32bf12fa",
+      "mode": "100644",
+      "sha256": "6908397990644b1e86e9671c801f93be1e4c62f9db85b35afa900c0407e1c1f7",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "derived_candidate",
+    "source_prompt_identity": "chat-control-free-r1"
+  },
+  "prompt_identity": "required-value-carrier-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "baseline_result": "chat-control-free-core-r1-n5-baseline-r1",
+    "design_record": "evaluations/targets/general-chat-response-control/docs/candidate-required-value-carrier-r1-design.md"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

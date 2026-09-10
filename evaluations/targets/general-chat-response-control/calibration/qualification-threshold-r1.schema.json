@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-threshold-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "threshold_contract_id", "status", "fixed_before_holdout_qualification", "criteria", "governance"],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-threshold/v1"},
+    "threshold_contract_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["pilot_not_completed", "governance_decision_pending", "fixed"]},
+    "fixed_before_holdout_qualification": {"type": "boolean"},
+    "criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_exact_agreement_rate", "maximum_false_pass_rate", "maximum_false_fail_rate", "maximum_unknown_rate", "maximum_major_false_pass_count", "ambiguous_gold_items_allowed"],
+      "properties": {
+        "minimum_exact_agreement_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "maximum_false_pass_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "maximum_false_fail_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "maximum_unknown_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "maximum_major_false_pass_count": {"type": ["integer", "null"], "minimum": 0},
+        "ambiguous_gold_items_allowed": {"const": false}
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pilot_report_id", "risk_policy_reference", "decision_record", "approvers", "fixed_at"],
+      "properties": {
+        "pilot_report_id": {"type": ["string", "null"], "minLength": 1},
+        "risk_policy_reference": {"type": ["string", "null"], "minLength": 1},
+        "decision_record": {"type": ["string", "null"], "minLength": 1},
+        "approvers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "fixed_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "pilot_not_completed"}}},
+      "then": {
+        "properties": {
+          "fixed_before_holdout_qualification": {"const": false},
+          "criteria": {
+            "properties": {
+              "minimum_exact_agreement_rate": {"const": null},
+              "maximum_false_pass_rate": {"const": null},
+              "maximum_false_fail_rate": {"const": null},
+              "maximum_unknown_rate": {"const": null},
+              "maximum_major_false_pass_count": {"const": null}
+            }
+          },
+          "governance": {
+            "properties": {
+              "pilot_report_id": {"const": null},
+              "risk_policy_reference": {"const": null},
+              "decision_record": {"const": null},
+              "approvers": {"maxItems": 0},
+              "fixed_at": {"const": null}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "governance_decision_pending"}}},
+      "then": {
+        "properties": {
+          "fixed_before_holdout_qualification": {"const": false},
+          "criteria": {
+            "properties": {
+              "minimum_exact_agreement_rate": {"const": null},
+              "maximum_false_pass_rate": {"const": null},
+              "maximum_false_fail_rate": {"const": null},
+              "maximum_unknown_rate": {"const": null},
+              "maximum_major_false_pass_count": {"const": null}
+            }
+          },
+          "governance": {
+            "properties": {
+              "pilot_report_id": {"type": "string", "minLength": 1},
+              "risk_policy_reference": {"const": null},
+              "decision_record": {"const": null},
+              "approvers": {"maxItems": 0},
+              "fixed_at": {"const": null}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "fixed"}}},
+      "then": {
+        "properties": {
+          "fixed_before_holdout_qualification": {"const": true},
+          "criteria": {
+            "properties": {
+              "minimum_exact_agreement_rate": {"type": "number"},
+              "maximum_false_pass_rate": {"type": "number"},
+              "maximum_false_fail_rate": {"type": "number"},
+              "maximum_unknown_rate": {"type": "number"},
+              "maximum_major_false_pass_count": {"type": "integer"}
+            }
+          },
+          "governance": {
+            "properties": {
+              "pilot_report_id": {"type": "string", "minLength": 1},
+              "risk_policy_reference": {"type": "string", "minLength": 1},
+              "decision_record": {"type": "string", "minLength": 1},
+              "approvers": {"minItems": 2},
+              "fixed_at": {"type": "string", "format": "date-time"}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

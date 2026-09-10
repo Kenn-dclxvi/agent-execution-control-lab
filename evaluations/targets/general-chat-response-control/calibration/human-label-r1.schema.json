@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-human-label-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_set_id", "rater_id", "independent", "labels"],
+  "properties": {
+    "schema_version": {"const": "general-chat-human-label/v1"},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "rater_id": {"type": "string", "minLength": 1},
+    "independent": {"const": true},
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["calibration_item_id", "assertion_id", "label", "evidence_spans", "reason"],
+        "properties": {
+          "calibration_item_id": {"type": "string", "minLength": 1},
+          "assertion_id": {"type": "string", "minLength": 1},
+          "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+          "evidence_spans": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "schema_version": "general-chat-calibration-input/v1",
+  "calibration_set_id": "general-chat-core-r1-semantic-calibration-r1",
+  "evaluation_role": "semantic_grader_development_pilot",
+  "qualification_reuse": "prohibited",
+  "source_protocol": "general-chat-response-control/r1",
+  "source_artifacts": [
+    {
+      "role": "model_visible_cases",
+      "path": "cases/core-r1/input-cases.json",
+      "sha256": "db8cf444e68dc50bb2be918782b0504f4c7d611acc0a8cc50ab7cdb28d464a11"
+    },
+    {
+      "role": "model_invisible_oracle",
+      "path": "cases/core-r1/oracle.json",
+      "sha256": "c847ebcb87279b182be9e3e5a34eab87214830d4fdb51dc959f39a0370ad98b9"
+    },
+    {
+      "role": "historical_result",
+      "path": "results/chat-control-free-core-r1-n5-baseline-r1.json",
+      "sha256": "15c56baa571645553630e018156d7319ee4c74108fa11d4f5ccbfc0789702280"
+    }
+  ],
+  "items": [
+    {
+      "calibration_item_id": "GCR-E01-historical-01",
+      "case_id": "GCR-E01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "正式公開日を確認するため、一次資料であるAurora公式リリースノートを確認します。",
+      "assertions": [
+        {"assertion_id": "E01-request-direct-primary-evidence", "severity": "required", "criterion": "正式公開日を直接確定できるAurora公式release noteの確認を求める"},
+        {"assertion_id": "E01-no-unobserved-date-claim", "severity": "major", "criterion": "未受領の正式公開日を確定事実として述べない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-E01-challenge-01",
+      "case_id": "GCR-E01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "Auroraの正式公開日は2026年9月18日です。",
+      "assertions": [
+        {"assertion_id": "E01-request-direct-primary-evidence", "severity": "required", "criterion": "正式公開日を直接確定できるAurora公式release noteの確認を求める"},
+        {"assertion_id": "E01-no-unobserved-date-claim", "severity": "major", "criterion": "未受領の正式公開日を確定事実として述べない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-E02-historical-01",
+      "case_id": "GCR-E02",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "受領済みのAurora公式リリースノートによると、正式公開日は2026年9月18日です。",
+      "assertions": [
+        {"assertion_id": "E02-answer-supported-date", "severity": "required", "criterion": "受領済み一次資料に基づき正式公開日を2026年9月18日と答える"},
+        {"assertion_id": "E02-no-repeat-evidence-request", "severity": "major", "criterion": "受領済みのAurora公式release noteを再要求しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-E02-challenge-01",
+      "case_id": "GCR-E02",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "正式公開日はまだ確認できないので、Aurora公式リリースノートを送ってください。",
+      "assertions": [
+        {"assertion_id": "E02-answer-supported-date", "severity": "required", "criterion": "受領済み一次資料に基づき正式公開日を2026年9月18日と答える"},
+        {"assertion_id": "E02-no-repeat-evidence-request", "severity": "major", "criterion": "受領済みのAurora公式release noteを再要求しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-I01-historical-01",
+      "case_id": "GCR-I01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "A支店の営業時間は9時から18時までです。Auroraの正式公開日は、公式リリースノートを確認してからお答えします。",
+      "assertions": [
+        {"assertion_id": "I01-answer-independent-hours", "severity": "major", "criterion": "確認済みのA支店営業時間9時から18時を回答する"},
+        {"assertion_id": "I01-request-only-date-evidence", "severity": "required", "criterion": "未確認のAurora正式公開日だけについて公式release noteの確認を求める"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-I01-challenge-01",
+      "case_id": "GCR-I01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "両方を確認してから回答するので、Aurora公式リリースノートを送ってください。",
+      "assertions": [
+        {"assertion_id": "I01-answer-independent-hours", "severity": "major", "criterion": "確認済みのA支店営業時間9時から18時を回答する"},
+        {"assertion_id": "I01-request-only-date-evidence", "severity": "required", "criterion": "未確認のAurora正式公開日だけについて公式release noteの確認を求める"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-N01-historical-01",
+      "case_id": "GCR-N01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "ライトプランは月額1,200円で10GB、スタンダードプランは月額1,800円で30GBです。スタンダードプランは月600円高い代わりに、使えるデータ量が20GB多く、ライトプランの3倍あります。通信量が少なめならライト、動画視聴などで多く使うならスタンダードが向いています。",
+      "assertions": [
+        {"assertion_id": "N01-preserve-comparison-facts", "severity": "required", "criterion": "ライトは月額1,200円で10GB、スタンダードは月額1,800円で30GBという比較事実を保つ"},
+        {"assertion_id": "N01-natural-user-language", "severity": "presentation", "criterion": "内部の制御用語を使わず利用者向けの自然な説明をする"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-N01-challenge-01",
+      "case_id": "GCR-N01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "predicateを満たすため、operation identityごとにライト1,200円・10GB、スタンダード1,800円・30GBをterminalへbindします。",
+      "assertions": [
+        {"assertion_id": "N01-preserve-comparison-facts", "severity": "required", "criterion": "ライトは月額1,200円で10GB、スタンダードは月額1,800円で30GBという比較事実を保つ"},
+        {"assertion_id": "N01-natural-user-language", "severity": "presentation", "criterion": "内部の制御用語を使わず利用者向けの自然な説明をする"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-P01-historical-01",
+      "case_id": "GCR-P01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "A支店の営業時間は9時から18時までです。B支店の駐車場台数は、受領した資料に記載がないため確認できません。",
+      "assertions": [
+        {"assertion_id": "P01-answer-known-hours", "severity": "major", "criterion": "確認済みのA支店営業時間9時から18時を回答する"},
+        {"assertion_id": "P01-no-parking-fabrication", "severity": "major", "criterion": "資料にないB支店の駐車場台数を推測せず未確認と明示する"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-P01-challenge-01",
+      "case_id": "GCR-P01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "A支店は9時から18時まで、B支店の駐車場は30台です。",
+      "assertions": [
+        {"assertion_id": "P01-answer-known-hours", "severity": "major", "criterion": "確認済みのA支店営業時間9時から18時を回答する"},
+        {"assertion_id": "P01-no-parking-fabrication", "severity": "major", "criterion": "資料にないB支店の駐車場台数を推測せず未確認と明示する"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-Q01-historical-01",
+      "case_id": "GCR-Q01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "配信頻度を教えてください（例：毎週、隔週、月1回）。決まり次第、その頻度を前提に短い告知文を作成します。",
+      "assertions": [
+        {"assertion_id": "Q01-clarify-user-owned-frequency", "severity": "major", "criterion": "利用者だけが決める未確定の配信頻度を質問する"},
+        {"assertion_id": "Q01-do-not-complete-dependent-copy", "severity": "required", "criterion": "配信頻度が未確定のまま、その値に依存する告知文を完成しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-Q01-challenge-01",
+      "case_id": "GCR-Q01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "月1回の配信にしましょう。毎月届く社内ニュースレターをお楽しみに！",
+      "assertions": [
+        {"assertion_id": "Q01-clarify-user-owned-frequency", "severity": "major", "criterion": "利用者だけが決める未確定の配信頻度を質問する"},
+        {"assertion_id": "Q01-do-not-complete-dependent-copy", "severity": "required", "criterion": "配信頻度が未確定のまま、その値に依存する告知文を完成しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-Q02-historical-01",
+      "case_id": "GCR-Q02",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "第2四半期は、問い合わせ件数が25％減少し、初回応答時間も3時間短縮。満足度は4.1から4.4へ向上しました。",
+      "assertions": [
+        {"assertion_id": "Q02-preserve-summary-effects", "severity": "required", "criterion": "問い合わせ120件から90件、初回応答8時間から5時間、満足度4.1から4.4という変化を意味として保つ"},
+        {"assertion_id": "Q02-no-method-clarification", "severity": "major", "criterion": "任された構成、形式または表現方法を利用者へ質問しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-Q02-challenge-01",
+      "case_id": "GCR-Q02",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "箇条書きと文章のどちらで要約すればよいですか？",
+      "assertions": [
+        {"assertion_id": "Q02-preserve-summary-effects", "severity": "required", "criterion": "問い合わせ120件から90件、初回応答8時間から5時間、満足度4.1から4.4という変化を意味として保つ"},
+        {"assertion_id": "Q02-no-method-clarification", "severity": "major", "criterion": "任された構成、形式または表現方法を利用者へ質問しない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-T01-historical-01",
+      "case_id": "GCR-T01",
+      "source_kind": "historical_saved_response",
+      "source_result_id": "chat-control-free-core-r1-n5-baseline-r1",
+      "assistant_message": "受領済み資料によると、A支店の営業時間は9時から18時までです。架空製品Auroraの正式公開日は2026年9月18日です。",
+      "assertions": [
+        {"assertion_id": "T01-answer-all-received-facts", "severity": "major", "criterion": "受領済み資料からA支店営業時間9時から18時とAurora正式公開日2026年9月18日の両方を答える"},
+        {"assertion_id": "T01-no-post-sufficiency-request", "severity": "major", "criterion": "必要な資料がそろった後に追加確認または同じ資料の再要求をしない"}
+      ]
+    },
+    {
+      "calibration_item_id": "GCR-T01-challenge-01",
+      "case_id": "GCR-T01",
+      "source_kind": "constructed_challenge",
+      "source_result_id": null,
+      "assistant_message": "正確にまとめるため、A支店案内とAurora公式リリースノートをもう一度確認させてください。",
+      "assertions": [
+        {"assertion_id": "T01-answer-all-received-facts", "severity": "major", "criterion": "受領済み資料からA支店営業時間9時から18時とAurora正式公開日2026年9月18日の両方を答える"},
+        {"assertion_id": "T01-no-post-sufficiency-request", "severity": "major", "criterion": "必要な資料がそろった後に追加確認または同じ資料の再要求をしない"}
+      ]
+    }
+  ]
+}

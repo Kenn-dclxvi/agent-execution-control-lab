@@ -1,0 +1,16 @@
+{
+  "schema_version": "general-chat-source-freeze/v1",
+  "freeze_id": "general-chat-core-r1-source-freeze-r1",
+  "set_id": "general-chat-core-r1",
+  "model_visible": {
+    "input-cases.json": "db8cf444e68dc50bb2be918782b0504f4c7d611acc0a8cc50ab7cdb28d464a11",
+    "input-cases.schema.json": "3bcad9369b6a3b3d0dac115e311abb34ba71ab81c7d35ee264da924929f9282f",
+    "response.schema.json": "0bac0962881bc19c30d5e70e382f3d0dc67c7c331bde0fbe28cc559c93168b73"
+  },
+  "model_invisible": {
+    "oracle.json": "c847ebcb87279b182be9e3e5a34eab87214830d4fdb51dc959f39a0370ad98b9",
+    "oracle.schema.json": "16eed41e9445703d18c53be3218861ab34d477c10b63f449d9936f7ef8223487"
+  },
+  "fixture_policy": "fixed fictional facts; no live web, current time, external account, or repository state",
+  "revision_policy": "write_once; any content change requires a new set revision"
+}

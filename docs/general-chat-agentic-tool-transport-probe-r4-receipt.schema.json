@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-tool-transport-probe-r4-receipt.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "authorization_id", "terminal_state", "process", "criteria", "bindings", "usage", "safe_error_categories", "artifact_hashes", "model_invocations", "probe_issues", "retry_performed", "raw_transcript_saved", "sensitive_material_saved"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-tool-transport-receipt/v1"},
+    "probe_id": {"const": "general-chat-agentic-tool-transport-preflight-r4"},
+    "authorization_id": {"const": "general-chat-agentic-tool-transport-r4-user-authorization"},
+    "terminal_state": {"enum": ["tool_transport_available", "tool_transport_unavailable"]},
+    "process": {"type": "object", "required": ["exit_code", "started_monotonic_ms", "ended_monotonic_ms", "elapsed_ms"], "properties": {"exit_code": {"type": "integer"}, "started_monotonic_ms": {"type": "integer", "minimum": 0}, "ended_monotonic_ms": {"type": "integer", "minimum": 0}, "elapsed_ms": {"type": "integer", "minimum": 0}}},
+    "criteria": {"type": "object", "additionalProperties": false, "required": ["root_thread_identity", "mcp_initialize", "mcp_tools_list", "fixed_tool_call_and_result", "root_rollout_tool_call", "final_response", "root_final_usage", "monotonic_elapsed", "safe_projection"], "properties": {"root_thread_identity": {"$ref": "#/$defs/state"}, "mcp_initialize": {"$ref": "#/$defs/state"}, "mcp_tools_list": {"$ref": "#/$defs/state"}, "fixed_tool_call_and_result": {"$ref": "#/$defs/state"}, "root_rollout_tool_call": {"$ref": "#/$defs/state"}, "final_response": {"$ref": "#/$defs/state"}, "root_final_usage": {"$ref": "#/$defs/state"}, "monotonic_elapsed": {"$ref": "#/$defs/state"}, "safe_projection": {"$ref": "#/$defs/state"}}},
+    "bindings": {"type": "object"}, "usage": {"type": ["object", "null"]},
+    "safe_error_categories": {"type": "array", "items": {"enum": ["mcp_startup_failed", "tools_list_error", "method_not_found", "timeout"]}, "uniqueItems": true},
+    "artifact_hashes": {"type": "object"}, "model_invocations": {"const": 1}, "probe_issues": {"const": 1}, "retry_performed": {"const": false}, "raw_transcript_saved": {"const": false}, "sensitive_material_saved": {"const": false}
+  },
+  "$defs": {"state": {"enum": ["satisfied", "unsatisfied", "unobserved"]}}
+}

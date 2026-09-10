@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-metric-contract-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_id", "status", "threshold_sha256", "reference_sha256", "denominators", "error_rules", "zero_denominator_rate", "decision_rule"],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-metric-contract/v1"},
+    "contract_id": {"const": "general-chat-semantic-qualification-metrics-r1"},
+    "status": {"const": "fixed_before_qualification_run"},
+    "threshold_sha256": {"const": "afd12f677e5a8a5d8ab6492d47164b887123d908622e9edaa58c240f33915ea9"},
+    "reference_sha256": {"const": "482a1111a45502c57920c59100b09a2084221d56a1c461ec3c9c655dcc9e6551"},
+    "denominators": {
+      "const": {
+        "exact_agreement_rate": "all_reference_assertions",
+        "false_pass_rate": "reference_fail_assertions",
+        "false_fail_rate": "reference_pass_assertions",
+        "unknown_rate": "all_reference_assertions",
+        "major_false_pass_count": "count_only"
+      }
+    },
+    "error_rules": {
+      "const": {
+        "false_pass": "reference=fail and grader=pass",
+        "false_fail": "reference=pass and grader=fail",
+        "unknown": "grader=unknown",
+        "major_false_pass": "severity=major and reference=fail and grader=pass",
+        "other_label_mismatch": "exact_agreement mismatch only"
+      }
+    },
+    "zero_denominator_rate": {"const": 0},
+    "decision_rule": {
+      "const": "all fixed threshold criteria must pass; any other exact label mismatch also fails through minimum_exact_agreement_rate=1"
+    }
+  }
+}

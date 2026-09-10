@@ -1,0 +1,11 @@
+{
+  "schema_version": "general-chat-token-accounting/v1",
+  "contract_id": "codex-jsonl-single-agent-all-agent-total-r2",
+  "scope": "all_agents",
+  "source": "codex turn.completed usage",
+  "calculation": "usage.total_tokens when present; otherwise usage.input_tokens + usage.output_tokens",
+  "cached_input_rule": "cached_input_tokens is a subset of input_tokens and is not added again",
+  "admission": "multi_agent is disabled, exactly one thread.started and one turn.completed are required, and both operands must be non-negative integers when total_tokens is absent",
+  "estimation": "forbidden",
+  "repair_basis": "r3 observed terminal usage without total_tokens before any valid baseline measurement; the Responses usage definition identifies total as input plus output"
+}

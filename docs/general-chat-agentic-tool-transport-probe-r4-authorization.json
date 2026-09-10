@@ -1,0 +1,25 @@
+{
+  "schema_version": "general-chat-agentic-tool-transport-authorization/v1",
+  "authorization_id": "general-chat-agentic-tool-transport-r4-user-authorization",
+  "probe_id": "general-chat-agentic-tool-transport-preflight-r4",
+  "direct_predecessor": "general-chat-agentic-capability-preflight-r3",
+  "authorization_basis": "explicit_interactive_user_authorization_2026-08-20_followup",
+  "issuance_authority": "authorized_not_issued",
+  "purpose": "isolate_fixed_mcp_tool_transport",
+  "non_goals": ["worker_trace_binding", "target_registration", "candidate_creation", "evaluation"],
+  "issuance_policy": {"max_issues": 1, "retry": false, "overwrite": false, "reservation_required": true},
+  "runtime": {
+    "path": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9/bundle/bin/codex",
+    "version": "0.146.0", "model": "gpt-5.6-sol", "reasoning": "medium", "sandbox": "workspace-write", "approval_policy": "never", "multi_agent": false, "session_mode": "persisted",
+    "sha256": "ae1d3ffe6d48aec6a4dc3f50e7eb8e0d11962485a6a9406c5a7012139383da02", "bytes": 271056976
+  },
+  "artifacts": {
+    "predecessor_result": {"path": "docs/general-chat-agentic-capability-preflight-r3-result.md", "sha256": "191d7fa62fff3d6ae959c666054e73617153163371485c5c9a99bcbf1ea028a2", "bytes": 3527},
+    "model_input": {"path": "docs/general-chat-agentic-tool-transport-probe-r4-model-input.txt", "sha256": "99f4b21137972a62ae243f1ff48c9d59f060c4bec6b68f0ed0b12d68a53ab238", "bytes": 652},
+    "tool_server": {"path": "scripts/general_chat_agentic_branch_tool_server_r4.py", "sha256": "a540930f1680e2965fc90af37d6766f428339a99c8239987e5af5e7bba1bddd8", "bytes": 3736},
+    "runner": {"path": "scripts/general_chat_agentic_tool_transport_probe_r4.py", "sha256": "de49661065b80d8454f5c3aaf3497766b24aaf01d4c7d647a22b03915810d966", "bytes": 13013},
+    "receipt_schema": {"path": "docs/general-chat-agentic-tool-transport-probe-r4-receipt.schema.json", "sha256": "8941f5b3f94cf7423225e5458daddf77276e1b48e1df9924936eebd937be72b0", "bytes": 2480}
+  },
+  "issuance_records": {"root": "artifacts/capability-preflight-issuance", "names": ["reservation.json", "issued.json", "receipt.json"], "write_once": true, "commit_allowed": false},
+  "storage_policy": {"private_root": "/Users/kenn/repos/_verification", "raw_rollout": "temporary_until_receipt_sealed", "auth_material": "temporary_never_commit", "cleanup_terminal": "receipt_sealed_or_terminal_failure"}
+}

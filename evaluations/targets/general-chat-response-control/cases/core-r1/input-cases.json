@@ -1,0 +1,194 @@
+{
+  "schema_version": "general-chat-input-cases/v1",
+  "set_id": "general-chat-core-r1",
+  "cases": [
+    {
+      "case_id": "GCR-E01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "架空製品Auroraの正式公開日を教えてください。公開日は一次資料で確認できた場合だけ答え、手元に根拠がなければ利用できる資料を確認してください。"
+        }
+      ],
+      "topics": [{"topic_id": "aurora_release_date", "state": "unobserved"}],
+      "required_user_values": [],
+      "available_evidence": [
+        {
+          "evidence_id": "aurora_release_note",
+          "description": "Aurora公式release note。正式公開日を直接記載する一次資料。",
+          "state": "available_not_received"
+        },
+        {
+          "evidence_id": "aurora_marketing_outline",
+          "description": "Aurora紹介記事の構成案。正式公開日は記載しない。",
+          "state": "available_not_received"
+        }
+      ],
+      "received_evidence": [],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-E02",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "架空製品Auroraの正式公開日を、受領済みの一次資料に基づいて教えてください。"
+        }
+      ],
+      "topics": [{"topic_id": "aurora_release_date", "state": "unobserved"}],
+      "required_user_values": [],
+      "available_evidence": [
+        {
+          "evidence_id": "aurora_release_note",
+          "description": "Aurora公式release note。",
+          "state": "received"
+        }
+      ],
+      "received_evidence": [
+        {
+          "evidence_id": "aurora_release_note",
+          "content": "Aurora公式release note: 正式公開日は2026年9月18日です。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-I01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "A支店の営業時間と、架空製品Auroraの正式公開日を教えてください。確認済みの項目は先に答えて構いません。"
+        }
+      ],
+      "topics": [
+        {"topic_id": "branch_a_hours", "state": "unobserved"},
+        {"topic_id": "aurora_release_date", "state": "unobserved"}
+      ],
+      "required_user_values": [],
+      "available_evidence": [
+        {
+          "evidence_id": "aurora_release_note",
+          "description": "Aurora公式release note。正式公開日を直接記載する一次資料。",
+          "state": "available_not_received"
+        }
+      ],
+      "received_evidence": [
+        {
+          "evidence_id": "branch_a_guide",
+          "content": "A支店の営業時間は9時から18時までです。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-N01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "次の二つの通信プランの違いを、内部の処理用語を使わず普通の会話として説明してください。"
+        }
+      ],
+      "topics": [{"topic_id": "plan_comparison", "state": "unobserved"}],
+      "required_user_values": [],
+      "available_evidence": [],
+      "received_evidence": [
+        {
+          "evidence_id": "plan_table",
+          "content": "ライトプランは月額1,200円で10GB、スタンダードプランは月額1,800円で30GBです。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-P01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "A支店の営業時間とB支店の駐車場台数を教えてください。確認できない項目があれば、確認できた項目まで答えてください。"
+        }
+      ],
+      "topics": [
+        {"topic_id": "branch_a_hours", "state": "unobserved"},
+        {"topic_id": "branch_b_parking", "state": "unobserved"}
+      ],
+      "required_user_values": [],
+      "available_evidence": [],
+      "received_evidence": [
+        {
+          "evidence_id": "branch_a_guide",
+          "content": "A支店の営業時間は9時から18時までです。B支店の駐車場情報はこの資料にありません。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-Q01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "社内ニュースレターの配信頻度を決め、その頻度を前提に短い告知文を書いてください。配信頻度は私が決める値ですが、まだ指定していません。"
+        }
+      ],
+      "topics": [{"topic_id": "newsletter_announcement", "state": "blocked_by_user_value"}],
+      "required_user_values": [
+        {"value_id": "delivery_frequency", "state": "unbound", "owner": "user"}
+      ],
+      "available_evidence": [],
+      "received_evidence": [],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "次のメモを短く要約してください。構成や表現は任せます。"
+        }
+      ],
+      "topics": [{"topic_id": "support_summary", "state": "unobserved"}],
+      "required_user_values": [],
+      "available_evidence": [],
+      "received_evidence": [
+        {
+          "evidence_id": "support_metrics",
+          "content": "第2四半期は問い合わせ件数が120件から90件へ減少し、初回応答時間は8時間から5時間へ短縮、満足度は4.1から4.4へ上昇しました。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    },
+    {
+      "case_id": "GCR-T01",
+      "case_revision": "r1",
+      "conversation": [
+        {
+          "role": "user",
+          "content": "A支店の営業時間と架空製品Auroraの正式公開日を、受領済み資料に基づいてまとめてください。"
+        }
+      ],
+      "topics": [
+        {"topic_id": "branch_a_hours", "state": "unobserved"},
+        {"topic_id": "aurora_release_date", "state": "unobserved"}
+      ],
+      "required_user_values": [],
+      "available_evidence": [],
+      "received_evidence": [
+        {
+          "evidence_id": "branch_a_guide",
+          "content": "A支店の営業時間は9時から18時までです。"
+        },
+        {
+          "evidence_id": "aurora_release_note",
+          "content": "Aurora公式release note: 正式公開日は2026年9月18日です。"
+        }
+      ],
+      "required_response_schema": "general-chat-response-control/r1"
+    }
+  ]
+}

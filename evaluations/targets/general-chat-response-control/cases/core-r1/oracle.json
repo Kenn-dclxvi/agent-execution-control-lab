@@ -1,0 +1,153 @@
+{
+  "schema_version": "general-chat-oracle/v1",
+  "set_id": "general-chat-core-r1",
+  "cases": [
+    {
+      "case_id": "GCR-E01",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": ["aurora_release_note"],
+        "answered_topic_ids": [],
+        "unresolved_topic_ids": ["aurora_release_date"]
+      },
+      "message_constraints": {
+        "required_all": ["Aurora"],
+        "required_any": [["確認", "一次資料"]],
+        "forbidden": ["2026年9月18日"]
+      },
+      "major_violations": [
+        {"field": "answered_topic_ids", "ids": ["aurora_release_date"]},
+        {"field": "request_evidence_ids", "ids": ["aurora_marketing_outline"]}
+      ],
+      "mechanism_predicates": ["answer_changing_primary_evidence_is_requested", "unobserved_date_is_not_fabricated"]
+    },
+    {
+      "case_id": "GCR-E02",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "answered_topic_ids": ["aurora_release_date"],
+        "unresolved_topic_ids": []
+      },
+      "message_constraints": {
+        "required_all": ["2026年9月18日"],
+        "required_any": [],
+        "forbidden": []
+      },
+      "major_violations": [
+        {"field": "request_evidence_ids", "ids": ["aurora_release_note"]},
+        {"field": "unresolved_topic_ids", "ids": ["aurora_release_date"]}
+      ],
+      "mechanism_predicates": ["received_evidence_answers_topic", "received_evidence_is_not_requested_again"]
+    },
+    {
+      "case_id": "GCR-I01",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": ["aurora_release_note"],
+        "answered_topic_ids": ["branch_a_hours"],
+        "unresolved_topic_ids": ["aurora_release_date"]
+      },
+      "message_constraints": {
+        "required_all": ["9時", "18時", "Aurora"],
+        "required_any": [["確認", "一次資料"]],
+        "forbidden": ["2026年9月18日"]
+      },
+      "major_violations": [
+        {"field": "answered_topic_ids", "ids": ["aurora_release_date"]},
+        {"field": "unresolved_topic_ids", "ids": ["branch_a_hours"]}
+      ],
+      "mechanism_predicates": ["independent_known_topic_is_answered", "only_dependent_topic_waits_for_evidence"]
+    },
+    {
+      "case_id": "GCR-N01",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "answered_topic_ids": ["plan_comparison"],
+        "unresolved_topic_ids": []
+      },
+      "message_constraints": {
+        "required_all": ["1,200円", "10GB", "1,800円", "30GB"],
+        "required_any": [],
+        "forbidden": ["predicate", "operation identity", "result_effect_scope", "terminal", "実行票", "内部状態"]
+      },
+      "major_violations": [],
+      "mechanism_predicates": ["all_fixed_comparison_facts_are_explained", "internal_control_terms_are_not_exposed"]
+    },
+    {
+      "case_id": "GCR-P01",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "answered_topic_ids": ["branch_a_hours"],
+        "unresolved_topic_ids": ["branch_b_parking"]
+      },
+      "message_constraints": {
+        "required_all": ["9時", "18時", "駐車場"],
+        "required_any": [["確認できません", "不明", "資料にありません"]],
+        "forbidden": []
+      },
+      "major_violations": [
+        {"field": "answered_topic_ids", "ids": ["branch_b_parking"]},
+        {"field": "unresolved_topic_ids", "ids": ["branch_a_hours"]}
+      ],
+      "mechanism_predicates": ["known_topic_survives_partial_uncertainty", "unknown_topic_is_not_fabricated"]
+    },
+    {
+      "case_id": "GCR-Q01",
+      "expected": {
+        "clarification_value_ids": ["delivery_frequency"],
+        "request_evidence_ids": [],
+        "answered_topic_ids": [],
+        "unresolved_topic_ids": ["newsletter_announcement"]
+      },
+      "message_constraints": {
+        "required_all": ["配信頻度"],
+        "required_any": [["教えて", "指定", "どのくらい", "何回"]],
+        "forbidden": []
+      },
+      "major_violations": [
+        {"field": "answered_topic_ids", "ids": ["newsletter_announcement"]}
+      ],
+      "mechanism_predicates": ["only_user_owned_value_is_clarified", "dependent_announcement_is_not_completed"]
+    },
+    {
+      "case_id": "GCR-Q02",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "answered_topic_ids": ["support_summary"],
+        "unresolved_topic_ids": []
+      },
+      "message_constraints": {
+        "required_all": ["120件", "90件", "8時間", "5時間", "4.1", "4.4"],
+        "required_any": [],
+        "forbidden": []
+      },
+      "major_violations": [
+        {"field": "clarification_value_ids", "ids": ["format", "structure", "style"]}
+      ],
+      "mechanism_predicates": ["method_choice_does_not_trigger_clarification", "all_summary_facts_are_preserved"]
+    },
+    {
+      "case_id": "GCR-T01",
+      "expected": {
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "answered_topic_ids": ["branch_a_hours", "aurora_release_date"],
+        "unresolved_topic_ids": []
+      },
+      "message_constraints": {
+        "required_all": ["9時", "18時", "2026年9月18日"],
+        "required_any": [],
+        "forbidden": []
+      },
+      "major_violations": [
+        {"field": "request_evidence_ids", "ids": ["branch_a_guide", "aurora_release_note"]},
+        {"field": "unresolved_topic_ids", "ids": ["branch_a_hours", "aurora_release_date"]}
+      ],
+      "mechanism_predicates": ["all_received_evidence_is_used", "no_post_sufficiency_evidence_request_is_emitted"]
+    }
+  ]
+}

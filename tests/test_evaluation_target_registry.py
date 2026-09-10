@@ -15,6 +15,16 @@ SCHEMA_VERSION_V2 = "the-caption-prompt.evaluation-target/v2"
 SCHEMA_VERSIONS = {SCHEMA_VERSION_V1, SCHEMA_VERSION_V2}
 LAYOUTS = ("legacy_root", "namespaced")
 LEGACY_ROOT_TARGET_ID = "the-caption"
+V2_RATING_REQUIREMENTS = {
+    "portable-instruction-semantic-conformance": (
+        "portable-instruction-semantic-rating/v1",
+        "scripts/portable_semantic_conformance.py",
+    ),
+    "general-chat-response-control": (
+        "general-chat-response-rating/v1",
+        "evaluations/targets/general-chat-response-control/runtime/run_qualification.py",
+    ),
+}
 
 
 def descriptors() -> list[tuple[str, dict]]:
@@ -85,12 +95,13 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
                 else:
                     target_contract = json.loads(contract_path.read_text(encoding="utf-8"))
                     self.assertEqual(target_contract["contract_id"], contract)
+                    expected_schema, required_module = V2_RATING_REQUIREMENTS[directory]
                     self.assertEqual(
                         target_contract["schema_version"],
-                        "portable-instruction-semantic-rating/v1",
+                        expected_schema,
                     )
                     self.assertIn(
-                        "scripts/portable_semantic_conformance.py",
+                        required_module,
                         descriptor["target_specific_modules"],
                     )
 

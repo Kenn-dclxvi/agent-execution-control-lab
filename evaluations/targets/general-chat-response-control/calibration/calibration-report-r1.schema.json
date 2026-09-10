@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-calibration-report-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_set_id", "grader_identity", "human_rater_count", "gold_state", "metrics", "qualification"],
+  "properties": {
+    "schema_version": {"const": "general-chat-calibration-report/v1"},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "grader_identity": {"type": "string", "minLength": 1},
+    "human_rater_count": {"type": "integer", "minimum": 2},
+    "gold_state": {"enum": ["complete", "incomplete", "ambiguous_items_present"]},
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gold_assertion_count", "exact_agreement_count", "false_pass_count", "false_fail_count", "unknown_count", "major_false_pass_count"],
+      "properties": {
+        "gold_assertion_count": {"type": "integer", "minimum": 0},
+        "exact_agreement_count": {"type": "integer", "minimum": 0},
+        "false_pass_count": {"type": "integer", "minimum": 0},
+        "false_fail_count": {"type": "integer", "minimum": 0},
+        "unknown_count": {"type": "integer", "minimum": 0},
+        "major_false_pass_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["threshold_contract_id", "state"],
+      "properties": {
+        "threshold_contract_id": {"type": ["string", "null"]},
+        "state": {"enum": ["threshold_not_bound", "passed", "failed", "unavailable"]}
+      }
+    }
+  }
+}

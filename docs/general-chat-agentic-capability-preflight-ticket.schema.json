@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-preflight-ticket.schema.json",
+  "title": "General chat agentic capability preflight ticket",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "probe_id",
+    "purpose",
+    "contract_state",
+    "issuance_authority",
+    "runtime",
+    "artifacts",
+    "required_observations",
+    "issuance_policy",
+    "storage_policy"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-ticket/v1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r1"},
+    "purpose": {"const": "non_evaluation_runtime_capability"},
+    "contract_state": {"const": "fixed"},
+    "issuance_authority": {"enum": ["not_authorized", "authorized_not_issued", "issued"]},
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "version",
+        "model",
+        "reasoning_effort",
+        "sandbox_mode",
+        "approval_policy",
+        "multi_agent",
+        "agents_max_threads",
+        "persist_session",
+        "descendant_rollout_export",
+        "trace_capabilities",
+        "instruction_isolation",
+        "codex_home_scope"
+      ],
+      "properties": {
+        "executable": {"const": "codex"},
+        "version": {"const": "0.146.0"},
+        "model": {"const": "gpt-5.6-sol"},
+        "reasoning_effort": {"const": "medium"},
+        "sandbox_mode": {"const": "workspace-write"},
+        "approval_policy": {"const": "never"},
+        "multi_agent": {"const": true},
+        "agents_max_threads": {"type": "integer", "minimum": 2, "maximum": 4},
+        "persist_session": {"const": true},
+        "descendant_rollout_export": {"const": true},
+        "trace_capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "parent_thread_identity",
+            "task_identity",
+            "terminal_sender",
+            "all_agent_final_usage",
+            "tool_call_result_identity",
+            "safe_packet_projection"
+          ],
+          "properties": {
+            "parent_thread_identity": {"const": true},
+            "task_identity": {"const": true},
+            "terminal_sender": {"const": true},
+            "all_agent_final_usage": {"const": true},
+            "tool_call_result_identity": {"const": true},
+            "safe_packet_projection": {"const": true}
+          }
+        },
+        "instruction_isolation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["user_config", "user_rules", "memories", "apps", "plugins", "plugin_sharing"],
+          "properties": {
+            "user_config": {"const": false},
+            "user_rules": {"const": false},
+            "memories": {"const": false},
+            "apps": {"const": false},
+            "plugins": {"const": false},
+            "plugin_sharing": {"const": false}
+          }
+        },
+        "codex_home_scope": {"const": "per_probe_persisted_temporary"}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task", "fixture"],
+      "properties": {
+        "task": {"$ref": "#/$defs/artifact_identity"},
+        "fixture": {"$ref": "#/$defs/artifact_identity"}
+      }
+    },
+    "required_observations": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "root_thread_identity"},
+        {"const": "spawn_call_and_task_identity"},
+        {"const": "worker_packet_projection"},
+        {"const": "descendant_parent_and_task_binding"},
+        {"const": "descendant_terminal_sender_and_result"},
+        {"const": "root_tool_call_and_terminal_result"},
+        {"const": "final_response_direct_binding"},
+        {"const": "all_agent_final_usage"},
+        {"const": "monotonic_elapsed"},
+        {"const": "safe_projection_without_raw_transcript"}
+      ],
+      "items": false
+    },
+    "issuance_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_issues", "retry", "overwrite", "precondition"],
+      "properties": {
+        "max_issues": {"const": 1},
+        "retry": {"const": false},
+        "overwrite": {"const": false},
+        "precondition": {"const": "issuance_authority=authorized_not_issued_and_all_static_checks_pass"}
+      }
+    },
+    "storage_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_mode", "raw_rollout", "auth_material", "raw_transcript"],
+      "properties": {
+        "receipt_mode": {"const": "write_once"},
+        "raw_rollout": {"const": "temporary_until_receipt_sealed"},
+        "auth_material": {"const": "never_commit"},
+        "raw_transcript": {"const": "never_commit"}
+      }
+    }
+  },
+  "$defs": {
+    "artifact_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

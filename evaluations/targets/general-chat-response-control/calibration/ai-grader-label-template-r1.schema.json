@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-ai-grader-label-template-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "packet_id", "calibration_set_id", "grader_execution_id", "independent_context", "labels"],
+  "properties": {
+    "schema_version": {"const": "general-chat-ai-grader-label-template/v1"},
+    "packet_id": {"type": "string", "minLength": 1},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "grader_execution_id": {"type": "string", "minLength": 1},
+    "independent_context": {"const": true},
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rating_item_id", "assertion_id", "label", "evidence_spans", "reason"],
+        "properties": {
+          "rating_item_id": {"type": "string", "pattern": "^item-[0-9a-f]{16}$"},
+          "assertion_id": {"type": "string", "minLength": 1},
+          "label": {"type": "null"},
+          "evidence_spans": {"const": []},
+          "reason": {"const": ""}
+        }
+      }
+    }
+  }
+}

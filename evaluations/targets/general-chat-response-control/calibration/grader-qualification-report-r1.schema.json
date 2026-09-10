@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-grader-qualification-report-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evaluation_role", "holdout_identity", "reference_identity", "grader_identity", "threshold_identity", "metrics", "qualification_state", "run_count", "formal_evaluation_effect"],
+  "properties": {
+    "schema_version": {"const": "general-chat-grader-qualification-report/v1"},
+    "evaluation_role": {"const": "heldout_grader_qualification"},
+    "holdout_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["set_id", "input_sha256", "reference_sha256", "pilot_overlap_count", "sealed_before_grader_run"],
+      "properties": {
+        "set_id": {"type": "string", "minLength": 1},
+        "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "pilot_overlap_count": {"const": 0},
+        "sealed_before_grader_run": {"const": true}
+      }
+    },
+    "reference_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "ai_grader_count", "human_auditor_count", "human_alignment_state"],
+      "properties": {
+        "type": {"enum": ["multi_grader_consensus_reference", "human_validated_reference"]},
+        "ai_grader_count": {"type": "integer", "minimum": 3},
+        "human_auditor_count": {"type": "integer", "minimum": 0},
+        "human_alignment_state": {"enum": ["unmeasured", "sampled", "validated"]}
+      }
+    },
+    "grader_identity": {"type": "string", "minLength": 1},
+    "threshold_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["threshold_contract_id", "sha256", "status"],
+      "properties": {
+        "threshold_contract_id": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status": {"const": "fixed"}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference_assertion_count", "exact_agreement_count", "exact_agreement_rate", "false_pass_count", "false_pass_rate", "false_fail_count", "false_fail_rate", "unknown_count", "unknown_rate", "major_false_pass_count"],
+      "properties": {
+        "reference_assertion_count": {"type": "integer", "minimum": 1},
+        "exact_agreement_count": {"type": "integer", "minimum": 0},
+        "exact_agreement_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "false_pass_count": {"type": "integer", "minimum": 0},
+        "false_pass_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "false_fail_count": {"type": "integer", "minimum": 0},
+        "false_fail_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "unknown_count": {"type": "integer", "minimum": 0},
+        "unknown_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "major_false_pass_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "qualification_state": {"enum": ["passed", "failed", "unavailable"]},
+    "run_count": {"const": 1},
+    "formal_evaluation_effect": {"enum": ["grader_qualified", "grader_not_qualified"]}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "reference_identity": {
+            "properties": {"type": {"const": "human_validated_reference"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reference_identity": {
+            "properties": {
+              "human_auditor_count": {"minimum": 1},
+              "human_alignment_state": {"const": "validated"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"qualification_state": {"const": "passed"}}},
+      "then": {"properties": {"formal_evaluation_effect": {"const": "grader_qualified"}}},
+      "else": {"properties": {"formal_evaluation_effect": {"const": "grader_not_qualified"}}}
+    }
+  ]
+}

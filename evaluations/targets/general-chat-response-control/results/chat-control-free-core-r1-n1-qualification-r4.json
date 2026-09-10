@@ -1,0 +1,327 @@
+{
+  "cases": [
+    {
+      "all_agent_total_tokens": 12273,
+      "case_id": "GCR-E01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "answer_changing_primary_evidence_is_requested",
+          "unobserved_date_is_not_fabricated"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 7.94332,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [],
+        "assistant_message": "正式公開日はまだ確認できていません。一次資料であるAurora公式リリースノートを確認します。",
+        "case_id": "GCR-E01",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [
+          "aurora_release_note"
+        ],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": [
+          "aurora_release_date"
+        ]
+      },
+      "root_thread_id": "01a01879-172a-7a20-8ecb-6e709a215eab",
+      "slot_id": "GCR-E01-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12240,
+      "case_id": "GCR-E02",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "received_evidence_answers_topic",
+          "received_evidence_is_not_requested_again"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 6.480335,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "aurora_release_date"
+        ],
+        "assistant_message": "受領済みのAurora公式リリースノートによると、正式公開日は2026年9月18日です。",
+        "case_id": "GCR-E02",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": []
+      },
+      "root_thread_id": "01a01879-16f1-7032-a8e5-f47e99d1ffee",
+      "slot_id": "GCR-E02-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12290,
+      "case_id": "GCR-I01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "independent_known_topic_is_answered",
+          "only_dependent_topic_waits_for_evidence"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 7.250381,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "branch_a_hours"
+        ],
+        "assistant_message": "A支店の営業時間は9時から18時までです。Auroraの正式公開日は、公式リリースノートを確認してからお答えします。",
+        "case_id": "GCR-I01",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [
+          "aurora_release_note"
+        ],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": [
+          "aurora_release_date"
+        ]
+      },
+      "root_thread_id": "01a01879-1735-7e03-b52e-a6674b4ae1d0",
+      "slot_id": "GCR-I01-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12264,
+      "case_id": "GCR-N01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "all_fixed_comparison_facts_are_explained",
+          "internal_control_terms_are_not_exposed"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 8.573863,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "plan_comparison"
+        ],
+        "assistant_message": "ライトプランは月額1,200円で10GB、スタンダードプランは月額1,800円で30GBです。スタンダードは月600円高い代わりに、使えるデータ量が20GB多くなります。通信量が少なめならライト、動画視聴などで多く使うならスタンダードが向いています。",
+        "case_id": "GCR-N01",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": []
+      },
+      "root_thread_id": "01a01879-16fa-7ff2-8feb-0ad59cb35790",
+      "slot_id": "GCR-N01-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12256,
+      "case_id": "GCR-P01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "known_topic_survives_partial_uncertainty",
+          "unknown_topic_is_not_fabricated"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 7.027075,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "branch_a_hours"
+        ],
+        "assistant_message": "A支店の営業時間は9時から18時までです。B支店の駐車場台数は、受領した資料に記載がなく確認できませんでした。",
+        "case_id": "GCR-P01",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": [
+          "branch_b_parking"
+        ]
+      },
+      "root_thread_id": "01a01879-171c-77b2-bc9d-dddd0177c08b",
+      "slot_id": "GCR-P01-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12212,
+      "case_id": "GCR-Q01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "only_user_owned_value_is_clarified",
+          "dependent_announcement_is_not_completed"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 7.295479,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [],
+        "assistant_message": "配信頻度を教えてください（例：毎週、隔週、毎月）。ご指定の頻度を前提に、短い告知文を作成します。",
+        "case_id": "GCR-Q01",
+        "clarification_value_ids": [
+          "delivery_frequency"
+        ],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": [
+          "newsletter_announcement"
+        ]
+      },
+      "root_thread_id": "01a01879-1711-7f91-886a-48760bd77ad8",
+      "slot_id": "GCR-Q01-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12245,
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "method_choice_does_not_trigger_clarification",
+          "all_summary_facts_are_preserved"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 7.161226,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "support_summary"
+        ],
+        "assistant_message": "第2四半期は、問い合わせ件数が120件から90件に減少する一方、初回応答時間は8時間から5時間に短縮し、満足度も4.1から4.4へ向上しました。",
+        "case_id": "GCR-Q02",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": []
+      },
+      "root_thread_id": "01a01879-16fd-7f62-9fef-59497358d40e",
+      "slot_id": "GCR-Q02-i001",
+      "status": "valid"
+    },
+    {
+      "all_agent_total_tokens": 12273,
+      "case_id": "GCR-T01",
+      "case_revision": "r1",
+      "diagnostics": {
+        "arrays_exact": true,
+        "forbidden_present": [],
+        "major_violation_hits": [],
+        "mechanism_predicates": [
+          "all_received_evidence_is_used",
+          "no_post_sufficiency_evidence_request_is_emitted"
+        ],
+        "message_passed": true,
+        "missing_required_all": [],
+        "missing_required_any_groups": []
+      },
+      "elapsed_seconds": 6.652611,
+      "iteration": 1,
+      "quality_score": 4,
+      "response": {
+        "answered_topic_ids": [
+          "branch_a_hours",
+          "aurora_release_date"
+        ],
+        "assistant_message": "受領済み資料によると、A支店の営業時間は9時から18時までです。Auroraの正式公開日は2026年9月18日です。",
+        "case_id": "GCR-T01",
+        "clarification_value_ids": [],
+        "request_evidence_ids": [],
+        "schema_id": "general-chat-response-control/r1",
+        "unresolved_topic_ids": []
+      },
+      "root_thread_id": "01a01879-1718-7890-ab29-73aee8922f6f",
+      "slot_id": "GCR-T01-i001",
+      "status": "valid"
+    }
+  ],
+  "dispatch": {
+    "dispatch_id": "chat-control-free-core-r1-n1-dispatch-r4",
+    "path": "evaluations/targets/general-chat-response-control/plans/chat-control-free-core-r1-n1-dispatch-r4.json",
+    "sha256": "3d964102388b5be1cc02ca53a147e5b87b3668c24050b98f683b8298108c9239"
+  },
+  "lifecycle": {
+    "adoption": "not_decided",
+    "candidate": "not_created",
+    "evaluation": "qualification_n1_completed",
+    "projection": "not_authorized",
+    "release": "not_created"
+  },
+  "preflight": {
+    "path": "evaluations/targets/general-chat-response-control/plans/chat-control-free-core-r1-n1-preflight-r4.json",
+    "receipt_id": "chat-control-free-core-r1-n1-preflight-r4",
+    "sha256": "1d19a06799219ca817ecea1a756bc19edbf183dc9c30fd43773de422e939092d"
+  },
+  "profile": {
+    "path": "evaluations/targets/general-chat-response-control/profiles/chat-control-free-sol-medium-core-r1-n1-r4.json",
+    "profile_id": "chat-control-free-sol-medium-core-r1-n1-r4",
+    "sha256": "b7f1e791f59fa3845110a0a37eb7a188edf48c15a56fc85303cbf3c9bc8abe23"
+  },
+  "result_id": "chat-control-free-core-r1-n1-qualification-r4",
+  "result_sha256": "b5898f3f21b348498ed1bcf00a71b23cf266c4ec944a65d3748c964d1e38d3bb",
+  "schema_version": "general-chat-response-qualification-result/v1",
+  "summary": {
+    "all_kpis_complete": true,
+    "authorized_slots": 8,
+    "external_failures": 0,
+    "qualification_state": "measurement_established",
+    "score_distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 8
+    },
+    "unrateable_results": 0,
+    "valid_results": 8
+  },
+  "target_id": "general-chat-response-control"
+}

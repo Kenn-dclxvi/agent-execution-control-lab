@@ -1,0 +1,40 @@
+{
+  "artifact": {
+    "artifact_role": "baseline",
+    "description": "runtime既定instructionと固定TaskSpec wrapperを保持し、追加一般チャット制御だけを0 bytesにした比較元。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "runtime hidden/default instruction不在の主張",
+      "品質、tokenまたは時間の優劣主張",
+      "C147またはCandidate163とのresult比較",
+      "採用、releaseまたはprojection"
+    ],
+    "problem": "一般チャット制御の問題経路をCandidate設計前に観測できる固定baselineが必要である。",
+    "prompt_set_name": "chat_control_free",
+    "scope": "isolated workspace rootのAGENTS.md一件だけ。",
+    "state": "registered"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9",
+  "files": [
+    {
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "AGENTS.md",
+      "type": "file"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "initial_path_set",
+    "source_prompt_identity": null
+  },
+  "prompt_identity": "chat-control-free-r1",
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "1f378c17239d6e91d40c1653ce9d640c6ce7b1ca",
+    "repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "tree": "73e6dbbde674316d34b8e95c81f1b42bc696a263"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

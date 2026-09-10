@@ -249,6 +249,32 @@
 | [`p006-frontier-carrier-codex-static-counterexample-audit-r1.md`](p006-frontier-carrier-codex-static-counterexample-audit-r1.md) | 0件・1件frontier、部分発行、真正dependency、compound代替、途中出力など14 classを監査し、blocking counterexample 0件としてP006 bundle作成を許可 |
 | [`p006-the-caption-standard14-measurement-design.md`](p006-the-caption-standard14-measurement-design.md) | P006のTHE-CAPTION Standard14 N=5条件をprompt-onlyで固定し、70 / 70 Score `4`、P005比token `-10.57%`・elapsed `-3.90%`を記録。F08の途中result経路は後続再監査で既存条項へのnonconformanceへ再分類 |
 | [`p006-frontier-carrier-post-result-causal-reassessment.md`](p006-frontier-carrier-post-result-causal-reassessment.md) | F08の分割5 / 5件をP005から既存のFRONTIERへのnonconformanceと再分類。P006差分は一意なpermission closureを追加せず因果帰属不能と判定し、独立mechanism gateを撤回、P007非作成とP005/P006 N=20各210不足slotを固定 |
+| [`general-chat-response-control-series-design.md`](general-chat-response-control-series-design.md) | コード変更系列と分離した一般チャットの新規評価系列。質問、根拠要求、部分回答、独立論点、完了および自然な会話表現を8 Caseへ固定し、0-byte baseline観測後にだけ局所Candidateを作る順序を正本化 |
+| [`../evaluations/targets/general-chat-response-control/docs/required-value-carrier-r1-evaluation.md`](../evaluations/targets/general-chat-response-control/docs/required-value-carrier-r1-evaluation.md) | baseline N=5で観測した保持必須値のcarrier欠落と、RequiredValueCarrier r1のtargeted N=5、core N=5、targeted N=20通過を、採用・release・projectionと分離した評価記録 |
+| [`../evaluations/targets/general-chat-response-control/docs/c147-chat-coverage-assessment-r1.md`](../evaluations/targets/general-chat-response-control/docs/c147-chat-coverage-assessment-r1.md) | 固定8 Caseの局所通過とC147の13制御の網羅性を分離。coverage未完了、統合Candidate未作成、総合評価未開始、採用資格なしを現在判定として固定 |
+| [`general-chat-c147-coverage-architecture-r1.md`](general-chat-c147-coverage-architecture-r1.md) | 既存の単発応答targetと、実tool・分担・途中result・継続・validation・recoveryを観測する未登録agentic targetを分離。13制御の対向Case、trace oracle、capability preflightおよび上位coverage gateを固定 |
+| [`general-chat-agentic-target-preregistration-design.md`](general-chat-agentic-target-preregistration-design.md) | Codex CLI 0.146.0を最初のagentic chat runtime候補とし、persisted親子trace、task identity、packet、terminal sender、tool result、final responseおよびall-agent tokenを一つの非評価receiptへbindできるまでtarget登録しない境界を固定 |
+| [`general-chat-agentic-capability-preflight-plan.md`](general-chat-agentic-capability-preflight-plan.md) | agentic runtimeの非評価probeについて、固定task・fixture、未許可ticket、16 negative fixture、write-once receipt schema、静的admission、synthetic file adapter、runner設計および発行後停止規則を固定。model、real runner、receipt、target登録および評価は未実施 |
+| [`general-chat-agentic-binding-extractor-design.md`](general-chat-agentic-binding-extractor-design.md) | agentic capability receiptへ保存するtask・packet・親子thread・terminal sender・tool result・final response・usageの正規化入力と許可projectionを固定。正常1件・反例12件のsynthetic gateとbinding evaluatorは実装済み、raw spawn selectorとnormalizerは未実装 |
+| [`general-chat-agentic-raw-normalizer-design.md`](general-chat-agentic-raw-normalizer-design.md) | 既存collectorで確認済みのroot identity、親子thread、terminal本文、final usageおよび単調時計だけを正規化し、spawn・packet・sender・専用tool・root finalを補完しないsynthetic入力限定normalizerを実装。real trace adapterは未実装 |
+| [`general-chat-agentic-exact-runtime-preflight-r2.md`](general-chat-agentic-exact-runtime-preflight-r2.md) | r1を保持してregistry内のexact Codex CLI 0.146.0をalias・manifest・5 file・symlink・entrypoint・署名・versionへbind。runtime identityはverifiedだがr2 ticketのadapter gate false・ticket未許可でdispatchを拒否 |
+| [`general-chat-agentic-real-trace-adapter-design.md`](general-chat-agentic-real-trace-adapter-design.md) | hash-bound synthetic root events・session集合・parent chain・monotonicだけを読み、既知fieldだけをr2 normalized traceへ写すadapterを実装。unknown selectorを補完せず、実traceは未読 |
+| [`general-chat-agentic-composition-preflight-r1.md`](general-chat-agentic-composition-preflight-r1.md) | exact 0.146.0 runtimeとsynthetic adapterを固定identityで結合し、runtime verified・synthetic adapter verified・binding unavailable・dispatch denied・model/real trace/probe各0件を確認した非評価preflight |
+| [`general-chat-agentic-private-trace-adapter-r1.md`](general-chat-agentic-private-trace-adapter-r1.md) | runnerが外部選択したprivate trace fileだけを読むreal-input contractを別identityで実装し、repository shadowでpath・hash・thread・parent・origin・cleanup責任とunknown selectorのfail-closed境界を検証。実traceは未読 |
+| [`general-chat-agentic-composition-preflight-r2.md`](general-chat-agentic-composition-preflight-r2.md) | r1を直接前段に、exact 0.146.0 runtimeとprivate trace shadow adapterを固定identityで結合。shadow verified・binding unavailable・dispatch denied・model/real trace/probe各0件を確認 |
+| [`general-chat-agentic-issuance-preparation-r3.md`](general-chat-agentic-issuance-preparation-r3.md) | r2 ticketを保持し、private adapter、one issue、retryなし、write-once record、cleanupを別ticketへ固定。composition verified・identity availableだがauthority未付与のため`ready_not_authorized` |
+| [`general-chat-agentic-capability-preflight-r3-result.md`](general-chat-agentic-capability-preflight-r3-result.md) | 利用者許可を別artifactへ固定して非評価probeを一回だけ発行。process exit 0、10 criterion中5 satisfied・4 unobserved・1 unsatisfiedで`capability_unavailable`を封印し、再試行・target登録・評価を停止 |
+| [`general-chat-agentic-tool-transport-probe-r4-result.md`](general-chat-agentic-tool-transport-probe-r4-result.md) | r3の固定tool未観測をworker経路から分離。MCP初期化とtool一覧取得は成立したがcallは0件、最終一文不通過のため`tool_transport_unavailable`を封印し、未成立境界を一覧取得後のcallへ限定 |
+| [`general-chat-agentic-worker-trace-probe-r5-result.md`](general-chat-agentic-worker-trace-probe-r5-result.md) | r3のworker経路をtoolから分離。spawn、子session、最終一文、all-agent usageは成立したがruntime outputからchild identityを投影できず`worker_trace_unavailable`を封印。残存範囲を観測済みselectorへ限定 |
+| [`general-chat-agentic-worker-trace-probe-r6-result.md`](general-chat-agentic-worker-trace-probe-r6-result.md) | r5の固定条件を保って`function_call_output`内部を再帰投影したがchild identityとpacket JSONを取得できず停止。次の最終診断を専用`sub_agent_activity`と内容境界へ限定 |
+| [`general-chat-agentic-worker-trace-probe-r7-result.md`](general-chat-agentic-worker-trace-probe-r7-result.md) | 専用activity eventでspawnからchild terminalまでのidentity bindingを成立させた一方、worker packetとterminal内容は不通過。selector不足と実動作不通過を分離して追加probeを停止 |
+| [`general-chat-agentic-capability-followup-r4-r7-status.md`](general-chat-agentic-capability-followup-r4-r7-status.md) | r4–r8を統合し、MCPは一覧取得後のcall、workerは限定packetとterminal内容が未成立と整理。agentic target登録、C147チャット総合評価、Candidate作成を未開始のまま停止 |
+| [`general-chat-agentic-normal-route-feasibility-audit-r8.md`](general-chat-agentic-normal-route-feasibility-audit-r8.md) | 完全MCP identityと、rootから資料本文を除いてworkerだけが固定pathを読むcarrierをr8正常経路へ固定した発行前監査 |
+| [`general-chat-agentic-capability-probe-r8-result.md`](general-chat-agentic-capability-probe-r8-result.md) | root read 0・worker read 1・親子bindingは成立したがpacketとworker resultが不通過、完全MCP identityでもcall 0件となりcapability unavailableを封印 |
+| [`general-chat-control-free-n1-attempt-r1-external-failure.md`](general-chat-control-free-n1-attempt-r1-external-failure.md) | ChatControlFree N=1の8件が共有`CODEX_HOME`のskills更新競合とmodel cache互換エラーでmodel応答前に失敗した記録。Caseを変えずrun別一時homeへ隔離するruntime r2だけを許可 |
+| [`general-chat-control-free-n1-attempt-r2-external-failure.md`](general-chat-control-free-n1-attempt-r2-external-failure.md) | run別一時`CODEX_HOME`へ隔離したr2も8 / 8件が外部失敗し、stdout error event未保存により原因を確定できなかった記録。同じCaseの再発行を止め、非評価probeへ接続 |
+| [`general-chat-isolated-home-transport-probe-design.md`](general-chat-isolated-home-transport-probe-design.md) | 固定JSON一件だけでisolated `CODEX_HOME`の認証、structured output、terminal usageおよびerror event transportを一回だけ観測する非評価probe設計 |
+| [`codex-cli-version-coexistence-environment-design.md`](codex-cli-version-coexistence-environment-design.md) | Desktop / Remoteの最新runtimeと試験用旧Codex CLIを分離し、immutable release bundle、exact path/hash、run別`CODEX_HOME`、認証、persisted session、compatibility keyおよび段階導入gateを固定した評価・運用基盤設計 |
 | [`codex-validation-carrier-target-registration-design.md`](codex-validation-carrier-target-registration-design.md) | 一回応答semantic targetではruntime carrierを観測できない境界を確認し、実tool、途中ingress、fail-fast、continuation、terminal projectionと3 KPIを測るpublic repository targetを登録。Case・rating・baseline qualification前で停止 |
 | [`portable-full-agent-conformance-r1-boundary-audit.md`](portable-full-agent-conformance-r1-boundary-audit.md) | r1不通過7件を一次応答で再監査し、5件の主要効果成立とmodel-visible response projection未定義、H10／H11の個別result・後続発行・集約terminal境界の曖昧さを分離。効率化を停止し、portable機能完成を先行する現在地を固定 |
 | [`portable-semantic-c147-reference-qualification-design.md`](portable-semantic-c147-reference-qualification-design.md) | 新semantic setをportableより先にC147 referenceで資格確認し、全14 Case通過時だけ局所診断へ使う順序へ修正。Standard14をend-to-end正式評価として維持し、reference不通過時は評価セットを停止する設計 |
@@ -634,6 +660,8 @@
 
 ## 7. 完了済み研究記録
 
+- [Astra FreeのA01結果差の分析](astra-free-a01-reasoning-route-audit-r1.md): 15件を確認停止・現状テスト・推測編集へ分類。提示条件と採点条件の差、以前の減点説明の訂正を記録。
+
 ### 7a. Candidate設計記録
 
 各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
@@ -835,3 +863,9 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`candidate167-prechange-repair-contract-admission-design.md`](candidate167-prechange-repair-contract-admission-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 21 / 14`で停止 |
 | [`candidate168-repair-evidence-burden-design.md`](candidate168-repair-evidence-burden-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 29 / 6`で停止 |
 | [`candidate169-repair-decision-evidence-closure-design.md`](candidate169-repair-decision-evidence-closure-design.md) | 旧修正契約系列の履歴Candidate。targetedはScore `4 / 1 = 30 / 5`で停止 |
+- [一般チャットAI採点pilot attempt r1の結果](general-chat-ai-panel-pilot-attempt-r1-result.md)
+- [一般チャットAI採点pilot attempt r2の結果](general-chat-ai-panel-pilot-attempt-r2-result.md)
+- [一般チャットAI panel adjudication r1の結果](general-chat-ai-panel-adjudication-r1-result.md)
+- [一般チャットsemantic grader閾値統治 判断票 r1](general-chat-semantic-threshold-governance-decision-input-r1.md)
+- [一般チャットsemantic grader risk policy r1](general-chat-semantic-grader-risk-policy-r1.md)
+- [一般チャットsemantic grader threshold decision r1](general-chat-semantic-grader-threshold-decision-r1.md)

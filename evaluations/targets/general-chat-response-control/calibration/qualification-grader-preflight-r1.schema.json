@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-grader-preflight-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "receipt_id", "plan_id", "state", "issued_slot_count", "runtime_binding", "fixed_sources", "instruction_isolation", "storage", "reference_labels_in_model_input", "organizer_map_in_model_input", "slot", "receipt_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-grader-preflight/v1"},
+    "receipt_id": {"const": "general-chat-semantic-qualification-grader-r1-preflight-r1"},
+    "plan_id": {"const": "general-chat-semantic-qualification-holdout-plan-r1"},
+    "state": {"const": "ready_not_issued"},
+    "issued_slot_count": {"const": 0},
+    "runtime_binding": {"$ref": "#/$defs/runtime_binding"},
+    "fixed_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan", "plan_schema", "holdout", "holdout_schema", "reference", "reference_schema", "threshold", "metric_contract", "metric_contract_schema", "member_prompt", "packet_schema", "organizer_map_schema", "label_template_schema", "canonical_label_schema", "qualification_report_schema", "dispatch_schema", "run_result_schema", "preflight_schema", "runner"],
+      "properties": {
+        "plan": {"$ref": "#/$defs/repository_file"},
+        "plan_schema": {"$ref": "#/$defs/repository_file"},
+        "holdout": {"$ref": "#/$defs/repository_file"},
+        "holdout_schema": {"$ref": "#/$defs/repository_file"},
+        "reference": {"$ref": "#/$defs/repository_file"},
+        "reference_schema": {"$ref": "#/$defs/repository_file"},
+        "threshold": {"$ref": "#/$defs/repository_file"},
+        "metric_contract": {"$ref": "#/$defs/repository_file"},
+        "metric_contract_schema": {"$ref": "#/$defs/repository_file"},
+        "member_prompt": {"$ref": "#/$defs/repository_file"},
+        "packet_schema": {"$ref": "#/$defs/repository_file"},
+        "organizer_map_schema": {"$ref": "#/$defs/repository_file"},
+        "label_template_schema": {"$ref": "#/$defs/repository_file"},
+        "canonical_label_schema": {"$ref": "#/$defs/repository_file"},
+        "qualification_report_schema": {"$ref": "#/$defs/repository_file"},
+        "dispatch_schema": {"$ref": "#/$defs/repository_file"},
+        "run_result_schema": {"$ref": "#/$defs/repository_file"},
+        "preflight_schema": {"$ref": "#/$defs/repository_file"},
+        "runner": {"$ref": "#/$defs/repository_file"}
+      }
+    },
+    "instruction_isolation": {"$ref": "#/$defs/isolation"},
+    "storage": {"$ref": "#/$defs/storage"},
+    "reference_labels_in_model_input": {"const": false},
+    "organizer_map_in_model_input": {"const": false},
+    "slot": {"$ref": "#/$defs/slot"},
+    "receipt_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "repository_file": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}}},
+    "external_file": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}}},
+    "runtime_binding": {"type": "object", "additionalProperties": false, "required": ["schema_version", "runtime_id", "alias", "executable", "version_output", "entrypoint_sha256", "codesign_team_identifier"], "properties": {"schema_version": {"const": "the-caption-prompt.codex-runtime-binding/v1"}, "runtime_id": {"type": "string", "minLength": 1}, "alias": {"const": "codex-0.148"}, "executable": {"type": "string", "minLength": 1}, "version_output": {"const": "codex-cli 0.148.0"}, "entrypoint_sha256": {"$ref": "#/$defs/sha256"}, "codesign_team_identifier": {"const": "2DC432GLL2"}}},
+    "isolation": {"type": "object", "additionalProperties": false, "required": ["ephemeral", "ignore_user_config", "ignore_rules", "multi_agent", "memories", "apps", "plugins", "plugin_sharing", "sandbox", "approval_policy"], "properties": {"ephemeral": {"const": true}, "ignore_user_config": {"const": true}, "ignore_rules": {"const": true}, "multi_agent": {"const": false}, "memories": {"const": false}, "apps": {"const": false}, "plugins": {"const": false}, "plugin_sharing": {"const": false}, "sandbox": {"const": "read-only"}, "approval_policy": {"const": "never"}}},
+    "storage": {"type": "object", "additionalProperties": false, "required": ["run_root", "repository_external", "codex_home", "auth_transport", "raw_output_policy"], "properties": {"run_root": {"type": "string", "minLength": 1}, "repository_external": {"const": true}, "codex_home": {"const": "per_slot_temporary"}, "auth_transport": {"const": "host_auth_symlink_not_persisted"}, "raw_output_policy": {"const": "external_run_root_only"}}},
+    "slot": {"type": "object", "additionalProperties": false, "required": ["slot_id", "grader_identity", "grader_execution_id", "model", "reasoning_effort", "run_count", "packet", "organizer_map", "label_template", "transport_schema", "stdin"], "properties": {"slot_id": {"const": "qualification-slot-01"}, "grader_identity": {"const": "general-chat-semantic-grader-terra-medium-r1"}, "grader_execution_id": {"const": "semantic-qualification-terra-r1"}, "model": {"const": "gpt-5.6-terra"}, "reasoning_effort": {"const": "medium"}, "run_count": {"const": 1}, "packet": {"$ref": "#/$defs/external_file"}, "organizer_map": {"$ref": "#/$defs/external_file"}, "label_template": {"$ref": "#/$defs/external_file"}, "transport_schema": {"$ref": "#/$defs/external_file"}, "stdin": {"$ref": "#/$defs/external_file"}}}
+  }
+}

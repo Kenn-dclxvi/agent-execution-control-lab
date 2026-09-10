@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-pilot-adjudication-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_set_id", "pilot_report_sha256", "adjudicators", "items", "state", "qualification_effect"],
+  "properties": {
+    "schema_version": {"const": "general-chat-pilot-adjudication/v1"},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "pilot_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "adjudicators": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["calibration_item_id", "assertion_id", "outcome", "resolved_label", "rationale"],
+        "properties": {
+          "calibration_item_id": {"type": "string", "minLength": 1},
+          "assertion_id": {"type": "string", "minLength": 1},
+          "outcome": {"enum": ["resolved_label", "rubric_revision_required", "ambiguous_retained"]},
+          "resolved_label": {"type": ["string", "null"], "enum": ["pass", "fail", "unknown", "not_applicable", null]},
+          "rationale": {"type": "string", "minLength": 1}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"outcome": {"const": "resolved_label"}}},
+            "then": {"properties": {"resolved_label": {"enum": ["pass", "fail", "unknown", "not_applicable"]}}},
+            "else": {"properties": {"resolved_label": {"const": null}}}
+          }
+        ]
+      }
+    },
+    "state": {"enum": ["complete", "rubric_revision_required", "ambiguous_items_retained"]},
+    "qualification_effect": {"const": "none"}
+  }
+}

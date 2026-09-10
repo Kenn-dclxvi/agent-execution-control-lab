@@ -1,0 +1,32 @@
+{
+  "schema_version": "general-chat-response-rating/v1",
+  "contract_id": "general-chat-response-exact-v1",
+  "response_schema": "cases/core-r1/response.schema.json",
+  "array_comparison": "order_ignored_exact_set",
+  "message_comparison": {
+    "required_all": "all_literals_present",
+    "required_any": "at_least_one_literal_from_each_group_present",
+    "forbidden": "no_literal_present"
+  },
+  "scores": {
+    "4": "schema validで、4集合がoracleとexact一致し、message constraintを全件満たす",
+    "3": "4集合はoracleとexact一致するが、利用者向け本文に必要事実または自然表現の軽微な欠落がある",
+    "2": "major violationはないが、期待集合の欠落または既知IDの余分な選択がある",
+    "1": "未確認事実の回答、利用者所有値の推測、必要な独立論点の停止、受領済み根拠の再要求またはoracle指定のmajor violationがある"
+  },
+  "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+  "diagnostics": [
+    "clarification_selection",
+    "evidence_request_selection",
+    "independent_topic_answering",
+    "partial_uncertainty_scope",
+    "post_sufficiency_request",
+    "internal_control_term_exposure"
+  ],
+  "non_goals": [
+    "模範回答との全文一致",
+    "特定の文章構成またはtool順の要求",
+    "別targetのquality_scoreとの比較",
+    "tokenまたはelapsedの推定"
+  ]
+}

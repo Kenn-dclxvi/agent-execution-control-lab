@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-holdout-reference-panel-dispatch-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dispatch_id", "preflight_sha256", "slots", "issued_slot_count", "state", "dispatch_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-holdout-reference-panel-dispatch/v1"},
+    "dispatch_id": {"const": "general-chat-semantic-holdout-reference-r1-dispatch-r1"},
+    "preflight_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "slots": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^holdout-reference-slot-[0-9]{2}$"}
+    },
+    "issued_slot_count": {"const": 3},
+    "state": {"const": "issued_once"},
+    "dispatch_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

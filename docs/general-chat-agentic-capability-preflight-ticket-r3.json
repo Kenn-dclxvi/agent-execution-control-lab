@@ -1,0 +1,79 @@
+{
+  "schema_version": "general-chat-agentic-capability-ticket/v3",
+  "probe_id": "general-chat-agentic-capability-preflight-r3",
+  "purpose": "non_evaluation_runtime_capability",
+  "contract_state": "fixed",
+  "issuance_authority": "not_authorized",
+  "preparation_output_schema": {"path": "docs/general-chat-agentic-issuance-preparation-r3-output.schema.json", "sha256": "84d1080173605172f5fce9500d2934a3628c032c0fc73f8e8ea33ea569256dc1", "bytes": 1550},
+  "lineage": {
+    "direct_predecessor": "general-chat-agentic-capability-preflight-r2",
+    "artifact": {"path": "docs/general-chat-agentic-capability-preflight-ticket-r2.json", "sha256": "ea905672628d0c94be421ebbacb0cca0f05f15f34b1908d354767eaf55053035", "bytes": 4293},
+    "allowed_delta": "private_trace_adapter_binding_and_issuance_preparation_only"
+  },
+  "composition_readiness": {
+    "composition_id": "general-chat-agentic-composition-preflight-r2",
+    "input": {"path": "docs/general-chat-agentic-composition-preflight-r2.json", "sha256": "d4b411875e918f103e7e146ccd3c43f709ec76e4aea8260f0b638aa91dcc1af7", "bytes": 4409},
+    "input_schema": {"path": "docs/general-chat-agentic-composition-preflight-r2-input.schema.json", "sha256": "47e736c8670d45c3f72759d27f45e6e4a15f9d75cb909c47463631cae10f485c", "bytes": 5836},
+    "output_schema": {"path": "docs/general-chat-agentic-composition-preflight-r2-output.schema.json", "sha256": "6794d86198ca437a6b545e120eb77d776ab9e11dba79e1c8b6dd8bf2dc6503c0", "bytes": 3446},
+    "validator": {"path": "scripts/general_chat_agentic_composition_preflight_r2.py", "sha256": "5fadad91827b35ec70731cf634d0f2417f4c7534bd11464244ba3f02cea662e8", "bytes": 9200},
+    "required_state": {
+      "runtime_identity_state": "verified",
+      "adapter_state": "private_trace_shadow_verified",
+      "trace_origin": "synthetic_shadow",
+      "binding_admission": "agentic_runtime_capability_unavailable",
+      "dispatch_state": "denied",
+      "reasons": ["REAL_TRACE_ADAPTER_NOT_READY", "ISSUANCE_NOT_AUTHORIZED"],
+      "model_invocations": 0,
+      "real_trace_reads": 0,
+      "probe_issues": 0
+    }
+  },
+  "private_trace_adapter": {
+    "validator": {"path": "scripts/general_chat_agentic_private_trace_adapter.py", "sha256": "a598bea5861d90b4fa9dd7924a1c6ce7213cab01f631edc18c66180fd12313eb", "bytes": 9979},
+    "input_schema": {"path": "docs/general-chat-agentic-private-trace-adapter-input.schema.json", "sha256": "c9ff2699a6f66749ee4477be1983ea6f8945d188df372d4aa48c382e3a90efe3", "bytes": 3893},
+    "output_schema": {"path": "docs/general-chat-agentic-private-trace-adapter-output.schema.json", "sha256": "09fa6f04fea6734191b12a806e1d7de18792a98cdd8c90897787f6b1ecf99f57", "bytes": 1744},
+    "technical_state": "shadow_verified",
+    "production_input_mode": "externally_selected_private_trace",
+    "production_trace_origin": "issued_probe",
+    "real_trace_observed": false,
+    "selection_authority": "runner_manifest",
+    "discovery_allowed": false
+  },
+  "artifacts": {
+    "task": {"path": "docs/general-chat-agentic-capability-preflight-task-r1.txt", "sha256": "507504756a5178a096c4fc6a739ef374827fbb26c0582a82702731b3eb20dda8", "bytes": 718},
+    "fixture": {"path": "docs/general-chat-agentic-capability-preflight-fixture-r1.json", "sha256": "ec9814d603caf3fee94c61069e2dbb61828759ad160a31dd2daeb3e025afa369", "bytes": 1140}
+  },
+  "required_observations": [
+    "root_thread_identity",
+    "spawn_call_and_task_identity",
+    "worker_packet_projection",
+    "descendant_parent_and_task_binding",
+    "descendant_terminal_sender_and_result",
+    "root_tool_call_and_terminal_result",
+    "final_response_direct_binding",
+    "all_agent_final_usage",
+    "monotonic_elapsed",
+    "safe_projection_without_raw_transcript"
+  ],
+  "issuance_policy": {
+    "max_issues": 1,
+    "retry": false,
+    "overwrite": false,
+    "reservation_required": true,
+    "precondition": "issuance_authority=authorized_not_issued_and_all_static_checks_pass"
+  },
+  "issuance_records": {
+    "root": "artifacts/capability-preflight-issuance",
+    "names": ["reservation.json", "issued.json", "receipt.json"],
+    "write_once": true,
+    "commit_allowed": false
+  },
+  "storage_policy": {
+    "receipt_mode": "write_once",
+    "raw_rollout": "temporary_until_receipt_sealed",
+    "trace_root_owner": "runner",
+    "cleanup_terminal": "receipt_sealed_or_terminal_failure",
+    "auth_material": "never_commit",
+    "raw_transcript": "never_commit"
+  }
+}

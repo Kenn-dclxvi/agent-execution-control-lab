@@ -1,0 +1,63 @@
+{
+  "schema_version": "general-chat-ai-grader-panel/v1",
+  "panel_id": "general-chat-semantic-pilot-panel-r1",
+  "status": "fixed",
+  "runtime_identity": "codex-cli 0.148.0",
+  "model_under_test_identity": "gpt-5.6-sol",
+  "independence": {
+    "separate_contexts": true,
+    "other_member_outputs_forbidden": true,
+    "model_under_test_identity_forbidden": true,
+    "fixed_input_bytes": true
+  },
+  "members": [
+    {
+      "grader_execution_id": "semantic-panel-terra-r1-run-1",
+      "model": "gpt-5.6-terra",
+      "prompt_sha256": "d01e50fc436bf26e0306d501df3767d89f2f8e4399490dc4bc5cad7c9cbd9fbd",
+      "schema_sha256": "061f4d2eefc3eb9fe4cda51d1c6a28055c223296871b6f9b6a03d14c26debc7a",
+      "reasoning_effort": "medium",
+      "temperature": null,
+      "seed": null
+    },
+    {
+      "grader_execution_id": "semantic-panel-terra-r1-run-2",
+      "model": "gpt-5.6-terra",
+      "prompt_sha256": "d01e50fc436bf26e0306d501df3767d89f2f8e4399490dc4bc5cad7c9cbd9fbd",
+      "schema_sha256": "061f4d2eefc3eb9fe4cda51d1c6a28055c223296871b6f9b6a03d14c26debc7a",
+      "reasoning_effort": "medium",
+      "temperature": null,
+      "seed": null
+    },
+    {
+      "grader_execution_id": "semantic-panel-terra-r1-run-3",
+      "model": "gpt-5.6-terra",
+      "prompt_sha256": "d01e50fc436bf26e0306d501df3767d89f2f8e4399490dc4bc5cad7c9cbd9fbd",
+      "schema_sha256": "061f4d2eefc3eb9fe4cda51d1c6a28055c223296871b6f9b6a03d14c26debc7a",
+      "reasoning_effort": "medium",
+      "temperature": null,
+      "seed": null
+    }
+  ],
+  "adjudicator": {
+    "grader_execution_id": "semantic-adjudicator-terra-r1",
+    "model": "gpt-5.6-terra",
+    "prompt_sha256": "1307dd5a9666fc9aba6dc7bbf7357d2cb37bd8b8881c13d46dcaa0abd3859e06",
+    "schema_sha256": "de9b421094f025cc8504944bf37a8b2013198e415878386321485445098323aa",
+    "reasoning_effort": "medium",
+    "temperature": null,
+    "seed": null,
+    "panel_member": false
+  },
+  "human_audit": {
+    "role": "optional_evidence_strengthening",
+    "required_for_pilot_start": false,
+    "required_for_human_alignment_claim": true,
+    "triggered_items": [
+      "panel_disagreement",
+      "unknown",
+      "major_assertion",
+      "stratified_random_sample"
+    ]
+  }
+}
