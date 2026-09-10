@@ -34,3 +34,5 @@ Free bundle、Astra、CLI 0.153.3、Python 3.14.5、Rating v14、全エージェ
 - [3条件の集計と減点記録](control-free-astra-low-medium-high-standard14-n5_2026-09-08.json)
 - [mediumプロファイル](../profiles/control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json)
 - [先行するhigh・lowの計測](control-free-astra-high-low-standard14-n5_2026-09-08.md)
+
+後続の[A01分析と説明の訂正](../../docs/astra-free-a01-reasoning-route-audit-r1.md)で、現状テストと推測による編集を区別した。`a01_final_drift`は応答文面ではなく、実際のファイル変更を指す。

@@ -28,3 +28,5 @@ Free bundleは`999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d`
 全140件が有効、除外・再試行0件。採点、個別run登録、選択集合の固定、集計result登録、証拠の検証付き圧縮保存まで完了した。生証拠はローカルの`control-free-astra-high-standard14-n5-cli0153-20260908-r1`と`control-free-astra-low-standard14-n5-cli0153-20260908-r1`に保持する。
 
 正式な作業時間は入力配送境界と時計対応が未観測のため欠測を保持する。9月5日のFree mediumは時間記録条件が異なるため、この2条件の互換比較には混ぜない。N=5の固定試験であり、推論設定の一般的な優劣や未評価タスクでの品質を確定する結果ではない。本体設定、採用、releaseは変更していない。
+
+後続の[A01分析と説明の訂正](../../docs/astra-free-a01-reasoning-route-audit-r1.md)で、現状テストと推測による編集を区別した。`a01_final_drift`は応答文面ではなく、実際のファイル変更を指す。
