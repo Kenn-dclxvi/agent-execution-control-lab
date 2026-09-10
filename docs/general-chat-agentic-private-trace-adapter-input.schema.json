@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-private-trace-adapter-input.schema.json",
+  "title": "General chat agentic externally selected private trace packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "input_mode", "trace_origin", "trace_root_kind", "probe_id", "runtime_id", "workspace", "selection", "monotonic", "normalized_output_schema", "lifecycle"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-private-trace-adapter-input/v1"},
+    "input_mode": {"const": "externally_selected_private_trace"},
+    "trace_origin": {"enum": ["synthetic_shadow", "issued_probe"]},
+    "trace_root_kind": {"enum": ["repository_shadow", "private_temporary"]},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "runtime_id": {"const": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9"},
+    "workspace": {"type": "string", "pattern": "^/"},
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "discovery_allowed", "root_events", "root_thread_id", "sessions"],
+      "properties": {
+        "authority": {"const": "runner_manifest"},
+        "discovery_allowed": {"const": false},
+        "root_events": {"$ref": "#/$defs/file_identity"},
+        "root_thread_id": {"type": "string", "minLength": 1},
+        "sessions": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"$ref": "#/$defs/session_identity"}
+        }
+      }
+    },
+    "monotonic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_ms", "ended_ms"],
+      "properties": {
+        "started_ms": {"type": "integer", "minimum": 0},
+        "ended_ms": {"type": "integer", "minimum": 0}
+      }
+    },
+    "normalized_output_schema": {"$ref": "#/$defs/file_identity"},
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trace_root_owner", "adapter_mutation_allowed", "adapter_cleanup_allowed", "cleanup_required", "cleanup_terminal"],
+      "properties": {
+        "trace_root_owner": {"const": "runner"},
+        "adapter_mutation_allowed": {"const": false},
+        "adapter_cleanup_allowed": {"const": false},
+        "cleanup_required": {"const": true},
+        "cleanup_terminal": {"const": "receipt_sealed_or_terminal_failure"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"trace_origin": {"const": "synthetic_shadow"}}, "required": ["trace_origin"]},
+      "then": {
+        "properties": {
+          "trace_root_kind": {"const": "repository_shadow"},
+          "workspace": {"const": "/synthetic/private-trace-shadow-r1"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"trace_origin": {"const": "issued_probe"}}, "required": ["trace_origin"]},
+      "then": {"properties": {"trace_root_kind": {"const": "private_temporary"}}}
+    }
+  ],
+  "$defs": {
+    "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"$ref": "#/$defs/path"},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "session_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "thread_id", "parent_thread_id", "file"],
+      "properties": {
+        "role": {"enum": ["root", "descendant"]},
+        "thread_id": {"type": "string", "minLength": 1},
+        "parent_thread_id": {"type": ["string", "null"]},
+        "file": {"$ref": "#/$defs/file_identity"}
+      }
+    }
+  }
+}

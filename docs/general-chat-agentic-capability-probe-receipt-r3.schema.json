@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-probe-receipt-r3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "authorization_id", "terminal_state", "process", "criteria", "bindings", "usage", "artifact_hashes", "model_invocations", "probe_issues", "retry_performed", "raw_transcript_saved", "sensitive_material_saved"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-probe-receipt/v3"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r3"},
+    "authorization_id": {"const": "general-chat-agentic-capability-preflight-r3-user-authorization-r1"},
+    "terminal_state": {"enum": ["capability_available", "capability_unavailable"]},
+    "process": {
+      "type": "object", "additionalProperties": false,
+      "required": ["exit_code", "started_monotonic_ms", "ended_monotonic_ms", "elapsed_ms"],
+      "properties": {
+        "exit_code": {"type": ["integer", "null"]},
+        "started_monotonic_ms": {"type": "integer", "minimum": 0},
+        "ended_monotonic_ms": {"type": "integer", "minimum": 0},
+        "elapsed_ms": {"type": "integer", "minimum": 0}
+      }
+    },
+    "criteria": {
+      "type": "object", "additionalProperties": false,
+      "required": ["root_thread_identity", "spawn_call_and_task_identity", "worker_packet_projection", "descendant_parent_and_task_binding", "descendant_terminal_sender_and_result", "root_tool_call_and_terminal_result", "final_response_direct_binding", "all_agent_final_usage", "monotonic_elapsed", "safe_projection_without_raw_transcript"],
+      "properties": {
+        "root_thread_identity": {"$ref": "#/$defs/state"},
+        "spawn_call_and_task_identity": {"$ref": "#/$defs/state"},
+        "worker_packet_projection": {"$ref": "#/$defs/state"},
+        "descendant_parent_and_task_binding": {"$ref": "#/$defs/state"},
+        "descendant_terminal_sender_and_result": {"$ref": "#/$defs/state"},
+        "root_tool_call_and_terminal_result": {"$ref": "#/$defs/state"},
+        "final_response_direct_binding": {"$ref": "#/$defs/state"},
+        "all_agent_final_usage": {"$ref": "#/$defs/state"},
+        "monotonic_elapsed": {"$ref": "#/$defs/state"},
+        "safe_projection_without_raw_transcript": {"$ref": "#/$defs/state"}
+      }
+    },
+    "bindings": {"type": "object"},
+    "usage": {"type": "object"},
+    "artifact_hashes": {"type": "object"},
+    "model_invocations": {"const": 1},
+    "probe_issues": {"const": 1},
+    "retry_performed": {"const": false},
+    "raw_transcript_saved": {"const": false},
+    "sensitive_material_saved": {"const": false}
+  },
+  "$defs": {"state": {"enum": ["satisfied", "unsatisfied", "unobserved"]}}
+}

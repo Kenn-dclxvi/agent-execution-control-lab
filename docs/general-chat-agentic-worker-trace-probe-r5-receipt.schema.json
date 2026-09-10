@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-worker-trace-probe-r5-receipt.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "authorization_id", "terminal_state", "process", "criteria", "bindings", "usage", "selector_inventory", "artifact_hashes", "model_invocations", "probe_issues", "retry_performed", "raw_transcript_saved", "sensitive_material_saved"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-worker-trace-receipt/v1"}, "probe_id": {"const": "general-chat-agentic-worker-trace-preflight-r5"}, "authorization_id": {"const": "general-chat-agentic-worker-trace-r5-user-authorization"},
+    "terminal_state": {"enum": ["worker_trace_available", "worker_trace_unavailable"]},
+    "process": {"type": "object", "required": ["exit_code", "started_monotonic_ms", "ended_monotonic_ms", "elapsed_ms"]},
+    "criteria": {"type": "object", "additionalProperties": false, "required": ["root_thread_identity", "spawn_request", "worker_packet", "runtime_spawn_result", "child_session_binding", "child_terminal_result", "root_final_response", "all_agent_final_usage", "monotonic_elapsed", "safe_projection"], "properties": {"root_thread_identity": {"$ref": "#/$defs/state"}, "spawn_request": {"$ref": "#/$defs/state"}, "worker_packet": {"$ref": "#/$defs/state"}, "runtime_spawn_result": {"$ref": "#/$defs/state"}, "child_session_binding": {"$ref": "#/$defs/state"}, "child_terminal_result": {"$ref": "#/$defs/state"}, "root_final_response": {"$ref": "#/$defs/state"}, "all_agent_final_usage": {"$ref": "#/$defs/state"}, "monotonic_elapsed": {"$ref": "#/$defs/state"}, "safe_projection": {"$ref": "#/$defs/state"}}},
+    "bindings": {"type": "object"}, "usage": {"type": "object"},
+    "selector_inventory": {"type": "object", "additionalProperties": false, "required": ["event_types", "response_item_types"], "properties": {"event_types": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "response_item_types": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}}},
+    "artifact_hashes": {"type": "object"}, "model_invocations": {"const": 1}, "probe_issues": {"const": 1}, "retry_performed": {"const": false}, "raw_transcript_saved": {"const": false}, "sensitive_material_saved": {"const": false}
+  },
+  "$defs": {"state": {"enum": ["satisfied", "unsatisfied", "unobserved"]}}
+}

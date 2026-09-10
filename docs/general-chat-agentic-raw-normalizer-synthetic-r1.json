@@ -1,0 +1,171 @@
+{
+  "schema_version": "general-chat-agentic-raw-normalizer-synthetic-fixture/v1",
+  "raw_input_schema": "docs/general-chat-agentic-raw-normalizer-input.schema.json",
+  "normalized_output_schema": "docs/general-chat-agentic-binding-extractor-input.schema.json",
+  "raw_trace": {
+    "schema_version": "general-chat-agentic-synthetic-raw-trace/v1",
+    "probe_id": "general-chat-agentic-capability-preflight-r1",
+    "root_events": [
+      {
+        "type": "thread.started",
+        "thread_id": "root-thread-r1"
+      }
+    ],
+    "sessions": [
+      {
+        "session_meta": {
+          "type": "session_meta",
+          "payload": {
+            "id": "root-thread-r1",
+            "cwd": "/synthetic/general-chat-agentic-r1",
+            "parent_thread_id": null,
+            "source": "root"
+          }
+        },
+        "events": [
+          {
+            "type": "event_msg",
+            "payload": {
+              "type": "token_count",
+              "info": {
+                "total_token_usage": {
+                  "input_tokens": 100,
+                  "cached_input_tokens": 20,
+                  "output_tokens": 20,
+                  "total_tokens": 120
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "session_meta": {
+          "type": "session_meta",
+          "payload": {
+            "id": "child-thread-r1",
+            "cwd": "/synthetic/general-chat-agentic-r1",
+            "parent_thread_id": "root-thread-r1",
+            "source": {
+              "subagent": {
+                "thread_spawn": {
+                  "agent_path": "parking_fact_check"
+                }
+              }
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "event_msg",
+            "payload": {
+              "type": "task_complete",
+              "last_agent_message": "土曜日は18時まで駐車できる（利用時間は18時30分まで）。"
+            }
+          },
+          {
+            "type": "event_msg",
+            "payload": {
+              "type": "token_count",
+              "info": {
+                "total_token_usage": {
+                  "input_tokens": 50,
+                  "cached_input_tokens": 10,
+                  "output_tokens": 10,
+                  "total_tokens": 60
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "monotonic": {
+      "started_ms": 1000,
+      "ended_ms": 1450
+    }
+  },
+  "expected_normalized_trace": {
+    "schema_version": "general-chat-agentic-normalized-trace/v1",
+    "probe_id": "general-chat-agentic-capability-preflight-r1",
+    "root": {
+      "thread_started": ["root-thread-r1"],
+      "spawn_calls": [],
+      "spawn_results": [],
+      "tool_calls": [],
+      "tool_results": [],
+      "final_responses": []
+    },
+    "descendants": [
+      {
+        "thread_id": "child-thread-r1",
+        "parent_thread_id": "root-thread-r1",
+        "task_identity": null,
+        "terminal_events": [
+          {
+            "sender": null,
+            "result": "土曜日は18時まで駐車できる（利用時間は18時30分まで）。"
+          }
+        ]
+      }
+    ],
+    "usage": {
+      "root_thread_id": "root-thread-r1",
+      "sessions": [
+        {
+          "thread_id": "root-thread-r1",
+          "parent_thread_id": null,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 20,
+          "total_tokens": 120
+        },
+        {
+          "thread_id": "child-thread-r1",
+          "parent_thread_id": "root-thread-r1",
+          "input_tokens": 50,
+          "cached_input_tokens": 10,
+          "output_tokens": 10,
+          "total_tokens": 60
+        }
+      ]
+    },
+    "monotonic": {
+      "started_ms": 1000,
+      "ended_ms": 1450
+    },
+    "projection": {
+      "raw_transcript_required": false
+    }
+  },
+  "expected_binding_result": {
+    "admission": "agentic_runtime_capability_unavailable",
+    "criteria": {
+      "root_thread_identity": "satisfied",
+      "spawn_call_and_task_identity": "unobserved",
+      "worker_packet_projection": "unobserved",
+      "descendant_parent_and_task_binding": "unobserved",
+      "descendant_terminal_sender_and_result": "unobserved",
+      "root_tool_call_and_terminal_result": "unobserved",
+      "final_response_direct_binding": "unobserved",
+      "all_agent_final_usage": "satisfied",
+      "monotonic_elapsed": "satisfied",
+      "safe_projection_without_raw_transcript": "satisfied"
+    }
+  },
+  "unconfirmed_selectors": [
+    "spawn_call.requested_task_identity",
+    "spawn_call.packet",
+    "spawn_result.returned_task_identity",
+    "spawn_result.child_thread_id",
+    "descendant.terminal_sender",
+    "root_tool.call_and_result",
+    "root.final_response"
+  ],
+  "forbidden_inferences": [
+    "source.subagent.thread_spawn.agent_path -> requested_task_identity",
+    "source.subagent.thread_spawn.agent_path -> returned_task_identity",
+    "source.subagent.thread_spawn.agent_path -> terminal_sender",
+    "task_complete.last_agent_message -> root.final_response"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "general-chat-agentic-real-trace-adapter-input/v1",
+  "input_mode": "synthetic_repository_fixture",
+  "probe_id": "general-chat-agentic-capability-preflight-r2",
+  "runtime_id": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9",
+  "workspace": "/synthetic/general-chat-agentic-r2",
+  "root_events": {
+    "path": "docs/general-chat-agentic-real-trace-adapter-synthetic/root-events.jsonl",
+    "sha256": "91af06155af58b20c5fb4c0243c464e04d7bcd071ee4266a7e514bc345f214a1",
+    "bytes": 169
+  },
+  "root_thread_id": "root-thread-r2",
+  "sessions": [
+    {
+      "role": "root",
+      "thread_id": "root-thread-r2",
+      "parent_thread_id": null,
+      "file": {
+        "path": "docs/general-chat-agentic-real-trace-adapter-synthetic/root-session.jsonl",
+        "sha256": "c80f48a50a7bba3b27caf7b224ca7913d50b5662de5235e671773931ef384060",
+        "bytes": 424
+      }
+    },
+    {
+      "role": "descendant",
+      "thread_id": "child-thread-r2",
+      "parent_thread_id": "root-thread-r2",
+      "file": {
+        "path": "docs/general-chat-agentic-real-trace-adapter-synthetic/child-session.jsonl",
+        "sha256": "5ec86df5ca08609260e3df84c9d800f5776dd3ae9c1a5097d602de492a522a31",
+        "bytes": 653
+      }
+    }
+  ],
+  "monotonic": {
+    "started_ms": 2000,
+    "ended_ms": 2450
+  },
+  "normalized_output_schema": {
+    "path": "docs/general-chat-agentic-binding-extractor-input-r2.schema.json",
+    "sha256": "42a85185964df04ea0b085c25b13d155c06658d758c76f95f617e69730c167e8",
+    "bytes": 4917
+  }
+}

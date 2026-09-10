@@ -1,0 +1,106 @@
+{
+  "schema_version": "general-chat-agentic-capability-negative-fixtures/v1",
+  "base_ticket": {
+    "path": "docs/general-chat-agentic-capability-preflight-ticket-r1.json",
+    "sha256": "acd67df381cf029bd0cb15dc323e6aba84f02408f30716b1cb594bebd62932c1"
+  },
+  "mutation_format": "single_json_pointer_replace",
+  "cases": [
+    {
+      "case_id": "GCA-CAP-N01",
+      "pointer": "/runtime/multi_agent",
+      "value": false,
+      "expected_rejection": "MULTI_AGENT_DISABLED"
+    },
+    {
+      "case_id": "GCA-CAP-N02",
+      "pointer": "/runtime/agents_max_threads",
+      "value": 1,
+      "expected_rejection": "INSUFFICIENT_AGENT_THREADS"
+    },
+    {
+      "case_id": "GCA-CAP-N03",
+      "pointer": "/runtime/persist_session",
+      "value": false,
+      "expected_rejection": "PERSISTED_SESSION_REQUIRED"
+    },
+    {
+      "case_id": "GCA-CAP-N04",
+      "pointer": "/runtime/descendant_rollout_export",
+      "value": false,
+      "expected_rejection": "DESCENDANT_EXPORT_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N05",
+      "pointer": "/runtime/trace_capabilities/parent_thread_identity",
+      "value": false,
+      "expected_rejection": "PARENT_THREAD_IDENTITY_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N06",
+      "pointer": "/runtime/trace_capabilities/task_identity",
+      "value": false,
+      "expected_rejection": "TASK_IDENTITY_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N07",
+      "pointer": "/runtime/trace_capabilities/terminal_sender",
+      "value": false,
+      "expected_rejection": "TERMINAL_SENDER_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N08",
+      "pointer": "/runtime/trace_capabilities/all_agent_final_usage",
+      "value": false,
+      "expected_rejection": "ALL_AGENT_USAGE_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N09",
+      "pointer": "/runtime/trace_capabilities/tool_call_result_identity",
+      "value": false,
+      "expected_rejection": "TOOL_IDENTITY_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N10",
+      "pointer": "/runtime/trace_capabilities/safe_packet_projection",
+      "value": false,
+      "expected_rejection": "SAFE_PACKET_PROJECTION_UNAVAILABLE"
+    },
+    {
+      "case_id": "GCA-CAP-N11",
+      "pointer": "/runtime/version",
+      "value": "0.145.0",
+      "expected_rejection": "RUNTIME_VERSION_MISMATCH"
+    },
+    {
+      "case_id": "GCA-CAP-N12",
+      "pointer": "/runtime/model",
+      "value": "gpt-5.6-terra",
+      "expected_rejection": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "GCA-CAP-N13",
+      "pointer": "/runtime/reasoning_effort",
+      "value": "high",
+      "expected_rejection": "REASONING_MISMATCH"
+    },
+    {
+      "case_id": "GCA-CAP-N14",
+      "pointer": "/runtime/sandbox_mode",
+      "value": "read-only",
+      "expected_rejection": "SANDBOX_MISMATCH"
+    },
+    {
+      "case_id": "GCA-CAP-N15",
+      "pointer": "/runtime/approval_policy",
+      "value": "on-request",
+      "expected_rejection": "APPROVAL_POLICY_MISMATCH"
+    },
+    {
+      "case_id": "GCA-CAP-N16",
+      "pointer": "/runtime/instruction_isolation/memories",
+      "value": true,
+      "expected_rejection": "INSTRUCTION_ISOLATION_MISMATCH"
+    }
+  ]
+}

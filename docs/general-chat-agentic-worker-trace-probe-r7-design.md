@@ -1,0 +1,7 @@
+# worker activity最終診断probe r7
+
+r7はr6を直接の前段とし、観測済みの専用`sub_agent_activity` eventが持つ`agent_thread_id`と`agent_path`だけをruntime側のchild identity carrierにする。spawn requestが一件、activity bindingが一意、child sessionのID・parent・canonical pathが一致した場合だけchild terminal resultを採用する。
+
+packetはJSONの表示形式を要求せず、spawn messageに固定した駐車場資料、質問、必要結果の文字列が全件含まれ、支店営業時間recordと平日駐車場recordが含まれない場合だけ合格とする。これはr6で失敗した構文抽出を成功手順へ置換するのではなく、「駐車場資料だけを渡した」という必要な内容境界を直接確認する変更である。
+
+r7はworker traceの最終診断として一回だけ発行する。不通過なら新しいselector probeを追加せず、このruntimeでのworker trace bindingを未解決として止める。通過してもr4の固定tool callは未成立なのでagentic target全体を登録しない。

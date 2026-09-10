@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-preflight-ticket-r3.schema.json",
+  "title": "General chat agentic issuance preparation ticket r3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "purpose", "contract_state", "issuance_authority", "preparation_output_schema", "lineage", "composition_readiness", "private_trace_adapter", "artifacts", "required_observations", "issuance_policy", "issuance_records", "storage_policy"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-ticket/v3"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r3"},
+    "purpose": {"const": "non_evaluation_runtime_capability"},
+    "contract_state": {"const": "fixed"},
+    "issuance_authority": {"const": "not_authorized"},
+    "preparation_output_schema": {"$ref": "#/$defs/file_identity"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direct_predecessor", "artifact", "allowed_delta"],
+      "properties": {
+        "direct_predecessor": {"const": "general-chat-agentic-capability-preflight-r2"},
+        "artifact": {"$ref": "#/$defs/file_identity"},
+        "allowed_delta": {"const": "private_trace_adapter_binding_and_issuance_preparation_only"}
+      }
+    },
+    "composition_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["composition_id", "input", "input_schema", "output_schema", "validator", "required_state"],
+      "properties": {
+        "composition_id": {"const": "general-chat-agentic-composition-preflight-r2"},
+        "input": {"$ref": "#/$defs/file_identity"},
+        "input_schema": {"$ref": "#/$defs/file_identity"},
+        "output_schema": {"$ref": "#/$defs/file_identity"},
+        "validator": {"$ref": "#/$defs/file_identity"},
+        "required_state": {"$ref": "#/$defs/required_state"}
+      }
+    },
+    "private_trace_adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["validator", "input_schema", "output_schema", "technical_state", "production_input_mode", "production_trace_origin", "real_trace_observed", "selection_authority", "discovery_allowed"],
+      "properties": {
+        "validator": {"$ref": "#/$defs/file_identity"},
+        "input_schema": {"$ref": "#/$defs/file_identity"},
+        "output_schema": {"$ref": "#/$defs/file_identity"},
+        "technical_state": {"const": "shadow_verified"},
+        "production_input_mode": {"const": "externally_selected_private_trace"},
+        "production_trace_origin": {"const": "issued_probe"},
+        "real_trace_observed": {"const": false},
+        "selection_authority": {"const": "runner_manifest"},
+        "discovery_allowed": {"const": false}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task", "fixture"],
+      "properties": {
+        "task": {"$ref": "#/$defs/file_identity"},
+        "fixture": {"$ref": "#/$defs/file_identity"}
+      }
+    },
+    "required_observations": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "root_thread_identity"},
+        {"const": "spawn_call_and_task_identity"},
+        {"const": "worker_packet_projection"},
+        {"const": "descendant_parent_and_task_binding"},
+        {"const": "descendant_terminal_sender_and_result"},
+        {"const": "root_tool_call_and_terminal_result"},
+        {"const": "final_response_direct_binding"},
+        {"const": "all_agent_final_usage"},
+        {"const": "monotonic_elapsed"},
+        {"const": "safe_projection_without_raw_transcript"}
+      ],
+      "items": false,
+      "minItems": 10,
+      "maxItems": 10
+    },
+    "issuance_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_issues", "retry", "overwrite", "reservation_required", "precondition"],
+      "properties": {
+        "max_issues": {"const": 1},
+        "retry": {"const": false},
+        "overwrite": {"const": false},
+        "reservation_required": {"const": true},
+        "precondition": {"const": "issuance_authority=authorized_not_issued_and_all_static_checks_pass"}
+      }
+    },
+    "issuance_records": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "names", "write_once", "commit_allowed"],
+      "properties": {
+        "root": {"const": "artifacts/capability-preflight-issuance"},
+        "names": {
+          "type": "array",
+          "prefixItems": [{"const": "reservation.json"}, {"const": "issued.json"}, {"const": "receipt.json"}],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "write_once": {"const": true},
+        "commit_allowed": {"const": false}
+      }
+    },
+    "storage_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_mode", "raw_rollout", "trace_root_owner", "cleanup_terminal", "auth_material", "raw_transcript"],
+      "properties": {
+        "receipt_mode": {"const": "write_once"},
+        "raw_rollout": {"const": "temporary_until_receipt_sealed"},
+        "trace_root_owner": {"const": "runner"},
+        "cleanup_terminal": {"const": "receipt_sealed_or_terminal_failure"},
+        "auth_material": {"const": "never_commit"},
+        "raw_transcript": {"const": "never_commit"}
+      }
+    }
+  },
+  "$defs": {
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "required_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime_identity_state", "adapter_state", "trace_origin", "binding_admission", "dispatch_state", "reasons", "model_invocations", "real_trace_reads", "probe_issues"],
+      "properties": {
+        "runtime_identity_state": {"const": "verified"},
+        "adapter_state": {"const": "private_trace_shadow_verified"},
+        "trace_origin": {"const": "synthetic_shadow"},
+        "binding_admission": {"const": "agentic_runtime_capability_unavailable"},
+        "dispatch_state": {"const": "denied"},
+        "reasons": {
+          "type": "array",
+          "prefixItems": [{"const": "REAL_TRACE_ADAPTER_NOT_READY"}, {"const": "ISSUANCE_NOT_AUTHORIZED"}],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "model_invocations": {"const": 0},
+        "real_trace_reads": {"const": 0},
+        "probe_issues": {"const": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "general-chat-agentic-composition-preflight-input/v1",
+  "composition_id": "general-chat-agentic-composition-preflight-r1",
+  "probe_id": "general-chat-agentic-capability-preflight-r2",
+  "mode": "model_free_synthetic_composition",
+  "output_schema": {"path": "docs/general-chat-agentic-composition-preflight-output.schema.json", "sha256": "5e824bae475ccfd03a2c834f3d9ab9ec6187c46673a6ce9e35109d07433457ef", "bytes": 3024},
+  "runtime": {
+    "ticket": {"path": "docs/general-chat-agentic-capability-preflight-ticket-r2.json", "sha256": "ea905672628d0c94be421ebbacb0cca0f05f15f34b1908d354767eaf55053035", "bytes": 4293},
+    "schema": {"path": "docs/general-chat-agentic-capability-preflight-ticket-r2.schema.json", "sha256": "3227968030f960a79b572226aec1af438d6281be779f6cc28068980c988d1735", "bytes": 7083},
+    "validator": {"path": "scripts/general_chat_agentic_exact_runtime_preflight.py", "sha256": "8bdfa3dd6a2045ac7b4b1e2b10753b425a49155258c771f518fc501110ad2a2d", "bytes": 9761}
+  },
+  "adapter": {
+    "packet": {"path": "docs/general-chat-agentic-real-trace-adapter-synthetic-packet-r1.json", "sha256": "e622068ec190d87b15577c01470ede7f7ad2e5ec4f7826431a6fb388820c44c4", "bytes": 1590},
+    "packet_schema": {"path": "docs/general-chat-agentic-real-trace-adapter-input.schema.json", "sha256": "17881c5c11d940bd5740ac7d63e0faa640f85ca442e07e41feb89f596031100d", "bytes": 2370},
+    "validator": {"path": "scripts/general_chat_agentic_real_trace_adapter.py", "sha256": "47207cb8cc9845d0a4ebf34a88f8afda03dbf2f8d0f3fff2a5d83d74b0513507", "bytes": 9755},
+    "normalizer": {"path": "scripts/general_chat_agentic_raw_normalizer.py", "sha256": "d923298fff6272adaf8e1d57e3153a2861176a4d857a16e0bf411b0ea76cb016", "bytes": 5874},
+    "normalized_schema": {"path": "docs/general-chat-agentic-binding-extractor-input-r2.schema.json", "sha256": "42a85185964df04ea0b085c25b13d155c06658d758c76f95f617e69730c167e8", "bytes": 4917}
+  },
+  "binding": {
+    "evaluator": {"path": "scripts/general_chat_agentic_binding_extractor.py", "sha256": "ca9821be83b02a76a4c93841dac1ee47f1334c5c92824625d2da919530bef78d", "bytes": 17874},
+    "fixture": {"path": "docs/general-chat-agentic-capability-preflight-fixture-r1.json", "sha256": "ec9814d603caf3fee94c61069e2dbb61828759ad160a31dd2daeb3e025afa369", "bytes": 1140}
+  },
+  "expected": {
+    "runtime_identity_state": "verified",
+    "adapter_state": "synthetic_verified",
+    "normalized_output_sha256": "b6c8f053df7811c3385dfe9484a1fc2b357ea34f0c8da29097ba841086b91d4a",
+    "binding_criteria": {
+      "root_thread_identity": "satisfied",
+      "spawn_call_and_task_identity": "unobserved",
+      "worker_packet_projection": "unobserved",
+      "descendant_parent_and_task_binding": "unobserved",
+      "descendant_terminal_sender_and_result": "unobserved",
+      "root_tool_call_and_terminal_result": "unobserved",
+      "final_response_direct_binding": "unobserved",
+      "all_agent_final_usage": "satisfied",
+      "monotonic_elapsed": "satisfied",
+      "safe_projection_without_raw_transcript": "satisfied"
+    },
+    "binding_admission": "agentic_runtime_capability_unavailable",
+    "dispatch_state": "denied",
+    "reasons": ["REAL_TRACE_ADAPTER_NOT_READY", "ISSUANCE_NOT_AUTHORIZED"],
+    "model_invocations": 0,
+    "real_trace_reads": 0,
+    "probe_issues": 0
+  }
+}

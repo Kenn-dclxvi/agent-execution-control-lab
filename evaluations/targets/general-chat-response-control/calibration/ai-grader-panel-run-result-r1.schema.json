@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-ai-grader-panel-run-result-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "panel_id", "preflight", "dispatch", "slots", "pilot_report", "summary", "result_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-ai-grader-panel-run-result/v1"},
+    "run_id": {"const": "general-chat-semantic-pilot-panel-r1-run-r2"},
+    "panel_id": {"const": "general-chat-semantic-pilot-panel-r1"},
+    "preflight": {"$ref": "#/$defs/artifact"},
+    "dispatch": {"$ref": "#/$defs/artifact"},
+    "slots": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot_id", "grader_execution_id", "status", "process_exit_code", "elapsed_seconds", "stdout_sha256", "stderr_sha256", "root_thread_id", "total_tokens", "label"],
+        "properties": {
+          "slot_id": {"type": "string", "minLength": 1},
+          "grader_execution_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["valid", "external_failure", "unrateable"]},
+          "process_exit_code": {"type": "integer"},
+          "elapsed_seconds": {"type": "number", "minimum": 0},
+          "stdout_sha256": {"$ref": "#/$defs/sha256"},
+          "stderr_sha256": {"$ref": "#/$defs/sha256"},
+          "root_thread_id": {"type": ["string", "null"]},
+          "total_tokens": {"type": ["integer", "null"], "minimum": 0},
+          "label": {"anyOf": [{"$ref": "#/$defs/artifact"}, {"type": "null"}]}
+        }
+      }
+    },
+    "pilot_report": {"anyOf": [{"$ref": "#/$defs/artifact"}, {"type": "null"}]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authorized_slots", "valid_results", "external_failures", "unrateable_results", "measurement_state"],
+      "properties": {
+        "authorized_slots": {"type": "integer", "minimum": 3},
+        "valid_results": {"type": "integer", "minimum": 0},
+        "external_failures": {"type": "integer", "minimum": 0},
+        "unrateable_results": {"type": "integer", "minimum": 0},
+        "measurement_state": {"enum": ["pilot_measurement_established", "pilot_measurement_not_established"]}
+      }
+    },
+    "result_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

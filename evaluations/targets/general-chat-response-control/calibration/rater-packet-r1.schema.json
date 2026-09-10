@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-rater-packet-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "packet_id", "calibration_set_id", "rater_id", "independent", "instructions", "items"],
+  "properties": {
+    "schema_version": {"const": "general-chat-rater-packet/v1"},
+    "packet_id": {"type": "string", "minLength": 1},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "rater_id": {"type": "string", "minLength": 1},
+    "independent": {"const": true},
+    "instructions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["labels", "unit", "do_not_infer_missing_facts", "do_not_compare_items"],
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pass", "fail", "unknown", "not_applicable"],
+          "properties": {
+            "pass": {"type": "string", "minLength": 1},
+            "fail": {"type": "string", "minLength": 1},
+            "unknown": {"type": "string", "minLength": 1},
+            "not_applicable": {"type": "string", "minLength": 1}
+          }
+        },
+        "unit": {"const": "各回答の各assertionを独立に判定する"},
+        "do_not_infer_missing_facts": {"const": true},
+        "do_not_compare_items": {"const": true}
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/item"}
+    }
+  },
+  "$defs": {
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "content"],
+      "properties": {
+        "role": {"enum": ["user", "assistant"]},
+        "content": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id"],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "state": {"type": "string", "minLength": 1},
+        "content": {"type": "string", "minLength": 1}
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertion_id", "severity", "criterion"],
+      "properties": {
+        "assertion_id": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["major", "required", "presentation"]},
+        "criterion": {"type": "string", "minLength": 1}
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rating_item_id", "conversation", "available_evidence", "received_evidence", "assistant_message", "assertions"],
+      "properties": {
+        "rating_item_id": {"type": "string", "pattern": "^item-[0-9a-f]{16}$"},
+        "conversation": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/message"}
+        },
+        "available_evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "received_evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "assistant_message": {"type": "string", "minLength": 1},
+        "assertions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/assertion"}
+        }
+      }
+    }
+  }
+}

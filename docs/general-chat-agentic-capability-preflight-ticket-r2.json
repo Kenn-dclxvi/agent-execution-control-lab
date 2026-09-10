@@ -1,0 +1,117 @@
+{
+  "schema_version": "general-chat-agentic-capability-ticket/v2",
+  "probe_id": "general-chat-agentic-capability-preflight-r2",
+  "purpose": "non_evaluation_runtime_capability",
+  "contract_state": "fixed",
+  "issuance_authority": "not_authorized",
+  "lineage": {
+    "direct_predecessor": "general-chat-agentic-capability-preflight-r1",
+    "path": "docs/general-chat-agentic-capability-preflight-ticket-r1.json",
+    "sha256": "acd67df381cf029bd0cb15dc323e6aba84f02408f30716b1cb594bebd62932c1",
+    "allowed_delta": "exact_runtime_resolution_only"
+  },
+  "runtime_ref": {
+    "alias": {
+      "path": "/Users/kenn/.local/share/codex-eval/aliases/codex-0.146.json",
+      "sha256": "7f0a1721bba5325ce488af94887fb9a0680c00565cc1c0fed7f927f8a9ae315f"
+    },
+    "manifest": {
+      "path": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9/manifest.json",
+      "sha256": "0ab73a80a0c0ddde94e0f554219a82155ce21d56922f2e9c01e6d88677b598a2"
+    },
+    "runtime_id": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9",
+    "product": "codex-cli",
+    "version_output": "codex-cli 0.146.0",
+    "target": "aarch64-apple-darwin",
+    "bundle_path": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9/bundle",
+    "bundle_sha256": "d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9",
+    "entrypoint": "bin/codex",
+    "entrypoint_sha256": "ae1d3ffe6d48aec6a4dc3f50e7eb8e0d11962485a6a9406c5a7012139383da02",
+    "codesign_team_identifier": "2DC432GLL2",
+    "file_inventory": [
+      {
+        "path": "bin/codex",
+        "sha256": "ae1d3ffe6d48aec6a4dc3f50e7eb8e0d11962485a6a9406c5a7012139383da02",
+        "bytes": 271056976
+      },
+      {
+        "path": "bin/codex-code-mode-host",
+        "sha256": "dcf8f6621229f3401ac2a0b4dea9043676c87ea761359e80c647971321670cba",
+        "bytes": 48727808
+      },
+      {
+        "path": "codex-package.json",
+        "sha256": "dc8605948fa15c2ccb3e0249b3c2e158e7eb5ab2532a77f98ef3f3bb0700d942",
+        "bytes": 200
+      },
+      {
+        "path": "codex-path/rg",
+        "sha256": "882ee4837235e252ce5ffecc3c1707f6d5b7db0054b7922301b5dc0f466a0fed",
+        "bytes": 4030432
+      },
+      {
+        "path": "codex-resources/zsh/bin/zsh",
+        "sha256": "3070e0b5a71b25930f78aeaecd23d6c1081b19b2b83975e5cd29a075d6c463b9",
+        "bytes": 754208
+      }
+    ],
+    "symlink_inventory": [
+      {
+        "path": "codex",
+        "target": "bin/codex"
+      }
+    ],
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "sandbox_mode": "workspace-write",
+    "approval_policy": "never",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "persist_session": true,
+    "instruction_isolation": {
+      "user_config": false,
+      "user_rules": false,
+      "memories": false,
+      "apps": false,
+      "plugins": false,
+      "plugin_sharing": false
+    },
+    "codex_home_scope": "per_probe_persisted_temporary"
+  },
+  "artifacts": {
+    "task": {
+      "path": "docs/general-chat-agentic-capability-preflight-task-r1.txt",
+      "sha256": "507504756a5178a096c4fc6a739ef374827fbb26c0582a82702731b3eb20dda8",
+      "bytes": 718
+    },
+    "fixture": {
+      "path": "docs/general-chat-agentic-capability-preflight-fixture-r1.json",
+      "sha256": "ec9814d603caf3fee94c61069e2dbb61828759ad160a31dd2daeb3e025afa369",
+      "bytes": 1140
+    }
+  },
+  "required_observations": [
+    "root_thread_identity",
+    "spawn_call_and_task_identity",
+    "worker_packet_projection",
+    "descendant_parent_and_task_binding",
+    "descendant_terminal_sender_and_result",
+    "root_tool_call_and_terminal_result",
+    "final_response_direct_binding",
+    "all_agent_final_usage",
+    "monotonic_elapsed",
+    "safe_projection_without_raw_transcript"
+  ],
+  "real_trace_adapter_ready": false,
+  "issuance_policy": {
+    "max_issues": 1,
+    "retry": false,
+    "overwrite": false
+  },
+  "storage_policy": {
+    "receipt_mode": "write_once",
+    "raw_rollout": "temporary_until_receipt_sealed",
+    "auth_material": "never_commit",
+    "raw_transcript": "never_commit"
+  }
+}

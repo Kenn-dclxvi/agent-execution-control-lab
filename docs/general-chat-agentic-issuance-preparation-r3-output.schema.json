@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-issuance-preparation-r3-output.schema.json",
+  "title": "General chat agentic issuance preparation r3 output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "ticket_sha256", "direct_predecessor", "composition_id", "runtime_identity_state", "adapter_technical_state", "real_trace_observed", "identity_available", "issuance_authority", "preparation_state", "dispatch_state", "reason", "model_invocations", "real_trace_reads", "probe_issues"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-issuance-preparation/v1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r3"},
+    "ticket_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "direct_predecessor": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "composition_id": {"const": "general-chat-agentic-composition-preflight-r2"},
+    "runtime_identity_state": {"const": "verified"},
+    "adapter_technical_state": {"const": "shadow_verified"},
+    "real_trace_observed": {"const": false},
+    "identity_available": {"const": true},
+    "issuance_authority": {"const": "not_authorized"},
+    "preparation_state": {"const": "ready_not_authorized"},
+    "dispatch_state": {"const": "denied"},
+    "reason": {"const": "ISSUANCE_NOT_AUTHORIZED"},
+    "model_invocations": {"const": 0},
+    "real_trace_reads": {"const": 0},
+    "probe_issues": {"const": 0}
+  }
+}

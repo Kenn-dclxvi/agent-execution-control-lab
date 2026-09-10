@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-real-trace-adapter-input.schema.json",
+  "title": "General chat agentic synthetic real trace adapter packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "input_mode",
+    "probe_id",
+    "runtime_id",
+    "workspace",
+    "root_events",
+    "root_thread_id",
+    "sessions",
+    "monotonic",
+    "normalized_output_schema"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-real-trace-adapter-input/v1"},
+    "input_mode": {"const": "synthetic_repository_fixture"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "runtime_id": {"const": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9"},
+    "workspace": {"const": "/synthetic/general-chat-agentic-r2"},
+    "root_events": {"$ref": "#/$defs/file_identity"},
+    "root_thread_id": {"const": "root-thread-r2"},
+    "sessions": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/session_identity"}
+    },
+    "monotonic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_ms", "ended_ms"],
+      "properties": {
+        "started_ms": {"type": "integer", "minimum": 0},
+        "ended_ms": {"type": "integer", "minimum": 0}
+      }
+    },
+    "normalized_output_schema": {"$ref": "#/$defs/file_identity"}
+  },
+  "$defs": {
+    "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"$ref": "#/$defs/path"},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "session_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "thread_id", "parent_thread_id", "file"],
+      "properties": {
+        "role": {"enum": ["root", "descendant"]},
+        "thread_id": {"type": "string", "minLength": 1},
+        "parent_thread_id": {"type": ["string", "null"]},
+        "file": {"$ref": "#/$defs/file_identity"}
+      }
+    }
+  }
+}

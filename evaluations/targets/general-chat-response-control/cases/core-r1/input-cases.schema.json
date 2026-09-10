@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-input-cases-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "set_id", "cases"],
+  "properties": {
+    "schema_version": {"const": "general-chat-input-cases/v1"},
+    "set_id": {"const": "general-chat-core-r1"},
+    "cases": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "case_revision",
+          "conversation",
+          "topics",
+          "required_user_values",
+          "available_evidence",
+          "received_evidence",
+          "required_response_schema"
+        ],
+        "properties": {
+          "case_id": {"type": "string"},
+          "case_revision": {"const": "r1"},
+          "conversation": {"type": "array", "minItems": 1},
+          "topics": {"type": "array"},
+          "required_user_values": {"type": "array"},
+          "available_evidence": {"type": "array"},
+          "received_evidence": {"type": "array"},
+          "required_response_schema": {"const": "general-chat-response-control/r1"}
+        }
+      }
+    }
+  }
+}

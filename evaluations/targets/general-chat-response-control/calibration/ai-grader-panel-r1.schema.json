@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-ai-grader-panel-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "panel_id", "status", "runtime_identity", "model_under_test_identity", "independence", "members", "adjudicator", "human_audit"],
+  "properties": {
+    "schema_version": {"const": "general-chat-ai-grader-panel/v1"},
+    "panel_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["grader_identities_unbound", "fixed"]},
+    "runtime_identity": {"type": ["string", "null"], "minLength": 1},
+    "model_under_test_identity": {"type": ["string", "null"], "minLength": 1},
+    "independence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["separate_contexts", "other_member_outputs_forbidden", "model_under_test_identity_forbidden", "fixed_input_bytes"],
+      "properties": {
+        "separate_contexts": {"const": true},
+        "other_member_outputs_forbidden": {"const": true},
+        "model_under_test_identity_forbidden": {"const": true},
+        "fixed_input_bytes": {"const": true}
+      }
+    },
+    "members": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/grader_identity"}
+    },
+    "adjudicator": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["grader_execution_id", "model", "prompt_sha256", "schema_sha256", "reasoning_effort", "temperature", "seed", "panel_member"],
+      "properties": {
+        "grader_execution_id": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "reasoning_effort": {"type": ["string", "null"]},
+        "temperature": {"type": ["number", "null"]},
+        "seed": {"type": ["integer", "null"]},
+        "panel_member": {"const": false}
+      }
+    },
+    "human_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "required_for_pilot_start", "required_for_human_alignment_claim", "triggered_items"],
+      "properties": {
+        "role": {"const": "optional_evidence_strengthening"},
+        "required_for_pilot_start": {"const": false},
+        "required_for_human_alignment_claim": {"const": true},
+        "triggered_items": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["panel_disagreement", "unknown", "major_assertion", "stratified_random_sample"]}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "grader_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grader_execution_id", "model", "prompt_sha256", "schema_sha256", "reasoning_effort", "temperature", "seed"],
+      "properties": {
+        "grader_execution_id": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "reasoning_effort": {"type": ["string", "null"]},
+        "temperature": {"type": ["number", "null"]},
+        "seed": {"type": ["integer", "null"]}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "grader_identities_unbound"}}},
+      "then": {
+        "properties": {
+          "members": {"maxItems": 0},
+          "adjudicator": {"const": null},
+          "runtime_identity": {"const": null},
+          "model_under_test_identity": {"const": null}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "fixed"}}},
+      "then": {
+        "properties": {
+          "members": {"minItems": 3},
+          "adjudicator": {"type": "object"},
+          "runtime_identity": {"type": "string", "minLength": 1},
+          "model_under_test_identity": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  ]
+}

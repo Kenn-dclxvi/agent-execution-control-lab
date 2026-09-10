@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-ai-panel-adjudication-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_set_id", "panel_report_sha256", "adjudicator_identity", "panel_member", "items", "reference_type", "human_alignment_state", "qualification_effect"],
+  "properties": {
+    "schema_version": {"const": "general-chat-ai-panel-adjudication/v1"},
+    "calibration_set_id": {"type": "string", "minLength": 1},
+    "panel_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "adjudicator_identity": {"type": "string", "minLength": 1},
+    "panel_member": {"const": false},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["calibration_item_id", "assertion_id", "label", "evidence_spans", "reason"],
+        "properties": {
+          "calibration_item_id": {"type": "string", "minLength": 1},
+          "assertion_id": {"type": "string", "minLength": 1},
+          "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+          "evidence_spans": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "reference_type": {"const": "multi_grader_consensus_reference"},
+    "human_alignment_state": {"const": "unmeasured"},
+    "qualification_effect": {"const": "none"}
+  }
+}

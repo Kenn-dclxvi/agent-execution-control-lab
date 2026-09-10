@@ -1,0 +1,39 @@
+{
+  "schema_version": "the-caption-prompt.evaluation-target/v2",
+  "target_id": "general-chat-response-control",
+  "target_kind": "semantic_protocol",
+  "layout": "namespaced",
+  "visibility": "public",
+  "third_party_reproducible": true,
+  "target_subject": {
+    "kind": "semantic_protocol",
+    "protocol_id": "general-chat-response-control",
+    "protocol_revision": "r1",
+    "interaction_mode": "single_response_natural_chat_with_transition_sets",
+    "response_schema_sha256": "0bac0962881bc19c30d5e70e382f3d0dc67c7c331bde0fbe28cc559c93168b73",
+    "subject_authority": "evaluations/targets/general-chat-response-control/cases/core-r1/response.schema.json"
+  },
+  "executor_binding": "profile",
+  "artifact_roots": {
+    "cases": "evaluations/targets/general-chat-response-control/cases",
+    "sets": "evaluations/targets/general-chat-response-control/sets",
+    "profiles": "evaluations/targets/general-chat-response-control/profiles",
+    "dispatch_plans": "evaluations/targets/general-chat-response-control/plans",
+    "rating_contracts": "evaluations/targets/general-chat-response-control/rating-contracts",
+    "contracts": "evaluations/targets/general-chat-response-control/contracts",
+    "prompt_bundles": "evaluations/targets/general-chat-response-control/prompts",
+    "published_results": "evaluations/targets/general-chat-response-control/results"
+  },
+  "current_rating_contract": "general-chat-response-exact-v1",
+  "target_specific_modules": [
+    "evaluations/targets/general-chat-response-control/runtime/run_qualification.py",
+    "evaluations/targets/general-chat-response-control/runtime/run_qualification_v2.py"
+  ],
+  "authority_notes": {
+    "design": "docs/general-chat-response-control-series-design.md",
+    "case_boundary": "core-r1の8 Caseだけを初期qualification対象とし、分担Caseを含めない",
+    "runtime_boundary": "model、reasoning、permissionおよびtoken accountingはprofileへ固定する",
+    "repository_boundary": "repository変更ではなく一回の一般チャット応答を評価するsemantic protocolである",
+    "lineage_boundary": "C147までの知見を設計入力に使うが、C147またはCandidate163のresultを継承しない"
+  }
+}

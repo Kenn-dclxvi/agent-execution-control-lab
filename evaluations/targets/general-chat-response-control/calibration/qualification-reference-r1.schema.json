@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-reference-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reference_id",
+    "status",
+    "holdout_set_id",
+    "holdout_sha256",
+    "reference_type",
+    "ai_grader_count",
+    "human_auditor_count",
+    "human_alignment_state",
+    "ambiguous_item_count",
+    "panel_run",
+    "adjudication_required",
+    "adjudication_result",
+    "label_counts",
+    "labels",
+    "sealed_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-reference/v1"},
+    "reference_id": {"const": "general-chat-semantic-qualification-reference-r1"},
+    "status": {"const": "sealed"},
+    "holdout_set_id": {"const": "general-chat-semantic-qualification-holdout-r1"},
+    "holdout_sha256": {"const": "9bc22536be3be9b2b5ed068f4beb41435cae4d63ceb9e32808c3e563bff2c678"},
+    "reference_type": {"const": "multi_grader_consensus_reference"},
+    "ai_grader_count": {"type": "integer", "minimum": 3},
+    "human_auditor_count": {"const": 0},
+    "human_alignment_state": {"const": "unmeasured"},
+    "ambiguous_item_count": {"const": 0},
+    "panel_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "result_identity", "result_file_sha256", "report_file_sha256"],
+      "properties": {
+        "run_id": {"const": "general-chat-semantic-holdout-reference-r1-run-r1"},
+        "result_identity": {"const": "53f131daec73b8d31e0efb243858ab35383ff9692c52a70287f803e77a80a4a3"},
+        "result_file_sha256": {"const": "60b34a7ecba1827fc9c7d0c51430b7e2375f60325e6b65d02cc019bbacb428da"},
+        "report_file_sha256": {"const": "3a4e432384e39f7b4e5e32af95a297c32c64b7208d811b86c40677bf280d86af"}
+      }
+    },
+    "adjudication_required": {"const": false},
+    "adjudication_result": {"const": null},
+    "label_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass", "fail", "unknown", "not_applicable"],
+      "properties": {
+        "pass": {"const": 19},
+        "fail": {"const": 13},
+        "unknown": {"const": 0},
+        "not_applicable": {"const": 0}
+      }
+    },
+    "labels": {
+      "type": "array",
+      "minItems": 32,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["holdout_item_id", "assertion_id", "severity", "label"],
+        "properties": {
+          "holdout_item_id": {"type": "string", "pattern": "^GCH-[A-Z][0-9]{2}-[AB]$"},
+          "assertion_id": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["major", "required", "presentation"]},
+          "label": {"enum": ["pass", "fail", "unknown", "not_applicable"]}
+        }
+      }
+    },
+    "sealed_at": {"type": "string", "format": "date-time"}
+  }
+}

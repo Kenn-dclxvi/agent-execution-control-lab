@@ -24,6 +24,7 @@
 | `agent-execution-control-lab` | `namespaced` | public | 可 | [`agent-execution-control-lab/target.json`](agent-execution-control-lab/target.json) | PRレビュー測定系列。機能仕様r1固定、Core Baseline未qualification、正式result 0件 |
 | `portable-instruction-semantic-conformance` | `namespaced` | public | 可 | [`portable-instruction-semantic-conformance/target.json`](portable-instruction-semantic-conformance/target.json) | control-freeで測定成立。portable full-agent N=1は14 / 14 valid、7 / 14 score 4でquality停止し、C147 referenceは未発行 |
 | `codex-validation-carrier-conformance` | `namespaced` | public | 可 | [`codex-validation-carrier-conformance/target.json`](codex-validation-carrier-conformance/target.json) | heldout r1の6 runtime Caseと3 preflight negative fixtureをsource freeze。adapter・baseline未qualification、正式result 0件 |
+| `general-chat-response-control` | `namespaced` | public | 可 | [`general-chat-response-control/target.json`](general-chat-response-control/target.json) | 一般チャット8 Caseの局所評価は通過。C147チャットcoverage未完了、統合Candidate未作成、総合評価未開始、採用資格なし |
 
 `the-caption`のvisibilityは、計測が固定した移行前treeの可視性を指す。2026-08-01〜08-03の移行で公開された[`Kenn-dclxvi/the-caption`](https://github.com/Kenn-dclxvi/the-caption)は履歴を切り出し直しており、このインスタンスが固定するcommit / treeを含まない。したがって公開版は既存インスタンスの現在状態ではなく、`click`と同格の別インスタンスとして登録する。登録時期はrelease計測が必要になった時点とし、それまでこの表へ追加しない。時間境界は[`docs/repository-overview.md`](../../docs/repository-overview.md)の「対象リポジトリの公開移行」を正本とする。
 
@@ -34,6 +35,8 @@
 `portable-instruction-semantic-conformance`はrepository snapshotではなく、固定operation ledgerへの一回応答を対象とするsemantic protocolインスタンスである。`target_repository_ref`を持たず、subject、runtime、prompt identityを分ける。登録bytes、測定基盤qualificationと未決定の採用境界は[`README.md`](portable-instruction-semantic-conformance/README.md)を参照する。
 
 `codex-validation-carrier-conformance`は、同semantic protocolでは観測できない実際のnested validation、途中result ingress、fail-fast、continuationおよびterminal projectionをCodex実行traceで測るpublic repositoryインスタンスである。heldout r1 sourceは固定済みだが、adapter、grader、control-free qualificationおよび正式resultは未作成である。境界は[`README.md`](codex-validation-carrier-conformance/README.md)を参照する。
+
+`general-chat-response-control`は、コード変更を対象にせず、利用者への確認、固定根拠の要求、部分回答、独立論点および完了判断を一回の自然言語応答で測るsemantic protocolインスタンスである。C147までの知見は設計入力に限って使い、THE-CAPTION、Candidate163またはportable semantic resultを比較元へ入れない。現在の8 CaseはC147の13制御を網羅せず、局所通過を統合チャットCandidateの成立へ昇格させない。境界は[`README.md`](general-chat-response-control/README.md)を参照する。
 
 ## layout
 

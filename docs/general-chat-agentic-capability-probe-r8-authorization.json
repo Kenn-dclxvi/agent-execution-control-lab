@@ -1,0 +1,17 @@
+{
+  "schema_version": "general-chat-agentic-capability-r8-authorization/v1", "authorization_id": "general-chat-agentic-capability-r8-user-authorization", "probe_id": "general-chat-agentic-capability-preflight-r8",
+  "lineage": {"direct_predecessor": "general-chat-agentic-capability-preflight-r3", "diagnostic_inputs": ["general-chat-agentic-tool-transport-preflight-r4", "general-chat-agentic-worker-activity-preflight-r7"], "allowed_delta": "full_runtime_tool_identity_and_path_only_worker_carrier", "not_inherited": ["short_tool_identity", "root_visible_worker_material", "packet_json_syntax_as_outcome"]},
+  "authorization_basis": "explicit_interactive_user_authorization_2026-08-20_continue", "issuance_authority": "authorized_not_issued", "issuance_policy": {"max_issues": 1, "retry": false, "overwrite": false, "reservation_required": true},
+  "runtime": {"path": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9/bundle/bin/codex", "version": "0.146.0", "model": "gpt-5.6-sol", "reasoning": "medium", "sandbox": "workspace-write", "approval_policy": "never", "multi_agent": true, "max_threads": 2, "session_mode": "persisted", "sha256": "ae1d3ffe6d48aec6a4dc3f50e7eb8e0d11962485a6a9406c5a7012139383da02", "bytes": 271056976},
+  "artifacts": {
+    "feasibility_audit": {"path": "docs/general-chat-agentic-normal-route-feasibility-audit-r8.md", "sha256": "3d142fb70caf2667a1270cdbef15932b5a317c766834a36900c8bb6bf9dd6af0", "bytes": 2751},
+    "model_input": {"path": "docs/general-chat-agentic-capability-probe-r8-model-input.txt", "sha256": "b8ee5c7ac2361d96f8e9d80693be5ef9a02a6b399c52d4b11de62833a1ef17fa", "bytes": 1267},
+    "worker_material": {"path": "docs/general-chat-agentic-worker-material-r8.txt", "sha256": "4cda4a59c7d75f4d9d14ca1315b20a532932ba9678b619f9fc85679b968c4f82", "bytes": 77},
+    "worker_parser": {"path": "scripts/general_chat_agentic_worker_trace_probe_r5.py", "sha256": "31a52b8b90c33463496529ac65a30425da8609e9e42e3c1c83f381fc2994d464", "bytes": 16289},
+    "activity_parser": {"path": "scripts/general_chat_agentic_worker_trace_probe_r7.py", "sha256": "0061309a56d1e5299cba3973303885405bed874c32dfc87e9c3f4183b97fe591", "bytes": 11407},
+    "tool_server": {"path": "scripts/general_chat_agentic_branch_tool_server_r4.py", "sha256": "a540930f1680e2965fc90af37d6766f428339a99c8239987e5af5e7bba1bddd8", "bytes": 3736},
+    "runner": {"path": "scripts/general_chat_agentic_capability_probe_r8.py", "sha256": "945f82f094870a45d1a6da92606e898bc71db6d4bea3f2eb6975383b034998df", "bytes": 13419},
+    "receipt_schema": {"path": "docs/general-chat-agentic-capability-probe-r8-receipt.schema.json", "sha256": "75775786c86b41b87dba68ac3c7f4e28c1fb7e962899fb8f152d7e2d0eadee04", "bytes": 2309}
+  },
+  "issuance_records": {"root": "artifacts/capability-preflight-issuance", "names": ["reservation.json", "issued.json", "receipt.json"], "write_once": true, "commit_allowed": false}, "storage_policy": {"private_root": "/Users/kenn/repos/_verification", "raw_rollout": "temporary_until_receipt_sealed", "auth_material": "temporary_never_commit", "cleanup_terminal": "receipt_sealed_or_terminal_failure"}
+}

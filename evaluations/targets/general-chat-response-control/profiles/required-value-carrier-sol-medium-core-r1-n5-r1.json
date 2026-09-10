@@ -1,0 +1,107 @@
+{
+  "schema_version": "general-chat-response-profile/v1",
+  "profile_id": "required-value-carrier-sol-medium-core-r1-n5-r1",
+  "target_id": "general-chat-response-control",
+  "lifecycle_state": "registered_not_qualified",
+  "target_subject_ref": {
+    "kind": "semantic_protocol",
+    "protocol_id": "general-chat-response-control",
+    "protocol_revision": "r1",
+    "interaction_mode": "single_response_natural_chat_with_transition_sets",
+    "response_schema_sha256": "0bac0962881bc19c30d5e70e382f3d0dc67c7c331bde0fbe28cc559c93168b73"
+  },
+  "prompt_set_identity": {
+    "name": "required-value-carrier-r1",
+    "revision": "r1",
+    "bundle_sha256": "adb397bc9b1d5681ea923cee2c5a081f1a243134ec44289f337786b0c3f05971",
+    "path": "evaluations/targets/general-chat-response-control/prompts/candidates/required-value-carrier-r1"
+  },
+  "runtime_ref": {
+    "runtime": "codex-cli",
+    "version": "0.146.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "session_mode": "ephemeral_single_agent",
+    "instruction_isolation": {
+      "ignore_user_config": true,
+      "ignore_rules": true,
+      "memory": false,
+      "apps": false,
+      "plugins": false,
+      "plugin_sharing": false,
+      "multi_agent": false
+    },
+    "runtime_state_isolation": {
+      "codex_home": "per_slot_temporary",
+      "auth_transport": "host_auth_symlink_not_persisted",
+      "skills_cache": "not_shared",
+      "models_cache": "not_shared"
+    },
+    "permission": {"sandbox": "read-only", "approval_policy": "never"},
+    "capability_catalog": {
+      "path": "evaluations/targets/general-chat-response-control/contracts/codex-cli-0.146.0-chat-semantic-r1.json",
+      "sha256": "664c2febee8b01b97fc68374d8598c37c4696b000f995ff87f2ea9c9ec36ddc8"
+    },
+    "token_accounting": {
+      "contract_id": "codex-jsonl-single-agent-all-agent-total-r2",
+      "path": "evaluations/targets/general-chat-response-control/contracts/token-accounting-r2.json",
+      "sha256": "2f40961274aa5f5c6527b9b0b1d29a8a6d162e2c01b0c98fa67e0ca2757ba506"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic"
+  },
+  "runtime_adapter_ref": {
+    "path": "evaluations/targets/general-chat-response-control/runtime/run_candidate_core_n5.py",
+    "sha256": "337dc3ed4446ebdeb491f0f72da7e3ba6d0c690b6eeb16f9f030b660bbef38ec"
+  },
+  "task_spec_ref": {
+    "revision": "general-chat-single-response-r1",
+    "path": "evaluations/targets/general-chat-response-control/contracts/task-spec-wrapper-r1.txt",
+    "sha256": "d776638909e79bbe4f329b59f965878e28ef9ee4e745ab4c46218ed993bb2a68"
+  },
+  "evaluation_set_ref": {
+    "set_id": "general-chat-core-r1",
+    "set_revision": "r1",
+    "path": "evaluations/targets/general-chat-response-control/sets/core-r1/set.json",
+    "sha256": "a203302fc92a3242f62cfdb8d3d33397890baaf732b8ffe08097d100e818c916"
+  },
+  "case_source_ref": {
+    "path": "evaluations/targets/general-chat-response-control/cases/core-r1/input-cases.json",
+    "sha256": "db8cf444e68dc50bb2be918782b0504f4c7d611acc0a8cc50ab7cdb28d464a11"
+  },
+  "oracle_ref": {
+    "path": "evaluations/targets/general-chat-response-control/cases/core-r1/oracle.json",
+    "sha256": "c847ebcb87279b182be9e3e5a34eab87214830d4fdb51dc959f39a0370ad98b9",
+    "model_visible": false
+  },
+  "response_schema_ref": {
+    "path": "evaluations/targets/general-chat-response-control/cases/core-r1/response.schema.json",
+    "sha256": "0bac0962881bc19c30d5e70e382f3d0dc67c7c331bde0fbe28cc559c93168b73"
+  },
+  "rating_ref": {
+    "contract_id": "general-chat-response-exact-v1",
+    "path": "evaluations/targets/general-chat-response-control/rating-contracts/general-chat-response-exact-v1.json",
+    "sha256": "aaa61c5e5dc6cc0312cb628cec093209535d732d67ebb9a485aa03b5986bf0c5"
+  },
+  "repetition_condition": {
+    "iterations": 5,
+    "order": "case_id_ascending_then_iteration_ascending",
+    "valid_low_quality_policy": "retain",
+    "external_failure_policy": "record_and_stop_before_comparison"
+  },
+  "execution": {
+    "max_workers": 24,
+    "schedule_policy": "global_queue",
+    "max_attempts_per_slot": 1,
+    "dispatch_gate": "saved_preflight_receipt_required"
+  },
+  "scope": {
+    "qualification_only": true,
+    "adoption": "not_decided",
+    "release": "not_created",
+    "projection": "not_authorized"
+  }
+}
+
+
+
+

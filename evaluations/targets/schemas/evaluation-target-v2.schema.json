@@ -74,7 +74,12 @@
         "kind": {"const": "semantic_protocol"},
         "protocol_id": {"type": "string", "minLength": 1},
         "protocol_revision": {"type": "string", "minLength": 1},
-        "interaction_mode": {"const": "single_response_operation_ledger"},
+        "interaction_mode": {
+          "enum": [
+            "single_response_operation_ledger",
+            "single_response_natural_chat_with_transition_sets"
+          ]
+        },
         "response_schema_sha256": {"$ref": "#/$defs/sha256"},
         "subject_authority": {"type": "string", "minLength": 1}
       }

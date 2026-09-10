@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-composition-preflight-input.schema.json",
+  "title": "General chat agentic model-free composition preflight input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "composition_id", "probe_id", "mode", "output_schema", "runtime", "adapter", "binding", "expected"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-composition-preflight-input/v1"},
+    "composition_id": {"const": "general-chat-agentic-composition-preflight-r1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "mode": {"const": "model_free_synthetic_composition"},
+    "output_schema": {"$ref": "#/$defs/file_identity"},
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ticket", "schema", "validator"],
+      "properties": {
+        "ticket": {"$ref": "#/$defs/file_identity"},
+        "schema": {"$ref": "#/$defs/file_identity"},
+        "validator": {"$ref": "#/$defs/file_identity"}
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packet", "packet_schema", "validator", "normalizer", "normalized_schema"],
+      "properties": {
+        "packet": {"$ref": "#/$defs/file_identity"},
+        "packet_schema": {"$ref": "#/$defs/file_identity"},
+        "validator": {"$ref": "#/$defs/file_identity"},
+        "normalizer": {"$ref": "#/$defs/file_identity"},
+        "normalized_schema": {"$ref": "#/$defs/file_identity"}
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluator", "fixture"],
+      "properties": {
+        "evaluator": {"$ref": "#/$defs/file_identity"},
+        "fixture": {"$ref": "#/$defs/file_identity"}
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime_identity_state", "adapter_state", "normalized_output_sha256", "binding_criteria", "binding_admission", "dispatch_state", "reasons", "model_invocations", "real_trace_reads", "probe_issues"],
+      "properties": {
+        "runtime_identity_state": {"const": "verified"},
+        "adapter_state": {"const": "synthetic_verified"},
+        "normalized_output_sha256": {"const": "b6c8f053df7811c3385dfe9484a1fc2b357ea34f0c8da29097ba841086b91d4a"},
+        "binding_criteria": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["root_thread_identity", "spawn_call_and_task_identity", "worker_packet_projection", "descendant_parent_and_task_binding", "descendant_terminal_sender_and_result", "root_tool_call_and_terminal_result", "final_response_direct_binding", "all_agent_final_usage", "monotonic_elapsed", "safe_projection_without_raw_transcript"],
+          "properties": {
+            "root_thread_identity": {"const": "satisfied"},
+            "spawn_call_and_task_identity": {"const": "unobserved"},
+            "worker_packet_projection": {"const": "unobserved"},
+            "descendant_parent_and_task_binding": {"const": "unobserved"},
+            "descendant_terminal_sender_and_result": {"const": "unobserved"},
+            "root_tool_call_and_terminal_result": {"const": "unobserved"},
+            "final_response_direct_binding": {"const": "unobserved"},
+            "all_agent_final_usage": {"const": "satisfied"},
+            "monotonic_elapsed": {"const": "satisfied"},
+            "safe_projection_without_raw_transcript": {"const": "satisfied"}
+          }
+        },
+        "binding_admission": {"const": "agentic_runtime_capability_unavailable"},
+        "dispatch_state": {"const": "denied"},
+        "reasons": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "REAL_TRACE_ADAPTER_NOT_READY"},
+            {"const": "ISSUANCE_NOT_AUTHORIZED"}
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "model_invocations": {"const": 0},
+        "real_trace_reads": {"const": 0},
+        "probe_issues": {"const": 0}
+      }
+    }
+  },
+  "$defs": {
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

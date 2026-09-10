@@ -1,0 +1,124 @@
+{
+  "allowed_delta": "prompt_set_identity only",
+  "authorized_slot_count": 5,
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/general-chat-response-control/sets/core-r1/set.json",
+    "set_id": "general-chat-core-r1",
+    "set_revision": "r1",
+    "sha256": "a203302fc92a3242f62cfdb8d3d33397890baaf732b8ffe08097d100e818c916"
+  },
+  "issued_slot_count": 0,
+  "profile": {
+    "path": "evaluations/targets/general-chat-response-control/profiles/required-value-carrier-sol-medium-q02-n5-r1.json",
+    "profile_id": "required-value-carrier-sol-medium-q02-n5-r1",
+    "sha256": "41e8e9012dd740cd6288c807bba3c4048777ad9ea5d8b68f4a9baa72d8be0ef3"
+  },
+  "prompt_set_identity": {
+    "bundle_sha256": "adb397bc9b1d5681ea923cee2c5a081f1a243134ec44289f337786b0c3f05971",
+    "name": "required-value-carrier-r1",
+    "path": "evaluations/targets/general-chat-response-control/prompts/candidates/required-value-carrier-r1",
+    "revision": "r1"
+  },
+  "rating_ref": {
+    "contract_id": "general-chat-response-exact-v1",
+    "path": "evaluations/targets/general-chat-response-control/rating-contracts/general-chat-response-exact-v1.json",
+    "sha256": "aaa61c5e5dc6cc0312cb628cec093209535d732d67ebb9a485aa03b5986bf0c5"
+  },
+  "receipt_id": "required-value-carrier-core-r1-q02-n5-preflight-r1",
+  "receipt_sha256": "eadd63a08f4dc2266db050c85fa8ab5079ae1a9f23959fcc022654d1c00cabac",
+  "reference_result": {
+    "baseline_state": "measured",
+    "path": "evaluations/targets/general-chat-response-control/results/chat-control-free-core-r1-n5-baseline-r1.json",
+    "sha256": "15c56baa571645553630e018156d7319ee4c74108fa11d4f5ccbfc0789702280"
+  },
+  "registration": {
+    "path": "evaluations/targets/general-chat-response-control/registration.json",
+    "sha256": "52face01f30b7135cace0c08d77aae81a503335b76f80646fec1c52613eb0ef9"
+  },
+  "runtime_ref": {
+    "capability_catalog": {
+      "path": "evaluations/targets/general-chat-response-control/contracts/codex-cli-0.146.0-chat-semantic-r1.json",
+      "sha256": "664c2febee8b01b97fc68374d8598c37c4696b000f995ff87f2ea9c9ec36ddc8"
+    },
+    "elapsed_boundary": "adapter_start_to_terminal_process_result_monotonic",
+    "instruction_isolation": {
+      "apps": false,
+      "ignore_rules": true,
+      "ignore_user_config": true,
+      "memory": false,
+      "multi_agent": false,
+      "plugin_sharing": false,
+      "plugins": false
+    },
+    "model": "gpt-5.6-sol",
+    "permission": {
+      "approval_policy": "never",
+      "sandbox": "read-only"
+    },
+    "reasoning_effort": "medium",
+    "runtime": "codex-cli",
+    "runtime_state_isolation": {
+      "auth_transport": "host_auth_symlink_not_persisted",
+      "codex_home": "per_slot_temporary",
+      "models_cache": "not_shared",
+      "skills_cache": "not_shared"
+    },
+    "session_mode": "ephemeral_single_agent",
+    "token_accounting": {
+      "contract_id": "codex-jsonl-single-agent-all-agent-total-r2",
+      "path": "evaluations/targets/general-chat-response-control/contracts/token-accounting-r2.json",
+      "sha256": "2f40961274aa5f5c6527b9b0b1d29a8a6d162e2c01b0c98fa67e0ca2757ba506"
+    },
+    "version": "0.146.0"
+  },
+  "schema_version": "general-chat-response-preflight/v1",
+  "slots": [
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "iteration": 1,
+      "slot_id": "GCR-Q02-i001"
+    },
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "iteration": 2,
+      "slot_id": "GCR-Q02-i002"
+    },
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "iteration": 3,
+      "slot_id": "GCR-Q02-i003"
+    },
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "iteration": 4,
+      "slot_id": "GCR-Q02-i004"
+    },
+    {
+      "case_id": "GCR-Q02",
+      "case_revision": "r1",
+      "iteration": 5,
+      "slot_id": "GCR-Q02-i005"
+    }
+  ],
+  "state": "ready_not_issued",
+  "target": {
+    "path": "evaluations/targets/general-chat-response-control/target.json",
+    "sha256": "a4becc4ce4762006120b34ac2f690733563d68def839dfc73d9c17407fd44d7b"
+  },
+  "target_subject_ref": {
+    "interaction_mode": "single_response_natural_chat_with_transition_sets",
+    "kind": "semantic_protocol",
+    "protocol_id": "general-chat-response-control",
+    "protocol_revision": "r1",
+    "response_schema_sha256": "0bac0962881bc19c30d5e70e382f3d0dc67c7c331bde0fbe28cc559c93168b73"
+  },
+  "task_spec_ref": {
+    "path": "evaluations/targets/general-chat-response-control/contracts/task-spec-wrapper-r1.txt",
+    "revision": "general-chat-single-response-r1",
+    "sha256": "d776638909e79bbe4f329b59f965878e28ef9ee4e745ab4c46218ed993bb2a68"
+  }
+}

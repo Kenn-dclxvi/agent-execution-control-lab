@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-grader-dispatch-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dispatch_id", "preflight_sha256", "slot_id", "issued_slot_count", "state", "dispatch_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-grader-dispatch/v1"},
+    "dispatch_id": {"const": "general-chat-semantic-qualification-grader-r1-dispatch-r1"},
+    "preflight_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "slot_id": {"const": "qualification-slot-01"},
+    "issued_slot_count": {"const": 1},
+    "state": {"const": "issued_once"},
+    "dispatch_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

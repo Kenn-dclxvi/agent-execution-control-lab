@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-ai-grader-panel-recovery-result-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "recovery_id", "source_run", "source_preflight", "recovery_method", "recovery_runner", "recovery_schema", "slots", "pilot_report", "summary", "result_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-ai-grader-panel-recovery-result/v1"},
+    "recovery_id": {"const": "general-chat-semantic-pilot-panel-r1-attempt-r2-recovery-r1"},
+    "source_run": {"$ref": "#/$defs/artifact"},
+    "source_preflight": {"$ref": "#/$defs/artifact"},
+    "recovery_method": {"const": "codex-cli-jsonl-terminal-recovery-r1"},
+    "recovery_runner": {"$ref": "#/$defs/artifact"},
+    "recovery_schema": {"$ref": "#/$defs/artifact"},
+    "slots": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot_id", "grader_execution_id", "root_thread_id", "usage", "stdout", "label"],
+        "properties": {
+          "slot_id": {"type": "string", "minLength": 1},
+          "grader_execution_id": {"type": "string", "minLength": 1},
+          "root_thread_id": {"type": "string", "minLength": 1},
+          "usage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["input_tokens", "cached_input_tokens", "cache_write_input_tokens", "output_tokens", "reasoning_output_tokens", "total_tokens"],
+            "properties": {
+              "input_tokens": {"type": "integer", "minimum": 0},
+              "cached_input_tokens": {"type": "integer", "minimum": 0},
+              "cache_write_input_tokens": {"type": "integer", "minimum": 0},
+              "output_tokens": {"type": "integer", "minimum": 0},
+              "reasoning_output_tokens": {"type": "integer", "minimum": 0},
+              "total_tokens": {"type": "integer", "minimum": 0}
+            }
+          },
+          "stdout": {"$ref": "#/$defs/artifact"},
+          "label": {"$ref": "#/$defs/artifact"}
+        }
+      }
+    },
+    "pilot_report": {"$ref": "#/$defs/artifact"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recovered_results", "valid_results", "measurement_state"],
+      "properties": {
+        "recovered_results": {"const": 3},
+        "valid_results": {"const": 3},
+        "measurement_state": {"const": "pilot_measurement_established"}
+      }
+    },
+    "result_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

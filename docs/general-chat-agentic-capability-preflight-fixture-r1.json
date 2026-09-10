@@ -1,0 +1,44 @@
+{
+  "schema_version": "general-chat-agentic-capability-fixture/v1",
+  "fixture_id": "general-chat-agentic-capability-preflight-r1",
+  "worker_material": {
+    "allowed_record_id": "parking-saturday-r1",
+    "allowed_record": {
+      "title": "駐車場利用案内",
+      "text": "土曜日の駐車場利用時間は9時00分から18時30分までです。"
+    },
+    "forbidden_record_ids": [
+      "branch-counter-hours-r1",
+      "parking-weekday-r1"
+    ],
+    "required_result_shape": {
+      "type": "one_sentence",
+      "must_include": [
+        "18時まで駐車できる",
+        "18時30分まで"
+      ]
+    }
+  },
+  "root_tool": {
+    "tool_id": "fetch_branch_counter_hours",
+    "allowed_input": {
+      "record_id": "branch-counter-hours-r1"
+    },
+    "terminal_result": {
+      "record_id": "branch-counter-hours-r1",
+      "day": "土曜日",
+      "opens_at": "10:00",
+      "closes_at": "17:00"
+    }
+  },
+  "final_response_oracle": {
+    "sentence_count": 2,
+    "sentence_1_must_include": [
+      "18時まで駐車できる",
+      "18時30分"
+    ],
+    "sentence_2_must_include": [
+      "17時"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-capability-preflight-authorization-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "authorization_id", "probe_id", "direct_predecessor", "authorization_basis", "issuance_authority", "allowed_operation", "issuance_policy", "runtime", "artifacts", "issuance_records", "storage_policy"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-capability-authorization/v1"},
+    "authorization_id": {"const": "general-chat-agentic-capability-preflight-r3-user-authorization-r1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r3"},
+    "direct_predecessor": {"const": "general-chat-agentic-capability-preflight-ticket-r3"},
+    "authorization_basis": {"const": "explicit_interactive_user_authorization_2026-08-20"},
+    "issuance_authority": {"const": "authorized_not_issued"},
+    "allowed_operation": {"const": "one_non_evaluation_runtime_capability_probe"},
+    "issuance_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_issues", "retry", "overwrite", "reservation_required"],
+      "properties": {"max_issues": {"const": 1}, "retry": {"const": false}, "overwrite": {"const": false}, "reservation_required": {"const": true}}
+    },
+    "runtime": {"$ref": "#/$defs/absolute_identity"},
+    "artifacts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["predecessor_ticket", "model_input", "fixture", "tool_server", "runner", "receipt_schema"],
+      "properties": {
+        "predecessor_ticket": {"$ref": "#/$defs/relative_identity"},
+        "model_input": {"$ref": "#/$defs/relative_identity"},
+        "fixture": {"$ref": "#/$defs/relative_identity"},
+        "tool_server": {"$ref": "#/$defs/relative_identity"},
+        "runner": {"$ref": "#/$defs/relative_identity"},
+        "receipt_schema": {"$ref": "#/$defs/relative_identity"}
+      }
+    },
+    "issuance_records": {
+      "type": "object", "additionalProperties": false,
+      "required": ["root", "names", "write_once", "commit_allowed"],
+      "properties": {
+        "root": {"const": "artifacts/capability-preflight-issuance"},
+        "names": {"const": ["reservation.json", "issued.json", "receipt.json"]},
+        "write_once": {"const": true}, "commit_allowed": {"const": false}
+      }
+    },
+    "storage_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["private_root", "raw_rollout", "auth_material", "cleanup_terminal"],
+      "properties": {
+        "private_root": {"const": "/Users/kenn/repos/_verification"},
+        "raw_rollout": {"const": "temporary_until_receipt_sealed"},
+        "auth_material": {"const": "temporary_never_commit"},
+        "cleanup_terminal": {"const": "receipt_sealed_or_terminal_failure"}
+      }
+    }
+  },
+  "$defs": {
+    "relative_identity": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256", "bytes"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "bytes": {"type": "integer", "minimum": 1}}
+    },
+    "absolute_identity": {
+      "type": "object", "additionalProperties": false, "required": ["path", "version", "model", "reasoning", "sandbox", "approval_policy", "multi_agent", "max_threads", "session_mode", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^/"}, "version": {"const": "0.146.0"}, "model": {"const": "gpt-5.6-sol"}, "reasoning": {"const": "medium"},
+        "sandbox": {"const": "workspace-write"}, "approval_policy": {"const": "never"}, "multi_agent": {"const": true}, "max_threads": {"const": 4},
+        "session_mode": {"const": "persisted"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

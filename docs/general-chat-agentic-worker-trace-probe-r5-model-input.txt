@@ -1,0 +1,5 @@
+これは非評価のworker trace診断です。collaborationの`spawn_agent`を一回だけ使い、`task_name`を`parking_fact_check`、`fork_turns`を`none`とし、`message`には次の一行のJSONだけを改変せず渡してください。
+
+{"task_identity":"parking_fact_check","record_id":"parking-saturday-r1","record":{"title":"駐車場利用案内","text":"土曜日の駐車場利用時間は9時00分から18時30分までです。"},"question":"土曜日に18時まで駐車できるか、根拠とともに一文で答える","required_result_shape":{"type":"one_sentence","must_include":["18時まで駐車できる","18時30分まで"]}}
+
+担当のterminal resultを受け取るまで待ち、受け取れた場合はその内容に基づき「土曜日は18時まで駐車でき、利用時間は18時30分までです。」という一文だけを返してください。terminal resultを受け取れない場合は推測せず、「担当の結果を取得できませんでした。」という一文だけを返してください。

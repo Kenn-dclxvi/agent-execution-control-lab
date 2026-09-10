@@ -1,0 +1,24 @@
+{
+  "schema_version": "general-chat-qualification-threshold/v1",
+  "threshold_contract_id": "general-chat-semantic-grader-qualification-r1",
+  "status": "fixed",
+  "fixed_before_holdout_qualification": true,
+  "criteria": {
+    "minimum_exact_agreement_rate": 1,
+    "maximum_false_pass_rate": 0,
+    "maximum_false_fail_rate": 0,
+    "maximum_unknown_rate": 0,
+    "maximum_major_false_pass_count": 0,
+    "ambiguous_gold_items_allowed": false
+  },
+  "governance": {
+    "pilot_report_id": "sha256:7039ae072aa5af74a48bc46d978e75f40d8474782582c3d73604226869c53194",
+    "risk_policy_reference": "docs/general-chat-semantic-grader-risk-policy-r1.md",
+    "decision_record": "docs/general-chat-semantic-grader-threshold-decision-r1.md",
+    "approvers": [
+      "independent-ai-reviewer:/root/threshold_ai_review",
+      "evaluation-owner:user"
+    ],
+    "fixed_at": "2026-08-20T10:30:33Z"
+  }
+}

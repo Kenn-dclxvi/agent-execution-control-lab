@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-binding-extractor-output.schema.json",
+  "title": "General chat agentic binding extraction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "synthetic_input", "bindings", "usage", "elapsed_ms", "criteria", "admission", "sensitive_material_saved"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-binding-extraction/v1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r1"},
+    "synthetic_input": {"type": "boolean"},
+    "bindings": {"$ref": "general-chat-agentic-capability-preflight-receipt.schema.json#/$defs/extraction_bindings"},
+    "usage": {"$ref": "general-chat-agentic-capability-preflight-receipt.schema.json#/$defs/extraction_usage"},
+    "elapsed_ms": {"type": ["integer", "null"], "minimum": 0},
+    "criteria": {"$ref": "general-chat-agentic-capability-preflight-receipt.schema.json#/$defs/extraction_criteria"},
+    "admission": {"enum": ["agentic_runtime_capability_available", "agentic_runtime_capability_unavailable"]},
+    "sensitive_material_saved": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"admission": {"const": "agentic_runtime_capability_available"}}},
+      "then": {
+        "properties": {
+          "criteria": {"$ref": "general-chat-agentic-capability-preflight-receipt.schema.json#/$defs/all_criteria_satisfied"},
+          "bindings": {
+            "properties": {
+              "packet": {
+                "properties": {
+                  "forbidden_field_count": {"const": 0},
+                  "raw_transcript_required": {"const": false}
+                }
+              },
+              "final_response": {
+                "properties": {
+                  "worker_result_directly_carried": {"const": true},
+                  "root_tool_result_directly_carried": {"const": true}
+                }
+              }
+            }
+          },
+          "usage": {
+            "properties": {
+              "complete": {"const": true},
+              "duplicate_session_count": {"const": 0}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"admission": {"const": "agentic_runtime_capability_unavailable"}}},
+      "then": {
+        "properties": {
+          "criteria": {"not": {"$ref": "general-chat-agentic-capability-preflight-receipt.schema.json#/$defs/all_criteria_satisfied"}}
+        }
+      }
+    }
+  ]
+}

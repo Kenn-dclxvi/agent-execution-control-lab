@@ -1,0 +1,79 @@
+{
+  "schema_version": "general-chat-response-rating-draft/v2",
+  "contract_id": "general-chat-response-hybrid-r2-draft",
+  "status": "calibration_required_not_active",
+  "replaces_when_qualified": "general-chat-response-exact-v1",
+  "response_under_test": "assistant_message_only",
+  "grader_architecture": {
+    "deterministic": {
+      "purpose": [
+        "execution_validity",
+        "required_outcome_and_trace_checks",
+        "identity_and_hash_binding",
+        "grader_output_schema_validation"
+      ],
+      "natural_language_semantics": "not_decided_by_literal_presence_alone"
+    },
+    "semantic": {
+      "type": "reference_guided_label_model",
+      "independent_from_model_under_test": true,
+      "output_schema": "general-chat-semantic-judge-output-r1.schema.json",
+      "labels": ["pass", "fail", "unknown", "not_applicable"],
+      "returns_quality_score": false,
+      "candidate_answer_treated_as_data": true
+    },
+    "ai_panel": {
+      "purpose": "development_reference_and_semantic_grader_calibration",
+      "panel_contract": "../calibration/ai-grader-panel-r1.json",
+      "rater_packet_schema": "../calibration/rater-packet-r1.schema.json",
+      "label_schema": "../calibration/ai-grader-label-r1.schema.json",
+      "minimum_independent_graders": 3,
+      "unreconciled_disagreement": "separate_ai_adjudication_required",
+      "reference_type_without_human_audit": "multi_grader_consensus_reference"
+    },
+    "human_audit": {
+      "purpose": "optional_evidence_strengthening",
+      "required_for_pilot_start": false,
+      "required_for_human_alignment_claim": true,
+      "label_schema": "../calibration/human-label-r2.schema.json"
+    }
+  },
+  "score_mapping": {
+    "4": "全required assertionと全presentation assertionがpass",
+    "3": "全required assertionはpassだがpresentation assertionにfailがある",
+    "2": "major violationはないがrequired assertionにfailまたはunknownがある",
+    "1": "major assertionがfailである"
+  },
+  "calibration_gate": {
+    "development_pilot_input": "../calibration/calibration-input-core-r1.json",
+    "ai_panel_contract": "../calibration/ai-grader-panel-r1.json",
+    "ai_panel_state": "fixed_not_run",
+    "pilot_report_schema": "../calibration/ai-panel-pilot-report-r1.schema.json",
+    "pilot_adjudication_schema": "../calibration/ai-panel-adjudication-r1.schema.json",
+    "pilot_qualification_effect": "none",
+    "threshold_contract": "../calibration/qualification-threshold-r1.json",
+    "qualification_report_schema": "../calibration/grader-qualification-report-r1.schema.json",
+    "qualification_run_policy": "once_on_sealed_holdout",
+    "qualification_reference": null,
+    "human_alignment_state": "unmeasured",
+    "qualification_threshold": null,
+    "threshold_state": "pilot_not_completed",
+    "qualification_holdout": null,
+    "formal_evaluation_authorized": false
+  },
+  "prohibited_as_sole_semantic_oracle": [
+    "full_response_exact_match",
+    "substring_presence",
+    "text_similarity",
+    "model_under_test_self_reported_topic_sets",
+    "single_ai_judge",
+    "ai_panel_agreement_as_human_alignment_evidence"
+  ],
+  "kpis": ["quality_score", "all_agent_total_tokens", "elapsed_seconds"],
+  "non_goals": [
+    "過去resultの再採点",
+    "r1とr2のscoreをprompt効果として比較",
+    "tool順またはworker routingを第4のKPIにする",
+    "panel identity固定前のgrader runまたはformal baseline発行"
+  ]
+}

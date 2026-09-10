@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "general-chat-qualification-grader-run-result-r1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "preflight", "dispatch", "slot", "qualification_report", "measurement_state", "result_sha256"],
+  "properties": {
+    "schema_version": {"const": "general-chat-qualification-grader-run-result/v1"},
+    "run_id": {"const": "general-chat-semantic-qualification-grader-r1-run-r1"},
+    "preflight": {"$ref": "#/$defs/artifact"},
+    "dispatch": {"$ref": "#/$defs/artifact"},
+    "slot": {"$ref": "#/$defs/slot"},
+    "qualification_report": {"anyOf": [{"$ref": "#/$defs/artifact"}, {"type": "null"}]},
+    "measurement_state": {"enum": ["qualification_measurement_established", "qualification_measurement_not_established"]},
+    "result_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}}},
+    "slot": {"type": "object", "additionalProperties": false, "required": ["slot_id", "grader_execution_id", "status", "process_exit_code", "elapsed_seconds", "stdout_sha256", "stderr_sha256", "root_thread_id", "total_tokens", "label"], "properties": {"slot_id": {"const": "qualification-slot-01"}, "grader_execution_id": {"const": "semantic-qualification-terra-r1"}, "status": {"enum": ["valid", "external_failure", "unrateable"]}, "process_exit_code": {"type": "integer"}, "elapsed_seconds": {"type": "number", "minimum": 0}, "stdout_sha256": {"$ref": "#/$defs/sha256"}, "stderr_sha256": {"$ref": "#/$defs/sha256"}, "root_thread_id": {"type": ["string", "null"]}, "total_tokens": {"type": ["integer", "null"], "minimum": 0}, "label": {"anyOf": [{"$ref": "#/$defs/artifact"}, {"type": "null"}]}}}
+  }
+}

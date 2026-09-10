@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/general-chat-agentic-private-trace-adapter-output.schema.json",
+  "title": "General chat agentic private trace safe projection envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "probe_id", "runtime_id", "trace_origin", "projection_state", "normalized_trace", "trace_file_count", "raw_path_count", "model_invocations", "probe_issues", "mutation_performed", "cleanup_responsibility"],
+  "properties": {
+    "schema_version": {"const": "general-chat-agentic-private-trace-projection/v1"},
+    "probe_id": {"const": "general-chat-agentic-capability-preflight-r2"},
+    "runtime_id": {"const": "codex-cli-0.146.0-aarch64-apple-darwin-d98c29a85f529267fca03172828e0cd6db526380f1ad4a9a2fe37b111bf649a9"},
+    "trace_origin": {"enum": ["synthetic_shadow", "issued_probe"]},
+    "projection_state": {"enum": ["synthetic_shadow_verified", "issued_probe_projected"]},
+    "normalized_trace": {"type": "object"},
+    "trace_file_count": {"type": "integer", "minimum": 2},
+    "raw_path_count": {"const": 0},
+    "model_invocations": {"const": 0},
+    "probe_issues": {"const": 0},
+    "mutation_performed": {"const": false},
+    "cleanup_responsibility": {"const": "runner"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"trace_origin": {"const": "synthetic_shadow"}}, "required": ["trace_origin"]},
+      "then": {"properties": {"projection_state": {"const": "synthetic_shadow_verified"}}}
+    },
+    {
+      "if": {"properties": {"trace_origin": {"const": "issued_probe"}}, "required": ["trace_origin"]},
+      "then": {"properties": {"projection_state": {"const": "issued_probe_projected"}}}
+    }
+  ]
+}
