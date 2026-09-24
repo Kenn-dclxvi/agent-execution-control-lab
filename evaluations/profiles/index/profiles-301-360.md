@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json)
@@ -21,6 +22,8 @@
 - [`candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json)
 - [`candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json)
 - [`candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json)
+- [`candidate274-luna6-high-standard14-n5-cli0156-r1.json`](../candidate274-luna6-high-standard14-n5-cli0156-r1.json)
+- [`candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json`](../candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
 - [`candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json)
 - [`candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)

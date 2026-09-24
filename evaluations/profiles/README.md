@@ -43,6 +43,13 @@ Candidate147のinformation closureとCandidate164〜166のreview admission系列
 
 Candidate147のprofile identityと実行条件は上記result本体を正とする。READMEから推測して補完しない。
 
+### GPT-6 Luna HighでのC147・C274比較
+
+| 条件 | プロファイル | result |
+| --- | --- | --- |
+| Candidate147 | [`candidate147-luna6-high-standard14-n5-cli0156-r1`](candidate147-luna6-high-standard14-n5-cli0156-r1.json) | [追加比較記録](../results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md) |
+| Candidate274 | [`candidate274-luna6-high-standard14-n5-cli0156-r1`](candidate274-luna6-high-standard14-n5-cli0156-r1.json) | [追加比較記録](../results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md) |
+
 ### ControlFree readable系列
 
 ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた系列は、対象ケースごとにプロファイルを分け、最後にStandard14へ統合している。
@@ -76,7 +83,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`301–360`](index/profiles-301-360.md)
 - [`361–420`](index/profiles-361-420.md)
 - [`421–480`](index/profiles-421-480.md)
-- [`481–529`](index/profiles-481-529.md)
+- [`481–538`](index/profiles-481-538.md)
 
 このシャードと上のリンクは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。プロファイル追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、ディレクトリ実体、READMEから辿れる索引シャード、profile JSONのリンクの集合一致として固定する。
 

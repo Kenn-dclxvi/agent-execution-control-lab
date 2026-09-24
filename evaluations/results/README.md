@@ -1,6 +1,6 @@
 # result索引
 
-最新Standard14 resultはP006の[`THE-CAPTION投影14項目各N=5`](p006-the-caption-standard14-projection-n5_2026-08-19.md)である。P005の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP006へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP005比token `-10.57%`、elapsed `-3.90%`、Candidate147比token `+21.75%`、elapsed `+13.86%`である。F08の分割5 / 5件は後続再監査で既存`FRONTIER`へのnonconformanceと再分類し、独立mechanism gateを撤回した。現在状態は`quality_gate_passed / p005_cost_both_lower / p006_delta_causal_attribution_not_established / n20_eligible_not_started / adoption_not_decided`とする。[登録result](684cb3c380bc4b28a65680f415ecb8e6.json)を保存した。
+THE-CAPTION投影系列の最新Standard14 resultはP006の[`THE-CAPTION投影14項目各N=5`](p006-the-caption-standard14-projection-n5_2026-08-19.md)である。P005の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP006へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP005比token `-10.57%`、elapsed `-3.90%`、Candidate147比token `+21.75%`、elapsed `+13.86%`である。F08の分割5 / 5件は後続再監査で既存`FRONTIER`へのnonconformanceと再分類し、独立mechanism gateを撤回した。現在状態は`quality_gate_passed / p005_cost_both_lower / p006_delta_causal_attribution_not_established / n20_eligible_not_started / adoption_not_decided`とする。[登録result](684cb3c380bc4b28a65680f415ecb8e6.json)を保存した。
 
 直前のStandard14 resultはP005の[`THE-CAPTION投影14項目各N=5`](p005-the-caption-standard14-projection-n5_2026-08-19.md)である。C147の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP005へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP001比token `-36.30%`、elapsed `+1.23%`、Candidate147比token `+36.14%`、elapsed `+18.48%`である。現在状態は`standard14_n5_completed / quality_gate_passed / p001_token_cost_recovered_partially / p001_elapsed_not_improved / c147_cost_regression_persists / p005_canonical_unchanged / adoption_not_decided`とし、N=20へ自動拡張しない。[登録result](28082254ecc6447f8d76d63e85062299.json)を保存した。
 
@@ -27,6 +27,18 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 このディレクトリ内では、ファイル名に`-atomic-n<N>-`または`-atomic-reuse-`を持つ62件がv4（atomic run）経路である。v4経路の最初のresultは2026-07-31の[`Candidate106 / Candidate107 Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)（第5節）で、第4節のCandidate108以降はすべてv4経路である。それより前のresultはv3以前の経路であり、履歴として保持する。
 
 ## 目次
+
+- [GPT-6 Free・C274主要条件の統合比較（2026-09-24）](#free-c274-selected-model-summary-2026-09-24)
+
+- [Control-Free各モデルの推論設定比較（2026-09-24）](#free-model-reasoning-20260924)
+
+- [Control-Free GPT-6 Lunaの推論設定計測（2026-09-24）](#free-luna6-reasoning-20260924)
+
+- [Control-Free GPT-6 Solの推論設定計測（2026-09-24）](#free-sol6-reasoning-20260924)
+
+- [C274 GPT-6 SolのStandard14計測（2026-09-24）](#c274-sol6-medium-20260924)
+
+- [C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）](#c147-c274-luna6-high-20260924)
 
 - [Astra Freeのhigh・low計測（2026-09-08）](#astra-free-high-low)
 
@@ -56,6 +68,52 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c274-selected-model-summary-2026-09-24"></a>
+
+## GPT-6 Free・C274主要条件の統合比較（2026-09-24）
+
+[統合比較](free-c274-selected-model-summary_2026-09-24.md)は、GPT-6 Astra Low、Sol Medium、Luna HighのFree/C274各70件を同一条件内で整理し、入力・出力tokenとAPI料金換算を併記した。GPT-5.6 Sol Medium Freeは参考値として含め、対応するC274 resultがないこと、モデル間の条件差も明記した。一次resultと計測記録へのリンクを本文に置いた。
+
+<a id="free-model-reasoning-20260924"></a>
+
+## Control-Free各モデルの推論設定比較（2026-09-24）
+
+[比較表](control-free-model-reasoning-comparison_2026-09-24.md)と[機械可読表](control-free-model-reasoning-comparison_2026-09-24.json)にGPT-5.6 Sol、GPT-6 Astra、GPT-6 Sol、GPT-6 Lunaの10条件を並べ、品質分布・トークン数・経過時間とCLI・実施日の差を示した。モデル間の数値は記述比較として扱う。
+
+[GPT-5.6 Sol medium](d5fcd68143a94c9e8df7d988c5eba8a2.json)は70件すべて有効で、Score 4が65件、Score 0が5件だった。全エージェントトークン中央値は3,734,191、14ケース合計の経過時間中央値は1,777.42秒。atomic registryの原本をbyte一致で格納した。
+
+<a id="free-luna6-reasoning-20260924"></a>
+
+## Control-Free GPT-6 Lunaの推論設定計測（2026-09-24）
+
+[medium](f51b4e9814ad40b6a69a261cee3d8a61.json)の70件は全件有効で、Score 4が62件、Score 2が3件、Score 0が5件だった。全エージェントトークン中央値は2,509,550、総所要時間中央値は713.51秒。[3条件の計測記録](control-free-luna6-medium-high-xhigh-standard14-n5-cli0156_2026-09-24.md)にケース別内訳と既存Sol結果との条件差を保存した。
+
+[high](71a8231c6cc048d0a522aaa43d3a91b6.json)の70件は全件有効で、Score 4が65件、Score 0が5件だった。全エージェントトークン中央値は3,141,404、総所要時間中央値は1,043.65秒。
+
+[xhigh](8ff169aaae1f444e9486b8c037c86901.json)の70件は全件有効で、Score 4が65件、Score 0が5件だった。全エージェントトークン中央値は3,387,566、総所要時間中央値は1,731.16秒。
+
+<a id="free-sol6-reasoning-20260924"></a>
+
+## Control-Free GPT-6 Solの推論設定計測（2026-09-24）
+
+[low](d141469e2cdd48bda75f1772a285ee0a.json)、[medium](a26f63cd6a1b497ba5fa37ee0b35d370.json)、[high](96bfcb3ea510497e88b68fa53bf7358a.json)の各70件はすべて有効で、いずれもScore 4が65件、Score 0が5件だった。トークン中央値は順に2,516,965・2,894,385・2,877,099、総所要時間中央値は617.87・813.13・936.18秒。[3条件の計測記録](control-free-sol6-low-medium-high-standard14-n5-cli0156_2026-09-24.md)にケース別内訳と過去のAstra参考結果との条件差を保存した。
+
+<a id="c274-sol6-medium-20260924"></a>
+
+## C274 GPT-6 SolのStandard14計測（2026-09-24）
+
+[登録result](7a1e38da9ccb4269b37b26ff9d18df32.json)は70件すべて有効かつScore 4で、全エージェントトークン中央値1,809,875、総所要時間中央値681.90秒だった。[計測記録](candidate274-sol6-medium-standard14-n5-cli0156_2026-09-24.md)に過去のAstra結果を参考情報として併記した。CLI版と実行日が異なるため、モデル単独の効果は判定していない。
+
+<a id="c147-c274-luna6-high-20260924"></a>
+
+## C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）
+
+[追加比較表](candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[機械可読集計](candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.json)に、C147・C274のHigh条件を記録した。各候補の実行前照合は同じ互換キーで成立した。
+
+[C147 GPT-6 Luna High](9240ac71dd964ff0923f925c279f398b.json)は70件すべて有効かつScore 4で、全エージェントトークン中央値1,751,340、総所要時間中央値973.53秒だった。
+
+[C274 GPT-6 Luna High](f606c690dbab40a783ba31576b5b31c2.json)は70件すべて有効かつScore 4で、全エージェントトークン中央値1,808,386、総所要時間中央値975.93秒だった。
 
 <a id="astra-free-high-low"></a>
 
@@ -860,3 +918,75 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 - [candidate206-admitted-evidence-current-standard14-n5-comparison-c175-r1.json](candidate206-admitted-evidence-current-standard14-n5-comparison-c175-r1.json)
 - [candidate206-admitted-evidence-current-standard14-n5-quality-audit-r1.json](candidate206-admitted-evidence-current-standard14-n5-quality-audit-r1.json)
 - [candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json](candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json)
+
+### 既存登録ファイルへのリンク（個別要約なし）
+
+- [13fe94d5f45a4a2ba764593a5505ba9f.json](13fe94d5f45a4a2ba764593a5505ba9f.json)
+- [16c1efe030e64d5cbfd8b7426ed7c2df.json](16c1efe030e64d5cbfd8b7426ed7c2df.json)
+- [2398d22125bd4e658fe5b653679167b5.json](2398d22125bd4e658fe5b653679167b5.json)
+- [3658861abc824d52b2fd49dbba6900d3.json](3658861abc824d52b2fd49dbba6900d3.json)
+- [36c27bfed1f94b499dec80bd7bbbf60f.json](36c27bfed1f94b499dec80bd7bbbf60f.json)
+- [49305662323742b39230de44b9409981.json](49305662323742b39230de44b9409981.json)
+- [4d2971b66f0e4754b893abd7be672aad.json](4d2971b66f0e4754b893abd7be672aad.json)
+- [537193868f29459ea4038f5339f415ae.json](537193868f29459ea4038f5339f415ae.json)
+- [5daf07f0c8e34df9b6a3bff1cd9a27c3.json](5daf07f0c8e34df9b6a3bff1cd9a27c3.json)
+- [5e14b9628a1a4586832cc4f67edc2c1c.json](5e14b9628a1a4586832cc4f67edc2c1c.json)
+- [5f4ea3177785443ab2b63f67ebb6652a.json](5f4ea3177785443ab2b63f67ebb6652a.json)
+- [693240813dd34ef1a7cf6876b3f1e95c.json](693240813dd34ef1a7cf6876b3f1e95c.json)
+- [69ed4d69946d4629aeadaa4568e847fa.json](69ed4d69946d4629aeadaa4568e847fa.json)
+- [6f71ce927c694699a2909f8ef102695b.json](6f71ce927c694699a2909f8ef102695b.json)
+- [7227eaaa7e3e4cb998738ccaa5f274b7.json](7227eaaa7e3e4cb998738ccaa5f274b7.json)
+- [7df7a89b1384409f82c5ded4f943c3e1.json](7df7a89b1384409f82c5ded4f943c3e1.json)
+- [7df9ee1ec52b45b8895f92c280e98798.json](7df9ee1ec52b45b8895f92c280e98798.json)
+- [8d94cbef7b5640358bb36b140e48b8e6.json](8d94cbef7b5640358bb36b140e48b8e6.json)
+- [a0702207f03a4cb18c8b501329b74023.json](a0702207f03a4cb18c8b501329b74023.json)
+- [a1910bf71a474153947dabfc4582991a.json](a1910bf71a474153947dabfc4582991a.json)
+- [aee4cdf149ef43de9305b1a3138ebe59.json](aee4cdf149ef43de9305b1a3138ebe59.json)
+- [c05a481ec7d24be691649b2135aecbe4.json](c05a481ec7d24be691649b2135aecbe4.json)
+- [c147-sol-c274-astra-time-recording-standard14-n5_2026-09-06.json](c147-sol-c274-astra-time-recording-standard14-n5_2026-09-06.json)
+- [c22f1c7eda584010976ee4ce6647fc2f.json](c22f1c7eda584010976ee4ce6647fc2f.json)
+- [c31b560bce92400293c7b3bc40715246.json](c31b560bce92400293c7b3bc40715246.json)
+- [c5f3eb7b655941a3ac077566a735363e.json](c5f3eb7b655941a3ac077566a735363e.json)
+- [candidate147-preimplementation-adversarial-design-review-baseline-qualification-audit-r1.json](candidate147-preimplementation-adversarial-design-review-baseline-qualification-audit-r1.json)
+- [candidate147-result-effect-scope-adr9-r2-n50-audit-r1.json](candidate147-result-effect-scope-adr9-r2-n50-audit-r1.json)
+- [candidate172-preimplementation-design-admission-targeted-audit-r1.json](candidate172-preimplementation-design-admission-targeted-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-adr9-r2-n50-audit-r1.json](candidate173-concrete-counterexample-adjudication-adr9-r2-n50-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-r2-baseline-audit-r1.json](candidate173-concrete-counterexample-adjudication-r2-baseline-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-standard14-n50-audit-r1.json](candidate173-concrete-counterexample-adjudication-standard14-n50-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-standard14-quality-audit-r1.json](candidate173-concrete-counterexample-adjudication-standard14-quality-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-standard14-review-route-audit-r1.json](candidate173-concrete-counterexample-adjudication-standard14-review-route-audit-r1.json)
+- [candidate173-concrete-counterexample-adjudication-targeted-audit-r1.json](candidate173-concrete-counterexample-adjudication-targeted-audit-r1.json)
+- [candidate175-candidate208-adr9-r2-n50-mechanism-comparison-r1.json](candidate175-candidate208-adr9-r2-n50-mechanism-comparison-r1.json)
+- [candidate175-review-operation-admission-closure-adr9-r2-n5-audit-r1.json](candidate175-review-operation-admission-closure-adr9-r2-n5-audit-r1.json)
+- [candidate175-review-operation-admission-closure-adr9-r2-n50-additional-quality-audit-r1.json](candidate175-review-operation-admission-closure-adr9-r2-n50-additional-quality-audit-r1.json)
+- [candidate175-review-operation-admission-closure-adr9-r2-n50-mechanism-audit-r1.json](candidate175-review-operation-admission-closure-adr9-r2-n50-mechanism-audit-r1.json)
+- [candidate175-review-operation-admission-closure-standard14-n5-quality-audit-r1.json](candidate175-review-operation-admission-closure-standard14-n5-quality-audit-r1.json)
+- [candidate176-decision-premise-counterexample-adr9-r2-n5-audit-r1.json](candidate176-decision-premise-counterexample-adr9-r2-n5-audit-r1.json)
+- [candidate176-decision-premise-counterexample-adr9-r2-n5-comparison-c175-r1.json](candidate176-decision-premise-counterexample-adr9-r2-n5-comparison-c175-r1.json)
+- [candidate176-decision-premise-counterexample-standard14-n5-comparison-c175-r1.json](candidate176-decision-premise-counterexample-standard14-n5-comparison-c175-r1.json)
+- [candidate176-decision-premise-counterexample-standard14-n5-quality-audit-r1.json](candidate176-decision-premise-counterexample-standard14-n5-quality-audit-r1.json)
+- [candidate176-decision-premise-counterexample-targeted-n20-audit-r1.json](candidate176-decision-premise-counterexample-targeted-n20-audit-r1.json)
+- [candidate176-decision-premise-counterexample-targeted-n50-audit-r1.json](candidate176-decision-premise-counterexample-targeted-n50-audit-r1.json)
+- [candidate178-support-source-contract-adr9-r2-n5-audit-r1.json](candidate178-support-source-contract-adr9-r2-n5-audit-r1.json)
+- [candidate204-portable-execution-core-f01-f02-f03-n5-mechanism-audit-r1.json](candidate204-portable-execution-core-f01-f02-f03-n5-mechanism-audit-r1.json)
+- [candidate204-portable-execution-core-f01-f02-f03-n5-quality-audit-r1.json](candidate204-portable-execution-core-f01-f02-f03-n5-quality-audit-r1.json)
+- [candidate222-review-source-observation-view-adr9-r2-n5-mechanism-base-audit-r1.json](candidate222-review-source-observation-view-adr9-r2-n5-mechanism-base-audit-r1.json)
+- [candidate254-independent-check-same-model-step-f04-n5-mechanism-audit-r1.json](candidate254-independent-check-same-model-step-f04-n5-mechanism-audit-r1.json)
+- [candidate254-independent-check-same-model-step-f04-n5-quality-audit-r1.json](candidate254-independent-check-same-model-step-f04-n5-quality-audit-r1.json)
+- [candidate269-natural-language-validation-carrier-closure-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json](candidate269-natural-language-validation-carrier-closure-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json)
+- [candidate269-natural-language-validation-carrier-closure-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json](candidate269-natural-language-validation-carrier-closure-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json)
+- [candidate270-natural-language-predicate-bound-validation-result-standard14-n20-validation-carrier-audit-r1.json](candidate270-natural-language-predicate-bound-validation-result-standard14-n20-validation-carrier-audit-r1.json)
+- [candidate270-natural-language-predicate-bound-validation-result-standard14-n5-validation-carrier-audit-r1.json](candidate270-natural-language-predicate-bound-validation-result-standard14-n5-validation-carrier-audit-r1.json)
+- [candidate272-natural-language-issued-result-permission-removal-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json](candidate272-natural-language-issued-result-permission-removal-f01-f02-f03-f10-entrypoint-n5-quality-audit-r1.json)
+- [candidate274-astra-high-medium-standard14-n5_2026-09-08.json](candidate274-astra-high-medium-standard14-n5_2026-09-08.json)
+- [candidate274-astra-low-medium-high-xhigh-standard14-n5_2026-09-08.json](candidate274-astra-low-medium-high-xhigh-standard14-n5_2026-09-08.json)
+- [candidate274-astra-max-low-medium-high-xhigh-standard14-n5_2026-09-08.json](candidate274-astra-max-low-medium-high-xhigh-standard14-n5_2026-09-08.json)
+- [candidate274-astra-medium-high-xhigh-standard14-n5_2026-09-08.json](candidate274-astra-medium-high-xhigh-standard14-n5_2026-09-08.json)
+- [candidate274-astra-medium-remeasure-high-xhigh-standard14-n5_2026-09-08.json](candidate274-astra-medium-remeasure-high-xhigh-standard14-n5_2026-09-08.json)
+- [candidate274-sol6-medium-standard14-n5-cli0156_2026-09-24.json](candidate274-sol6-medium-standard14-n5-cli0156_2026-09-24.json)
+- [control-free-luna6-medium-high-xhigh-standard14-n5-cli0156_2026-09-24.json](control-free-luna6-medium-high-xhigh-standard14-n5-cli0156_2026-09-24.json)
+- [control-free-sol6-low-medium-high-standard14-n5-cli0156_2026-09-24.json](control-free-sol6-low-medium-high-standard14-n5-cli0156_2026-09-24.json)
+- [d3e91302f0d14350906075676c5a2791.json](d3e91302f0d14350906075676c5a2791.json)
+- [d85781ef65c04be9a17706c0f21e0207.json](d85781ef65c04be9a17706c0f21e0207.json)
+- [d85929dc3c334c9a836c416f0eb832ec.json](d85929dc3c334c9a836c416f0eb832ec.json)
+- [eba0a4bc1d0e4391afa631462b8daccb.json](eba0a4bc1d0e4391afa631462b8daccb.json)
