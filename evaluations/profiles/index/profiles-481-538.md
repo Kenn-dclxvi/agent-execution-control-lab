@@ -1,7 +1,10 @@
-# Profile index 481-529
+# Profile index 481-538
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate83-delegation-value-boundary-v14-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate83-delegation-value-boundary-v14-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json)
+- [`candidate84-delegation-marginal-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json`](../candidate84-delegation-marginal-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json)
+- [`candidate85-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate85-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate85-planning-first-producer-selection-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate85-planning-first-producer-selection-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate85-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate85-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json)
 - [`candidate86-producer-plan-fast-path-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate86-producer-plan-fast-path-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
@@ -38,6 +41,9 @@
 - [`control-free-astra-low-standard14-n5-cli0153-r1.json`](../control-free-astra-low-standard14-n5-cli0153-r1.json)
 - [`control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json`](../control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json)
 - [`control-free-generic-expanded12-global-m24-n5-r1.json`](../control-free-generic-expanded12-global-m24-n5-r1.json)
+- [`control-free-luna6-high-standard14-n5-cli0156-r1.json`](../control-free-luna6-high-standard14-n5-cli0156-r1.json)
+- [`control-free-luna6-medium-standard14-n5-cli0156-r1.json`](../control-free-luna6-medium-standard14-n5-cli0156-r1.json)
+- [`control-free-luna6-xhigh-standard14-n5-cli0156-r1.json`](../control-free-luna6-xhigh-standard14-n5-cli0156-r1.json)
 - [`control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json`](../control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)
 - [`control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
@@ -45,6 +51,9 @@
 - [`control-free-repository-v13-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-standard14-global-m24-n5-r1.json)
 - [`control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
 - [`control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`control-free-sol6-high-standard14-n5-cli0156-r1.json`](../control-free-sol6-high-standard14-n5-cli0156-r1.json)
+- [`control-free-sol6-low-standard14-n5-cli0156-r1.json`](../control-free-sol6-low-standard14-n5-cli0156-r1.json)
+- [`control-free-sol6-medium-standard14-n5-cli0156-r1.json`](../control-free-sol6-medium-standard14-n5-cli0156-r1.json)
 - [`p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

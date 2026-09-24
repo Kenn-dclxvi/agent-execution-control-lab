@@ -1,0 +1,382 @@
+{
+  "campaign": {
+    "elapsed_seconds": 441.814741707989,
+    "excluded_attempts": 0,
+    "paired_interleaved_candidates": [
+      "C147",
+      "C274"
+    ],
+    "plan_count": 2,
+    "requested_slots": 140,
+    "status": "complete",
+    "valid_slots": 140
+  },
+  "codex_cli": "0.156.1",
+  "comparison_status": "same_compatibility_key_prompt_identity_varies",
+  "evaluation_set": {
+    "cases": 14,
+    "iterations": 5,
+    "runs_per_condition": 70,
+    "set_id": "the-caption-standard14-r1"
+  },
+  "evidence_directory": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate147-vs-candidate274-luna6-high-standard14-n5-cli0156-20260924-r1",
+  "max_workers": 24,
+  "measurement_date": "2026-09-24",
+  "model": "gpt-6-luna",
+  "pricing": {
+    "cached_input_used": false,
+    "checked_on": "2026-09-24",
+    "context_assumption": "short_context",
+    "input_usd_per_million": 0.1,
+    "method": "All input tokens are costed at the uncached standard input rate; all output tokens are costed at the standard output rate. This is an API-equivalent estimate, not a Codex Free charge.",
+    "output_usd_per_million": 0.5,
+    "processing": "Standard",
+    "source": "https://developers.openai.com/api/docs/pricing"
+  },
+  "ranking_metric": "quality_points_total / estimated_api_cost_usd; higher ranks first",
+  "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+  "reasoning_effort": "high",
+  "rows": [
+    {
+      "all_runs": {
+        "input_tokens": 8542496,
+        "output_tokens": 178748,
+        "total_tokens": 8721244
+      },
+      "comparison_preflight_receipt": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate147-luna6-high-standard14-n5-cli0156-20260924-r1/batch-001/cycle/layer1/comparison-preflight.json",
+      "comparison_preflight_receipt_sha256": "8d3450f4939829a2e3ee6385cbf3c195c7abe057b05d9f0438471c5fffb551bf",
+      "compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e",
+      "cost_effectiveness_rank": 1,
+      "estimated_api_cost_usd": 0.943624,
+      "excluded_runs": 0,
+      "iteration_token_and_elapsed_totals": {
+        "1": {
+          "elapsed_seconds": 925.9368459960679,
+          "input": 1625116,
+          "output": 36257,
+          "total": 1661373
+        },
+        "2": {
+          "elapsed_seconds": 984.4370657919208,
+          "input": 1783422,
+          "output": 33204,
+          "total": 1816626
+        },
+        "3": {
+          "elapsed_seconds": 893.1666918770643,
+          "input": 1714288,
+          "output": 37052,
+          "total": 1751340
+        },
+        "4": {
+          "elapsed_seconds": 1068.7333975400543,
+          "input": 1851622,
+          "output": 38055,
+          "total": 1889677
+        },
+        "5": {
+          "elapsed_seconds": 973.534050543909,
+          "input": 1568048,
+          "output": 34180,
+          "total": 1602228
+        }
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 925.9368459960679,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1661373
+        },
+        {
+          "elapsed_seconds": 984.4370657919208,
+          "iteration": 2,
+          "quality_score": 100.0,
+          "total_tokens": 1816626
+        },
+        {
+          "elapsed_seconds": 893.1666918770643,
+          "iteration": 3,
+          "quality_score": 100.0,
+          "total_tokens": 1751340
+        },
+        {
+          "elapsed_seconds": 1068.7333975400543,
+          "iteration": 4,
+          "quality_score": 100.0,
+          "total_tokens": 1889677
+        },
+        {
+          "elapsed_seconds": 973.534050543909,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1602228
+        }
+      ],
+      "label": "C147",
+      "median": {
+        "elapsed_seconds": 973.534050543909,
+        "input_tokens": 1714288,
+        "output_tokens": 36257,
+        "total_tokens": 1751340
+      },
+      "price_usd_per_million_tokens": {
+        "output": 0.5,
+        "uncached_input": 0.1
+      },
+      "profile_id": "candidate147-luna6-high-standard14-n5-cli0156-r1",
+      "prompt_set_identity": {
+        "bundle_sha256": "51b0395d2a82b90e12b4d457d441c43a899577128cfa887c454618c9d2e0a5cc",
+        "name": "the-caption-3ce91a4-result-effect-scope-r1",
+        "revision": "r1"
+      },
+      "quality_audit": {
+        "diagnostic_counts": {
+          "command_protocol_violations": 0,
+          "monthly_review_numeric_location": {
+            "exact": 4,
+            "mismatch": 1
+          },
+          "owner_producer_evidence_inadmissible": 55
+        },
+        "failure_counts": {},
+        "rateable_runs": 70,
+        "run_count": 70,
+        "score_counts": {
+          "4": 70
+        }
+      },
+      "quality_points_per_usd": 296.72848,
+      "quality_points_total": 280,
+      "result_content_sha256": "41c7f7c59a80ac45da3584623da78d605ca9c2ce957d4383b19e782147a919f2",
+      "result_id": "9240ac71dd964ff0923f925c279f398b",
+      "score_counts": {
+        "4": 70
+      },
+      "valid_runs": 70
+    },
+    {
+      "all_runs": {
+        "input_tokens": 8854709,
+        "output_tokens": 198318,
+        "total_tokens": 9053027
+      },
+      "comparison_preflight_receipt": "/Users/kenn/repos/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate274-luna6-high-standard14-n5-cli0156-20260924-r1/batch-001/cycle/layer1/comparison-preflight.json",
+      "comparison_preflight_receipt_sha256": "fcee436eacca911bdd834f395005237ce1465431e86b4ee2f5e38e07aeb01045",
+      "compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e",
+      "cost_effectiveness_rank": 2,
+      "estimated_api_cost_usd": 0.98463,
+      "excluded_runs": 0,
+      "iteration_token_and_elapsed_totals": {
+        "1": {
+          "elapsed_seconds": 975.9297825428657,
+          "input": 1768213,
+          "output": 40173,
+          "total": 1808386
+        },
+        "2": {
+          "elapsed_seconds": 900.127092294977,
+          "input": 1598855,
+          "output": 36576,
+          "total": 1635431
+        },
+        "3": {
+          "elapsed_seconds": 917.7546599127818,
+          "input": 1608284,
+          "output": 35713,
+          "total": 1643997
+        },
+        "4": {
+          "elapsed_seconds": 1019.3411222920986,
+          "input": 1933851,
+          "output": 40480,
+          "total": 1974331
+        },
+        "5": {
+          "elapsed_seconds": 1128.3110834598774,
+          "input": 1945506,
+          "output": 45376,
+          "total": 1990882
+        }
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 975.9297825428657,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1808386
+        },
+        {
+          "elapsed_seconds": 900.127092294977,
+          "iteration": 2,
+          "quality_score": 100.0,
+          "total_tokens": 1635431
+        },
+        {
+          "elapsed_seconds": 917.7546599127818,
+          "iteration": 3,
+          "quality_score": 100.0,
+          "total_tokens": 1643997
+        },
+        {
+          "elapsed_seconds": 1019.3411222920986,
+          "iteration": 4,
+          "quality_score": 100.0,
+          "total_tokens": 1974331
+        },
+        {
+          "elapsed_seconds": 1128.3110834598774,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1990882
+        }
+      ],
+      "label": "C274",
+      "median": {
+        "elapsed_seconds": 975.9297825428657,
+        "input_tokens": 1768213,
+        "output_tokens": 40173,
+        "total_tokens": 1808386
+      },
+      "price_usd_per_million_tokens": {
+        "output": 0.5,
+        "uncached_input": 0.1
+      },
+      "profile_id": "candidate274-luna6-high-standard14-n5-cli0156-r1",
+      "prompt_set_identity": {
+        "bundle_sha256": "7454c6921e60db3334d8308b9cc016833a6a8588bc2ca4c275d78197780e4e66",
+        "name": "the-caption-3ce91a4-execution-boundary-core-r1",
+        "revision": "r1"
+      },
+      "quality_audit": {
+        "diagnostic_counts": {
+          "command_protocol_violations": 0,
+          "monthly_review_numeric_location": {
+            "exact": 5
+          },
+          "owner_producer_evidence_inadmissible": 54
+        },
+        "failure_counts": {},
+        "rateable_runs": 70,
+        "run_count": 70,
+        "score_counts": {
+          "4": 70
+        }
+      },
+      "quality_points_per_usd": 284.37081,
+      "quality_points_total": 280,
+      "result_content_sha256": "2699ef0affd1690e0491c1ecd40cdc6ceb69703f6998c6e514915a746f1b50c6",
+      "result_id": "f606c690dbab40a783ba31576b5b31c2",
+      "score_counts": {
+        "4": 70
+      },
+      "valid_runs": 70
+    },
+    {
+      "all_runs": {
+        "input_tokens": 16135258,
+        "output_tokens": 193618,
+        "total_tokens": 16328876
+      },
+      "comparison_preflight_receipt": null,
+      "comparison_preflight_receipt_sha256": null,
+      "compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e",
+      "cost_effectiveness_rank": 3,
+      "estimated_api_cost_usd": 1.710335,
+      "excluded_runs": 0,
+      "iteration_token_and_elapsed_totals": {
+        "1": {
+          "elapsed_seconds": 1007.3414732066449,
+          "input": 3104244,
+          "output": 37160,
+          "total": 3141404
+        },
+        "2": {
+          "elapsed_seconds": 983.991863044328,
+          "input": 3016570,
+          "output": 37115,
+          "total": 3053685
+        },
+        "3": {
+          "elapsed_seconds": 1349.0292998309014,
+          "input": 3959401,
+          "output": 44427,
+          "total": 4003828
+        },
+        "4": {
+          "elapsed_seconds": 1043.65416966693,
+          "input": 3332064,
+          "output": 39172,
+          "total": 3371236
+        },
+        "5": {
+          "elapsed_seconds": 1109.0849499988835,
+          "input": 2722979,
+          "output": 35744,
+          "total": 2758723
+        }
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 1007.3414732066449,
+          "iteration": 1,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 3141404
+        },
+        {
+          "elapsed_seconds": 983.991863044328,
+          "iteration": 2,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 3053685
+        },
+        {
+          "elapsed_seconds": 1349.0292998309014,
+          "iteration": 3,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 4003828
+        },
+        {
+          "elapsed_seconds": 1043.65416966693,
+          "iteration": 4,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 3371236
+        },
+        {
+          "elapsed_seconds": 1109.0849499988835,
+          "iteration": 5,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 2758723
+        }
+      ],
+      "label": "Control-Free",
+      "median": {
+        "elapsed_seconds": 1043.65416966693,
+        "input_tokens": 3104244,
+        "output_tokens": 37160,
+        "total_tokens": 3141404
+      },
+      "price_usd_per_million_tokens": {
+        "output": 0.5,
+        "uncached_input": 0.1
+      },
+      "profile_id": "control-free-luna6-high-standard14-n5-cli0156-r1",
+      "prompt_set_identity": {
+        "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+        "name": "the-caption-3ce91a4-control-free-repository-r1",
+        "revision": "r1"
+      },
+      "quality_audit": null,
+      "quality_points_per_usd": 152.01702,
+      "quality_points_total": 260,
+      "result_content_sha256": "78d2eae60f6af477eb046bbd67bb7a3bc716cd6654abd9e5050d39b1c5cb08b1",
+      "result_id": "71a8231c6cc048d0a522aaa43d3a91b6",
+      "score_counts": {
+        "0": 5,
+        "4": 65
+      },
+      "valid_runs": 70
+    }
+  ],
+  "schema_version": "the-caption-prompt.c147-c274-luna6-high-standard14-cost-comparison/v1",
+  "shared_compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e"
+}
