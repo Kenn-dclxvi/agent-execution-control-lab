@@ -39,6 +39,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 - [C274 GPT-6 SolのStandard14計測（2026-09-24）](#c274-sol6-medium-20260924)
 
 - [C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）](#c147-c274-luna6-high-20260924)
+- [C163 GPT-6 Luna High（2026-09-24）](#c163-luna6-high-20260924)
+- [Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）](#4文版-standard14-gpt-6-luna-high-20260924)
 
 - [Astra Freeのhigh・low計測（2026-09-08）](#astra-free-high-low)
 
@@ -114,6 +116,20 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 [C147 GPT-6 Luna High](9240ac71dd964ff0923f925c279f398b.json)は70件すべて有効かつScore 4で、全エージェントトークン中央値1,751,340、総所要時間中央値973.53秒だった。
 
 [C274 GPT-6 Luna High](f606c690dbab40a783ba31576b5b31c2.json)は70件すべて有効かつScore 4で、全エージェントトークン中央値1,808,386、総所要時間中央値975.93秒だった。
+
+<a id="c163-luna6-high-20260924"></a>
+
+## C163 GPT-6 Luna High（2026-09-24）
+
+[比較記録](candidate163-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[機械可読集計](candidate163-luna6-high-standard14-n5-cli0156_2026-09-24.json)に、C163のStandard14 N=5追加計測を保存した。70 run中69件がScore 4、1件がScore 3で、品質gateは不通過。Control-Free比の中央値はtoken -22.33%、elapsed +1.07%だったため、コスト改善とは判定しない。一次resultは[e92b8cfddcd942cda3d5686b7f532726](e92b8cfddcd942cda3d5686b7f532726.json)。
+
+C163の5文目だけを削除した4文版は、[`F02 Luna High N=5`](candidate163-four-sentence-ablation-f02-luna6-high-n5_2026-09-24.md)と[機械可読result](candidate163-four-sentence-ablation-f02-luna6-high-n5_2026-09-24.json)に記録した。F02は5 / 5件Score 4。C163 F02よりfocused pytest失敗後に再試験・full gateへ進み、両方passした。結果はF02限定である。
+
+<a id="4文版-standard14-gpt-6-luna-high-20260924"></a>
+
+## Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）
+
+4文版Candidateの[Standard14 N=5 result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.json)を保存した。F02先行5件を再利用して不足65件を実行し、計70件が有効・採点可能、除外0だった。登録時のScore `4`は69 / 70件である。残るF02 1件はfocused pytest初回exit `2`だけを見てScore `3`とされた後、同じ試験の再実行exit `0`と`main_verify.sh` exit `0`を根拠に`4`へ訂正された。過去のatomic run記録はwrite-onceのため元の`3`を保持しており、訂正反映後は70 / 70件Score `4`となる。採点内訳は[quality audit](four-verified-lines-ablation-luna6-high-standard14-n5-quality-audit-r1.json)、中央値差分は[comparison view](four-verified-lines-ablation-luna6-high-standard14-n5-comparisons_2026-09-24.json)を参照する。
 
 <a id="astra-free-high-low"></a>
 

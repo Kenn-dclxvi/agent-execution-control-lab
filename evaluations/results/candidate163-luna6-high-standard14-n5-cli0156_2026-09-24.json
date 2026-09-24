@@ -1,0 +1,100 @@
+{
+  "schema_version": "the-caption-prompt.c163-luna6-high-standard14-measurement/v1",
+  "measurement_date": "2026-09-24",
+  "campaign": {
+    "attempt_count": 70,
+    "elapsed_seconds": 350.2873310840223,
+    "ended_at": "2026-09-24T06:04:54.856321+00:00",
+    "errors": [],
+    "excluded_attempt_count": 0,
+    "max_workers": 24,
+    "requested_slots": 70,
+    "schedule_policy": "global_queue",
+    "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+    "started_at": "2026-09-24T05:59:04.565889+00:00",
+    "status": "complete",
+    "valid_slots": 70
+  },
+  "conditions": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "codex_cli": "0.156.1",
+    "evaluation_set": "the-caption-standard14-r1",
+    "case_count": 14,
+    "runs_per_case": 5,
+    "max_workers": 24,
+    "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14"
+  },
+  "compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e",
+  "comparison": {
+    "reference_result_id": "71a8231c6cc048d0a522aaa43d3a91b6",
+    "reference_prompt_identity": {
+      "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+      "name": "the-caption-3ce91a4-control-free-repository-r1",
+      "revision": "r1"
+    },
+    "candidate_prompt_identity": {
+      "bundle_sha256": "4813ccf9fb3813b5b4f48b58a53dc4c8833b9971140a65aadd3b3c76d6bea62b",
+      "name": "the-caption-3ce91a4-five-verified-lines-integrated-r1",
+      "revision": "r1"
+    },
+    "matched_execution_strata": 1,
+    "sample_count": 5,
+    "median_reference": {
+      "elapsed_seconds": 1043.65416966693,
+      "quality_score": 92.85714285714286,
+      "total_tokens": 3141404
+    },
+    "median_candidate": {
+      "elapsed_seconds": 1054.7984574572183,
+      "quality_score": 100.0,
+      "total_tokens": 2439785
+    },
+    "candidate_minus_reference": {
+      "elapsed_seconds": 11.144287790288217,
+      "quality_score": 7.142857142857139,
+      "total_tokens": -701619
+    },
+    "percent_change": {
+      "total_tokens": -22.33456760098351,
+      "elapsed_seconds": 1.0678142352312792
+    }
+  },
+  "quality_audit": {
+    "score_counts": {
+      "3": 1,
+      "4": 69
+    },
+    "failure_counts": {
+      "required_command_failed:pytest:tests/unit/test_collection_history_updater.py:tests/unit/test_v4_engine.py": 1,
+      "required_command_not_attempted:bash:scripts/dev/main_verify.sh": 1
+    },
+    "quality_gate": "not_passed",
+    "below_four_runs": [
+      {
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 3,
+        "score": 3,
+        "reason": "主要成果は確認できたが、必須試験コマンドの成功証拠が不足した。",
+        "failures": [
+          "required_command_failed:pytest:tests/unit/test_collection_history_updater.py:tests/unit/test_v4_engine.py",
+          "required_command_not_attempted:bash:scripts/dev/main_verify.sh"
+        ]
+      }
+    ]
+  },
+  "result_id": "e92b8cfddcd942cda3d5686b7f532726",
+  "result_content_sha256": "804f6820e9b10a764e42085100d27ce129821dbce608e65aed72e4cf1cbcba93",
+  "evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate163-luna6-high-standard14-n5-cli0156-20260924-r1",
+  "preflight": {
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate163-luna6-high-standard14-n5-cli0156-20260924-r1/batch-001/cycle/layer1/comparison-preflight.json",
+    "sha256": "4a5b9efce9baeb525bad331d70765db51107115d4fb3c0b8e26a2f0a8b86b25d",
+    "authorized_slots": 70,
+    "issued_slots": 70
+  },
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_created",
+    "runtime_projection": "not_authorized"
+  }
+}

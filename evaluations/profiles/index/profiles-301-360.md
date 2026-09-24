@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate265-instruction-result-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate265-instruction-result-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
+- [`candidate266-declared-instruction-descendant-read-dependency-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate266-declared-instruction-descendant-read-dependency-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
 - [`candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json)
-- [`candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json)

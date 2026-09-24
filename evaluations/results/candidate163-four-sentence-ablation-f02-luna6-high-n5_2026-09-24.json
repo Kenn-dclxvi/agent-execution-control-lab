@@ -1,0 +1,66 @@
+{
+  "schema_version": "the-caption-prompt.targeted-ablation-result/v1",
+  "result_id": "candidate163-four-sentence-ablation-f02-luna6-high-n5-2026-09-24",
+  "target": {
+    "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+    "revision": "r1",
+    "evaluation_set": "the-caption-standard14-r1"
+  },
+  "comparison": {
+    "reference_result_id": "e92b8cfddcd942cda3d5686b7f532726",
+    "compatibility_key": "d72f0ae2d2d945c77bfab3ee51284db2dc8011fbc3072d096ecc3ca041fa304e",
+    "only_declared_condition_change": "prompt identity",
+    "reference_prompt_identity": {
+      "name": "the-caption-3ce91a4-five-verified-lines-integrated-r1",
+      "revision": "r1",
+      "bundle_sha256": "4813ccf9fb3813b5b4f48b58a53dc4c8833b9971140a65aadd3b3c76d6bea62b"
+    },
+    "candidate_prompt_identity": {
+      "name": "the-caption-3ce91a4-four-verified-lines-ablation-r1",
+      "revision": "r1",
+      "bundle_sha256": "357f684904979c7703a1d9248d3b88ad9a1704eefa4243affc912ff6921cb5ac"
+    },
+    "sample_count": 5,
+    "score_4_counts": {
+      "reference": 4,
+      "candidate": 5
+    },
+    "median_quality_score": {
+      "reference": 4,
+      "candidate": 4,
+      "difference": 0
+    },
+    "median_total_tokens": {
+      "reference": 375255,
+      "candidate": 296506,
+      "difference": -78749,
+      "percent_difference": -20.98
+    },
+    "median_elapsed_seconds": {
+      "reference": 132.33265570900403,
+      "candidate": 100.8988142919261,
+      "difference": -31.43384141707793,
+      "percent_difference": -23.75
+    }
+  },
+  "observed_validation_path": {
+    "reference_failed_iteration": 4,
+    "reference_focused_pytest_exit_codes": [2, 1],
+    "reference_full_gate_issued": false,
+    "candidate_failed_first_attempt_iteration": 2,
+    "candidate_focused_pytest_exit_codes": [2, 0],
+    "candidate_full_gate_exit_code": 0,
+    "candidate_other_runs_focused_and_full_gate_exit_code": 0
+  },
+  "rating_correction": {
+    "run_id": "f6ec1150753843669e47bcf3a2e7094f",
+    "stored_initial_score": 3,
+    "corrected_score": 4,
+    "correction_record": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate163-4sentence-f02-luna6-high-20260924-r1/rating-correction-f6ec1150753843669e47bcf3a2e7094f-v2.json",
+    "reason": "All-agent command evidence contains both the successful focused pytest rerun (exit 0) and full gate (exit 0); the initial rating considered only the first failed attempt."
+  },
+  "evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/candidate163-4sentence-f02-luna6-high-20260924-r1",
+  "adoption_status": "not_decided",
+  "release_status": "not_created",
+  "runtime_projection_status": "not_authorized"
+}
