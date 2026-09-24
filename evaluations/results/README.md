@@ -41,6 +41,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 - [C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）](#c147-c274-luna6-high-20260924)
 - [C163 GPT-6 Luna High（2026-09-24）](#c163-luna6-high-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）](#4文版-standard14-gpt-6-luna-high-20260924)
+- [Candidate275 4文版 Standard14 GPT-6 Luna xHigh / MAX（2026-09-24）](#candidate275-luna6-xhigh-max-standard14-20260924)
+- [Candidate275 4文版 Standard14 GPT-6 Sol Low（2026-09-24）](#candidate275-sol6-low-standard14-20260924)
+- [Candidate275 4文版 Standard14 GPT-6 Sol Medium（2026-09-24）](#candidate275-sol6-medium-standard14-20260924)
+- [Candidate275 Standard14 GPT-6 Astra Low・CLI 0.156.1（2026-09-24）](#candidate275-astra6-low-cli0156-20260924)
 
 - [Astra Freeのhigh・low計測（2026-09-08）](#astra-free-high-low)
 
@@ -130,6 +134,32 @@ C163の5文目だけを削除した4文版は、[`F02 Luna High N=5`](candidate1
 ## Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）
 
 4文版Candidateの[Standard14 N=5 result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.json)を保存した。F02先行5件を再利用して不足65件を実行し、計70件が有効・採点可能、除外0だった。登録時のScore `4`は69 / 70件である。残るF02 1件はfocused pytest初回exit `2`だけを見てScore `3`とされた後、同じ試験の再実行exit `0`と`main_verify.sh` exit `0`を根拠に`4`へ訂正された。過去のatomic run記録はwrite-onceのため元の`3`を保持しており、訂正反映後は70 / 70件Score `4`となる。採点内訳は[quality audit](four-verified-lines-ablation-luna6-high-standard14-n5-quality-audit-r1.json)、中央値差分は[comparison view](four-verified-lines-ablation-luna6-high-standard14-n5-comparisons_2026-09-24.json)を参照する。
+
+<a id="candidate275-luna6-xhigh-max-standard14-20260924"></a>
+
+## Candidate275 4文版 Standard14 GPT-6 Luna xHigh / MAX（2026-09-24）
+
+GPT-6 Lunaのxhighとmaxを各14ケース×N=5、70 runずつ計測した。Mac mini（Mac16,10）上で両条件とも70 / 70件が有効・採点可能、Score 4、除外0件だった。品質中央値は両方100.000。トークン中央値はxHigh 2,716,023、MAX 2,737,921で、MAXが21,898（+0.81%）多かった。経過時間中央値はxHigh 1,560.930秒、MAX 1,717.125秒で、MAXが156.195秒（+10.01%）長かった。これは今回の固定Standard14 N=5で観測した値である。
+
+各条件の[計測記録](four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156_2026-09-24.md)と[計測記録](four-verified-lines-ablation-luna6-max-standard14-n5-cli0156_2026-09-24.md)、[xHighの登録result](four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156_2026-09-24.json)、[MAXの登録result](four-verified-lines-ablation-luna6-max-standard14-n5-cli0156_2026-09-24.json)、[xHigh品質監査](four-verified-lines-ablation-luna6-xhigh-standard14-n5-quality-audit-r1.json)、[MAX品質監査](four-verified-lines-ablation-luna6-max-standard14-n5-quality-audit-r1.json)を保存した。品質監査のowner-producer証拠不適格50 / 70件・51 / 70件、command protocol違反1件・5件は診断値であり、品質契約上のScoreには影響しない。
+
+<a id="candidate275-sol6-low-standard14-20260924"></a>
+
+## Candidate275 4文版 Standard14 GPT-6 Sol Low（2026-09-24）
+
+[計測記録](four-verified-lines-ablation-sol6-low-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-sol6-low-standard14-n5-cli0156_2026-09-24.json)を保存した。70件すべて有効で、Score 4が68件、Score 2が2件、除外0件。品質中央値100%、トークン中央値2,163,785、総所要時間中央値603.17秒だった。
+
+<a id="candidate275-sol6-medium-standard14-20260924"></a>
+
+## Candidate275 4文版 Standard14 GPT-6 Sol Medium（2026-09-24）
+
+[計測記録](four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156_2026-09-24.json)を保存した。70件すべて有効で、Score 4が69件、Score 2が1件、除外0件。品質中央値100%、トークン中央値2,444,384、総所要時間中央値776.91秒だった。
+
+<a id="candidate275-astra6-low-cli0156-20260924"></a>
+
+## Candidate275 Standard14 GPT-6 Astra Low・CLI 0.156.1（2026-09-24）
+
+[計測記録](four-verified-lines-ablation-astra6-low-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-astra6-low-standard14-n5-cli0156_2026-09-24.json)、[品質監査](four-verified-lines-ablation-astra6-low-standard14-n5-quality-audit-r1.json)を保存した。70件すべて有効・Score 4で、除外0件。品質中央値100%、全エージェントトークン中央値1,772,618、総所要時間中央値669.08秒だった。
 
 <a id="astra-free-high-low"></a>
 

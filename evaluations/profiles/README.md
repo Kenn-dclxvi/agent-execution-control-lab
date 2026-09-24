@@ -64,6 +64,8 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 | 5文統合 | [`Candidate163 Standard14`](candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json) / [`GPT-6 Luna High`](candidate163-luna6-high-standard14-n5-cli0156-r1.json) | [`Medium result`](../results/candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md) / [`High result`](../results/candidate163-luna6-high-standard14-n5-cli0156_2026-09-24.md) |
 | 5文目削除の影響確認 | [`4文版・GPT-6 Luna High・F02 N=5`](candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json) | [`F02 result`](../results/candidate163-four-sentence-ablation-f02-luna6-high-n5_2026-09-24.md)。C163 Highの固定条件とLayer 1を再利用 |
 | Candidate275・4文版 Standard14 | [`GPT-6 Luna High・N=5`](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json) | [`Standard14 result`](../results/four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)。F02先行5件を再利用し、不足65件を実行 |
+| Candidate275・4文版 Standard14 | [GPT-6 Luna xHigh・N=5](four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json) | [Standard14 result](../results/four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156_2026-09-24.md)。70 / 70件Score 4、除外0件 |
+| Candidate275・4文版 Standard14 | [GPT-6 Luna MAX・N=5](four-verified-lines-ablation-luna6-max-standard14-n5-cli0156-r1.json) | [Standard14 result](../results/four-verified-lines-ablation-luna6-max-standard14-n5-cli0156_2026-09-24.md)。70 / 70件Score 4、除外0件 |
 
 ### 個別に導線を保持する履歴アンカー
 
@@ -86,7 +88,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`361–420`](index/profiles-361-420.md)
 - [`421–480`](index/profiles-421-480.md)
 - [`481–540`](index/profiles-481-540.md)
-- [`541–541`](index/profiles-541-541.md)
+- [`541–543`](index/profiles-541-543.md)
 
 このシャードと上のリンクは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。プロファイル追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、ディレクトリ実体、READMEから辿れる索引シャード、profile JSONのリンクの集合一致として固定する。
 
