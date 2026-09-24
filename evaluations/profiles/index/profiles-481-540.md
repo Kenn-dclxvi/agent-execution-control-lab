@@ -1,7 +1,9 @@
-# Profile index 481-538
+# Profile index 481-540
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate83-delegation-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json`](../candidate83-delegation-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json)
+- [`candidate83-delegation-value-boundary-v14-reasoning-medium-delegation-value-f04-global-m5-n5-r1.json`](../candidate83-delegation-value-boundary-v14-reasoning-medium-delegation-value-f04-global-m5-n5-r1.json)
 - [`candidate83-delegation-value-boundary-v14-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate83-delegation-value-boundary-v14-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate84-delegation-marginal-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json`](../candidate84-delegation-marginal-value-boundary-v14-reasoning-medium-delegation-value-f02-global-m5-n5-r1.json)
 - [`candidate85-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate85-planning-first-producer-selection-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
@@ -54,9 +56,9 @@
 - [`control-free-sol6-high-standard14-n5-cli0156-r1.json`](../control-free-sol6-high-standard14-n5-cli0156-r1.json)
 - [`control-free-sol6-low-standard14-n5-cli0156-r1.json`](../control-free-sol6-low-standard14-n5-cli0156-r1.json)
 - [`control-free-sol6-medium-standard14-n5-cli0156-r1.json`](../control-free-sol6-medium-standard14-n5-cli0156-r1.json)
+- [`four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json)
 - [`p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`revision-2-core9-global-m4-r2.json`](../revision-2-core9-global-m4-r2.json)
 - [`revision-2-expanded12-global-m24-n1-r1.json`](../revision-2-expanded12-global-m24-n1-r1.json)
-- [`token-accounting-all-agents-v1.json`](../token-accounting-all-agents-v1.json)
