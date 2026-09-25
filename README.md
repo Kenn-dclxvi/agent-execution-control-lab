@@ -42,6 +42,10 @@ API費用はキャッシュ割引なしで、各70件全体の入力・出力tok
 
 費用対品質点の順位とAPI単価、C274 LunaとFreeの追加比較は[Free/C274統合比較](evaluations/results/free-c274-selected-model-summary_2026-09-24.md)にまとめています。
 
+### Candidate276・GPT-6 Luna Medium（2026-09-25）
+
+Standard14を5反復した70件はすべて有効で、全件の採点分布はScore 4が68件、Score 1が1件、Score 0が1件でした。保存済みControl-Free Luna MediumとのN=5比較では、品質中央値は100.00点、全エージェントトークン中央値は2,330,083、経過時間中央値は681.60秒で、Control-Free比はそれぞれ品質+7.14ポイント、トークン-7.15%、経過時間-4.47%でした。これは固定Standard14・Luna Medium条件内の観測です。条件と採点分布を含む[Candidate276の試験記録](evaluations/results/candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)を参照してください。
+
 以前のAstra Low推奨は当時の固定条件に関する記録として[推論設定の推奨判定とトークン差の分析](docs/candidate274-astra-reasoning-recommendation-r1.md)に残しています。今日の横断表は[Free/C274統合比較](evaluations/results/free-c274-selected-model-summary_2026-09-24.md)、Free各条件の詳細は[Freeモデル比較表](evaluations/results/control-free-model-reasoning-comparison_2026-09-24.md)、各Candidateの詳細は[Sol C274](evaluations/results/candidate274-sol6-medium-standard14-n5-cli0156_2026-09-24.md)と[Luna High C147/C274](evaluations/results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md)を参照してください。
 
 ## 実行制御で何が変わったか
