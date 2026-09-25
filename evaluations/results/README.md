@@ -41,6 +41,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 - [C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）](#c147-c274-luna6-high-20260924)
 - [C163 GPT-6 Luna High（2026-09-24）](#c163-luna6-high-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）](#4文版-standard14-gpt-6-luna-high-20260924)
+- [Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）](#candidate276-luna6-medium-standard14-20260925)
 - [Candidate275 4文版 Standard14 GPT-6 Luna xHigh / MAX（2026-09-24）](#candidate275-luna6-xhigh-max-standard14-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Sol Low（2026-09-24）](#candidate275-sol6-low-standard14-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Sol Medium（2026-09-24）](#candidate275-sol6-medium-standard14-20260924)
@@ -134,6 +135,12 @@ C163の5文目だけを削除した4文版は、[`F02 Luna High N=5`](candidate1
 ## Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）
 
 4文版Candidateの[Standard14 N=5 result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.json)を保存した。F02先行5件を再利用して不足65件を実行し、計70件が有効・採点可能、除外0だった。登録時のScore `4`は69 / 70件である。残るF02 1件はfocused pytest初回exit `2`だけを見てScore `3`とされた後、同じ試験の再実行exit `0`と`main_verify.sh` exit `0`を根拠に`4`へ訂正された。過去のatomic run記録はwrite-onceのため元の`3`を保持しており、訂正反映後は70 / 70件Score `4`となる。採点内訳は[quality audit](four-verified-lines-ablation-luna6-high-standard14-n5-quality-audit-r1.json)、中央値差分は[comparison view](four-verified-lines-ablation-luna6-high-standard14-n5-comparisons_2026-09-24.json)を参照する。
+
+<a id="candidate276-luna6-medium-standard14-20260925"></a>
+
+## Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）
+
+[GPT-6 Luna Medium・Standard14 N=5 result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)と[登録result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.json)を保存した。70 / 70件が有効・採点可能、除外0。全70件のScore分布は4が68件、1が1件、0が1件。選択されたN=5の品質中央値は100.00、全エージェントトークン中央値は2,330,083、経過時間中央値は681.60秒だった。保存済みControl-Free Mediumとのmatched-stratum比較では品質`+7.14`ポイント、token`-7.15%`、elapsed`-4.47%だった。採点内訳は[quality audit](candidate276-execution-control-luna6-medium-standard14-n5-quality-audit-r1_2026-09-25.json)、[比較view](candidate276-control-free-comparison-luna6-medium-standard14-n5_2026-09-25.json)を参照する。
 
 <a id="candidate275-luna6-xhigh-max-standard14-20260924"></a>
 
