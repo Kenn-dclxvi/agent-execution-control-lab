@@ -56,6 +56,9 @@
 - [Candidate274 Standard14 N=5続行](candidate274-standard14-n5-continuation.md): 利用者の続行指示により、既存30件と追加40件の全70件を評価完了。全件Score 4、C147比トークン0.91%減・経過時間26.52%減。
 
 - [Candidate274設計](candidate274-c147-execution-boundary-core-design.md): C147の検証・判断境界を原文で保持し、委任管理だけを削る。初回30件は全件Score 4、C273のコスト増加を解消したがC147比token +0.80%で追加評価は停止。
+- [Candidate277 事前方針文の削除試験](candidate277-remove-upfront-plan-design.md): C276のroot `AGENTS.md` 5行目だけを削除する直接子Candidateの設計。Standard14 N=5は70 / 70件Score 4だが、C276比token +5.29%・elapsed +11.15%。
+- [Candidate278 C277残存規則の一括削除試験](candidate278-remove-remaining-rules-design.md): C277 root `AGENTS.md`の3行目以降を削除した直接子Candidateの設計。Standard14 N=5は70 / 70件Score 4、C277比token +4.99%・elapsed +5.53%。
+- [Candidate279 root `AGENTS.md`空化の再試験](candidate279-empty-root-agents-design.md): C278からrepo root `AGENTS.md`を0 byteにした直接子のStandard14 N=5再試験。A01は5 / 5件Score 4だった一方、global `~/.codex/AGENTS.md`がCLIで有効だったため、無指示条件の試験ではない。
 
 - [Candidate273のトークン増加原因](candidate273-astra-n5-token-increase-causal-audit.md): 保存60runから、検証途中のモデル再入と履歴入力の反復を主因と特定。
 

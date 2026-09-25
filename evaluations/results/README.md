@@ -41,11 +41,19 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 - [C147・C274 GPT-6 Luna Highの追加計測（2026-09-24）](#c147-c274-luna6-high-20260924)
 - [C163 GPT-6 Luna High（2026-09-24）](#c163-luna6-high-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）](#4文版-standard14-gpt-6-luna-high-20260924)
+- [Candidate276 Standard14 GPT-6 Luna High（2026-09-24）](#candidate276-luna6-high-standard14-20260924)
 - [Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）](#candidate276-luna6-medium-standard14-20260925)
+- [Candidate277 Standard14 GPT-6 Luna High（2026-09-24）](#candidate277-luna6-high-standard14-20260924)
+- [Candidate277・共通AGENTS.md空条件の再試験（2026-09-25）](#candidate277-no-global-agents-2026-09-25)
+- [Candidate278 Standard14 GPT-6 Luna High（2026-09-24）](#candidate278-luna6-high-standard14-20260924)
+- [Candidate279 Standard14 GPT-6 Luna High（2026-09-24）](#candidate279-luna6-high-standard14-20260924)
+- [Candidate279・共通AGENTS.md空条件再試験（2026-09-25）](#candidate279-no-global-agents-2026-09-25)
+- [C277・C279・Free Standard14 N=5統合比較（2026-09-25）](#candidate277-candidate279-free-merged-2026-09-25)
 - [Candidate275 4文版 Standard14 GPT-6 Luna xHigh / MAX（2026-09-24）](#candidate275-luna6-xhigh-max-standard14-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Sol Low（2026-09-24）](#candidate275-sol6-low-standard14-20260924)
 - [Candidate275 4文版 Standard14 GPT-6 Sol Medium（2026-09-24）](#candidate275-sol6-medium-standard14-20260924)
 - [Candidate275 Standard14 GPT-6 Astra Low・CLI 0.156.1（2026-09-24）](#candidate275-astra6-low-cli0156-20260924)
+- [Candidate275 Standard14 GPT-6計測の集約（2026-09-24）](#candidate275-standard14-model-reasoning-summary-2026-09-24)
 
 - [Astra Freeのhigh・low計測（2026-09-08）](#astra-free-high-low)
 
@@ -136,11 +144,54 @@ C163の5文目だけを削除した4文版は、[`F02 Luna High N=5`](candidate1
 
 4文版Candidateの[Standard14 N=5 result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.json)を保存した。F02先行5件を再利用して不足65件を実行し、計70件が有効・採点可能、除外0だった。登録時のScore `4`は69 / 70件である。残るF02 1件はfocused pytest初回exit `2`だけを見てScore `3`とされた後、同じ試験の再実行exit `0`と`main_verify.sh` exit `0`を根拠に`4`へ訂正された。過去のatomic run記録はwrite-onceのため元の`3`を保持しており、訂正反映後は70 / 70件Score `4`となる。採点内訳は[quality audit](four-verified-lines-ablation-luna6-high-standard14-n5-quality-audit-r1.json)、中央値差分は[comparison view](four-verified-lines-ablation-luna6-high-standard14-n5-comparisons_2026-09-24.json)を参照する。
 
+<a id="candidate276-luna6-high-standard14-20260924"></a>
+
+## Candidate276 Standard14 GPT-6 Luna High（2026-09-24）
+
+[C275およびControl-Freeと比較したStandard14 N=5 result](candidate276-execution-control-luna6-high-standard14-n5-cli0156_2026-09-24.md)を登録した。14ケース×5回の70 / 70件がvalid・採点可能で、全件Score `4`、除外0だった。C275と品質中央値は同じ100、token中央値は`+3.16%`、elapsed中央値は`-1.37%`。Control-Free比では品質中央値`+7.143`ポイント、token中央値`-19.60%`、elapsed中央値`-11.36%`。C275の登録Scoreは69 / 70件だが、既存traceに基づく訂正を反映した分布は70 / 70件Score `4`である。採点内訳は[quality audit](candidate276-execution-control-luna6-high-standard14-n5-quality-audit-r1.json)、[C275比較view](candidate276-candidate275-comparison-luna6-high-standard14-n5_2026-09-24.json)、[Control-Free比較view](candidate276-control-free-comparison-luna6-high-standard14-n5_2026-09-24.json)、[ケース別Free比較内訳](candidate276-control-free-case-breakdown-luna6-high-standard14-n5_2026-09-24.json)を参照する。
+
 <a id="candidate276-luna6-medium-standard14-20260925"></a>
 
 ## Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）
 
 [GPT-6 Luna Medium・Standard14 N=5 result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)と[登録result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.json)を保存した。70 / 70件が有効・採点可能、除外0。全70件のScore分布は4が68件、1が1件、0が1件。選択されたN=5の品質中央値は100.00、全エージェントトークン中央値は2,330,083、経過時間中央値は681.60秒だった。保存済みControl-Free Mediumとのmatched-stratum比較では品質`+7.14`ポイント、token`-7.15%`、elapsed`-4.47%だった。採点内訳は[quality audit](candidate276-execution-control-luna6-medium-standard14-n5-quality-audit-r1_2026-09-25.json)、[比較view](candidate276-control-free-comparison-luna6-medium-standard14-n5_2026-09-25.json)を参照する。
+
+<a id="candidate277-luna6-high-standard14-20260924"></a>
+
+## Candidate277 Standard14 GPT-6 Luna High（2026-09-24）
+
+[C276のroot `AGENTS.md` 5行目を削除したCandidateのStandard14 N=5 result](candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156_2026-09-24.md)を登録した。14ケース×5回の70 / 70件がvalid・採点可能で、全件Score `4`、除外0。C276比で品質中央値100を維持し、token中央値`+5.29%`、elapsed中央値`+11.15%`。保存済みControl-Free比では品質中央値`+7.14`ポイント、token中央値`-15.35%`、elapsed中央値`-1.48%`。ケース別のFree比較は[内訳](candidate277-control-free-case-breakdown-luna6-high-standard14-n5_2026-09-24.json)、[C276比較view](candidate277-candidate276-luna6-high-standard14-n5_2026-09-24.json)、[Free比較view](candidate277-control-free-luna6-high-standard14-n5_2026-09-24.json)、[quality audit](candidate277-remove-upfront-plan-luna6-high-standard14-n5-quality-audit-r1.json)を参照する。
+
+<a id="candidate277-no-global-agents-2026-09-25"></a>
+
+## Candidate277・共通AGENTS.md空条件の再試験（2026-09-25）
+
+[共通`AGENTS.md`が0 byteの状態での独立試験](candidate277-no-user-global-standard14-n5-cli0156-no-user-global_2026-09-25.md)は70 / 70件valid・採点可能、Score `4`が68件、Score `0`が2件で、A01に集中した。品質中央値100、all-agent token中央値2,719,631、elapsed中央値1,051.03秒。過去C277 resultは共通`AGENTS.md`状態を固定していないため、正式な同条件比較にはしていない。[result](candidate277-no-user-global-standard14-n5-cli0156-no-user-global_2026-09-25.json)、[quality audit](candidate277-no-user-global-standard14-n5-cli0156-no-user-global_2026-09-25-quality-audit-r1.json)を参照する。
+
+<a id="candidate278-luna6-high-standard14-20260924"></a>
+
+## Candidate278 Standard14 GPT-6 Luna High（2026-09-24）
+
+[C277 root `AGENTS.md`の3行目以降に残る三規則を削除したCandidateのStandard14 N=5 result](candidate278-execution-control-heading-only-luna6-high-standard14-n5-cli0156_2026-09-24.md)を登録した。14ケース×5回の70 / 70件がvalid・採点可能で全件Score `4`、除外0。C277比で品質中央値100を維持し、all-agent token中央値`+4.99%`、elapsed中央値`+5.53%`。差は三規則まとめた一括削除に対するN=5の記述結果であり、各規則の個別効果や一般的因果を示さない。[C277比較view](candidate277-candidate278-luna6-high-standard14-n5_2026-09-24.json)と[quality audit](candidate278-execution-control-heading-only-luna6-high-standard14-n5-quality-audit-r1.json)を参照する。
+
+<a id="candidate279-luna6-high-standard14-20260924"></a>
+
+## Candidate279 Standard14 GPT-6 Luna High（2026-09-24）
+
+[C278からroot `AGENTS.md`だけを0 byteにした再試験](candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156_2026-09-24.md)は70 / 70件valid・採点可能、除外0。Score `4`は69 / 70件、Score `2`はF06 iteration 1の1件。A01は5 / 5件Score `4`。品質中央値100はC278と同じで、token中央値`-10.14%`、elapsed中央値`-9.31%`だった。C279のbundle SHAは保存済みControl-Freeと同じだが、CLIはglobal `~/.codex/AGENTS.md`を読み込む条件で動いており、保存済みFreeの65 / 70件結果とはglobal指示の版が一致したと確認できない。Freeとの差をprompt内容またはglobal指示だけの因果効果に帰属させない。[C278比較view](candidate278-candidate279-empty-agents-comparison-r1.json)、[品質audit](candidate279-empty-root-agents-luna6-high-standard14-n5-quality-audit-r1.json)、[集約analysis](candidate279-empty-root-agents-luna6-high-standard14-n5-analysis-r1.json)を参照する。
+
+<a id="candidate279-no-global-agents-2026-09-25"></a>
+
+## Candidate279・共通AGENTS.md空条件再試験（2026-09-25）
+
+[共通`AGENTS.md`を0 byteにした状態での独立Standard14 N=5再試験](candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156_2026-09-25.md)は70 / 70件valid・採点可能、Score `4`が64件、Score `3`が1件、Score `0`が5件だった。A01は5 / 5件Score `0`、F06は1件Score `3`。品質中央値92.86、all-agent token中央値3,205,076、elapsed中央値1,242.34秒。前回C279のprofileがユーザー共通`AGENTS.md`状態を固定していなかったため、前回との差を正式な同条件KPI比較にしない。[result](candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156_2026-09-25.json)、[quality audit](candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156_2026-09-25-quality-audit-r1.json)を参照する。
+
+<a id="candidate277-candidate279-free-merged-2026-09-25"></a>
+
+## C277・C279・Free Standard14 N=5統合比較（2026-09-25）
+
+[統合記録](candidate277-candidate279-free-merged-standard14-n5_2026-09-25.md)と[run単位の統合JSON](candidate277-candidate279-free-merged-standard14-n5_2026-09-25.json)に、Free・C275〜C277・従来C279・共通`AGENTS.md`空条件のC277/C279を収録した。計7条件・490試行。C275→C276→従来C277は品質中央値100を維持し、トークン中央値は2,448,245→2,525,590→2,659,295、経過時間中央値は937.95→925.10→1,028.22秒。[同一互換条件でのC275〜C277比較view](candidate275-candidate277-standard14-n5-comparison_2026-09-25.json)も作成した。Free実行時の共通`AGENTS.md`状態が未確定のためFreeとの差は因果効果と扱わない。2026-09-25の空条件C277/C279は互換条件が一致し、C277はC279比でトークン中央値`-15.15%`、経過時間中央値`-15.40%`だった。
+
 
 <a id="candidate275-luna6-xhigh-max-standard14-20260924"></a>
 
@@ -167,6 +218,12 @@ GPT-6 Lunaのxhighとmaxを各14ケース×N=5、70 runずつ計測した。Mac 
 ## Candidate275 Standard14 GPT-6 Astra Low・CLI 0.156.1（2026-09-24）
 
 [計測記録](four-verified-lines-ablation-astra6-low-standard14-n5-cli0156_2026-09-24.md)と[登録result](four-verified-lines-ablation-astra6-low-standard14-n5-cli0156_2026-09-24.json)、[品質監査](four-verified-lines-ablation-astra6-low-standard14-n5-quality-audit-r1.json)を保存した。70件すべて有効・Score 4で、除外0件。品質中央値100%、全エージェントトークン中央値1,772,618、総所要時間中央値669.08秒だった。
+
+<a id="candidate275-standard14-model-reasoning-summary-2026-09-24"></a>
+
+## Candidate275 Standard14 GPT-6計測の集約（2026-09-24）
+
+[集約記録](candidate275-standard14-model-reasoning-summary_2026-09-24.md)と[機械可読集約](candidate275-standard14-model-reasoning-summary_2026-09-24.json)にLuna High / xHigh / Max、Sol Low / Medium、Astra Lowの各Standard14 N=5結果、入出力token、API標準料金の換算目安をまとめた。各条件の一次resultと個別記録はそのまま保持している。
 
 <a id="astra-free-high-low"></a>
 
