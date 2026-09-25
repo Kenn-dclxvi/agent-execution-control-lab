@@ -64,7 +64,13 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 | 5文統合 | [`Candidate163 Standard14`](candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json) / [`GPT-6 Luna High`](candidate163-luna6-high-standard14-n5-cli0156-r1.json) | [`Medium result`](../results/candidate163-free-five-verified-lines-integrated-v14-medium-standard14-n5-cli0146_2026-08-04.md) / [`High result`](../results/candidate163-luna6-high-standard14-n5-cli0156_2026-09-24.md) |
 | 5文目削除の影響確認 | [`4文版・GPT-6 Luna High・F02 N=5`](candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json) | [`F02 result`](../results/candidate163-four-sentence-ablation-f02-luna6-high-n5_2026-09-24.md)。C163 Highの固定条件とLayer 1を再利用 |
 | Candidate275・4文版 Standard14 | [`GPT-6 Luna High・N=5`](four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json) | [`Standard14 result`](../results/four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.md)。F02先行5件を再利用し、不足65件を実行 |
+| Candidate276・利用者指定4項目 Standard14 | [`GPT-6 Luna High・N=5`](candidate276-execution-control-luna6-high-standard14-n5-cli0156-r1.json) | [`C275比較result`](../results/candidate276-execution-control-luna6-high-standard14-n5-cli0156_2026-09-24.md)。70 / 70件valid・Score 4、除外0 |
 | Candidate276・利用者指定4項目 Standard14 | [`GPT-6 Luna Medium・N=5`](candidate276-execution-control-luna6-medium-standard14-n5-cli0156-r1.json) | [`Control-Free比較result`](../results/candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)。70 / 70件valid、Score 4が68件、除外0 |
+| Candidate277・C276 5行目削除 Standard14 | [`GPT-6 Luna High・N=5`](candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json) | [`C276・Free比較result`](../results/candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156_2026-09-24.md)。70 / 70件valid・Score 4、除外0 |
+| Candidate277・共通`AGENTS.md`空条件の再試験 | [`GPT-6 Luna High・N=5`](candidate277-no-user-global-standard14-n5-cli0156-r1.json) | [独立Standard14 result](../results/candidate277-no-user-global-standard14-n5-cli0156-no-user-global_2026-09-25.md)。70 / 70件valid、A01は3 / 5件Score 4 |
+| Candidate278・C277残存3規則削除 Standard14 | [`GPT-6 Luna High・N=5`](candidate278-heading-only-luna6-high-standard14-n5-cli0156-r1.json) | [`C277比較result`](../results/candidate278-execution-control-heading-only-luna6-high-standard14-n5-cli0156_2026-09-24.md)。70 / 70件valid・Score 4、除外0 |
+| Candidate279・root `AGENTS.md`空化 Standard14 | [`GPT-6 Luna High・N=5`](candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json) | [`C278比較result`](../results/candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156_2026-09-24.md)。70 / 70件valid、69 / 70件Score 4、A01は5 / 5件Score 4 |
+| Candidate279・共通`AGENTS.md`空条件の再試験 | [`GPT-6 Luna High・N=5`](candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156-r1.json) | [独立Standard14 result](../results/candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156_2026-09-25.md)。70 / 70件valid、A01は5 / 5件Score 0 |
 | Candidate275・4文版 Standard14 | [GPT-6 Luna xHigh・N=5](four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json) | [Standard14 result](../results/four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156_2026-09-24.md)。70 / 70件Score 4、除外0件 |
 | Candidate275・4文版 Standard14 | [GPT-6 Luna MAX・N=5](four-verified-lines-ablation-luna6-max-standard14-n5-cli0156-r1.json) | [Standard14 result](../results/four-verified-lines-ablation-luna6-max-standard14-n5-cli0156_2026-09-24.md)。70 / 70件Score 4、除外0件 |
 
@@ -89,7 +95,7 @@ ControlFreeRepositoryへ説明可能な小さい制御を段階的に加えた�
 - [`361–420`](index/profiles-361-420.md)
 - [`421–480`](index/profiles-421-480.md)
 - [`481–540`](index/profiles-481-540.md)
-- [`541–544`](index/profiles-541-544.md)
+- [`541–553`](index/profiles-541-553.md)
 
 このシャードと上のリンクは[`scripts/generate_profile_index.py`](../../scripts/generate_profile_index.py)の生成物である。プロファイル追加・削除時は`--write`で再生成し、引数なし実行で生成物との一致を確認する。到達性そのものは[`tests/test_profile_index_coverage.py`](../../tests/test_profile_index_coverage.py)で、ディレクトリ実体、READMEから辿れる索引シャード、profile JSONのリンクの集合一致として固定する。
 

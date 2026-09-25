@@ -1,0 +1,299 @@
+{
+  "schema_version": "candidate275-standard14-multi-condition-summary/v1",
+  "created_on": "2026-09-25",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-four-verified-lines-ablation-r1",
+    "revision": "r1",
+    "bundle_sha256": "357f684904979c7703a1d9248d3b88ad9a1704eefa4243affc912ff6921cb5ac"
+  },
+  "shared_conditions": {
+    "codex_cli": "0.156.1",
+    "evaluation_set": "the-caption-standard14-r1",
+    "case_count": 14,
+    "iterations_per_case": 5,
+    "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14"
+  },
+  "conditions": [
+    {
+      "model": "GPT-6 Luna",
+      "reasoning_effort": "high",
+      "profile": "evaluations/profiles/candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-luna6-high-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "975c33cb36404c2381ce0715fc7a2592",
+      "result_content_sha256": "34d097d1a45abd3c5cd602f355fb18bb09e0443c27fda696b21e2858f9e71671",
+      "quality_audit": "four-verified-lines-ablation-luna6-high-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "3": 1,
+        "4": 69
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 2448245,
+      "elapsed_seconds_median": 937.9502851658035,
+      "usage_totals": {
+        "input_tokens_including_cached": 12034658,
+        "cached_input_tokens": 10635776,
+        "uncached_input_tokens": 1398882,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 155525,
+        "total_input_plus_output_tokens": 12190183
+      },
+      "api_cost_estimate_usd": {
+        "input": 0.24624596,
+        "output": 0.0777625,
+        "total": 0.32400846,
+        "per_run_average": 0.00462869,
+        "pricing": {
+          "uncached_input_per_million": 0.1,
+          "cached_input_per_million": 0.01,
+          "output_per_million": 0.5,
+          "tier": "standard_short_context"
+        }
+      },
+      "rating_correction": {
+        "registered_score_counts_after_correction": {
+          "4": 70
+        },
+        "note": "F02 iteration 2 was corrected from 3 to 4; write-once registered result retains original score."
+      }
+    },
+    {
+      "model": "GPT-6 Luna",
+      "reasoning_effort": "xhigh",
+      "profile": "evaluations/profiles/four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "537d74e437474eb7b405fa4577a0f669",
+      "result_content_sha256": "0a5e828442c8e670235ca9738b5978ce71ec13143dcd3769c9a12c5f47a34398",
+      "quality_audit": "four-verified-lines-ablation-luna6-xhigh-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "4": 70
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 2716023,
+      "elapsed_seconds_median": 1560.9300375841558,
+      "usage_totals": {
+        "input_tokens_including_cached": 13281394,
+        "cached_input_tokens": 11650560,
+        "uncached_input_tokens": 1630834,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 297487,
+        "total_input_plus_output_tokens": 13578881
+      },
+      "api_cost_estimate_usd": {
+        "input": 0.279589,
+        "output": 0.1487435,
+        "total": 0.4283325,
+        "per_run_average": 0.00611904,
+        "pricing": {
+          "uncached_input_per_million": 0.1,
+          "cached_input_per_million": 0.01,
+          "output_per_million": 0.5,
+          "tier": "standard_short_context"
+        }
+      }
+    },
+    {
+      "model": "GPT-6 Luna",
+      "reasoning_effort": "max",
+      "profile": "evaluations/profiles/four-verified-lines-ablation-luna6-max-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-luna6-max-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "a14b29311dc342dfb3f1eb7f01489687",
+      "result_content_sha256": "2a7096c79df0ee64aa439a1e941ac0031635246d70e122e7a4a6ca0652d29fcf",
+      "quality_audit": "four-verified-lines-ablation-luna6-max-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "4": 70
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 2737921,
+      "elapsed_seconds_median": 1717.1250099978643,
+      "usage_totals": {
+        "input_tokens_including_cached": 13649236,
+        "cached_input_tokens": 11964672,
+        "uncached_input_tokens": 1684564,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 351332,
+        "total_input_plus_output_tokens": 14000568
+      },
+      "api_cost_estimate_usd": {
+        "input": 0.28810312,
+        "output": 0.175666,
+        "total": 0.46376912,
+        "per_run_average": 0.00662527,
+        "pricing": {
+          "uncached_input_per_million": 0.1,
+          "cached_input_per_million": 0.01,
+          "output_per_million": 0.5,
+          "tier": "standard_short_context"
+        }
+      }
+    },
+    {
+      "model": "GPT-6 Sol",
+      "reasoning_effort": "low",
+      "profile": "evaluations/profiles/four-verified-lines-ablation-sol6-low-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-sol6-low-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "a59674094efe4d5e9063b58b533f7408",
+      "result_content_sha256": "3e8b2873f43b29e14fce387b0ec54296acf5d3f5705d3824cfe6efa83de383b2",
+      "quality_audit": "four-verified-lines-ablation-sol6-low-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "2": 2,
+        "4": 68
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 2163785,
+      "elapsed_seconds_median": 603.1655942478683,
+      "usage_totals": {
+        "input_tokens_including_cached": 10639546,
+        "cached_input_tokens": 9464192,
+        "uncached_input_tokens": 1175354,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 73280,
+        "total_input_plus_output_tokens": 10712826
+      },
+      "api_cost_estimate_usd": {
+        "input": 4.2435464,
+        "output": 0.7328,
+        "total": 4.9763464,
+        "per_run_average": 0.07109066,
+        "pricing": {
+          "uncached_input_per_million": 2,
+          "cached_input_per_million": 0.2,
+          "output_per_million": 10,
+          "tier": "standard_short_context"
+        }
+      }
+    },
+    {
+      "model": "GPT-6 Sol",
+      "reasoning_effort": "medium",
+      "profile": "evaluations/profiles/control-free-sol6-medium-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "3ac998f726ee46a08c00b50f7a890518",
+      "result_content_sha256": "3d23a6c92f69a1a5414d87c2bad5bda92519dafbc19e45bbd19033d8b5a99589",
+      "quality_audit": "four-verified-lines-ablation-sol6-medium-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "2": 1,
+        "4": 69
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 2444384,
+      "elapsed_seconds_median": 776.9099211661378,
+      "usage_totals": {
+        "input_tokens_including_cached": 11904900,
+        "cached_input_tokens": 10682752,
+        "uncached_input_tokens": 1222148,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 107260,
+        "total_input_plus_output_tokens": 12012160
+      },
+      "api_cost_estimate_usd": {
+        "input": 4.5808464,
+        "output": 1.0726,
+        "total": 5.6534464,
+        "per_run_average": 0.08076352,
+        "pricing": {
+          "uncached_input_per_million": 2,
+          "cached_input_per_million": 0.2,
+          "output_per_million": 10,
+          "tier": "standard_short_context"
+        }
+      }
+    },
+    {
+      "model": "GPT-6 Astra",
+      "reasoning_effort": "low",
+      "profile": "evaluations/profiles/four-verified-lines-ablation-astra6-low-standard14-n5-cli0156-r1.json",
+      "result": "four-verified-lines-ablation-astra6-low-standard14-n5-cli0156_2026-09-24.json",
+      "result_id": "a1cd9cadd61b43bb8ad13cc2b4a65f2f",
+      "result_content_sha256": "9a30ee765b8b08310063292f93133cfbd5c2e8531e7eec35ebcb92d9a209f143",
+      "quality_audit": "four-verified-lines-ablation-astra6-low-standard14-n5-quality-audit-r1.json",
+      "evaluation_set": {
+        "identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+        "revision": "r1",
+        "set_id": "the-caption-standard14-r1"
+      },
+      "case_count": 14,
+      "iterations_per_case": 5,
+      "valid_runs": 70,
+      "excluded_attempts": 0,
+      "registered_score_counts": {
+        "4": 70
+      },
+      "quality_score_median": 100.0,
+      "total_tokens_median": 1772618,
+      "elapsed_seconds_median": 669.0843248347519,
+      "usage_totals": {
+        "input_tokens_including_cached": 8820103,
+        "cached_input_tokens": 7700992,
+        "uncached_input_tokens": 1119111,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63800,
+        "total_input_plus_output_tokens": 8883903
+      },
+      "api_cost_estimate_usd": {
+        "input": 18.892102,
+        "output": 3.19,
+        "total": 22.082102,
+        "per_run_average": 0.3154586,
+        "pricing": {
+          "uncached_input_per_million": 10,
+          "cached_input_per_million": 1,
+          "output_per_million": 50,
+          "tier": "standard_short_context"
+        }
+      }
+    }
+  ],
+  "combined_usage_totals": {
+    "input_tokens_including_cached": 70329837,
+    "cached_input_tokens": 62098944,
+    "output_tokens": 1048684
+  },
+  "combined_api_cost_estimate_usd": 33.92800488,
+  "cost_method": "Estimated by applying current OpenAI API standard short-context uncached input, cached input and output rates to recorded usage totals. This is not actual Codex CLI billing. Long-context per-request multipliers are excluded because request-level input totals are unavailable.",
+  "comparison_boundary": "Conditions differ by model and/or reasoning effort. This descriptive aggregation does not claim an isolated causal effect or a winner."
+}
