@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "description": "保存済みC276とControl-Freeのケース別比較。各ケース5 runの中央値。差はC276−Control-Free。",
+  "comparison_key": "7a0dbf958350263ffecf8a55e7dad7638da41153f535ba2673ef16aaa9ee878a",
+  "sources": {
+    "control_free_result_id": "a26f63cd6a1b497ba5fa37ee0b35d370",
+    "control_free_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/result-registry-v4/results/a26f63cd6a1b497ba5fa37ee0b35d370.json",
+    "c276_result_id": "e9aec72c3bb64b8ca73bc890c9c046eb",
+    "c276_path": "candidate276-execution-control-sol6-medium-standard14-n5-cli0156_2026-09-26.json"
+  },
+  "case_count": 14,
+  "runs_per_case": 5,
+  "cases": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 0,
+        "total_tokens_median": 443645,
+        "elapsed_seconds_median": 92.65868908294942,
+        "score4_count": 0,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 61461,
+        "elapsed_seconds_median": 77.86763699993026,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 4,
+        "quality_score_percent": null,
+        "total_tokens": -382184,
+        "total_tokens_percent": -86.14635575741866,
+        "elapsed_seconds": -14.791052083019167,
+        "elapsed_seconds_percent": -15.962941230236918
+      }
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 258006,
+        "elapsed_seconds_median": 69.51237358397339,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 196457,
+        "elapsed_seconds_median": 59.70044154196512,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -61549,
+        "total_tokens_percent": -23.855646767904624,
+        "elapsed_seconds": -9.811932042008266,
+        "elapsed_seconds_percent": -14.11537476871669
+      }
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 198163,
+        "elapsed_seconds_median": 52.92500854108948,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 197230,
+        "elapsed_seconds_median": 58.89487275003921,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -933,
+        "total_tokens_percent": -0.47082452324601465,
+        "elapsed_seconds": 5.96986420894973,
+        "elapsed_seconds_percent": 11.27985497501601
+      }
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 298013,
+        "elapsed_seconds_median": 72.12803608307149,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 380016,
+        "elapsed_seconds_median": 83.06316537503153,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": 82003,
+        "total_tokens_percent": 27.51658484696976,
+        "elapsed_seconds": 10.935129291960038,
+        "elapsed_seconds_percent": 15.160719583943477
+      }
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 168988,
+        "elapsed_seconds_median": 61.386574167059734,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 144376,
+        "elapsed_seconds_median": 59.47476462495979,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -24612,
+        "total_tokens_percent": -14.564347764338295,
+        "elapsed_seconds": -1.9118095420999452,
+        "elapsed_seconds_percent": -3.114377317908432
+      }
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 258398,
+        "elapsed_seconds_median": 62.38048962503672,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 201686,
+        "elapsed_seconds_median": 54.93475916690659,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -56712,
+        "total_tokens_percent": -21.947538293640044,
+        "elapsed_seconds": -7.445730458130129,
+        "elapsed_seconds_percent": -11.935992331714159
+      }
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 66329,
+        "elapsed_seconds_median": 24.411898040911183,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 32015,
+        "elapsed_seconds_median": 27.75362316693645,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -34314,
+        "total_tokens_percent": -51.73302778573474,
+        "elapsed_seconds": 3.341725126025267,
+        "elapsed_seconds_percent": 13.68891972441048
+      }
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 31210,
+        "elapsed_seconds_median": 21.11144329106901,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 79529,
+        "elapsed_seconds_median": 21.093826542026363,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": 48319,
+        "total_tokens_percent": 154.81896827939764,
+        "elapsed_seconds": -0.017616749042645097,
+        "elapsed_seconds_percent": -0.08344644560657628
+      }
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 195996,
+        "elapsed_seconds_median": 54.97278712503612,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 183747,
+        "elapsed_seconds_median": 53.5254068330396,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -12249,
+        "total_tokens_percent": -6.24961733912937,
+        "elapsed_seconds": -1.4473802919965237,
+        "elapsed_seconds_percent": -2.632903237568151
+      }
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 194848,
+        "elapsed_seconds_median": 57.95203154196497,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 193198,
+        "elapsed_seconds_median": 59.78021695802454,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -1650,
+        "total_tokens_percent": -0.8468139267531615,
+        "elapsed_seconds": 1.8281854160595685,
+        "elapsed_seconds_percent": 3.154652852395208
+      }
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 148425,
+        "elapsed_seconds_median": 43.89405574998818,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 156909,
+        "elapsed_seconds_median": 58.999909749953076,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": 8484,
+        "total_tokens_percent": 5.716018191005558,
+        "elapsed_seconds": 15.105853999964893,
+        "elapsed_seconds_percent": 34.41435005688432
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 261888,
+        "elapsed_seconds_median": 65.44810525001958,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 137409,
+        "elapsed_seconds_median": 49.52153554104734,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -124479,
+        "total_tokens_percent": -47.53138746334311,
+        "elapsed_seconds": -15.926569708972238,
+        "elapsed_seconds_percent": -24.334653613165482
+      }
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 208607,
+        "elapsed_seconds_median": 66.4479579590261,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 158790,
+        "elapsed_seconds_median": 59.63629487506114,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": -49817,
+        "total_tokens_percent": -23.88079019400116,
+        "elapsed_seconds": -6.811663083964959,
+        "elapsed_seconds_percent": -10.251124779734006
+      }
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "sample_count": 5,
+      "control_free": {
+        "quality_score_median": 4,
+        "total_tokens_median": 75808,
+        "elapsed_seconds_median": 38.040588333969936,
+        "score4_count": 5,
+        "valid_run_count": 5
+      },
+      "c276": {
+        "quality_score_median": 4,
+        "total_tokens_median": 94109,
+        "elapsed_seconds_median": 42.76169708301313,
+        "score4_count": 4,
+        "valid_run_count": 5
+      },
+      "delta_c276_minus_free": {
+        "quality_score": 0,
+        "quality_score_percent": 0.0,
+        "total_tokens": 18301,
+        "total_tokens_percent": 24.141251582946392,
+        "elapsed_seconds": 4.721108749043196,
+        "elapsed_seconds_percent": 12.410714333845581
+      }
+    }
+  ]
+}

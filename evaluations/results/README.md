@@ -43,6 +43,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 - [Candidate275 4文版 Standard14 GPT-6 Luna High（2026-09-24）](#4文版-standard14-gpt-6-luna-high-20260924)
 - [Candidate276 Standard14 GPT-6 Luna High（2026-09-24）](#candidate276-luna6-high-standard14-20260924)
 - [Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）](#candidate276-luna6-medium-standard14-20260925)
+- [Candidate276 Standard14 GPT-6 Sol Low（2026-09-26）](#candidate276-sol6-low-standard14-20260926)
+- [Candidate276 Standard14 GPT-6 Sol Medium（2026-09-26）](#candidate276-sol6-medium-standard14-20260926)
 - [Candidate277 Standard14 GPT-6 Luna High（2026-09-24）](#candidate277-luna6-high-standard14-20260924)
 - [Candidate277・共通AGENTS.md空条件の再試験（2026-09-25）](#candidate277-no-global-agents-2026-09-25)
 - [Candidate278 Standard14 GPT-6 Luna High（2026-09-24）](#candidate278-luna6-high-standard14-20260924)
@@ -155,6 +157,19 @@ C163の5文目だけを削除した4文版は、[`F02 Luna High N=5`](candidate1
 ## Candidate276 Standard14 GPT-6 Luna Medium（2026-09-25）
 
 [GPT-6 Luna Medium・Standard14 N=5 result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)と[登録result](candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.json)を保存した。70 / 70件が有効・採点可能、除外0。全70件のScore分布は4が68件、1が1件、0が1件。選択されたN=5の品質中央値は100.00、全エージェントトークン中央値は2,330,083、経過時間中央値は681.60秒だった。保存済みControl-Free Mediumとのmatched-stratum比較では品質`+7.14`ポイント、token`-7.15%`、elapsed`-4.47%だった。採点内訳は[quality audit](candidate276-execution-control-luna6-medium-standard14-n5-quality-audit-r1_2026-09-25.json)、[比較view](candidate276-control-free-comparison-luna6-medium-standard14-n5_2026-09-25.json)を参照する。
+
+
+<a id="candidate276-sol6-low-standard14-20260926"></a>
+
+## Candidate276 Standard14 GPT-6 Sol Low（2026-09-26）
+
+[GPT-6 Sol Low・Standard14 N=5 result](candidate276-execution-control-sol6-low-standard14-n5-cli0156_2026-09-26.md)と[登録result](candidate276-execution-control-sol6-low-standard14-n5-cli0156_2026-09-26.json)を保存した。70 / 70件が有効・採点可能で除外0。Score 4が66件、Score 2が3件、Score 0が1件。品質中央値96.43、全エージェントトークン中央値2,171,991、経過時間中央値633.49秒。保存済みControl-Free Lowとのmatched-stratum比較では品質`+3.57`ポイント、token`-13.71%`、elapsed`+2.53%`だった。採点内訳は[quality audit](candidate276-execution-control-sol6-low-standard14-n5-quality-audit-r1_2026-09-26.json)、[比較view](candidate276-control-free-comparison-sol6-low-standard14-n5_2026-09-26.json)、[ケース別比較](candidate276-control-free-case-breakdown-sol6-low-standard14-n5_2026-09-26.json)を参照する。
+
+<a id="candidate276-sol6-medium-standard14-20260926"></a>
+
+## Candidate276 Standard14 GPT-6 Sol Medium（2026-09-26）
+
+[GPT-6 Sol Medium・Standard14 N=5 result](candidate276-execution-control-sol6-medium-standard14-n5-cli0156_2026-09-26.md)と[登録result](candidate276-execution-control-sol6-medium-standard14-n5-cli0156_2026-09-26.json)を保存した。70 / 70件が有効・採点可能で除外0。Score 4が69件、Score 2が1件。品質中央値100.00、全エージェントトークン中央値2,319,885、経過時間中央値768.16秒。保存済みControl-Free Mediumとのmatched-stratum比較では品質`+7.14`ポイント、token`-19.85%`、elapsed`-5.53%`だった。採点内訳は[quality audit](candidate276-execution-control-sol6-medium-standard14-n5-quality-audit-r1_2026-09-26.json)、[比較view](candidate276-control-free-comparison-sol6-medium-standard14-n5_2026-09-26.json)、[ケース別比較](candidate276-control-free-case-breakdown-sol6-medium-standard14-n5_2026-09-26.json)を参照する。
 
 <a id="candidate277-luna6-high-standard14-20260924"></a>
 
