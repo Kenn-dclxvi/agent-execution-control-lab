@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）](#sol61-c147-c276-free-20260930)
+
 - [GPT-6 Free・C274主要条件の統合比較（2026-09-24）](#free-c274-selected-model-summary-2026-09-24)
 
 - [Control-Free各モデルの推論設定比較（2026-09-24）](#free-model-reasoning-20260924)
@@ -85,6 +87,24 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="sol61-c147-c276-free-20260930"></a>
+
+## GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）
+
+[6条件の計測記録](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30.md)と[機械可読集計](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30.json)に、個人指示を除外したStandard14各5回・計420件の結果を保存した。
+
+[Control-Free lowの登録結果](351556727fa144c9a5fa2f505f2bee28.json)は70件が有効で、得点分布は4: 65件、0: 5件。品質中央値は92.86、全エージェントトークン中央値は2,186,315、所要時間中央値は1034.67秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-free-low-quality-audit.json)を保存した。
+
+[C147 lowの登録結果](46b27ef4934f4208b911e414d9fa0b41.json)は70件が有効で、得点分布は4: 70件。品質中央値は100.00、全エージェントトークン中央値は1,493,465、所要時間中央値は739.33秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-low-quality-audit.json)を保存した。
+
+[C276 lowの登録結果](daa6472f889e4a22a104db42ee5f05e9.json)は70件が有効で、得点分布は4: 70件。品質中央値は100.00、全エージェントトークン中央値は1,870,011、所要時間中央値は916.38秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-low-quality-audit.json)を保存した。
+
+[Control-Free mediumの登録結果](c281d8d520224c078a495603eb04d643.json)は70件が有効で、得点分布は4: 65件、0: 5件。品質中央値は92.86、全エージェントトークン中央値は2,592,002、所要時間中央値は1251.60秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-free-medium-quality-audit.json)を保存した。
+
+[C147 mediumの登録結果](93c60741799944b0a8375672f0e4006e.json)は70件が有効で、得点分布は4: 69件、2: 1件。品質中央値は100.00、全エージェントトークン中央値は1,493,212、所要時間中央値は875.66秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-medium-quality-audit.json)を保存した。
+
+[C276 mediumの登録結果](849b4943e8f04b62b2e78bb37ad4fe85.json)は70件が有効で、得点分布は4: 70件。品質中央値は100.00、全エージェントトークン中央値は2,263,288、所要時間中央値は1124.57秒。[品質採点](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-medium-quality-audit.json)を保存した。
 
 <a id="free-c274-selected-model-summary-2026-09-24"></a>
 
