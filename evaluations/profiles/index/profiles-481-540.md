@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-global-m24-n5-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json)
@@ -61,4 +62,3 @@
 - [`control-free-luna6-xhigh-standard14-n5-cli0156-r1.json`](../control-free-luna6-xhigh-standard14-n5-cli0156-r1.json)
 - [`control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json`](../control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)
-- [`control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
