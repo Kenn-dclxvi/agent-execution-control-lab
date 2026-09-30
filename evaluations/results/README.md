@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C276 GPT-6 Astra Low・個人指示隔離（2026-09-30）](#c276-astra6-low-isolated-20260930)
+
 - [GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）](#sol61-c147-c276-free-20260930)
 
 - [GPT-6 Free・C274主要条件の統合比較（2026-09-24）](#free-c274-selected-model-summary-2026-09-24)
@@ -87,6 +89,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c276-astra6-low-isolated-20260930"></a>
+
+## C276 GPT-6 Astra Low・個人指示隔離（2026-09-30）
+
+[計測記録](c276-astra6-low-standard14-n5-cli0159-isolated_2026-09-30.md)と[条件照合・集計](c276-astra6-low-standard14-n5-cli0159-isolated_2026-09-30.json)に、C276 GPT-6.1 Sol lowとモデル以外の条件を揃えたStandard14各5回の結果を保存した。
+
+[登録結果](99d8bf731d8d406ea8b5c6f0b26f77e7.json)は70件すべて有効で、Score 4: 70件、除外0件。品質中央値は100.00、全エージェントトークン中央値は1,841,984、総所要時間中央値は686.66秒。[品質採点](c276-astra6-low-standard14-n5-cli0159-isolated_2026-09-30-quality-audit.json)を参照。
 
 <a id="sol61-c147-c276-free-20260930"></a>
 
