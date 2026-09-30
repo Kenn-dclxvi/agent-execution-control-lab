@@ -1,7 +1,11 @@
-# Profile index 541-555
+# Profile index 541-561
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
+- [`control-free-repository-v13-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-standard14-global-m24-n5-r1.json)
+- [`control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
+- [`control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`control-free-sol6-high-standard14-n5-cli0156-r1.json`](../control-free-sol6-high-standard14-n5-cli0156-r1.json)
 - [`control-free-sol6-low-standard14-n5-cli0156-r1.json`](../control-free-sol6-low-standard14-n5-cli0156-r1.json)
 - [`control-free-sol6-medium-standard14-n5-cli0156-r1.json`](../control-free-sol6-medium-standard14-n5-cli0156-r1.json)
@@ -11,6 +15,8 @@
 - [`four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-sol6-low-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-sol6-low-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json)
+- [`free-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-r1.json)
+- [`free-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
 - [`p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
