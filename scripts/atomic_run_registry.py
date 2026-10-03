@@ -14,6 +14,7 @@ from typing import Any
 if __package__:
     from .evaluation_loop import (
         EXECUTION_SCHEMA_V3,
+        SUPPORTED_TOKEN_ACCOUNTINGS,
         TOKEN_ACCOUNTING,
         EvaluationError,
         canonical_json,
@@ -30,6 +31,7 @@ if __package__:
 else:
     from evaluation_loop import (
         EXECUTION_SCHEMA_V3,
+        SUPPORTED_TOKEN_ACCOUNTINGS,
         TOKEN_ACCOUNTING,
         EvaluationError,
         canonical_json,
@@ -328,7 +330,11 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         raise EvaluationError("only valid runs can enter the atomic registry")
     if execution.get("schema_version") != EXECUTION_SCHEMA_V3:
         raise EvaluationError("atomic registration requires execution schema v3")
-    if execution.get("token_accounting") != TOKEN_ACCOUNTING:
+    accounting = execution.get("token_accounting")
+    if (
+        accounting not in SUPPORTED_TOKEN_ACCOUNTINGS
+        or accounting != binding["comparison_conditions"]["executor_parameters"].get("token_accounting")
+    ):
         raise EvaluationError("atomic registration requires all-agent token accounting v1")
     manifest = frozen_set(cycle)
     case_id = binding["case_id"]
@@ -357,7 +363,7 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         effective_common=effective,
         provenance=provenance,
         sample_id=sample_id,
-        accounting=TOKEN_ACCOUNTING,
+        accounting=accounting,
         quality_score=rating["score"],
         total_tokens=execution["total_tokens"],
         elapsed_seconds=execution["elapsed_seconds"],
@@ -748,11 +754,17 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
         key: statistics.median(item[key] for item in iterations)
         for key in ("quality_score", "total_tokens", "elapsed_seconds")
     }
+    accountings = {canonical_json(record["token_accounting"]) for record in records.values()}
+    if len(accountings) != 1:
+        raise EvaluationError("selected atomic runs use different token accounting")
+    token_accounting = json.loads(next(iter(accountings)))
+    if token_accounting != conditions["executor_parameters"].get("token_accounting"):
+        raise EvaluationError("selected atomic runs do not match profile token accounting")
     result_id = uuid.uuid4().hex
     result = {
         "schema_version": "the-caption-prompt.prompt-set-result/v2",
         "result_id": result_id,
-        "token_accounting": TOKEN_ACCOUNTING,
+        "token_accounting": token_accounting,
         "prompt_set_identity": pool["prompt_set_identity"],
         "prompt_set_identity_sha256": pool["prompt_set_identity_sha256"],
         "compatibility": compatibility,
@@ -780,7 +792,7 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
                 "result_path": str(artifact),
                 "compatibility_key": result["compatibility_key"],
                 "result_content_sha256": result["result_content_sha256"],
-                "token_accounting": TOKEN_ACCOUNTING,
+                "token_accounting": token_accounting,
                 "registered_at": utc_now(),
             },
         )

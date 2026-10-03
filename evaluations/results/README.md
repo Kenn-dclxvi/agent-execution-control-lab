@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 Control-Free・C147・C276（2026-10-01）](#claude-opus55-free-c147-c276-20261001)
+
 - [C276 GPT-6 Astra Low・個人指示隔離（2026-09-30）](#c276-astra6-low-isolated-20260930)
 
 - [GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）](#sol61-c147-c276-free-20260930)
@@ -89,6 +91,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-free-c147-c276-20261001"></a>
 
 <a id="c276-astra6-low-isolated-20260930"></a>
 

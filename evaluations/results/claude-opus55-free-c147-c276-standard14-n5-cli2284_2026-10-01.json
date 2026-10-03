@@ -1,0 +1,214 @@
+{
+  "claude_code": "2.1.284 (Claude Code)",
+  "conditions": {
+    "c147": {
+      "compatibility_key": "56edc1a2241cb91a8f81bd083b8031fbfe3a12b7b5edd912c17f1a9e01189d52",
+      "diagnostic_counts": {
+        "command_protocol_violations": 0,
+        "owner_producer_evidence_unavailable": 70
+      },
+      "excluded_attempt_count": 138,
+      "failure_counts": {
+        "clarification_missing:live_csv_fallback_policy": 3
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 490.86026825101,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1198480
+        },
+        {
+          "elapsed_seconds": 427.79467737503,
+          "iteration": 2,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1204945
+        },
+        {
+          "elapsed_seconds": 453.9700858750439,
+          "iteration": 3,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1218798
+        },
+        {
+          "elapsed_seconds": 471.8401182059897,
+          "iteration": 4,
+          "quality_score": 100.0,
+          "total_tokens": 1277639
+        },
+        {
+          "elapsed_seconds": 504.8974327479664,
+          "iteration": 5,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1360311
+        }
+      ],
+      "median": {
+        "elapsed_seconds": 471.8401182059897,
+        "quality_score": 96.42857142857143,
+        "total_tokens": 1218798
+      },
+      "result_content_sha256": "4fa1b5c544728dfa8b540571550cc241c1c4b11120e91ab6067cc67f4817097c",
+      "result_id": "185c131d7b89451daffb63a98dc05ce9",
+      "score_counts": {
+        "2": 3,
+        "4": 67
+      }
+    },
+    "c276": {
+      "compatibility_key": "56edc1a2241cb91a8f81bd083b8031fbfe3a12b7b5edd912c17f1a9e01189d52",
+      "diagnostic_counts": {
+        "command_protocol_violations": 0,
+        "owner_producer_evidence_unavailable": 70
+      },
+      "excluded_attempt_count": 144,
+      "failure_counts": {
+        "a01_forbidden_mutating_operation": 1,
+        "a01_forbidden_test_operation": 1,
+        "clarification_missing:live_csv_fallback_policy": 2
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 669.0640750030288,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1110817
+        },
+        {
+          "elapsed_seconds": 505.0414929189428,
+          "iteration": 2,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 1171753
+        },
+        {
+          "elapsed_seconds": 513.4831265000103,
+          "iteration": 3,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1102219
+        },
+        {
+          "elapsed_seconds": 479.1895649189246,
+          "iteration": 4,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1134644
+        },
+        {
+          "elapsed_seconds": 564.6634566239954,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1119238
+        }
+      ],
+      "median": {
+        "elapsed_seconds": 513.4831265000103,
+        "quality_score": 96.42857142857143,
+        "total_tokens": 1119238
+      },
+      "result_content_sha256": "35d85c17a3de1c3c1bd77df0f540e72c0e2bd0432d8b8df86bc322dcf7bbaf0e",
+      "result_id": "307322da5e59422b90df43387e75efd5",
+      "score_counts": {
+        "0": 1,
+        "2": 2,
+        "4": 67
+      }
+    },
+    "free": {
+      "compatibility_key": "56edc1a2241cb91a8f81bd083b8031fbfe3a12b7b5edd912c17f1a9e01189d52",
+      "diagnostic_counts": {
+        "command_protocol_violations": 0,
+        "owner_producer_evidence_unavailable": 70
+      },
+      "excluded_attempt_count": 141,
+      "failure_counts": {
+        "a01_forbidden_test_operation": 2,
+        "clarification_missing:live_csv_fallback_policy": 1
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 509.8063170819951,
+          "iteration": 1,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 1228153
+        },
+        {
+          "elapsed_seconds": 480.03556704410585,
+          "iteration": 2,
+          "quality_score": 100.0,
+          "total_tokens": 1176901
+        },
+        {
+          "elapsed_seconds": 505.20866416292847,
+          "iteration": 3,
+          "quality_score": 96.42857142857143,
+          "total_tokens": 1153853
+        },
+        {
+          "elapsed_seconds": 465.9262885389908,
+          "iteration": 4,
+          "quality_score": 92.85714285714286,
+          "total_tokens": 1116143
+        },
+        {
+          "elapsed_seconds": 525.4824292930134,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1130336
+        }
+      ],
+      "median": {
+        "elapsed_seconds": 505.20866416292847,
+        "quality_score": 96.42857142857143,
+        "total_tokens": 1153853
+      },
+      "result_content_sha256": "620cad0f2edf4de7bc8b479e6230a3494a2ee93085367d1d44b16da8efd6fa3f",
+      "result_id": "2916103610694207a868995a00b3fc13",
+      "score_counts": {
+        "0": 2,
+        "2": 1,
+        "4": 67
+      }
+    }
+  },
+  "issuance": {
+    "excluded_attempts_reason": "claude_api_error (HTTP 429 session limit)",
+    "first_campaign_valid": 69,
+    "resume_issued": 141,
+    "resume_receipt": "resume-2-receipt.json"
+  },
+  "max_workers": 24,
+  "model": "claude-opus-5-5",
+  "preflight": {
+    "authentication": {
+      "apiProvider": "firstParty",
+      "authMethod": "claude.ai",
+      "loggedIn": true,
+      "subscriptionType": "team"
+    },
+    "claude_runtime": {
+      "executable": "/Users/kenn/Library/Application Support/Claude/claude-code/2.1.284/claude.app/Contents/MacOS/claude",
+      "executable_sha256": "4241eb34a941f9e7ca960ed845714b40f381a0365fe36d06077a1296bc6f97b2",
+      "version_output": "2.1.284 (Claude Code)"
+    },
+    "code_sha256": {
+      "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+      "scripts/atomic_run_registry.py": "7f72ccee87e4bab0b7d06e9ead4197cd5a9b25e4dec9239b72cefbbd0acfc489",
+      "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+      "scripts/evaluation_loop.py": "fa67db4cf4007fd0ddfc6d36a544360a138c31247293950d087b1e2146e5e806",
+      "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+      "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+      "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+      "scripts/run_claude_evaluation.py": "b21bdc26e70c402de222876142e9012878ca5a3cdcc2eae37b01960f659ec198",
+      "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "scripts/standard14_claude_quality_audit.py": "0afbe1d1783d483412deebddc358ffe1789f98add53cc122e0e5fd156f7c6a12",
+      "scripts/standard14_quality_audit.py": "9eb0abff8f9ab41396664eb0e2583a70240655851de070a3940a855664e1d60a",
+      "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+    },
+    "conditions_sha256": "c59955e63309f46b82c81002bf35b8942afc1d72e7a9fb900d2785b6bd3b78ec",
+    "mismatches": [],
+    "status": "ready",
+    "unfixed": [],
+    "unverified": [],
+    "variable": "prompt_set_identity only"
+  },
+  "schema_version": "the-caption-prompt.claude-series-measurement-summary/v1"
+}

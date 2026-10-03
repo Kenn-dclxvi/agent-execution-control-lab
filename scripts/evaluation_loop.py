@@ -20,6 +20,7 @@ from typing import Any
 if __package__:
     from .execution_time_recording import collect as collect_execution_time
     from .all_agent_usage import TOKEN_ACCOUNTING
+    from .claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
     from .codex_runtime_binding import (
         CodexRuntimeBindingError,
         resolve_runtime_from_conditions,
@@ -30,6 +31,7 @@ if __package__:
 else:
     from execution_time_recording import collect as collect_execution_time
     from all_agent_usage import TOKEN_ACCOUNTING
+    from claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
     from codex_runtime_binding import (
         CodexRuntimeBindingError,
         resolve_runtime_from_conditions,
@@ -218,6 +220,15 @@ QUALITY_RATING_V8 = {
     "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
 }
+QUALITY_RATING_CLAUDE_COLLECTOR_V1 = {
+    "contract_id": "outcome-terminal-state-evidence-claude-collector-v1",
+    "contract_sha256": "10fc2f48b39c3760f674e6f4469f6b94f147fd873db8c84e9dff955c3e982d3f",
+    "producer_evidence_schema_version": "the-caption-prompt.claude-owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.claude-all-agent-command-evidence/v1",
+    "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+    "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 SUPPORTED_QUALITY_RATINGS = (
     LEGACY_QUALITY_RATING,
     QUALITY_RATING_V2,
@@ -233,6 +244,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
     QUALITY_RATING_V14,
+    QUALITY_RATING_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLICK_V1,
     QUALITY_RATING_CLICK_V2,
     QUALITY_RATING_CLICK_V3,
@@ -252,6 +264,7 @@ RESULT_SCHEMA_V2 = "the-caption-prompt.prompt-set-result/v2"
 VIEW_SCHEMA_V1 = "the-caption-prompt.prompt-set-comparison-view/v1"
 VIEW_SCHEMA_V2 = "the-caption-prompt.prompt-set-comparison-view/v2"
 TOKEN_USAGE_SCHEMA_V2 = "the-caption-prompt.token-usage/v2"
+SUPPORTED_TOKEN_ACCOUNTINGS = (TOKEN_ACCOUNTING, CLAUDE_TOKEN_ACCOUNTING)
 ROOT_ONLY_ACCOUNTING = {
     "scope": "root_agent",
     "revision": "legacy_v1",
@@ -470,12 +483,13 @@ def parse_usage(path: Path) -> tuple[int, dict[str, str]] | None:
     usage = load_json(path)
     if usage.get("schema_version") != TOKEN_USAGE_SCHEMA_V2:
         raise EvaluationError("usage has an unsupported schema_version")
-    if usage.get("token_accounting") != TOKEN_ACCOUNTING:
+    accounting = usage.get("token_accounting")
+    if accounting not in SUPPORTED_TOKEN_ACCOUNTINGS:
         raise EvaluationError("usage must use all-agent token accounting v1")
     total = usage.get("total_tokens")
     if not isinstance(total, int) or isinstance(total, bool) or total < 0:
         raise EvaluationError("usage must contain a non-negative integer total_tokens")
-    return total, TOKEN_ACCOUNTING
+    return total, accounting
 
 
 def parse_run_status(path: Path) -> dict[str, Any] | None:
@@ -538,7 +552,7 @@ def validate_comparison_conditions(value: Any) -> dict[str, Any]:
     executor_parameters = conditions["executor_parameters"]
     if not isinstance(executor_parameters, dict):
         raise EvaluationError("comparison_conditions.executor_parameters must be an object")
-    if executor_parameters.get("token_accounting") != TOKEN_ACCOUNTING:
+    if executor_parameters.get("token_accounting") not in SUPPORTED_TOKEN_ACCOUNTINGS:
         raise EvaluationError(
             "comparison_conditions.executor_parameters.token_accounting must use all_agents/v1"
         )
@@ -565,7 +579,7 @@ def validate_atomic_run_conditions(value: Any) -> dict[str, Any]:
     executor_parameters = conditions["executor_parameters"]
     if not isinstance(executor_parameters, dict):
         raise EvaluationError("comparison_conditions.executor_parameters must be an object")
-    if executor_parameters.get("token_accounting") != TOKEN_ACCOUNTING:
+    if executor_parameters.get("token_accounting") not in SUPPORTED_TOKEN_ACCOUNTINGS:
         raise EvaluationError(
             "comparison_conditions.executor_parameters.token_accounting must use all_agents/v1"
         )
@@ -755,6 +769,8 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
         )
     if exclusion is None and usage is None:
         raise EvaluationError("valid run requires all-agent token usage")
+    if usage is not None and usage[1] != conditions["executor_parameters"]["token_accounting"]:
+        raise EvaluationError("usage token accounting differs from the run capsule")
     total_tokens = None if usage is None else usage[0]
     token_accounting = None if usage is None else usage[1]
     if usage_report_path.exists():
@@ -947,7 +963,9 @@ def collect_runs(
         execution = load_json(cycle / "layer2" / "evidence" / run_id / "execution.json")
         if execution.get("schema_version") != EXECUTION_SCHEMA_V3:
             raise EvaluationError("valid run must use execution schema v3")
-        if execution.get("token_accounting") != TOKEN_ACCOUNTING:
+        if execution.get("token_accounting") != binding["comparison_conditions"][
+            "executor_parameters"
+        ].get("token_accounting") or execution.get("token_accounting") not in SUPPORTED_TOKEN_ACCOUNTINGS:
             raise EvaluationError("valid run must use all-agent token accounting v1")
         rating = load_json(cycle / "layer3" / "ratings" / f"{run_id}.json")
         runs.append({**binding, "execution": execution, "rating": rating})
@@ -1528,10 +1546,11 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
     compatibility = build_compatibility(manifest, conditions, cases, iterations)
     compatibility_key = identity_sha256(compatibility)
     result_id = uuid.uuid4().hex
+    token_accounting = conditions["executor_parameters"]["token_accounting"]
     result = {
         "schema_version": RESULT_SCHEMA_V2,
         "result_id": result_id,
-        "token_accounting": TOKEN_ACCOUNTING,
+        "token_accounting": token_accounting,
         "prompt_set_identity": prompt_set_identity,
         "prompt_set_identity_sha256": identity_sha256(prompt_set_identity),
         "compatibility": compatibility,
@@ -1553,7 +1572,7 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
             "result_path": str(artifact),
             "compatibility_key": compatibility_key,
             "result_content_sha256": result["result_content_sha256"],
-            "token_accounting": TOKEN_ACCOUNTING,
+            "token_accounting": token_accounting,
             "registered_at": utc_now(),
         },
     )
@@ -1571,9 +1590,9 @@ def token_accounting_for_result(result: dict[str, Any]) -> dict[str, str]:
     if result.get("schema_version") == RESULT_SCHEMA_V1:
         return ROOT_ONLY_ACCOUNTING
     accounting = result.get("token_accounting")
-    if accounting != TOKEN_ACCOUNTING:
+    if accounting not in SUPPORTED_TOKEN_ACCOUNTINGS:
         raise EvaluationError("v2 result must use all-agent token accounting v1")
-    return TOKEN_ACCOUNTING
+    return accounting
 
 
 def reaccount_compatibility(source: dict[str, Any]) -> dict[str, Any]:

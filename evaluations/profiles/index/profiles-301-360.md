@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate260-canonical-evidence-consumer-binding-restoration-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate260-canonical-evidence-consumer-binding-restoration-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
+- [`candidate261-spec-output-consumer-closure-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json`](../candidate261-spec-output-consumer-closure-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate262-spec-false-start-state-consumer-permission-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json`](../candidate262-spec-false-start-state-consumer-permission-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate262-spec-false-start-state-consumer-permission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate262-spec-false-start-state-consumer-permission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate263-result-effect-dependency-closure-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate263-result-effect-dependency-closure-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v7-expanded12-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate35-root-control-only-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate35-root-control-only-owner-producer-v7-expanded12-global-m24-n5-r1.json`](../candidate35-root-control-only-owner-producer-v7-expanded12-global-m24-n5-r1.json)
-- [`candidate35-root-control-only-owner-producer-v8-expanded12-f04r2-global-m24-n5-r1.json`](../candidate35-root-control-only-owner-producer-v8-expanded12-f04r2-global-m24-n5-r1.json)
