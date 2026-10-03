@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Free GPT-6.1 Sol Lowの新規N=5（2026-10-03）](#free-sol61-low-new-n5-20261003)
+
 - [C276 GPT-6 Astra Low・個人指示隔離（2026-09-30）](#c276-astra6-low-isolated-20260930)
 
 - [GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）](#sol61-c147-c276-free-20260930)
@@ -89,6 +91,12 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-sol61-low-new-n5-20261003"></a>
+
+## Free GPT-6.1 Sol Lowの新規N=5（2026-10-03）
+
+[新規試験記録](free-sol61-low-standard14-new-n5_2026-10-03.md)（[機械可読記録](free-sol61-low-standard14-new-n5_2026-10-03.json)、[品質採点](free-sol61-low-standard14-new-n5_2026-10-03-quality-audit.json)、[登録結果](a372fbf2992d42d5a85fc14deebfee7f.json)）は70件が有効で、4点67件、1点1件、0点2件。品質中央値94.64、全エージェントトークン中央値2,155,444、所要時間中央値886.49秒。過去runを含めない新規試験として完了し、前回との互換比較は行っていない。
 
 <a id="c276-astra6-low-isolated-20260930"></a>
 

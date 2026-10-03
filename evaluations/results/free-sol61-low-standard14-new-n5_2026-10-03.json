@@ -1,0 +1,49 @@
+{
+  "campaign": {
+    "attempt_count": 70,
+    "elapsed_seconds": 206.99066858296283,
+    "ended_at": "2026-10-03T13:40:34.111090+00:00",
+    "errors": [],
+    "excluded_attempt_count": 0,
+    "max_workers": 24,
+    "requested_slots": 70,
+    "schedule_policy": "global_queue",
+    "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+    "started_at": "2026-10-03T13:37:07.118206+00:00",
+    "status": "complete",
+    "valid_slots": 70
+  },
+  "cli": "0.159.0",
+  "conditions": {
+    "free-low": {
+      "analysis": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-sol61-low-standard14-n5-20261003-r1/free-low/analysis.json",
+      "compatibility_key": "c1f112965bcb938f75f0c495b2ffab1ba1ec2cf0a67562f39a2c246caeff907e",
+      "failure_counts": {
+        "a01_forbidden_test_operation": 2,
+        "a02_canonical_route_mismatch": 1
+      },
+      "isolated_run_count": 70,
+      "median": {
+        "elapsed_seconds": 886.4890529160621,
+        "quality_score": 94.64285714285714,
+        "total_tokens": 2155444
+      },
+      "pool_key": "e3f1877cd3775288b8eaa3779ae4d2f82f30b4a7eff4a14811b26bc14deb7986",
+      "result_content_sha256": "b803dae202d36d18f3903fbedf1389b39a4033e02aa19ee52fed988083c1f6fb",
+      "result_id": "a372fbf2992d42d5a85fc14deebfee7f",
+      "score_counts": {
+        "0": 2,
+        "1": 1,
+        "4": 67
+      }
+    }
+  },
+  "evidence_root": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-sol61-low-standard14-n5-20261003-r1",
+  "historical_comparison": "not_performed",
+  "local_code_change": "scripts/evaluation_loop.pyのClaude集計対応追加。前回とコードハッシュが異なるため、提供環境だけの効果を分離した比較ではない。",
+  "max_workers": 24,
+  "model": "gpt-6.1-sol",
+  "new_runs_only": true,
+  "personal_instruction_isolation_verified_runs": 70,
+  "valid_runs": 70
+}
