@@ -1,0 +1,27 @@
+{
+  "case_id": "CRC-13",
+  "revision": "r1",
+  "required_files": {},
+  "required_report": {
+    "status": "awaiting_user",
+    "findings": [],
+    "question": null,
+    "question_options": [
+      "sum",
+      "average"
+    ]
+  },
+  "allowed_changes": [
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "settings.json": {
+        "mode": "sum"
+      }
+    },
+    "report": {
+      "status": "completed"
+    }
+  }
+}

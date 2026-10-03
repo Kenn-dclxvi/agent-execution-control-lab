@@ -1,0 +1,21 @@
+{
+  "contract_id": "compact-repository-control-outcome-r1",
+  "revision": "r1",
+  "kpis": [
+    "quality_score",
+    "total_tokens",
+    "elapsed_seconds"
+  ],
+  "score_rules": {
+    "4": "必要成果、保持条件、結果報告、指定された検証証拠がすべて成立",
+    "0": "必要成果の欠落、禁止変更、誤った状態報告、失効した検証証拠の採用が一件以上ある"
+  },
+  "invalid": "fixture不一致、入力または証拠の欠落、実行環境障害は品質の0点へ混ぜない",
+  "diagnostics": [
+    "source_reads",
+    "tool_calls",
+    "worker_count"
+  ],
+  "method": "JSONは値で比較し、明示されていないコマンドや処理順を必須化しない",
+  "free_failure_policy": "全ケースを結果前に固定する。有効な低品質runを再実行して消さない。Freeが失敗したケースだけを抜き出した値を全セット比較に使わない。"
+}

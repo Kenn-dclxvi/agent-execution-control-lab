@@ -26,6 +26,7 @@
 | [`repository-contract.md`](repository-contract.md) | リポジトリ契約の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md) | 評価基盤のレイヤーと境界の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`evaluation-loop-manual.md`](evaluation-loop-manual.md) | 評価実行方法の正本 | [`docs/AGENTS.md`](AGENTS.md) |
+| [`reproducibility-decision-policy.md`](reproducibility-decision-policy.md) | 保存実績に基づく再現性判断と累積N=5・20・50の打ち切り基準 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | プロンプト制御の原因分析、成功・失敗比較、Candidate設計および再構成へ進む前に全文を読む設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-file-bundle.md`](prompt-file-bundle.md) | prompt file bundle形式・manifest・格納の正本 | [`scripts/AGENTS.md`](../scripts/AGENTS.md) |
 
@@ -43,7 +44,23 @@
 
 ## 3. 現行frontier
 
+- [小規模A01 r2・r3のAstra各N2結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-r3-n2_2026-10-03.md)：同一CLI・PATHの12件の動作分類と費用。旧KPIを再利用しない初回比較。
+
+- [小規模A01 r2・r3のAstra各N2計測](compact-latent-mode-r2-r3-astra-n2-execution.md)：同じCLI・PATHで両版を各推論設定2回測定する。過去r2のPATH固定証拠不足のため、今回の計12件へ固定。
+
+- [小規模A01の見直し：用途と入力固定の復元](compact-latent-mode-r3-redesign.md)：N20結果と[追加99件の操作証拠](compact-latent-mode-r3-comparison-evidence.json)を比較し、r2で落とした用途・日付・取得元・呼出し側の関係をr3へ戻す。局所15テスト成功、モデル未測定。
+
 現在進行中の研究軸を、別軸の作業を混ぜず因果系列ごとに並べる。
+
+### 今後のモデル評価に向けたA01の動作差の保持
+
+- [旧A01と復元版の累積N20計画](astra-a01-old-compact-n20-plan-r1.md): 利用者依頼による反復追加。保存済み互換実行を再利用し、各試験・推論設定を累積20件まで確認する。
+
+- [依存関係を戻した小規模試験](compact-latent-mode-dependency-r2-design.md): 要求文を保持し、呼出しとstrictの例外条件を復元したr2。Astraの推論設定別の初回診断条件を固定する。
+
+- [復元版のAstra測定結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-n2_2026-10-01.md): 各2回で、lowの確認停止・mediumの現状テスト・highの推測編集を観測。旧A01を再実行せず、4,792バイトの素材で分岐を確認した。
+
+- [Astraの推論設定差を残すモデル評価試験](astra-a01-model-discrimination-investigation-r1.md): 旧15件の分岐と小規模化で変わった依存関係を整理。得点と推測編集を分けて記録し、実行環境とfixtureの原因を切り分ける未実施条件を固定する。
 
 ### C147の成果確定・探索制限を中心に残す再構成
 
@@ -605,6 +622,8 @@
 
 ## 4. 研究成果・統合知見
 
+- [Free・C147・C276のStandard14縮小検討](standard14-free-c147-c276-case-reduction-assessment-r1.md): GPT-5.6以降の34結果と16互換比較を分析。品質失敗とコスト方向を保存する10項目の日常比較案、全体評価を置き換えられない範囲を記録。
+
 - [C274を使うAstraの推論設定の推奨判定](candidate274-astra-reasoning-recommendation-r1.md): 5段階・計350件の品質、時間、トークン内訳と呼び出し履歴から通常設定lowを推奨。入力再送・待機・テスト選択のやり直し、maxの表記による減点を区別。
 
 - [Sol・Astraの計測推移と動作の特徴](sol-astra-c147-c274-measurement-synthesis-r1.md): 最初の4条件からC273・C274、Solの時間差監査、時間記録導入後までをまとめた2026年9月6日時点の統合記録。
@@ -637,6 +656,10 @@
 
 ## 6. 評価・運用基盤
 
+- [旧A01と削減版を比較する条件](old-a01-reduction-comparison-conditions.md)：固定入力・環境、素材削減とモデル比較の分離、動作・トークン・時間・容量の計測、Low N2開始条件を整理。
+
+- [小規模リポジトリによる制御評価系列](compact-repository-control-series-design.md): STD14相当14件と追加6件、独立fixture、Free初期N=1、既存runの再利用と実測前の条件を固定。[初回測定](../evaluations/targets/compact-repository-control/results/free-sol61-low-core20-n1_2026-10-01.md)は20件実行成立、採点不備1件を留保。
+
 - [C274 Astra maxの比較計測](candidate274-astra-max-n5-execution.md): 推論設定maxでStandard14各N=5を実行し、low・直近medium・high・xhighと比較する範囲と結果。
 
 - [C274 Astra lowの比較計測](candidate274-astra-low-n5-execution.md): mediumの一段下でStandard14各N=5を実行し、直近medium・high・xhighと比較する範囲と結果。
@@ -662,6 +685,51 @@
 | [`pr-review-measurement-environment-design.md`](pr-review-measurement-environment-design.md) | `agent-execution-control-lab` namespacedインスタンスでClaude Code Actionの実行経路を比較するPRレビュー測定設計。仕様監査で既存PRR-C01 runをdiagnosticへ再分類し、Core Baselineは未qualification |
 
 ## 7. 完了済み研究記録
+
+- [累積削減版r9の仕様分離結果](old-a01-cumulative-spec-projection-r9-report.md)：仕様本文は両件未読。4点1件・0点1件で、仕様分離の削減効果は未確認。
+- [累積削減版r9の仕様分離設計](old-a01-cumulative-spec-projection-r9-design.md)：r8を保持し、運用移行の原文だけを別文書へ分離。復元一致と39件のテストを確認し、並列Low N2で測定。
+
+- [累積削減版r8のledger組立分離結果](old-a01-cumulative-ledger-separation-r8-report.md)：停止4点2件。対象外blockの入口配送は両件で除外。停止内で消費は分かれ、平均だけでコスト改善としない。
+
+- [累積削減版r8のledger組立分離設計](old-a01-cumulative-ledger-separation-r8-design.md)：保存済み6件で配送された対象外の資産組立を既存資産側へ移す。モード判断と全テストを保持し、並列Low N2で初回配送と持越しを確認。[配送選定証拠](old-a01-r8-delivery-selection-evidence.json)。
+
+- [直近r6・r7の方針監査](old-a01-r6-r7-direction-audit.md)：ファイル短縮へ偏った設計と、入力の累積・動作構成を分析。共通化の反復を止め、判断情報と実際の配送入力を基準にする。[抽出証拠](old-a01-r6-r7-direction-audit.json)。
+
+- [累積削減版r7のsnapshotテスト短縮結果](old-a01-cumulative-snapshot-test-r7-report.md)：Low N2は両件テスト先行、全体トークン・時間増加。元39テストと判断情報を保持したが削減成果とはせず、r5を土台に維持。
+
+- [累積削減版r7のsnapshotテスト共通化設計](old-a01-cumulative-snapshot-test-r7-design.md)：r5の累積削減を維持し、snapshotテスト一ファイルの準備処理を短縮。展開ASTと39テストを照合して並列Low N2。
+
+- [累積削減版r6の確認結果](old-a01-cumulative-test-deduplication-r6-report.md)：画像・資料除外と処理分離を保持しテスト準備を短縮。Low N2は両件テスト先行、トークン・時間増加。次の土台にはr5を保持。
+
+- [累積削減版r6のテスト準備共通化設計](old-a01-cumulative-test-deduplication-r6-design.md)：r5の全削減を保持し、テスト準備一ファイルだけを短縮。展開ASTと39テストを照合して並列Low N2。
+- [r5の時間増加の切り分け](old-a01-r5-wait-time-diagnostic.md)：確認後sleep60秒を保存ログで特定。元の時間KPIは保持。[証拠](old-a01-r5-wait-time-diagnostic.json)。
+
+- [実読コード・テスト削減r4/r5の比較報告](old-a01-read-input-reduction-r4-r5-report.md)：空白短縮は失敗。処理分離のLow N2は同じ動作構成でトークン12.7%減、時間増加。各版の固定条件・配置差・39テストの保持・読取りの変化を整理。
+
+- [旧A01の判断箇所と資産計算処理を分離するr5](old-a01-source-separation-r5-design.md)：r3から元の全メソッド・テストを保持して入口を分離。変更・追加各2件を宣言し、並列Low N2で計測。
+
+- [旧A01の実読コード・テストを短縮するr4](old-a01-token-preserving-compaction-r4-design.md)：字句・AST・元39テストを維持する空白短縮。変更2ファイルと派生Git識別子を宣言し、並列Low N2だけを実施。
+
+- [未参照資料削減r3の比較報告](old-a01-unread-artifact-projection-r3-comparison-report.md)：比較条件に沿ってLow N2の動作、トークン、時間、容量を対照し、固定条件と記録内の並列表記不整合を明記。
+
+- [旧A01の未参照資料削減r3とLow N2確認](old-a01-unread-artifact-projection-r3-design.md)：53件を追加除外。並列Low N2は停止1件・テスト先行1件、編集なし。新しい削減の確認はまずN2とし、自動でN20へ延長しない。
+
+- [PNG投影r2 N20の並列切替記録](old-a01-exact-input-projection-r2-n20-parallel-amendment.md)：実施中の利用者依頼により未実施2件を並列へ切替。[結果](../evaluations/results/control-free-astra-low-old-a01-exact-input-projection-r2-n20_2026-10-03.md)は停止8件・テスト先行12件、編集なし。
+- [PNG投影r2のAstra Low累積N20計画](old-a01-exact-input-projection-r2-n20-plan.md)：利用者の追加依頼に基づき、条件一致を照合して既存2件を再利用し、実同時1で不足18件だけ追加する固定計画。
+- [旧A01の判断入力を保持する素材削減r2](old-a01-exact-input-projection-r2-design.md)：元の257ファイル・JSON TaskSpec・Git開始観測・共有Pythonを保持し、対象外PNG2件だけを疎な投影で除く構成とLow N2の発行条件。
+- [旧素材と小規模r4の隔離Low N20条件監査](old-versus-compact-isolated-low-n20-condition-audit-r1.md)：全40件でCLI・指示配送を照合。TaskSpec・authority・Python依存環境・実行群の差を特定し、縮小単独の比較ではないことを明記。[証拠](old-versus-compact-isolated-low-n20-condition-audit-r1.json)。
+- [個人指示を除外した旧A01の推論レベル別N20実行計画](old-a01-isolated-reasoning-n20-plan-r1.md)：入力・環境を固定した計画。途中でLowだけへ変更し、[Low N20結果](../evaluations/results/control-free-astra-low-old-a01-isolated-n20_2026-10-03.md)を保存。
+- [個人指示除外条件に基づく環境差監査の訂正](old-a01-personal-instruction-exclusion-correction-r2.md)：今回の指示除外は正しく、旧追加15件の混入が最新条件への不適合であると訂正。前版の個人指示復元案を撤回。
+- [旧A01の元環境と移植後環境の差異監査](old-a01-original-environment-transfer-audit-r1.md)：旧Low20件と移植後4件の全指示を照合し、旧追加15件にあった作業開始前の制約が移植後に欠落していたことを確認。移植後4件の比較上の使用範囲を訂正。[証拠](old-a01-original-environment-transfer-audit-r1.json)。
+- [旧A01の画像削除前後のログ差分分析](old-a01-image-removal-log-difference-analysis-r1.md)：4実行の指示・読取り結果・実配送・質問方式・応答別usageを比較。画像の直接観測はなく、失敗1件は非同期質問後に現状テストへ続行。[証拠](old-a01-image-removal-log-difference-analysis-r1.json)。
+
+- [旧A01から不要部分を削減する診断](old-a01-progressive-reduction-r1.md)：元素材は現在環境Low N2で確認停止2件。画像2件だけ除去した次段階ではテスト先行1件を観測し、高設定と次の削減は未発行。[結果](../evaluations/results/control-free-astra-low-old-a01-assets-reduced-n2_2026-10-03.md)。
+
+- [小規模A01の依頼文における現状確認と変更後検証の診断](compact-latent-mode-task-r4-diagnostic.md)：TASK一文だけを変更した別評価系列の設計と各N2の条件。 [結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-task-r4-n2_2026-10-03.md)。
+
+- [非同期確認の後にテストを続けた理由の再分析](astra-latent-mode-continuation-cause-audit-r2.md)：57実行の基本指示一致と質問前の操作方針を確認し、指示改版・非同期tool新設・受付による方針変更・環境による継続強制を棄却または原因候補から下げる。[証拠](astra-latent-mode-continuation-cause-audit-r2.json)。
+
+- [Astraの推論設定によるスコア差が小規模版で失われた理由](astra-latent-mode-score-gradient-analysis-r1.md)：旧N20と新r2・r3各N2を分解し、未指定値の認識とテストの保留を分ける。実行環境と非同期確認の差も[証拠索引](astra-latent-mode-score-gradient-analysis-r1.json)へ保存。新規測定なし。
 
 - [Astra FreeのA01結果差の分析](astra-free-a01-reasoning-route-audit-r1.md): 15件を確認停止・現状テスト・推測編集へ分類。提示条件と採点条件の差、以前の減点説明の訂正を記録。
 
@@ -872,3 +940,5 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 - [一般チャットsemantic grader閾値統治 判断票 r1](general-chat-semantic-threshold-governance-decision-input-r1.md)
 - [一般チャットsemantic grader risk policy r1](general-chat-semantic-grader-risk-policy-r1.md)
 - [一般チャットsemantic grader threshold decision r1](general-chat-semantic-grader-threshold-decision-r1.md)
+
+- [Astra Free：旧A01と小規模版の各N20結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-n20_2026-10-01.md)：旧Low20件の停止に対し、小規模版Lowは停止1件。動作分類、費用、CLIと並列の条件差を記録。

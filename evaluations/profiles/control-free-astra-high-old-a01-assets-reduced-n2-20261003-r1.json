@@ -1,0 +1,57 @@
+{
+  "profile_id": "control-free-astra-high-old-a01-assets-reduced-n2-20261003-r1",
+  "target_id": "the-caption",
+  "revision": "r1",
+  "runtime": {
+    "executor": "codex-cli",
+    "required_version": "0.159.0",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "executable_binding": {
+      "alias": "codex-0.159",
+      "codesign_team_identifier": "2DC432GLL2",
+      "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+      "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+      "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+      "version_output": "codex-cli 0.159.0"
+    },
+    "permission": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "max_workers": 24,
+    "personal_instruction_isolation": "per_run_empty_CODEX_HOME_auth_only",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v1",
+      "source": "codex_rollout_final_usage_by_workspace"
+    },
+    "elapsed_boundary": "cli_subprocess_start_to_return_monotonic"
+  },
+  "repetition": {
+    "initial_n": 2,
+    "max_attempts_per_slot": 1,
+    "low_quality_run_policy": "retain"
+  },
+  "budget": {
+    "total_authorized_model_slots": 2,
+    "automatic_retry": false
+  },
+  "case_id": "TC-A01-LATENT-MODE-POLICY",
+  "case_revision": "r2",
+  "target_repository_tree": "e8f3b66b487a57525b8d11bf4d2013e9ed42c1ad",
+  "prompt_set_identity": {
+    "name": "the-caption-3ce91a4-control-free-repository-r1",
+    "revision": "r1",
+    "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d"
+  },
+  "task_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+  "rating_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+  "diagnostic_scope": "PNG画像2件だけを削減したfixture軸の非登録診断。同一環境の旧素材Low N2を基準とし、高設定はLow保持後のみ発行。",
+  "max_workers": 24,
+  "actual_concurrency": 1,
+  "fixture_variant": "unrelated_png_removed_r1"
+}

@@ -1,0 +1,782 @@
+{
+  "analysis_id": "old-a01-image-removal-log-difference-analysis-r1",
+  "new_model_runs": 0,
+  "historical_results_changed": false,
+  "runs": [
+    {
+      "variant": "before",
+      "run_id": "before-low-01",
+      "quality_score": 4,
+      "route": "確認して停止",
+      "usage": {
+        "input_tokens": 79932,
+        "cached_input_tokens": 63872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 420,
+        "reasoning_output_tokens": 20,
+        "total_tokens": 80352
+      },
+      "elapsed_seconds": 34.93834708305076,
+      "model_response_count": 4,
+      "model_responses": [
+        {
+          "rollout_index": 16,
+          "input_tokens": 13716,
+          "cached_input_tokens": 11264,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 135,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 13851
+        },
+        {
+          "rollout_index": 21,
+          "input_tokens": 14096,
+          "cached_input_tokens": 13568,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 72,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 14168
+        },
+        {
+          "rollout_index": 28,
+          "input_tokens": 25321,
+          "cached_input_tokens": 13952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 88,
+          "reasoning_output_tokens": 20,
+          "total_tokens": 25409
+        },
+        {
+          "rollout_index": 32,
+          "input_tokens": 26799,
+          "cached_input_tokens": 25088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 125,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 26924
+        }
+      ],
+      "base_instructions_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+      "developer_messages": [
+        {
+          "sha256": "7b4c90d354d3454fd1e43fc05fcaf52c990bf8897d90bfdaef7b0fec3c5d9a78",
+          "normalized_sha256": "dd21076d3036af015913ea28749f97af1c5dd58e330ea1b087df7f986e6ef6d2"
+        },
+        {
+          "sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "normalized_sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552"
+        },
+        {
+          "sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e",
+          "normalized_sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        }
+      ],
+      "user_messages": [
+        {
+          "sha256": "61348b26a3f0cac4132f4ee30447faf549cda5285c4950e4e4ba53f83ea6c50f",
+          "normalized_sha256": "3fe783b880bf6dbc67f94bab32d4376c08d34794c552c603787be3f0f6495d32",
+          "actual_task": false
+        },
+        {
+          "sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "normalized_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "actual_task": true
+        }
+      ],
+      "first_listing": {
+        "ordered_paths": [
+          "tests/AGENTS.md",
+          "AGENTS.md",
+          "src/AGENTS.md",
+          "src/domain/universal_ingester.py",
+          "src/domain/market_units_snapshot.py",
+          "scripts/AGENTS.md",
+          "tests/unit/test_market_data.py",
+          "tests/unit/test_market_units_snapshot.py",
+          "tests/unit/test_universal_ingester.py",
+          "src/infra/ingester.py",
+          "src/infra/market_data.py",
+          "src/infra/market_snapshot_repository.py",
+          "docs/AGENTS.md",
+          "scripts/dev/run_shadow_ingester.py",
+          "docs/how-to/market-units-migration-spec.md"
+        ],
+        "set_sha256": "1225406bea5410085ebda05c0a4a91c6754d82ae315e50c13b3b928beee46915"
+      },
+      "common_read_stdout": {
+        "characters": 48167,
+        "sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+      },
+      "common_read_model_delivery": {
+        "normalized_sha256": "3ec39e514eed453fac6d0b49919017b08487f3199ee76bc26c96d948792d2fd2",
+        "truncated": true,
+        "normalization": "外側のchunk ID、実行時間、元token数の注意表示のみ。本文は正規化しない。"
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingester*'\"",
+          "exit_code": 0,
+          "stdout_characters": 594,
+          "stdout_sha256": "30aad54155db7e8dc5a2b5c9ba4f48fdaa088f2362b2710e4ae3a77fca3f9384"
+        },
+        {
+          "command": "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; rg --files src/domain tests/unit -g AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py'",
+          "exit_code": 0,
+          "stdout_characters": 48167,
+          "stdout_sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n 'units_mode|strict|daily|snapshot|UniversalIngester' tests/unit/test_market_units_snapshot.py; wc -c AGENTS.md; git symbolic-ref -q --short HEAD\"",
+          "exit_code": 1,
+          "stdout_characters": 4815,
+          "stdout_sha256": "8a41dab98efee026d27d86c82d642e42acb06200f807b1bdc85de40bff1c4ab9"
+        }
+      ],
+      "timeline": [
+        {
+          "rollout_index": 11,
+          "kind": "公開説明",
+          "text": "まず作業場所とGitの状態、適用される指示、対象コードと直接関連する既存テストを確認します。既定modeの指定がコードや指示から判断できない場合は、変更前に確認します。\n"
+        },
+        {
+          "rollout_index": 12,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "fbfd6f0af732eb8b4981c8e6b0e1d7c2fa841283fdae9f6dd277398bf559f88e"
+        },
+        {
+          "rollout_index": 17,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "b576a1b88effda1d6760591990c2f7539208bed0c752f02405c2a29c6bd09837"
+        },
+        {
+          "rollout_index": 24,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "847f46b57152dc43d64e200268c32a47ec1f3363d814eccef3c042aa519989b2"
+        },
+        {
+          "rollout_index": 30,
+          "kind": "公開説明",
+          "text": "現在の既定は `units_mode=\"daily\"` で、snapshotが欠落・不正の場合はlive CSVへフォールバックします。\n\n**既定を `\"strict\"` に変更する意図でしょうか？** この場合、通常はsnapshotの欠落・不正でエラーになります。TaskSpecに変更先の指定がないため確認が必要です。\n\n開始状態はdetached HEAD（`b5c1cc6d`）、作業ツリーはクリーンでした。ファイル変更・テスト実行はまだ行っていません。"
+        }
+      ],
+      "async_acceptances": 0,
+      "image_operation_observed": false,
+      "user_answer_observed": false,
+      "raw_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-current-env-low-n2-20261003-r1/runs/low-01",
+      "rollout_sha256": "984d992a6adeaef18ef27ad4a6e77aff7b3cb20086fdb2d4d05520168d94a234",
+      "events_sha256": "38832c8983c39f1a5cc7488ab3a4e1a8735ddab5c1b4ad18978bb830df940e0c"
+    },
+    {
+      "variant": "before",
+      "run_id": "before-low-02",
+      "quality_score": 4,
+      "route": "確認して停止",
+      "usage": {
+        "input_tokens": 84581,
+        "cached_input_tokens": 63872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 442,
+        "reasoning_output_tokens": 31,
+        "total_tokens": 85023
+      },
+      "elapsed_seconds": 29.634676625020802,
+      "model_response_count": 4,
+      "model_responses": [
+        {
+          "rollout_index": 16,
+          "input_tokens": 13716,
+          "cached_input_tokens": 11264,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 129,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 13845
+        },
+        {
+          "rollout_index": 21,
+          "input_tokens": 14089,
+          "cached_input_tokens": 13568,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 59,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 14148
+        },
+        {
+          "rollout_index": 28,
+          "input_tokens": 25299,
+          "cached_input_tokens": 13952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 102,
+          "reasoning_output_tokens": 17,
+          "total_tokens": 25401
+        },
+        {
+          "rollout_index": 34,
+          "input_tokens": 31477,
+          "cached_input_tokens": 25088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 152,
+          "reasoning_output_tokens": 14,
+          "total_tokens": 31629
+        }
+      ],
+      "base_instructions_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+      "developer_messages": [
+        {
+          "sha256": "faf5036ae4316edb33a1d43ea013cb70929714c672e3829f6b80f5b2e03a5683",
+          "normalized_sha256": "dd21076d3036af015913ea28749f97af1c5dd58e330ea1b087df7f986e6ef6d2"
+        },
+        {
+          "sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "normalized_sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552"
+        },
+        {
+          "sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e",
+          "normalized_sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        }
+      ],
+      "user_messages": [
+        {
+          "sha256": "4f5ae9568d4165ab08be32e51aa98587d33a096b707822f70aa3427a8317d4d8",
+          "normalized_sha256": "3fe783b880bf6dbc67f94bab32d4376c08d34794c552c603787be3f0f6495d32",
+          "actual_task": false
+        },
+        {
+          "sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "normalized_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "actual_task": true
+        }
+      ],
+      "first_listing": {
+        "ordered_paths": [
+          "src/domain/market_units_snapshot.py",
+          "src/domain/universal_ingester.py",
+          "src/AGENTS.md",
+          "src/infra/ingester.py",
+          "src/infra/market_data.py",
+          "src/infra/market_snapshot_repository.py",
+          "AGENTS.md",
+          "scripts/AGENTS.md",
+          "scripts/dev/run_shadow_ingester.py",
+          "docs/AGENTS.md",
+          "docs/how-to/market-units-migration-spec.md",
+          "tests/AGENTS.md",
+          "tests/unit/test_market_data.py",
+          "tests/unit/test_market_units_snapshot.py",
+          "tests/unit/test_universal_ingester.py"
+        ],
+        "set_sha256": "1225406bea5410085ebda05c0a4a91c6754d82ae315e50c13b3b928beee46915"
+      },
+      "common_read_stdout": {
+        "characters": 48167,
+        "sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+      },
+      "common_read_model_delivery": {
+        "normalized_sha256": "480dd7ca6c2283ea0f1bfaa12d0a072965baf1bbc468a4f9d0bc1059a9537afd",
+        "truncated": true,
+        "normalization": "外側のchunk ID、実行時間、元token数の注意表示のみ。本文は正規化しない。"
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal*' -g '*ingester*' -g '*market*'\"",
+          "exit_code": 0,
+          "stdout_characters": 594,
+          "stdout_sha256": "b28d3b0630d2dd4bffa5e30ce0d39a70bb3de12900789e2c95d7c162a0411643"
+        },
+        {
+          "command": "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py'",
+          "exit_code": 0,
+          "stdout_characters": 48167,
+          "stdout_sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+        },
+        {
+          "command": "/bin/zsh -lc \"cat docs/how-to/market-units-migration-spec.md; rg -n 'units_mode|strict|daily|snapshot|UniversalIngester' tests/unit/test_market_units_snapshot.py; ls -l AGENTS.md; rg --files src/domain tests/unit -g AGENTS.md\"",
+          "exit_code": 1,
+          "stdout_characters": 14121,
+          "stdout_sha256": "0e236a56b82b5dd5ddb9ad7cdaad08a900c81fb8c394a70b9cbd4086c3e871e3"
+        }
+      ],
+      "timeline": [
+        {
+          "rollout_index": 11,
+          "kind": "公開説明",
+          "text": "まずcheckoutの状態と適用される指示、対象実装・関連testを確認します。変更先の既定modeが指定されていないため、既存の定義から判断できるか確認します。\n"
+        },
+        {
+          "rollout_index": 12,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "101118197dac85bb3d7e1a6761b5ed8e5820410c6e5e2ca127542f1a2cc54565"
+        },
+        {
+          "rollout_index": 17,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "6037867d70cd840e3beec17dea9e981c0d894c02229b63fbeaee65c63170f82e"
+        },
+        {
+          "rollout_index": 24,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "6a9ade908f6cbd91380307b796e7752a8b00aad31d4dbf678c5f3fac36ca4361"
+        },
+        {
+          "rollout_index": 32,
+          "kind": "公開説明",
+          "text": "現在の既定modeは `daily` で、snapshot欠損・不正時はlive CSVへフォールバックします。既存仕様・testもこの動作を定義しています。\n\n**既定を `strict` に変更する意図でしょうか？** `strict` ではsnapshot欠損・不正時に原則エラーになります。TaskSpecに変更後のmodeがないため、この点の指定が必要です。\n\ncheckoutはdetached HEAD（`b5c1cc6`）、作業ツリーはcleanでした。変更・test実行はまだ行っていません。"
+        }
+      ],
+      "async_acceptances": 0,
+      "image_operation_observed": false,
+      "user_answer_observed": false,
+      "raw_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-current-env-low-n2-20261003-r1/runs/low-02",
+      "rollout_sha256": "e8a944eae62041d4e44f060ff8b574643c2f9362e43ba470c377f2da2b7b6348",
+      "events_sha256": "b35bd14c0797d22c582053cf3d8ea05235911a96171cd322946a4f5e6cca9a1e"
+    },
+    {
+      "variant": "after",
+      "run_id": "after-low-01",
+      "quality_score": 0,
+      "route": "現状テストのみ",
+      "usage": {
+        "input_tokens": 166301,
+        "cached_input_tokens": 131584,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 737,
+        "reasoning_output_tokens": 44,
+        "total_tokens": 167038
+      },
+      "elapsed_seconds": 49.95969099999638,
+      "model_response_count": 7,
+      "model_responses": [
+        {
+          "rollout_index": 16,
+          "input_tokens": 13716,
+          "cached_input_tokens": 11264,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 134,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 13850
+        },
+        {
+          "rollout_index": 21,
+          "input_tokens": 14097,
+          "cached_input_tokens": 13568,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 59,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 14156
+        },
+        {
+          "rollout_index": 28,
+          "input_tokens": 25309,
+          "cached_input_tokens": 13952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 107,
+          "reasoning_output_tokens": 12,
+          "total_tokens": 25416
+        },
+        {
+          "rollout_index": 33,
+          "input_tokens": 25434,
+          "cached_input_tokens": 11264,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 69,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 25503
+        },
+        {
+          "rollout_index": 41,
+          "input_tokens": 26905,
+          "cached_input_tokens": 25088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 176,
+          "reasoning_output_tokens": 12,
+          "total_tokens": 27081
+        },
+        {
+          "rollout_index": 47,
+          "input_tokens": 29856,
+          "cached_input_tokens": 26752,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 58,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 29914
+        },
+        {
+          "rollout_index": 53,
+          "input_tokens": 30984,
+          "cached_input_tokens": 29696,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 134,
+          "reasoning_output_tokens": 20,
+          "total_tokens": 31118
+        }
+      ],
+      "base_instructions_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+      "developer_messages": [
+        {
+          "sha256": "25e2d1160e708d215ec18cf2a72f90c9c29d06c21ba8740f32b5618eaf643609",
+          "normalized_sha256": "dd21076d3036af015913ea28749f97af1c5dd58e330ea1b087df7f986e6ef6d2"
+        },
+        {
+          "sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "normalized_sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552"
+        },
+        {
+          "sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e",
+          "normalized_sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        }
+      ],
+      "user_messages": [
+        {
+          "sha256": "26c5cd22d6853c8be9b253cbe875c4ebe9168cf11813a1506a86c5d964357f7a",
+          "normalized_sha256": "3fe783b880bf6dbc67f94bab32d4376c08d34794c552c603787be3f0f6495d32",
+          "actual_task": false
+        },
+        {
+          "sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "normalized_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "actual_task": true
+        }
+      ],
+      "first_listing": {
+        "ordered_paths": [
+          "src/domain/market_units_snapshot.py",
+          "src/domain/universal_ingester.py",
+          "src/AGENTS.md",
+          "AGENTS.md",
+          "scripts/AGENTS.md",
+          "docs/AGENTS.md",
+          "scripts/dev/run_shadow_ingester.py",
+          "tests/AGENTS.md",
+          "docs/how-to/market-units-migration-spec.md",
+          "src/infra/ingester.py",
+          "src/infra/market_data.py",
+          "src/infra/market_snapshot_repository.py",
+          "tests/unit/test_universal_ingester.py",
+          "tests/unit/test_market_data.py",
+          "tests/unit/test_market_units_snapshot.py"
+        ],
+        "set_sha256": "1225406bea5410085ebda05c0a4a91c6754d82ae315e50c13b3b928beee46915"
+      },
+      "common_read_stdout": {
+        "characters": 48167,
+        "sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+      },
+      "common_read_model_delivery": {
+        "normalized_sha256": "480dd7ca6c2283ea0f1bfaa12d0a072965baf1bbc468a4f9d0bc1059a9537afd",
+        "truncated": true,
+        "normalization": "外側のchunk ID、実行時間、元token数の注意表示のみ。本文は正規化しない。"
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingest*'\"",
+          "exit_code": 0,
+          "stdout_characters": 593,
+          "stdout_sha256": "1c81c3f0930434204d4150168f090d679197d83b2fbcbc6e85df0a50c73dfbae"
+        },
+        {
+          "command": "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py'",
+          "exit_code": 0,
+          "stdout_characters": 48167,
+          "stdout_sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg --files --hidden -g AGENTS.md src/domain tests/unit; rg -n 'units_mode|allow_live_csv|snapshot|def test' tests/unit/test_market_units_snapshot.py; cat AGENTS.md\"",
+          "exit_code": 0,
+          "stdout_characters": 4874,
+          "stdout_sha256": "1804ccfcef55674b68c416db7dcd05dde02ce555f36c6965e43522a057915dda"
+        },
+        {
+          "command": "/bin/zsh -lc 'python -m pytest tests/unit/test_universal_ingester.py tests/unit/test_market_units_snapshot.py -q'",
+          "exit_code": 0,
+          "stdout_characters": 24383,
+          "stdout_sha256": "055533863ec35d2a0f8a7c79f7d33729e87f22e59da8dd169886f174d7d336a1"
+        },
+        {
+          "command": "/bin/zsh -lc 'git status --short'",
+          "exit_code": 0,
+          "stdout_characters": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "timeline": [
+        {
+          "rollout_index": 11,
+          "kind": "公開説明",
+          "text": "checkoutの識別情報と既存の指示、対象実装・関連テストを確認します。既定modeの変更先が現状から特定できるか確認し、許可された範囲で進めます。\n"
+        },
+        {
+          "rollout_index": 12,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "9048de7a613c4e116872fc8cdbb3742cb0e6e17ec7eacb29ab68b97cff968a80"
+        },
+        {
+          "rollout_index": 17,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "4e400e65a1fd4173a598708b1b2ed954d71520adc310c2ae3a220fbe6d7e14f0"
+        },
+        {
+          "rollout_index": 24,
+          "kind": "非同期質問",
+          "name": "request_user_input_async",
+          "arguments": {
+            "questions": [
+              {
+                "title": "現在の既定値は daily（snapshot優先、欠落・不正時はlive CSVへフォールバック）です。変更後の既定modeは strict（snapshot必須、不正時はエラー）でよいですか？",
+                "options": [
+                  "strict に変更する",
+                  "別の挙動を指定する"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "rollout_index": 27,
+          "kind": "質問受付",
+          "accepted": true
+        },
+        {
+          "rollout_index": 29,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "ed142e03a896af7a1e16f4ef01e577c1a63508ae8d1874f85f3740c6e6da0273"
+        },
+        {
+          "rollout_index": 37,
+          "kind": "公開説明",
+          "text": "HEADは `a0e3262bf824ca62a85b8235c9eccf4f05dd7cd5`、detached HEADで作業ツリーはクリーンです。既存テストにはdailyのCSVフォールバックとstrictのエラー・明示的CSV許可の検証があります。TaskSpecに変更先の指定がないため、その点だけ回答を待ちつつ関連テストの現状を確認します。\n"
+        },
+        {
+          "rollout_index": 38,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "35574ee2ae733a72a7f41c16291456c3bda890fb3df5b645ba2f5376749357f6"
+        },
+        {
+          "rollout_index": 43,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "6aaba10eff11ed7891ff6ae6639a03078cc54c5f0ce61c2bf0d43dce8c6af6ea"
+        },
+        {
+          "rollout_index": 51,
+          "kind": "公開説明",
+          "text": "現在の既定modeは `daily` です。snapshotを優先し、欠落・不正時はlive CSVへフォールバックします。関連する既存テストは39件すべて成功しました。\n\nTaskSpecに変更先の指定がないため確認です。既定値を `strict`（原則snapshot必須、欠落・不正時はエラー）へ変更する意図でしょうか？\n\n現時点ではファイル変更・commitは行っていません。"
+        }
+      ],
+      "async_acceptances": 1,
+      "image_operation_observed": false,
+      "user_answer_observed": false,
+      "raw_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-assets-reduced-n2-20261003-r1/runs/low-01",
+      "rollout_sha256": "0fdbb099abe24aef8d7d0163d87b3bc12171442774633bf4b842027ebea92ef5",
+      "events_sha256": "d5bca599f87dd69b68c0d28941c19e9101bf6e7a55c9b90b32e13b08f52591a6"
+    },
+    {
+      "variant": "after",
+      "run_id": "after-low-02",
+      "quality_score": 4,
+      "route": "確認して停止",
+      "usage": {
+        "input_tokens": 79895,
+        "cached_input_tokens": 63872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 399,
+        "reasoning_output_tokens": 36,
+        "total_tokens": 80294
+      },
+      "elapsed_seconds": 25.66491724998923,
+      "model_response_count": 4,
+      "model_responses": [
+        {
+          "rollout_index": 16,
+          "input_tokens": 13716,
+          "cached_input_tokens": 11264,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 123,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 13839
+        },
+        {
+          "rollout_index": 21,
+          "input_tokens": 14088,
+          "cached_input_tokens": 13568,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 59,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 14147
+        },
+        {
+          "rollout_index": 28,
+          "input_tokens": 25299,
+          "cached_input_tokens": 13952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 82,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 25381
+        },
+        {
+          "rollout_index": 34,
+          "input_tokens": 26792,
+          "cached_input_tokens": 25088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 135,
+          "reasoning_output_tokens": 26,
+          "total_tokens": 26927
+        }
+      ],
+      "base_instructions_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+      "developer_messages": [
+        {
+          "sha256": "3d9e40e95553054dd38251d694c1618079fcceef59e11a4c536a5e48f1a5efaf",
+          "normalized_sha256": "dd21076d3036af015913ea28749f97af1c5dd58e330ea1b087df7f986e6ef6d2"
+        },
+        {
+          "sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "normalized_sha256": "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552"
+        },
+        {
+          "sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e",
+          "normalized_sha256": "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        }
+      ],
+      "user_messages": [
+        {
+          "sha256": "8b4e2830c22f74f645c2968de5e443ef612be068bde566fda23b201355ce5d8b",
+          "normalized_sha256": "3fe783b880bf6dbc67f94bab32d4376c08d34794c552c603787be3f0f6495d32",
+          "actual_task": false
+        },
+        {
+          "sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "normalized_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+          "actual_task": true
+        }
+      ],
+      "first_listing": {
+        "ordered_paths": [
+          "src/domain/market_units_snapshot.py",
+          "src/domain/universal_ingester.py",
+          "src/AGENTS.md",
+          "src/infra/ingester.py",
+          "src/infra/market_data.py",
+          "src/infra/market_snapshot_repository.py",
+          "AGENTS.md",
+          "scripts/AGENTS.md",
+          "scripts/dev/run_shadow_ingester.py",
+          "tests/AGENTS.md",
+          "tests/unit/test_market_data.py",
+          "tests/unit/test_market_units_snapshot.py",
+          "tests/unit/test_universal_ingester.py",
+          "docs/AGENTS.md",
+          "docs/how-to/market-units-migration-spec.md"
+        ],
+        "set_sha256": "1225406bea5410085ebda05c0a4a91c6754d82ae315e50c13b3b928beee46915"
+      },
+      "common_read_stdout": {
+        "characters": 48167,
+        "sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+      },
+      "common_read_model_delivery": {
+        "normalized_sha256": "480dd7ca6c2283ea0f1bfaa12d0a072965baf1bbc468a4f9d0bc1059a9537afd",
+        "truncated": true,
+        "normalization": "外側のchunk ID、実行時間、元token数の注意表示のみ。本文は正規化しない。"
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"pwd\n git branch --show-current\n git rev-parse HEAD\n git status --short\n rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingester*'\"",
+          "exit_code": 0,
+          "stdout_characters": 593,
+          "stdout_sha256": "cc035a052c377e8239754df147e1b567181ee0f80c4265cb5c952433dd45dad7"
+        },
+        {
+          "command": "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md\ncat src/domain/universal_ingester.py\ncat tests/unit/test_universal_ingester.py'",
+          "exit_code": 0,
+          "stdout_characters": 48167,
+          "stdout_sha256": "9bae69e5654051d424efabbc9db58b9e3145b4c90ac52ae932301b6e11c4ac0b"
+        },
+        {
+          "command": "/bin/zsh -lc \"ls -l AGENTS.md\nrg -n 'units_mode|strict|daily|UniversalIngester|snapshot' tests/unit/test_market_units_snapshot.py\nrg --files src/domain tests/unit -g AGENTS.md\"",
+          "exit_code": 1,
+          "stdout_characters": 4848,
+          "stdout_sha256": "40bdf6331cd83bed2d3151174eb39c1c933e5aac7d92e43dafb008018aecc8d2"
+        }
+      ],
+      "timeline": [
+        {
+          "rollout_index": 11,
+          "kind": "公開説明",
+          "text": "まず作業場所・branch・HEAD・差分と既存の指示を確認し、対象sourceと直接関連する既存testから現在の既定modeを調べます。\n"
+        },
+        {
+          "rollout_index": 12,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "95b56cb5bb2f301684aa78f527b4f289bb12c0ca4ae76c0feb6266d9036f333a"
+        },
+        {
+          "rollout_index": 17,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "2a148dc0389134ccca1f75b3a8cb7b18a326d8b421ca74dd42e37c3aa1dfbca7"
+        },
+        {
+          "rollout_index": 24,
+          "kind": "操作発行",
+          "call_type": "custom_exec",
+          "input_sha256": "ff6e9fae2917737e8feef9b94b2f121752e1dadae2fe85b479e428b087ff3043"
+        },
+        {
+          "rollout_index": 32,
+          "kind": "公開説明",
+          "text": "現在の既定modeは `daily` で、snapshotが欠落・不正の場合はlive CSVへフォールバックします。既存の `strict` はその場合にエラーになります。\n\n変更後の既定modeは `strict` でよいですか？ TaskSpecに変更先がないため確認が必要です。\n\ncheckoutはdetached HEAD（`a0e3262`）、作業ツリーはクリーンでした。まだ変更していません。"
+        }
+      ],
+      "async_acceptances": 0,
+      "image_operation_observed": false,
+      "user_answer_observed": false,
+      "raw_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-assets-reduced-n2-20261003-r1/runs/low-02",
+      "rollout_sha256": "1ebca2f1bf22833208925ccf44478ef815279324dc761ddf76c75afc2bd94e49",
+      "events_sha256": "86a45a59a969d935a8274be777bf82eeb5f547082f0b3af2ddbdd1b3b6b12d51"
+    }
+  ],
+  "input_comparison": {
+    "task_and_user_context_equal_after_run_path_normalization": true,
+    "developer_messages_equal_after_run_path_normalization": true,
+    "base_instructions_equal": true,
+    "first_listing_same_file_set": true,
+    "first_listing_order_differs": true,
+    "common_read_stdout_equal_all_four": true,
+    "delivered_common_read_equal_before02_after01_after02_after_record_metadata_normalization": true,
+    "before01_delivery_residual_difference": "省略箇所の空白1文字と省略token数2871/2872。表示されるコード・testの意味差を確認していない。",
+    "uncontrolled_visible_literals": [
+      "毎回隔離用の作業ディレクトリ文字列（系列名とrun番号を含む）",
+      "削除に伴うHEAD hash",
+      "rg列挙順（全件で同じ15path集合）"
+    ],
+    "tool_schema_full_identity_proven": false
+  },
+  "token_difference_after01_vs_before01": {
+    "delta": 86686,
+    "additional_three_model_responses": 82498,
+    "last_response_larger_context_delta": 4194,
+    "first_three_responses_delta": -6,
+    "cached_input_delta": 67712,
+    "input_delta": 86369,
+    "output_delta": 317
+  },
+  "findings": [
+    "画像や画像パスの観測を介した直接の判断変更はログにない。",
+    "内容欠落、Free指示改版、実装改版、モードの理解不足を今回の分岐原因には採用しない。",
+    "失敗runは共通source/testの受領後、補助test探索より先に非同期質問を発行し、回答前にテストを独立作業として進めた。",
+    "停止runは最終応答で確認し、追加操作を発行しなかった。",
+    "画像有無だけに結び付いたモデル可視情報の差は確認できず、画像除去の単独因果は証明していない。",
+    "同じ削減条件でも停止runがあるので、画像を除くと必ず失敗するという説明は成立しない。",
+    "以前の不採用判定はこのN2でLow全件停止を満たさなかったことに限る。画像削除自体の不適切さの証明へ昇格させない。"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "CRC-16",
+  "revision": "r1",
+  "required_files": {
+    "settings.json": {
+      "version": 2
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null,
+    "validation_required": true
+  },
+  "allowed_changes": [
+    "settings.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "report": {
+      "validation": {
+        "sha256": "old",
+        "passed": true
+      }
+    }
+  }
+}

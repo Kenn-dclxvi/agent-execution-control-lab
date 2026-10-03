@@ -1,0 +1,45 @@
+{
+  "revision": "r3",
+  "classification": "素材の局所検証のみ。モデル未実行。旧A01の代替成立は未確認。",
+  "sha256": {
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/case.json": "09e1b7f236f5df9118ac568baa22e663ef604d5eb33dda816da19ca30d4c41fd",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/README.md": "a53ca449cf22a08367816c3b262bf3bc44cfe64f5d1bb5e2246f034ee698c4a8",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/TASK.md": "124eb499fa9edad3ac9b24c824768d485b3ddcd76bef8b386eea852116afd222",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/AGENTS.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/private/oracle.json": "9883f8d7310943cd4b7e047dd947affe75e349b5583b6d9c33a4c3f02bf8c5f8",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/tests/AGENTS.md": "0985f27a6ba9c81f8ebfcea491612377baf4b193f11858ddd0827183d935be42",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/src/AGENTS.md": "01965b2126289f51ef647e9a67ca34bf8f60375fcb698efa583286ae263e36ec",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/src/domain/universal_ingester.py": "75be50732488212b752b06a1bc925af4a175a258e33fed6610e820c38f2a188f",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/docs/how-to/market-units-migration-spec.md": "6ce3c47fd36d294bfeff61118226935f8eb1d665a711f1766e8756afa41c6e2d",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/tests/unit/test_universal_ingester.py": "5d905f5c50864f04e1aedf866032bdf67ea9f785f951f7358821a45045469ab5",
+    "evaluations/targets/compact-repository-control/cases/latent-mode-code/r3/visible/tests/unit/test_market_units_snapshot.py": "ab97cceeca50ef9c29610996fd185119898cca32d09e23f8b7a5d11fbf0f91c2"
+  },
+  "local_qualification": {
+    "python_executable": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv/bin/python",
+    "python_version": "Python 3.14.5",
+    "command": [
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/unit",
+      "-v"
+    ],
+    "cwd": "r3/visibleの一時コピー",
+    "returncode": 0,
+    "test_output": "test_default_daily_invalid_falls_back_to_current_csv (test_market_units_snapshot.MarketUnitsTests.test_default_daily_invalid_falls_back_to_current_csv) ... ok\ntest_default_daily_missing_falls_back_to_current_csv (test_market_units_snapshot.MarketUnitsTests.test_default_daily_missing_falls_back_to_current_csv) ... ok\ntest_invalid_snapshot_contracts (test_market_units_snapshot.MarketUnitsTests.test_invalid_snapshot_contracts) ... ok\ntest_invalid_snapshot_even_with_allow_flag_blocks (test_market_units_snapshot.MarketUnitsTests.test_invalid_snapshot_even_with_allow_flag_blocks) ... ok\ntest_other_date_snapshot_is_not_target_date_input (test_market_units_snapshot.MarketUnitsTests.test_other_date_snapshot_is_not_target_date_input) ... ok\ntest_snapshot_adoption_records_actual_source_and_canonical_path (test_market_units_snapshot.MarketUnitsTests.test_snapshot_adoption_records_actual_source_and_canonical_path) ... ok\ntest_strict_missing_blocks (test_market_units_snapshot.MarketUnitsTests.test_strict_missing_blocks) ... ok\ntest_strict_missing_explicitly_allows_current_csv (test_market_units_snapshot.MarketUnitsTests.test_strict_missing_explicitly_allows_current_csv) ... ok\ntest_strict_valid_snapshot_does_not_read_current_csv (test_market_units_snapshot.MarketUnitsTests.test_strict_valid_snapshot_does_not_read_current_csv) ... ok\ntest_unknown_mode_rejected (test_market_units_snapshot.MarketUnitsTests.test_unknown_mode_rejected) ... ok\ntest_unreadable_json_uses_mode_policy (test_market_units_snapshot.MarketUnitsTests.test_unreadable_json_uses_mode_policy) ... ok\ntest_default_ledger_merges_market_and_absolute_assets (test_universal_ingester.LedgerConsumerTests.test_default_ledger_merges_market_and_absolute_assets) ... ok\ntest_run_inherits_default_and_records_target_date (test_universal_ingester.LedgerConsumerTests.test_run_inherits_default_and_records_target_date) ... ok\ntest_run_serializes_ledger_when_output_is_requested (test_universal_ingester.LedgerConsumerTests.test_run_serializes_ledger_when_output_is_requested) ... ok\ntest_run_without_output_does_not_create_artifact (test_universal_ingester.LedgerConsumerTests.test_run_without_output_does_not_create_artifact) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.007s\n\nOK\n",
+    "default_to_strict_mutation": {
+      "returncode": 1,
+      "detected_in_both_test_files": true
+    },
+    "task_sha256_matches_r2": true,
+    "oracle_sha256_matches_r2": true,
+    "root_agents_empty": true,
+    "historical_r2_fixture_hashes_unchanged": true
+  },
+  "visible_files": 9,
+  "visible_bytes": 14412,
+  "new_model_runs": 0
+}

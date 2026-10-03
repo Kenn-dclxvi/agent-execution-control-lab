@@ -1,0 +1,1929 @@
+{
+  "schema_version": "compact-latent-mode-historical-free-audit/v1",
+  "scope": {
+    "repository_result_json_files_scanned": 504,
+    "repository_result_json_parse_errors": [],
+    "A01_scored_row_occurrences": 495,
+    "A01_unique_run_ids_all_prompts_in_result_rows": 385,
+    "profile_json_files_scanned": 632,
+    "profile_json_parse_errors": [],
+    "private_campaign_entries_inventoried": 380,
+    "private_profile_paths": "campaign/profile*.json、campaign/subcondition/profile*.json、campaign/subcondition/cycle/profile*.json",
+    "filter": "Free prompt identity、TC-A01-LATENT-MODE-POLICY。Candidateや別reasoningをAstra lowへ混ぜない。"
+  },
+  "conditions": [
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/profile.json",
+      "profile_id": "control-free-astra-high-standard14-n5-cli0153-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "3d9ce0e58c6d485cbee93d382db45987",
+        "9f35d0011b224219adc3dffd7bcc76e9",
+        "bb4a8dde3c674f2596dc46c9ac75d496",
+        "cea006ebfc444220a7acfd9c889ca698",
+        "e196a9cefa1b49bbafe9763e929ecb10"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 4,
+        "4": 1
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/profile.json",
+      "profile_id": "control-free-astra-low-standard14-n5-cli0153-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "67b67848dffb42f38362be2f232db555",
+        "7b3d28796db541878c7890860c192433",
+        "8acb15a91bd4415081c44315925b6d02",
+        "a5a8f1fe14eb4f67b75b535dd0763c86",
+        "b043aaabb8a94c2fa8c30dbf6d5bc300"
+      ],
+      "n": 5,
+      "score_counts": {
+        "4": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/profile.json",
+      "profile_id": "control-free-astra-medium-remeasure-standard14-n5-cli0153-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "420257d91743489e947d046901fcd54d",
+        "93119bd46ab94bdba8a5abcdd7cd95fe",
+        "9d2e659bf829424e85df84f3031ae68e",
+        "a052145fcb5f4ac1a9a546a71855255e",
+        "a91f949a83f54fb8ae0a7b6c4a9c43ab"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 2,
+        "4": 3
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/profile.json",
+      "profile_id": "control-free-repository-v14-reasoning-medium-standard14-astra-global-m24-n5-cli0153-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "23efb2cece624b948ea27d438193a672",
+        "3e7031642f1c4a5bb053068b795295e5",
+        "9f36c931055a40e59f72ac574bceef29",
+        "b0063a1a943944718c4e96964ce811f9",
+        "bbf41b66d84f4966a1def33d178705db"
+      ],
+      "n": 5,
+      "score_counts": {
+        "4": 3,
+        "0": 2
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/profile.json",
+      "profile_id": "control-free-repository-v14-reasoning-medium-standard14-sol-global-m24-n5-cli0153-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "0775e544bd194526b203e4da453b0e8c",
+        "1949082775eb4ffea5950d06c2a0fccb",
+        "2816105b00094b3d8652e3849f3fa207",
+        "cf9f45ae164f46bfb760d46a6e645818",
+        "e74aa11d6b7d43ec921b82c063b4d983"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/profile.json",
+      "profile_id": "control-free-sol6-high-standard14-n5-cli0156-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "510b8db8dfa94542815dc6683b4b0fb7",
+        "5f6b309fe1ff4e8380e263339cf08c78",
+        "a5a8dc84245c4c1d95174775fba5108b",
+        "b2f2e1379c624d409f7f72fcadb39d2b",
+        "e7a862184a014c79974b7eefdedae5cd"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/profile.json",
+      "profile_id": "control-free-sol6-low-standard14-n5-cli0156-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "644df5925cbd48039e31ad15a2e33800",
+        "844b677efe094595953e6fe7c73c8c4d",
+        "b4c53fb3351b4446a0854795d490bcba",
+        "dbb5e849f74843268dcdae33b29bba4b",
+        "e91a8c012371486f9aee5ad17892a2ca"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/profile.json",
+      "profile_id": "control-free-sol6-medium-standard14-n5-cli0156-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "10d4592be2fd486aa61d666afcd3dc89",
+        "2916cc209bfc42cf837c8f9bf132d733",
+        "625973d67ada4326a39f1543ac6de042",
+        "9fd7b89958e74695b6c5437d48fd0991",
+        "a4dbc25e63c8445b87009f25d341127b"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r1/free-low/profile.json",
+      "profile_id": "free-sol61-low-standard14-n5-cli0156-isolated-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [],
+      "n": 0,
+      "score_counts": {},
+      "status": "no_valid_measurement_cli_model_rejection"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r1/free-medium/profile.json",
+      "profile_id": "free-sol61-medium-standard14-n5-cli0156-isolated-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [],
+      "n": 0,
+      "score_counts": {},
+      "status": "no_valid_measurement_cli_model_rejection"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/profile.json",
+      "profile_id": "free-sol61-low-standard14-n5-cli0159-isolated-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "23f80aeda64341b6b746167ab1ba82cf",
+        "24e6c07284c9423d8a9d37a6cbd22a92",
+        "25c2c129755e426c91d4e97c46ef6fe1",
+        "787a31564e7748838d2a4cb1ba9248f4",
+        "ae10c9f92c604b4e947fbb22dd717a28"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "profile_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/profile.json",
+      "profile_id": "free-sol61-medium-standard14-n5-cli0159-isolated-r1",
+      "prompt_identity": "the-caption-3ce91a4-control-free-repository-r1",
+      "run_ids": [
+        "7e44f49b8e5a41ab8c374285135f3f12",
+        "9ccc589d2c19410a8ad5a9fc26363f22",
+        "d6d84aae777b4ad6870fbf6dafa51c6a",
+        "f9c904167fbc4102afa0a22a11552986",
+        "fbb8893fd368444ca809e7854f5ad324"
+      ],
+      "n": 5,
+      "score_counts": {
+        "0": 5
+      },
+      "status": "measured"
+    }
+  ],
+  "unique_old_free_A01_runs": 50,
+  "runs": [
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "3d9ce0e58c6d485cbee93d382db45987",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "3d9ce0e58c6d485cbee93d382db45987"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "9f35d0011b224219adc3dffd7bcc76e9",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "9f35d0011b224219adc3dffd7bcc76e9"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "bb4a8dde3c674f2596dc46c9ac75d496",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "bb4a8dde3c674f2596dc46c9ac75d496"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "cea006ebfc444220a7acfd9c889ca698",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "cea006ebfc444220a7acfd9c889ca698"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "e196a9cefa1b49bbafe9763e929ecb10",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "e196a9cefa1b49bbafe9763e929ecb10"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "67b67848dffb42f38362be2f232db555",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "67b67848dffb42f38362be2f232db555"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "7b3d28796db541878c7890860c192433",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "7b3d28796db541878c7890860c192433"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "8acb15a91bd4415081c44315925b6d02",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "8acb15a91bd4415081c44315925b6d02"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "a5a8f1fe14eb4f67b75b535dd0763c86",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "a5a8f1fe14eb4f67b75b535dd0763c86"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "low",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "b043aaabb8a94c2fa8c30dbf6d5bc300",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "b043aaabb8a94c2fa8c30dbf6d5bc300"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "420257d91743489e947d046901fcd54d",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "420257d91743489e947d046901fcd54d"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "93119bd46ab94bdba8a5abcdd7cd95fe",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "93119bd46ab94bdba8a5abcdd7cd95fe"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "9d2e659bf829424e85df84f3031ae68e",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "9d2e659bf829424e85df84f3031ae68e"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "a052145fcb5f4ac1a9a546a71855255e",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "a052145fcb5f4ac1a9a546a71855255e"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "a91f949a83f54fb8ae0a7b6c4a9c43ab",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "a91f949a83f54fb8ae0a7b6c4a9c43ab"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "23efb2cece624b948ea27d438193a672",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "23efb2cece624b948ea27d438193a672"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "3e7031642f1c4a5bb053068b795295e5",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "3e7031642f1c4a5bb053068b795295e5"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "9f36c931055a40e59f72ac574bceef29",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "9f36c931055a40e59f72ac574bceef29"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "b0063a1a943944718c4e96964ce811f9",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "b0063a1a943944718c4e96964ce811f9"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "bbf41b66d84f4966a1def33d178705db",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "bbf41b66d84f4966a1def33d178705db"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "0775e544bd194526b203e4da453b0e8c",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "0775e544bd194526b203e4da453b0e8c"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "1949082775eb4ffea5950d06c2a0fccb",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "1949082775eb4ffea5950d06c2a0fccb"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "2816105b00094b3d8652e3849f3fa207",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "2816105b00094b3d8652e3849f3fa207"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "cf9f45ae164f46bfb760d46a6e645818",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "cf9f45ae164f46bfb760d46a6e645818"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "cli": "0.153.3",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "e74aa11d6b7d43ec921b82c063b4d983",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "e74aa11d6b7d43ec921b82c063b4d983"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "510b8db8dfa94542815dc6683b4b0fb7",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "510b8db8dfa94542815dc6683b4b0fb7"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "5f6b309fe1ff4e8380e263339cf08c78",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "5f6b309fe1ff4e8380e263339cf08c78"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "a5a8dc84245c4c1d95174775fba5108b",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "a5a8dc84245c4c1d95174775fba5108b"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "b2f2e1379c624d409f7f72fcadb39d2b",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "b2f2e1379c624d409f7f72fcadb39d2b"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "high",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "e7a862184a014c79974b7eefdedae5cd",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "e7a862184a014c79974b7eefdedae5cd"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "644df5925cbd48039e31ad15a2e33800",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "644df5925cbd48039e31ad15a2e33800"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "844b677efe094595953e6fe7c73c8c4d",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "844b677efe094595953e6fe7c73c8c4d"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "b4c53fb3351b4446a0854795d490bcba",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "b4c53fb3351b4446a0854795d490bcba"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "dbb5e849f74843268dcdae33b29bba4b",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "dbb5e849f74843268dcdae33b29bba4b"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "low",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "e91a8c012371486f9aee5ad17892a2ca",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "e91a8c012371486f9aee5ad17892a2ca"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "10d4592be2fd486aa61d666afcd3dc89",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "10d4592be2fd486aa61d666afcd3dc89"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "2916cc209bfc42cf837c8f9bf132d733",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "2916cc209bfc42cf837c8f9bf132d733"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "625973d67ada4326a39f1543ac6de042",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "625973d67ada4326a39f1543ac6de042"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "9fd7b89958e74695b6c5437d48fd0991",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "9fd7b89958e74695b6c5437d48fd0991"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "cli": "0.156.1",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "changed",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "artifact_changed",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "a4dbc25e63c8445b87009f25d341127b",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_final_drift",
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "a4dbc25e63c8445b87009f25d341127b"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "23f80aeda64341b6b746167ab1ba82cf",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "23f80aeda64341b6b746167ab1ba82cf"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "24e6c07284c9423d8a9d37a6cbd22a92",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "24e6c07284c9423d8a9d37a6cbd22a92"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "25c2c129755e426c91d4e97c46ef6fe1",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "25c2c129755e426c91d4e97c46ef6fe1"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "787a31564e7748838d2a4cb1ba9248f4",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "787a31564e7748838d2a4cb1ba9248f4"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "low",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "ae10c9f92c604b4e947fbb22dd717a28",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "ae10c9f92c604b4e947fbb22dd717a28"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "7e44f49b8e5a41ab8c374285135f3f12",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 4,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "7e44f49b8e5a41ab8c374285135f3f12"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "9ccc589d2c19410a8ad5a9fc26363f22",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 5,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "9ccc589d2c19410a8ad5a9fc26363f22"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "d6d84aae777b4ad6870fbf6dafa51c6a",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 3,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "d6d84aae777b4ad6870fbf6dafa51c6a"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "f9c904167fbc4102afa0a22a11552986",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 2,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "f9c904167fbc4102afa0a22a11552986"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "cli": "0.159.0",
+      "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json",
+      "candidate_score": 0,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_eligible": true,
+        "owner_producer_evidence_status": "not_applicable",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "validation_started",
+          "outcome_state": "advanced_before_resolution",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "fbb8893fd368444ca809e7854f5ad324",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": true
+        }
+      },
+      "failures": [
+        "a01_forbidden_test_operation"
+      ],
+      "iteration": 1,
+      "rating_reason": "変更後の方針を確認する前に編集または試験へ進んだ。",
+      "run_id": "fbb8893fd368444ca809e7854f5ad324"
+    }
+  ],
+  "sources_sha256": {
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json": "e144f981a804dfbd313b005cbac6b45192a1e2af483b89e236ec64f974bfbed4",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-high-standard14-n5-cli0153-20260908-r1/profile.json": "aeb42af85a5db1997b816833f13a94fdd40d634f629239fc2c41d87917ce0976",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json": "edf6249cd7a87f2992162a327425253177b81e2a4769888a40ef60301672e80f",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-low-standard14-n5-cli0153-20260908-r1/profile.json": "07b7dc44f412987c3efcdda937e52dfea84ee248d21db1ceb4703c4a729458bf",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/batch-001/quality-audit.json": "862c6df6a54eac560e94ae699888afec0faccf8b2e1dcd9a6444ae710d5749e1",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-astra-medium-remeasure-standard14-n5-cli0153-20260908-r1/profile.json": "692abbb8104c7ae4d88c5a673ae842a171c3b3826f5d0fadf3cfcafee7fdcbc0",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json": "dbe7642a33b97c475356233b7804e52c758242d8024974b9acb2bc772c1c5e84",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-astra-atomic-n5-cli0153-20260905-r1/profile.json": "65018ca920883a9b83d1afeed88a625ad3660006ecf1ec7898d13fdf372dd22b",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/batch-001/quality-audit.json": "5bf1c59028906a46bf3c7e7effc1faa676a754272c3179c5758fce70f1d93aed",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-repository-v14-medium-standard14-sol-atomic-n5-cli0153-20260905-r1/profile.json": "b1a6e211eb8458b62634002aefe3cb56fadf32186bb49ffca5e882b6ee4f4b98",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/batch-001/quality-audit.json": "fe768b4d7689c5c5cc6fdd8649de9c1e8a08644cb6e1258d54ee128f36363493",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/high/profile.json": "9924a239e3ce31c07ba3e7fd23b47afa2ce094d4ec7162112011052a409b56c2",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/batch-001/quality-audit.json": "b816abbadf895fff8c4c27958cb0c40b2f452c696ee8bbbba52a91dac327bdba",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/low/profile.json": "05237ec745200c99ddf6bdb4dcd3d51b73fefcdc3f79203b21968a2385cabfea",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/batch-001/quality-audit.json": "ab97f2e2e621f04038eeac773b0b19e42b63fabe4c2eb17c0d78e1562182df75",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/control-free-sol6-low-medium-high-campaign-20260924-r1/medium/profile.json": "a18415e762bf5f8c22133b562a5d9f578f7fd160a8197979c49c06c3304df955",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r1/free-low/profile.json": "987215b07a55c305bda86cc78edabc6394fa483470f09ce7ba1d7cfe36ee8198",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r1/free-medium/profile.json": "1b4333dac7a46f4260c3884115d3e5ac2202424317729d0a62706963bcfb64cf",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/batch-001/quality-audit.json": "7d9151f502aa3bc2c7ec4f2db1eab2d0e570d2b5e1959e38b1b3183c390e576b",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-low/profile.json": "ae607c29c0a663b43de3da868ccaa38167436728d05141531067189f0d02425b",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/batch-001/quality-audit.json": "e98d0153d1d37b800faa6123cf3317f94d1dd00925e54307c9cf5876116bc8d4",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/sol61-c147-c276-free-low-medium-standard14-n5-20260930-r2/free-medium/profile.json": "275324d77ee867e98fed360059e2ea85545f3ee4531cf955b5f9e70041fcb7ae"
+  },
+  "conclusions": [
+    "保存済み旧Astra Free low A01は5件で、全て4点。同条件の追加実測は確認できない。",
+    "旧Astra Free mediumは独立二系列計10件のうち4件が0点、highは5件のうち4件が0点。lowと区別する。",
+    "今回の小規模Astra lowは独立2件とも0点であり、保存済み旧lowの観測経路を保持していない。",
+    "ゆらぎを根拠に検討を延期するという先の説明を撤回する。現時点では代替成立を認めない。",
+    "原因を小規模化のどの変更へ帰属させるかは、この履歴調査だけでは決定できない。"
+  ],
+  "new_model_dispatches": 0,
+  "historical_results_modified": false
+}
