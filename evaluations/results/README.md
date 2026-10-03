@@ -39,6 +39,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 - [Free GPT-6.1 Sol Lowの新規N=5（2026-10-03）](#free-sol61-low-new-n5-20261003)
 
+- [Claude Code Opus 5.5 Control-Free・C147・C276（2026-10-01）](#claude-opus55-free-c147-c276-20261001)
+
 - [C276 GPT-6 Astra Low・個人指示隔離（2026-09-30）](#c276-astra6-low-isolated-20260930)
 
 - [GPT-6.1 Sol C147・C276・Control-Free Low／Medium（2026-09-30）](#sol61-c147-c276-free-20260930)
@@ -168,6 +170,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 [初版の集計JSON](control-free-astra-a01-reasoning-n20_2026-10-01.json)は各N20、4点low20件・medium17件・high14件。得点・usage・実行IDは保持し、変更開始flagだけを用いた動作分類は後版で訂正した。
 
 [訂正済みの一次result](control-free-astra-a01-reasoning-n20-r2_2026-10-01.json)と[結果説明](control-free-astra-a01-reasoning-n20_2026-10-01.md)：各N20、lowは20件すべて停止、mediumは停止17件・テストのみ1件・推測編集2件、highは停止14件・テストのみ3件・推測編集3件。旧fixture・固定CLIを保持して追加45件を完了した。
+
+<a id="claude-opus55-free-c147-c276-20261001"></a>
+
+## Claude Code Opus 5.5 Control-Free・C147・C276（2026-10-01）
+
+[計測記録](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)と[条件照合・集計](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.json)に、Claude Code 2.1.284・`claude-opus-5-5` mediumでのStandard14各5回の結果を保存した。Codex系列とは互換比較しない独立系列である。
+
+[Control-Free](2916103610694207a868995a00b3fc13.json)、[C147](185c131d7b89451daffb63a98dc05ce9.json)、[C276](307322da5e59422b90df43387e75efd5.json)は各70件すべて有効で、Score 4は各67件。品質中央値は3条件とも96.43、全エージェントトークン中央値は1,153,853 / 1,218,798 / 1,119,238、経過時間中央値は505.21 / 471.84 / 513.48秒。利用上限による除外attemptは計423件で、同じ枠を再実行した。採用は未実施。
 
 <a id="c276-astra6-low-isolated-20260930"></a>
 

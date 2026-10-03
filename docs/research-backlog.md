@@ -13,7 +13,7 @@
 | [`機能見直しフェーズ 第1期`](feature-review-phase1-plan.md) | `active / FR-01 Candidate166_behavior_cases_redesigned` | prompt predicateの直積を廃止。HR01、正常・欠陥・判定不能のclean / perturbed 3 pairを7 case × N=5へ固定する。RA03 / RA04はresult integrityの保存済み別証拠とし、case materializationとpreflight前のため新規slot未発行 |
 | `CONTEXT`（`X1`） | ペンディング | A06はUltra制御用。Ultra条件で再検討する明示判断があった場合だけ再開 |
 | `RECOVERY`（`R1 / R2`） | 未完了・効果未測定 | `environment_recovery_max>0`の正のrecovery scenarioを評価するか判断 |
-| [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 保留・実装／pilot／本測定未着手 | 系列へ着手する明示判断とPhase 0の認証方式選択が揃った場合だけ再開 |
+| [Claude Code CLI executor系列](claude-code-cli-evaluation-adapter-design.md) | 2026-10-01に再開。Opus 5.5 medium・Standard14 N=5でControl-Free・C147・C276を計測済み。費用後退のtrace監査は未実施 | 後続のN追加、別モデル、移植Candidateは別の判断で決める |
 | 部分曖昧・長期タスクでの仕様確定境界（項目11） | 未着手・該当caseなし | 部分曖昧かつ複数段のcase familyと、誤停止・過剰問合せの採点条件を固定できた場合に着手 |
 | model / CLI更新時の再測定範囲と費用記録（項目12） | 未着手 | 次のmodelまたはCLI更新時に、再実行するbaselineの範囲を事前固定する明示判断があった場合 |
 
@@ -295,6 +295,8 @@ Layer 2 executorをCodex CLI（`codex exec`）からClaude Code CLI（`claude -p
 - 再開条件: Claude Code系列へ着手する明示判断と、Phase 0で採用する認証方式の選択が揃った場合だけ再開する。
 
 2026-08-17のportable instruction作業再開では、正式adapter系列やPhase 1を再開せず、既存subscription認証を採用決定しないtransport限定の非評価probeだけを別identityで実施した。[`measurement transport probe r2`](claude-code-2.1.220-measurement-transport-probe-r2-result.md)でstdout / stderr分離は成立したが、認証方式とall-agent token完全性は未決のため、このbacklogのadapter保留は解除しない。
+
+2026-10-01、利用者がClaude Code条件での試験を明示的に依頼し、認証方式として評価専用`CLAUDE_CONFIG_DIR`での契約アカウントログインを選んだため、再開条件が揃った。[試験方針](claude-code-opus55-standard14-series-plan.md)を固定し、[評価経路probe](claude-code-2.1.284-evaluation-surface-probe-result.md)で計測経路を確認した。そのうえでClaude Code 2.1.284・`claude-opus-5-5` mediumのStandard14各5回を3条件で計測した（[計測記録](../evaluations/results/claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)）。上の未確定事項のうち、認証方式、subagent transcriptの網羅性、補助モデルの扱い、capability catalogの固定方法は、方針文書とprobe記録で決定または実測した。並列度を制限する環境変数の効果と、`spawnDepth > 1`の網羅性は未実測である（210件でsubagent起動が0件だったため）。
 
 ## 9. root `AGENTS.md`へのrepository index参照追加の効果（実施済み・停止）
 
