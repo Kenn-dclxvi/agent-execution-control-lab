@@ -1,0 +1,30 @@
+{
+  "case_id": "CRC-19",
+  "revision": "r1",
+  "required_files": {
+    "b.json": {
+      "version": 2
+    }
+  },
+  "required_report": {
+    "status": "blocked",
+    "findings": [],
+    "question": null,
+    "completed_effects": [
+      "b"
+    ],
+    "blocked_effects": [
+      "a"
+    ]
+  },
+  "allowed_changes": [
+    "b.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "b.json",
+    "report": {
+      "completed_effects": []
+    }
+  }
+}

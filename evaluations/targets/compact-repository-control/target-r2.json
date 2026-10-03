@@ -1,0 +1,27 @@
+{
+  "schema_version": "compact-repository-control-target/v1",
+  "target_id": "compact-repository-control",
+  "target_kind": "repository_fixture_corpus",
+  "layout": "namespaced",
+  "visibility": "public",
+  "third_party_reproducible": true,
+  "subject_authority": "registrations/source-freeze-r1.json",
+  "current_rating_contract": "compact-repository-control-outcome-r2",
+  "executor_binding": "profile",
+  "artifact_roots": {
+    "cases": "evaluations/targets/compact-repository-control/cases",
+    "sets": "evaluations/targets/compact-repository-control/sets",
+    "profiles": "evaluations/targets/compact-repository-control/profiles",
+    "rating-contracts": "evaluations/targets/compact-repository-control/rating-contracts",
+    "runtime": "evaluations/targets/compact-repository-control/runtime",
+    "prompts": "evaluations/targets/compact-repository-control/prompts",
+    "results": "evaluations/targets/compact-repository-control/results",
+    "registrations": "evaluations/targets/compact-repository-control/registrations"
+  },
+  "qualification": "execution_qualified_quality_contract_issue_remaining",
+  "standard14_boundary": "14確認点の縮小版であり、実際のWeb build、atomic replace、外部dependency解決、worker配送は同等性未証明。旧STD14を置換しない。",
+  "descriptor_revision": "r2",
+  "previous_descriptor": "target.json",
+  "current_result": "results/free-sol61-low-core20-n1-r3_2026-10-01.json",
+  "local_grader_fix": "registrations/local-grader-question-representation-fix-r1.json"
+}

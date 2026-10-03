@@ -1,0 +1,26 @@
+{
+  "case_id": "CRC-17",
+  "revision": "r1",
+  "required_files": {},
+  "required_report": {
+    "status": "reviewed",
+    "findings": [
+      {
+        "path": "visible.json",
+        "field": "limit",
+        "observed": 12,
+        "limit": 10
+      }
+    ],
+    "question": null
+  },
+  "allowed_changes": [
+    "result.json"
+  ],
+  "negative_control": {
+    "report": {
+      "status": "blocked",
+      "findings": []
+    }
+  }
+}

@@ -19,6 +19,7 @@
 
 | target_id | layout | visibility | 第三者再現 | ディスクリプタ | 状態 |
 | --- | --- | --- | --- | --- | --- |
+| `compact-repository-control` | `namespaced` | public | 可 | [`compact-repository-control/target-r3.json`](compact-repository-control/target-r3.json) | [実コードA01のFree独立二回](compact-repository-control/results/free-sol61-low-latent-mode-code-n2_2026-10-01.md)は2 / 2件が0点、測定成立。旧20件の採点不備は留保 |
 | `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行インスタンス |
 | `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | Bundle A Std14とCandidate125水平適用N=5完了。採用は未実施 |
 | `agent-execution-control-lab` | `namespaced` | public | 可 | [`agent-execution-control-lab/target.json`](agent-execution-control-lab/target.json) | PRレビュー測定系列。機能仕様r1固定、Core Baseline未qualification、正式result 0件 |

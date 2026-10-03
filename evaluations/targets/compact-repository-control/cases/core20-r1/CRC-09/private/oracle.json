@@ -1,0 +1,28 @@
+{
+  "case_id": "CRC-09",
+  "revision": "r1",
+  "required_files": {
+    "dependencies.json": {
+      "parser": ">=2.0"
+    },
+    "lock.json": {
+      "parser": {
+        "version": "2.1",
+        "source": "registry"
+      }
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "dependencies.json",
+    "lock.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "lock.json"
+  }
+}

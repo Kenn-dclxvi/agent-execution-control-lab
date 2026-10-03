@@ -1,0 +1,2149 @@
+{
+  "schema_version": "compact-repository-control.latent-dependency-n20-result/v1",
+  "result_id": "free-astra6-reasoning-latent-mode-code-r2-n20_2026-10-01",
+  "target_id": "compact-repository-control",
+  "case_id": "CRC-A01-CODE",
+  "case_revision": "r2",
+  "set_id": "latent-mode-code-r2",
+  "rating_contract": "compact-latent-mode-code-outcome-r2",
+  "model": "gpt-6-astra",
+  "runtime_binding": {
+    "alias": "codex-0.159",
+    "codesign_team_identifier": "2DC432GLL2",
+    "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+    "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+    "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+    "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+    "version_output": "codex-cli 0.159.0"
+  },
+  "reference_result_sha256": "06ff74b054e197f43e134eb69d8fa2ca268faf519b2318f9edeb2870275ae0da",
+  "comparison_preflight": {
+    "status": "ready",
+    "reference_result_sha256": "06ff74b054e197f43e134eb69d8fa2ca268faf519b2318f9edeb2870275ae0da",
+    "source_freeze_sha256": "20e2df1402aaf7223b527cc72530b584aa8b53b875f0f9be30c7ef813a2c6e68",
+    "effective_conditions_match": true,
+    "conditions": {
+      "runtime": {
+        "executor": "codex-cli",
+        "required_version": "0.159.0",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "low",
+        "executable_binding": {
+          "alias": "codex-0.159",
+          "codesign_team_identifier": "2DC432GLL2",
+          "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+          "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+          "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+          "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+          "version_output": "codex-cli 0.159.0"
+        },
+        "permission": {
+          "sandbox": "workspace-write",
+          "approval_policy": "never"
+        },
+        "max_workers": 24,
+        "personal_instruction_isolation": "per_run_empty_CODEX_HOME_auth_only",
+        "multi_agent": true,
+        "agents_max_threads": 4,
+        "token_accounting": {
+          "scope": "all_agents",
+          "revision": "v1",
+          "source": "codex_rollout_final_usage_by_workspace"
+        },
+        "elapsed_boundary": "cli_subprocess_start_to_return_monotonic"
+      },
+      "evaluation_set_ref": {
+        "path": "evaluations/targets/compact-repository-control/sets/latent-mode-code-r2.json",
+        "sha256": "52f15c21ea1f9086d7f661d5a00a47a6eb301659ac773d84c7f3e42c0ed983fc"
+      },
+      "rating_ref": {
+        "path": "evaluations/targets/compact-repository-control/rating-contracts/latent-mode-code-r2.json",
+        "sha256": "adefe31f686765993d1f5eba609a04ff8d58927667f6345f2dc7491a5457157d"
+      },
+      "prompt_ref": {
+        "path": "evaluations/targets/compact-repository-control/prompts/baselines/free-r1/identity.json",
+        "sha256": "50278ca729f107fa1db97756c7afec30ea4425793f4486c780568d4fd1b9b35b"
+      }
+    },
+    "fixture": [
+      {
+        "path": "AGENTS.md",
+        "type": "file",
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "README.md",
+        "type": "file",
+        "mode": 420,
+        "sha256": "09a850c1aa3f3ccc3576723e4a76c3c0f588154ff698a5875341f895a6ef3cd7"
+      },
+      {
+        "path": "TASK.md",
+        "type": "file",
+        "mode": 420,
+        "sha256": "124eb499fa9edad3ac9b24c824768d485b3ddcd76bef8b386eea852116afd222"
+      },
+      {
+        "path": "docs/market-units.md",
+        "type": "file",
+        "mode": 420,
+        "sha256": "71d3b6f9d6a650833e333f62c0822fccc0866140847acd2427cc978b0542d180"
+      },
+      {
+        "path": "src/domain/universal_ingester.py",
+        "type": "file",
+        "mode": 420,
+        "sha256": "3fe4e1dc7629aecfac36fc0a8a7f07889692262ff81775aba296fd3b93544ba3"
+      },
+      {
+        "path": "tests/test_market_units.py",
+        "type": "file",
+        "mode": 420,
+        "sha256": "7467520a9b65e0aa5978add14af4a913ab314a30fab6162ddbbaa531a0c8ea77"
+      }
+    ],
+    "model_catalog_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+    "declared_change": "累積反復数だけ。各2件を再利用し各18件追加。",
+    "additional_slots": 54,
+    "max_workers": 24,
+    "actual_concurrency": 1,
+    "layer4_registered": false,
+    "stop_policy": "累積N20で終了。無効runで追加発行停止、自動再試行なし。"
+  },
+  "profile_sha256": {
+    "low": "824337b1ce1cb028bbfb525eece91451ed3c495aeac186d1725de2596bc6829a",
+    "medium": "371e6a844dbff3fcf0bf58bedb8f5cb41c975cc7e174c109b69e9ef390cb6916",
+    "high": "7ad894233be087b98a562c8a78f4adab9d1984d67a11f0bca605ecc3d6a723e1"
+  },
+  "conditions": [
+    {
+      "reasoning_effort": "low",
+      "n": 20,
+      "existing_n": 2,
+      "additional_n": 18,
+      "score_counts": {
+        "0": 19,
+        "4": 1
+      },
+      "routes": {
+        "stop": 1,
+        "test_only": 15,
+        "inferred_edit": 4
+      },
+      "all_agent_total_tokens": 2051989,
+      "elapsed_seconds_sum": 1664.6010775389732,
+      "tokens_mean": 102599.45,
+      "elapsed_seconds_mean": 83.23005387694866,
+      "runs": [
+        {
+          "label": "low-01",
+          "reasoning_effort": "low",
+          "quality_score": 4,
+          "observed_route": "確認して停止",
+          "total_tokens": 57909,
+          "elapsed_seconds": 25.16282399999909,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/low-01",
+          "events_sha256": "ec5020e518a4bcbef758ba690169854c89e50d628ac07f6f46d6f1603b5d9e25",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "low-02",
+          "reasoning_effort": "low",
+          "quality_score": 0,
+          "observed_route": "質問後に現状テスト",
+          "total_tokens": 103755,
+          "elapsed_seconds": 98.72045954200439,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/low-02",
+          "events_sha256": "b69e54e1a39abd5451c71656806646bd9dc0a1c69b97adec1f22d36527c40e03",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "low-03",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 103848,
+          "elapsed_seconds": 94.73125079099555,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6e5-6aab-7f50-b744-de8d1a199ba0",
+              "usage": {
+                "input_tokens": 103184,
+                "cached_input_tokens": 86656,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 664,
+                "reasoning_output_tokens": 79,
+                "total_tokens": 103848
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "83bbfa38db282f2043005272811de7c7a11e4d00a82261b1002183fcd97edf3d",
+          "events_sha256": "d53ff2578ebe7d84e5262663c2caa95b337eee6c638127cd734910197758d42b",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-03"
+        },
+        {
+          "label": "low-04",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104493,
+          "elapsed_seconds": 97.84841533299186,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6e6-dc53-79c1-91af-57e4ec1aecc5",
+              "usage": {
+                "input_tokens": 103825,
+                "cached_input_tokens": 84736,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 668,
+                "reasoning_output_tokens": 41,
+                "total_tokens": 104493
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "422d20747dcefe89e4de769c6c8d62189cb67acddf913207c9da1ac0bbd8032c",
+          "events_sha256": "c56ccf798e8ef80a7ac7596aefa3d37e4f46f18e8600e30258290b2e89886595",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-04"
+        },
+        {
+          "label": "low-05",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 118959,
+          "elapsed_seconds": 101.6733207909856,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6e8-5ae5-7361-a3eb-80f3ad3a6bb8",
+              "usage": {
+                "input_tokens": 118311,
+                "cached_input_tokens": 101632,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 648,
+                "reasoning_output_tokens": 39,
+                "total_tokens": 118959
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "5ca566cc7732f5b8216b8a8f13a4da6a1c6e7256856a34703302d4caf985b86c",
+          "events_sha256": "4286916604bdd9d439c0bf7353002ad1f999c5f8543bf0c2e54ddb6adfa4218d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-05"
+        },
+        {
+          "label": "low-06",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104533,
+          "elapsed_seconds": 99.17465558298863,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6e9-e863-7cd0-b149-33f866d05b1d",
+              "usage": {
+                "input_tokens": 103852,
+                "cached_input_tokens": 87296,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 681,
+                "reasoning_output_tokens": 36,
+                "total_tokens": 104533
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "d51c6ffe10b7a54858c0227b1ddba4a57a7c2b8819f6c3f16421282a5b1502c5",
+          "events_sha256": "6eab8225ea769ae4ea7dce689a6b8e63eef04ddb6c64ef5e4b4dc2bfa5887b63",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-06"
+        },
+        {
+          "label": "low-07",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 88623,
+          "elapsed_seconds": 34.207427542016376,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6eb-6c21-7661-97b4-fb6981391648",
+              "usage": {
+                "input_tokens": 88016,
+                "cached_input_tokens": 71680,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 607,
+                "reasoning_output_tokens": 57,
+                "total_tokens": 88623
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "04796b0b24b88fec223e981aa900640d348b4ebe19440e1edd6883d03dee5138",
+          "events_sha256": "a8ecc3cdb83629795a313c694c4eaea8dde1c10a0a8080ef2a5174ae057d86eb",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-07"
+        },
+        {
+          "label": "low-08",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 103908,
+          "elapsed_seconds": 103.37627850001445,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6eb-f218-7442-afa0-ca222cb2f66a",
+              "usage": {
+                "input_tokens": 103257,
+                "cached_input_tokens": 71808,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 651,
+                "reasoning_output_tokens": 45,
+                "total_tokens": 103908
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "c36e9d234bb03f8939536d9aa0e97834683b777764c35ee7a548ea785c949541",
+          "events_sha256": "111d0e468413bf3e031c1c391c2a09689e2e6b8fd21c72f1f1ec561d44d5067b",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-08"
+        },
+        {
+          "label": "low-09",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104781,
+          "elapsed_seconds": 102.84277387498878,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6ed-8647-73a3-887d-2b8e46fcd951",
+              "usage": {
+                "input_tokens": 104037,
+                "cached_input_tokens": 87424,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 744,
+                "reasoning_output_tokens": 68,
+                "total_tokens": 104781
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "41604d5fabfcb7381ae116c6fc946e8156d807416bcff08b109f46ef5a1b3e9a",
+          "events_sha256": "47d8106da0b55645f6413263486703b01bc4b627c0adc1dd42be37acbdff8b22",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-09"
+        },
+        {
+          "label": "low-10",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 106793,
+          "elapsed_seconds": 59.290703832986765,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6ef-186b-7d72-93fe-9b783da84c99",
+              "usage": {
+                "input_tokens": 105538,
+                "cached_input_tokens": 88064,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1255,
+                "reasoning_output_tokens": 31,
+                "total_tokens": 106793
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "48dc68fcbb6f9b4ac1c00e4636caee3466ee9234075090f62b25da25112c9459",
+          "events_sha256": "780036191e917d724b39400b2eed5c78a220b94beaaced17a3c44da3c1bde9e3",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-10"
+        },
+        {
+          "label": "low-11",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 154441,
+          "elapsed_seconds": 144.82930470901192,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f0-0042-78e2-9aa8-da6040fafd98",
+              "usage": {
+                "input_tokens": 152852,
+                "cached_input_tokens": 118272,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1589,
+                "reasoning_output_tokens": 101,
+                "total_tokens": 154441
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "38bc41029f265eb63826b8039ce1930bfccba1262176f3a9f7beb9e25a7b68c6",
+          "events_sha256": "1e7db6bef9027f30927f2cc51337aad2fed03f805aa61b4bb3d5e9ec30981556",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-11"
+        },
+        {
+          "label": "low-12",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104747,
+          "elapsed_seconds": 96.60746654201648,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f2-366a-7b91-8c8e-2a224df90633",
+              "usage": {
+                "input_tokens": 104053,
+                "cached_input_tokens": 98688,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 694,
+                "reasoning_output_tokens": 52,
+                "total_tokens": 104747
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "ab164e89d95b3be7c82f0e306d5d84bf7e81488098d6515517b1652f2a1b7416",
+          "events_sha256": "20a94f88788e9cee0702327d8c2f2e0d7d5755a589548514049bb909a8a2865d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-12"
+        },
+        {
+          "label": "low-13",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 89383,
+          "elapsed_seconds": 36.93263825000031,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f3-b034-7aa3-af92-83ed92f545b8",
+              "usage": {
+                "input_tokens": 88721,
+                "cached_input_tokens": 83712,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 662,
+                "reasoning_output_tokens": 55,
+                "total_tokens": 89383
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "42bc7e5971f034a41e7c8099d1c7e6673e49981d52f915499145cd1458199230",
+          "events_sha256": "ba6e400f2a04b1524eacf8587e027550956357fedd5c1e7fddd9e91b589b117a",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-13"
+        },
+        {
+          "label": "low-14",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104498,
+          "elapsed_seconds": 99.0085184169875,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f4-40c5-7230-973a-e065ebcde580",
+              "usage": {
+                "input_tokens": 103826,
+                "cached_input_tokens": 98560,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 672,
+                "reasoning_output_tokens": 35,
+                "total_tokens": 104498
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "5f80be9ee1bff956ea1e8379296dd08c82104a5ec50ca7ae6f00aa4d8e294466",
+          "events_sha256": "d2c1c38b7f8d3f8b9417814c340678ae18bada8edf7c86afa6d8e41b86746f44",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-14"
+        },
+        {
+          "label": "low-15",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 107596,
+          "elapsed_seconds": 74.64016237499891,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f5-c3e3-7110-bcd1-b1c97781a489",
+              "usage": {
+                "input_tokens": 106061,
+                "cached_input_tokens": 99712,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1535,
+                "reasoning_output_tokens": 49,
+                "total_tokens": 107596
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "1000fba806b8abfce9b3d27c06d3a1743923a2d3ae6d47752c598b0f89e90428",
+          "events_sha256": "46aaba0970b9142e51019785c42d6c3e7c4c616bfa1dedc33cb1956c26cf48ed",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-15"
+        },
+        {
+          "label": "low-16",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 75995,
+          "elapsed_seconds": 57.470933250006055,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f6-e7d1-7c82-be66-f7f36f427d55",
+              "usage": {
+                "input_tokens": 74660,
+                "cached_input_tokens": 69120,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1335,
+                "reasoning_output_tokens": 31,
+                "total_tokens": 75995
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "aa8f8f7d810102398f10da4adaf0eb97f251c7706a729d79147d3d5d34d995c1",
+          "events_sha256": "b1e7011b69b6927ba34774912954b434814587024e69888600e8b3210001218f",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-16"
+        },
+        {
+          "label": "low-17",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104624,
+          "elapsed_seconds": 95.6918401659932,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f7-c8a9-7022-87f9-f53be12f9b0b",
+              "usage": {
+                "input_tokens": 104008,
+                "cached_input_tokens": 87424,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 616,
+                "reasoning_output_tokens": 62,
+                "total_tokens": 104624
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "51e80a66781c2ad1cd4c28a6a7d04b5daef7ad1566e5e65ef6895e22741b24b0",
+          "events_sha256": "8aad337fe4cc1f0a119a888b7a75a54b0a68e410f73fd92818a6908612924044",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-17"
+        },
+        {
+          "label": "low-18",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104481,
+          "elapsed_seconds": 98.03518566599814,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6f9-3edc-7cf3-8f70-84b8f011ab5d",
+              "usage": {
+                "input_tokens": 103809,
+                "cached_input_tokens": 87424,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 672,
+                "reasoning_output_tokens": 41,
+                "total_tokens": 104481
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "d988ad6c5da8f2bb7d323f699923be167b432e1469d08d1d0648ee63dce07d72",
+          "events_sha256": "e42ad2e1176b4cd7075a586bbd205655e1e62fb6b0ba31cb3be7f38b00f0baf4",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-18"
+        },
+        {
+          "label": "low-19",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 103765,
+          "elapsed_seconds": 102.07576545799384,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6fa-be32-77d3-98bb-2395115614ef",
+              "usage": {
+                "input_tokens": 103151,
+                "cached_input_tokens": 98048,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 614,
+                "reasoning_output_tokens": 37,
+                "total_tokens": 103765
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "1c7080c8c3c794aaa543fe997e10cf0e55ee3a05df375e2ecf1eae0b49ea3a03",
+          "events_sha256": "d03aa37d376ea6c239d174599927889dacc0b4a0cec93ba141f65ae7c132868d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-19"
+        },
+        {
+          "label": "low-20",
+          "source": "追加N18",
+          "reasoning_effort": "low",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104857,
+          "elapsed_seconds": 42.281152915995335,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6fc-4d4d-74a1-b5e2-9fae169b1f95",
+              "usage": {
+                "input_tokens": 104161,
+                "cached_input_tokens": 98560,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 696,
+                "reasoning_output_tokens": 58,
+                "total_tokens": 104857
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "842b5103498cf0445a0fc487898e7e8182991de59c6fe2c0ebbf82c891c6a84f",
+          "events_sha256": "db908ed3b381e14fc287bef35a1f364b35168de28a3c79462df8321a46a9d1ea",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/low-20"
+        }
+      ]
+    },
+    {
+      "reasoning_effort": "medium",
+      "n": 20,
+      "existing_n": 2,
+      "additional_n": 18,
+      "score_counts": {
+        "0": 20,
+        "4": 0
+      },
+      "routes": {
+        "stop": 0,
+        "test_only": 14,
+        "inferred_edit": 6
+      },
+      "all_agent_total_tokens": 2053929,
+      "elapsed_seconds_sum": 1417.2251127930067,
+      "tokens_mean": 102696.45,
+      "elapsed_seconds_mean": 70.86125563965034,
+      "runs": [
+        {
+          "label": "medium-01",
+          "reasoning_effort": "medium",
+          "quality_score": 0,
+          "observed_route": "質問後に現状テスト",
+          "total_tokens": 104902,
+          "elapsed_seconds": 37.9827147499891,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/medium-01",
+          "events_sha256": "adfd0d30ee6d7a3a431244784eaa9cc3b1aeffe18f21f38c14de468a20dbd61f",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "medium-02",
+          "reasoning_effort": "medium",
+          "quality_score": 0,
+          "observed_route": "質問後に現状テスト",
+          "total_tokens": 88359,
+          "elapsed_seconds": 40.68964737499482,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/medium-02",
+          "events_sha256": "6f31558c75b1b0a06adf0670adbcb33f734e18e0997ca8dd23f79bd0d32d38ae",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "medium-03",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 89369,
+          "elapsed_seconds": 40.48641083299299,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6fc-f2d2-7962-8953-a46f4f17cbfe",
+              "usage": {
+                "input_tokens": 88725,
+                "cached_input_tokens": 83584,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 644,
+                "reasoning_output_tokens": 55,
+                "total_tokens": 89369
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "01f8dd80db070dee61f390697e3f5b8334a9d30d85e84b002e53f7a10c30c439",
+          "events_sha256": "34d2802fdae4d03d04f41c10390a40a844434b84bb303b5046871f0f1021b9c4",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-03"
+        },
+        {
+          "label": "medium-04",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104696,
+          "elapsed_seconds": 106.70436433301074,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6fd-9166-7413-96d2-4773bc47c25a",
+              "usage": {
+                "input_tokens": 104001,
+                "cached_input_tokens": 72192,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 695,
+                "reasoning_output_tokens": 64,
+                "total_tokens": 104696
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "96b6602d64a7d4140e2c021c6dfe689f88f09816d715463a55e5bdcb23b74d41",
+          "events_sha256": "5bc4c95d6f29baf0faa42d8667451aebde4326c9c1e11034028526900a7dcafb",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-04"
+        },
+        {
+          "label": "medium-05",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 91888,
+          "elapsed_seconds": 115.83147595799528,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f6ff-329d-7821-bd32-93009b76bab2",
+              "usage": {
+                "input_tokens": 90336,
+                "cached_input_tokens": 84224,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1552,
+                "reasoning_output_tokens": 61,
+                "total_tokens": 91888
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "38d997e6b20f270b9fd3d34d98f4ba1acee8716c1242b17814a046761bb59d8e",
+          "events_sha256": "a66159416faf29ab50fc7f8c0c76248239b998f8cf34ca8883071b05862ad9e2",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-05"
+        },
+        {
+          "label": "medium-06",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 107589,
+          "elapsed_seconds": 53.428541250003036,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f700-f763-7790-a4ff-f5004c0b19ff",
+              "usage": {
+                "input_tokens": 106468,
+                "cached_input_tokens": 89216,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1121,
+                "reasoning_output_tokens": 145,
+                "total_tokens": 107589
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "51005f3734ee91b55aa90c4449ad0e4fe09e0d9b3a2ec182557f9b059db2196f",
+          "events_sha256": "6b9e2bc76ec9edb7a760db4ffcaa84fe2e0223d26f803152982ac744f86a0053",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-06"
+        },
+        {
+          "label": "medium-07",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 89272,
+          "elapsed_seconds": 36.46571287498227,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f701-c887-7452-aead-72582b976b03",
+              "usage": {
+                "input_tokens": 88642,
+                "cached_input_tokens": 72320,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 630,
+                "reasoning_output_tokens": 54,
+                "total_tokens": 89272
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "7c989997872846609188327c5129c0c58c75320f9baf62c11c28dff1188e498a",
+          "events_sha256": "ddcfd4afb1d7c35c8c8e90570c8a2a2f03523251cccf6eb0267e28a7e0508007",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-07"
+        },
+        {
+          "label": "medium-08",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 105025,
+          "elapsed_seconds": 100.52202745902468,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f702-5741-7553-8174-e7fa74357c7d",
+              "usage": {
+                "input_tokens": 104267,
+                "cached_input_tokens": 94976,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 758,
+                "reasoning_output_tokens": 87,
+                "total_tokens": 105025
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "ad1d96bf5cb668e76c775f764d6364e5707a046ab3c5af32af6847fa948e88c4",
+          "events_sha256": "6cc0b8ee8675c5c681d423cc37fdcbdc7b1bfd028025baf96ef1a83b0ad62850",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-08"
+        },
+        {
+          "label": "medium-09",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104680,
+          "elapsed_seconds": 97.27323270900524,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f703-e03e-7500-8a4e-3ad431a1cc3b",
+              "usage": {
+                "input_tokens": 103983,
+                "cached_input_tokens": 98816,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 697,
+                "reasoning_output_tokens": 71,
+                "total_tokens": 104680
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "5e89fb4e9ee01eb5653e2bf0f71f80a434f2474b20b38e66ac5c3b8d696fca76",
+          "events_sha256": "f383f6b097dc385f56661084a17ab7abe89dc376a4f57b511ee73c3f6f177998",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-09"
+        },
+        {
+          "label": "medium-10",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 108903,
+          "elapsed_seconds": 66.44239549999475,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f705-5c80-7ba3-8115-40c379050d6b",
+              "usage": {
+                "input_tokens": 107227,
+                "cached_input_tokens": 86656,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1676,
+                "reasoning_output_tokens": 62,
+                "total_tokens": 108903
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "8e6ec36fd6372b4e4843777692ca56e12884203b4dd14ac3935eb3de7d4e91a8",
+          "events_sha256": "0aa52b15453eda8d8c64f9c3e57ff1193af935d00b4c6bce1b2481d9b6495da0",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-10"
+        },
+        {
+          "label": "medium-11",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 89057,
+          "elapsed_seconds": 32.13979954199749,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f706-6067-7e92-ad14-b953b0d1dfa4",
+              "usage": {
+                "input_tokens": 88450,
+                "cached_input_tokens": 83456,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 607,
+                "reasoning_output_tokens": 77,
+                "total_tokens": 89057
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "4fc61478b9464655e0e8751a0477372ee7e44504011713f7cd74e355d4839eaa",
+          "events_sha256": "4ea4dbc0650dc0cd687b287da3864dafac4d1aff35493751463e3f7aac8f1496",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-11"
+        },
+        {
+          "label": "medium-12",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 105334,
+          "elapsed_seconds": 115.9687074169924,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f706-de52-7fb3-8fec-06f6a4e8d6d0",
+              "usage": {
+                "input_tokens": 104604,
+                "cached_input_tokens": 99072,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 730,
+                "reasoning_output_tokens": 92,
+                "total_tokens": 105334
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "b56c429ba4d3726fe8fead00acb75df394136c0ffa4baf4123fe3e021972d008",
+          "events_sha256": "60a9595a8da529e95c7b7fa1be3aed6206a7274bdd273f5eadaa72915a269d8d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-12"
+        },
+        {
+          "label": "medium-13",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104607,
+          "elapsed_seconds": 100.16867154199281,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f708-a3b0-7fa0-8b70-4c48ee7b0753",
+              "usage": {
+                "input_tokens": 103905,
+                "cached_input_tokens": 94720,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 702,
+                "reasoning_output_tokens": 60,
+                "total_tokens": 104607
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "e1c5e4dc009768e8945e16f19db9e1317d1597765ba36b2d63602d137fbc6897",
+          "events_sha256": "2c05ada13433a6fb884c37cb1de16eaa9c3b8c30b89e535ec5b1deb4212196ae",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-13"
+        },
+        {
+          "label": "medium-14",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 108079,
+          "elapsed_seconds": 70.45417608399293,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70a-2b72-7c23-9b36-a44e5c4c42da",
+              "usage": {
+                "input_tokens": 106411,
+                "cached_input_tokens": 99968,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1668,
+                "reasoning_output_tokens": 84,
+                "total_tokens": 108079
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "a1f8dd2b47f52bf85d9a629942619a8f5186eaaf20d5352adf8bb8aa526f39d5",
+          "events_sha256": "356283629d9e174814cb399aeb093298077caaedf8a0247c3d7a7d77478bceca",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-14"
+        },
+        {
+          "label": "medium-15",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104746,
+          "elapsed_seconds": 99.91982624999946,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70b-3eff-7ea3-a6c8-d0e45236771a",
+              "usage": {
+                "input_tokens": 103985,
+                "cached_input_tokens": 87424,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 761,
+                "reasoning_output_tokens": 126,
+                "total_tokens": 104746
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "12206ae30541574af7af654d493a8fefc43e0e050ab2621cd5f0b8202f5b71e0",
+          "events_sha256": "f1f85d59bd840eea1c999290edb407d62059257c18d8a1c8c2943b3095ac1fd9",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-15"
+        },
+        {
+          "label": "medium-16",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 107784,
+          "elapsed_seconds": 66.90419133400428,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70c-c5a9-7c82-b9d6-5eb90a72aee1",
+              "usage": {
+                "input_tokens": 106205,
+                "cached_input_tokens": 96128,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1579,
+                "reasoning_output_tokens": 52,
+                "total_tokens": 107784
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "7a95d28136314ba53fcda6dd6342caa0b73b1b6679f2c09b6377837875524c4d",
+          "events_sha256": "4918d806ccf157ac279af14dea8afbab415faa975ec8f108406a5d842644492f",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-16"
+        },
+        {
+          "label": "medium-17",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 89471,
+          "elapsed_seconds": 36.22628670799895,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70d-cb59-7773-9dad-0c21b6822c9c",
+              "usage": {
+                "input_tokens": 88830,
+                "cached_input_tokens": 83584,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 641,
+                "reasoning_output_tokens": 82,
+                "total_tokens": 89471
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "61d6141de4710a6907cfb34eb907b979e957a450b5db61f8cb8e443f7c16c460",
+          "events_sha256": "651e239cececd748f0dfc53a3eb4169ccd49c6ed920229e138e4af41e7b7c100",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-17"
+        },
+        {
+          "label": "medium-18",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 119724,
+          "elapsed_seconds": 60.52190449999762,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70e-5930-7e10-84ac-49a8283cc29a",
+              "usage": {
+                "input_tokens": 118987,
+                "cached_input_tokens": 87296,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 737,
+                "reasoning_output_tokens": 94,
+                "total_tokens": 119724
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            1000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "3dbb06cb0061727c125a3f1183a15ce62b2ad875fe2c5298931cff06d2d0d4c2",
+          "events_sha256": "5e4332434675e3ad3a9d1b77ab8f46cdadf1f3d871786104d5cd1f9284babb75",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-18"
+        },
+        {
+          "label": "medium-19",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 122822,
+          "elapsed_seconds": 74.79062720801448,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f70f-4601-7a50-ba97-0928788e1a59",
+              "usage": {
+                "input_tokens": 121120,
+                "cached_input_tokens": 109312,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1702,
+                "reasoning_output_tokens": 73,
+                "total_tokens": 122822
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "e5118ca7c6d488ceccb2636e79003b5cd3d7c7741dcf31c9823b0462e0bf8e26",
+          "events_sha256": "ff4867245df6b7fc9c440b204b5788da2eeba48e9b01094fad3c1dca3a1f035a",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-19"
+        },
+        {
+          "label": "medium-20",
+          "source": "追加N18",
+          "reasoning_effort": "medium",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 107622,
+          "elapsed_seconds": 64.30439916602336,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f710-6a74-74c1-81a8-e6fa936fc5c0",
+              "usage": {
+                "input_tokens": 106104,
+                "cached_input_tokens": 99840,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1518,
+                "reasoning_output_tokens": 45,
+                "total_tokens": 107622
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "258842570c2501d29511a083f9d3fa7544db887ce2eac34f8168dad7c8e49a7c",
+          "events_sha256": "be7eaeaaa37839e49748d9d5444aa2b6669f4bf48cbd57e1e70dfe8f08863002",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/medium-20"
+        }
+      ]
+    },
+    {
+      "reasoning_effort": "high",
+      "n": 20,
+      "existing_n": 2,
+      "additional_n": 18,
+      "score_counts": {
+        "0": 20,
+        "4": 0
+      },
+      "routes": {
+        "stop": 0,
+        "test_only": 12,
+        "inferred_edit": 8
+      },
+      "all_agent_total_tokens": 2309463,
+      "elapsed_seconds_sum": 1633.4822349179885,
+      "tokens_mean": 115473.15,
+      "elapsed_seconds_mean": 81.67411174589942,
+      "runs": [
+        {
+          "label": "high-01",
+          "reasoning_effort": "high",
+          "quality_score": 0,
+          "observed_route": "質問後に推測して編集・テスト",
+          "total_tokens": 142127,
+          "elapsed_seconds": 143.51573437501793,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/high-01",
+          "events_sha256": "6b3d2de76490d994d2ed3a8dc2125b5642eafacc2be1a83ab3b6e86e8fa2412c",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "high-02",
+          "reasoning_effort": "high",
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 108217,
+          "elapsed_seconds": 78.58873358299024,
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-dependency-astra-20261001-r2/runs/high-02",
+          "events_sha256": "2574ada337d058a3df2658863583e812db10f2cff8b7d9a6fd8073d7b6ca4e95",
+          "source": "既存N2",
+          "valid": true
+        },
+        {
+          "label": "high-03",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 127884,
+          "elapsed_seconds": 84.38186470899382,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f711-65fe-78c2-8cd3-3a0de4bfa9c4",
+              "usage": {
+                "input_tokens": 125843,
+                "cached_input_tokens": 117632,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 2041,
+                "reasoning_output_tokens": 409,
+                "total_tokens": 127884
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "7ca342c45e52cd6fbf5263ef181968aab78ce0d505c600cfe059dcf3691f0c17",
+          "events_sha256": "a3e18affb968d92331e757640ca71295f7ecf6a5d8836e23ca88161028e6d3c4",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-03"
+        },
+        {
+          "label": "high-04",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104607,
+          "elapsed_seconds": 91.76765579200583,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f712-aff0-7702-87e8-9d96d6dd0393",
+              "usage": {
+                "input_tokens": 103747,
+                "cached_input_tokens": 84864,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 860,
+                "reasoning_output_tokens": 240,
+                "total_tokens": 104607
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            50000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "b797532549a65e19af8e158abc006f63b1c9e76bc248484b8b7efa8f34d229fc",
+          "events_sha256": "fcac4b87cb667a733ceddbb9cce6469e8d4b288791727cefc311c319a38a2404",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-04"
+        },
+        {
+          "label": "high-05",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 105356,
+          "elapsed_seconds": 52.96874737498001,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f714-16c4-7200-aaaf-6872055ec0b9",
+              "usage": {
+                "input_tokens": 104386,
+                "cached_input_tokens": 98816,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 970,
+                "reasoning_output_tokens": 330,
+                "total_tokens": 105356
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "3ba4840b30809ee2e61e4f7af43bd6ee5a3627ade28773d14a0f75d28e46f26e",
+          "events_sha256": "de7605209f032fdcffc22955c0c6e7837a8f4a5a7c034020fcb48d0256288868",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-05"
+        },
+        {
+          "label": "high-06",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 108173,
+          "elapsed_seconds": 64.40763733300264,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f714-e606-7ab0-b67b-5d3c0824791f",
+              "usage": {
+                "input_tokens": 106651,
+                "cached_input_tokens": 99840,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1522,
+                "reasoning_output_tokens": 136,
+                "total_tokens": 108173
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "a0ffe4e8d4403dbd31fc8bf74b478f63c997e80f87e97834bead44fff80de707",
+          "events_sha256": "16aa749eb71a9cdc7ac5462d0f7abc65cd21f0472135896237ff110ec426f340",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-06"
+        },
+        {
+          "label": "high-07",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 137815,
+          "elapsed_seconds": 59.62945062498329,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f715-e1fa-7513-b9dd-55a5e68bfa31",
+              "usage": {
+                "input_tokens": 136622,
+                "cached_input_tokens": 130176,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1193,
+                "reasoning_output_tokens": 448,
+                "total_tokens": 137815
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "5f2864dab97580dec212fcd07fecd9f8f60b191525df075165422cb11cef57a2",
+          "events_sha256": "08e17c91e724d5131ad9e7f5f007e9010dffe7a68c38a3f44fb8e525dddd931c",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-07"
+        },
+        {
+          "label": "high-08",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 105100,
+          "elapsed_seconds": 45.69979708301253,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f716-cb41-7792-8462-79a50bb09154",
+              "usage": {
+                "input_tokens": 104136,
+                "cached_input_tokens": 98560,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 964,
+                "reasoning_output_tokens": 286,
+                "total_tokens": 105100
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "04c901e960534d2f1f7651298a840bb3274d2fe552ee64ea02c46d5cfa162e2c",
+          "events_sha256": "6d58458b4ad1c57f9e85cea4a757e78b4ebba1177a8ddb0a7565a2ad1c01c1f4",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-08"
+        },
+        {
+          "label": "high-09",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 106383,
+          "elapsed_seconds": 108.84925600001588,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f717-7e15-7572-83ec-42afc0b9f480",
+              "usage": {
+                "input_tokens": 105311,
+                "cached_input_tokens": 99456,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1072,
+                "reasoning_output_tokens": 315,
+                "total_tokens": 106383
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "8141e153aef69d6734280fae4adf527055e261c3bf493ba3861dd7fb2488df81",
+          "events_sha256": "2e0f8915232ca3f5fc5d93e8497b6eefb86ba36dd3f17698dc24cac90dd248c6",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-09"
+        },
+        {
+          "label": "high-10",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 104702,
+          "elapsed_seconds": 99.86559495900292,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f719-27a0-7921-9979-9f602cba2288",
+              "usage": {
+                "input_tokens": 103896,
+                "cached_input_tokens": 98304,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 806,
+                "reasoning_output_tokens": 169,
+                "total_tokens": 104702
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "e7d03ae79466e39fc6bcee5687d3e72ab7bbb4810bab419ba86c778ab2ccc2a1",
+          "events_sha256": "77e934751d79b12b6ddab691d10e0a931513596d510726237b4d927061af5c8c",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-10"
+        },
+        {
+          "label": "high-11",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 142296,
+          "elapsed_seconds": 78.31863824999891,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f71a-ae16-7250-a106-8a4140436ad8",
+              "usage": {
+                "input_tokens": 140389,
+                "cached_input_tokens": 130176,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1907,
+                "reasoning_output_tokens": 241,
+                "total_tokens": 142296
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "fc7c1a3a8a9ea76f20d273787e43477f4b06f6963bd73367b3bebb24b90e76f7",
+          "events_sha256": "00efbb1e2508f51f056beaef9434ecad9eff8ea872c9f88324a4f866ed3bcd5d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-11"
+        },
+        {
+          "label": "high-12",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 106827,
+          "elapsed_seconds": 57.284873374999734,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f71b-e05d-70c2-88c3-2cc8141c5edf",
+              "usage": {
+                "input_tokens": 105626,
+                "cached_input_tokens": 95232,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1201,
+                "reasoning_output_tokens": 236,
+                "total_tokens": 106827
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "d0cfa8fcc887eb95dfbde3ed0b00112f3e6c2b153538efabcc8274df5335e36c",
+          "events_sha256": "97c088b73279137299cdf64ef7a22f53107e23a3f127af2ef1a38e7148ae360d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-12"
+        },
+        {
+          "label": "high-13",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 105215,
+          "elapsed_seconds": 105.98421358299674,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f71c-c07b-7a52-812b-a6b47a4d3f88",
+              "usage": {
+                "input_tokens": 104458,
+                "cached_input_tokens": 71936,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 757,
+                "reasoning_output_tokens": 128,
+                "total_tokens": 105215
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            60000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "0efec17ad265022f201cec75db4d2142e5bdf21bf8d33f8137eb0611f18c28a8",
+          "events_sha256": "f2e421885c29e2110c072e28589b618e9f5a205519ee2167dd3c86de139dd1ad",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-13"
+        },
+        {
+          "label": "high-14",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 91168,
+          "elapsed_seconds": 65.26236004199018,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f71e-5ed2-74a3-ba62-b1ec91cd1dd8",
+              "usage": {
+                "input_tokens": 89433,
+                "cached_input_tokens": 83200,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1735,
+                "reasoning_output_tokens": 232,
+                "total_tokens": 91168
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "b7ac9f450fa98e4a9f6f4777f8eaab76d2c90174eb2d7d340b042d94af8515ea",
+          "events_sha256": "0066fc95b00532af4709f32f677e798abdfd99fcff43b21332ed1b353454af22",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-14"
+        },
+        {
+          "label": "high-15",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 140692,
+          "elapsed_seconds": 82.99290241699782,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f71f-5e0e-78f1-9a83-894581e50b1a",
+              "usage": {
+                "input_tokens": 139325,
+                "cached_input_tokens": 120960,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1367,
+                "reasoning_output_tokens": 407,
+                "total_tokens": 140692
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "7dfdd0b78077d8238d7f387690e47147ffe896d51ed75275efbe49122eaf833a",
+          "events_sha256": "2222c7041d40a0f4b599b3c60c29a338c1e4c2b8ae93db1a02648e74c38736b8",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-15"
+        },
+        {
+          "label": "high-16",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 112492,
+          "elapsed_seconds": 87.25464145798469,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f720-a299-7330-9dbc-f5cb05cc6b88",
+              "usage": {
+                "input_tokens": 110284,
+                "cached_input_tokens": 90496,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 2208,
+                "reasoning_output_tokens": 265,
+                "total_tokens": 112492
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "ebe3b35d54769e63e0181dd801fdc50e03a77a773c381decdf043085bb10b467",
+          "events_sha256": "f98f01de69df4e25d6f345eb1997dc83fcee8fe9f8b3f6e40e3e5ff5a0af14a4",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-16"
+        },
+        {
+          "label": "high-17",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "推測して編集・テスト",
+          "total_tokens": 124662,
+          "elapsed_seconds": 83.75575991699588,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f721-f7c9-7982-87ef-98afd76535a2",
+              "usage": {
+                "input_tokens": 122819,
+                "cached_input_tokens": 98432,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1843,
+                "reasoning_output_tokens": 234,
+                "total_tokens": 124662
+              }
+            }
+          ],
+          "source_changed_paths": [
+            "src/domain/universal_ingester.py",
+            "tests/test_market_units.py"
+          ],
+          "question_tool_calls": 0,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "67cd3cae9c7a75c7e12c85a3604d08a10d73194266afc21c1d0b5a40ebb52001",
+          "events_sha256": "40bc249c8fefe6fdc23b3949bc41cf22967a3937b4cb3a10adef36c147d2e01d",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-17"
+        },
+        {
+          "label": "high-18",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 124535,
+          "elapsed_seconds": 66.58729908399982,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f723-3f4c-7862-ba1b-a666024940ba",
+              "usage": {
+                "input_tokens": 123098,
+                "cached_input_tokens": 101376,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1437,
+                "reasoning_output_tokens": 328,
+                "total_tokens": 124535
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "b4ac49a3cec143735fd3dd0bddeb0cc274c845a8a9d748bc12e44392be23cdb0",
+          "events_sha256": "6f772372cba81666c477931397fddbbdbe2ae512e18435bcc8953e76b93f8046",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-18"
+        },
+        {
+          "label": "high-19",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 90963,
+          "elapsed_seconds": 46.44684904199676,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f724-43c0-7780-b60f-c5c2e38b3505",
+              "usage": {
+                "input_tokens": 89951,
+                "cached_input_tokens": 84224,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 1012,
+                "reasoning_output_tokens": 346,
+                "total_tokens": 90963
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "2059f043b0fa58d8f98fb9c147008f86e91533d3e4f5999f666770fd3682b7b5",
+          "events_sha256": "df35b5dbf8ad64ef31b9a3d3239ea6e903185c2856afad6d3dd0737cd7af2744",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-19"
+        },
+        {
+          "label": "high-20",
+          "source": "追加N18",
+          "reasoning_effort": "high",
+          "valid": true,
+          "quality_score": 0,
+          "observed_route": "現状テスト後に確認",
+          "total_tokens": 120249,
+          "elapsed_seconds": 129.9202259160229,
+          "session_count": 1,
+          "usage_by_session": [
+            {
+              "thread_id": "01a0f724-f986-7e73-b740-0fd2c6f40ac0",
+              "usage": {
+                "input_tokens": 119416,
+                "cached_input_tokens": 113664,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 833,
+                "reasoning_output_tokens": 207,
+                "total_tokens": 120249
+              }
+            }
+          ],
+          "source_changed_paths": [],
+          "question_tool_calls": 1,
+          "sleep_durations_ms": [
+            1000,
+            50000
+          ],
+          "user_message_count": 2,
+          "command_protocol_violation_count": 0,
+          "semantic_review_completed": true,
+          "outcome_audit_sha256": "d06976bdfa48fefe517ce000b3a9abe74d3061df26da46bb7b84df7ec9260eb6",
+          "events_sha256": "2606fb6e734567212f26c1bd9c58d7cd290e2f18f0f9af9cdc1706b6cb1a7565",
+          "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/compact-r2/runs/high-20"
+        }
+      ]
+    }
+  ],
+  "additional_valid_runs": 54,
+  "new_total_tokens": 5810112,
+  "all_agent_total_tokens": 6415381,
+  "new_elapsed_seconds_sum": 4290.648311624973,
+  "fixture_visible_files": 6,
+  "fixture_visible_bytes": 4792,
+  "storage": {
+    "logical_bytes": 222562614,
+    "physical_kib": 252992,
+    "copied_auth_removed": true,
+    "per_run_auth_removed": true
+  },
+  "layer4_registered": false,
+  "historical_results_changed": false
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "CRC-01",
+  "revision": "r1",
+  "required_files": {
+    "assets.json": [
+      {
+        "id": "a",
+        "value": 2
+      },
+      {
+        "id": "b",
+        "value": 3
+      }
+    ]
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "assets.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "assets.json": [
+        {
+          "id": "a",
+          "value": 1
+        },
+        {
+          "id": "b",
+          "value": 3
+        }
+      ]
+    }
+  }
+}

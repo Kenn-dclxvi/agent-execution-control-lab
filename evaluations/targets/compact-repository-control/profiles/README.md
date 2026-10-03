@@ -1,0 +1,25 @@
+# 実行条件
+
+各JSONが条件と参照の正本。過去の固定版は保持する。
+
+- [free-astra6-high-latent-mode-code-n2-r2](free-astra6-high-latent-mode-code-n2-r2.json)
+- [free-astra6-high-latent-mode-code-n20-r2](free-astra6-high-latent-mode-code-n20-r2.json)
+- [free-astra6-high-latent-mode-code-paired-n2-r2-20261003](free-astra6-high-latent-mode-code-paired-n2-r2-20261003.json)
+- [free-astra6-high-latent-mode-code-paired-n2-r3-20261003](free-astra6-high-latent-mode-code-paired-n2-r3-20261003.json)
+- [free-astra6-high-latent-mode-code-task-r4-n2-20261003](free-astra6-high-latent-mode-code-task-r4-n2-20261003.json)
+- [free-astra6-low-latent-mode-code-n2-r1](free-astra6-low-latent-mode-code-n2-r1.json)
+- [free-astra6-low-latent-mode-code-n2-r2](free-astra6-low-latent-mode-code-n2-r2.json)
+- [free-astra6-low-latent-mode-code-n20-r2](free-astra6-low-latent-mode-code-n20-r2.json)
+- [free-astra6-low-latent-mode-code-paired-n2-r2-20261003](free-astra6-low-latent-mode-code-paired-n2-r2-20261003.json)
+- [free-astra6-low-latent-mode-code-paired-n2-r3-20261003](free-astra6-low-latent-mode-code-paired-n2-r3-20261003.json)
+- [free-astra6-low-latent-mode-code-task-r4-n2-20261003](free-astra6-low-latent-mode-code-task-r4-n2-20261003.json)
+- [free-astra6-low-latent-mode-code-task-r4-n20-20261003](free-astra6-low-latent-mode-code-task-r4-n20-20261003.json)
+- [free-astra6-medium-latent-mode-code-n2-r2](free-astra6-medium-latent-mode-code-n2-r2.json)
+- [free-astra6-medium-latent-mode-code-n20-r2](free-astra6-medium-latent-mode-code-n20-r2.json)
+- [free-astra6-medium-latent-mode-code-paired-n2-r2-20261003](free-astra6-medium-latent-mode-code-paired-n2-r2-20261003.json)
+- [free-astra6-medium-latent-mode-code-paired-n2-r3-20261003](free-astra6-medium-latent-mode-code-paired-n2-r3-20261003.json)
+- [free-astra6-medium-latent-mode-code-task-r4-n2-20261003](free-astra6-medium-latent-mode-code-task-r4-n2-20261003.json)
+- [free-sol61-low-latent-mode-code-n2-r1](free-sol61-low-latent-mode-code-n2-r1.json)
+- [free-sol61-low-n1-r1](free-sol61-low-n1-r1.json)
+- [free-sol61-low-n1-r2](free-sol61-low-n1-r2.json)
+- [free-sol61-low-n1-r3](free-sol61-low-n1-r3.json)

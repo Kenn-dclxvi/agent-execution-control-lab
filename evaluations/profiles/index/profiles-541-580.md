@@ -1,7 +1,23 @@
-# Profile index 541-564
+# Profile index 541-580
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-low-old-a01-current-env-n2-20261003-r1.json`](../control-free-astra-low-old-a01-current-env-n2-20261003-r1.json)
+- [`control-free-astra-low-old-a01-exact-input-projection-r2-n2-20261003.json`](../control-free-astra-low-old-a01-exact-input-projection-r2-n2-20261003.json)
+- [`control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json`](../control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json)
+- [`control-free-astra-low-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-low-old-a01-isolated-n20-20261003-r1.json)
+- [`control-free-astra-low-old-a01-source-separation-r5-n2-20261003.json`](../control-free-astra-low-old-a01-source-separation-r5-n2-20261003.json)
+- [`control-free-astra-low-old-a01-token-preserving-compaction-r4-n2-20261003.json`](../control-free-astra-low-old-a01-token-preserving-compaction-r4-n2-20261003.json)
+- [`control-free-astra-low-old-a01-unread-artifact-projection-r3-n2-20261003.json`](../control-free-astra-low-old-a01-unread-artifact-projection-r3-n2-20261003.json)
+- [`control-free-astra-low-standard14-n5-cli0153-r1.json`](../control-free-astra-low-standard14-n5-cli0153-r1.json)
+- [`control-free-astra-medium-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-medium-old-a01-assets-reduced-n2-20261003-r1.json)
+- [`control-free-astra-medium-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-medium-old-a01-isolated-n20-20261003-r1.json)
+- [`control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json`](../control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json)
+- [`control-free-generic-expanded12-global-m24-n5-r1.json`](../control-free-generic-expanded12-global-m24-n5-r1.json)
+- [`control-free-luna6-high-standard14-n5-cli0156-r1.json`](../control-free-luna6-high-standard14-n5-cli0156-r1.json)
+- [`control-free-luna6-medium-standard14-n5-cli0156-r1.json`](../control-free-luna6-medium-standard14-n5-cli0156-r1.json)
+- [`control-free-luna6-xhigh-standard14-n5-cli0156-r1.json`](../control-free-luna6-xhigh-standard14-n5-cli0156-r1.json)
+- [`control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json`](../control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)
 - [`control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../control-free-repository-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json)

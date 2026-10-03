@@ -7,6 +7,7 @@
 - リポジトリ契約の正本は`docs/repository-contract.md`とする。
 - 評価基盤のレイヤーと境界は`docs/prompt-comparison-workflow.md`を正本とする。
 - 評価実行方法は`docs/evaluation-loop-manual.md`を正本とする。
+- 再現性の判断、累積反復数と打ち切り基準は`docs/reproducibility-decision-policy.md`を正本とする。
 - プロンプト制御の設計原則は`docs/prompt-control-design-principles.md`を正本とする。
 - review制御の現行frontierは`docs/candidate214-route-closure-recontrol-direction.md`に置き、source deliveryの現在解釈は`docs/review-carrier-bootstrap-authority-audit.md`を併読する。Candidate214で成立したpacket構築後のreviewer再read閉鎖と別containerの必要観測を保持しつつ、同Candidateでも未閉鎖だったroot初回whole-source deliveryを最初のsource取得から閉じることを優先する。誤経路が実行可能なまま条件付き判断へ誘導する案を次案として記載しない。`candidate_not_created`は、その設計案をCandidateとして評価へ進めないという判定に限る。問題の検討終了やfrontierの完了を意味しない。案を棄却した後も未解決の設計課題として残し、必要reviewを完遂できる別のcarrier構造を検討する。
 - prompt制御の原因分析、成功runと失敗runの比較、Candidate設計、制御再構成または次案を扱う文書へ着手する前に、`docs/prompt-control-design-principles.md`の全文を読む。対象文書の一次参照へリンクを置くだけでは、この読了を満たさない。

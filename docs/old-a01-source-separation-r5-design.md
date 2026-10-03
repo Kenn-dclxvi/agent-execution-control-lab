@@ -1,0 +1,19 @@
+# 旧A01の判断箇所と資産計算処理を分離するr5
+
+目的は、元の判断根拠と実行挙動を維持し、実際に読まれる入口の情報量を減らすこと。空白短縮r4はトークンを減らせなかったため採用せず、r3を実装の親とする。r4の有効な結果は棄却せず、失敗した削減方法の記録として保持する。プロンプトは変更しない。
+
+## 対象と方法
+
+src/domain/universal_ingester.pyの先頭から_load_fund_configまでを元のバイトのまま保持する。資産計算に関する後半メソッドを、同じimports・定数を持つsrc/domain/_universal_ingester_assets.pyの基底クラスへ移す。元クラスはその基底クラスを継承する。__init__、build_shadow_ledger、run、mode解決、snapshotの欠落・不正、daily/strictとlive CSVの分岐は元ファイルのままとする。
+
+tests/unit/test_universal_ingester.pyの全内容をtests/unit/_universal_ingester_cases.pyへバイト同一で移し、元ファイルは元の全テスト関数を明示importする入口とする。pytestの元コマンドと収集項目、39件のテスト内容を保持する。tests/unit/test_market_units_snapshot.pyと仕様文書、適用AGENTS.mdは変更しない。
+
+元の全メソッドについて、移動後のASTが一致することと、保持・移動した部分のバイトが同一であることを機械照合する。テスト移動先は元ファイルのhashと一致させる。元と新素材の関連39テストの収集ID・成否を照合する。入れ子のclassやsuper、後半で使うprivateな二重underscore名がないことも確認してから分離する。
+
+コードとテストは削除せず、必要ならモデルが元の処理全体を読める。モデルに読む順序や停止を新しく指示しない。モード判断に必要な未指定値・現行default・fallback・既存テスト・仕様の矛盾は保持する。配置とクラス継承・import関係は変わるため、旧試験の難易度や推論差の同等性は未検証として観測する。
+
+## 固定条件と試験
+
+比較の基準はr3 Low N2。元JSON TaskSpec、Free、全authority、CLI、Astra Low、共有Python・依存、元oracle・Rating14、permission、トークン集計・時間境界を保持する。個人指示を含めない。固定Layer1のr3から複製し、変更2件・追加2件、対応する派生Git HEAD/tree/stage、クラスの継承関係とテストのimport関係を実行前に宣言する。他の202ファイルはバイト同一。detached・clean・元HEADを親として保持し、元の既存refsを維持する。別素材系列であり、旧run poolへ合算しない。
+
+事前照合と39テストの一致を保存後、並列Astra Low N2、M24・実同時2だけを発行する。再試行・N20への自動延長なし。動作と実測トークン・時間を記録する。低得点を残し、配置変更による判断差を調べる。推論設定間の動作差はLow N2の結果だけで成立としない。

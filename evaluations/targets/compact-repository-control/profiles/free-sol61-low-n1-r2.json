@@ -1,0 +1,90 @@
+{
+  "profile_id": "compact-core20-free-sol61-low-n1-r2",
+  "target_id": "compact-repository-control",
+  "revision": "r2",
+  "lifecycle_state": "configured_qualification_dispatch_only",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/compact-repository-control/sets/core20-r2.json",
+    "sha256": "e3a0969b8c53d2a9338c1e0b5816211986aa9ecec86e83777bb018d169bbb134"
+  },
+  "rating_ref": {
+    "path": "evaluations/targets/compact-repository-control/rating-contracts/outcome-r1.json",
+    "sha256": "ff92fad23d9c5fe607d1af46fb6c21443339c5aedc36cd36bed6fa19495040bd"
+  },
+  "prompt_ref": {
+    "path": "evaluations/targets/compact-repository-control/prompts/baselines/free-r1/identity.json",
+    "sha256": "50278ca729f107fa1db97756c7afec30ea4425793f4486c780568d4fd1b9b35b"
+  },
+  "runtime": {
+    "executor": "codex-cli",
+    "required_version": "0.159.0",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "executable_binding": {
+      "alias": "codex-0.159",
+      "codesign_team_identifier": "2DC432GLL2",
+      "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+      "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+      "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+      "version_output": "codex-cli 0.159.0"
+    },
+    "permission": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "max_workers": 24,
+    "personal_instruction_isolation": "per_run_empty_CODEX_HOME_auth_only",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v1",
+      "source": "codex_rollout_final_usage_by_workspace"
+    },
+    "elapsed_boundary": "cli_subprocess_start_to_return_monotonic"
+  },
+  "repetition": {
+    "initial_n": 1,
+    "confirmatory_n": 5,
+    "reuse_existing_atomic_runs": true,
+    "max_attempts_per_slot": 1,
+    "low_quality_run_policy": "retain"
+  },
+  "budget": {
+    "initial_model_slots": 20,
+    "confirmatory_additional_max_slots": 80,
+    "candidate_slots_before_baseline_qualification": 0,
+    "automatic_dispatch": false,
+    "total_token_hard_limit": null,
+    "limit_policy": "トークン上限を理由に途中終了した実行を品質0点や節約成功へ混ぜない。各段階の総量を実測してから次段階を別計画へ固定する。",
+    "total_authorized_model_slots": 21
+  },
+  "execution_gate": {
+    "enabled": false,
+    "required": [
+      "fixture_qualification",
+      "absolute_executable_version_sha256",
+      "runtime_and_auth_isolation_receipt",
+      "all_agent_usage_qualification",
+      "baseline_independent_repeat",
+      "baseline_all20_n1_three_kpis",
+      "comparison_preflight_receipt_before_prompt_comparison"
+    ],
+    "required_before_qualification": [
+      "fixture_qualification",
+      "absolute_executable_version_sha256",
+      "runtime_and_auth_isolation_receipt"
+    ],
+    "required_before_core20": [
+      "baseline_independent_repeat",
+      "all_agent_usage_qualification"
+    ]
+  },
+  "comparison_scope": "新系列内のprompt差だけを比較し、旧STD14結果は比較元に使わない",
+  "qualification_dispatch": {
+    "minimal_case": "CRC-01",
+    "independent_runs": 2,
+    "reuse_first_for_core20_n1": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "case_id": "CRC-03",
+  "revision": "r1",
+  "required_files": {
+    "context.json": {
+      "saved": 1,
+      "next": 2
+    },
+    "pending.json": {}
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "context.json",
+    "pending.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "pending.json"
+  }
+}

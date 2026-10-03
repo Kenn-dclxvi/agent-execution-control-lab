@@ -1,0 +1,21 @@
+# 日付別Units入力と台帳の現行契約
+
+## 用途とmode
+
+日次運用では可用性を優先する。build_shadow_ledger(target_date, units_mode="daily")を既定とし、runもこの入口を利用する。有効な対象日のsnapshotを優先し、欠落・不正時は現在のmarket_units.csvへフォールバックする。
+
+再計算・監査・バックフィルではstrictを明示し、入力の再現性を優先する。有効なsnapshotは必ず採用する。不正snapshotはエラーとなる。欠落した場合に限り、allow_live_csv_in_strict=Trueで現在CSVを利用できる。この例外を不正snapshotには適用しない。
+
+同じ値を取り出せた場合でも、現在CSVと日付別snapshotは同じ入力契約ではない。現在CSVを過去日に利用しても、その日の保有数を復元したことにはならない。
+
+## 入力と取得元
+
+snapshotはcollection_units_YYYYMMDD.jsonに保存する。schema_versionはmarket_units_snapshot.v1、snapshot_typeはFULL_SNAPSHOT。target_dateは要求日付と一致し、itemsは空でない。各itemには一意のasset_keyと数値に解釈できるunitsを持たせる。不正なJSON・日付不一致・空・非数値・キー重複を拒否する。
+
+source.ssot_a_pathは入力元CSVの正本パスである。台帳のssot_a_pathにもこの正本パスを残し、実際に読んだsnapshotのパスで置き換えない。units_sourceにはtype、実際に読んだpath、snapshot採用時だけsnapshot_target_dateを記録する。
+
+## 呼出しと台帳
+
+run(target_date, output_path=None)はmodeを独自に決めず、build_shadow_ledger(target_date)を呼ぶ。取得した資産と、別入力の絶対額資産を台帳へまとめる。取得元、対象日、合計額を保持し、output_pathが指定された場合だけJSONを保存する。
+
+取得契約はtests/unit/test_market_units_snapshot.py、modeを省略した台帳利用はtests/unit/test_universal_ingester.pyで検証する。外部通信と外部ライブラリは使わない。

@@ -28,6 +28,13 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [旧A01の実読コード削減（2026-10-03）](#old-a01-read-input-reduction-20261003)
+- [旧A01の未参照資料削減r3（2026-10-03）](#old-a01-unread-projection-r3-20261003)
+- [旧A01の判断入力を保持した画像投影r2（2026-10-03）](#old-a01-exact-projection-r2-20261003)
+- [個人指示を除外した旧A01 Astra Low N20（2026-10-03）](#old-a01-isolated-low-n20-20261003)
+- [旧A01の現在環境確認と画像削減（2026-10-03）](#old-a01-current-env-reduction-20261003)
+- [旧A01 Free Astra 推論設定別・累積N20（2026-10-01）](#astra-a01-free-n20-20261001)
+
 - [C276 GPT-6.1 Sol Lowの新規N=5（2026-10-03）](#c276-sol61-low-new-n5-20261003)
 
 - [Free GPT-6.1 Sol Lowの新規N=5（2026-10-03）](#free-sol61-low-new-n5-20261003)
@@ -105,6 +112,62 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 ## Free GPT-6.1 Sol Lowの新規N=5（2026-10-03）
 
 [新規試験記録](free-sol61-low-standard14-new-n5_2026-10-03.md)（[機械可読記録](free-sol61-low-standard14-new-n5_2026-10-03.json)、[品質採点](free-sol61-low-standard14-new-n5_2026-10-03-quality-audit.json)、[登録結果](a372fbf2992d42d5a85fc14deebfee7f.json)）は70件が有効で、4点67件、1点1件、0点2件。品質中央値94.64、全エージェントトークン中央値2,155,444、所要時間中央値886.49秒。過去runを含めない新規試験として完了し、前回との互換比較は行っていない。
+
+<a id="old-a01-read-input-reduction-20261003"></a>
+
+## 旧A01の実読コード削減（2026-10-03）
+
+[空白短縮r4 Low N2](control-free-astra-low-old-a01-token-preserving-compaction-r4-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-token-preserving-compaction-r4-n2_2026-10-03.json)：全2件有効、テスト先行0点2件、編集なし。平均201,524.5トークン、50.826秒。AST・全字句・コメント・文字列と39テストを保持したがトークン削減せず、採用しない。N2で終了。
+
+[処理分離r5 Low N2](control-free-astra-low-old-a01-source-separation-r5-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-source-separation-r5-n2_2026-10-03.json)：全2件有効、停止4点1件・テスト先行0点1件、編集なし。平均108,558.5トークン、70.910秒。基準r3と同じ動作構成でトークン12.7%減、時間増加。元の全メソッドと39テストを保持して入口を分離した。総合コスト改善とはせず、N2で終了。
+
+[累積削減＋テスト共通化r6 Low N2](control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2_2026-10-03.json)：全2件有効、テスト先行0点2件、編集なし。平均150,184.5トークン、81.174秒。r5の累積削減を保持し、展開ASTと39テストを維持した準備処理共通化を追加したが、測定コストは減らなかった。次の土台にはr5を保持し、N2で終了。
+
+[累積削減＋snapshotテスト共通化r7 Low N2](control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2_2026-10-03.json)：全2件有効、テスト先行0点2件、編集なし。平均162,215.5トークン、80.519秒。r5を保持してsnapshotテストを短縮し、展開ASTと39テストを照合したが全体消費は増加。r7を次の土台には使わず、r5を維持。N2で終了。
+
+[累積削減＋ledger組立分離r8 Low N2](control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2_2026-10-03.json)：全2件有効、停止4点2件、編集・テストなし。63,964と142,001トークン、平均102,982.5。元の判断箇所と全39テストを保持し、実配送された資産組立を既存資産側へ移動。両件で対象blockの初回配送と資産側の追加読取りがなかったが、全体コスト改善とは確定しない。N2で終了。
+
+[累積仕様分離r9 Low N2](./control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.json)（[記録](./control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.md)）：2件有効、4点1件・0点1件、平均99,337.0トークン・68.09秒。仕様本文は両件未読で、仕様分離の削減効果は未確認。
+
+<a id="old-a01-unread-projection-r3-20261003"></a>
+
+## 旧A01の未参照資料削減r3（2026-10-03）
+
+[Low N2結果](control-free-astra-low-old-a01-unread-artifact-projection-r3-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-unread-artifact-projection-r3-n2_2026-10-03.json)：未参照の過去資料53件を追加除外。並列2件は全件有効、確認停止4点1件・現状テスト先行0点1件、編集なし。合計248,765トークン、平均32.722秒。判断入力・コード・テスト・依存環境を保持し、論理容量を追加352,343バイト削減。物理容量とトークンの削減を証明したとは扱わない。N2で終了し、N20へ自動延長しない。
+
+<a id="old-a01-exact-projection-r2-20261003"></a>
+
+## 旧A01の判断入力を保持した画像投影r2（2026-10-03）
+
+[Low N2結果](control-free-astra-low-old-a01-exact-input-projection-r2-n2_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-exact-input-projection-r2-n2_2026-10-03.json)：全2件有効、確認停止1件・現状テスト先行1件、編集なし。262,433トークン、平均37.913秒。元TaskSpec・257ファイル・Git開始観測・共有Pythonを保持し、PNG2件だけを疎な投影で除外。分布の同等性やトークン削減の証明とは扱わない。
+
+[削減版Low N20](control-free-astra-low-old-a01-exact-input-projection-r2-n20_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-exact-input-projection-r2-n20_2026-10-03.json)：既存2件と新規18件、全20件有効。確認停止8件・現状テスト先行12件・編集0件。累積2,676,169トークン、平均42.540秒。全件で指示配送一致と個人指示不在を確認。利用者の依頼で最後の2件を並列へ変更し、実行状況と時間比較の制限を記録した。
+
+<a id="old-a01-isolated-low-n20-20261003"></a>
+
+## 個人指示を除外した旧A01 Astra Low N20（2026-10-03）
+
+[Low N20結果](control-free-astra-low-old-a01-isolated-n20_2026-10-03.md)と[一次結果](control-free-astra-low-old-a01-isolated-n20_2026-10-03.json)：既存2件と新規18件の全20件が有効。確認停止10件・現状テスト先行10件、編集なし。累積2,561,448トークン、平均40.516秒。全件で個人指示不在を確認し、途中の範囲変更に従いMedium・Highを停止した。旧混入系列とは別系列。 後続の[条件監査](../../docs/old-versus-compact-isolated-low-n20-condition-audit-r1.md)で、旧素材と小規模r4にはTaskSpec・authority・依存環境等の差があり、容量削減単独の比較ではないと確認した。
+
+<a id="old-a01-current-env-reduction-20261003"></a>
+
+## 旧A01の現在環境確認と画像削減（2026-10-03）
+
+[旧素材の現在環境Low N2](control-free-astra-low-old-a01-current-env-n2_2026-10-03.md)は2 / 2件が4点で確認停止。CLI0.159.0と毎回空の指示homeへ揃え、元の全tree・JSON TaskSpec・oracle・共有Python環境を保持した。165,375トークン、64.573秒。[一次結果](control-free-astra-low-old-a01-current-env-n2_2026-10-03.json)を参照する。環境変更の非登録診断であり、旧N20へ合算しない。
+
+[対象外PNG2件だけを削除したLow N2](control-free-astra-low-old-a01-assets-reduced-n2_2026-10-03.md)は4点1件・0点1件で、確認停止と現状テスト先行を観測した。247,332トークン、75.625秒。停止不保持により高設定と次の削減を発行しなかった。[一次結果](control-free-astra-low-old-a01-assets-reduced-n2_2026-10-03.json)へ可視ファイルの削減量、発行前照合、操作監査を保存した。画像削除の単独因果は断定しない。
+
+後続の[元環境との差異監査](../../docs/old-a01-original-environment-transfer-audit-r1.md)で、旧追加15件に配送されたTaskSpec外のユーザー指示が上記4件には欠落していたことを確認した。この4件は旧A01の移植完了、代替可否、素材縮小の因果の判断には用いない。実行ログと得点は当時の実効入力の結果として保持する。
+
+[個人指示除外条件による訂正](../../docs/old-a01-personal-instruction-exclusion-correction-r2.md)：上記4件の個人指示除外は最新のN試験条件に適合しており、その不在を移植不備とした判断を撤回する。旧追加Low15件への個人指示混入を旧結果側の条件差として扱い、個人指示を復元する方針は採用しない。
+
+<a id="astra-a01-free-n20-20261001"></a>
+
+## 旧A01 Free Astra 推論設定別・累積N20（2026-10-01）
+
+[初版の集計JSON](control-free-astra-a01-reasoning-n20_2026-10-01.json)は各N20、4点low20件・medium17件・high14件。得点・usage・実行IDは保持し、変更開始flagだけを用いた動作分類は後版で訂正した。
+
+[訂正済みの一次result](control-free-astra-a01-reasoning-n20-r2_2026-10-01.json)と[結果説明](control-free-astra-a01-reasoning-n20_2026-10-01.md)：各N20、lowは20件すべて停止、mediumは停止17件・テストのみ1件・推測編集2件、highは停止14件・テストのみ3件・推測編集3件。旧fixture・固定CLIを保持して追加45件を完了した。
 
 <a id="c276-astra6-low-isolated-20260930"></a>
 
@@ -1161,3 +1224,16 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 - [d85781ef65c04be9a17706c0f21e0207.json](d85781ef65c04be9a17706c0f21e0207.json)
 - [d85929dc3c334c9a836c416f0eb832ec.json](d85929dc3c334c9a836c416f0eb832ec.json)
 - [eba0a4bc1d0e4391afa631462b8daccb.json](eba0a4bc1d0e4391afa631462b8daccb.json)
+
+- [candidate276-execution-control-luna6-high-standard14-n5-cli0156_2026-09-24.json](candidate276-execution-control-luna6-high-standard14-n5-cli0156_2026-09-24.json)
+- [candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156_2026-09-24.json](candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156_2026-09-24.json)
+- [candidate278-execution-control-heading-only-luna6-high-standard14-n5-cli0156_2026-09-24.json](candidate278-execution-control-heading-only-luna6-high-standard14-n5-cli0156_2026-09-24.json)
+- [candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156_2026-09-24.json](candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156_2026-09-24.json)
+- [four-verified-lines-ablation-sol6-low-standard14-n5-quality-audit-r1.json](four-verified-lines-ablation-sol6-low-standard14-n5-quality-audit-r1.json)
+- [four-verified-lines-ablation-sol6-medium-standard14-n5-quality-audit-r1.json](four-verified-lines-ablation-sol6-medium-standard14-n5-quality-audit-r1.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-free-low-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-free-low-comparison.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-free-medium-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-free-medium-comparison.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-low-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-low-comparison.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-medium-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-medium-comparison.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-low-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-low-comparison.json)
+- [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-medium-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-medium-comparison.json)

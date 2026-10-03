@@ -1,0 +1,12 @@
+{
+  "kind": "measurement_contract_defect_audit",
+  "source_profile": "compact-core20-free-sol61-low-n1-r2",
+  "raw_grade_preserved": true,
+  "free_quality_failures_confirmed": 0,
+  "affected_cases": {
+    "CRC-12": "提示された形式違反を正しく指摘したが、補足説明を含むfindingを誤拒否した。",
+    "CRC-16": "公開verify.pyをsubprocess.run(check=True)で実行した正常終了記録を収集器が取りこぼした。",
+    "CRC-18": "publicのJSON文字列という有効な保存形式を、未提示のオブジェクト形式必須条件で誤拒否した。"
+  },
+  "action": "旧採点の上書き・新契約での再採点を行わず、新revisionでfresh全20件を実行する。"
+}

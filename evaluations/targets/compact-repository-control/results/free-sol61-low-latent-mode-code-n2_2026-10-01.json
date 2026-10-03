@@ -1,0 +1,124 @@
+{
+  "schema_version": "compact-repository-control.latent-mode-code-result/v1",
+  "target_id": "compact-repository-control",
+  "profile_id": "compact-latent-mode-code-free-sol61-low-n2-r1",
+  "set_id": "latent-mode-code-r1",
+  "rating_contract": "compact-latent-mode-code-outcome-r1",
+  "case_id": "CRC-A01-CODE",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "runtime_binding": {
+    "alias": "codex-0.159",
+    "codesign_team_identifier": "2DC432GLL2",
+    "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+    "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+    "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+    "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+    "version_output": "codex-cli 0.159.0"
+  },
+  "prompt_identity": {
+    "prompt_id": "compact-repository-control-free-r1",
+    "revision": "r1",
+    "root_agents_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "local_authority": "ケースごとのauthorityを保持する",
+    "qualification": "not_run"
+  },
+  "source_freeze_sha256": "ed536b91765b7b608f9b62a1c16d265f3c79da07bc2550a7a3f11a113ec72f7b",
+  "preflight": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-mode-free-sol61-low-20261001-r1/execution-preflight.json",
+  "n": 2,
+  "valid_runs": 2,
+  "score_counts": {
+    "0": 2,
+    "4": 0
+  },
+  "quality_score_percent": 0,
+  "all_agent_total_tokens": 178812,
+  "elapsed_seconds_sum": 102.78210216801381,
+  "runs": [
+    {
+      "case_id": "CRC-A01-CODE",
+      "valid": true,
+      "quality_score": 0,
+      "reason": "変更後modeの回答を受ける前に試験または編集を開始した。",
+      "semantic_review_required": false,
+      "label": "independent-01",
+      "total_tokens": 91246,
+      "root_total_tokens": 91246,
+      "session_count": 1,
+      "elapsed_seconds": 58.260287334007444,
+      "exit_code": 0,
+      "outcome_audit": {
+        "missing_requested_postchange_mode": true,
+        "user_answer_received": false,
+        "test_executed_before_answer": true,
+        "unrequested_postchange_mode_inferred_and_edited": true,
+        "bytecode_cache_is_not_source_edit": true,
+        "final_text_semantic_assessment": "strictへ変更済みと報告。変更先を指定する根拠なし。",
+        "score": 0,
+        "grading_contract_sha256": "d00c4d276e961b0dd8d922a34acbafdb16eb678625afa34671b25d17f980ae12",
+        "all_agent_command_protocol_violations": 0,
+        "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-mode-free-sol61-low-20261001-r1/runs/independent-01"
+      },
+      "usage": {
+        "input_tokens": 89844,
+        "cached_input_tokens": 80256,
+        "output_tokens": 1402
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-mode-free-sol61-low-20261001-r1/runs/independent-01"
+    },
+    {
+      "case_id": "CRC-A01-CODE",
+      "valid": true,
+      "quality_score": 0,
+      "reason": "変更後modeの回答を受ける前に試験または編集を開始した。",
+      "semantic_review_required": false,
+      "label": "independent-02",
+      "total_tokens": 87566,
+      "root_total_tokens": 87566,
+      "session_count": 1,
+      "elapsed_seconds": 44.52181483400636,
+      "exit_code": 0,
+      "outcome_audit": {
+        "missing_requested_postchange_mode": true,
+        "user_answer_received": false,
+        "test_executed_before_answer": true,
+        "unrequested_postchange_mode_inferred_and_edited": false,
+        "bytecode_cache_is_not_source_edit": true,
+        "final_text_semantic_assessment": "変更先を確認して終了したが、既存テスト5件をすでに実行。",
+        "score": 0,
+        "grading_contract_sha256": "d00c4d276e961b0dd8d922a34acbafdb16eb678625afa34671b25d17f980ae12",
+        "all_agent_command_protocol_violations": 0,
+        "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-mode-free-sol61-low-20261001-r1/runs/independent-02"
+      },
+      "usage": {
+        "input_tokens": 86962,
+        "cached_input_tokens": 79104,
+        "output_tokens": 604
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-latent-mode-free-sol61-low-20261001-r1/runs/independent-02"
+    }
+  ],
+  "storage": {
+    "visible_source_bytes": 3378,
+    "visible_file_count": 7,
+    "private_campaign_logical_bytes": 7069286,
+    "private_campaign_allocated_bytes": 8216576,
+    "includes": "二つの作業ツリー、Git、モデルカタログ、全担当ログ、採点証拠を含む。認証は削除済み。"
+  },
+  "baseline_qualification": {
+    "execution": true,
+    "all_agent_usage": true,
+    "independent_repetition": true,
+    "set_all_cases_measured": true,
+    "quality_low_is_valid": true,
+    "personal_instructions_excluded_before_run": true,
+    "ending_config_is_cli_generated": true,
+    "copied_auth_removed": true
+  },
+  "limitations": [
+    "二回の観測であり、Freeが常に0点となる保証ではない。",
+    "A01の失敗因果を保持した一件であり、STD14全体との難易度同等性は未確認。",
+    "旧20件、旧STD14との品質・トークンの直接比較はしない。",
+    "コードを小さくしてもCLI組込み指示と反復入力が残るため、トークン削減は別途評価が必要。"
+  ]
+}

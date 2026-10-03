@@ -1,0 +1,31 @@
+{
+  "case_id": "CRC-04",
+  "revision": "r1",
+  "required_files": {
+    "view.json": {
+      "columns": [
+        "id",
+        "audit"
+      ]
+    },
+    "export.json": {
+      "columns": [
+        "id",
+        "audit"
+      ]
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "view.json",
+    "export.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "export.json"
+  }
+}
