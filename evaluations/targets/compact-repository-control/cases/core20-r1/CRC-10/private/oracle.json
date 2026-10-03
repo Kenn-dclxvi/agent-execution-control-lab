@@ -1,0 +1,25 @@
+{
+  "case_id": "CRC-10",
+  "revision": "r1",
+  "required_files": {
+    "cli.json": {
+      "command": "run-v4"
+    },
+    "reference.json": {
+      "command": "run-v4"
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "cli.json",
+    "reference.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "reference.json"
+  }
+}

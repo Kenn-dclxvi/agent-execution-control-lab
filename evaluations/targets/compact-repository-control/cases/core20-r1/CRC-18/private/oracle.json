@@ -1,0 +1,26 @@
+{
+  "case_id": "CRC-18",
+  "revision": "r1",
+  "required_files": {
+    "projection.json": {
+      "public": "ready"
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "projection.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "projection.json": {
+        "public": "ready",
+        "internal": "INTERNAL_CRC18_7f32"
+      }
+    }
+  }
+}

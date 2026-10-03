@@ -1,0 +1,25 @@
+{
+  "case_id": "CRC-08",
+  "revision": "r1",
+  "required_files": {
+    "runner.json": {
+      "entrypoint": "v4"
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "runner.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "runner.json": {
+        "entrypoint": "v3"
+      }
+    }
+  }
+}

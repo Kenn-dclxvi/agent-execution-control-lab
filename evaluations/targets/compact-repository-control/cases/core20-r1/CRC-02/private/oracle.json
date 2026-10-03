@@ -1,0 +1,26 @@
+{
+  "case_id": "CRC-02",
+  "revision": "r1",
+  "required_files": {
+    "history.json": {
+      "date": "2026-09-30",
+      "value": 7
+    },
+    "view.json": {
+      "date": "2026-09-30"
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "history.json",
+    "view.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "omit_file": "view.json"
+  }
+}

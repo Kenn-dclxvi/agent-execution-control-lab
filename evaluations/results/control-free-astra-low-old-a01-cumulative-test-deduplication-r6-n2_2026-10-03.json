@@ -1,0 +1,2358 @@
+{
+  "result_id": "control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2_2026-10-03",
+  "target_id": "the-caption",
+  "case_id": "TC-A01-LATENT-MODE-POLICY",
+  "case_revision": "r2",
+  "fixture_projection_revision": "r6",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "n": 2,
+  "new_valid_runs": 2,
+  "invalid_runs": 0,
+  "automatic_retries": 0,
+  "score_counts": {
+    "0": 2
+  },
+  "routes": {
+    "現状テストのみ": 2
+  },
+  "all_agent_total_tokens": 300369,
+  "elapsed_seconds_sum": 162.3488275000127,
+  "preflight": {
+    "ready": true,
+    "baseline_result": "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-source-separation-r5-n2_2026-10-03.json",
+    "baseline_sha256": "f4b1a3d208b080b7f456c79d8d51b1e6ee69045f6ea1edd73d83be50a6b9d3e8",
+    "declared_axis": "test_preparation_deduplication",
+    "declared_differences": [
+      "テスト本体一ファイルの準備処理を共通化。展開後AST一致。累積削減は全て保持。",
+      "対応する派生Git HEAD/tree/stage。r5 HEADを親として保持。"
+    ],
+    "preserved": [
+      "元JSON TASKバイト同一",
+      "元case oracle・Rating14の停止基準",
+      "Astra Low",
+      "sandbox workspace-write approval never",
+      "元共有Python runtime identity・venv shim",
+      "全担当トークン・cached input含む",
+      "CLI開始から返却までの秒",
+      "M24 実同時2",
+      "変更一ファイル以外の205ファイルと除外55件を保持",
+      "M24 実同時2"
+    ],
+    "classification": "累積削減を保持したテスト準備処理共通化。非prompt別素材系列、Low N2のみ、Layer4非登録。",
+    "layer4_registered": false,
+    "old_runs_reused": false,
+    "current_environment_reference": "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-r3-n2_2026-10-03.json",
+    "profile_path": "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2-20261003.json",
+    "fixture_tree": "f65e3077734240347c81d1b8954f0341a2590203",
+    "shared_venv": {
+      "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv",
+      "identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73"
+    },
+    "venv_materializer": {
+      "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/frozen-lab/scripts/run_codex_evaluation.py",
+      "sha256": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c"
+    },
+    "source_sha256": {
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_exact_projection_r2_n2.py": "ead94485ca0e90d0ce14d9479a96ea12a30fbd51332f2b812b6cbe59af205dfa",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-exact-input-projection-r2-n2-20261003.json": "d6ea0393c5889604d6f5944147c892697e8c4428ec964f234503c3b97c7ac96e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-isolated-n20-20261003-r1.json": "601690075afe9aee7108ba5b8b001d99c42e12d3f446f352d6760f7f28f7c6a4",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n2-20261003/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n2-20261003/fixture-manifest.json": "48a5cd800393dec293261710ca200aca66cc1b0aa15f9bca1286e2e81719d5a8",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-isolated-n20_2026-10-03.json": "487869a8da394af36dce09018185c4c52ed2193edf07e2c420c9da5d235b2e05",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n2-20261003/authentication-source/models_cache.json": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_isolated_n20_r1.py": "e8ff32bf64fe93b892bc56b8c539e681d2bd67beb1ad2afa551f8c9b02d12b52",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-isolated-n20-20261003-r1/dispatch-plan.json": "dbbefc4cb38af729a96bba955e4999e804ad5af874ce481b068bdf81ef217c52",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-current-env-n2_2026-10-03.json": "4fd4a7d60faa0c5527e5284a388ed53a4204c63f4803e48c2fc68a271ecafceb",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-isolated-n20-20261003-r1/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-isolated-n20-20261003-r1/authentication-source/models_cache.json": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-a01-reasoning-n20-r2_2026-10-01.json": "4ca34cf6421661ffe183f0001b2d84ae1ff3f16c77f7bd446f635a156e58821f",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-r3-n2_2026-10-03.json": "63d148b954d2a1342b315fee2402d161803c119b1e42428292584bba520f4713",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-current-env-n2-20261003-r1.json": "21a78aeb6614792927c60080bc22407dea06602b3c7cae2f265befec3c0509d0",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_current_environment_n2_r1.py": "565e94ac8adf190871f419ae32a59986df1c39cb39cd7f3cc08e12b52009d058",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-current-env-low-n2-20261003-r1/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/cases/TC-A01-LATENT-MODE-POLICY/r2/trial-prompt-input.json": "70cc8816b66fcda3505d0fc5cc5b71d4d01d5b2b9294c488ba75e2a9b76f28e1",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/cases/TC-A01-LATENT-MODE-POLICY/r2/private/case-data.json": "4209e8c93095ef353b96dc538037ec4d1eb87654d823645d9bf05fec13cccfaa",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/frozen-lab/prompts/candidates/the-caption-3ce91a4-control-free-repository-r1/manifest.json": "87e9995109e491272a92a2711ab353cf04f5eb920187a034f2c0fad31e3e9270",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/frozen-lab/scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv/requirements.freeze.txt": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-compact-r2-r3-n2-20261003-r1/r3/authentication-source/models_cache.json": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+      "/Users/kenn/repos/agent-execution-control-lab/scripts/all_agent_usage.py": "aeb633b99e8b565567a1d936d9eede49c83f0d0b3d0855921ff501272b5dd4c0",
+      "/Users/kenn/repos/agent-execution-control-lab/scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-medium-old-a01-isolated-n20-20261003-r1.json": "928a5d34cd00184f84d4c159fe746001a695de4e79e2b0a75f6cbbaaa7c42c56",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-high-old-a01-isolated-n20-20261003-r1.json": "00988bae9361dd798ced4be4cbf62cda81fd703b28aa853d5662b64dc6d0e360",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_exact_projection_r2_n20.py": "154feb3f7ce1cb3e23a3731ca8b2df41997bbdf3558215bb3f275e98ff9ccb3f",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json": "bfbb1a4974a50b64852b6e71d8a1f98204a75028302520c72c5871cd05cbf0ac",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n20-20261003/dispatch-plan.json": "0c4f40c61aba0914a0acede6905b19586572d07bdae45977d514dee3a326d7f2",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n20-20261003/fixture-manifest.json": "48a5cd800393dec293261710ca200aca66cc1b0aa15f9bca1286e2e81719d5a8",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n20-20261003/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-exact-input-projection-r2-low-n20-20261003/authentication-source/models_cache.json": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-exact-input-projection-r2-n2_2026-10-03.json": "c1230e09263e876702bb722676e1b93cf4013102ee0fe790d944bfc5af40c981",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_unread_projection_r3_n2.py": "efc82296d464ce68df7767a6fe84b7cbd7d5074cc2f1f942150927d7fa32e08d",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-unread-artifact-projection-r3-n2-20261003.json": "e76ac225cf2751bfeadc2e63dee2b61c06c6c99d89da8a0fc5cd2a118404fc5f",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-unread-artifact-projection-r3-low-n2-20261003/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-unread-artifact-projection-r3-low-n2-20261003/fixture-manifest.json": "dc4318c4afc5acbaf9aee53bdfb8611add1083d3e3414d9c9cb051dcea829c6c",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-unread-artifact-projection-r3-low-n2-20261003/deletion-selection-evidence.json": "b6c3af83bde04e32dcd02c665d6f69d4d1344bd525a68197f42082a000ad45c9",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-unread-artifact-projection-r3-low-n2-20261003/authentication-source/models_cache.json": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-exact-input-projection-r2-n20_2026-10-03.json": "f9739827751b6187eccb6f92598234f02c2329ff58bbb5d8058465bf8ef856d0",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_separation_r5_n2.py": "57d6c9faffdfd27e2c7f6770d9f41bb1b15f12fae7f8ee1dfa888e008c737b57",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/separate_ingester_r5.py": "f8610e087366f568d8f85f4b1642f2a7279f180639a2d47c16824ab90add77fb",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-source-separation-r5-n2-20261003.json": "4c4ddf61db4e8507010af6f55c3d43f1407db9f3beaebe1cba52932ff6dce3dd",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-source-separation-r5-low-n2-20261003/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-source-separation-r5-low-n2-20261003/fixture-manifest.json": "5118e8faa2fac1d876004620c21fdeedad5a5de4407bbe3e603878e03a8457ef",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-unread-artifact-projection-r3-n2_2026-10-03.json": "2d44b2298e46fbe2d44b7308834aa3f2766ae97536abe6f4ec1dc7ee0735be34",
+      "/Users/kenn/repos/agent-execution-control-lab/docs/old-a01-source-separation-r5-design.md": "7111d13088fce32378f3ba16da8785a70510ec99774fe623897ea16a0884e5cc",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_deduplication_r6_n2.py": "b88606b95cf0e84302d45908ced8674c48b098833853db6b001260c6cdf56f73",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/deduplicate_ingester_tests_r6.py": "07281d3dae6414b9f4c6be413cbb901c75e2c81c6b3dc470ab4ccf6e59f3e326",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2-20261003.json": "a3e6eb0b41e12913d117d0840d02a622e9063a22f1ac89a770cfe555a1bc96d3",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-cumulative-test-deduplication-r6-low-n2-20261003/task.txt": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+      "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-cumulative-test-deduplication-r6-low-n2-20261003/fixture-manifest.json": "a5b1469660ab49d1679395481babfa447c77d9634277d5224079f0dc1f44e25e",
+      "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/control-free-astra-low-old-a01-source-separation-r5-n2_2026-10-03.json": "f4b1a3d208b080b7f456c79d8d51b1e6ee69045f6ea1edd73d83be50a6b9d3e8",
+      "/Users/kenn/repos/agent-execution-control-lab/docs/old-a01-cumulative-test-deduplication-r6-design.md": "b3f927de7fc416e072d3f66626e59ec35fe9c95a1166159952a0725515c346ab"
+    },
+    "python_executable": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv/bin/python",
+    "python_version": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "inherited_path": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/kenn/.antigravity/antigravity/bin:/Users/kenn/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Users/kenn/.codex/tmp/arg0/codex-arg0JFowxT:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/kenn/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/kenn/.antigravity/antigravity/bin:/Users/kenn/.local/bin:/Users/kenn/local/bin:/Users/kenn/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/kenn/local/bin",
+    "model_catalog_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+    "slots": 2,
+    "max_workers": 24,
+    "actual_concurrency": 2,
+    "stop_policy": "2件で終了、低得点保持、無効で停止、自動再試行なし。",
+    "profiles": {
+      "low": "/Users/kenn/repos/agent-execution-control-lab/evaluations/profiles/control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2-20261003.json"
+    },
+    "executor_source": "/Users/kenn/repos/agent-execution-control-lab/evaluations/targets/the-caption/runtime/run_old_a01_current_environment_n2_r1.py",
+    "reused_current_isolated_low_runs": 0,
+    "reused_valid_runs": 2
+  },
+  "controller_preflight": {
+    "ready": true,
+    "comparison_preflight_sha256": "6dc9f62f0436648d3fde151e455f0414c40e16f32616d25a55246c79c6327a17",
+    "preserved_file_count": 206,
+    "removed_file_count": 55,
+    "slots": 2,
+    "actual_concurrency": 2
+  },
+  "fixture_manifest": {
+    "source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-source-separation-r5-low-n2-20261003/fixed-fixture",
+    "preserved_files": {
+      ".claude/settings.json": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "8a39524c8c28ff4b2a2dd4a7f196510879ab703159768346bd7dec0fc769abd4",
+        "symlink_target": null,
+        "bytes": 1147
+      },
+      ".gitattributes": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c",
+        "symlink_target": null,
+        "bytes": 19
+      },
+      ".github/PULL_REQUEST_TEMPLATE.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2905ab211bba6f0b83eab5c3a58470b1c3c60b9e9a88c09f0f6b51f456163f06",
+        "symlink_target": null,
+        "bytes": 441
+      },
+      ".github/workflows/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ef349aa9d719d7cf072d7ae37a604ed9f4d77cef8147c605832de3fa4c34886a",
+        "symlink_target": null,
+        "bytes": 259
+      },
+      ".github/workflows/docs-canonical-command-guard.yml": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2a23421ff1b0db6209d7add78c1974485dded48c30c952c278409332905f57d2",
+        "symlink_target": null,
+        "bytes": 1148
+      },
+      ".gitignore": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2a1cc817c372cef9acc0620189ac44e05996657e9666b81b4081745721c7b615",
+        "symlink_target": null,
+        "bytes": 379
+      },
+      ".vscode/settings.json": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7e6d3235e16295a5b7520e6a3a94d67ea317cbe4e8ca6c8b40f0a03a415c4666",
+        "symlink_target": null,
+        "bytes": 64
+      },
+      "AGENTS.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "CLAUDE.md": {
+        "type": "symlink",
+        "mode": "0o755",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": "AGENTS.md",
+        "bytes": 0
+      },
+      "Director-Led_AI_Dev.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7f141d3704735e619c0d6a2706dd17d23eb1900ae7791aefdaf023f9898fa297",
+        "symlink_target": null,
+        "bytes": 3054
+      },
+      "README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7d485ce95a65af66264efd1942550e2d98c16896f00ed73166916f31b3afd834",
+        "symlink_target": null,
+        "bytes": 23509
+      },
+      "automation/backup.sh": {
+        "type": "file",
+        "mode": "0o700",
+        "sha256": "cb6ab6c1f97300d0a5211cbb74d8a8f4fbff2a7826177a0da0c23823c8bf4842",
+        "symlink_target": null,
+        "bytes": 1550
+      },
+      "automation/com.kenn.dev.thecaption.datacopy.plist": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "74faabebd50637d51283d210d709e010598dbd9f8ec9bead85ea20b057928526",
+        "symlink_target": null,
+        "bytes": 823
+      },
+      "automation/com.kenn.thecaption.datacopy.plist": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "18098d6693f7708091317ba1ba4e9283d054f5da9e8fb97a21d5c11753058c4f",
+        "symlink_target": null,
+        "bytes": 813
+      },
+      "configs/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4ab7b5062422aa18a1d8c220514717b1e31a9c1268b3b7cf04e88dee4b189228",
+        "symlink_target": null,
+        "bytes": 132
+      },
+      "configs/zsh/the-caption.zsh": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f4dd294c82052c2c2c6e7be0d75b575bc1d6b01344920d8c77bc6ad7abdeaab8",
+        "symlink_target": null,
+        "bytes": 3202
+      },
+      "docs/AGENTS.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+        "symlink_target": null,
+        "bytes": 1296
+      },
+      "docs/CLAUDE.md": {
+        "type": "symlink",
+        "mode": "0o755",
+        "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+        "symlink_target": "AGENTS.md",
+        "bytes": 1296
+      },
+      "docs/_index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "78d594cabf4b9074b34fe688a0ee92536c066ff6bb3ece98f7ab3a3525f0d304",
+        "symlink_target": null,
+        "bytes": 870
+      },
+      "docs/adr/ADR-0001-trinity-separation.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0d31294bf5c2f4a9c92024bc3cdf6df33ad836806e0793933f441abcfe40045c",
+        "symlink_target": null,
+        "bytes": 1047
+      },
+      "docs/adr/ADR-0002-ledger-native-ssot.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4aef973095c1a67feaf065b757a593454c5e082ebd784312e7d516a0a452af41",
+        "symlink_target": null,
+        "bytes": 929
+      },
+      "docs/adr/ADR-0003-risk-acceptance-policy.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5da96d26a91ac70b767bd277bdade2973f5980e9dd822291a915b25199552c59",
+        "symlink_target": null,
+        "bytes": 1017
+      },
+      "docs/adr/ADR-0004-collection-primary-v4.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "83c76fa207470a48c8482c6f03ba641aa5edc19fbc07b14bb239859b152f2633",
+        "symlink_target": null,
+        "bytes": 3131
+      },
+      "docs/adr/decisions_index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "75324cacda38aa273f5f14448d6a85fc541d6a88da55554f79148402b48e33ab",
+        "symlink_target": null,
+        "bytes": 443
+      },
+      "docs/appendix/index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "be2eea31c44726225964267db1f6b759e574a9ace6ee6dca309984253605dfc9",
+        "symlink_target": null,
+        "bytes": 23917
+      },
+      "docs/archive/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "94838b9caf1f68c349fac5c7877d92979fdaf2555f1981dd23da59c04ab73791",
+        "symlink_target": null,
+        "bytes": 24282
+      },
+      "docs/explanation/index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "adce04de4173d03ab6ec3eaf9f8baf5f5b6118952ea2fe95d33baeb68238e885",
+        "symlink_target": null,
+        "bytes": 31256
+      },
+      "docs/glossary.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "ce861b947e0c5181b22aa553cb431fd50d356864db228f3283ae7e376de96d3d",
+        "symlink_target": null,
+        "bytes": 4086
+      },
+      "docs/how-to/index.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+        "symlink_target": null,
+        "bytes": 25589
+      },
+      "docs/how-to/market-units-migration-spec.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "113c75874e2bf52eedd535dde84bb9e031d5fc32865b0c797128715b9d316bda",
+        "symlink_target": null,
+        "bytes": 14767
+      },
+      "docs/instructions/agents-style-policy-cgroup.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6cdd91a530dc7b089b9c2f4a3b0c1d154fe69549e66c7ae7763ab4302f70a385",
+        "symlink_target": null,
+        "bytes": 21868
+      },
+      "docs/instructions/agents-style-policy.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6d04afe28f5e0308c1dd9aff80f5ad857c97f11db5d3cce96c1e04e820253edf",
+        "symlink_target": null,
+        "bytes": 26268
+      },
+      "docs/instructions/mbp-label-spec.updated.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3aadcd6ae958e5160247bcc18b7cdd7ca2559bf80b8fb77673fa78006c84a82b",
+        "symlink_target": null,
+        "bytes": 6573
+      },
+      "docs/orchestration-process.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "0bac08fb39548ac35e2b0ba2f6822d760dfc939914b2c0f6da0a21450909a34c",
+        "symlink_target": null,
+        "bytes": 24209
+      },
+      "docs/prompt-guide.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "00424e0cd356dfdf050d59427e591e81d2466b73485045897a6f2e02c27bc414",
+        "symlink_target": null,
+        "bytes": 15421
+      },
+      "docs/reference/design-system.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f391d9d98fe5b337a0fca598d34907a0ae73de59a8661bc43be921b0b6b5bc39",
+        "symlink_target": null,
+        "bytes": 23083
+      },
+      "docs/reference/index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "03fc89b8507b7895fe46b6ef5fa7debe4d6dac6be56644197d35f030bbd43f85",
+        "symlink_target": null,
+        "bytes": 1940
+      },
+      "docs/reference/logic.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "8561f273f160615654fadfa32d57bea7b93dda6acc58ec3ed61dee5493fd96ed",
+        "symlink_target": null,
+        "bytes": 35504
+      },
+      "docs/reference/project-contexts/the-caption.txt": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+        "symlink_target": null,
+        "bytes": 5868
+      },
+      "docs/reference/prompts.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a6bb6d886629df4d3cbb941d5ec9a2f0c64dcd5645777ac97e2dad87f0f76997",
+        "symlink_target": null,
+        "bytes": 33733
+      },
+      "docs/reference/system.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9810cf07a43bbab08b86f55ffad41207a1894c061fe60c53f3ebf933dd08ae44",
+        "symlink_target": null,
+        "bytes": 41207
+      },
+      "docs/tutorials/index.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "751349d5b289bea81f64a1e7f45f596f5f8c39d73f3bcfe880fcbed7be3428cf",
+        "symlink_target": null,
+        "bytes": 12402
+      },
+      "examples/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b5904777f5942faa992ac9291eb57fd82310143b77e6d657b998178330b2565a",
+        "symlink_target": null,
+        "bytes": 76
+      },
+      "legacy/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a01521c6529db23d56f6cbbd18d3b9cece70080af2ecdeb44ec82150e8631bab",
+        "symlink_target": null,
+        "bytes": 510
+      },
+      "legacy/v3/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "67683a2d235aae0ded54fbc016b65135b31facea6410914162b094b898abb221",
+        "symlink_target": null,
+        "bytes": 542
+      },
+      "legacy/v3/manifest.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "da84c212cc4477e251d423f54a6f12b9a23e7433cd915516c1a66823c02e2753",
+        "symlink_target": null,
+        "bytes": 1753
+      },
+      "legacy/v3/src/app/collection_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "dbce2ec53b039ff04b22f535d046420f00d13b858532f1393c3a5d3b547f3196",
+        "symlink_target": null,
+        "bytes": 26552
+      },
+      "legacy/v3/src/app/dispatch_controller.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a5c42d33edc77643be4aef625ba40c7b06062edec54518f6da8fa50260b3eb09",
+        "symlink_target": null,
+        "bytes": 4715
+      },
+      "legacy/v3/src/app/engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "130d5176ce497ec443769f76d5510a2c5f696048df3968cebe29f5b48ef2be49",
+        "symlink_target": null,
+        "bytes": 5670
+      },
+      "legacy/v3/src/app/entrypoints/collection_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ebf0928ac4e66ad01c84107a32afdfc687e3c1c488d39588f6229ea8c4aeb235",
+        "symlink_target": null,
+        "bytes": 2300
+      },
+      "legacy/v3/src/app/entrypoints/daily_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6c1fee7929d6fe344c415837245e431f620979b15540499b5bb1f999783321d3",
+        "symlink_target": null,
+        "bytes": 2737
+      },
+      "legacy/v3/src/app/monex_auditor.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "84a1292dacb72a9ddad053c72ff80fb656e0adea10a803b8fd6f96c6b93607fc",
+        "symlink_target": null,
+        "bytes": 2853
+      },
+      "legacy/v3/src/app/phase1_collection_audit.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6a34c2a0d8eea8e39746cb158c5207bf6bbc2553bbb5773ad5944a424d8554b1",
+        "symlink_target": null,
+        "bytes": 30808
+      },
+      "legacy/v3/tests/unit/test_collection_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "63aed601cb2b3527c0c8422c8b86bb00b1c75907e52eea94bcd2ad56b21532f7",
+        "symlink_target": null,
+        "bytes": 28959
+      },
+      "legacy/v3/tests/unit/test_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9699a45639e9003d963e828c89afc3e3e56a18fdc2a2cc00d019a1114d515af2",
+        "symlink_target": null,
+        "bytes": 6382
+      },
+      "legacy/v3/tests/unit/test_monex_auditor.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "72ad8b6960c41372276f666f7ec0fcc205072e7bef84ee6cf58f89ab071287de",
+        "symlink_target": null,
+        "bytes": 1616
+      },
+      "legacy/v3/tests/unit/test_phase1_collection_audit.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3018a986c84ec6b3df2e84dca33b4ee5c757278c6bcd51deba13914839d47357",
+        "symlink_target": null,
+        "bytes": 15276
+      },
+      "prompts/audit.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "6a2f4c67e28ee88f3f67e9b0ed5e4ff51c880c3a0e8f77f1fa50713f9259fb45",
+        "symlink_target": null,
+        "bytes": 5161
+      },
+      "prompts/implement.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "85257eaae5558461e943bbc93bd0846d5f7db66ef2b6df1692ad574922492bdd",
+        "symlink_target": null,
+        "bytes": 2128
+      },
+      "prompts/plan.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "397c1a47f3236b4249d05dc0127943ceb3b3a5860f906839d96ad55b9b79a885",
+        "symlink_target": null,
+        "bytes": 4183
+      },
+      "prompts/review.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "40b4b51def80b54aa035927e95221875ef7ceba2f0cdd0ea77c11ebbc028c200",
+        "symlink_target": null,
+        "bytes": 3910
+      },
+      "pytest.ini": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d6b902e426bbb6410e9092444784fa9c39e636d328642bba184d4c3434ef2d33",
+        "symlink_target": null,
+        "bytes": 150
+      },
+      "reports/agents-md-tests/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0b19ff01d028545ae0cda36113ddd0957f0a96814c9e96e123450475c02cfe41",
+        "symlink_target": null,
+        "bytes": 191
+      },
+      "requirements-dev.in": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f5c497a1ba2d0bfba6121273342b935e2e3e41539c8eb6dc1096e9f2da0e1bb3",
+        "symlink_target": null,
+        "bytes": 70
+      },
+      "requirements-dev.txt": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "07860bf03fdb0d50ba8693a976c8a6d1dc70408f5da9986b130e5521fc8723b8",
+        "symlink_target": null,
+        "bytes": 3024
+      },
+      "requirements.in": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "96ef0b1e808c00037c19b65bfabdd8352b1e54ad37465e709c2de01a3c53ac7a",
+        "symlink_target": null,
+        "bytes": 203
+      },
+      "requirements.txt": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ea5bf43d60b6c407f8946388186c4fd759ab46e8e1e6098f6df0fb79771dd355",
+        "symlink_target": null,
+        "bytes": 2623
+      },
+      "run.sh": {
+        "type": "file",
+        "mode": "0o700",
+        "sha256": "4def3a7305b7a58f8555978c1c6dc1b5179de7a291aa159bc011e60e9021ed42",
+        "symlink_target": null,
+        "bytes": 5724
+      },
+      "scripts/AGENTS.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+        "symlink_target": null,
+        "bytes": 728
+      },
+      "scripts/CLAUDE.md": {
+        "type": "symlink",
+        "mode": "0o755",
+        "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+        "symlink_target": "AGENTS.md",
+        "bytes": 728
+      },
+      "scripts/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "1c80787cd41ddba8fc1578f300dd36da41a052b3880f5c85b74e78848ef85220",
+        "symlink_target": null,
+        "bytes": 115
+      },
+      "scripts/ci/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "73efcd75495a419dac49db7f10cf606fe6da9a656adf30f6846029610901f813",
+        "symlink_target": null,
+        "bytes": 44
+      },
+      "scripts/dev/bump_rev.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "10f9477c0ba295286cf884dc225f330317a3e73c9b1b1e2bc2db7ea7e201f28b",
+        "symlink_target": null,
+        "bytes": 2643
+      },
+      "scripts/dev/check_models.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c32be98e4d19c57505bf3ba1a801a9d6a3c0e0043fa21c37d42f7bc7dce293b1",
+        "symlink_target": null,
+        "bytes": 1017
+      },
+      "scripts/dev/cost_summary.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "260543eb2313f0e37ddf45b4049776512f698d43a584871f633b29c6f8968cf9",
+        "symlink_target": null,
+        "bytes": 4516
+      },
+      "scripts/dev/encrypt_env.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2d58433b753d5b406e0db67e834e792b9c255f9029d67b7ab4b8053a4d93b1cb",
+        "symlink_target": null,
+        "bytes": 1587
+      },
+      "scripts/dev/fetch_all_assets.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "cd388cdf5d9ea81f0490f729e3e5f6a2dc689890ecd21f195a07c9be429ffb3f",
+        "symlink_target": null,
+        "bytes": 4209
+      },
+      "scripts/dev/generate_asset_yaml.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e4c6079adffd2334c5210b136f9b5194e037cc466ab15eaccd853302e696ea18",
+        "symlink_target": null,
+        "bytes": 5501
+      },
+      "scripts/dev/install_hooks.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3240d0b6cbb01a60b4ef61cd5b12dd087162b5cdf5144f6a58a63b37df8fad28",
+        "symlink_target": null,
+        "bytes": 2234
+      },
+      "scripts/dev/install_the_caption_zshenv.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f1380e075e527a3f6a443739a577f1ede769d89630cef36a1977e84f71917f28",
+        "symlink_target": null,
+        "bytes": 3176
+      },
+      "scripts/dev/main_verify.sh": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f714bc5ed1c91c4d9d8a68f85f64a362e4c83681a673536da3be433e0f100f74",
+        "symlink_target": null,
+        "bytes": 81
+      },
+      "scripts/dev/merge_project.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "947746b65999d6761746b224556f30a5b5692712adadf6f6443d7bf4515f3d30",
+        "symlink_target": null,
+        "bytes": 4858
+      },
+      "scripts/dev/poc_fetch_detail.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b353325868abbd38dfa00f42dd21986bb0f4c12911fd8eb4daab9fe72f0d26f6",
+        "symlink_target": null,
+        "bytes": 3897
+      },
+      "scripts/dev/rebuild_knowledge.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a4acf2afb9c0a1456e2ff8e8d6ff086e910d6871d37904e1febace49c8962ed0",
+        "symlink_target": null,
+        "bytes": 5358
+      },
+      "scripts/dev/run_shadow_ingester.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "32a52f7441abe044d6abb60848b0913dc95f032deda7863fa8104dc479f88b64",
+        "symlink_target": null,
+        "bytes": 833
+      },
+      "scripts/dev/setup_auth.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e976b6d8e1e620dc8eb1e46464a8cba5136729e2fc7a41826544274b341a1bc1",
+        "symlink_target": null,
+        "bytes": 1580
+      },
+      "scripts/dev/sp": {
+        "type": "file",
+        "mode": "0o700",
+        "sha256": "d4accc12e24884cf5686a6a6a5ab2212477743df9ae7d0997009f1a79f888484",
+        "symlink_target": null,
+        "bytes": 13317
+      },
+      "scripts/dev/test_email.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2043806f972a23b96b4af9be08e4a8e4803f4a08a589e8aa73649df94c3e9c85",
+        "symlink_target": null,
+        "bytes": 1629
+      },
+      "scripts/dev/verify_change_set.sh": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "8df7411e54923e0646a8844cd0d61d66a427e8b72bf7202ce969088eb90fdc20",
+        "symlink_target": null,
+        "bytes": 354
+      },
+      "scripts/dev/weekly_e2e_gate.sh": {
+        "type": "file",
+        "mode": "0o700",
+        "sha256": "2aea59ef8e242b5b9a62b3aace9ec5bd21b4bf72bfd4980c802136734bdb2481",
+        "symlink_target": null,
+        "bytes": 1596
+      },
+      "src/AGENTS.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+        "symlink_target": null,
+        "bytes": 1317
+      },
+      "src/CLAUDE.md": {
+        "type": "symlink",
+        "mode": "0o755",
+        "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+        "symlink_target": "AGENTS.md",
+        "bytes": 1317
+      },
+      "src/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "71fc954ad6c587d8e2ceb9ab02558aa10c8de7168bad067812ea23ca3d7237e2",
+        "symlink_target": null,
+        "bytes": 416
+      },
+      "src/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/app/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/app/entrypoints/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "891d4742d79fc26add869298d45e49af5b08d5b17c40b2166bdbc448e455dc54",
+        "symlink_target": null,
+        "bytes": 59
+      },
+      "src/app/entrypoints/monthly_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "855402f7475f5147045fcaaafcea80a6ad38a68e34593ff51dcfe09e8556b95f",
+        "symlink_target": null,
+        "bytes": 1097
+      },
+      "src/app/entrypoints/v4_daily_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "86a6268bb9d393ac1a62577a996b55d8bb6ea7243dead1b4b45cdddea2490607",
+        "symlink_target": null,
+        "bytes": 2821
+      },
+      "src/app/entrypoints/weekly_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0a8db4dc307129298a7af786a2242522651ae695d082a68ad9fff31f9399814e",
+        "symlink_target": null,
+        "bytes": 1091
+      },
+      "src/app/monthly_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "204a3026f1ce86e43f71402215f0df659031b2fe240b2fd53ffa41d779a982a5",
+        "symlink_target": null,
+        "bytes": 12426
+      },
+      "src/app/notifier.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d783c4660d9fd6603823f7a9498ff88dc609aacbfaa1b865e47951f2c5b07d5a",
+        "symlink_target": null,
+        "bytes": 4491
+      },
+      "src/app/renderer/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "626e16eb16acf12c919e821924e061695662da687784f4ec39f2a67942e6a479",
+        "symlink_target": null,
+        "bytes": 2216
+      },
+      "src/app/renderer/alert.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0f61fc57071549069d477e4c153b72dad24ba33e788a4bf31b2b2fae8a9f0617",
+        "symlink_target": null,
+        "bytes": 2267
+      },
+      "src/app/renderer/base.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e6f9a62437b49dae0ad4639b38eac176e7632fdc8875751a27c7e48dec34852d",
+        "symlink_target": null,
+        "bytes": 4619
+      },
+      "src/app/renderer/report_collection.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "efcac853131a3baf7f38f527dd813965fb945032f9a843dc26124b94897d0e79",
+        "symlink_target": null,
+        "bytes": 5567
+      },
+      "src/app/renderer/report_context.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f5988f0d1d754e00594cd53a01a1f35468d0c35e0567861bff10b9e6d16e2a0d",
+        "symlink_target": null,
+        "bytes": 8159
+      },
+      "src/app/renderer/report_fortress.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3b5a3485be8f0a29d3451ce44ef4c900f748ff4e393eaab085bbe3df92ebb1b5",
+        "symlink_target": null,
+        "bytes": 5463
+      },
+      "src/app/renderer/report_monthly.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7d1988e4d34401bf405c9d355f25031e7fbc77c2621fcba328c7720b6da9afab",
+        "symlink_target": null,
+        "bytes": 13175
+      },
+      "src/app/renderer/templates/v4_chronicle.html": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "85779781faebaf1a87908e9f1832ba6189d0ccee31af501da9575e134119f92a",
+        "symlink_target": null,
+        "bytes": 3344
+      },
+      "src/app/renderer/templates/v4_monolithic.html": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "847e7c5f0c5d85a047afaa17e7d4023cf0a3725e330476bab3e90e1d4c454405",
+        "symlink_target": null,
+        "bytes": 9470
+      },
+      "src/app/renderer/v4_content_renderer.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "128168fac29f9c694189b759b758fbfd45b784b24a62d67c3fbf9a00fc7610a4",
+        "symlink_target": null,
+        "bytes": 5422
+      },
+      "src/app/renderer/v4_view_models.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "39eb50f3435843e021f4f1a86ba997b60a2aa618f2cc2641b4dcacbaf58adad5",
+        "symlink_target": null,
+        "bytes": 21928
+      },
+      "src/app/renderer/view_models.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "080b08af9525ab6f0b5003e32b023b7e4fd2f181a8935d3a9de5a0ef2f9585ef",
+        "symlink_target": null,
+        "bytes": 8164
+      },
+      "src/app/v4_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "14b9b2de597e74ddc5683d30e8107568f3283907226dea95ea609bf273a3a314",
+        "symlink_target": null,
+        "bytes": 15509
+      },
+      "src/app/weekly_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b724e77bbda9a5445bbd624f3a2ca4c0997a1c38cf303cd0df2b50e735316950",
+        "symlink_target": null,
+        "bytes": 6542
+      },
+      "src/config/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/config/prompts.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c6dedb69e547bdaed67bcca36aff7655a8fe966e542098739a047a5792b102c1",
+        "symlink_target": null,
+        "bytes": 24079
+      },
+      "src/config/settings.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3a9b8dcdddb5461fee6918a1de958ab20a9ac333c2ccc2e6021416bfb941543c",
+        "symlink_target": null,
+        "bytes": 4749
+      },
+      "src/domain/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/domain/collection_history_updater.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c82123b2160e8d969b2acd98fb902c8be53859b5d58c2dfaed5f20f519a9ed7b",
+        "symlink_target": null,
+        "bytes": 14047
+      },
+      "src/domain/curator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7fde0fc7e3153ee08c255b0d94c24cecd610d0ab29c81852e6ca404b2db78325",
+        "symlink_target": null,
+        "bytes": 20200
+      },
+      "src/domain/daily_metrics.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "945759dbbfb3083a4d49820a213d3401a1b52853dbb0ea2a5f670cf04e3b846c",
+        "symlink_target": null,
+        "bytes": 5685
+      },
+      "src/domain/guard_rail.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "daeecf175341a84478b4507bff9d7ab2d9cbc4d5e400cc657e5a081cf41b30ba",
+        "symlink_target": null,
+        "bytes": 2588
+      },
+      "src/domain/ledger_factory.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "cffd3e7005dbf1dafb5e303d56a76c6054647f12d6450d314c757d8c5b610ced",
+        "symlink_target": null,
+        "bytes": 3670
+      },
+      "src/domain/ledger_manager.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ccb00353c4c4c590d34ab9cd9931c4443a66bff91755dbd70c40c2a22cd4a058",
+        "symlink_target": null,
+        "bytes": 17042
+      },
+      "src/domain/ledger_schema.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "bfef5d6fe73c210fafe1a9a18464eadbb2b35f9e2c44f8b78846aa7f02e09dea",
+        "symlink_target": null,
+        "bytes": 4135
+      },
+      "src/domain/market_units_snapshot.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ea37c69b2d3f75376f1bf90ef911deb77e57811097956b8c5ab6daafe4afb8b8",
+        "symlink_target": null,
+        "bytes": 7850
+      },
+      "src/domain/monthly_curator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c8841bc6eed2aa09ebb57bfddb9cf27427b9f38f36d74436a6198b5a4132d192",
+        "symlink_target": null,
+        "bytes": 28168
+      },
+      "src/domain/monthly_guard.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "8a1d69539d0227492796a658722600d5084d39d5f6764926673a82ae5c00e89d",
+        "symlink_target": null,
+        "bytes": 1366
+      },
+      "src/domain/shadow_ledger_adapter.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4fa7ac5474ebbd34d762266176278ff3896983cde0ced8aaef1a85c3516a4f3b",
+        "symlink_target": null,
+        "bytes": 5565
+      },
+      "src/domain/universal_ingester.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "66c73287cdbc1b8df9b845ecf1c933b5512a6aa5b660284e7efd20a082336827",
+        "symlink_target": null,
+        "bytes": 7623
+      },
+      "src/domain/v4_ledger_finalizer.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "caa152a598d78129daa7e44c120cde7c4bead6043597ae2dd2f652db854d3f64",
+        "symlink_target": null,
+        "bytes": 1795
+      },
+      "src/domain/weekly_curator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c5e856434d37d1d6faa4711c20f92129b9a5f3a534a291d4d490ef94b3f22892",
+        "symlink_target": null,
+        "bytes": 3543
+      },
+      "src/domain/weekly_guard.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e95909f9bb05e3bb6ad8373ff1e2a5e6381694c916c2ebaf51e29ec612a64556",
+        "symlink_target": null,
+        "bytes": 1878
+      },
+      "src/infra/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/infra/browser_manager.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3edf6fc78ca07e8670ad679616b86f65935669f1d3aedbe8e22b32e6cf74a95d",
+        "symlink_target": null,
+        "bytes": 11488
+      },
+      "src/infra/chronicle_repository.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "391f3feda4b51445d82955f63088d6c351366c69d5b900191836377f8d4bd59a",
+        "symlink_target": null,
+        "bytes": 2024
+      },
+      "src/infra/context_repository.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d041cd132a01aa8b626eb46921dc5c31bbe22c063de63efb77a6790c85c9ac6a",
+        "symlink_target": null,
+        "bytes": 1996
+      },
+      "src/infra/daily_metrics_repository.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7fd74687636e3ee1ae5097aa1e9c8e75b0201153f983f763b6606ed21a8e4719",
+        "symlink_target": null,
+        "bytes": 2210
+      },
+      "src/infra/gmail_otp.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "87cf4fdbdd783b76d5142b31a743967373e4161101aa0881a9c30e14f353c802",
+        "symlink_target": null,
+        "bytes": 5454
+      },
+      "src/infra/ingester.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ea1426ae9ff485d99803d2aeeb06afe3f8ad38bb7dd1206a354f68bf10b5d394",
+        "symlink_target": null,
+        "bytes": 7010
+      },
+      "src/infra/knowledge_manager.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "824fc53cf2af6264e1a6c72babc73db82da9f3f300d2e156c72fd9237d13e529",
+        "symlink_target": null,
+        "bytes": 7869
+      },
+      "src/infra/ledger_repository.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "49af3d4bc285acf16cc348f89f7b2fba3b0736f0c8e0e750a8a2e587d947a80d",
+        "symlink_target": null,
+        "bytes": 2428
+      },
+      "src/infra/llm_transporter.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "42f528ce99c7d84199aea5ba15345bf879eec76d39267aee27b749c422615a3a",
+        "symlink_target": null,
+        "bytes": 8257
+      },
+      "src/infra/mail_sender.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3ac93c995c647c999778d8bcbb27424f6b3b7130c01f6b7e5bf88243b40c5144",
+        "symlink_target": null,
+        "bytes": 1289
+      },
+      "src/infra/market_data.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5a3a37eb56eb72f5fcc1778936dc0da81c731d22879612459f43b870e8cb8dde",
+        "symlink_target": null,
+        "bytes": 6524
+      },
+      "src/infra/market_snapshot_repository.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3c11df77c3b742e6045e1bfc2f72bab7b92f410a46ed3446ea6607413928931d",
+        "symlink_target": null,
+        "bytes": 2559
+      },
+      "src/infra/monex_client.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ef9489e57d3dd26408b7d4143bb624c708b88c3c66817df7268154c948eb6bfc",
+        "symlink_target": null,
+        "bytes": 2966
+      },
+      "src/infra/monex_operator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "daa2284d4c2086910bfa7a1953be58dddc94248d46084ec126f9e736840da576",
+        "symlink_target": null,
+        "bytes": 19860
+      },
+      "src/infra/monex_parser.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6f9bb10f29fbcbc511bcf3a75238687b5b4f8ac0adcd495bc4088779b7561888",
+        "symlink_target": null,
+        "bytes": 11063
+      },
+      "src/lib/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "src/lib/guard.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "dc3691a78216c434c179b45f535ab3423f7e976079effe3d8f1feb05dd9e6ca5",
+        "symlink_target": null,
+        "bytes": 411
+      },
+      "src/lib/logger.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "1e21a4c6968c9bf5cb974f81d965f757da97853104dba4af2e699e6968768be6",
+        "symlink_target": null,
+        "bytes": 2243
+      },
+      "src/lib/models.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "04067754e260903a855bbecd2ef2d2e5bdbdbec879564e2531fb559f336071cf",
+        "symlink_target": null,
+        "bytes": 2372
+      },
+      "src/lib/timeline_controller.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "46bc542f96565290f185c9f386024d73653e1a81090a8032f83d710314eab80b",
+        "symlink_target": null,
+        "bytes": 6509
+      },
+      "src/lib/utils.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b9fff2c0b16a4aab05a31a9d1243ba98ed52b0bcb1adddc00edb856f22436900",
+        "symlink_target": null,
+        "bytes": 3371
+      },
+      "src/web/market_units_editor/index.html": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "67f29314dd2194102e3b872d8f4581ad5f9a1881e14f4eadf5e5fb43212636a2",
+        "symlink_target": null,
+        "bytes": 363
+      },
+      "src/web/market_units_editor/package-lock.json": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2e5bf608b74f6e25ec56acbfba2eb59a241a97ffe1b9d0d5860020de7817d927",
+        "symlink_target": null,
+        "bytes": 112203
+      },
+      "src/web/market_units_editor/package.json": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "46c826531060d688e349062244c84019de6d93d8ef9369867e306742e4054771",
+        "symlink_target": null,
+        "bytes": 735
+      },
+      "src/web/market_units_editor/server.ts": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d1402839944878d7888101a74122a8926ac4dd8a64367de17aa25f99f3865e33",
+        "symlink_target": null,
+        "bytes": 8149
+      },
+      "src/web/market_units_editor/src/App.tsx": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5685fa784046354cec5b8b641591d11185fd7d4fcd3d48ea80c078c35e8f91c0",
+        "symlink_target": null,
+        "bytes": 49464
+      },
+      "src/web/market_units_editor/src/index.css": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9a706ab2e5d8da44761793e8ed8b489846567508ad02e4d8400585be275c5e80",
+        "symlink_target": null,
+        "bytes": 652
+      },
+      "src/web/market_units_editor/src/main.tsx": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2f30c16ebe3168a21ac6262cea975ba5767d616f0f7e03aa312f57d9b835c145",
+        "symlink_target": null,
+        "bytes": 332
+      },
+      "src/web/market_units_editor/tsconfig.json": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a0e2e45d498095e5843747d7f8c4d69d4282abcbf5b06a8e372b85e61ff0b514",
+        "symlink_target": null,
+        "bytes": 476
+      },
+      "src/web/market_units_editor/vite.config.ts": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d5e459d4e49132da37299605880bf3b86faa7d4544bb6c0e518185674b67cfe2",
+        "symlink_target": null,
+        "bytes": 491
+      },
+      "tests/AGENTS.md": {
+        "type": "file",
+        "mode": "0o644",
+        "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+        "symlink_target": null,
+        "bytes": 551
+      },
+      "tests/CLAUDE.md": {
+        "type": "symlink",
+        "mode": "0o755",
+        "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+        "symlink_target": "AGENTS.md",
+        "bytes": 551
+      },
+      "tests/README.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "1804496f866624372eb1d98b492051268d5a74faa0f30569a9699a81a09ee965",
+        "symlink_target": null,
+        "bytes": 143
+      },
+      "tests/__init__.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "tests/conftest.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "353be1167c50b66c11717e46fa78e11403dc5c32cb0a894053c58da14cfe7243",
+        "symlink_target": null,
+        "bytes": 3338
+      },
+      "tests/integration/.gitkeep": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "tests/unit/.gitkeep": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "symlink_target": null,
+        "bytes": 0
+      },
+      "tests/unit/test_atomic_save.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "95edd2a9a55130d0384b6db49a940289353bea03e03aab26f090815e678b56df",
+        "symlink_target": null,
+        "bytes": 4965
+      },
+      "tests/unit/test_collection_history_updater.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c4ab97ca4d8cbc55b757575846664a61a09fbc8a147f274ae5c582e79dce4780",
+        "symlink_target": null,
+        "bytes": 9782
+      },
+      "tests/unit/test_curator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f20130c5a4fc95f53724e466c47d89050356ea8c1d9f0d5ec61b9bbbca39ce20",
+        "symlink_target": null,
+        "bytes": 17676
+      },
+      "tests/unit/test_daily_metrics.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c0d20e9ae157b3714ac9ed424b8300c882893ff676977a864903c1762ae49841",
+        "symlink_target": null,
+        "bytes": 14030
+      },
+      "tests/unit/test_gmail_otp.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4455014cbba9d5ab4d8755a8c12c14a36e4dac28ea43e6eff48ecfb47556f6a4",
+        "symlink_target": null,
+        "bytes": 2093
+      },
+      "tests/unit/test_import_paths.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "43134f2d504a396b00b404c25e8143f98687a5cb187522e2cbc39038ae4caaac",
+        "symlink_target": null,
+        "bytes": 5758
+      },
+      "tests/unit/test_install_the_caption_zshenv.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7357d0d56728be5f96aa18a4c873b043c9d69ec7f2238cc0bc2e3ea1b857ff23",
+        "symlink_target": null,
+        "bytes": 3810
+      },
+      "tests/unit/test_knowledge_manager.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b5c91957c9ad20155e44071118812405d32c0039f60dab3fdd0984eb7ea812c9",
+        "symlink_target": null,
+        "bytes": 3245
+      },
+      "tests/unit/test_ledger_manager.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5e757ef7f62ceea4a27f01f746173f670e529c5651adc051d177bb878b017777",
+        "symlink_target": null,
+        "bytes": 10340
+      },
+      "tests/unit/test_ledger_mtd_regression.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "025a1ba818faad2599090e08c797f06d897204290e082ee5fb7e6aac3ee95a4b",
+        "symlink_target": null,
+        "bytes": 2712
+      },
+      "tests/unit/test_ledger_schema.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0dc6d91d8d1a9c3b665bdfb8653750d7da155c7c6bb796f6e1c6c0b3a3b8fbd0",
+        "symlink_target": null,
+        "bytes": 5376
+      },
+      "tests/unit/test_llm_transporter.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "315ee96bf0d92dc6cc2f1fffa51c259d0182d2f6b91b3b37ac995bfc5ef8576f",
+        "symlink_target": null,
+        "bytes": 7057
+      },
+      "tests/unit/test_market_data.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e6af8219924cb9baf23eb7ce06d380d7c138aed1324ab079a84414b68c5642f4",
+        "symlink_target": null,
+        "bytes": 7038
+      },
+      "tests/unit/test_market_units_snapshot.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "507c1614fe0c806309bcb72c9880f0987656ba359d6271bf214ee48781a4a916",
+        "symlink_target": null,
+        "bytes": 10843
+      },
+      "tests/unit/test_monthly_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0f60c35cf0bbc7e3404a4364d3824605c51738d9d9582b9d94afc0cf8cde1322",
+        "symlink_target": null,
+        "bytes": 15677
+      },
+      "tests/unit/test_monthly_renderer_dispatch.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "71196ecb2a83c214a39c5a105d516da34d1f508dea8d60c923b4331d41222dfc",
+        "symlink_target": null,
+        "bytes": 1291
+      },
+      "tests/unit/test_report_collection.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "21a94f274cb2706b6dbb567907b4ce00a9a111383f3c0b7f638a37b4eca527db",
+        "symlink_target": null,
+        "bytes": 4145
+      },
+      "tests/unit/test_report_context.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "183879efc5c8f957cc0acc15a35e9a26e18547700d33e822610c79c3027b15be",
+        "symlink_target": null,
+        "bytes": 1897
+      },
+      "tests/unit/test_report_fortress.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "90c21683bc0caf083c1c590e4b479c7f43c224823399a6c6c35eeefd6803ef53",
+        "symlink_target": null,
+        "bytes": 2069
+      },
+      "tests/unit/test_shadow_ledger_adapter.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "09746d4a5dafb53cc55ff2694ef396d51639c403176dc4e9bd7867cbbbead2c9",
+        "symlink_target": null,
+        "bytes": 3558
+      },
+      "tests/unit/test_sp_contract.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "33f1d071af80197ab2b935b73401e1add0612e54db727077280f69e01f95d970",
+        "symlink_target": null,
+        "bytes": 2074
+      },
+      "tests/unit/test_universal_ingester.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ef80154f2ac1e2c92609d6849fa05da5cc359e733c612a642ebd8291ed24840b",
+        "symlink_target": null,
+        "bytes": 1073
+      },
+      "tests/unit/test_utils.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "86bbb73e72277c4ecbe3a56fed6336b1f4b6ae9bd0d158c48d98829b65a1ef9b",
+        "symlink_target": null,
+        "bytes": 1747
+      },
+      "tests/unit/test_v4_daily_main.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ad412087b44d9d9db6dd66b0e4a6cbbe81e59ea64a2a3cf28c5c9f22c491b3eb",
+        "symlink_target": null,
+        "bytes": 816
+      },
+      "tests/unit/test_v4_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7b98f3de340cf9073363a039dfaa6a94ea2edbc27ab26864612b8b5d371c4f0e",
+        "symlink_target": null,
+        "bytes": 16275
+      },
+      "tests/unit/test_v4_ledger_finalizer.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b5f2ef617dff6782176a106824a5aeafdc3b594eb4b824fd32ab9d6651e278ea",
+        "symlink_target": null,
+        "bytes": 2095
+      },
+      "tests/unit/test_v4_monthly_curator.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "16a977c147036e8acf9374334c66fd403e218ff860c61856a31676e70f1e335c",
+        "symlink_target": null,
+        "bytes": 23688
+      },
+      "tests/unit/test_v4_monthly_renderer.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6d78b44835342e29d321b5aeeee1816d4931ce94276e5de1a1e427141002f03e",
+        "symlink_target": null,
+        "bytes": 3593
+      },
+      "tests/unit/test_v4_renderer.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6cd31dbb68a492e5b0244293789780b89dbaf3a51c024fd6ede984c054babe5f",
+        "symlink_target": null,
+        "bytes": 16072
+      },
+      "tests/unit/test_view_models.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4608e817c0793e5adb251ef8cc5d825b4eae4d39d3fa57e3c92ab72e9c2a0a2e",
+        "symlink_target": null,
+        "bytes": 11502
+      },
+      "tests/unit/test_weekly_engine.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a02c9fcdaebb8263ebd461e090ed5e954e1e80cfe6a6d024734c8cdb42ab05cd",
+        "symlink_target": null,
+        "bytes": 5761
+      },
+      "tests/unit/test_weekly_guard.py": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "1f9d45f14ef9f65c8fc6ce2fa0a6153893f35a9737be1e271dd146e4dcd1faeb",
+        "symlink_target": null,
+        "bytes": 1838
+      },
+      "src/domain/_universal_ingester_assets.py": {
+        "sha256": "74cca5a342db47853f9e9bd43ed57f6b2fde350d0537c73a215938896198cb80",
+        "bytes": 18877,
+        "type": "file",
+        "mode": "0o644"
+      },
+      "tests/unit/_universal_ingester_cases.py": {
+        "sha256": "d3f8361faad183161376a5e6ed1da44ccbe2cdee351a1cc1b892b8601add3af8",
+        "bytes": 18660,
+        "type": "file",
+        "mode": "0o644"
+      }
+    },
+    "removed_files": {
+      "images/MailIcon.png": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "aa2de9811785b4a6605ecea4080b1011284a5086f4a9a3c246413669a8b8fd44",
+        "symlink_target": null,
+        "bytes": 6517321
+      },
+      "src/web/market_units_editor/public/mail-icon.png": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "aa2de9811785b4a6605ecea4080b1011284a5086f4a9a3c246413669a8b8fd44",
+        "symlink_target": null,
+        "bytes": 6517321
+      },
+      "docs/archive/ACQUISITION_PROTOCOL.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "01443279d205c6e3809fb8a6069a48f614e8b4768890e1cd8e24f6454b0723e8",
+        "symlink_target": null,
+        "bytes": 3567
+      },
+      "docs/archive/AI駆動最適化.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5dc71f12d6001cbf49e08bf9a648128dc42ad0d3d799b05f0aaa4424fbe6197f",
+        "symlink_target": null,
+        "bytes": 6140
+      },
+      "docs/archive/CLAUDE_Spec.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e0fd348f555b09c849e1ef7e6c612aca3e3230bec8fe6424d31786a4b697a72c",
+        "symlink_target": null,
+        "bytes": 2846
+      },
+      "docs/archive/Contract & Assertion.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "33037838e78b3bc842448d65638d0d7f5358c6a3679afe633c90e90c049714d9",
+        "symlink_target": null,
+        "bytes": 1563
+      },
+      "docs/archive/DATA_ARCHITECTURE.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "25155d9219750fcecfefc7c04a73f95e2cbb94772a9c49c0492e2ab03845e707",
+        "symlink_target": null,
+        "bytes": 6563
+      },
+      "docs/archive/DATA_INTEGRITY.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9d8dc5d25a1d7dd09c178e4830e4c87f7f1d6f31fca0180815d62168ea37bdde",
+        "symlink_target": null,
+        "bytes": 7443
+      },
+      "docs/archive/DATA_LIFECYCLE.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "744503fa368bc89d1e0a9068e57c3e8df98f5949375df5241337df3191200368",
+        "symlink_target": null,
+        "bytes": 4963
+      },
+      "docs/archive/DESIGN_SPEC.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "fb6c65ade861e4f553e758538f2424acd1ff8578eba4f64cec3a0ea24693ff13",
+        "symlink_target": null,
+        "bytes": 33761
+      },
+      "docs/archive/ENVIRONMENT_SPEC.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "bbd55e4603db68a766917623c3898911623bc1fc250ea0d9784d1a5c1d03b868",
+        "symlink_target": null,
+        "bytes": 3894
+      },
+      "docs/archive/JUDGMENT_LOGIC_SPEC.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "01006abafb03f764abe09e37b5d150eff83519213096c5bb19244a96ca744056",
+        "symlink_target": null,
+        "bytes": 1799
+      },
+      "docs/archive/KNOWLEDGE_BANK_V2.1.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "4fce612ed4c7c8ec95810776a3f64d03270c3b3097630e6776126509b4ee578c",
+        "symlink_target": null,
+        "bytes": 7393
+      },
+      "docs/archive/KNOWLEDGE_BASE_CAUSALITY.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7b75688c9f0c8cb305e88640ae904838f9fb612180940da01c63b990df4e45d9",
+        "symlink_target": null,
+        "bytes": 2940
+      },
+      "docs/archive/LOGIC_INGESTION_SCHEDULE.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5dd80241d610e55d704f7c4643c7fdee112a99423896483af921481589962d96",
+        "symlink_target": null,
+        "bytes": 6518
+      },
+      "docs/archive/OPERATIONS.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "38b9d33f21f10ea1080ed90dbba6a0cd0764e7d48f8468b120c18d090a9da787",
+        "symlink_target": null,
+        "bytes": 10818
+      },
+      "docs/archive/PROTOTYPE_REQUIREMENTS_PROTO.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "b6a6523dda0fc001b6ecc00b86a1a3efc7f2eba49d66f729fd53c5d574483941",
+        "symlink_target": null,
+        "bytes": 1893
+      },
+      "docs/archive/REQUIREMENTS_COLLECTION.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f30ec522b6588e5e20d1361a1c0eb956bcf59be9421582f80e0e5a944e2bfe76",
+        "symlink_target": null,
+        "bytes": 3160
+      },
+      "docs/archive/REQUIREMENTS_V1.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "2634156ca6ac726033c07282239476eeb76efd1182110e63bf61ea333932a8e5",
+        "symlink_target": null,
+        "bytes": 6801
+      },
+      "docs/archive/REQUIREMENTS_V2.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e2c513cb7efb63163cfef0b841cd6298aefabaa30dcb73dd523da7495b51ae59",
+        "symlink_target": null,
+        "bytes": 4646
+      },
+      "docs/archive/Requirements_Ver3.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "269eecda952286981a1dc97da8da34aaaaf786fe05b91709387d5b15804d8c86",
+        "symlink_target": null,
+        "bytes": 3832
+      },
+      "docs/archive/SETUP_GUIDE.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c16070c3ec13aeb60c18c66324da7bfcc6518c78d63a2503370a7415c69eb324",
+        "symlink_target": null,
+        "bytes": 6607
+      },
+      "docs/archive/SPEC_LOGIC_CURATOR.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "792607ea5a1f5df7dc6c309575f950e3ee083bc62f13cff0f6e3559fbb049c43",
+        "symlink_target": null,
+        "bytes": 3771
+      },
+      "docs/archive/SPEC_REPORTING_V2.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "7e597fe3f9b2465a90a6546275cb730885d66ebde3880f883702975fb71092a1",
+        "symlink_target": null,
+        "bytes": 7826
+      },
+      "docs/archive/SYSTEM_ARCHITECTURE_V1.3.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "a4f19b59df828fba5ca79033f32d35c90ba90198a5abeb91b367058694426aed",
+        "symlink_target": null,
+        "bytes": 4813
+      },
+      "docs/archive/SYSTEM_FLOW.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5e39fbe5cda988d4e56b224c1dd2032a936e9a7c15a9775bfbe364078c96ed87",
+        "symlink_target": null,
+        "bytes": 6465
+      },
+      "docs/archive/System Architecture Documentation_JSON_v1.3.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "084248d8693a39c10779b5741d85bc1b2a9b18cb34c3b42ff2b759a7b0b3ac80",
+        "symlink_target": null,
+        "bytes": 3915
+      },
+      "docs/archive/instructions-pr276/browser_manager.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "d225867ddfb85388453764f7d7bffee954cc21100b711b6ce90a2f02b7db49ec",
+        "symlink_target": null,
+        "bytes": 3989
+      },
+      "docs/archive/instructions-pr276/curator.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6074b50fe64676bc48d5403b319dc03163e91887f1bbfabe212128c2ffd7580a",
+        "symlink_target": null,
+        "bytes": 4347
+      },
+      "docs/archive/instructions-pr276/dispatch_controller.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "153019b87a2338c1a8d5992edbc3c48f2dcc18449621ad50250e523274972736",
+        "symlink_target": null,
+        "bytes": 3089
+      },
+      "docs/archive/instructions-pr276/gmail_otp.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "142be0d08957310257a24ad67ce3a4c2856d8c29ebdc3864988e0940620ae45c",
+        "symlink_target": null,
+        "bytes": 6418
+      },
+      "docs/archive/instructions-pr276/ingester.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "6ddf5865de3ae84b01e8a5fdd62c1df6f4da1094ed51ea6bc112dd481fc2d20f",
+        "symlink_target": null,
+        "bytes": 3701
+      },
+      "docs/archive/instructions-pr276/knowledge_manager.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c034165a3797830832f968e87c80042331d6f5650f65ba569b38980b60e77bda",
+        "symlink_target": null,
+        "bytes": 4830
+      },
+      "docs/archive/instructions-pr276/ledger_manager.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "dd5d9fa4b84dc0aad03d9c424e4c111ee275ecd72942290cc91823d7234fa812",
+        "symlink_target": null,
+        "bytes": 4675
+      },
+      "docs/archive/instructions-pr276/ledger_repository.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e0745433c642938e823c42a9d78afbc7bf6f28d487d40d8bd5b6c6ccd8368e80",
+        "symlink_target": null,
+        "bytes": 3827
+      },
+      "docs/archive/instructions-pr276/ledger_schema.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "84dca511be7dd3c172bf4c3ba82d7eef88708df6ff0fd33c0dd1bfd81a07afd0",
+        "symlink_target": null,
+        "bytes": 3492
+      },
+      "docs/archive/instructions-pr276/llm_transporter.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9688ca152aca227d1def007322b29bbc1e99d693eccbf222f424eb8744dd9d16",
+        "symlink_target": null,
+        "bytes": 4221
+      },
+      "docs/archive/instructions-pr276/market_data.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "847e01e42c7d50a925fa73ab5620fa9a6707234b2ecb966f1392dca2ce290001",
+        "symlink_target": null,
+        "bytes": 4196
+      },
+      "docs/archive/instructions-pr276/monex_operator.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "53101b403ed4214a4a0cf913afdcef01c9bfc7e742d966985b2f1514235671a3",
+        "symlink_target": null,
+        "bytes": 4516
+      },
+      "docs/archive/instructions-pr276/monex_parser.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "132bbe698214cd60eee0a7c23d6a8193229b318b54174df46ce11edf3140da85",
+        "symlink_target": null,
+        "bytes": 3282
+      },
+      "docs/archive/instructions-pr276/monthly_curator.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "9716aba56ab8614821ee223514eb7799fb54f76c0b3b7160936038d0d7331569",
+        "symlink_target": null,
+        "bytes": 5052
+      },
+      "docs/archive/instructions-pr276/notifier.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "912a4f78b69bc5ec9068e08b85f2c2779eae697c10f9f3f46076bb66837d4eef",
+        "symlink_target": null,
+        "bytes": 3543
+      },
+      "docs/archive/instructions-pr276/settings.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "eb7066cf704a9db9dab55acb46f8b06a9ce5a82e6d2ffe0ab80ec58908a78b04",
+        "symlink_target": null,
+        "bytes": 3529
+      },
+      "docs/archive/instructions-pr276/timeline_controller.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "3d005dd57e177cc9c6bfafdbc77557c38ea34a7329bf2d3d319cd0650cf65cc5",
+        "symlink_target": null,
+        "bytes": 4211
+      },
+      "docs/archive/instructions-pr276/utils.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "ea25f384cb544f91196a3b4661238b2ae54bcd231ae58bb3eabf7b2d6ca3f2b2",
+        "symlink_target": null,
+        "bytes": 3682
+      },
+      "docs/archive/instructions-pr276/v4_engine.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "81985430070e8646ead3364f79ae555a60c8f9b717b87a5f47022ab231a6a67e",
+        "symlink_target": null,
+        "bytes": 3808
+      },
+      "reports/agents-md-tests/2026-05-04-ambiguity-control.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "e439824103db1f004623f41b46cdad68772d784b7b78bed607d7f9e72807da6c",
+        "symlink_target": null,
+        "bytes": 15195
+      },
+      "reports/agents-md-tests/2026-05-07-parent-agent-t5-test-procedure.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "c5a55ca801518bb020de6f2570c7b89bf8c542971a79b8c5d31d7d8a6ec10f20",
+        "symlink_target": null,
+        "bytes": 26234
+      },
+      "reports/agents-md-tests/2026-05-09-implementation-delegation-test-procedure.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f7b9037776f7bee096b2e6b811d8d3760445d8759e7e46bc6419d145881879a6",
+        "symlink_target": null,
+        "bytes": 5392
+      },
+      "reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "5dc858f73067e6409fef75d3ed6815805d579e8436370b62da2ef416a5cd400b",
+        "symlink_target": null,
+        "bytes": 927
+      },
+      "reports/agents-md-tests/2026-05-10-positive-contract-output-test-procedure.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "f97aa81378a79befea5aafeed4cd63dfef0db1a4b34cfa815d09578e69a1026a",
+        "symlink_target": null,
+        "bytes": 16383
+      },
+      "reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "731ab79eca147e6dcd15d108d44507d718e2f5f7a4b84db5d15e6a00b39bb00f",
+        "symlink_target": null,
+        "bytes": 1757
+      },
+      "reports/agents-md-tests/fixtures/t5a-orchestration-sample.md": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "09cefc48971827ab01f878859658cd8781381947cdca9cd62aebd25c1a50af68",
+        "symlink_target": null,
+        "bytes": 811
+      },
+      "reports/v4_audit_context_2026-04-24.html": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "0d7df5a3a7434c5883dfdfc7fd83ea605188169240df3eb2aa8778168558f105",
+        "symlink_target": null,
+        "bytes": 28217
+      },
+      "reports/v4_format_test_2026-04-24.html": {
+        "type": "file",
+        "mode": "0o600",
+        "sha256": "67593f2d0c629754bdcf8e0240213532d568b571a0be0186a6bea0c122003038",
+        "symlink_target": null,
+        "bytes": 25082
+      }
+    },
+    "new_removed_files": [
+      "docs/archive/ACQUISITION_PROTOCOL.md",
+      "docs/archive/AI駆動最適化.md",
+      "docs/archive/CLAUDE_Spec.md",
+      "docs/archive/Contract & Assertion.md",
+      "docs/archive/DATA_ARCHITECTURE.md",
+      "docs/archive/DATA_INTEGRITY.md",
+      "docs/archive/DATA_LIFECYCLE.md",
+      "docs/archive/DESIGN_SPEC.md",
+      "docs/archive/ENVIRONMENT_SPEC.md",
+      "docs/archive/JUDGMENT_LOGIC_SPEC.md",
+      "docs/archive/KNOWLEDGE_BANK_V2.1.md",
+      "docs/archive/KNOWLEDGE_BASE_CAUSALITY.md",
+      "docs/archive/LOGIC_INGESTION_SCHEDULE.md",
+      "docs/archive/OPERATIONS.md",
+      "docs/archive/PROTOTYPE_REQUIREMENTS_PROTO.md",
+      "docs/archive/REQUIREMENTS_COLLECTION.md",
+      "docs/archive/REQUIREMENTS_V1.md",
+      "docs/archive/REQUIREMENTS_V2.md",
+      "docs/archive/Requirements_Ver3.md",
+      "docs/archive/SETUP_GUIDE.md",
+      "docs/archive/SPEC_LOGIC_CURATOR.md",
+      "docs/archive/SPEC_REPORTING_V2.md",
+      "docs/archive/SYSTEM_ARCHITECTURE_V1.3.md",
+      "docs/archive/SYSTEM_FLOW.md",
+      "docs/archive/System Architecture Documentation_JSON_v1.3.md",
+      "docs/archive/instructions-pr276/browser_manager.md",
+      "docs/archive/instructions-pr276/curator.md",
+      "docs/archive/instructions-pr276/dispatch_controller.md",
+      "docs/archive/instructions-pr276/gmail_otp.md",
+      "docs/archive/instructions-pr276/ingester.md",
+      "docs/archive/instructions-pr276/knowledge_manager.md",
+      "docs/archive/instructions-pr276/ledger_manager.md",
+      "docs/archive/instructions-pr276/ledger_repository.md",
+      "docs/archive/instructions-pr276/ledger_schema.md",
+      "docs/archive/instructions-pr276/llm_transporter.md",
+      "docs/archive/instructions-pr276/market_data.md",
+      "docs/archive/instructions-pr276/monex_operator.md",
+      "docs/archive/instructions-pr276/monex_parser.md",
+      "docs/archive/instructions-pr276/monthly_curator.md",
+      "docs/archive/instructions-pr276/notifier.md",
+      "docs/archive/instructions-pr276/settings.md",
+      "docs/archive/instructions-pr276/timeline_controller.md",
+      "docs/archive/instructions-pr276/utils.md",
+      "docs/archive/instructions-pr276/v4_engine.md",
+      "reports/agents-md-tests/2026-05-04-ambiguity-control.md",
+      "reports/agents-md-tests/2026-05-07-parent-agent-t5-test-procedure.md",
+      "reports/agents-md-tests/2026-05-09-implementation-delegation-test-procedure.md",
+      "reports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md",
+      "reports/agents-md-tests/2026-05-10-positive-contract-output-test-procedure.md",
+      "reports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md",
+      "reports/agents-md-tests/fixtures/t5a-orchestration-sample.md",
+      "reports/v4_audit_context_2026-04-24.html",
+      "reports/v4_format_test_2026-04-24.html"
+    ],
+    "retained_candidates": {
+      "docs/archive/README.md": "保持するコード・test・適用authority・現行仕様に参照あり",
+      "reports/agents-md-tests/README.md": "保持するコード・test・適用authority・現行仕様に参照あり"
+    },
+    "git_start": {
+      "head": "55231246f2ff1381aa9be466138e5ac273a6a4aa",
+      "tree": "f65e3077734240347c81d1b8954f0341a2590203",
+      "stage": "100644 2210b3408005156c05918adb513a87894c8b8a28 0\t.claude/settings.json\n100644 6313b56c57848efce05faa7aa7e901ccfc2886ea 0\t.gitattributes\n100644 ea149b3ed9f076f27ca192f7db3266a50d6874a4 0\t.github/PULL_REQUEST_TEMPLATE.md\n100644 2f4c4368251fa7cb1b089eda1e2afd97e4aba101 0\t.github/workflows/README.md\n100644 b4dd2f00be88461cd311e5881647819febfd4019 0\t.github/workflows/docs-canonical-command-guard.yml\n100644 f3c3f99c2c920acd05c7c7b52cd92a691e8a1f0e 0\t.gitignore\n100644 f3d1fba54347560674590103b143ab5d1f9305e7 0\t.vscode/settings.json\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tAGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tCLAUDE.md\n100644 642388889417062a4ff6fa693e35c4404cf6549f 0\tDirector-Led_AI_Dev.md\n100644 a047f9ce6d29629b783c13ad47400f6f482efbdf 0\tREADME.md\n100755 617f65046d7971b022a316b3321f2b2468496fee 0\tautomation/backup.sh\n100644 66b21924bad7887a3a690263fee9da154b50b192 0\tautomation/com.kenn.dev.thecaption.datacopy.plist\n100644 4b4055a18d058bf9f23b9038d925ac694f8c3fbe 0\tautomation/com.kenn.thecaption.datacopy.plist\n100644 2fe048d7291b4733750088c9ee78bb72ffb23404 0\tconfigs/README.md\n100644 3821b8260089e1eb3fb004d2409eda8823173f58 0\tconfigs/zsh/the-caption.zsh\n100644 dc7446eae35eda9f0be9e162f9e81fb2dedcd97b 0\tdocs/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tdocs/CLAUDE.md\n100644 f40e2d32f8c24f853430295ac651783d28697322 0\tdocs/_index.md\n100644 7c811652f8ca48a507b9512bdf99af55fc20461e 0\tdocs/adr/ADR-0001-trinity-separation.md\n100644 1e12dc8ce0ae6d7ffa50a7bb21add6543e6a35ed 0\tdocs/adr/ADR-0002-ledger-native-ssot.md\n100644 1432f7b2f027e3a9dabb52cbd526a6abb7a87b0c 0\tdocs/adr/ADR-0003-risk-acceptance-policy.md\n100644 40f90f670636ce88b6ade2fd43d2526c660af800 0\tdocs/adr/ADR-0004-collection-primary-v4.md\n100644 3b304333a44855b94d9f7df310319095cda79fb5 0\tdocs/adr/decisions_index.md\n100644 71b9873b2eb6ecca079b9aeb0eca356a26f9205b 0\tdocs/appendix/index.md\n100644 f0324d0fa6b5f29577ec155d98de81488078d2a6 0\tdocs/archive/ACQUISITION_PROTOCOL.md\n100644 893748b006fccd7fcf3232e22bf62c63a00b92c5 0\t\"docs/archive/AI\\351\\247\\206\\345\\213\\225\\346\\234\\200\\351\\201\\251\\345\\214\\226.md\"\n100644 0f63217b0231fd82343cca27d4217ab34f9efef8 0\tdocs/archive/CLAUDE_Spec.md\n100644 2d57529668a2eb3cb0f6d51d043fbd0d80856fa4 0\tdocs/archive/Contract & Assertion.md\n100644 bd89bc402236ca6c0ed36989b7e0efbaa8e2d4ef 0\tdocs/archive/DATA_ARCHITECTURE.md\n100644 56dd0f537cbe200231ee1b24e251febd139ffc2f 0\tdocs/archive/DATA_INTEGRITY.md\n100644 0a8efea00f8f8d0e6a1667b17a74d8092d8c72cd 0\tdocs/archive/DATA_LIFECYCLE.md\n100644 2d3c6d30a5da182023c9b7df3c9af74836b369b2 0\tdocs/archive/DESIGN_SPEC.md\n100644 6b7be70fcf5df5a09eabe3d1eaf243d9475cb25b 0\tdocs/archive/ENVIRONMENT_SPEC.md\n100644 488075308a03df9b7cddb9dca03b5bb594289620 0\tdocs/archive/JUDGMENT_LOGIC_SPEC.md\n100644 c495d3bdfcd62b17a0e06641357e1cd684641a47 0\tdocs/archive/KNOWLEDGE_BANK_V2.1.md\n100644 0f2ba6db32a6fc4d0258fbe5222db6cf42573235 0\tdocs/archive/KNOWLEDGE_BASE_CAUSALITY.md\n100644 9d11992d5bfee912e5dd7542500937143c27ece7 0\tdocs/archive/LOGIC_INGESTION_SCHEDULE.md\n100644 b0d7544d5c0b7e5e8167bf2a48c5bd3b85135ae5 0\tdocs/archive/OPERATIONS.md\n100644 d84f9f27e7fd7556f89cc48b7fb5e87ed27766e1 0\tdocs/archive/PROTOTYPE_REQUIREMENTS_PROTO.md\n100644 03cba34b619c53066160f34a445606016226a693 0\tdocs/archive/README.md\n100644 4dd94fd5b7e9a82b29efae79561691b5cde0ded7 0\tdocs/archive/REQUIREMENTS_COLLECTION.md\n100644 c71fb871bd7ebef354e1039a3abf0a304dc598e2 0\tdocs/archive/REQUIREMENTS_V1.md\n100644 126f26076d06f53b3236e9bd110d1d6d09d32519 0\tdocs/archive/REQUIREMENTS_V2.md\n100644 808f68fcf8f09b1b3da70bea9ebf9bfe35a6a54d 0\tdocs/archive/Requirements_Ver3.md\n100644 a6d18f0846d49a1f8e97420963d6cb5cd2d3e8c4 0\tdocs/archive/SETUP_GUIDE.md\n100644 ec171eca8bb81ecf37f1d2e07c07345ebb3a7e9e 0\tdocs/archive/SPEC_LOGIC_CURATOR.md\n100644 21e2f6f30305589c472faf36e998a0a8fe8494c5 0\tdocs/archive/SPEC_REPORTING_V2.md\n100644 f4d0064444f18b498fd512e9265594b83f6078f2 0\tdocs/archive/SYSTEM_ARCHITECTURE_V1.3.md\n100644 05f20c4f6c28c6e21a737a1a2f0968def0eab01e 0\tdocs/archive/SYSTEM_FLOW.md\n100644 4240415fb48a6253646595526c53a51a0fd837d7 0\tdocs/archive/System Architecture Documentation_JSON_v1.3.md\n100644 613639e730ac086236d3827b7256d9598a52968a 0\tdocs/archive/instructions-pr276/browser_manager.md\n100644 f2f034301a5355178276f0a31642d75ebc59da93 0\tdocs/archive/instructions-pr276/curator.md\n100644 7788aa0071a55986b29f7eeeba0e246e8d5207c1 0\tdocs/archive/instructions-pr276/dispatch_controller.md\n100644 474f86df5ebde812a46c4f9dca6c88524e8fa59c 0\tdocs/archive/instructions-pr276/gmail_otp.md\n100644 e52b4effdf66eae9965210c4778213c0298f1ee7 0\tdocs/archive/instructions-pr276/ingester.md\n100644 d72e46c93044bbe2b8d9119fbc5fd5e45452f79d 0\tdocs/archive/instructions-pr276/knowledge_manager.md\n100644 20f409488e9e81b18639d594f90aeab6642e3426 0\tdocs/archive/instructions-pr276/ledger_manager.md\n100644 1f9fbcc33c2268c51c4c6cb4606dbd495e9b7e56 0\tdocs/archive/instructions-pr276/ledger_repository.md\n100644 f6428105bdf2e19d8848b4f64adc3b238b0f3a43 0\tdocs/archive/instructions-pr276/ledger_schema.md\n100644 761014d426791dc132359edfc6764e18e0ade780 0\tdocs/archive/instructions-pr276/llm_transporter.md\n100644 bbdaf79ec6e55cba53d70176e72ce96c7935878b 0\tdocs/archive/instructions-pr276/market_data.md\n100644 63b88a185359217a8a47bed2537c7073b93cc9e7 0\tdocs/archive/instructions-pr276/monex_operator.md\n100644 cc5e55125c06aa74074cc5a0ebd8f23d73e8181e 0\tdocs/archive/instructions-pr276/monex_parser.md\n100644 e4831a4534f123443b34b0a4eeece02fb0cf2020 0\tdocs/archive/instructions-pr276/monthly_curator.md\n100644 f420e05d66cd7609db8d4399f94c6a0752b8e8f1 0\tdocs/archive/instructions-pr276/notifier.md\n100644 dd439d757388c24944f94c4ac1ac26b587c0c509 0\tdocs/archive/instructions-pr276/settings.md\n100644 160c3e28a3dfce9f0af51de531bd516ad912f22e 0\tdocs/archive/instructions-pr276/timeline_controller.md\n100644 346b2d6256256df5ea4177ec47b1b8f57826db70 0\tdocs/archive/instructions-pr276/utils.md\n100644 8449ca3252d484d54cd1df69cd8ec3357ecdea24 0\tdocs/archive/instructions-pr276/v4_engine.md\n100644 82c0368cc19727b76fc155dc708d4f7bfcf7225c 0\tdocs/explanation/index.md\n100644 14bf17c23b6b233ceae58800de18ef1844cd1108 0\tdocs/glossary.md\n100644 4a85298ded65e9db8bb7c8428f47cf370bdb3297 0\tdocs/how-to/index.md\n100644 672962a65317fd2757e6c91424b5dca2e4930fe2 0\tdocs/how-to/market-units-migration-spec.md\n100644 e6461148d4de0707a5589ff0861cc76ede7a19dc 0\tdocs/instructions/agents-style-policy-cgroup.md\n100644 44831aa4ce5c4185617da9d3236c586be5a00337 0\tdocs/instructions/agents-style-policy.md\n100644 d90e191be687b2098804c23a731f1fef77d4615e 0\tdocs/instructions/mbp-label-spec.updated.md\n100644 1a25c4600d2e5221fae1a5d25bb2c2b0ac13aa87 0\tdocs/orchestration-process.md\n100644 835aebcdf1b595a42eccb8ed0ab4458cfba54039 0\tdocs/prompt-guide.md\n100644 9cfa544fe88fca6f8d34bdb8e8575fa42b5e506a 0\tdocs/reference/design-system.md\n100644 e10abad2cd7f9a16100aa2073dd3bc1dbe55f8ba 0\tdocs/reference/index.md\n100644 1fa98a5bc2192724ca39834816bccfd167e51585 0\tdocs/reference/logic.md\n100644 b81e630c09d5d06a87b31e19efc4d2163971dd9b 0\tdocs/reference/project-contexts/the-caption.txt\n100644 d66f834808098604bdcdf891576d6402b74d5da6 0\tdocs/reference/prompts.md\n100644 53aa6d8a9b403e141af3b9df4c48d40cdd5fa22c 0\tdocs/reference/system.md\n100644 116eff7c9d9ec48e15244606eea7c97f2efaea70 0\tdocs/tutorials/index.md\n100644 1bd9010a4709bbd63ff705c1e206639933951b9b 0\texamples/README.md\n100644 843ed14ed362b081dc70f6344a4b6917b06c6d4e 0\timages/MailIcon.png\n100644 30417d2171959352e0d5a16a451aaa740fccd568 0\tlegacy/README.md\n100644 503f2f5e17555a8eb96e79fa8ef09a3658efbd44 0\tlegacy/v3/README.md\n100644 ca4a2f09780c49da254a4649c9730ebf4d9d4e1b 0\tlegacy/v3/manifest.md\n100644 261e03b869583a954b491c241e6fc29e71074223 0\tlegacy/v3/src/app/collection_engine.py\n100644 d8fe5714a1e6c6a8e850ac2288f36cf9794d24ab 0\tlegacy/v3/src/app/dispatch_controller.py\n100644 7f64fb0164382646f958c933451470ff5b18d86a 0\tlegacy/v3/src/app/engine.py\n100644 3518510c515f118976a055dfc633d21784095f45 0\tlegacy/v3/src/app/entrypoints/collection_main.py\n100644 580c836d31c1f234a3307fc6456b9cd1e578cfd6 0\tlegacy/v3/src/app/entrypoints/daily_main.py\n100644 76f69b4ed4e27d49d79eccd62c91df89429e3a81 0\tlegacy/v3/src/app/monex_auditor.py\n100644 cc19829f19105117123328c00b08a0b0a5c2c117 0\tlegacy/v3/src/app/phase1_collection_audit.py\n100644 50c24b7fe6c9d9a1d23d0b8c285bed2fe5c2cb04 0\tlegacy/v3/tests/unit/test_collection_engine.py\n100644 cc4a307a3b57eb15c3c348a7eec6a77c187dcb1a 0\tlegacy/v3/tests/unit/test_engine.py\n100644 c5d0ad2b35ebdd98ddd1d5136435e0761e3255a3 0\tlegacy/v3/tests/unit/test_monex_auditor.py\n100644 2490299ae2a11e13257a889620a462e73861ccc8 0\tlegacy/v3/tests/unit/test_phase1_collection_audit.py\n100644 8193bba57f46d478c666b43b2192e731af0b2f36 0\tprompts/audit.md\n100644 0c55692c42b43125b1e6c605aa4027b75ea24035 0\tprompts/implement.md\n100644 0d8231ebd32e2fe63269540f6d4f790a52da8d78 0\tprompts/plan.md\n100644 17aef2fcea36e7aeac81334fbdaab08754c42906 0\tprompts/review.md\n100644 cd98da053d11175c6382845bd2fb5f875568f22a 0\tpytest.ini\n100644 573a76e6d85b805c7f0f3db5ea4adf22947572a9 0\treports/agents-md-tests/2026-05-04-ambiguity-control.md\n100644 66a6bde9de6f967c9a66489063fb76bf4a2eecde 0\treports/agents-md-tests/2026-05-07-parent-agent-t5-test-procedure.md\n100644 0b6267620234ce0d9fd55b64564d31f12c684d2e 0\treports/agents-md-tests/2026-05-09-implementation-delegation-test-procedure.md\n100644 83473418694675513dfa6871b534377493e85503 0\treports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md\n100644 f843af15c6c4f1c5244374ca8b0014d252e5cd2e 0\treports/agents-md-tests/2026-05-10-positive-contract-output-test-procedure.md\n100644 69344d75f5f6495b2684eb12647335e96ad10725 0\treports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md\n100644 325a65dbfa01b85d6852736ccdb7f6981cba6849 0\treports/agents-md-tests/README.md\n100644 9372e1059c8a90edf8c0f1641c236e00c4ed5a92 0\treports/agents-md-tests/fixtures/t5a-orchestration-sample.md\n100644 b2ef8ae0ba1555d4ce37aba523d46421b0d6ccc1 0\treports/v4_audit_context_2026-04-24.html\n100644 40e5e7e8039d8647ae1d7be62f277f639530724d 0\treports/v4_format_test_2026-04-24.html\n100644 681f6aed31f942089b407264a2b363ec91c0e1ba 0\trequirements-dev.in\n100644 103a2edad438c58b078c1a4b9919b70633a73957 0\trequirements-dev.txt\n100644 04422581b2bcbccd99eac12bf6a5419e2bea9a62 0\trequirements.in\n100644 9f67f84a7cf1bf5d3a0e398e89cc53126d06a3b4 0\trequirements.txt\n100755 b97f4f916c25c6f17a74ef64bc9b153fc33f4bab 0\trun.sh\n100644 fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6 0\tscripts/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tscripts/CLAUDE.md\n100644 95adade87109aa22a9f1a6d0e71b6c4175edb28f 0\tscripts/README.md\n100644 7b900d55affde45e8a36abadc60856ee8457d538 0\tscripts/ci/README.md\n100644 88620c029764a8a19c97cbf0bec7b393b6cfad44 0\tscripts/dev/bump_rev.py\n100644 848ddaa0c1019954dca9a5a4c6b6a1d1a19f41c6 0\tscripts/dev/check_models.py\n100644 24444fa795f9754cf970158369370a50928cbcc7 0\tscripts/dev/cost_summary.py\n100644 2b08b1ebe024f22b0cd5e68d2df22e1381fa0e1f 0\tscripts/dev/encrypt_env.py\n100644 61fc72e6dabec5f8d9aa94184cdf3b9400c27d17 0\tscripts/dev/fetch_all_assets.py\n100644 fe77fc53ebe9ad43e888be90945bb1e94d379e1b 0\tscripts/dev/generate_asset_yaml.py\n100644 f280c57788d66ebde19d658e3a5bb20c0fc52718 0\tscripts/dev/install_hooks.py\n100644 246c461df56e18a98ee4b5ad73172a5a10d34901 0\tscripts/dev/install_the_caption_zshenv.py\n100644 5ec4987a7eec1e4f339b88850ff3be3231ffd621 0\tscripts/dev/main_verify.sh\n100644 3489cbd18a636f18a3423dcdb7c18d18e408fdc5 0\tscripts/dev/merge_project.py\n100644 bb30406b0532791b393936190500625087f8e726 0\tscripts/dev/poc_fetch_detail.py\n100644 4624cf11137fdb51a597c72fd0ae10825839ebfa 0\tscripts/dev/rebuild_knowledge.py\n100644 b0fbbe990643257c1af90848aae581a8ec05edbb 0\tscripts/dev/run_shadow_ingester.py\n100644 48edfa08bf01e3304328e142aef2ec1d4124e417 0\tscripts/dev/setup_auth.py\n100755 f2aed7160507f1d056ff9f2866b5829030feadfe 0\tscripts/dev/sp\n100644 e510add69bf145901c1a2229242cf631b99ce5c9 0\tscripts/dev/test_email.py\n100644 5ee804ec72358491fbd0b4d862b8dc6b11bc8b45 0\tscripts/dev/verify_change_set.sh\n100755 17a93e51eeb27a9618e5c91b7e48a4bb0fc4527e 0\tscripts/dev/weekly_e2e_gate.sh\n100644 2d0834867848fc02f236b4c390cfabb42a818565 0\tsrc/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tsrc/CLAUDE.md\n100644 631384541b478086811717ed11b8527671ba67b3 0\tsrc/README.md\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/__init__.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/app/__init__.py\n100644 13ed560d49f3baf55d48a44cf881767405468f18 0\tsrc/app/entrypoints/__init__.py\n100644 b2c8c064662712179cf428f5fceb3ff95482e003 0\tsrc/app/entrypoints/monthly_main.py\n100644 cd585db1ce7dbeeae7cee138e0630b7d4f11cd60 0\tsrc/app/entrypoints/v4_daily_main.py\n100644 508d413ab01a51864a501b4d18446ebaf6929130 0\tsrc/app/entrypoints/weekly_main.py\n100644 ed389fa36d65b64a352e8a541ed2712f9b76bbff 0\tsrc/app/monthly_engine.py\n100644 f0a089af4015c4a965eb40cd410919bec91281cc 0\tsrc/app/notifier.py\n100644 c9628df63710b0d5828b3ae22426cb1c730399d5 0\tsrc/app/renderer/__init__.py\n100644 ae09a073e4ec3bd53b9b68c2aa89b8d597ac795d 0\tsrc/app/renderer/alert.py\n100644 08f8564ef3acbb6ea911f9477ac8efab541bb465 0\tsrc/app/renderer/base.py\n100644 f83e38ac49ee278c3ba03a3b1a8fa6a096177793 0\tsrc/app/renderer/report_collection.py\n100644 a20ea3b7cc2bf5fb0787253f70e3fb3a65a9385a 0\tsrc/app/renderer/report_context.py\n100644 4908a0b404b34e02509da4aaf3bcb484e41d03b3 0\tsrc/app/renderer/report_fortress.py\n100644 33fe7470f4f6b7964b1ac7481419382dbeb28b92 0\tsrc/app/renderer/report_monthly.py\n100644 f7c38a9db5ac265982a58d2e14658c0e429c742c 0\tsrc/app/renderer/templates/v4_chronicle.html\n100644 d335d3aa18eee1edbb59ffff08b5758a97995c74 0\tsrc/app/renderer/templates/v4_monolithic.html\n100644 4edd00e39f69877a415426f003e6481c7a87d377 0\tsrc/app/renderer/v4_content_renderer.py\n100644 f25b11e461bba7524133151d35911e7f98f91390 0\tsrc/app/renderer/v4_view_models.py\n100644 72f115e16e671766dc91c982be9ed9155c6f479a 0\tsrc/app/renderer/view_models.py\n100644 2d434888e1cb659dacab2a8e2722b9c9b741ee50 0\tsrc/app/v4_engine.py\n100644 941466e521edbde99c271aec212aca60921992d8 0\tsrc/app/weekly_engine.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/config/__init__.py\n100644 21b2cd5b9ac11bf23f48635f8b7c15b14f387a8a 0\tsrc/config/prompts.py\n100644 787b7a116e89ebdd21172cb0dc01aa84094cff08 0\tsrc/config/settings.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/domain/__init__.py\n100644 fb64d6ceadf08857c3b21874f5eef59fee8378d1 0\tsrc/domain/_universal_ingester_assets.py\n100644 179beed1fd43c218a4215b214cba4a5a9c994854 0\tsrc/domain/collection_history_updater.py\n100644 489b1d8aa8f586379d1279014a921c16c541981c 0\tsrc/domain/curator.py\n100644 3b17ec32ba43d33e2338812c141af083ec38150f 0\tsrc/domain/daily_metrics.py\n100644 572267fbf450674236386a795891d47982c56ad1 0\tsrc/domain/guard_rail.py\n100644 d5dbf86b2e69d8ff055890a82da5e49c0dfc5d0a 0\tsrc/domain/ledger_factory.py\n100644 7f489b468ebcd32728755e9b9280f887600ff3fc 0\tsrc/domain/ledger_manager.py\n100644 e680ba891b83c0c84d81cf4fd527dd163cb45bd4 0\tsrc/domain/ledger_schema.py\n100644 e3af06ab26c74a98815a53de7ec0661af82e3e18 0\tsrc/domain/market_units_snapshot.py\n100644 f260e2be735662eb68d4cf714111e1d5381272b1 0\tsrc/domain/monthly_curator.py\n100644 1ed1fbac74e2951b85e2693c7ecb0600390374af 0\tsrc/domain/monthly_guard.py\n100644 8dc99d5ff2f26cca083fc41cf2228a4064841422 0\tsrc/domain/shadow_ledger_adapter.py\n100644 9ec7ea71f0504ff10fdf3a07a420acb4ab26f186 0\tsrc/domain/universal_ingester.py\n100644 d7ed02285b6fefaf91f219244f4a7ab4dd2c1dcf 0\tsrc/domain/v4_ledger_finalizer.py\n100644 785d0869959c30950a95025c8404025c1ad797f0 0\tsrc/domain/weekly_curator.py\n100644 5092846dfdfb804d5e9acf14d6e3a91c560037ab 0\tsrc/domain/weekly_guard.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/infra/__init__.py\n100644 c1f3904116cc18df73ee86bfa087a6f98a887826 0\tsrc/infra/browser_manager.py\n100644 41430d7310506c9c1115a8d63cde27101e0c6d06 0\tsrc/infra/chronicle_repository.py\n100644 1c7a3acd14d26b248ddf19e6dfe1e8d5e072bb9b 0\tsrc/infra/context_repository.py\n100644 aa926437f780d9251ad38d7cb6d8295c50d8f68e 0\tsrc/infra/daily_metrics_repository.py\n100644 df4e6a6bea0a6f5fafbe62bcc59bdd207428ff41 0\tsrc/infra/gmail_otp.py\n100644 186cafe5da8c1fb9d92bff08ffad460e468a1707 0\tsrc/infra/ingester.py\n100644 5163c0d4e615c695c40a27e2b7e3888ff5f54d36 0\tsrc/infra/knowledge_manager.py\n100644 cd0863aefba0778b7bf9d4ef5b2358f8f5451c5b 0\tsrc/infra/ledger_repository.py\n100644 2b1889664a66c5381ff1a8b344f054f2653ef11e 0\tsrc/infra/llm_transporter.py\n100644 fc04f949574517e21ee1d6bc6b59e28c95389b0e 0\tsrc/infra/mail_sender.py\n100644 fe25477c6461ce50e52afce23da63c3d5eeca4fd 0\tsrc/infra/market_data.py\n100644 9fcf2ecce5d60c690ac1bcb0a044765e2c1ef5f9 0\tsrc/infra/market_snapshot_repository.py\n100644 98e2709345ab621bceced481bdb49b2ef3a2527a 0\tsrc/infra/monex_client.py\n100644 023ae2e23f49b86ca04c73f15727ea37a3028726 0\tsrc/infra/monex_operator.py\n100644 074460c1c52aac164c7af951b9f40c46dee92984 0\tsrc/infra/monex_parser.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/lib/__init__.py\n100644 6b5a338e14d480d3351b0876eac2c08d4467f432 0\tsrc/lib/guard.py\n100644 93d81eb417747fda4baa957d17f0d32cc5319cb5 0\tsrc/lib/logger.py\n100644 f948e1a8ae69d29f5d470491e664092ac3c19a27 0\tsrc/lib/models.py\n100644 42b791fb4c7c9cc2c79a32f3d399d44a42bc7744 0\tsrc/lib/timeline_controller.py\n100644 6c83c076d4f089252b4ae3eefe8a3db98074cff6 0\tsrc/lib/utils.py\n100644 cba0954fbc62a3f22001e29e1ed3d06f26762331 0\tsrc/web/market_units_editor/index.html\n100644 5b84c7407cda5f283545a9b161c8bfe628a827e2 0\tsrc/web/market_units_editor/package-lock.json\n100644 eb5bcd337658788993194ce2928f20e89945ba77 0\tsrc/web/market_units_editor/package.json\n100644 843ed14ed362b081dc70f6344a4b6917b06c6d4e 0\tsrc/web/market_units_editor/public/mail-icon.png\n100644 7b8a0c3a78fdc7b4152f5f9d213716e885a7c30a 0\tsrc/web/market_units_editor/server.ts\n100644 27e5953da7f6dd68456245feead7a73a5ddca864 0\tsrc/web/market_units_editor/src/App.tsx\n100644 b18f0a163f3def56565507844d7ab64fbce58fe5 0\tsrc/web/market_units_editor/src/index.css\n100644 80b5f7b46a9b90223d5f82abb9a7f27c797a25c9 0\tsrc/web/market_units_editor/src/main.tsx\n100644 47120364fb4e6207865a3739abbd1bae9ef53b82 0\tsrc/web/market_units_editor/tsconfig.json\n100644 32473c11cb3db491d3ccf3bdf44308fa3d6af3ac 0\tsrc/web/market_units_editor/vite.config.ts\n100644 062c1ded63a981f88aaf0c22c4d15089ef8d0417 0\ttests/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\ttests/CLAUDE.md\n100644 9cd233e87be8ab60df969d0763ae7dc6198d5ae8 0\ttests/README.md\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/__init__.py\n100644 3c9866eeff4813e1a1965e4045a748a56ca52e59 0\ttests/conftest.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/integration/.gitkeep\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/unit/.gitkeep\n100644 a9256a8651fc265ad52747aa50ad8dee9fd8c722 0\ttests/unit/_universal_ingester_cases.py\n100644 de1007fb9632459d306edaaaf44b83cb892d581e 0\ttests/unit/test_atomic_save.py\n100644 1b9280267d44dbbef334066823c60ba1ae3dbedd 0\ttests/unit/test_collection_history_updater.py\n100644 6f9591bd9f9a93c818cf68db0424a7b6ab229cec 0\ttests/unit/test_curator.py\n100644 d44fc8e1be5d61f2f1354aebe91ddf0757d6aaae 0\ttests/unit/test_daily_metrics.py\n100644 e3ed7393515a8d2a573204259c8cf74f9ca43e90 0\ttests/unit/test_gmail_otp.py\n100644 8d78ce5efd1ac86982ce0c705ed398bb355c0074 0\ttests/unit/test_import_paths.py\n100644 440cb352446de440257a4eec125785cd90812066 0\ttests/unit/test_install_the_caption_zshenv.py\n100644 49c5e82ad533d1aa59088c747959ceb6bd17db6e 0\ttests/unit/test_knowledge_manager.py\n100644 b5606c3cbca6b39afc5a2bc4e55087deafdf604c 0\ttests/unit/test_ledger_manager.py\n100644 fefeac5b3b728d577c3bad952ef293890415c4ec 0\ttests/unit/test_ledger_mtd_regression.py\n100644 c1223f666fe3ce9440d983ad48e4ff910339790b 0\ttests/unit/test_ledger_schema.py\n100644 d64a61e153cadeebccfca34a9cb1649c129d76d9 0\ttests/unit/test_llm_transporter.py\n100644 fb432932266e166189c4a1ce037ff6d6bdccbb71 0\ttests/unit/test_market_data.py\n100644 a854b1e85795418c372a26c72a2f4a9a3e24d6a2 0\ttests/unit/test_market_units_snapshot.py\n100644 d290ae9cfac013566a50ebf395bc83efe497844e 0\ttests/unit/test_monthly_engine.py\n100644 20084f7cf463aeee6ecb2bdede3056f8d91d9f4f 0\ttests/unit/test_monthly_renderer_dispatch.py\n100644 f7c8a9ee44171a4f958fef5c7f2542d908209259 0\ttests/unit/test_report_collection.py\n100644 8b89a814c24e4cf85f811bea4be760f04bdccbbb 0\ttests/unit/test_report_context.py\n100644 1ef7c26d0ebe94fbb15f1f5b7b99e65a9a7ca4b4 0\ttests/unit/test_report_fortress.py\n100644 32eae23125bc59499bb703362fde326b9f5dd445 0\ttests/unit/test_shadow_ledger_adapter.py\n100644 c0ab0b177f7ee6ab1727c3e8a12704f57a36cef2 0\ttests/unit/test_sp_contract.py\n100644 d9e4d6734d5f29cbc3fcf39881dce5a6a6efdf4f 0\ttests/unit/test_universal_ingester.py\n100644 abe83c3c43b262711cc62dd142a0757b98f6aa51 0\ttests/unit/test_utils.py\n100644 e44994e87cae8b00793050491da5eb7ce433974f 0\ttests/unit/test_v4_daily_main.py\n100644 4ac7c85d610cd113cd7f0b24890440bbe8e00844 0\ttests/unit/test_v4_engine.py\n100644 bde057907e9629905eaa0f2ca1ffe8c3a6447c48 0\ttests/unit/test_v4_ledger_finalizer.py\n100644 d6e8c07c8a3f6f474e5b22a59fb0f74baa9a000f 0\ttests/unit/test_v4_monthly_curator.py\n100644 d1f39ed7ef69a0a60350b1d275d999350ac25d92 0\ttests/unit/test_v4_monthly_renderer.py\n100644 c690afcd04259f48e4c7e8e8c4b4b1159da04490 0\ttests/unit/test_v4_renderer.py\n100644 d64429d6c31aaf8a816cc284047f07ee5bac257e 0\ttests/unit/test_view_models.py\n100644 2c8baf39f6473b8a35e751e1789ebca9378b0923 0\ttests/unit/test_weekly_engine.py\n100644 f3d9f7f465804e4b09f6353d4e527ab7057eacfb 0\ttests/unit/test_weekly_guard.py",
+      "refs": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44 refs/heads/main\n6c75018ba94198a2596a1599babda617bb20b0a8 refs/tags/release-AI-Team\n0187a727eb5429ccb200cdd6ab4f3e72631614d5 refs/tags/v1.0-CSV-Edition\n54d6d29f6824b24c63400be988715a2957614944 refs/tags/v1.3\nf2cb02b913b9e40c9c88444f2a39657e42428735 refs/tags/v2.0\n729d969df4c074a3c0c2fec72f04378bfc40b99c refs/tags/v2.1\n52ae4e74e532c6ececc2a32e3bdcd0e218aa1284 refs/tags/v3.0\n42e62a6471a208a1047ee6b80c2f73d588eeec85 refs/tags/v3.3\n01f9656b8886ff2db60842223dcce724d9f44778 refs/tags/v3.5\n36bc6c9288ac3e46efbd1bfd9ea7a3073d72a7c3 refs/tags/v4.1\n4ef6efd918ecac8ebca320e866996b35f1ec51f8 refs/tags/v4.2\n49defaa9d78639b4c67e474e9e2400468513e965 refs/tags/v4.3"
+    },
+    "projection_metadata_delta": [
+      "core.sparseCheckout=true",
+      "core.sparseCheckoutCone=false",
+      "index.sparse=false",
+      ".git/info/sparse-checkout",
+      "除外2件のskip-worktree flag"
+    ],
+    "git_history_retained": true,
+    "source_git_start": {
+      "head": "cd2e27d82d62b9bc5624c0420ca21119e44c30bc",
+      "tree": "c247589906e5fe13d1cace2db7f7a2ce5931860f",
+      "stage": "100644 2210b3408005156c05918adb513a87894c8b8a28 0\t.claude/settings.json\n100644 6313b56c57848efce05faa7aa7e901ccfc2886ea 0\t.gitattributes\n100644 ea149b3ed9f076f27ca192f7db3266a50d6874a4 0\t.github/PULL_REQUEST_TEMPLATE.md\n100644 2f4c4368251fa7cb1b089eda1e2afd97e4aba101 0\t.github/workflows/README.md\n100644 b4dd2f00be88461cd311e5881647819febfd4019 0\t.github/workflows/docs-canonical-command-guard.yml\n100644 f3c3f99c2c920acd05c7c7b52cd92a691e8a1f0e 0\t.gitignore\n100644 f3d1fba54347560674590103b143ab5d1f9305e7 0\t.vscode/settings.json\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tAGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tCLAUDE.md\n100644 642388889417062a4ff6fa693e35c4404cf6549f 0\tDirector-Led_AI_Dev.md\n100644 a047f9ce6d29629b783c13ad47400f6f482efbdf 0\tREADME.md\n100755 617f65046d7971b022a316b3321f2b2468496fee 0\tautomation/backup.sh\n100644 66b21924bad7887a3a690263fee9da154b50b192 0\tautomation/com.kenn.dev.thecaption.datacopy.plist\n100644 4b4055a18d058bf9f23b9038d925ac694f8c3fbe 0\tautomation/com.kenn.thecaption.datacopy.plist\n100644 2fe048d7291b4733750088c9ee78bb72ffb23404 0\tconfigs/README.md\n100644 3821b8260089e1eb3fb004d2409eda8823173f58 0\tconfigs/zsh/the-caption.zsh\n100644 dc7446eae35eda9f0be9e162f9e81fb2dedcd97b 0\tdocs/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tdocs/CLAUDE.md\n100644 f40e2d32f8c24f853430295ac651783d28697322 0\tdocs/_index.md\n100644 7c811652f8ca48a507b9512bdf99af55fc20461e 0\tdocs/adr/ADR-0001-trinity-separation.md\n100644 1e12dc8ce0ae6d7ffa50a7bb21add6543e6a35ed 0\tdocs/adr/ADR-0002-ledger-native-ssot.md\n100644 1432f7b2f027e3a9dabb52cbd526a6abb7a87b0c 0\tdocs/adr/ADR-0003-risk-acceptance-policy.md\n100644 40f90f670636ce88b6ade2fd43d2526c660af800 0\tdocs/adr/ADR-0004-collection-primary-v4.md\n100644 3b304333a44855b94d9f7df310319095cda79fb5 0\tdocs/adr/decisions_index.md\n100644 71b9873b2eb6ecca079b9aeb0eca356a26f9205b 0\tdocs/appendix/index.md\n100644 f0324d0fa6b5f29577ec155d98de81488078d2a6 0\tdocs/archive/ACQUISITION_PROTOCOL.md\n100644 893748b006fccd7fcf3232e22bf62c63a00b92c5 0\t\"docs/archive/AI\\351\\247\\206\\345\\213\\225\\346\\234\\200\\351\\201\\251\\345\\214\\226.md\"\n100644 0f63217b0231fd82343cca27d4217ab34f9efef8 0\tdocs/archive/CLAUDE_Spec.md\n100644 2d57529668a2eb3cb0f6d51d043fbd0d80856fa4 0\tdocs/archive/Contract & Assertion.md\n100644 bd89bc402236ca6c0ed36989b7e0efbaa8e2d4ef 0\tdocs/archive/DATA_ARCHITECTURE.md\n100644 56dd0f537cbe200231ee1b24e251febd139ffc2f 0\tdocs/archive/DATA_INTEGRITY.md\n100644 0a8efea00f8f8d0e6a1667b17a74d8092d8c72cd 0\tdocs/archive/DATA_LIFECYCLE.md\n100644 2d3c6d30a5da182023c9b7df3c9af74836b369b2 0\tdocs/archive/DESIGN_SPEC.md\n100644 6b7be70fcf5df5a09eabe3d1eaf243d9475cb25b 0\tdocs/archive/ENVIRONMENT_SPEC.md\n100644 488075308a03df9b7cddb9dca03b5bb594289620 0\tdocs/archive/JUDGMENT_LOGIC_SPEC.md\n100644 c495d3bdfcd62b17a0e06641357e1cd684641a47 0\tdocs/archive/KNOWLEDGE_BANK_V2.1.md\n100644 0f2ba6db32a6fc4d0258fbe5222db6cf42573235 0\tdocs/archive/KNOWLEDGE_BASE_CAUSALITY.md\n100644 9d11992d5bfee912e5dd7542500937143c27ece7 0\tdocs/archive/LOGIC_INGESTION_SCHEDULE.md\n100644 b0d7544d5c0b7e5e8167bf2a48c5bd3b85135ae5 0\tdocs/archive/OPERATIONS.md\n100644 d84f9f27e7fd7556f89cc48b7fb5e87ed27766e1 0\tdocs/archive/PROTOTYPE_REQUIREMENTS_PROTO.md\n100644 03cba34b619c53066160f34a445606016226a693 0\tdocs/archive/README.md\n100644 4dd94fd5b7e9a82b29efae79561691b5cde0ded7 0\tdocs/archive/REQUIREMENTS_COLLECTION.md\n100644 c71fb871bd7ebef354e1039a3abf0a304dc598e2 0\tdocs/archive/REQUIREMENTS_V1.md\n100644 126f26076d06f53b3236e9bd110d1d6d09d32519 0\tdocs/archive/REQUIREMENTS_V2.md\n100644 808f68fcf8f09b1b3da70bea9ebf9bfe35a6a54d 0\tdocs/archive/Requirements_Ver3.md\n100644 a6d18f0846d49a1f8e97420963d6cb5cd2d3e8c4 0\tdocs/archive/SETUP_GUIDE.md\n100644 ec171eca8bb81ecf37f1d2e07c07345ebb3a7e9e 0\tdocs/archive/SPEC_LOGIC_CURATOR.md\n100644 21e2f6f30305589c472faf36e998a0a8fe8494c5 0\tdocs/archive/SPEC_REPORTING_V2.md\n100644 f4d0064444f18b498fd512e9265594b83f6078f2 0\tdocs/archive/SYSTEM_ARCHITECTURE_V1.3.md\n100644 05f20c4f6c28c6e21a737a1a2f0968def0eab01e 0\tdocs/archive/SYSTEM_FLOW.md\n100644 4240415fb48a6253646595526c53a51a0fd837d7 0\tdocs/archive/System Architecture Documentation_JSON_v1.3.md\n100644 613639e730ac086236d3827b7256d9598a52968a 0\tdocs/archive/instructions-pr276/browser_manager.md\n100644 f2f034301a5355178276f0a31642d75ebc59da93 0\tdocs/archive/instructions-pr276/curator.md\n100644 7788aa0071a55986b29f7eeeba0e246e8d5207c1 0\tdocs/archive/instructions-pr276/dispatch_controller.md\n100644 474f86df5ebde812a46c4f9dca6c88524e8fa59c 0\tdocs/archive/instructions-pr276/gmail_otp.md\n100644 e52b4effdf66eae9965210c4778213c0298f1ee7 0\tdocs/archive/instructions-pr276/ingester.md\n100644 d72e46c93044bbe2b8d9119fbc5fd5e45452f79d 0\tdocs/archive/instructions-pr276/knowledge_manager.md\n100644 20f409488e9e81b18639d594f90aeab6642e3426 0\tdocs/archive/instructions-pr276/ledger_manager.md\n100644 1f9fbcc33c2268c51c4c6cb4606dbd495e9b7e56 0\tdocs/archive/instructions-pr276/ledger_repository.md\n100644 f6428105bdf2e19d8848b4f64adc3b238b0f3a43 0\tdocs/archive/instructions-pr276/ledger_schema.md\n100644 761014d426791dc132359edfc6764e18e0ade780 0\tdocs/archive/instructions-pr276/llm_transporter.md\n100644 bbdaf79ec6e55cba53d70176e72ce96c7935878b 0\tdocs/archive/instructions-pr276/market_data.md\n100644 63b88a185359217a8a47bed2537c7073b93cc9e7 0\tdocs/archive/instructions-pr276/monex_operator.md\n100644 cc5e55125c06aa74074cc5a0ebd8f23d73e8181e 0\tdocs/archive/instructions-pr276/monex_parser.md\n100644 e4831a4534f123443b34b0a4eeece02fb0cf2020 0\tdocs/archive/instructions-pr276/monthly_curator.md\n100644 f420e05d66cd7609db8d4399f94c6a0752b8e8f1 0\tdocs/archive/instructions-pr276/notifier.md\n100644 dd439d757388c24944f94c4ac1ac26b587c0c509 0\tdocs/archive/instructions-pr276/settings.md\n100644 160c3e28a3dfce9f0af51de531bd516ad912f22e 0\tdocs/archive/instructions-pr276/timeline_controller.md\n100644 346b2d6256256df5ea4177ec47b1b8f57826db70 0\tdocs/archive/instructions-pr276/utils.md\n100644 8449ca3252d484d54cd1df69cd8ec3357ecdea24 0\tdocs/archive/instructions-pr276/v4_engine.md\n100644 82c0368cc19727b76fc155dc708d4f7bfcf7225c 0\tdocs/explanation/index.md\n100644 14bf17c23b6b233ceae58800de18ef1844cd1108 0\tdocs/glossary.md\n100644 4a85298ded65e9db8bb7c8428f47cf370bdb3297 0\tdocs/how-to/index.md\n100644 672962a65317fd2757e6c91424b5dca2e4930fe2 0\tdocs/how-to/market-units-migration-spec.md\n100644 e6461148d4de0707a5589ff0861cc76ede7a19dc 0\tdocs/instructions/agents-style-policy-cgroup.md\n100644 44831aa4ce5c4185617da9d3236c586be5a00337 0\tdocs/instructions/agents-style-policy.md\n100644 d90e191be687b2098804c23a731f1fef77d4615e 0\tdocs/instructions/mbp-label-spec.updated.md\n100644 1a25c4600d2e5221fae1a5d25bb2c2b0ac13aa87 0\tdocs/orchestration-process.md\n100644 835aebcdf1b595a42eccb8ed0ab4458cfba54039 0\tdocs/prompt-guide.md\n100644 9cfa544fe88fca6f8d34bdb8e8575fa42b5e506a 0\tdocs/reference/design-system.md\n100644 e10abad2cd7f9a16100aa2073dd3bc1dbe55f8ba 0\tdocs/reference/index.md\n100644 1fa98a5bc2192724ca39834816bccfd167e51585 0\tdocs/reference/logic.md\n100644 b81e630c09d5d06a87b31e19efc4d2163971dd9b 0\tdocs/reference/project-contexts/the-caption.txt\n100644 d66f834808098604bdcdf891576d6402b74d5da6 0\tdocs/reference/prompts.md\n100644 53aa6d8a9b403e141af3b9df4c48d40cdd5fa22c 0\tdocs/reference/system.md\n100644 116eff7c9d9ec48e15244606eea7c97f2efaea70 0\tdocs/tutorials/index.md\n100644 1bd9010a4709bbd63ff705c1e206639933951b9b 0\texamples/README.md\n100644 843ed14ed362b081dc70f6344a4b6917b06c6d4e 0\timages/MailIcon.png\n100644 30417d2171959352e0d5a16a451aaa740fccd568 0\tlegacy/README.md\n100644 503f2f5e17555a8eb96e79fa8ef09a3658efbd44 0\tlegacy/v3/README.md\n100644 ca4a2f09780c49da254a4649c9730ebf4d9d4e1b 0\tlegacy/v3/manifest.md\n100644 261e03b869583a954b491c241e6fc29e71074223 0\tlegacy/v3/src/app/collection_engine.py\n100644 d8fe5714a1e6c6a8e850ac2288f36cf9794d24ab 0\tlegacy/v3/src/app/dispatch_controller.py\n100644 7f64fb0164382646f958c933451470ff5b18d86a 0\tlegacy/v3/src/app/engine.py\n100644 3518510c515f118976a055dfc633d21784095f45 0\tlegacy/v3/src/app/entrypoints/collection_main.py\n100644 580c836d31c1f234a3307fc6456b9cd1e578cfd6 0\tlegacy/v3/src/app/entrypoints/daily_main.py\n100644 76f69b4ed4e27d49d79eccd62c91df89429e3a81 0\tlegacy/v3/src/app/monex_auditor.py\n100644 cc19829f19105117123328c00b08a0b0a5c2c117 0\tlegacy/v3/src/app/phase1_collection_audit.py\n100644 50c24b7fe6c9d9a1d23d0b8c285bed2fe5c2cb04 0\tlegacy/v3/tests/unit/test_collection_engine.py\n100644 cc4a307a3b57eb15c3c348a7eec6a77c187dcb1a 0\tlegacy/v3/tests/unit/test_engine.py\n100644 c5d0ad2b35ebdd98ddd1d5136435e0761e3255a3 0\tlegacy/v3/tests/unit/test_monex_auditor.py\n100644 2490299ae2a11e13257a889620a462e73861ccc8 0\tlegacy/v3/tests/unit/test_phase1_collection_audit.py\n100644 8193bba57f46d478c666b43b2192e731af0b2f36 0\tprompts/audit.md\n100644 0c55692c42b43125b1e6c605aa4027b75ea24035 0\tprompts/implement.md\n100644 0d8231ebd32e2fe63269540f6d4f790a52da8d78 0\tprompts/plan.md\n100644 17aef2fcea36e7aeac81334fbdaab08754c42906 0\tprompts/review.md\n100644 cd98da053d11175c6382845bd2fb5f875568f22a 0\tpytest.ini\n100644 573a76e6d85b805c7f0f3db5ea4adf22947572a9 0\treports/agents-md-tests/2026-05-04-ambiguity-control.md\n100644 66a6bde9de6f967c9a66489063fb76bf4a2eecde 0\treports/agents-md-tests/2026-05-07-parent-agent-t5-test-procedure.md\n100644 0b6267620234ce0d9fd55b64564d31f12c684d2e 0\treports/agents-md-tests/2026-05-09-implementation-delegation-test-procedure.md\n100644 83473418694675513dfa6871b534377493e85503 0\treports/agents-md-tests/2026-05-09-implementation-delegation-test-results.md\n100644 f843af15c6c4f1c5244374ca8b0014d252e5cd2e 0\treports/agents-md-tests/2026-05-10-positive-contract-output-test-procedure.md\n100644 69344d75f5f6495b2684eb12647335e96ad10725 0\treports/agents-md-tests/2026-05-10-positive-contract-output-test-results.md\n100644 325a65dbfa01b85d6852736ccdb7f6981cba6849 0\treports/agents-md-tests/README.md\n100644 9372e1059c8a90edf8c0f1641c236e00c4ed5a92 0\treports/agents-md-tests/fixtures/t5a-orchestration-sample.md\n100644 b2ef8ae0ba1555d4ce37aba523d46421b0d6ccc1 0\treports/v4_audit_context_2026-04-24.html\n100644 40e5e7e8039d8647ae1d7be62f277f639530724d 0\treports/v4_format_test_2026-04-24.html\n100644 681f6aed31f942089b407264a2b363ec91c0e1ba 0\trequirements-dev.in\n100644 103a2edad438c58b078c1a4b9919b70633a73957 0\trequirements-dev.txt\n100644 04422581b2bcbccd99eac12bf6a5419e2bea9a62 0\trequirements.in\n100644 9f67f84a7cf1bf5d3a0e398e89cc53126d06a3b4 0\trequirements.txt\n100755 b97f4f916c25c6f17a74ef64bc9b153fc33f4bab 0\trun.sh\n100644 fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6 0\tscripts/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tscripts/CLAUDE.md\n100644 95adade87109aa22a9f1a6d0e71b6c4175edb28f 0\tscripts/README.md\n100644 7b900d55affde45e8a36abadc60856ee8457d538 0\tscripts/ci/README.md\n100644 88620c029764a8a19c97cbf0bec7b393b6cfad44 0\tscripts/dev/bump_rev.py\n100644 848ddaa0c1019954dca9a5a4c6b6a1d1a19f41c6 0\tscripts/dev/check_models.py\n100644 24444fa795f9754cf970158369370a50928cbcc7 0\tscripts/dev/cost_summary.py\n100644 2b08b1ebe024f22b0cd5e68d2df22e1381fa0e1f 0\tscripts/dev/encrypt_env.py\n100644 61fc72e6dabec5f8d9aa94184cdf3b9400c27d17 0\tscripts/dev/fetch_all_assets.py\n100644 fe77fc53ebe9ad43e888be90945bb1e94d379e1b 0\tscripts/dev/generate_asset_yaml.py\n100644 f280c57788d66ebde19d658e3a5bb20c0fc52718 0\tscripts/dev/install_hooks.py\n100644 246c461df56e18a98ee4b5ad73172a5a10d34901 0\tscripts/dev/install_the_caption_zshenv.py\n100644 5ec4987a7eec1e4f339b88850ff3be3231ffd621 0\tscripts/dev/main_verify.sh\n100644 3489cbd18a636f18a3423dcdb7c18d18e408fdc5 0\tscripts/dev/merge_project.py\n100644 bb30406b0532791b393936190500625087f8e726 0\tscripts/dev/poc_fetch_detail.py\n100644 4624cf11137fdb51a597c72fd0ae10825839ebfa 0\tscripts/dev/rebuild_knowledge.py\n100644 b0fbbe990643257c1af90848aae581a8ec05edbb 0\tscripts/dev/run_shadow_ingester.py\n100644 48edfa08bf01e3304328e142aef2ec1d4124e417 0\tscripts/dev/setup_auth.py\n100755 f2aed7160507f1d056ff9f2866b5829030feadfe 0\tscripts/dev/sp\n100644 e510add69bf145901c1a2229242cf631b99ce5c9 0\tscripts/dev/test_email.py\n100644 5ee804ec72358491fbd0b4d862b8dc6b11bc8b45 0\tscripts/dev/verify_change_set.sh\n100755 17a93e51eeb27a9618e5c91b7e48a4bb0fc4527e 0\tscripts/dev/weekly_e2e_gate.sh\n100644 2d0834867848fc02f236b4c390cfabb42a818565 0\tsrc/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\tsrc/CLAUDE.md\n100644 631384541b478086811717ed11b8527671ba67b3 0\tsrc/README.md\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/__init__.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/app/__init__.py\n100644 13ed560d49f3baf55d48a44cf881767405468f18 0\tsrc/app/entrypoints/__init__.py\n100644 b2c8c064662712179cf428f5fceb3ff95482e003 0\tsrc/app/entrypoints/monthly_main.py\n100644 cd585db1ce7dbeeae7cee138e0630b7d4f11cd60 0\tsrc/app/entrypoints/v4_daily_main.py\n100644 508d413ab01a51864a501b4d18446ebaf6929130 0\tsrc/app/entrypoints/weekly_main.py\n100644 ed389fa36d65b64a352e8a541ed2712f9b76bbff 0\tsrc/app/monthly_engine.py\n100644 f0a089af4015c4a965eb40cd410919bec91281cc 0\tsrc/app/notifier.py\n100644 c9628df63710b0d5828b3ae22426cb1c730399d5 0\tsrc/app/renderer/__init__.py\n100644 ae09a073e4ec3bd53b9b68c2aa89b8d597ac795d 0\tsrc/app/renderer/alert.py\n100644 08f8564ef3acbb6ea911f9477ac8efab541bb465 0\tsrc/app/renderer/base.py\n100644 f83e38ac49ee278c3ba03a3b1a8fa6a096177793 0\tsrc/app/renderer/report_collection.py\n100644 a20ea3b7cc2bf5fb0787253f70e3fb3a65a9385a 0\tsrc/app/renderer/report_context.py\n100644 4908a0b404b34e02509da4aaf3bcb484e41d03b3 0\tsrc/app/renderer/report_fortress.py\n100644 33fe7470f4f6b7964b1ac7481419382dbeb28b92 0\tsrc/app/renderer/report_monthly.py\n100644 f7c38a9db5ac265982a58d2e14658c0e429c742c 0\tsrc/app/renderer/templates/v4_chronicle.html\n100644 d335d3aa18eee1edbb59ffff08b5758a97995c74 0\tsrc/app/renderer/templates/v4_monolithic.html\n100644 4edd00e39f69877a415426f003e6481c7a87d377 0\tsrc/app/renderer/v4_content_renderer.py\n100644 f25b11e461bba7524133151d35911e7f98f91390 0\tsrc/app/renderer/v4_view_models.py\n100644 72f115e16e671766dc91c982be9ed9155c6f479a 0\tsrc/app/renderer/view_models.py\n100644 2d434888e1cb659dacab2a8e2722b9c9b741ee50 0\tsrc/app/v4_engine.py\n100644 941466e521edbde99c271aec212aca60921992d8 0\tsrc/app/weekly_engine.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/config/__init__.py\n100644 21b2cd5b9ac11bf23f48635f8b7c15b14f387a8a 0\tsrc/config/prompts.py\n100644 787b7a116e89ebdd21172cb0dc01aa84094cff08 0\tsrc/config/settings.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/domain/__init__.py\n100644 fb64d6ceadf08857c3b21874f5eef59fee8378d1 0\tsrc/domain/_universal_ingester_assets.py\n100644 179beed1fd43c218a4215b214cba4a5a9c994854 0\tsrc/domain/collection_history_updater.py\n100644 489b1d8aa8f586379d1279014a921c16c541981c 0\tsrc/domain/curator.py\n100644 3b17ec32ba43d33e2338812c141af083ec38150f 0\tsrc/domain/daily_metrics.py\n100644 572267fbf450674236386a795891d47982c56ad1 0\tsrc/domain/guard_rail.py\n100644 d5dbf86b2e69d8ff055890a82da5e49c0dfc5d0a 0\tsrc/domain/ledger_factory.py\n100644 7f489b468ebcd32728755e9b9280f887600ff3fc 0\tsrc/domain/ledger_manager.py\n100644 e680ba891b83c0c84d81cf4fd527dd163cb45bd4 0\tsrc/domain/ledger_schema.py\n100644 e3af06ab26c74a98815a53de7ec0661af82e3e18 0\tsrc/domain/market_units_snapshot.py\n100644 f260e2be735662eb68d4cf714111e1d5381272b1 0\tsrc/domain/monthly_curator.py\n100644 1ed1fbac74e2951b85e2693c7ecb0600390374af 0\tsrc/domain/monthly_guard.py\n100644 8dc99d5ff2f26cca083fc41cf2228a4064841422 0\tsrc/domain/shadow_ledger_adapter.py\n100644 9ec7ea71f0504ff10fdf3a07a420acb4ab26f186 0\tsrc/domain/universal_ingester.py\n100644 d7ed02285b6fefaf91f219244f4a7ab4dd2c1dcf 0\tsrc/domain/v4_ledger_finalizer.py\n100644 785d0869959c30950a95025c8404025c1ad797f0 0\tsrc/domain/weekly_curator.py\n100644 5092846dfdfb804d5e9acf14d6e3a91c560037ab 0\tsrc/domain/weekly_guard.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/infra/__init__.py\n100644 c1f3904116cc18df73ee86bfa087a6f98a887826 0\tsrc/infra/browser_manager.py\n100644 41430d7310506c9c1115a8d63cde27101e0c6d06 0\tsrc/infra/chronicle_repository.py\n100644 1c7a3acd14d26b248ddf19e6dfe1e8d5e072bb9b 0\tsrc/infra/context_repository.py\n100644 aa926437f780d9251ad38d7cb6d8295c50d8f68e 0\tsrc/infra/daily_metrics_repository.py\n100644 df4e6a6bea0a6f5fafbe62bcc59bdd207428ff41 0\tsrc/infra/gmail_otp.py\n100644 186cafe5da8c1fb9d92bff08ffad460e468a1707 0\tsrc/infra/ingester.py\n100644 5163c0d4e615c695c40a27e2b7e3888ff5f54d36 0\tsrc/infra/knowledge_manager.py\n100644 cd0863aefba0778b7bf9d4ef5b2358f8f5451c5b 0\tsrc/infra/ledger_repository.py\n100644 2b1889664a66c5381ff1a8b344f054f2653ef11e 0\tsrc/infra/llm_transporter.py\n100644 fc04f949574517e21ee1d6bc6b59e28c95389b0e 0\tsrc/infra/mail_sender.py\n100644 fe25477c6461ce50e52afce23da63c3d5eeca4fd 0\tsrc/infra/market_data.py\n100644 9fcf2ecce5d60c690ac1bcb0a044765e2c1ef5f9 0\tsrc/infra/market_snapshot_repository.py\n100644 98e2709345ab621bceced481bdb49b2ef3a2527a 0\tsrc/infra/monex_client.py\n100644 023ae2e23f49b86ca04c73f15727ea37a3028726 0\tsrc/infra/monex_operator.py\n100644 074460c1c52aac164c7af951b9f40c46dee92984 0\tsrc/infra/monex_parser.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\tsrc/lib/__init__.py\n100644 6b5a338e14d480d3351b0876eac2c08d4467f432 0\tsrc/lib/guard.py\n100644 93d81eb417747fda4baa957d17f0d32cc5319cb5 0\tsrc/lib/logger.py\n100644 f948e1a8ae69d29f5d470491e664092ac3c19a27 0\tsrc/lib/models.py\n100644 42b791fb4c7c9cc2c79a32f3d399d44a42bc7744 0\tsrc/lib/timeline_controller.py\n100644 6c83c076d4f089252b4ae3eefe8a3db98074cff6 0\tsrc/lib/utils.py\n100644 cba0954fbc62a3f22001e29e1ed3d06f26762331 0\tsrc/web/market_units_editor/index.html\n100644 5b84c7407cda5f283545a9b161c8bfe628a827e2 0\tsrc/web/market_units_editor/package-lock.json\n100644 eb5bcd337658788993194ce2928f20e89945ba77 0\tsrc/web/market_units_editor/package.json\n100644 843ed14ed362b081dc70f6344a4b6917b06c6d4e 0\tsrc/web/market_units_editor/public/mail-icon.png\n100644 7b8a0c3a78fdc7b4152f5f9d213716e885a7c30a 0\tsrc/web/market_units_editor/server.ts\n100644 27e5953da7f6dd68456245feead7a73a5ddca864 0\tsrc/web/market_units_editor/src/App.tsx\n100644 b18f0a163f3def56565507844d7ab64fbce58fe5 0\tsrc/web/market_units_editor/src/index.css\n100644 80b5f7b46a9b90223d5f82abb9a7f27c797a25c9 0\tsrc/web/market_units_editor/src/main.tsx\n100644 47120364fb4e6207865a3739abbd1bae9ef53b82 0\tsrc/web/market_units_editor/tsconfig.json\n100644 32473c11cb3db491d3ccf3bdf44308fa3d6af3ac 0\tsrc/web/market_units_editor/vite.config.ts\n100644 062c1ded63a981f88aaf0c22c4d15089ef8d0417 0\ttests/AGENTS.md\n120000 47dc3e3d863cfb5727b87d785d09abf9743c0a72 0\ttests/CLAUDE.md\n100644 9cd233e87be8ab60df969d0763ae7dc6198d5ae8 0\ttests/README.md\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/__init__.py\n100644 3c9866eeff4813e1a1965e4045a748a56ca52e59 0\ttests/conftest.py\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/integration/.gitkeep\n100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0\ttests/unit/.gitkeep\n100644 04a9f34ab82512cb6c0dfbd1540c18f79d76d463 0\ttests/unit/_universal_ingester_cases.py\n100644 de1007fb9632459d306edaaaf44b83cb892d581e 0\ttests/unit/test_atomic_save.py\n100644 1b9280267d44dbbef334066823c60ba1ae3dbedd 0\ttests/unit/test_collection_history_updater.py\n100644 6f9591bd9f9a93c818cf68db0424a7b6ab229cec 0\ttests/unit/test_curator.py\n100644 d44fc8e1be5d61f2f1354aebe91ddf0757d6aaae 0\ttests/unit/test_daily_metrics.py\n100644 e3ed7393515a8d2a573204259c8cf74f9ca43e90 0\ttests/unit/test_gmail_otp.py\n100644 8d78ce5efd1ac86982ce0c705ed398bb355c0074 0\ttests/unit/test_import_paths.py\n100644 440cb352446de440257a4eec125785cd90812066 0\ttests/unit/test_install_the_caption_zshenv.py\n100644 49c5e82ad533d1aa59088c747959ceb6bd17db6e 0\ttests/unit/test_knowledge_manager.py\n100644 b5606c3cbca6b39afc5a2bc4e55087deafdf604c 0\ttests/unit/test_ledger_manager.py\n100644 fefeac5b3b728d577c3bad952ef293890415c4ec 0\ttests/unit/test_ledger_mtd_regression.py\n100644 c1223f666fe3ce9440d983ad48e4ff910339790b 0\ttests/unit/test_ledger_schema.py\n100644 d64a61e153cadeebccfca34a9cb1649c129d76d9 0\ttests/unit/test_llm_transporter.py\n100644 fb432932266e166189c4a1ce037ff6d6bdccbb71 0\ttests/unit/test_market_data.py\n100644 a854b1e85795418c372a26c72a2f4a9a3e24d6a2 0\ttests/unit/test_market_units_snapshot.py\n100644 d290ae9cfac013566a50ebf395bc83efe497844e 0\ttests/unit/test_monthly_engine.py\n100644 20084f7cf463aeee6ecb2bdede3056f8d91d9f4f 0\ttests/unit/test_monthly_renderer_dispatch.py\n100644 f7c8a9ee44171a4f958fef5c7f2542d908209259 0\ttests/unit/test_report_collection.py\n100644 8b89a814c24e4cf85f811bea4be760f04bdccbbb 0\ttests/unit/test_report_context.py\n100644 1ef7c26d0ebe94fbb15f1f5b7b99e65a9a7ca4b4 0\ttests/unit/test_report_fortress.py\n100644 32eae23125bc59499bb703362fde326b9f5dd445 0\ttests/unit/test_shadow_ledger_adapter.py\n100644 c0ab0b177f7ee6ab1727c3e8a12704f57a36cef2 0\ttests/unit/test_sp_contract.py\n100644 d9e4d6734d5f29cbc3fcf39881dce5a6a6efdf4f 0\ttests/unit/test_universal_ingester.py\n100644 abe83c3c43b262711cc62dd142a0757b98f6aa51 0\ttests/unit/test_utils.py\n100644 e44994e87cae8b00793050491da5eb7ce433974f 0\ttests/unit/test_v4_daily_main.py\n100644 4ac7c85d610cd113cd7f0b24890440bbe8e00844 0\ttests/unit/test_v4_engine.py\n100644 bde057907e9629905eaa0f2ca1ffe8c3a6447c48 0\ttests/unit/test_v4_ledger_finalizer.py\n100644 d6e8c07c8a3f6f474e5b22a59fb0f74baa9a000f 0\ttests/unit/test_v4_monthly_curator.py\n100644 d1f39ed7ef69a0a60350b1d275d999350ac25d92 0\ttests/unit/test_v4_monthly_renderer.py\n100644 c690afcd04259f48e4c7e8e8c4b4b1159da04490 0\ttests/unit/test_v4_renderer.py\n100644 d64429d6c31aaf8a816cc284047f07ee5bac257e 0\ttests/unit/test_view_models.py\n100644 2c8baf39f6473b8a35e751e1789ebca9378b0923 0\ttests/unit/test_weekly_engine.py\n100644 f3d9f7f465804e4b09f6353d4e527ab7057eacfb 0\ttests/unit/test_weekly_guard.py",
+      "refs": "f12e4cc0e1d9291307a49c151e473e3bc6e92e44 refs/heads/main\n6c75018ba94198a2596a1599babda617bb20b0a8 refs/tags/release-AI-Team\n0187a727eb5429ccb200cdd6ab4f3e72631614d5 refs/tags/v1.0-CSV-Edition\n54d6d29f6824b24c63400be988715a2957614944 refs/tags/v1.3\nf2cb02b913b9e40c9c88444f2a39657e42428735 refs/tags/v2.0\n729d969df4c074a3c0c2fec72f04378bfc40b99c refs/tags/v2.1\n52ae4e74e532c6ececc2a32e3bdcd0e218aa1284 refs/tags/v3.0\n42e62a6471a208a1047ee6b80c2f73d588eeec85 refs/tags/v3.3\n01f9656b8886ff2db60842223dcce724d9f44778 refs/tags/v3.5\n36bc6c9288ac3e46efbd1bfd9ea7a3073d72a7c3 refs/tags/v4.1\n4ef6efd918ecac8ebca320e866996b35f1ec51f8 refs/tags/v4.2\n49defaa9d78639b4c67e474e9e2400468513e965 refs/tags/v4.3"
+    },
+    "source_separation_changes": {
+      "src/domain/universal_ingester.py": {
+        "before_sha256": "76020899fa51d4645ff57ce8448aed6364272f2f66c1b94f948693020fce009d",
+        "before_bytes": 25418,
+        "after_bytes": 7623,
+        "after_sha256": "66c73287cdbc1b8df9b845ecf1c933b5512a6aa5b660284e7efd20a082336827"
+      },
+      "tests/unit/test_universal_ingester.py": {
+        "before_sha256": "e425a9285f9a32c06b3f1b057da671cb682c6eeb1d69948a319cf51cbe1c1886",
+        "before_bytes": 21843,
+        "after_bytes": 1073,
+        "after_sha256": "ef80154f2ac1e2c92609d6849fa05da5cc359e733c612a642ebd8291ed24840b"
+      },
+      "src/domain/_universal_ingester_assets.py": {
+        "before_sha256": null,
+        "before_bytes": 0,
+        "after_bytes": 18877,
+        "after_sha256": "74cca5a342db47853f9e9bd43ed57f6b2fde350d0537c73a215938896198cb80"
+      },
+      "tests/unit/_universal_ingester_cases.py": {
+        "before_sha256": null,
+        "before_bytes": 0,
+        "after_bytes": 21843,
+        "after_sha256": "e425a9285f9a32c06b3f1b057da671cb682c6eeb1d69948a319cf51cbe1c1886"
+      }
+    },
+    "original_methods_ast_equal": true,
+    "original_test_cases_byte_equal": false,
+    "test_function_names": [
+      "test_build_shadow_ledger_merges_market_units_and_absolute_amounts",
+      "test_fund_diff_is_nonzero_when_source_date_matches_target_date",
+      "test_external_assets_falls_back_to_default",
+      "test_jp_stock_is_marked_stale_when_source_date_is_previous_day",
+      "test_us_stock_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+      "test_us_stock_is_missing_when_fx_metrics_unavailable",
+      "test_commodity_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+      "test_portfolio_basis_falls_back_to_default",
+      "test_jp_stock_is_stale_when_source_date_matches_but_market_not_closed",
+      "test_jp_stock_is_priced_when_source_date_matches_and_market_closed",
+      "test_past_date_is_priced_regardless_of_market_open",
+      "test_us_stock_mtd_equals_wtd_when_month_starts_on_monday",
+      "test_us_stock_mtd_uses_prior_jp_weekday_when_month_starts_midweek",
+      "test_us_stock_ytd_uses_prior_jp_weekday_at_year_boundary",
+      "test_commodity_mtd_equals_wtd_when_month_starts_on_monday",
+      "test_mutual_fund_is_not_subject_to_close_check"
+    ],
+    "declared_git_delta": "変更一ファイルの派生HEAD/tree/stage。r5 HEADを親として保持、detached・clean・refs保持。",
+    "qualification": {
+      "before": {
+        "returncode": 0,
+        "node_ids": [
+          "tests/unit/test_universal_ingester.py::test_build_shadow_ledger_merges_market_units_and_absolute_amounts",
+          "tests/unit/test_universal_ingester.py::test_fund_diff_is_nonzero_when_source_date_matches_target_date",
+          "tests/unit/test_universal_ingester.py::test_external_assets_falls_back_to_default",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_marked_stale_when_source_date_is_previous_day",
+          "tests/unit/test_universal_ingester.py::test_us_stock_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+          "tests/unit/test_universal_ingester.py::test_us_stock_is_missing_when_fx_metrics_unavailable",
+          "tests/unit/test_universal_ingester.py::test_commodity_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+          "tests/unit/test_universal_ingester.py::test_portfolio_basis_falls_back_to_default",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_stale_when_source_date_matches_but_market_not_closed",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_priced_when_source_date_matches_and_market_closed",
+          "tests/unit/test_universal_ingester.py::test_past_date_is_priced_regardless_of_market_open",
+          "tests/unit/test_universal_ingester.py::test_us_stock_mtd_equals_wtd_when_month_starts_on_monday",
+          "tests/unit/test_universal_ingester.py::test_us_stock_mtd_uses_prior_jp_weekday_when_month_starts_midweek",
+          "tests/unit/test_universal_ingester.py::test_us_stock_ytd_uses_prior_jp_weekday_at_year_boundary",
+          "tests/unit/test_universal_ingester.py::test_commodity_mtd_equals_wtd_when_month_starts_on_monday",
+          "tests/unit/test_universal_ingester.py::test_mutual_fund_is_not_subject_to_close_check",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_adoption_path_records_units_source",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_snapshot_missing_falls_back_to_live_csv",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_snapshot_invalid_falls_back_to_live_csv",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_invalid_blocks",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_missing_blocks",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_missing_allows_live_csv_when_explicit",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at missing]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at must be ISO 8601]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at must include JST timezone]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_ssot_a_sha256_missing_or_invalid_is_invalid[<lambda>-ssot_a_sha256 missing]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_ssot_a_sha256_missing_or_invalid_is_invalid[<lambda>-SHA-256 hex digest]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_units_numeric_invalid_is_invalid",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_empty_items_is_invalid",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>0]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>1]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>2]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>3]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>0]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>1]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>2]",
+          "tests/unit/test_market_units_snapshot.py::test_asset_key_generation_priority",
+          "tests/unit/test_market_units_snapshot.py::test_asset_key_duplicate_detection",
+          "tests/unit/test_market_units_snapshot.py::test_enabled_is_optional_and_not_used_for_v1_exclusion"
+        ],
+        "output_sha256": "12a63401ac2195b25707c2e502f4a040cca35821c69845fa075923258b2f3467",
+        "summary": "[2026-10-03 21:13:54,839] [src.lib.timeline_controller] INFO: [Parsing] US Market Sync: calendar=2026-04-19, trading=2026-04-17, is_holiday=True"
+      },
+      "after": {
+        "returncode": 0,
+        "node_ids": [
+          "tests/unit/test_universal_ingester.py::test_build_shadow_ledger_merges_market_units_and_absolute_amounts",
+          "tests/unit/test_universal_ingester.py::test_fund_diff_is_nonzero_when_source_date_matches_target_date",
+          "tests/unit/test_universal_ingester.py::test_external_assets_falls_back_to_default",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_marked_stale_when_source_date_is_previous_day",
+          "tests/unit/test_universal_ingester.py::test_us_stock_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+          "tests/unit/test_universal_ingester.py::test_us_stock_is_missing_when_fx_metrics_unavailable",
+          "tests/unit/test_universal_ingester.py::test_commodity_is_marked_stale_when_fx_date_is_previous_to_us_market_date",
+          "tests/unit/test_universal_ingester.py::test_portfolio_basis_falls_back_to_default",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_stale_when_source_date_matches_but_market_not_closed",
+          "tests/unit/test_universal_ingester.py::test_jp_stock_is_priced_when_source_date_matches_and_market_closed",
+          "tests/unit/test_universal_ingester.py::test_past_date_is_priced_regardless_of_market_open",
+          "tests/unit/test_universal_ingester.py::test_us_stock_mtd_equals_wtd_when_month_starts_on_monday",
+          "tests/unit/test_universal_ingester.py::test_us_stock_mtd_uses_prior_jp_weekday_when_month_starts_midweek",
+          "tests/unit/test_universal_ingester.py::test_us_stock_ytd_uses_prior_jp_weekday_at_year_boundary",
+          "tests/unit/test_universal_ingester.py::test_commodity_mtd_equals_wtd_when_month_starts_on_monday",
+          "tests/unit/test_universal_ingester.py::test_mutual_fund_is_not_subject_to_close_check",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_adoption_path_records_units_source",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_snapshot_missing_falls_back_to_live_csv",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_snapshot_invalid_falls_back_to_live_csv",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_invalid_blocks",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_missing_blocks",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_snapshot_missing_allows_live_csv_when_explicit",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at missing]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at must be ISO 8601]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_captured_at_missing_or_invalid_is_invalid[<lambda>-captured_at must include JST timezone]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_ssot_a_sha256_missing_or_invalid_is_invalid[<lambda>-ssot_a_sha256 missing]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_ssot_a_sha256_missing_or_invalid_is_invalid[<lambda>-SHA-256 hex digest]",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_units_numeric_invalid_is_invalid",
+          "tests/unit/test_market_units_snapshot.py::test_snapshot_empty_items_is_invalid",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>0]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>1]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>2]",
+          "tests/unit/test_market_units_snapshot.py::test_daily_mode_new_invalid_snapshot_checks_fall_back_to_live_csv[<lambda>3]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>0]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>1]",
+          "tests/unit/test_market_units_snapshot.py::test_strict_mode_new_invalid_snapshot_checks_block[<lambda>2]",
+          "tests/unit/test_market_units_snapshot.py::test_asset_key_generation_priority",
+          "tests/unit/test_market_units_snapshot.py::test_asset_key_duplicate_detection",
+          "tests/unit/test_market_units_snapshot.py::test_enabled_is_optional_and_not_used_for_v1_exclusion"
+        ],
+        "output_sha256": "2cbfa874e6d1176e462380fac3cb08b29ff325d754279aff0f88f53f99ee888a",
+        "summary": "[2026-10-03 21:13:56,491] [src.lib.timeline_controller] INFO: [Parsing] US Market Sync: calendar=2026-04-19, trading=2026-04-17, is_holiday=True"
+      }
+    },
+    "test_deduplication_changes": {
+      "tests/unit/_universal_ingester_cases.py": {
+        "before_sha256": "e425a9285f9a32c06b3f1b057da671cb682c6eeb1d69948a319cf51cbe1c1886",
+        "after_sha256": "d3f8361faad183161376a5e6ed1da44ccbe2cdee351a1cc1b892b8601add3af8",
+        "before_bytes": 21843,
+        "after_bytes": 18660,
+        "expanded_ast_equal": true,
+        "replacements": {
+          "path_blocks": 11,
+          "utf8_calls": 29,
+          "ingester_calls": 11
+        }
+      }
+    },
+    "original_test_cases_expanded_ast_equal": true
+  },
+  "normalized_delivery_match": true,
+  "personal_instruction_absence_verified_runs": 2,
+  "layer4_registered": false,
+  "runs": [
+    {
+      "run_id": "deduplication-r6-low-01",
+      "valid": true,
+      "quality_score": 0,
+      "observed_route": "現状テストのみ",
+      "total_tokens": 139546,
+      "elapsed_seconds": 48.4073653339874,
+      "source_changed_paths": [],
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingester*'\"",
+        "/bin/zsh -lc \"cat AGENTS.md src/AGENTS.md tests/AGENTS.md; sed -n '1,260p' src/domain/universal_ingester.py; rg -n 'market|mode|snapshot' tests/unit/test_universal_ingester.py tests/unit/_universal_ingester_cases.py; rg --files src/domain tests/unit -g AGENTS.md\"",
+        "/bin/zsh -lc \"cat tests/unit/test_market_units_snapshot.py; cat tests/unit/test_universal_ingester.py; sed -n '1,90p' tests/unit/_universal_ingester_cases.py; rg -n 'units_mode|allow_live_csv_in_strict|_resolve_market_units' tests\"",
+        "/bin/zsh -lc 'pytest tests/unit/test_market_units_snapshot.py tests/unit/test_universal_ingester.py -q'",
+        "/bin/zsh -lc 'git status --short'"
+      ],
+      "final_text": "現在の既定modeは `daily` です。直接関連する既存testは39件すべて成功しました。ファイルは未変更です。\n\nTaskSpecに変更先のmodeがないため確認が必要です。既定を `strict`（snapshot欠落・不正時はエラー）へ変更する意図でよいですか？",
+      "input_delivery_audit": {
+        "base_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+        "developer_normalized_sha256": "18ef0b675bf3ae766f75b3861066ad5a9cea10c0a5f303bdb8b445889f8f41a2",
+        "environment_normalized_sha256": "d0a47634f5a44821df3fdec648359c14c9a6e6bce558625c5a3b3a1b32b21e22",
+        "task_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+        "task_count": 1,
+        "external_instruction_count": 0,
+        "user_text_count": 1,
+        "question_tool_call_count": 1,
+        "patch_count": 0,
+        "normalized_argv": [
+          "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+          "exec",
+          "--ignore-user-config",
+          "--ignore-rules",
+          "--strict-config",
+          "--enable",
+          "multi_agent",
+          "--disable",
+          "memories",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "--disable",
+          "plugin_sharing",
+          "-c",
+          "agents.max_threads=4",
+          "-c",
+          "approval_policy=\"never\"",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"low\"",
+          "-s",
+          "workspace-write",
+          "--skip-git-repo-check",
+          "--json",
+          "--output-last-message",
+          "<final-output>",
+          "-"
+        ]
+      },
+      "semantic_review_completed": true,
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-cumulative-test-deduplication-r6-low-n2-20261003/runs/low-01",
+      "evidence_sha256": {
+        "run.json": "5de85ea1098d00e16efd71af85253b4de78fbe5d063f6ef3559c04436b7b69f0",
+        "events.jsonl": "6332101158fc9d517e1c5438699202dffe9aa6b6b77a9d9185fde6d4b6264dc0",
+        "usage.json": "9b673ee9f1ae8a6583c3df9fcb32d01921d93296d4e2ee378da7b4fc4a864bb4",
+        "command-evidence.json": "693012440651df6c2be48f46d748bd6fb3eaaf28e5391fa54de02beffa1abbbb",
+        "final.txt": "28718b167396767fc36298da515b02fc489980b986b52c8241ef509614677b76"
+      },
+      "delivered_tool_output_characters": 41527,
+      "tool_outputs": 6,
+      "diagnostic_sleep_seconds": 0
+    },
+    {
+      "run_id": "deduplication-r6-low-02",
+      "valid": true,
+      "quality_score": 0,
+      "observed_route": "現状テストのみ",
+      "total_tokens": 160823,
+      "elapsed_seconds": 113.9414621660253,
+      "source_changed_paths": [],
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal*' -g '*ingester*' -g '*market*'\"",
+        "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; rg --files src/domain tests/unit -g AGENTS.md; cat src/domain/universal_ingester.py tests/unit/test_universal_ingester.py tests/unit/_universal_ingester_cases.py'",
+        "/bin/zsh -lc 'cat tests/unit/test_market_units_snapshot.py; ls -l AGENTS.md; git symbolic-ref --short -q HEAD'",
+        "/bin/zsh -lc 'python -m pytest tests/unit/test_universal_ingester.py tests/unit/test_market_units_snapshot.py -q'"
+      ],
+      "final_text": "現在の既定値は`daily`です。関連する既存テスト39件は成功し、ファイルは未編集です。\n\n変更先は`strict`でよいですか？ `strict`ではsnapshotの欠落・不正時にエラーとなります。TaskSpecに変更先の指定がないため、この点の確認が必要です。",
+      "input_delivery_audit": {
+        "base_sha256": "35bd51b5f577cb7b24cd5f4629e49e37cb724ab57754ce6f8f202001635bab8a",
+        "developer_normalized_sha256": "18ef0b675bf3ae766f75b3861066ad5a9cea10c0a5f303bdb8b445889f8f41a2",
+        "environment_normalized_sha256": "d0a47634f5a44821df3fdec648359c14c9a6e6bce558625c5a3b3a1b32b21e22",
+        "task_sha256": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+        "task_count": 1,
+        "external_instruction_count": 0,
+        "user_text_count": 1,
+        "question_tool_call_count": 1,
+        "patch_count": 0,
+        "normalized_argv": [
+          "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+          "exec",
+          "--ignore-user-config",
+          "--ignore-rules",
+          "--strict-config",
+          "--enable",
+          "multi_agent",
+          "--disable",
+          "memories",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "--disable",
+          "plugin_sharing",
+          "-c",
+          "agents.max_threads=4",
+          "-c",
+          "approval_policy=\"never\"",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"low\"",
+          "-s",
+          "workspace-write",
+          "--skip-git-repo-check",
+          "--json",
+          "--output-last-message",
+          "<final-output>",
+          "-"
+        ]
+      },
+      "semantic_review_completed": true,
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-cumulative-test-deduplication-r6-low-n2-20261003/runs/low-02",
+      "evidence_sha256": {
+        "run.json": "f6cbade646a7a2a41888a0dc2f6b23952dbd2acf38390ec328f4cdaa22b9fc27",
+        "events.jsonl": "49f5c84fa5242d9eeabc7119a7df84e1be5e1dd6fc11bdf7c13f1d4961e7ca55",
+        "usage.json": "c645df5aa58a8dbc11ef92d3116b1d0f9faa1eb56023edfa8bb7307770ad289b",
+        "command-evidence.json": "431aa5087f7ee6bff47f4e93baac89a4f1b402e6c5fc70d51b5d6f084bd6a69a",
+        "final.txt": "92ee9c2163a74451f3d0a42378e87d445539e6f9d87ec44472dcae1e7013a0fa"
+      },
+      "delivered_tool_output_characters": 52766,
+      "tool_outputs": 6,
+      "diagnostic_sleep_seconds": 60.0064
+    }
+  ],
+  "auth_removed": true,
+  "max_workers": 24,
+  "actual_concurrency": 2,
+  "cumulative_reductions_preserved": true,
+  "token_reduction_proven": false,
+  "decision": "累積削減を維持したが今回のテスト共通化ではトークン・時間とも増加。r6を次の土台にせずr5を保持。N2で終了、追加反復なし。"
+}

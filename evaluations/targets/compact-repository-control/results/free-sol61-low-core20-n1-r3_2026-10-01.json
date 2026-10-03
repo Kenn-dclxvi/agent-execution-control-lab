@@ -1,0 +1,375 @@
+{
+  "schema_version": "compact-repository-control-measurement/v1",
+  "result_id": "26c8d95c95cc4e44a73368473172576a",
+  "created_at": "2026-10-01T07:15:34.890582+00:00",
+  "profile_id": "compact-core20-free-sol61-low-n1-r3",
+  "profile_sha256": "2760b9457b5e5d3ff516777ea23816c8cc2be547fca65533e1e6f7f0ae0788eb",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/compact-repository-control/sets/core20-r2.json",
+    "sha256": "e3a0969b8c53d2a9338c1e0b5816211986aa9ecec86e83777bb018d169bbb134"
+  },
+  "rating_ref": {
+    "path": "evaluations/targets/compact-repository-control/rating-contracts/outcome-r2.json",
+    "sha256": "938e8d3787b455c393a8daf9395021ff81db334b21939ee5292b2a5118a85f6d"
+  },
+  "prompt_ref": {
+    "path": "evaluations/targets/compact-repository-control/prompts/baselines/free-r1/identity.json",
+    "sha256": "50278ca729f107fa1db97756c7afec30ea4425793f4486c780568d4fd1b9b35b"
+  },
+  "runtime": {
+    "executor": "codex-cli",
+    "required_version": "0.159.0",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "executable_binding": {
+      "alias": "codex-0.159",
+      "codesign_team_identifier": "2DC432GLL2",
+      "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+      "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+      "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+      "version_output": "codex-cli 0.159.0"
+    },
+    "permission": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "max_workers": 24,
+    "personal_instruction_isolation": "per_run_empty_CODEX_HOME_auth_only",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v1",
+      "source": "codex_rollout_final_usage_by_workspace"
+    },
+    "elapsed_boundary": "cli_subprocess_start_to_return_monotonic"
+  },
+  "execution_preflight_sha256": "8cbeaa4027b74df7e8333188df523a00bbf955e80723660e9ac43a3f44412bf0",
+  "instruction_isolation_verified": true,
+  "model_visible_input_changed_during_measurement": false,
+  "execution_valid_cases": 20,
+  "execution_invalid_cases": 0,
+  "quality_rateable_cases": 19,
+  "raw_score_counts": {
+    "4": 19,
+    "0": 1
+  },
+  "quality_usable_score_counts": {
+    "4": 19
+  },
+  "quality_unrateable_cases": [
+    {
+      "case_id": "CRC-12",
+      "raw_score": 0,
+      "reason": "確認事項なしを空配列で表した正常成果を、未提示のnull必須条件で採点器が誤拒否した。",
+      "free_quality_failure": false,
+      "local_fix_ref": "registrations/local-grader-question-representation-fix-r1.json"
+    }
+  ],
+  "additional_case_score4_count": 6,
+  "additional_case_count": 6,
+  "free_failure_confirmed_count": 0,
+  "total_tokens": 1285552,
+  "total_tokens_scope": "r3で選択した20件。CRC-12の実測usageも含む。",
+  "mean_total_tokens": 64277.6,
+  "median_total_tokens": 64548.5,
+  "elapsed_seconds_sum": 714.5621750400169,
+  "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+  "elapsed_sum_is_not_parallel_wall_time": true,
+  "execution_provenance": {
+    "max_workers": 24,
+    "selected_sequential_qualification_cases": 1,
+    "parallel_ready_slots": 19,
+    "extra_qualification_runs": 1,
+    "selection": "qualification-01をCRC-01のN=1へ再利用"
+  },
+  "runs": [
+    {
+      "case_id": "CRC-01",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "qualification-01",
+      "total_tokens": 56398,
+      "root_total_tokens": 56398,
+      "session_count": 1,
+      "elapsed_seconds": 30.79258499998832,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-02",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-02-n1",
+      "total_tokens": 71715,
+      "root_total_tokens": 71715,
+      "session_count": 1,
+      "elapsed_seconds": 33.06156825000653,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-03",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-03-n1",
+      "total_tokens": 57706,
+      "root_total_tokens": 57706,
+      "session_count": 1,
+      "elapsed_seconds": 31.771880833024625,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-04",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-04-n1",
+      "total_tokens": 71950,
+      "root_total_tokens": 71950,
+      "session_count": 1,
+      "elapsed_seconds": 39.54232816697913,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-05",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-05-n1",
+      "total_tokens": 55938,
+      "root_total_tokens": 55938,
+      "session_count": 1,
+      "elapsed_seconds": 23.9071281250217,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-06",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-06-n1",
+      "total_tokens": 71391,
+      "root_total_tokens": 71391,
+      "session_count": 1,
+      "elapsed_seconds": 28.56685225002002,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-07",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-07-n1",
+      "total_tokens": 72115,
+      "root_total_tokens": 72115,
+      "session_count": 1,
+      "elapsed_seconds": 43.17056054199929,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-08",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-08-n1",
+      "total_tokens": 86438,
+      "root_total_tokens": 86438,
+      "session_count": 1,
+      "elapsed_seconds": 42.02055420799297,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-09",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-09-n1",
+      "total_tokens": 57241,
+      "root_total_tokens": 57241,
+      "session_count": 1,
+      "elapsed_seconds": 35.43228237499716,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-10",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-10-n1",
+      "total_tokens": 71858,
+      "root_total_tokens": 71858,
+      "session_count": 1,
+      "elapsed_seconds": 38.29796825000085,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-11",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-11-n1",
+      "total_tokens": 71545,
+      "root_total_tokens": 71545,
+      "session_count": 1,
+      "elapsed_seconds": 40.43811608297983,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-12",
+      "valid": true,
+      "quality_score": 0,
+      "errors": [
+        "報告が必要成果と不一致: question"
+      ],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-12-n1",
+      "total_tokens": 72276,
+      "root_total_tokens": 72276,
+      "session_count": 1,
+      "elapsed_seconds": 37.13347962498665,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-13",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-13-n1",
+      "total_tokens": 56047,
+      "root_total_tokens": 56047,
+      "session_count": 1,
+      "elapsed_seconds": 27.62447283399524,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-14",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-14-n1",
+      "total_tokens": 71992,
+      "root_total_tokens": 71992,
+      "session_count": 1,
+      "elapsed_seconds": 48.16544604199589,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-15",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-15-n1",
+      "total_tokens": 56319,
+      "root_total_tokens": 56319,
+      "session_count": 1,
+      "elapsed_seconds": 27.461175791017013,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-16",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-16-n1",
+      "total_tokens": 56486,
+      "root_total_tokens": 56486,
+      "session_count": 1,
+      "elapsed_seconds": 34.305727458006004,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-17",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-17-n1",
+      "total_tokens": 71415,
+      "root_total_tokens": 71415,
+      "session_count": 1,
+      "elapsed_seconds": 49.83543691600789,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-18",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-18-n1",
+      "total_tokens": 57541,
+      "root_total_tokens": 57541,
+      "session_count": 1,
+      "elapsed_seconds": 32.65481816598913,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-19",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-19-n1",
+      "total_tokens": 56602,
+      "root_total_tokens": 56602,
+      "session_count": 1,
+      "elapsed_seconds": 46.83712233300321,
+      "exit_code": 0
+    },
+    {
+      "case_id": "CRC-20",
+      "valid": true,
+      "quality_score": 4,
+      "errors": [],
+      "scope": "成果採点のみ。トークンと経過時間は実行系が別途取得する。",
+      "label": "crc-20-n1",
+      "total_tokens": 42579,
+      "root_total_tokens": 42579,
+      "session_count": 1,
+      "elapsed_seconds": 23.54267179200542,
+      "exit_code": 0
+    }
+  ],
+  "formal_comparison_baseline_ready": false,
+  "qualification_status": "execution_qualified_quality_contract_issue_remaining",
+  "raw_grade_not_overwritten_or_rescored": true,
+  "old_attempt_retained": {
+    "profile_id": "compact-core20-free-sol61-low-n1-r2",
+    "selected_cases": 20,
+    "raw_score4_count": 17,
+    "raw_score0_count": 3,
+    "total_tokens": 1313839,
+    "audit_ref": "registrations/free-n1-r2-contract-defect-audit.json"
+  },
+  "task_resource_accounting": {
+    "model_runs_total": 42,
+    "selected_current_runs": 20,
+    "previous_contract_attempt_runs": 20,
+    "extra_qualification_runs_total": 2,
+    "all_executed_total_tokens": 2711754,
+    "scope": "採点修正前の試験と独立資格確認を含む今回の全実行。"
+  },
+  "private_evidence_location": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/compact-core20-free-sol61-low-n1-20261001-r3",
+  "standard14_pass_claimed": false,
+  "token_reduction_proven": false,
+  "scope": "Free N=1の実測と測定契約の不備確認。Candidate比較、N=5、採用、release、本体反映は行わない。",
+  "result_content_sha256": "6f34561be777cc98fe3eaff70396c342b84264681254ba792c630dba8433a96f"
+}

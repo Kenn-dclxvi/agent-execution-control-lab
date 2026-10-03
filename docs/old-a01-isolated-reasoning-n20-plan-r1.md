@@ -1,0 +1,9 @@
+# 個人指示を除外した旧A01の推論レベル別N20
+
+利用者が2026年10月3日に依頼した旧A01の再測定。旧素材そのまま、Free、Astra Low・Medium・Highを各累積20件とする。今回の現在環境Low2件は個人指示除外を照合して再利用し、Low18件、Medium20件、High20件の58件を追加する。旧の混入条件N20、画像削減素材、小規模素材の結果は合算しない。
+
+CLI 0.159.0、元のFree適用後tree、元JSON TaskSpec、元oracleとRating14、固定models_cache、共有Python、sandbox、approval、全担当トークン集計と経過時間境界を固定する。各実行は別workspaceと空のCODEX_HOMEに認証と固定モデル一覧だけを渡し、個人指示と上位指示の不在を実行前後に保存する。個人指示を復元しない。
+
+基準は現在環境Low N2の一次resultとし、入力・実行器・採点源・全証拠hashを照合する。推論レベルだけを変える。固定並列上限M24を保持し、新規は最大24件、再利用2件は実同時1件だったことを実行状況として記録する。実同時数を理由にトークンや時間を補正しない。低得点も保存し、累積20件で終了。無効runで未発行分を停止し、自動再試行や追加Nは行わない。
+
+ケース単独の非登録診断であり、Standard14全体のLayer4登録やprompt効果の主張は行わない。個人指示が混入した旧結果との完全互換比較には使わない。専用保存場所はSN7100のruns/astra-old-a01-isolated-n20-20261003-r1。dispatch-plan.json、comparison-preflight.json、condition-compatibility-receipt.jsonを一件目発行前に固定する。

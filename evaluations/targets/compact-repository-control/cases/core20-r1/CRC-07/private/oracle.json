@@ -1,0 +1,27 @@
+{
+  "case_id": "CRC-07",
+  "revision": "r1",
+  "required_files": {
+    "loader.json": {
+      "empty_is_valid": true
+    }
+  },
+  "required_report": {
+    "status": "completed",
+    "findings": [],
+    "question": null
+  },
+  "allowed_changes": [
+    "loader.json",
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "snapshot.json": [
+        {
+          "placeholder": true
+        }
+      ]
+    }
+  }
+}

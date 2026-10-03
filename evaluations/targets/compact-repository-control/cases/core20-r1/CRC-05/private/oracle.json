@@ -1,0 +1,27 @@
+{
+  "case_id": "CRC-05",
+  "revision": "r1",
+  "required_files": {},
+  "required_report": {
+    "status": "awaiting_user",
+    "findings": [],
+    "question": null,
+    "question_options": [
+      "円",
+      "千円"
+    ]
+  },
+  "allowed_changes": [
+    "result.json"
+  ],
+  "negative_control": {
+    "files": {
+      "settings.json": {
+        "unit": "千円"
+      }
+    },
+    "report": {
+      "status": "completed"
+    }
+  }
+}

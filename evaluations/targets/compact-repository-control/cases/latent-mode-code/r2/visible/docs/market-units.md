@@ -1,0 +1,7 @@
+# market unitsの現行仕様
+
+runはbuild_shadow_ledgerを呼び出す。指定を省略したときの現在のmodeはdailyで、snapshotを優先し、欠落・不正時はlive CSVを使う。取得元と資産一覧を台帳へ渡す。
+
+strictはsnapshotの不正をエラーにする。欠落も通常はエラーだが、allow_live_csv_in_strictを明示した場合だけlive CSVを使える。不正snapshotにはこの例外を適用しない。
+
+この文書は現行挙動を記述する。変更を決めた記録はまだない。

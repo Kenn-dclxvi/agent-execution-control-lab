@@ -1,0 +1,66 @@
+{
+  "profile_id": "compact-core20-free-sol61-low-n1-r1",
+  "target_id": "compact-repository-control",
+  "revision": "r1",
+  "lifecycle_state": "configured_not_runtime_qualified",
+  "evaluation_set_ref": {
+    "path": "evaluations/targets/compact-repository-control/sets/core20-r1.json",
+    "sha256": "805acb962662a80e1536aae0cbaddad6ad256fcbb70ef16466d0fab2674cae0c"
+  },
+  "rating_ref": {
+    "path": "evaluations/targets/compact-repository-control/rating-contracts/outcome-r1.json",
+    "sha256": "ff92fad23d9c5fe607d1af46fb6c21443339c5aedc36cd36bed6fa19495040bd"
+  },
+  "prompt_ref": {
+    "path": "evaluations/targets/compact-repository-control/prompts/baselines/free-r1/identity.json",
+    "sha256": "50278ca729f107fa1db97756c7afec30ea4425793f4486c780568d4fd1b9b35b"
+  },
+  "runtime": {
+    "executor": "codex-cli",
+    "required_version": "0.159.0",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "executable_binding": null,
+    "permission": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "max_workers": 24,
+    "personal_instruction_isolation": "per_run_empty_CODEX_HOME_auth_only",
+    "multi_agent": true,
+    "agents_max_threads": 4,
+    "token_accounting": {
+      "scope": "all_agents",
+      "revision": "v1",
+      "source": "codex_rollout_final_usage_by_workspace"
+    }
+  },
+  "repetition": {
+    "initial_n": 1,
+    "confirmatory_n": 5,
+    "reuse_existing_atomic_runs": true,
+    "max_attempts_per_slot": 1,
+    "low_quality_run_policy": "retain"
+  },
+  "budget": {
+    "initial_model_slots": 20,
+    "confirmatory_additional_max_slots": 80,
+    "candidate_slots_before_baseline_qualification": 0,
+    "automatic_dispatch": false,
+    "total_token_hard_limit": null,
+    "limit_policy": "トークン上限を理由に途中終了した実行を品質0点や節約成功へ混ぜない。各段階の総量を実測してから次段階を別計画へ固定する。"
+  },
+  "execution_gate": {
+    "enabled": false,
+    "required": [
+      "fixture_qualification",
+      "absolute_executable_version_sha256",
+      "runtime_and_auth_isolation_receipt",
+      "all_agent_usage_qualification",
+      "baseline_independent_repeat",
+      "baseline_all20_n1_three_kpis",
+      "comparison_preflight_receipt_before_prompt_comparison"
+    ]
+  },
+  "comparison_scope": "新系列内のprompt差だけを比較し、旧STD14結果は比較元に使わない"
+}

@@ -1,0 +1,24 @@
+{
+  "contract_id": "compact-repository-control-outcome-r2",
+  "revision": "r2",
+  "kpis": [
+    "quality_score",
+    "total_tokens",
+    "elapsed_seconds"
+  ],
+  "score_rules": {
+    "4": "必要成果、保持条件、結果報告、指定された検証証拠がすべて成立",
+    "0": "必要成果の欠落、禁止変更、誤った状態報告、失効した検証証拠の採用が一件以上ある"
+  },
+  "invalid": "fixture不一致、入力または証拠の欠落、実行環境障害は品質の0点へ混ぜない",
+  "diagnostics": [
+    "source_reads",
+    "tool_calls",
+    "worker_count"
+  ],
+  "method": "JSONは値で比較し、明示されていないコマンドや処理順を必須化しない",
+  "free_failure_policy": "全ケースを結果前に固定する。有効な低品質runを再実行して消さない。Freeが失敗したケースだけを抜き出した値を全セット比較に使わない。",
+  "report_value_policy": "必要な値は包含一致、余分な説明を許容。集合の並び順は未指定なら採点しない。余分なfindingは許容しない。",
+  "projection_value_policy": "CRC-18はpublicのJSON値だけ、またはpublicだけを持つオブジェクトを許容。内部値は禁止。",
+  "validation_evidence_policy": "公開verify.pyを実際に呼んだ正常終了commandと、変更後hashへ対応する出力を採用。Python subprocess経由の正常実行も許容。"
+}

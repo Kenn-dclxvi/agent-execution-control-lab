@@ -1,0 +1,3 @@
+入力はa.jsonの変換不能を示しています。aを推測して書き換えず、独立して更新できるb.jsonのversionを2へ直してください。結果はblockedとし、completed_effectsへb、blocked_effectsへaを記録してください。
+
+この作業ディレクトリだけを対象とする。要求された結果を得て、変更前からある対象外のファイルを保持する。結果はresult.jsonへJSONで保存する。result.jsonのstatusはcompleted、awaiting_user、blocked、reviewedのいずれかとする。reviewedの場合はfindingsへ具体的な指摘を記録し、それ以外はfindingsを空配列にする。必要な確認事項はquestionへ記録する。要求された検証を実行した場合は、その証拠をvalidationへ記録する。

@@ -1,0 +1,925 @@
+{
+  "new_model_runs": 0,
+  "historical_results_changed": false,
+  "counting_method": "token_countの累積usageが変わる記録だけを抽出し、同一usageの再掲を除いた。各実行の最終合計を一次結果と照合。",
+  "runs": [
+    {
+      "variant": "source-separation-r5",
+      "run_id": "separation-r5-low-01",
+      "quality_score": 4,
+      "result_sha256": "f4b1a3d208b080b7f456c79d8d51b1e6ee69045f6ea1edd73d83be50a6b9d3e8",
+      "rollout_sha256": "be75e0e097ab87163c009fe82d7b47c0d373ac1fcf14db5ca1e4642267c04b68",
+      "distinct_usage_updates": 4,
+      "final_usage": {
+        "input_tokens": 80023,
+        "cached_input_tokens": 60160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 405,
+        "reasoning_output_tokens": 33,
+        "total_tokens": 80428
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T09:27:30.868Z",
+          "cumulative": {
+            "input_tokens": 13725,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 121,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13846
+          },
+          "last": {
+            "input_tokens": 13725,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 121,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13846
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:35.191Z",
+          "cumulative": {
+            "input_tokens": 28171,
+            "cached_input_tokens": 22528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 187,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28358
+          },
+          "last": {
+            "input_tokens": 14446,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 66,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14512
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:39.732Z",
+          "cumulative": {
+            "input_tokens": 52469,
+            "cached_input_tokens": 36096,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 244,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 52713
+          },
+          "last": {
+            "input_tokens": 24298,
+            "cached_input_tokens": 13568,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 57,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 24355
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:50.080Z",
+          "cumulative": {
+            "input_tokens": 80023,
+            "cached_input_tokens": 60160,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 405,
+            "reasoning_output_tokens": 33,
+            "total_tokens": 80428
+          },
+          "last": {
+            "input_tokens": 27554,
+            "cached_input_tokens": 24064,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 161,
+            "reasoning_output_tokens": 33,
+            "total_tokens": 27715
+          }
+        }
+      ],
+      "command_count": 3,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal*' -g '*ingest*' -g '*market*' -g '*test*'\"",
+        "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py tests/unit/test_universal_ingester.py tests/unit/_universal_ingester_cases.py'",
+        "/bin/zsh -lc \"cat tests/unit/test_market_units_snapshot.py; ls -l AGENTS.md; rg --files --hidden .agents .codex -g '*.md'\""
+      ],
+      "delivered_tool_output_characters": 49496
+    },
+    {
+      "variant": "source-separation-r5",
+      "run_id": "separation-r5-low-02",
+      "quality_score": 0,
+      "result_sha256": "f4b1a3d208b080b7f456c79d8d51b1e6ee69045f6ea1edd73d83be50a6b9d3e8",
+      "rollout_sha256": "23c77b2e66bf5cd081c0140c16ee78653b139a1d5a4261901144526899f7b8ab",
+      "distinct_usage_updates": 7,
+      "final_usage": {
+        "input_tokens": 136002,
+        "cached_input_tokens": 120448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 687,
+        "reasoning_output_tokens": 51,
+        "total_tokens": 136689
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T09:27:30.483Z",
+          "cumulative": {
+            "input_tokens": 13725,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 127,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13852
+          },
+          "last": {
+            "input_tokens": 13725,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 127,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13852
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:34.672Z",
+          "cumulative": {
+            "input_tokens": 27845,
+            "cached_input_tokens": 24832,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 186,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28031
+          },
+          "last": {
+            "input_tokens": 14120,
+            "cached_input_tokens": 13568,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 59,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14179
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:40.431Z",
+          "cumulative": {
+            "input_tokens": 44781,
+            "cached_input_tokens": 38784,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 291,
+            "reasoning_output_tokens": 13,
+            "total_tokens": 45072
+          },
+          "last": {
+            "input_tokens": 16936,
+            "cached_input_tokens": 13952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 105,
+            "reasoning_output_tokens": 13,
+            "total_tokens": 17041
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:47.646Z",
+          "cumulative": {
+            "input_tokens": 61840,
+            "cached_input_tokens": 55552,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 388,
+            "reasoning_output_tokens": 13,
+            "total_tokens": 62228
+          },
+          "last": {
+            "input_tokens": 17059,
+            "cached_input_tokens": 16768,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 97,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 17156
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:27:54.670Z",
+          "cumulative": {
+            "input_tokens": 84597,
+            "cached_input_tokens": 72448,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 458,
+            "reasoning_output_tokens": 27,
+            "total_tokens": 85055
+          },
+          "last": {
+            "input_tokens": 22757,
+            "cached_input_tokens": 16896,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 70,
+            "reasoning_output_tokens": 14,
+            "total_tokens": 22827
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:29:06.011Z",
+          "cumulative": {
+            "input_tokens": 110222,
+            "cached_input_tokens": 94976,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 590,
+            "reasoning_output_tokens": 41,
+            "total_tokens": 110812
+          },
+          "last": {
+            "input_tokens": 25625,
+            "cached_input_tokens": 22528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 132,
+            "reasoning_output_tokens": 14,
+            "total_tokens": 25757
+          }
+        },
+        {
+          "timestamp": "2026-10-03T09:29:11.542Z",
+          "cumulative": {
+            "input_tokens": 136002,
+            "cached_input_tokens": 120448,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 687,
+            "reasoning_output_tokens": 51,
+            "total_tokens": 136689
+          },
+          "last": {
+            "input_tokens": 25780,
+            "cached_input_tokens": 25472,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 97,
+            "reasoning_output_tokens": 10,
+            "total_tokens": 25877
+          }
+        }
+      ],
+      "command_count": 4,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingest*'\"",
+        "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py'",
+        "/bin/zsh -lc \"rg -n 'units_mode|allow_live|snapshot|build_shadow_ledger|\\\\.run\\\\(' tests/unit/test_market_units_snapshot.py tests/unit/_universal_ingester_cases.py; rg --files -g AGENTS.md -g '*universal*' -g '*snapshot*' tests src/domain; cat tests/unit/test_market_units_snapshot.py\"",
+        "/bin/zsh -lc 'python -m pytest tests/unit/test_universal_ingester.py tests/unit/test_market_units_snapshot.py -q'"
+      ],
+      "delivered_tool_output_characters": 42517
+    },
+    {
+      "variant": "cumulative-test-deduplication-r6",
+      "run_id": "deduplication-r6-low-01",
+      "quality_score": 0,
+      "result_sha256": "9886034616222e9d5871870e7d1617083835b3f74b1f3f7b1f0a3a1c87b000c0",
+      "rollout_sha256": "2bf720e51c1e3a463c8f01842af883dd37006047c7d1b95efb386bcb535563b0",
+      "distinct_usage_updates": 7,
+      "final_usage": {
+        "input_tokens": 138921,
+        "cached_input_tokens": 123264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 625,
+        "reasoning_output_tokens": 43,
+        "total_tokens": 139546
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T12:14:59.255Z",
+          "cumulative": {
+            "input_tokens": 13761,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 119,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13880
+          },
+          "last": {
+            "input_tokens": 13761,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 119,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13880
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:05.171Z",
+          "cumulative": {
+            "input_tokens": 27912,
+            "cached_input_tokens": 24832,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 217,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28129
+          },
+          "last": {
+            "input_tokens": 14151,
+            "cached_input_tokens": 13568,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 98,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14249
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:11.566Z",
+          "cumulative": {
+            "input_tokens": 45901,
+            "cached_input_tokens": 38784,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 325,
+            "reasoning_output_tokens": 21,
+            "total_tokens": 46226
+          },
+          "last": {
+            "input_tokens": 17989,
+            "cached_input_tokens": 13952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 108,
+            "reasoning_output_tokens": 21,
+            "total_tokens": 18097
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:17.451Z",
+          "cumulative": {
+            "input_tokens": 64016,
+            "cached_input_tokens": 56576,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 409,
+            "reasoning_output_tokens": 21,
+            "total_tokens": 64425
+          },
+          "last": {
+            "input_tokens": 18115,
+            "cached_input_tokens": 17792,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 84,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 18199
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:23.819Z",
+          "cumulative": {
+            "input_tokens": 87454,
+            "cached_input_tokens": 74496,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 484,
+            "reasoning_output_tokens": 43,
+            "total_tokens": 87938
+          },
+          "last": {
+            "input_tokens": 23438,
+            "cached_input_tokens": 17920,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 75,
+            "reasoning_output_tokens": 22,
+            "total_tokens": 23513
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:28.186Z",
+          "cumulative": {
+            "input_tokens": 113113,
+            "cached_input_tokens": 97792,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 543,
+            "reasoning_output_tokens": 43,
+            "total_tokens": 113656
+          },
+          "last": {
+            "input_tokens": 25659,
+            "cached_input_tokens": 23296,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 59,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 25718
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:36.954Z",
+          "cumulative": {
+            "input_tokens": 138921,
+            "cached_input_tokens": 123264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 625,
+            "reasoning_output_tokens": 43,
+            "total_tokens": 139546
+          },
+          "last": {
+            "input_tokens": 25808,
+            "cached_input_tokens": 25472,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 82,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 25890
+          }
+        }
+      ],
+      "command_count": 5,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingester*'\"",
+        "/bin/zsh -lc \"cat AGENTS.md src/AGENTS.md tests/AGENTS.md; sed -n '1,260p' src/domain/universal_ingester.py; rg -n 'market|mode|snapshot' tests/unit/test_universal_ingester.py tests/unit/_universal_ingester_cases.py; rg --files src/domain tests/unit -g AGENTS.md\"",
+        "/bin/zsh -lc \"cat tests/unit/test_market_units_snapshot.py; cat tests/unit/test_universal_ingester.py; sed -n '1,90p' tests/unit/_universal_ingester_cases.py; rg -n 'units_mode|allow_live_csv_in_strict|_resolve_market_units' tests\"",
+        "/bin/zsh -lc 'pytest tests/unit/test_market_units_snapshot.py tests/unit/test_universal_ingester.py -q'",
+        "/bin/zsh -lc 'git status --short'"
+      ],
+      "delivered_tool_output_characters": 41527
+    },
+    {
+      "variant": "cumulative-test-deduplication-r6",
+      "run_id": "deduplication-r6-low-02",
+      "quality_score": 0,
+      "result_sha256": "9886034616222e9d5871870e7d1617083835b3f74b1f3f7b1f0a3a1c87b000c0",
+      "rollout_sha256": "b27b42436a25033da36bf31c64ea5d77194086b83505dfb4d062388964611039",
+      "distinct_usage_updates": 7,
+      "final_usage": {
+        "input_tokens": 160139,
+        "cached_input_tokens": 138368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 684,
+        "reasoning_output_tokens": 57,
+        "total_tokens": 160823
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T12:15:00.159Z",
+          "cumulative": {
+            "input_tokens": 13761,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 133,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13894
+          },
+          "last": {
+            "input_tokens": 13761,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 133,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13894
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:06.149Z",
+          "cumulative": {
+            "input_tokens": 27925,
+            "cached_input_tokens": 22528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 212,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28137
+          },
+          "last": {
+            "input_tokens": 14164,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 79,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14243
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:14.374Z",
+          "cumulative": {
+            "input_tokens": 51144,
+            "cached_input_tokens": 36480,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 338,
+            "reasoning_output_tokens": 25,
+            "total_tokens": 51482
+          },
+          "last": {
+            "input_tokens": 23219,
+            "cached_input_tokens": 13952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 126,
+            "reasoning_output_tokens": 25,
+            "total_tokens": 23345
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:18.661Z",
+          "cumulative": {
+            "input_tokens": 74507,
+            "cached_input_tokens": 59520,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 388,
+            "reasoning_output_tokens": 25,
+            "total_tokens": 74895
+          },
+          "last": {
+            "input_tokens": 23363,
+            "cached_input_tokens": 23040,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 50,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 23413
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:15:26.218Z",
+          "cumulative": {
+            "input_tokens": 101083,
+            "cached_input_tokens": 82688,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 455,
+            "reasoning_output_tokens": 36,
+            "total_tokens": 101538
+          },
+          "last": {
+            "input_tokens": 26576,
+            "cached_input_tokens": 23168,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 67,
+            "reasoning_output_tokens": 11,
+            "total_tokens": 26643
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:16:35.740Z",
+          "cumulative": {
+            "input_tokens": 130526,
+            "cached_input_tokens": 109056,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 602,
+            "reasoning_output_tokens": 57,
+            "total_tokens": 131128
+          },
+          "last": {
+            "input_tokens": 29443,
+            "cached_input_tokens": 26368,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 147,
+            "reasoning_output_tokens": 21,
+            "total_tokens": 29590
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:16:42.797Z",
+          "cumulative": {
+            "input_tokens": 160139,
+            "cached_input_tokens": 138368,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 684,
+            "reasoning_output_tokens": 57,
+            "total_tokens": 160823
+          },
+          "last": {
+            "input_tokens": 29613,
+            "cached_input_tokens": 29312,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 82,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 29695
+          }
+        }
+      ],
+      "command_count": 4,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal*' -g '*ingester*' -g '*market*'\"",
+        "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; rg --files src/domain tests/unit -g AGENTS.md; cat src/domain/universal_ingester.py tests/unit/test_universal_ingester.py tests/unit/_universal_ingester_cases.py'",
+        "/bin/zsh -lc 'cat tests/unit/test_market_units_snapshot.py; ls -l AGENTS.md; git symbolic-ref --short -q HEAD'",
+        "/bin/zsh -lc 'python -m pytest tests/unit/test_universal_ingester.py tests/unit/test_market_units_snapshot.py -q'"
+      ],
+      "delivered_tool_output_characters": 52766
+    },
+    {
+      "variant": "cumulative-snapshot-test-r7",
+      "run_id": "snapshot-r7-low-01",
+      "quality_score": 0,
+      "result_sha256": "8d5af8e2da7ff871b5398a464602d70115d1ea9e0b533ec3f70bd513f1f5878b",
+      "rollout_sha256": "2e3feb18e48f9b1c9698c503906ff988f5d0d26204912b773b83810b05c36aa1",
+      "distinct_usage_updates": 8,
+      "final_usage": {
+        "input_tokens": 193954,
+        "cached_input_tokens": 157824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 749,
+        "reasoning_output_tokens": 55,
+        "total_tokens": 194703
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T12:27:46.235Z",
+          "cumulative": {
+            "input_tokens": 13743,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 132,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13875
+          },
+          "last": {
+            "input_tokens": 13743,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 132,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13875
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:27:50.475Z",
+          "cumulative": {
+            "input_tokens": 27868,
+            "cached_input_tokens": 24832,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 202,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28070
+          },
+          "last": {
+            "input_tokens": 14125,
+            "cached_input_tokens": 13568,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 70,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14195
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:27:56.500Z",
+          "cumulative": {
+            "input_tokens": 51846,
+            "cached_input_tokens": 38784,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 312,
+            "reasoning_output_tokens": 18,
+            "total_tokens": 52158
+          },
+          "last": {
+            "input_tokens": 23978,
+            "cached_input_tokens": 13952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 110,
+            "reasoning_output_tokens": 18,
+            "total_tokens": 24088
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:01.040Z",
+          "cumulative": {
+            "input_tokens": 75952,
+            "cached_input_tokens": 62592,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 381,
+            "reasoning_output_tokens": 18,
+            "total_tokens": 76333
+          },
+          "last": {
+            "input_tokens": 24106,
+            "cached_input_tokens": 23808,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 69,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 24175
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:14.149Z",
+          "cumulative": {
+            "input_tokens": 103099,
+            "cached_input_tokens": 86528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 561,
+            "reasoning_output_tokens": 36,
+            "total_tokens": 103660
+          },
+          "last": {
+            "input_tokens": 27147,
+            "cached_input_tokens": 23936,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 180,
+            "reasoning_output_tokens": 18,
+            "total_tokens": 27327
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:19.023Z",
+          "cumulative": {
+            "input_tokens": 133263,
+            "cached_input_tokens": 97792,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 619,
+            "reasoning_output_tokens": 36,
+            "total_tokens": 133882
+          },
+          "last": {
+            "input_tokens": 30164,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 58,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 30222
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:29:23.234Z",
+          "cumulative": {
+            "input_tokens": 163577,
+            "cached_input_tokens": 127744,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 659,
+            "reasoning_output_tokens": 55,
+            "total_tokens": 164236
+          },
+          "last": {
+            "input_tokens": 30314,
+            "cached_input_tokens": 29952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 40,
+            "reasoning_output_tokens": 19,
+            "total_tokens": 30354
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:29:28.735Z",
+          "cumulative": {
+            "input_tokens": 193954,
+            "cached_input_tokens": 157824,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 749,
+            "reasoning_output_tokens": 55,
+            "total_tokens": 194703
+          },
+          "last": {
+            "input_tokens": 30377,
+            "cached_input_tokens": 30080,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 90,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 30467
+          }
+        }
+      ],
+      "command_count": 5,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal*' -g '*ingester*' -g '*market*' -g '\"'!docs/**'\"' -g '\"'!node_modules/**'\"'\"",
+        "/bin/zsh -lc 'cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py; cat tests/unit/_universal_ingester_cases.py'",
+        "/bin/zsh -lc \"rg --files -g AGENTS.md -g '\"'!scripts/**'\"'; cat tests/unit/test_market_units_snapshot.py; rg -n 'units_mode|allow_live_csv_in_strict|_resolve_market_units' tests\"",
+        "/bin/zsh -lc 'python -m pytest tests/unit/test_market_units_snapshot.py tests/unit/test_universal_ingester.py -q'",
+        "/bin/zsh -lc 'git status --short'"
+      ],
+      "delivered_tool_output_characters": 56274
+    },
+    {
+      "variant": "cumulative-snapshot-test-r7",
+      "run_id": "snapshot-r7-low-02",
+      "quality_score": 0,
+      "result_sha256": "8d5af8e2da7ff871b5398a464602d70115d1ea9e0b533ec3f70bd513f1f5878b",
+      "rollout_sha256": "1398dfd448b2b25fc3fb70890a656bfe5a498a6f0cef7ae36e30a7544146783d",
+      "distinct_usage_updates": 7,
+      "final_usage": {
+        "input_tokens": 129056,
+        "cached_input_tokens": 107136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 672,
+        "reasoning_output_tokens": 56,
+        "total_tokens": 129728
+      },
+      "steps": [
+        {
+          "timestamp": "2026-10-03T12:27:47.531Z",
+          "cumulative": {
+            "input_tokens": 13743,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 123,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13866
+          },
+          "last": {
+            "input_tokens": 13743,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 123,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 13866
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:27:53.464Z",
+          "cumulative": {
+            "input_tokens": 27876,
+            "cached_input_tokens": 22528,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 203,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 28079
+          },
+          "last": {
+            "input_tokens": 14133,
+            "cached_input_tokens": 11264,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 80,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 14213
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:00.301Z",
+          "cumulative": {
+            "input_tokens": 44869,
+            "cached_input_tokens": 36480,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 330,
+            "reasoning_output_tokens": 16,
+            "total_tokens": 45199
+          },
+          "last": {
+            "input_tokens": 16993,
+            "cached_input_tokens": 13952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 127,
+            "reasoning_output_tokens": 16,
+            "total_tokens": 17120
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:06.843Z",
+          "cumulative": {
+            "input_tokens": 63672,
+            "cached_input_tokens": 53248,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 438,
+            "reasoning_output_tokens": 28,
+            "total_tokens": 64110
+          },
+          "last": {
+            "input_tokens": 18803,
+            "cached_input_tokens": 16768,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 108,
+            "reasoning_output_tokens": 12,
+            "total_tokens": 18911
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:10.333Z",
+          "cumulative": {
+            "input_tokens": 82601,
+            "cached_input_tokens": 71936,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 472,
+            "reasoning_output_tokens": 28,
+            "total_tokens": 83073
+          },
+          "last": {
+            "input_tokens": 18929,
+            "cached_input_tokens": 18688,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 34,
+            "reasoning_output_tokens": 0,
+            "total_tokens": 18963
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:16.693Z",
+          "cumulative": {
+            "input_tokens": 104376,
+            "cached_input_tokens": 85504,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 542,
+            "reasoning_output_tokens": 42,
+            "total_tokens": 104918
+          },
+          "last": {
+            "input_tokens": 21775,
+            "cached_input_tokens": 13568,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 70,
+            "reasoning_output_tokens": 14,
+            "total_tokens": 21845
+          }
+        },
+        {
+          "timestamp": "2026-10-03T12:28:24.062Z",
+          "cumulative": {
+            "input_tokens": 129056,
+            "cached_input_tokens": 107136,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 672,
+            "reasoning_output_tokens": 56,
+            "total_tokens": 129728
+          },
+          "last": {
+            "input_tokens": 24680,
+            "cached_input_tokens": 21632,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 130,
+            "reasoning_output_tokens": 14,
+            "total_tokens": 24810
+          }
+        }
+      ],
+      "command_count": 5,
+      "commands": [
+        "/bin/zsh -lc \"pwd; git branch --show-current; git rev-parse HEAD; git status --short; rg --files -g AGENTS.md -g '*universal_ingester*' -g '*market*' -g '*ingest*'\"",
+        "/bin/zsh -lc \"cat AGENTS.md src/AGENTS.md tests/AGENTS.md; cat src/domain/universal_ingester.py; cat tests/unit/test_universal_ingester.py; rg -n 'market_units|mode|snapshot' tests/unit/_universal_ingester_cases.py\"",
+        "/bin/zsh -lc \"ls -l AGENTS.md; rg -n 'units_mode|allow_live_csv|UniversalIngester|daily|strict' tests/unit/test_market_units_snapshot.py; sed -n '1,90p' tests/unit/_universal_ingester_cases.py; rg --files -g AGENTS.md -g '*authority*' -g '*TaskSpec*' .agents .codex src/domain tests/unit\"",
+        "/bin/zsh -lc 'cat tests/unit/test_market_units_snapshot.py'",
+        "/bin/zsh -lc 'python -m pytest tests/unit/test_market_units_snapshot.py tests/unit/test_universal_ingester.py -q'"
+      ],
+      "delivered_tool_output_characters": 37116
+    }
+  ]
+}
