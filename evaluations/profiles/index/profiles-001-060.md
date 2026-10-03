@@ -12,6 +12,7 @@
 - [`c147-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../c147-sol61-low-standard14-n5-cli0159-isolated-r1.json)
 - [`c147-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../c147-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
 - [`c276-astra6-low-standard14-n5-cli0159-isolated-r1.json`](../c276-astra6-low-standard14-n5-cli0159-isolated-r1.json)
+- [`c276-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json`](../c276-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json)
 - [`c276-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../c276-sol61-low-standard14-n5-cli0159-isolated-r1.json)
 - [`c276-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../c276-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f07-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f07-global-m24-n5-cli0146-r1.json)
