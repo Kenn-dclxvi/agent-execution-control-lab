@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate257-evidence-permission-binding-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate257-evidence-permission-binding-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate258-partial-result-continuation-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate258-partial-result-continuation-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate259-same-artifact-second-continuation-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate259-same-artifact-second-continuation-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate259-same-artifact-second-continuation-exclusion-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate259-same-artifact-second-continuation-exclusion-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate33-worker-context-sufficiency-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate33-worker-context-sufficiency-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate34-owner-result-state-separation-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate34-owner-result-state-separation-owner-producer-v5-targeted2-global-m10-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v5-targeted2-global-m10-n5-r1.json)
-- [`candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v6-expanded12-global-m24-n5-r1.json)

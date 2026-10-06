@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC276のGPT-6 Astra low新規N=5（2026-10-06）](#astra6-c276-free-new-n5-20261006)
+
 - [C276とFreeの6.1 Sol low／medium新規N=5（2026-10-06）](#sol61-c276-free-new-n5-20261006)
 
 - [旧A01の実読コード削減（2026-10-03）](#old-a01-read-input-reduction-20261003)
@@ -104,6 +106,18 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="astra6-c276-free-new-n5-20261006"></a>
+
+## FreeとC276のGPT-6 Astra low新規N=5（2026-10-06）
+
+[astra6-c276-free-low-standard14-new-n5_2026-10-06.md](astra6-c276-free-low-standard14-new-n5_2026-10-06.md)：Standard14全14ケース各N=5を2条件、計140件新規実行し、各実行のスコア・全エージェントトークン・所要時間を記載。
+
+[free-lowの登録結果](71163a1a328641f2ae1d447370253b7f.json)。
+
+[c276-lowの登録結果](09113d732579439cb3d84ade1c91fe4f.json)。
+
+[astra6-c276-free-low-standard14-new-n5_2026-10-06.json](astra6-c276-free-low-standard14-new-n5_2026-10-06.json)、[astra6-c276-free-low-standard14-new-n5_2026-10-06-comparison.json](astra6-c276-free-low-standard14-new-n5_2026-10-06-comparison.json)。
 
 <a id="sol61-c276-free-new-n5-20261006"></a>
 

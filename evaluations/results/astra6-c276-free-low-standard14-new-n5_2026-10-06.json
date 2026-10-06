@@ -1,0 +1,103 @@
+{
+  "campaign": {
+    "elapsed_seconds": 286.01433420798276,
+    "ended_at": "2026-10-06T06:08:40.816032+00:00",
+    "errors": [],
+    "max_workers": 24,
+    "plan_count": 2,
+    "plan_summaries": [
+      {
+        "attempt_count": 70,
+        "campaign_output": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra6-c276-free-low-standard14-n5-20261006-r1/campaign",
+        "elapsed_seconds": 286.01433420798276,
+        "ended_at": "2026-10-06T06:08:40.814895+00:00",
+        "errors": [],
+        "excluded_attempt_count": 0,
+        "max_workers": 24,
+        "requested_slots": 70,
+        "schedule_policy": "global_queue",
+        "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+        "started_at": "2026-10-06T06:03:54.800521+00:00",
+        "status": "complete",
+        "valid_slots": 70
+      },
+      {
+        "attempt_count": 70,
+        "campaign_output": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra6-c276-free-low-standard14-n5-20261006-r1/campaign",
+        "elapsed_seconds": 286.01433420798276,
+        "ended_at": "2026-10-06T06:08:40.815911+00:00",
+        "errors": [],
+        "excluded_attempt_count": 0,
+        "max_workers": 24,
+        "requested_slots": 70,
+        "schedule_policy": "global_queue",
+        "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+        "started_at": "2026-10-06T06:03:54.800521+00:00",
+        "status": "complete",
+        "valid_slots": 70
+      }
+    ],
+    "requested_slots": 140,
+    "schedule_policy": "global_queue",
+    "schema_version": "the-caption-prompt.parallel-campaign-summary/v1",
+    "started_at": "2026-10-06T06:03:54.800521+00:00",
+    "status": "complete",
+    "valid_slots": 140
+  },
+  "cli": "0.159.0",
+  "conditions": {
+    "c276-low": {
+      "analysis": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra6-c276-free-low-standard14-n5-20261006-r1/c276-low/analysis.json",
+      "compatibility_key": "8587b06065d82053fa1b68765d25ac8895d342a26f1807e84e08472ecceb8bd7",
+      "failure_counts": {},
+      "isolated_run_count": 70,
+      "median": {
+        "elapsed_seconds": 616.5293815820478,
+        "quality_score": 100.0,
+        "total_tokens": 1944598
+      },
+      "pool_key": "3ca199e84ab56828718896f71c159c60a07b9ad4939279b0f3cc6664e509127c",
+      "result_content_sha256": "c6cefff881c7dfd049686604096ed37d063d9eef4e30ee41dccc0e92a27b4c0f",
+      "result_id": "09113d732579439cb3d84ade1c91fe4f",
+      "score_counts": {
+        "4": 70
+      }
+    },
+    "free-low": {
+      "analysis": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra6-c276-free-low-standard14-n5-20261006-r1/free-low/analysis.json",
+      "compatibility_key": "8587b06065d82053fa1b68765d25ac8895d342a26f1807e84e08472ecceb8bd7",
+      "failure_counts": {
+        "a01_forbidden_test_operation": 2,
+        "compiled_provenance_invalid": 3,
+        "direct_constraint_invalid": 3,
+        "required_changed_path_missing:requirements.in": 3,
+        "required_changed_path_missing:requirements.txt": 3,
+        "required_command_not_attempted:git:diff:--check": 3,
+        "required_command_not_attempted:git:diff:--name-only": 3,
+        "required_command_not_attempted:python3:PyYAML>=6.0.1:pyyaml==6.0.3": 3
+      },
+      "isolated_run_count": 70,
+      "median": {
+        "elapsed_seconds": 652.0234982080292,
+        "quality_score": 96.42857142857143,
+        "total_tokens": 2134746
+      },
+      "pool_key": "1681b76b66c6b778f64ca9f250a9a19d9d477b140433c8b2f0393ec91ab3c1a2",
+      "result_content_sha256": "c70abeee55e30d3f9fee64b9ba4c95f4d3b6de8089df905030c5267db17d5545",
+      "result_id": "71163a1a328641f2ae1d447370253b7f",
+      "score_counts": {
+        "0": 2,
+        "2": 3,
+        "4": 65
+      }
+    }
+  },
+  "max_workers": 24,
+  "model": "gpt-6-astra",
+  "personal_instruction_isolation_verified_runs": 140,
+  "valid_runs": 140,
+  "new_runs_only": true,
+  "preflight_verified": true,
+  "evidence_root": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra6-c276-free-low-standard14-n5-20261006-r1",
+  "comparison_scope": "今回のAstra lowのFree対C276。過去run・別モデルのrunは集計に含めない。"
+}
