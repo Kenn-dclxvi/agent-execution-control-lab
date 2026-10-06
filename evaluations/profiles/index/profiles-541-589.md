@@ -1,7 +1,8 @@
-# Profile index 541-587
+# Profile index 541-589
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json)
 - [`control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json)
 - [`control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2-20261003.json)
 - [`control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2-20261003.json)
@@ -37,6 +38,7 @@
 - [`four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-sol6-low-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-sol6-low-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json)
+- [`free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 - [`free-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json)
 - [`free-sol61-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)

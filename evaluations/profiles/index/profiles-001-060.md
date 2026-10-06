@@ -12,6 +12,7 @@
 - [`c147-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../c147-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 - [`c147-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../c147-sol61-low-standard14-n5-cli0159-isolated-r1.json)
 - [`c147-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../c147-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
+- [`c276-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../c276-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`c276-astra6-low-standard14-n5-cli0159-isolated-r1.json`](../c276-astra6-low-standard14-n5-cli0159-isolated-r1.json)
 - [`c276-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../c276-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 - [`c276-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json`](../c276-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate121-evidence-request-scope-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate121-evidence-request-scope-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
-- [`candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

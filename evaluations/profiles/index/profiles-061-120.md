@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate123-preterminal-result-round-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate123-preterminal-result-round-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate147-luna6-high-standard14-n5-cli0156-r1.json`](../candidate147-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json)
-- [`candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json`](../candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json)
