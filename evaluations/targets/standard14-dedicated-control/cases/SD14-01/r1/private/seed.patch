@@ -1,0 +1,10 @@
+--- a/src/domain/market_units_snapshot.py
++++ b/src/domain/market_units_snapshot.py
+@@ -64,7 +64,6 @@
+         for row in csv.DictReader(f):
+             normalized = normalize_market_unit_row(row)
+             rows.append(normalized)
+-    _validate_unique_asset_keys(rows)
+     return rows
+ 
+ 

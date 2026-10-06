@@ -1,0 +1,91 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-04",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+  "source_revision": "r2",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "F04-C1",
+        "type": "source_behavior",
+        "expected": "Header and row cells are conditional on at least one nonblank audit_match_key."
+      },
+      {
+        "criterion_id": "F04-C2",
+        "type": "source_behavior",
+        "expected": "The empty-record colSpan matches the rendered column count."
+      },
+      {
+        "criterion_id": "F04-C3",
+        "type": "command_identity_and_drift",
+        "expected": "npm ci, lint, and build pass in order; package and lock files remain unchanged; no forbidden drift remains. Adapter-owned temporary outputs are outside candidate quality."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r2",
+    "mode": "repository_state_terminal_command_and_source_evidence",
+    "human_calibration_owner": "independent_source_check",
+    "criteria": [
+      {
+        "criterion_id": "F04-C1",
+        "evidence_sources": [
+          "final_App.tsx",
+          "source_semantic_check"
+        ]
+      },
+      {
+        "criterion_id": "F04-C2",
+        "evidence_sources": [
+          "final_App.tsx",
+          "source_semantic_check"
+        ]
+      },
+      {
+        "criterion_id": "F04-C3",
+        "evidence_sources": [
+          "ordered_command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      "cd src/web/market_units_editor && npm ci --ignore-scripts --no-audit --no-fund --include=dev",
+      "cd src/web/market_units_editor && npm run lint",
+      "cd src/web/market_units_editor && npm run build",
+      "git diff --check"
+    ],
+    "success_rule": "all listed criteria pass from observed evidence; build success alone does not satisfy the caller-visible source criteria; adapter teardown is not a candidate criterion"
+  },
+  "seed_operations": [
+    [
+      "src/web/market_units_editor/src/App.tsx",
+      "funds.some(f => (f.audit_match_key ?? '').trim() !== '')",
+      "true"
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/web/market_units_editor/src/App.tsx",
+      "mode": "100644",
+      "git_blob_sha1": "27e5953da7f6dd68456245feead7a73a5ddca864"
+    },
+    {
+      "path": "src/web/market_units_editor/package.json",
+      "mode": "100644",
+      "git_blob_sha1": "eb5bcd337658788993194ce2928f20e89945ba77"
+    },
+    {
+      "path": "src/web/market_units_editor/package-lock.json",
+      "mode": "100644",
+      "git_blob_sha1": "5b84c7407cda5f283545a9b161c8bfe628a827e2"
+    }
+  ]
+}

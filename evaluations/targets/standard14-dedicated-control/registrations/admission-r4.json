@@ -1,0 +1,49 @@
+{
+  "ready": false,
+  "model_slots_issued": 0,
+  "authorized_slots_now": 0,
+  "planned": {
+    "low": 28,
+    "medium": 28,
+    "high": 28
+  },
+  "max_workers": 24,
+  "automatic_retry": false,
+  "retain_valid_low_quality": true,
+  "unverified": [
+    "工程3の第4版再判定",
+    "固定モデル一覧の実配送照合",
+    "CLI basic/developer/skills/toolと質問方式の一致",
+    "空home・認証だけ・network禁止の各実行照合",
+    "all-agent usageと時間区間の新系列実測成立",
+    "新集合Layer 1とatomic planの実行前照合"
+  ],
+  "schema_version": "standard14-dedicated-admission/v4",
+  "scoring_connection": {
+    "implemented": true,
+    "local_qualification": {
+      "normal": 14,
+      "negative": 107,
+      "all_pass": true,
+      "receipt": "evidence-bridge-qualification-r3.json"
+    },
+    "live_model_observed": false
+  },
+  "historical_node_identity": {
+    "proven": false,
+    "reason": "旧receiptに当時のbinary hashとcache manifestがない。版とpackage/lockの一致を完全同一性へ補完しない。",
+    "receipt": "node-environment-audit-r2.json",
+    "required_for": "旧保存結果との比較認定。工程2の新系列内環境固定とは別。"
+  },
+  "stage3_executed": false,
+  "stage2_complete": true,
+  "node_binding": {
+    "node-environment-binding-r3.json": "f19cae962ff98c3c7b6bba50d7d45eb66c6f96e04deb322c5284d659d2f00c54",
+    "node-dynamic-closure-r4.json": "87b331f769b222b616c8dcfb0654b572f7c6f84d33d4f517858a1f258512e191",
+    "node-setting-connection-r4.json": "c6854e5b9895b2dba85fefe4be4cd34f19111faa11f6f9642fa6183de3740005"
+  },
+  "stage2_repair_locally_complete": true,
+  "stage3_pass": false,
+  "requires_stage3_reassessment": true,
+  "repair_binding_sha256": "ef01329634ed74caa44070107dcfe6b33de6181329d61a38f5a903f67992a4e3"
+}

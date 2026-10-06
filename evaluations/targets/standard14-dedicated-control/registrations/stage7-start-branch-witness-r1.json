@@ -1,0 +1,36 @@
+{
+  "schema_version": "standard14-start-branch-witness/r1",
+  "witnesses": [
+    {
+      "side": "old",
+      "case_id": "SD14-09",
+      "reasoning_effort": "low",
+      "iteration": 2,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-09/runs/low-02/events.jsonl",
+      "source_sha256": "734360b90ac0011a50249b4d6a074661af07761202dc2dea76a95771a6752ca3",
+      "line": 5,
+      "record_sha256": "3069cb899c34480cd4a130f37f2309416907a98e07e2f83d7617b95dac65de00",
+      "observed_branch_state": "detached",
+      "observed_branch_name": null,
+      "exit_code": 0,
+      "role": "モデルが最初に受領した開始確認の出力。全84組の事前証明ではない"
+    },
+    {
+      "side": "dedicated",
+      "case_id": "SD14-09",
+      "reasoning_effort": "low",
+      "iteration": 2,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-09/runs/low-02/events.jsonl",
+      "source_sha256": "eb1dd02dd200294fe5aec61f2dc9be4d2c68c93256c79157e35b49a5dfc2f665",
+      "line": 5,
+      "record_sha256": "56ec7ead7d6bfdec17c902eb5710d8133d8c9412b7d2f05b309c49a85674cfb4",
+      "observed_branch_state": "attached",
+      "observed_branch_name": "main",
+      "exit_code": 0,
+      "role": "モデルが最初に受領した開始確認の出力。全84組の事前証明ではない"
+    }
+  ],
+  "finding": "同じLow2の依存宣言ケースで、旧側はdetached HEAD、専用側はmain。root削除・空コミットだけが唯一の差または原因ではない",
+  "coverage_pairs": 1,
+  "model_slots": 0
+}

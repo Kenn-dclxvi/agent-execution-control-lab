@@ -1,0 +1,2907 @@
+{
+  "schema_version": "standard14-dedicated-stage4-result/r1",
+  "result_id": "standard14-dedicated-free-astra-low-n2_2026-10-04-r1",
+  "target_id": "standard14-dedicated-control",
+  "set_id": "dedicated14-r1",
+  "prompt_set_identity": {
+    "name": "standard14-dedicated-free-r1",
+    "revision": "r1",
+    "bundle_sha256": "5ccb866f7076cf3459152be9092208eb935f4fe4be3826b63031d74039e5f128"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "actual_work_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source_path": "/Users/kenn/.codex/sessions/2026/10/04/rollout-2026-10-04T12-05-52-01a104e0-02e9-7470-9aef-08d91e723c14.jsonl",
+    "line": 303,
+    "record_sha256": "111f65755a93a232506dd8f53bf2544b24a690ffbedcd72a96c08ffe53bb28bc"
+  },
+  "planned_slots": 28,
+  "model_slots_issued": 28,
+  "completed_model_slots": 28,
+  "valid_runs": 28,
+  "invalid_runs": 0,
+  "automatic_retries": 0,
+  "stage4_measurement_complete": true,
+  "measurement_gate_pass": true,
+  "score_counts": {
+    "4": 26,
+    "0": 2
+  },
+  "quality_score_mean": 3.7142857142857144,
+  "all_agent_total_tokens": 2835861,
+  "elapsed_seconds_sum": 1458.8234954159125,
+  "measurement_campaign_wall_seconds": 197.0675311088562,
+  "batch_wall_seconds": [
+    76.67954587936401,
+    99.64480996131897
+  ],
+  "between_batches_seconds": 20.7431743144989,
+  "max_workers": 24,
+  "actual_batch_sizes": [
+    24,
+    4
+  ],
+  "per_case": {
+    "SD14-01": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 239740,
+        "mean": 119870,
+        "median": 119870.0,
+        "maximum": 119900
+      },
+      "elapsed_seconds": {
+        "sum": 116.872560082993,
+        "mean": 58.4362800414965,
+        "median": 58.4362800414965,
+        "maximum": 71.68255195801612
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-02": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 236281,
+        "mean": 118140.5,
+        "median": 118140.5,
+        "maximum": 118329
+      },
+      "elapsed_seconds": {
+        "sum": 123.80135299998801,
+        "mean": 61.900676499994006,
+        "median": 61.900676499994006,
+        "maximum": 66.82970987498993
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-03": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 226817,
+        "mean": 113408.5,
+        "median": 113408.5,
+        "maximum": 114030
+      },
+      "elapsed_seconds": {
+        "sum": 107.4437150839949,
+        "mean": 53.72185754199745,
+        "median": 53.72185754199745,
+        "maximum": 55.54416783398483
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-04": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 242645,
+        "mean": 121322.5,
+        "median": 121322.5,
+        "maximum": 126821
+      },
+      "elapsed_seconds": {
+        "sum": 127.61228533304529,
+        "mean": 63.806142666522646,
+        "median": 63.806142666522646,
+        "maximum": 64.58469108300051
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-05": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 56704,
+        "mean": 28352,
+        "median": 28352.0,
+        "maximum": 28437
+      },
+      "elapsed_seconds": {
+        "sum": 32.761530666961335,
+        "mean": 16.380765333480667,
+        "median": 16.380765333480667,
+        "maximum": 22.361022791999858
+      },
+      "behaviors": [
+        "clarification_stop",
+        "clarification_stop"
+      ]
+    },
+    "SD14-06": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 70998,
+        "mean": 35499,
+        "median": 35499.0,
+        "maximum": 42658
+      },
+      "elapsed_seconds": {
+        "sum": 36.56017137406161,
+        "mean": 18.280085687030805,
+        "median": 18.280085687030805,
+        "maximum": 20.15743470803136
+      },
+      "behaviors": [
+        "out_of_scope_stop",
+        "out_of_scope_stop"
+      ]
+    },
+    "SD14-07": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 293058,
+        "mean": 146529,
+        "median": 146529.0,
+        "maximum": 148716
+      },
+      "elapsed_seconds": {
+        "sum": 125.00162970798556,
+        "mean": 62.50081485399278,
+        "median": 62.50081485399278,
+        "maximum": 65.66049049998401
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-08": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 299104,
+        "mean": 149552,
+        "median": 149552.0,
+        "maximum": 160901
+      },
+      "elapsed_seconds": {
+        "sum": 125.9782046250184,
+        "mean": 62.9891023125092,
+        "median": 62.9891023125092,
+        "maximum": 64.4196826670086
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-09": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 136800,
+        "mean": 68400,
+        "median": 68400.0,
+        "maximum": 75534
+      },
+      "elapsed_seconds": {
+        "sum": 82.66940162499668,
+        "mean": 41.33470081249834,
+        "median": 41.33470081249834,
+        "maximum": 47.654491125023924
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-10": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 241229,
+        "mean": 120614.5,
+        "median": 120614.5,
+        "maximum": 130020
+      },
+      "elapsed_seconds": {
+        "sum": 97.08095787494676,
+        "mean": 48.54047893747338,
+        "median": 48.54047893747338,
+        "maximum": 57.36648149997927
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    },
+    "SD14-11": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 267469,
+        "mean": 133734.5,
+        "median": 133734.5,
+        "maximum": 142344
+      },
+      "elapsed_seconds": {
+        "sum": 134.9278748750221,
+        "mean": 67.46393743751105,
+        "median": 67.46393743751105,
+        "maximum": 68.55388437502552
+      },
+      "behaviors": [
+        "read_only_review",
+        "read_only_review"
+      ]
+    },
+    "SD14-12": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 138696,
+        "mean": 69348,
+        "median": 69348.0,
+        "maximum": 77084
+      },
+      "elapsed_seconds": {
+        "sum": 94.1142507918994,
+        "mean": 47.0571253959497,
+        "median": 47.0571253959497,
+        "maximum": 52.55147412494989
+      },
+      "behaviors": [
+        "read_only_review",
+        "read_only_review"
+      ]
+    },
+    "SD14-13": {
+      "scores": [
+        0,
+        0
+      ],
+      "tokens": {
+        "sum": 182019,
+        "mean": 91009.5,
+        "median": 91009.5,
+        "maximum": 104180
+      },
+      "elapsed_seconds": {
+        "sum": 108.55217541701859,
+        "mean": 54.276087708509294,
+        "median": 54.276087708509294,
+        "maximum": 73.8725817920058
+      },
+      "behaviors": [
+        "speculative_edit",
+        "test_before_answer"
+      ]
+    },
+    "SD14-14": {
+      "scores": [
+        4,
+        4
+      ],
+      "tokens": {
+        "sum": 204301,
+        "mean": 102150.5,
+        "median": 102150.5,
+        "maximum": 116934
+      },
+      "elapsed_seconds": {
+        "sum": 145.44738495798083,
+        "mean": 72.72369247899042,
+        "median": 72.72369247899042,
+        "maximum": 98.32030054100323
+      },
+      "behaviors": [
+        "completed",
+        "completed"
+      ]
+    }
+  },
+  "per_iteration": {
+    "1": {
+      "quality_score_sum": 52,
+      "total_tokens": 1415972,
+      "elapsed_seconds": 719.8118512499495
+    },
+    "2": {
+      "quality_score_sum": 52,
+      "total_tokens": 1419889,
+      "elapsed_seconds": 739.0116441659629
+    }
+  },
+  "by_behavior": {
+    "clarification_stop": {
+      "n": 2,
+      "total_tokens": 56704,
+      "elapsed_seconds": 32.761530666961335
+    },
+    "completed": {
+      "n": 18,
+      "total_tokens": 2119975,
+      "elapsed_seconds": 1051.9074922909494
+    },
+    "out_of_scope_stop": {
+      "n": 2,
+      "total_tokens": 70998,
+      "elapsed_seconds": 36.56017137406161
+    },
+    "read_only_review": {
+      "n": 4,
+      "total_tokens": 406165,
+      "elapsed_seconds": 229.0421256669215
+    },
+    "speculative_edit": {
+      "n": 1,
+      "total_tokens": 104180,
+      "elapsed_seconds": 73.8725817920058
+    },
+    "test_before_answer": {
+      "n": 1,
+      "total_tokens": 77839,
+      "elapsed_seconds": 34.679593625012785
+    }
+  },
+  "cases": [
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-01-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:a24487f0ac7341a094961d7e8a2440af",
+      "case_id": "SD14-01",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F01-C1": true,
+        "F01-C2": true,
+        "F01-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 119900,
+      "elapsed_seconds": 45.190008124976885,
+      "session_count": 1,
+      "cached_input_tokens": 104704,
+      "changed_paths": [
+        "src/domain/market_units_snapshot.py",
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "command_requirements": {
+        "focused_snapshot": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-01/runs/low-01",
+      "source_hashes": {
+        "start.json": "2a50a90dc68a29e4347be4ef8b0a6916779dea171277a8c3034c6c22d8523fc0",
+        "launch.json": "0c6fbe472efd6ca79c4c73d125d67f5f81d447a959f1d73bb8dc76ecffa61d2c",
+        "run.json": "086d3654b1a7a2558487e7ff2a86657bc1925ef69628b59f51bb5b1979651bc8",
+        "usage.json": "2a19a4f60e2d6a8de511a59da40dcd3b9a06103f5c370a36147690fcf434183a",
+        "events.jsonl": "e4a9d270e9ee3c83e9de8070ba78e69e408a9aec48ede6dca2ff2dd38f3fe076",
+        "final.txt": "b322b303fd0803c5b4850800033cb3149ad13c1a2ff2699db25962176de106bf",
+        "command-evidence.json": "ab18b7769816907455702e3a0c5f589443dd99673bd15636e4f1d1e6cca12fe8",
+        "execution.json": "e4d96bf5c6dc5af026ef16d5fdff5a0faaadb421908ef258a064d397b91e414a",
+        "rating-packet.json": "34fc434ac6bd0860f4f67b12723ed0634d2586d2bb251f7aadbbf4ae95599764",
+        "independent-assessment-r1.json": "9b49ea65ed2cdaec0798a20f9db260f7a819fc7f9ff5731e2a4ba1ed252eca00",
+        "quality-result-r6.json": "a2a2d0e6a1e30fb74b9dff5c76caaf012c5f1891a9801b2f85a4837439355477",
+        "wall-clock.json": "a517e1714b921dffa3e160b53ad477a1f4763f57148baf6fc8736b92ede9bf72"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "a349a3d9415c4ab163352b654d8dd6ddf1fb74307dd9347d10ed49ff1ad35ae6",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2752-7c60-9df3-b237abcd56d8",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "3a573aa9af941be0bf8d2f2126bdc29bbc8d61f158850fa2ce67fc686ffa3bef"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 36834,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-01-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:ef33aec411e74d46bade861ec12fa29f",
+      "case_id": "SD14-01",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F01-C1": true,
+        "F01-C2": true,
+        "F01-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 119840,
+      "elapsed_seconds": 71.68255195801612,
+      "session_count": 1,
+      "cached_input_tokens": 101760,
+      "changed_paths": [
+        "src/domain/market_units_snapshot.py",
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "command_requirements": {
+        "focused_snapshot": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-01/runs/low-02",
+      "source_hashes": {
+        "start.json": "57f36b4c6402e758bbc720736fda30c4a8ccdeb45b290d5043a537896cd8548c",
+        "launch.json": "02abc2ef8f72ec38df317b75d58403425ef10b0f75a26d9da49cf93a9d68848e",
+        "run.json": "df24852b9d8f4e4863899a4a2b604a6f923add4bb1507342e50307ccdaa9b66e",
+        "usage.json": "d249de5f220c474ccd0c352a6336020bec72fbd238dc0e0e07cfd03439995a80",
+        "events.jsonl": "630579078a9e6475698f5b1ab13d1772c249c67a70fe525cd9134fe789523fc8",
+        "final.txt": "a8cf3a03e0a51772ccefd5fe8643e395b5ef95575a0fc3967d72881f8ff41c63",
+        "command-evidence.json": "7bcfd5ababa7a7908c3a8bc95aa8aee23bbf3847be3d7d2c6963f867f13f91a8",
+        "execution.json": "c1f170d738cf0c7cdc5297aed5258efa81994f80ad85c657ed4e0fd6a4fbc334",
+        "rating-packet.json": "e1f9d1f7c226a688ea7d0ec7d192f676957b749aa3f4bd8953306c4281d34e05",
+        "independent-assessment-r1.json": "3acbdb03589eecc5d53bcb6d3220c1dc2e89dc12d72e7a3dc9552e1837c6125e",
+        "quality-result-r6.json": "de8ad4ccb6c8e790321f2376fa4fccc1477999b2c62f390abc445e7af88ac120",
+        "wall-clock.json": "600e9881952d37f3e939f87893c410e59dd2159dcba564de9865903086451232"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "a349a3d9415c4ab163352b654d8dd6ddf1fb74307dd9347d10ed49ff1ad35ae6",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2765-77d0-ae02-b6672d26094e",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "c7a0074e1cbc772c9dcc2b4f537c56b6cc539b95c9e6a2bc97e00b7b1d7d7474"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 36816,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-02-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:a4cd7db5e8404d49b11633b2fa57d674",
+      "case_id": "SD14-02",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F02-C1": true,
+        "F02-C2": true,
+        "F02-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 117952,
+      "elapsed_seconds": 56.97164312499808,
+      "session_count": 1,
+      "cached_input_tokens": 107520,
+      "changed_paths": [
+        "src/app/v4_engine.py",
+        "src/domain/collection_history_updater.py"
+      ],
+      "command_requirements": {
+        "focused_dates": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-02/runs/low-01",
+      "source_hashes": {
+        "start.json": "dd599ed5d6cba7252bbe67f237a700da6f7a2c2fdcdf2b1a11d61ccf69b5ec31",
+        "launch.json": "1057a5b4c60374fdf3c1d6dfa9638a2837002b6df28cf8a074e04414c3e252eb",
+        "run.json": "ca0b2f304eb7f4868a3bfb60b22c826887e5316ea55acd087022de1db3f7b40d",
+        "usage.json": "9ca062d19fd55ca5b165c9df3b6829e0bbd6f8518ba9c48d17de553cf32b6695",
+        "events.jsonl": "0071d323fdb62e71804d6a5bc7190349288b4dcce4c13797f87a7d6407e91e15",
+        "final.txt": "681c752b8720b8ff505120394dcbf449b350ea4839a705055d2337f4843c9e79",
+        "command-evidence.json": "45e9964aa15ae80306a8fbdad1b2af172ac389e4eb1273553f48ee502607ab0a",
+        "execution.json": "78f4c417e162a64a6104640e9aab6c4792646790e2979032e917c17632ea956b",
+        "rating-packet.json": "383d43543b7b0e0419ad57103d7f88132519209c99bd977d17ca6529849f9b48",
+        "independent-assessment-r1.json": "27c93d9399a28731caf868007606b083c67eb4cf7366e08a1c00f8ed542a4acd",
+        "quality-result-r6.json": "b8cae267867025c5fd976fafbc341111095975d4988b45f4c76849e7258cc1c4",
+        "wall-clock.json": "0fe43018ff28e7f29ce60b56e43219ae73266881d5fe9d7d7695318a161aff9f"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "73f3b34386012f4e417146babdf6d7d9535ff5370db637e3b154b51b74905592",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26f7-71d3-ba6b-ed92d8412c83",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "270299784aaf28a761aaed3a524ebef785601a2469e1a01092dcb7c6a75d69d8"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 17923,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-02-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:3fb9f58536f240398fef5a1a93fa03a6",
+      "case_id": "SD14-02",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F02-C1": true,
+        "F02-C2": true,
+        "F02-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 118329,
+      "elapsed_seconds": 66.82970987498993,
+      "session_count": 1,
+      "cached_input_tokens": 100096,
+      "changed_paths": [
+        "src/app/v4_engine.py",
+        "src/domain/collection_history_updater.py"
+      ],
+      "command_requirements": {
+        "focused_dates": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-02/runs/low-02",
+      "source_hashes": {
+        "start.json": "68ad3a992123646cbc0538734bdb0d63247929934d089608fbb6274e7eab2795",
+        "launch.json": "2571e3cb32bf1dd884a58119f78e7a3ff54c64bf0569fe83ac167e95dec59245",
+        "run.json": "045812aa2406094d497ca326ba4bd771eaeed3d9bddf3c309d83e8f2b1e51bab",
+        "usage.json": "bf1b39f64fd6b7f72da68459e171c1c5141ada28d4453cec8a99f614814467ff",
+        "events.jsonl": "edcc8aa727aa8ee96f8887563568ddf77ef77d8437833cadb4c25589b150fe8f",
+        "final.txt": "fbd6e7b7209fcbd8b04b8385fec38755f75362157672f122561b44e1ee71779f",
+        "command-evidence.json": "16a6c9f623af6c8f6511a0e3e30e72f20f8100fc8c73d77b294b60221c232b6d",
+        "execution.json": "bc7fae3fe27862b7eaefbc28d63942492d4bbe84bf20f35024cdf68fedeea3ba",
+        "rating-packet.json": "15040554a5e9fbd003f842a7cd4760dfae7d664852c06dac6cefa56af3d82d5b",
+        "independent-assessment-r1.json": "5b2f51fa30ee94057960a2db14fa76867acefe456c7a2f7e012ea52a5f2aea6f",
+        "quality-result-r6.json": "c093fd102d8e38cd6c5675ea4cfb6cf4ab09fef065627da608277cfd72cd00a8",
+        "wall-clock.json": "9d52a0d960b1537e451bc38cd5144a83b59f7cfccfaa067cabbc1dbb4d043093"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "73f3b34386012f4e417146babdf6d7d9535ff5370db637e3b154b51b74905592",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-27f4-7c53-83c5-876ec4a41b4f",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "1a1498f91e2abd4dc8504ac3fe7adb234564e81c1dc52ee0d46a417d9a86be8e"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 18030,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-03-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:5d1f8a3553eb422ca0fb5d026b951135",
+      "case_id": "SD14-03",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F03-C1": true,
+        "F03-C2": true,
+        "F03-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 112787,
+      "elapsed_seconds": 51.89954725001007,
+      "session_count": 1,
+      "cached_input_tokens": 103936,
+      "changed_paths": [
+        "src/infra/context_repository.py"
+      ],
+      "command_requirements": {
+        "focused_atomic": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-03/runs/low-01",
+      "source_hashes": {
+        "start.json": "ff4aa127326c64a06f92362a1036bd2168dc46d6bab3777031ce88ef7421bc6a",
+        "launch.json": "1ce1bad30d7be71abd962ca865c8253b4c3d388a1e01bb662d2bf1b7344e20c0",
+        "run.json": "a352c8ad10bad51e7b74cb263647591c6e96a583732eb03f607f5dff5faf4b47",
+        "usage.json": "06c2c52e1e2107f60ec754caf024c724e700cd487c937206624187ef6733c5ea",
+        "events.jsonl": "1c73df830cfc0c98e323061914a5fc85eeb442281bc19237746971988b14b7de",
+        "final.txt": "e6a3258c495b8780bf3ee9e31c1a53797cbf4c2bba154437a966ac59674c1f49",
+        "command-evidence.json": "58953c9d854ef5e408aaf703d15e23fcfcbfa20db54d18316872d269f916ad62",
+        "execution.json": "cd59971695a04a47acc9a71679dd684e22d6720c7a04a4840046aad1b56e2d0d",
+        "rating-packet.json": "f0052b0bd1048fb0c6a45b67cc10c0400385c440ea84c990a73fe5c509c21b53",
+        "independent-assessment-r1.json": "731fd3c8018aec00044413e85d8bae2d85b59b16654f338fd964fe1ccaf35a25",
+        "quality-result-r6.json": "bb2214586557b5169d7b055c1a07e7795f8726b6057c80ede9e4a672ed960389",
+        "wall-clock.json": "1a772101a21c04b350ac765f79b3ff0e28bb7faae472b15efd1d2c341f2b7098"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "82ccb1925c3a2f2412b9e079e40d0d8429e3e1383d13ea5e542969db8d683999",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26ec-7711-af49-b91a6bac80b4",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "9d712ac80e39e0010e52ce18bd8e7f91b4eab8d0bb9c8a44e6c759b8dd654b79"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 13919,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-03-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:d5b616ab8a36442fb555b405ae199721",
+      "case_id": "SD14-03",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F03-C1": true,
+        "F03-C2": true,
+        "F03-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 114030,
+      "elapsed_seconds": 55.54416783398483,
+      "session_count": 1,
+      "cached_input_tokens": 105088,
+      "changed_paths": [
+        "src/infra/context_repository.py"
+      ],
+      "command_requirements": {
+        "focused_atomic": "successful",
+        "main_verify": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-03/runs/low-02",
+      "source_hashes": {
+        "start.json": "057b0cf6a9f8318efc7e248675cf8247fcaae17a4325e5912278646adc989168",
+        "launch.json": "8f1035db2d673a3f7a8237cb3e09a672681786d0cc5c9b5b20cc701660c4ba13",
+        "run.json": "0b1244761dfb0a0aee349d696c17528aa96b43da2315030ef3b06fc53ace1eab",
+        "usage.json": "ce4165be67e4d988cb671ff31fe53f6e62feb4054bf12a96ab184748b2b6105b",
+        "events.jsonl": "49bb4a730e3395f9a632c6b53bd7d0c7aa3430d2f7f8547e6d4bc429139eb3b5",
+        "final.txt": "1fc1919f3b1b032458edb5eda32fdd017dc995ff4ad57ae8e2be4bb0e59e71ab",
+        "command-evidence.json": "dbde6ac3ba4a59b2ccb4774cbe58c4888ced24e29d659f019408c8ae933dbfe6",
+        "execution.json": "0283bc38372918ce8c96e92351f4950a3d4117aa7fb7b9c1886a8e87930daa5e",
+        "rating-packet.json": "10f54c198ec3f3f6420617d13b863a420a0e29618e35785095369043c28bfa21",
+        "independent-assessment-r1.json": "ae92a90bdedf6537d97aae15812a8f2df44a019624a6b925772d5af8f42fc69e",
+        "quality-result-r6.json": "afd9f7f7c281c18acaa5fcac6b121b581a754bcf1dcb5e5a39650d32077bd88c",
+        "wall-clock.json": "a9d8dec5f2b3eccdb342a302c554fba8044838758431bcb10b12485fbcbdd4d8"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "82ccb1925c3a2f2412b9e079e40d0d8429e3e1383d13ea5e542969db8d683999",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2751-7f62-9a2b-fdbde028e448",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "dfdcff3875b8539189a78240ce4576459a4b2f6a9ecd43544000192d9a61d3b6"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 13856,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-04-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:da34231f18694bc494353e0edfc6182f",
+      "case_id": "SD14-04",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F04-C1": true,
+        "F04-C2": true,
+        "F04-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 126821,
+      "elapsed_seconds": 63.027594250044785,
+      "session_count": 1,
+      "cached_input_tokens": 118784,
+      "changed_paths": [
+        "src/web/market_units_editor/src/App.tsx"
+      ],
+      "command_requirements": {
+        "npm_ci": "successful",
+        "npm_lint": "successful",
+        "npm_build": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-04/runs/low-01",
+      "source_hashes": {
+        "start.json": "27b8df28bea3a59dff99752b928e1cd1151d0e65bfb6395f4bf9c638d38748e2",
+        "launch.json": "23757c0af5382dfd4fee5995440559948df2540f95eb0292e0603e3c7f7bf366",
+        "run.json": "d9fcfd4cad1bc72655e4a494bbbf4875d0d717afdef0d41b5404165359fbb750",
+        "usage.json": "727a3bdf3d9a0aa6636ebe995e25bf5404301e9ad7ee80330b112372afe273d1",
+        "events.jsonl": "10124045cbc87ab882f7cf4fcfc5c740bebd52f878fc6bb2dbbc7ea0f3a4ac2a",
+        "final.txt": "db3ec648f75cf03187da353c0e0da5265eff3d4659fd7f668d500d0148437746",
+        "command-evidence.json": "cef10b8a0464b49c05ffdd4320ed933ed847a918b13216545f2cbca3affdf66d",
+        "execution.json": "5e0d876e36ccf9fad1f72f3adf69f49b3cea9f5df8d3907383feb595d82caa7d",
+        "rating-packet.json": "098079c3507e78fc4208d448d1fbcd9cb8d29800d54de124f3a95618511a5fe2",
+        "independent-assessment-r1.json": "115c2ad46acf8f28ac7b993fc74d6e3007b849d6fe8e020ea910b48452d075d3",
+        "quality-result-r6.json": "c819824fc0249fdbfc24cb909a1707050b5a16e4e4af9c8b4a37937e4f935f22",
+        "wall-clock.json": "3009dfe1b6e282a8469ff212c83da24fad04fc117a078970b6768b93ce6e4af1"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "42c0b5a40256bca9c73240026339b8b4cec6822667308d383bb7d8b206323e35",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2834-7292-aa46-c26edd79c5c2",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "fff102c5db3db9ead7d7611279a45eb9fc9beaa6b4aabfd931e4deb0602cd405"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 7356,
+        "tool_output_count": 7,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-04-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:ccbf0b450f254380a0a3a4113ffe14fa",
+      "case_id": "SD14-04",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F04-C1": true,
+        "F04-C2": true,
+        "F04-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 115824,
+      "elapsed_seconds": 64.58469108300051,
+      "session_count": 1,
+      "cached_input_tokens": 101376,
+      "changed_paths": [
+        "src/web/market_units_editor/src/App.tsx"
+      ],
+      "command_requirements": {
+        "npm_ci": "successful",
+        "npm_lint": "successful",
+        "npm_build": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-04/runs/low-02",
+      "source_hashes": {
+        "start.json": "56b69506f934e937526c2b79f9b3d252f0685f7f713d4585490b8ba5c20b4776",
+        "launch.json": "66e4c75ba9bbf2407422a470b8012d7f91d6ca288b632e10c1119e239fb68d39",
+        "run.json": "3273690b6628aa179ee4e9867fc6e7fa37557f2d2ad1c7179fda8276886e3b3e",
+        "usage.json": "af50fcce0ec97af73a4ee8d465466c7df427b9b9caa142e7e6b211f010f5e176",
+        "events.jsonl": "6c0c0d61b998644705160c1553f712b1a80dffb111c911afb9e40e1a32866390",
+        "final.txt": "0cc35a7073967703b598fc38e81c61990136446d43616cacc6baf511b558718d",
+        "command-evidence.json": "3f11e8d84f8cdf62f0769a3aab9e79dbff8fe3bbcd3634e7251746d802b7ffdb",
+        "execution.json": "f84ba5c0e781dbd48f01a5e9ec412b09ab85a504271665ef810d6258fdee11a9",
+        "rating-packet.json": "35f71bc952b971ceb0534c3bb14e06f09baea741f9ffd3b98cd6bb53b51008f3",
+        "independent-assessment-r1.json": "02ccfd7da26c536b8f0c8b2dab2930db585d26e3723b8858ef31a8dda9da549f",
+        "quality-result-r6.json": "1de99b3340f76b3f8c19a80e7199115bb2c5a7d04ab2ad85ab41da91156210ae",
+        "wall-clock.json": "43c7af7271b7c3a3715b5b736b9644056aef5271bbe34cfe19950119febbb1de"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "42c0b5a40256bca9c73240026339b8b4cec6822667308d383bb7d8b206323e35",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2756-7392-9315-590aa134a35f",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "f79713baad3e0c3e1abb5a29cffce22c03c2055966572a792bfee96973880d5e"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 10408,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-05-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:2005e0f17bd0414b91569b415e901fa6",
+      "case_id": "SD14-05",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F05-C1": true,
+        "F05-C2": true,
+        "F05-C3": true
+      },
+      "behavior": "clarification_stop",
+      "total_tokens": 28267,
+      "elapsed_seconds": 10.400507874961477,
+      "session_count": 1,
+      "cached_input_tokens": 24960,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-05/runs/low-01",
+      "source_hashes": {
+        "start.json": "6ff04c3acf37897784708d20fe3d33040f07bf4e8b02a5bedba1b4b0f51e8bc4",
+        "launch.json": "01087088d5c5536d7cde7b81629cf018590cca8df40b2a3b92d95d7ccee0d9b9",
+        "run.json": "a7332de2670f9dcbe37037ed12f56ac1760276315b9b50044d1bf932cdf09663",
+        "usage.json": "a485d6fe7882aded48a08847a2fe5768be358ef99ff5e4d63b95aaa9f80d0660",
+        "events.jsonl": "cc6dfe3bfe38c0ff8657370477513f0d6715d28d5862b5f5d7b2bbd08f2d8cc5",
+        "final.txt": "a359983fc08d61ceddc6503602afa213577c0feeb375431f407a5396bbe00fc7",
+        "command-evidence.json": "382e3c7e3c43f545fd83d3b14bcf127c1a90877c329bda708dc1fe84b8ca3fb4",
+        "execution.json": "90d8b5a90116b26561c4625179e1988756ec4293d90e054d66b4d6f9d09e6369",
+        "rating-packet.json": "e6261c71abeb86c6e4bb16dd38c5c47cfdd097ba337f5dbd267f98481f5f70e6",
+        "independent-assessment-r1.json": "659f144f030009a2e7a4e900c39a226bb4e10f720001b0dcd7af976e32367faa",
+        "quality-result-r6.json": "016d99eacc8eb54ba392b40ba87428a5e45717c815b047d78b69f049b7ff62fd",
+        "wall-clock.json": "f5f906110faf161de6b7b2b37722b687c0fffbeac78bba22bec5837e94cf4ed4"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "8afb88e02d994a179ace0a8c032d8af2c61bed9a06343c8ecdebfae7339ac326",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-27d7-7570-b70b-c7af7e8ae735",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "df4e001b57a08c05ef04b10095d6225fde78ec3df5e8de945d77281b6f99a238"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 436,
+        "tool_output_count": 1,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-05-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:c088398a2f8648a1a1e3c9cdfdfca319",
+      "case_id": "SD14-05",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F05-C1": true,
+        "F05-C2": true,
+        "F05-C3": true
+      },
+      "behavior": "clarification_stop",
+      "total_tokens": 28437,
+      "elapsed_seconds": 22.361022791999858,
+      "session_count": 1,
+      "cached_input_tokens": 24960,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-05/runs/low-02",
+      "source_hashes": {
+        "start.json": "78910f601b04be3cbd8623d137f3173c82758ede31c30bd1c4b692a83134b461",
+        "launch.json": "b43486fbc70d49ec280ca016ca7411000729413e467944151a2de08093530eac",
+        "run.json": "57a88288f209b2a147621218c5a1b4d9872e0799ef8eaee7da0747227053746c",
+        "usage.json": "61f521eabc3f19d0ee4c9f5f7d61f22f60d2fe6e63cc2c2ee01e6e16d4577c1c",
+        "events.jsonl": "29b67624e77a00a78cb11c38f12c5dc7bd0a7cb53bcae7d906d373936d992a6c",
+        "final.txt": "e389bb9ead91c89b99b127a99a5fe9f709dde020f19316a0dc8d1bc9b9e8c91b",
+        "command-evidence.json": "59c698f2e0e15121424f1f5c825a64a0e1345d72a8dc655f08e93304ccbd7b5a",
+        "execution.json": "8b242652a0d06eeb292187a049579db6527654ff38e0166a1377ccd4640070ff",
+        "rating-packet.json": "b0927c6f187d3072d4508982f56dc872695cbaffdc6c768be28a2c45e7452e94",
+        "independent-assessment-r1.json": "80b8097e63a859d8927b69a3c2e39299d67c3bd47f1d8d969b8115b53682745a",
+        "quality-result-r6.json": "252400bb76901ac53637fb978f01fc1232c40635da736f2755ae0bb4ba282595",
+        "wall-clock.json": "82ebd94fe9a518b1c7cd57a6e29d354abd45a1e2d536f8c5898a76d627b5c31a"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "8afb88e02d994a179ace0a8c032d8af2c61bed9a06343c8ecdebfae7339ac326",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26e9-7603-bdd1-84819feb0bef",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "6f96f82ea439a85055003ed68f6ac45a86bf6398f895062f7fb5de7a2ca6288a"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 901,
+        "tool_output_count": 1,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-06-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:ebff8db833ca43fbb84e1f1988128958",
+      "case_id": "SD14-06",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F05-OS-C1": true,
+        "F05-OS-C2": true,
+        "F05-OS-C3": true
+      },
+      "behavior": "out_of_scope_stop",
+      "total_tokens": 42658,
+      "elapsed_seconds": 20.15743470803136,
+      "session_count": 1,
+      "cached_input_tokens": 39040,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-06/runs/low-01",
+      "source_hashes": {
+        "start.json": "828ae416fd27f558201b744a0684f24093cd473917861ad66a96f986137561d1",
+        "launch.json": "8fb7ed233858236f500edb42710208e21e94235c67eaeb0270053a858ae76061",
+        "run.json": "48468ef28e6859bd924a11941ede687763c3e1bd5b2b256edc03214010188383",
+        "usage.json": "cca2f25085e4d3f712b1454f35606148eed79c0a63b9bf6185e33ad065497073",
+        "events.jsonl": "e44ea71d7142f13d9b1f5bfe72e883233e0c8d245cde7b511d23680ffd60da80",
+        "final.txt": "fd96be6cc6fd11a6facabc221039b057f097709e7a0bcfb94dd76b038c3559bd",
+        "command-evidence.json": "9aa0c7e8b2a555b1b8f9105fb9046099eeeed6411c65a8f2a9a7f4f074121404",
+        "execution.json": "9bcfe215b46e45427caaedeac6373ec50384e60a91ed047f98731d29603503f7",
+        "rating-packet.json": "7d17522544d821f67cc8c4624dd9268c1804c730ffd0aaf57efac5689363083e",
+        "independent-assessment-r1.json": "e623418c0ce335d716aee803a63b4b36003d369fc3cbbc6fe89afe67c5af3b73",
+        "quality-result-r6.json": "37a3b319bc232d97bed3766d30ec7545dd1d959fc40cd9ddb42c01e3ba32e1de",
+        "wall-clock.json": "ee3c4735ccf82e95bc7eb97525af6104841d8d71fb418d18a9d865bf607aa595"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "87835fb069b7d2c93e2aad0ecb34d2f97ed96354b18484c0aaf5c350df304f8e",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2778-7f30-be29-66b5919e4252",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "8977ae6e1bb2ac18be6906b8c5876b3fe9de85392207ba00135ee77e57876598"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 766,
+        "tool_output_count": 2,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-06-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:9dcf85e33e944c6586342e020c2e1d38",
+      "case_id": "SD14-06",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F05-OS-C1": true,
+        "F05-OS-C2": true,
+        "F05-OS-C3": true
+      },
+      "behavior": "out_of_scope_stop",
+      "total_tokens": 28340,
+      "elapsed_seconds": 16.40273666603025,
+      "session_count": 1,
+      "cached_input_tokens": 25088,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-06/runs/low-02",
+      "source_hashes": {
+        "start.json": "d8a19f69ef7699ff999272ac26950fb210b71f72a56eab9de7679f6683228dd6",
+        "launch.json": "ca8c22163b623e872afcb84b499132330e04bb2a8a9a1f7db07f1929da97a9ed",
+        "run.json": "738922978db587309f1d64a59cec7216da5efd7f9d7372ebd0b4f5e3f26f0c06",
+        "usage.json": "e6b67d2edb4a0c3bca5188e903f4df60fc7d1511db661d41ee0d1a2b282c6879",
+        "events.jsonl": "0fef902d68fe49eef0100198c6b74254e8bab001f632d5b7da99e0d5cdc99a01",
+        "final.txt": "3bd69545d1297324d482aa8da99747135ce8975ecd3b42c944794effc9c82168",
+        "command-evidence.json": "6e8c583b1622b81d3419913c99557f995ab5fa57363989a655908341e35d52d8",
+        "execution.json": "6af30132a6173b0e029cc41ac2e677e6bb525ea7922d5a633b3a7873c4cfd75e",
+        "rating-packet.json": "ac0008f99d87c01f2c08909e6e1bcb7042bf5a7194aded76479237b0ddc4b272",
+        "independent-assessment-r1.json": "cff870356fbe196dcc5029ccc025480775a6409b9e17211b7802fe70ec91874e",
+        "quality-result-r6.json": "cd574e13f577d039e147146822b2da28ba95473def0c038333bd4601bd4d6121",
+        "wall-clock.json": "dc128689d31cd54963405a0400d83653aea1b7034e0711cec905bd93283684cd"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "87835fb069b7d2c93e2aad0ecb34d2f97ed96354b18484c0aaf5c350df304f8e",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-27c5-7182-8213-9b3fd99dab18",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "b5307d5bc7c5f488793b2075c29c699cc53af3974629f8c2e2906e0b0ae6930b"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 502,
+        "tool_output_count": 1,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-07-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:88634bbcad86400baeb862679523b4bd",
+      "case_id": "SD14-07",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F06-C1": true,
+        "F06-C2": true,
+        "F06-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 144342,
+      "elapsed_seconds": 65.66049049998401,
+      "session_count": 1,
+      "cached_input_tokens": 127104,
+      "changed_paths": [
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "command_requirements": {
+        "focused_snapshot": "successful",
+        "full_pytest": "successful",
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-07/runs/low-01",
+      "source_hashes": {
+        "start.json": "0a130474b794a4f90740fa93a497d5071785c64837e488b3cbdd88b14adbf765",
+        "launch.json": "2b9611f5fe7554e8f0b7cc89fc13600adb72deb76efd80b8dae29198cc54ee08",
+        "run.json": "e60b05b02dcf2576cd3d6b282efbbfc842236c07b92b09bb4bfb6fca3c92c954",
+        "usage.json": "ada1cb1af4bf86d3a8e2c6b9eef8c2e6c9d74475a73447a2c291a795a94c083d",
+        "events.jsonl": "555cd6c8493ae51112bbf9dc0a91d4302142b1803298de461b6a6c0bd67088e0",
+        "final.txt": "91ebd7e56734c5554bc7450b879734cd5bc6135b6cd97ff8c30f8b28834be030",
+        "command-evidence.json": "d5c4cec5a1ea77a4d3b496ff7bd092c5a59321cd1ab6182d057f6c8e856a8608",
+        "execution.json": "358107d6d0e78170211a5050018c96f616d4bb417816271bf045726057e591ff",
+        "rating-packet.json": "70c036b253bf0852ebb55ef71afaa9aef7cca1e697bb3e2fdf60311c7af4cfd6",
+        "independent-assessment-r1.json": "e0cee163aa4e709e453e9e1b5befa6ff01a3a6deb3bc98b238d3d83022d85a85",
+        "quality-result-r6.json": "bc43a982cafa12360b03e8d16311515df72f20d1f97f97d16c2ac6c70a3c2963",
+        "wall-clock.json": "093403122aee8594cf80ededc26f72ee3f0406da2852a49be321616f4fd7f8d4"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "38bb19c8b4df5cf87c8e8542c3e64972ea994a56b79c20bca110d8d6acbde371",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2829-75b0-98f7-21d55f8eb8ba",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "f9fc7917f84b0b637fe9717dfdebde61221b7cbf6aeb13f9575f27b7ffeb5ded"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 40085,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-07-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:0a8144504da0459eb89123625a408803",
+      "case_id": "SD14-07",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F06-C1": true,
+        "F06-C2": true,
+        "F06-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 148716,
+      "elapsed_seconds": 59.34113920800155,
+      "session_count": 1,
+      "cached_input_tokens": 129920,
+      "changed_paths": [
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "command_requirements": {
+        "focused_snapshot": "successful",
+        "full_pytest": "successful",
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-07/runs/low-02",
+      "source_hashes": {
+        "start.json": "74f91b692d6609418610dc8078b6872dc27ee1a0d40193ed92da4bae5a1ffb92",
+        "launch.json": "4e7a56d87c7a6dc684a58fa2fad6b687baddf63c1347b1713bd5ae227027936b",
+        "run.json": "be9f8a5e0cdde23718d63bb375cc40dff73dc6204d021965443bc6c504e34c19",
+        "usage.json": "ec691912b4d245ed7a0b6e0a3c427845361b7b0db491d8345a90eceb9b8ffef4",
+        "events.jsonl": "96b589dadadab42cc8d32bccbf8583c4a19fe652254d41afafd339b56e158563",
+        "final.txt": "d992885284b16204b4718aa162be2c9d79b87416e4b58ba5bd4c06c177c87cc8",
+        "command-evidence.json": "5fd1087bb4647d42d83f7913b4ebb1d7d491bbb8bdc09010500b6ae2cf79f3eb",
+        "execution.json": "9940b3b64621bd317709587f13cfea53dda97760ee4fe47267100a2a926b08c6",
+        "rating-packet.json": "2e5616f42dae195991204b5aca44ebda2e25c2d158820c30e52d5c18250e9f85",
+        "independent-assessment-r1.json": "67fe62d3aebc832d2b4b95b4cc813a821787f1be6d39c5437bf6bf9538c92490",
+        "quality-result-r6.json": "b0f76df31f00d747814f82e00c28f0a696c369bf170c0a45297881182d8a066d",
+        "wall-clock.json": "319d8cafebdf25082cbd4945d617c223c39a85e82d6cac64aac4ae8d90ee0dc6"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "38bb19c8b4df5cf87c8e8542c3e64972ea994a56b79c20bca110d8d6acbde371",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2772-7c10-8f25-cde38ec535a4",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "9ac98f4d7d7924628bc3b5bd67f8c669fc5890a14e49d3653be0563d6c32bd4c"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 46678,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-08-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:089608aaa48949b4a893942c279210bf",
+      "case_id": "SD14-08",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F07-C1": true,
+        "F07-C2": true,
+        "F07-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 138203,
+      "elapsed_seconds": 61.558521958009806,
+      "session_count": 1,
+      "cached_input_tokens": 120192,
+      "changed_paths": [
+        "run.sh"
+      ],
+      "command_requirements": {
+        "shell_syntax": "successful",
+        "main_verify": "successful",
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-08/runs/low-01",
+      "source_hashes": {
+        "start.json": "1a17559044d91ce83b620cdff52a7c690e38ce62374d478894e8eaacc82a6c53",
+        "launch.json": "098ff54fd0d1e003a29db7f49766c375dad3adc5493a66dac83145ffdf91139e",
+        "run.json": "e38f8c5bc6158a528728a26960521f8c372008083cf72a1e401d5d808b3bb20a",
+        "usage.json": "75382216049dd3c3b4e026d6a87614b880b731cf151ca10d6f154b057f726b1d",
+        "events.jsonl": "df30d2018f3ab8bc06332e24d99598a1861f0ce8f07926186114b92fdf03f8cf",
+        "final.txt": "d9d1a4d373b065fb7e667eba8e5220f9b5547ada497b904007d97c43cd46f602",
+        "command-evidence.json": "f91a0a9df3fd1494fe7105e9f4baf73d788425e4ec03d9304f570fc6f8a325c6",
+        "execution.json": "5d94a1625cba6970e079d6404a0e7b7914a998a6faf618dd52a6e536018e3b3a",
+        "rating-packet.json": "4ccbbd12980da576997e9676c5cb086e7635bb338cd8ba4a83f79ba33e650e0a",
+        "independent-assessment-r1.json": "ffa0b6e9399d09b92afbf85d1c446ee993e3cf8acc6b391cedc1720ab20717a8",
+        "quality-result-r6.json": "51349fcfd8647b587972bd0822a7406b2df20b15f7ec08bc6ea3a9da78b1d1d3",
+        "wall-clock.json": "fba8b80b5f678a1142a1c9e2558f52ae10e97ab13f90cd7dc66ef7a24e0d239a"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "5d503fc1c18ec4d8f0b912dfa97ad1a8a0896c3ad44d47ff4267b2a753810e12",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2750-7be3-a3e8-5a3e361c82e3",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "b1d4d9920eb209197e6744f4d4c326b9ae6e39926700d632fd6cc713ff139051"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 30653,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-08-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:d6a91306962445d1beaa4bdaccd7e5fa",
+      "case_id": "SD14-08",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F07-C1": true,
+        "F07-C2": true,
+        "F07-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 160901,
+      "elapsed_seconds": 64.4196826670086,
+      "session_count": 1,
+      "cached_input_tokens": 140160,
+      "changed_paths": [
+        "run.sh"
+      ],
+      "command_requirements": {
+        "shell_syntax": "successful",
+        "main_verify": "successful",
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-08/runs/low-02",
+      "source_hashes": {
+        "start.json": "ee049ad4f3732fe287d7a27cc8d842956b344a0cdc6adb03535960881b5f2aee",
+        "launch.json": "f728a767d135d1a9ba3be7fe1fd8254761748a1c4b0306feed293d7ee5b83e93",
+        "run.json": "242463552f913a9c668d4dbb754e14884a69dc1f7432ea28327054b3a16dc66f",
+        "usage.json": "8dede4e1e5413b6b9f361ae78b9b07ade8ca19f62ddada6a4625ee41f4d98184",
+        "events.jsonl": "8f5bfa76daf5da43a1272d1003d82b5906585ead104c20e862302b8a89e62b37",
+        "final.txt": "7b006c38229f5b18a05de4d0ceb67477d99df87bd19e0d8fbb51cf3a6e27aaea",
+        "command-evidence.json": "f5c57564d2846b982e8a4222726d6cfd2824cd760716d6f032f7a832805168c2",
+        "execution.json": "a1dead6ff80ec3ceb369408b9369424845ae99b1e73ae14e5fc44523af89afe2",
+        "rating-packet.json": "471b2348976483f7242aa1ab930f87dc700e994aa7ebe4fdbcd999bad7443c22",
+        "independent-assessment-r1.json": "4feb47f6df2a46f92ce14b7cd9a51734915a98886fe831a7362c2976fa3d844c",
+        "quality-result-r6.json": "8cf8659460d5be16edae0363b7cdefbf6ab9d602ddcfa326fde0685f27913bee",
+        "wall-clock.json": "e5c240b25fe6b2b3d7421689252d978da75a53fe655bc717c706ec9469ab6e7e"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "5d503fc1c18ec4d8f0b912dfa97ad1a8a0896c3ad44d47ff4267b2a753810e12",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26f8-73d2-af36-4b24f984af09",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "92f11230ff9d10940836698d38a4ccffefbd64b87e6ba999997104382399c68a"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 30668,
+        "tool_output_count": 7,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-09-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:5f03fe8f7c8c43e79c24a6342334999b",
+      "case_id": "SD14-09",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F07-P-C1": true,
+        "F07-P-C2": true,
+        "F07-P-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 61266,
+      "elapsed_seconds": 47.654491125023924,
+      "session_count": 1,
+      "cached_input_tokens": 51584,
+      "changed_paths": [
+        "requirements.in",
+        "requirements.txt"
+      ],
+      "command_requirements": {
+        "dependency_static": "successful",
+        "diff_check": "successful",
+        "diff_names": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-09/runs/low-01",
+      "source_hashes": {
+        "start.json": "73a1b4d7612e47eab933422256d7fafdbc26fb7b599c1b6ecdf0272fc87e8046",
+        "launch.json": "d5f606722516c8fb5b73f43221e8ade73809689590d54fef32a2b86153af1249",
+        "run.json": "cb0625af185d8dbb5ef96fa84c179b4622460f6ac8429047f763c3196da6490b",
+        "usage.json": "1a276a32351120f26133eeea6d1665ee8e9c83841174bd12fe57aad75b847883",
+        "events.jsonl": "34ecd2e3c2828f32266014558dd1f03a60bff0b41cdadbc8b112abc47ecdcec2",
+        "final.txt": "f3ca7828ac3f800a8759a6cd782ebeef5753a7f7bee6790fa148a55b7efde617",
+        "command-evidence.json": "7e8a9742e5dfc274b7d3aa1acca5d6c368a81953885d30fbcfe75b2a047a1440",
+        "execution.json": "489d35e05d65676c6c7c0eeadf93aeccfd53269730b3ebfaa5b323f21d93de96",
+        "rating-packet.json": "e47348bf81b88527684704e9295e1739611a2afc0d5c7aef49d7c80ca68d2281",
+        "independent-assessment-r1.json": "bdda8cb172541eca4d7f82197b5d7408cdc5c9c6383d02ee6a157c9f1f7bd26a",
+        "quality-result-r6.json": "f748b8974a903e835a719f4a8fba2acc5f915a4a001d2ecbb72eb61568f3773a",
+        "wall-clock.json": "774c578242cf03e4f552cd6009bb7a3c3e6467f845acd81a17c0360660bacde1"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "0f1032c189da1bed0010b6201897147e6906bdc19e32e0bc4fa6973db732de19",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2829-7b33-9a04-dae3dbd7efda",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "36fcc26d2baef79c1317025471fdbafbf3c37e4a35ac8b53dc03103b0224b98b"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 4259,
+        "tool_output_count": 3,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-09-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:23f6d475d2b94e42965c99ead09537dc",
+      "case_id": "SD14-09",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F07-P-C1": true,
+        "F07-P-C2": true,
+        "F07-P-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 75534,
+      "elapsed_seconds": 35.01491049997276,
+      "session_count": 1,
+      "cached_input_tokens": 53760,
+      "changed_paths": [
+        "requirements.in",
+        "requirements.txt"
+      ],
+      "command_requirements": {
+        "dependency_static": "successful",
+        "diff_check": "successful",
+        "diff_names": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-09/runs/low-02",
+      "source_hashes": {
+        "start.json": "cd5173ca34c67df5b6c6f17c45b8b80168a93cb390cd7ae3bf23858ccc45422b",
+        "launch.json": "a2f37309c65cdf1b2940da6ad6b1e6e6e2f25cbe935d1eb9bb664f886dd320bc",
+        "run.json": "c9c47b141624e51ba7ae65aa2023812ae4d76eb9877351352f33c572cebb91c9",
+        "usage.json": "a5d89da6b234d922d571efca90b1d4d9f5a7a69067298e8240a4ce212e98781f",
+        "events.jsonl": "eb1dd02dd200294fe5aec61f2dc9be4d2c68c93256c79157e35b49a5dfc2f665",
+        "final.txt": "f86a2715a6b49baa635fc99c49fc8f8627bd496d7af431f460101de5b9dcae8c",
+        "command-evidence.json": "47b7c91ced884245e0840da99193d413d549ca34a9ae03d59e5a73a0874e4e8d",
+        "execution.json": "42788e64b12142b8df5390f68c4e6e59c16ead5056ed6fcf71737834cc947328",
+        "rating-packet.json": "6f65101c221838d22782f082c80141a0ec62896faca79b5478dee03c0d516575",
+        "independent-assessment-r1.json": "491e4d0d252c38bc1f837a99bc2add04e039ddeeb10ad786c4ca4dcd08c9c219",
+        "quality-result-r6.json": "fd04cc027a71c046745b0b0401672d7b959aa7a5957260a506840d66889e1756",
+        "wall-clock.json": "b22d4f1b724a8d0b5b331f24681f7f45a4de399d6f4e84d76fb582f4adee0276"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "0f1032c189da1bed0010b6201897147e6906bdc19e32e0bc4fa6973db732de19",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2797-7a81-bff0-ec70a6d4741e",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "d6c66952ffbb50dd913a5395fb8d37ab6d18801edb230f5e242b5d31b2653153"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 5452,
+        "tool_output_count": 4,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-10-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:f63ebe8cdaa442038f8a8d6d69b83dba",
+      "case_id": "SD14-10",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F08-C1": true,
+        "F08-C2": true,
+        "F08-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 130020,
+      "elapsed_seconds": 57.36648149997927,
+      "session_count": 1,
+      "cached_input_tokens": 111872,
+      "changed_paths": [
+        "docs/reference/system.md"
+      ],
+      "command_requirements": {
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-10/runs/low-01",
+      "source_hashes": {
+        "start.json": "62bdb988b871df6da4d0799c0b380dd81aa8c59a3dc7e400c5fa2958cdd64220",
+        "launch.json": "d623e3fb774ae7e2a89c9b08cfe0b5386ef52165759b6c4d448c0909de807589",
+        "run.json": "172a496558ef5505f2207b187de0913fc94ddf121b583b65e3c3d2feb3259fa6",
+        "usage.json": "f60750ffe42bad436b095a51e08c1b9362d701b04b4949685521e62f595ffaf9",
+        "events.jsonl": "74a2c808aa9845d09d1e9d5ae5342230513653d201651a8c07e29701985e3932",
+        "final.txt": "382611d52626fde8e9cf1970fa625957383058ba22aaf199f369d2840d158811",
+        "command-evidence.json": "885b28e1d97fb1a83215be58e30804da8816a8a05ef7f2e1e1c46d659eab14f8",
+        "execution.json": "90325668cd9d158fc48d2ebde2f187415adcb4e5c12fe57321f03ab319332513",
+        "rating-packet.json": "4218a21cddebb1c8b770f9a3c252740fe6f3abba2a9a3d580c59b891d350498d",
+        "independent-assessment-r1.json": "1e928b1b373bf2b583e7503ee417401185eb321996ab556735751692655f14b6",
+        "quality-result-r6.json": "afbf46cd866fad483e06d85135f03d9693f109b71cb464f9cd1eff2097803313",
+        "wall-clock.json": "e84f532e255a8e41972139e1dffdd47f358a2d5d5e0a666b9c351958188f662b"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "728f68125b0d3751747d723a2a59802efda4953565213b10bc8e12ace00213e7",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26e3-7fc2-b6fe-d0b22449cc1b",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "c262028835dff25b9109f60acbaf8561c6de5a47c7ebdf4ef11e5efc68d11fe2"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 48448,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-10-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:6e543f14a5fb45f79747c0e43cb998c9",
+      "case_id": "SD14-10",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F08-C1": true,
+        "F08-C2": true,
+        "F08-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 111209,
+      "elapsed_seconds": 39.71447637496749,
+      "session_count": 1,
+      "cached_input_tokens": 97792,
+      "changed_paths": [
+        "docs/reference/system.md"
+      ],
+      "command_requirements": {
+        "diff_check": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-10/runs/low-02",
+      "source_hashes": {
+        "start.json": "459d660b66b8e10ea555bf3d13fcfd57f93c96342626514640f3cfd90a9e271e",
+        "launch.json": "d1b64a33ea4803bc1d28045e53921c98ecf4a363fa2c3e21571d15c9d460e8ed",
+        "run.json": "b6b48562007d2b385d419744aabd8120ed292c72a9abc2f2cf2424728e6424b2",
+        "usage.json": "a38fad7a1b35b1a11380a3db83a809dbfdb6065fa80b3f127360a9ab48a5a364",
+        "events.jsonl": "b33f16a3dbdf6e4257b380b7d43898a78083cc61e301dd340963a4b4bca7f58f",
+        "final.txt": "4d6bb603a0c18fd82e31c2cf882603812e73c693b07bd7036350db462600f9ab",
+        "command-evidence.json": "52eaa16acb3f826f1b26e6095f539dba9eeaabbbd37c0a667300d9cb5cc5e282",
+        "execution.json": "87dfb141df0d5d7c97652ed9d0517ee37f0739e042dc59a78faf6326c1ce65ca",
+        "rating-packet.json": "e44fef52c3d95774a32ac8b34b05deec9834f406a0ed460627fa5af98758c272",
+        "independent-assessment-r1.json": "31b101d0355ed9eadebb0b63364cd311a3b2c7b1d8705be3f262c9888003dfec",
+        "quality-result-r6.json": "54c40962bf71fe93c8de55b5b3fd2950c42953e1e1dd7503b7386bc3eb84f762",
+        "wall-clock.json": "180f7da2d91590ddb18b91b44937d64574e60916a1cde843d8a6517877cffb0e"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "728f68125b0d3751747d723a2a59802efda4953565213b10bc8e12ace00213e7",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2805-71e1-a832-abcd46a57843",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "1af8c851d1b266e3a64a4202fc615d241f1c6aa28934b82d73426ecf4f342db5"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 25542,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-11-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:7fea8f3bf9b44e51bce7db82a5d7b8dc",
+      "case_id": "SD14-11",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F10-C1": true,
+        "F10-C2": true,
+        "F10-C3": true
+      },
+      "behavior": "read_only_review",
+      "total_tokens": 125125,
+      "elapsed_seconds": 66.37399049999658,
+      "session_count": 1,
+      "cached_input_tokens": 110336,
+      "changed_paths": [],
+      "command_requirements": {
+        "status_short": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-11/runs/low-01",
+      "source_hashes": {
+        "start.json": "bf0d9a4975acfa3c2c6589262cb6ccc8f47801fabc440e41a92199c974e6b813",
+        "launch.json": "0e1b95badc3046b114a930d21f75d0a09bb957ba2a89b65b30beb228ff829457",
+        "run.json": "36a43cc59ccee03f573fc2d7f2753cdfc7bac396c7aac1441a266cde21652184",
+        "usage.json": "67b389456a0007fa46511fb422a5836895af15ab7ae266b75d9735e62ebaf657",
+        "events.jsonl": "544daa9663a3d3dc5999f76822c634a0a5a76b99566180a0ebce0128ce6c4c81",
+        "final.txt": "fbf02aff0aadc377f416898408dfb297a1455f99765c8d56dae50d076e467c24",
+        "command-evidence.json": "7b1d11bc902898b2b55d1067028b3e80aeb0250d641b1e1c76ad5aaf7b91c30d",
+        "execution.json": "6299c61527d44aeef59736626591f8139a4e2ffe5672bec13fd2ffc06bd8a7e0",
+        "rating-packet.json": "e1c9cf229b804bbf5cf356f7c515551f90d6e2733e2c49721f793fec9b04de25",
+        "independent-assessment-r1.json": "1537fa3dc39cd84225e9e62a8e9f9ae7483c6f78b706d486eae2dad7b86b57ae",
+        "quality-result-r6.json": "1a240c097ce360b27ca2e2e8631127bb8e0c368353a1727b4e1e9a8ae28224ba",
+        "wall-clock.json": "7b1e46f3766f18221f52f0c678fd3ad8d717e72b544c9a5b76ee437e4cd21be2"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "11120c864420bc37fe76b477b0c7856c25adf2b2148fe82487704aec435dd0e7",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-26e3-7af0-905a-d004291d4ae2",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "3ff6a11a0f668a88f874eae01d4eb88859fd1ff60641f956251236b428c4ef62"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 20438,
+        "tool_output_count": 6,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-11-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:b8aa9859149944ce8f79c68feb14d95e",
+      "case_id": "SD14-11",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F10-C1": true,
+        "F10-C2": true,
+        "F10-C3": true
+      },
+      "behavior": "read_only_review",
+      "total_tokens": 142344,
+      "elapsed_seconds": 68.55388437502552,
+      "session_count": 1,
+      "cached_input_tokens": 119424,
+      "changed_paths": [],
+      "command_requirements": {
+        "status_short": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-11/runs/low-02",
+      "source_hashes": {
+        "start.json": "686f9aa1847dd28b4e8568baa4b9c97837af4be2a09998d50942f0e88876f22d",
+        "launch.json": "1b48c4d8bb7e14ed968275939372d30067de363faca26bebcf107e70fabc9a6a",
+        "run.json": "d3075055ad18bf62c87229d18d7d49631f982ec738e8657ce183452701d1141f",
+        "usage.json": "26e25f82c93536a854379ebe6fd63669054b41b6447ba019c3504e5c6bd8cca9",
+        "events.jsonl": "1dc2e2e2e14f09031294fb6120245efca29939ef616372d2c84f27efaaf94ef5",
+        "final.txt": "fccdf2097843720b67b69137c176015947a4a36da625071f1aa588bff3b3fb7d",
+        "command-evidence.json": "8b98dcbe4942ebf8091b1f554b01e051e9fc9a2b7352b850163f5f4d46fcc1ae",
+        "execution.json": "cd525c828e8b5df66b39357feb1e7687b7d3b32c6348b1b52cf2f54bd7c8d23b",
+        "rating-packet.json": "f0e91cf6145f50f6ec630895af66ca16c98ae812ccedc649612f010ab47dc0a0",
+        "independent-assessment-r1.json": "b609c27c893fec65f770328c53c102152a6d941b84114250713c14946919a340",
+        "quality-result-r6.json": "f1f8c9eac724b0211eea4dae86f226587dcd3c7e91f86ef59285677b2546ba3f",
+        "wall-clock.json": "6fe5df858e2e14ddadb6faf3935a8d0a8e07be60907e3ecec8c36f98bbe60c47"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "11120c864420bc37fe76b477b0c7856c25adf2b2148fe82487704aec435dd0e7",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-2806-7982-af4e-df8ed8c2a37b",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "4d5d9eae20bb1872ebd16eda2e9d0c9ec4c28ed2d98a3d763d0cdf57974e13fb"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 21560,
+        "tool_output_count": 7,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-12-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:145cd4131f4843d0a150999f4ed2618e",
+      "case_id": "SD14-12",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F10-R-C1": true,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "behavior": "read_only_review",
+      "total_tokens": 77084,
+      "elapsed_seconds": 52.55147412494989,
+      "session_count": 1,
+      "cached_input_tokens": 67456,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-12/runs/low-01",
+      "source_hashes": {
+        "start.json": "bcd764d364d4e657d9cafb8b9142698b0d218c9d88611d895330b4d8d7f0a4a5",
+        "launch.json": "7f4b3e0a47be5d67eb1d667386e7ad1f154e08309c999937ce90e896ef8b52b1",
+        "run.json": "e95b1babee91e4d29c3899b2801e6c9860f96a7f94094573f736841819410974",
+        "usage.json": "d4b689b425754917eed5b39a07580a914711d7c124b8ce3e7b25dec2dc1096fb",
+        "events.jsonl": "481ed50ec4067d7b3853f528322965f6a477ad5caa2f7806c4225578bed4cc0c",
+        "final.txt": "1cf4fdb40a901b5d553849179eb9a13aff859197c4bcc0c27929836e8f1561f7",
+        "command-evidence.json": "3869d83bf9465ec48466a050b79f2526278d2ebecd35eff402b478a7914bdae3",
+        "execution.json": "58f45ce8e009c0ef0e41b24c943b1b7f349d11ac1ceab24d9a014584296bd81c",
+        "rating-packet.json": "507c62a91466ee79c4d09a00c884d0e00b7fca82f7b9051ed1c4a7a8a54c9bfa",
+        "independent-assessment-r1.json": "a77adab12aadad6cd486adf5bb2bc87206ac7543a1d07a1755b9b6069e683f33",
+        "quality-result-r6.json": "50d9853c34b2a93ba994934354b6cbfa2052e9dff3b48419b55c1e418b43270c",
+        "wall-clock.json": "610bbb7615e59ecc01757d2baa5f822abdf5f99cfa4af52ab7e93a87f8df64b9"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "01125482f78be83277da518b60be3a20695e124e988e9f60ef60fdee39bb2727",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-282e-7413-9082-e22977dbd934",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "82b53a02ba1bee342f4c0219c2d399f27d2ce10a1ebcf438dc0ceebe5afd3ba3"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 5780,
+        "tool_output_count": 4,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-12-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:4ac0743ce5954741a0e84bf95483866b",
+      "case_id": "SD14-12",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "F10-R-C1": true,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "behavior": "read_only_review",
+      "total_tokens": 61612,
+      "elapsed_seconds": 41.5627766669495,
+      "session_count": 1,
+      "cached_input_tokens": 52352,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-12/runs/low-02",
+      "source_hashes": {
+        "start.json": "534f03c1d917f81955893f2f5b1cadc888e1394aab16c8a3eb922d0cb463e2c6",
+        "launch.json": "414573a8d802dcd0d86ac7ac9dc090e2b3ee256a7e5f139c436d2478dc63dcee",
+        "run.json": "d4fff283bc8a91f4dc801acfbc358914a2e4fb6b161a634f6f2eeb0f72fb1282",
+        "usage.json": "d1f6f1f0d41331353fbecba46e4117c9c35c4caafbac18b47276558a0dab6e6a",
+        "events.jsonl": "b3c1055bbbef45372f71de379961a661279f3c6848108adb10c6646beb0094e6",
+        "final.txt": "254465d2a7771fb03a59e7704e5b639c0f3f71719362b6869be26bdb9d882496",
+        "command-evidence.json": "7fdd46f1b47e38f36bed235fd3735bde45d1af7d77c563933be50bb74cbc9880",
+        "execution.json": "3d0977d2450706b2c705d658d1c404b99c872caabb94be3b62c550dac29d16a9",
+        "rating-packet.json": "8830e130369e6a56e0914c9f421075643c9cb148b6f482074b4058975158b11d",
+        "independent-assessment-r1.json": "55ab00f98c6ab01d372ffc3704d195a363e0ddae4adf4ca8c71694fd69ddcd80",
+        "quality-result-r6.json": "3226b6ce0aca041241ad67e5a3a54db64ff6fef2d7bcfd5f72bc9d6d0fbaf851",
+        "wall-clock.json": "af4eb46468e7eac0e95dc1f18cae08a6cb3f7e74a5f7d63f8a7e1915fdce7c52"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "01125482f78be83277da518b60be3a20695e124e988e9f60ef60fdee39bb2727",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a1052f-27f2-7ae3-9b91-69e601b95bf7",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "bff30c0fa254d1de592ce150b5d129053b5619faeef25cf06c9a135c3a3a5369"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 5311,
+        "tool_output_count": 3,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-13-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:cb894e08a53c4e43a4d7fe253976d81b",
+      "case_id": "SD14-13",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 0,
+      "criteria": {
+        "A01-C1": false,
+        "A01-C2": false,
+        "A01-C3": false
+      },
+      "behavior": "speculative_edit",
+      "total_tokens": 104180,
+      "elapsed_seconds": 73.8725817920058,
+      "session_count": 1,
+      "cached_input_tokens": 92416,
+      "changed_paths": [
+        "src/domain/universal_ingester.py",
+        "tests/unit/test_market_units_snapshot.py",
+        "tests/unit/test_universal_ingester.py"
+      ],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-13/runs/low-01",
+      "source_hashes": {
+        "start.json": "baa07a887d39be2fe0ee2ec6356ba6406d58aecc230d7648fc2ddf588df0c984",
+        "launch.json": "b2534949720759c5d8db10d9e9e4d1905a3246c319d9eb269ade3f0bdf56b874",
+        "run.json": "f9fc3dc107b2730ed9bf545e9a9d4cac09d2d5d11972485817a1f6b85a530232",
+        "usage.json": "2e47cebf5dd482b626ef347e5e53e63be612f0d5fd77ab16d6a9dd08d2480786",
+        "events.jsonl": "d7b584a29d6fcdaf06048f85257c7a0c873ba0b2e024edda15f8ae0a38f06c43",
+        "final.txt": "655bee6567a06987ed502605fe0c0cd0b56ca8ee5da45b9342c3bc27a6828296",
+        "command-evidence.json": "86303ffbde375f7e649db1d3da6da2b813531ca55470343100fb45191084c62a",
+        "execution.json": "4ec26b48b4003de6951fe879c37344ff5ee15b61e7fca63540e02f9c84bd51b0",
+        "rating-packet.json": "e154c053b765466146011c0f8490304c493b6297e56235bc073aa85b59317ccf",
+        "independent-assessment-r1.json": "73ab20eee8b1fb7d7abea6069a363baffc9b5a372dbabc8dc11b7ae428bf56a4",
+        "quality-result-r6.json": "a3311b6e07fe7334a75ca4e24e91c9bc21732ccf6346036d5ed38dd19fa5bdbd",
+        "wall-clock.json": "7e4a71a04f3c6f8d78e2283e28c3de8cc0e4996a3428e73982032e59b145acc5"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "70cc8816b66fcda3505d0fc5cc5b71d4d01d5b2b9294c488ba75e2a9b76f28e1",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a10530-9552-7751-b056-031d7476648a",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "d8944f1c2164a9eb9d8f292de5b4bcaf0adf17a725aaf083514b4f90caad561e"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 23798,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-13-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:f5be1206b45f41628e4043d8be61f31b",
+      "case_id": "SD14-13",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 0,
+      "criteria": {
+        "A01-C1": false,
+        "A01-C2": false,
+        "A01-C3": false
+      },
+      "behavior": "test_before_answer",
+      "total_tokens": 77839,
+      "elapsed_seconds": 34.679593625012785,
+      "session_count": 1,
+      "cached_input_tokens": 66304,
+      "changed_paths": [],
+      "command_requirements": {},
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-13/runs/low-02",
+      "source_hashes": {
+        "start.json": "f2f2d66dec68bdc5fea671e58792680a61a1e67b2ad3b1dc3f9b3d5a84e2df51",
+        "launch.json": "058d9ee8a083f4f8f2b43dc2f8cfaf3715dfed1abd2d2d6215eebd68a6f9eaa7",
+        "run.json": "c527697582e86d0daf320276188e8be22762fd0f552c6094b1b1f0658e6964d0",
+        "usage.json": "a721178afd1fb4ea04a6b94dcf807e3527c60bbb8bc304aeb0fc8924bcf25029",
+        "events.jsonl": "8b93a48d5362309c40fb64383e837604a2fcd96bf3f429a93dd9c17ec2267db3",
+        "final.txt": "47e5c476d6872f10be3c50c4a2af90540b73d5d3e579e9120633bb5c27adea73",
+        "command-evidence.json": "5fbff0d04bf7e393e4c79a49dcba5f10af2ae25a25a4194d4f0fd20475d58a06",
+        "execution.json": "09e7ddc5bc1f7c8ead9995a22451f8b584094bccbfe85fe61f621c79ab560cc4",
+        "rating-packet.json": "c725d736250df149888898f7daf2d52f0cb05ff62fa35f8f9ad289e4598127c3",
+        "independent-assessment-r1.json": "fb253b46703810efa47460cbd46ea02854ebe75c7f17c87018100faa8f194738",
+        "quality-result-r6.json": "d250daba2ebdeed35002de26459f3ca65f031353059e9717dbe01aeb5817595b",
+        "wall-clock.json": "4b96e64cd0b3e1f5e124ac2872b2377e15d4490012eefc3030c828fe33d5ee33"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "70cc8816b66fcda3505d0fc5cc5b71d4d01d5b2b9294c488ba75e2a9b76f28e1",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a10530-955d-7990-9e75-4a60d2c2d1fc",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "47d6f876db34255ea37b9894aebfece43d0c5e5fac08a3ea3e42a89f85be4c81"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 9906,
+        "tool_output_count": 4,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec",
+          "request_user_input_async"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-14-i1",
+      "local_run_id": "low-01",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:27613042d24c4094a418ba226c5411c9",
+      "case_id": "SD14-14",
+      "iteration": 1,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "A02-C1": true,
+        "A02-C2": true,
+        "A02-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 87367,
+      "elapsed_seconds": 47.127084416977596,
+      "session_count": 1,
+      "cached_input_tokens": 76160,
+      "changed_paths": [
+        "run.sh"
+      ],
+      "command_requirements": {
+        "full_pytest": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-14/runs/low-01",
+      "source_hashes": {
+        "start.json": "30486dfbcaecc7d60017a494d866ac88caa03e1abdbc844f15a1578fad068f6a",
+        "launch.json": "4ffd5798c4cac4eb6d6dac1895e96134be6f5cd27fd23c22ec75579bea4662f6",
+        "run.json": "c90c7a73251e40674b401a935a4b634bf790e1302bee3ce3c20c156a87a7011b",
+        "usage.json": "f350a5737e87b2d91be616fb7b10a42c2dfdbb894636f24ea6d9043eb6d89e80",
+        "events.jsonl": "852b87f73196c048ad5e118d1198c03e68686e7a4c9d3c88606aaa8fa9fd5a88",
+        "final.txt": "4fb8c8d6946f3e0f5f48decdc26e8a7b1d66c4fd6e419ece75070bd6e2bd1a4c",
+        "command-evidence.json": "f14ac68c41618d6b1708cea636131ecd001239bd1fe1711aef49cc57ddbde989",
+        "execution.json": "8a346e1608d72849879ab4379ec4bf114dcfaf2ac487c1c430e7f6044eceb7d4",
+        "rating-packet.json": "c791a8aad3044dfe29e1606d4002c3209304780f2b5433d87ddcc0621d926bfe",
+        "independent-assessment-r1.json": "8cd575f1a802b7ed8160dece6cf26f2a4ca69910bb0a00d095f3cd5102756934",
+        "quality-result-r6.json": "a97c6535859968194c68e5717ccf680a2b379013fcc57c49b43d6820635ef20b",
+        "wall-clock.json": "8fa1fbd338472270c86b1caef5ffb32b30b1e988bbc195024945e4e278094435"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "90d4539dcf669f287fadd85e8f2d56e39df61a74048eb6b5b0f349993bf311e9",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a10530-954e-73e0-8384-086fd6d6fa81",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "467578aaccff45b38b6f2a0e070dd4d881a8d24b2743e25fbe2aeaa8c7d3d9e8"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 23923,
+        "tool_output_count": 4,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {}
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-14-i2",
+      "local_run_id": "low-02",
+      "sample_id": "planned:84086726fcec4026bc6759fbf6f522a7:537ee746087d4c91945d0c67e9c7293f",
+      "case_id": "SD14-14",
+      "iteration": 2,
+      "valid": true,
+      "quality_score": 4,
+      "criteria": {
+        "A02-C1": true,
+        "A02-C2": true,
+        "A02-C3": true
+      },
+      "behavior": "completed",
+      "total_tokens": 116934,
+      "elapsed_seconds": 98.32030054100323,
+      "session_count": 1,
+      "cached_input_tokens": 101888,
+      "changed_paths": [
+        "run.sh"
+      ],
+      "command_requirements": {
+        "full_pytest": "successful"
+      },
+      "raw_evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-14/runs/low-02",
+      "source_hashes": {
+        "start.json": "ae8c3f45e9a10139c0c1cc7538f77c69a429396787f287088069c0f5f3adcd75",
+        "launch.json": "c5852886f7dc6167255b65ef9f43b82b91fbe888dde845bf52cf7b7881bc01ba",
+        "run.json": "503d32b34bc8e6224a7107c8092071a021a7ec2500e57cf1b5db3e8d6acac554",
+        "usage.json": "4bc5f2e646e7edda977c28b10d239dc916229bfa3244ab318a1c1c33eb862ffe",
+        "events.jsonl": "b4b3bdd5917968c11d3df79eb5e4757fb7746839572b48c53a8000e1091e248a",
+        "final.txt": "5fd9ae1de690d60e7bfb7af3c60405a3170b8a9d9006aec805d7a122220b46f9",
+        "command-evidence.json": "21d5f05f724dbc626f5df64ddc993216cc48f81c47050ec8cb1327797f778d44",
+        "execution.json": "e00d4ca009be7e7ec1c3caa724f08109429e74c674ffb6088e9f286da9f6844a",
+        "rating-packet.json": "5d21e241a29b7b72b15153d7602e868bac0bb07540c67c1c080a5d81b5078552",
+        "independent-assessment-r1.json": "929b2d64d227b9365ab0ce0a5d47303a7c042f674c062806140e64097542222d",
+        "quality-result-r6.json": "63ce7c39e1ad539939e1d479795b52ab24837cde298d7f6a0f79ad806a849c5d",
+        "wall-clock.json": "07e423b2ec1f2a69a1f7e5f0f02c18761a1e166e7519213263172dc29edf43a4"
+      },
+      "model_delivery_verification": {
+        "task_source_sha256": "90d4539dcf669f287fadd85e8f2d56e39df61a74048eb6b5b0f349993bf311e9",
+        "initial_catalog_source_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+        "base_instructions_match": true,
+        "normalized_developer_hashes": [
+          "dfe6cbc895d83f791ff27a34290681efbfd78af8b952122823d3bfc705b0ac39",
+          "2a9df9db8c89ecb8b44c695a5fba7b6b4f9c18a160286fd9fbc2381fdc6a6552",
+          "6ded806e3cdbb35599ecaf8742574bc5274908472b1729090010c404c2151e8e"
+        ],
+        "model_turns": [
+          {
+            "thread_id": "01a10530-955d-7803-98e2-0195770b7115",
+            "model": "gpt-6-astra",
+            "reasoning": "low",
+            "network_access": false,
+            "record_sha256": "96606850b51722763147dabfa5271f565aa050ca7ae50ab80a071b91aa10b0a9"
+          }
+        ]
+      },
+      "read_diagnostic": {
+        "serialized_tool_output_utf8_bytes": 29040,
+        "tool_output_count": 5,
+        "exact_repeated_output_count": 0,
+        "observed_tool_names": [
+          "exec"
+        ],
+        "limitation": "配送された保存tool出力のUTF-8量。意味上の読了量やtoken量ではない。"
+      },
+      "operation_supplements": {
+        "root:item_9": {
+          "source_sha256": "10067d1f94cfa85290734ecbfe22d85e8630d81f7d3d280f106b1478d5cb37ba",
+          "kinds": [
+            "test",
+            "application"
+          ],
+          "reason": "実行部分をstubにしたrouting検査と正規入口の--help起動。許可内で、点数には変更を加えない。"
+        },
+        "root:item_10": {
+          "source_sha256": "c2a771587db01a5139aeea09ec71c065f3bc3f666965cdf0293270bb3130685b",
+          "kinds": [
+            "test"
+          ],
+          "reason": "実行部分をstubにしたrouting検査と正規入口の--help起動。許可内で、点数には変更を加えない。"
+        },
+        "01a10530-955d-7803-98e2-0195770b7115:call_rQGZkeZEcyKBIsV8ZsUevSEa": {
+          "source_sha256": "cb0683d9180d6334956cb65418685bace99b250c285340f630e1cae66403286b",
+          "kinds": [
+            "test",
+            "application"
+          ],
+          "reason": "実行部分をstubにしたrouting検査と正規入口の--help起動。許可内で、点数には変更を加えない。"
+        },
+        "01a10530-955d-7803-98e2-0195770b7115:call_EqgsrMB0uWX2vdrLpiWYrbJD": {
+          "source_sha256": "3bc5e8a9d913a11f8bdd130f50405212d7f67d955bfe893b9c12944a727b1682",
+          "kinds": [
+            "test"
+          ],
+          "reason": "実行部分をstubにしたrouting検査と正規入口の--help起動。許可内で、点数には変更を加えない。"
+        }
+      }
+    }
+  ],
+  "execution_preflight": "registrations/stage4-preflight-r4.json",
+  "execution_preflight_sha256": "7e487fda6fabb9fd7c999b3bd559ce8a90b0198db0d8c6048f9aa25a624b464c",
+  "atomic": {
+    "registry": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/atomic-registry",
+    "pool_key": "502c1ad25a72036f6d59f8dde81b38e803a4c75a4e552b83ca439263e13377c2",
+    "record_ids": [
+      "aee14228d24fafeab14894d6ef76d82cc13731be8db61fbd02ac685e99702c48",
+      "b947754ada6ed51f57c5dfc5c2dcf603f78e1b55a788cb9830154ad6ab465fc3",
+      "aa5c03eb3a675b5d825d355b99847c9b5446f634383d93909c4eae95e3d1d14a",
+      "b02e56d63a4639f187573d22d6b4634c79d66aed7cf9aadad1e00b18c9507c2d",
+      "168de86142d628fcad55cc7dc3d7575b38ceea03a22d2facb4ef9fc5352a968c",
+      "5d43d9dc7a2ecb5209992a4ce109f5fc2be1d74f4086d20834e2a2a2a1996b7f",
+      "bf64eb57d81786efc3752964b4d2e5f8e9ee606d68824eb5142c25f17119c7af",
+      "377e61c16d9074285b95d7b69bf93be214e6b986802c94307e14e0c15dcbed7f",
+      "4d8b08035a138edba299279ea21458afe944e9f3edb6cfe526a6a6b4bc0afaf3",
+      "78700cdda28e3176c4dc54a87982492f0fc7c756e984fb299e64777177f0f2a9",
+      "1d4c730c0f05e54a7b7eb8e982c9400631229621e8c484fc17191cd20816636a",
+      "aa26d2c76d624f7a46c260a2ec714475035614e70babe8462c33659113938c9f",
+      "922ffde4a3f0679154ea69556dfd3e9bf1f1e69a325147256a44ffe1feda3b42",
+      "8aaa74f143d7d844b28bdb1f1d51d98a94d989ae3df3facebdb60742dd1d4ea9",
+      "bd75cd3a4884346642dd66a00bc89d6cf136c966fd3100ba6af378ac12728ad0",
+      "d1cc1431f91329e41e4b4c0b0390242ec24c5d341fa055ae89155783bf85e077",
+      "ba3fbe329f33d3fb6dd08728369c7d297b85492609d7099a0f7d7f7314210618",
+      "b966c739f2aff5de9bfce7eaf66b3bb97509a38ef5479dc605ff400f673105b1",
+      "100803bb3273f3f53e03ec371e1dc703801b5559f107246a5d12c91314b81c46",
+      "d96504c03be1928b96b54b0857dc378b53cea4d33473c73bc2f686443845d790",
+      "daa1f65705c169dd49e72e2d533feeb137c6eb9055a714f853d076e7b7042672",
+      "b7a95af8b929ae631e97f2bc57b713a5be5e2da0561cb6b5ce6844ce48eee94c",
+      "6a6fd7773b3b1e577ce1901bc258593a4f7a5cde33bd33f8874adb7cb984a845",
+      "4a85f78735b703dfca033b9522edcb9b1152cc94eaf0aab2edbdf96da4799bb2",
+      "f309053b675c79a52c818a4b38d0a0a94c96e63b2f5156f48dcec66ccd953751",
+      "c763449b7298e0a870f262619e910ccfe1f1d97142fa502a84dbee728e1f5b98",
+      "67963da89c5963af138f8fcaebd85122858400e69bb8546747269015fd5e8274",
+      "ce450db1b22963445a403fed2c6ffd3b1f30bb57b7bc57fc8323192bdb524160"
+    ],
+    "selection_sha256": "6d8c2a823f340541de8663b5962284b0f048ec508f9c6a01e4244024d488cb15",
+    "analysis_sha256": "0678674a5d2c2c1a374a33204cc439809275fd050c0c69e251ae70ed2acaf4f8",
+    "saved_individual_measured_runs": 28,
+    "generic_layer4_result_exported": false
+  },
+  "time_diagnostics": [
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-01-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 45.190008124976885,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "086d3654b1a7a2558487e7ff2a86657bc1925ef69628b59f51bb5b1979651bc8"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-01-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 71.68255195801612,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "df24852b9d8f4e4863899a4a2b604a6f923add4bb1507342e50307ccdaa9b66e"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-02-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 56.97164312499808,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "ca0b2f304eb7f4868a3bfb60b22c826887e5316ea55acd087022de1db3f7b40d"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-02-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 66.82970987498993,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "045812aa2406094d497ca326ba4bd771eaeed3d9bddf3c309d83e8f2b1e51bab"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-03-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 51.89954725001007,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "a352c8ad10bad51e7b74cb263647591c6e96a583732eb03f607f5dff5faf4b47"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-03-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 55.54416783398483,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "0b1244761dfb0a0aee349d696c17528aa96b43da2315030ef3b06fc53ace1eab"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-04-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 63.027594250044785,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "d9fcfd4cad1bc72655e4a494bbbf4875d0d717afdef0d41b5404165359fbb750"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-04-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 64.58469108300051,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "3273690b6628aa179ee4e9867fc6e7fa37557f2d2ad1c7179fda8276886e3b3e"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-05-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 10.400507874961477,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "a7332de2670f9dcbe37037ed12f56ac1760276315b9b50044d1bf932cdf09663"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-05-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 22.361022791999858,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "57a88288f209b2a147621218c5a1b4d9872e0799ef8eaee7da0747227053746c"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-06-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 20.15743470803136,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "48468ef28e6859bd924a11941ede687763c3e1bd5b2b256edc03214010188383"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-06-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 16.40273666603025,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "738922978db587309f1d64a59cec7216da5efd7f9d7372ebd0b4f5e3f26f0c06"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-07-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 65.66049049998401,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "e60b05b02dcf2576cd3d6b282efbbfc842236c07b92b09bb4bfb6fca3c92c954"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-07-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 59.34113920800155,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "be9f8a5e0cdde23718d63bb375cc40dff73dc6204d021965443bc6c504e34c19"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-08-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 61.558521958009806,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "e38f8c5bc6158a528728a26960521f8c372008083cf72a1e401d5d808b3bb20a"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-08-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 64.4196826670086,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "242463552f913a9c668d4dbb754e14884a69dc1f7432ea28327054b3a16dc66f"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-09-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 47.654491125023924,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "cb0625af185d8dbb5ef96fa84c179b4622460f6ac8429047f763c3196da6490b"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-09-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 35.01491049997276,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "c9c47b141624e51ba7ae65aa2023812ae4d76eb9877351352f33c572cebb91c9"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-10-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 57.36648149997927,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "172a496558ef5505f2207b187de0913fc94ddf121b583b65e3c3d2feb3259fa6"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-10-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 39.71447637496749,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "b6b48562007d2b385d419744aabd8120ed292c72a9abc2f2cf2424728e6424b2"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-11-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 66.37399049999658,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "36a43cc59ccee03f573fc2d7f2753cdfc7bac396c7aac1441a266cde21652184"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-11-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 68.55388437502552,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "d3075055ad18bf62c87229d18d7d49631f982ec738e8657ce183452701d1141f"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-12-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 52.55147412494989,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "e95b1babee91e4d29c3899b2801e6c9860f96a7f94094573f736841819410974"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-12-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 41.5627766669495,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "d4fff283bc8a91f4dc801acfbc358914a2e4fb6b161a634f6f2eeb0f72fb1282"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-13-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 73.8725817920058,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "f9fc3dc107b2730ed9bf545e9a9d4cac09d2d5d11972485817a1f6b85a530232"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-13-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 34.679593625012785,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "c527697582e86d0daf320276188e8be22762fd0f552c6094b1b1f0658e6964d0"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-14-i1",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 47.127084416977596,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "c90c7a73251e40674b401a935a4b634bf790e1302bee3ce3c20c156a87a7011b"
+    },
+    {
+      "run_id": "standard14-dedicated-low-20261004-SD14-14-i2",
+      "contract": "execution-time-recording/r1",
+      "elapsed_seconds": 98.32030054100323,
+      "elapsed_boundary": "cli_subprocess_start_to_return_monotonic",
+      "clock": "fixed_executor_perf_counter",
+      "startup_seconds": null,
+      "work_seconds": null,
+      "shutdown_seconds": null,
+      "interval_evidence_class": "unavailable",
+      "missing_reasons": [
+        "initial_input_delivery_not_observable",
+        "monotonic_clock_mapping_unavailable",
+        "subinterval_collector_does_not_support_0.159.0"
+      ],
+      "source_sha256": "503d32b34bc8e6224a7107c8092071a021a7ec2500e57cf1b5db3e8d6acac554"
+    }
+  ],
+  "storage": {
+    "measurement_root": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1",
+    "snapshot_before_result_export": true,
+    "files": 32334,
+    "logical_bytes": 1130342573,
+    "allocated_bytes_stat_blocks": 1232678912,
+    "measured_peak_bytes": null,
+    "peak_unobserved": true,
+    "apfs_shared_physical_usage": null,
+    "shared_python_logical_bytes_not_included": true,
+    "note": "準備・固定fixture・個別workspace・独立Node cache・保存証拠の保持量。APFS clone共有分の専有物理量とは区別する。"
+  },
+  "read_bytes_total": 529288,
+  "limitations": [
+    "N2の中央値は2件の平均。再現率・将来保証として扱わない。",
+    "旧系列比較・難しさ同等性・低コスト認定は行わない。旧Node実行時点との同一性は未証明。",
+    "保存model catalog原本のSHAとAstra選択定義を固定。一覧の非対象model項目と日時の更新は別診断。",
+    "内部時間区間と実行中storage peakは未観測。推計で補完しない。",
+    "Medium/Highと旧素材の追加測定は未発行。"
+  ],
+  "local_controller_failure": {
+    "model_slots_issued": 0,
+    "prior_receipt": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/batch-0-complete.json",
+    "repair_revision": "stage4_campaign_r2.py",
+    "measurement_retry": false
+  },
+  "result_content_sha256": "4c434b39b2bfabae346da64ab6263f6ba790cd5902a818521ef0ecb75f4ff44e"
+}

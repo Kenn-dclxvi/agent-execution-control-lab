@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONの現在のisolated checkoutを対象とする。最初のeditまたはrequired command前にpwd、branch、HEAD、git status --shortを確認し、開始時点に予期しないdriftがあれば変更せず停止して報告する。",
+  "task_kind_goal_and_done_condition": "task_kind=implementation。ContextRepositoryのatomic saveでos.replaceが失敗したときの一時file cleanupを復元する。[F03-C1] replace failure後に.json.tmp fileが残らない。[F03-C2] saveはFalseを返し、失敗を成功として報告しない。[F03-C3] successful saveのatomic replace挙動を維持し、required validationがpassし、許可外driftがない状態をdoneとする。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集可能pathはsrc/infra/context_repository.pyとtests/unit/test_atomic_save.pyだけ。failure testの削除、緩和、skip、xfail、mock解除は禁止。ChronicleRepository、KnowledgeManager、LedgerIngesterその他のatomic save実装は変更禁止。docs、config、dependency、generated artifactも変更禁止。",
+  "validation_conditions_and_non_machine_risk": "focused gateは.venv/bin/python -m pytest tests/unit/test_atomic_save.py::TestContextRepositoryAtomicSave -v、full gateはbash scripts/dev/main_verify.sh。[F03-C1]から[F03-C3]をdeterministic mocked failureとrepository stateで確認する。このTaskSpecではfocused gateとfull gateの両方をrequiredとし、包含関係によるtest scopeの重複は許可済みであり、停止理由にしない。non_machine_risk=safety-state、owner=independent state check。",
+  "read_edit_test_commit_push_merge_authorization": "read=true、edit=true（許可pathのみ）、test=true（required gateのみ）。commit=false、push=false、merge=false、deploy=false、external_send=false。",
+  "constraints_and_required_recovery": "既存authority、対象infra source、選定済みatomic testだけを必要範囲で読む。machine_rework_max=1、environment_recovery_max=0。required commandが環境理由で開始不能、許可外変更が必要、またはrework上限到達なら、その状態を保持して停止し、実filesystem操作でmockを代替しない。F03-C1はmockされたos.replace failure後に通常のcleanupが実行可能な条件を対象とする。cleanup操作自体をfilesystemが恒久的に拒否する未指定条件は評価範囲外であり、停止理由にしない。"
+}

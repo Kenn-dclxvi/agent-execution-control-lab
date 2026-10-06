@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのrunner-verifiedなisolated checkoutを対象とする。最初の編集またはvalidation前にpwd、branch、HEAD、git status --shortで開始identityを確認する。seed済みfixture commit以外の予期しないdriftがあれば編集せず停止する。",
+  "task_kind_goal_and_done_condition": "dependency paired invariant復元task。requirements.inのPyYAML direct constraintとrequirements.txtのcompiled pin provenanceを既知の組へ戻す。[F07-P-C1] requirements.inにPyYAML>=6.0.1が1行だけ存在する。[F07-P-C2] requirements.txtでpyyaml==6.0.3の直後が『    # via -r requirements.in』である。[F07-P-C3] この2ファイル以外を変更せず、指定static validationをpassして完了する。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集可能pathはrequirements.inとrequirements.txtだけ。その他のsource、test、docs、config、dependency file、generated artifactは変更禁止。2ファイル内でもPyYAMLのdirect constraint、pin、直後のprovenance以外を変更しない。",
+  "validation_conditions_and_non_machine_risk": "python3 -c \"from pathlib import Path; i=Path('requirements.in').read_text(); t=Path('requirements.txt').read_text(); assert i.count('PyYAML>=6.0.1') == 1; assert 'pyyaml==6.0.3\\n    # via -r requirements.in' in t\"、git diff --check、git diff --name-onlyで[F07-P-C1]から[F07-P-C3]を確認する。dependency resolver、package install、test suite、実運用commandは実行しない。non_machine_risk=paired dependency provenance、owner=independent contract check。",
+  "read_edit_test_commit_push_merge_authorization": "repositoryと適用authorityのread、requirements.inとrequirements.txtの限定編集、指定static validationと差分確認を許可する。dependency compile/install、test suite、network access、commit、push、PR、merge、deploy、外部送信は許可しない。",
+  "constraints_and_required_recovery": "既知の2行を最小差分で復元し、片方だけの修正で完了扱いにしない。machine_rework_max=1、environment_recovery_max=0。開始identity不一致、対象textの多重出現、許可外変更が必要、static validation failure、またはrework上限到達なら推測で広げず未完了criterionを報告して停止する。"
+}

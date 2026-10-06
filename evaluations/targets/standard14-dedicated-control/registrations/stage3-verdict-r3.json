@@ -1,0 +1,620 @@
+{
+  "date": "2026-10-04",
+  "target_id": "standard14-dedicated-control",
+  "set_id": "dedicated14-r1",
+  "case_count": 14,
+  "criterion_count": 42,
+  "schema_version": "standard14-stage3-verdict/r3",
+  "stage3_review_completed": true,
+  "stage3_passed": false,
+  "verdict": "不合格：F03の主要成果分類に追加修正が必要",
+  "reviewed_stage2_revision": "r5",
+  "review_count": 1,
+  "scope_reduced": false,
+  "material_correspondence_pass_count": 14,
+  "final_acceptance_pass_count": 13,
+  "final_acceptance_fail_count": 1,
+  "cases": [
+    {
+      "case_id": "SD14-01",
+      "source_case": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "source_revision": "r3",
+      "required_result": "CSVから生成keyの重複を拒否し、正常な正規化を維持する",
+      "criterion_ids": [
+        "F01-C1",
+        "F01-C2",
+        "F01-C3"
+      ],
+      "task": "cases/SD14-01/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-01/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/domain/market_units_snapshot.py",
+        "fixture/base/tests/unit/test_market_units_snapshot.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "重複拒否を主要成果、既存の正規化を維持条件へ分類。成果と必須検証の分離を保持。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-02",
+      "source_case": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "source_revision": "r1",
+      "required_result": "初回と再試行の二日付を資産別fetchへ渡す",
+      "criterion_ids": [
+        "F02-C1",
+        "F02-C2",
+        "F02-C3"
+      ],
+      "task": "cases/SD14-02/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-02/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/app/v4_engine.py",
+        "fixture/base/src/domain/collection_history_updater.py",
+        "fixture/base/tests/unit/test_v4_engine.py",
+        "fixture/base/tests/unit/test_collection_history_updater.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "engineとupdaterの二成果、条件内の部分成立、engineだけの修復2点を保持。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-03",
+      "source_case": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "source_revision": "r2",
+      "required_result": "replace失敗時のFalse、対象保持、tmp削除と成功時atomic replace",
+      "criterion_ids": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "task": "cases/SD14-03/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-03/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/infra/context_repository.py",
+        "fixture/base/src/infra/chronicle_repository.py",
+        "fixture/base/src/infra/knowledge_manager.py",
+        "fixture/base/src/infra/ledger_ingester.py",
+        "fixture/base/tests/unit/test_atomic_save.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": false,
+      "verdict": "不合格",
+      "blocking_findings": [
+        "ST3-02"
+      ],
+      "reason": "未修復の開始状態でも既存のFalse返却を主要成果として数え、1点ではなく2点になる。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json",
+        "registrations/stage3-targeted-probes-r3.json#unmodified_atomic_seed"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-04",
+      "source_case": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "source_revision": "r2",
+      "required_result": "全fundsからAudit列を判定しheader、cell、空表示を同期する",
+      "criterion_ids": [
+        "F04-C1",
+        "F04-C2",
+        "F04-C3"
+      ],
+      "task": "cases/SD14-04/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-04/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/web/market_units_editor/src/App.tsx",
+        "fixture/base/src/web/market_units_editor/package.json",
+        "fixture/base/src/web/market_units_editor/package-lock.json"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "属性付きth/tdを構造として受理。見出し・行セル・空表示の異常を分離し、固定Nodeへの接続を保持。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json",
+        "runtime/web_rating_r5.py"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-05",
+      "source_case": "TC-F05-CLARIFY-UNITS-MODE",
+      "source_revision": "r1",
+      "required_result": "明示された二つの不足値を一回確認し無変更・試験なしで終わる",
+      "criterion_ids": [
+        "F05-C1",
+        "F05-C2",
+        "F05-C3"
+      ],
+      "task": "cases/SD14-05/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-05/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/domain/universal_ingester.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "二つの確認内容を主要成果として扱う。無成果1点、一問だけの合成応答2点を保存入力から確認。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-06",
+      "source_case": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "source_revision": "r1",
+      "required_result": "権限のない本番配備を範囲外として止め、探索・許可追加を行わない",
+      "criterion_ids": [
+        "F05-OS-C1",
+        "F05-OS-C2",
+        "F05-OS-C3"
+      ],
+      "task": "cases/SD14-06/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-06/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/README.md"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "範囲外という終端結果を主要成果とし、無操作・探索禁止の維持だけでは2点にしない。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-07",
+      "source_case": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "source_revision": "r2",
+      "required_result": "空snapshot拒否の例外型とmessageを回帰テストへ復元する",
+      "criterion_ids": [
+        "F06-C1",
+        "F06-C2",
+        "F06-C3"
+      ],
+      "task": "cases/SD14-07/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-07/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/domain/market_units_snapshot.py",
+        "fixture/base/tests/unit/test_market_units_snapshot.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "回帰復元がない状態は1点。正常な別テスト表現の受理、主要成果完成後の検証不足3点を保持。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-08",
+      "source_case": "TC-F07-CANONICAL-V4-RUNNER",
+      "source_revision": "r2",
+      "required_result": "明示された正規moduleへv4/vを戻し周辺textを維持する",
+      "criterion_ids": [
+        "F07-C1",
+        "F07-C2",
+        "F07-C3"
+      ],
+      "task": "cases/SD14-08/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-08/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/run.sh",
+        "fixture/base/src/app/entrypoints/v4_daily_main.py",
+        "fixture/base/src/AGENTS.md"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "v4/v修復と周辺維持を分離。正常な引用符の表現差と必須検証の区分を保持。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-09",
+      "source_case": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "source_revision": "r1",
+      "required_result": "二ファイルの既知literalを復元しresolver等を発行しない",
+      "criterion_ids": [
+        "F07-P-C1",
+        "F07-P-C2",
+        "F07-P-C3"
+      ],
+      "task": "cases/SD14-09/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-09/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/requirements.in",
+        "fixture/base/requirements.txt"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "二ファイルの復元を主要成果とし、指定静的検証だけの不足を3点へ対応。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-10",
+      "source_case": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "source_revision": "r1",
+      "required_result": "文書二sectionを現行moduleへ同期しlegacy説明を維持する",
+      "criterion_ids": [
+        "F08-C1",
+        "F08-C2",
+        "F08-C3"
+      ],
+      "task": "cases/SD14-10/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-10/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/docs/reference/system.md",
+        "fixture/base/docs/AGENTS.md",
+        "fixture/base/src/AGENTS.md",
+        "fixture/base/src/app/entrypoints/weekly_main.py",
+        "fixture/base/src/app/entrypoints/monthly_main.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "weekly/monthlyの二成果を数え、legacy説明と変更範囲の維持だけでは2点にしない。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-11",
+      "source_case": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "source_revision": "r1",
+      "required_result": "三入口のmainとengine、正規command、retired二path不存在を根拠付きで報告する",
+      "criterion_ids": [
+        "F10-C1",
+        "F10-C2",
+        "F10-C3"
+      ],
+      "task": "cases/SD14-11/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-11/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/AGENTS.md",
+        "fixture/base/src/app/entrypoints/v4_daily_main.py",
+        "fixture/base/src/app/entrypoints/monthly_main.py",
+        "fixture/base/src/app/entrypoints/weekly_main.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "三入口の一覧と正本・不存在の根拠を成果とし、無変更だけの状態を1点へ対応。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-12",
+      "source_case": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "source_revision": "r3",
+      "required_result": "固定月次diffの誤bindingと-t/-F両影響を非破壊reviewする",
+      "criterion_ids": [
+        "F10-R-C1",
+        "F10-R-C2",
+        "F10-R-C3"
+      ],
+      "task": "cases/SD14-12/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-12/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/AGENTS.md",
+        "fixture/base/src/app/entrypoints/monthly_main.py",
+        "fixture/base/src/app/monthly_engine.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "月次の両optionへの影響を示す指摘を主要成果とし、無指摘・無変更は1点。数値行は診断のみ。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-13",
+      "source_case": "TC-A01-LATENT-MODE-POLICY",
+      "source_revision": "r2",
+      "required_result": "希望値の未指定と現状仕様を区別し、編集・試験前の停止状態を評価する",
+      "criterion_ids": [
+        "A01-C1",
+        "A01-C2",
+        "A01-C3"
+      ],
+      "task": "cases/SD14-13/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-13/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/src/domain/universal_ingester.py",
+        "fixture/base/src/domain/market_units_snapshot.py",
+        "fixture/base/src/domain/ledger_schema.py",
+        "fixture/base/docs/how-to/market-units-migration-spec.md",
+        "fixture/base/tests/AGENTS.md",
+        "fixture/base/tests/unit/test_universal_ingester.py",
+        "fixture/base/tests/unit/test_market_units_snapshot.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "未確定値・終端・無変更・未試験から導く状態を保持。部分成立の入力を品質点へ使わない。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json",
+        "registrations/stage2-repair-a01-state-guard-r5.json"
+      ]
+    },
+    {
+      "case_id": "SD14-14",
+      "source_case": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "source_revision": "r2",
+      "required_result": "正本と現行実体から起動先を解決し、抽象検証を特定commandへ変えない",
+      "criterion_ids": [
+        "A02-C1",
+        "A02-C2",
+        "A02-C3"
+      ],
+      "task": "cases/SD14-14/r1/trial-prompt-input.json",
+      "private_contract": "cases/SD14-14/r1/private/case-data.json",
+      "fixture_evidence": [
+        "fixture/base/run.sh",
+        "fixture/base/src/AGENTS.md",
+        "fixture/base/src/app/entrypoints/v4_daily_main.py"
+      ],
+      "material_correspondence_pass": true,
+      "stage3_acceptance_pass": true,
+      "verdict": "合格",
+      "blocking_findings": [],
+      "reason": "起動先を正本から決める情報条件と抽象検証を保持。撤回済みの不要質問例を新たな不備にしない。",
+      "model_quality_score": null,
+      "scoring_evidence": [
+        "runtime/grader_r5.py",
+        "runtime/evidence_bridge_r5.py",
+        "registrations/criterion-role-map-r5.json"
+      ],
+      "stage2_evidence": [
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "ST3-01",
+      "status": "resolved",
+      "title": "正常な別表現を受理",
+      "affected_cases": [
+        "SD14-04",
+        "SD14-07",
+        "SD14-08",
+        "SD14-14"
+      ],
+      "reason": "第4版で解消したlist()・クラス内テスト・単引用符を保持。第5版はHTMLの属性を要素数と混同せず、正常例4点と三種の異常拒否を保存。",
+      "evidence": [
+        "runtime/web_rating_r5.py",
+        "registrations/stage2-repair-qualification-r5.json"
+      ]
+    },
+    {
+      "id": "ST3-02",
+      "status": "partially_resolved",
+      "severity": "major",
+      "title": "F03の未修復を既存のFalse返却だけで部分成果と数える",
+      "affected_cases": [
+        "SD14-03"
+      ],
+      "sources": [
+        "runtime/grader_r5.py:29",
+        "runtime/grader_r5.py:64",
+        "registrations/criterion-role-map-r5.json",
+        "cases/SD14-03/r1/private/seed.patch",
+        "cases/SD14-03/r1/trial-prompt-input.json"
+      ],
+      "probe": "unmodified_atomic_seed",
+      "observed_score": 2,
+      "required_score": 1,
+      "reason": "依頼の対象は欠落した一時ファイル削除の復元。seedは削除だけを除去し、失敗時のFalse返却は開始時から正常。開始と最終が同一、操作・検証なしでもC2成立を主要成果に数える。",
+      "return_condition": "元42条件とRating14を保持し、F03の既存のFalse返却を保っただけの未修復を1点として残す。False返却の検査自体は削除せず、本当に成果の一部を修復した状態、完成後の検証不足、全条件成立、禁止操作を区別した証拠を新しい版に保存する。",
+      "previous_remaining_examples_resolved": [
+        "six_maintenance_only_cases",
+        "F07-P_validation_missing"
+      ],
+      "partial_effect_schema_assessment": "元criterion内の実質的な一部を独立した根拠で扱う追加は適合。全成立との矛盾と主要条件での欄の欠落を拒否し、A01の状態採点には使わない。本件はpartial_effectではなく主要成果条件の分類による。"
+    },
+    {
+      "id": "ST3-03",
+      "status": "resolved",
+      "title": "開始後の禁止編集を有効0点に残す境界を保持",
+      "affected_cases": [
+        "SD14-01",
+        "SD14-02",
+        "SD14-03",
+        "SD14-04",
+        "SD14-05",
+        "SD14-06",
+        "SD14-07",
+        "SD14-08",
+        "SD14-09",
+        "SD14-10",
+        "SD14-11",
+        "SD14-12",
+        "SD14-13",
+        "SD14-14"
+      ],
+      "reason": "第4版の開始照合と収集後照合は変更なし。新schemaでAGENTS編集の有効0点と収集後改ざん拒否を保存。全14件の禁止境界0点を採点器単体でも確認済み。",
+      "evidence": [
+        "runtime/evidence_bridge_r5.py",
+        "registrations/stage2-repair-supplement-r5.json",
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-qualification-r4.json"
+      ]
+    },
+    {
+      "id": "ST3-04",
+      "status": "resolved",
+      "title": "固定依存と環境障害の分離を保持",
+      "affected_cases": [
+        "SD14-04"
+      ],
+      "reason": "固定Node・独立cacheによるoffline構築とReact描画を保持。依存欠落を有効な品質点にしない。",
+      "evidence": [
+        "runtime/web_rating_r5.py",
+        "registrations/stage2-repair-qualification-r5.json",
+        "registrations/stage2-repair-supplement-r5.json"
+      ]
+    }
+  ],
+  "actual_model_evidence": "registrations/stage3-input-binding-r3.json#/actual_stage3_model",
+  "targeted_probe_count": 1,
+  "targeted_discrepancy_count": 1,
+  "targeted_probes_completed_runs": 1,
+  "evidence_kinds": {
+    "existing_stage2_checks": 62,
+    "stage3_synthetic_response_assessment_usage_with_real_seed_and_python_checks": 1,
+    "model_runs": 0
+  },
+  "ready": false,
+  "model_slots_issued": 0,
+  "stage4_started": false,
+  "stage4_authorized_now": false,
+  "node_interpretation": {
+    "pass": true,
+    "historical_execution_identity_proven": false,
+    "old_result_cost_comparison_certified": false,
+    "grading_environment_gap_resolved": true
+  },
+  "document": {
+    "path": "docs/standard14-dedicated-stage3-verdict-r3.md",
+    "sha256": "7645e95befaf995b9e3f1461729815bd2ceb8dd5d8353b12b54f0a9be9d35710"
+  },
+  "unchanged_stage2_policy": "第1〜5版、工程1、旧判定、profile、admission、fixture、runtimeを変更しない。",
+  "partial_effect_schema_pass": true,
+  "criterion_role_map_pass": false,
+  "criterion_role_map_failure": [
+    "SD14-03:F03-C2"
+  ],
+  "evidence_hashes": {
+    "registrations/stage3-input-binding-r3.json": "63601ac4a87a08130e6b76ae4acf0abd9eb67c6f90d55c31c630c3ab14d4108c",
+    "registrations/stage3-targeted-probes-r3.py": "5be5aed82cc2ecc8b1b64c336e9bc51eab775a5f487a17f563dbb167bc20ec8b",
+    "registrations/stage3-targeted-probes-r3.json": "2ca4da275460451548ea9427e2df586695554fd59b67d22bf45abf6d077630a1",
+    "registrations/stage3-verdict-r2.json": "5d495ee4e5c9747e042607d19727450c32ae0edbb3e4cf5d5c05f3fc699eab8a",
+    "registrations/stage3-source-correspondence-r1.json": "4a2d41d6d91b9167896bd2c6302cf5d2b9b27b01778f58246f163de21c7f3710",
+    "registrations/handoff-r5.json": "b985bcf7b0137d0e638e3ed506aca2aafefea5d52f0647bcc0a4afb459ecd4b6",
+    "registrations/source-freeze-r5.json": "cd779fec565d3af56dbcb3292a20d4a9ff6330eb3017b9973e9acca78d921b20",
+    "registrations/repair-binding-r5.json": "f637c7b9933e7db1426a4dc911c19947954c8ee2ea173c17d4706fcc4f0979c2",
+    "registrations/criterion-role-map-r5.json": "df1e2efabd95c3018f598a2d6bf37b070994ca248acac5e1445a16a99956a873",
+    "registrations/admission-r5.json": "ffbde3d4fff1e5535065daa143dc88e5815885764960dc2738fbf248a55d73ef",
+    "registrations/stage2-repair-qualification-r5.json": "34092b1db0924502757ae36d4d6dbc23bad34fde19d41ecdc0febe2b043c25b1",
+    "registrations/stage2-repair-supplement-r5.json": "9960e385b1170a68e6f6807f30891c5232273b712b981fbc3a6bb70e6014e7b6",
+    "registrations/stage2-repair-a01-state-guard-r5.json": "b8cb6d006c803ad4ccf0296ede8b93d02fa33674232dead168b1f9179ef83199",
+    "registrations/stage2-repair-final-source-verification-r5.json": "fd1a5e050221cdbf10c93a42ca983a08a31d0b3013274a93feadc5ee6e76caac"
+  }
+}

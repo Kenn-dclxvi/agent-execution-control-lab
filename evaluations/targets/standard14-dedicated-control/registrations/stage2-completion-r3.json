@@ -1,0 +1,65 @@
+{
+  "schema_version": "standard14-stage2-completion/r3",
+  "stage2_complete": true,
+  "stage3_executed": false,
+  "model_slots_issued": 0,
+  "case_count": 14,
+  "acceptance": [
+    {
+      "requirement": 1,
+      "evidence": {
+        "local-qualification-r1.json": "4c06afdee7ae5b390df6f315887182b523f13225ff3c85f0e076d390f6e83c3c",
+        "supplemental-qualification-r1.json": "b0756d81dee23d365a3db07b634dfdd7dce9b263aeaeb1471811a7e6ca7ff5c5"
+      }
+    },
+    {
+      "requirement": 2,
+      "evidence": {
+        "local-qualification-r1.json": "4c06afdee7ae5b390df6f315887182b523f13225ff3c85f0e076d390f6e83c3c",
+        "evidence-bridge-qualification-r3.json": "6db12ce71b56c81c70baec0a5f87ed30e5e30fe83acfdeb778f2cc97ef14b44e"
+      }
+    },
+    {
+      "requirement": 3,
+      "evidence": {
+        "local-qualification-r1.json": "4c06afdee7ae5b390df6f315887182b523f13225ff3c85f0e076d390f6e83c3c",
+        "node-environment-binding-r3.json": "f19cae962ff98c3c7b6bba50d7d45eb66c6f96e04deb322c5284d659d2f00c54"
+      }
+    },
+    {
+      "requirement": 4,
+      "evidence": {
+        "criterion-map-r1.json": "c6536567e45fcdb3d44e72753e75ffffeeb0e997e1878f5da7b71ac8eb8b6e4d"
+      }
+    },
+    {
+      "requirement": 5,
+      "evidence": {
+        "delivery-audit-r1.json": "b08606386b286a7f0b17c489460815e05ce8e60a7c5b96321bd0da629efcf078",
+        "environment-r1.json": "e836078cb5c3a558feac8e52b3cc5bd4beb726f343a22338e5c93a7c45549618",
+        "node-environment-binding-r3.json": "f19cae962ff98c3c7b6bba50d7d45eb66c6f96e04deb322c5284d659d2f00c54",
+        "node-dynamic-closure-r4.json": "87b331f769b222b616c8dcfb0654b572f7c6f84d33d4f517858a1f258512e191",
+        "node-setting-connection-r4.json": "c6854e5b9895b2dba85fefe4be4cd34f19111faa11f6f9642fa6183de3740005"
+      }
+    },
+    {
+      "requirement": 6,
+      "evidence": {
+        "storage-r1.json": "94e4e924913aadc20abc66e359330669fd74f03fcb4a95a3f90e3b52ed600719",
+        "storage-r3.json": "c414e6d647e11d2401c47ef94fca4067b92119aeabf6de46934ad1232d23d1d4"
+      }
+    }
+  ],
+  "scope": "工程1仕様の実装・局所受入・新系列内の固定。同等性の最終判定は工程3。",
+  "node_requirement_authority": "docs/standard14-dedicated-evaluation-plan-r1.md:58",
+  "historical_comparison_authority": "docs/standard14-dedicated-evaluation-plan-r1.md:80",
+  "historical_node_execution_identity_proven": false,
+  "actual_stage2_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "session_id": "01a10272-8060-7d92-8e98-df630cf13d77",
+    "source": "session turn_context",
+    "requested_model": "gpt-6.1-sol",
+    "requested_reasoning": "medium"
+  }
+}

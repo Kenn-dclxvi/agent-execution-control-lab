@@ -1,0 +1,66 @@
+{
+  "schema_version": "standard14-stage3-input-binding/r4",
+  "worktree": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/agent-execution-control-lab",
+  "review_patch": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/standard14-stage2-review-r6.patch",
+  "review_patch_sha256": "83be739eca7cbd93c77358f679d3aaa11191856090e547c7ceb522fe2ba95f3d",
+  "current_diff_matches_fixed_patch": true,
+  "source_freeze_sha256": "412e83da5f3d855f48acaedccad62b84cf7203e834808b52fbda117b36e83d86",
+  "handoff_sha256": "cba056c25ce9dd4f78c65449ca3a781a3e77e7f9070576fbabfd17fc471d3cf3",
+  "repair_binding_sha256": "2058f1ebea287d161024f768821441b7865d7dd695bdeeb8837cc5217673838d",
+  "frozen_artifacts_verified": 202,
+  "previous_stage3_verdict_sha256": "7ac1aea1b4d9b4909ea059316691c83da5e28d8c984ddfc7b3d2e6ac263c0bca",
+  "stage1_inputs": {
+    "docs/standard14-dedicated-evidence-r1.json": "e7fcc985ac9e0ff003c136886dc804f9365c3ae963325deba5ed1a5f905b8b34",
+    "docs/standard14-dedicated-history-analysis-r1.md": "0f87c8a47086a74b35920d0993b5b32404825e1cb776584ce98615b8ca2990a3",
+    "docs/standard14-dedicated-case-spec-r1.md": "73466a2cc5d19ddb0931f08451556bf51f1b3428da01779ea0a6d4fa06c3f16e",
+    "docs/standard14-dedicated-history-r1.tsv": "ba85255f04b4d7f2818356be827fc63e16e4984d541acd774892e8faa213348c",
+    "docs/standard14-dedicated-evaluation-plan-r1.md": "d3dc83d216a7324f4a0e9f30f418bfd301e1cbf5a40a9204b16ca59908ae109a"
+  },
+  "reused_kernel_sources": {
+    "scripts/all_agent_usage.py": "aeb633b99e8b565567a1d936d9eede49c83f0d0b3d0855921ff501272b5dd4c0",
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "layer2/extensions/parallel_execution/prepare_atomic_plan.py": "c47760188f36e78680d48370a9352eff0a861e64970c98ebf76ee8d6be7027ec",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60"
+  },
+  "applicable_rules": {
+    "AGENTS.md": "8abb4f3ddb3da65d366c24620d53ee8753a4487012ea598420889e809434e9da",
+    "docs/AGENTS.md": "5292ce109877d376fa7461f0acf5e4dd4c01409a2562205772f9fe812429c50d",
+    "evaluations/AGENTS.md": "5ad95f2444a2ad398f6072c6939e5073c98dfd02f726887293dec6cb0a73cb44",
+    "evaluations/targets/AGENTS.md": "cc46e89f0818701ea836ffb7db9f62a448e11daeabf4afea880db896ed369990",
+    "evaluations/targets/standard14-dedicated-control/AGENTS.md": "c7d75c7ab964edc7c3946915dd0581ca631d58b42b99b3f8a44090d08f7c02f1"
+  },
+  "actual_stage3_model": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning": "high",
+    "observed_model": "gpt-6-astra",
+    "observed_reasoning": "high",
+    "source": "turn_context",
+    "source_path": "/Users/kenn/.codex/sessions/2026/10/04/rollout-2026-10-04T02-26-42-01a102cd-c684-7f73-a736-c0d2ff57e63c.jsonl",
+    "line": 630,
+    "timestamp": "2026-10-04T02:30:56.982Z",
+    "record_sha256": "f34b832eaee395b28cf314ebebd787b77f672641553d74bcadbfae50b8ef5684",
+    "session_id": "01a102cd-c684-7f73-a736-c0d2ff57e63c",
+    "raw_log_copied": false
+  },
+  "policy": {
+    "required_result": "F03と第6版の接続差分を独立に判定し、前回合格13件を保持して工程3第4版へ保存する",
+    "target": "工程2第6版の固定差分、F03の主要成果分類と採点接続",
+    "method": "元要求、前回反例、新実装、限定17検査を照合。既に合格した判定の重複実行はせず、具体的疑義がある場合だけ補助確認する",
+    "preserved": "旧成果、元42条件・全14件、開始checkoutと工程1worktree、ready=false、全profile無効。モデル発行・委譲・外部変更・Git書込み・工程4なし"
+  },
+  "delta_verification": {
+    "grader_only_f03_primary_membership": true,
+    "prior_grader_reconstructed_sha256": "dedb4564e441de14d43a12318bc583fe26c81a42b64aa793f79659fa87951012",
+    "bridge_only_import_and_schema_revision": true,
+    "execution_binding_only_import_and_output_revision": true,
+    "role_map_changed_criteria": [
+      "F03-C2"
+    ],
+    "criteria_expected_text_and_source_sha256_match_count": 42,
+    "qualified_runtime_sources_match": true,
+    "reused_runtime_sources_match": true
+  },
+  "model_slots_issued": 0,
+  "stage4_started": false,
+  "docs_index_initial_sha256": "b607afa24c34830aa88037e6cfdf2f8c64842a6ef68398ab993e453e79e1a8a3"
+}

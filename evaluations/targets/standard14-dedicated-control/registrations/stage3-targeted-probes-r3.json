@@ -1,0 +1,129 @@
+{
+  "schema_version": "standard14-stage3-targeted-probes/r3",
+  "script_sha256": "5be5aed82cc2ecc8b1b64c336e9bc51eab775a5f487a17f563dbb167bc20ec8b",
+  "model_slots_issued": 0,
+  "git_writes": 0,
+  "existing_artifacts_modified": false,
+  "probe_count": 1,
+  "probes": [
+    {
+      "id": "unmodified_atomic_seed",
+      "case_id": "SD14-03",
+      "terminal_response": "修復も検証も行っていません。一時ファイルの削除は未実装のままです。",
+      "start_equals_final": true,
+      "changed_paths": [],
+      "seed_commit": "f347ec354b7b5272a0b8a70d1b8b6144a6b282fc",
+      "commands": {
+        "focused_atomic": {
+          "required_tokens": [
+            "-m pytest",
+            "tests/unit/test_atomic_save.py::TestContextRepositoryAtomicSave",
+            "-v"
+          ],
+          "status": "not_attempted",
+          "attempted_count": 0,
+          "successful_count": 0,
+          "failed_count": 0,
+          "matching_commands": []
+        },
+        "main_verify": {
+          "required_tokens": [
+            "bash",
+            "scripts/dev/main_verify.sh"
+          ],
+          "status": "not_attempted",
+          "attempted_count": 0,
+          "successful_count": 0,
+          "failed_count": 0,
+          "matching_commands": []
+        }
+      },
+      "assessment": {
+        "schema_version": "standard14-dedicated-independent-assessment/r5",
+        "packet_sha256": "45b43fa122acd2ffc5f515884a969f3b7d6330b7a48665d42862fcdde9222f71",
+        "case_id": "SD14-03",
+        "run_id": "SD14-03",
+        "reviewer_id": "stage3-independent-rater",
+        "terminal_count": 1,
+        "criteria": {
+          "F03-C1": {
+            "pass": false,
+            "reason": "一時ファイル削除は未修復。False返却と成功時保存は開始時の既存動作。指定検証は未実施。",
+            "sources": [
+              "start_manifest",
+              "final_manifest",
+              "source_views",
+              "final.txt",
+              "command_report"
+            ],
+            "partial_effect": false,
+            "partial_reason": "修復は一切していない。"
+          },
+          "F03-C2": {
+            "pass": true,
+            "reason": "一時ファイル削除は未修復。False返却と成功時保存は開始時の既存動作。指定検証は未実施。",
+            "sources": [
+              "start_manifest",
+              "final_manifest",
+              "source_views",
+              "final.txt",
+              "command_report"
+            ],
+            "partial_effect": false,
+            "partial_reason": "修復は一切していない。"
+          },
+          "F03-C3": {
+            "pass": false,
+            "reason": "一時ファイル削除は未修復。False返却と成功時保存は開始時の既存動作。指定検証は未実施。",
+            "sources": [
+              "start_manifest",
+              "final_manifest",
+              "source_views",
+              "final.txt",
+              "command_report"
+            ],
+            "effect_pass": true,
+            "effect_reason": "成功時保存と許可外差分なしは開始時から維持。必須検証のみ未実施。"
+          }
+        },
+        "observations": {},
+        "commands": {
+          "focused_atomic": {
+            "execution_matches": false,
+            "reason": "コマンドを一件も記録していない。"
+          },
+          "main_verify": {
+            "execution_matches": false,
+            "reason": "コマンドを一件も記録していない。"
+          }
+        }
+      },
+      "source_sha256": "a9b9d083704e9fc848ae3bf82cbecf4c277ab182dd9c86f80c4c6adc29a45e77",
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F03-C1": false,
+          "F03-C2": true,
+          "F03-C3": false
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": false,
+        "schema_version": "standard14-dedicated-quality-result/r5",
+        "run_id": "SD14-03",
+        "case_id": "SD14-03",
+        "packet_sha256": "45b43fa122acd2ffc5f515884a969f3b7d6330b7a48665d42862fcdde9222f71",
+        "assessment_sha256": "0d63904a102b8a32736f3528f2108c41ada53cc4f5def3045fd5c2e29d4d7b64",
+        "total_tokens": 2,
+        "elapsed_seconds": 0,
+        "evidence_origin": "local_synthetic_no_model",
+        "model_test_issued_by_bridge": false,
+        "layer4_registration_allowed": false
+      },
+      "required_score": 1,
+      "rationale": "依頼は欠落した一時ファイル削除の復元。開始時のFalse返却を保っただけで、主要成果の一部を作ったとはいえない。"
+    }
+  ],
+  "evidence_policy": "終了応答・意味判定・usage・時間は合成。固定seedからの実ファイル、開始と最終の一致、採点中のcleanup/False返却/成功時保存のPython検査は実処理。モデル実行の成績ではない。"
+}

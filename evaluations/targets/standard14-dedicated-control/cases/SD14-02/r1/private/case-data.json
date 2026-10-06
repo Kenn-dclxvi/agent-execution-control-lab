@@ -1,0 +1,103 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-02",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+  "source_revision": "r1",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "F02-C1",
+        "type": "cross_layer_behavior",
+        "expected": "Primary and selective refresh calls receive target_date and us_market_date derived by the V4 engine."
+      },
+      {
+        "criterion_id": "F02-C2",
+        "type": "domain_behavior",
+        "expected": "JP stock uses target_date; US stock, commodities, and FX use us_market_date with target_date fallback."
+      },
+      {
+        "criterion_id": "F02-C3",
+        "type": "command_contract_and_drift",
+        "expected": "Focused and full gates pass, date-bound assertions remain effective, and only allowed paths differ from the seeded fixture."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_command_and_contract_evidence",
+    "human_calibration_owner": "independent_contract_check",
+    "criteria": [
+      {
+        "criterion_id": "F02-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "tests/unit/test_v4_engine.py",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "F02-C2",
+        "evidence_sources": [
+          "final_repository_state",
+          "tests/unit/test_collection_history_updater.py",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "F02-C3",
+        "evidence_sources": [
+          "test_contract_diff",
+          "command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      ".venv/bin/python -m pytest tests/unit/test_collection_history_updater.py tests/unit/test_v4_engine.py -v",
+      "bash scripts/dev/main_verify.sh",
+      "git diff --check"
+    ],
+    "success_rule": "all listed criteria pass from observed evidence; test weakening and worker self-report alone cannot satisfy a criterion"
+  },
+  "seed_operations": [
+    [
+      "src/app/v4_engine.py",
+      "primary = self.updater.update(target_date=target_date, us_market_date=us_market_date)",
+      "primary = self.updater.update()"
+    ],
+    [
+      "src/domain/collection_history_updater.py",
+      "market_end = self._resolve_market_end_date(asset['asset_class'], target_date, us_market_date, end_date)",
+      "market_end = end_date"
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/app/v4_engine.py",
+      "mode": "100644",
+      "git_blob_sha1": "2d434888e1cb659dacab2a8e2722b9c9b741ee50"
+    },
+    {
+      "path": "src/domain/collection_history_updater.py",
+      "mode": "100644",
+      "git_blob_sha1": "179beed1fd43c218a4215b214cba4a5a9c994854"
+    },
+    {
+      "path": "tests/unit/test_v4_engine.py",
+      "mode": "100644",
+      "git_blob_sha1": "4ac7c85d610cd113cd7f0b24890440bbe8e00844"
+    },
+    {
+      "path": "tests/unit/test_collection_history_updater.py",
+      "mode": "100644",
+      "git_blob_sha1": "1b9280267d44dbbef334066823c60ba1ae3dbedd"
+    }
+  ]
+}

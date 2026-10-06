@@ -1,0 +1,55 @@
+{
+  "schema_version": "standard14-stage3-input-binding/r3",
+  "worktree": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/agent-execution-control-lab",
+  "review_patch": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/standard14-stage2-review-r5.patch",
+  "review_patch_sha256": "a031d5df361aedcfc37211ebcee9c55137b839c231a9344be79b9fc5464a0cb1",
+  "current_diff_matches_fixed_patch": true,
+  "source_freeze_sha256": "cd779fec565d3af56dbcb3292a20d4a9ff6330eb3017b9973e9acca78d921b20",
+  "handoff_sha256": "b985bcf7b0137d0e638e3ed506aca2aafefea5d52f0647bcc0a4afb459ecd4b6",
+  "repair_binding_sha256": "f637c7b9933e7db1426a4dc911c19947954c8ee2ea173c17d4706fcc4f0979c2",
+  "criterion_role_map_sha256": "df1e2efabd95c3018f598a2d6bf37b070994ca248acac5e1445a16a99956a873",
+  "frozen_artifacts_verified": 187,
+  "previous_stage3_verdict_sha256": "5d495ee4e5c9747e042607d19727450c32ae0edbb3e4cf5d5c05f3fc699eab8a",
+  "stage1_inputs": {
+    "docs/standard14-dedicated-evidence-r1.json": "e7fcc985ac9e0ff003c136886dc804f9365c3ae963325deba5ed1a5f905b8b34",
+    "docs/standard14-dedicated-history-analysis-r1.md": "0f87c8a47086a74b35920d0993b5b32404825e1cb776584ce98615b8ca2990a3",
+    "docs/standard14-dedicated-case-spec-r1.md": "73466a2cc5d19ddb0931f08451556bf51f1b3428da01779ea0a6d4fa06c3f16e",
+    "docs/standard14-dedicated-history-r1.tsv": "ba85255f04b4d7f2818356be827fc63e16e4984d541acd774892e8faa213348c",
+    "docs/standard14-dedicated-evaluation-plan-r1.md": "d3dc83d216a7324f4a0e9f30f418bfd301e1cbf5a40a9204b16ca59908ae109a"
+  },
+  "reused_kernel_sources": {
+    "scripts/all_agent_usage.py": "aeb633b99e8b565567a1d936d9eede49c83f0d0b3d0855921ff501272b5dd4c0",
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "layer2/extensions/parallel_execution/prepare_atomic_plan.py": "c47760188f36e78680d48370a9352eff0a861e64970c98ebf76ee8d6be7027ec",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60"
+  },
+  "applicable_rules": {
+    "AGENTS.md": "8abb4f3ddb3da65d366c24620d53ee8753a4487012ea598420889e809434e9da",
+    "docs/AGENTS.md": "5292ce109877d376fa7461f0acf5e4dd4c01409a2562205772f9fe812429c50d",
+    "evaluations/AGENTS.md": "5ad95f2444a2ad398f6072c6939e5073c98dfd02f726887293dec6cb0a73cb44",
+    "evaluations/targets/AGENTS.md": "cc46e89f0818701ea836ffb7db9f62a448e11daeabf4afea880db896ed369990",
+    "evaluations/targets/standard14-dedicated-control/AGENTS.md": "c7d75c7ab964edc7c3946915dd0581ca631d58b42b99b3f8a44090d08f7c02f1"
+  },
+  "actual_stage3_model": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning": "high",
+    "observed_model": "gpt-6-astra",
+    "observed_reasoning": "high",
+    "source": "turn_context",
+    "source_path": "/Users/kenn/.codex/sessions/2026/10/04/rollout-2026-10-04T02-26-42-01a102cd-c684-7f73-a736-c0d2ff57e63c.jsonl",
+    "line": 515,
+    "timestamp": "2026-10-04T02:12:06.730Z",
+    "record_sha256": "b63fc5450860eabc07486edd6c75d68beb2d576755b22167fcac7945416620b8",
+    "session_id": "01a102cd-c684-7f73-a736-c0d2ff57e63c",
+    "raw_log_copied": false
+  },
+  "policy": {
+    "required_result": "第5版の全14件・42条件と残件2件、維持境界を再判定し工程3第3版へ保存する",
+    "target": "工程2第5版の固定差分と新採点経路、主要成果の分類と部分成果の分解",
+    "method": "元要求と固定成果、新実装、保存済み62件を照合し、具体的疑義に限り補助証拠を取得する",
+    "preserved": "旧成果、全14件、開始checkoutと工程1worktree、ready=false、全profile無効。委譲・モデル発行・外部変更・Git書込み・工程4なし"
+  },
+  "model_slots_issued": 0,
+  "stage4_started": false,
+  "docs_index_initial_sha256": "4268dc52b67a212b35d7f6c5f07653d70dc7ed241a14145a48f2d7191118be8e"
+}

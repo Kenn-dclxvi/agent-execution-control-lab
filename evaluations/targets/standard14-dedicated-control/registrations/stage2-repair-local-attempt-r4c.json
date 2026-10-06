@@ -1,0 +1,6 @@
+{
+  "model_slots_issued": 0,
+  "all_pass": false,
+  "reason": "class正常例の生成時に次の関数のdecoratorまで取り込み、構文エラーを作った。",
+  "correction": "ASTの関数終端で限定して正常例を生成する。候補の構文不正は内容不成立として扱う入口も保持する。"
+}

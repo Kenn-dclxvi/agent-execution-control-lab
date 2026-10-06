@@ -1,0 +1,96 @@
+{
+  "stage2_actual": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "session_id": "01a10272-8060-7d92-8e98-df630cf13d77",
+    "source": "session turn_context",
+    "requested_model": "gpt-6.1-sol",
+    "requested_reasoning": "medium"
+  },
+  "shared_python": {
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv",
+    "requirements_freeze_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+    "expected_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+    "version": {
+      "exit_code": 0,
+      "stdout": "Python 3.14.5",
+      "stderr": ""
+    },
+    "python3": {
+      "exit_code": 0,
+      "stdout": "Python 3.14.5",
+      "stderr": ""
+    },
+    "pytest": {
+      "exit_code": 0,
+      "stdout": "pytest 9.0.2",
+      "stderr": ""
+    },
+    "identity_matches": true
+  },
+  "cli": {
+    "binding": {
+      "alias": "codex-0.159",
+      "codesign_team_identifier": "2DC432GLL2",
+      "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+      "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+      "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+      "version_output": "codex-cli 0.159.0"
+    },
+    "actual_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+    "version": {
+      "exit_code": 0,
+      "stdout": "codex-cli 0.159.0",
+      "stderr": ""
+    },
+    "codesign": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Executable=/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex\nIdentifier=codex\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20500 size=1861969 flags=0x10000(runtime) hashes=58176+7 location=embedded\nVersionPlatform=1\nVersionMin=720896\nVersionSDK=984320\nHash type=sha256 size=32\nCandidateCDHash sha256=5e592aebd4810e72d96d9e3efc73abf7d1b9f89c\nCandidateCDHashFull sha256=5e592aebd4810e72d96d9e3efc73abf7d1b9f89c984a155a9bf7a5519e20e786\nHash choices=sha256\nCMSDigest=5e592aebd4810e72d96d9e3efc73abf7d1b9f89c984a155a9bf7a5519e20e786\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=227753984\nExecutable Segment flags=0x1\nPage size=4096\nCDHash=5e592aebd4810e72d96d9e3efc73abf7d1b9f89c\nSignature size=9047\nAuthority=Developer ID Application: OpenAI OpCo, LLC (2DC432GLL2)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Sep 29, 2026 at 16:42:01\nNotarization Ticket=stapled\nInfo.plist entries=6\nTeamIdentifier=2DC432GLL2\nRuntime Version=15.5.0\nSealed Resources version=2 rules=13 files=1\nInternal requirements count=1 size=168\nTotal signatures=1\nChosen signature=1"
+    },
+    "identity_matches": true
+  },
+  "node": {
+    "path": "/opt/homebrew/Cellar/node/26.0.0/bin/node",
+    "sha256": "08dad0581f00a0cabf4d49ec92ca1f25fdfd01c2c18fa8e92b35f04d4c24c164",
+    "version": {
+      "exit_code": 0,
+      "stdout": "v26.0.0",
+      "stderr": ""
+    },
+    "npm_path": "/opt/homebrew/lib/node_modules/npm/bin/npm-cli.js",
+    "npm_sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+    "npm_version": {
+      "exit_code": 0,
+      "stdout": "11.12.1",
+      "stderr": ""
+    },
+    "old_environment_match": "unverified",
+    "cache": "/Users/kenn/.npm"
+  },
+  "execution": {
+    "max_workers": 24,
+    "all_agent_usage": "scripts/all_agent_usage.py",
+    "command_evidence": "scripts/all_agent_command_evidence.py",
+    "token_accounting": "all-agent/v1",
+    "elapsed": "execution-time-recording/r1",
+    "interval": "CLI subprocess start to return; question wait included",
+    "permissions": {
+      "sandbox": "workspace-write",
+      "approval_policy": "never"
+    },
+    "network_access": false,
+    "memories": false,
+    "per_run_home": "empty_auth_only",
+    "retry": false,
+    "slots_per_reasoning": 28,
+    "authorized_now": 0,
+    "fixed_executor": {
+      "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-a01-old-and-compact-n20-20261001-r1/frozen-lab/scripts/run_codex_evaluation.py",
+      "sha256": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "expected_sha256": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "identity_matches": true
+    }
+  }
+}

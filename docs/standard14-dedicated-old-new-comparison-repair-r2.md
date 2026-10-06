@@ -1,0 +1,9 @@
+# 旧新対応比較の開始証跡修復 第2版
+
+2026年10月4日。旧側第1版Lowの開始証跡は、原本のtarget commit/treeを含むfixture構築記録をモデルから参照可能なstart.jsonへ格納していた。専用版start.jsonはbase/seed/freeの実際の開始identityを持ち、この余分な構築記録を持たない。旧Low入口レビュー2件が原本と開始identityを混同して停止した実証拠があり、事前照合がこの実配送境界まで及ばなかった不備を確認した。これは素材だけの対応比較を阻害するため、第1版の発行前照合を不完全と判定する。発行後に正式比較へ使用することを認めない。第1版Low28件と実消費・動作を別の診断証拠としてそのまま保持し、成功値へ変換しない。第1版Medium・Highは発行しない。
+
+必要な修復は、モデルが参照できる開始証跡の項目と意味を専用版と一致させることだけである。元fixture、14ケース、42条件、TaskSpec、authority、Rating14、CLI・実行器・収集器・Python・Node・権限を変更しない。原本構築記録は固定入力の非公開証拠へ保持し、start.jsonには専用版と同じcase_id、run_id、base_commit、seed_commit、free_commit、manifest、authority、task_sha256、executor_bindingを保存する。
+
+第2版は第1版で一度固定した14素材を再利用する。旧Low28件を追加し、Medium・High各28件を未発行枠として実施する。追加発行の上限は84件であり、旧側全体の累計発行上限は112件となる。第1版の旧Lowは第2版プールへ再利用しない。実行群の24件＋4件を維持するため、入口レビューだけの再測定で費用比較を補完しない。専用Low・Medium・Highは再実行しない。
+
+旧main_verifyが生成するGit ignore対象の.coverage・logs/test.log・reports/test-result.xmlは実測ストレージとして保持し、元契約のtracked/non-ignored driftへ読み替えない。全変更のmanifestとGit ignore判定を併記する。採点前の記録抽出を修復する場合も元記録を削除しない。

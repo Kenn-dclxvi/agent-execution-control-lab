@@ -44,6 +44,19 @@
 
 ## 3. 現行frontier
 
+- [STD14専用評価の全体計画見直し 第2版](standard14-dedicated-evaluation-plan-r2.md)：工程8への自動移行を撤回。比較の種類・権限・終了条件を分離。後続の新規リポジトリには引き継がない。
+- [STD14専用評価の規則影響調査](standard14-dedicated-rule-impact-audit-r1.md)：完全一致規則の適用範囲、古い工程指示、作業判断の影響を分離。
+- [STD14の保存失敗と判断材料の対応確認 第1版](standard14-dedicated-stage6-correspondence-report-r1.md)：保存失敗72件の検出を確認。開始記録の2項目差を検出し、難しさと完全な比較互換性・低コスト認定は未成立。
+
+- [STD14専用評価の残工程実行方針](standard14-dedicated-stage5-execution-plan-r1.md)：全14件、既存Lowと固定条件の保持。
+- [旧新対応比較の追加測定計画](standard14-dedicated-old-new-comparison-plan-r1.md)と[開始記録の修正](standard14-dedicated-old-new-comparison-repair-r2.md)：旧素材の最小追加測定と発行前照合不備の記録。
+- [STD14専用評価の旧新比較結果 第1版](standard14-dedicated-stage5-final-report-r1.md)：旧・専用の各84件と要件別の未証明。低コストな代替認定は未成立。
+
+
+- [STD14専用コードベースの再設計計画](standard14-dedicated-evaluation-plan-r1.md)：全14項目を対象に工程1の仕様化を完了。A01だけへの縮小を撤回し、実装、対応確認、Astra Low・Medium・High各N2（各28件）の入口条件を固定。当時のモデル試験は未発行。後続の全設定測定と残る未証明は旧新比較報告を参照。
+- [STD14専用版の全14項目仕様](standard14-dedicated-case-spec-r1.md)：元TaskSpec・authorityと判断材料、実装依存、正常・誤成果、採点の対応。設計側の契約であり測定対象へは渡さない。
+- [STD14専用版の過去実績分析](standard14-dedicated-history-analysis-r1.md)：34件のSTD14結果と小規模試作の観測・因果・仮説を分離。[条件と契約の証拠](standard14-dedicated-evidence-r1.json)、[条件別・実行ID別の台帳](standard14-dedicated-history-r1.tsv)へ接続。
+
 - [小規模A01 r2・r3のAstra各N2結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-r3-n2_2026-10-03.md)：同一CLI・PATHの12件の動作分類と費用。旧KPIを再利用しない初回比較。
 
 - [小規模A01 r2・r3のAstra各N2計測](compact-latent-mode-r2-r3-astra-n2-execution.md)：同じCLI・PATHで両版を各推論設定2回測定する。過去r2のPATH固定証拠不足のため、今回の計12件へ固定。
@@ -688,6 +701,15 @@
 
 ## 7. 完了済み研究記録
 
+- [STD14の開始状態と履歴対応の最終判定 第1版](standard14-dedicated-stage7-final-verdict-r1.md)：Astra Highで契約案を判定。基本区分を受け入れ、履歴条件は第2版へ具体化。新素材・難しさ・低コスト認定とは分離。
+- [STD14の開始状態の比較契約案と局所照合 第1版](standard14-dedicated-stage7-start-state-report-r1.md)：Sol Mediumで契約案と84組の機械照合を実装。対応の最終確認は計画どおりAstra Highへ残す。
+
+- [STD14専用素材の工程3 再判定 第4版](standard14-dedicated-stage3-verdict-r4.md)：工程2第6版のF03残件と接続差分を判定し、全14件・42条件の受入合格。前回の13件を保持。発行許可は無効のまま、モデル発行0件・工程4未開始。
+- [STD14専用評価の工程4 初回Low測定 第1版](standard14-dedicated-stage4-result-r1.md)：全14件各2回の28件を完了。4点26件、A01の有効0点2件を保持し、全担当usage・時間・動作・不変結果を保存。旧素材比較と低コスト認定は未実施。
+- [STD14専用素材の工程3 再判定 第3版](standard14-dedicated-stage3-verdict-r3.md)：工程2第5版の全14件・42条件を判定。前版の残件例は解消したが、F03の未修復を2点とする分類が残り不合格。13件合格・1件不合格、モデル発行0件、工程4は未開始。
+- [STD14専用素材の工程3 再判定 第2版](standard14-dedicated-stage3-verdict-r2.md)：工程2第4版の全14件を再判定。禁止編集と固定Node接続は解消、正常表現の誤拒否と点数区分に残件があり不合格。モデル試験0件、工程4は未開始。
+- [STD14専用素材の工程3 最終対応判定](standard14-dedicated-stage3-verdict-r1.md)：全14件を判定し、採点の誤拒否・点数区分・禁止編集の除外・Web採点環境の不備により工程2へ返却。Node条件の解釈訂正は適合。モデル試験0件、工程4は未開始。
+
 - [累積削減版r9の仕様分離結果](old-a01-cumulative-spec-projection-r9-report.md)：仕様本文は両件未読。4点1件・0点1件で、仕様分離の削減効果は未確認。
 - [累積削減版r9の仕様分離設計](old-a01-cumulative-spec-projection-r9-design.md)：r8を保持し、運用移行の原文だけを別文書へ分離。復元一致と39件のテストを確認し、並列Low N2で測定。
 
@@ -919,6 +941,8 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 
 ## 8. historical handoff／superseded interpretation
 
+- [STD14の開始履歴を保持する素材別版の実装方針 第1版](standard14-dedicated-stage8-material-revision-plan-r1.md)：未実装の修正案。全体計画第2版で自動実装を取り下げた。
+
 内容は当時の記録として保持する。現行設計・現行値として読まない。各文書の冒頭バナーが位置づけを示す。
 
 | 文書 | 位置づけ |
@@ -944,3 +968,15 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 - [一般チャットsemantic grader threshold decision r1](general-chat-semantic-grader-threshold-decision-r1.md)
 
 - [Astra Free：旧A01と小規模版の各N20結果](../evaluations/targets/compact-repository-control/results/free-astra6-reasoning-latent-mode-code-r2-n20_2026-10-01.md)：旧Low20件の停止に対し、小規模版Lowは停止1件。動作分類、費用、CLIと並列の条件差を記録。
+
+- [STD14専用素材の工程2実装・局所検証記録](standard14-dedicated-stage2-r1.md): 全14件の固定成果、検証証拠と工程3へ渡す未確認条件。
+
+- [STD14専用素材の工程2継続記録](standard14-dedicated-stage2-continuation-r2.md): 採点接続の実装・全14件の局所検証と、旧Node同一性の証拠不足を記録。
+
+- [STD14専用素材の工程2完了記録 第3版](standard14-dedicated-stage2-completion-r3.md)：Node条件の解釈訂正、依存固定、全14件の局所受入と工程3への引き継ぎ。
+
+- [STD14専用素材の工程2修正記録 第4版](standard14-dedicated-stage2-repair-r4.md)：工程3で返された4件の採点不備の修正・局所検証・再判定への引き継ぎ。
+
+- [STD14専用素材の工程2追加修正記録 第5版](standard14-dedicated-stage2-repair-r5.md)：属性付きHTMLの受理、主要成果と維持条件・検証不足の区別、再判定への引き継ぎ。
+
+- [STD14専用素材の工程2追加修正記録 第6版](standard14-dedicated-stage2-repair-r6.md)：F03の未修復と部分修復の分類、返却検査の保持、再判定への引き継ぎ。

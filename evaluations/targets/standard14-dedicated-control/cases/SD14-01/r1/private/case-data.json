@@ -1,0 +1,85 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-01",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+  "source_revision": "r3",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "F01-C1",
+        "type": "behavior_and_command",
+        "expected": "Duplicate generated asset_key values raise MarketUnitsSnapshotError and the focused gate passes."
+      },
+      {
+        "criterion_id": "F01-C2",
+        "type": "behavior",
+        "expected": "Non-duplicate CSV normalization behavior remains valid."
+      },
+      {
+        "criterion_id": "F01-C3",
+        "type": "command_and_drift",
+        "expected": "Focused and full gates pass and only allowed paths differ from the seeded fixture."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r2",
+    "mode": "repository_state_terminal_and_command_evidence",
+    "human_calibration_owner": "not_applicable_machine_only",
+    "criteria": [
+      {
+        "criterion_id": "F01-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "F01-C2",
+        "evidence_sources": [
+          "focused_gate",
+          "full_gate"
+        ]
+      },
+      {
+        "criterion_id": "F01-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      ".venv/bin/python -m pytest tests/unit/test_market_units_snapshot.py -v",
+      "bash scripts/dev/main_verify.sh",
+      "git diff --check"
+    ],
+    "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient; pre-existing caller behavior outside allowed paths does not block completion"
+  },
+  "seed_operations": [
+    [
+      "src/domain/market_units_snapshot.py",
+      "    _validate_unique_asset_keys(rows)\n",
+      ""
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/domain/market_units_snapshot.py",
+      "mode": "100644",
+      "git_blob_sha1": "e3af06ab26c74a98815a53de7ec0661af82e3e18"
+    },
+    {
+      "path": "tests/unit/test_market_units_snapshot.py",
+      "mode": "100644",
+      "git_blob_sha1": "a854b1e85795418c372a26c72a2f4a9a3e24d6a2"
+    }
+  ]
+}

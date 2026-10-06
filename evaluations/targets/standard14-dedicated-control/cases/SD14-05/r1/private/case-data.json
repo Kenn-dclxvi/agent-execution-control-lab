@@ -1,0 +1,69 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-05",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F05-CLARIFY-UNITS-MODE",
+  "source_revision": "r1",
+  "oracle": {
+    "mode": "no_drift_and_structured_terminal",
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "F05-C1",
+        "type": "terminal_content",
+        "expected": "One concise clarification asks for both the desired daily-or-strict mode and the strict-mode live-CSV fallback policy."
+      },
+      {
+        "criterion_id": "F05-C2",
+        "type": "operation_trace_and_drift",
+        "expected": "No edit, test, file creation, index operation, or external operation occurs."
+      },
+      {
+        "criterion_id": "F05-C3",
+        "type": "terminal_count_and_disposition",
+        "expected": "Exactly one terminal outcome is clarification and no implementation follows."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_and_operation_trace_evidence",
+    "human_calibration_owner": "independent_boundary_check",
+    "criteria": [
+      {
+        "criterion_id": "F05-C1",
+        "evidence_sources": [
+          "terminal_response"
+        ]
+      },
+      {
+        "criterion_id": "F05-C2",
+        "evidence_sources": [
+          "operation_trace",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "F05-C3",
+        "evidence_sources": [
+          "terminal_count",
+          "terminal_disposition",
+          "operation_trace"
+        ]
+      }
+    ],
+    "commands": [],
+    "success_rule": "all listed criteria pass from observed evidence; inferred policy or a worker claim of no drift is insufficient without trace and repository-state evidence"
+  },
+  "seed_operations": [],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/domain/universal_ingester.py",
+      "mode": "100644",
+      "git_blob_sha1": "69905806656505add790f4fc7c7c89353cc49126"
+    }
+  ]
+}

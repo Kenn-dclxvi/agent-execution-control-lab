@@ -1,0 +1,20 @@
+--- a/requirements.in
++++ b/requirements.in
+@@ -7,5 +7,5 @@
+ jpholiday>=0.1.0
+ pandas-market-calendars>=4.0.0
+ cryptography>=41.0.0
+-PyYAML>=6.0.1
++PyYAML>=7.0.0
+ yfinance>=0.2.0
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -103,7 +103,7 @@
+ pytz==2025.2
+     # via yfinance
+ pyyaml==6.0.3
+-    # via -r requirements.in
++    # via manual override
+ requests==2.32.5
+     # via yfinance
+ six==1.17.0

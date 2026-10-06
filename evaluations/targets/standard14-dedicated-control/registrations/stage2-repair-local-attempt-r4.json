@@ -1,0 +1,6 @@
+{
+  "model_slots_issued": 0,
+  "all_pass": false,
+  "reason": "模擬shellのlock pathに各一時workspaceの絶対pathが入るため、等価出力の単純比較が失敗した。",
+  "correction": "模擬実行の一時workspace部分だけを正規化し、module・引数・exit・周辺応答の比較を維持する。"
+}

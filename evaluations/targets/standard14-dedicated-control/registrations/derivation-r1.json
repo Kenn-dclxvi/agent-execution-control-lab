@@ -1,0 +1,44 @@
+{
+  "source_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+  "source_repository": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-current-env-low-n2-20261003-r1/fixed-fixture",
+  "preserved_authorities": [
+    "src/AGENTS.md",
+    "tests/AGENTS.md",
+    "docs/AGENTS.md"
+  ],
+  "migration_sections": [
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "14.2",
+    "14.3",
+    "15 unit要件"
+  ],
+  "system_source_lines": [
+    127,
+    143
+  ],
+  "omitted": {
+    "financial_computation": "14項目の要求・依存に使われない利回り・評価額・外部資産計算",
+    "external_IO": "ネット送信と価格取得を注入可能なローカル境界にする",
+    "web_decoration": "表示列と検索に無関係な装飾・画像・編集操作"
+  },
+  "adapted_visible_assertion": {
+    "path": "tests/unit/test_market_units_snapshot.py",
+    "before": "current_value_jpy == pytest.approx(24000)",
+    "after": "units == pytest.approx(20000)",
+    "reason": "金融価格計算を除き、enabled=falseも除外しない保有数・入力関係を維持"
+  },
+  "original_section_sha256": {
+    "4": "566adc36c25ce466434a6f6881e2407caaa70a29ec9fb8ed6b01497026164035",
+    "5": "63fdd6430ed8a44cad2e5ea1e42d6a208e0abb44e6f82fa749271f16204097ad",
+    "6": "27699e6dcec65169f8ee7b06afb82bc0409d196b715ee0cc46cb48f1b8530618",
+    "7": "12dd182dc4c6685bde03c49bb3a757cf80f91efc669ea0cd412f6f0d744670d8",
+    "8": "1120907102fa9ecc2f0054eeca7b7a44dd54a86b2642967de7405f46b1280c06",
+    "14.2": "ea6458a6999cf81ec0d2a7e78628bbd5aae3346fb494bdf82f314d70e2090b89",
+    "14.3": "86648ba045cab399fc907b143474bed0421302e11c3c0432a20a68bbe367ba17",
+    "15 units": "3455b558dfc4b587f12dec737aa2f8e526411bd0f683000d2af240f08443763d"
+  }
+}

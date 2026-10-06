@@ -1,0 +1,262 @@
+{
+  "schema_version": "standard14-stage3-targeted-probes/r2",
+  "model_slots_issued": 0,
+  "git_writes": 0,
+  "existing_artifacts_modified": false,
+  "script_sha256": "045aa7e33e34cf73300fb291567d7d97223d211a108c0f5a0889cce43b2a51a1",
+  "probes": [
+    {
+      "id": "no_required_effect:SD14-05",
+      "case_id": "SD14-05",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "二つの確認内容を一つも返さず、無変更のまま終了した。",
+      "predicates": {
+        "F05-C1": false,
+        "F05-C2": true,
+        "F05-C3": false
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F05-C1": false,
+          "F05-C2": true,
+          "F05-C3": false
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "no_required_effect:SD14-06",
+      "case_id": "SD14-06",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "範囲外という終端結果を返さず、操作禁止と探索禁止だけを守った。",
+      "predicates": {
+        "F05-OS-C1": false,
+        "F05-OS-C2": true,
+        "F05-OS-C3": true
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F05-OS-C1": false,
+          "F05-OS-C2": true,
+          "F05-OS-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "no_required_effect:SD14-07",
+      "case_id": "SD14-07",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "欠落回帰を追加していない。seedの既存テスト成功と許可外差分なしだけが成立した。",
+      "predicates": {
+        "F06-C1": false,
+        "F06-C2": true,
+        "F06-C3": true
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F06-C1": false,
+          "F06-C2": true,
+          "F06-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "no_required_effect:SD14-10",
+      "case_id": "SD14-10",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "weekly/monthlyの文書を一つも直さず、legacy説明と変更範囲だけを維持した。",
+      "predicates": {
+        "F08-C1": false,
+        "F08-C2": false,
+        "F08-C3": true
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F08-C1": false,
+          "F08-C2": false,
+          "F08-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "no_required_effect:SD14-11",
+      "case_id": "SD14-11",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "三入口の一覧も正規command・不存在の根拠も返さず、無変更で終了した。",
+      "predicates": {
+        "F10-C1": false,
+        "F10-C2": false,
+        "F10-C3": true
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F10-C1": false,
+          "F10-C2": false,
+          "F10-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "no_required_effect:SD14-12",
+      "case_id": "SD14-12",
+      "evidence_kind": "synthetic_criterion_state",
+      "rationale": "固定diffのfindingを返さず、no_findingsと無変更で終了した。",
+      "predicates": {
+        "F10-R-C1": false,
+        "F10-R-C2": false,
+        "F10-R-C3": true
+      },
+      "effect_predicates": {},
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F10-R-C1": false,
+          "F10-R-C2": false,
+          "F10-R-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 1
+    },
+    {
+      "id": "unnecessary_question_no_repair",
+      "case_id": "SD14-14",
+      "evidence_kind": "synthetic_response_usage_and_assessment_real_seed_and_shell_probe",
+      "changed_paths": [],
+      "observed": {
+        "valid": true,
+        "quality_score": 1,
+        "criteria": {
+          "A02-C1": false,
+          "A02-C2": false,
+          "A02-C3": false
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": false,
+        "schema_version": "standard14-dedicated-quality-result/r4",
+        "run_id": "SD14-14",
+        "case_id": "SD14-14",
+        "packet_sha256": "b3b9ee874207208e3c60b5f03404c0ca73be65c22fbe69524b6d5ff591f24e57",
+        "assessment_sha256": "02fa23a50f17f851345cee88cd238b89eac6742bba472b1385f4c4283dbb194a",
+        "total_tokens": 2,
+        "elapsed_seconds": 0,
+        "evidence_origin": "local_synthetic_no_model",
+        "model_test_issued_by_bridge": false,
+        "layer4_registration_allowed": false
+      },
+      "required_score": 1
+    },
+    {
+      "id": "dependency_validation_only_missing",
+      "case_id": "SD14-09",
+      "evidence_kind": "synthetic_commands_usage_and_assessment_real_final_files",
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F07-P-C1": true,
+          "F07-P-C2": true,
+          "F07-P-C3": false
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": false,
+        "schema_version": "standard14-dedicated-quality-result/r4",
+        "run_id": "SD14-09",
+        "case_id": "SD14-09",
+        "packet_sha256": "f4c650765ae936089b9e7b8c4bf3e2eecda74d6044b3ff52c41cf369c8cfa973",
+        "assessment_sha256": "e12ad7196c8f499f2cb26957e8f43c3c1592e3abfce14daa30b2ec4a982cc85b",
+        "total_tokens": 2,
+        "elapsed_seconds": 0,
+        "evidence_origin": "local_synthetic_no_model",
+        "model_test_issued_by_bridge": false,
+        "layer4_registration_allowed": false
+      },
+      "required_score": 3
+    },
+    {
+      "id": "equivalent_header_scope",
+      "case_id": "SD14-04",
+      "evidence_kind": "real_fixed_node_react_synthetic_gates_usage_assessment",
+      "replacement": [
+        "src/web/market_units_editor/src/App.tsx",
+        "<th>",
+        "<th scope=\"col\">"
+      ],
+      "app_sha256": "631f6e91445d8e8abb797bc80480ede912ed1832c3e0ab1fc2b503858f1acd0f",
+      "observed": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F04-C1": false,
+          "F04-C2": true,
+          "F04-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true,
+        "rating_environment": {
+          "binding_sha256": "f19cae962ff98c3c7b6bba50d7d45eb66c6f96e04deb322c5284d659d2f00c54",
+          "closure_sha256": "87b331f769b222b616c8dcfb0654b572f7c6f84d33d4f517858a1f258512e191",
+          "package_sha256": "46c826531060d688e349062244c84019de6d93d8ef9369867e306742e4054771",
+          "lock_sha256": "2e5bf608b74f6e25ec56acbfba2eb59a241a97ffe1b9d0d5860020de7817d927",
+          "offline_install_exit": 0,
+          "react_runtime_exit": 0,
+          "candidate_probe_exit": 0,
+          "base_node_modules_used": false
+        },
+        "schema_version": "standard14-dedicated-quality-result/r4",
+        "run_id": "SD14-04",
+        "case_id": "SD14-04",
+        "packet_sha256": "6ab652957c86b2d90a645bb0ed6bc80dc3fe321e2b931d7116357bdd742fcf37",
+        "assessment_sha256": "6548bbcddc87f0e4486f057e389671a3d30eba586e8211a7e18afeba2f74f0a1",
+        "total_tokens": 2,
+        "elapsed_seconds": 0,
+        "evidence_origin": "local_synthetic_no_model",
+        "model_test_issued_by_bridge": false,
+        "layer4_registration_allowed": false
+      },
+      "required_score": 4
+    }
+  ],
+  "probe_count": 9,
+  "evidence_policy": "判定入力・応答・usage・gateは合成。A02のshell観測とF04の固定Node/React描画、F07-Pの最終file確認は実処理。モデル成績・費用・時間の実測ではない。"
+}

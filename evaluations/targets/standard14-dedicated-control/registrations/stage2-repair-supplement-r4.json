@@ -1,0 +1,78 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "checks": [
+    {
+      "check": "bridge_engine_only_partial",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "check": "no_primary_effect_not_promoted_by_preservation",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-01",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-02",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-03",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-04",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-08",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "major_effect_validation_only:SD14-14",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "equivalent_class_regression",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "check": "start_case_swap_rejected",
+      "actual": "start case identity mismatch",
+      "expected": "start case identity mismatch",
+      "pass": true
+    }
+  ],
+  "implementation_sources": {
+    "execution_binding_r4.py": "19f62be4c5eaa1c07b0377178eaf8af9fc5d7bd5ff44e28af08d99e10d446a04",
+    "test_stage2_repair_supplement_r4.py": "fedd1d0625da4fbd62d0ca65b79becf592af38ad8831ec7b7470c621e1601f9a",
+    "test_stage2_repair_r4.py": "cf68a9d89d02582660654bd20de734d7c7795ca4fcf7e277923e41d917b68758",
+    "evidence_bridge_r4.py": "af3ab1f8d069d7565021c97c3d77445ddfb330c2ce64fd595a1331ac56ba27b1",
+    "grader_r4.py": "855b7f8ff3339e3647a6c7295a1b3d562a406b69be521bf99609d1038f9f84e5",
+    "inspect_artifact_r4.py": "23d4a5a65d584c63b1dfea002f410da9364f075f4fdcfda469da73c60f1ef9e7",
+    "web_rating_r4.py": "52ffcfcfdfcf13712d245c7ebb0e76876defaf78592687e3ad608bf742823fb8",
+    "shell_rating_r4.py": "5790f1ced9b3928d5d3b43001e46350c751a989f30b2175e373ffdf805ab666a",
+    "private_rating_checks_r4.py": "11b13486a106c41a3641961fba3409b62a43c38cfb91746f6a9cef432852206e"
+  },
+  "evidence_policy": "gateと意味判定は合成。内容検査は実subprocess。工程3の合格を主張しない。"
+}

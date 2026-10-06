@@ -1,0 +1,157 @@
+{
+  "schema_version": "standard14-historical-failure-predicate-correspondence/r1",
+  "mapped_audited_failures": 7,
+  "historical_non_a01_failures_total": 10,
+  "all_raw_failure_replay_certified": false,
+  "rows": [
+    {
+      "run_id": "7d24afd1d84641e8abebcbbc005a48bc",
+      "case_id": "SD14-11",
+      "audit": "evaluations/results/candidate276-execution-control-luna6-medium-standard14-n5-quality-audit-r1_2026-09-25.json",
+      "audit_sha256": "fdf65239afc1cbef9832122c133a7bfe6bb9b764cbab0c17e09a2e31a08a6bfe",
+      "saved_historical_score": 1,
+      "saved_failures": [
+        "inventory_response_missing:v4_daily_main",
+        "inventory_response_missing:monthly_main",
+        "inventory_response_missing:weekly_main",
+        "inventory_response_missing:V4PortfolioEngine",
+        "inventory_response_missing:MonthlyEngine",
+        "inventory_response_missing:WeeklyEngine"
+      ],
+      "mapped_missing_predicates": {
+        "F10-C1": false,
+        "F10-C2": false,
+        "F10-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "a16d9da11e024578b1fdd7cf73a695b6",
+      "case_id": "SD14-09",
+      "audit": "evaluations/results/sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c147-medium-quality-audit.json",
+      "audit_sha256": "6df46eacf17a47622329de36de938cbfd72867bb50c00a5c49c7fd2839c8562b",
+      "saved_historical_score": 2,
+      "saved_failures": [
+        "direct_constraint_invalid",
+        "compiled_provenance_invalid",
+        "required_changed_path_missing:requirements.in",
+        "required_changed_path_missing:requirements.txt",
+        "required_command_not_attempted:python3:PyYAML>=6.0.1:pyyaml==6.0.3",
+        "required_command_not_attempted:git:diff:--check"
+      ],
+      "mapped_missing_predicates": {
+        "F07-P-C1": false,
+        "F07-P-C2": false,
+        "F07-P-C3": false
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "465a25c9c6cd4e65a4567234b8ff776e",
+      "case_id": "SD14-14",
+      "audit": "evaluations/results/free-sol61-low-standard14-new-n5_2026-10-03-quality-audit.json",
+      "audit_sha256": "d92e13c431b64a6f4af5c72fc76258e2fd18f51c3e1f4ace36d36ad927da25cb",
+      "saved_historical_score": 1,
+      "saved_failures": [
+        "a02_canonical_route_mismatch"
+      ],
+      "mapped_missing_predicates": {
+        "A02-C1": false,
+        "A02-C2": true,
+        "A02-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "13138f6075e14fbc84cbf7bd8a393031",
+      "case_id": "SD14-12",
+      "audit": "evaluations/results/candidate276-execution-control-sol6-low-standard14-n5-quality-audit-r1_2026-09-26.json",
+      "audit_sha256": "20858873bb5f311b9b6e120ebe04bec7267a30234b40e828baa44dd1ad324506",
+      "saved_historical_score": 2,
+      "saved_failures": [
+        "review_semantic_missing:incorrect_binding"
+      ],
+      "mapped_missing_predicates": {
+        "F10-R-C1": false,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "70bf555acd1b4bb9ab4948c25f16777c",
+      "case_id": "SD14-12",
+      "audit": "evaluations/results/candidate276-execution-control-sol6-low-standard14-n5-quality-audit-r1_2026-09-26.json",
+      "audit_sha256": "20858873bb5f311b9b6e120ebe04bec7267a30234b40e828baa44dd1ad324506",
+      "saved_historical_score": 2,
+      "saved_failures": [
+        "review_semantic_missing:incorrect_binding"
+      ],
+      "mapped_missing_predicates": {
+        "F10-R-C1": false,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "9166e4d9ee894049a915b15ed10ab883",
+      "case_id": "SD14-12",
+      "audit": "evaluations/results/candidate276-execution-control-sol6-low-standard14-n5-quality-audit-r1_2026-09-26.json",
+      "audit_sha256": "20858873bb5f311b9b6e120ebe04bec7267a30234b40e828baa44dd1ad324506",
+      "saved_historical_score": 2,
+      "saved_failures": [
+        "review_semantic_missing:incorrect_binding"
+      ],
+      "mapped_missing_predicates": {
+        "F10-R-C1": false,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    },
+    {
+      "run_id": "76943d342ea64b33b8138855efdf4038",
+      "case_id": "SD14-12",
+      "audit": "evaluations/results/candidate276-execution-control-sol6-medium-standard14-n5-quality-audit-r1_2026-09-26.json",
+      "audit_sha256": "b4fcce85fbc78334bda40b0fb0e87a8a41562f41380b520026b5da3f0379a5a7",
+      "saved_historical_score": 2,
+      "saved_failures": [
+        "review_semantic_missing:incorrect_binding"
+      ],
+      "mapped_missing_predicates": {
+        "F10-R-C1": false,
+        "F10-R-C2": true,
+        "F10-R-C3": true
+      },
+      "new_detector_rejects_full_success": true,
+      "predicate_diagnostic_score": 1,
+      "raw_trace_replayed": false,
+      "historical_score_rewritten": false
+    }
+  ],
+  "unmapped_saved_results": [
+    "f51b4e9814ad40b6a69a261cee3d8a61:4cdf14fc96a645fda1321a978ba35071",
+    "f51b4e9814ad40b6a69a261cee3d8a61:992d910948574b5aa594d391504734fc",
+    "f51b4e9814ad40b6a69a261cee3d8a61:F07起動"
+  ],
+  "limitation": "保存監査の欠落predicateが全成功にならない接続だけを確認。元のdiff・終了応答・tool traceを専用素材で再演した証明ではない。既存点数は変更しない。"
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-10",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+  "source_revision": "r1",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "F08-C1",
+        "type": "reference_contract",
+        "expected": "The weekly section names python -m src.app.entrypoints.weekly_main and the referenced entrypoint exists."
+      },
+      {
+        "criterion_id": "F08-C2",
+        "type": "reference_contract",
+        "expected": "The monthly section names python -m src.app.entrypoints.monthly_main and the referenced entrypoint exists."
+      },
+      {
+        "criterion_id": "F08-C3",
+        "type": "legacy_and_drift",
+        "expected": "The collection_main legacy statement is unchanged and only docs/reference/system.md differs from the seeded fixture."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_command_and_contract_evidence",
+    "human_calibration_owner": "independent_contract_check",
+    "criteria": [
+      {
+        "criterion_id": "F08-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "entrypoint_existence_check"
+        ]
+      },
+      {
+        "criterion_id": "F08-C2",
+        "evidence_sources": [
+          "final_repository_state",
+          "entrypoint_existence_check"
+        ]
+      },
+      {
+        "criterion_id": "F08-C3",
+        "evidence_sources": [
+          "legacy_statement_check",
+          "condition_relative_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      "test -f src/app/entrypoints/weekly_main.py",
+      "test -f src/app/entrypoints/monthly_main.py",
+      "git diff --check"
+    ],
+    "success_rule": "All listed criteria must pass from observed evidence; worker self-report alone is insufficient."
+  },
+  "seed_operations": [
+    [
+      "docs/reference/system.md",
+      "python -m src.app.entrypoints.weekly_main",
+      "python weekly.py"
+    ],
+    [
+      "docs/reference/system.md",
+      "python -m src.app.entrypoints.monthly_main",
+      "python monthly.py"
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "docs/reference/system.md",
+      "mode": "100644",
+      "git_blob_sha1": "53aa6d8a9b403e141af3b9df4c48d40cdd5fa22c"
+    },
+    {
+      "path": "src/app/entrypoints/weekly_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "508d413ab01a51864a501b4d18446ebaf6929130"
+    },
+    {
+      "path": "src/app/entrypoints/monthly_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003"
+    },
+    {
+      "path": "src/AGENTS.md",
+      "mode": "100644",
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565"
+    }
+  ]
+}
