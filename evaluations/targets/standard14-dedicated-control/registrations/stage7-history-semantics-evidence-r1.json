@@ -1,0 +1,2369 @@
+{
+  "schema_version": "standard14-history-semantics-evidence/r1",
+  "method": "既存84組の照合を再実行せず、未確認だった直接の親・baseとseedの同一性・過去root本文の同一性を各ケースのLow1で読み取り、保存済み開始記録の同一object IDで他5組へ結ぶ。生ログ・root本文は複製しない",
+  "prior_audit_sha256": "340634421f9ae18ad76f5654d2e4fe5e23f19c5a89708f1cf244fb1a9367aabe",
+  "representative_git_workspaces": 28,
+  "bound_pairs": 84,
+  "cases": [
+    {
+      "case_id": "SD14-01",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "4e6910d08f49b0825beff08837178f5106cbd0f2",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "4f388482b89e0b1ed44060f82dc1e8c26a342f7805555f47a7e2504b45938489"
+          },
+          "free_commit": {
+            "oid": "b3c11ff9fa84b7aaad7777c988ec2f0417caae87",
+            "parents": [
+              "4e6910d08f49b0825beff08837178f5106cbd0f2"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "9c9db0d0d9ee71e895c5e7cfd0d4e8e05cf49d3193e2910b2aff763fa6c21fab"
+          }
+        },
+        "seed_delta_paths": [
+          "src/domain/market_units_snapshot.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/domain/market_units_snapshot.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "0123ccd49a1c66b7c6c7fb9b732bf928fa39f2ab",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "1949b2a57348144082def9c7d0d61dc133ee6674e0c84f9e7687eab57cbca4af"
+          },
+          "free_commit": {
+            "oid": "d9d72068c4be1497a1e36f66f9498e65035cbe16",
+            "parents": [
+              "8554af8196263f4d6bf98ed5753bd7cfb3de4122"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "79be2fe2b5e356da5f883434eb31bba18c1ba5066fb809ccc8be027e8309e0a2"
+          }
+        },
+        "seed_delta_paths": [
+          "src/domain/market_units_snapshot.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/domain/market_units_snapshot.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-01/runs/low-01/start.json",
+          "sha256": "bed0bd02b06b6c20481eabd29052a6f2e24c37e7d059568badd2b2c22b02d871"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-01/runs/low-01/start.json",
+          "sha256": "2a50a90dc68a29e4347be4ef8b0a6916779dea171277a8c3034c6c22d8523fc0"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-01/runs/low-02/start.json",
+          "sha256": "a56bdee8ed7d7d9e7b107af79a72c985c363a7fe2e3630ee3bb609212ff466af"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-01/runs/low-02/start.json",
+          "sha256": "57f36b4c6402e758bbc720736fda30c4a8ccdeb45b290d5043a537896cd8548c"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-01/runs/medium-01/start.json",
+          "sha256": "d95c3477ebdc45ccc24a5cc5f673e2351fa00f97679cd1188f61d2ce4814e9f5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-01/runs/medium-01/start.json",
+          "sha256": "f115eaa6aaa63cd120b7779e298c5ca90b092c6d634d596551287b0983ab22f4"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-01/runs/medium-02/start.json",
+          "sha256": "698c0d033b2e39c9023a0418f61d0eb6ff7c5b297aeb15ca6d9dbf5f0bdee137"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-01/runs/medium-02/start.json",
+          "sha256": "0e72b21443716930a5a696dd95e61a316a3ecaeb193f028b6e79c733e5d21539"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-01/runs/high-01/start.json",
+          "sha256": "2ccb6cc37867e32e6edb735890febd386947d110ab1d0ded0a70ab01e120ed68"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-01/runs/high-01/start.json",
+          "sha256": "b945d438a572e654006ab7081d23589599e036b28af631134c0c665227ce6ca3"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-01/runs/high-02/start.json",
+          "sha256": "7dbed69397920143c8cc24c9edbef4514b351107aa44297a889976c3a295ec27"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-01/runs/high-02/start.json",
+          "sha256": "50728cc8e1cc887f8c049b0873ec28a855c6dc0ed81108528c543e19bb655d7b"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-02",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "b802eae75710d6c54b3250cc790b29a3ff56f675",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "eebbdb1d20d05cbd259ffe1eed8433e0f8ebfd7b160f3cb3631b48663469fa7a"
+          },
+          "free_commit": {
+            "oid": "60b97778f40969e3ad2d6ab66e5500e19c0a58cf",
+            "parents": [
+              "b802eae75710d6c54b3250cc790b29a3ff56f675"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "53aa9f0fc19fa16ddc01f35adc64e5e37ac489d62b6d180ef9bc553fcb521cb6"
+          }
+        },
+        "seed_delta_paths": [
+          "src/app/v4_engine.py",
+          "src/domain/collection_history_updater.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/app/v4_engine.py",
+          "src/domain/collection_history_updater.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "ea70e96c4a918e100e926a860797d652b254c9b4",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "bd1ea4d0ca7d00e61cd3e19d37978665c857fc05d5c14be087fd4cd1a6940d8e"
+          },
+          "free_commit": {
+            "oid": "3e4638de439ddebc571571f8f7da8e2ab95c8778",
+            "parents": [
+              "5f36bac3e60238f81687e1de5eeaee4622200322"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "4b87a05e21ec337db8aff13002c67b7c1d83d30e7499160d965d8227039bbaf5"
+          }
+        },
+        "seed_delta_paths": [
+          "src/app/v4_engine.py",
+          "src/domain/collection_history_updater.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/app/v4_engine.py",
+          "src/domain/collection_history_updater.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-02/runs/low-01/start.json",
+          "sha256": "ec12e9f059816cd8ae8b5e9fcf09404a9939c4a246463a55f48407d48206beb3"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-02/runs/low-01/start.json",
+          "sha256": "dd599ed5d6cba7252bbe67f237a700da6f7a2c2fdcdf2b1a11d61ccf69b5ec31"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-02/runs/low-02/start.json",
+          "sha256": "3596ad896302b346a399723a14a4c051ede5ab96958cd9903c40a370d5c8a897"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-02/runs/low-02/start.json",
+          "sha256": "68ad3a992123646cbc0538734bdb0d63247929934d089608fbb6274e7eab2795"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-02/runs/medium-01/start.json",
+          "sha256": "fed1a40de75c82c913a8f4165d448293dd825e566bfe650ca67ee1357e567530"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-02/runs/medium-01/start.json",
+          "sha256": "b9345df8d63024120bd14855865bb1c3ec7ed0fb0d210d364a347c499a691962"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-02/runs/medium-02/start.json",
+          "sha256": "10897ca37c32632e0f358f4fe5f37e262852aea9654dab3bc976b15129401874"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-02/runs/medium-02/start.json",
+          "sha256": "7b62e1708455f91a429cddff7bbc6e62993c11726fed970b6dae19ce87bc6ff5"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-02/runs/high-01/start.json",
+          "sha256": "5f09c819bb7e9f43de824520358bef0c7ff3d5d41d9820c6038933e86b6392e5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-02/runs/high-01/start.json",
+          "sha256": "43a47d472838ba3d369d32ab0ef0ec322795f9faed2a3f1ed71e0df51f03cfa7"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-02/runs/high-02/start.json",
+          "sha256": "c390302cd0e13bb36f42b93fa5ace746c48045c78dd208a7b779795b0cb8054a"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-02/runs/high-02/start.json",
+          "sha256": "1579f980e7e68ccd5355285b05c99fe7b81a23737386cf76ba2fb57ee75b34cb"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-03",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "895d60764990f02f25c6a6c81babbcb1e0ad5ffa",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "1ba5930623f2857f254d2b33a7617c8747a9324400193b250a6b8c9bddbf4931"
+          },
+          "free_commit": {
+            "oid": "322de5ef6554e5aac5ba84f1dbacd837009ad9ab",
+            "parents": [
+              "895d60764990f02f25c6a6c81babbcb1e0ad5ffa"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "306b28b8b50b97a173f03147c732460305b85408b540c98db95fceb02fe1a61d"
+          }
+        },
+        "seed_delta_paths": [
+          "src/infra/context_repository.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/infra/context_repository.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "f347ec354b7b5272a0b8a70d1b8b6144a6b282fc",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "019192d9076d889768552fb66399fd2bf4985dfd3e1454c4a79c2aa2504e0d76"
+          },
+          "free_commit": {
+            "oid": "ce6c905c0f7251e36f50ed5da540009207511c2b",
+            "parents": [
+              "4fe6c0af271f15c9f01c09c8d6e7f28883617f55"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "e78d3bbc6f5c1eb943384050738e7868d15ecd2e5b42b49e63bd2b57b92457f2"
+          }
+        },
+        "seed_delta_paths": [
+          "src/infra/context_repository.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/infra/context_repository.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-03/runs/low-01/start.json",
+          "sha256": "b243967a5d6aeb58164e87e6494cb7f49d92529c1d2e2a370e22bcce0f72f0d5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-03/runs/low-01/start.json",
+          "sha256": "ff4aa127326c64a06f92362a1036bd2168dc46d6bab3777031ce88ef7421bc6a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-03/runs/low-02/start.json",
+          "sha256": "39b739d27c32a3756d388dc4a2eb5afb7639da72c116d5b86319441bea4f0af1"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-03/runs/low-02/start.json",
+          "sha256": "057b0cf6a9f8318efc7e248675cf8247fcaae17a4325e5912278646adc989168"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-03/runs/medium-01/start.json",
+          "sha256": "c50d7e0b2cdce355fd9dcd810d0a6a4cdf2290e0dca91a95c7618a856069332e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-03/runs/medium-01/start.json",
+          "sha256": "8f54a353d5f4e74918887f4438531acb8c721608f854f9904b6dbdbdc0e9ec90"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-03/runs/medium-02/start.json",
+          "sha256": "eeb11fcd7558ee8c9a27b6c0cbf5ea431d0d284d361a973b6587a7bd2da625b4"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-03/runs/medium-02/start.json",
+          "sha256": "854efe15024fc524392b1d8c03b5271d9db3ba0ac3df525cf78255341782a08e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-03/runs/high-01/start.json",
+          "sha256": "b3f9a8f0db5833930a83d4e1d17a59699c4d2db4383344d9ace4230a2de4048a"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-03/runs/high-01/start.json",
+          "sha256": "5ebc539d361b95304db5766772946ed04b07b7d7ce07aaee170993267fb87d40"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-03/runs/high-02/start.json",
+          "sha256": "6c7eba511a91ce890530db36faa3d995379cbd9b5bb8ecbfe8c5ef8565c81467"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-03/runs/high-02/start.json",
+          "sha256": "d2841846156598163dcd6b201a9bfca6b032ff26ca13c0fd3ab3a8838835c8ab"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-04",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "36f594ae5d16f6ac930b0c5afe12335c7624c020",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "be901d743b0c477d87894ec69d999575e01f1c1369466b3c0cad3369da544276"
+          },
+          "free_commit": {
+            "oid": "f2dec7c1cd4ebd7c1df6f4532b712be993f972c8",
+            "parents": [
+              "36f594ae5d16f6ac930b0c5afe12335c7624c020"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "b7cbe872851f18caad6da799e31466cdb6d33b7983f17cd2fcd1f289e691b043"
+          }
+        },
+        "seed_delta_paths": [
+          "src/web/market_units_editor/src/App.tsx"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/web/market_units_editor/src/App.tsx"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "ab41a3741538cf709091616fe607287facb3a4aa",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "3f07b0080661be2127c808d28044aadd2750a5b81f2d9150d98baeb97170cf68"
+          },
+          "free_commit": {
+            "oid": "8722f9ba8a16dddb9fb50782813e2def514e2d66",
+            "parents": [
+              "9eba99ac5ddb11f8951cb9525bea104ced3dd7c2"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "158e4275eb53dc467a2393c6a6b93fc1b5231f620b716f9a4156b282b89c921d"
+          }
+        },
+        "seed_delta_paths": [
+          "src/web/market_units_editor/src/App.tsx"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/web/market_units_editor/src/App.tsx"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-04/runs/low-01/start.json",
+          "sha256": "03011024ba24e8dfddcf6b38d2bb38d138d08a8bba1b5d605c976fc08140ab92"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-04/runs/low-01/start.json",
+          "sha256": "27b8df28bea3a59dff99752b928e1cd1151d0e65bfb6395f4bf9c638d38748e2"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-04/runs/low-02/start.json",
+          "sha256": "dc0caa983c54bfd30c8b81b4b4a19bd49385cfdd903a7c291de4a248265f1de5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-04/runs/low-02/start.json",
+          "sha256": "56b69506f934e937526c2b79f9b3d252f0685f7f713d4585490b8ba5c20b4776"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-04/runs/medium-01/start.json",
+          "sha256": "a1be0540eaa8e66cf8079af31c7d7c5bdc8e90391c14d15e74da2089016a1608"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-04/runs/medium-01/start.json",
+          "sha256": "d7f168f324d7bd6e5e9478b7103d6ece85480f14e4c56ac6c36047fc2ad7d860"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-04/runs/medium-02/start.json",
+          "sha256": "d336edfc3976fe607d147c93ac354cfbdcc740ec86bd9370c371597200bb064d"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-04/runs/medium-02/start.json",
+          "sha256": "3413ecf9b5066c134a4e953fc767a3b81c2a576afe99ef2367ad36f8cba06a6d"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-04/runs/high-01/start.json",
+          "sha256": "f672dc965daec028548439af86847a4373fe530fb0202aff6418757a8ac82e50"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-04/runs/high-01/start.json",
+          "sha256": "10a10838d019541101e4325be15cd6563e419a42e078468dd74e7a6a7465b2b9"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-04/runs/high-02/start.json",
+          "sha256": "7e721e3537e3659230a2f278e3848cbefe5b0b3c303700b47c1821720e8d08ac"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-04/runs/high-02/start.json",
+          "sha256": "17399bee9fd6298c486c21b2afc91d80a27f87cd96e2845f410766df7512d5ab"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-05",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "free_commit": {
+            "oid": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "57356b610f5b84e347b24e888755afb0f29edca7e140a04bec334cc3b89fcf75"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_v4_daily_main.py",
+          "tests/unit/test_v4_engine.py"
+        ],
+        "base_equals_seed": true,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "元baseの過去変更。ケースseedの故障差分ではない"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "8289ae82702e2409ef644d3b691ccd82a6cc39195edae7533a9e2f7b2bd76b47"
+          },
+          "free_commit": {
+            "oid": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+            "parents": [
+              "c76db94924c8fdb25c15e4a3477e0eeb4bdfa904"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d56036acfde74873b768d8ac1b639618b988480fde3e6888cd53cd15d4c31421"
+          }
+        },
+        "seed_delta_paths": [],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-05/runs/low-01/start.json",
+          "sha256": "088ff2dcdfe63c46f09a16c89eb2a546ac8c3f33b677fbddd04f30b89c8bf48c"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-05/runs/low-01/start.json",
+          "sha256": "6ff04c3acf37897784708d20fe3d33040f07bf4e8b02a5bedba1b4b0f51e8bc4"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-05/runs/low-02/start.json",
+          "sha256": "a2060e4142babc7eb6bc4379c8ded1855cd94f166b18ab2df6bcea4460e8ac31"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-05/runs/low-02/start.json",
+          "sha256": "78910f601b04be3cbd8623d137f3173c82758ede31c30bd1c4b692a83134b461"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-05/runs/medium-01/start.json",
+          "sha256": "554f2e6e510fbc5a35f4eb41e5ded0a58ae7b950dfa3f51744f9dd067c74c779"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-05/runs/medium-01/start.json",
+          "sha256": "1ea1c2f8bce3b6f541355d83e17d53ad5b61893c29483a5e3cf6957292c2117a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-05/runs/medium-02/start.json",
+          "sha256": "7290f930055f3192590936526aa27bca2990941388ddf5630656938000857def"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-05/runs/medium-02/start.json",
+          "sha256": "23ba4b3372501a0fcba9c516b5cd525df0059ad0542c15df71895f097b6a485d"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-05/runs/high-01/start.json",
+          "sha256": "84494543afc47470641eaf9df825d6ab2da722cf47349099d418e5a34c1805f2"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-05/runs/high-01/start.json",
+          "sha256": "e209dbf86b04d8c1e5c5da3328e1aa3ab0f8fc78cebfd091b6d28bcb3addab2d"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-05/runs/high-02/start.json",
+          "sha256": "1f6124d7f0ab2b5df35b97dc1fb9f1ffb1bbfb76abbe187755b98fec0a660913"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-05/runs/high-02/start.json",
+          "sha256": "42b69b68e075045c01b763326fe17163db7e0a64d319b32e6499f1c3653d71e1"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-06",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "free_commit": {
+            "oid": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "57356b610f5b84e347b24e888755afb0f29edca7e140a04bec334cc3b89fcf75"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_v4_daily_main.py",
+          "tests/unit/test_v4_engine.py"
+        ],
+        "base_equals_seed": true,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "元baseの過去変更。ケースseedの故障差分ではない"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "8289ae82702e2409ef644d3b691ccd82a6cc39195edae7533a9e2f7b2bd76b47"
+          },
+          "free_commit": {
+            "oid": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+            "parents": [
+              "c76db94924c8fdb25c15e4a3477e0eeb4bdfa904"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d56036acfde74873b768d8ac1b639618b988480fde3e6888cd53cd15d4c31421"
+          }
+        },
+        "seed_delta_paths": [],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-06/runs/low-01/start.json",
+          "sha256": "54a3c5bbd5e24b6848ae01f9350d739283296fe3febbc879a1c0bd1db9d74333"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-06/runs/low-01/start.json",
+          "sha256": "828ae416fd27f558201b744a0684f24093cd473917861ad66a96f986137561d1"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-06/runs/low-02/start.json",
+          "sha256": "4211cbbdf46cba4b56c7d17cdd38e5558f8099313ed6183fc70a7631de975a1e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-06/runs/low-02/start.json",
+          "sha256": "d8a19f69ef7699ff999272ac26950fb210b71f72a56eab9de7679f6683228dd6"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-06/runs/medium-01/start.json",
+          "sha256": "5e40c8203ad223a2f3b19e159ee0f091af329256a2a6a6d2c4781bbfbc5e8e59"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-06/runs/medium-01/start.json",
+          "sha256": "d156d18834be4c3da1d4b5c61523c54448dabf8ff28fb7d4c2348a90695cc93e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-06/runs/medium-02/start.json",
+          "sha256": "de4d231874a0fa4a0c8d50accc246f9d71e58ac46e65fc1fd45aee6b2a3402c5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-06/runs/medium-02/start.json",
+          "sha256": "32a2db8718f032c84ce51dc038b3853e3224da7762ebf75e7262a3ea0469c28a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-06/runs/high-01/start.json",
+          "sha256": "d00909a7a0fa19beec0765c3bb5d11f8d5d44e2a20b518bec4ff8ee02f0e948e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-06/runs/high-01/start.json",
+          "sha256": "40a450c57875e5f4141716c054d7f074c5c0a541310ffcfcd3218bae88217d22"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-06/runs/high-02/start.json",
+          "sha256": "d0c264e8ddc1e012335273591d6360b0c5a53a5e0f46aa41fa2df372e9da6268"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-06/runs/high-02/start.json",
+          "sha256": "88804e5d948f5d7ef185b1f95a7d846e5b00c926ee7b4324671191697f7d31d9"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-07",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "90dc14b47c5419e8158f3027437cd297d2f4b9ed",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "e18057ec2cbebd96d846ffa63b92a0fccd33588695a92529fd9d6c60ee5bb992"
+          },
+          "free_commit": {
+            "oid": "90aaf8151662e76713f55f860037768b11e1f506",
+            "parents": [
+              "90dc14b47c5419e8158f3027437cd297d2f4b9ed"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "e24f79bf4e98978d55bf3f5fde975dbf814b1826e5146f3132e005b42757914d"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_market_units_snapshot.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "tests/unit/test_market_units_snapshot.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "4a5b1a4a14459732ba57cf4567868b821455a781",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "61196374e03277d5ea2453d94c508ceb9da7cb2d0b8678b66552085efe7f66c6"
+          },
+          "free_commit": {
+            "oid": "3a9891e0e2586467fb5b6ced93d4dcfeb8f55918",
+            "parents": [
+              "1224dd2ecdccdab4afe7aea4e5230a0d2ed588e4"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d634bb2cb07514a257b47a0be21b7db4ee0440b9edd286c99129520930cb54da"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_market_units_snapshot.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "tests/unit/test_market_units_snapshot.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-07/runs/low-01/start.json",
+          "sha256": "a5890579260300bc2c44c49c696e5d3e7fb86e823ffe6f75dc5c47b54cc7ee44"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-07/runs/low-01/start.json",
+          "sha256": "0a130474b794a4f90740fa93a497d5071785c64837e488b3cbdd88b14adbf765"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-07/runs/low-02/start.json",
+          "sha256": "2f12af5202a9e5f5ef24e963845524332acb47f245dfc7d6f38da06936c8714e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-07/runs/low-02/start.json",
+          "sha256": "74f91b692d6609418610dc8078b6872dc27ee1a0d40193ed92da4bae5a1ffb92"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-07/runs/medium-01/start.json",
+          "sha256": "c34ed5468464fc72330702485b6277c274f37680af993a5ae8a9a31708600940"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-07/runs/medium-01/start.json",
+          "sha256": "f0f8d2b53a49a5f4b69c0949fe55f3534a426a1b52b45998f1f42678c436452a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-07/runs/medium-02/start.json",
+          "sha256": "3e02fc089cd17de7d4d76d6657f5e0c990276999580a164ffa4c53a1c2b568ca"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-07/runs/medium-02/start.json",
+          "sha256": "ce277a3591a2cd23d89d389ff4981473fa2fb1ff88f72aba4d49784b5694e458"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-07/runs/high-01/start.json",
+          "sha256": "372e197c355c8ac799fb851102d1824aca530f341d8beedaddfa2bc0a58855b2"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-07/runs/high-01/start.json",
+          "sha256": "3a9841739856c76b32f92112082b742564d4c162ff5a21ec06ae4c539ca934cf"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-07/runs/high-02/start.json",
+          "sha256": "44b0c2f0c57a5dab98e352b1c0b5eff0b8ed78c424b1467b638eda46084ffbb3"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-07/runs/high-02/start.json",
+          "sha256": "a9f85ce8deac2514ffde012e8dc5fd881ba86f34fa8b708c62dc64288eda034d"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-08",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "5b17df6fc5c86be5614c37e0883277d52045c0cd",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "6793a40d0385b34b5646d5f6c4caee5ce4420d8f386470633832e64a12453323"
+          },
+          "free_commit": {
+            "oid": "0d03226e478e77a300c739ab722b0190f716c557",
+            "parents": [
+              "5b17df6fc5c86be5614c37e0883277d52045c0cd"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d8b9a4792eb98e981321b1edb45d88e822d23b7076e9cd7efaacad1228ae5e9d"
+          }
+        },
+        "seed_delta_paths": [
+          "run.sh"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "run.sh"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "3971369ed4ae6065ae7d2aff92fe0dbf88e8a228",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "5f2ac8582676ed57bc9bcdfb0cc2109d95125f4b654e4901f67ebbd4fb1c9606"
+          },
+          "free_commit": {
+            "oid": "4590d6eacbb7fd9110247f0e3a99db5668a8cb39",
+            "parents": [
+              "33111509dfee99c65be6c9dfd8be372acba7f311"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "6fba33a2ce48e0e9b847b2251b7de261144b901398af742dc76ce63ead49f777"
+          }
+        },
+        "seed_delta_paths": [
+          "run.sh"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "run.sh"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-08/runs/low-01/start.json",
+          "sha256": "996f5e1ecdb540ab38b5de53a0869d6e23d406f31ad608621888cb5c71ee398f"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-08/runs/low-01/start.json",
+          "sha256": "1a17559044d91ce83b620cdff52a7c690e38ce62374d478894e8eaacc82a6c53"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-08/runs/low-02/start.json",
+          "sha256": "75c5bc97355a573d1e91da0b8801b15a3d0060fa352eba6b69269cc54eb50137"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-08/runs/low-02/start.json",
+          "sha256": "ee049ad4f3732fe287d7a27cc8d842956b344a0cdc6adb03535960881b5f2aee"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-08/runs/medium-01/start.json",
+          "sha256": "5ade24a2c6197efe58c990a220a221e42074cfc5626941252c57bdf6bac8325d"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-08/runs/medium-01/start.json",
+          "sha256": "da855ede180775c19bc23fc9c37d84ca9d1cef91b761ff0bf0fce373e31335e6"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-08/runs/medium-02/start.json",
+          "sha256": "5b469bbe26676c55b0bbb11effa9053429bbbe2308b5be9534dd541dc09a142c"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-08/runs/medium-02/start.json",
+          "sha256": "e7ed90c77b1c432a94335fa233f6beedc9753c711864bb530dfc1f3189a261f7"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-08/runs/high-01/start.json",
+          "sha256": "d0d4287f2a0903bc29f196cd6f5730235afedd08346d1431fb489d24c8b2ae34"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-08/runs/high-01/start.json",
+          "sha256": "05f212273573cbcae064ac2bb021dfb48aea3b79cdb74c3901cea4bddaf0189b"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-08/runs/high-02/start.json",
+          "sha256": "49ba8dc2c78a369953ff733b434bb3c700fe61e29344aca64951412355ec9e66"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-08/runs/high-02/start.json",
+          "sha256": "f6ae1d6339a07d84130426554967547552dca9f1b8d55ee239965b47db390d03"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-09",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "07ca562d4e70d3b4f5e451b2098259a0d26e9fcb",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "099670155efee88dda18f7defc3faf14632607585812ba22f77455b6f3651162"
+          },
+          "free_commit": {
+            "oid": "e6640693d08002618bb2518d9d093ae6426891d0",
+            "parents": [
+              "07ca562d4e70d3b4f5e451b2098259a0d26e9fcb"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "6623a13984cc1a78a06cf93bcde777c4a0c590bc9946b82a54b7e78feb5b8d86"
+          }
+        },
+        "seed_delta_paths": [
+          "requirements.in",
+          "requirements.txt"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "requirements.in",
+          "requirements.txt"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "d576abe742ce4311f0f32e9333f2e6731f58ca38",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "c6d687064ab8cddf1e7c5df8717e25df9e3c05de97f20a1452732ad7c64a74e9"
+          },
+          "free_commit": {
+            "oid": "b2831e4e2c249130dd874142fce969a7d1ee5281",
+            "parents": [
+              "1efb716307f61912ada38926ad01d723a1551a43"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "ef8423e98c053bd0ed3d374492101c0b7a5a2ab404ef1ef3529dba5f5128be3a"
+          }
+        },
+        "seed_delta_paths": [
+          "requirements.in",
+          "requirements.txt"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "requirements.in",
+          "requirements.txt"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-09/runs/low-01/start.json",
+          "sha256": "153573ae27b496707416e61f64728eac6236852aee1102b5cfade4834f53b0aa"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-09/runs/low-01/start.json",
+          "sha256": "73a1b4d7612e47eab933422256d7fafdbc26fb7b599c1b6ecdf0272fc87e8046"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-09/runs/low-02/start.json",
+          "sha256": "aa23e3c228ee67c804c12a334eec7f384caab7469d06126969e1d9e7058f1961"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-09/runs/low-02/start.json",
+          "sha256": "cd5173ca34c67df5b6c6f17c45b8b80168a93cb390cd7ae3bf23858ccc45422b"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-09/runs/medium-01/start.json",
+          "sha256": "84b77ba9cd515a430cb973dbea347adf0a10312db191aeec04512433ced57f0b"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-09/runs/medium-01/start.json",
+          "sha256": "e7bc900aabc49d6900cc9f1376e36842e4a31aed9574d9ea38c5219aa8c4f55e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-09/runs/medium-02/start.json",
+          "sha256": "40504e0a572d485d9aa4b7feb15ed7399d1e0588feca80fbdaa368342466d764"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-09/runs/medium-02/start.json",
+          "sha256": "485e0f5b13c74eeeed29fb0fa97fe4c4e1b669fa2293349fae3dd131958bc786"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-09/runs/high-01/start.json",
+          "sha256": "50f18c40ca36d0d029f52f9974acc1bf38a226f5c6b82168f79ff2d2c976b191"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-09/runs/high-01/start.json",
+          "sha256": "cae8aaa608bdd414812c6eee62a51f660e86967f76da3e2024ada14688fe05e0"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-09/runs/high-02/start.json",
+          "sha256": "acbddf4b3cca39b451ee990f1271a5d166eec58a40dce3803b9831241a87f1b3"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-09/runs/high-02/start.json",
+          "sha256": "0eaadaa88a97006211197782a1dc4e59ed46ca41dc0e7821dccb9a7a5f516fe6"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-10",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "9708b581e627027b97acc275369b8c517898e17d",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "a4a95964c2278a66edf5c4667d9bb7c371eeabc34627fb7d77935ec84a626b33"
+          },
+          "free_commit": {
+            "oid": "ea2f7792bebe0f50a9f4dc736ea5ab69d2db7ae1",
+            "parents": [
+              "9708b581e627027b97acc275369b8c517898e17d"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "85665dca594d18eb1c118fd4b59969bced2ea1eeead7e3542dd2380525a81e54"
+          }
+        },
+        "seed_delta_paths": [
+          "docs/reference/system.md"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "docs/reference/system.md"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "8c64b3a8199b7d40c758c3707f7e091927cf4947",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "b9011c3f22bd0c19803f063efe951ae0cf9b8e779e460d7b067193aea3b7eae7"
+          },
+          "free_commit": {
+            "oid": "49cf3734b5481a652d658e315d7e0d787c7b45d2",
+            "parents": [
+              "455e4530c4e8f65c1bbbad22d910a7861e094e85"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "1176d4a2ba9c58f798c49c6423b96097942c1a7b84d576dbdb068c9b72754cbc"
+          }
+        },
+        "seed_delta_paths": [
+          "docs/reference/system.md"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "docs/reference/system.md"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-10/runs/low-01/start.json",
+          "sha256": "1b39e8c4521ea3ba96b0df72f971c44e02e6fa258f723a3a91d458e1be3e53a7"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-10/runs/low-01/start.json",
+          "sha256": "62bdb988b871df6da4d0799c0b380dd81aa8c59a3dc7e400c5fa2958cdd64220"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-10/runs/low-02/start.json",
+          "sha256": "9e89adb353204d7918e4a229c0d4921c19eca88eb1fba389d8e77e3aac66fb76"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-10/runs/low-02/start.json",
+          "sha256": "459d660b66b8e10ea555bf3d13fcfd57f93c96342626514640f3cfd90a9e271e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-10/runs/medium-01/start.json",
+          "sha256": "132965c37e092934e12bd3d1230101a85a750e08db887e4bd74381091b40b37f"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-10/runs/medium-01/start.json",
+          "sha256": "37336887ffbd729a995fb1dfb942ec146257ed3a201ddde66cd11041462d0677"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-10/runs/medium-02/start.json",
+          "sha256": "942677b713ae0f6ff1d6fc1d1884dd713eec193f80eb897cc98340999247af87"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-10/runs/medium-02/start.json",
+          "sha256": "47161bbcb76052e1daa9fffd0693014890944d73838b847056817bd6c1108e0e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-10/runs/high-01/start.json",
+          "sha256": "ddf94d7aae94b8c1211d2842b22615369a8fb1e78e20a0d5e7a244a6b5bdd21e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-10/runs/high-01/start.json",
+          "sha256": "f5de73d95b0f64d247993f9af790bb162c426c32d4fde25dc9e8161d9a1b968e"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-10/runs/high-02/start.json",
+          "sha256": "cc8796314c17be2d535be7069cc433716813ab5dd2a385ac4c8b657f80be9d5f"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-10/runs/high-02/start.json",
+          "sha256": "f4f4de245c7a65ec59eaa69bbd7c0a1c229802c3280975ec4e5924e74a7e304e"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-11",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "free_commit": {
+            "oid": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "57356b610f5b84e347b24e888755afb0f29edca7e140a04bec334cc3b89fcf75"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_v4_daily_main.py",
+          "tests/unit/test_v4_engine.py"
+        ],
+        "base_equals_seed": true,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "元baseの過去変更。ケースseedの故障差分ではない"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "8289ae82702e2409ef644d3b691ccd82a6cc39195edae7533a9e2f7b2bd76b47"
+          },
+          "free_commit": {
+            "oid": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+            "parents": [
+              "c76db94924c8fdb25c15e4a3477e0eeb4bdfa904"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d56036acfde74873b768d8ac1b639618b988480fde3e6888cd53cd15d4c31421"
+          }
+        },
+        "seed_delta_paths": [],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-11/runs/low-01/start.json",
+          "sha256": "b6bb994f3c7cc5e8ec850004e89c52814862dc44f349d348f0617947240fe17e"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-11/runs/low-01/start.json",
+          "sha256": "bf0d9a4975acfa3c2c6589262cb6ccc8f47801fabc440e41a92199c974e6b813"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-11/runs/low-02/start.json",
+          "sha256": "bef24d88f9af9af80467ad16ac81b16515328697ac7c3f1708a3926aa26e69a5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-11/runs/low-02/start.json",
+          "sha256": "686f9aa1847dd28b4e8568baa4b9c97837af4be2a09998d50942f0e88876f22d"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-11/runs/medium-01/start.json",
+          "sha256": "16697d386f86d99ab4acb839c5f14b0fb462518097bcdce668737ab350973520"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-11/runs/medium-01/start.json",
+          "sha256": "2e991551137da4b56fd8eb275ef79b429c0efab1eb9710d972cd020d7fb0c57c"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-11/runs/medium-02/start.json",
+          "sha256": "0e93d254e0346f383aa3bb07583476e5e7fd4eece0b4e13125b6b43db92d61e1"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-11/runs/medium-02/start.json",
+          "sha256": "3ab9ffb9bff19a3ebcced8116200117779b44a254c1d23af16c0210552015d18"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-11/runs/high-01/start.json",
+          "sha256": "143d43003e557c4b2ea0c93e70582e7466b3e4118d7f5a6c0c257475976fbd3f"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-11/runs/high-01/start.json",
+          "sha256": "87d4bcb6d5e4df8ad92f972cd785632067225c117f25da755f83a345b4e585f0"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-11/runs/high-02/start.json",
+          "sha256": "b0538769ec81c75580ae9968c51bae3a362f1f79ed62dd32ac453384cb7e90c5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-11/runs/high-02/start.json",
+          "sha256": "3c51c1b5ed201730cb60597a6a61647399cead5354b9603855443162c799efa8"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-12",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "a53601614b41f52633f1d75e77c72861a0f0f1c8",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "1f91a72122ee0159392098a0fa179c4daafb0069e5e7567a98fb1049b9a90776"
+          },
+          "free_commit": {
+            "oid": "6a16bd19d1415ede12f11b71f79642c53698a265",
+            "parents": [
+              "a53601614b41f52633f1d75e77c72861a0f0f1c8"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "ae6c5f75d4c6570262fc9111af29b484523d94843e008744ba0ef36bbd9b4e1d"
+          }
+        },
+        "seed_delta_paths": [
+          "src/app/entrypoints/monthly_main.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/app/entrypoints/monthly_main.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "8957a1a517c63da9e6af58f9f56d5b1c80e91553",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "9af7d7769c8d8c30a1b8934af3055f34089200e5386bd67f5ba1d39ea88ba57f"
+          },
+          "free_commit": {
+            "oid": "f56ae0a4b0aa88a6e5ca61412d7846251c9b64f6",
+            "parents": [
+              "ffbb374a1c553bc18d69fe33cff517616c37cd0e"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "80ad3c68c761abe5cdefe6d813ff8c4ca6c55e7137c912e527e3c3472ab45de5"
+          }
+        },
+        "seed_delta_paths": [
+          "src/app/entrypoints/monthly_main.py"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "src/app/entrypoints/monthly_main.py"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-12/runs/low-01/start.json",
+          "sha256": "cf8e19e4b0e0fc5b04d54b5a3e08c827fc08aa298ae8336b07fb03f5fe7670c4"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-12/runs/low-01/start.json",
+          "sha256": "bcd764d364d4e657d9cafb8b9142698b0d218c9d88611d895330b4d8d7f0a4a5"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-12/runs/low-02/start.json",
+          "sha256": "7441b82398f4b3d0bb5d3627b76fde7e7197681e96ebac761d6c5973d44cc466"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-12/runs/low-02/start.json",
+          "sha256": "534f03c1d917f81955893f2f5b1cadc888e1394aab16c8a3eb922d0cb463e2c6"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-12/runs/medium-01/start.json",
+          "sha256": "f1d41a78d60e575c9fbbd8666ae07ff3865a5dd523907d1f0082a5ebf90bf310"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-12/runs/medium-01/start.json",
+          "sha256": "4a8c44f0ca05637f2215e1f5f8fbae57c7d4919ea88ec2969347f6a1b4748914"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-12/runs/medium-02/start.json",
+          "sha256": "468a27ced37f61dc756bac5512366f0c43708ba5cceef537d3ff083c9e550fb5"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-12/runs/medium-02/start.json",
+          "sha256": "0f1064ddff18c73f2831ed434832f54a961210a053cfdb9ae8a59a6d6879ac74"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-12/runs/high-01/start.json",
+          "sha256": "582201f5dd5e88941ff41108636daeb225c3d29c79726d6645018cd9ace561e7"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-12/runs/high-01/start.json",
+          "sha256": "aca15258c6a9c1f6081bf568f8528c8b2f26b2dcda7b5258de61c9d74408a64a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-12/runs/high-02/start.json",
+          "sha256": "826975c808c264c24ecab6fc0d5530de9590b15628720fecc62c8fc2b844d3cf"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-12/runs/high-02/start.json",
+          "sha256": "3b8fba914e3bc4697000af03832943178923517bd2b2b0ba369b69cf6e807e76"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-13",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "free_commit": {
+            "oid": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "57356b610f5b84e347b24e888755afb0f29edca7e140a04bec334cc3b89fcf75"
+          }
+        },
+        "seed_delta_paths": [
+          "tests/unit/test_v4_daily_main.py",
+          "tests/unit/test_v4_engine.py"
+        ],
+        "base_equals_seed": true,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "元baseの過去変更。ケースseedの故障差分ではない"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "8289ae82702e2409ef644d3b691ccd82a6cc39195edae7533a9e2f7b2bd76b47"
+          },
+          "free_commit": {
+            "oid": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+            "parents": [
+              "c76db94924c8fdb25c15e4a3477e0eeb4bdfa904"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d56036acfde74873b768d8ac1b639618b988480fde3e6888cd53cd15d4c31421"
+          }
+        },
+        "seed_delta_paths": [],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-13/runs/low-01/start.json",
+          "sha256": "3c7a7281f21c10fd05377c7ac1b26d9b7c8d93df0274a632d7f3be1c83421e1a"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-13/runs/low-01/start.json",
+          "sha256": "baa07a887d39be2fe0ee2ec6356ba6406d58aecc230d7648fc2ddf588df0c984"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-13/runs/low-02/start.json",
+          "sha256": "8666ed33198cf8bc44e8b0c1dc4dd3a730ff02661faaec36bb5e6d60d0a6b9fa"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-13/runs/low-02/start.json",
+          "sha256": "f2f2d66dec68bdc5fea671e58792680a61a1e67b2ad3b1dc3f9b3d5a84e2df51"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-13/runs/medium-01/start.json",
+          "sha256": "27840bbafcb682230d5ff3713644892d65103e10f25925dbdaa070d064cc78b3"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-13/runs/medium-01/start.json",
+          "sha256": "2285a9f15c345bf92d1600b30f31f52dd282ee2eb0a36868f6402df08bee9f49"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-13/runs/medium-02/start.json",
+          "sha256": "39ec2f802c3109a577f4b87334028bc0c80ca2b8a4f6882a85100127ad0c0a2d"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-13/runs/medium-02/start.json",
+          "sha256": "c3ad58596c478e500c449637d807f9cdea538bcf30d308efacf21799e5c12a4a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-13/runs/high-01/start.json",
+          "sha256": "51b6d732e9c704ac56ba49464d44949aa13f7244928431c213eefa5f855667e2"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-13/runs/high-01/start.json",
+          "sha256": "fc7f6f0543a751015c8b24473c3f546a55dae00f7705781b2fda2a9d463b216f"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-13/runs/high-02/start.json",
+          "sha256": "68240b3a647e5f4f4262ac240665402c533c22a7bb0ad6485100ccce887eb972"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-13/runs/high-02/start.json",
+          "sha256": "acd1b22275ebca88231ab46f3f6c84f69a29a09ddceb0e0de0c5ac064d5f0597"
+        }
+      ]
+    },
+    {
+      "case_id": "SD14-14",
+      "old": {
+        "commits": {
+          "base_commit": {
+            "oid": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+            "parents": [
+              "d28dff0264781105625a65b819136bcef14a43e7"
+            ],
+            "subject": "v4 testのruntime stateをisolate (#333)",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "71b0ee10f2c4d36203c9355890d6662a4a8162a3aeff28cd522c0f88d5c80a88"
+          },
+          "seed_commit": {
+            "oid": "5b17df6fc5c86be5614c37e0883277d52045c0cd",
+            "parents": [
+              "3ce91a403f9e0c83f29d56bbe9e7b449b713445d"
+            ],
+            "subject": "evaluation fixture seed",
+            "root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+            "commit_object_sha256": "6793a40d0385b34b5646d5f6c4caee5ce4420d8f386470633832e64a12453323"
+          },
+          "free_commit": {
+            "oid": "0d03226e478e77a300c739ab722b0190f716c557",
+            "parents": [
+              "5b17df6fc5c86be5614c37e0883277d52045c0cd"
+            ],
+            "subject": "repository authority",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "d8b9a4792eb98e981321b1edb45d88e822d23b7076e9cd7efaacad1228ae5e9d"
+          }
+        },
+        "seed_delta_paths": [
+          "run.sh"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "run.sh"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "dedicated": {
+        "commits": {
+          "base_commit": {
+            "oid": "d31a142efcb40223415464d8d2ef2ef0c8118a94",
+            "parents": [],
+            "subject": "repository base",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "f5faebb287397f92b47529ec9cf2e5ada53855393ed22571ead12c88f12b2980"
+          },
+          "seed_commit": {
+            "oid": "3971369ed4ae6065ae7d2aff92fe0dbf88e8a228",
+            "parents": [
+              "d31a142efcb40223415464d8d2ef2ef0c8118a94"
+            ],
+            "subject": "repository change",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "5f2ac8582676ed57bc9bcdfb0cc2109d95125f4b654e4901f67ebbd4fb1c9606"
+          },
+          "free_commit": {
+            "oid": "4590d6eacbb7fd9110247f0e3a99db5668a8cb39",
+            "parents": [
+              "33111509dfee99c65be6c9dfd8be372acba7f311"
+            ],
+            "subject": "repository start",
+            "root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "commit_object_sha256": "6fba33a2ce48e0e9b847b2251b7de261144b901398af742dc76ce63ead49f777"
+          }
+        },
+        "seed_delta_paths": [
+          "run.sh"
+        ],
+        "base_equals_seed": false,
+        "base_to_seed_paths": [
+          "run.sh"
+        ],
+        "seed_parent_diff_role": "ケースseedの差分"
+      },
+      "saved_start_bindings": [
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-14/runs/low-01/start.json",
+          "sha256": "db4a3892d549b013be81312ad29e0ff24e516d723e2017c33dab40f124700e5c"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-14/runs/low-01/start.json",
+          "sha256": "30486dfbcaecc7d60017a494d866ac88caa03e1abdbc844f15a1578fad068f6a"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-14/runs/low-02/start.json",
+          "sha256": "1c255ce641814f1744d0b983a2fab4e4719d5318bad9519103687d486cac627a"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "low",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/cases/SD14-14/runs/low-02/start.json",
+          "sha256": "ae8c3f45e9a10139c0c1cc7538f77c69a429396787f287088069c0f5f3adcd75"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-14/runs/medium-01/start.json",
+          "sha256": "cbaced6de69641b01cd9c4a0541d4e9e3ea9c12308b0c71808188a511cae99ba"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-14/runs/medium-01/start.json",
+          "sha256": "9015a221f5d1077d9d174843b39434339cdfb964b587b03922fe26038df1e312"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-14/runs/medium-02/start.json",
+          "sha256": "77df55b9ad5e5a23e134a8869b3621a9a6b15ca2966454d24d9b408594339b25"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "medium",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-medium-n2-20261004-r1/cases/SD14-14/runs/medium-02/start.json",
+          "sha256": "fb518f2eed8eef158bae82def52d17e4f4216b5af1618a293c2139a346ea9e54"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-14/runs/high-01/start.json",
+          "sha256": "8cd3c637fc39c572b3e3488f87622e44182178cb3bf66de189dd877bc2a8f5d1"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 1,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-14/runs/high-01/start.json",
+          "sha256": "95fd21efc626ceb1dae3f8e903c9af58ef2a7592f711f599981d3154c7bc4c56"
+        },
+        {
+          "side": "old",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-14/runs/high-02/start.json",
+          "sha256": "40daa2847c2e6ea36d110f556bde7cefc78763ebe75055062f2396f57b3cb796"
+        },
+        {
+          "side": "dedicated",
+          "reasoning_effort": "high",
+          "iteration": 2,
+          "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-high-n2-20261004-r1/cases/SD14-14/runs/high-02/start.json",
+          "sha256": "0b72e4fd046363be04487176d714309ef623a539584b847130df9a2d8466548c"
+        }
+      ]
+    }
+  ],
+  "dependency_responses": [
+    {
+      "reasoning_effort": "low",
+      "iteration": 1,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-09/runs/low-01/final.txt",
+      "sha256": "a23d1c1cb2b079f6e9307af7e78c624e0812e78955b9f2dbae598d5740752691",
+      "response_class": "復元と検証の完了応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    },
+    {
+      "reasoning_effort": "low",
+      "iteration": 2,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/low/cases/SD14-09/runs/low-02/final.txt",
+      "sha256": "9aa6e1ecb0705a199d23a1397cb0d512e1949312af28d4c4b5fc6c31c2316c53",
+      "response_class": "開始履歴を理由とする停止応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    },
+    {
+      "reasoning_effort": "medium",
+      "iteration": 1,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-09/runs/medium-01/final.txt",
+      "sha256": "91987fb074399a50a4aebd81c3e0e3a48ce33018ae5fe2ad2551324d37603747",
+      "response_class": "開始履歴を理由とする停止応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    },
+    {
+      "reasoning_effort": "medium",
+      "iteration": 2,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/medium/cases/SD14-09/runs/medium-02/final.txt",
+      "sha256": "f62671a9284a6c4bff252a0ddc1dcb4a3eadc49845d9ae96491e6672c457d611",
+      "response_class": "復元と検証の完了応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    },
+    {
+      "reasoning_effort": "high",
+      "iteration": 1,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-09/runs/high-01/final.txt",
+      "sha256": "c8d1a972835aad7f0f1d303663dafd4e7145191ef66840aa8dbbf99836db157e",
+      "response_class": "復元と検証の完了応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    },
+    {
+      "reasoning_effort": "high",
+      "iteration": 2,
+      "source_path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r2/high/cases/SD14-09/runs/high-02/final.txt",
+      "sha256": "a8f3ca888cb32a8d4b5d335f0625c03d44f60cf43253a010ab670f970295144d",
+      "response_class": "復元と検証の完了応答",
+      "scope": "保存応答の意味。今回、操作や品質の再採点はしない"
+    }
+  ],
+  "history_root_sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+  "history_root_bytes": 5980,
+  "history_root_lines": 58,
+  "empty_seed_alias_cases": [
+    "SD14-05",
+    "SD14-06",
+    "SD14-11",
+    "SD14-13"
+  ],
+  "sole_cause_established": false,
+  "pre_dispatch_clean_certified": false,
+  "model_slots": 0
+}

@@ -1,0 +1,46 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "checks": [
+    {
+      "check": "mode_question_only_partial",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "check": "observed_authority_edit_still_valid_zero",
+      "actual": [
+        true,
+        0
+      ],
+      "expected": [
+        true,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_still_rejected",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "dependency_failure_still_not_quality",
+      "actual": [
+        false,
+        null,
+        "rating_environment_failure"
+      ],
+      "expected": [
+        false,
+        null,
+        "rating_environment_failure"
+      ],
+      "pass": true
+    }
+  ],
+  "source_sha256": "71672913ede9ea446511de783b3d892828f25cec6e9bafe1d8f99190141c3c23",
+  "evidence_policy": "応答・意味判定・usageは合成。AGENTS差分と依存欠落は独立一時ファイル上で実物を確認。モデル成績ではない。"
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-03",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+  "source_revision": "r2",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "F03-C1",
+        "type": "state_after_mocked_failure",
+        "expected": "No .json.tmp file remains after os.replace raises."
+      },
+      {
+        "criterion_id": "F03-C2",
+        "type": "terminal_behavior",
+        "expected": "ContextRepository.save returns False for replace failure."
+      },
+      {
+        "criterion_id": "F03-C3",
+        "type": "success_path_command_and_drift",
+        "expected": "Successful atomic save remains valid, focused and full gates pass, and only allowed paths differ from the seeded fixture."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r2",
+    "mode": "repository_state_terminal_command_and_state_evidence",
+    "human_calibration_owner": "independent_state_check",
+    "criteria": [
+      {
+        "criterion_id": "F03-C1",
+        "evidence_sources": [
+          "mocked_failure_filesystem_state",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "F03-C2",
+        "evidence_sources": [
+          "mocked_failure_return_value",
+          "focused_gate"
+        ]
+      },
+      {
+        "criterion_id": "F03-C3",
+        "evidence_sources": [
+          "success_path_test",
+          "command_receipts",
+          "final_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      ".venv/bin/python -m pytest tests/unit/test_atomic_save.py::TestContextRepositoryAtomicSave -v",
+      "bash scripts/dev/main_verify.sh",
+      "git diff --check"
+    ],
+    "success_rule": "all listed criteria pass from observed evidence; deleting or weakening the mocked failure contract cannot satisfy a criterion; failure of the cleanup operation itself is outside F03-C1"
+  },
+  "seed_operations": [
+    [
+      "src/infra/context_repository.py",
+      "                try:\n                    os.unlink(tmp_path)\n                except OSError:\n                    pass\n",
+      ""
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/infra/context_repository.py",
+      "mode": "100644",
+      "git_blob_sha1": "1c7a3acd14d26b248ddf19e6dfe1e8d5e072bb9b"
+    },
+    {
+      "path": "tests/unit/test_atomic_save.py",
+      "mode": "100644",
+      "git_blob_sha1": "de1007fb9632459d306edaaaf44b83cb892d581e"
+    }
+  ]
+}

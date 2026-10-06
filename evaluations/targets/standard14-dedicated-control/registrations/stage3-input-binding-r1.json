@@ -1,0 +1,51 @@
+{
+  "schema_version": "standard14-stage3-input-binding/r1",
+  "worktree": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/agent-execution-control-lab",
+  "review_patch": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/standard14-stage2-review-r3.patch",
+  "review_patch_sha256": "ca92a51c0eb0085e3527ad744570ba873fa8f226b5de9a252014ddb4e4c1980c",
+  "current_diff_matches_fixed_patch": true,
+  "diff_command": [
+    "git",
+    "diff",
+    "--binary",
+    "--full-index",
+    "HEAD"
+  ],
+  "handoff_sha256": "7bf123d5cb6e2e4302d26ac033bab76c1e929e9c9aef2413bb0f1fc033913266",
+  "source_freeze_sha256": "b7be5d5f48e0d3c10e90e4149b9cb29af63e2ef8ede2bfa32f82eba5105880e2",
+  "frozen_artifacts_verified": 140,
+  "stage1_inputs": {
+    "docs/standard14-dedicated-evidence-r1.json": "e7fcc985ac9e0ff003c136886dc804f9365c3ae963325deba5ed1a5f905b8b34",
+    "docs/standard14-dedicated-history-analysis-r1.md": "0f87c8a47086a74b35920d0993b5b32404825e1cb776584ce98615b8ca2990a3",
+    "docs/standard14-dedicated-case-spec-r1.md": "73466a2cc5d19ddb0931f08451556bf51f1b3428da01779ea0a6d4fa06c3f16e",
+    "docs/standard14-dedicated-history-r1.tsv": "ba85255f04b4d7f2818356be827fc63e16e4984d541acd774892e8faa213348c",
+    "docs/standard14-dedicated-evaluation-plan-r1.md": "d3dc83d216a7324f4a0e9f30f418bfd301e1cbf5a40a9204b16ca59908ae109a"
+  },
+  "reused_kernel_sources": {
+    "scripts/all_agent_usage.py": "aeb633b99e8b565567a1d936d9eede49c83f0d0b3d0855921ff501272b5dd4c0",
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "layer2/extensions/parallel_execution/prepare_atomic_plan.py": "c47760188f36e78680d48370a9352eff0a861e64970c98ebf76ee8d6be7027ec",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60"
+  },
+  "actual_stage3_model": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning": "high",
+    "observed_model": "gpt-6-astra",
+    "observed_reasoning": "high",
+    "session_id": "01a102cd-c684-7f73-a736-c0d2ff57e63c",
+    "source_path": "/Users/kenn/.codex/sessions/2026/10/04/rollout-2026-10-04T02-26-42-01a102cd-c684-7f73-a736-c0d2ff57e63c.jsonl",
+    "source_type": "turn_context",
+    "line": 8,
+    "timestamp": "2026-10-03T17:26:45.203Z",
+    "record_sha256": "bae1ae3d484eee861b8b47d2bc3bbfa22ef76168c509e7df6138a73ba94c8020",
+    "raw_log_copied": false
+  },
+  "policy": {
+    "required_result": "全14件と共通環境の元要求対応を一回判定し、合否と返却条件を新規記録へ保存する",
+    "target": "固定された工程2第3版とdedicated14-r1",
+    "method": "正本、固定diff、実装、局所証拠を照合し、具体的疑義だけ補助検証する",
+    "preserved": "旧固定成果、工程1、開始checkout、採点境界、全14件、モデル試験0件、ready=falseを維持する"
+  },
+  "model_slots_issued": 0,
+  "stage4_started": false
+}

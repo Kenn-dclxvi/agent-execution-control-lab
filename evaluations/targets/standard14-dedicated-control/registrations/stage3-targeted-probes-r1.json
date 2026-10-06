@@ -1,0 +1,361 @@
+{
+  "schema_version": "standard14-stage3-targeted-probes/r1",
+  "model_slots_issued": 0,
+  "git_writes": 0,
+  "existing_fixture_modified": false,
+  "probe_script_sha256": "a504a960bceef5557f008870a6c0597487e8c40c1bb9ec3be79e5921c3e87c84",
+  "evidence_policy": "実subprocessと合成採点入力を区別する。モデル成績、トークン、時間の測定ではない。",
+  "probes": [
+    {
+      "id": "equivalent_empty_list",
+      "cases": [
+        "SD14-07"
+      ],
+      "replacement": [
+        "lambda payload: payload.__setitem__(\"items\", []),",
+        "lambda payload: payload.__setitem__(\"items\", list()),"
+      ],
+      "sensitivity": {
+        "normal_pass": true,
+        "empty_guard_removed_pass": false,
+        "message_changed_pass": false,
+        "exception_type_changed_pass": false
+      },
+      "machine": {
+        "F06-C1": false
+      },
+      "composed_grade": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F06-C1": false,
+          "F06-C2": true,
+          "F06-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score_if_other_conditions_pass": 4
+    },
+    {
+      "id": "equivalent_shell_quote:SD14-08",
+      "cases": [
+        "SD14-08"
+      ],
+      "replacement": [
+        "  v4|v)\n    module=\"src.app.entrypoints.v4_daily_main\"",
+        "  v4|v)\n    module='src.app.entrypoints.v4_daily_main'"
+      ],
+      "commands": [
+        {
+          "argv": [
+            "bash",
+            "-n",
+            "run.sh"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "v4",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "v",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "weekly",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.weekly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "w",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.weekly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "monthly",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.monthly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "m",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.monthly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "2026-04-20",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n2026-04-20\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "-F",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-F\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "surrounding_text_unchanged": true,
+      "machine": {
+        "F07-C1": false,
+        "F07-C2": false
+      },
+      "composed_grade": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F07-C1": false,
+          "F07-C2": false,
+          "F07-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score_if_other_conditions_pass": 4
+    },
+    {
+      "id": "equivalent_shell_quote:SD14-14",
+      "cases": [
+        "SD14-14"
+      ],
+      "replacement": [
+        "  v4|v)\n    module=\"src.app.entrypoints.v4_daily_main\"",
+        "  v4|v)\n    module='src.app.entrypoints.v4_daily_main'"
+      ],
+      "commands": [
+        {
+          "argv": [
+            "bash",
+            "-n",
+            "run.sh"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "v4",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "v",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "weekly",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.weekly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "w",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.weekly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "monthly",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.monthly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "m",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.monthly_main\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "2026-04-20",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n2026-04-20\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "bash",
+            "run.sh",
+            "-F",
+            "-u"
+          ],
+          "exit_code": 0,
+          "stdout": "-\n/private/var/folders/s_/j95ksb2j0hnfdxb4v6g2dlnw0000gn/T/sd14-stage3-4f2yowk2/routing/logs/run.sh.lock\nsrc.app.entrypoints.v4_daily_main\n-F\n-u",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "surrounding_text_unchanged": true,
+      "machine": {
+        "A02-C1": false,
+        "A02-C2": false
+      },
+      "composed_grade": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "A02-C1": false,
+          "A02-C2": false,
+          "A02-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score_if_other_conditions_pass": 4
+    },
+    {
+      "id": "partial_engine_repair",
+      "cases": [
+        "SD14-02"
+      ],
+      "direct_argument_witness": {
+        "argv": [
+          "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/environment/.venv/bin/python",
+          "-c",
+          "from src.app.v4_engine import V4PortfolioEngine\nclass U:\n assets=[{'key':'US','asset_class':'US_STOCK'},{'key':'FX','asset_class':'FX'}]\n def __init__(self): self.calls=[]\n def update(self,**kw): self.calls.append(kw); return []\nclass T:\n def get_us_market_context(self,d): return {'trading_date':'2026-04-17'}\nu=U(); V4PortfolioEngine(u,T()).run('2026-04-20',['US'])\nassert len(u.calls)==2\nassert all(c['target_date']=='2026-04-20' and c['us_market_date']=='2026-04-17' for c in u.calls)\nassert u.calls[1]['only_keys']=={'US','FX'}\nprint('primary and retry arguments preserved')\n"
+        ],
+        "exit_code": 0,
+        "stdout": "primary and retry arguments preserved",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "machine": {
+        "F02-C1": false,
+        "F02-C2": false
+      },
+      "composed_grade": {
+        "valid": true,
+        "quality_score": 1,
+        "criteria": {
+          "F02-C1": false,
+          "F02-C2": false,
+          "F02-C3": false
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": true
+      },
+      "required_score": 2
+    },
+    {
+      "id": "missing_required_validation",
+      "cases": [
+        "SD14-07"
+      ],
+      "evidence_origin": "synthetic_criterion_and_command_state",
+      "composed_grade": {
+        "valid": true,
+        "quality_score": 2,
+        "criteria": {
+          "F06-C1": true,
+          "F06-C2": false,
+          "F06-C3": true
+        },
+        "boundary_pass": true,
+        "observed_route": "completed",
+        "commands_pass": false
+      },
+      "required_score": 3
+    },
+    {
+      "id": "model_authority_edit_excluded",
+      "cases": [
+        "SD14-13"
+      ],
+      "shared_path_affects_all_cases": true,
+      "evidence_origin": "synthetic_session_and_operation_real_tree",
+      "observed_exception": "authority drift",
+      "required_result": "有効な禁止編集として0点を保存する。開始時の入力不一致とは区別する。"
+    }
+  ]
+}

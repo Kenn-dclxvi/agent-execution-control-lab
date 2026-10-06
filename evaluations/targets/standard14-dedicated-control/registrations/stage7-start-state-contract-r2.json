@@ -1,0 +1,111 @@
+{
+  "schema_version": "standard14-start-state-correspondence-contract/r2",
+  "target_id": "standard14-dedicated-control",
+  "objective": "全14ケースの要求・維持条件・判断材料・難しさを保った低コストな評価代替",
+  "scope": "開始状態の対応に必要な条件。完全な実行前ゲートの代替ではない",
+  "receipt_fields": {
+    "case_id": "str",
+    "run_id": "str",
+    "base_commit": "str",
+    "seed_commit": "str",
+    "free_commit": "str",
+    "manifest": "dict",
+    "authority": "dict",
+    "task_sha256": "str",
+    "executor_binding": "dict",
+    "git_objects_logical_bytes": "int",
+    "git_objects_allocated_bytes": "int"
+  },
+  "receipt_keyset_policy": "必須項目の集合と型を両側で完全一致させる。未宣言の追加項目も拒否する",
+  "exact_pair_fields": [
+    "authority",
+    "executor_binding"
+  ],
+  "mapped_pair_fields": {
+    "case_id": "固定済み工程3の元ケースと専用ケースの対応を使用する",
+    "run_id": "同じ推論設定とiterationを対応づける",
+    "base_commit": "原本と専用素材の実際の識別子を保持。偽装や同値化をしない",
+    "seed_commit": "各ケースの実際のseedと変更関係を保持する",
+    "free_commit": "各側の実際の開始コミット。seedとの祖先関係を検査する",
+    "manifest": "各側の固定素材を識別する。容量やパス数の一致を意味対応の代用にしない",
+    "task_sha256": "月次の宣言済み固定seed置換以外は同一の配送内容"
+  },
+  "material_diagnostic_fields": [
+    "git_objects_logical_bytes",
+    "git_objects_allocated_bytes"
+  ],
+  "material_diagnostic_value_policy": "同じ意味・型・測り方で記録するが、値は素材軸の測定量であり等値を要求しない",
+  "start_identity_predicates": [
+    "開始前のHEADがfree_commitと一致し、作業領域がcleanである証拠を発行前に保存する",
+    "base、seed、freeが実在し、固定した祖先関係と変更関係を満たす",
+    "開始manifest、authority、配送TaskSpecが固定入力へ一致する",
+    "開始記録の各項目を実物から生成し、宣言のtrueを証明に使わない"
+  ],
+  "history_correspondence_predicates": [
+    "全14ケースで、実行開始時のrootは0 byte、非root正本は旧Free原文。過去rootを現行authorityへ復活させない",
+    "baseとseedの過去rootは旧5980 byteの原文hashへ結び、seedからFreeへの直接の一コミットでrootだけを空にする",
+    "SD14-05、06、11、13ではbase_commit=seed_commit。残り10件ではseedの直接の親がbaseで、課題故障の差分だけを持つ",
+    "freeの直接の親はseed。追加の空repository startコミットを作らない",
+    "SD14-12は固定seed^..seedの月次一差分を保持し、TaskSpecのSHAだけを実seedへ置換する。HEAD親子関係を開始条件へ追加しない",
+    "開始前のdetached/attached、HEAD、refの対応を実物へ結ぶ。同じ開始確認に異なるbranch状態を未宣言で渡さない",
+    "過去rootの本文、削除path・mode・変更内容、seedと開始のコミット説明、関連refは設計側で固定する。過去rootを新しい作業指示として配送しない"
+  ],
+  "model_visible_gate_policy": "開始状態の判定は評価側の実物照合で行う。モデルへの開始許可文、正解、追加手順は導入しない",
+  "comparison_boundary": "旧新は別インスタンスの素材対応である。同一fixtureのプロンプト比較や同じatomic poolとして登録しない",
+  "historical_receipt_policy": "保存済みの結果・開始記録・発行前宣言を変更しない。発行後の診断で事前ゲートを追認しない",
+  "model_slots_authorized": 0,
+  "full_comparison_admitted": false,
+  "remaining_requirements": [
+    "新しい履歴素材版と発行を伴わない局所検査",
+    "新版の全14件・42条件対応の受入",
+    "完全な発行前照合",
+    "難しさの同等性の実証",
+    "品質と対応関係を保持したトークン・時間の低下"
+  ],
+  "revision_role": "Astra Highが固定した設計契約。新素材と検査実装は未作成。r1と保存済みrunへ遡及適用しない",
+  "predecessor": {
+    "path": "stage7-start-state-contract-r1.json",
+    "sha256": "63c3e9750da8c512ec081612aa32f3505154356a25951f607e42696cf475de21"
+  },
+  "history_root_identity": {
+    "source_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "path": "AGENTS.md",
+    "sha256": "daa311bffd40c36dbc8120cf8f9ecaea6e37cc97e329631130b224f387fd98e5",
+    "bytes": 5980,
+    "lines": 58,
+    "usage": "履歴の判断材料だけ。作業開始treeのrootは空"
+  },
+  "allowed_material_delta": [
+    "新しいcommit/tree/blob ID、作業領域の絶対パス。元IDを偽装せず対応表へ結ぶ",
+    "工程3で受け入れた専用コード、テスト、文書の縮小。既存素材の内容と42条件の意味を変えない",
+    "baseより古い履歴は課題の指定参照に不要な範囲だけ切り出す。base自体をreview対象seedと誤表示しない",
+    "新baseの説明はrepository baseとする。故障を注入するseedはevaluation fixture seed、Free化はrepository authorityとし、新しい開始許可・解答の文言を加えない",
+    "Git容量の数値差、物理配置、ハッシュから派生する文字列差。難しさが不変という証明には使わない"
+  ],
+  "forbidden_delta": [
+    "元TaskSpecへの開始許可、追加のgate成功値、正解、成功手順の配送",
+    "root削除を空差分へ投影すること",
+    "故障注入なしのケースへ架空のseed変更を示すこと",
+    "停止率や得点を合わせる素材調整",
+    "外部executor、CLI、hookの変更",
+    "旧runの開始記録の補完・発行前ゲートの追認"
+  ],
+  "evaluation_side_attestation": {
+    "visibility": "設計側の別記録。start.jsonの11項目へ成功labelを追加しない",
+    "required_fields": [
+      "run/case/reasoning/iterationと固定入力hash",
+      "記録schemaと各nested manifestのpath/type/mode/content/symlink",
+      "HEADとbranch状態と関連ref",
+      "status出力、観測時点、未実行のdispatch identity",
+      "base/seed/freeの直接の親とalias",
+      "base→seedとseed→freeのpath/mode/content差分",
+      "元TaskSpecと実配送入力hash、月次の置換箇所",
+      "正本と実行器の実物hash",
+      "容量の対象、除外範囲、時点、測り方"
+    ],
+    "truth_policy": "true宣言で置き換えず、証拠欠落を拒否する。開始後の状態を開始前証明に使わない",
+    "storage_definition": "同じ時点のworkspace/.git/objects配下の通常fileのst_size合計とst_blocks*512合計。packed/loose、外部alternatesの有無を記録し、後者をAPFS専有物理量と呼ばない",
+    "implementation_status": "未実装。r1監査の5検査はこの全条件の実装完了を意味しない"
+  },
+  "history_decision_record": "stage7-final-verdict-r1.json"
+}

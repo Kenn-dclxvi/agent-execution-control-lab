@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのrunner-verifiedなisolated checkoutを対象とする。最初の編集またはrequired command前に現在のcheckout identityを記録し、git status --shortが空であることを確認する。runnerのstart-identity gateがfailed、または未コミット変更があれば編集せず停止する。",
+  "task_kind_goal_and_done_condition": "root launcher修復task。./run.sh v4 が現行の正規v4 daily entrypointである src.app.entrypoints.v4_daily_main を起動するように戻す。F07-C1: v4およびv aliasが正規moduleへmapされる。F07-C2: retired modeの拒否、weekly/monthly、default/date/optionsの既存routingを変更しない。F07-C2はseeded fixtureから周辺routingのtextが不変であることを意味し、既存routing全体が新たな監査に合格することを要求しない。F07-C3: test一式とshell静的確認がpassし、run.sh以外に差分がない。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集を許可するpathは run.sh のみ。src/**、tests/**、docs/**、設定、依存関係は変更しない。retired entrypointの再導入やshim追加は行わない。",
+  "validation_conditions_and_non_machine_risk": "F07-C1とF07-C2はrun.shのcase routingを静的に確認し、bash -n run.shを実行する。F07-C3はbash scripts/dev/main_verify.sh、git diff --check、変更path確認で判定する。実運用pipeline、mail送信、外部serviceは起動しない。non_machine_risk=contract-consistency、owner=independent contract check。",
+  "read_edit_test_commit_push_merge_authorization": "repositoryと適用されるAGENTS.mdの読取り、run.shの編集、bash静的確認、指定testと差分確認を許可する。実運用run、commit、push、PR作成、merge、deploy、外部送信は許可しない。",
+  "constraints_and_required_recovery": "既存routingのうち誤ったv4 mappingだけを最小差分で修復する。machine_rework_max=1、environment_recovery_max=0。開始identity不一致、許可外変更が必要、test環境failure、変更したv4 mappingが既存routingと矛盾する場合、またはrework上限到達なら、推測で広げず観測事実と未完了のcriterion IDを報告して停止する。変更していないdefault pathなどの既存挙動は報告してよいが、このtaskの未完了理由にしない。"
+}

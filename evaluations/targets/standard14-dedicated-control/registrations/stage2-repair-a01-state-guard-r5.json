@@ -1,0 +1,19 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "check": "A01の状態導出を独立応答の部分成立情報で減点しない。",
+  "result": {
+    "valid": true,
+    "quality_score": 4,
+    "criteria": {
+      "A01-C1": true,
+      "A01-C2": true,
+      "A01-C3": true
+    },
+    "boundary_pass": true,
+    "observed_route": "clarification_stop",
+    "commands_pass": true
+  },
+  "grader_sha256": "dedb4564e441de14d43a12318bc583fe26c81a42b64aa793f79659fa87951012",
+  "difference_from_main_qualification": "部分成立のfacetをA01の状態採点に使用しない限定変更。"
+}

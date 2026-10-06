@@ -1,0 +1,22 @@
+--- a/docs/reference/system.md
++++ b/docs/reference/system.md
+@@ -7,7 +7,7 @@
+ 
+ `python -m src.app.entrypoints.daily_main` は `legacy/v3/` へ退避済みであり、現行 src/ には存在しない。
+ 
+-`python -m src.app.entrypoints.weekly_main` の実行時引数。
++`python weekly.py` の実行時引数。
+ 
+ * **`date`**: **[Target Date]** (位置引数) 処理対象の基準日を YYYY-MM-DD 形式で指定。省略時はシステムが前営業日を自動判定し、さらにその前週最終営業日を対象として処理する。
+ * **`-F, --force`**: **[Force Send]** 週次用のCompletionLock (`last_sent_weekly.txt`) を無視して強制送信。
+--- a/docs/reference/system.md
++++ b/docs/reference/system.md
+@@ -14,7 +14,7 @@
+ * **`-u, --use-cache`**: **[Reuse Context]** 既存の AI による週次総括結果 (chronicle_YYYYWww.json) があれば、 AI プロバイダへの問い合わせをスキップして再利用する。
+ * **`-t, --format-test`**: **[Format Test]** レンダリングテストを実行する。HTML を `reports/weekly_format_test.html` に保存し、メール送信はスキップする。
+ 
+-`python -m src.app.entrypoints.monthly_main` の実行時引数。
++`python monthly.py` の実行時引数。
+ 
+ * **`date`**: **[Target Date]** (位置引数) 処理対象の基準日を YYYY-MM-DD 形式で指定。省略時はシステムが前営業日を自動判定し、さらにその前月末日を対象として処理する。
+ * **`-F, --force`**: **[Force Send]** 月次用のCompletionLock (`last_sent_monthly.txt`) を無視して強制送信。

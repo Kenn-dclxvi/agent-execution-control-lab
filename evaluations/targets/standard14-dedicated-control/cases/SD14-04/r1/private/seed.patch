@@ -1,0 +1,11 @@
+--- a/src/web/market_units_editor/src/App.tsx
++++ b/src/web/market_units_editor/src/App.tsx
+@@ -3,7 +3,7 @@
+ export default function App({funds = [], search = ''}: {funds?: Fund[]; search?: string}) {
+   const [query, setQuery] = useState(search);
+   const rows = funds.filter(f => f.name.includes(query));
+-  const hasAuditKey = funds.some(f => (f.audit_match_key ?? '').trim() !== '');
++  const hasAuditKey = true;
+   return <><input value={query} onChange={e => setQuery(e.target.value)} /><table><thead><tr>
+     <th>Name</th><th>Class</th><th>Currency</th><th>Units</th><th>Symbol</th><th>CSV</th>{hasAuditKey && <th>Audit Key</th>}
+   </tr></thead><tbody>{rows.map((f, i) => <tr key={i}>

@@ -1,0 +1,88 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-12",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+  "source_revision": "r3",
+  "oracle": {
+    "mode": "review_response_and_no_drift",
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "F10-R-C1",
+        "type": "captured_review_finding",
+        "expected": "One major finding identifies src/app/entrypoints/monthly_main.py at the changed format_test binding: args.format_test is ignored and args.force enables MonthlyEngine's format-test early-return path, changing both -t and -F behavior."
+      },
+      {
+        "criterion_id": "F10-R-C2",
+        "type": "finding_structure_and_precision",
+        "expected": "The finding includes severity, changed-line location, direct evidence, and impact; it does not add unsupported findings or claim a fix was applied."
+      },
+      {
+        "criterion_id": "F10-R-C3",
+        "type": "operation_trace_and_no_drift",
+        "expected": "No file changes, tests, application execution, dependency operation, Git write, network access, or external operation occur; the seeded checkout remains clean."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "captured_review_response_operation_trace_and_repository_state",
+    "human_calibration_owner": "independent_response_check",
+    "criteria": [
+      {
+        "criterion_id": "F10-R-C1",
+        "evidence_sources": [
+          "captured_terminal_response",
+          "fixed_seed_diff",
+          "read_only_behavior_reference"
+        ]
+      },
+      {
+        "criterion_id": "F10-R-C2",
+        "evidence_sources": [
+          "captured_terminal_response"
+        ]
+      },
+      {
+        "criterion_id": "F10-R-C3",
+        "evidence_sources": [
+          "operation_trace",
+          "condition_relative_start_and_end_state"
+        ]
+      }
+    ],
+    "commands": [
+      "git diff a53601614b41f52633f1d75e77c72861a0f0f1c8^..a53601614b41f52633f1d75e77c72861a0f0f1c8 -- src/app/entrypoints/monthly_main.py",
+      "git status --short"
+    ],
+    "success_rule": "all listed criteria pass from the review response, fixed diff, operation trace, and no-drift evidence; worker self-report alone is insufficient"
+  },
+  "seed_operations": [
+    [
+      "src/app/entrypoints/monthly_main.py",
+      "format_test=args.format_test",
+      "format_test=args.force"
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/AGENTS.md",
+      "mode": "100644",
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565"
+    },
+    {
+      "path": "src/app/entrypoints/monthly_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "79a0d6d8b6e608046c63c1b13b1ff666872221b3"
+    },
+    {
+      "path": "src/app/monthly_engine.py",
+      "mode": "100644",
+      "git_blob_sha1": "ed389fa36d65b64a352e8a541ed2712f9b76bbff"
+    }
+  ]
+}

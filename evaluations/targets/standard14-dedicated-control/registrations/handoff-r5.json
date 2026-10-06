@@ -1,0 +1,48 @@
+{
+  "schema_version": "standard14-stage2-handoff/v5",
+  "worktree": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/agent-execution-control-lab",
+  "base_commit": "fcad5e118af0d0ad69f60cc0faa79dae5ef389af",
+  "review_patch": "/Users/kenn/.codex/worktrees/standard14-dedicated-stage2/standard14-stage2-review-r5.patch",
+  "review_patch_sha256": "a031d5df361aedcfc37211ebcee9c55137b839c231a9344be79b9fc5464a0cb1",
+  "source_freeze_sha256": "cd779fec565d3af56dbcb3292a20d4a9ff6330eb3017b9973e9acca78d921b20",
+  "repair_binding_sha256": "f637c7b9933e7db1426a4dc911c19947954c8ee2ea173c17d4706fcc4f0979c2",
+  "repair_document_sha256": "ed33f42bb06fc7e8d4965b9b36054cd944b6de494fd9a63e6c85163c78cdece7",
+  "stage2_repair_locally_complete": true,
+  "stage3_pass": false,
+  "requires_stage3_reassessment": true,
+  "model_slots_issued": 0,
+  "ready_for_model_dispatch": false,
+  "profiles_execution_enabled": false,
+  "previous_artifacts_preserved": 167,
+  "stage1_preserved": 5,
+  "kernel_preserved": 4,
+  "syntax_check": true,
+  "diff_check": true,
+  "diff_check_scope": "工程1 CRLF保持。private/seed.patchのcontext空白を除く。",
+  "local_checks": {
+    "main": 57,
+    "supplement": 4,
+    "a01_state_guard": 1,
+    "all_pass": true,
+    "synthetic_gate_usage_and_assessment": true
+  },
+  "actual_stage2_model": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "session_id": "01a10272-8060-7d92-8e98-df630cf13d77",
+    "source": "session turn_context",
+    "source_record_sha256": "08938d774fc35aa169c57c0bf9ba6fb0d954769929236ed17ac7ad5eb9f2f9f6"
+  },
+  "remaining_issues_addressed": [
+    "ST3-01 HTML属性を含む正常構造の受理",
+    "ST3-02 主要成果と維持条件・検証不足の区別"
+  ],
+  "previously_resolved_boundaries_retained": [
+    "ST3-03",
+    "ST3-04"
+  ],
+  "a02_withdrawn_issue_not_reopened": true,
+  "historical_node_execution_identity_proven": false,
+  "old_cost_comparison_certified": false,
+  "stage3_thread_id": "01a102cd-c684-7f73-a736-c0d2ff57e63c"
+}

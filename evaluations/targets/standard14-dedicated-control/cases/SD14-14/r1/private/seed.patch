@@ -1,0 +1,11 @@
+--- a/run.sh
++++ b/run.sh
+@@ -185,7 +185,7 @@
+ 
+ case "${target}" in
+   v4|v)
+-    module="src.app.entrypoints.v4_daily_main"
++    module="src.app.entrypoints.daily_main"
+     shift
+     ;;
+   daily|d|legacy|monex|collection|c)

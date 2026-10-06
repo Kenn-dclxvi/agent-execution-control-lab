@@ -1,0 +1,90 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-09",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+  "source_revision": "r1",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "F07-P-C1",
+        "type": "direct_constraint",
+        "expected": "requirements.in contains exactly one PyYAML>=6.0.1 direct constraint."
+      },
+      {
+        "criterion_id": "F07-P-C2",
+        "type": "compiled_pin_provenance",
+        "expected": "requirements.txt retains pyyaml==6.0.3 and its immediately following provenance is # via -r requirements.in."
+      },
+      {
+        "criterion_id": "F07-P-C3",
+        "type": "paired_path_and_operation_boundary",
+        "expected": "Only requirements.in and requirements.txt differ from the seeded fixture; no resolver, install, test-suite, or network operation occurs."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_command_and_operation_trace_evidence",
+    "human_calibration_owner": "independent_contract_check",
+    "criteria": [
+      {
+        "criterion_id": "F07-P-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "static_validation_receipt"
+        ]
+      },
+      {
+        "criterion_id": "F07-P-C2",
+        "evidence_sources": [
+          "final_repository_state",
+          "static_validation_receipt"
+        ]
+      },
+      {
+        "criterion_id": "F07-P-C3",
+        "evidence_sources": [
+          "operation_trace",
+          "condition_relative_drift_manifest",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      "python3 -c paired text assertion from trial-prompt-input.json",
+      "git diff --check",
+      "git diff --name-only"
+    ],
+    "success_rule": "all listed criteria pass from final state, operation trace, and command evidence; worker self-report alone is insufficient"
+  },
+  "seed_operations": [
+    [
+      "requirements.in",
+      "PyYAML>=6.0.1",
+      "PyYAML>=7.0.0"
+    ],
+    [
+      "requirements.txt",
+      "pyyaml==6.0.3\n    # via -r requirements.in",
+      "pyyaml==6.0.3\n    # via manual override"
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "requirements.in",
+      "mode": "100644",
+      "git_blob_sha1": "04422581b2bcbccd99eac12bf6a5419e2bea9a62"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "100644",
+      "git_blob_sha1": "9f67f84a7cf1bf5d3a0e398e89cc53126d06a3b4"
+    }
+  ]
+}

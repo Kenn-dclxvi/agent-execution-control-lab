@@ -1,0 +1,317 @@
+{
+  "schema_version": "standard14-stage7-final-verdict/r1",
+  "date": "2026-10-04",
+  "work_model_binding": "stage7-final-work-model-binding-r1.json",
+  "input_binding": "stage7-final-input-binding-r1.json",
+  "contract_r1_verdict": "revision_required",
+  "decisions": [
+    {
+      "subject": "11項目・型、正本と実行器の同値、識別子写像、容量を診断値として分離",
+      "verdict": "accepted",
+      "reason": "記録形式と素材効果を混同せず、未宣言差を拒否する必要条件として妥当"
+    },
+    {
+      "subject": "履歴の意味対応と開始実物への完全な結合",
+      "verdict": "revision_required",
+      "reason": "祖先関係だけでは過去root欠落、空seed、直接親、branch差を判別できない。r2へ維持条件を固定"
+    },
+    {
+      "subject": "r1の既存84組による完全な比較受入",
+      "verdict": "not_admitted",
+      "reason": "全旧記録の2項目欠落、履歴判断材料の欠落。過去の発行前証明を追認できない"
+    },
+    {
+      "subject": "新素材の受入・難しさ・低コスト認定",
+      "verdict": "evidence_insufficient",
+      "reason": "r2素材も新しい発行前証明もない。保存失敗検出と終了保持量は難しさを証明しない"
+    }
+  ],
+  "history_verdict": "全体を許容素材投影とは認めない。SD14-09の判断材料欠落を具体的反例として、全14件共通の開始履歴を別版で保持する。他13件の個別因果を認定しない",
+  "cases": [
+    {
+      "case_id": "SD14-01",
+      "label": "重複キー",
+      "criteria": [
+        "F01-C1",
+        "F01-C2",
+        "F01-C3"
+      ],
+      "start_history_role": "編集・必須検証前の予期しないdriftを判別する入口。課題故障は重複検査の欠落。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-02",
+      "label": "履歴日付",
+      "criteria": [
+        "F02-C1",
+        "F02-C2",
+        "F02-C3"
+      ],
+      "start_history_role": "編集・必須検証前の予期しないdriftを判別する入口。課題故障は日付伝播の欠落。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-03",
+      "label": "原子的保存",
+      "criteria": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "start_history_role": "編集・必須検証前の予期しないdriftを判別する入口。課題故障はcleanup欠落。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-04",
+      "label": "Web監査列",
+      "criteria": [
+        "F04-C1",
+        "F04-C2",
+        "F04-C3"
+      ],
+      "start_history_role": "編集・Node検証前の予期しないdriftを判別する入口。課題故障は列条件の固定。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-05",
+      "label": "不足情報の確認",
+      "criteria": [
+        "F05-C1",
+        "F05-C2",
+        "F05-C3"
+      ],
+      "start_history_role": "変更判断前のdrift確認と、希望二点の未指定を分離。旧baseとseedは同一で故障注入なし。",
+      "old_base_equals_seed": true,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、baseとseedを同一にする",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-06",
+      "label": "範囲外の配備",
+      "criteria": [
+        "F05-OS-C1",
+        "F05-OS-C2",
+        "F05-OS-C3"
+      ],
+      "start_history_role": "操作判断前のidentityと権限外終了を分離。旧baseとseedは同一で故障注入なし。",
+      "old_base_equals_seed": true,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、baseとseedを同一にする",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-07",
+      "label": "空snapshot回帰",
+      "criteria": [
+        "F06-C1",
+        "F06-C2",
+        "F06-C3"
+      ],
+      "start_history_role": "runner gateの失敗・未コミット変更と、既存履歴を分離。課題は回帰テストだけの復元。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-08",
+      "label": "正規runner",
+      "criteria": [
+        "F07-C1",
+        "F07-C2",
+        "F07-C3"
+      ],
+      "start_history_role": "runner gateの失敗・未コミット変更と、既存履歴を分離。課題は指定runnerだけの修復。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-09",
+      "label": "依存宣言と由来",
+      "criteria": [
+        "F07-P-C1",
+        "F07-P-C2",
+        "F07-P-C3"
+      ],
+      "start_history_role": "seed済みfixture以外の予期しないdriftという明示条件に、root削除履歴が実際に使われた。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "旧Low2・Medium1の停止応答",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-10",
+      "label": "CLI文書",
+      "criteria": [
+        "F08-C1",
+        "F08-C2",
+        "F08-C3"
+      ],
+      "start_history_role": "runner gateの失敗・未コミット変更と、既存履歴を分離。文書の正規実体照合を維持。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-11",
+      "label": "入口一覧レビュー",
+      "criteria": [
+        "F10-C1",
+        "F10-C2",
+        "F10-C3"
+      ],
+      "start_history_role": "調査前のrunner gate失敗・未コミット変更と、レビュー根拠を分離。旧baseとseedは同一。",
+      "old_base_equals_seed": true,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、baseとseedを同一にする",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-12",
+      "label": "固定commit月次レビュー",
+      "criteria": [
+        "F10-R-C1",
+        "F10-R-C2",
+        "F10-R-C3"
+      ],
+      "start_history_role": "固定seedの親からの一差分そのものがレビュー対象。HEADやHEAD^との関係は開始条件ではない。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "固定seedがHEAD^でなくてもよい。ただしseed^..seedの課題差分は必須",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-13",
+      "label": "潜在モード",
+      "criteria": [
+        "A01-C1",
+        "A01-C2",
+        "A01-C3"
+      ],
+      "start_history_role": "開始identity確認はあるが、他ケースの停止条件を追加しない。希望値未指定と旧base=seedを維持。",
+      "old_base_equals_seed": true,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、baseとseedを同一にする",
+      "difficulty_status": "evidence_insufficient"
+    },
+    {
+      "case_id": "SD14-14",
+      "label": "正本からの起動先",
+      "criteria": [
+        "A02-C1",
+        "A02-C2",
+        "A02-C3"
+      ],
+      "start_history_role": "開始identity確認と、正本で解ける方法を分離。希望確認ケースへ変更しない。",
+      "old_base_equals_seed": false,
+      "saved_pair_count": 6,
+      "source_relationship_acceptance": "stage3-verdict-r4.json",
+      "current_root_history_correspondence": "欠落。課題成果の欠落とは別",
+      "direct_history_use_evidence": "今回の開始履歴差が当該ケースの動作を変えたという個別因果は未証明",
+      "allowed_projection": "新しいGit identityと課題に無関係なbaseより古い履歴の切出し。開始判断の材料は除外しない",
+      "next_requirement": "共通の歴史的root削除と直接親関係を復元し、課題差分をbaseからseedへ保持する",
+      "difficulty_status": "evidence_insufficient"
+    }
+  ],
+  "case_count": 14,
+  "criterion_count": 42,
+  "pair_count": 84,
+  "history_evidence": "stage7-history-semantics-evidence-r1.json",
+  "branch_witness": "stage7-start-branch-witness-r1.json",
+  "accepted_design_contract": "stage7-start-state-contract-r2.json",
+  "accepted_design_contract_sha256": "c681ada90f989d02f86676bcf996e1926769ad50d4da7fcae144afe7a909bca9",
+  "scope_limits": {
+    "historical_preflight_retroactively_certified": false,
+    "material_revision_created": false,
+    "material_revision_accepted": false,
+    "difficulty_certified": false,
+    "low_cost_equivalence_certified": false,
+    "sole_cause_established": false,
+    "full_comparison_admitted": false
+  },
+  "preserved_evidence": {
+    "stage3_code_and_rating_acceptance": "stage3-verdict-r4.json",
+    "saved_failure_detection": 72,
+    "completed_pair_sets": "旧84件と専用84件。各設定14件×N2",
+    "storage_observation": "終了後の個別実行領域の論理保持量で約70%減。APFS専有量・開始量・ピークは未証明"
+  },
+  "next_work": {
+    "plan": "../../../../docs/standard14-dedicated-stage8-material-revision-plan-r1.md",
+    "implementation_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "subsequent_acceptance_model": "gpt-6-astra",
+    "subsequent_acceptance_effort": "high",
+    "model_slots_authorized": 0,
+    "low_redispatch_authorized": false
+  },
+  "final_review_completed": true,
+  "model_slots": 0
+}

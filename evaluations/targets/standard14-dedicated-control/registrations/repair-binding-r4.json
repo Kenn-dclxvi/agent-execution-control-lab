@@ -1,0 +1,29 @@
+{
+  "schema_version": "standard14-repair-binding/r4",
+  "execution_enabled": false,
+  "ready": false,
+  "requires_stage3_reassessment": true,
+  "previous_handoff_sha256": "7bf123d5cb6e2e4302d26ac033bab76c1e929e9c9aef2413bb0f1fc033913266",
+  "stage3_verdict_sha256": "9bae42ca7d9876a192861fd90da1e9e47bbabf4328e71725dedf2739c480d015",
+  "runtime": {
+    "execution_binding_r4.py": "19f62be4c5eaa1c07b0377178eaf8af9fc5d7bd5ff44e28af08d99e10d446a04",
+    "test_stage2_repair_supplement_r4.py": "fedd1d0625da4fbd62d0ca65b79becf592af38ad8831ec7b7470c621e1601f9a",
+    "test_stage2_repair_r4.py": "cf68a9d89d02582660654bd20de734d7c7795ca4fcf7e277923e41d917b68758",
+    "evidence_bridge_r4.py": "af3ab1f8d069d7565021c97c3d77445ddfb330c2ce64fd595a1331ac56ba27b1",
+    "grader_r4.py": "855b7f8ff3339e3647a6c7295a1b3d562a406b69be521bf99609d1038f9f84e5",
+    "inspect_artifact_r4.py": "1830a3b2455d261c4b7be061507efcf90dacafaaa242ddbc658b4a91b3e837c4",
+    "web_rating_r4.py": "52ffcfcfdfcf13712d245c7ebb0e76876defaf78592687e3ad608bf742823fb8",
+    "shell_rating_r4.py": "5790f1ced9b3928d5d3b43001e46350c751a989f30b2175e373ffdf805ab666a",
+    "private_rating_checks_r4.py": "11b13486a106c41a3641961fba3409b62a43c38cfb91746f6a9cef432852206e"
+  },
+  "grading_entrypoint": "runtime/evidence_bridge_r4.py",
+  "execution_entrypoint": "runtime/execution_binding_r4.py",
+  "rating_contract_unchanged_sha256": "5943c9ac456cf175473e9d0e44c480bbce9caa01fdd61f0644185cff270675ab",
+  "cases_unchanged": 14,
+  "qualification": {
+    "stage2-repair-qualification-r4.json": "96af8817f49c1e69bda2e3183113879cdf5e77742f73aa93d99b1db5d300d6a8",
+    "stage2-repair-supplement-r4.json": "1b49f5b75deac1b5ae8e20594262f6ed358f2da3c125d7eb52610acb148d0ca7",
+    "stage2-repair-dependency-fault-r4.json": "843292621c4afdaf18a826d7497395c901814cd522665e0acf1bc5f7fb07bc2a"
+  },
+  "model_slots_issued": 0
+}

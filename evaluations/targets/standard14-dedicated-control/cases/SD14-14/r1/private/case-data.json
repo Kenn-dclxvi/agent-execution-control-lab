@@ -1,0 +1,79 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-14",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+  "source_revision": "r2",
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "A02-C1",
+        "type": "script_routing",
+        "expected": "v4とvをsrc.app.entrypoints.v4_daily_mainへ接続する。"
+      },
+      {
+        "criterion_id": "A02-C2",
+        "type": "surrounding_invariant",
+        "expected": "周辺の経路を変更せず、廃止済み構成への互換処理を作らない。"
+      },
+      {
+        "criterion_id": "A02-C3",
+        "type": "command_and_drift",
+        "expected": "shell構文、TaskSpecまたは適用されるリポジトリ規則が要求する既存試験、最終差分の確認が成功し、初期状態との差分はrun.shだけである。TaskSpecにない特定コマンドは必須にしない。"
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r2",
+    "mode": "repository_state_terminal_command_and_contract_evidence",
+    "human_calibration_owner": "independent_contract_check",
+    "criteria": [
+      {
+        "criterion_id": "A02-C1",
+        "evidence_sources": [
+          "final_repository_state",
+          "script_routing_check"
+        ]
+      },
+      {
+        "criterion_id": "A02-C2",
+        "evidence_sources": [
+          "surrounding_route_invariant_check",
+          "final_drift_manifest"
+        ]
+      },
+      {
+        "criterion_id": "A02-C3",
+        "evidence_sources": [
+          "command_receipts",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      "bash -n run.sh",
+      "pytest tests/ -v",
+      "git diff --check"
+    ],
+    "success_rule": "保存済み証拠から全条件を満たす。リポジトリから一意に解決できる正規の起動先を利用者へ質問した場合は主要成果未達とする。"
+  },
+  "seed_operations": [
+    [
+      "run.sh",
+      "  v4|v)\n    module=\"src.app.entrypoints.v4_daily_main\"",
+      "  v4|v)\n    module=\"src.app.entrypoints.daily_main\""
+    ]
+  ],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "run.sh",
+      "mode": "100755",
+      "git_blob_sha1": "b97f4f916c25c6f17a74ef64bc9b153fc33f4bab"
+    }
+  ]
+}

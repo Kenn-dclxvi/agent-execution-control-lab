@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONのrunner-verifiedなisolated checkoutを対象とする。最初の調査前に現在のcheckout identityを記録し、git status --shortが空であることを確認する。runnerのstart-identity gateがfailed、または未コミット変更があれば調査せず停止する。",
+  "task_kind_goal_and_done_condition": "read-only entrypoint inventory review。src/AGENTS.mdとsrc/app/entrypoints配下を確認し、現行daily、monthly、weeklyの各正規entrypoint、そのmain functionが呼び出すengine、retired daily/collection entrypointの現行srcでの不存在を表形式で報告する。F10-C1: 3つの正規entrypointについてpath、main function、engineを根拠path付きで示す。F10-C2: authorityが定める正規commandとretired 2 pathの不存在を根拠付きで示す。F10-C3: repositoryに一切の差分を作らない。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集許可pathはない。src/app/entrypoints/v4_daily_main.py、monthly_main.py、weekly_main.py、src/AGENTS.mdと必要なdirectory listingだけをread-onlyで確認する。file作成、code、tests、docs、設定、依存関係の変更は禁止する。",
+  "validation_conditions_and_non_machine_risk": "F10-C1は各fileのimportとmain function内のengine invocationを直接確認する。F10-C2はsrc/AGENTS.mdと対象pathの存在確認で判定する。F10-C3は終了時のgit status --shortが開始時と同じ空であることを確認する。推測したentrypoint、実行していない動作、legacy側の内容を現行srcの事実として報告しない。non_machine_risk=response-quality、owner=independent response check。",
+  "read_edit_test_commit_push_merge_authorization": "repositoryと適用されるAGENTS.mdのread-only確認、file listing、git status確認を許可する。編集、test実行、application実行、commit、push、PR作成、merge、deploy、外部送信は許可しない。",
+  "constraints_and_required_recovery": "調査対象を指定pathとauthority確認に限定する。machine_rework_max=not_applicable、environment_recovery_max=not_applicable。開始identity不一致、未コミット変更、対象file欠落、またはauthorityとの矛盾を検出した場合は修正や範囲拡張をせず、観測事実と未完了のcriterion IDを報告して停止する。"
+}

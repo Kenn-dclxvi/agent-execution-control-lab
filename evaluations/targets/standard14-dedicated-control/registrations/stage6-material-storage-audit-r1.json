@@ -1,0 +1,1423 @@
+{
+  "schema_version": "standard14-stage6-material-and-storage-audit/r1",
+  "case_count": 14,
+  "criterion_count": 42,
+  "cases": [
+    {
+      "case_id": "SD14-01",
+      "criteria": [
+        "F01-C1",
+        "F01-C2",
+        "F01-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/domain/market_units_snapshot.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "tests/unit/test_market_units_snapshot.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "4e6910d08f49b0825beff08837178f5106cbd0f2",
+          "free_commit": "b3c11ff9fa84b7aaad7777c988ec2f0417caae87",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "ce4ef202dc80b94e3fdc469bc9350621b14c12eec413e70b9aa743270b06ed07"
+        },
+        "new": {
+          "seed_commit": "0123ccd49a1c66b7c6c7fb9b732bf928fa39f2ab",
+          "free_commit": "d9d72068c4be1497a1e36f66f9498e65035cbe16",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "da00fd95e81f506dcd8d91a709a4adfa1d776bb738ac529ef2bffe8620b794fd"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY/r3/trial-prompt-input.json": "a349a3d9415c4ab163352b654d8dd6ddf1fb74307dd9347d10ed49ff1ad35ae6",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-01/r1/trial-prompt-input.json": "a349a3d9415c4ab163352b654d8dd6ddf1fb74307dd9347d10ed49ff1ad35ae6",
+        "evaluations/cases/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY/r3/private/case-data.json": "f4019abd99d667519403320a6e42c9e988947b65dce855486245bd81713f12f1",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-01/r1/private/case-data.json": "b71f94d3aa1af56e88e6715c2562686825394c28f52c7f19f13c680d45cc48b8"
+      }
+    },
+    {
+      "case_id": "SD14-02",
+      "criteria": [
+        "F02-C1",
+        "F02-C2",
+        "F02-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/app/v4_engine.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/domain/collection_history_updater.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "tests/unit/test_v4_engine.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "tests/unit/test_collection_history_updater.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "b802eae75710d6c54b3250cc790b29a3ff56f675",
+          "free_commit": "60b97778f40969e3ad2d6ab66e5500e19c0a58cf",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "4a4f07165a34070c174321a397319f19bdf0b31189a6d41e862e1f1f7101b150"
+        },
+        "new": {
+          "seed_commit": "ea70e96c4a918e100e926a860797d652b254c9b4",
+          "free_commit": "3e4638de439ddebc571571f8f7da8e2ab95c8778",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "770b0dc4a8c3b3a682b6be9fde9227900454aab52f6b536163aabb79af75d2a2"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND/r1/trial-prompt-input.json": "73f3b34386012f4e417146babdf6d7d9535ff5370db637e3b154b51b74905592",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-02/r1/trial-prompt-input.json": "73f3b34386012f4e417146babdf6d7d9535ff5370db637e3b154b51b74905592",
+        "evaluations/cases/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND/r1/private/case-data.json": "6a9928546a9b50c4168b89ca038f06f06a0ecba717422222911818d248c3b387",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-02/r1/private/case-data.json": "1c766b1a5938034215676524cac7d9ddb63b646526e9cdd1431a049505c613b5"
+      }
+    },
+    {
+      "case_id": "SD14-03",
+      "criteria": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/infra/context_repository.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "tests/unit/test_atomic_save.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "895d60764990f02f25c6a6c81babbcb1e0ad5ffa",
+          "free_commit": "322de5ef6554e5aac5ba84f1dbacd837009ad9ab",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "df980a7b7bcbd078e91a19866755d1a421f931bab7cf3f2ce0634350c77c1874"
+        },
+        "new": {
+          "seed_commit": "f347ec354b7b5272a0b8a70d1b8b6144a6b282fc",
+          "free_commit": "ce6c905c0f7251e36f50ed5da540009207511c2b",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "887ec33ccd8b545dcb5da8714d4dbc336d137a22c36a3aed183206ecf3e308f2"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F03-ATOMIC-CONTEXT-CLEANUP/r2/trial-prompt-input.json": "82ccb1925c3a2f2412b9e079e40d0d8429e3e1383d13ea5e542969db8d683999",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-03/r1/trial-prompt-input.json": "82ccb1925c3a2f2412b9e079e40d0d8429e3e1383d13ea5e542969db8d683999",
+        "evaluations/cases/TC-F03-ATOMIC-CONTEXT-CLEANUP/r2/private/case-data.json": "e329fb27da353b73f03795a83637ada4a9889607562a9e71015d56e39a4e9740",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-03/r1/private/case-data.json": "b36b5cbd3611e3b39a2f2dba23abe187d812efe297f86204f45c5e1aa48cfc50"
+      }
+    },
+    {
+      "case_id": "SD14-04",
+      "criteria": [
+        "F04-C1",
+        "F04-C2",
+        "F04-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/web/market_units_editor/src/App.tsx": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/web/market_units_editor/package.json": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/web/market_units_editor/package-lock.json": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "36f594ae5d16f6ac930b0c5afe12335c7624c020",
+          "free_commit": "f2dec7c1cd4ebd7c1df6f4532b712be993f972c8",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "aaac5f1c4cb6261cdf60d211ad5c4d49303a83457ddef45b270d2c6a21baa377"
+        },
+        "new": {
+          "seed_commit": "ab41a3741538cf709091616fe607287facb3a4aa",
+          "free_commit": "8722f9ba8a16dddb9fb50782813e2def514e2d66",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "1d22bbc74e853511b1a955453194efe2e00f0b99eb20f41cde31931bef157ffd"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY/r2/trial-prompt-input.json": "42c0b5a40256bca9c73240026339b8b4cec6822667308d383bb7d8b206323e35",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-04/r1/trial-prompt-input.json": "42c0b5a40256bca9c73240026339b8b4cec6822667308d383bb7d8b206323e35",
+        "evaluations/cases/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY/r2/private/case-data.json": "d9fe4c9a7937c4ecea39e53eab478fd6671952caffb81b677591d701ae812d88",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-04/r1/private/case-data.json": "e2cbe1d8fca069e6c72bdef96bdf73a6fe7e6358151cbd3953ab9758815ced6c"
+      }
+    },
+    {
+      "case_id": "SD14-05",
+      "criteria": [
+        "F05-C1",
+        "F05-C2",
+        "F05-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/domain/universal_ingester.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+          "free_commit": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "878afee1005738bc730725af2544afd00fa7a5cacc8f684b14320ba8875da4f1"
+        },
+        "new": {
+          "seed_commit": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+          "free_commit": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "29349a9d25447b6c14ad5be0b63600756aa00af997ec4e43ae9da9ed4b7ebdb5"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F05-CLARIFY-UNITS-MODE/r1/trial-prompt-input.json": "8afb88e02d994a179ace0a8c032d8af2c61bed9a06343c8ecdebfae7339ac326",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-05/r1/trial-prompt-input.json": "8afb88e02d994a179ace0a8c032d8af2c61bed9a06343c8ecdebfae7339ac326",
+        "evaluations/cases/TC-F05-CLARIFY-UNITS-MODE/r1/private/case-data.json": "eeb8461aec037232f7ca80efd72ef7e8d638b19fc0cbc6a63b3ce539cd511f52",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-05/r1/private/case-data.json": "9e16f2f5cd038779259cc66f0dddb6f4b2b69e0d0b6dc53ef94ea03e0e339c3f"
+      }
+    },
+    {
+      "case_id": "SD14-06",
+      "criteria": [
+        "F05-OS-C1",
+        "F05-OS-C2",
+        "F05-OS-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "README.md": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+          "free_commit": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "878afee1005738bc730725af2544afd00fa7a5cacc8f684b14320ba8875da4f1"
+        },
+        "new": {
+          "seed_commit": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+          "free_commit": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "29349a9d25447b6c14ad5be0b63600756aa00af997ec4e43ae9da9ed4b7ebdb5"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY/r1/trial-prompt-input.json": "87835fb069b7d2c93e2aad0ecb34d2f97ed96354b18484c0aaf5c350df304f8e",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-06/r1/trial-prompt-input.json": "87835fb069b7d2c93e2aad0ecb34d2f97ed96354b18484c0aaf5c350df304f8e",
+        "evaluations/cases/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY/r1/private/case-data.json": "cc1f8a3f8f148a3cce41e1cf2565c76bbcc57b6b738cfea006d3c3c7671eee8f",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-06/r1/private/case-data.json": "89d23ea3e73364ffa3629828ae52e7d1759a9f58bcd58f1372f5ac94ee9da322"
+      }
+    },
+    {
+      "case_id": "SD14-07",
+      "criteria": [
+        "F06-C1",
+        "F06-C2",
+        "F06-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "tests/unit/test_market_units_snapshot.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "90dc14b47c5419e8158f3027437cd297d2f4b9ed",
+          "free_commit": "90aaf8151662e76713f55f860037768b11e1f506",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "b4d7c32685597f8067a6a219436c1a38f32bec72a2263c77f64d80400731fc01"
+        },
+        "new": {
+          "seed_commit": "4a5b1a4a14459732ba57cf4567868b821455a781",
+          "free_commit": "3a9891e0e2586467fb5b6ced93d4dcfeb8f55918",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "26b600659acda898cb1bf5991eb750a5bcbe9d5f71a329ce1765d3709319323e"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT/r2/trial-prompt-input.json": "38bb19c8b4df5cf87c8e8542c3e64972ea994a56b79c20bca110d8d6acbde371",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-07/r1/trial-prompt-input.json": "38bb19c8b4df5cf87c8e8542c3e64972ea994a56b79c20bca110d8d6acbde371",
+        "evaluations/cases/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT/r2/private/case-data.json": "23eece51bcd47fadc6b0274e80c9786804e7b40dd3e12addd477a5fc58b94ff5",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-07/r1/private/case-data.json": "109c806f49c37e18cd16d9837e2fc21ff048014bffb42cb590b55f6b6a901bfa"
+      }
+    },
+    {
+      "case_id": "SD14-08",
+      "criteria": [
+        "F07-C1",
+        "F07-C2",
+        "F07-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "run.sh": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "5b17df6fc5c86be5614c37e0883277d52045c0cd",
+          "free_commit": "0d03226e478e77a300c739ab722b0190f716c557",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "e732d8c870ebab5d8313386fa5dcdd0e149f387af7932665aab8d9d5498e32fb"
+        },
+        "new": {
+          "seed_commit": "3971369ed4ae6065ae7d2aff92fe0dbf88e8a228",
+          "free_commit": "4590d6eacbb7fd9110247f0e3a99db5668a8cb39",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "d34ed53d321aa96c7d2a24af98315f8cd0e8becbf8428717934b7dbd6d3c079f"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F07-CANONICAL-V4-RUNNER/r2/trial-prompt-input.json": "5d503fc1c18ec4d8f0b912dfa97ad1a8a0896c3ad44d47ff4267b2a753810e12",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-08/r1/trial-prompt-input.json": "5d503fc1c18ec4d8f0b912dfa97ad1a8a0896c3ad44d47ff4267b2a753810e12",
+        "evaluations/cases/TC-F07-CANONICAL-V4-RUNNER/r2/private/case-data.json": "f47421c8bd09ef33e5fbf51921f31fe849dfda0ccb5a5a0018845d80cc9aa3d5",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-08/r1/private/case-data.json": "d513734ba9b7e11cc7df3b2049cbb4d4da0b31c985cb808a1c6e5e691f53c16e"
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "criteria": [
+        "F07-P-C1",
+        "F07-P-C2",
+        "F07-P-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "requirements.in": {
+          "old_present": true,
+          "new_present": true
+        },
+        "requirements.txt": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "07ca562d4e70d3b4f5e451b2098259a0d26e9fcb",
+          "free_commit": "e6640693d08002618bb2518d9d093ae6426891d0",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "3458b5f7f890fe6b7dd0d1268080f116228c7e16f1f024439a0bee14ed8f4c6c"
+        },
+        "new": {
+          "seed_commit": "d576abe742ce4311f0f32e9333f2e6731f58ca38",
+          "free_commit": "b2831e4e2c249130dd874142fce969a7d1ee5281",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "23ca3b047ac7f93415b36720d8b7b434591206725359fd710f0f01e38f19604a"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F07-DEPENDENCY-PROVENANCE-PAIR/r1/trial-prompt-input.json": "0f1032c189da1bed0010b6201897147e6906bdc19e32e0bc4fa6973db732de19",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-09/r1/trial-prompt-input.json": "0f1032c189da1bed0010b6201897147e6906bdc19e32e0bc4fa6973db732de19",
+        "evaluations/cases/TC-F07-DEPENDENCY-PROVENANCE-PAIR/r1/private/case-data.json": "297339084a5020a1cdc626ba18544ca840fd3272ebbe313d3dc961be4eee824a",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-09/r1/private/case-data.json": "ac7657507d18ed9a007ad914f1bb4794bd3a830888155c65e7d80532f05c8acd"
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "criteria": [
+        "F08-C1",
+        "F08-C2",
+        "F08-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "docs/reference/system.md": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/weekly_main.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/monthly_main.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/AGENTS.md": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "9708b581e627027b97acc275369b8c517898e17d",
+          "free_commit": "ea2f7792bebe0f50a9f4dc736ea5ab69d2db7ae1",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "49200c9b74d4e75896fb7a44a9c61f6fec4ac1e609b4e4228e6692c2be25d3b1"
+        },
+        "new": {
+          "seed_commit": "8c64b3a8199b7d40c758c3707f7e091927cf4947",
+          "free_commit": "49cf3734b5481a652d658e315d7e0d787c7b45d2",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "91bba1e889b317b5c7593ea12bc8d09f4f34a648857c16dadee5820b4a0158d6"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F08-CANONICAL-CLI-REFERENCE-SYNC/r1/trial-prompt-input.json": "728f68125b0d3751747d723a2a59802efda4953565213b10bc8e12ace00213e7",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-10/r1/trial-prompt-input.json": "728f68125b0d3751747d723a2a59802efda4953565213b10bc8e12ace00213e7",
+        "evaluations/cases/TC-F08-CANONICAL-CLI-REFERENCE-SYNC/r1/private/case-data.json": "0072e64283f8fc037223d671488e0784935af45e9fad214dfd77edf1077d00a7",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-10/r1/private/case-data.json": "5fabbf66fe70c7a5e14a3c69b6341a3b7a5cf1c5dc10af5dafb3757637f6e7ec"
+      }
+    },
+    {
+      "case_id": "SD14-11",
+      "criteria": [
+        "F10-C1",
+        "F10-C2",
+        "F10-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/AGENTS.md": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/v4_daily_main.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/monthly_main.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/weekly_main.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+          "free_commit": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "878afee1005738bc730725af2544afd00fa7a5cacc8f684b14320ba8875da4f1"
+        },
+        "new": {
+          "seed_commit": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+          "free_commit": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "29349a9d25447b6c14ad5be0b63600756aa00af997ec4e43ae9da9ed4b7ebdb5"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F10-ENTRYPOINT-INVENTORY-REVIEW/r1/trial-prompt-input.json": "11120c864420bc37fe76b477b0c7856c25adf2b2148fe82487704aec435dd0e7",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-11/r1/trial-prompt-input.json": "11120c864420bc37fe76b477b0c7856c25adf2b2148fe82487704aec435dd0e7",
+        "evaluations/cases/TC-F10-ENTRYPOINT-INVENTORY-REVIEW/r1/private/case-data.json": "aaa5ea073fbf2b6e75ee212d4d75a3be65fb48d6c1dd4ae3492777f18f09e566",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-11/r1/private/case-data.json": "eeb0d098687ff80b9ae38ba1a9a1f7f944bdd8b8929c03cba1d2238d44577d01"
+      }
+    },
+    {
+      "case_id": "SD14-12",
+      "criteria": [
+        "F10-R-C1",
+        "F10-R-C2",
+        "F10-R-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/AGENTS.md": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/entrypoints/monthly_main.py": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/app/monthly_engine.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "a53601614b41f52633f1d75e77c72861a0f0f1c8",
+          "free_commit": "6a16bd19d1415ede12f11b71f79642c53698a265",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "28f6f8a615e492d83789e05fba85f9953cabe201a058cd4529a8827acb179dc4"
+        },
+        "new": {
+          "seed_commit": "8957a1a517c63da9e6af58f9f56d5b1c80e91553",
+          "free_commit": "f56ae0a4b0aa88a6e5ca61412d7846251c9b64f6",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "8c9f3159fbd178b83f57d6b24754f94e2cae3d49eaadfc1924563f1c56396621"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3/trial-prompt-input.json": "1111a935214909fc5253f77680e5749a05b8969c469c6f1e1166772a3faad1d7",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-12/r1/trial-prompt-input.json": "1111a935214909fc5253f77680e5749a05b8969c469c6f1e1166772a3faad1d7",
+        "evaluations/cases/TC-F10-MONTHLY-FORMAT-TEST-REVIEW/r3/private/case-data.json": "2726463b12b3896ee2030ec8f6ecb0490ddbc1b36c9513b4c074596b9f21587c",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-12/r1/private/case-data.json": "9aa30faa038791c83f4bea8a1c308503f764af3a6811b0ece0a235e1078d4a3b"
+      }
+    },
+    {
+      "case_id": "SD14-13",
+      "criteria": [
+        "A01-C1",
+        "A01-C2",
+        "A01-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "src/domain/universal_ingester.py": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+          "free_commit": "d4cda2f7f537829896b6e7a56c8c4f7747987279",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "878afee1005738bc730725af2544afd00fa7a5cacc8f684b14320ba8875da4f1"
+        },
+        "new": {
+          "seed_commit": "81984aada7acdd2ad35bf74d1e3ecb3c89f659e1",
+          "free_commit": "ca937ad05ef27ee698967fa57c7cee8db674e933",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "29349a9d25447b6c14ad5be0b63600756aa00af997ec4e43ae9da9ed4b7ebdb5"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-A01-LATENT-MODE-POLICY/r2/trial-prompt-input.json": "70cc8816b66fcda3505d0fc5cc5b71d4d01d5b2b9294c488ba75e2a9b76f28e1",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-13/r1/trial-prompt-input.json": "70cc8816b66fcda3505d0fc5cc5b71d4d01d5b2b9294c488ba75e2a9b76f28e1",
+        "evaluations/cases/TC-A01-LATENT-MODE-POLICY/r2/private/case-data.json": "4209e8c93095ef353b96dc538037ec4d1eb87654d823645d9bf05fec13cccfaa",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-13/r1/private/case-data.json": "560694c3f51b3776b3f75e94c5af07949ba81cff93cf782340c9f5f50f3c3926"
+      }
+    },
+    {
+      "case_id": "SD14-14",
+      "criteria": [
+        "A02-C1",
+        "A02-C2",
+        "A02-C3"
+      ],
+      "original_task_json_same": true,
+      "delivered_task_same_except_declared_monthly_seed": true,
+      "original_42_criterion_semantics_same": true,
+      "authority": {
+        "AGENTS.md": {
+          "old": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "same": true
+        },
+        "src/AGENTS.md": {
+          "old": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "new": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+          "same": true
+        },
+        "tests/AGENTS.md": {
+          "old": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "new": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+          "same": true
+        },
+        "docs/AGENTS.md": {
+          "old": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "new": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+          "same": true
+        }
+      },
+      "required_source_paths": {
+        "run.sh": {
+          "old_present": true,
+          "new_present": true
+        },
+        "src/AGENTS.md": {
+          "old_present": true,
+          "new_present": true
+        }
+      },
+      "source_relationship_acceptance_receipt": "registrations/stage3-verdict-r4.json",
+      "source_relationship_accepted": true,
+      "source_bytes_or_path_count_not_used_as_equivalence_proof": true,
+      "start_receipt_keyset_same": false,
+      "start_receipt_keys_only_old": [],
+      "start_receipt_keys_only_dedicated": [
+        "git_objects_allocated_bytes",
+        "git_objects_logical_bytes"
+      ],
+      "common_identity_fields_present": true,
+      "git_start_relationship": {
+        "old": {
+          "seed_commit": "5b17df6fc5c86be5614c37e0883277d52045c0cd",
+          "free_commit": "0d03226e478e77a300c739ab722b0190f716c557",
+          "seed_to_free_numstat": "0\t58\tAGENTS.md\n",
+          "seed_to_free_numstat_sha256": "bebc006f64f44dbf89d85a2c23ca82a930bcdc8ba1beacfc80be45432759989d",
+          "root_at_seed_bytes": 5980,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "e732d8c870ebab5d8313386fa5dcdd0e149f387af7932665aab8d9d5498e32fb"
+        },
+        "new": {
+          "seed_commit": "3971369ed4ae6065ae7d2aff92fe0dbf88e8a228",
+          "free_commit": "4590d6eacbb7fd9110247f0e3a99db5668a8cb39",
+          "seed_to_free_numstat": "",
+          "seed_to_free_numstat_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "root_at_seed_bytes": 0,
+          "root_at_free_bytes": 0,
+          "commit_log_sha256": "d34ed53d321aa96c7d2a24af98315f8cd0e8becbf8428717934b7dbd6d3c079f"
+        }
+      },
+      "empirical_difficulty_equivalence": "unproved",
+      "source_hashes": {
+        "evaluations/cases/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2/trial-prompt-input.json": "90d4539dcf669f287fadd85e8f2d56e39df61a74048eb6b5b0f349993bf311e9",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-14/r1/trial-prompt-input.json": "90d4539dcf669f287fadd85e8f2d56e39df61a74048eb6b5b0f349993bf311e9",
+        "evaluations/cases/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2/private/case-data.json": "65cf15623d2ab0c9aa5c5cbd75e469cf20163d6bff90444a3c6ae66b502592a4",
+        "evaluations/targets/standard14-dedicated-control/cases/SD14-14/r1/private/case-data.json": "d167fbcbb27fc426a678ad6010e192d2ec3e87d2a896de8f5bbdd58bfd0341d1"
+      }
+    }
+  ],
+  "normalized_storage": [
+    {
+      "reasoning_effort": "low",
+      "scope": "28個の完了した個別実行directory。workspace、Git objects、成果・cache・保存証拠を含み、実行directory外の準備原本と共通依存は除外。",
+      "measurements": {
+        "old": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 143914327,
+              "allocated_bytes_stat_blocks": 164356096,
+              "files": 2188
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 418863633,
+              "allocated_bytes_stat_blocks": 434012160,
+              "files": 7151
+            },
+            "workspace_caches": {
+              "logical_bytes": 15510443,
+              "allocated_bytes_stat_blocks": 17600512,
+              "files": 978
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 253506726,
+              "allocated_bytes_stat_blocks": 293748736,
+              "files": 15180
+            },
+            "git_metadata_other": {
+              "logical_bytes": 1538068,
+              "allocated_bytes_stat_blocks": 3440640,
+              "files": 616
+            },
+            "git_objects": {
+              "logical_bytes": 439422688,
+              "allocated_bytes_stat_blocks": 440156160,
+              "files": 232
+            }
+          },
+          "logical_bytes": 1272755885,
+          "allocated_bytes_stat_blocks": 1353314304,
+          "physical_exclusive_or_peak": null
+        },
+        "dedicated": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 129219420,
+              "allocated_bytes_stat_blocks": 145776640,
+              "files": 2290
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 4824957,
+              "allocated_bytes_stat_blocks": 8601600,
+              "files": 1204
+            },
+            "workspace_caches": {
+              "logical_bytes": 1371506,
+              "allocated_bytes_stat_blocks": 2060288,
+              "files": 251
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 240383052,
+              "allocated_bytes_stat_blocks": 280616960,
+              "files": 15176
+            },
+            "git_metadata_other": {
+              "logical_bytes": 905688,
+              "allocated_bytes_stat_blocks": 2981888,
+              "files": 644
+            },
+            "git_objects": {
+              "logical_bytes": 1597912,
+              "allocated_bytes_stat_blocks": 8355840,
+              "files": 1844
+            }
+          },
+          "logical_bytes": 378302535,
+          "allocated_bytes_stat_blocks": 448393216,
+          "physical_exclusive_or_peak": null
+        }
+      },
+      "retained_logical_reduction_percent": 70.27689760004527,
+      "apfs_exclusive_reduction_certified": false,
+      "peak_reduction_certified": false
+    },
+    {
+      "reasoning_effort": "medium",
+      "scope": "28個の完了した個別実行directory。workspace、Git objects、成果・cache・保存証拠を含み、実行directory外の準備原本と共通依存は除外。",
+      "measurements": {
+        "old": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 131989233,
+              "allocated_bytes_stat_blocks": 151846912,
+              "files": 2182
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 418866200,
+              "allocated_bytes_stat_blocks": 434020352,
+              "files": 7150
+            },
+            "workspace_caches": {
+              "logical_bytes": 15726913,
+              "allocated_bytes_stat_blocks": 17907712,
+              "files": 996
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 253511262,
+              "allocated_bytes_stat_blocks": 293748736,
+              "files": 15180
+            },
+            "git_metadata_other": {
+              "logical_bytes": 1538068,
+              "allocated_bytes_stat_blocks": 3440640,
+              "files": 616
+            },
+            "git_objects": {
+              "logical_bytes": 439422688,
+              "allocated_bytes_stat_blocks": 440156160,
+              "files": 232
+            }
+          },
+          "logical_bytes": 1261054364,
+          "allocated_bytes_stat_blocks": 1341120512,
+          "physical_exclusive_or_peak": null
+        },
+        "dedicated": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 120454254,
+              "allocated_bytes_stat_blocks": 135151616,
+              "files": 2294
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 4825109,
+              "allocated_bytes_stat_blocks": 8605696,
+              "files": 1204
+            },
+            "workspace_caches": {
+              "logical_bytes": 1229561,
+              "allocated_bytes_stat_blocks": 1830912,
+              "files": 222
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 240387612,
+              "allocated_bytes_stat_blocks": 280616960,
+              "files": 15176
+            },
+            "git_metadata_other": {
+              "logical_bytes": 905688,
+              "allocated_bytes_stat_blocks": 2981888,
+              "files": 644
+            },
+            "git_objects": {
+              "logical_bytes": 1597912,
+              "allocated_bytes_stat_blocks": 8355840,
+              "files": 1844
+            }
+          },
+          "logical_bytes": 369400136,
+          "allocated_bytes_stat_blocks": 437542912,
+          "physical_exclusive_or_peak": null
+        }
+      },
+      "retained_logical_reduction_percent": 70.70704114386619,
+      "apfs_exclusive_reduction_certified": false,
+      "peak_reduction_certified": false
+    },
+    {
+      "reasoning_effort": "high",
+      "scope": "28個の完了した個別実行directory。workspace、Git objects、成果・cache・保存証拠を含み、実行directory外の準備原本と共通依存は除外。",
+      "measurements": {
+        "old": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 166032884,
+              "allocated_bytes_stat_blocks": 189366272,
+              "files": 2196
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 418869835,
+              "allocated_bytes_stat_blocks": 434028544,
+              "files": 7150
+            },
+            "workspace_caches": {
+              "logical_bytes": 15313899,
+              "allocated_bytes_stat_blocks": 17350656,
+              "files": 960
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 253508234,
+              "allocated_bytes_stat_blocks": 293748736,
+              "files": 15180
+            },
+            "git_metadata_other": {
+              "logical_bytes": 1538068,
+              "allocated_bytes_stat_blocks": 3440640,
+              "files": 616
+            },
+            "git_objects": {
+              "logical_bytes": 439422688,
+              "allocated_bytes_stat_blocks": 440156160,
+              "files": 232
+            }
+          },
+          "logical_bytes": 1294685608,
+          "allocated_bytes_stat_blocks": 1378091008,
+          "physical_exclusive_or_peak": null
+        },
+        "dedicated": {
+          "run_count": 28,
+          "groups": {
+            "saved_evidence_and_controller": {
+              "logical_bytes": 142516725,
+              "allocated_bytes_stat_blocks": 165781504,
+              "files": 2278
+            },
+            "workspace_visible_files": {
+              "logical_bytes": 4825646,
+              "allocated_bytes_stat_blocks": 8609792,
+              "files": 1204
+            },
+            "workspace_caches": {
+              "logical_bytes": 1162844,
+              "allocated_bytes_stat_blocks": 1744896,
+              "files": 213
+            },
+            "workspace_dependencies_and_builds": {
+              "logical_bytes": 240384588,
+              "allocated_bytes_stat_blocks": 280616960,
+              "files": 15176
+            },
+            "git_metadata_other": {
+              "logical_bytes": 905688,
+              "allocated_bytes_stat_blocks": 2981888,
+              "files": 644
+            },
+            "git_objects": {
+              "logical_bytes": 1597912,
+              "allocated_bytes_stat_blocks": 8355840,
+              "files": 1844
+            }
+          },
+          "logical_bytes": 391393403,
+          "allocated_bytes_stat_blocks": 468090880,
+          "physical_exclusive_or_peak": null
+        }
+      },
+      "retained_logical_reduction_percent": 69.76923196013468,
+      "apfs_exclusive_reduction_certified": false,
+      "peak_reduction_certified": false
+    }
+  ],
+  "old_shared_prepared14_retained_storage": {
+    "root": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-old-new-paired-n2-20261004-r1/fixed-fixtures",
+    "groups": {
+      "saved_evidence_and_controller": {
+        "logical_bytes": 428441190,
+        "allocated_bytes_stat_blocks": 437297152,
+        "files": 3980
+      }
+    },
+    "retained_logical_bytes": 428441190,
+    "allocated_bytes_stat_blocks": 437297152,
+    "peak_bytes": null,
+    "apfs_exclusive_physical_bytes": null,
+    "shared_dependencies_excluded": true,
+    "snapshot": "終了後の現物保持量。削除・推計・APFS共有分の補正なし。"
+  },
+  "model_slots": 0,
+  "preflight_schema_compatibility_incomplete": true,
+  "full_comparative_compatibility_certified": false,
+  "source_relationships_preserved_per_accepted_stage3": true,
+  "difficulty_certified": false,
+  "findings": [
+    "全14件の元TaskSpec JSONと42条件原文・非root正本は一致。実配送は月次固定seedの宣言済み置換だけ。",
+    "旧側のseedからFree開始までのroot削除は履歴の内容差分として見える。専用側は内容差分がない。開始履歴の判断負荷は同等と認定しない。",
+    "開始gateの明示的成否値は旧新どちらの開始記録にもなく、成功・失敗のモデル解釈が分かれる。専用開始記録だけにGit容量2項目が存在する。前回のschema一致の記述は誤りであり、完全な比較互換性は認定しない。",
+    "終了後の同じ個別実行領域における論理保持量は比較できる。準備原本、APFS共有物理量、実行中ピークはその比較へ混ぜない。"
+  ]
+}

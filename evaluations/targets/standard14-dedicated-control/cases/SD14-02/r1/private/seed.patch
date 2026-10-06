@@ -1,0 +1,22 @@
+--- a/src/app/v4_engine.py
++++ b/src/app/v4_engine.py
+@@ -5,7 +5,7 @@
+         self.timeline = timeline or TimelineController()
+     def run(self, target_date, missing_keys=()):
+         us_market_date = self.timeline.get_us_market_context(target_date).get('trading_date')
+-        primary = self.updater.update(target_date=target_date, us_market_date=us_market_date)
++        primary = self.updater.update()
+         retry_keys = set(missing_keys)
+         if any(a['key'] in retry_keys and a['asset_class'] in {'US_STOCK','COMMODITIES'} for a in self.updater.assets):
+             retry_keys.update(a['key'] for a in self.updater.assets if a['asset_class']=='FX')
+--- a/src/domain/collection_history_updater.py
++++ b/src/domain/collection_history_updater.py
+@@ -13,7 +13,7 @@
+         for asset in self.assets:
+             if only_keys is not None and asset['key'] not in only_keys:
+                 continue
+-            market_end = self._resolve_market_end_date(asset['asset_class'], target_date, us_market_date, end_date)
++            market_end = end_date
+             exclusive_end = (date.fromisoformat(market_end) + timedelta(days=1)).isoformat() if market_end else None
+             records.append(self.fetch(asset['key'], end=exclusive_end))
+         return records

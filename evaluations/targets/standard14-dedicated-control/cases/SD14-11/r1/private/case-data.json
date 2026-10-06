@@ -1,0 +1,88 @@
+{
+  "schema_version": "standard14-dedicated-case/v1",
+  "case_id": "SD14-11",
+  "case_revision": "r1",
+  "visibility": "model_invisible",
+  "source_case": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+  "source_revision": "r1",
+  "oracle": {
+    "mode": "read_only_response_and_no_drift",
+    "reference_postimage_is_exclusive": true,
+    "assertions": [
+      {
+        "criterion_id": "F10-C1",
+        "type": "captured_response",
+        "expected": "The response lists the v4 daily, monthly, and weekly paths, main functions, and engine classes with path evidence."
+      },
+      {
+        "criterion_id": "F10-C2",
+        "type": "captured_response",
+        "expected": "The response cites src/AGENTS.md and reports daily_main.py and collection_main.py absent from current src."
+      },
+      {
+        "criterion_id": "F10-C3",
+        "type": "condition_relative_drift",
+        "expected": "The condition checkout remains clean relative to its own start state; no fixed current-baseline commit comparison is used."
+      }
+    ],
+    "reference_source": "fixture/base (model-invisible reference reconstruction)"
+  },
+  "grader": {
+    "status": "designed_not_implemented",
+    "contract_revision": "grader-contract-r1",
+    "mode": "repository_state_terminal_command_and_contract_evidence",
+    "human_calibration_owner": "independent_response_check",
+    "criteria": [
+      {
+        "criterion_id": "F10-C1",
+        "evidence_sources": [
+          "captured_terminal_response",
+          "source_inventory_check"
+        ]
+      },
+      {
+        "criterion_id": "F10-C2",
+        "evidence_sources": [
+          "captured_terminal_response",
+          "authority_and_absent_path_check"
+        ]
+      },
+      {
+        "criterion_id": "F10-C3",
+        "evidence_sources": [
+          "condition_relative_start_and_end_state",
+          "terminal_outcome"
+        ]
+      }
+    ],
+    "commands": [
+      "test ! -e src/app/entrypoints/daily_main.py",
+      "test ! -e src/app/entrypoints/collection_main.py",
+      "git status --short"
+    ],
+    "success_rule": "All listed criteria must pass from observed evidence; worker self-report alone is insufficient."
+  },
+  "seed_operations": [],
+  "legacy_reference_postimage_files": [
+    {
+      "path": "src/AGENTS.md",
+      "mode": "100644",
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565"
+    },
+    {
+      "path": "src/app/entrypoints/v4_daily_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "cd585db1ce7dbeeae7cee138e0630b7d4f11cd60"
+    },
+    {
+      "path": "src/app/entrypoints/monthly_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "b2c8c064662712179cf428f5fceb3ff95482e003"
+    },
+    {
+      "path": "src/app/entrypoints/weekly_main.py",
+      "mode": "100644",
+      "git_blob_sha1": "508d413ab01a51864a501b4d18446ebaf6929130"
+    }
+  ]
+}

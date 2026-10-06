@@ -1,0 +1,70 @@
+{
+  "schema_version": "standard14-dedicated-stage4-startup-audit/r2",
+  "date": "2026-10-04",
+  "ready": false,
+  "model_slots_issued": 0,
+  "inference_turns_started": 0,
+  "measurement_completed": 0,
+  "probe_interface": "codex-cli 0.159.0 app-server stdio",
+  "probe_methods": [
+    "initialize",
+    "initialized",
+    "config/read",
+    "thread/start"
+  ],
+  "turn_start_called": false,
+  "exec_dispatch_called": false,
+  "fixed_executor_not_modified": true,
+  "fixed_catalog": {
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/astra-old-a01-isolated-n20-20261003-r1/authentication-source/models_cache.json",
+    "sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+    "expected_sha256": "e7f386c6adaac4f7754464150107ada16c1dea09e9bca3fcd365aa32a5dd3b1e",
+    "models_sha256": "7d60e85e831ee3fe1ceae2e26d3c1a5c9839f8c599c786f8d6f4340a6648a406"
+  },
+  "startup_catalog": {
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/startup-home-r2/models_cache.json",
+    "sha256": "687c7c03b9a3e8175616b9d3247c3250de72843fcf6ec66c43b6eb08d2a171fe",
+    "models_sha256": "b7e53a36cd8c6c7291a87149a9125c6c1fec00ce16805d46b3fb439bd8239e02"
+  },
+  "changed_top_level_keys": [
+    "etag",
+    "fetched_at",
+    "models"
+  ],
+  "model_changes": [
+    {
+      "slug": "gpt-5.5",
+      "old_present": true,
+      "new_present": true,
+      "changed_keys": [
+        "upgrade"
+      ]
+    }
+  ],
+  "astra_entry_unchanged": true,
+  "probe_effective_config": {
+    "model": "gpt-6-astra",
+    "reasoning": "low",
+    "approval_policy": "never",
+    "sandbox": "workspace-write",
+    "network_access": false,
+    "multi_agent_mode": "explicitRequestOnly",
+    "instruction_sources": []
+  },
+  "evidence": {
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/startup-stderr.txt": "357e04ca92b8a9822c1e3ae299f679a3d7cdbb60d619789b2286699fb680f5ca",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/startup-stderr-r2.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/startup-config-read-r2.json": "81c725e10279a71d2d445d9a19c6b56b6e824fe6050f481fbe184cc9c0d242d4",
+    "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/standard14-dedicated-low-n2-20261004-r1/startup-thread-start-r2.json": "dc6245c3a0b2c1375e40de394ac004bc1de44670e2be3c1ddd5c37dcc387eaba"
+  },
+  "auth_removed": true,
+  "scope_limit": "app-serverの起動確認であり、execの実配送そのものを観測した証拠ではない。execで同じ更新を行うことは未確認。モデル推論を伴う確認枠は発行していない。",
+  "dispatch_blocker": "固定一覧をコピーするだけでは起動後の固定を証明できない。固定exec経路の実配送を発行前に照合できていないためreadyにしない。",
+  "possible_resolution_not_applied": "model_catalog_jsonによる明示固定は公式設定に存在するが、固定executeのargvへ追加することは実行器の変更に該当するため今回適用しない。",
+  "remaining_preparation": [
+    "全28件の固定Layer 1・atomic pool・発行計画は未生成",
+    "各runのPython/Node解決先・空home・認証のみの個別照合は未実施",
+    "基本指示・developer・skills・tool・質問方式のexec配送照合は未成立"
+  ],
+  "historical_artifacts_overwritten": false
+}

@@ -1,0 +1,13 @@
+--- a/src/infra/context_repository.py
++++ b/src/infra/context_repository.py
+@@ -39,10 +39,6 @@
+                     json.dump(data, f, indent=2, ensure_ascii=False)
+                 os.replace(tmp_path, path)
+             except Exception:
+-                try:
+-                    os.unlink(tmp_path)
+-                except OSError:
+-                    pass
+                 raise
+             logger.info(f"[Parsing] Saved context cache to {os.path.basename(path)}")
+             return True

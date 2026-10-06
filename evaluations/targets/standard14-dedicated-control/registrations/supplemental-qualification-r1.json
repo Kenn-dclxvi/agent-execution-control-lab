@@ -1,0 +1,466 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "checks": [
+    {
+      "case_id": "SD14-01",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F01-C1": true,
+        "F01-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-02",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F02-C1": true,
+        "F02-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-03",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F03-C1": true,
+        "F03-C2": true,
+        "F03-C3": true
+      }
+    },
+    {
+      "case_id": "SD14-07",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F06-C1": true
+      }
+    },
+    {
+      "case_id": "SD14-08",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F07-C1": true,
+        "F07-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F07-P-C1": true,
+        "F07-P-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "F08-C1": true,
+        "F08-C2": true,
+        "F08-C3": true
+      }
+    },
+    {
+      "case_id": "SD14-14",
+      "variant": "actual_reference_artifact",
+      "criteria": {
+        "A02-C1": true,
+        "A02-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "declaration_only",
+      "criteria": {
+        "F07-P-C1": true,
+        "F07-P-C2": false
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "provenance_only",
+      "criteria": {
+        "F07-P-C1": false,
+        "F07-P-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "pin_changed",
+      "criteria": {
+        "F07-P-C1": true,
+        "F07-P-C2": false
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "duplicate_constraint",
+      "criteria": {
+        "F07-P-C1": false,
+        "F07-P-C2": true
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "weekly_only",
+      "criteria": {
+        "F08-C1": true,
+        "F08-C2": false,
+        "F08-C3": true
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "monthly_only",
+      "criteria": {
+        "F08-C1": false,
+        "F08-C2": true,
+        "F08-C3": true
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "legacy_removed",
+      "criteria": {
+        "F08-C1": true,
+        "F08-C2": true,
+        "F08-C3": false
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "source_changed",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F08-C1": true,
+          "F08-C2": true,
+          "F08-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-08",
+      "variant": "surrounding_route_changed",
+      "criteria": {
+        "F07-C1": true,
+        "F07-C2": false
+      }
+    },
+    {
+      "case_id": "SD14-14",
+      "variant": "default_changed",
+      "criteria": {
+        "A02-C1": true,
+        "A02-C2": false
+      }
+    },
+    {
+      "case_id": "SD14-01",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F01-C1": true,
+          "F01-C2": true,
+          "F01-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-01",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-02",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F02-C1": true,
+          "F02-C2": true,
+          "F02-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-02",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-03",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F03-C1": true,
+          "F03-C2": true,
+          "F03-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-03",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-04",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F04-C1": true,
+          "F04-C2": true,
+          "F04-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-04",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-05",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F05-C1": true,
+          "F05-C2": true,
+          "F05-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-06",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F05-OS-C1": true,
+          "F05-OS-C2": true,
+          "F05-OS-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-07",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F06-C1": true,
+          "F06-C2": true,
+          "F06-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-07",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-08",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F07-C1": true,
+          "F07-C2": true,
+          "F07-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-08",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F07-P-C1": true,
+          "F07-P-C2": true,
+          "F07-P-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "prohibited:resolver",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "prohibited:install",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "prohibited:test",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-09",
+      "variant": "prohibited:application",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F08-C1": true,
+          "F08-C2": true,
+          "F08-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "prohibited:resolver",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "prohibited:install",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "prohibited:test",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-10",
+      "variant": "prohibited:application",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-11",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F10-C1": true,
+          "F10-C2": true,
+          "F10-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-12",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "F10-R-C1": true,
+          "F10-R-C2": true,
+          "F10-R-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-13",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "A01-C1": false,
+          "A01-C2": false,
+          "A01-C3": false
+        },
+        "boundary_pass": false,
+        "observed_route": "clarification_stop",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-14",
+      "variant": "forbidden_drift",
+      "result": {
+        "valid": true,
+        "quality_score": 0,
+        "criteria": {
+          "A02-C1": true,
+          "A02-C2": true,
+          "A02-C3": true
+        },
+        "boundary_pass": false,
+        "observed_route": "completed",
+        "commands_pass": true
+      }
+    },
+    {
+      "case_id": "SD14-14",
+      "variant": "command_missing_failed_unknown_distinguished",
+      "detected": true
+    },
+    {
+      "case_id": "SD14-14",
+      "variant": "abstract_diff_evidence_without_hidden_command",
+      "accepted": true
+    }
+  ]
+}

@@ -1,0 +1,536 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "checks": [
+    {
+      "check": "equivalent_list",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "check": "wrong_message_regression",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "check": "equivalent_quote:SD14-08",
+      "actual": {
+        "F07-C1": true,
+        "F07-C2": true
+      },
+      "expected": {
+        "F07-C1": true,
+        "F07-C2": true
+      },
+      "pass": true
+    },
+    {
+      "check": "equivalent_quote:SD14-14",
+      "actual": {
+        "A02-C1": true,
+        "A02-C2": true
+      },
+      "expected": {
+        "A02-C1": true,
+        "A02-C2": true
+      },
+      "pass": true
+    },
+    {
+      "check": "wrong_v4_route",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "check": "wrong_surrounding_route",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "check": "partial_engine_criteria",
+      "actual": {
+        "F02-C1": true,
+        "F02-C2": false
+      },
+      "expected": {
+        "F02-C1": true,
+        "F02-C2": false
+      },
+      "pass": true
+    },
+    {
+      "check": "partial_engine_score",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "check": "independent_atomic:cleanup",
+      "actual": [
+        false,
+        true
+      ],
+      "expected": [
+        false,
+        true
+      ],
+      "pass": true
+    },
+    {
+      "check": "independent_atomic:return",
+      "actual": [
+        true,
+        false
+      ],
+      "expected": [
+        true,
+        false
+      ],
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-01",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-01",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-01",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-02",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-02",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-02",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-03",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-03",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-03",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-04",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-04",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-04",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-05",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-05",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-05",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-06",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-06",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-06",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-07",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-07",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-07",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-08",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-08",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-08",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-09",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-09",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-09",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-10",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-10",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-10",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-11",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-11",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-11",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-12",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-12",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-12",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-13",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-13",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-13",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "authority_edit_zero:SD14-14",
+      "actual": [
+        true,
+        0,
+        2
+      ],
+      "expected": [
+        true,
+        0,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "initial_mismatch_rejected:SD14-14",
+      "actual": "initial input identity mismatch",
+      "expected": "initial input identity mismatch",
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected:SD14-14",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    },
+    {
+      "check": "fixed_web_no_base_dependencies",
+      "actual": {
+        "F04-C1": true,
+        "F04-C2": true
+      },
+      "expected": {
+        "F04-C1": true,
+        "F04-C2": true
+      },
+      "pass": true
+    },
+    {
+      "check": "fixed_web_provenance",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "check": "independent_web_span",
+      "actual": {
+        "F04-C1": true,
+        "F04-C2": false
+      },
+      "expected": {
+        "F04-C1": true,
+        "F04-C2": false
+      },
+      "pass": true
+    },
+    {
+      "check": "independent_web_header",
+      "actual": {
+        "F04-C1": false,
+        "F04-C2": true
+      },
+      "expected": {
+        "F04-C1": false,
+        "F04-C2": true
+      },
+      "pass": true
+    },
+    {
+      "check": "faithful_missing_validation_score",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "check": "full_outcome_score",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "check": "rating_environment_not_quality",
+      "actual": [
+        false,
+        null,
+        "rating_environment_failure"
+      ],
+      "expected": [
+        false,
+        null,
+        "rating_environment_failure"
+      ],
+      "pass": true
+    },
+    {
+      "check": "missing_effect_witness_rejected",
+      "actual": "mixed criterion effect witness missing",
+      "expected": "mixed criterion effect witness missing",
+      "pass": true
+    }
+  ],
+  "test_source_sha256": "cf68a9d89d02582660654bd20de734d7c7795ca4fcf7e277923e41d917b68758",
+  "evidence_policy": "gate・独立応答・usageは合成。Python/shell/Reactの内容検査は実subprocess。モデル品質やKPIの実測ではない。"
+}

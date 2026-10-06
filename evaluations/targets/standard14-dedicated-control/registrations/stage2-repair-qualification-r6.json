@@ -1,0 +1,194 @@
+{
+  "all_pass": true,
+  "model_slots_issued": 0,
+  "checks": [
+    {
+      "check": "unrepaired:score",
+      "actual": [
+        true,
+        1
+      ],
+      "expected": [
+        true,
+        1
+      ],
+      "pass": true
+    },
+    {
+      "check": "unrepaired:retains_criterion",
+      "actual": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "expected": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "pass": true
+    },
+    {
+      "check": "unrepaired:no_edit",
+      "actual": [],
+      "expected": [],
+      "pass": true
+    },
+    {
+      "check": "unrepaired:start_equals_final",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "check": "unrepaired:existing_false_return",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "check": "partial:score",
+      "actual": [
+        true,
+        2
+      ],
+      "expected": [
+        true,
+        2
+      ],
+      "pass": true
+    },
+    {
+      "check": "partial:retains_criterion",
+      "actual": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "expected": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "pass": true
+    },
+    {
+      "check": "partial:cleanup_repaired",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "check": "partial:false_return_not_discarded",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "check": "validation_missing:score",
+      "actual": [
+        true,
+        3
+      ],
+      "expected": [
+        true,
+        3
+      ],
+      "pass": true
+    },
+    {
+      "check": "validation_missing:retains_criterion",
+      "actual": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "expected": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "pass": true
+    },
+    {
+      "check": "complete:score",
+      "actual": [
+        true,
+        4
+      ],
+      "expected": [
+        true,
+        4
+      ],
+      "pass": true
+    },
+    {
+      "check": "complete:retains_criterion",
+      "actual": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "expected": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "pass": true
+    },
+    {
+      "check": "complete:real_content",
+      "actual": {
+        "F03-C1": true,
+        "F03-C2": true,
+        "F03-C3": true
+      },
+      "expected": {
+        "F03-C1": true,
+        "F03-C2": true,
+        "F03-C3": true
+      },
+      "pass": true
+    },
+    {
+      "check": "forbidden:score",
+      "actual": [
+        true,
+        0
+      ],
+      "expected": [
+        true,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "check": "forbidden:retains_criterion",
+      "actual": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "expected": [
+        "F03-C1",
+        "F03-C2",
+        "F03-C3"
+      ],
+      "pass": true
+    },
+    {
+      "check": "postpacket_tamper_rejected",
+      "actual": "evidence changed after packet creation",
+      "expected": "evidence changed after packet creation",
+      "pass": true
+    }
+  ],
+  "source_sha256": "f7bf05792f5f5fd981e63e742cfd01afa90ef06f9f2b849b3af2e6054f3767d2",
+  "runtime_sources": {
+    "evidence_bridge_r6.py": "141be966ec9d738fa96977ba42d235ac2bd898d225df908f9b773bdd62082e6d",
+    "grader_r6.py": "ae23a3e85cd2f716e4c2f6a1810a61d4c377e87ba973b95722586a13d45e5594",
+    "execution_binding_r6.py": "a04f10bef6e61a1c6d0e3f8eb933a37b571554e9866f0b2b428e85961b6bd8cd",
+    "test_stage2_repair_r6.py": "f7bf05792f5f5fd981e63e742cfd01afa90ef06f9f2b849b3af2e6054f3767d2"
+  },
+  "evidence_policy": "応答・意味判定・gate・usage・時間は合成。固定seedと変更後のcleanup/False返却/成功時保存は実Python検査。モデル実測ではない。"
+}

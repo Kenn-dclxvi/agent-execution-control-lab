@@ -1,0 +1,49 @@
+{
+  "schema_version": "standard14-start-state-correspondence-contract/r1",
+  "target_id": "standard14-dedicated-control",
+  "objective": "全14ケースの要求・維持条件・判断材料・難しさを保った低コストな評価代替",
+  "scope": "開始状態の対応に必要な条件。完全な実行前ゲートの代替ではない",
+  "receipt_fields": {
+    "case_id": "str",
+    "run_id": "str",
+    "base_commit": "str",
+    "seed_commit": "str",
+    "free_commit": "str",
+    "manifest": "dict",
+    "authority": "dict",
+    "task_sha256": "str",
+    "executor_binding": "dict",
+    "git_objects_logical_bytes": "int",
+    "git_objects_allocated_bytes": "int"
+  },
+  "receipt_keyset_policy": "必須項目の集合と型を両側で完全一致させる。未宣言の追加項目も拒否する",
+  "exact_pair_fields": ["authority", "executor_binding"],
+  "mapped_pair_fields": {
+    "case_id": "固定済み工程3の元ケースと専用ケースの対応を使用する",
+    "run_id": "同じ推論設定とiterationを対応づける",
+    "base_commit": "原本と専用素材の実際の識別子を保持。偽装や同値化をしない",
+    "seed_commit": "各ケースの実際のseedと変更関係を保持する",
+    "free_commit": "各側の実際の開始コミット。seedとの祖先関係を検査する",
+    "manifest": "各側の固定素材を識別する。容量やパス数の一致を意味対応の代用にしない",
+    "task_sha256": "月次の宣言済み固定seed置換以外は同一の配送内容"
+  },
+  "material_diagnostic_fields": ["git_objects_logical_bytes", "git_objects_allocated_bytes"],
+  "material_diagnostic_value_policy": "同じ意味・型・測り方で記録するが、値は素材軸の測定量であり等値を要求しない",
+  "start_identity_predicates": [
+    "開始前のHEADがfree_commitと一致し、作業領域がcleanである証拠を発行前に保存する",
+    "base、seed、freeが実在し、固定した祖先関係と変更関係を満たす",
+    "開始manifest、authority、配送TaskSpecが固定入力へ一致する",
+    "開始記録の各項目を実物から生成し、宣言のtrueを証明に使わない"
+  ],
+  "history_correspondence_predicates": [
+    "モデルから取得可能なseedから開始までの変更、親関係、参照、コミット説明を事前に対応づける",
+    "旧root指示の削除と専用側の空変更の差を、無関係と仮定して除外しない",
+    "履歴の差を判断材料として保持する必要があるか、素材投影の許容差かを一次契約と証拠で確定する"
+  ],
+  "model_visible_gate_policy": "開始状態の判定は評価側の実物照合で行う。モデルへの開始許可文、正解、追加手順は導入しない",
+  "comparison_boundary": "旧新は別インスタンスの素材対応である。同一fixtureのプロンプト比較や同じatomic poolとして登録しない",
+  "historical_receipt_policy": "保存済みの結果・開始記録・発行前宣言を変更しない。発行後の診断で事前ゲートを追認しない",
+  "model_slots_authorized": 0,
+  "full_comparison_admitted": false,
+  "remaining_requirements": ["履歴の判断材料の対応確定", "完全な発行前照合", "難しさの同等性の実証", "品質を保持した同条件内のトークンと時間の低下"]
+}
