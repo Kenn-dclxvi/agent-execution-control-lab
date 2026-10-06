@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C276とFreeの6.1 Sol low／medium新規N=5（2026-10-06）](#sol61-c276-free-new-n5-20261006)
+
 - [旧A01の実読コード削減（2026-10-03）](#old-a01-read-input-reduction-20261003)
 - [旧A01の未参照資料削減r3（2026-10-03）](#old-a01-unread-projection-r3-20261003)
 - [旧A01の判断入力を保持した画像投影r2（2026-10-03）](#old-a01-exact-projection-r2-20261003)
@@ -102,6 +104,22 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="sol61-c276-free-new-n5-20261006"></a>
+
+## C276とFreeの6.1 Sol low／medium新規N=5（2026-10-06）
+
+[sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.md](sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.md)：4条件のStandard14全14ケース各N=5、計280件を新規実行した。全280件の個別スコアを記載。
+
+[free-lowの登録結果](ecf6ece4009149e384fb29ab8ea40d35.json)。
+
+[c276-lowの登録結果](e8614a2ea0f74cdbaf9fd9084c0ceeff.json)。
+
+[free-mediumの登録結果](3dd2e8bded274b5599ce72efaecd4a6a.json)。
+
+[c276-mediumの登録結果](ad917ff0063f4ae2a099242b3f0cea9a.json)。
+
+[sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.json](sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.json)、[sol61-c276-free-low-medium-standard14-new-n5_2026-10-06-low-comparison.json](sol61-c276-free-low-medium-standard14-new-n5_2026-10-06-low-comparison.json)、[sol61-c276-free-low-medium-standard14-new-n5_2026-10-06-medium-comparison.json](sol61-c276-free-low-medium-standard14-new-n5_2026-10-06-medium-comparison.json)。
 
 <a id="c276-sol61-low-new-n5-20261003"></a>
 
@@ -178,6 +196,19 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 [計測記録](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)と[条件照合・集計](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.json)に、Claude Code 2.1.284・`claude-opus-5-5` mediumでのStandard14各5回の結果を保存した。Codex系列とは互換比較しない独立系列である。
 
 [Control-Free](2916103610694207a868995a00b3fc13.json)、[C147](185c131d7b89451daffb63a98dc05ce9.json)、[C276](307322da5e59422b90df43387e75efd5.json)は各70件すべて有効で、Score 4は各67件。品質中央値は3条件とも96.43、全エージェントトークン中央値は1,153,853 / 1,218,798 / 1,119,238、経過時間中央値は505.21 / 471.84 / 513.48秒。利用上限による除外attemptは計423件で、同じ枠を再実行した。採用は未実施。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-free-comparison.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-free-comparison.json)。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-quality-audit.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-quality-audit.json)。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-c147-comparison.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-c147-comparison.json)。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-free-comparison.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-free-comparison.json)。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-quality-audit.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-quality-audit.json)。
+
+[claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-free-quality-audit.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-free-quality-audit.json)。
+
 
 <a id="c276-astra6-low-isolated-20260930"></a>
 
