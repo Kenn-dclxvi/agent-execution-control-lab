@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate12-route-cardinality-expanded12-global-m24-n5-r1.json`](../candidate12-route-cardinality-expanded12-global-m24-n5-r1.json)
 - [`candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate121-evidence-request-scope-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate121-evidence-request-scope-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate122-prechange-evidence-wave-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate147-information-closure-document-task-development-r3-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-task-development-r3-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-heldout-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-heldout-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-task-qualification-dev-r1-medium-m24-n3-cli0146.json`](../candidate147-information-closure-task-qualification-dev-r1-medium-m24-n3-cli0146.json)
-- [`candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json`](../candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json)

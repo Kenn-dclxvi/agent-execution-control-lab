@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C281のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c281-sol61-low-std14-20261007)
+
 - [C280のGPT-6.1 Sol Low・STD14 N=5（2026-10-07）](#c280-sol61-low-std14-20261007)
 
 - [Claude Code Opus 5.5 Control-Free・C276・C280（2026-10-06）](#claude-opus55-free-c276-c280-20261006)
@@ -110,6 +112,12 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c281-sol61-low-std14-20261007"></a>
+
+## C281のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[C281計測記録](c281-sol61-low-standard14-n5_2026-10-07.md)。70件すべて4点、除外・再試行0件。品質中央値100、全エージェントトークン中央値1,963,036、経過時間中央値571.86秒。[登録結果](a7ed99cf7b304acd81399b9fbc9dae18.json)、[機械可読記録](c281-sol61-low-standard14-n5_2026-10-07.json)、[C280互換比較](c281-sol61-low-standard14-n5_2026-10-07-c280-comparison.json)、[C276互換比較](c281-sol61-low-standard14-n5_2026-10-07-c276-comparison.json)、[品質監査](c281-sol61-low-standard14-n5_2026-10-07-quality-audit.json)。試験完了、採用は未判断。
 
 <a id="c280-sol61-low-std14-20261007"></a>
 

@@ -1,7 +1,8 @@
-# Profile index 541-593
+# Profile index 541-594
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate99-decision-evidence-boundary-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate99-decision-evidence-boundary-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
 - [`control-free-astra-high-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-high-old-a01-assets-reduced-n2-20261003-r1.json)
 - [`control-free-astra-high-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-high-old-a01-isolated-n20-20261003-r1.json)
 - [`control-free-astra-high-standard14-n5-cli0153-r1.json`](../control-free-astra-high-standard14-n5-cli0153-r1.json)

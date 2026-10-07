@@ -702,6 +702,8 @@
 
 ## 7. 完了済み研究記録
 
+- [Candidate281 実行制御4項の簡潔化](candidate281-execution-control-concise-design.md): 作成前に固定した設計記録。
+
 - [STD14の開始状態と履歴対応の最終判定 第1版](standard14-dedicated-stage7-final-verdict-r1.md)：Astra Highで契約案を判定。基本区分を受け入れ、履歴条件は第2版へ具体化。新素材・難しさ・低コスト認定とは分離。
 - [STD14の開始状態の比較契約案と局所照合 第1版](standard14-dedicated-stage7-start-state-report-r1.md)：Sol Mediumで契約案と84組の機械照合を実装。対応の最終確認は計画どおりAstra Highへ残す。
 

@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate32-compact-execution-control-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate32-compact-execution-control-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate33-worker-context-sufficiency-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate33-worker-context-sufficiency-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate34-owner-result-state-separation-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate34-owner-result-state-separation-owner-producer-v5-targeted2-global-m10-n5-r1.json`](../candidate34-owner-result-state-separation-owner-producer-v5-targeted2-global-m10-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate58-purpose-bound-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate58-purpose-bound-read-route-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate58-purpose-bound-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate58-purpose-bound-read-route-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate59-read-only-operation-batch-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate59-read-only-operation-batch-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate59-read-only-operation-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate59-read-only-operation-batch-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
