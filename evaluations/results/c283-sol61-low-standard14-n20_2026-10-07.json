@@ -1,0 +1,619 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "case_count": 14,
+  "iterations": 20,
+  "retained_runs": 70,
+  "added_valid_runs": 210,
+  "cumulative_valid_runs": 280,
+  "added_excluded_attempts": 0,
+  "score_counts": {
+    "4": 280
+  },
+  "added_score_counts": {
+    "4": 210
+  },
+  "result_id": "fd89bc9e0074474586951051202d52b5",
+  "result_content_sha256": "16ba7254ee5e10ea3372638d005e401e73564ee4d9123c4fce3fa3ee8200f687",
+  "median": {
+    "elapsed_seconds": 573.6954990614322,
+    "quality_score": 100.0,
+    "total_tokens": 2096732.0
+  },
+  "reference_n5_descriptive_differences": {
+    "c280": {
+      "reference_result_id": "794d02abe894456686eea22e9b6f0fed",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 537.745003539836,
+        "quality_score": 100.0,
+        "total_tokens": 2071746
+      },
+      "difference_percent": {
+        "total_tokens": 1.20603587505419,
+        "elapsed_seconds": 6.68541693273641
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    },
+    "c282": {
+      "reference_result_id": "b9555c4df4584e988c5e1837c2e251d9",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 562.1222122499021,
+        "quality_score": 100.0,
+        "total_tokens": 2144337
+      },
+      "difference_percent": {
+        "total_tokens": -2.2200335115236114,
+        "elapsed_seconds": 2.0588559852861676
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    },
+    "c283_n5": {
+      "reference_result_id": "8f11b7122d6847a88e81a494c4480e99",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 572.3880692480598,
+        "quality_score": 100.0,
+        "total_tokens": 1983664
+      },
+      "difference_percent": {
+        "total_tokens": 5.699957250824728,
+        "elapsed_seconds": 0.22841667805724164
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    }
+  },
+  "case_medians": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 32444.0,
+            "elapsed_seconds": 16.556151020515244
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32422,
+            "elapsed_seconds": 16.195333041017875
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32489,
+            "elapsed_seconds": 17.880625750054605
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 129673.5,
+            "elapsed_seconds": 41.21489897900028
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 125797,
+            "elapsed_seconds": 41.08496000000741
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 133550,
+            "elapsed_seconds": 43.583216917002574
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 188123.0,
+            "elapsed_seconds": 53.80277168750763
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 189860,
+            "elapsed_seconds": 53.80799695895985
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 180831,
+            "elapsed_seconds": 52.06160579202697
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 365192.0,
+            "elapsed_seconds": 68.42980729154078
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 367228,
+            "elapsed_seconds": 68.10779912502039
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 363156,
+            "elapsed_seconds": 69.73669304104988
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 164023.5,
+            "elapsed_seconds": 47.652586916985456
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 163989,
+            "elapsed_seconds": 47.72183358401526
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 166776,
+            "elapsed_seconds": 47.583340249955654
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 295382.0,
+            "elapsed_seconds": 62.16187262546737
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 293818,
+            "elapsed_seconds": 60.992339416989125
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 312067,
+            "elapsed_seconds": 63.33140583394561
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 33181.0,
+            "elapsed_seconds": 15.67096118745394
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33197,
+            "elapsed_seconds": 16.03324854199309
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33165,
+            "elapsed_seconds": 14.9392340000486
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 33428.0,
+            "elapsed_seconds": 18.70243256248068
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33317,
+            "elapsed_seconds": 18.663022583001293
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33457,
+            "elapsed_seconds": 18.741842541960068
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 187045.5,
+            "elapsed_seconds": 49.333313770999666
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 188271,
+            "elapsed_seconds": 49.151396750006825
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 176681,
+            "elapsed_seconds": 49.52619791601319
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 160237.0,
+            "elapsed_seconds": 46.353468833549414
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 160738,
+            "elapsed_seconds": 46.401921250042506
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 148906,
+            "elapsed_seconds": 44.001188250025734
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 129495.0,
+            "elapsed_seconds": 39.9366066250368
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 131222,
+            "elapsed_seconds": 40.211203708080575
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 126597,
+            "elapsed_seconds": 39.66200954199303
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 170159.5,
+            "elapsed_seconds": 41.55746206251206
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 156044,
+            "elapsed_seconds": 39.59570020902902
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 184275,
+            "elapsed_seconds": 46.926350832916796
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 93542.5,
+            "elapsed_seconds": 37.548195603943896
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 93267,
+            "elapsed_seconds": 37.32031104096677
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 96966,
+            "elapsed_seconds": 37.77768237493001
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "conditions": {
+        "c283_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 78607.5,
+            "elapsed_seconds": 30.984347812482156
+          }
+        },
+        "c283_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 78579,
+            "elapsed_seconds": 31.437305332976393
+          }
+        },
+        "c283_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 80122,
+            "elapsed_seconds": 28.84601149999071
+          }
+        }
+      }
+    }
+  ],
+  "low_score_runs": [],
+  "preflight_reference_result_id": "8f11b7122d6847a88e81a494c4480e99",
+  "preflight_receipt": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c283-sol61-low-standard14-n20-20261007-r1/c283-low/batch-001/cycle/layer1/comparison-preflight.json",
+  "fixed_code_source_commit": "979fdfa1f825b0865e1a3951c8111ba9bf30c918",
+  "execution_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c283-sol61-low-standard14-n20-20261007-r1",
+  "scope": "既存70件を保持し210件追加。累積全14ケースN=20。N=5基準との差は参考差。採用、本体反映、PR、マージは未実施。"
+}

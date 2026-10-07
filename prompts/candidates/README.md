@@ -286,6 +286,8 @@
 
 | [`the-caption-3ce91a4-execution-control-result-effect-scope-r1`](the-caption-3ce91a4-execution-control-result-effect-scope-r1/manifest.json)（Candidate282） | `the-caption-3ce91a4-execution-control-outcome-binding-r1`（Candidate280） | 利用者指定の結果待ちと再判断の影響範囲制御を1項追加。他18対象を保持。[設計記録](../../docs/candidate282-result-effect-scope-design.md) | [GPT-6.1 Sol Low・Standard14 N=5](../../evaluations/results/c282-sol61-low-standard14-n5_2026-10-07.md)（有効70件、4点70件） |
 
+| [`the-caption-3ce91a4-validation-result-permission-boundary-r1`](the-caption-3ce91a4-validation-result-permission-boundary-r1/manifest.json)（Candidate283） | `the-caption-3ce91a4-execution-control-outcome-binding-r1`（Candidate280） | 検証結果の採用と追加操作の許可境界を3項追加。実施方式は指定しない。[設計記録](../../docs/candidate283-validation-result-permission-boundary-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c283-sol61-low-standard14-n5_2026-10-07.md)：有効70件、得点分布{"4": 70}。[累積N=20](../../evaluations/results/c283-sol61-low-standard14-n20_2026-10-07.md)：280件、得点分布{"4": 280}。採用は未判断 |
+
 candidate bundleのmanifestは構築時provenanceとして不変のまま保持する。評価状態の更新はmanifestをin-place変更せず、この索引と独立したevaluation resultで表す。
 
 C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、バンドルと現行のcandidate索引から削除した。

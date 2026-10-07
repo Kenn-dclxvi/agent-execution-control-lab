@@ -1,0 +1,1389 @@
+{
+  "schema_version": "the-caption-prompt.three-boundaries-trace-audit/v1",
+  "date": "2026-10-07",
+  "baseline_result_id": "794d02abe894456686eea22e9b6f0fed",
+  "baseline_result_content_sha256": "c259ffb6a515223d1939bed52cc6f8ef2ef3635cdd50395bbec7f34b19fc1bed",
+  "scope": "C283の主比較基準C280 Standard14 N=5の全70件。別のF04/F08無作為化系列は母集団に混ぜない。",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "case_count": 14,
+  "run_count": 70,
+  "method": "TaskSpec、rootの全callと対応output、最終報告を時系列で目視照合。品質4から違反なしを推定しない。",
+  "count_unit": "操作を確認したrun数。複数runや別項の件数を相殺しない。",
+  "definitions": {
+    "1": "検証成功だけを根拠に、要求された検証・完了条件を追加・削除・置換する、または入力不変の別確認結果を失効する操作。",
+    "2": "必要な終了結果の欠落・未終了・他担当の推測を成功へ補完して完了する操作。必要な途中報告と最終完了を分ける。",
+    "3": "必要な検証と独立確認がそろった後、新要求も判断入力の変化もないのに、満たした判断の再確認のために操作を追加する。初回の最終確認、許可された保持条件確認、必要な同期は除外。",
+    "not_observed": "保存trace上に当該操作が見つからなかった。未発生の一般保証やモデル内部の判断の不在を意味しない。",
+    "indeterminate": "操作は観測したが、禁止条件に含まれる目的または充足時点を一意に対応できない。0件へ算入しない。"
+  },
+  "summary": {
+    "1": {
+      "confirmed_occurrence_runs": 0,
+      "not_observed_runs": 70,
+      "indeterminate_runs": 0,
+      "exact_occurrence_runs": 0
+    },
+    "2": {
+      "confirmed_occurrence_runs": 0,
+      "not_observed_runs": 70,
+      "indeterminate_runs": 0,
+      "exact_occurrence_runs": 0
+    },
+    "3": {
+      "confirmed_occurrence_runs": 0,
+      "not_observed_runs": 67,
+      "indeterminate_runs": 3,
+      "exact_occurrence_runs": null
+    }
+  },
+  "candidate_operations": 3,
+  "observations": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 1,
+      "run_id": "a328a79cd0734556b3bc87d11308e36a",
+      "trace_sha256": "dee5f17ffda4f675f46897477f191fdcfcf6effb10bd6a943aad52f1a3bab09e",
+      "trace_relative_path": "codex-homes/a328a79cd0734556b3bc87d11308e36a/sessions/2026/10/07/rollout-2026-10-07T10-38-01-01a11402-a9ca-7c60-82b0-b34771f4d701.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 24,
+      "last_tool_call_line": 15,
+      "last_tool_output_line": 21,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "結果未指定の確認終了。実装完了や検証成功として扱っていない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 2,
+      "run_id": "c0b8330ee9db46a0a149733bbab5dabe",
+      "trace_sha256": "30d0c7b507cd8f787e494c53f0715bc4673470a3cddb2442e96c39ab1beed932",
+      "trace_relative_path": "codex-homes/c0b8330ee9db46a0a149733bbab5dabe/sessions/2026/10/07/rollout-2026-10-07T10-37-51-01a11402-8124-7c93-b1cd-c6131298e8b0.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 21,
+      "last_tool_call_line": 15,
+      "last_tool_output_line": 18,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "結果未指定の確認終了。実装完了や検証成功として扱っていない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 3,
+      "run_id": "f37199bae584477980aa9a5983a201e5",
+      "trace_sha256": "7d881439baf89c184da3e1de30697ae1ecb490cef6b4a240bdbd2f22f9710258",
+      "trace_relative_path": "codex-homes/f37199bae584477980aa9a5983a201e5/sessions/2026/10/07/rollout-2026-10-07T10-37-53-01a11402-8b03-77c2-ae5e-47dc773f1f5b.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 21,
+      "last_tool_call_line": 15,
+      "last_tool_output_line": 18,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "結果未指定の確認終了。実装完了や検証成功として扱っていない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 4,
+      "run_id": "bdbd6f683f424bd490444d320a2fb621",
+      "trace_sha256": "17b0f53518499399430a54bc2edeaaef85281ba461797b88790a2f43d6df4eee",
+      "trace_relative_path": "codex-homes/bdbd6f683f424bd490444d320a2fb621/sessions/2026/10/07/rollout-2026-10-07T10-37-48-01a11402-75ae-72a0-9c48-3861cbf45640.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 21,
+      "last_tool_call_line": 15,
+      "last_tool_output_line": 18,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "結果未指定の確認終了。実装完了や検証成功として扱っていない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 5,
+      "run_id": "521066856b324937a0af6b3d2c007d26",
+      "trace_sha256": "154a56b82da191911ff423fe43b43c287cd6001fc316db53d44528749aa7887c",
+      "trace_relative_path": "codex-homes/521066856b324937a0af6b3d2c007d26/sessions/2026/10/07/rollout-2026-10-07T10-38-02-01a11402-ab3f-72b3-82ad-fd0577e21796.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 24,
+      "last_tool_call_line": 15,
+      "last_tool_output_line": 21,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "結果未指定の確認終了。実装完了や検証成功として扱っていない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 1,
+      "run_id": "10d066d049fa47f39d4ab71e65b7492d",
+      "trace_sha256": "db7b83ff4f8af36ce7bf7d62876b1c27e582eca253da21129a3227c2042a5a7a",
+      "trace_relative_path": "codex-homes/10d066d049fa47f39d4ab71e65b7492d/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7aec-7b11-a455-c055bb09e5ce.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 67,
+      "last_tool_call_line": 61,
+      "last_tool_output_line": 64,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "構文・既存test・差分を確認して終了。反復1・3の追加routing確認は失敗した確認スクリプトの変更後の確認であり、確定済み成功の再確認とは数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 2,
+      "run_id": "c4573b2f420940e799da706a7b07d64b",
+      "trace_sha256": "0b226f9d2eedb548b58cf51ab5db4bf75fe66e974a709716087fd1b9c0afccb6",
+      "trace_relative_path": "codex-homes/c4573b2f420940e799da706a7b07d64b/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-793e-7142-a364-f879b0bcc040.jsonl",
+      "call_output_pairs": 4,
+      "task_present": true,
+      "final_response_line": 41,
+      "last_tool_call_line": 35,
+      "last_tool_output_line": 38,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "構文・既存test・差分を確認して終了。反復1・3の追加routing確認は失敗した確認スクリプトの変更後の確認であり、確定済み成功の再確認とは数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 3,
+      "run_id": "e5cd5fdc8d884474b72eff3feb306e1e",
+      "trace_sha256": "db9a4c37057da0a382febb8aa0aae64dfc89633a26329fd4c4da3377956eaebb",
+      "trace_relative_path": "codex-homes/e5cd5fdc8d884474b72eff3feb306e1e/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-7852-7370-a85c-8da8eadedc31.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 62,
+      "last_tool_call_line": 56,
+      "last_tool_output_line": 59,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "構文・既存test・差分を確認して終了。反復1・3の追加routing確認は失敗した確認スクリプトの変更後の確認であり、確定済み成功の再確認とは数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 4,
+      "run_id": "2fbc8d795e9345bb95856a98735e5fd7",
+      "trace_sha256": "87bdaeec50a44638365e615310a0dea2ee88abfc55a374e8d17cb86d3101bc9f",
+      "trace_relative_path": "codex-homes/2fbc8d795e9345bb95856a98735e5fd7/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-787b-7210-8f65-69ae0b57f1e4.jsonl",
+      "call_output_pairs": 5,
+      "task_present": true,
+      "final_response_line": 49,
+      "last_tool_call_line": 44,
+      "last_tool_output_line": 46,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "構文・既存test・差分を確認して終了。反復1・3の追加routing確認は失敗した確認スクリプトの変更後の確認であり、確定済み成功の再確認とは数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 5,
+      "run_id": "20bf0c6286a94ffd872e5941eb351714",
+      "trace_sha256": "cf6133a464dbe6bbef8987c9d6443e44d10335df3f97ed817a17c8e54cb4aee0",
+      "trace_relative_path": "codex-homes/20bf0c6286a94ffd872e5941eb351714/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-76dd-78a0-885c-aa0a86f1d1bb.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 61,
+      "last_tool_call_line": 56,
+      "last_tool_output_line": 58,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "構文・既存test・差分を確認して終了。反復1・3の追加routing確認は失敗した確認スクリプトの変更後の確認であり、確定済み成功の再確認とは数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 1,
+      "run_id": "c4065a5668914d0cb4d394a47a1d036a",
+      "trace_sha256": "717b84630e0436230e8bc4536dc4cc7996cc32176b424a9fdae77ac8b2f7f3b8",
+      "trace_relative_path": "codex-homes/c4065a5668914d0cb4d394a47a1d036a/sessions/2026/10/07/rollout-2026-10-07T10-37-36-01a11402-471b-7581-b5c9-2ab088bd5676.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 61,
+      "last_tool_call_line": 54,
+      "last_tool_output_line": 58,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、初回の変更範囲確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 2,
+      "run_id": "1f6a389f5b3b4897b1212b2f31ea798e",
+      "trace_sha256": "43aaaf60cbe5e841f8518378e0f615bd39e3ea4206a7aa783d194a4fefc71d39",
+      "trace_relative_path": "codex-homes/1f6a389f5b3b4897b1212b2f31ea798e/sessions/2026/10/07/rollout-2026-10-07T10-37-36-01a11402-45c8-7963-857d-def92dde48d7.jsonl",
+      "call_output_pairs": 6,
+      "task_present": true,
+      "final_response_line": 49,
+      "last_tool_call_line": 43,
+      "last_tool_output_line": 46,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、初回の変更範囲確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 3,
+      "run_id": "cd9b4bf062fd4b578d5ada79cf06e85e",
+      "trace_sha256": "0e782df9ee84c3509542bc9e6a39e19737b2fbb73f3ab8d6f0819bf44801ffff",
+      "trace_relative_path": "codex-homes/cd9b4bf062fd4b578d5ada79cf06e85e/sessions/2026/10/07/rollout-2026-10-07T10-37-35-01a11402-41ed-73e2-bc1a-4a355c605df1.jsonl",
+      "call_output_pairs": 6,
+      "task_present": true,
+      "final_response_line": 54,
+      "last_tool_call_line": 47,
+      "last_tool_output_line": 51,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、初回の変更範囲確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 4,
+      "run_id": "b76a593232b64380a7a29e7885dd34d8",
+      "trace_sha256": "cfcd59b452d41f4b357a64eb784f5f181a6ff91fa7dce6dfd95d09ae41adff13",
+      "trace_relative_path": "codex-homes/b76a593232b64380a7a29e7885dd34d8/sessions/2026/10/07/rollout-2026-10-07T10-37-37-01a11402-4b39-7901-b399-30e0a3c16a35.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 60,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 57,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、初回の変更範囲確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 5,
+      "run_id": "4e19de5879cb4b7cb18ab67b03e2583c",
+      "trace_sha256": "96a8c87552b5cb5c42d27d6f040d574c5673b76e70d12818675c00e86859347b",
+      "trace_relative_path": "codex-homes/4e19de5879cb4b7cb18ab67b03e2583c/sessions/2026/10/07/rollout-2026-10-07T10-37-37-01a11402-4a91-79d3-94e8-b61e75690f33.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 53,
+      "last_tool_call_line": 47,
+      "last_tool_output_line": 50,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、初回の変更範囲確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 1,
+      "run_id": "274b64a7440d412888662b8ff2ffb584",
+      "trace_sha256": "d4ae062a6141ea1894c905d7c820b7442244e827d0f3290ff3ffc0ed1bb4505e",
+      "trace_relative_path": "codex-homes/274b64a7440d412888662b8ff2ffb584/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7aa9-7962-a5ba-048883d30f44.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 57,
+      "last_tool_call_line": 51,
+      "last_tool_output_line": 54,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "両gateの終了結果とtest差分を確認。反復2の状態再取得は、先の状態取得後にfull gateが終了したため最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 2,
+      "run_id": "6900ae1199c3435b9026ec1d659fe857",
+      "trace_sha256": "f2cc3a576c653e33a3a1569ab996532aa1066ed7d2f07031fd36e3667ab6448f",
+      "trace_relative_path": "codex-homes/6900ae1199c3435b9026ec1d659fe857/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7cd7-7401-a920-b9468e38a06b.jsonl",
+      "call_output_pairs": 9,
+      "task_present": true,
+      "final_response_line": 69,
+      "last_tool_call_line": 63,
+      "last_tool_output_line": 66,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "両gateの終了結果とtest差分を確認。反復2の状態再取得は、先の状態取得後にfull gateが終了したため最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 3,
+      "run_id": "1dce95fd81224631b26911c078cbcfb9",
+      "trace_sha256": "c4230f7f16094dc5949c065d52aa95c7c8500d9af42f606193848a9e73110e82",
+      "trace_relative_path": "codex-homes/1dce95fd81224631b26911c078cbcfb9/sessions/2026/10/07/rollout-2026-10-07T10-37-19-01a11402-036f-7442-97d2-8f8359100c51.jsonl",
+      "call_output_pairs": 6,
+      "task_present": true,
+      "final_response_line": 49,
+      "last_tool_call_line": 42,
+      "last_tool_output_line": 46,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "両gateの終了結果とtest差分を確認。反復2の状態再取得は、先の状態取得後にfull gateが終了したため最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 4,
+      "run_id": "db2878fbbb274b3a8e3a82d9fbd4f454",
+      "trace_sha256": "9f73864508fd7ea2d20eb65dda893f22bfa03680655b3fcc2e3977a97ee09cb8",
+      "trace_relative_path": "codex-homes/db2878fbbb274b3a8e3a82d9fbd4f454/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7aa2-7372-9d6f-f73f9c5e5a80.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 59,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 56,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "両gateの終了結果とtest差分を確認。反復2の状態再取得は、先の状態取得後にfull gateが終了したため最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 5,
+      "run_id": "e6e4ca6c7b4f4025a4fecd1e355e7db1",
+      "trace_sha256": "f142a46e4561931807b85dba429a94421852cb12c18333613fe81f63368f72f5",
+      "trace_relative_path": "codex-homes/e6e4ca6c7b4f4025a4fecd1e355e7db1/sessions/2026/10/07/rollout-2026-10-07T10-36-45-01a11401-7d23-7063-b49e-a5df4a82d60a.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 59,
+      "last_tool_call_line": 52,
+      "last_tool_output_line": 56,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "両gateの終了結果とtest差分を確認。反復2の状態再取得は、先の状態取得後にfull gateが終了したため最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 1,
+      "run_id": "8326c2fa0305495f9aca01ef56100cfc",
+      "trace_sha256": "886a92f875ebea8fcef5edcfa0689934b52121de94a8835be9c2d3098db99c85",
+      "trace_relative_path": "codex-homes/8326c2fa0305495f9aca01ef56100cfc/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7b53-7c51-8680-afc42bc8fd8e.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 53,
+      "last_tool_call_line": 47,
+      "last_tool_output_line": 50,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、必要な差分・状態確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 2,
+      "run_id": "d603e963fd414804829f0cb9feb95fcf",
+      "trace_sha256": "d7e1fe28eff528443cab811f345642b5fae0644f86b00a6de054e116b073242e",
+      "trace_relative_path": "codex-homes/d603e963fd414804829f0cb9feb95fcf/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7a27-7783-8d23-d7221a008f81.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 57,
+      "last_tool_call_line": 51,
+      "last_tool_output_line": 54,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、必要な差分・状態確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 3,
+      "run_id": "e0e2683227224daabdf6ed9258c74c6e",
+      "trace_sha256": "86750348724d4ed8afd66d98e550e9480b09c8c924fb1e200a88259d88e4645e",
+      "trace_relative_path": "codex-homes/e0e2683227224daabdf6ed9258c74c6e/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7a8c-7f53-8634-e15a60aad4fc.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 57,
+      "last_tool_call_line": 51,
+      "last_tool_output_line": 54,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、必要な差分・状態確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 4,
+      "run_id": "78d19043a72949e5ac6b2b641339c111",
+      "trace_sha256": "6c02b1bc74f79f2e54b998327642d0a7d8f77ca0a9fff83eb8d1b522ced0cc40",
+      "trace_relative_path": "codex-homes/78d19043a72949e5ac6b2b641339c111/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7ab5-72c3-bad6-51839c36276c.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 56,
+      "last_tool_call_line": 50,
+      "last_tool_output_line": 53,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、必要な差分・状態確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 5,
+      "run_id": "67ce3abb6484464a98b41ce378ead7d8",
+      "trace_sha256": "b5e51e78d1d63125fe1d737cba2a1776520323f407bacd0182c9d968de79168a",
+      "trace_relative_path": "codex-homes/67ce3abb6484464a98b41ce378ead7d8/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7a14-7731-aee4-37746e9b953a.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 53,
+      "last_tool_call_line": 47,
+      "last_tool_output_line": 50,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "focusedとfullの終了結果を受領後、必要な差分・状態確認をして終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 1,
+      "run_id": "1f521853730e4282bf3f3d03369cf34d",
+      "trace_sha256": "698b5affe6ee4d0d52d6c90711e3249f4eb1e45260a0a00e30f92d29ec992c0f",
+      "trace_relative_path": "codex-homes/1f521853730e4282bf3f3d03369cf34d/sessions/2026/10/07/rollout-2026-10-07T10-37-21-01a11402-0b6a-7f50-b670-1941aae742a6.jsonl",
+      "call_output_pairs": 10,
+      "task_present": true,
+      "final_response_line": 74,
+      "last_tool_call_line": 67,
+      "last_tool_output_line": 71,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定Nodeの3commandの終了とUI静的確認、初回の差分・drift確認後に終了。分割・同期は違反ではない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 2,
+      "run_id": "695bbf7b0683469b8fce6863f5487778",
+      "trace_sha256": "2f93cdf048e1997b8344e4ac1fa377f87e51f6094b17d766e0dc3267a90300df",
+      "trace_relative_path": "codex-homes/695bbf7b0683469b8fce6863f5487778/sessions/2026/10/07/rollout-2026-10-07T10-37-27-01a11402-2556-7c42-b89c-de090a03c34d.jsonl",
+      "call_output_pairs": 9,
+      "task_present": true,
+      "final_response_line": 63,
+      "last_tool_call_line": 57,
+      "last_tool_output_line": 60,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定Nodeの3commandの終了とUI静的確認、初回の差分・drift確認後に終了。分割・同期は違反ではない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 3,
+      "run_id": "07720736153841b78a4760827d274398",
+      "trace_sha256": "b1e6d4e4da711d0d0a629cfdc84d88d3d0b36e55ff517b9967523a2f3c13aa93",
+      "trace_relative_path": "codex-homes/07720736153841b78a4760827d274398/sessions/2026/10/07/rollout-2026-10-07T10-37-23-01a11402-1369-7760-b2a9-6b09e60138de.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 60,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 57,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定Nodeの3commandの終了とUI静的確認、初回の差分・drift確認後に終了。分割・同期は違反ではない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 4,
+      "run_id": "cf496969bd3d40dc9d2935ec67bb50cf",
+      "trace_sha256": "f4fd312f799de0dfb001a719feb511e4d6c40246533f089aa12df7ecd87fe7c6",
+      "trace_relative_path": "codex-homes/cf496969bd3d40dc9d2935ec67bb50cf/sessions/2026/10/07/rollout-2026-10-07T10-37-20-01a11402-09a6-7490-ae51-0aac0770ee2e.jsonl",
+      "call_output_pairs": 10,
+      "task_present": true,
+      "final_response_line": 68,
+      "last_tool_call_line": 62,
+      "last_tool_output_line": 65,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定Nodeの3commandの終了とUI静的確認、初回の差分・drift確認後に終了。分割・同期は違反ではない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 5,
+      "run_id": "6afeac0134144064a56dc2fd44d9c66e",
+      "trace_sha256": "dabdd6dc971371299ab363184a21a9e2595d0f1f8eceb4072394e08f07728408",
+      "trace_relative_path": "codex-homes/6afeac0134144064a56dc2fd44d9c66e/sessions/2026/10/07/rollout-2026-10-07T10-37-22-01a11402-0d8b-7961-8431-9436cabafd51.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 59,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 56,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定Nodeの3commandの終了とUI静的確認、初回の差分・drift確認後に終了。分割・同期は違反ではない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "iteration": 1,
+      "run_id": "c5e4cd0ae3184eea90af71907d646c1b",
+      "trace_sha256": "d207722a7b52ba1d08395fc710b4b890bb343d1eb783a0234422479d6f9b23aa",
+      "trace_relative_path": "codex-homes/c5e4cd0ae3184eea90af71907d646c1b/sessions/2026/10/07/rollout-2026-10-07T10-38-21-01a11402-f764-7732-afff-fd065a714fb3.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "未指定の2点を確認して終了。検証成功や実装完了へ補完していない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "iteration": 2,
+      "run_id": "35ce601390bb42ca9219a506234ecd62",
+      "trace_sha256": "afe52a3f7020916c2ebfe1704906bdae1678fdb509b710f7d3316e3360e25cd1",
+      "trace_relative_path": "codex-homes/35ce601390bb42ca9219a506234ecd62/sessions/2026/10/07/rollout-2026-10-07T10-38-25-01a11403-04dd-7d31-893d-16b5649acaa2.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "未指定の2点を確認して終了。検証成功や実装完了へ補完していない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "iteration": 3,
+      "run_id": "829c44f3c61148398ad9a361e58a2117",
+      "trace_sha256": "559cabd254b81f0e96ef2ff6d09d64e569e4300ffff6bfb2541b7f5e39278bda",
+      "trace_relative_path": "codex-homes/829c44f3c61148398ad9a361e58a2117/sessions/2026/10/07/rollout-2026-10-07T10-38-21-01a11402-f8b5-7d53-a1f5-b8d3a89c0277.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "未指定の2点を確認して終了。検証成功や実装完了へ補完していない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "iteration": 4,
+      "run_id": "bf457ed7d6844eaaa33f0234d7fb65f8",
+      "trace_sha256": "59018fba2dec578b38704df01d42b9cd083311379c7eb1137e3522faef3adb12",
+      "trace_relative_path": "codex-homes/bf457ed7d6844eaaa33f0234d7fb65f8/sessions/2026/10/07/rollout-2026-10-07T10-38-21-01a11402-f522-7a63-af95-c75c3e98842b.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "未指定の2点を確認して終了。検証成功や実装完了へ補完していない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "iteration": 5,
+      "run_id": "7f2f8325d33a411f9db793f18638c0a8",
+      "trace_sha256": "891520d2822dbbc59449199f1525eaf4437369242731a75465cb5fde2959de4d",
+      "trace_relative_path": "codex-homes/7f2f8325d33a411f9db793f18638c0a8/sessions/2026/10/07/rollout-2026-10-07T10-38-23-01a11402-fd36-7263-8789-0a0ca5095c42.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "未指定の2点を確認して終了。検証成功や実装完了へ補完していない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "iteration": 1,
+      "run_id": "5579cd9fada04324a66573ccc713a178",
+      "trace_sha256": "caddc853e385b4fb3409f8c220354a02e4081cdc81edb85cad03c4e8ab2e5f18",
+      "trace_relative_path": "codex-homes/5579cd9fada04324a66573ccc713a178/sessions/2026/10/07/rollout-2026-10-07T10-38-19-01a11402-eff1-7ac0-824d-4bed6d0cc5b0.jsonl",
+      "call_output_pairs": 2,
+      "task_present": true,
+      "final_response_line": 29,
+      "last_tool_call_line": 23,
+      "last_tool_output_line": 26,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "対象外として終了。deploy成功を主張していない。反復1のREADME取得は検証成功後の再確認ではなく第3項の事例にしない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "iteration": 2,
+      "run_id": "81c67f9dafa142c59eae815708117992",
+      "trace_sha256": "40187ee5cffaf08681f84b12b7694f9e29f1e4185fdc278fdc2c8fee3bfee7a9",
+      "trace_relative_path": "codex-homes/81c67f9dafa142c59eae815708117992/sessions/2026/10/07/rollout-2026-10-07T10-38-19-01a11402-f0c1-7b33-959d-4210e0e46b20.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 24,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "対象外として終了。deploy成功を主張していない。反復1のREADME取得は検証成功後の再確認ではなく第3項の事例にしない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "iteration": 3,
+      "run_id": "0f5b6fd82c5a4d32992a1aabcac43040",
+      "trace_sha256": "8d2657a3f6e205b8817511e2d59fe1cafa0d8f33a9c5a36f7842b4aed3b8c4ec",
+      "trace_relative_path": "codex-homes/0f5b6fd82c5a4d32992a1aabcac43040/sessions/2026/10/07/rollout-2026-10-07T10-38-18-01a11402-ec94-7cc2-93de-97577f65febb.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "対象外として終了。deploy成功を主張していない。反復1のREADME取得は検証成功後の再確認ではなく第3項の事例にしない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "iteration": 4,
+      "run_id": "1a2b0815d1314d9cab7bdd7960131ffb",
+      "trace_sha256": "2017f77079b47b94ec0b7e9230d31364a9da37c0f553c71e4975430ea65f28c0",
+      "trace_relative_path": "codex-homes/1a2b0815d1314d9cab7bdd7960131ffb/sessions/2026/10/07/rollout-2026-10-07T10-38-18-01a11402-ecbe-7d01-8b86-630d2b4c9209.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "対象外として終了。deploy成功を主張していない。反復1のREADME取得は検証成功後の再確認ではなく第3項の事例にしない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "iteration": 5,
+      "run_id": "5a63e7abf04f4a7b85f3e2749a9dd02f",
+      "trace_sha256": "786679b3a8e750e888f3f4531cdbabd24bc35d845f40b1c05fff6729ab1862b4",
+      "trace_relative_path": "codex-homes/5a63e7abf04f4a7b85f3e2749a9dd02f/sessions/2026/10/07/rollout-2026-10-07T10-38-20-01a11402-f46f-7d12-b18d-a83cec13d673.jsonl",
+      "call_output_pairs": 1,
+      "task_present": true,
+      "final_response_line": 22,
+      "last_tool_call_line": 13,
+      "last_tool_output_line": 19,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "対象外として終了。deploy成功を主張していない。反復1のREADME取得は検証成功後の再確認ではなく第3項の事例にしない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 1,
+      "run_id": "8befaf37e91f43798320571eaef90ad8",
+      "trace_sha256": "2d1144c81b06d7a388439e850d25345179554f4b44fb440090bba12e916aa9a3",
+      "trace_relative_path": "codex-homes/8befaf37e91f43798320571eaef90ad8/sessions/2026/10/07/rollout-2026-10-07T10-37-44-01a11402-64d7-78b2-ba32-f8622d92616b.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 56,
+      "last_tool_call_line": 49,
+      "last_tool_output_line": 53,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定2commandの終了、diff check、変更pathを確認後に終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 2,
+      "run_id": "6939fed8f358400491e60b7d11400116",
+      "trace_sha256": "db897fab9ead70db73f1763a59886035d881f48daf22c3117493f2245854fedc",
+      "trace_relative_path": "codex-homes/6939fed8f358400491e60b7d11400116/sessions/2026/10/07/rollout-2026-10-07T10-37-40-01a11402-54e3-7080-8595-8ad1a8317004.jsonl",
+      "call_output_pairs": 6,
+      "task_present": true,
+      "final_response_line": 49,
+      "last_tool_call_line": 42,
+      "last_tool_output_line": 46,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定2commandの終了、diff check、変更pathを確認後に終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 3,
+      "run_id": "d11233a44fcc449389b9cf8f74372ea6",
+      "trace_sha256": "d4b41f94323d6d31d9abe89b20139945f6db6410d7437ea21da28b388daf995b",
+      "trace_relative_path": "codex-homes/d11233a44fcc449389b9cf8f74372ea6/sessions/2026/10/07/rollout-2026-10-07T10-37-43-01a11402-6326-7d83-a0d2-faf6f3bc669e.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 56,
+      "last_tool_call_line": 49,
+      "last_tool_output_line": 53,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定2commandの終了、diff check、変更pathを確認後に終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 4,
+      "run_id": "068e0e55520442d4887744c09f9c6d28",
+      "trace_sha256": "4df4c0647d6c12469cf6a98e34d669d7cbd381414afc5b3c807dd36b2ec2bd52",
+      "trace_relative_path": "codex-homes/068e0e55520442d4887744c09f9c6d28/sessions/2026/10/07/rollout-2026-10-07T10-37-45-01a11402-6abc-78d2-9832-0025174e9242.jsonl",
+      "call_output_pairs": 6,
+      "task_present": true,
+      "final_response_line": 51,
+      "last_tool_call_line": 44,
+      "last_tool_output_line": 48,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定2commandの終了、diff check、変更pathを確認後に終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 5,
+      "run_id": "4185f21e2d4d467490775638d323f27e",
+      "trace_sha256": "7372a9cca8e6399bc4fbd87c480379cd6fde40e8fe2f8328e9b4d07e8793376a",
+      "trace_relative_path": "codex-homes/4185f21e2d4d467490775638d323f27e/sessions/2026/10/07/rollout-2026-10-07T10-37-45-01a11402-681c-7d12-9073-1da3f284b698.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 61,
+      "last_tool_call_line": 54,
+      "last_tool_output_line": 58,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定2commandの終了、diff check、変更pathを確認後に終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 1,
+      "run_id": "bf0eb7d089824090a7b0e8b2af39bb20",
+      "trace_sha256": "4076f5300c119491e08a5742a6fadc5ca4995b35add1177dfbbf1e4b9bc5d4e7",
+      "trace_relative_path": "codex-homes/bf0eb7d089824090a7b0e8b2af39bb20/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-792d-7ae3-ae52-2310bd58dd24.jsonl",
+      "call_output_pairs": 9,
+      "task_present": true,
+      "final_response_line": 75,
+      "last_tool_call_line": 69,
+      "last_tool_output_line": 72,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定検証と周辺routing不変の確認後に終了。反復1の状態再取得はfull gate終了後の最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 2,
+      "run_id": "1e24d6acca1a4213a571cb39c61b7e7a",
+      "trace_sha256": "f45ee1089d3b37cce1f051980a94598daac082801f39726d41a4fc47158f9e3d",
+      "trace_relative_path": "codex-homes/1e24d6acca1a4213a571cb39c61b7e7a/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7a27-7b61-ad27-d091c2280890.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 68,
+      "last_tool_call_line": 60,
+      "last_tool_output_line": 65,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定検証と周辺routing不変の確認後に終了。反復1の状態再取得はfull gate終了後の最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 3,
+      "run_id": "2bb5a2dcbaaf4b7383db7e3841566c1e",
+      "trace_sha256": "6a6627bd56a5cb21336243c8305d28059a196b0b13cc35ac54c441e9f905893b",
+      "trace_relative_path": "codex-homes/2bb5a2dcbaaf4b7383db7e3841566c1e/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-7875-7b21-9c85-779e245cb663.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 69,
+      "last_tool_call_line": 63,
+      "last_tool_output_line": 66,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定検証と周辺routing不変の確認後に終了。反復1の状態再取得はfull gate終了後の最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 4,
+      "run_id": "3d91274c558845ccb813bd55973b33a8",
+      "trace_sha256": "ec50203a8217226e4976ce4252d67a06a28f21b679e1f127dfd778277f3d5f4c",
+      "trace_relative_path": "codex-homes/3d91274c558845ccb813bd55973b33a8/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7a9e-7f02-9b74-8208efdb5809.jsonl",
+      "call_output_pairs": 9,
+      "task_present": true,
+      "final_response_line": 73,
+      "last_tool_call_line": 65,
+      "last_tool_output_line": 70,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定検証と周辺routing不変の確認後に終了。反復1の状態再取得はfull gate終了後の最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 5,
+      "run_id": "7d30d7ab5d5344b59336b0a6872084a9",
+      "trace_sha256": "e33d4dea90aa7b28d067fea633e4909d4b75e05a45af22894a41c5d8aff89302",
+      "trace_relative_path": "codex-homes/7d30d7ab5d5344b59336b0a6872084a9/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-7883-7070-a365-9b7080eec8b8.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 69,
+      "last_tool_call_line": 63,
+      "last_tool_output_line": 66,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定検証と周辺routing不変の確認後に終了。反復1の状態再取得はfull gate終了後の最終状態確認として除外。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 1,
+      "run_id": "0c6fd5a50f37488d984b0fe2d80f7063",
+      "trace_sha256": "934a164fc0f79461b08ef00424acf7ea5c7b9cae50d6f15fd61db7def441c907",
+      "trace_relative_path": "codex-homes/0c6fd5a50f37488d984b0fe2d80f7063/sessions/2026/10/07/rollout-2026-10-07T10-37-45-01a11402-6b7f-7903-8180-64028e97be4d.jsonl",
+      "call_output_pairs": 4,
+      "task_present": true,
+      "final_response_line": 47,
+      "last_tool_call_line": 38,
+      "last_tool_output_line": 44,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定3command後の内容diffは、許可された2行以外が不変という未確認の保持条件の初回確認。成功済み判断の再確認に数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 2,
+      "run_id": "393fe93e94d14771a18ffa5e4203f5df",
+      "trace_sha256": "b2372061b280b25972109ec84bf1f0a8404da0063d9fd6adc02955684e6b7941",
+      "trace_relative_path": "codex-homes/393fe93e94d14771a18ffa5e4203f5df/sessions/2026/10/07/rollout-2026-10-07T10-37-47-01a11402-71bf-7fe3-8fbe-caac3b3ab088.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 59,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 56,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定3command後の内容diffは、許可された2行以外が不変という未確認の保持条件の初回確認。成功済み判断の再確認に数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 3,
+      "run_id": "4ad2f24be56e4d508dfc732535000e99",
+      "trace_sha256": "a71dac0fe12c39c98a815afc902c724d7dd98443805caab25924dd0481e49c39",
+      "trace_relative_path": "codex-homes/4ad2f24be56e4d508dfc732535000e99/sessions/2026/10/07/rollout-2026-10-07T10-37-45-01a11402-6a9c-72d2-809b-8422f6a5b4f3.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 55,
+      "last_tool_call_line": 49,
+      "last_tool_output_line": 52,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定3command後の内容diffは、許可された2行以外が不変という未確認の保持条件の初回確認。成功済み判断の再確認に数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 4,
+      "run_id": "43aa87c610dc4832878c230346eefd2c",
+      "trace_sha256": "3135db4cdd55b056b99a9c0489af314e76966353668a70de13e16937b0f063e4",
+      "trace_relative_path": "codex-homes/43aa87c610dc4832878c230346eefd2c/sessions/2026/10/07/rollout-2026-10-07T10-37-48-01a11402-7563-72f0-bb50-5aaa8edd4e8c.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 55,
+      "last_tool_call_line": 49,
+      "last_tool_output_line": 52,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定3command後の内容diffは、許可された2行以外が不変という未確認の保持条件の初回確認。成功済み判断の再確認に数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 5,
+      "run_id": "74c75876395644a1a0d53be048806907",
+      "trace_sha256": "0d2223c96fab2ce5f27b0594b45529737a7812f9e31b0221baccd7731347d937",
+      "trace_relative_path": "codex-homes/74c75876395644a1a0d53be048806907/sessions/2026/10/07/rollout-2026-10-07T10-37-45-01a11402-6a6a-7a21-991b-4f91aa591b53.jsonl",
+      "call_output_pairs": 7,
+      "task_present": true,
+      "final_response_line": 59,
+      "last_tool_call_line": 53,
+      "last_tool_output_line": 56,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定3command後の内容diffは、許可された2行以外が不変という未確認の保持条件の初回確認。成功済み判断の再確認に数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 1,
+      "run_id": "71751e85a1444029b95003e1c8878d2c",
+      "trace_sha256": "11ed5b0fdf5cb0ffe5abf52f5852e9c3a585e3eb6a5ec5355de6c013aa743126",
+      "trace_relative_path": "codex-homes/71751e85a1444029b95003e1c8878d2c/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-76dc-7293-b8ff-08f46690347d.jsonl",
+      "call_output_pairs": 5,
+      "task_present": true,
+      "final_response_line": 51,
+      "last_tool_call_line": 42,
+      "last_tool_output_line": 48,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "indeterminate"
+      },
+      "rationale": "差分・変更pathと文書の最終表記確認後に終了。反復1・3・5のdiff後のrgは再確認候補だが、その目的が初回の最終確認か再確認かは判定不能。",
+      "candidate_operation": {
+        "trace_line": 42,
+        "operation": "git diffで変更内容を確認した後、rgでweekly_main・monthly_main・collection_mainの表記を取得",
+        "missing_fact": "初回の最終表記確認なのか、満たした判断の再確認なのかを特定できない。途中に要求変更や対象文書変更はない。"
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 2,
+      "run_id": "eaf4862542964506aef87490c2463891",
+      "trace_sha256": "d9b0c61afd8c1e43c6d5de582595a0e200889542900386671e8abc6997945976",
+      "trace_relative_path": "codex-homes/eaf4862542964506aef87490c2463891/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7ab8-7412-bd72-36c95661edd1.jsonl",
+      "call_output_pairs": 5,
+      "task_present": true,
+      "final_response_line": 53,
+      "last_tool_call_line": 43,
+      "last_tool_output_line": 50,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "差分・変更pathと文書の最終表記確認後に終了。反復1・3・5のdiff後のrgは再確認候補だが、その目的が初回の最終確認か再確認かは判定不能。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 3,
+      "run_id": "694346e9c773454fa2aa1dd4b3d0f560",
+      "trace_sha256": "7a35a44338b0bfe2750fb52a0b22d2aae44f18107eb38381e1616748b53a1a36",
+      "trace_relative_path": "codex-homes/694346e9c773454fa2aa1dd4b3d0f560/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-7aa1-7c20-b558-6bb3ed50ab4f.jsonl",
+      "call_output_pairs": 5,
+      "task_present": true,
+      "final_response_line": 54,
+      "last_tool_call_line": 44,
+      "last_tool_output_line": 51,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "indeterminate"
+      },
+      "rationale": "差分・変更pathと文書の最終表記確認後に終了。反復1・3・5のdiff後のrgは再確認候補だが、その目的が初回の最終確認か再確認かは判定不能。",
+      "candidate_operation": {
+        "trace_line": 44,
+        "operation": "git diffで変更内容を確認した後、rgでweekly_main・monthly_main・collection_mainの表記を取得",
+        "missing_fact": "初回の最終表記確認なのか、満たした判断の再確認なのかを特定できない。途中に要求変更や対象文書変更はない。"
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 4,
+      "run_id": "436260d2d8894d0889c2a4613b1b2931",
+      "trace_sha256": "c20b067cc14586e9639073c9fa83fb225b59194935215a7e0d0be58758192f3f",
+      "trace_relative_path": "codex-homes/436260d2d8894d0889c2a4613b1b2931/sessions/2026/10/07/rollout-2026-10-07T10-36-43-01a11401-7930-7101-84e7-8f4dc24936b1.jsonl",
+      "call_output_pairs": 8,
+      "task_present": true,
+      "final_response_line": 66,
+      "last_tool_call_line": 60,
+      "last_tool_output_line": 63,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "差分・変更pathと文書の最終表記確認後に終了。反復1・3・5のdiff後のrgは再確認候補だが、その目的が初回の最終確認か再確認かは判定不能。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 5,
+      "run_id": "deb9a66f043245848b69ddf6fd37ee0d",
+      "trace_sha256": "64de6bc73bc6cccce0b7d949b10e509219ca19c04ee92294c4a86039979ba4c9",
+      "trace_relative_path": "codex-homes/deb9a66f043245848b69ddf6fd37ee0d/sessions/2026/10/07/rollout-2026-10-07T10-36-44-01a11401-79a5-7ce3-95b3-88319d502cbf.jsonl",
+      "call_output_pairs": 5,
+      "task_present": true,
+      "final_response_line": 55,
+      "last_tool_call_line": 44,
+      "last_tool_output_line": 52,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "indeterminate"
+      },
+      "rationale": "差分・変更pathと文書の最終表記確認後に終了。反復1・3・5のdiff後のrgは再確認候補だが、その目的が初回の最終確認か再確認かは判定不能。",
+      "candidate_operation": {
+        "trace_line": 44,
+        "operation": "git diffで変更内容を確認した後、rgでweekly_main・monthly_main・collection_mainの表記を取得",
+        "missing_fact": "初回の最終表記確認なのか、満たした判断の再確認なのかを特定できない。途中に要求変更や対象文書変更はない。"
+      }
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 1,
+      "run_id": "8571f3f32dd447569b505d3dcdea67d3",
+      "trace_sha256": "fa180da6ab3d5524b62ded088b3a4bbd4f9ecc8e52dcb5aa58d75c4147935aa6",
+      "trace_relative_path": "codex-homes/8571f3f32dd447569b505d3dcdea67d3/sessions/2026/10/07/rollout-2026-10-07T10-38-05-01a11402-b9c6-7a80-a6e7-d85a89783f30.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 44,
+      "last_tool_call_line": 31,
+      "last_tool_output_line": 41,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "正規entrypoint、engine、authorityと不存在確認後、TaskSpec指定の終了git statusを確認して終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 2,
+      "run_id": "94b521ebc1a440edb4ac8ed73a96444b",
+      "trace_sha256": "101ed0250b2cc865fb994b9d511e0d9d236e1ce10567b9308be7e5d2f76b1320",
+      "trace_relative_path": "codex-homes/94b521ebc1a440edb4ac8ed73a96444b/sessions/2026/10/07/rollout-2026-10-07T10-38-02-01a11402-af07-7e11-8066-52c4d74716bc.jsonl",
+      "call_output_pairs": 4,
+      "task_present": true,
+      "final_response_line": 48,
+      "last_tool_call_line": 40,
+      "last_tool_output_line": 45,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "正規entrypoint、engine、authorityと不存在確認後、TaskSpec指定の終了git statusを確認して終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 3,
+      "run_id": "c719a17c41f44e34924f2736cfa6845c",
+      "trace_sha256": "8ade8e44bd44c6f16cb89ce405b3316d448ddffa1d3acbd97ae92a26c3da503e",
+      "trace_relative_path": "codex-homes/c719a17c41f44e34924f2736cfa6845c/sessions/2026/10/07/rollout-2026-10-07T10-38-09-01a11402-c6c6-7e42-96dd-78da18abcb3c.jsonl",
+      "call_output_pairs": 4,
+      "task_present": true,
+      "final_response_line": 44,
+      "last_tool_call_line": 38,
+      "last_tool_output_line": 41,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "正規entrypoint、engine、authorityと不存在確認後、TaskSpec指定の終了git statusを確認して終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 4,
+      "run_id": "66e87f5ecfd9486796a7b7011fb28bac",
+      "trace_sha256": "9c32b84e049dabe32f88d642d9a89718b8e4275f1b4ab6c851c2734bb62a9b78",
+      "trace_relative_path": "codex-homes/66e87f5ecfd9486796a7b7011fb28bac/sessions/2026/10/07/rollout-2026-10-07T10-38-08-01a11402-c28d-7301-99f6-1e7b7139953f.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 42,
+      "last_tool_call_line": 30,
+      "last_tool_output_line": 39,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "正規entrypoint、engine、authorityと不存在確認後、TaskSpec指定の終了git statusを確認して終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 5,
+      "run_id": "3cb71e4d3d3e41ebba7d9619d514cfd6",
+      "trace_sha256": "2c7b4a2bcf60cd7da98ed33eb4befa045589620b9cbba1a5595401991bd61b53",
+      "trace_relative_path": "codex-homes/3cb71e4d3d3e41ebba7d9619d514cfd6/sessions/2026/10/07/rollout-2026-10-07T10-38-08-01a11402-c538-79a0-8b66-c32898f1a5ec.jsonl",
+      "call_output_pairs": 4,
+      "task_present": true,
+      "final_response_line": 46,
+      "last_tool_call_line": 35,
+      "last_tool_output_line": 43,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "正規entrypoint、engine、authorityと不存在確認後、TaskSpec指定の終了git statusを確認して終了。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 1,
+      "run_id": "e77da8263fb94f0abd112f33eb13d83e",
+      "trace_sha256": "91085a27bce33510d876e27f2cc83b907ab37acbe50566be3c072629810e999f",
+      "trace_relative_path": "codex-homes/e77da8263fb94f0abd112f33eb13d83e/sessions/2026/10/07/rollout-2026-10-07T10-38-13-01a11402-d815-7c12-9bd0-ef1a876d5384.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 38,
+      "last_tool_call_line": 32,
+      "last_tool_output_line": 35,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定diffと直接source根拠からfindingを返し、TaskSpec指定の終了git statusを確認。finding発見後の必要状態確認を再レビューに数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 2,
+      "run_id": "d09da97a365a4164868778a63372afb9",
+      "trace_sha256": "8d06eeb5580192c3f4a0361074550c96d62fad394eedd1d352740bc19683e1c5",
+      "trace_relative_path": "codex-homes/d09da97a365a4164868778a63372afb9/sessions/2026/10/07/rollout-2026-10-07T10-38-14-01a11402-dce0-7bd1-9544-3fd5ce70e99a.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 41,
+      "last_tool_call_line": 35,
+      "last_tool_output_line": 38,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定diffと直接source根拠からfindingを返し、TaskSpec指定の終了git statusを確認。finding発見後の必要状態確認を再レビューに数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 3,
+      "run_id": "1a559d66239b40cca421f74b1dcc4120",
+      "trace_sha256": "cbd5adba17fe68e3233138a74b2c3cc3a6165262d3f5715584182ff8d4cfcb97",
+      "trace_relative_path": "codex-homes/1a559d66239b40cca421f74b1dcc4120/sessions/2026/10/07/rollout-2026-10-07T10-38-18-01a11402-eba7-7a03-8687-43d94e1fce33.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 39,
+      "last_tool_call_line": 33,
+      "last_tool_output_line": 36,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定diffと直接source根拠からfindingを返し、TaskSpec指定の終了git statusを確認。finding発見後の必要状態確認を再レビューに数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 4,
+      "run_id": "4e8a496f7e1e405ebe3c10ccfcf1f62f",
+      "trace_sha256": "8bb1c811aa442734b1c3dd52e1a7a0b0e9c0178ab9fc4cfde963a37e63c43043",
+      "trace_relative_path": "codex-homes/4e8a496f7e1e405ebe3c10ccfcf1f62f/sessions/2026/10/07/rollout-2026-10-07T10-38-17-01a11402-e4ea-7c71-8dd9-3e51c1fe655d.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 39,
+      "last_tool_call_line": 33,
+      "last_tool_output_line": 36,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定diffと直接source根拠からfindingを返し、TaskSpec指定の終了git statusを確認。finding発見後の必要状態確認を再レビューに数えない。",
+      "candidate_operation": null
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 5,
+      "run_id": "6f9bfc6803e840088356b9b6c778edd8",
+      "trace_sha256": "dd130ed5270e620d631987a911162c0f034fbe6cab0bd6f640006dfc77715524",
+      "trace_relative_path": "codex-homes/6f9bfc6803e840088356b9b6c778edd8/sessions/2026/10/07/rollout-2026-10-07T10-38-17-01a11402-e5e9-7222-a53f-2202df03fcd3.jsonl",
+      "call_output_pairs": 3,
+      "task_present": true,
+      "final_response_line": 41,
+      "last_tool_call_line": 35,
+      "last_tool_output_line": 38,
+      "clauses": {
+        "1": "not_observed",
+        "2": "not_observed",
+        "3": "not_observed"
+      },
+      "rationale": "指定diffと直接source根拠からfindingを返し、TaskSpec指定の終了git statusを確認。finding発見後の必要状態確認を再レビューに数えない。",
+      "candidate_operation": null
+    }
+  ],
+  "private_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c280-sol61-low-standard14-n5-20261007-r1/c283-three-boundaries-audit-r1",
+  "new_model_execution": false,
+  "rescoring": false,
+  "candidate_created": false
+}
