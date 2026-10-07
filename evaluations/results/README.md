@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Sonnet 5.5 low C291とC280 Sonnet lowの比較（2026-10-08）](#claude-sonnet55-low-c291-20261008)
+
 - [Claude Code Sonnet 5.5 low C280（2026-10-08）](#claude-sonnet55-low-c280-20261008)
 
 - [Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）](#claude-opus55-low-c280-20261008)
@@ -148,6 +150,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-sonnet55-low-c291-20261008"></a>
+## Claude Code Sonnet 5.5 low C291とC280 Sonnet lowの比較（2026-10-08）
+
+[計測記録](claude-sonnet55-low-c291-standard14-n5-cli2288_2026-10-08.md)、[登録結果](42391c16154646c3a63b206abfb033c2.json)、[品質監査](claude-sonnet55-low-c291-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[C291 − C280 Sonnet lowの比較](claude-sonnet55-low-c291-standard14-n5-cli2288_2026-10-08-c291-c280-comparison.json)、[発行前の記録](claude-sonnet55-low-c291-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-sonnet55-low-c291-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。有効70件、4点69件・3点1件（A02の試験証拠不足）。C280 Sonnet low比でトークン中央値+29.95%、経過時間中央値+31.85%。採用は未判断。
 
 <a id="claude-sonnet55-low-c280-20261008"></a>
 ## Claude Code Sonnet 5.5 low C280（2026-10-08）

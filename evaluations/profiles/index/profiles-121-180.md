@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n53-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n53-cli0146-r1.json)
 - [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate152-four-decision-rules-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate152-four-decision-rules-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json)
-- [`candidate156-five-prompt-conditions-readable-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate156-five-prompt-conditions-readable-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
