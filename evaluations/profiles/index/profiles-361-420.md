@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json)
 - [`candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json)
 - [`candidate274-luna6-high-standard14-n5-cli0156-r1.json`](../candidate274-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json`](../candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json)
 - [`candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json)

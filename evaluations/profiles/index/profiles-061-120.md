@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate105-validation-terminal-return-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate105-validation-terminal-return-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json)
 - [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate135-criterion-span-request-authority-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate135-criterion-span-request-authority-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate136-effect-local-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate136-effect-local-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json)
-- [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
