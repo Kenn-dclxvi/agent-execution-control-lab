@@ -1,0 +1,2213 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "case_count": 14,
+  "iterations": 20,
+  "retained_runs": 70,
+  "added_valid_runs": 210,
+  "cumulative_valid_runs": 280,
+  "added_excluded_attempts": 0,
+  "score_counts": {
+    "4": 280
+  },
+  "added_score_counts": {
+    "4": 210
+  },
+  "result_id": "bee75634efb749e58de759aaa0b2b848",
+  "result_content_sha256": "0dca0748cb4db654a8f79458ed9cbdca936d875a385382977bca207c93edfb7c",
+  "median": {
+    "elapsed_seconds": 537.5333859365783,
+    "quality_score": 100.0,
+    "total_tokens": 1314863.5
+  },
+  "reference_n5_descriptive_differences": {
+    "C285": {
+      "reference_result_id": "164a08aa201944c1b80ad0ea87f11d3b",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 613.9992659600684,
+        "quality_score": 100.0,
+        "total_tokens": 1415661
+      },
+      "difference_percent": {
+        "total_tokens": -7.120172131604951,
+        "elapsed_seconds": -12.453741276697738
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    },
+    "C284": {
+      "reference_result_id": "d5fe0da15753407a87f1db7c8acd931d",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 580.3788597920211,
+        "quality_score": 100.0,
+        "total_tokens": 1537374
+      },
+      "difference_percent": {
+        "total_tokens": -14.47341375618425,
+        "elapsed_seconds": -7.382328479503286
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    },
+    "C280": {
+      "reference_result_id": "794d02abe894456686eea22e9b6f0fed",
+      "reference_n": 5,
+      "candidate_n": 20,
+      "formal_comparison": false,
+      "reference_median": {
+        "elapsed_seconds": 537.745003539836,
+        "quality_score": 100.0,
+        "total_tokens": 2071746
+      },
+      "difference_percent": {
+        "total_tokens": -36.53355671979094,
+        "elapsed_seconds": -0.039352779080181755
+      },
+      "reference_score_counts": {
+        "4": 70
+      }
+    }
+  },
+  "case_medians": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 33547.5,
+            "elapsed_seconds": 15.796690604067408
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33549,
+            "elapsed_seconds": 15.889203625032678
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33498,
+            "elapsed_seconds": 15.361308249994181
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 160057.5,
+            "elapsed_seconds": 54.18802035454428
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 158231,
+            "elapsed_seconds": 54.63386287505273
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 162177,
+            "elapsed_seconds": 53.74217783403583
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 105255.5,
+            "elapsed_seconds": 51.34549433301436
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 105295,
+            "elapsed_seconds": 50.58713324996643
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 104878,
+            "elapsed_seconds": 55.618742832913995
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 152641.0,
+            "elapsed_seconds": 56.61692164547276
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 152711,
+            "elapsed_seconds": 56.052323082927614
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 152571,
+            "elapsed_seconds": 60.724608208052814
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 92805.0,
+            "elapsed_seconds": 41.67553087504348
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 92964,
+            "elapsed_seconds": 41.382887500105426
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 89959,
+            "elapsed_seconds": 44.08779645792674
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 186310.0,
+            "elapsed_seconds": 52.52559629199095
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 186263,
+            "elapsed_seconds": 52.334965458954684
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 186357,
+            "elapsed_seconds": 53.40357324993238
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 34125.0,
+            "elapsed_seconds": 16.39507491653785
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 34105,
+            "elapsed_seconds": 15.543953332933597
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 34202,
+            "elapsed_seconds": 19.291490042000078
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 40266.5,
+            "elapsed_seconds": 18.94610352104064
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 40342,
+            "elapsed_seconds": 19.02136887505185
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 38973,
+            "elapsed_seconds": 18.596616041031666
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 93563.0,
+            "elapsed_seconds": 44.71969820850063
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 93648,
+            "elapsed_seconds": 44.12061112502124
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 93478,
+            "elapsed_seconds": 45.39119704102632
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 90380.0,
+            "elapsed_seconds": 43.054154811950866
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 91304,
+            "elapsed_seconds": 42.797669415944256
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 87566,
+            "elapsed_seconds": 46.738267040927894
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 78032.5,
+            "elapsed_seconds": 31.39280327106826
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 78058,
+            "elapsed_seconds": 30.930637250072323
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 78007,
+            "elapsed_seconds": 32.78487704193685
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 107140.5,
+            "elapsed_seconds": 36.06599989545066
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 107151,
+            "elapsed_seconds": 35.354424457997084
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 106909,
+            "elapsed_seconds": 36.92857083398849
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 60156.0,
+            "elapsed_seconds": 38.07511587504996
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 60170,
+            "elapsed_seconds": 38.263688625069335
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 59991,
+            "elapsed_seconds": 37.19795295794029
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "conditions": {
+        "c286_n20": {
+          "n": 20,
+          "score_counts": {
+            "4": 20
+          },
+          "median": {
+            "quality_score": 4.0,
+            "total_tokens": 64120.0,
+            "elapsed_seconds": 29.64646120846737
+          }
+        },
+        "c286_added": {
+          "n": 15,
+          "score_counts": {
+            "4": 15
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 65080,
+            "elapsed_seconds": 29.67155729199294
+          }
+        },
+        "c286_n5": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 63750,
+            "elapsed_seconds": 29.621365124941804
+          }
+        }
+      }
+    }
+  ],
+  "low_score_runs": [],
+  "preflight_reference_result_id": "d6fb28dbcef44caebc516591fd720eaa",
+  "preflight_receipt": {
+    "authorized_slots": [
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i1.json",
+        "capsule_sha256": "500152d86be7bf6067e18548c6dd64867394438233b0ae7434967e2f1907cdad",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:991d9b51e774475ebf2c502dc7295bc8"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i2.json",
+        "capsule_sha256": "083a21beb82eeb4192d09f851fe56da0160cf2111912f1fb88d27ebd4799c5d6",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:0b4e3f43f17d4c2eafc30fa4b2aeaec9"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i3.json",
+        "capsule_sha256": "bb5e967599b6cd2defbb8f4168de2fa2746248ff0e44187d6626f5b533b55ca7",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:705fbb1027ec4b1b8f6da7fdb6d5f130"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i4.json",
+        "capsule_sha256": "3221e92610b6df14e14a0ef06cf5e8ce6d2906c16090b69bdfdd19bd82181f01",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:141018e2e0ed4ab498d799de5c6d296d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i5.json",
+        "capsule_sha256": "f559e1f20dffb6332a9a1c73518954fb0e27df9c6ac51e038fc9e9d4e2407fdd",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ab259ec841d3421b9336bfa4b3a3aca7"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i6.json",
+        "capsule_sha256": "24f9f4742d702950b0035c700d6694ea2a2c6808008c5f5f325153f9254fdd1e",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e96eb8e5f784411490a3d00f80161b40"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i7.json",
+        "capsule_sha256": "ec93a78490db99db78e8ce35e3e298afea28a8cb65287f509fdc65a913fe31ec",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a6c4ae4720144d78ba7c7203f5f747d5"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i8.json",
+        "capsule_sha256": "70d1fb63af9a033d70bd3959cbcec96ecaca85a6478afc1a499e42d216f970ca",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7e37c5b351df4141bcad778ca98f116f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i9.json",
+        "capsule_sha256": "f7471f7075ccebde833b16541510a6d4d87241cfc375cb3e2ad49279edc6dc48",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:21217157558a425b8e4e37ac5455ff9a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i10.json",
+        "capsule_sha256": "9e4fb5282ab2d842ee4c0abf263c5b0e1dd142dffac2ab1d559a4a66ddeff57c",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:96a1a5cf8d084cc89a5cb0487ad12338"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i11.json",
+        "capsule_sha256": "9a82ae4e059fd19f56b096c5fa3be4d38e199a0c5961108954a74480b25f61d5",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:baff72dec5e147e2a2af2b890fe84814"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i12.json",
+        "capsule_sha256": "b45a8c630a731c22ea1033bafda365ab78184b0329bb2db52864d663a9ebc510",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4885f5493cc3427bac1c7dd1571bce3a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i13.json",
+        "capsule_sha256": "2553742d58361d55ddf3149eccc281cae1212f9447227ba5ce48cc8f17b4cb96",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:1c185d24fc104ea6b0fb4fa71a49c2ad"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i14.json",
+        "capsule_sha256": "e833793f283418dafaa5c01c9138657c96a89c5956551a467c06459f10e77333",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:68f9c0020ab04435aba5c934c935bb54"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A01-LATENT-MODE-POLICY-i15.json",
+        "capsule_sha256": "11af931c38f2753cfa5c84de692562892913c32a3aff423825d61d44ab424994",
+        "case_id": "TC-A01-LATENT-MODE-POLICY",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:072b996830984165879e1684c31d0654"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i1.json",
+        "capsule_sha256": "e0d89bd6851bbb25106f1264c88db1c3f6c74b8156df81d29153b0985b60db9a",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5e7cc9d1115247a084e39d90969e431b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i2.json",
+        "capsule_sha256": "1277c60be61ec5120da7c504261b164f02a2c79f9629e9391f87f928a82427ed",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:445be508cc194451b5b7c062cf07492b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i3.json",
+        "capsule_sha256": "0bfdcc2469134288fd296af5c25d9888aedb3bb7275c5b80b60e10a1cf09b475",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:addcf926348e466ca4ea8b36e0629aed"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i4.json",
+        "capsule_sha256": "a313f489cd8056599e041336fc3acde4947c200820e53ff3fca8f8a20ed99bc0",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f92760a13ec941a7a2d8610cf261d1c1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i5.json",
+        "capsule_sha256": "7cac408cf4751c8885c5f973d0e0a3f3d4dfdf3d95b3d9cf5e08db70ca49cf0a",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6ca806e73c904e56b756fe33051ff22f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i6.json",
+        "capsule_sha256": "67ac93b5aa09f771c3100f02927b786440eb615e7bdf9ae616733cada42286ab",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7c15f3972af34790a19a53e908a66fd4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i7.json",
+        "capsule_sha256": "487a18d6f09dfbe3a2e5d9227082721d81060c9dde901099abf0ce99bfd455a7",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8d4250b75fd0413397bca2e18648fd39"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i8.json",
+        "capsule_sha256": "2c249306c4cc69d765659ee8daf0cf926fb3b0103c1e3b55b57dc7d7db8c0756",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:bccc08387ab44778aa135a7bb0251004"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i9.json",
+        "capsule_sha256": "ae009a4811df118acec28843152717cfe9db2e2781af7a0bf245ca038c09b90f",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f0a0c7537555457f852ff9015ab485a0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i10.json",
+        "capsule_sha256": "7ecc294ccb626cff05452e81b0a5e8f62ccfe742cceb01274947e4978f5e549f",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9ed6ecdf4edd4e819b81e34863ffc53b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i11.json",
+        "capsule_sha256": "a8b1d0b163d581716d0f83cbbed631fbe445fc237f062fd192885ffa46097cd4",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d90b2125ef8b45828cf1b198df7118ec"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i12.json",
+        "capsule_sha256": "59e6db89ae679f86a7575fa43e7cb7ef6e225378dfa03560ca24773456ce3411",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:032503882ea8482388e277f9d2561fd2"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i13.json",
+        "capsule_sha256": "59c118ba4e6397508e1f724ae1573885e5921764f188fa28414a97756b2503db",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:56b496a21a0c41c1b9fde9cad795ce75"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i14.json",
+        "capsule_sha256": "9174cbebffb1730654846e842864e8f86cb5def36e1e2890f99ae9a83df393e6",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7fad1d9630fc4b0bbf5f9c85d86f40ba"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING-i15.json",
+        "capsule_sha256": "edc1de8f608f7fbbb7c7e9e7a6049c4cf350f4932be581adf1aedee931103bab",
+        "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d8d299e3e35e4284847a3d091f13ce86"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i1.json",
+        "capsule_sha256": "92b9c22c6dfeb558e5211c39dcb0565f139de06821be8a116b91566ed354722b",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a2ad1a4ee81e4025a1b8867014320000"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i2.json",
+        "capsule_sha256": "8ecc5365a75b73fed5e85e71e1a099c269366816d7e0ea253b7abfed03236ab9",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:288eb9f131f74c3c940a8704f4d63ff6"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i3.json",
+        "capsule_sha256": "1ddb1d81725cf7f1a40ffb180ba8252e7c526ce3138a78138e42a880086d0391",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e1dcd5bbd7dc42ccb01780511cb57693"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i4.json",
+        "capsule_sha256": "e1432049e0bd83b0a95292dd6055d1b00cc5c8d40a65e6b9e4fbfe70b3b32f3c",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:0331abdfccd7442187f97f1f6315056a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i5.json",
+        "capsule_sha256": "c8cb1458f3de0453b7bc9b4ab3a6307d740d0f18bb9fb2acbfa0d854f77954b3",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ca72039b4b0f4e95a0ae5e9622c4369f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i6.json",
+        "capsule_sha256": "3f212cdb9103b76ecb58df1bd3a71c39e55dcc6315083489bc67360f93e4251c",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4e9808f9809847f9afb69660b4835b07"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i7.json",
+        "capsule_sha256": "d35428740e0f8ef0a08257274ff3756b00bc04db96bcf1e0fd96310ed43b92d5",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d2b065a70f364a958955fe15340a96c9"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i8.json",
+        "capsule_sha256": "caf956776bc308cc532656fe32e4697b1c65d1e276cbb651c958a83ef5fd124e",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e8673fcbf9cf4a549fdcbc2bafcb32d8"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i9.json",
+        "capsule_sha256": "d71e09efd51abc5890bfea5c2729614e2709fa19eba60d33c49e384d5365feac",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3b9e127bf2aa4d58a07c73bb75214085"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i10.json",
+        "capsule_sha256": "fb3f45321362a4c97560b144a1263df9393b981abf60bf9934f09bb438285997",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3c052c4fc6424009ae1bfbee3a457780"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i11.json",
+        "capsule_sha256": "2dc0ee8fe1afb05bad8bb89f70701846c71909436874a0d40d9035f0f6427979",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:736ba2afffb44275b593939bbb592a83"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i12.json",
+        "capsule_sha256": "06a3a20c03399f4a7c3556e5076b2275cd59d17d817419193d7d874902fe9b73",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d88bde2907e44826aeb286f73cb45496"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i13.json",
+        "capsule_sha256": "7a9c750a8e12bcbe1f63372141832625165992e0b244be871b4a19e6cfbdc95e",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a5b2375ec29b471d91a233a433475ba4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i14.json",
+        "capsule_sha256": "712c478be7bfb2a0430cefc54b108e9b1756438bb1a163e095f4e9486fc587f2",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7896f6bee33a4e8e87af2be005ea0466"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F01-DOMAIN-DUPLICATE-ASSET-KEY-i15.json",
+        "capsule_sha256": "a1ed57e873467ba074fcfd96d921a8f424a965aa8a77a5bff2d666c8ed79ec7d",
+        "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2d751edd32e04795bdabc125610bfa4d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i1.json",
+        "capsule_sha256": "77b33ef2d4e6b013a868335deb2bd872135e65feb508dd9da2f7a1179ef28c51",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9b8ceb1e17e94e66b9d4fd935612f8b1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i2.json",
+        "capsule_sha256": "6c11e7711ea31dc502c66b7377d83788b298c86a4e58b9f0da0d1fc87b813b3c",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ccc609406ee24957bda990dba724b4e4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i3.json",
+        "capsule_sha256": "a7ae398b5ca1d86184d02f9c76d2574f14a83018b0338442b3d8a2415d137e9b",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:060afda39ec64341997d345aa5acc0e4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i4.json",
+        "capsule_sha256": "20f202f2e48b7c4469ccbaebf4abdcaeaba88ca6b9d70a5935ef46850b9ea531",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:29e595bbf1e542dfbee53560f2c13316"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i5.json",
+        "capsule_sha256": "fb6e5c40e4a66be9588a3b39c195535b63891fa6f4d768514a78f4a51c586a45",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:26c98415872943a2be781f2e3d799e36"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i6.json",
+        "capsule_sha256": "b54765f1066cb3f0ed77017964d5c2c725d9c1342e44a1207560852bddd504d0",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a1b3ae89c29545b88ba0a7d0868aee92"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i7.json",
+        "capsule_sha256": "929f1875438ae87d96c0a772845d721f727e7e1c7d24f4f7fcf00f3417641084",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e5a6fc39236c4157b223f45a024e7411"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i8.json",
+        "capsule_sha256": "25ee3964379d2a264a9d3cd165806513f48859de5adff382ecac8cbc10042387",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e82990c03459498ba7463568a4c0267a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i9.json",
+        "capsule_sha256": "38cfb3045644040fc12adafb6208b9394572e4e68b04bb20a542ddb8516e5bc3",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ec3bc32a226249fb9a3da2a018b9e426"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i10.json",
+        "capsule_sha256": "fdd26d5352828f865fbc62f0ac8f55a1555e30eade1e7e335d6bf1bdb36b7888",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:93370e25dcfb4a7289a613c904d79c71"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i11.json",
+        "capsule_sha256": "c4c848a24c8e5989cac50112ee56879c8c3623c22c5b747a19d3c03dc9def2dd",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:0801342cb7884be19a3bb28a69f0285f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i12.json",
+        "capsule_sha256": "9524a80c8e56bc15c580c9b96b34984fedb6cc342dc5c404921cd788a4c4677b",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:89d33e99e4a94d82bc85eecc549746a4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i13.json",
+        "capsule_sha256": "47475d99c199d6bff009da1c673495c162260d009c1f07c6e6a66accfac1fe3d",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2d9a556a1b664ef397a0c3a80ba6ac88"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i14.json",
+        "capsule_sha256": "a9e876c6b0dffac87b59d4f2c9a522a24fc63a5871f1e81e98a23f0126ee3918",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:378dcf48aa2c4aa882c4761302894c57"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND-i15.json",
+        "capsule_sha256": "d2e3ca4be6271147d401ee2cb930ac8f51a2a534d9b06e9878b1a54d7cc8c389",
+        "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f98accdb2c3c432c8301cda2e9c54964"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i1.json",
+        "capsule_sha256": "9ce8f7cdf761587f47ca7a9ce72e4a93d2fdb3248e4313626e37b09ec3a4aeff",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:70dfe3e0aabf42bda2fa7d035c9f1ba6"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i2.json",
+        "capsule_sha256": "20c13fd9fc62e69ff5f60ff0a37c0c6131c7b739588764373421a11cdca6013c",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d86b84a9b35140819805bbac5dd2d43f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i3.json",
+        "capsule_sha256": "a6accd50dafe3436322570d8d7ce18c459922d704a1ae288fa9cf4edf2f19862",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:aab301cb2e084f4f83e4adb51c5414d9"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i4.json",
+        "capsule_sha256": "b62b2f3c6ca30da74ee8c510c1c896dc1fa08d3935892e105f92a80ffa6329cf",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3cc0b24563914dfbafb9d62204e00555"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i5.json",
+        "capsule_sha256": "ea667fa06eec7d7ab809af15a27e7650f6715c301df1ca8593d19ea8ea8831c1",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:73bc2974c0654e7aa406fd73b81a2da0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i6.json",
+        "capsule_sha256": "d1c59d661d0f293e214f200cb0fdd0322944f289004171a76045610b07160e05",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e43d4a7f5f4e48a6a88ed6ae7cad5f3a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i7.json",
+        "capsule_sha256": "6e486b81e2c3db53b11d6ab1ce5884a33b33dfdf73ea5647e50cb2c6fd369eea",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5987ac0647b347b1b678ad98d8a45c91"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i8.json",
+        "capsule_sha256": "731b316ce4b6d81f239ca2d66f5a042eda23cd26fd212eb0ffb227df729633bb",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2758b916214e4f89b56d6fdb457c25de"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i9.json",
+        "capsule_sha256": "50842ab6f478391ea51c1615267b7887c1821992446d0fbc003fef21a847580e",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:53af4a0b7e004823a524e01c8b294334"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i10.json",
+        "capsule_sha256": "493c7db9ae667675dd88fd0da1bf182b3ec2e3959ff171f2623565e12824ae6a",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a5f086274eeb4d4bb4ccd7247d5ffa7e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i11.json",
+        "capsule_sha256": "ce649593cbc9295a664b396371706c4964f0f296031e209c740298b4aa5f359d",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3b450fb68f59421a9d335c5e926042aa"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i12.json",
+        "capsule_sha256": "0917b993aed5876519e4adbcdd4e003e80a9ca24e05e2b9f953346ca772febab",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5d499fb39ba94325bec7f07a55a27adb"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i13.json",
+        "capsule_sha256": "ee0e21fe6bb3a2476eecf1c56c60aa0b7a7e0bc5e8b77bcdcf15016c506b7a78",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:68ecef3f74354199895575ded48a6951"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i14.json",
+        "capsule_sha256": "635a8b848281bcc7ed00d39604a6d2379fe0f500d79c62513e11fa19f527e007",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:90b49b33cac94731aef68c3e4cb4323b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F03-ATOMIC-CONTEXT-CLEANUP-i15.json",
+        "capsule_sha256": "aaff156de87ecd24bacbe67b29c103f37df06795d026f36dd6cbee823414875b",
+        "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:aaaaad0f5f824a5f8f2d6a7a163abc30"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i1.json",
+        "capsule_sha256": "7c34782e2471369efedfc5a7f298067a0a0cf1c2008ac5278b2fc7df6b7e08f8",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e9c5a65653454929a260cfee0899120f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i2.json",
+        "capsule_sha256": "b715360e62c467c2200e8b73ed4322dbc6450fe0af69f480a7a736feacdb9eb4",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4e3d037dd7434fadb56402d21a087b59"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i3.json",
+        "capsule_sha256": "624c4437a7108eb5703a7c88832450650889eeed53b91d79996f364239e1f4ae",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:45c0dc4fa6964baba6d7c2e8588b8896"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i4.json",
+        "capsule_sha256": "cb31ce4e6af72ea6b5d6b69f3065362910aa23b80014afd47c908d56b06f70e1",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:63ecbb0e834f4fbaaf0fc2aa5ff64bf2"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i5.json",
+        "capsule_sha256": "76a4ab229c4a85eb25be68bcc476990ff343fa36b03d669dfb676b379cf7b037",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:75c1d8ae930c43fa838b2bc711a2c756"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i6.json",
+        "capsule_sha256": "51354c8a3744fc0ed6a2bf008e68ba23fe46d3c03c58cf9b5a52634e5fb3d195",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7ad84bef2a9a47aea7ba5e7fa1b0bbe2"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i7.json",
+        "capsule_sha256": "ddc683e332565b3dac88a38834b76d3bb5828277c1651840074f9b2dc007cd2d",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:dd18e8142f314b66805e0f1673cbec7d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i8.json",
+        "capsule_sha256": "c10b2e5efe095cf6f27555fee14f841326cdd58ac09b8183cedc271957553d6e",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4605c4350bb54621a4a85d69dd684724"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i9.json",
+        "capsule_sha256": "c3524bc18bb4281dcb68302104f1c1a8465a99c56df9ce327ae137d693cac8c0",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:308b2e0a633a4e79b0c5b2267ab38f89"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i10.json",
+        "capsule_sha256": "4e0ad77d3d35cab47ce182f6b9a31e377e3a17534f1fd3fd8e2d80302beb24d4",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:83b440993a8e4a4094f81ecd6aafb171"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i11.json",
+        "capsule_sha256": "b41c13de666d54299dd2d06420be7d9cbbd7fc2055f73e028398ba042821be85",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4c734419ac60481d8c2f6ff524f5cf64"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i12.json",
+        "capsule_sha256": "641d5b5adb1b187fd8b3ec71b62357a0981aeb22e603d24e6022f9a67e7a131a",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6fbaadb33bb440ff8b343b482e71faee"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i13.json",
+        "capsule_sha256": "622e304b7bb5e6882692a229b705817adaf39656721648f4afa3d2a6daaf3705",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:01b3b957626a4f0ca15ccdfbd16dfb54"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i14.json",
+        "capsule_sha256": "d02047e1dfc08288da1599c5058adff80e5fee228eaa103f69c6a49102537801",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f11fce6bb66d473d8d141d0d3a80091b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F04-WEB-AUDIT-COLUMN-VISIBILITY-i15.json",
+        "capsule_sha256": "a140680c0ccd59d13a8c6eb5cbe6963625025cdf3a1b532f9d7416bcc232da0e",
+        "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:cdbcef31e08b4b5fbfce38f2299117ea"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i1.json",
+        "capsule_sha256": "f370d9c80f6dc452d07c21f9c7c79a3e7d898138f7243a69c7f371514823c1b6",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:777a145aade04ebeb20f885abe59afbd"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i2.json",
+        "capsule_sha256": "33f0160e54a53a6286729a2c5248a99e0aa0c739a3eba863af38724a515b0ecd",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6f3cfc3e445848e484a0f47507229490"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i3.json",
+        "capsule_sha256": "28c3a29990b3d2f933fd1287fa4d5a72a2c17ae3be611267fce180bb5743c93d",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:65d33e1344ee4f5d830d0b7dc568be3b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i4.json",
+        "capsule_sha256": "5595f6a29dacd9837b83a8cbd9be24f115f5cc05ca53e06dba6fe54c52aa3d40",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:fbe63bb411df4772a498122d92bfd0d0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i5.json",
+        "capsule_sha256": "1a7132258dd1b66469554c5788b8c0861788900ac7d98dbf3f9fcdcfc4afb9c2",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:581448d21b9745178e037f96c2f74bd6"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i6.json",
+        "capsule_sha256": "0fcb81c5b54ace72f0544a89c70d1a4f62909b39a84ee6889ec10220464c5fc3",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4e53c3fc19be4232a2d10b9fdc5ec25b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i7.json",
+        "capsule_sha256": "5f948ae4fa1a1bbbf49addee481224b613379692819afa1b72f21064e5c07667",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:1ab66b4999b44b03985dc7f1ca31864c"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i8.json",
+        "capsule_sha256": "44bd8e358709549e3e1c0ee356c6dff96c5963eb3702967e391d29292ae65c79",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f15d7f28ae6342f8bbea610e1a1683cc"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i9.json",
+        "capsule_sha256": "acf77bba57914570a36f6e656039ba3326a707ee50c93d4881b1a36ea08f3261",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:b13f6bda9d844dc0a14c65375b31af56"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i10.json",
+        "capsule_sha256": "f20b3952122382a081e45fda768a50d84521b792ef718df003717c696ff6e4e8",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4414b45bf7814462be47f90cc9f1d75f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i11.json",
+        "capsule_sha256": "382c10960053fc5aaa626cad9a7420a373099f6f456709cd2372430e5b89002c",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:58d51932892f480683ff3a8cfebb1ddc"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i12.json",
+        "capsule_sha256": "82baba33251d059e99a346bcbd4fb76e48d0df32eaa05b474a249f25cd506ab4",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:56ac2b7c282e45b788331c66814800cd"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i13.json",
+        "capsule_sha256": "b306e4cac252cf745ed18ec109d668ee36567c20460a59aa4e281b2165a4eae8",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:15e9da871fda4f668a6326891e5b8bc1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i14.json",
+        "capsule_sha256": "2d9a45dec8ce265bb486a79943e92655367439eee0e034f2d1d4851a66e474d9",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:b923d8ee9ef546adb46bf90a15cf8e85"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-CLARIFY-UNITS-MODE-i15.json",
+        "capsule_sha256": "fb5cb04f844fafcd3a2096ab2b0fb4d9ae6e6465ece321f3b03c7ab42c7217c8",
+        "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:dc941cee10cd4f61b54a4c971b5c1b6a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i1.json",
+        "capsule_sha256": "cd8f8f8e9c0c1a69eab8316181459118fa529070daf066b2ab26dd819b6ee0fa",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:139b2cf36d494cbea02bc23f70ccffaf"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i2.json",
+        "capsule_sha256": "50c6e746246ce55017704773bf1c21eb830a978fd02d1ed87ae482d20e2a391d",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:96fab591332f43c89a586e576a95fe56"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i3.json",
+        "capsule_sha256": "4e87f1738c4101dadf29c526eb5b154a5f9e0f1d99b688f51874e35665421e8f",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:c243c759882c4c5f9974c106565a9448"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i4.json",
+        "capsule_sha256": "9a2a1b83f55eea693962bc45672ecaabc5375480054c48d78d1a12b17423b79f",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d3b4df4dc4b941de932c3c58551eddc8"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i5.json",
+        "capsule_sha256": "455c83676258e2a2b551a4f71152b6affa8a03b826225b9d1f3431aec3f27479",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9df9493fa7ac4fe899b94a34c190a7fb"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i6.json",
+        "capsule_sha256": "8e8534227425fd8cc8f22cc3db1b9a1e70bebf59e965ce53bb397685978193ec",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:519a431123e4430389d00a99203ba79f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i7.json",
+        "capsule_sha256": "061ed6931f1298d449df19561e47e795461d39327b0d2704c44dcd00084fb380",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7a832b6c327f4c34ae608974a9c191a0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i8.json",
+        "capsule_sha256": "bf2e22815f94b44715ac35b75d1ec8382a24d6113ae73b225b12dbe4fa1cf9f4",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6ce5e8e4aaf8453f938a7ba5a30ef235"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i9.json",
+        "capsule_sha256": "c4098ce91df3450cc9765b0283a2a46c63cfad17acc5f05d83ac3b9a87cde3c9",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d4b28a5c96c14ed5a4a58ef73d4a6a65"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i10.json",
+        "capsule_sha256": "1fe91f48be1ef928c86a492efbaebd20f3e29bad5faf2a1b0741f9cb6b4a8150",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9dd43899ff924d56845258f372ce1c7b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i11.json",
+        "capsule_sha256": "3275bf3c2b2b6e40113cb33b66260b7bb4019bad1c39f25a410f00dbed5b5b12",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:bf95750fcf454f08bf7a2024519aa296"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i12.json",
+        "capsule_sha256": "5e06d1efbc9155d319e059532d46327732bfad62d5ab9fee03446d280e5ab5db",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5507ee58980743e4b4f77cd323548058"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i13.json",
+        "capsule_sha256": "a9aef15a22175434234391a6f3f30011a2689f488641b1ae1097569948574eeb",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:680eb262520b4cc0967117a4d1fa85db"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i14.json",
+        "capsule_sha256": "1d61f06d17768ff91fde71f30d8da11bc5f1e13c9783a46d2a820f7d31166f35",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:796c8185573a47b4980e573f80553fa0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY-i15.json",
+        "capsule_sha256": "9e9dde7d84f7fcfdcdf6167e21066f453f582ab1c6885175cdf5e5a7fd1b7657",
+        "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:775b35b1597a4286b44fa47a50060a81"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i1.json",
+        "capsule_sha256": "367687de1d7915eb3b11002dd067c7d061234389b7e1ce5d440007eff94e4d96",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3e7bb762633f41afa0cd2f79700fe8dc"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i2.json",
+        "capsule_sha256": "fd5c1bd52faefc2715e986a404d5545c6fe5621de3fdff5b5ed6970743f2616e",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:12afba9101b741e9ad073b9194c97800"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i3.json",
+        "capsule_sha256": "f1133268f9745896480d857d35f1f9724f93e2212596c886b97bab1bb03cf1a1",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d2ff4c325d3a4c4c82109795b852c57d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i4.json",
+        "capsule_sha256": "96b727b17d729c3c3d11fc711bf20732af0eada902cfb12e640ba76980fa6c30",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:c0d80efa1c95487c8f7566b393434537"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i5.json",
+        "capsule_sha256": "22f6f81f2b64bf9b363cd131ac2f43aed992ea9894ef2652cff70e1e078c55bb",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:91dad23e7e1745b98177ad05315d50a7"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i6.json",
+        "capsule_sha256": "fa337f323da6845c36a27fdef2b128ac8ef6abd83d70a4fa8eeebf1100257c2c",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d00f5f36ca6d4e27afd4a6b89b27e4a7"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i7.json",
+        "capsule_sha256": "207ebbb0f8f6b391fa89bfe4aa502387b5facdae57cb7ba44b7dc29d02b55f5e",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a9b570b673f249668ec2544676f985f6"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i8.json",
+        "capsule_sha256": "8efaaf26689861f7b0f43cef5054a8fbdcfc9e3960a0b51f5a123f4376c41cfd",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:109fd7bd0f2b4bd0adc22dcd0038f82b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i9.json",
+        "capsule_sha256": "62ea8664f750ff0211525e901f6b88dca58d16a21e7092537238cf94d4c2f63a",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:804d5bb210624358a77e059723bdc22d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i10.json",
+        "capsule_sha256": "bcc455991e355962fbe531a30ce6c9a731f8af7bcb3f05869bf9ebc780255b26",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5e6ded0993304d48a987d3bed89ab0a7"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i11.json",
+        "capsule_sha256": "dd417b9977643b41b7b0cfa1ed6f875564fc9bade86123075651f9d9eaedeed4",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ee4ebfb0da6b43929ce108b2dfd86031"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i12.json",
+        "capsule_sha256": "32ce389a4f61f34b8bc33db79a1d321ed53a933976dae5e94d9ca4d58a4caa62",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:275ce25b3ae948f0abe318bb3a97c958"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i13.json",
+        "capsule_sha256": "f3fb55f6d330bf9616cef825e1eec84be458522859c9fa767db04347f9eb25a8",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2bee6e735ed240e0b0e7f35788a6e68f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i14.json",
+        "capsule_sha256": "abc888cb69c2d57e8cc29ab8813d30a9e61105c0813335caeb7164d32e414b38",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d3e5c81f60804ba78ac7274cee675869"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT-i15.json",
+        "capsule_sha256": "00034734243a7921f723071631dfff858e46f5e40cfc09a88ba14fd2d22c081c",
+        "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4d80b5dd6fd6455e867a3a4039ad38d2"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i1.json",
+        "capsule_sha256": "2f14e1e5c8d21fc7a24b10510d8d8d4e28bb4ac1c81ef4431ad1ab7074b8113b",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6e0b105021fe44bba7c387c71daaef39"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i2.json",
+        "capsule_sha256": "ced191f5491644b0f9bcdf386db068622e674b8931d471028d0b96e43e7268eb",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:642781d4178445238a40c1115cae8d28"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i3.json",
+        "capsule_sha256": "a18309d69b9f6bac27c06437196a821af640b09fa335b20d135b878c3cd18bff",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a1acf9a4807042d3b2da31f01017f228"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i4.json",
+        "capsule_sha256": "ac0400144a58fb140b167b129bf77b85c54c1d6825d287ce4557a4570c64a94f",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:38d5294c698b43059128342a839e78ee"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i5.json",
+        "capsule_sha256": "8a9d77a1d267e2f39e1df0830f56cb5804327e3cb06f1618878914c13fd41d53",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d01900b1f344446c93fb904a7a120d88"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i6.json",
+        "capsule_sha256": "c096d60d7e3f6f317b46f4774fbd411df382dca9a90ef86980e1d340893a7a6b",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2964e0cc7bd0490186874f527fd1d80e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i7.json",
+        "capsule_sha256": "c20162a2433b2e3f65a2aef162cb258a43ca4a26c08a46ce668d837d76e1ab0b",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:1dcdf7cac8b14a8e80e0f0b1533277c9"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i8.json",
+        "capsule_sha256": "e41ef2f136b0d1106fb9ff06f9642ab2165f4da3875c3c3749c79007bfc862b0",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:28dc9d6a958d4002a0ae8480939ad209"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i9.json",
+        "capsule_sha256": "6f927339d39cd85602292d2c0dbc6689dc5bf750c36bc5c65f4265fb666633bb",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8b63b0da37f9452488fe62924bfcd7a5"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i10.json",
+        "capsule_sha256": "2ab28db8bc0a056089cf745ac1046291b79276f1d6acadede3185b5d356642a3",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8a952e559f78497cb8db6294c42e83e2"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i11.json",
+        "capsule_sha256": "6e85af2818a876644e903f4206da31eaa7c0ef2a8701275205d56a7af2cb0a96",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:b6bce0d384234b95bc19f4dfa0e63624"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i12.json",
+        "capsule_sha256": "b314f580956e4392ae63da67fd462932df7f5741db920fc5fbbe3a8693b9ecad",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:de7c38bc24b940bf9e66b63f82cedba1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i13.json",
+        "capsule_sha256": "c0dc72cc08691b10f828150145d312fab1847b2587c73b9412e15f93e5fe76f0",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:218dc4e6990041f08a2c49343d4f2e06"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i14.json",
+        "capsule_sha256": "aa878c91582af92e1b25c5504afb0ea99ac760578f90ec7b75eafe0c4bbe204d",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f02f95be800a4f51ac5e2472b704907e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-CANONICAL-V4-RUNNER-i15.json",
+        "capsule_sha256": "d26456f36401ba6ab9719eb8b4e2bbc6812cae673522bc7cbc1ceae6e6c54591",
+        "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:91e1c8762381471897ee52afbbc8ade0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i1.json",
+        "capsule_sha256": "a0184dd11911d083df504b0dd56725ab368343c2c2604394b9a7ee1ebdaedfd9",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a9f5f328345e4010b78d527a2c9bb8c1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i2.json",
+        "capsule_sha256": "a98c8d6167017a5a6d5604f257cf0d90363bdd3765245cdfef5a0cd3f4900328",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5456c603ea884136a99e2dde051f317a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i3.json",
+        "capsule_sha256": "23cb72a6dba71e362aa0585f67a5c2935c24facfe02210a4b6933691ea6bb384",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8ea4d396cd0d428e80763fbfe945cb65"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i4.json",
+        "capsule_sha256": "9b4b66857295b1f47b1a3f10d69b506938565177238ee0075522fef32ace81e9",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:95ba896eb2bf4978930a3b1c222dd997"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i5.json",
+        "capsule_sha256": "38ffb493cbb4a8c8a8da5cfc0a8c0c1f91227b0259a93ec572724f8ed87f11af",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:73627ce8ebb34a26a414235edf4cbf15"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i6.json",
+        "capsule_sha256": "555e7cdc7921617e597239ea16816afaae3137de09833369fbd459170e66c3ec",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:24e0b87295ec41249925e1c3cd3ffb4a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i7.json",
+        "capsule_sha256": "0cce681f34a2c48f3cc5f2d083ca0bfb51b501d690e0acea1e353ac6051f6565",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:c64ebe9bbee64071a457583fe94106ed"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i8.json",
+        "capsule_sha256": "36fcc7588c6d65b6c5f12218a23cd8fb5fe42335edc4eb63856557be02a85ffb",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:984ff59bc5354760858dfd3e6ef0c6b0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i9.json",
+        "capsule_sha256": "fc9f0db3b58affccfd185230ddddf48bb37e26c943d28048865df26653b283e5",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:05a6cfd0542d4d7292468d022605f68e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i10.json",
+        "capsule_sha256": "fa2db9aa3f732dba1e581f2eb46b892db42b7d7e44b2e3d468957a76354f194a",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d5d22b3a66d948b480ab21c706f63a46"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i11.json",
+        "capsule_sha256": "7f5586a05a25258327b2ee1cee90f010881285dfb15c34693061edc9db87ae75",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:3c60a3cc17c74fa5960d319edf97d470"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i12.json",
+        "capsule_sha256": "e4520da33804ca1504dd4f6d9cda2ac1ed1cf926b28fe53c6d8a0a979a00eda0",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:a20c05c00736473ab702060d5f480a50"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i13.json",
+        "capsule_sha256": "4bd13318e32cbc7c47d9d7e6d53940623e5861ad3520012257ed86f4d15f1c50",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8d4b628ff62a47768f8516b63a89e3b1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i14.json",
+        "capsule_sha256": "e2d911dcd95add222b32f5888f9cce926d3c49fd1c61b2ca76053cad1a638a01",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:4206aa8a32644bef8d6869d6dffd32fd"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F07-DEPENDENCY-PROVENANCE-PAIR-i15.json",
+        "capsule_sha256": "3642c0ed90333ad81e5a44382f8d071b1843f1fba7302856e7497d2602418bb0",
+        "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:005bad54aec04358b4c45e26e6bf4bea"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i1.json",
+        "capsule_sha256": "f56ae6ef133e010625ab83e28ff675edc092755a20e96185c0ae407c47db220b",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:0ebe7f9da3354b6ab6656f3a16a23660"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i2.json",
+        "capsule_sha256": "7e7d36ffb2e82524aec432b1fbfc47def7aba7a3e833c4cf29253b3d2921c261",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7cab9645a54a4640bef6ee08f77d7c7d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i3.json",
+        "capsule_sha256": "055af1aab98b964bc3691f7d22f95e3987818a64348d8be57b7264d258b3fb31",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6b1b2df943b1412a808d6453fe40508d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i4.json",
+        "capsule_sha256": "32c6cc1f193833033f4bd00bec07d7b19059c75475de342a5ad7ed68b6b925db",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:8f35e489cee84b5e96cb5c8ac480dc57"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i5.json",
+        "capsule_sha256": "ea624721955d7da73f3d6d9f662b96ffb6a15527ea182c5db79a90850c0039d9",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:879b01e9a9ef4d07962cdd092fe37533"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i6.json",
+        "capsule_sha256": "657234e9646cff44f414d027c7f9182fea6c2da81b1e5dd55979172a200dd46b",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:67afdd0e5c1848dd9b542a2e70f1e726"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i7.json",
+        "capsule_sha256": "211db5247e65d284866bdca5d641240ff97aa0eaf7d358f7412327a05c233f29",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:32001a371f194c96a9570960bc964002"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i8.json",
+        "capsule_sha256": "aa5198b39a84a414c24b3232a65cfe370305eb8daa58a1b9416b9bf1934946d2",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d396e237b9b049d9a6e0454b956c96fc"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i9.json",
+        "capsule_sha256": "991fa3e1e4fa10606201d12529557da4432841d7a7686b17b99039d12db936ab",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:03b9e14aa192420eb21d9fadb70bafc9"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i10.json",
+        "capsule_sha256": "1d526814fd994a1072b1c2a77cad08cc944cd03b8c522c22c7b829dcec4a9732",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:e691777f72ca425fa13ebba316347bde"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i11.json",
+        "capsule_sha256": "aa5696f3f4a21a35221d7238f7d7111e5400bed38fc29c266399afdb2926a7a2",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:b15ac97d468c4f41808d8375fde833e3"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i12.json",
+        "capsule_sha256": "bb074816ec8ba837906f17f9bfac21de80abe02dc33a4775a208c043726b63e3",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:bee5b50744f3401b94052e73cc80007b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i13.json",
+        "capsule_sha256": "da665b262dfe5fd23205cf70425c84dcfc00a58616b4ebccffb8ca70c3d6eeb8",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f76d70f3033a48c58137a2f5bb81b323"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i14.json",
+        "capsule_sha256": "9e46c1622619ff456524cb8420d5bd561d730ca1c0f162e1d4d8eed9847ebf41",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:7ce8da5649bc48b6bc5ec4f75821f459"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F08-CANONICAL-CLI-REFERENCE-SYNC-i15.json",
+        "capsule_sha256": "4c376c81a1a0a3e59bc5c2beeb1a5dee29e9a1d9f5f4fba294fe091d643ebdde",
+        "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d14fa8797eb64de19c980d4d991191d1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i1.json",
+        "capsule_sha256": "f6ef2db3e64fd9ff4eb7b92f0ec185b293d16de1e1e061f11b99e8a0d420edef",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:826cd23ae6574cc8a15073e9f26699a1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i2.json",
+        "capsule_sha256": "8101061b7f4797d06168226ee772157b318eeed63f64726d2cabc1a6fce043df",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f5df9eed492b4873a7827ac1e9c25798"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i3.json",
+        "capsule_sha256": "304b2f1434cb1db8ebca1105659d387dd5fb1d4b5d6906eb2da075cfc9f5f016",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:2e79e6aada7b49fa8625009073fed12c"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i4.json",
+        "capsule_sha256": "4f99863f078bf06b934cf9344a487cb507abdde706ecef71739d6913a7defb5e",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:01a6b4330a6f47599adddba5eac67c93"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i5.json",
+        "capsule_sha256": "a410df5527c2156dc5ea3f35113e3d8f05b676b52127942d193a87987db00c25",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:c86937e5b5b14443a95a8de0cb90bc80"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i6.json",
+        "capsule_sha256": "ecb00b7872a57b72413cfe1d4d24fca01a4d111327a57dfac19b64bbc5dce747",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9a1fb0a1410e405a80a7129323f29f88"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i7.json",
+        "capsule_sha256": "053b6e69ac32deedca0acb39d2413901f711f44cf1e95a6de886f105a0e40e05",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:84c03e94b90447ed8f7ef9721cb1b150"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i8.json",
+        "capsule_sha256": "f318a19f4a4d73c06f0f4364e1ade8a26bb463054e1c3dc97a87757c48b7938d",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:cbfa3088c15e49d9a7799cf08226aebe"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i9.json",
+        "capsule_sha256": "41b752ec39f58c9c91e23344a89e8a489c2ea76ef95c55600364a6e328101213",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d5722cf7c63e4c4b9fadf2b664172a99"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i10.json",
+        "capsule_sha256": "c5f53eed6d5171fe28747ef26dee7afdcb0407c3ab35fe590e0b249ad8d0be9a",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:c9fcd5f7302649d9b5ef0b8defb414cf"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i11.json",
+        "capsule_sha256": "3c68d7a2f0d570db7d56c60c48e0fb8c43c1973d2baaa4b61235ad26690b2fa7",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:d2098cd85c1346a694e894c37dc8237e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i12.json",
+        "capsule_sha256": "f5125fbc981aff917886e82e5c87f339b4498c26761f9dd1c3b7c2d72fb056ee",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:473b187016d64be39af5d82e7909436a"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i13.json",
+        "capsule_sha256": "7642c169b516594c73f6a0d05ea6aef9f37c78508d2858c2ed61da04377bba35",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:427a07943a1c4210bb0fac1ee621c223"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i14.json",
+        "capsule_sha256": "8366a0296b1ac7aaa56e0e8001ef95ac32916166a3a3cd3ab0fb05ad050ecf8a",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:11d22b76bbbc460c89a46ea01bfb40a0"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-ENTRYPOINT-INVENTORY-REVIEW-i15.json",
+        "capsule_sha256": "8677aff3d94c692c812be7361c0732eb21972454163209ff740a0093cde17c36",
+        "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:ee20ab6317df459f8e5d1f65f50ffb81"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i1.json",
+        "capsule_sha256": "478fe5875ca1bb603726db5a5a55735041bc1cc4425ee50623c4e736aa8c426c",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 1,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:fd09ea01f95840aea471c84271e1b41e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i2.json",
+        "capsule_sha256": "0abaa954b1fcb2f893bbeb3186b5bf9723ba6558311fa05d8accb9e60d510625",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 2,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5074a9753817482ea0e4c3fb4b398cc1"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i3.json",
+        "capsule_sha256": "a356ad4b473e7ff0c5ee87de9d4cd0ebac4bd9842a74e73a22281eda27e1cf58",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 3,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f29e296f63ae4adf88817989e7bcfc54"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i4.json",
+        "capsule_sha256": "cb203ed64a93f8ff41cdae857ffc9e306b5b0d00f13682ba2b9b1a2fad442c4e",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 4,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:77231011a19f4eb997128cb24fc6c59f"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i5.json",
+        "capsule_sha256": "47c5dcfd1998976e644ae95c0bc4d850fd3eb280ad3310f4b8b8743b68ad746d",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 5,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:62e785f6cd414fb89404044ab4cbb50b"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i6.json",
+        "capsule_sha256": "deca44533a23b58a648e19a6d2d7139b05b83cb22386c6808d3a82e6867f0af4",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 6,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5782253dba02412a87e7b4ca7b2d619e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i7.json",
+        "capsule_sha256": "7b79b8751e5f0c3a987413bdb09f7e0d798728f2978e051886e2df77c4c53028",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 7,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:786d9f63452443dcaf1193f23ef2ec9d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i8.json",
+        "capsule_sha256": "ea71d7423363eb7778f1ba5a09bbecaf25a0378870912d606f1992769e01f07b",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 8,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:5e02c787eb5246cf857c139ba53c5ea3"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i9.json",
+        "capsule_sha256": "e8959a007ae7d2d9e5bfbd39b9146134521462a24f600d1fc1ed828d083dad2f",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 9,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:b56fd5774fa04520afd67a0d4ebc7828"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i10.json",
+        "capsule_sha256": "f9b456b21e8d8fa21dff2e517829241abae9352698d6b56beba6e09202467006",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 10,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:6e6ff75191134f7fa05a4f78900de89d"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i11.json",
+        "capsule_sha256": "b8d176b49f6583f5cdf14c43ba6bc6826747e28d9c73a56c7afd9515f4b30157",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 11,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:74e19bcb81cc47b08c5cb60815fee669"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i12.json",
+        "capsule_sha256": "a2dec82239461baafcdbc5037dfb43669e33a206023d0de5dbf6d712e8fa0f7a",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 12,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:318a7c47070c452cb69eea5563b6b5c4"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i13.json",
+        "capsule_sha256": "8a8740cc596b4b4237cee63b8f9478cf2e495516b2a3ef1f44439b1f65ff3321",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 13,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:955dbc12304844999e4cb4bc993c41cf"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i14.json",
+        "capsule_sha256": "c54f038d8472f6a59839b04a9773ac99a29c2ba12ccacd7e87e7ecc4d91ea39c",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 14,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:9cc16a3d7aff4c76b50a424e1efdc71e"
+      },
+      {
+        "capsule": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/capsules/TC-F10-MONTHLY-FORMAT-TEST-REVIEW-i15.json",
+        "capsule_sha256": "8f31294b0d8b5fd88c340beb85ff4772e0dd3371b3e93dfb20072b27b4b06751",
+        "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+        "iteration": 15,
+        "sample_id": "planned:496220bb897a4bdc8eca12149e85e37b:f518e45a1c10469cb1cd44ef5d3a450f"
+      }
+    ],
+    "codex_runtime_binding": {
+      "alias": "codex-0.159",
+      "codesign_team_identifier": "2DC432GLL2",
+      "entrypoint_sha256": "ccd1b9441d35ce30102059c78514a125d676e6765ea1d001033e8cbe88718314",
+      "executable": "/Users/kenn/.local/share/codex-eval/runtimes/codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6/bundle/CodexCLI.app/Contents/MacOS/codex",
+      "runtime_id": "codex-cli-0.159.0-aarch64-apple-darwin-5e6a1e288aff4cd1e5d9cb0b6eb568615487c47abb48be2589feafb32c525ef6",
+      "schema_version": "the-caption-prompt.codex-runtime-binding/v1",
+      "version_output": "codex-cli 0.159.0"
+    },
+    "compatibility_key": "c1f112965bcb938f75f0c495b2ffab1ba1ec2cf0a67562f39a2c246caeff907e",
+    "coverage": {
+      "case_ids": [
+        "TC-A01-LATENT-MODE-POLICY",
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+        "TC-F05-CLARIFY-UNITS-MODE",
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+        "TC-F07-CANONICAL-V4-RUNNER",
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW"
+      ],
+      "iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "dispatch_mode": "atomic",
+    "dispatch_plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/dispatch-plan.json",
+    "dispatch_plan_sha256": "8949e551d8afe3868688562f966418d9214e4698bdc87576af280a44c5a47fe3",
+    "evaluation_set_identity_sha256": "2096d15e9d5d072e09e92313caa296caf8853c5e86f205d4d9f819b576263c33",
+    "fixtures": {
+      "TC-A01-LATENT-MODE-POLICY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5099f9cc77572f47fa9666fbfe09aedc6cec329247e8c5c23e906528e0e6d5ab"
+      },
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "d97bc408f4039cb02cce46d7d4427875516d2c991427d81066b1f61404f14e66"
+      },
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "5fbbf3e5de7bdb51b8d9586707a63ce6e88b3fad3286f5b00fa984cf080aa52e"
+      },
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "775d76d3d31b2b0814c96dab431e9c1733545fabb287be49f397fd3d8257b443"
+      },
+      "TC-F05-CLARIFY-UNITS-MODE": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fac9ce123bd9c4b883d7b9419bbd0f86d88aa5227ba910213d5bf5f30206ebf7"
+      },
+      "TC-F07-CANONICAL-V4-RUNNER": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fb705604d30202b79e1c35c3a00b03ca21827d971d855db2e5c09c419941787c"
+      },
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "35a203ed28d239b0e2b4c9e591e16978acd84283ae14f218b42ae406df6c7f80"
+      },
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "fa8a4bb732ab3d54b650d9c3d404e920c54cb5dfaa74b892d77e0332bf9dc709"
+      },
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "4f6bd603081a4f33c16658a4effb50f36816bf814ba13301053a4fc590a08ebb"
+      },
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+        "algorithm": "sha256(canonical-json(path,type,mode,content); excludes .git)",
+        "digest": "261dfd727616c53823a4ca95512ee9f1754c7f2c9bc301e5baed634b87938bf4"
+      }
+    },
+    "generation_receipt_content_sha256": "cde7130df0d7f3a07f24d27c5c759e693e68e46740eb6749d7d70e0ed1a82ea8",
+    "global_plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/global-plan/global-plan.json",
+    "global_plan_sha256": "ed1e0da5c4deb7c8fbbf0c3b6493f0ad4f753b494623fcdccf612d08eafb41e0",
+    "issued_slots": 0,
+    "max_workers": 24,
+    "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/c286-low/profile.json",
+    "profile_sha256": "0b02197b4deb531bbdd8c5e46e8f091225e01b00d1069661463a4ef1152673cc",
+    "prompt_set_identity": {
+      "bundle_sha256": "eda8ec3004c9c27f1d35e34cea9769895e7bca7e416a8d2a206a9ab9bd94dc6a",
+      "name": "the-caption-3ce91a4-start-read-batch-r1",
+      "revision": "r1"
+    },
+    "receipt_content_sha256": "335219b2c8225d4559600f49ade5dc2ca17d0a50685164ebf5fd214bd304e7bd",
+    "reference_result_content_sha256": "aa34b34a23828dbe5113bcb048147f2dbbf33602340e95fc9e98088a2d33045d",
+    "reference_result_id": "d6fb28dbcef44caebc516591fd720eaa",
+    "registry": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2/result-registry",
+    "schema_version": "the-caption-prompt.comparison-preflight/v2",
+    "status": "ready"
+  },
+  "execution_period": {
+    "started_at": "2026-10-07T10:58:21.913584+00:00",
+    "ended_at": "2026-10-07T11:04:18.798720+00:00",
+    "elapsed_seconds": 356.88457908295095,
+    "attempt_count": 210
+  },
+  "execution_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c286-sol61-low-standard14-n20-20261007-r2",
+  "quality_all_four_held": true,
+  "scope": "既存70件を保持し210件追加。累積全14ケースN=20。N=5基準との差は参考差。採用、本体反映、PR、マージは未実施。"
+}
