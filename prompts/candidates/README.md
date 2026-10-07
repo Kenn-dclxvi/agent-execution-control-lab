@@ -292,6 +292,8 @@
 
 | [`the-caption-3ce91a4-repository-read-scope-r1`](the-caption-3ce91a4-repository-read-scope-r1/manifest.json)（Candidate285） | `the-caption-3ce91a4-validation-single-call-r1`（Candidate284） | 情報を確認する範囲を依頼・適用中の指示・作業対象のリポジトリへ限定する1項を追加。他18対象を保持。[設計記録](../../docs/candidate285-repository-read-scope-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c285-sol61-low-standard14-n5_2026-10-07.md)：有効70件、得点分布{"4": 70}。採用は未判断 |
 
+| [`the-caption-3ce91a4-start-read-batch-r1`](the-caption-3ce91a4-start-read-batch-r1/manifest.json)（Candidate286） | `the-caption-3ce91a4-repository-read-scope-r1`（Candidate285） | 開始時の確認と、名指しされたファイル・適用される指示ファイルの読み取りを最初の一つの外側呼び出しで行う無条件の処理方法指定を3項追加。他18対象を保持。[設計記録](../../docs/candidate286-start-read-batch-design.md) | `not_evaluated` |
+
 candidate bundleのmanifestは構築時provenanceとして不変のまま保持する。評価状態の更新はmanifestをin-place変更せず、この索引と独立したevaluation resultで表す。
 
 C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、バンドルと現行のcandidate索引から削除した。

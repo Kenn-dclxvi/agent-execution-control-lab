@@ -1,0 +1,1172 @@
+{
+  "schema_version": "c285-start-read-split-analysis/v1",
+  "generated_on": "2026-10-07",
+  "scope": "C147（9月30日）とC285のGPT-6.1 Sol Low・Standard14 N=5のうち、TaskSpecがファイルを名指しする11ケース各55件。保存rolloutの読み取り専用集計。",
+  "method": {
+    "prechange_calls": "最初のapply_patchを含む外側呼び出しより前の外側呼び出し。",
+    "first_named_read_call_index": "cat、sed -n、nl、head、tail、git show、git diffのいずれかと、TaskSpecが名指ししたパスを含む最初の変更前呼び出しの番号。",
+    "first_call_has_discovery": "最初の呼び出しにrg --files、find、ls -Rを含む。",
+    "named_paths": {
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": [
+        "run.sh"
+      ],
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": [
+        "src/domain/market_units_snapshot.py",
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": [
+        "src/app/v4_engine.py",
+        "src/domain/collection_history_updater.py",
+        "tests/unit/test_v4_engine.py",
+        "tests/unit/test_collection_history_updater.py"
+      ],
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": [
+        "src/infra/context_repository.py",
+        "tests/unit/test_atomic_save.py"
+      ],
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+        "App.tsx"
+      ],
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": [
+        "tests/unit/test_market_units_snapshot.py"
+      ],
+      "TC-F07-CANONICAL-V4-RUNNER": [
+        "run.sh"
+      ],
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": [
+        "requirements.in",
+        "requirements.txt"
+      ],
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": [
+        "docs/reference/system.md",
+        "weekly_main.py",
+        "monthly_main.py"
+      ],
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": [
+        "v4_daily_main.py",
+        "monthly_main.py",
+        "weekly_main.py"
+      ],
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": [
+        "monthly_main.py",
+        "monthly_engine.py"
+      ]
+    }
+  },
+  "summary": {
+    "C147": {
+      "runs": 55,
+      "prechange_calls": 122,
+      "named_read_after_first_call": 13,
+      "first_call_has_discovery": 38
+    },
+    "C285": {
+      "runs": 55,
+      "prechange_calls": 138,
+      "named_read_after_first_call": 47,
+      "first_call_has_discovery": 47
+    }
+  },
+  "runs": [
+    {
+      "condition": "C147",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 2,
+      "run_id": "28ac642db5ae4007a2fdb42881ce15b5",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "49e0b053349b57c2093d66115856836b8a23f57025348bd14f4a08aef4ba8595"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 4,
+      "run_id": "54e74f24c35045dd937bbf1a2850b87d",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "13d9f71eefdafc0a46607521950128a58d1e00a0a4530061d2eeceb398103608"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 3,
+      "run_id": "ac2e22f78b2747778a723488773c0fe6",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "07d44c329205d1a1ac414a22626a5e217de702930b014f324e5e15c24c962cff"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 1,
+      "run_id": "bf3e02f0238c48faaddf456f789dae80",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "8137c5768375fa3ed845ffa0547ebd7af95d93bf9f79002a23468abfac9402da"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 5,
+      "run_id": "a3e099ecc35d4becbd9b3c70f1b8c73c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "a3d516243a71bef87c46fd0de46385e38a7b2e0d7664434f86bb92f9d9cd55b9"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 5,
+      "run_id": "3b1d27cb485d4ff999eaa3236645e701",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "24512d24c2709589fd6d9f58a17eb41cb0a42f8a84b2f2d2a9d0e4fb3b33d9c7"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 4,
+      "run_id": "e064829a887f4460afefd604fdf45a1b",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "da2995824256c9d070f29fcafb64b49a126dff2efb304dc66aa27f1c1bb30570"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 3,
+      "run_id": "71d3e80687224e5d83f25a144bf6513f",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "24629e399c89748f06f84a67fb069d6cc2dd83aa937d187a15d5125015355ffc"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 1,
+      "run_id": "c714ef7bf32e419db3be54d294db3bcf",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0b812506b19eb9625e89b97a878942d9668fe2096eb9ef7a388eadff68126459"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 2,
+      "run_id": "52cde5bcb5f74d0abeb72e3d202b8164",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "893398e53d51ffb7ec6e425bc3f9ab0ae18ce407fedd1b7c44af01c2e80d566a"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 3,
+      "run_id": "648ec8fb70e742e1b56c4e4e5ee6a1e2",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "f920a42cea41a42dbb530a8054c0223c2e7a219707cf14881264127336c53d3b"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 1,
+      "run_id": "aaaf3519cca54b64856fc43e9507759f",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "a4e4784561e363039484ddcdc3e21c2f21e51fe6af346056c54508636587509a"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 2,
+      "run_id": "458714514c114064ac514015308d2014",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "5741e51c6b654869ee3ca4230c503124ef545f2a2d583793b339daedd0561677"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 4,
+      "run_id": "dafdd3ca30c14b418c0693ba76540e35",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "2fdfbbea1a1c16567b2779d6317687a80180e426e99a9e2b276bea2b71cd1f32"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 5,
+      "run_id": "e425c6b867374ce19a9c7bbf0b6f5cad",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "d583c965495244fa12f89c27744ea23cffb77e9714c1b24d5d2ec5071d8772d7"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 1,
+      "run_id": "c74c4cbe07fc44d48178ee2f73bbf53e",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "cf6e520407f4f1d841cb96a94c88305a835d6525152e7391ddef4444430558be"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 2,
+      "run_id": "701bf66d82e74ffb9b2730f944e2805f",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "7d93b2b1127452e491704a7fffa59af4fb565a1c927c16ef34ecf1ad6af70fa1"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 5,
+      "run_id": "1b2e744983264f83bbd5b8e069c5781b",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "61a4df920cbb677b403d4ca5808f5cd522ae4568a9b11e20cd6e8b11662bcb0c"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 4,
+      "run_id": "8f1fcd5b98d14a26a4197975b00e89dc",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "2478134daa618357b92a92ac384d671b630548b912a50ca229bc799cc7bceb5d"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 3,
+      "run_id": "f8765d52e2fb40d2a9942b7b4c189c1b",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0e9e47063d5372acd752a6d4c052bb1f0a59f4624d01ad04adc197c790b642fa"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 5,
+      "run_id": "9e595c4510aa4348978616e0f90043df",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "8ab9918b51fe5d82031edfd97c88277d1d1c974a7c9bfe4f0d0f280a3ee7e77a"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 1,
+      "run_id": "97967870cdee4df3b5c70c4e7e2236b5",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "3a9606b9a8c39a79512389793296b68037067ac667f76692a336738411cad220"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 2,
+      "run_id": "1318d632b2454541b288017feef1d840",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "96762e6ff7f128d97bdc94d1890c4d25d4da4b0ea5270c9d504cfc5b8e4011dd"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 3,
+      "run_id": "159e590a15574337926580f414003c8d",
+      "prechange_outer_calls": 5,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "f4e3fcbe21b86fe4a2681dbf06ddd408098391041fd78025f6a8fafcd34c1222"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 4,
+      "run_id": "1b52f48c76e44ec985955c4e520873a7",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6a135fd3203556840181cd028b783e7e67143d8a4afc3c335c3c829397353f29"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 2,
+      "run_id": "21873a81f1cc41b1adaa0d5b3927aadb",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "54d53f8eb755858d1a9039704790f8084e68330251b94e8c17f226c686946caf"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 4,
+      "run_id": "66ac7d1a0dc0454395221d2493bbc7a1",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "99175341a327109df4057d9b2b7d6710fe0b685322cc099a06a6d7bd1339e68a"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 3,
+      "run_id": "5290991b95f045a9ab785b70644320ec",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "e753277e8ddf5e5c1b19c7fecd317ba46bae656de7d05db59b936739f9c51746"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 5,
+      "run_id": "ea7c1cea93c540b4b3d5149654906f44",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "4e187008dd2beb2f954c305200b334f28fc474fc86ae5790d49786e9193b4d06"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 1,
+      "run_id": "120003eb33cb4320abeaee54a294bb3d",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "3c4acc9951a56301f9d45ba724e36df5b0d4d3d1ac24c2e947518bea8cc98648"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 2,
+      "run_id": "2cf26d2b067349f08b2d08a21697ede3",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "e864b369ab31a1bda962fd215dbb2bcc2383c52668b34da0afad326d442aa9d8"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 1,
+      "run_id": "8c02b74d636340cba5faa7df83b196e4",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0e47953ddd508175ee798273c2f86e69d7c5e02e147f2741fb4eff905647f83f"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 5,
+      "run_id": "0c4e36285d534813a4a4daa75eb5efb8",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "f8ca23dff6a47a3d24dc2a6fbcf99c6bb0e2cc9cee53c205226336ffccbd781c"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 3,
+      "run_id": "12ecd5ce6e4a429d9e897e8ec2dacc8d",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "b2882a9c3944083799bc673d46ff5c5ef4ab467ffe711ddd661ab682c753c70d"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 4,
+      "run_id": "9bd599a7aa07423f8d21756a387d1915",
+      "prechange_outer_calls": 1,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "350c24ed8a161be88355953071ed9c8436b18a68951479f35c21790e32fb55c9"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 5,
+      "run_id": "db76dba4128945b5a9332477349fb2e8",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "5c2ec94c35d3ee83ad7de72fcd84d8a29cf5c575c0d89d23659e1ca14e16c5a6"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 3,
+      "run_id": "e75e1b035dbd440aaf2e7a236baf69da",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "7bee74bb57ed8e265e8273cdd7a89dc6932046ba9a062bb9d3122cfc28da5986"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 4,
+      "run_id": "c2bc9185d3db449caf7e0b9cfa4dc582",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "ecd32087d04de146529ab962fff12679e5bde149b49e1b5d8358b48e2d70116f"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 1,
+      "run_id": "2ac3e446d4c54e868809d8ad0c60dd71",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "d57c348d74762353daf80b7bdea1a207640b90ae7487de42e365ea1a6d5889ba"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 2,
+      "run_id": "fff4982780324ce6be6f3baed64fe5a3",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "02e7c429d4f35127b29c100551ff74aa37dbc887063c5c12eb569e69f83e3c72"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 2,
+      "run_id": "a8c91914a5a049d0b158219b762e4fda",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "542e1ae90779d0c2a1885ba130378336108bacfd2a9e553ab8c3204b5f20f209"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 5,
+      "run_id": "a1a0b3c7ceef4f2d8a305dbf94769a11",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "394b397c629db108c3dfc4bd26d10feaeea0abe5e0836bb459730a41f0e41f10"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 4,
+      "run_id": "0c20a09722244c2888ef495ffc9cd252",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "678e1287cc808e85009efa2cf128c58ba42feabf0eb0dccb72ed5619c077d17f"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 3,
+      "run_id": "d4da37790bce42b6ab619eacd1708213",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0195710975376c4d15f554dba68f8b52e855d0708c4a3e2c048254997d77d622"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 1,
+      "run_id": "78c207fb347a484b9eee30531705f834",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0f6ca2b439d91dc00457d02bc9553778a3bb983f72c3b0e416f810b43db43d63"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 4,
+      "run_id": "3880314aae7748b49bb7247af23729ff",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 3,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "c87b4908ecd0888f8dc975e00882f2b15a2f423af52ac2a0e88ab1429a95d55a"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 1,
+      "run_id": "0cc92873642b41d6b4ed803b0189f87d",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "8cc1802f412c54f05a3b8ed02ec7975ab7be5c45c70e8dcea4c6158165d46037"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 5,
+      "run_id": "887d2c79324a4b5b8a14f9cc1154a68c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "1efe3da9787c9a58243e61016121f74bb6245b004170e2830572bc4fb61319c8"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 2,
+      "run_id": "52f37ade7d764401b5f0d321db71bb67",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "fb01212fddeb4fa1a969e342bdb4ad303311da1d88c79029aaa4e40dce556326"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 3,
+      "run_id": "c2a67604482b40a4bac010272c946c7a",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "25cd83c907787aa4f118a603ea185f478feb598cbb8c0e9d6d559b8c061e16f8"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 5,
+      "run_id": "b178b9d49f8e4be583731f463d5839cb",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "d3c38d1c2f5d5c90fb23262e3ebc29db9938a3981d618efb8d363cee0fddee59"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 1,
+      "run_id": "772e9fb36918445e8e528a9eb6e3f052",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "96e9cd7a24e7917e55dda5b51978226e2545f1e4ad7f861cf0aac3e12de0c02f"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 3,
+      "run_id": "ed4bdec113044bfc907aef0e851d4c0e",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "2d7ab616678615f025c6b5c3ab90233e89c48c3f90ce0ae2285388050a7881e3"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 4,
+      "run_id": "88131165ea1b4cab98144da04a1f741a",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "fad149c20b8139a01048af58309772d2113a03fde8c7d6100e5bd4243141422d"
+    },
+    {
+      "condition": "C147",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 2,
+      "run_id": "3678bc4bc2be458fa2586bcc2f00e351",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "4b5859892c1a0a621c733fcc21083575c6ddccb5b261c6985823ef438c4fc325"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 1,
+      "run_id": "3dfcdfe98f2246d793cb62a5baab749b",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "c568f1a0f3f72f5720f1b5efdb51d9d6f306ab048af39bfdf519fa2c979c8002"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 2,
+      "run_id": "b57b682e5560499db0cadc62112a1112",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "bf3b329c2592b0f376fa7be0262a726fbeea025b7b5060b08f08f124b5ca125c"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 3,
+      "run_id": "97b5a0b8c3424d8aba60b2e9774fbae7",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6624ff153359b0effcfc32c8b900eb98e4f68348c91e74b990212e8b8f3f2edb"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 4,
+      "run_id": "93a786e827f14c0b97fcf6707d18feb6",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "d9d9068f5e8ff76e66b8ac22b4ffe99b0788d6c4ba85081df2f0f25e9163e119"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "iteration": 5,
+      "run_id": "07f09c283a7549858e9f8c7daf4713dd",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "e9e9373a2a7b75890f03e0875133938cbf998e3a4accf0f6b512759f4831d55a"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 1,
+      "run_id": "9774401603f848309f047a05bba36e00",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "a2f6fefb8c6755d41bc3aa0ae4375cc8185a756450778539492b17307fad1899"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 2,
+      "run_id": "b79fe3a5589b479690c326188aa16895",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "40ffe26f651c4b359a7a5d82293cf45ae3ec73e0f4923c01e9ce8715cd09f530"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 3,
+      "run_id": "f72f8a17a13a4970a65fda3a1504054d",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "c99359e4b08069fad02b8a4f76a544dd4af4b4f34553424837cdbca3e9a3ce3d"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 4,
+      "run_id": "58f1dedbbcce499e811603ea73e869dd",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "886f4fcfb3a6544eca1f47c61cd9697a3df2b98c48e3ecc7a738595a8a7f9185"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "iteration": 5,
+      "run_id": "63fcdc6dc493402d8919078c82e7fc8d",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6cb832f2ad2eba0607224a4d8a7eddf4da5511966bdeacd11ccf72e79a572dce"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 1,
+      "run_id": "8c1fed718ed54083956370a06e66cd30",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "480f187468ee53fbe895757435e96e0a4bec606d33c092162db5820f252c2dd4"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 2,
+      "run_id": "4d95ba56202347ac82c105b5c3be53d7",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6b73f8625ba3e2bdd3d14c09d3ba1d3c7ea0cdb702b84251eeee793b3dfab6cf"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 3,
+      "run_id": "ab4051f2353848f2867d4a83ad6ed07a",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "89d362803e1a166fe806a88a64b7f9ad7cba577b2db719bcd6223dd9d97a24ac"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 4,
+      "run_id": "3eb62957e97c4c53814e9bda46b59f79",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6dce8a5fa4d1d134b9c740e71d47671cabb996535d621f23dd951d31cde24cb0"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "iteration": 5,
+      "run_id": "7a19bbb1f3f44f24bea3009df8305aef",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "898a0aeda4c5590be01d54f9a7287b71f646d4f6e2e851e1ad2ef019919f4ef3"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 1,
+      "run_id": "348e574dcbf44d0987881b4aa771cae6",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "35cca1de47cb796a2185e924d4ccd7b1562cbc9f2b369b082a0afaa51cd0d564"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 2,
+      "run_id": "ae68e43ec423413cb036873a3c27652b",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "16a18d86f2eff9802e2e3b3aa488617b41045e32dc4988d5a0daeef92fc07541"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 3,
+      "run_id": "ffd47a9585c642c6b71f3ffb4f51c239",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6fc2092e1c66f9fcae1a76875248248bdbefa5ed098de425b54ee26328c42155"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 4,
+      "run_id": "01beee1dd5c8490ba25c8d5a733c20a9",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "75ad25a8b0ffb5083c4a3272f4272bdf554538c51dafced92bf86981e729ec1e"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "iteration": 5,
+      "run_id": "adb7c4f90dd54684a19aab0d1e847702",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6a244a1153997f4d4c8054c0eceb28855d43a90f147a38575b5065f8ba3c1a3a"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 1,
+      "run_id": "fc640a5df437482394861b8942b4c09a",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "9f8a42188e283b2a42260c46972473fdb7e88bd1d66a179aa25db4647e7187bd"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 2,
+      "run_id": "a4a238415e324f909188217a1aabe046",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "76cae2d7d3f7634e3f5cfffb3d479d99281beccf11235035b09c508621dea61f"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 3,
+      "run_id": "98bcaed3f2b84b93953485d3271db757",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "febeff6a17b6139e92e2f02d91517fa7371111e6f01329defed7dda1edc104aa"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 4,
+      "run_id": "ec3b99caa2e54e9f8dadff0d757e9608",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "efa92248e2a7e69eda24ee786a89db82b8c0b0aed7182d4c9bdfd47bfab0aaef"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "iteration": 5,
+      "run_id": "3da111b974924b1da3861a88246fc82c",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6928dff86730ba69010ec6eba24c669f81ce1edf7edc0d7e4c53868ce1e40fce"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 1,
+      "run_id": "d9a742b7a8724607b626d837125ccfe2",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "46b36524e37612b63b29c932f66b5be1270cb97e29480fd495950e9eff25ecc6"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 2,
+      "run_id": "db2a7dce409646a1825acc70e052aa47",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "1d5dec15f3edd6deb4dc5580099681aa958201ddb8ab71a6d09a1f9229b0347c"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 3,
+      "run_id": "e893da410a8a4c7ea6dfe7b7b459c4c8",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "1f8cdaa67e08b8805782e1d34d5f2a16fbe0b7432a781fd081d1092a1523631f"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 4,
+      "run_id": "5132c10c57dc4cc581331968249b74c7",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "02941fa4398f1fa06a82113f9d259b569cbea876efac486eef54afd2a2c669bd"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "iteration": 5,
+      "run_id": "7ac0a5f37b4944fdbf7bfb2a6e1c1d1e",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "8579be26284071f4804a81c370d7d6312e91ffa678bd81782d79185f21ae19f3"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 1,
+      "run_id": "0537003ec3234bf5b9ffe29eaca9fe55",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "77763ff1b7e0264ed92cacfaf49a432e109942cc391fd7a1de12c8ddec2ddb07"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 2,
+      "run_id": "a467505a5ac74659b06735f164b4593a",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "59fffedf9ff64bde25ee81e4269fdedbabdba5f1dc4731a245343ad3f2346716"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 3,
+      "run_id": "8ca6c6dcfa8d40b89e600a970a7a6dcb",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "4e9ec68e21a063215bcf2cdef29994eedd9f060e6a8dae01b4a11708f4e6313b"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 4,
+      "run_id": "93fe9c6a1f4b41ef9432afacc1947b3c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "9bb4e2e67f717a2db8d1f100caa1201f3ab67e6070321452eed730abc14298fe"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "iteration": 5,
+      "run_id": "5ae872c2684e45a7a77e548b6e447561",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "0f0cb5840c784e562bee376815505fe261e3d19c635782f97a3bc0bb25fbb0e2"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 1,
+      "run_id": "db5d88eaaf3047a0b84fe8bc4f5727c6",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": null,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "7f2df8a44fc1aabc3f496927deb31038793fb8b0a993f82b3aff716fceb4e243"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 2,
+      "run_id": "13fa2e6e37434df4ae5c41e5ee83a78c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": null,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "64be86b812c1ceb983140871dab2450bd4d253709c09c1df26c58e391e4c365b"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 3,
+      "run_id": "8d268d9a2081414e9fe6084a0e66af3f",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": null,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "a6b4d830a4c0ecd29c48f861764c340aafe5008457ad667c9dd8ec54da7ace3e"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 4,
+      "run_id": "9491ddbaaedc45b99284ed5d08a03fb0",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": null,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "6dde419922acab59f3563acefc07a3eb60d2df1fb36bbeeba01ecdd1c2d61a23"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "iteration": 5,
+      "run_id": "7509c3e0cede415bad76af375a556b02",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 0,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "682447fb771c023d26ad525a1fe88cc1276c13e08953b0221700518ed72ceebb"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 1,
+      "run_id": "e13121f0adec44c484b73201923b0c3c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "1772be2b329b131c346e8b7c5c00e243fc7a47362de7c10b8b5d0de61ec4ec17"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 2,
+      "run_id": "25fb0203ac4d4211a4fa81209b23ff14",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "fbb6794bd89d3ea17b99983d50f19a8c4cb34c74aae3c3e6c81f569fb59f3200"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 3,
+      "run_id": "c843e493606c48f0b8670467c820de5c",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "4695560a8cd9e6c62994e70b3c1d8ecba508fcbc18c7272cd2f34a888d1c23fd"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 4,
+      "run_id": "8abddfccdd1e40d3ae4d076658544cdb",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "757599c4a72aa060828449f9c4fce1fb6e483c9ea4dbd47c222ca9e154772063"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "iteration": 5,
+      "run_id": "fdb8bf92802741d29daf3e4400ed5160",
+      "prechange_outer_calls": 2,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "f6cb80cd766cd886b8e2807eacc0bfe23edb580024f236bbfa503c05222f80f4"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 1,
+      "run_id": "15abcf26d6664b14b6522703c93d8237",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 2,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "f2ac06de9073266874863ca82a783b3a2a7b40227d4c5037ce7073c9f3ddf076"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 2,
+      "run_id": "412ae61e96004df4863e7bd055bf3839",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 2,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "a46444418c0e226752d4e8f912befbe917150ba7d7ee779a99d504d75d91f7f8"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 3,
+      "run_id": "143fa4a254bb4ceba2e83706d42de2ac",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 2,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "dd93098a68311d702e46d74077a74e18f58ab7bc2242202f2a2d8764300db747"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 4,
+      "run_id": "99b5c6e3fc3e475099f9866c51c20ed1",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 2,
+      "first_call_has_discovery": true,
+      "rollout_sha256": "933d9e8f7a9ba034f94b026c017f893198423e33777c41d56cc8e5606dda077d"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "iteration": 5,
+      "run_id": "56e5eeefc9094b47a6f4385b841ccbcc",
+      "prechange_outer_calls": 4,
+      "first_named_read_call_index": 2,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "01fbe6a44981525ec249e4319b8d9f941048afe9d6f00297399f96f4aedd70c1"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 1,
+      "run_id": "4b763a93e65c4d01a88bfa60f9a3d549",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "65bfd965aa2f1f78f4b37f91606f4b86f0f3c517e909a74e1d507accd3370eef"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 2,
+      "run_id": "c0f680128a994107ac2f9eecd9e06575",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "1a58ec535351bb8a22676916be1e4c8633c93c4ffb579a929777e54e9938b8ef"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 3,
+      "run_id": "2a86a0f40c96430a94fdc447c1840c68",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "d71b01919465888b67cfacb34338a97e7f6e2f29deea0037863aaa5b27db8191"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 4,
+      "run_id": "5baa214610bd4e64874119c8db948359",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "881fbe77e3449470872ae136d6bd804a6a8e324ad39a3b4301e82c42c7f15a38"
+    },
+    {
+      "condition": "C285",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "iteration": 5,
+      "run_id": "026947d45dfb4d1194f60059da5348ac",
+      "prechange_outer_calls": 3,
+      "first_named_read_call_index": 1,
+      "first_call_has_discovery": false,
+      "rollout_sha256": "aa49cf169e54095e2e798f62c7d2c79a0474165f0dc548b44329178a0b211493"
+    }
+  ]
+}
