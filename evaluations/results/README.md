@@ -1328,3 +1328,5 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 - [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-medium-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-c147-medium-comparison.json)
 - [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-low-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-low-comparison.json)
 - [sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-medium-comparison.json](sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30-c276-free-medium-comparison.json)
+- [control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.md](control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.md)
+- [control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.json](control-free-astra-low-old-a01-cumulative-spec-projection-r9-n2_2026-10-03.json)
