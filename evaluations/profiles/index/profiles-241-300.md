@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate192-consumer-bound-coissuance-standard14-affected9-f04-control-n5-cli0146.json`](../candidate192-consumer-bound-coissuance-standard14-affected9-f04-control-n5-cli0146.json)
+- [`candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json`](../candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json`](../candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate195-operation-ticketed-review-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate195-operation-ticketed-review-control-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json`](../candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json`](../candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json`](../candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json)
@@ -57,8 +62,3 @@
 - [`candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
-- [`candidate240-portable-result-wait-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate240-portable-result-wait-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate241-result-issuance-frontier-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate241-result-issuance-frontier-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)

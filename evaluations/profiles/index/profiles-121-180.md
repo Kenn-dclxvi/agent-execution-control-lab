@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
+- [`candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
+- [`candidate143-required-outcome-implementation-bind-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate143-required-outcome-implementation-bind-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
+- [`candidate143-required-outcome-implementation-bind-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate143-required-outcome-implementation-bind-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate144-required-outcome-validation-method-boundary-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate144-required-outcome-validation-method-boundary-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate145-lifecycle-consumer-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
@@ -57,8 +62,3 @@
 - [`candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
 - [`candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json`](../candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json)
-- [`candidate163-luna6-high-standard14-n5-cli0156-r1.json`](../candidate163-luna6-high-standard14-n5-cli0156-r1.json)
-- [`candidate164-autonomous-review-admission-routing-r1-medium-m24-n5-cli0146.json`](../candidate164-autonomous-review-admission-routing-r1-medium-m24-n5-cli0146.json)
-- [`candidate165-review-result-admission-r1-medium-m24-n5-cli0146.json`](../candidate165-review-result-admission-r1-medium-m24-n5-cli0146.json)
-- [`candidate165-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate165-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

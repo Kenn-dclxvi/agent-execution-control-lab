@@ -301,3 +301,7 @@ candidate bundleのmanifestは構築時provenanceとして不変のまま保持�
 C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、バンドルと現行のcandidate索引から削除した。
 
 C25〜C27はF10の一つの失敗形をroute固有の制御で避ける方向へ狭まり、既存のoperation binding系列へ一般化できないため公開候補にせず破棄した。番号は再利用せず、Candidate28をCandidate24の直接childとして構築する。
+
+| [`the-caption-3ce91a4-scoped-read-batch-r1`](the-caption-3ce91a4-scoped-read-batch-r1/manifest.json)（Candidate288） | `the-caption-3ce91a4-repository-read-scope-r1`（Candidate285） | SolとOpusへ同じ範囲指定・独立した取得の同時発行・未取得部分の回収を指示し、Markdownを統一。他18対象を保持。[設計記録](../../docs/candidate288-scoped-read-batch-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c288-sol61-low-standard14-n5_2026-10-07.md)：有効70件、全件4点。C285比トークン-7.89%、経過時間+1.97%。採用は未判断。 |
+
+| [`the-caption-3ce91a4-scoped-first-return-r1`](the-caption-3ce91a4-scoped-first-return-r1/manifest.json)（Candidate289） | `the-caption-3ce91a4-scoped-read-batch-r1`（Candidate288） | 一般ファイルの位置検索と限定本文を同じ外側呼び出しの結果へ含め、検索位置だけを先に返す経路を閉じる。rootの読み取り3項だけを変更し、他18対象を保持。[設計記録](../../docs/candidate289-scoped-first-return-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c289-sol61-low-standard14-n5_2026-10-08.md)は有効70件すべて4点。[累積N=20](../../evaluations/results/c289-sol61-low-standard14-n20_2026-10-08.md)は有効280件すべて4点で、C288累積N=20比トークン-3.14%、経過時間-3.96%。採用は未判断。 |
