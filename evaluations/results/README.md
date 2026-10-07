@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C284のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c284-sol61-low-std14-20261007)
+
 - [C283のGPT-6.1 Sol Low・Standard14累積N=20（2026-10-07）](#c283-sol61-low-std14-n20-20261007)
 
 - [C283のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c283-sol61-low-std14-20261007)
@@ -120,6 +122,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c284-sol61-low-std14-20261007"></a>
+## C284のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[計測記録](c284-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](d5fe0da15753407a87f1db7c8acd931d.json)、[機械可読記録](c284-sol61-low-standard14-n5_2026-10-07.json)、[C280互換比較](c284-sol61-low-standard14-n5_2026-10-07-c280-comparison.json)、[品質監査](c284-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[遵守集計](c284-sol61-low-standard14-n5_2026-10-07-compliance-audit.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
 
 <a id="c283-sol61-low-std14-n20-20261007"></a>
 ## C283のGPT-6.1 Sol Low・Standard14累積N=20（2026-10-07）
