@@ -1,0 +1,420 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "case_count": 14,
+  "iterations": 5,
+  "valid_runs": 70,
+  "excluded_attempts": 0,
+  "score_counts": {
+    "4": 70
+  },
+  "result_id": "d5fe0da15753407a87f1db7c8acd931d",
+  "result_content_sha256": "4f2f1183d2ff30c505f26ce86f19d71e7bd933450d1918fbcc90a4548fdfacf7",
+  "median": {
+    "elapsed_seconds": 580.3788597920211,
+    "quality_score": 100.0,
+    "total_tokens": 1537374
+  },
+  "comparisons": {
+    "c280": {
+      "reference_result_id": "794d02abe894456686eea22e9b6f0fed",
+      "reference_median": {
+        "elapsed_seconds": 537.745003539836,
+        "quality_score": 100.0,
+        "total_tokens": 2071746
+      },
+      "difference_percent": {
+        "total_tokens": -25.793316362140917,
+        "elapsed_seconds": 7.928266366314407
+      },
+      "reference_quality_scores": {
+        "4": 70
+      }
+    }
+  },
+  "case_medians": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32760,
+            "elapsed_seconds": 15.583736167056486
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32023,
+            "elapsed_seconds": 13.67638399999123
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 151407,
+            "elapsed_seconds": 47.131027416093275
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 218718,
+            "elapsed_seconds": 54.926773665938526
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 140345,
+            "elapsed_seconds": 62.50799087504856
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 203724,
+            "elapsed_seconds": 44.407818916020915
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 169420,
+            "elapsed_seconds": 65.80033083306625
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 278718,
+            "elapsed_seconds": 62.37221337493975
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 108234,
+            "elapsed_seconds": 50.79967633308843
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 177677,
+            "elapsed_seconds": 63.18292287492659
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 185720,
+            "elapsed_seconds": 54.89157608302776
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 275289,
+            "elapsed_seconds": 48.893120124936104
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33377,
+            "elapsed_seconds": 16.32426404103171
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32757,
+            "elapsed_seconds": 13.793923666933551
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 33437,
+            "elapsed_seconds": 17.333246125024743
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 32961,
+            "elapsed_seconds": 15.516467334004119
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 162427,
+            "elapsed_seconds": 55.29373720800504
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 179224,
+            "elapsed_seconds": 40.70189058303367
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 126704,
+            "elapsed_seconds": 43.87064549990464
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 211491,
+            "elapsed_seconds": 55.221011582994834
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 94120,
+            "elapsed_seconds": 31.301769500016235
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 142423,
+            "elapsed_seconds": 31.483513416955248
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 185661,
+            "elapsed_seconds": 50.59767299995292
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 153711,
+            "elapsed_seconds": 35.5320229169447
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 77062,
+            "elapsed_seconds": 38.236784084001556
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 91758,
+            "elapsed_seconds": 29.55329700000584
+          }
+        }
+      }
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "conditions": {
+        "c284": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 78860,
+            "elapsed_seconds": 30.702411084086634
+          }
+        },
+        "c280": {
+          "n": 5,
+          "score_counts": {
+            "4": 5
+          },
+          "median": {
+            "quality_score": 4,
+            "total_tokens": 77399,
+            "elapsed_seconds": 25.192299667047337
+          }
+        }
+      }
+    }
+  ],
+  "preflight_reference_result_id": "794d02abe894456686eea22e9b6f0fed",
+  "preflight_receipt": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c284-sol61-low-standard14-n5-20261007-r1/c284-low/batch-001/cycle/layer1/comparison-preflight.json",
+  "fixed_code_source_commit": "979fdfa1f825b0865e1a3951c8111ba9bf30c918",
+  "execution_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c284-sol61-low-standard14-n5-20261007-r1",
+  "scope": "C280直接子、変更後の検証を一つの外側呼び出しにまとめる指定3項。70件を完了。採用・追加反復・本体反映は未実施。"
+}
