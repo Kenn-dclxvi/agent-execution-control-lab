@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate117-implementation-authority-delegation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate117-implementation-authority-delegation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate146-consumer-closure-evidence-operation-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate146-consumer-closure-evidence-operation-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json)
-- [`candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json)

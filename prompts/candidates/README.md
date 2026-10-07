@@ -290,7 +290,7 @@
 
 | [`the-caption-3ce91a4-validation-single-call-r1`](the-caption-3ce91a4-validation-single-call-r1/manifest.json)（Candidate284） | `the-caption-3ce91a4-execution-control-outcome-binding-r1`（Candidate280） | 変更後の検証と確認を一つの外側呼び出しで個別に実行する無条件の処理方法指定を3項追加。他18対象を保持。[設計記録](../../docs/candidate284-validation-single-call-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c284-sol61-low-standard14-n5_2026-10-07.md)：有効70件、得点分布{"4": 70}。採用は未判断 |
 
-| [`the-caption-3ce91a4-repository-read-scope-r1`](the-caption-3ce91a4-repository-read-scope-r1/manifest.json)（Candidate285） | `the-caption-3ce91a4-validation-single-call-r1`（Candidate284） | 情報を確認する範囲を依頼・適用中の指示・作業対象のリポジトリへ限定する1項を追加。他18対象を保持。[設計記録](../../docs/candidate285-repository-read-scope-design.md) | `not_evaluated` |
+| [`the-caption-3ce91a4-repository-read-scope-r1`](the-caption-3ce91a4-repository-read-scope-r1/manifest.json)（Candidate285） | `the-caption-3ce91a4-validation-single-call-r1`（Candidate284） | 情報を確認する範囲を依頼・適用中の指示・作業対象のリポジトリへ限定する1項を追加。他18対象を保持。[設計記録](../../docs/candidate285-repository-read-scope-design.md) | [Sol Low・Standard14 N=5](../../evaluations/results/c285-sol61-low-standard14-n5_2026-10-07.md)：有効70件、得点分布{"4": 70}。採用は未判断 |
 
 candidate bundleのmanifestは構築時provenanceとして不変のまま保持する。評価状態の更新はmanifestをin-place変更せず、この索引と独立したevaluation resultで表す。
 
