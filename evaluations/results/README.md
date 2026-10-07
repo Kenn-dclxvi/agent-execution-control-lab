@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C289のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c289-sol61-low-std14-20261008)
+
+- [C288のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c288-sol61-low-std14-20261007)
+
 - [Claude Code Opus 5.5 C287 N=2（2026-10-07）](#claude-opus55-c287-n2-20261007)
 
 - [C287のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c287-sol61-low-std14-20261007)
@@ -132,6 +136,20 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c289-sol61-low-std14-20261008"></a>
+## C289のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）
+
+[計測記録](c289-sol61-low-standard14-n5_2026-10-08.md)、[登録結果](e6110c90222b4110ae062cfbac1317ab.json)、[atomic集計](c289-sol61-low-standard14-n5_2026-10-08-atomic-analysis.json)、[選択記録](c289-sol61-low-standard14-n5_2026-10-08-selection.json)、[C288比較](c289-sol61-low-standard14-n5_2026-10-08-c288-comparison.json)、[先行35件の品質監査](c289-sol61-low-standard14-n5_2026-10-08-targeted-quality-audit.json)、[残り35件の品質監査](c289-sol61-low-standard14-n5_2026-10-08-remaining-quality-audit.json)。有効70件、全件4点。C288比トークン-3.09%、経過時間-7.03%。時刻差を含むため時間差の因果効果は未確定。採用は未判断。
+
+[累積N=20計測記録](c289-sol61-low-standard14-n20_2026-10-08.md)、[登録結果](93846c9a795441dcb4dd030b5b00e5d0.json)、[atomic集計](c289-sol61-low-standard14-n20_2026-10-08-atomic-analysis.json)、[選択記録](c289-sol61-low-standard14-n20_2026-10-08-selection.json)、[C288累積N=20比較](c289-sol61-low-standard14-n20_2026-10-08-c288-comparison.json)、[追加210件の品質監査](c289-sol61-low-standard14-n20_2026-10-08-quality-audit.json)。N=5の70件を再利用して210件を追加し、有効280件すべて4点。C288累積N=20比トークン-3.14%、経過時間-3.96%。採用は未判断。
+
+<a id="c288-sol61-low-std14-20261007"></a>
+## C288のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[計測記録](c288-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](4762c82b2b3b4446b97a9853bb1e022d.json)、[機械可読の集計](c288-sol61-low-standard14-n5_2026-10-07.json)、[C285比較](c288-sol61-low-standard14-n5_2026-10-07-c285-comparison.json)、[品質監査](c288-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[時間の区間診断](c288-c285-time-decomposition_2026-10-07.json)、[C286とのトークン差](c288-c286-token-decomposition_2026-10-08.json)。有効70件、全件4点。トークンは減少、経過時間は増加。後続の区間診断では増加がモデル応答を含む区間に集中した。時間の観測値と本文による因果効果は区別し、時刻の影響と本文の影響は未分離、採用も未判断。C286とのトークン減少は主にF04とA02に集中した。
+
+[累積N=20計測記録](c288-sol61-low-standard14-n20_2026-10-08.md)、[登録結果](b1e352d14357403fbd8e3b4a66727ec3.json)、[atomic集計](c288-sol61-low-standard14-n20_2026-10-08-atomic-analysis.json)、[選択記録](c288-sol61-low-standard14-n20_2026-10-08-selection.json)、[追加210件の品質監査](c288-sol61-low-standard14-n20_2026-10-08-quality-audit.json)。N=5の70件を再利用して210件を追加し、有効280件すべて4点。全エージェントトークン中央値1,303,006.5、経過時間中央値594.89秒。採用は未判断。後続の[C286との累積N=20比較](../../docs/candidate288-candidate286-standard14-n20-comparison-r1.md)では、品質はともに全件4点、C288のトークン中央値は0.90%少なく、経過時間中央値は10.67%長い。時刻差を含むため、時間差の原因は未確定。
 
 <a id="claude-opus55-c287-n2-20261007"></a>
 ## Claude Code Opus 5.5 C287 N=2（2026-10-07）

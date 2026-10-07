@@ -77,6 +77,15 @@
 
 ### C147の成果確定・探索制限を中心に残す再構成
 
+- [Candidate288 読み取り範囲と同時発行を共通化する](candidate288-scoped-read-batch-design.md)：C285を直接の親に、C287で残った全文取得と再取得を狭める共通方法を設計。SolとOpusへ同じ本文を渡し、Markdown書式も統一する。[Sol Low・Standard14 N=5](../evaluations/results/c288-sol61-low-standard14-n5_2026-10-07.md)は有効70件すべて4点で、C285比トークン-7.89%、経過時間+1.97%。Opusでの評価は未実施。
+- [C288のSol Low・Standard14累積N=20試験](../evaluations/results/c288-sol61-low-standard14-n20_2026-10-08.md)：保存済みN=5を再利用して各ケース15件を追加し、累積280件すべて4点。採用は未判断。
+
+- [C288の経過時間増加の分解](candidate288-elapsed-time-decomposition-r1.md)：C285・C287・C288の保存済み実行を同じ区間へ分解。C288の時間増加はモデル応答を含む区間に集中した。観測値の増加と本文による因果効果を区別し、時刻の影響と本文の影響は未分離とする。
+- [C288とC286のトークン差の分析](candidate288-candidate286-token-analysis-r1.md)：保存済みStandard14 N=5をケース別に分解。減少は主にF04とA02に集中し、ほかのケースの増加が多くを相殺した。
+- [C288とC286の累積N=20比較](candidate288-candidate286-standard14-n20-comparison-r1.md)：両条件280件の品質、トークン、経過時間を比較。トークン減少のケース偏在と、時間差の因果上の限界を記録する。
+- [C286とC288の追加N=15実行ログ監査](candidate288-candidate286-n20-log-behavior-audit-r1.md)：追加各210件の保存記録で、読み取り範囲、検索、追加取得、呼び出し回数を照合。F04・A02・F08の削減経路と、F01・F03の増加経路を分ける。
+- [Candidate289 検索と限定本文の初回受領を一体化する](candidate289-scoped-first-return-design.md)：C288を直接の親に、検索位置だけを返す追加のモデル応答を閉じる新しい候補の設計と評価条件を固定する。[Sol Low・Standard14 N=5](../evaluations/results/c289-sol61-low-standard14-n5_2026-10-08.md)は有効70件すべて4点。[累積N=20](../evaluations/results/c289-sol61-low-standard14-n20_2026-10-08.md)は有効280件すべて4点で、C288累積N=20比トークン-3.14%、経過時間-3.96%。採用は未判断。
+
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
 

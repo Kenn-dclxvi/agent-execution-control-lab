@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
+- [`candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json`](../candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json)
+- [`candidate110-validation-ticket-decision-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate110-validation-ticket-decision-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
+- [`candidate111-validation-ticket-model-return-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate111-validation-ticket-model-return-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
+- [`candidate112-evidence-admission-scheduling-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate112-evidence-admission-scheduling-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate113-explicit-authority-delegation-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate113-explicit-authority-delegation-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
 - [`candidate114-spec-ready-evidence-phase-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate114-spec-ready-evidence-phase-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate115-authority-location-discovery-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate115-authority-location-discovery-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
@@ -57,8 +62,3 @@
 - [`candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate14-validation-authority-expanded12-global-m24-n5-r1.json`](../candidate14-validation-authority-expanded12-global-m24-n5-r1.json)
 - [`candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate143-required-outcome-implementation-bind-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate143-required-outcome-implementation-bind-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate143-required-outcome-implementation-bind-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate143-required-outcome-implementation-bind-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate144-required-outcome-validation-method-boundary-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate144-required-outcome-validation-method-boundary-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
