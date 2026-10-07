@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate91-concise-output-ingress-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate91-concise-output-ingress-v14-reasoning-medium-f02-global-m5-n5-r1.json)
+- [`candidate92-bound-output-route-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate92-bound-output-route-v14-reasoning-medium-f02-global-m5-n5-r1.json)
+- [`candidate93-result-classification-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate93-result-classification-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
 - [`candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
@@ -59,6 +62,3 @@
 - [`free-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-r1.json)
 - [`free-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
-- [`p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p005-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

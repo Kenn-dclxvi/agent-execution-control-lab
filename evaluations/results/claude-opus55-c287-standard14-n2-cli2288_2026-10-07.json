@@ -1,0 +1,206 @@
+{
+  "schema_version": "c287-opus55-n2-measurement/v1",
+  "model": "claude-opus-5-5",
+  "reasoning_effort": "medium",
+  "case_count": 14,
+  "iterations": 2,
+  "valid_runs": 28,
+  "score_counts": {
+    "4": 28
+  },
+  "median": {
+    "elapsed_seconds": 458.42494754114887,
+    "quality_score": 100.0,
+    "total_tokens": 1491925.5
+  },
+  "result_id": "7a1e630f4a7a41c0aaa4a37e3306e1cb",
+  "result_content_sha256": "082b9f0e28798c8a01fdc380792afbca06ba1ddb7aeb61fbbcc7c30e14381db8",
+  "preflight": {
+    "authentication": {
+      "apiProvider": "firstParty",
+      "authMethod": "claude.ai",
+      "loggedIn": true,
+      "subscriptionType": "team"
+    },
+    "baseline_compatibility_key": "296d9c6c2d3b4c34b11e249a5a1d048eeff2726cafe435280ccd9519d7d450e5",
+    "baseline_results": {
+      "c280": {
+        "prompt_set_identity": {
+          "bundle_sha256": "cac81e81eb5d66582a119042b034c457a1b2415fb6959ce2d03bcd0250fc5ea0",
+          "name": "the-caption-3ce91a4-execution-control-outcome-binding-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "1c183e48dbba160800d63c3f223b99d3cb03f2c9749a7d1ebd8ebf2d185aabf6",
+        "result_id": "b23f5f3735d44a0aa79f0c592c995bc7"
+      }
+    },
+    "checks": [
+      {
+        "capsule_count": 28,
+        "claude_md_links": [
+          "CLAUDE.md",
+          "docs/CLAUDE.md",
+          "scripts/CLAUDE.md",
+          "src/CLAUDE.md",
+          "tests/CLAUDE.md"
+        ],
+        "condition": "c287",
+        "conditions_sha256": "87c11e94521c0d9ce1aeaa3e12615aec2b5a847b3d5b7f7de85ab79044f3c196",
+        "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c287-standard14-n2-cli2288-20261007-r1/c287/global-plan/global-plan.json",
+        "plan_sha256": "b0a1c637a8a35dcc570e87835ff02af4c3613a10ed5539c63b0761d6d67e6349",
+        "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c287-standard14-n2-cli2288-20261007-r1/c287/profile.json",
+        "profile_sha256": "dd0673feedc560fc9536b0964cbd3e342cd20d3bd86c230aa87ea591b879c39a",
+        "prompt_identity": {
+          "bundle_sha256": "dd6469c035ef5b0b57e0679fd36e53e95aacdc812d115d5db14fbec454858934",
+          "name": "the-caption-3ce91a4-start-read-response-r1",
+          "revision": "r1"
+        },
+        "slots": 28
+      }
+    ],
+    "claude_runtime": {
+      "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+      "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+      "version_output": "2.1.288 (Claude Code)"
+    },
+    "code_sha256": {
+      "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+      "scripts/atomic_run_registry.py": "7f72ccee87e4bab0b7d06e9ead4197cd5a9b25e4dec9239b72cefbbd0acfc489",
+      "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+      "scripts/evaluation_loop.py": "79142b50ed64b3963dbb4d90b0e3fa9f5b97154dd8c135c045cfc956a448deb6",
+      "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+      "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+      "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+      "scripts/run_claude_evaluation.py": "b21bdc26e70c402de222876142e9012878ca5a3cdcc2eae37b01960f659ec198",
+      "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+      "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+      "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+    },
+    "code_signature_verified": true,
+    "condition_source_profile": "evaluations/profiles/c280-claude-opus55-medium-standard14-n5-cli2288-r1.json",
+    "config_isolation": {
+      "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+      "credential_values_recorded": false,
+      "forbidden_entries_checked": [
+        "CLAUDE.md",
+        "settings.json",
+        "settings.local.json",
+        "agents",
+        "commands",
+        "skills",
+        "plugins",
+        "output-styles",
+        "hooks",
+        "rules"
+      ],
+      "forbidden_entries_present": [],
+      "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+      "top_level_entry_names": [
+        ".claude.json",
+        ".credentials.json",
+        ".last-cleanup",
+        "backups",
+        "cache",
+        "policy-limits.json",
+        "policy-limits.json.stamp.json",
+        "projects",
+        "remote-settings.json",
+        "session-env",
+        "sessions",
+        "shell-snapshots"
+      ]
+    },
+    "layer1_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c287-standard14-n2-cli2288-20261007-r1/reference-c280/cycle-ordered/layer1",
+    "max_workers": 24,
+    "mismatches": [],
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "medium",
+    "requested_iterations": 2,
+    "requested_slots": 28,
+    "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+    "source_preflight_sha256": "123836bd45ec23751c770ac49105775f7615f14d6554492813b6afe808c8c5fe",
+    "status": "ready",
+    "unfixed": [],
+    "unverified": [],
+    "variable": "prompt_set_identity only; N2 is authorized sampling provenance"
+  },
+  "preflight_receipt_sha256": "42a6b4fad60ede7e227125dbcf2e17ead206cb8c4ec969612bd41e99be8f44bc",
+  "comparisons": {
+    "c280": {
+      "reference_median": {
+        "elapsed_seconds": 416.25381568598095,
+        "quality_score": 100.0,
+        "total_tokens": 1039131.0
+      },
+      "reference_analysis_id": "83bfa4ecdde8475bac69bfed7ee1e208",
+      "reference_analysis_content_sha256": "09210cde9bc001faa2233235e91a23bb5a7a83efae3f7a7cbc6401ead82fe5b6",
+      "differences": {
+        "elapsed_seconds": 42.171131855167914,
+        "quality_score": 0.0,
+        "total_tokens": 452794.5
+      },
+      "percentage_differences": {
+        "total_tokens": 43.574342407261454,
+        "elapsed_seconds": 10.13110997809604
+      }
+    },
+    "c286": {
+      "reference_median": {
+        "elapsed_seconds": 434.2317781652091,
+        "quality_score": 100.0,
+        "total_tokens": 1328959.5
+      },
+      "reference_analysis_id": "84ca227ac4e145efab89e06c7820552e",
+      "reference_analysis_content_sha256": "91c3930772a321a908b9bf117021bfd2cb3f853ac3b54fb3f5a9c4ea3b372c1b",
+      "differences": {
+        "elapsed_seconds": 24.19316937593976,
+        "quality_score": 0.0,
+        "total_tokens": 162966.0
+      },
+      "percentage_differences": {
+        "total_tokens": 12.262676176362033,
+        "elapsed_seconds": 5.571487530959827
+      }
+    }
+  },
+  "reference_c280_result_id": "b23f5f3735d44a0aa79f0c592c995bc7",
+  "reference_original_results": {
+    "c280": "10a2d444d80f4987a6a4d74e22fb8937",
+    "c286": "e1145d3027994db78153dfad149e4e0b"
+  },
+  "reference_sampling": "各ケース2件をselect-runsの既定順序で保存済みプールから選択。C280は発行前の基準、C286は参考比較。結果を見て選び直していない。",
+  "sampling_authority": "利用者が残りトークンの都合でN2を指定。PR #332のN5から反復数だけ変更。",
+  "issuance": {
+    "attempt_count": 28,
+    "elapsed_seconds": 50.854949875036255,
+    "ended_at": "2026-10-07T12:20:47.431365+00:00",
+    "errors": [],
+    "excluded_attempt_count": 0,
+    "max_workers": 24,
+    "requested_slots": 28,
+    "schedule_policy": "global_queue",
+    "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+    "started_at": "2026-10-07T12:19:56.575810+00:00",
+    "status": "complete",
+    "valid_slots": 28
+  },
+  "preparation": "N5基準とN2のcoverage、次に参照先とケース配列順の不一致で発行前に停止。未発行の準備物を別名で保持し、保存fixtureをclonefileで再利用してN2基準を固定した。評価環境と基盤コードは変更していない。",
+  "storage": {
+    "archive_sha256": "a19ba2f181bc1e63479b1377376b66dfc62922929d939add45ab7f14a307bfe3",
+    "archive_bytes": 35128485,
+    "workspace_pruned": false,
+    "standard_seal_completed": false,
+    "standard_compact_completed": false,
+    "method": "既存Claude計測と同じ検証済み汎用archiveへtranscriptと採点証拠を保存。標準seal・compactはClaude schema非対応のため適用していない。"
+  },
+  "judgement": {
+    "measurement_and_comparison": "completed",
+    "quality_preserved": true,
+    "cost_direction": "token_and_elapsed_regression",
+    "necessity_of_cost_increase": "not_established",
+    "adoption": "not_decided",
+    "additional_repetition": "not_performed"
+  },
+  "execution_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c287-standard14-n2-cli2288-20261007-r1"
+}
