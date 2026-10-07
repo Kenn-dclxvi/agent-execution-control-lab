@@ -287,6 +287,31 @@ class ClaudeAdapterTest(unittest.TestCase):
         init["skills"] = ["debug"]
         self.assertEqual(adapter.surface_mismatches(init, claude, MODEL), ["skills"])
 
+    def test_surface_ignores_infrastructure_plugins_only(self):
+        telemetry = {"name": "cc-plugin-telemetry", "path": "builtin", "source": "cc-plugin-telemetry@builtin"}
+        sec_default = {"name": "cc-plugin-sec-default", "path": "builtin", "source": "cc-plugin-sec-default@builtin"}
+        claude = {"tools": ["Bash"], "agents": ["Explore"], "plugins": [sec_default, telemetry], "version_output": "2.1.288 (Claude Code)"}
+        init = {
+            "model": MODEL,
+            "permissionMode": "bypassPermissions",
+            "apiKeySource": "none",
+            "mcp_servers": [],
+            "slash_commands": [],
+            "skills": [],
+            "plugins": [telemetry],
+            "tools": ["Bash"],
+            "agents": ["Explore"],
+            "claude_code_version": "2.1.288",
+            "output_style": "default",
+        }
+        self.assertEqual(adapter.surface_mismatches(init, claude, MODEL), [])
+        init["plugins"] = []
+        self.assertEqual(adapter.surface_mismatches(init, claude, MODEL), [])
+        init["plugins"] = [telemetry, {"name": "reviewer", "path": "/x", "source": "reviewer@market"}]
+        self.assertEqual(adapter.surface_mismatches(init, claude, MODEL), ["plugins"])
+        init["plugins"] = [{"name": "cc-plugin-telemetry", "path": "/x", "source": "cc-plugin-telemetry@market"}]
+        self.assertEqual(adapter.surface_mismatches(init, claude, MODEL), ["plugins"])
+
     def test_config_isolation_rejects_personal_instructions(self):
         with tempfile.TemporaryDirectory() as directory:
             claude = {"config_dir": directory}

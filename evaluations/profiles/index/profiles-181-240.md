@@ -2,6 +2,10 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json`](../candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json)
+- [`candidate160-assignment-result-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../candidate160-assignment-result-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
+- [`candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
+- [`candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate163-five-verified-lines-integrated-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json`](../candidate163-four-sentence-ablation-v14-reasoning-high-f02-n5-cli0156-r1.json)
 - [`candidate163-luna6-high-standard14-n5-cli0156-r1.json`](../candidate163-luna6-high-standard14-n5-cli0156-r1.json)
@@ -58,7 +62,3 @@
 - [`candidate190-current-prior-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate190-current-prior-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-medium-m24-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-medium-m24-cli0146.json)
 - [`candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json)
-- [`candidate191-explicit-review-operation-applicability-adr9-r2-medium-m24-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate191-explicit-review-operation-applicability-adr9-review-required-medium-m24-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr9-review-required-medium-m24-n5-cli0146.json)
-- [`candidate191-explicit-review-operation-applicability-standard14-affected9-f04-reference-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-standard14-affected9-f04-reference-n5-cli0146.json)
-- [`candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-medium-m24-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-standard14-f02-f03-f04-medium-m24-n5-cli0146.json)
