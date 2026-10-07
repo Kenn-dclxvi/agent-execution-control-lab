@@ -1,0 +1,698 @@
+{
+  "schema_version": "c286-validation-call-compliance-audit/v1",
+  "method_source": "docs/c147-sol-low-validation-call-compliance-audit-r1.md",
+  "method": "最初のapply_patch外側呼び出しより後のexec_command、待機単独、再修正を分類。一括の判定は実行呼び出し1以下、待機単独0、再修正0。rootトークン区分は変更後最初のtoken_count。",
+  "summary": {
+    "observed_runs": 70,
+    "missing_rollouts": [],
+    "changed_runs": 43,
+    "single_validation_call": 42,
+    "postchange_exec_distribution": {
+      "1": 43
+    },
+    "runs_with_wait_only_call": 0,
+    "runs_with_rework": 1,
+    "root_tokens_through_first_edit_sum": 2649367,
+    "root_tokens_after_first_edit_sum": 2625756
+  },
+  "runs": [
+    {
+      "run_id": "0162fd26fa2243cc965b992c6e5e2afe",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "rollout_sha256": "d48243755d08f8824e7a9c16ccd8af1fac4cf25204db0592f1b3a794876c9599",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 39138,
+      "root_tokens_after_first_edit": 54340
+    },
+    {
+      "run_id": "095fafcb875749d793990b8ac87a334f",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "rollout_sha256": "dbf19abba0d97381fa67484fddc16f20415a8b8050e5f2598dc0ee6b911c48d6",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 37829,
+      "root_tokens_after_first_edit": 49737
+    },
+    {
+      "run_id": "0a6af8b700284fb8b608e5c8b6d23a8d",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "rollout_sha256": "2d762213141198e9c5ff89edeb441859092f5ccabd2302a4ea5c2f8020d3777d",
+      "changed": false
+    },
+    {
+      "run_id": "11af5984825b407d9f24e732be89dcd2",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "rollout_sha256": "13caad915f0384e4c5e899740f731347267b75805100b84cd9c8caf5a27f342c",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 115802,
+      "root_tokens_after_first_edit": 71551
+    },
+    {
+      "run_id": "16a0103985d64ad7b6463e221cddb776",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "rollout_sha256": "068dcab534262eef2918388000dec544571379eb4c077c0999c15f8203af9957",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 76198,
+      "root_tokens_after_first_edit": 76733
+    },
+    {
+      "run_id": "1b6939e1a19a440e8b04a4a68e724578",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "rollout_sha256": "831783d8ac2e2ea05b6f2a1a560fa5c239b82cf9aa607d458627f1ea5dcabd2b",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 39417,
+      "root_tokens_after_first_edit": 52523
+    },
+    {
+      "run_id": "1c9a6e709d064f39b9f47ebaca4123c8",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "rollout_sha256": "0916b752f88fb719a4aaa3f7027eadb72fb8629093e9c47259484a32bdde60e3",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 46747,
+      "root_tokens_after_first_edit": 60544
+    },
+    {
+      "run_id": "1c9d2259fcc645dfa0ce38e95051b0ac",
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "rollout_sha256": "f3806cb5be95b7d841e80e335a947e1ffc9dfe19f500695cd253f779d71ec53b",
+      "changed": false
+    },
+    {
+      "run_id": "20e5814fbebf4b048b2debab3a587741",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "rollout_sha256": "ee9c37b7d4a4902412b6c731cc544e5e045e92aa61e06f4ccb36989e2084e098",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 76318,
+      "root_tokens_after_first_edit": 76884
+    },
+    {
+      "run_id": "2221382123804d039de471f8c4f7e872",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "rollout_sha256": "35bbecfaff8c1912690c198630b9ce6cca6787825c2c050ffeb1031ddc393266",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 1,
+      "single_validation_call": false,
+      "root_tokens_through_first_edit": 42160,
+      "root_tokens_after_first_edit": 89214
+    },
+    {
+      "run_id": "22388552d6a04b758becdd47881d5e27",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "rollout_sha256": "e2d6ea1384ff602c716c23fe929338fe386a6d7f4894b6b714d82e32c471c54f",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38472,
+      "root_tokens_after_first_edit": 50754
+    },
+    {
+      "run_id": "254e04d5c3924e69a6c0d1e7ffc4896b",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "rollout_sha256": "a2266c726ced295d7adfcf1abbe4136a49b607142f31cc1154ae055bfa070712",
+      "changed": false
+    },
+    {
+      "run_id": "259aa0da2f62404cb313020c51f42fe8",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "rollout_sha256": "06bf148e203ca7fc670a13e76b30142296d77dd89cfe6e8f1d9feda16dd6a445",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 39049,
+      "root_tokens_after_first_edit": 55880
+    },
+    {
+      "run_id": "27758e6b051e4ff29c44e1f95f44418c",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "rollout_sha256": "396047824def18cc09f744b63c238147f85c92ab45ec3b24f34412e331e3a81e",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 94871,
+      "root_tokens_after_first_edit": 67306
+    },
+    {
+      "run_id": "2cea621f582f4ced8a6e8144cbb8a78e",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "rollout_sha256": "24bc3894e7af3129817cd65b6f23fee42c6ea85b7514028e054d49a9e86314b8",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 39216,
+      "root_tokens_after_first_edit": 49258
+    },
+    {
+      "run_id": "3435bccce4944fcf8aa57a4ecbac00ea",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "rollout_sha256": "b9c8d0d6ee72187da49c7fec4ab93ba9823b37c34ffbbf0fc8c522cc8639738f",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38348,
+      "root_tokens_after_first_edit": 51611
+    },
+    {
+      "run_id": "360dd0e02acf48a386fedebbf4e539ab",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "rollout_sha256": "74d8d55330117e5507bb2122cd873d7f623f702e3c8799fe7116a28990057b85",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 75644,
+      "root_tokens_after_first_edit": 76008
+    },
+    {
+      "run_id": "4087105a83fb4949b3cc09a1ec5d13e0",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "rollout_sha256": "c1ef1c9668e94d3f0f6376ba976153045b0b336c9ce755fb6ce49170422ae6cb",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 41982,
+      "root_tokens_after_first_edit": 63361
+    },
+    {
+      "run_id": "454a1ede44c948ed80ba627b9594961f",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "rollout_sha256": "c1390ed4fa261490fa20e86e561e36c3a91b4089ef493d36d006882b610e2064",
+      "changed": false
+    },
+    {
+      "run_id": "4a6fee2bde0c475791efa8e167823d19",
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "rollout_sha256": "18e12a95315619e356554a873f37cce3182fa22eafe35dddf24e71602f24197f",
+      "changed": false
+    },
+    {
+      "run_id": "4b084f28ddd7457db1b35fd11fcce381",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "rollout_sha256": "f4e27fa8cd45697b9f27260f498a2d1dfa1447f07052c4bb373b8c1362a327cc",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 75720,
+      "root_tokens_after_first_edit": 75703
+    },
+    {
+      "run_id": "50d04f22e6874cf69c39d23f7bd58dfd",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "rollout_sha256": "116b5d9e2fee89a4060f20ff8a104e758e61bf86d03514793e6a7c5ebeb7bb09",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 46716,
+      "root_tokens_after_first_edit": 60193
+    },
+    {
+      "run_id": "5a2f786369b5489fa9b6e9d1ee3668b0",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "rollout_sha256": "1709319c567869f9f8b1f9fab499e3c4de97a3370764ccc0162eed5773d22568",
+      "changed": false
+    },
+    {
+      "run_id": "618ec6877b9445efbea6911cf17f3d88",
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "rollout_sha256": "47d6582bf0d26b5f7917d19efee38af87faf21306b5579902673e9a4996793c6",
+      "changed": false
+    },
+    {
+      "run_id": "64e5ab143deb4bf0bb6f516e431f3c60",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "rollout_sha256": "a96f0fcda21b0cc9cc6b4dd4c0320d26d6845f8abed94f8c6763ff286d36e8cb",
+      "changed": false
+    },
+    {
+      "run_id": "6688f214c77b4fbd87d2ed9af6ca67d7",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "rollout_sha256": "653f6f2afcd03b2a624c041ef46d4eb10cf98ba2af70806c5c19db279eac0426",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 115713,
+      "root_tokens_after_first_edit": 71468
+    },
+    {
+      "run_id": "6828a7df69cb4d56b06ca6fdc84a0ec6",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "rollout_sha256": "d21652a82da2c27b5dee9757f7b1aea5e9f5725e760c65046e2de668a5c5c423",
+      "changed": false
+    },
+    {
+      "run_id": "68653888c48b41f3ad6841d10aebd249",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "rollout_sha256": "4e963868f974770eaf152f82e191759bc61e0d94c6f12ca06b0a5842833821db",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 105898,
+      "root_tokens_after_first_edit": 76823
+    },
+    {
+      "run_id": "6a8231b52bea40b5b052c46be238987e",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "rollout_sha256": "1665435aa9492992646b764796fda20fda399517a3b9b1a726e074f9d525b475",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 46711,
+      "root_tokens_after_first_edit": 60188
+    },
+    {
+      "run_id": "6b79fac1584746c4a9d92787a1c23e72",
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "rollout_sha256": "7e237869d3cbe9599352b88ad8de8b2cb162d37a072a687acd76a496e93ce20f",
+      "changed": false
+    },
+    {
+      "run_id": "6ca478be24774ebf8b129de561ee325f",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "rollout_sha256": "86e68c41aa1cc8355a7c4d8591889007dde1c5a98920bdb8529b8eaa89c12998",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 95286,
+      "root_tokens_after_first_edit": 66763
+    },
+    {
+      "run_id": "6f413f6ba8744dc6af1ffa94371df2f8",
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "rollout_sha256": "e064c79385302be2ccd773b7236dbac069f56193ece82129a340ab4a5b791ffa",
+      "changed": false
+    },
+    {
+      "run_id": "7077cb7dac8247bd8581a39dfa67f94f",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "rollout_sha256": "037cdff7853ec7e79417438231bd9bb388d145512a6b3ebf279c4514bbfcc24f",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 39100,
+      "root_tokens_after_first_edit": 57486
+    },
+    {
+      "run_id": "70eac4c09da149c3b54ddf7ee26f343f",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "rollout_sha256": "52486e51942fbc9bad2ec61e1d431e690f18e92c8a03a6c3e8e0d0975f44a62f",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 57231,
+      "root_tokens_after_first_edit": 41110
+    },
+    {
+      "run_id": "7597d9c692404d7dba62391fa42232d2",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "rollout_sha256": "540b2701b785cff40a8df739aa4c6bddfb1a588a5c6bed90d5dffbd01389c1a0",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 115605,
+      "root_tokens_after_first_edit": 70752
+    },
+    {
+      "run_id": "794108d4009640fcace5b3eb114807de",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "rollout_sha256": "b56b651f52e50d099cc469589c6717218945d67f54e815d0df85aa13823a9612",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 46609,
+      "root_tokens_after_first_edit": 60233
+    },
+    {
+      "run_id": "7b1d6bb88dab4a498789ca61a02eb82f",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "rollout_sha256": "365c22f77595d9417ab75a3fca3d277fc8d25f852a7b59096dff2e11d48c0f08",
+      "changed": false
+    },
+    {
+      "run_id": "839a7dd7e13e40faadd55e58725c1300",
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "rollout_sha256": "7fad38a4b29ee88ff73344cfdc5283cf46b0b227244455b3cb4725984619188c",
+      "changed": false
+    },
+    {
+      "run_id": "83db0a5b72844454bf48f3d9e8fb3b89",
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "rollout_sha256": "77e97b49c1e7df561cc4266354b3a509e95192c42d464660c4abd90db0e1cbe1",
+      "changed": false
+    },
+    {
+      "run_id": "88199863f36d4e9da1163867b94bcc0e",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "rollout_sha256": "7d05c88a385bdf3b66b6c4dbc0ab06b85b096e7a8eee0b7de4c3285c6e4ecfb9",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 114972,
+      "root_tokens_after_first_edit": 71265
+    },
+    {
+      "run_id": "8b1416449c784eab874db25534c5aeb7",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "rollout_sha256": "bbff50423ac65de017b205b239cafb29a1b08fea838b149d8cdf643972b8a129",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 37986,
+      "root_tokens_after_first_edit": 48226
+    },
+    {
+      "run_id": "954ddff27cde404aaa91a521911f068e",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "rollout_sha256": "b4adeaf9b6b1890d3e892795981c229a6644d180fd2dde48a0e4af47b084b609",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 42059,
+      "root_tokens_after_first_edit": 62819
+    },
+    {
+      "run_id": "9634053debdd48b4815f688f39699df3",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "rollout_sha256": "d87f3a65f7c0893c51c49a9a4ee74d60c355d5247ec3174f569a81eef76ea9e8",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 37958,
+      "root_tokens_after_first_edit": 47477
+    },
+    {
+      "run_id": "967cd3943d9640cd88eead537734f39c",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "rollout_sha256": "53290c6860cbe01f578aef0c82912faaf0d456476e7f3c8b26ba806c1d58c9e7",
+      "changed": false
+    },
+    {
+      "run_id": "97b476ba71ce42d581f96ea297ca4f0f",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "rollout_sha256": "27046549331ee8a5ebdb868ad23b12d2ce581a4e1038a3863636c0cbc3d9fddf",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38308,
+      "root_tokens_after_first_edit": 56004
+    },
+    {
+      "run_id": "9a1b8dc3ac1b4de9b7fae0f48742c46a",
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "rollout_sha256": "ad4cd60d067a5b99775788a3de80f3fef239f5105245cebf9df45d88ccc14311",
+      "changed": false
+    },
+    {
+      "run_id": "9c44b54be0ae4c769751a8c3b8c8240c",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "rollout_sha256": "2a9a0bc763a1fc6f5d0c5ae373861f6b31d4fd6e9382ffc9433edfa5ca609afd",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38351,
+      "root_tokens_after_first_edit": 50284
+    },
+    {
+      "run_id": "9d1b274575be47f6932c129f2f26daa8",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "rollout_sha256": "888e8e87e2929179f1f22c535c935908519e5b67d5a0686da7d1e45f7d36e7eb",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 89108,
+      "root_tokens_after_first_edit": 59888
+    },
+    {
+      "run_id": "9fc6673a3ea947bbac942ae0ba4e555a",
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "rollout_sha256": "bbc7ebf2a697600f586e1f773c8e1e23579a9910413ce4b0a61691a90890940d",
+      "changed": false
+    },
+    {
+      "run_id": "aae94708166b4031915d8e7bab8c0263",
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "rollout_sha256": "1b3d98b28e4e5e16b45399a10a7458c1dff4ebbdacb7b9ee5a697c45e4da37f0",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 103708,
+      "root_tokens_after_first_edit": 72141
+    },
+    {
+      "run_id": "aefe0fc9e0564ff3bfa99f9f94afddb1",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "rollout_sha256": "e5eacff112ca55bba666839e02a7ee48316ebd5287dc16333a20bd8aa871267f",
+      "changed": false
+    },
+    {
+      "run_id": "b8b6f9b395fd47cc8bab9ddd7d969282",
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "rollout_sha256": "3b20f2deabcf0cb06ca717977b05e8eef25753be93b5da594947e613aa52d2bc",
+      "changed": false
+    },
+    {
+      "run_id": "ba5aeb722b704ed0b804a3c188d887b9",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "rollout_sha256": "2e2b917365456cc59dad0cb8695a14e37b2f78cb111b8519324ad6c02de06242",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 114630,
+      "root_tokens_after_first_edit": 70558
+    },
+    {
+      "run_id": "bc0812259bb04296aa9a1da519e6fe17",
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "rollout_sha256": "a2a10f182d3464effd3b1087b77ceda000659544e1798e65ea4a11f9d4f9f26e",
+      "changed": false
+    },
+    {
+      "run_id": "c254923b95e14827b196458e209eeeae",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "rollout_sha256": "afe8a81e66d3df6bd646809b39ab4aa7698388c227ffe7a75bf983a507615ef4",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 41333,
+      "root_tokens_after_first_edit": 61532
+    },
+    {
+      "run_id": "cac9efebcf37477cb75f233593135555",
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "rollout_sha256": "ebbf040fd325cdf9f15a4917591a353fb2780109dca6e79acaace33ebfb7256f",
+      "changed": false
+    },
+    {
+      "run_id": "cce149728b8e40fda2d401d8fab13e12",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "rollout_sha256": "c3369e6cdd57e33e7b363a9fa897f714e0d5d8f6a51a14b4df0896a1b6dc7377",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38199,
+      "root_tokens_after_first_edit": 50849
+    },
+    {
+      "run_id": "cd3ac8b7ef9348f9ac8823fa00278434",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "rollout_sha256": "d33fc97e25b786a1a3cbc095a54abde29d0ddee7bfdf750c6ffa54f0fae297d2",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 37078,
+      "root_tokens_after_first_edit": 40648
+    },
+    {
+      "run_id": "cfa9d7163cef4e77b88042bb3af6be92",
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "rollout_sha256": "17026affe1b720cc07fc0a380a328238557a90cb561aeac40ac5e8f5e5db7e5c",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 37174,
+      "root_tokens_after_first_edit": 40833
+    },
+    {
+      "run_id": "cfab4f0cad6f4f7489ffccfa6e437f5f",
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "rollout_sha256": "c6d2699b56a7607f1300ca5fe02829304a5d880540209079f0c0dc1373e04730",
+      "changed": false
+    },
+    {
+      "run_id": "cfe942a3c147468b8a29509d1b0422a1",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "rollout_sha256": "6a73344e80bcac290b1ce79499d02a2a933b4874da0503373156187d4689374b",
+      "changed": false
+    },
+    {
+      "run_id": "d1599764347a465ab2cce0778a8ce9f9",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "rollout_sha256": "51f40761111c012c71f83f7ff0a2a185b72f21af844f271765044130ca441410",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 58933,
+      "root_tokens_after_first_edit": 50946
+    },
+    {
+      "run_id": "deaab87fa2014d2a8bebb45495fb343c",
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "rollout_sha256": "5371e15d47780637f23b6b3abc68b32b1f8d402370a33049786d08cc0de5efae",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 76095,
+      "root_tokens_after_first_edit": 76476
+    },
+    {
+      "run_id": "dfa2964b474a4f43b24d6fc8459884e5",
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "rollout_sha256": "8a1a89b4f480e0203b56950fe783120df6b775c9846a687693939e242a8d7bc9",
+      "changed": false
+    },
+    {
+      "run_id": "e042ce3b522f4f89aeb3c5e9082286b8",
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "rollout_sha256": "8882e8442caa6746e2089340bbf79fc4a5d22bb76c3c97db921966478be8bd24",
+      "changed": false
+    },
+    {
+      "run_id": "e9d78937acd742d5afff6e3c6cd2afec",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "rollout_sha256": "a15b238e7586a20a67652c39a1639dcd383ebd56293f80b2cd8ccc3038d4e2f6",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 77048,
+      "root_tokens_after_first_edit": 62194
+    },
+    {
+      "run_id": "efaf94464a844968a390e0b2f2532f5e",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "rollout_sha256": "fa702e8c310d4bfdc0c7d26c0af9e5e4113f0ee47852eb452092a6aaf6742a43",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 38464,
+      "root_tokens_after_first_edit": 56351
+    },
+    {
+      "run_id": "f3228af32c2043e8bef1e836d7aeade7",
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "rollout_sha256": "5254ac0228af03fd17236654a0c6e525831423a48dd83189f2d72cf7b950cdec",
+      "changed": false
+    },
+    {
+      "run_id": "f487fafdd34b4b658f00b1ed0b97a103",
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "rollout_sha256": "3944c65af414ab83f1919e83454a6ba9bc51de1b50557d16d6f977d7d070d72a",
+      "changed": false
+    },
+    {
+      "run_id": "f72bdee323284e1083ecbe4917c1e867",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "rollout_sha256": "4752dab31c0098f98b15840380b37e2cce8b04f9f1f88a11c41a25e86c51aa0c",
+      "changed": true,
+      "postchange_exec_calls": 1,
+      "postchange_wait_only_calls": 0,
+      "postchange_edit_calls": 0,
+      "single_validation_call": true,
+      "root_tokens_through_first_edit": 42183,
+      "root_tokens_after_first_edit": 60842
+    }
+  ]
+}
