@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-document-task-development-r1-medium-m24-n3-cli0146.json`](../candidate147-information-closure-document-task-development-r1-medium-m24-n3-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json`](../candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json)
 - [`candidate166-review-behavior-r1-medium-m24-n5-cli0146.json`](../candidate166-review-behavior-r1-medium-m24-n5-cli0146.json)
 - [`candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json`](../candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json)
-- [`candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json`](../candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json)

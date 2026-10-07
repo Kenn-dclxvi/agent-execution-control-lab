@@ -132,6 +132,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 [計測記録](c286-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](d6fb28dbcef44caebc516591fd720eaa.json)、[機械可読記録](c286-sol61-low-standard14-n5_2026-10-07.json)、[C285互換比較](c286-sol61-low-standard14-n5_2026-10-07-c285-comparison.json)、[品質監査](c286-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[経路と時間の診断](c286-sol61-low-standard14-n5_2026-10-07-diagnostics.json)、[検証呼び出し集計](c286-sol61-low-standard14-n5_2026-10-07-compliance-audit.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
 
+[累積N=20の計測記録](c286-sol61-low-standard14-n20_2026-10-07.md)、[登録結果](bee75634efb749e58de759aaa0b2b848.json)、[機械可読記録](c286-sol61-low-standard14-n20_2026-10-07.json)、[atomic集計](c286-sol61-low-standard14-n20_2026-10-07-atomic-analysis.json)、[追加分の品質監査](c286-sol61-low-standard14-n20_2026-10-07-quality-audit.json)、[診断](c286-sol61-low-standard14-n20_2026-10-07-diagnostics.json)、[従来の検証集計](c286-sol61-low-standard14-n20_2026-10-07-legacy-compliance.json)。既存70件と追加210件、累積280件。得点分布{"4": 280}。指定試験完了、N=5との差は参考差、採用は未判断。
+
 <a id="c285-sol61-low-std14-20261007"></a>
 ## C285のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
 
