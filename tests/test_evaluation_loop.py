@@ -1154,6 +1154,92 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertIn("receipt content SHA-256 does not match", completed.stderr)
 
+    def test_effective_preflight_accepts_only_provenance_differences(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry, candidate_cycle, reference, _, _, _, _ = self.prepare_reference_comparison(root)
+            conditions = self.conditions(2)
+            conditions["executor_parameters"]["max_attempts"] = 3
+            profile, global_plan, capsules = self.write_comparison_plan(root, candidate_cycle, conditions)
+            args = [
+                "preflight-comparison", "--cycle", str(candidate_cycle), "--profile", str(profile),
+                "--global-plan", str(global_plan), "--registry", str(registry),
+                "--reference-result-id", reference["result_id"],
+            ]
+            self.assertIn("comparison compatibility mismatch", self.cli_failure(*args).stderr)
+            self.cli(*args, "--compatibility-rule", "effective-v1")
+            receipt = json.loads((candidate_cycle / "layer1/comparison-preflight.json").read_text())
+            self.assertEqual(receipt["compatibility_rule"], "effective-v1")
+            self.assertEqual(receipt["candidate_provenance"]["executor_parameters.max_attempts"], 3)
+            self.assertEqual(self.cli("verify-comparison-preflight", "--cycle", str(candidate_cycle))["status"], "ready")
+            self.assertEqual(self.cli("run", "--cycle", str(candidate_cycle), "--capsule", str(capsules[0]))["status"], "valid")
+
+    def test_effective_preflight_rejects_result_changing_differences(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry, candidate_cycle, reference, _, _, _, _ = self.prepare_reference_comparison(root)
+            conditions = self.conditions(2)
+            conditions["executor_parameters"]["reasoning_effort"] = "low"
+            profile, global_plan, _ = self.write_comparison_plan(root, candidate_cycle, conditions)
+            completed = self.cli_failure(
+                "preflight-comparison", "--cycle", str(candidate_cycle), "--profile", str(profile),
+                "--global-plan", str(global_plan), "--registry", str(registry),
+                "--reference-result-id", reference["result_id"], "--compatibility-rule", "effective-v1",
+            )
+            self.assertIn("reasoning_effort", completed.stderr)
+
+    def write_task_sha256(self, cycle: Path, value: str) -> None:
+        for path in (cycle / "layer2" / "bindings").glob("*.json"):
+            run_id = json.loads(path.read_text())["run_id"]
+            execution = cycle / "layer2" / "extensions" / run_id / "test-adapter" / "execution.json"
+            execution.parent.mkdir(parents=True, exist_ok=True)
+            execution.write_text(json.dumps({"task_sha256": value}), encoding="utf-8")
+
+    def test_compare_effective_checks_rendered_task_text(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            manifest = self.make_set(root)
+            baseline = self.record_prompt_set(manifest, root, registry, "baseline", 4, 120)
+            candidate = self.record_prompt_set(manifest, root, registry, "candidate", 4, 100)
+            cycles = {
+                baseline["result_id"]: root / "cycle-baseline-test-model",
+                candidate["result_id"]: root / "cycle-candidate-test-model",
+            }
+            def compare(output: str, failure: bool = False):
+                args = ["compare-effective", "--registry", str(registry), "--reference-result-id", baseline["result_id"], "--output", str(root / output)]
+                for result_id, cycle in cycles.items():
+                    args += ["--result-id", result_id, "--cycle", f"{result_id}={cycle}"]
+                return self.cli_failure(*args) if failure else self.cli(*args)
+
+            self.assertEqual(compare("fallback.json")["task_text_check"], "code_sha256_fallback")
+            for cycle in cycles.values():
+                self.write_task_sha256(cycle, "a" * 64)
+            view = compare("task.json")
+            self.assertEqual(view["task_text_check"], "task_sha256")
+            stored = json.loads((root / "task.json").read_text())
+            self.assertEqual(stored["schema_version"], "the-caption-prompt.effective-comparison-view/v1")
+            self.assertEqual(stored["differences"][0]["kpis"]["total_tokens"], -20)
+            self.write_task_sha256(cycles[candidate["result_id"]], "b" * 64)
+            self.assertIn("rendered task text differs", compare("differs.json", failure=True).stderr)
+
+    def test_compare_effective_rejects_result_changing_conditions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            manifest = self.make_set(root)
+            baseline = self.record_prompt_set(manifest, root, registry, "baseline", 4, 120)
+            other = self.record_prompt_set(manifest, root, registry, "other", 4, 100, model="other-model")
+            completed = self.cli_failure(
+                "compare-effective", "--registry", str(registry),
+                "--result-id", baseline["result_id"], "--result-id", other["result_id"],
+                "--reference-result-id", baseline["result_id"],
+                "--cycle", f"{baseline['result_id']}={root / 'cycle-baseline-test-model'}",
+                "--cycle", f"{other['result_id']}={root / 'cycle-other-other-model'}",
+                "--output", str(root / "view.json"),
+            )
+            self.assertIn("effective compatibility mismatch: $.model", completed.stderr)
+
     def test_atomic_comparison_preflight_authorizes_v3_capsules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
