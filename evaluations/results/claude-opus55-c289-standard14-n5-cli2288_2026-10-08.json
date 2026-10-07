@@ -1,0 +1,301 @@
+{
+  "analysis_id": "f3fb8291bb7340ab9d5d15e0a5cf8bf5",
+  "claude_code": "2.1.288 (Claude Code)",
+  "comparison_preflight": {
+    "schema_version": "the-caption-prompt.comparison-preflight/v2",
+    "sha256": "53a4b7c7afa34c62e8719961813fd7b3828a88a2562e3b6a2399c5dae436fae2"
+  },
+  "comparisons": {
+    "c280": {
+      "differences": {
+        "elapsed_seconds": -54.80748608452268,
+        "quality_score": 0.0,
+        "total_tokens": 215829
+      },
+      "percentage_differences": {
+        "elapsed_seconds": -12.219656727802104,
+        "total_tokens": 20.39358680472221
+      },
+      "reference_median": {
+        "elapsed_seconds": 448.5190321248956,
+        "quality_score": 100.0,
+        "total_tokens": 1058318
+      },
+      "reference_result_id": "10a2d444d80f4987a6a4d74e22fb8937"
+    },
+    "c286": {
+      "differences": {
+        "elapsed_seconds": -43.22656121267937,
+        "quality_score": 0.0,
+        "total_tokens": -54724
+      },
+      "percentage_differences": {
+        "elapsed_seconds": -9.893062769103988,
+        "total_tokens": -4.118082191574652
+      },
+      "reference_median": {
+        "elapsed_seconds": 436.9381072530523,
+        "quality_score": 100.0,
+        "total_tokens": 1328871
+      },
+      "reference_result_id": "e1145d3027994db78153dfad149e4e0b"
+    }
+  },
+  "conditions": {
+    "c289": {
+      "analysis": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c289-standard14-n5-cli2288-20261008-r1/c289/analysis.json",
+      "compatibility_key": "9383fc1082c13fc7d9a4c5b97eb0bf938cf6c29a656e64325e82e80383169af5",
+      "diagnostic_counts": {
+        "command_protocol_violations": 0,
+        "owner_producer_evidence_unavailable": 70
+      },
+      "excluded_attempt_count": 0,
+      "failure_counts": {
+        "a02_abstract_test_evidence_missing": 2
+      },
+      "iterations": [
+        {
+          "elapsed_seconds": 393.7115460403729,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1394045
+        },
+        {
+          "elapsed_seconds": 385.5129234980559,
+          "iteration": 2,
+          "quality_score": 98.21428571428571,
+          "total_tokens": 1214231
+        },
+        {
+          "elapsed_seconds": 423.94078391615767,
+          "iteration": 3,
+          "quality_score": 98.21428571428571,
+          "total_tokens": 1343813
+        },
+        {
+          "elapsed_seconds": 408.3364375018282,
+          "iteration": 4,
+          "quality_score": 100.0,
+          "total_tokens": 1274147
+        },
+        {
+          "elapsed_seconds": 383.8258663350716,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1190357
+        }
+      ],
+      "median": {
+        "elapsed_seconds": 393.7115460403729,
+        "quality_score": 100.0,
+        "total_tokens": 1274147
+      },
+      "pool_key": "3f7007c6aff7cf009dc6ee596b86cf9223d513d1e1474fbf14284e3cc7c2e598",
+      "result_artifact": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/result-registry-v4/results/d5001b92579f486da96a886ad23a3742.json",
+      "result_content_sha256": "1b573b94de561dddbaccc097b6657242bef2358bf8b677be64138ae301d29499",
+      "result_id": "d5001b92579f486da96a886ad23a3742",
+      "score_counts": {
+        "3": 2,
+        "4": 68
+      }
+    }
+  },
+  "execution_evidence": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c289-standard14-n5-cli2288-20261008-r1",
+  "issuance": {
+    "attempt_count": 70,
+    "elapsed_seconds": 99.2075031659333,
+    "ended_at": "2026-10-07T16:27:17.729887+00:00",
+    "errors": [],
+    "excluded_attempt_count": 0,
+    "max_workers": 24,
+    "requested_slots": 70,
+    "schedule_policy": "global_queue",
+    "schema_version": "the-caption-prompt.parallel-execution-summary/v1",
+    "started_at": "2026-10-07T16:25:38.521397+00:00",
+    "status": "complete",
+    "valid_slots": 70
+  },
+  "judgement": {
+    "additional_repetition": "not_performed",
+    "adoption": "not_decided",
+    "cost_direction": "c280: token_regression_elapsed_reduction; c286: token_and_elapsed_reduction",
+    "elapsed_prompt_effect": "not_established",
+    "measurement_and_comparison": "completed",
+    "quality_note": "A02の2件が3点（a02_abstract_test_evidence_missing）",
+    "quality_preserved": false
+  },
+  "max_workers": 24,
+  "model": "claude-opus-5-5",
+  "preflight": {
+    "authentication": {
+      "apiProvider": "firstParty",
+      "authMethod": "claude.ai",
+      "loggedIn": true,
+      "subscriptionType": "team"
+    },
+    "baseline_compatibility_key": "9383fc1082c13fc7d9a4c5b97eb0bf938cf6c29a656e64325e82e80383169af5",
+    "baseline_results": {
+      "c280": {
+        "prompt_set_identity": {
+          "bundle_sha256": "cac81e81eb5d66582a119042b034c457a1b2415fb6959ce2d03bcd0250fc5ea0",
+          "name": "the-caption-3ce91a4-execution-control-outcome-binding-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "82278084c8ec7eccb3869f4e061f4ec16b923b09e77c1ecace86d23399016294",
+        "result_id": "10a2d444d80f4987a6a4d74e22fb8937"
+      },
+      "c286": {
+        "prompt_set_identity": {
+          "bundle_sha256": "eda8ec3004c9c27f1d35e34cea9769895e7bca7e416a8d2a206a9ab9bd94dc6a",
+          "name": "the-caption-3ce91a4-start-read-batch-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "3e569cbf07e425cfb9cef977bb077b9cc99377af85c72dc1cc1efd743e7435e5",
+        "result_id": "e1145d3027994db78153dfad149e4e0b"
+      }
+    },
+    "checks": [
+      {
+        "capsule_count": 70,
+        "claude_md_links": [
+          "CLAUDE.md",
+          "docs/CLAUDE.md",
+          "scripts/CLAUDE.md",
+          "src/CLAUDE.md",
+          "tests/CLAUDE.md"
+        ],
+        "condition": "c289",
+        "conditions_sha256": "15e01e9f398d9bd9bce3747ee9c2068e0d884dba81ea844fcde0e29a4e46a19c",
+        "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c289-standard14-n5-cli2288-20261008-r1/c289/global-plan/global-plan.json",
+        "plan_sha256": "9d0d495019cf58511732401b0a3c092a78799e06d5cf13a86f40601e4d4de83e",
+        "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-c289-standard14-n5-cli2288-20261008-r1/c289/profile.json",
+        "profile_sha256": "ee19377b5de39625c50f2a8d65f9cd6a0b85e22d5f3e05f0d9b83271bf7dc2c9",
+        "prompt_identity": {
+          "bundle_sha256": "cfcffae1045072f6a960797cefcedc75506bba47cfc7d7d1a5eb4da424a80780",
+          "name": "the-caption-3ce91a4-scoped-first-return-r1",
+          "revision": "r1"
+        },
+        "slots": 70
+      }
+    ],
+    "claude_runtime": {
+      "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+      "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+      "version_output": "2.1.288 (Claude Code)"
+    },
+    "code_sha256": {
+      "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+      "scripts/atomic_run_registry.py": "7f72ccee87e4bab0b7d06e9ead4197cd5a9b25e4dec9239b72cefbbd0acfc489",
+      "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+      "scripts/evaluation_loop.py": "79142b50ed64b3963dbb4d90b0e3fa9f5b97154dd8c135c045cfc956a448deb6",
+      "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+      "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+      "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+      "scripts/run_claude_evaluation.py": "b21bdc26e70c402de222876142e9012878ca5a3cdcc2eae37b01960f659ec198",
+      "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+      "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+      "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+    },
+    "code_signature_verified": true,
+    "condition_source_profile": "evaluations/profiles/c280-claude-opus55-medium-standard14-n5-cli2288-r1.json",
+    "config_isolation": {
+      "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+      "credential_values_recorded": false,
+      "forbidden_entries_checked": [
+        "CLAUDE.md",
+        "settings.json",
+        "settings.local.json",
+        "agents",
+        "commands",
+        "skills",
+        "plugins",
+        "output-styles",
+        "hooks",
+        "rules"
+      ],
+      "forbidden_entries_present": [],
+      "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+      "top_level_entry_names": [
+        ".claude.json",
+        ".credentials.json",
+        ".last-cleanup",
+        "backups",
+        "cache",
+        "policy-limits.json",
+        "policy-limits.json.stamp.json",
+        "projects",
+        "remote-settings.json",
+        "session-env",
+        "sessions",
+        "shell-snapshots"
+      ]
+    },
+    "layer1_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-free-c276-c280-standard14-n5-cli2288-20261006-r1/c280/batch-001/cycle/layer1",
+    "max_workers": 24,
+    "mismatches": [],
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "medium",
+    "requested_slots": 70,
+    "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+    "source_preflight_sha256": "123836bd45ec23751c770ac49105775f7615f14d6554492813b6afe808c8c5fe",
+    "status": "ready",
+    "unfixed": [],
+    "unverified": [],
+    "variable": "prompt_set_identity only"
+  },
+  "preflight_receipt_sha256": "9ef8d7102ff4dd7efc3d7261694abcf0bcef0ce87b11249c8e7b3a7b3429e1a7",
+  "start_receipt": {
+    "authentication_response_succeeded": true,
+    "config_isolation": {
+      "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+      "credential_values_recorded": false,
+      "forbidden_entries_checked": [
+        "CLAUDE.md",
+        "settings.json",
+        "settings.local.json",
+        "agents",
+        "commands",
+        "skills",
+        "plugins",
+        "output-styles",
+        "hooks",
+        "rules"
+      ],
+      "forbidden_entries_present": [],
+      "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+      "top_level_entry_names": [
+        ".claude.json",
+        ".credentials.json",
+        ".last-cleanup",
+        "backups",
+        "cache",
+        "policy-limits.json",
+        "policy-limits.json.stamp.json",
+        "projects",
+        "remote-settings.json",
+        "session-env",
+        "sessions",
+        "shell-snapshots"
+      ]
+    },
+    "recorded_at": "2026-10-07T16:25:38.353548+00:00",
+    "requested_slots": 70,
+    "runtime": {
+      "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+      "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+      "version_output": "2.1.288 (Claude Code)"
+    },
+    "source_preflight_sha256": "9ef8d7102ff4dd7efc3d7261694abcf0bcef0ce87b11249c8e7b3a7b3429e1a7",
+    "status": "ready",
+    "valid_before": 0
+  },
+  "storage": {
+    "archive_bytes": 60099349,
+    "archive_sha256": "e487750084569b4f1adfa6c2432feb9b814d674831eb5eb69b8d511b2610b67c",
+    "method": "既存Claude計測と同じ検証済み汎用archiveへtranscriptと採点証拠を保存。標準seal・compactはClaude schema非対応のため適用していない。",
+    "standard_compact_completed": false,
+    "standard_seal_completed": false,
+    "workspace_pruned": false
+  }
+}

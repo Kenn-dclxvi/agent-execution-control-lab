@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 C289（2026-10-08）](#claude-opus55-c289-20261008)
+
 - [C289のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c289-sol61-low-std14-20261008)
 
 - [C288のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c288-sol61-low-std14-20261007)
@@ -136,6 +138,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-c289-20261008"></a>
+## Claude Code Opus 5.5 C289（2026-10-08）
+
+[計測記録](claude-opus55-c289-standard14-n5-cli2288_2026-10-08.md)、[条件照合・集計](claude-opus55-c289-standard14-n5-cli2288_2026-10-08.json)、[登録結果](d5001b92579f486da96a886ad23a3742.json)、[atomic集計](claude-opus55-c289-standard14-n5-cli2288_2026-10-08-atomic-analysis.json)、[品質監査](claude-opus55-c289-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[診断](claude-opus55-c289-standard14-n5-cli2288_2026-10-08-diagnostics.json)。有効70件、4点68件・3点2件（A02の試験証拠不足）。品質中央値100、全エージェントトークン中央値1,274,147、経過時間中央値393.71秒。[C280比較](claude-opus55-c289-standard14-n5-cli2288_2026-10-08-c289-c280-comparison.json)、[C286比較](claude-opus55-c289-standard14-n5-cli2288_2026-10-08-c289-c286-comparison.json)、[C280比のトークン分解](claude-opus55-c289-c280-token-decomposition_2026-10-08.json)。計測と比較は完了し、採用は未判断。標準seal・compactはClaude schema非対応のため未完了で、検証済みarchiveと元workspaceを保持した。
 
 <a id="c289-sol61-low-std14-20261008"></a>
 ## C289のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）
