@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Sonnet 5.5 low C280（2026-10-08）](#claude-sonnet55-low-c280-20261008)
+
 - [Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）](#claude-opus55-low-c280-20261008)
 
 - [Claude Code Opus 5.5 low C291（2026-10-08）](#claude-opus55-low-c291-20261008)
@@ -146,6 +148,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-sonnet55-low-c280-20261008"></a>
+## Claude Code Sonnet 5.5 low C280（2026-10-08）
+
+[計測記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[登録結果](c84fd22753d248e588e586cb8022ea1e.json)、[品質監査](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。比較相手のない単独計測。有効70件、全件4点。品質中央値100、全エージェントトークン中央値832,616、経過時間中央値297.94秒。採用は未判断。
 
 <a id="claude-opus55-low-c280-20261008"></a>
 ## Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）
