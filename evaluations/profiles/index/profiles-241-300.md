@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate204-portable-execution-core-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate204-portable-execution-core-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate205-portable-issuance-frontier-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate205-portable-issuance-frontier-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate206-admitted-evidence-current-adr9-r2-medium-m24-n20-cli0146.json`](../candidate206-admitted-evidence-current-adr9-r2-medium-m24-n20-cli0146.json)
 - [`candidate206-admitted-evidence-current-adr9-r2-medium-m24-n5-cli0146.json`](../candidate206-admitted-evidence-current-adr9-r2-medium-m24-n5-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate253-start-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate253-start-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate254-independent-check-same-model-step-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate254-independent-check-same-model-step-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
-- [`candidate254-independent-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
