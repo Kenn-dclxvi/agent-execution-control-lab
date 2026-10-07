@@ -77,6 +77,8 @@
 
 ### C147の成果確定・探索制限を中心に残す再構成
 
+- [C280へC147の制御をまとまりで移植する検討](c280-c147-control-group-transfer-study-r1.md)：検証票・途中判断・完了境界を一単位として移植する案と、開始時の共同発行を保証しない境界を区別した設計検討。Candidate化と測定は未実施。
+
 - [C147 Solの旧環境と再計測の時間増加](c147-sol-cli0146-cli0153-time-drift-audit.md): 325.50秒増の区間を分解。初期準備とroot記録外が約69.8%を占め、終了待ちとモデル一覧更新タイムアウトを確認。
 
 - [編集前の読み取り分割の再監査](candidate274-preedit-read-split-audit.md): 45runで初回出力の欠落と適用ルールの後続取得を区別。C147 Astraにも同じ経路が存在した。
@@ -90,6 +92,7 @@
 - [Candidate278 C277残存規則の一括削除試験](candidate278-remove-remaining-rules-design.md): C277 root `AGENTS.md`の3行目以降を削除した直接子Candidateの設計。Standard14 N=5は70 / 70件Score 4、C277比token +4.99%・elapsed +5.53%。
 - [Candidate279 root `AGENTS.md`空化の再試験](candidate279-empty-root-agents-design.md): C278からrepo root `AGENTS.md`を0 byteにした直接子のStandard14 N=5再試験。A01は5 / 5件Score 4だった一方、global `~/.codex/AGENTS.md`がCLIで有効だったため、無指示条件の試験ではない。
 - [Candidate280 結果未確定時の操作閉鎖](candidate280-outcome-binding-closure-design.md): Claude Code Opus 5.5のA01で、C276が候補の消去法から結果を補い確認前に変更・テストへ進んだ経路を、C276第1項の置換で閉じる設計。CLI 2.1.288の新系列でFree・C276と比較した。C280とC276はともに70 / 70件Score 4で、C280はA01で調査を行わず停止したが、C276比はトークン+0.09%・経過時間+3.93%だった（[計測記録](../evaluations/results/claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06.md)）。
+- [Candidate282 結果待ちと再判断の影響範囲](candidate282-result-effect-scope-design.md)：C280へ利用者指定の1項を追加する作成前の設計記録。
 
 - [Candidate273のトークン増加原因](candidate273-astra-n5-token-increase-causal-audit.md): 保存60runから、検証途中のモデル再入と履歴入力の反復を主因と特定。
 
@@ -886,6 +889,14 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | C163 | [`candidate163-five-verified-lines-integrated-design.md`](candidate163-five-verified-lines-integrated-design.md) | five verified lines integrated |
 
 ### 7b. 比較・診断・段階記録
+
+- [C280・C282の結果待ち制御とC147の対応分析](c280-c282-result-effect-scope-trace-analysis.md)：全140件の保存履歴から開始境界とF04・F08の分割経路を診断した完了記録。
+
+- [C280・C282の分割経路を切り分ける無作為化比較計画](c280-c282-randomized-route-comparison-plan-r1.md)：F04・F08の累積N=20、新規60件の条件・診断・判定を発行前に固定。
+
+- [C280・C282のF08追加比較計画、累積N=50で終了](c280-c282-f08-randomized-n50-extension-plan-r1.md)
+
+- [C280・C282の分割経路の切り分け結果](../evaluations/results/c280-c282-sol61-low-f08-randomized-n50_2026-10-07.md)
 
 | 文書 | 役割 |
 |---|---|

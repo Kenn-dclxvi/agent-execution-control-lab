@@ -284,6 +284,8 @@
 
 | [`the-caption-3ce91a4-execution-boundary-core-r1`](the-caption-3ce91a4-execution-boundary-core-r1/manifest.json)（Candidate274） | `the-caption-3ce91a4-result-effect-scope-r1` | C147の実行境界を含む9条項を逐語保持し、委任・役割管理の4条項を削除 | [Astra medium・Standard14 N=5](../../evaluations/results/candidate274-c147-astra-medium-standard14-n5_2026-09-05.md)は70 / 70 Score 4。C147比トークン -0.91%・経過時間 -26.52%。初回30件を再利用し、追加40件で完了 |
 
+| [`the-caption-3ce91a4-execution-control-result-effect-scope-r1`](the-caption-3ce91a4-execution-control-result-effect-scope-r1/manifest.json)（Candidate282） | `the-caption-3ce91a4-execution-control-outcome-binding-r1`（Candidate280） | 利用者指定の結果待ちと再判断の影響範囲制御を1項追加。他18対象を保持。[設計記録](../../docs/candidate282-result-effect-scope-design.md) | [GPT-6.1 Sol Low・Standard14 N=5](../../evaluations/results/c282-sol61-low-standard14-n5_2026-10-07.md)（有効70件、4点70件） |
+
 candidate bundleのmanifestは構築時provenanceとして不変のまま保持する。評価状態の更新はmanifestをin-place変更せず、この索引と独立したevaluation resultで表す。
 
 C18 / C19は明示的に合意された候補ではなく、診断中に実施指示を広く解釈して追加された派生案である。対象のF10誤認を解消せず、候補として維持する判断もなかったため、観測値と破棄の経緯を[result record](../../evaluations/results/candidate16-candidate19-evidence-boundary-targeted_2026-07-17.md)へ残し、バンドルと現行のcandidate索引から削除した。
