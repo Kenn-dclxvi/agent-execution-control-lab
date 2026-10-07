@@ -112,12 +112,19 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 
 上記は履歴のprompt-set resultの完全一致条件である。atomic run経路では、プロンプト以外のEvaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、token accountingを実効互換条件とする。`N`、coverage、iteration集合、計画順序、`max_workers`はexecution provenanceへ分離し、run poolのmember identityにしない。異なる`max_workers`のrunを同じプールで再利用する場合も、分析はexecution stratum別の件数と差分を保持する。
 
+実効互換規則`effective-v1`（2026-10-08追加、[設計](../docs/comparison-condition-identity-redesign.md)）では、比較条件を「結果の値を変えうる条件」と「記録だけの項目」に分け、前者だけを照合する。記録だけの項目は、評価コードのSHA-256（`time_recording.code_sha256`）、実行ファイルと設定フォルダのパス、署名者、認証方式と契約プラン、評価側のPython環境、発行方式（`schedule_policy`、`max_attempts`、`monitor_interval_seconds`、`duration_hint_method`、`max_workers`）、動きを変えない組み込みプラグイン（`cc-plugin-telemetry@builtin`、`cc-plugin-sec-default@builtin`）である。分類の正本は`scripts/comparison_identity.py`とする。
+
+- 評価コードのSHA-256の代わりに、実際にモデルへ渡した課題文の一致を、各runの`task_sha256`でケースごとに確かめる。`task_sha256`がないcycleを含む比較では、評価コードのSHA-256の一致を求める。
+- KPIの数え方を変えるコード変更では、`token_accounting.revision`、`time_recording.contract`、または採点契約を上げる。`tests/test_kpi_revision_guard.py`が版ごとの出力を固定する。
+- `preflight-comparison --compatibility-rule effective-v1`と`compare-effective`だけがこの規則を使う。既定の`exact`、既存の`compare`、atomic run経路（`seed-pool`、`plan-missing`、`register-run`）は、従来の完全一致を維持する。
+- 既存のresult、互換キー、比較viewは書き換えない。`effective-v1`の比較は、別schemaのview（`effective-comparison-view/v1`）として追加する。
+
 ## 比較試験の実行前ゲート
 
 ルートの`AGENTS.md`が定めるゲートの内訳をこの節の正本とする。
 
 - 実行予定条件から、Evaluation set identity、全ケースのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合を確定し、基準resultの互換条件と機械照合する。atomic run経路で実効互換条件へ含めない項目は`互換条件`の規定に従う。
-- プロンプト比較では、事前に宣言したprompt identity以外の互換条件が完全一致することを実行前ゲートとする。完全一致を証明するpreflight receiptを保存してから実行する。
+- プロンプト比較では、事前に宣言したprompt identity以外の互換条件が完全一致することを実行前ゲートとする。完全一致を証明するpreflight receiptを保存してから実行する。`effective-v1`を使う比較では、ここでの互換条件は`互換条件`の節が定める実効互換条件とし、記録だけの項目の違いはreceiptへ残す。課題文の一致は、実行後に`compare-effective`で確かめる。
 - Layer 4へ登録する試験では、発行予定のケース / iteration集合が固定Layer 1の全case coverageとresult schemaの登録条件を満たすこともpreflightで機械検証する。満たさない試験を非登録の診断として実施する場合は、その状態と再利用不能なゲートを一件目の発行前に明示する。
 - 試験ごとにfixture、file mode、ランタイム、設定上の並列上限などの実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。複数条件を新規実行する場合は、一つのLayer 1を先に固定して全条件へ複製する。
 - 保存済みprompt-set resultとの履歴互換サイクルは`prepare-comparison-layer1`で基準Layer 1から生成し、capsuleとglobal planの生成後に`preflight-comparison`を通す。比較用Layer 1を`freeze-set`で再生成しない。`comparison-preflight.json`がない、失効した、または改ざんされた旧経路サイクルの`run`は禁止する。

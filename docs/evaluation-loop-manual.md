@@ -554,6 +554,23 @@ python3 "$CLI" compare \
 
 `minuend_result_id`と`subtrahend_result_id`を各差分に明記する。referenceは採用状態や順位を意味しない。互換条件が1項目でも異なる場合はviewを作らない。
 
+### 実効互換規則による比較（`effective-v1`）
+
+評価コードのSHA-256や置き場所など、結果の値を変えない項目だけが違うresultは、`compare-effective`で比較できる。分類と規則は[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)の「互換条件」と[設計](comparison-condition-identity-redesign.md)を正本とする。
+
+```bash
+python3 "$CLI" compare-effective \
+  --registry "$REGISTRY" \
+  --result-id <reference result id> --cycle <reference result id>=<reference cycle> \
+  --result-id <candidate result id> --cycle <candidate result id>=<candidate cycle> \
+  --reference-result-id <reference result id> \
+  --output /tmp/effective-view.json
+```
+
+各resultのcycleから、validなrunの`task_sha256`をケースごとに集め、全resultで一致することを確かめる。viewの`task_text_check`は、`task_sha256`で確かめた場合は`task_sha256`、どれかのcycleに記録がなく評価コードのSHA-256の一致で代えた場合は`code_sha256_fallback`になる。viewには、各resultの記録だけの項目（`provenance`）も残す。
+
+発行前に同じ規則で照合する場合は、`preflight-comparison`へ`--compatibility-rule effective-v1`を付ける。receiptには規則名、実効互換キー、候補側の記録だけの項目が残り、`verify-comparison-preflight`と`run`は同じ規則で再検証する。
+
 ## 10. Directory
 
 ```text
