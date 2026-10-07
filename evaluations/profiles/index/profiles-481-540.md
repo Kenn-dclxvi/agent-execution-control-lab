@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate75-authority-bound-validation-fast-path-v12-validation-fast-path-f06-global-m5-n5-r1.json`](../candidate75-authority-bound-validation-fast-path-v12-validation-fast-path-f06-global-m5-n5-r1.json)
 - [`candidate76-final-state-validation-wave-v12-standard14-global-m24-n5-r1.json`](../candidate76-final-state-validation-wave-v12-standard14-global-m24-n5-r1.json)
 - [`candidate76-final-state-validation-wave-v12-validation-fast-path-f06-global-m5-n5-r1.json`](../candidate76-final-state-validation-wave-v12-validation-fast-path-f06-global-m5-n5-r1.json)
 - [`candidate77-triggered-exception-transition-v12-standard14-global-m24-n5-r1.json`](../candidate77-triggered-exception-transition-v12-standard14-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
 - [`candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate94-operation-criterion-totality-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
-- [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

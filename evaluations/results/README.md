@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C285のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c285-sol61-low-std14-20261007)
+
 - [C284のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c284-sol61-low-std14-20261007)
 
 - [C283のGPT-6.1 Sol Low・Standard14累積N=20（2026-10-07）](#c283-sol61-low-std14-n20-20261007)
@@ -122,6 +124,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c285-sol61-low-std14-20261007"></a>
+## C285のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[計測記録](c285-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](164a08aa201944c1b80ad0ea87f11d3b.json)、[機械可読記録](c285-sol61-low-standard14-n5_2026-10-07.json)、[C284互換比較](c285-sol61-low-standard14-n5_2026-10-07-c284-comparison.json)、[品質監査](c285-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[経路と時間の診断](c285-sol61-low-standard14-n5_2026-10-07-diagnostics.json)、[認証失敗記録](c285-sol61-low-standard14-n5_2026-10-07-authentication-failures.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
 
 <a id="c284-sol61-low-std14-20261007"></a>
 ## C284のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
@@ -1213,6 +1220,13 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 制御promptなし・repository情報ありとC15は、独立した[`ambiguity boundaries 5-case global M=10 N=3 comparison`](control-free-repository-candidate15-ambiguity-boundaries-global-m10-n3_2026-07-17.md)として各15 runをappend-only resultへ登録した。互換な3 KPI、case別のclarify / execute / stopped境界、semanticな成果同等性を記録し、winner、採用、release判断は出力しない。
 
 ## 12. この索引に要約を持たないresult
+
+[c284-start-side-route-analysis_2026-10-07.json](c284-start-side-route-analysis_2026-10-07.json)。
+
+[c284-c280-elapsed-time-decomposition_2026-10-07.json](c284-c280-elapsed-time-decomposition_2026-10-07.json)。
+
+[c147-sol61-low-validation-call-compliance-audit_2026-10-07.json](c147-sol61-low-validation-call-compliance-audit_2026-10-07.json)。
+
 
 [baf01e47d8d8432bbe2dc92a961287cb.json](baf01e47d8d8432bbe2dc92a961287cb.json)
 

@@ -1,0 +1,15 @@
+{
+  "schema_version": "c285-authentication-failure-record/v1",
+  "authentication_failed_attempts": 44,
+  "valid_runs": 70,
+  "preserved_initial_valid_runs": 26,
+  "recovered_slots": 44,
+  "failed_attempt_quality_score": null,
+  "failed_attempt_tokens": null,
+  "reason": "期限切れの認証情報でrefresh_token_reused。基盤は除外記録を生成せずcontroller errorとなったため、認証失敗44件を別記録として分類。完了済み26件は再実行していない。",
+  "execution_strata": [
+    "初回の単独待ち行列 M24",
+    "認証失敗44枠の再開待ち行列 M24"
+  ],
+  "evidence_directory": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c285-sol61-low-standard14-n5-20261007-r1"
+}
