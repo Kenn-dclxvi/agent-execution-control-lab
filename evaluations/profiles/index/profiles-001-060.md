@@ -43,6 +43,7 @@
 - [`c289-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json`](../c289-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json)
 - [`c289-sol61-low-standard14-targeted-n5-cli0159-isolated-20261008-r1.json`](../c289-sol61-low-standard14-targeted-n5-cli0159-isolated-20261008-r1.json)
 - [`c290-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json`](../c290-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json)
+- [`c291-claude-opus55-low-standard14-n5-cli2288-r1.json`](../c291-claude-opus55-low-standard14-n5-cli2288-r1.json)
 - [`c291-claude-opus55-medium-standard14-n5-cli2288-r1.json`](../c291-claude-opus55-medium-standard14-n5-cli2288-r1.json)
 - [`c291-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json`](../c291-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate105-validation-terminal-return-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate105-validation-terminal-return-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json)
 - [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
-- [`candidate106-compact-validation-terminal-wait-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate106-compact-validation-terminal-wait-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

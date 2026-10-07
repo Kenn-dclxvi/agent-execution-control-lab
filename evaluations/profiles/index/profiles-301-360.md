@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate236-taskspec-output-boundary-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate236-taskspec-output-boundary-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json)
 - [`candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json)
 - [`candidate274-luna6-high-standard14-n5-cli0156-r1.json`](../candidate274-luna6-high-standard14-n5-cli0156-r1.json)
-- [`candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json`](../candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json)
