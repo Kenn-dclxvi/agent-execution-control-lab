@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C282とC280の比較・分割経路診断（2026-10-07）](#c282-c280-comparison-20261007)
+
 - [Claude Code Opus 5.5 C281（2026-10-07）](#claude-opus55-c281-20261007)
 
 - [C281のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c281-sol61-low-std14-20261007)
@@ -114,6 +116,19 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c282-c280-comparison-20261007"></a>
+## C282とC280の比較・分割経路診断（2026-10-07）
+
+- [C282 GPT-6.1 Sol Low・Standard14 N=5](c282-sol61-low-standard14-n5_2026-10-07.md)
+
+- [C280・C282の結果待ち制御の履歴診断](c280-c282-result-effect-scope-trace-audit_2026-10-07.json)
+
+- [C280・C282のF04・F08無作為化比較、対象N=20](c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07.md)
+
+- [C280・C282のF08無作為化比較、対象N=50](c280-c282-sol61-low-f08-randomized-n50_2026-10-07.md)
+
+関連する機械可読結果：[c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07-c280-targeted-analysis.json](c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07-c280-targeted-analysis.json)、[c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07-c282-targeted-analysis.json](c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07-c282-targeted-analysis.json)、[c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07.json](c280-c282-sol61-low-f04-f08-randomized-n20_2026-10-07.json)、[c280-c282-sol61-low-f08-randomized-n50_2026-10-07-c280-targeted-analysis.json](c280-c282-sol61-low-f08-randomized-n50_2026-10-07-c280-targeted-analysis.json)、[c280-c282-sol61-low-f08-randomized-n50_2026-10-07-c282-targeted-analysis.json](c280-c282-sol61-low-f08-randomized-n50_2026-10-07-c282-targeted-analysis.json)、[c280-c282-sol61-low-f08-randomized-n50_2026-10-07.json](c280-c282-sol61-low-f08-randomized-n50_2026-10-07.json)、[c282-sol61-low-standard14-n5_2026-10-07-c280-comparison.json](c282-sol61-low-standard14-n5_2026-10-07-c280-comparison.json)、[c282-sol61-low-standard14-n5_2026-10-07-quality-audit.json](c282-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[c282-sol61-low-standard14-n5_2026-10-07.json](c282-sol61-low-standard14-n5_2026-10-07.json)、[b9555c4df4584e988c5e1837c2e251d9.json](b9555c4df4584e988c5e1837c2e251d9.json)。
 
 <a id="claude-opus55-c281-20261007"></a>
 
