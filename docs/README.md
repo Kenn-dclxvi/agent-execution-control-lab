@@ -778,6 +778,7 @@
 - [Candidate284 変更後の検証を一つの呼び出しで実行する指定](candidate284-validation-single-call-design.md)：C147の検証一括実行を、改訂後の「処理方法を指定できる条件」を満たす無条件の3項としてC280へ追加する作成前設計。[Sol Low・Standard14 N=5](../evaluations/results/c284-sol61-low-standard14-n5_2026-10-07.md)：有効70件すべて品質4、C280比トークン-25.79%・経過時間+7.93%。
 - [Candidate285 情報を確認する範囲をリポジトリの中に限定する](candidate285-repository-read-scope-design.md)：C284へ、リポジトリの外を読む経路を閉じる1項を追加する作成前設計。[Sol Low・Standard14 N=5](../evaluations/results/c285-sol61-low-standard14-n5_2026-10-07.md)：有効70件すべて品質4、C284比トークン-7.92%・経過時間+5.79%。
 - [Candidate286 開始時の確認と名指しされたファイルの読み取りを一つの呼び出しで行う](candidate286-start-read-batch-design.md)：C285へ、開始側の読み取りの分割を閉じる無条件の3項を追加する作成前設計。C285では名指しされたファイルを2回目以降の呼び出しで初めて読んだrunが47 / 55件（C147は13 / 55件）。[Sol Low・Standard14 N=5](../evaluations/results/c286-sol61-low-standard14-n5_2026-10-07.md)：有効70件すべて品質4、C285比トークン-7.18%・経過時間-9.09%。[累積N=20の追加方針](candidate286-standard14-n20-extension-plan-r1.md)を固定。[累積N=20の結果](../evaluations/results/c286-sol61-low-standard14-n20_2026-10-07.md)：既存70件と追加210件、全280件が品質4。[Claude Code Opus 5.5 medium・Standard14 N=5の計画](candidate286-claude-opus55-medium-standard14-n5-plan-r1.md)を固定。
+- [Candidate287 開始時の読み取りを最初の応答で発行し、読み方を縛らない](candidate287-start-read-response-design.md)：C286がOpus 5.5でトークンを増やした経路（一つの呼び出しへのまとめ読みによる読み取り量75%増、[分析](../evaluations/results/c286-opus55-start-read-volume-analysis_2026-10-07.json)）を避け、C285へ応答単位の3項を追加する作成前設計。Sol LowとOpus 5.5の両方で測る。評価は未実施。
 
 各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
 
