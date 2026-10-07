@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C283のGPT-6.1 Sol Low・Standard14累積N=20（2026-10-07）](#c283-sol61-low-std14-n20-20261007)
+
+- [C283のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c283-sol61-low-std14-20261007)
+
 - [C282とC280の比較・分割経路診断（2026-10-07）](#c282-c280-comparison-20261007)
 
 - [Claude Code Opus 5.5 C281（2026-10-07）](#claude-opus55-c281-20261007)
@@ -116,6 +120,18 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c283-sol61-low-std14-n20-20261007"></a>
+## C283のGPT-6.1 Sol Low・Standard14累積N=20（2026-10-07）
+
+[C280基準側の三項発生監査](c280-c283-three-boundaries-baseline-trace-audit_2026-10-07.json)、[判定記録](../../docs/c280-c283-three-boundaries-baseline-trace-audit-r1.md)。全70件、第1・2項は観測0件、第3項は確認0件・判定不能3件。保存traceの診断のみ。
+
+[計測記録](c283-sol61-low-standard14-n20_2026-10-07.md)、[登録結果](fd89bc9e0074474586951051202d52b5.json)、[機械可読記録](c283-sol61-low-standard14-n20_2026-10-07.json)、[atomic集計](c283-sol61-low-standard14-n20_2026-10-07-atomic-analysis.json)、[追加分の品質監査](c283-sol61-low-standard14-n20_2026-10-07-quality-audit.json)。既存70件と追加210件、累積280件。得点分布{"4": 280}。N=5との差は参考差。
+
+<a id="c283-sol61-low-std14-20261007"></a>
+## C283のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[計測記録](c283-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](8f11b7122d6847a88e81a494c4480e99.json)、[機械可読記録](c283-sol61-low-standard14-n5_2026-10-07.json)、[C280互換比較](c283-sol61-low-standard14-n5_2026-10-07-c280-comparison.json)、[C282互換比較](c283-sol61-low-standard14-n5_2026-10-07-c282-comparison.json)、[品質監査](c283-sol61-low-standard14-n5_2026-10-07-quality-audit.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
 
 <a id="c282-c280-comparison-20261007"></a>
 ## C282とC280の比較・分割経路診断（2026-10-07）

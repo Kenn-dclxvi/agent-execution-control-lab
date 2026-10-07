@@ -77,7 +77,9 @@
 
 ### C147の成果確定・探索制限を中心に残す再構成
 
-- [C280へC147の制御をまとまりで移植する検討](c280-c147-control-group-transfer-study-r1.md)：検証票・途中判断・完了境界を一単位として移植する案と、開始時の共同発行を保証しない境界を区別した設計検討。Candidate化と測定は未実施。
+
+- [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
+
 
 - [C147 Solの旧環境と再計測の時間増加](c147-sol-cli0146-cli0153-time-drift-audit.md): 325.50秒増の区間を分解。初期準備とroot記録外が約69.8%を占め、終了待ちとモデル一覧更新タイムアウトを確認。
 
@@ -765,6 +767,9 @@
 
 ### 7a. Candidate設計記録
 
+- [Candidate283 検証結果の採用と追加操作の許可境界](candidate283-validation-result-permission-boundary-design.md)：C280へ方式を指定しない三項を追加する作成前設計。[C282同条件のSol Low・Standard14 N=5](../evaluations/results/c283-sol61-low-standard14-n5_2026-10-07.md)を完了。有効70件すべて品質4。[累積N=20の追加方針](candidate283-standard14-n20-extension-plan-r1.md)に従い、[280件の結果](../evaluations/results/c283-sol61-low-standard14-n20_2026-10-07.md)を保存。
+- [C280のC283三項に対する基準側発生監査](c280-c283-three-boundaries-baseline-trace-audit-r1.md)：全70件。第1・2項は観測0件、第3項は確認0件・判定不能3件。
+
 各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
 
 正本はlifecycle軸ごとに分かれる。**identityは各バンドルの`manifest.json`**、**評価状態は評価・診断を実施済みなら独立したevaluation / diagnostic result、未実施の`not_evaluated`は[`prompts/candidates/README.md`](../prompts/candidates/README.md)の状態列**、**release・approval・runtime projectionは[`prompts/releases/README.md`](../prompts/releases/README.md)**を正本とする。系譜と現在状態の一覧はcandidate索引にある。この索引は制御軸だけを示し、状態は複製しない（`docs/AGENTS.md`「同じ説明を複数文書へ全文複製せず正本へリンク」）。評価と採用、releaseとprojectionは別状態である（[`repository-contract.md`](repository-contract.md)、[`AGENTS.md`](AGENTS.md)）。
@@ -954,6 +959,8 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`pytest-allowlist-success-delivery-design.md`](pytest-allowlist-success-delivery-design.md) | 成功出力の大半を占めるpytest系だけをexact argv boundなwrapper対象とする`success-delivery/v2`設計 |
 
 ## 8. historical handoff／superseded interpretation
+
+- [C280へC147の制御をまとまりで移植する検討r1](c280-c147-control-group-transfer-study-r1.md)：当時の文案を保存。[再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)により、単一呼び出しを必要な受け渡し経路とした設計判断は撤回。
 
 - [STD14の開始履歴を保持する素材別版の実装方針 第1版](standard14-dedicated-stage8-material-revision-plan-r1.md)：未実装の修正案。全体計画第2版で自動実装を取り下げた。
 
