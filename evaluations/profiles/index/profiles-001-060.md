@@ -22,6 +22,7 @@
 - [`c276-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../c276-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`c276-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../c276-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
 - [`c280-claude-opus55-medium-standard14-n5-cli2288-r1.json`](../c280-claude-opus55-medium-standard14-n5-cli2288-r1.json)
+- [`c280-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json`](../c280-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
 - [`candidate1-expanded12-global-m24-n5-r1.json`](../candidate1-expanded12-global-m24-n5-r1.json)
 - [`candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json`](../candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate118-implementation-bind-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate119-validation-predicate-method-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate119-validation-predicate-method-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate12-route-cardinality-expanded12-global-m24-n5-r1.json`](../candidate12-route-cardinality-expanded12-global-m24-n5-r1.json)
-- [`candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate120-implementation-edit-ticket-closure-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)

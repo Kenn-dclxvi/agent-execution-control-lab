@@ -15,38 +15,59 @@ AIエージェントの実行制御を再現可能に測る研究基盤です。
 
 計測は評価対象リポジトリ（ターゲット）ごとのインスタンスとして管理します。プロンプト設計、比較、評価、反映可能な形へのまとめを実行している現行インスタンスはTHE-CAPTION（`the-caption`）です。インスタンス台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
 
-## いま進めていること
+## 直近の計測（2026-10-06〜07）
 
-9月24日時点の主要結果を、FreeとC274に分けて掲載します。各条件はStandard14の14ケースを5反復した70件で、全件有効、除外0件です。token中央値は各反復の14ケース合計を5反復で個別に中央値化した値です。
+THE-CAPTIONを対象に、Standard14（STD14）の全14ケースを各5回計測した結果です。各条件は70件の有効な実行からなります。品質中央値は各反復の14ケースを100点満点へ換算した値、トークンと時間の中央値は各反復の14ケース合算値を、それぞれ5反復分から算出しています。品質中央値100でも全件4点とは限らないため、点数分布を併記します。
 
-### Free
+### GPT-6.1 Sol Low
 
-| モデル / 推論 | Score 4 / 0 | 入力 / 出力token中央値 | 全agent token中央値 | 総所要時間中央値 | API費用目安（70件） |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| GPT-6 Astra / low | 70 / 0 | 2,020,189 / 13,567 | 2,033,901 | 777.51秒 | $107.54 |
-| GPT-6 Sol / medium | 65 / 5 | 2,870,088 / 24,297 | 2,894,385 | 813.13秒 | $29.86 |
-| GPT-6 Luna / high | 65 / 5 | 3,104,244 / 37,160 | 3,141,404 | 1,043.65秒 | $1.71 |
-| GPT-5.6 Sol / medium（9/4） | 65 / 5 | 3,695,723 / 40,514 | 3,734,191 | 1,777.42秒 | $77.96 |
+| プロンプト | 点数分布 | 品質中央値 | 全エージェントトークン中央値 | 経過時間中央値（秒） | 記録 |
+| --- | --- | ---: | ---: | ---: | --- |
+| Free（10/6） | 4点64件・2点1件・0点5件 | 92.86 | 2,097,651 | 560.16 | [登録結果](evaluations/results/ecf6ece4009149e384fb29ab8ea40d35.json) |
+| C276（10/6） | 4点70件 | 100.00 | 1,958,203 | 519.62 | [登録結果](evaluations/results/e8614a2ea0f74cdbaf9fd9084c0ceeff.json) |
+| C280（10/7） | 4点70件 | 100.00 | 2,071,746 | 537.75 | [登録結果](evaluations/results/794d02abe894456686eea22e9b6f0fed.json) |
 
-### C274
+C276はFreeに対し品質中央値が7.14ポイント高く、トークンは-6.65%、時間は-7.24%でした。C280はC276と同じく全70件が4点でしたが、トークンは+5.80%、時間は+3.49%となりました。
 
-| モデル / 推論 | Score 4 / 0 | 入力 / 出力token中央値 | 全agent token中央値 | 総所要時間中央値 | API費用目安（70件） |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| GPT-6 Astra / low | 70 / 0 | 未記録 | 1,474,356 | 631.48秒 | 算出不可 |
-| GPT-6 Sol / medium | 70 / 0 | 1,789,594 / 20,281 | 1,809,875 | 681.90秒 | $18.60 |
-| GPT-6 Luna / high | 70 / 0 | 1,768,213 / 40,173 | 1,808,386 | 975.93秒 | $0.98 |
+[C276・Freeの計測記録](evaluations/results/sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.md)、[C280の計測記録](evaluations/results/c280-sol61-low-standard14-n5_2026-10-07.md)、[C276とC280のケース別中央値・全70件の個別KPI比較](evaluations/results/c280-c276-sol61-low-standard14-n5-per-run-comparison_2026-10-07.md)。
 
-各組内でのFree比は、C274でAstraが総token−27.51%・所要時間−18.78%、Solが−37.47%・−16.14%、Lunaが−42.43%・−6.49%でした。SolとLunaではScore 4が各65件から70件へ増え、AstraはFreeもC274も70件でした。GPT-5.6 Sol Mediumは9月4日のFree結果のみで、対になるC274 resultは登録資料で確認できません。
+### GPT-6.1 Sol Medium
 
-API費用はキャッシュ割引なしで、各70件全体の入力・出力token合計へ通常単価を当てた参考値です。実際のCodex Free請求額ではありません。Astra C274は入出力内訳が保存されていないため算出していません。9月24日のGPT-6 Sol/LunaはCLI 0.156.1、AstraとGPT-5.6 SolはCLI 0.153.3で実施日も異なります。モデル間の差をモデル単独の効果とはみなしません。また、固定された70件の観測をモデル全般や異なる課題へ一般化しません。
+| プロンプト | 点数分布 | 品質中央値 | 全エージェントトークン中央値 | 経過時間中央値（秒） | 記録 |
+| --- | --- | ---: | ---: | ---: | --- |
+| Free | 4点65件・0点5件 | 92.86 | 2,708,904 | 662.60 | [登録結果](evaluations/results/3dd2e8bded274b5599ce72efaecd4a6a.json) |
+| C276 | 4点70件 | 100.00 | 2,333,617 | 622.17 | [登録結果](evaluations/results/ad917ff0063f4ae2a099242b3f0cea9a.json) |
 
-費用対品質点の順位とAPI単価、C274 LunaとFreeの追加比較は[Free/C274統合比較](evaluations/results/free-c274-selected-model-summary_2026-09-24.md)にまとめています。
+C276はFreeに対し品質中央値が7.14ポイント高く、トークンは-13.85%、時間は-6.10%でした。[条件と個別実行の記録](evaluations/results/sol61-c276-free-low-medium-standard14-new-n5_2026-10-06.md)を参照してください。
 
-### Candidate276・GPT-6 Luna Medium（2026-09-25）
+### GPT-6 Astra Low
 
-Standard14を5反復した70件はすべて有効で、全件の採点分布はScore 4が68件、Score 1が1件、Score 0が1件でした。保存済みControl-Free Luna MediumとのN=5比較では、品質中央値は100.00点、全エージェントトークン中央値は2,330,083、経過時間中央値は681.60秒で、Control-Free比はそれぞれ品質+7.14ポイント、トークン-7.15%、経過時間-4.47%でした。これは固定Standard14・Luna Medium条件内の観測です。条件と採点分布を含む[Candidate276の試験記録](evaluations/results/candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)を参照してください。
+| プロンプト | 点数分布 | 品質中央値 | 全エージェントトークン中央値 | 経過時間中央値（秒） | 記録 |
+| --- | --- | ---: | ---: | ---: | --- |
+| Free | 4点65件・2点3件・0点2件 | 96.43 | 2,134,746 | 652.02 | [登録結果](evaluations/results/71163a1a328641f2ae1d447370253b7f.json) |
+| C276 | 4点70件 | 100.00 | 1,944,598 | 616.53 | [登録結果](evaluations/results/09113d732579439cb3d84ade1c91fe4f.json) |
 
-以前のAstra Low推奨は当時の固定条件に関する記録として[推論設定の推奨判定とトークン差の分析](docs/candidate274-astra-reasoning-recommendation-r1.md)に残しています。今日の横断表は[Free/C274統合比較](evaluations/results/free-c274-selected-model-summary_2026-09-24.md)、Free各条件の詳細は[Freeモデル比較表](evaluations/results/control-free-model-reasoning-comparison_2026-09-24.md)、各Candidateの詳細は[Sol C274](evaluations/results/candidate274-sol6-medium-standard14-n5-cli0156_2026-09-24.md)と[Luna High C147/C274](evaluations/results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md)を参照してください。
+C276はFreeに対し品質中央値が3.57ポイント高く、トークンは-8.91%、時間は-5.44%でした。[計測記録](evaluations/results/astra6-c276-free-low-standard14-new-n5_2026-10-06.md)を参照してください。
+
+### Claude Code Opus 5.5 Medium
+
+| プロンプト | 点数分布 | 品質中央値 | 全エージェントトークン中央値 | 経過時間中央値（秒） | 記録 |
+| --- | --- | ---: | ---: | ---: | --- |
+| Free | 4点68件・0点2件 | 100.00 | 1,196,005 | 501.72 | [登録結果](evaluations/results/aff3ca28282a452bb75b004506dfa1e1.json) |
+| C276 | 4点70件 | 100.00 | 1,057,346 | 431.57 | [登録結果](evaluations/results/b3a245079bb94501a58c1fa5e08ec8c6.json) |
+| C280 | 4点70件 | 100.00 | 1,058,318 | 448.52 | [登録結果](evaluations/results/10a2d444d80f4987a6a4d74e22fb8937.json) |
+
+C276はFreeに対し4点が68件から70件へ増え、トークンは-11.59%、時間は-13.98%でした。C280はC276と同じく全70件が4点で、トークンは+0.09%、時間は+3.93%でした。Claude Code 2.1.288、Claude採点契約v2による独立系列です。利用上限による除外は3条件合計285件で、同じ枠を再実行しました。除外は品質失敗へ含めていません。[計測記録と条件](evaluations/results/claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06.md)を参照してください。
+
+### 比較の範囲と現在の状態
+
+同じモデル・推論設定内では、固定したケース、TaskSpec、採点契約、実行環境を維持してプロンプトを比較しています。異なるモデルや実行環境の数値を、モデル単独の効果や総合順位として扱いません。C276のSol計測は4条件、Astraは2条件、C280のSol計測は単独条件の待ち行列でした。特にC280と前回C276の時間差は、プロンプトだけの因果効果として断定しません。Codex系列の今回の計測には除外・再試行がありませんでした。
+
+以上は固定STD14 N=5内の観測であり、別の課題への一般化や採用を示すものではありません。C276・C280の計測は完了していますが、今回の計測に基づく採用・本体反映は実施していません。A01だけの試験や別の評価系列は、この集約表へ含めていません。
+
+### 以前の計測
+
+9月24〜25日のFree・C274・C276の数値とAPI費用の参考値は、[Free/C274統合比較](evaluations/results/free-c274-selected-model-summary_2026-09-24.md)、[Freeモデル比較](evaluations/results/control-free-model-reasoning-comparison_2026-09-24.md)、[C276 Luna Medium](evaluations/results/candidate276-execution-control-luna6-medium-standard14-n5-cli0156_2026-09-25.md)に残しています。9月末〜10月初旬を含む計測履歴は[結果索引](evaluations/results/README.md)から参照できます。
 
 ## 実行制御で何が変わったか
 

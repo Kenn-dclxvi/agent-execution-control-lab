@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate6-expanded12-global-m24-n5-r1.json`](../candidate6-expanded12-global-m24-n5-r1.json)
 - [`candidate60-operation-method-capsule-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json`](../candidate60-operation-method-capsule-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json)
 - [`candidate61-atomic-spec-operation-gate-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate61-atomic-spec-operation-gate-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate61-atomic-spec-operation-gate-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate78-project-index-navigation-v13-standard14-global-m24-n5-r1.json`](../candidate78-project-index-navigation-v13-standard14-global-m24-n5-r1.json)
 - [`candidate79-ordered-validation-wave-v13-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate79-ordered-validation-wave-v13-reasoning-medium-f04-global-m5-n5-r1.json)
 - [`candidate80-root-validation-wrapper-v13-reasoning-medium-prompt-stability-f04-global-m10-n10-r1.json`](../candidate80-root-validation-wrapper-v13-reasoning-medium-prompt-stability-f04-global-m10-n10-r1.json)
-- [`candidate81-observation-delivery-control-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-observation-delivery-control-v14-reasoning-medium-f02-global-m5-n5-r1.json)
