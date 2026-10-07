@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 C286（2026-10-07）](#claude-opus55-c286-20261007)
+
 - [C286のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c286-sol61-low-std14-20261007)
 
 - [C285のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c285-sol61-low-std14-20261007)
@@ -127,7 +129,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
+<a id="claude-opus55-c286-20261007"></a>
+
+## Claude Code Opus 5.5 C286（2026-10-07）
+
+[計測記録](claude-opus55-c286-standard14-n5-cli2288_2026-10-07.md)、[条件照合・集計](claude-opus55-c286-standard14-n5-cli2288_2026-10-07.json)、[登録結果](e1145d3027994db78153dfad149e4e0b.json)、[atomic集計](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-atomic-analysis.json)、[品質監査](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-quality-audit.json)、[指定診断](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-diagnostics.json)。有効70件、全件4点。品質中央値100、全エージェントトークン中央値1,328,871、経過時間中央値436.94秒。[C280比較](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-c286-c280-comparison.json)、[Control-Free比較](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-c286-free-comparison.json)、[C276比較](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-c286-c276-comparison.json)、[C281比較](claude-opus55-c286-standard14-n5-cli2288_2026-10-07-c286-c281-comparison.json)。指定試験と比較は完了し、採用は未判断。標準seal・compactはClaude schema非対応のため未完了で、検証済みarchiveと元workspaceを保持した。
+
 <a id="c286-sol61-low-std14-20261007"></a>
+
 ## C286のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
 
 [計測記録](c286-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](d6fb28dbcef44caebc516591fd720eaa.json)、[機械可読記録](c286-sol61-low-standard14-n5_2026-10-07.json)、[C285互換比較](c286-sol61-low-standard14-n5_2026-10-07-c285-comparison.json)、[品質監査](c286-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[経路と時間の診断](c286-sol61-low-standard14-n5_2026-10-07-diagnostics.json)、[検証呼び出し集計](c286-sol61-low-standard14-n5_2026-10-07-compliance-audit.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
