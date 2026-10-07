@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json)
 - [`candidate191-explicit-review-operation-applicability-adr9-r2-medium-m24-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate191-explicit-review-operation-applicability-adr9-review-required-medium-m24-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr9-review-required-medium-m24-n5-cli0146.json)
 - [`candidate191-explicit-review-operation-applicability-standard14-affected9-f04-reference-n5-cli0146.json`](../candidate191-explicit-review-operation-applicability-standard14-affected9-f04-reference-n5-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
-- [`candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)

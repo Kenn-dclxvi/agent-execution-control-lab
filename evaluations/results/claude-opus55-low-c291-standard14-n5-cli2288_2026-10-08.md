@@ -42,3 +42,7 @@ lowでも、ルートの本文の再取得はmediumと同じく0件にはなら�
 
 - [登録結果](7e868f2502c24a2eac3c09cd99388e42.json)・[品質監査](claude-opus55-low-c291-standard14-n5-cli2288_2026-10-08-quality-audit.json)
 - [発行前の記録](claude-opus55-low-c291-standard14-n5-cli2288_2026-10-08-preflight.json)・[機序の診断](claude-opus55-low-c291-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)
+
+## 追記（2026-10-08）
+
+プロファイルの`executor_parameters.schedule_policy`は、medium系列から写した`global_queue`のままだが、実際の発行は`prepare_plan.py`による`wave_barrier`だった。C280 lowとC291 lowは同じ方式で発行しており、両者の比較には影響しない。medium系列と経過時間を比べる場合は、この違いを考慮する。プロファイルと登録結果は書き換えていない。
