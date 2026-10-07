@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C290・C291のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c290-c291-sol61-low-std14-20261008)
+
+- [Claude Code Opus 5.5 C291（2026-10-08）](#claude-opus55-c291-20261008)
+
 - [Claude Code Opus 5.5 C289（2026-10-08）](#claude-opus55-c289-20261008)
 
 - [C289のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c289-sol61-low-std14-20261008)
@@ -138,6 +142,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c290-c291-sol61-low-std14-20261008"></a>
+## C290・C291のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）
+
+[計測記録](c290-c291-sol61-low-standard14-n5_2026-10-08.md)、[機序の診断](c290-c291-standard14-n5_2026-10-08-mechanism-diagnostics.json)。C290は[登録結果](192ff720558f444a95cf43f4ed6c4d41.json)、[atomic集計](c290-c291-sol61-low-standard14-n5_2026-10-08-c290-atomic-analysis.json)、[選択記録](c290-c291-sol61-low-standard14-n5_2026-10-08-c290-selection.json)、[C289比較](c290-c291-sol61-low-standard14-n5_2026-10-08-c290-c289-comparison.json)、[品質監査](c290-c291-sol61-low-standard14-n5_2026-10-08-c290-quality-audit.json)。C291は[登録結果](5fc51e47cb0a40fba05e0d81dca85e62.json)、[atomic集計](c290-c291-sol61-low-standard14-n5_2026-10-08-c291-atomic-analysis.json)、[選択記録](c290-c291-sol61-low-standard14-n5_2026-10-08-c291-selection.json)、[C289比較](c290-c291-sol61-low-standard14-n5_2026-10-08-c291-c289-comparison.json)、[追加56件の品質監査](c290-c291-sol61-low-standard14-n5_2026-10-08-c291-quality-audit.json)、[事前計測14件の品質監査](c290-c291-sol61-low-standard14-n5_2026-10-08-c291-targeted-quality-audit.json)。両条件とも有効70件、全件4点。C289比でC290はトークン+1.39%・経過時間+20.43%、C291はトークン+4.35%・経過時間+8.59%。採用は未判断。
+
+<a id="claude-opus55-c291-20261008"></a>
+## Claude Code Opus 5.5 C291（2026-10-08）
+
+[計測記録](claude-opus55-c291-standard14-n5-cli2288_2026-10-08.md)、[登録結果](a306f8a734694e8a91de1060449c5222.json)、[atomic集計](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-atomic-analysis.json)、[選択記録](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-selection.json)、[C289比較](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-c291-c289-comparison.json)、品質監査（[事前計測14件](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-targeted-quality-audit.json)・[Team 9件](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-batch001-quality-audit.json)・[取り込み47件](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-batch002-quality-audit.json)）、[取り込みの記録](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-surface-revalidation.json)、[アカウント切り替えの記録](claude-opus55-c291-standard14-n5-cli2288_2026-10-08-account-switch.json)。有効70件、全件4点。C289比トークン-10.28%、経過時間+10.19%（47件はProアカウントでプラグイン一覧の違いを許容して取り込んだため、経過時間は評価しない）。採用は未判断。
 
 <a id="claude-opus55-c289-20261008"></a>
 ## Claude Code Opus 5.5 C289（2026-10-08）

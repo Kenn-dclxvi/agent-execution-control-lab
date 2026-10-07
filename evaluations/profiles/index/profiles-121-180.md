@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
+- [`candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
+- [`candidate14-validation-authority-expanded12-global-m24-n5-r1.json`](../candidate14-validation-authority-expanded12-global-m24-n5-r1.json)
 - [`candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate141-prechange-relation-coverage-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate142-initial-joint-effect-admission-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate157-focused-prechange-research-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json`](../candidate157-focused-prechange-research-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json)
 - [`candidate158-outcome-method-readable-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate158-outcome-method-readable-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
 - [`candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json`](../candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json)
-- [`candidate160-assignment-result-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../candidate160-assignment-result-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
-- [`candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../candidate161-assignment-result-closure-readable-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
-- [`candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate162-completion-ticket-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
