@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json`](../candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json`](../candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json`](../candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate2-expanded12-global-m24-n1-r1.json`](../candidate2-expanded12-global-m24-n1-r1.json)
 - [`candidate2-expanded12-global-m24-n5-r1.json`](../candidate2-expanded12-global-m24-n5-r1.json)
 - [`candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate20-criterion-owner-evidence-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
-- [`candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
-- [`candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
-- [`candidate247-start-result-read-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate247-start-result-read-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)

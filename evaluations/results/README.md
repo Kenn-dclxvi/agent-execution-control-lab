@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 C287 N=2（2026-10-07）](#claude-opus55-c287-n2-20261007)
+
+- [C287のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c287-sol61-low-std14-20261007)
+
 - [Claude Code Opus 5.5 C286（2026-10-07）](#claude-opus55-c286-20261007)
 
 - [C286のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c286-sol61-low-std14-20261007)
@@ -128,6 +132,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-c287-n2-20261007"></a>
+## Claude Code Opus 5.5 C287 N=2（2026-10-07）
+
+[計測記録](claude-opus55-c287-standard14-n2-cli2288_2026-10-07.md)、[条件・集計](claude-opus55-c287-standard14-n2-cli2288_2026-10-07.json)、[登録結果](7a1e630f4a7a41c0aaa4a37e3306e1cb.json)、[atomic集計](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-atomic-analysis.json)、[selection](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-selection.json)、[品質監査](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-quality-audit.json)、[診断](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-diagnostics.json)。有効28件、全件4点。指定N=2の計測と比較は完了し、採用は未判断。[C280基準result](b23f5f3735d44a0aa79f0c592c995bc7.json)、[C280 selection](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c280-n2-selection.json)、[C280集計](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c280-n2-analysis.json)、[C280比較](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c280-comparison.json)、[C286 selection](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c286-n2-selection.json)、[C286集計](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c286-n2-analysis.json)、[C286比較](claude-opus55-c287-standard14-n2-cli2288_2026-10-07-c286-comparison.json)。
+
+<a id="c287-sol61-low-std14-20261007"></a>
+## C287のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）
+
+[計測記録](c287-sol61-low-standard14-n5_2026-10-07.md)、[登録結果](4cd9f56f41b94fff97533107c76061f5.json)、[機械可読記録](c287-sol61-low-standard14-n5_2026-10-07.json)、[C285互換比較](c287-sol61-low-standard14-n5_2026-10-07-c285-comparison.json)、[品質監査](c287-sol61-low-standard14-n5_2026-10-07-quality-audit.json)、[C286参考比較](c287-sol61-low-standard14-n5_2026-10-07-c286-comparison.json)、[読み取りの診断](c287-sol61-low-standard14-n5_2026-10-07-response-read-diagnostics.json)、[経路と時間の診断](c287-sol61-low-standard14-n5_2026-10-07-diagnostics.json)、[検証呼び出しの診断](c287-sol61-low-standard14-n5_2026-10-07-compliance-audit.json)。有効70件、得点分布{"4": 70}。指定試験完了、採用は未判断。
 
 <a id="claude-opus55-c286-20261007"></a>
 
@@ -1317,6 +1331,8 @@ C14直接派生のCandidate15は[`expanded 12-case global M=24 N=5 result`](cand
 - [candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json](candidate270-natural-language-predicate-bound-validation-result-f01-f02-f03-f10-entrypoint-n5-mechanism-audit-r1.json)
 
 ### 既存登録ファイルへのリンク（個別要約なし）
+
+[c286-opus55-start-read-volume-analysis_2026-10-07.json](c286-opus55-start-read-volume-analysis_2026-10-07.json)
 
 - [13fe94d5f45a4a2ba764593a5505ba9f.json](13fe94d5f45a4a2ba764593a5505ba9f.json)
 - [16c1efe030e64d5cbfd8b7426ed7c2df.json](16c1efe030e64d5cbfd8b7426ed7c2df.json)
