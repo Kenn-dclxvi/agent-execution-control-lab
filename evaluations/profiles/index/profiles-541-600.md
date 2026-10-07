@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
 - [`candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate95-required-judgment-owner-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate96-successful-validation-result-projection-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate96-successful-validation-result-projection-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
 - [`candidate97-decision-round-closure-r2-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json`](../candidate97-decision-round-closure-r2-v14-reasoning-medium-f02-global-m5-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p006-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`revision-2-core9-global-m4-r2.json`](../revision-2-core9-global-m4-r2.json)
 - [`revision-2-expanded12-global-m24-n1-r1.json`](../revision-2-expanded12-global-m24-n1-r1.json)
-- [`token-accounting-all-agents-v1.json`](../token-accounting-all-agents-v1.json)
