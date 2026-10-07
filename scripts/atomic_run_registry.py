@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 if __package__:
+    from .comparison_identity import code_sha256, effective_block_key, split_effective, task_sha256_by_run
     from .evaluation_loop import (
         EXECUTION_SCHEMA_V3,
         SUPPORTED_TOKEN_ACCOUNTINGS,
@@ -29,6 +30,7 @@ if __package__:
         write_json_once,
     )
 else:
+    from comparison_identity import code_sha256, effective_block_key, split_effective, task_sha256_by_run
     from evaluation_loop import (
         EXECUTION_SCHEMA_V3,
         SUPPORTED_TOKEN_ACCOUNTINGS,
@@ -49,6 +51,8 @@ else:
 
 ATOMIC_RUN_SCHEMA = "the-caption-prompt.atomic-run/v1"
 RUN_POOL_SCHEMA = "the-caption-prompt.run-pool/v1"
+EFFECTIVE_RUN_POOL_SCHEMA = "the-caption-prompt.run-pool/v2"
+EFFECTIVE_RULE = "effective-v1"
 LEGACY_DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v1"
 DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v2"
 LEGACY_SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v1"
@@ -207,6 +211,66 @@ def store_records_and_pool(registry: Path, records: list[dict[str, Any]]) -> dic
     return pool
 
 
+def effective_pool_document(
+    registry: Path,
+    reference: dict[str, Any],
+    prompt_identity: dict[str, Any],
+    case_ids: list[str],
+    task_cycles: list[str],
+) -> dict[str, Any]:
+    """Build an effective-v1 pool whose per-case keys ignore provenance-only conditions."""
+    reference_is_effective = pool_rule(reference) == EFFECTIVE_RULE
+    effective: dict[str, Any] = {}
+    blocks: dict[str, str] = {}
+    code_by_case: dict[str, Any] = {}
+    task_by_case: dict[str, str] = {}
+    for case_id in case_ids:
+        conditions = reference["effective_conditions_by_case"][case_id]
+        effective[case_id] = split_effective(conditions)[0]
+        blocks[case_id] = effective_block_key(conditions)
+        if reference_is_effective:
+            code_by_case[case_id] = reference["code_sha256_by_case"].get(case_id)
+            if case_id in reference["task_sha256_by_case"]:
+                task_by_case[case_id] = reference["task_sha256_by_case"][case_id]
+        else:
+            code_by_case[case_id] = code_sha256(conditions)
+    observed: dict[str, str] = {}
+    for cycle in task_cycles:
+        observed.update(task_sha256_by_run(Path(cycle).resolve()))
+    found: dict[str, set[str]] = {}
+    for record in runs_for_pool(registry, reference):
+        task = record["source"].get("task_sha256") or observed.get(record["run_id"])
+        if task is not None and record["case_id"] in blocks:
+            found.setdefault(record["case_id"], set()).add(task)
+    for case_id, values in sorted(found.items()):
+        values = values | ({task_by_case[case_id]} if case_id in task_by_case else set())
+        if len(values) != 1:
+            raise EvaluationError(f"reference runs rendered different task text for a case: {case_id}")
+        task_by_case[case_id] = next(iter(values))
+    pool_key = identity_sha256(
+        {
+            "compatibility_rule": EFFECTIVE_RULE,
+            "prompt_set_identity": prompt_identity,
+            "comparison_block_keys": blocks,
+        }
+    )
+    return {
+        "schema_version": EFFECTIVE_RUN_POOL_SCHEMA,
+        "compatibility_rule": EFFECTIVE_RULE,
+        "pool_key": pool_key,
+        "prompt_set_identity": prompt_identity,
+        "prompt_set_identity_sha256": identity_sha256(prompt_identity),
+        "case_ids": case_ids,
+        "comparison_block_keys": blocks,
+        "comparison_key": identity_sha256({"compatibility_rule": EFFECTIVE_RULE, "effective_conditions_by_case": effective}),
+        "effective_conditions_by_case": effective,
+        "task_sha256_by_case": task_by_case,
+        "code_sha256_by_case": code_by_case,
+        "seeded_from_pool_key": reference["pool_key"],
+        "created_at": utc_now(),
+    }
+
+
 def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
     """Create an empty prompt-specific pool from a compatible reference pool."""
     registry = Path(args.registry).resolve()
@@ -232,30 +296,39 @@ def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
         unknown = sorted(set(case_ids) - set(reference["case_ids"]))
         if unknown:
             raise EvaluationError(f"seed pool has cases outside the reference pool: {unknown}")
-    blocks = {case_id: reference["comparison_block_keys"][case_id] for case_id in case_ids}
-    effective = {
-        case_id: reference["effective_conditions_by_case"][case_id]
-        for case_id in case_ids
-    }
-    comparison_key = identity_sha256(effective)
-    pool_key = identity_sha256(
-        {
-            "prompt_set_identity": prompt_identity,
-            "comparison_block_keys": blocks,
+    rule = getattr(args, "compatibility_rule", None) or "exact"
+    if rule == EFFECTIVE_RULE:
+        pool = effective_pool_document(registry, reference, prompt_identity, case_ids, getattr(args, "task_sha256_cycle", None) or [])
+        pool_key = pool["pool_key"]
+    else:
+        if getattr(args, "task_sha256_cycle", None):
+            raise EvaluationError("--task-sha256-cycle is used only with --compatibility-rule effective-v1")
+        if pool_rule(reference) != "exact":
+            raise EvaluationError("an exact pool cannot be seeded from an effective-v1 pool")
+        blocks = {case_id: reference["comparison_block_keys"][case_id] for case_id in case_ids}
+        effective = {
+            case_id: reference["effective_conditions_by_case"][case_id]
+            for case_id in case_ids
         }
-    )
-    pool = {
-        "schema_version": RUN_POOL_SCHEMA,
-        "pool_key": pool_key,
-        "prompt_set_identity": prompt_identity,
-        "prompt_set_identity_sha256": identity_sha256(prompt_identity),
-        "case_ids": case_ids,
-        "comparison_block_keys": blocks,
-        "comparison_key": comparison_key,
-        "effective_conditions_by_case": effective,
-        "seeded_from_pool_key": reference["pool_key"],
-        "created_at": utc_now(),
-    }
+        comparison_key = identity_sha256(effective)
+        pool_key = identity_sha256(
+            {
+                "prompt_set_identity": prompt_identity,
+                "comparison_block_keys": blocks,
+            }
+        )
+        pool = {
+            "schema_version": RUN_POOL_SCHEMA,
+            "pool_key": pool_key,
+            "prompt_set_identity": prompt_identity,
+            "prompt_set_identity_sha256": identity_sha256(prompt_identity),
+            "case_ids": case_ids,
+            "comparison_block_keys": blocks,
+            "comparison_key": comparison_key,
+            "effective_conditions_by_case": effective,
+            "seeded_from_pool_key": reference["pool_key"],
+            "created_at": utc_now(),
+        }
     pool["pool_content_sha256"] = identity_sha256(pool)
     write_or_verify(
         registry / "pools" / f"{pool_key}.json",
@@ -370,15 +443,17 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         source={
             "kind": "cycle_run",
             "cycle_layer1_identity_sha256": manifest["identity_sha256"],
+            **({"task_sha256": task} if (task := task_sha256_by_run(cycle).get(run_id)) else {}),
         },
     )
+    existing_path = registry / "runs" / f"{record['atomic_run_id']}.json"
+    if existing_path.exists() and "task_sha256" not in load_json(existing_path)["source"]:
+        record = load_atomic_run(registry, record["atomic_run_id"])
     if args.pool_key:
         pool = load_pool(registry, args.pool_key)
-        if (
-            pool["prompt_set_identity_sha256"] != record["prompt_set_identity_sha256"]
-            or pool["comparison_block_keys"].get(case_id) != record["comparison_block_key"]
-        ):
-            raise EvaluationError("registered run does not belong to the requested pool")
+        mismatch = record_pool_mismatch(pool, record)
+        if mismatch is not None:
+            raise EvaluationError(f"registered run does not belong to the requested pool: {mismatch}")
         write_or_verify(
             registry / "runs" / f"{record['atomic_run_id']}.json",
             record,
@@ -389,7 +464,8 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         for path in sorted((registry / "pools").glob("*.json")):
             candidate = load_pool(registry, path.stem)
             if (
-                candidate["prompt_set_identity_sha256"] == record["prompt_set_identity_sha256"]
+                pool_rule(candidate) == "exact"
+                and candidate["prompt_set_identity_sha256"] == record["prompt_set_identity_sha256"]
                 and candidate["comparison_block_keys"].get(case_id)
                 == record["comparison_block_key"]
             ):
@@ -415,7 +491,7 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
 
 def load_pool(registry: Path, pool_key: str) -> dict[str, Any]:
     pool = load_json(registry / "pools" / f"{pool_key}.json")
-    if pool.get("schema_version") != RUN_POOL_SCHEMA or pool.get("pool_key") != pool_key:
+    if pool.get("schema_version") not in {RUN_POOL_SCHEMA, EFFECTIVE_RUN_POOL_SCHEMA} or pool.get("pool_key") != pool_key:
         raise EvaluationError("run pool identity is invalid")
     content = dict(pool)
     stored = content.pop("pool_content_sha256", None)
@@ -424,14 +500,38 @@ def load_pool(registry: Path, pool_key: str) -> dict[str, Any]:
     return pool
 
 
+def pool_rule(pool: dict[str, Any]) -> str:
+    return pool.get("compatibility_rule", "exact")
+
+
+def block_key_for_pool(pool: dict[str, Any], run_effective: dict[str, Any]) -> str:
+    return effective_block_key(run_effective) if pool_rule(pool) == EFFECTIVE_RULE else identity_sha256(run_effective)
+
+
+def record_pool_mismatch(pool: dict[str, Any], record: dict[str, Any]) -> str | None:
+    """Return why a record is not a member of the pool, or None if it is."""
+    case_id = record["case_id"]
+    if record["prompt_set_identity_sha256"] != pool["prompt_set_identity_sha256"]:
+        return "prompt identity differs"
+    if case_id not in pool["comparison_block_keys"]:
+        return "case is outside the pool"
+    if pool_rule(pool) != EFFECTIVE_RULE:
+        if record["comparison_block_key"] != pool["comparison_block_keys"][case_id]:
+            return "effective conditions differ"
+        return None
+    if effective_block_key(record["effective_conditions"]) != pool["comparison_block_keys"][case_id]:
+        return "effective conditions differ"
+    expected_task = pool["task_sha256_by_case"].get(case_id)
+    task = record["source"].get("task_sha256")
+    if expected_task is not None and task is not None:
+        return None if task == expected_task else "rendered task text differs"
+    if code_sha256(record["effective_conditions"]) != pool["code_sha256_by_case"].get(case_id):
+        return "task text is unrecorded and the harness code differs"
+    return None
+
+
 def runs_for_pool(registry: Path, pool: dict[str, Any]) -> list[dict[str, Any]]:
-    return [
-        record
-        for record in registry_runs(registry)
-        if record["prompt_set_identity_sha256"] == pool["prompt_set_identity_sha256"]
-        and record["case_id"] in pool["comparison_block_keys"]
-        and record["comparison_block_key"] == pool["comparison_block_keys"][record["case_id"]]
-    ]
+    return [record for record in registry_runs(registry) if record_pool_mismatch(pool, record) is None]
 
 
 def plan_missing(args: argparse.Namespace) -> dict[str, Any]:
@@ -498,11 +598,14 @@ def select_runs(args: argparse.Namespace) -> dict[str, Any]:
     if unknown:
         raise EvaluationError(f"selection has cases outside the pool: {unknown}")
     case_ids = sorted(case_ids)
+    selected_conditions = {
+        case_id: pool["effective_conditions_by_case"][case_id]
+        for case_id in case_ids
+    }
     comparison_key = identity_sha256(
-        {
-            case_id: pool["effective_conditions_by_case"][case_id]
-            for case_id in case_ids
-        }
+        selected_conditions
+        if pool_rule(pool) == "exact"
+        else {"compatibility_rule": pool_rule(pool), "effective_conditions_by_case": selected_conditions}
     )
     records = runs_for_pool(registry, pool)
     selected_by_case: dict[str, list[dict[str, Any]]] = {}
@@ -719,7 +822,11 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
             "case_id": record["case_id"],
             "fixture": fixtures[record["case_id"]],
         }
-        if record["effective_conditions"] != expected:
+        if pool_rule(pool) == EFFECTIVE_RULE:
+            matches = split_effective(record["effective_conditions"])[0] == split_effective(expected)[0]
+        else:
+            matches = record["effective_conditions"] == expected
+        if not matches:
             raise EvaluationError(
                 f"selected atomic run does not match profile conditions: {record['atomic_run_id']}"
             )
@@ -921,6 +1028,12 @@ def parser() -> argparse.ArgumentParser:
     seeded.add_argument("--registry", required=True)
     seeded.add_argument("--reference-pool-key", required=True)
     seeded.add_argument("--prompt-identity", required=True)
+    seeded.add_argument("--compatibility-rule", choices=("exact", EFFECTIVE_RULE), default="exact")
+    seeded.add_argument(
+        "--task-sha256-cycle",
+        action="append",
+        help="cycle of reference runs whose adapter recorded task_sha256 (effective-v1 only)",
+    )
     seeded.set_defaults(handler=seed_pool)
 
     registered = commands.add_parser("register-run")

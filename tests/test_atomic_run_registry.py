@@ -568,3 +568,144 @@ class AtomicRunRegistryTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EffectiveAtomicPoolTest(AtomicRunRegistryTest):
+    def write_task(self, cycle: Path, run_id: str, task: str) -> None:
+        execution = cycle / "layer2" / "extensions" / run_id / "test-adapter" / "execution.json"
+        execution.parent.mkdir(parents=True, exist_ok=True)
+        execution.write_text(json.dumps({"task_sha256": task}), encoding="utf-8")
+
+    def candidate_cycle(self, root: Path, source: dict, change, tasks: dict[str, str]) -> Path:
+        compatibility = source["compatibility"]
+        cycle = root / f"cycle-{len(list(root.glob('cycle-*')))}"
+        (cycle / "layer1").mkdir(parents=True)
+        (cycle / "layer2" / "bindings").mkdir(parents=True)
+        (cycle / "layer3" / "ratings").mkdir(parents=True)
+        frozen = {
+            **compatibility["evaluation_set"],
+            "cases": [
+                {"id": case_id, "fixture": f"fixtures/{case_id}", "fixture_identity": compatibility["fixtures"][case_id]}
+                for case_id in ("CASE-A", "CASE-B")
+            ],
+        }
+        (cycle / "layer1" / "set.json").write_text(json.dumps(frozen), encoding="utf-8")
+        conditions = {
+            key: json.loads(json.dumps(value))
+            for key, value in compatibility.items()
+            if key not in {"evaluation_set", "fixtures", "coverage"}
+        }
+        conditions["repetition_condition"]["iterations"] = 1
+        change(conditions)
+        for case_id, task in tasks.items():
+            run_id = f"{cycle.name}-{case_id}"
+            binding = {
+                "schema_version": "the-caption-prompt.execution-binding/v2",
+                "run_id": run_id,
+                "case_id": case_id,
+                "iteration": 1,
+                "sample_id": f"planned:{run_id}",
+                "prompt_set_identity": {"name": "candidate", "revision": "r1"},
+                "comparison_conditions": conditions,
+                "status": "valid",
+            }
+            (cycle / "layer2" / "bindings" / f"{run_id}.json").write_text(json.dumps(binding), encoding="utf-8")
+            evidence = cycle / "layer2" / "evidence" / run_id
+            evidence.mkdir(parents=True)
+            (evidence / "execution.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "the-caption-prompt.execution/v3",
+                        "run_id": run_id,
+                        "case_id": case_id,
+                        "status": "valid",
+                        "token_accounting": TOKEN_ACCOUNTING,
+                        "total_tokens": 90,
+                        "elapsed_seconds": 10.0,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (cycle / "layer3" / "ratings" / f"{run_id}.json").write_text(json.dumps({"run_id": run_id, "score": 4}), encoding="utf-8")
+            self.write_task(cycle, run_id, task)
+        return cycle
+
+    def seed(self, root: Path, registry: Path, imported: dict, name: str, task_cycles: list[str]) -> dict:
+        identity = root / f"{name}.json"
+        identity.write_text(json.dumps({"prompt_set_identity": {"name": name, "revision": "r1"}}), encoding="utf-8")
+        return self.call(
+            seed_pool,
+            registry=str(registry),
+            reference_pool_key=imported["pool_key"],
+            prompt_identity=str(identity),
+            compatibility_rule="effective-v1",
+            task_sha256_cycle=task_cycles,
+        )
+
+    def test_effective_pool_accepts_provenance_only_differences_with_matching_task_text(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            result_id = self.make_result(registry, name="reference", iterations=2, max_workers=24, suffix="n2")
+            imported = self.call(import_result, registry=str(registry), result_id=result_id)
+            source = json.loads((registry / "results" / f"{result_id}.json").read_text())
+            reference_cycle = root / "reference-cycle"
+            for row in source["case_results"]:
+                self.write_task(reference_cycle, row["run_id"], f"task-{row['case_id']}")
+            reference_pool = self.seed(root, registry, imported, "reference", [str(reference_cycle)])
+            candidate_pool = self.seed(root, registry, imported, "candidate", [str(reference_cycle)])
+            self.assertEqual(reference_pool["comparison_key"], candidate_pool["comparison_key"])
+            self.assertNotEqual(reference_pool["comparison_key"], imported["comparison_key"])
+            pool = json.loads((registry / "pools" / f"{candidate_pool['pool_key']}.json").read_text())
+            self.assertEqual(pool["task_sha256_by_case"], {"CASE-A": "task-CASE-A", "CASE-B": "task-CASE-B"})
+
+            def provenance_only(conditions):
+                conditions["executor_parameters"].update(max_workers=8, schedule_policy="wave_barrier")
+                conditions["executor_parameters"]["time_recording"] = {"code_sha256": {"scripts/x.py": "0" * 64}}
+
+            cycle = self.candidate_cycle(root, source, provenance_only, {"CASE-A": "task-CASE-A", "CASE-B": "task-CASE-B"})
+            for path in sorted((cycle / "layer2" / "bindings").glob("*.json")):
+                self.call(register_cycle_run, registry=str(registry), cycle=str(cycle), run_id=path.stem, pool_key=candidate_pool["pool_key"])
+            plan = self.call(plan_missing, registry=str(registry), pool_key=candidate_pool["pool_key"], desired_count=1, output=str(root / "plan.json"))
+            self.assertEqual(plan["existing_sample_count_by_case"], {"CASE-A": 1, "CASE-B": 1})
+
+            selections = {}
+            for name, key, count in (("reference", reference_pool["pool_key"], 1), ("candidate", candidate_pool["pool_key"], 1)):
+                self.call(select_runs, registry=str(registry), pool_key=key, count=count, output=str(root / f"{name}-selection.json"))
+                self.call(aggregate_selection, registry=str(registry), selection=str(root / f"{name}-selection.json"), output=str(root / f"{name}-analysis.json"))
+                selections[name] = root / f"{name}-analysis.json"
+            self.call(compare_analyses, reference=str(selections["reference"]), candidate=str(selections["candidate"]), output=str(root / "comparison.json"))
+            comparison = json.loads((root / "comparison.json").read_text())
+            self.assertEqual(comparison["differences"]["total_tokens"], (90 + 90) - (101 + 102))
+
+    def test_effective_pool_rejects_task_text_and_result_changing_differences(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            result_id = self.make_result(registry, name="reference", iterations=2, max_workers=24, suffix="n2")
+            imported = self.call(import_result, registry=str(registry), result_id=result_id)
+            source = json.loads((registry / "results" / f"{result_id}.json").read_text())
+            reference_cycle = root / "reference-cycle"
+            for row in source["case_results"]:
+                self.write_task(reference_cycle, row["run_id"], "task")
+            pool = self.seed(root, registry, imported, "candidate", [str(reference_cycle)])
+            cases = (
+                (lambda c: None, "other-task", "rendered task text differs"),
+                (lambda c: c["executor_parameters"].update(reasoning_effort="low"), "task", "effective conditions differ"),
+            )
+            for change, task, message in cases:
+                cycle = self.candidate_cycle(root, source, change, {"CASE-A": task})
+                with self.assertRaisesRegex(Exception, message):
+                    self.call(register_cycle_run, registry=str(registry), cycle=str(cycle), run_id=f"{cycle.name}-CASE-A", pool_key=pool["pool_key"])
+
+    def test_exact_pool_cannot_be_seeded_from_an_effective_pool(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            result_id = self.make_result(registry, name="reference", iterations=2, max_workers=24, suffix="n2")
+            imported = self.call(import_result, registry=str(registry), result_id=result_id)
+            effective = self.seed(root, registry, imported, "candidate", [])
+            identity = root / "other.json"
+            identity.write_text(json.dumps({"prompt_set_identity": {"name": "other", "revision": "r1"}}), encoding="utf-8")
+            with self.assertRaisesRegex(Exception, "exact pool cannot be seeded"):
+                self.call(seed_pool, registry=str(registry), reference_pool_key=effective["pool_key"], prompt_identity=str(identity), compatibility_rule="exact", task_sha256_cycle=None)

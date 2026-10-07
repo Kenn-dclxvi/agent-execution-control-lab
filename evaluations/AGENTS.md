@@ -116,7 +116,8 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 
 - 評価コードのSHA-256の代わりに、実際にモデルへ渡した課題文の一致を、各runの`task_sha256`でケースごとに確かめる。`task_sha256`がないcycleを含む比較では、評価コードのSHA-256の一致を求める。
 - KPIの数え方を変えるコード変更では、`token_accounting.revision`、`time_recording.contract`、または採点契約を上げる。`tests/test_kpi_revision_guard.py`が版ごとの出力を固定する。
-- `preflight-comparison --compatibility-rule effective-v1`と`compare-effective`だけがこの規則を使う。既定の`exact`、既存の`compare`、atomic run経路（`seed-pool`、`plan-missing`、`register-run`）は、従来の完全一致を維持する。
+- この規則を使うのは、`preflight-comparison --compatibility-rule effective-v1`、`compare-effective`、および`seed-pool --compatibility-rule effective-v1`で作ったatomic run pool（`run-pool/v2`）である。既定の`exact`、既存の`compare`、既存のatomic run pool（`run-pool/v1`）は、従来の完全一致を維持する。
+- `run-pool/v2`は、ケースごとの条件キーを実効互換条件から計算し、ケースごとの課題文の`task_sha256`を持つ。既存のrun記録は書き換えず、保存済みの条件からキーを計算して所属を判定する。課題文の記録がないrunは、評価コードのSHA-256がpoolの基準と一致する場合だけ所属する。基準側の課題文は、`--task-sha256-cycle`で基準runのcycleを渡して記録する。比較する二つのanalysisは、どちらも`run-pool/v2`から作る。
 - 既存のresult、互換キー、比較viewは書き換えない。`effective-v1`の比較は、別schemaのview（`effective-comparison-view/v1`）として追加する。
 
 ## 比較試験の実行前ゲート

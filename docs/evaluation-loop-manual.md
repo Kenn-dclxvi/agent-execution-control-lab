@@ -569,6 +569,19 @@ python3 "$CLI" compare-effective \
 
 各resultのcycleから、validなrunの`task_sha256`をケースごとに集め、全resultで一致することを確かめる。viewの`task_text_check`は、`task_sha256`で確かめた場合は`task_sha256`、どれかのcycleに記録がなく評価コードのSHA-256の一致で代えた場合は`code_sha256_fallback`になる。viewには、各resultの記録だけの項目（`provenance`）も残す。
 
+atomic run経路では、基準と候補の両方について、同じ基準poolから`run-pool/v2`を作る。
+
+```bash
+python3 "$ATOMIC" seed-pool \
+  --registry "$REGISTRY" \
+  --reference-pool-key <reference pool key> \
+  --prompt-identity <reference or candidate profile> \
+  --compatibility-rule effective-v1 \
+  --task-sha256-cycle <cycle of the reference runs>
+```
+
+基準のprompt identityで作ったpoolには、基準の既存runが保存済みの条件から所属する。候補のpoolには、記録だけの項目が違うrunも、課題文が一致すれば所属する。`plan-missing`、`prepare_atomic_plan.py`、`select-runs`、`aggregate-selection`、`register-selection-result`、`compare-analyses`は、poolの規則に従って照合する。
+
 発行前に同じ規則で照合する場合は、`preflight-comparison`へ`--compatibility-rule effective-v1`を付ける。receiptには規則名、実効互換キー、候補側の記録だけの項目が残り、`verify-comparison-preflight`と`run`は同じ規則で再検証する。
 
 ## 10. Directory

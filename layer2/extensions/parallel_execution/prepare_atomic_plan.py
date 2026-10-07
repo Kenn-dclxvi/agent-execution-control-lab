@@ -24,6 +24,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.atomic_run_registry import (  # noqa: E402
+    block_key_for_pool,
     DISPATCH_PLAN_SCHEMA,
     EvaluationError,
     identity_sha256,
@@ -106,7 +107,7 @@ def prepare_atomic_plan(
         effective, _ = split_conditions(compatibility)
         fixtures = effective.pop("fixtures")
         run_effective = {**effective, "case_id": case_id, "fixture": fixtures[case_id]}
-        if identity_sha256(run_effective) != pool["comparison_block_keys"][case_id]:
+        if block_key_for_pool(pool, run_effective) != pool["comparison_block_keys"][case_id]:
             raise ParallelRunError(f"template effective conditions do not match the pool: {case_id}")
 
     output.mkdir(parents=True)

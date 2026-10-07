@@ -82,6 +82,13 @@ class ComparisonIdentityTest(unittest.TestCase):
         identity.split_effective(base)
         self.assertEqual(base, snapshot)
 
+    def test_containers_emptied_by_provenance_are_dropped(self):
+        base = compatibility()
+        base["executor_parameters"]["time_recording"] = {"code_sha256": {"scripts/x.py": "e" * 64}}
+        without = compatibility()
+        without["executor_parameters"].pop("time_recording")
+        self.assertEqual(identity.effective_key(base), identity.effective_key(without))
+
     def test_behavior_plugins_keep_non_builtin_sources(self):
         lookalike = {"name": "cc-plugin-telemetry", "path": "/x", "source": "cc-plugin-telemetry@market"}
         self.assertEqual(identity.behavior_plugins([SEC_DEFAULT, TELEMETRY]), [])
