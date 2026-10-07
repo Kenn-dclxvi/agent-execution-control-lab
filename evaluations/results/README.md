@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）](#claude-opus55-low-c280-20261008)
+
 - [Claude Code Opus 5.5 low C291（2026-10-08）](#claude-opus55-low-c291-20261008)
 
 - [C290・C291のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c290-c291-sol61-low-std14-20261008)
@@ -144,6 +146,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-low-c280-20261008"></a>
+## Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）
+
+[計測記録](claude-opus55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[登録結果](16e8167797914e8d853495ddf5e2df60.json)、[品質監査](claude-opus55-low-c280-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[C291 low − C280 lowの比較](claude-opus55-low-c280-standard14-n5-cli2288_2026-10-08-c291-c280-comparison.json)、[発行前の記録](claude-opus55-low-c280-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-opus55-low-c280-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。C291 lowと同じ条件（コミット1b63a42の評価コード）で実施。有効70件、全件4点。C280 low比でC291 lowはトークン中央値+22.02%、経過時間中央値+2.05%。採用は未判断。
 
 <a id="claude-opus55-low-c291-20261008"></a>
 ## Claude Code Opus 5.5 low C291（2026-10-08）

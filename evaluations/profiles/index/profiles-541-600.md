@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate87-producer-local-invocation-wave-v14-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate87-producer-local-invocation-wave-v14-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate88-parallel-worker-admission-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate88-parallel-worker-admission-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate88-parallel-worker-admission-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate88-parallel-worker-admission-v14-reasoning-medium-f04-global-m5-n5-r1.json)
 - [`candidate89-dispatch-time-worker-admission-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate89-dispatch-time-worker-admission-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
@@ -61,4 +62,3 @@
 - [`four-verified-lines-ablation-astra6-low-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-astra6-low-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-high-standard14-n5-cli0156-r1.json)
 - [`four-verified-lines-ablation-luna6-max-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-max-standard14-n5-cli0156-r1.json)
-- [`four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-luna6-xhigh-standard14-n5-cli0156-r1.json)
