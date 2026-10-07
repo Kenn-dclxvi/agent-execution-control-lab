@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json)
+- [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r2-medium-m24-n5-cli0146.json)
 - [`candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json`](../candidate147-result-effect-scope-adr9-r2-medium-m24-n5-selection-cli0146-r1.json)
 - [`candidate147-result-effect-scope-adr9-r2-medium-m24-n50-cli0146.json`](../candidate147-result-effect-scope-adr9-r2-medium-m24-n50-cli0146.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-a01-f03-global-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json)
 - [`candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n5-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n5-cli0146.json)
 - [`candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n50-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r2-medium-m24-n50-cli0146.json)
-- [`candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n50-cli0146-r1.json`](../candidate173-concrete-counterexample-adjudication-v14-reasoning-medium-standard14-global-m24-n50-cli0146-r1.json)

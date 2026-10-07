@@ -21,9 +21,12 @@
 | [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](outcome-abstract-condition-preserving-owner-diagnostic-v13.json) | 抽象成果条件を非公開の特定commandへ具体化して必須化することを禁止 | 履歴互換 |
 | [`outcome-terminal-state-evidence-owner-diagnostic-v14`](outcome-terminal-state-evidence-owner-diagnostic-v14.json) | v13を維持し、A01をresponse文面分類から`terminal-state-evidence/v1`へ切替 | 現行 |
 | [`outcome-terminal-state-evidence-claude-collector-v1`](outcome-terminal-state-evidence-claude-collector-v1.json) | v14のケース規則を変えず、command証跡とproducer証跡のcollectorだけをClaude Code transcript用へ差し替える | Claude Code系列専用 |
+| [`outcome-terminal-state-evidence-claude-collector-v2`](outcome-terminal-state-evidence-claude-collector-v2.json) | v1を維持し、F05 clarifyのfallback確認として英語の動詞形`fall back`系も受け付ける | Claude Code系列専用（現行） |
 
 v14はv13以前と異なる互換条件であり、過去resultをv14で再採点したものとして扱わない。既存のv10〜v13プロファイルは履歴再現用として保持する。
 
 `outcome-terminal-state-evidence-claude-collector-v1`はClaude Code実行系列だけで使う。ケース規則はv14と同じだが、証跡collectorが異なるためv14とは別の互換条件であり、Codex resultと同一比較へ入れない。
+
+`outcome-terminal-state-evidence-claude-collector-v2`は、Claude Codeが英語で応答したときにF05の確認を取りこぼしていた採点規則の欠陥を直す。v14（Codex条件）の受理形は変更せず、Codexの判定はそのまま残す。v1で採点済みのClaude resultとLayer 3 ratingは書き換えず、v2での再判定は別の監査記録として保存する。v1とv2は別の互換条件である。
 
 command / producer / terminal-state evidenceのcollector schemaとLayer 3実行手順は[`docs/evaluation-loop-manual.md`](../../docs/evaluation-loop-manual.md)および実装側のversioned contractを参照する。このREADMEへcollector実装の詳細を複製しない。

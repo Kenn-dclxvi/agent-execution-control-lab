@@ -271,10 +271,14 @@ def quality_rating_contract_id(cycle: Path) -> str:
     return contract_id
 
 
+F05_FALLBACK_FORMS = ("fallback", "フォールバック")
+
+
 def f_response_failures(
     case_id: str,
     final: str,
     rating_contract_id: str = MONTHLY_REVIEW_RATING_V10,
+    f05_fallback_forms: tuple[str, ...] = F05_FALLBACK_FORMS,
 ) -> list[str]:
     failures: list[str] = []
     if case_id == "TC-F05-CLARIFY-UNITS-MODE":
@@ -282,7 +286,7 @@ def f_response_failures(
         groups = {
             "daily_mode": ("daily",),
             "strict_mode": ("strict",),
-            "live_csv_fallback_policy": ("fallback", "フォールバック"),
+            "live_csv_fallback_policy": f05_fallback_forms,
         }
         for concept, forms in groups.items():
             if not any(form in text for form in forms):

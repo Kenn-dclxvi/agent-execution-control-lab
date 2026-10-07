@@ -229,6 +229,15 @@ QUALITY_RATING_CLAUDE_COLLECTOR_V1 = {
     "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_CLAUDE_COLLECTOR_V2 = {
+    "contract_id": "outcome-terminal-state-evidence-claude-collector-v2",
+    "contract_sha256": "3de920541b7451575fbeb6cfd51c4c152863a4f73c67e2ad6ceadcdfc668d2a6",
+    "producer_evidence_schema_version": "the-caption-prompt.claude-owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.claude-all-agent-command-evidence/v1",
+    "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+    "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 SUPPORTED_QUALITY_RATINGS = (
     LEGACY_QUALITY_RATING,
     QUALITY_RATING_V2,
@@ -245,6 +254,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V13,
     QUALITY_RATING_V14,
     QUALITY_RATING_CLAUDE_COLLECTOR_V1,
+    QUALITY_RATING_CLAUDE_COLLECTOR_V2,
     QUALITY_RATING_CLICK_V1,
     QUALITY_RATING_CLICK_V2,
     QUALITY_RATING_CLICK_V3,

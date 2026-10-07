@@ -89,6 +89,7 @@
 - [Candidate277 事前方針文の削除試験](candidate277-remove-upfront-plan-design.md): C276のroot `AGENTS.md` 5行目だけを削除する直接子Candidateの設計。Standard14 N=5は70 / 70件Score 4だが、C276比token +5.29%・elapsed +11.15%。
 - [Candidate278 C277残存規則の一括削除試験](candidate278-remove-remaining-rules-design.md): C277 root `AGENTS.md`の3行目以降を削除した直接子Candidateの設計。Standard14 N=5は70 / 70件Score 4、C277比token +4.99%・elapsed +5.53%。
 - [Candidate279 root `AGENTS.md`空化の再試験](candidate279-empty-root-agents-design.md): C278からrepo root `AGENTS.md`を0 byteにした直接子のStandard14 N=5再試験。A01は5 / 5件Score 4だった一方、global `~/.codex/AGENTS.md`がCLIで有効だったため、無指示条件の試験ではない。
+- [Candidate280 結果未確定時の操作閉鎖](candidate280-outcome-binding-closure-design.md): Claude Code Opus 5.5のA01で、C276が候補の消去法から結果を補い確認前に変更・テストへ進んだ経路を、C276第1項の置換で閉じる設計。CLI 2.1.288の新系列でFree・C276と比較した。C280とC276はともに70 / 70件Score 4で、C280はA01で調査を行わず停止したが、C276比はトークン+0.09%・経過時間+3.93%だった（[計測記録](../evaluations/results/claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06.md)）。
 
 - [Candidate273のトークン増加原因](candidate273-astra-n5-token-increase-causal-audit.md): 保存60runから、検証途中のモデル再入と履歴入力の反復を主因と特定。
 

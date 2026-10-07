@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 Control-Free・C276・C280（2026-10-06）](#claude-opus55-free-c276-c280-20261006)
+
 - [FreeとC276のGPT-6 Astra low新規N=5（2026-10-06）](#astra6-c276-free-new-n5-20261006)
 
 - [C276とFreeの6.1 Sol low／medium新規N=5（2026-10-06）](#sol61-c276-free-new-n5-20261006)
@@ -106,6 +108,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-free-c276-c280-20261006"></a>
+
+## Claude Code Opus 5.5 Control-Free・C276・C280（2026-10-06）
+
+[計測記録](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06.md)と[条件照合・集計](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06.json)に、Claude Code 2.1.288・`claude-opus-5-5` mediumでのStandard14各5回の結果を保存した。2.1.284の系列とは比較しない独立系列で、採点はClaude採点契約v2である。
+
+[Control-Free](aff3ca28282a452bb75b004506dfa1e1.json)、[C276](b3a245079bb94501a58c1fa5e08ec8c6.json)、[C280](10a2d444d80f4987a6a4d74e22fb8937.json)は各70件すべて有効で、Score 4は68 / 70 / 70件。品質中央値は3条件とも100.00、全エージェントトークン中央値は1,196,005 / 1,057,346 / 1,058,318、経過時間中央値は501.72 / 431.57 / 448.52秒。比較viewは[C280 − C276](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-c280-c276-comparison.json)、[C280 − Control-Free](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-c280-free-comparison.json)、[C276 − Control-Free](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-c276-free-comparison.json)、品質採点は[Control-Free](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-free-quality-audit.json)、[C276](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-c276-quality-audit.json)、[C280](claude-opus55-free-c276-c280-standard14-n5-cli2288_2026-10-06-c280-quality-audit.json)。利用上限による除外attemptは計285件で、同じ枠を再実行した。採用は未実施。
 
 <a id="astra6-c276-free-new-n5-20261006"></a>
 
@@ -210,6 +220,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 [計測記録](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)と[条件照合・集計](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.json)に、Claude Code 2.1.284・`claude-opus-5-5` mediumでのStandard14各5回の結果を保存した。Codex系列とは互換比較しない独立系列である。
 
 [Control-Free](2916103610694207a868995a00b3fc13.json)、[C147](185c131d7b89451daffb63a98dc05ce9.json)、[C276](307322da5e59422b90df43387e75efd5.json)は各70件すべて有効で、Score 4は各67件。品質中央値は3条件とも96.43、全エージェントトークン中央値は1,153,853 / 1,218,798 / 1,119,238、経過時間中央値は505.21 / 471.84 / 513.48秒。利用上限による除外attemptは計423件で、同じ枠を再実行した。採用は未実施。
+
+後続の併記（2026-10-06）: F05の失点6件は英語の`fall back`を取りこぼした採点規則の欠陥だった。[Claude採点契約v2](../rating-contracts/outcome-terminal-state-evidence-claude-collector-v2.json)での別監査の再判定では、Score 4がControl-Free 68件、C147 70件、C276 69件になった（[Control-Free](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-free-quality-reassessment-claude-collector-v2.json)、[C147](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-quality-reassessment-claude-collector-v2.json)、[C276](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-quality-reassessment-claude-collector-v2.json)）。登録済みのresultは変更していない。
 
 [claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-free-comparison.json](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-free-comparison.json)。
 

@@ -60,3 +60,17 @@ A01の終端状態は、Control-Freeが5件中3件、C147が5件中5件、C276�
 - profile: [Control-Free](../profiles/free-claude-opus55-medium-standard14-n5-cli2284-r1.json)、[C147](../profiles/c147-claude-opus55-medium-standard14-n5-cli2284-r1.json)、[C276](../profiles/c276-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 
 非公開のpreflight receipt、再発行の対応記録、実行証跡、transcript、個別run索引と選択結果は`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-free-c147-c276-standard14-n5-cli2220-20261001-r1`と評価専用設定directoryの`projects/`に保存した。
+
+## 後続の再判定（2026-10-06追記）
+
+上の記録はClaude採点契約v1で登録した当時の値であり、書き換えていない。後日、F05 clarifyの失点6件（Control-Free 1件、C147 3件、C276 2件）を読み直したところ、いずれもlive CSVへのfallback可否を正しく確認していた。英語の`fall back`と2語で書いたため、`fallback`と`フォールバック`だけを受け付ける規則で取りこぼしていた。
+
+この採点規則の欠陥を[Claude採点契約v2](../rating-contracts/outcome-terminal-state-evidence-claude-collector-v2.json)で直し、保存済みの210件を別の監査記録として再判定した。登録済みresultとLayer 3 ratingは変更していない。v1で同じ計算をやり直すと、3条件とも登録済みの採点と完全に一致した。
+
+| プロンプト | v1（登録値） | v2（再判定） | v2で残る失点 |
+| --- | ---: | ---: | --- |
+| Control-Free | 67 / 70 | 68 / 70 | A01でScore 0が2件（確認前に試験を実行） |
+| C147 | 67 / 70 | 70 / 70 | なし |
+| C276 | 67 / 70 | 69 / 70 | A01でScore 0が1件（確認前に試験と変更を実行） |
+
+再判定の記録: [Control-Free](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-free-quality-reassessment-claude-collector-v2.json)、[C147](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c147-quality-reassessment-claude-collector-v2.json)、[C276](claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01-c276-quality-reassessment-claude-collector-v2.json)。この系列の実行ファイル（2.1.284）は後にこのMacから失われたため、v2での新しい比較は別の系列として行う。
