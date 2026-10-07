@@ -85,6 +85,7 @@
 - [C288とC286の累積N=20比較](candidate288-candidate286-standard14-n20-comparison-r1.md)：両条件280件の品質、トークン、経過時間を比較。トークン減少のケース偏在と、時間差の因果上の限界を記録する。
 - [C286とC288の追加N=15実行ログ監査](candidate288-candidate286-n20-log-behavior-audit-r1.md)：追加各210件の保存記録で、読み取り範囲、検索、追加取得、呼び出し回数を照合。F04・A02・F08の削減経路と、F01・F03の増加経路を分ける。
 - [Candidate289 検索と限定本文の初回受領を一体化する](candidate289-scoped-first-return-design.md)：C288を直接の親に、検索位置だけを返す追加のモデル応答を閉じる新しい候補の設計と評価条件を固定する。[Sol Low・Standard14 N=5](../evaluations/results/c289-sol61-low-standard14-n5_2026-10-08.md)は有効70件すべて4点。[累積N=20](../evaluations/results/c289-sol61-low-standard14-n20_2026-10-08.md)は有効280件すべて4点で、C288累積N=20比トークン-3.14%、経過時間-3.96%。採用は未判断。
+- [Opus 5.5でC289がC280より多くのトークンを使った理由](claude-opus55-c289-c280-token-analysis-r1.md)：Opus 5.5 medium・Standard14 N=5の保存transcriptをリクエスト単位で分解。増加の約3分の2は、自動で読み込まれるルート指示ファイルの増量と、開始時の指示ファイルの読み直しによる重複で説明できる。
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。

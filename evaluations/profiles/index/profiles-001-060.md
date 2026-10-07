@@ -38,6 +38,7 @@
 - [`c287-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json`](../c287-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json)
 - [`c288-sol61-low-standard14-n20-cli0159-isolated-20261008-r1.json`](../c288-sol61-low-standard14-n20-cli0159-isolated-20261008-r1.json)
 - [`c288-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json`](../c288-sol61-low-standard14-n5-cli0159-isolated-20261007-r1.json)
+- [`c289-claude-opus55-medium-standard14-n5-cli2288-r1.json`](../c289-claude-opus55-medium-standard14-n5-cli2288-r1.json)
 - [`c289-sol61-low-standard14-n20-cli0159-isolated-20261008-r1.json`](../c289-sol61-low-standard14-n20-cli0159-isolated-20261008-r1.json)
 - [`c289-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json`](../c289-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json)
 - [`c289-sol61-low-standard14-targeted-n5-cli0159-isolated-20261008-r1.json`](../c289-sol61-low-standard14-targeted-n5-cli0159-isolated-20261008-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate107-validation-wrapper-reentry-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
-- [`candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

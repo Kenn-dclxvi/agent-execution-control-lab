@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json`](../candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json)
 - [`candidate110-validation-ticket-decision-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate110-validation-ticket-decision-boundary-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate14-validation-authority-expanded12-global-m24-n5-r1.json`](../candidate14-validation-authority-expanded12-global-m24-n5-r1.json)
-- [`candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate140-effect-satisfaction-witness-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
