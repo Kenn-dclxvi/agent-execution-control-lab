@@ -1,0 +1,164 @@
+{
+  "claude_code": "2.1.288 (Claude Code)",
+  "comparisons": {
+    "c281-c276": {
+      "differences": {
+        "elapsed_seconds": -60.17188637435902,
+        "quality_score": 0.0,
+        "total_tokens": 10764
+      },
+      "reference_result_id": "b3a245079bb94501a58c1fa5e08ec8c6"
+    },
+    "c281-c280": {
+      "differences": {
+        "elapsed_seconds": -77.11732104164548,
+        "quality_score": 0.0,
+        "total_tokens": 9792
+      },
+      "reference_result_id": "10a2d444d80f4987a6a4d74e22fb8937"
+    },
+    "c281-free": {
+      "differences": {
+        "elapsed_seconds": -130.3150926255621,
+        "quality_score": 0.0,
+        "total_tokens": -127895
+      },
+      "reference_result_id": "aff3ca28282a452bb75b004506dfa1e1"
+    }
+  },
+  "conditions": {
+    "c281": {
+      "compatibility_key": "9383fc1082c13fc7d9a4c5b97eb0bf938cf6c29a656e64325e82e80383169af5",
+      "diagnostic_counts": {
+        "command_protocol_violations": 0,
+        "owner_producer_evidence_unavailable": 70
+      },
+      "excluded_attempt_count": 120,
+      "failure_counts": {},
+      "iterations": [
+        {
+          "elapsed_seconds": 370.93336237501353,
+          "iteration": 1,
+          "quality_score": 100.0,
+          "total_tokens": 1012752
+        },
+        {
+          "elapsed_seconds": 368.0117497529136,
+          "iteration": 2,
+          "quality_score": 100.0,
+          "total_tokens": 1134257
+        },
+        {
+          "elapsed_seconds": 371.4017110832501,
+          "iteration": 3,
+          "quality_score": 100.0,
+          "total_tokens": 1047637
+        },
+        {
+          "elapsed_seconds": 393.69025062408764,
+          "iteration": 4,
+          "quality_score": 100.0,
+          "total_tokens": 1068110
+        },
+        {
+          "elapsed_seconds": 388.83973183389753,
+          "iteration": 5,
+          "quality_score": 100.0,
+          "total_tokens": 1077326
+        }
+      ],
+      "median": {
+        "elapsed_seconds": 371.4017110832501,
+        "quality_score": 100.0,
+        "total_tokens": 1068110
+      },
+      "result_content_sha256": "b7e7b7dac36349f20cebdf482702601c1156509d9ccce49af5e7bcf29b6f8258",
+      "result_id": "1888c82ff7c04ec39d806bce89756b52",
+      "score_counts": {
+        "4": 70
+      }
+    }
+  },
+  "issuance": {
+    "excluded_attempts_reason": "claude_api_error (OAuth refresh failure)",
+    "execution_path": "parallel_runner.run_plan（単一条件、global_queue、max_workers=24）。2026-10-06の3条件はcampaign_runnerで交互発行した",
+    "first_attempt": "campaign runnerが2条件以上を要求したため発行前に停止。単一計画のrun_planへ差し替えた",
+    "resume": "利用者の再ログイン後、同じ事前照合済み計画から70枠を再発行し、70件すべて有効、除外0件",
+    "resume_receipt": "resume-1-receipt.json",
+    "second_attempt": "発行直後から全attemptがclaude_api_error（OAuth session expired and could not be refreshed）。有効0件で手動停止"
+  },
+  "max_workers": 24,
+  "model": "claude-opus-5-5",
+  "preflight": {
+    "authentication": {
+      "apiProvider": "firstParty",
+      "authMethod": "claude.ai",
+      "loggedIn": true,
+      "subscriptionType": "team"
+    },
+    "baseline_compatibility_key": "9383fc1082c13fc7d9a4c5b97eb0bf938cf6c29a656e64325e82e80383169af5",
+    "baseline_results": {
+      "c276": {
+        "prompt_set_identity": {
+          "bundle_sha256": "4d2dcd4f34749b32155139138654cbc2bb33b78fc6841ba6eb14d29c8f7a678f",
+          "name": "the-caption-3ce91a4-execution-control-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "82f1e13529e1c857b0164d9471353bee5a0fd14b1e8d1ddfd7ebd0b845b8cd57",
+        "result_id": "b3a245079bb94501a58c1fa5e08ec8c6"
+      },
+      "c280": {
+        "prompt_set_identity": {
+          "bundle_sha256": "cac81e81eb5d66582a119042b034c457a1b2415fb6959ce2d03bcd0250fc5ea0",
+          "name": "the-caption-3ce91a4-execution-control-outcome-binding-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "82278084c8ec7eccb3869f4e061f4ec16b923b09e77c1ecace86d23399016294",
+        "result_id": "10a2d444d80f4987a6a4d74e22fb8937"
+      },
+      "free": {
+        "prompt_set_identity": {
+          "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+          "name": "the-caption-3ce91a4-control-free-repository-r1",
+          "revision": "r1"
+        },
+        "result_content_sha256": "024c77f538ac2289bf7ef020c4d303ea48bfd87cf87e888d50c8fec198227497",
+        "result_id": "aff3ca28282a452bb75b004506dfa1e1"
+      }
+    },
+    "claude_runtime": {
+      "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+      "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+      "version_output": "2.1.288 (Claude Code)"
+    },
+    "code_sha256": {
+      "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+      "scripts/atomic_run_registry.py": "7f72ccee87e4bab0b7d06e9ead4197cd5a9b25e4dec9239b72cefbbd0acfc489",
+      "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+      "scripts/evaluation_loop.py": "79142b50ed64b3963dbb4d90b0e3fa9f5b97154dd8c135c045cfc956a448deb6",
+      "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+      "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+      "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+      "scripts/run_claude_evaluation.py": "b21bdc26e70c402de222876142e9012878ca5a3cdcc2eae37b01960f659ec198",
+      "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+      "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+      "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+      "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+    },
+    "condition_source_profile": "evaluations/profiles/c280-claude-opus55-medium-standard14-n5-cli2288-r1.json",
+    "mismatches": [],
+    "requested_slots": 70,
+    "status": "ready",
+    "unfixed": [],
+    "unverified": [],
+    "variable": "prompt_set_identity only"
+  },
+  "quality_rating": "outcome-terminal-state-evidence-claude-collector-v2",
+  "runtime_surface": {
+    "plugins": [
+      "cc-plugin-sec-default@builtin",
+      "cc-plugin-telemetry@builtin"
+    ]
+  },
+  "schema_version": "the-caption-prompt.claude-series-measurement-summary/v1"
+}

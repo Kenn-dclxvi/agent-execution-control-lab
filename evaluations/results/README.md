@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Opus 5.5 C281（2026-10-07）](#claude-opus55-c281-20261007)
+
 - [C281のGPT-6.1 Sol Low・Standard14 N=5（2026-10-07）](#c281-sol61-low-std14-20261007)
 
 - [C280のGPT-6.1 Sol Low・STD14 N=5（2026-10-07）](#c280-sol61-low-std14-20261007)
@@ -112,6 +114,12 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-opus55-c281-20261007"></a>
+
+## Claude Code Opus 5.5 C281（2026-10-07）
+
+[計測記録](claude-opus55-c281-standard14-n5-cli2288_2026-10-07.md)と[条件照合・集計](claude-opus55-c281-standard14-n5-cli2288_2026-10-07.json)に、Claude Code 2.1.288・`claude-opus-5-5` mediumでのC281のStandard14各5回の結果を保存した。条件は2026-10-06のC280プロファイルと同一で、比較相手は同日のControl-Free・C276・C280の保存済みresultである。[C281](1888c82ff7c04ec39d806bce89756b52.json)は70件すべて有効でScore 4。品質中央値100.00、全エージェントトークン中央値1,068,110、経過時間中央値371.40秒。比較viewは[C281 − C280](claude-opus55-c281-standard14-n5-cli2288_2026-10-07-c281-c280-comparison.json)、[C281 − C276](claude-opus55-c281-standard14-n5-cli2288_2026-10-07-c281-c276-comparison.json)、[C281 − Control-Free](claude-opus55-c281-standard14-n5-cli2288_2026-10-07-c281-free-comparison.json)、品質採点は[C281](claude-opus55-c281-standard14-n5-cli2288_2026-10-07-quality-audit.json)。経過時間の差は実行日時と発行構成の差を含む。認証切れによる除外attemptは120件で、再ログイン後に同じ枠を再発行した。採用は未実施。
 
 <a id="c281-sol61-low-std14-20261007"></a>
 

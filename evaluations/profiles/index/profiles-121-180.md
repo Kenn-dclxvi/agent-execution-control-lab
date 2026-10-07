@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate147-information-closure-task-qualification-dev-r1-medium-m24-n3-cli0146.json`](../candidate147-information-closure-task-qualification-dev-r1-medium-m24-n3-cli0146.json)
 - [`candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json`](../candidate147-information-closure-task-qualification-dev-r2-medium-m24-n5-cli0146.json)
 - [`candidate147-luna6-high-standard14-n5-cli0156-r1.json`](../candidate147-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate147-preimplementation-adversarial-design-review-problem-qualification-r1-medium-m24-n5-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate17-operation-qualified-evidence-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate17-operation-qualified-evidence-owner-producer-v1-expanded12-global-m24-n5-r1.json)
 - [`candidate17-operation-qualified-evidence-owner-producer-v5-expanded12-global-m24-n5-r1.json`](../candidate17-operation-qualified-evidence-owner-producer-v5-expanded12-global-m24-n5-r1.json)
 - [`candidate172-preimplementation-design-admission-targeted-r1-medium-m24-n5-cli0146.json`](../candidate172-preimplementation-design-admission-targeted-r1-medium-m24-n5-cli0146.json)
-- [`candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json`](../candidate173-concrete-counterexample-adjudication-targeted-r1-medium-m24-n5-cli0146.json)
