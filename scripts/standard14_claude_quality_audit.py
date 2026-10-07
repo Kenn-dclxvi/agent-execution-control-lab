@@ -27,6 +27,7 @@ if __package__:
     )
     from .standard14_quality_audit import (
         A01,
+        F05_FALLBACK_FORMS,
         A02,
         EXPECTED_SET,
         F_CASES,
@@ -53,6 +54,7 @@ else:
     )
     from standard14_quality_audit import (
         A01,
+        F05_FALLBACK_FORMS,
         A02,
         EXPECTED_SET,
         F_CASES,
@@ -73,7 +75,15 @@ else:
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 EVALUATION_LOOP = REPOSITORY_ROOT / "scripts/evaluation_loop.py"
-CLAUDE_RATING_CONTRACT = "outcome-terminal-state-evidence-claude-collector-v1"
+CLAUDE_RATING_CONTRACT_V1 = "outcome-terminal-state-evidence-claude-collector-v1"
+CLAUDE_RATING_CONTRACT_V2 = "outcome-terminal-state-evidence-claude-collector-v2"
+CLAUDE_RATING_CONTRACT = CLAUDE_RATING_CONTRACT_V2
+# v2 accepts the English verb forms of "fall back" for the F05 fallback concept.
+# v1 keeps the v14 forms so earlier Claude ratings reproduce unchanged.
+F05_FALLBACK_FORMS_BY_CONTRACT = {
+    CLAUDE_RATING_CONTRACT_V1: F05_FALLBACK_FORMS,
+    CLAUDE_RATING_CONTRACT_V2: F05_FALLBACK_FORMS + ("fall back", "falls back", "falling back", "fell back", "fall-back"),
+}
 CASE_RULE_CONTRACT = MONTHLY_REVIEW_RATING_V14
 OWNER_EVIDENCE_SCHEMA_VERSION = "the-caption-prompt.claude-owner-producer-evidence/v1"
 EXPECTED_RUN_COUNT = 70
@@ -88,13 +98,14 @@ def valid_bindings(cycle: Path) -> list[dict[str, Any]]:
     return bindings
 
 
-def require_claude_contract(cycle: Path) -> None:
+def require_claude_contract(cycle: Path) -> str:
     contract_ids = {
         binding.get("comparison_conditions", {}).get("quality_rating", {}).get("contract_id")
         for binding in valid_bindings(cycle)
     }
-    if contract_ids != {CLAUDE_RATING_CONTRACT}:
-        raise RuntimeError(f"Claude audit requires {CLAUDE_RATING_CONTRACT}: {sorted(map(str, contract_ids))}")
+    if len(contract_ids) != 1 or not contract_ids <= set(F05_FALLBACK_FORMS_BY_CONTRACT):
+        raise RuntimeError(f"Claude audit requires one of {sorted(F05_FALLBACK_FORMS_BY_CONTRACT)}: {sorted(map(str, contract_ids))}")
+    return contract_ids.pop()
 
 
 def collect(batch: Path, expected_run_count: int = EXPECTED_RUN_COUNT) -> dict[str, Any]:
@@ -149,9 +160,11 @@ def owner_producer_report(cycle: Path) -> dict[str, Any]:
     }
 
 
-def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
+def evaluate(batch: Path, observations: dict[str, Any], contract_id: str | None = None) -> dict[str, Any]:
     cycle = batch / "cycle"
-    require_claude_contract(cycle)
+    bound_contract = require_claude_contract(cycle)
+    contract_id = contract_id or bound_contract
+    fallback_forms = F05_FALLBACK_FORMS_BY_CONTRACT[contract_id]
     results = []
     for item in observations["runs"]:
         run_id = item["run_id"]
@@ -185,7 +198,7 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             if command_audit.get("run_id") != run_id:
                 raise RuntimeError(f"invalid command protocol audit: {run_id}")
             failures.extend(command_quality_failures(command_audit["requirements"]))
-            failures.extend(f_response_failures(case_id, final, CASE_RULE_CONTRACT))
+            failures.extend(f_response_failures(case_id, final, CASE_RULE_CONTRACT, fallback_forms))
             score, reason = f_rating(case_id, final, failures, CASE_RULE_CONTRACT)
         elif case_id == A01:
             terminal_state_evidence = build_a01_terminal_state_evidence(
@@ -224,7 +237,7 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": "the-caption-prompt.standard14-claude-quality-audit/v1",
         "batch": batch.name,
-        "quality_rating_contract": CLAUDE_RATING_CONTRACT,
+        "quality_rating_contract": contract_id,
         "case_rule_contract": CASE_RULE_CONTRACT,
         "run_count": len(results),
         "rateable_runs": len(results),
@@ -275,12 +288,27 @@ def apply_ratings(batch: Path, report: dict[str, Any], expected_run_count: int) 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("collect", "apply"))
+    parser.add_argument("command", choices=("collect", "apply", "reassess"))
     parser.add_argument("--batch", type=Path, required=True)
     parser.add_argument("--expected-run-count", type=int, default=EXPECTED_RUN_COUNT)
+    parser.add_argument("--contract", choices=sorted(F05_FALLBACK_FORMS_BY_CONTRACT))
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     batch = args.batch.resolve()
     observations_path = batch / "pre-seal-observations.json"
+    if args.command == "reassess":
+        # Separate audit under another Claude contract revision. Registered
+        # Layer 3 ratings and the original quality-audit.json are not touched.
+        if args.contract is None or args.output is None:
+            parser.error("reassess requires --contract and --output")
+        report = evaluate(batch, load_json(observations_path), args.contract)
+        report["reassessment"] = {
+            "bound_contract": require_claude_contract(batch / "cycle"),
+            "registered_ratings_changed": False,
+        }
+        write_once(args.output.resolve(), report)
+        print(json.dumps({"artifact": str(args.output.resolve()), "score_counts": report["score_counts"]}, ensure_ascii=False))
+        return 0
     if args.command == "collect":
         report = collect(batch, args.expected_run_count)
         write_once(observations_path, report)
