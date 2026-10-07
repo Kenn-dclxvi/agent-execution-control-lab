@@ -719,6 +719,7 @@
 | [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceの仕様 |
 | [`claude-code-cli-evaluation-adapter-design.md`](claude-code-cli-evaluation-adapter-design.md) | Layer 2 executorをClaude Code CLIへ置き換える試験方法の設計検討（未実装。未確定事項を含む） |
 | [`claude-code-opus55-standard14-series-plan.md`](claude-code-opus55-standard14-series-plan.md) | Claude Code条件でStandard14のControl-Free・C147・C276を測る系列の、対象、固定条件、token・品質の計測規則、正式発行前のゲートを実行前に固定した方針 |
+| [`claude-runtime-surface-plugin-policy.md`](claude-runtime-surface-plugin-policy.md) | Claude Code評価の起動時照合で、動きを変えない組み込みプラグイン（telemetry、sec-default）と契約プランを識別条件から外す方針と、既存系列との互換性 |
 | [`claude-code-2.1.284-evaluation-surface-probe-result.md`](claude-code-2.1.284-evaluation-surface-probe-result.md) | 正式ケースを使わないprobeで、実行ファイルの選定、設定の混入範囲、使用tool、背景実行の完了判定、全エージェントusageの照合を確認した記録 |
 | [`pr-review-measurement-environment-design.md`](pr-review-measurement-environment-design.md) | `agent-execution-control-lab` namespacedインスタンスでClaude Code Actionの実行経路を比較するPRレビュー測定設計。仕様監査で既存PRR-C01 runをdiagnosticへ再分類し、Core Baselineは未qualification |
 

@@ -205,7 +205,20 @@ def render_task(case: dict[str, Any], command_evidence_protocol: dict[str, Any] 
     return task
 
 
+INFRASTRUCTURE_PLUGIN_SOURCES = frozenset({"cc-plugin-telemetry@builtin", "cc-plugin-sec-default@builtin"})
+
+
+def behavior_plugins(plugins: Any) -> Any:
+    if not isinstance(plugins, list):
+        return plugins
+    return sorted(
+        (plugin for plugin in plugins if not (isinstance(plugin, dict) and plugin.get("source") in INFRASTRUCTURE_PLUGIN_SOURCES)),
+        key=lambda plugin: json.dumps(plugin, sort_keys=True),
+    )
+
+
 def surface_mismatches(init: dict[str, Any], claude: dict[str, Any], model: str) -> list[str]:
+    observed = dict(init, plugins=behavior_plugins(init.get("plugins")))
     expected = {
         "model": model,
         "permissionMode": "bypassPermissions",
@@ -213,13 +226,13 @@ def surface_mismatches(init: dict[str, Any], claude: dict[str, Any], model: str)
         "mcp_servers": [],
         "slash_commands": [],
         "skills": [],
-        "plugins": claude["plugins"],
+        "plugins": behavior_plugins(claude["plugins"]),
         "tools": claude["tools"],
         "agents": claude["agents"],
         "claude_code_version": claude["version_output"].split(" ", 1)[0],
         "output_style": "default",
     }
-    return sorted(key for key, value in expected.items() if init.get(key) != value)
+    return sorted(key for key, value in expected.items() if observed.get(key) != value)
 
 
 def external_failure(reason_code: str, detector: str, **detail: Any) -> dict[str, Any]:
