@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from comparison_identity import behavior_plugins
     from export_prompt_bundle import BundleError, verify_bundle
     from all_agent_command_evidence import (
         adapter_owned_cleanup_attempts,
@@ -51,6 +52,7 @@ try:
         write_json,
     )
 except ModuleNotFoundError:  # Imported as scripts.run_claude_evaluation in tests.
+    from scripts.comparison_identity import behavior_plugins
     from scripts.export_prompt_bundle import BundleError, verify_bundle
     from scripts.all_agent_command_evidence import (
         adapter_owned_cleanup_attempts,
@@ -203,18 +205,6 @@ def render_task(case: dict[str, Any], command_evidence_protocol: dict[str, Any] 
             + "\n</command-evidence-protocol-json>\n"
         )
     return task
-
-
-INFRASTRUCTURE_PLUGIN_SOURCES = frozenset({"cc-plugin-telemetry@builtin", "cc-plugin-sec-default@builtin"})
-
-
-def behavior_plugins(plugins: Any) -> Any:
-    if not isinstance(plugins, list):
-        return plugins
-    return sorted(
-        (plugin for plugin in plugins if not (isinstance(plugin, dict) and plugin.get("source") in INFRASTRUCTURE_PLUGIN_SOURCES)),
-        key=lambda plugin: json.dumps(plugin, sort_keys=True),
-    )
 
 
 def surface_mismatches(init: dict[str, Any], claude: dict[str, Any], model: str) -> list[str]:

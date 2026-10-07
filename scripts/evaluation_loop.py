@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 if __package__:
+    from .comparison_identity import code_sha256 as condition_code_sha256, effective_key, split_effective
     from .execution_time_recording import collect as collect_execution_time
     from .all_agent_usage import TOKEN_ACCOUNTING
     from .claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
@@ -29,6 +30,7 @@ if __package__:
     )
     from .storage_copy import StorageCopyError, materialize_tree
 else:
+    from comparison_identity import code_sha256 as condition_code_sha256, effective_key, split_effective
     from execution_time_recording import collect as collect_execution_time
     from all_agent_usage import TOKEN_ACCOUNTING
     from claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
@@ -1052,6 +1054,7 @@ def build_compatibility(
 
 COMPARISON_GENERATION_SCHEMA = "the-caption-prompt.comparison-layer1-generation/v1"
 COMPARISON_PREFLIGHT_SCHEMA = "the-caption-prompt.comparison-preflight/v1"
+COMPATIBILITY_RULES = ("exact", "effective-v1")
 ATOMIC_COMPARISON_PREFLIGHT_SCHEMA = "the-caption-prompt.comparison-preflight/v2"
 
 
@@ -1264,7 +1267,10 @@ def build_comparison_preflight_payload(
     reference_result_id: str,
     require_pristine: bool,
     bound_codex_runtime: dict[str, Any] | None = None,
+    compatibility_rule: str = "exact",
 ) -> dict[str, Any]:
+    if compatibility_rule not in COMPATIBILITY_RULES:
+        raise EvaluationError(f"unsupported compatibility rule: {compatibility_rule}")
     layer1 = cycle / "layer1"
     generation_receipt = load_json(layer1 / "comparison-generation.json")
     generation_payload = validate_receipt_hash(generation_receipt, "generation")
@@ -1309,7 +1315,12 @@ def build_comparison_preflight_payload(
         coverage["case_ids"],
         coverage["iterations"],
     )
-    difference = first_value_difference(reference["compatibility"], candidate_compatibility)
+    if compatibility_rule == "exact":
+        difference = first_value_difference(reference["compatibility"], candidate_compatibility)
+    else:
+        difference = first_value_difference(
+            split_effective(reference["compatibility"])[0], split_effective(candidate_compatibility)[0]
+        )
     if difference is not None:
         raise EvaluationError(f"comparison compatibility mismatch: {difference}")
 
@@ -1436,6 +1447,10 @@ def build_comparison_preflight_payload(
         "max_workers": max_workers,
         "authorized_slots": authorized_slots,
     }
+    if compatibility_rule != "exact":
+        result["compatibility_rule"] = compatibility_rule
+        result["effective_compatibility_key"] = effective_key(reference["compatibility"])
+        result["candidate_provenance"] = split_effective(candidate_compatibility)[1]
     if codex_runtime_binding is not None:
         result["codex_runtime_binding"] = codex_runtime_binding
     if atomic_dispatch:
@@ -1461,6 +1476,7 @@ def preflight_comparison(args: argparse.Namespace) -> dict[str, Any]:
         registry,
         args.reference_result_id,
         require_pristine=True,
+        compatibility_rule=args.compatibility_rule,
     )
     receipt = receipt_with_hash(payload)
     receipt_path = cycle / "layer1" / "comparison-preflight.json"
@@ -1492,6 +1508,7 @@ def verify_comparison_preflight(cycle: Path) -> dict[str, Any]:
         payload["reference_result_id"],
         require_pristine=False,
         bound_codex_runtime=payload.get("codex_runtime_binding"),
+        compatibility_rule=payload.get("compatibility_rule", "exact"),
     )
     difference = first_value_difference(expected, payload)
     if difference is not None:
@@ -1847,6 +1864,118 @@ def compare_results(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+EFFECTIVE_VIEW_SCHEMA = "the-caption-prompt.effective-comparison-view/v1"
+
+
+def cycle_task_sha256(cycle: Path) -> dict[str, str] | None:
+    """Return the single task SHA-256 per case from valid runs, or None if any run lacks it."""
+    by_case: dict[str, set[str]] = {}
+    for path in sorted((cycle / "layer2" / "bindings").glob("*.json")):
+        binding = load_json(path)
+        if binding_is_excluded(binding):
+            continue
+        executions = sorted((cycle / "layer2" / "extensions" / binding["run_id"]).glob("*-adapter/execution.json"))
+        if len(executions) != 1:
+            return None
+        task_sha256 = load_json(executions[0]).get("task_sha256")
+        if not isinstance(task_sha256, str) or not task_sha256:
+            return None
+        by_case.setdefault(binding["case_id"], set()).add(task_sha256)
+    if not by_case:
+        return None
+    mixed = sorted(case for case, values in by_case.items() if len(values) != 1)
+    if mixed:
+        raise EvaluationError(f"one cycle rendered different task text for a case: {mixed[0]}")
+    return {case: values.pop() for case, values in sorted(by_case.items())}
+
+
+def compare_effective(args: argparse.Namespace) -> dict[str, Any]:
+    registry = Path(args.registry).resolve()
+    output = Path(args.output).resolve()
+    result_ids = args.result_id
+    if len(result_ids) < 2 or len(set(result_ids)) != len(result_ids):
+        raise EvaluationError("compare-effective requires at least two unique --result-id values")
+    if args.reference_result_id not in result_ids:
+        raise EvaluationError("reference result id must be included in --result-id")
+    cycles: dict[str, Path] = {}
+    for item in args.cycle:
+        result_id, separator, path = item.partition("=")
+        if not separator or result_id not in result_ids or result_id in cycles:
+            raise EvaluationError(f"--cycle must be RESULT_ID=PATH for one listed result: {item}")
+        cycles[result_id] = Path(path).resolve()
+    if set(cycles) != set(result_ids):
+        raise EvaluationError("compare-effective requires --cycle for every result")
+    available = {result["result_id"]: result for _, result in registry_results(registry)}
+    missing = [result_id for result_id in result_ids if result_id not in available]
+    if missing:
+        raise EvaluationError(f"unknown result id: {missing[0]}")
+    selected = [available[result_id] for result_id in result_ids]
+    reference = available[args.reference_result_id]
+    reference_effective = split_effective(reference["compatibility"])[0]
+    tasks = {result_id: cycle_task_sha256(cycle) for result_id, cycle in cycles.items()}
+    task_check = "task_sha256"
+    for result in selected:
+        if result["schema_version"] != reference["schema_version"]:
+            raise EvaluationError("result schema versions do not match")
+        if token_accounting_for_result(result) != token_accounting_for_result(reference):
+            raise EvaluationError("result token accounting does not match")
+        difference = first_value_difference(reference_effective, split_effective(result["compatibility"])[0])
+        if difference is not None:
+            raise EvaluationError(f"effective compatibility mismatch: {difference}")
+    if all(value is not None for value in tasks.values()):
+        expected = tasks[reference["result_id"]]
+        for result_id, value in tasks.items():
+            if value != expected:
+                raise EvaluationError(f"rendered task text differs from the reference: {result_id}")
+    else:
+        task_check = "code_sha256_fallback"
+        expected_code = condition_code_sha256(reference["compatibility"])
+        for result in selected:
+            if condition_code_sha256(result["compatibility"]) != expected_code:
+                raise EvaluationError(
+                    "task_sha256 is unavailable and the harness code differs; the runs cannot be compared"
+                )
+    view = {
+        "schema_version": EFFECTIVE_VIEW_SCHEMA,
+        "effective_compatibility_key": effective_key(reference["compatibility"]),
+        "task_text_check": task_check,
+        "task_sha256_by_case": tasks[reference["result_id"]],
+        "token_accounting": token_accounting_for_result(reference),
+        "reference_result_id": reference["result_id"],
+        "prompt_sets": [
+            {
+                "result_id": result["result_id"],
+                "compatibility_key": result["compatibility_key"],
+                "prompt_set_identity": result["prompt_set_identity"],
+                "provenance": split_effective(result["compatibility"])[1],
+                "cycle": str(cycles[result["result_id"]]),
+                "iterations": result["iterations"],
+                "median": result["median"],
+                "excluded_attempts": result["excluded_attempts"],
+            }
+            for result in selected
+        ],
+        "differences": [
+            {
+                "minuend_result_id": result["result_id"],
+                "subtrahend_result_id": reference["result_id"],
+                "kpis": kpi_difference(result["median"], reference["median"]),
+            }
+            for result in selected
+            if result["result_id"] != reference["result_id"]
+        ],
+        "generated_at": utc_now(),
+    }
+    write_json_once(output, view)
+    return {
+        "layer": 4,
+        "artifact": str(output),
+        "effective_compatibility_key": view["effective_compatibility_key"],
+        "task_text_check": task_check,
+        "difference_count": len(view["differences"]),
+    }
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description=__doc__)
     commands = root.add_subparsers(dest="subcommand", required=True)
@@ -1884,6 +2013,7 @@ def parser() -> argparse.ArgumentParser:
     comparison_preflight.add_argument("--global-plan", required=True)
     comparison_preflight.add_argument("--registry", required=True)
     comparison_preflight.add_argument("--reference-result-id", required=True)
+    comparison_preflight.add_argument("--compatibility-rule", choices=COMPATIBILITY_RULES, default="exact")
     comparison_preflight.set_defaults(handler=preflight_comparison)
 
     verify_preflight = commands.add_parser(
@@ -1930,6 +2060,17 @@ def parser() -> argparse.ArgumentParser:
     query.add_argument("--compatibility-key")
     query.add_argument("--token-scope", choices=("root_agent", "all_agents"))
     query.set_defaults(handler=query_results)
+
+    compare_effective_parser = commands.add_parser(
+        "compare-effective",
+        help="Layer 4: compare results whose effective conditions and rendered task text match",
+    )
+    compare_effective_parser.add_argument("--registry", required=True)
+    compare_effective_parser.add_argument("--result-id", action="append", required=True)
+    compare_effective_parser.add_argument("--reference-result-id", required=True)
+    compare_effective_parser.add_argument("--cycle", action="append", required=True, help="RESULT_ID=CYCLE_PATH")
+    compare_effective_parser.add_argument("--output", required=True)
+    compare_effective_parser.set_defaults(handler=compare_effective)
 
     compare = commands.add_parser(
         "compare", help="Layer 4: create a view from compatible stored results"
