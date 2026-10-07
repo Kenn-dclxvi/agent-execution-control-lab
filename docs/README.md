@@ -82,6 +82,10 @@
 
 - [C147の検証一括実行のSol Low遵守確認と原則改訂](c147-sol-low-validation-call-compliance-audit-r1.md)：処理方法の指定を、モデルの条件判断に依存するかで判定する基準へ改訂。C147は変更を伴う45件すべてで検証を一つの外側呼び出しで実行し、C280との差の約94%が変更後の区間にある。
 
+- [C284の経過時間増加の分解](c284-elapsed-time-decomposition-r1.md)：C280比+7.93%の増加はモデル応答区間だけで生じ、応答回数・出力・入力トークンはC284のほうが少ない。同日の応答待ちは午後に向けて2.99秒から4.06秒へ延びていた。残る応答回数の差は変更前の区間にある。
+
+- [C284の開始側の経路分析と移植の単位](c284-start-side-route-analysis-r1.md)：変更前の呼び出しの差35回を、リポジトリの外を読む経路（18回）と開始時の確認・読み取りの分割（17回）に分ける。前者をC285、後者をC286として扱う。
+
 
 - [C147 Solの旧環境と再計測の時間増加](c147-sol-cli0146-cli0153-time-drift-audit.md): 325.50秒増の区間を分解。初期準備とroot記録外が約69.8%を占め、終了待ちとモデル一覧更新タイムアウトを確認。
 
@@ -771,7 +775,8 @@
 
 - [Candidate283 検証結果の採用と追加操作の許可境界](candidate283-validation-result-permission-boundary-design.md)：C280へ方式を指定しない三項を追加する作成前設計。[C282同条件のSol Low・Standard14 N=5](../evaluations/results/c283-sol61-low-standard14-n5_2026-10-07.md)を完了。有効70件すべて品質4。[累積N=20の追加方針](candidate283-standard14-n20-extension-plan-r1.md)に従い、[280件の結果](../evaluations/results/c283-sol61-low-standard14-n20_2026-10-07.md)を保存。
 - [C280のC283三項に対する基準側発生監査](c280-c283-three-boundaries-baseline-trace-audit-r1.md)：全70件。第1・2項は観測0件、第3項は確認0件・判定不能3件。
-- [Candidate284 変更後の検証を一つの呼び出しで実行する指定](candidate284-validation-single-call-design.md)：C147の検証一括実行を、改訂後の「処理方法を指定できる条件」を満たす無条件の3項としてC280へ追加する作成前設計。Sol Low・Standard14 N=5は未実施。
+- [Candidate284 変更後の検証を一つの呼び出しで実行する指定](candidate284-validation-single-call-design.md)：C147の検証一括実行を、改訂後の「処理方法を指定できる条件」を満たす無条件の3項としてC280へ追加する作成前設計。[Sol Low・Standard14 N=5](../evaluations/results/c284-sol61-low-standard14-n5_2026-10-07.md)：有効70件すべて品質4、C280比トークン-25.79%・経過時間+7.93%。
+- [Candidate285 情報を確認する範囲をリポジトリの中に限定する](candidate285-repository-read-scope-design.md)：C284へ、リポジトリの外を読む経路を閉じる1項を追加する作成前設計。評価は未実施。
 
 各Candidateの制御軸を記録した成果アーティファクト。当時のresult・scoreは遡及変更しない。
 
