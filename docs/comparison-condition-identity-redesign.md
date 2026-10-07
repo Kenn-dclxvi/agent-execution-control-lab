@@ -79,4 +79,5 @@
 - 発行前の照合：`preflight-comparison --compatibility-rule effective-v1`。既定は従来の`exact`。
 - 保存済みの結果の比較：`compare-effective`。課題文の一致を`task_sha256`で確かめる。
 - KPIの数え方の固定：`tests/test_kpi_revision_guard.py`。Claudeのトークン集計と経過時間の記録を対象にした。Codexのトークン集計と採点契約は、既存の試験と契約のSHA-256で守っており、この版で固定表には加えていない。
-- 対象外：atomic run経路（`seed-pool`、`plan-missing`、`register-run`、`compare-analyses`）は、従来の完全一致のままである。プールのケース別の条件キーを新しい規則へ移すには、既存プールとの共存の設計が別に必要になる。アダプターが発行方式を観測値として記録する変更も、この版では行っていない。発行方式は、並列実行の要約（`parallel-run/summary.json`の`schedule_policy`）に観測値として残っている。
+- 対象外（当初）：atomic run経路は、最初の実装では従来の完全一致のままとした。
+- atomic run経路（追加実装）：`seed-pool --compatibility-rule effective-v1`で`run-pool/v2`を作る。既存の`run-pool/v1`とrun記録は書き換えず、保存済みの条件から新しいキーを計算して所属を判定する。新しく登録するrunには、記録元に課題文の`task_sha256`を残す。アダプターが発行方式を観測値として記録する変更も、この版では行っていない。発行方式は、並列実行の要約（`parallel-run/summary.json`の`schedule_policy`）に観測値として残っている。

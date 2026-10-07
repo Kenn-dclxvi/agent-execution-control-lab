@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+from pathlib import Path
 from typing import Any
 
 EFFECTIVE_IDENTITY_SCHEMA = "the-caption-prompt.effective-comparison-identity/v1"
@@ -49,7 +50,16 @@ def _pop_path(value: dict[str, Any], path: tuple[str, ...]) -> tuple[bool, Any]:
         node = node[key]
     if not isinstance(node, dict) or path[-1] not in node:
         return False, None
-    return True, node.pop(path[-1])
+    item = node.pop(path[-1])
+    for depth in range(len(path) - 1, 0, -1):
+        parent: Any = value
+        for key in path[: depth - 1]:
+            parent = parent[key]
+        if parent[path[depth - 1]] == {}:
+            parent.pop(path[depth - 1])
+        else:
+            break
+    return True, item
 
 
 def split_effective(compatibility: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -89,3 +99,21 @@ def code_sha256(compatibility: dict[str, Any]) -> Any:
         return None
     recording = executor.get("time_recording")
     return recording.get("code_sha256") if isinstance(recording, dict) else None
+
+
+def effective_block_key(run_effective: dict[str, Any]) -> str:
+    """Per-case key for atomic pools under effective-v1 (run_effective holds case_id and fixture)."""
+    effective, _ = split_effective(run_effective)
+    payload = {"schema_version": EFFECTIVE_IDENTITY_SCHEMA, "effective_block": effective}
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def task_sha256_by_run(cycle: Path) -> dict[str, str]:
+    """Rendered task SHA-256 recorded by the adapter of every run in a cycle, keyed by run id."""
+    values: dict[str, str] = {}
+    for execution in sorted(Path(cycle).glob("layer2/extensions/*/*-adapter/execution.json")):
+        task = json.loads(execution.read_text(encoding="utf-8")).get("task_sha256")
+        if isinstance(task, str) and task:
+            values[execution.parent.parent.name] = task
+    return values
