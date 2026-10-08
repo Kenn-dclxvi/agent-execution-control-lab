@@ -1,7 +1,9 @@
-# Profile index 601-631
+# Profile index 601-633
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-luna6-high-standard14-n5-cli0156-r1.json`](../control-free-luna6-high-standard14-n5-cli0156-r1.json)
+- [`control-free-luna6-medium-standard14-n5-cli0156-r1.json`](../control-free-luna6-medium-standard14-n5-cli0156-r1.json)
 - [`control-free-luna6-xhigh-standard14-n5-cli0156-r1.json`](../control-free-luna6-xhigh-standard14-n5-cli0156-r1.json)
 - [`control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json`](../control-free-repository-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`control-free-repository-expanded12-global-m24-n5-r1.json`](../control-free-repository-expanded12-global-m24-n5-r1.json)

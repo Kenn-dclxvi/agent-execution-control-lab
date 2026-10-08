@@ -61,4 +61,4 @@
 - [`c294-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json`](../c294-sol61-low-standard14-n5-cli0159-isolated-20261008-r1.json)
 - [`c295-claude-sonnet55-low-standard14-n5-cli2288-r1.json`](../c295-claude-sonnet55-low-standard14-n5-cli2288-r1.json)
 - [`c295-sol61-low-standard14-n5-cli0159-isolated-20261009-r1.json`](../c295-sol61-low-standard14-n5-cli0159-isolated-20261009-r1.json)
-- [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
+- [`c296-claude-sonnet55-low-standard14-n5-cli2288-r1.json`](../c296-claude-sonnet55-low-standard14-n5-cli2288-r1.json)
