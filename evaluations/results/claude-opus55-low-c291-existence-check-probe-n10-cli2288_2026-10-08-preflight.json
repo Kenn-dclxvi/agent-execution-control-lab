@@ -1,0 +1,77 @@
+{
+  "cases": [
+    "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+    "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+    "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+    "TC-F07-CANONICAL-V4-RUNNER",
+    "TC-F08-CANONICAL-CLI-REFERENCE-SYNC"
+  ],
+  "claude_runtime": {
+    "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+    "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+    "version_output": "2.1.288 (Claude Code)"
+  },
+  "code_sha256": {
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "scripts/atomic_run_registry.py": "7f72ccee87e4bab0b7d06e9ead4197cd5a9b25e4dec9239b72cefbbd0acfc489",
+    "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+    "scripts/evaluation_loop.py": "79142b50ed64b3963dbb4d90b0e3fa9f5b97154dd8c135c045cfc956a448deb6",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+    "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+    "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+    "scripts/run_claude_evaluation.py": "b21bdc26e70c402de222876142e9012878ca5a3cdcc2eae37b01960f659ec198",
+    "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+    "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+    "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+    "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+  },
+  "code_source": "git archive 1b63a42",
+  "compared_with": "C291 low N5 (7e868f2502c24a2eac3c09cd99388e42): same conditions except cases and iteration count",
+  "config_isolation": {
+    "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+    "credential_values_recorded": false,
+    "forbidden_entries_checked": [
+      "CLAUDE.md",
+      "settings.json",
+      "settings.local.json",
+      "agents",
+      "commands",
+      "skills",
+      "plugins",
+      "output-styles",
+      "hooks",
+      "rules"
+    ],
+    "forbidden_entries_present": [],
+    "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+    "top_level_entry_names": [
+      ".claude.json",
+      ".credentials.json",
+      ".last-cleanup",
+      "backups",
+      "cache",
+      "projects",
+      "session-env",
+      "sessions",
+      "shell-snapshots"
+    ]
+  },
+  "design_record": "docs/c291-improvement-review-r1.md",
+  "iterations": 10,
+  "kind": "diagnostic probe (not registered)",
+  "model": "claude-opus-5-5",
+  "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-low-c291-existence-check-probe-n10-cli2288-20261008-r1/c291/plan/parallel-plan.json",
+  "plan_sha256": "a8a289755d6226ce5d99806398498d522fd9a27b34e52ec1208e62b7cc2c595d",
+  "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-opus55-low-c291-existence-check-probe-n10-cli2288-20261008-r1/c291/profile.json",
+  "profile_sha256": "0ccaa4847399c044314344cf6584640489d00913859d3240ca5a96fea08bfd0b",
+  "prompt_identity": {
+    "bundle_sha256": "08f2c5533dba68e004d1fb75cbbaf04aa34e69e36eff9e0b420bfad811f69a8e",
+    "name": "the-caption-3ce91a4-validation-call-exit-r1",
+    "revision": "r1"
+  },
+  "reasoning_effort": "low",
+  "requested_slots": 60,
+  "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+  "status": "ready"
+}
