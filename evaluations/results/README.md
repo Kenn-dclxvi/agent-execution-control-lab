@@ -28,6 +28,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C293のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-08）](#c293-sol-sonnet-low-std14-20261008)
+
+- [C292のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）](#c292-sol61-low-std14-20261008)
+
 - [Claude Code Haiku 5.5 low C280・C291（2026-10-08）](#claude-haiku55-low-c280-c291-20261008)
 
 - [Claude Code Sonnet 5.5 low C291とC280 Sonnet lowの比較（2026-10-08）](#claude-sonnet55-low-c291-20261008)
@@ -156,6 +160,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c293-sol-sonnet-low-std14-20261008"></a>
+## C293のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-08）
+
+[計測記録](c293-sol61-low-sonnet55-low-standard14-n5_2026-10-08.md)。Sol Lowは[登録結果](4cd5d24a91064e07950ca0b01a90a8d9.json)、[atomic集計](c293-sol61-low-standard14-n5_2026-10-08-atomic-analysis.json)、[選択記録](c293-sol61-low-standard14-n5_2026-10-08-selection.json)、[C280比較](c293-sol61-low-standard14-n5_2026-10-08-c280-comparison.json)、[C289比較](c293-sol61-low-standard14-n5_2026-10-08-c289-comparison.json)、[C291比較](c293-sol61-low-standard14-n5_2026-10-08-c291-comparison.json)、[品質監査](c293-sol61-low-standard14-n5_2026-10-08-quality-audit.json)、[発行前の記録](c293-sol61-low-standard14-n5_2026-10-08-preflight.json)、[機序の診断](c293-sol61-low-standard14-n5_2026-10-08-mechanism-diagnostics.json)。Sonnet lowは[登録結果](7bedd7788410435f93e0e1de1a9f1659.json)、[C280比較](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-c280-comparison.json)、[C289比較](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-c289-comparison.json)、[C291比較](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-c291-comparison.json)、[品質監査](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-sonnet55-low-c293-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。両セルとも有効70件すべてが4点。C280比でSol Lowはトークン中央値−31.30%・経過時間+11.64%、Sonnet lowはトークン+15.30%・経過時間+12.63%。採用は未判断。
+
+<a id="c292-sol61-low-std14-20261008"></a>
+## C292のGPT-6.1 Sol Low・Standard14 N=5（2026-10-08）
+
+[計測記録](c292-sol61-low-standard14-n5_2026-10-08.md)、[登録結果](0795d21aedb243aab07f653b8f9f8dd0.json)、[atomic集計](c292-sol61-low-standard14-n5_2026-10-08-atomic-analysis.json)、[選択記録](c292-sol61-low-standard14-n5_2026-10-08-selection.json)、[C289比較](c292-sol61-low-standard14-n5_2026-10-08-c289-comparison.json)、[C291比較](c292-sol61-low-standard14-n5_2026-10-08-c291-comparison.json)、[C280比較](c292-sol61-low-standard14-n5_2026-10-08-c280-comparison.json)、[品質監査](c292-sol61-low-standard14-n5_2026-10-08-quality-audit.json)、[発行前の記録](c292-sol61-low-standard14-n5_2026-10-08-preflight.json)、[機序の診断](c292-sol61-low-standard14-n5_2026-10-08-mechanism-diagnostics.json)。有効70件すべてが4点。トークン中央値1,392,600（C280比−32.78%、C289比+10.20%、C291比+5.60%）、経過時間中央値652.38秒（C280比+21.32%、C289比+12.07%）。長いコマンドの待機が別の呼び出しに分かれた実行が11/70件（C289は0件）。採用は未判断。
 
 <a id="claude-haiku55-low-c280-c291-20261008"></a>
 ## Claude Code Haiku 5.5 low C280・C291（2026-10-08）

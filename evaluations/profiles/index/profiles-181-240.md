@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate149-specification-start-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate149-specification-start-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate15-ambiguity-boundaries-global-m10-n3-r1.json`](../candidate15-ambiguity-boundaries-global-m10-n3-r1.json)
+- [`candidate15-selected-role-control-input-expanded12-global-m24-n5-r1.json`](../candidate15-selected-role-control-input-expanded12-global-m24-n5-r1.json)
 - [`candidate150-required-outcome-bind-readable-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate150-required-outcome-bind-readable-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate151-evidence-consumer-boundary-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate151-evidence-consumer-boundary-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
@@ -59,6 +62,3 @@
 - [`candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate185-review-admission-totality-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json`](../candidate186-review-decision-record-totality-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate187-review-admission-proof-obligation-adr9-r2-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json)
-- [`candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json)
-- [`candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json)

@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json`](../candidate187-review-admission-proof-obligation-targeted-r1-medium-m24-n5-cli0146.json)
+- [`candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-n20-medium-m24-cli0146.json)
+- [`candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json`](../candidate187-review-admission-proof-obligation-tpo04-reference-n5-medium-m24-cli0146.json)
 - [`candidate189-self-contained-review-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate189-self-contained-review-control-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20-medium-m24-cli0146.json`](../candidate190-current-prior-review-result-admission-adr05-adr07-adr09-n20-medium-m24-cli0146.json)
 - [`candidate190-current-prior-review-result-admission-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json`](../candidate190-current-prior-review-result-admission-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json)
@@ -59,6 +62,3 @@
 - [`candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json`](../candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json)
 - [`candidate224-review-source-exclusive-authority-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate224-review-source-exclusive-authority-adr9-r2-medium-m24-n5-cli0146-r1.json)
-- [`candidate225-ten-principle-execution-control-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate225-ten-principle-execution-control-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate226-human-result-effect-scope-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate226-human-result-effect-scope-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate227-c147-direct-human-translation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate227-c147-direct-human-translation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)

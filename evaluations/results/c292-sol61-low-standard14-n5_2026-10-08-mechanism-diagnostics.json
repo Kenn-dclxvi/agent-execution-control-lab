@@ -1,0 +1,51 @@
+{
+  "definitions": {
+    "loop": "検証を含む呼び出しに for (const があるrun",
+    "multi_call": "検証を含む呼び出しが2回以上のrun",
+    "root_fetch": "cat AGENTS.md / cat CLAUDE.md を含む呼び出しがあるrun",
+    "verification_calls": "-m pytest / main_verify / git diff --check を含む呼び出し",
+    "wait_split": "write_stdinを含み、exec_commandを含まない呼び出しがあるrun(検証のループの外で待機)"
+  },
+  "method": "登録結果の各runのCodex rolloutから、tool呼び出し(custom_tool_call exec)の入力文字列を数えた簡易判定。C291は、このプールの56件だけ(保存先にrolloutが残る分)。",
+  "prompts": {
+    "C289": {
+      "loop": 41,
+      "multi_call": 7,
+      "root_fetch": 32,
+      "runs_analyzed": 70,
+      "runs_with_verification": 45,
+      "tool_calls_per_run": 2.73,
+      "verification_calls": 52,
+      "wait_split_by_case": {}
+    },
+    "C291": {
+      "loop": 28,
+      "multi_call": 5,
+      "root_fetch": 0,
+      "runs_analyzed": 56,
+      "runs_with_verification": 32,
+      "tool_calls_per_run": 2.89,
+      "verification_calls": 39,
+      "wait_split": 1,
+      "wait_split_by_case": {
+        "A02": 1
+      }
+    },
+    "C292": {
+      "loop": 38,
+      "multi_call": 11,
+      "root_fetch": 50,
+      "runs_analyzed": 70,
+      "runs_with_verification": 44,
+      "tool_calls_per_run": 3.36,
+      "verification_calls": 63,
+      "wait_split": 11,
+      "wait_split_by_case": {
+        "A02": 5,
+        "F04": 2,
+        "F07": 4
+      }
+    }
+  },
+  "schema_version": "c292-sol61-low-mechanism-diagnostics/v1"
+}

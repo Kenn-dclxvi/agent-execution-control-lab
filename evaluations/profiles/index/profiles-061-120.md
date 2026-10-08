@@ -2,6 +2,9 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate102-prechange-evidence-freeze-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate102-prechange-evidence-freeze-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
+- [`candidate103-prechange-evidence-receipt-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate103-prechange-evidence-receipt-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
+- [`candidate104-staged-evidence-admission-v14-reasoning-medium-a02-f07-global-m24-n5-cli0146-r1.json`](../candidate104-staged-evidence-admission-v14-reasoning-medium-a02-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate104-staged-evidence-admission-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json`](../candidate104-staged-evidence-admission-v14-reasoning-medium-f03-f08-global-m24-n5-cli0146-r1.json)
 - [`candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r2.json`](../candidate104-staged-evidence-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r2.json)
@@ -59,6 +62,3 @@
 - [`candidate128-required-effect-closure-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate128-required-effect-closure-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate129-unsatisfied-effect-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate129-unsatisfied-effect-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate130-focused-criterion-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate130-focused-criterion-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
-- [`candidate131-criterion-anchor-continuation-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json`](../candidate131-criterion-anchor-continuation-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json)
-- [`candidate131-criterion-anchor-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate131-criterion-anchor-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
-- [`candidate132-observed-preimage-change-construction-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate132-observed-preimage-change-construction-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
