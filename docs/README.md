@@ -96,6 +96,7 @@
 - [検証と読み取りの発行単位を統合する設計（r1）](integrated-dispatch-unit-design-r1.md)：C280を親に、検証・開始時の読み取り・検索と本文取得が閉じていた共通の辺（確定した操作の結果をモデルへ返して再入する）を一つの不変条件で閉じる4項目（2,262バイト）の案文を固定。現行6項目（3,905バイト）より約1,640バイト短い。設計の確認事項1〜9を記録し、残る穴（先行結果で決まる読み取りの分類、周辺本文の窓、検証出力の形）を明記。Candidateは未作成
 - [C281以降の機序の成立と阻害要因の判定表（r1）](mechanism-establishment-table-r1.md)：Sol Lowと、Claude（Opus・Sonnet・Haiku）の保存済みtranscript・rolloutを同じ指標で数え直し、機序（変更前に戻る回数、検証の一括化、位置だけの検索）の成立を判定。Opus mediumでC147・C291は要求数をcontrol-free比で約19%減らしたが、指示文の長さが効果（約14〜15%）を食いつぶしていた。残す機序と設計への要求を記録。Candidateは未作成
 - [Candidate293 Sol LowとSonnet Lowで成立した機序を、Claudeの修復を保ったまま運ぶ](candidate293-shared-mechanism-carrier-design.md)：C280を親に、判定表で両セルに成立した機序（検証の一括化、位置だけの検索を返さない、変更前に戻る回数）を、Claudeの逆効果を直した保護（応答単位、範囲の限定、ルート本文の非取得、終了コードの一致）と同じ変更単位で運ぶ5項目の案文（全文4,393バイト）と、Candidate作成前の確認事項1〜9を固定。主なセルはGPT-6.1 Sol LowとSonnet 5.5 low。Candidateは未作成
+- [Candidate294 C293で欠落した開始時の検索と範囲の一項を戻す](candidate294-shared-mechanism-carrier-restore-design.md)：C293のSol Lowで戻った変更前の呼び出しとリポジトリ外の読み取りに対し、供給源（C285、C289・C291）から転記し損ねた二点を原文どおりに戻す。範囲の一項は、機序ではなく保護として扱う。Candidateは未評価
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
