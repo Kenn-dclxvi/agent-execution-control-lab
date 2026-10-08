@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Claude Code Haiku 5.5 low C280・C291（2026-10-08）](#claude-haiku55-low-c280-c291-20261008)
+
 - [Claude Code Sonnet 5.5 low C291とC280 Sonnet lowの比較（2026-10-08）](#claude-sonnet55-low-c291-20261008)
 
 - [Claude Code Sonnet 5.5 low C280（2026-10-08）](#claude-sonnet55-low-c280-20261008)
@@ -150,6 +152,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="claude-haiku55-low-c280-c291-20261008"></a>
+## Claude Code Haiku 5.5 low C280・C291（2026-10-08）
+
+[計測記録](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08.md)、[C291 − C280の比較](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-c291-c280-comparison.json)、[発行前の記録](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-preflight.json)。C280は[登録結果](389be05abac440c6bfa5b8cf3df00ca7.json)、[品質監査](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-c280-quality-audit.json)、[機序の診断](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-c280-mechanism-diagnostics.json)。C291は[登録結果](98f9e87302c94fc880793d8fb02940c0.json)、[品質監査](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-c291-quality-audit.json)、[機序の診断](claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08-c291-mechanism-diagnostics.json)。両条件とも有効70件、4点69件・0点1件（A01）。C280比でC291はトークン中央値+1.72%、経過時間中央値+8.31%。採用は未判断。
 
 <a id="claude-sonnet55-low-c291-20261008"></a>
 ## Claude Code Sonnet 5.5 low C291とC280 Sonnet lowの比較（2026-10-08）

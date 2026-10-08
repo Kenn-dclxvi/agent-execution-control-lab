@@ -1,0 +1,89 @@
+{
+  "baselines": {
+    "sonnet_c280": "c84fd22753d248e588e586cb8022ea1e",
+    "sonnet_c291": "42391c16154646c3a63b206abfb033c2"
+  },
+  "checks": [
+    {
+      "condition": "c280",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-haiku55-low-c280-c291-standard14-n5-cli2288-20261008-r1/c280/plan/parallel-plan.json",
+      "plan_sha256": "6215eabd660d7e2e766c454b10e0468bc6da879442972b0edd0cb22cabb83be9",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-haiku55-low-c280-c291-standard14-n5-cli2288-20261008-r1/c280/profile.json",
+      "profile_sha256": "5045561b190268179237ed6f5f997665c29ffafc4286b9bcceebac1469274bf8",
+      "prompt_identity": {
+        "bundle_sha256": "cac81e81eb5d66582a119042b034c457a1b2415fb6959ce2d03bcd0250fc5ea0",
+        "name": "the-caption-3ce91a4-execution-control-outcome-binding-r1",
+        "revision": "r1"
+      }
+    },
+    {
+      "condition": "c291",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-haiku55-low-c280-c291-standard14-n5-cli2288-20261008-r1/c291/plan/parallel-plan.json",
+      "plan_sha256": "17b2139daedd2dcdc286da92f69da5be16cf10cacbb1dc35f97d4d156925d9fc",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-haiku55-low-c280-c291-standard14-n5-cli2288-20261008-r1/c291/profile.json",
+      "profile_sha256": "d084e402527b1d248ceb23c0f29746cbcf0e5cde23a925ffb8d258e8ac0a2957",
+      "prompt_identity": {
+        "bundle_sha256": "08f2c5533dba68e004d1fb75cbbaf04aa34e69e36eff9e0b420bfad811f69a8e",
+        "name": "the-caption-3ce91a4-validation-call-exit-r1",
+        "revision": "r1"
+      }
+    }
+  ],
+  "claude_runtime": {
+    "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+    "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+    "version_output": "2.1.288 (Claude Code)"
+  },
+  "code_commit": "81efc9cac4ffe3a519087a1b4a2e0971cd40fb8c",
+  "code_sha256": {
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "scripts/atomic_run_registry.py": "1bc3cf241485dcbeb478458eaac2a4f5b3007fe2331b3657cc630727c1d80609",
+    "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+    "scripts/evaluation_loop.py": "1395c6b8de40f170d90f46d872b87b6c77561ce066389556647a05e359c8d312",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+    "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+    "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+    "scripts/run_claude_evaluation.py": "1a3c850591baa7d1419ed89aa753eaba4c2d9c5e97453cb090d5230568cf5a56",
+    "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+    "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+    "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+    "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+  },
+  "config_isolation": {
+    "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+    "credential_values_recorded": false,
+    "forbidden_entries_checked": [
+      "CLAUDE.md",
+      "settings.json",
+      "settings.local.json",
+      "agents",
+      "commands",
+      "skills",
+      "plugins",
+      "output-styles",
+      "hooks",
+      "rules"
+    ],
+    "forbidden_entries_present": [],
+    "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+    "top_level_entry_names": [
+      ".claude.json",
+      ".credentials.json",
+      ".last-cleanup",
+      "backups",
+      "cache",
+      "projects",
+      "session-env",
+      "sessions",
+      "shell-snapshots"
+    ]
+  },
+  "max_workers": 24,
+  "model": "claude-haiku-5-5",
+  "reasoning_effort": "low",
+  "requested_slots_per_condition": 70,
+  "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+  "status": "ready",
+  "surface_check": "one live init matched the profile surface",
+  "variable": "model only (against the Sonnet 5.5 low series); the two Haiku conditions differ only in prompt identity"
+}

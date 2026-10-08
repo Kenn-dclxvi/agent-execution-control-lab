@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate70-machine-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json`](../candidate70-machine-decision-boundary-v11-machine-boundary-targeted4-global-m24-n5-r1.json)
+- [`candidate71-validation-closure-v10-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v10-standard14-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v11-machine-boundary-targeted4-global-m24-n5-r1.json`](../candidate71-validation-closure-v11-machine-boundary-targeted4-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate71-validation-closure-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v12-standard14-global-m24-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate85-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate85-planning-first-producer-selection-v14-reasoning-medium-f04-global-m5-n5-r1.json)
 - [`candidate86-producer-plan-fast-path-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate86-producer-plan-fast-path-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate86-producer-plan-fast-path-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate86-producer-plan-fast-path-v14-reasoning-medium-f02-global-m5-n5-r1.json)
-- [`candidate86-producer-plan-fast-path-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate86-producer-plan-fast-path-v14-reasoning-medium-f04-global-m5-n5-r1.json)
-- [`candidate87-producer-local-invocation-wave-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate87-producer-local-invocation-wave-v14-reasoning-medium-d01-global-m5-n5-catalog-fixed-r1.json)
