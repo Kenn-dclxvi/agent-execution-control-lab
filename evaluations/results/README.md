@@ -34,6 +34,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 - [Claude Code Sonnet 5.5 low C280（2026-10-08）](#claude-sonnet55-low-c280-20261008)
 
+- [Claude Code Sonnet 5.5 low C284・C288・C289と段階別の比較（2026-10-08）](#claude-sonnet55-low-stages-20261008)
+
 - [C291の指示ファイル取得の診断測定 Opus 5.5 low（2026-10-08）](#claude-opus55-low-c291-probe-20261008)
 
 - [Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）](#claude-opus55-low-c280-20261008)
@@ -169,6 +171,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 ## Claude Code Sonnet 5.5 low C280（2026-10-08）
 
 [計測記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[登録結果](c84fd22753d248e588e586cb8022ea1e.json)、[品質監査](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。比較相手のない単独計測。有効70件、全件4点。品質中央値100、全エージェントトークン中央値832,616、経過時間中央値297.94秒。採用は未判断。
+
+<a id="claude-sonnet55-low-stages-20261008"></a>
+## Claude Code Sonnet 5.5 low C284・C288・C289と段階別の比較（2026-10-08）
+
+[計測記録](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08.md)、[段階別の分析](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-stage-analysis.json)、[比較表示](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-stage-comparison.json)、[発行前の記録](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-preflight.json)。登録結果は[C284](947ad3d773084f2b869b82af66767d7c.json)、[C288](a347791903294ee3bc173d9801a1a415.json)、[C289](40b1c34285aa43d1a2c94724418003e2.json)、品質監査は[C284](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-c284-quality-audit.json)、[C288](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-c288-quality-audit.json)、[C289](claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288_2026-10-08-c289-quality-audit.json)。各70件が有効で、C284・C288は全件4点、C289は4点69件・3点1件（A02の試験証拠不足）。C280比でトークン中央値はC284 +15.8%、C288 +23.1%、C289 +27.0%、C291 +30.0%。ばらつきを超えるのはC284の増加だけで、検証コマンドの出力（`> ログ`の書き方11件→0件、出力を絞らない`pytest -v`4件→11件）が変わった。採用は未判断。
 
 <a id="claude-opus55-low-c291-probe-20261008"></a>
 ## C291の指示ファイル取得の診断測定 Opus 5.5 low（2026-10-08）

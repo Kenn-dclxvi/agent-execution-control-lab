@@ -1,0 +1,367 @@
+{
+  "design_record": "docs/c291-sentence-ledger-r1.md",
+  "method": "root transcripts of 70 runs per stage; per-request usage decomposition (sum equals recorded total tokens for every run); tool result bytes by command category; verification command forms for pytest/main_verify commands in the 55 runs that change files",
+  "schema_version": "c280-c291-sonnet55-low-stage-analysis/v1",
+  "stages": {
+    "C280": {
+      "context_search_calls": 9,
+      "context_window_median": 2,
+      "early_carried_per_iteration": 172925.2,
+      "first_request_context_mean": 9431.614285714286,
+      "fixed_context_tokens_per_iteration": 611731.2,
+      "late_carried_per_iteration": 39159.4,
+      "mean_tokens_per_iteration": 842626.6,
+      "output_tokens_per_iteration": 18810.8,
+      "requests_per_iteration": 64.6,
+      "results_ge_10KB": {
+        "Read": 4,
+        "ctx_search": 0,
+        "verify": 0
+      },
+      "runs": 70,
+      "tool_result_bytes_per_iteration": {
+        "Read": 38069.6,
+        "all": 100937.4,
+        "body": 9133.4,
+        "ctx_search": 2198.4,
+        "listing": 8086.8,
+        "search": 20077.0,
+        "verify": 18111.4
+      },
+      "verification_commands": 100,
+      "verification_output_limited": 45
+    },
+    "C284": {
+      "context_search_calls": 7,
+      "context_window_median": 1,
+      "early_carried_per_iteration": 211252.6,
+      "first_request_context_mean": 9806.185714285713,
+      "fixed_context_tokens_per_iteration": 659249.6,
+      "late_carried_per_iteration": 66010.6,
+      "mean_tokens_per_iteration": 957964.2,
+      "output_tokens_per_iteration": 21451.4,
+      "requests_per_iteration": 67.0,
+      "results_ge_10KB": {
+        "Read": 1,
+        "ctx_search": 0,
+        "verify": 6
+      },
+      "runs": 70,
+      "tool_result_bytes_per_iteration": {
+        "Read": 27296.4,
+        "all": 129932.4,
+        "body": 7946.0,
+        "ctx_search": 1361.4,
+        "listing": 8713.0,
+        "search": 36720.8,
+        "verify": 43058.6
+      },
+      "verification_commands": 98,
+      "verification_output_limited": 38
+    },
+    "C288": {
+      "context_search_calls": 8,
+      "context_window_median": 2,
+      "early_carried_per_iteration": 253024.0,
+      "first_request_context_mean": 10501.014285714286,
+      "fixed_context_tokens_per_iteration": 658930.2,
+      "late_carried_per_iteration": 62253.6,
+      "mean_tokens_per_iteration": 997219.2,
+      "output_tokens_per_iteration": 23011.4,
+      "requests_per_iteration": 62.6,
+      "results_ge_10KB": {
+        "Read": 10,
+        "ctx_search": 0,
+        "verify": 4
+      },
+      "runs": 70,
+      "tool_result_bytes_per_iteration": {
+        "Read": 76468.8,
+        "all": 168435.4,
+        "body": 13278.2,
+        "ctx_search": 2607.8,
+        "listing": 488.0,
+        "search": 33683.0,
+        "verify": 36465.4
+      },
+      "verification_commands": 87,
+      "verification_output_limited": 32
+    },
+    "C289": {
+      "context_search_calls": 21,
+      "context_window_median": 10,
+      "early_carried_per_iteration": 270351.8,
+      "first_request_context_mean": 10718.771428571428,
+      "fixed_context_tokens_per_iteration": 672728.0,
+      "late_carried_per_iteration": 65796.4,
+      "mean_tokens_per_iteration": 1031206.2,
+      "output_tokens_per_iteration": 22330.0,
+      "requests_per_iteration": 62.6,
+      "results_ge_10KB": {
+        "Read": 6,
+        "ctx_search": 4,
+        "verify": 5
+      },
+      "runs": 70,
+      "tool_result_bytes_per_iteration": {
+        "Read": 45799.0,
+        "all": 179029.4,
+        "body": 18318.4,
+        "ctx_search": 24841.2,
+        "listing": 12545.2,
+        "search": 31724.8,
+        "verify": 40933.6
+      },
+      "verification_commands": 97,
+      "verification_output_limited": 32
+    },
+    "C291": {
+      "context_search_calls": 33,
+      "context_window_median": 12,
+      "early_carried_per_iteration": 292069.4,
+      "first_request_context_mean": 10846.085714285715,
+      "fixed_context_tokens_per_iteration": 705014.6,
+      "late_carried_per_iteration": 79280.0,
+      "mean_tokens_per_iteration": 1100015.4,
+      "output_tokens_per_iteration": 23651.4,
+      "requests_per_iteration": 64.8,
+      "results_ge_10KB": {
+        "Read": 7,
+        "ctx_search": 8,
+        "verify": 7
+      },
+      "runs": 70,
+      "tool_result_bytes_per_iteration": {
+        "Read": 51858.8,
+        "all": 179526.2,
+        "body": 2705.8,
+        "ctx_search": 46241.4,
+        "listing": 8307.4,
+        "search": 12926.8,
+        "verify": 52012.0
+      },
+      "verification_commands": 94,
+      "verification_output_limited": 29
+    }
+  },
+  "verification_command_forms": {
+    "C280": {
+      "-v": {
+        "commands": 4,
+        "mean_output_bytes": 6831
+      },
+      ">file": {
+        "commands": 11,
+        "mean_output_bytes": 1250
+      },
+      ">file+-v": {
+        "commands": 2,
+        "mean_output_bytes": 223
+      },
+      "plain(no limit)": {
+        "commands": 6,
+        "mean_output_bytes": 2334
+      },
+      "|tail+-q": {
+        "commands": 8,
+        "mean_output_bytes": 141
+      },
+      "|tail+PIPESTATUS/pipefail": {
+        "commands": 3,
+        "mean_output_bytes": 1447
+      },
+      "|tail+PIPESTATUS/pipefail+-v": {
+        "commands": 19,
+        "mean_output_bytes": 1252
+      },
+      "|tail+|head+-q": {
+        "commands": 1,
+        "mean_output_bytes": 455
+      }
+    },
+    "C284": {
+      "-v": {
+        "commands": 11,
+        "mean_output_bytes": 13633
+      },
+      ">file": {
+        "commands": 6,
+        "mean_output_bytes": 1431
+      },
+      ">file+-v": {
+        "commands": 1,
+        "mean_output_bytes": 223
+      },
+      "plain(no limit)": {
+        "commands": 8,
+        "mean_output_bytes": 2356
+      },
+      "|tail+-q": {
+        "commands": 4,
+        "mean_output_bytes": 78
+      },
+      "|tail+PIPESTATUS/pipefail": {
+        "commands": 6,
+        "mean_output_bytes": 1601
+      },
+      "|tail+PIPESTATUS/pipefail+-q": {
+        "commands": 7,
+        "mean_output_bytes": 508
+      },
+      "|tail+PIPESTATUS/pipefail+-q+-v": {
+        "commands": 1,
+        "mean_output_bytes": 1425
+      },
+      "|tail+PIPESTATUS/pipefail+-v": {
+        "commands": 12,
+        "mean_output_bytes": 1294
+      }
+    },
+    "C288": {
+      "-q": {
+        "commands": 2,
+        "mean_output_bytes": 3435
+      },
+      "-v": {
+        "commands": 11,
+        "mean_output_bytes": 10551
+      },
+      ">file": {
+        "commands": 4,
+        "mean_output_bytes": 1450
+      },
+      ">file+-v": {
+        "commands": 1,
+        "mean_output_bytes": 223
+      },
+      "plain(no limit)": {
+        "commands": 7,
+        "mean_output_bytes": 2362
+      },
+      "|tail+-q": {
+        "commands": 5,
+        "mean_output_bytes": 55
+      },
+      "|tail+-v": {
+        "commands": 2,
+        "mean_output_bytes": 1585
+      },
+      "|tail+PIPESTATUS/pipefail": {
+        "commands": 9,
+        "mean_output_bytes": 1879
+      },
+      "|tail+PIPESTATUS/pipefail+-q": {
+        "commands": 3,
+        "mean_output_bytes": 284
+      },
+      "|tail+PIPESTATUS/pipefail+-v": {
+        "commands": 8,
+        "mean_output_bytes": 1452
+      }
+    },
+    "C289": {
+      "-q": {
+        "commands": 4,
+        "mean_output_bytes": 67
+      },
+      "-v": {
+        "commands": 11,
+        "mean_output_bytes": 11691
+      },
+      ">file": {
+        "commands": 2,
+        "mean_output_bytes": 1442
+      },
+      ">file+-v": {
+        "commands": 1,
+        "mean_output_bytes": 150
+      },
+      "PIPESTATUS/pipefail+-v": {
+        "commands": 1,
+        "mean_output_bytes": 87
+      },
+      "plain(no limit)": {
+        "commands": 10,
+        "mean_output_bytes": 2121
+      },
+      "|head": {
+        "commands": 1,
+        "mean_output_bytes": 5001
+      },
+      "|tail+-q": {
+        "commands": 4,
+        "mean_output_bytes": 219
+      },
+      "|tail+-v": {
+        "commands": 2,
+        "mean_output_bytes": 2571
+      },
+      "|tail+PIPESTATUS/pipefail": {
+        "commands": 9,
+        "mean_output_bytes": 1739
+      },
+      "|tail+PIPESTATUS/pipefail+-q": {
+        "commands": 2,
+        "mean_output_bytes": 245
+      },
+      "|tail+PIPESTATUS/pipefail+-q+-v": {
+        "commands": 1,
+        "mean_output_bytes": 1499
+      },
+      "|tail+PIPESTATUS/pipefail+-v": {
+        "commands": 9,
+        "mean_output_bytes": 1718
+      }
+    },
+    "C291": {
+      "-q": {
+        "commands": 5,
+        "mean_output_bytes": 1411
+      },
+      "-v": {
+        "commands": 12,
+        "mean_output_bytes": 14775
+      },
+      ">file": {
+        "commands": 3,
+        "mean_output_bytes": 589
+      },
+      ">file+-v": {
+        "commands": 1,
+        "mean_output_bytes": 87
+      },
+      "plain(no limit)": {
+        "commands": 11,
+        "mean_output_bytes": 2337
+      },
+      "|tail": {
+        "commands": 4,
+        "mean_output_bytes": 2753
+      },
+      "|tail+-q": {
+        "commands": 3,
+        "mean_output_bytes": 279
+      },
+      "|tail+-v": {
+        "commands": 2,
+        "mean_output_bytes": 2541
+      },
+      "|tail+>file+-v": {
+        "commands": 1,
+        "mean_output_bytes": 362
+      },
+      "|tail+PIPESTATUS/pipefail": {
+        "commands": 4,
+        "mean_output_bytes": 2133
+      },
+      "|tail+PIPESTATUS/pipefail+-q": {
+        "commands": 1,
+        "mean_output_bytes": 360
+      },
+      "|tail+PIPESTATUS/pipefail+-v": {
+        "commands": 10,
+        "mean_output_bytes": 1532
+      }
+    }
+  }
+}
