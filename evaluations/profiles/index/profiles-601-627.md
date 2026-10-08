@@ -1,7 +1,9 @@
-# Profile index 601-625
+# Profile index 601-627
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
+- [`control-free-repository-v13-standard14-global-m24-n5-r1.json`](../control-free-repository-v13-standard14-global-m24-n5-r1.json)
 - [`control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-d01-global-m24-n5-cli0146-r1.json)
 - [`control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../control-free-repository-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`control-free-sol6-high-standard14-n5-cli0156-r1.json`](../control-free-sol6-high-standard14-n5-cli0156-r1.json)
