@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "condition": "c284",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c284/plan/parallel-plan.json",
+      "plan_sha256": "f92f3010deacc98fb407d8f9818d2d818ed9c4702fef19c27b5e27ea333363ac",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c284/profile.json",
+      "profile_sha256": "65f0dd62547dcf816ee4571abc9184d04da4b7c2a4df7dbcc4f62352b8656f88",
+      "prompt_identity": {
+        "bundle_sha256": "866e48499d6f3b0402d70005aa11c1090564955ae29eb49d030b457915f41b0c",
+        "name": "the-caption-3ce91a4-validation-single-call-r1",
+        "revision": "r1"
+      }
+    },
+    {
+      "condition": "c288",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c288/plan/parallel-plan.json",
+      "plan_sha256": "b8e0f8755c1c200f04fbff02f254dab4b8b71a2a33046a874a17a626e1698df8",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c288/profile.json",
+      "profile_sha256": "5076423187256954afc8336c0de7f82cebfca02781d159cf848a73235e3c00b4",
+      "prompt_identity": {
+        "bundle_sha256": "1524a66d732652d772eb7d1b6023339cab27444d19215bb096c2afc53383e9ec",
+        "name": "the-caption-3ce91a4-scoped-read-batch-r1",
+        "revision": "r1"
+      }
+    },
+    {
+      "condition": "c289",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c289/plan/parallel-plan.json",
+      "plan_sha256": "9dc78932dc51e2322e87d39c462f7dbbe355243039364e415bb1b00326fad759",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c284-c288-c289-standard14-n5-cli2288-20261008-r1/c289/profile.json",
+      "profile_sha256": "87c42324bdbd06362633e9fda44da6560e5e18b8ff18234fefcc1b9843d0ebfa",
+      "prompt_identity": {
+        "bundle_sha256": "cfcffae1045072f6a960797cefcedc75506bba47cfc7d7d1a5eb4da424a80780",
+        "name": "the-caption-3ce91a4-scoped-first-return-r1",
+        "revision": "r1"
+      }
+    }
+  ],
+  "claude_runtime": {
+    "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+    "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+    "version_output": "2.1.288 (Claude Code)"
+  },
+  "code_commit": "d8104b68ac10f809aa9b8dbe2f6d64eb9d7e6ed6",
+  "code_sha256": {
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "scripts/atomic_run_registry.py": "1bc3cf241485dcbeb478458eaac2a4f5b3007fe2331b3657cc630727c1d80609",
+    "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+    "scripts/evaluation_loop.py": "1395c6b8de40f170d90f46d872b87b6c77561ce066389556647a05e359c8d312",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+    "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+    "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+    "scripts/run_claude_evaluation.py": "1a3c850591baa7d1419ed89aa753eaba4c2d9c5e97453cb090d5230568cf5a56",
+    "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+    "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+    "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+    "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+  },
+  "compared_with": {
+    "sonnet_c280_low": "c84fd22753d248e588e586cb8022ea1e",
+    "sonnet_c291_low": "42391c16154646c3a63b206abfb033c2"
+  },
+  "config_isolation": {
+    "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+    "credential_values_recorded": false,
+    "forbidden_entries_checked": [
+      "CLAUDE.md",
+      "settings.json",
+      "settings.local.json",
+      "agents",
+      "commands",
+      "skills",
+      "plugins",
+      "output-styles",
+      "hooks",
+      "rules"
+    ],
+    "forbidden_entries_present": [],
+    "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+    "top_level_entry_names": [
+      ".claude.json",
+      ".credentials.json",
+      ".last-cleanup",
+      "backups",
+      "cache",
+      "projects",
+      "session-env",
+      "sessions",
+      "shell-snapshots"
+    ]
+  },
+  "design_record": "docs/c291-sentence-ledger-r1.md",
+  "max_workers": 24,
+  "model": "claude-sonnet-5-5",
+  "reasoning_effort": "low",
+  "requested_slots_per_condition": 70,
+  "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+  "status": "ready",
+  "variable": "prompt identity only"
+}
