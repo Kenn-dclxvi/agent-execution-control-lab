@@ -1,0 +1,677 @@
+{
+  "design_record": "docs/c291-improvement-review-r1.md",
+  "exploratory_post_hoc": {
+    "eligible_cases": 0,
+    "note": "pooled with the 30 earlier C291 low N5 runs of the same six cases (90 runs); not preregistered; does not change the decision"
+  },
+  "per_case": {
+    "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+      "first": 0,
+      "later": 9,
+      "mean_requests": 4.7,
+      "mean_total_tokens": 99305,
+      "none": 1,
+      "runs": 10
+    },
+    "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+      "first": 0,
+      "later": 7,
+      "mean_requests": 4.7,
+      "mean_total_tokens": 87942,
+      "none": 3,
+      "runs": 10
+    },
+    "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+      "first": 1,
+      "later": 5,
+      "mean_requests": 5.1,
+      "mean_total_tokens": 90077,
+      "none": 4,
+      "runs": 10
+    },
+    "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+      "first": 0,
+      "later": 10,
+      "mean_requests": 4.8,
+      "mean_total_tokens": 101816,
+      "none": 0,
+      "runs": 10
+    },
+    "TC-F07-CANONICAL-V4-RUNNER": {
+      "first": 5,
+      "later": 1,
+      "mean_requests": 2.9,
+      "mean_total_tokens": 54794,
+      "none": 4,
+      "runs": 10
+    },
+    "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+      "first": 10,
+      "later": 0,
+      "mean_requests": 3,
+      "mean_total_tokens": 58580,
+      "none": 0,
+      "runs": 10
+    }
+  },
+  "preregistered_rule": {
+    "advance_if": "mean (later - first) requests over eligible cases >= +0.5",
+    "classification": "first / later / none by commands in the saved transcript",
+    "eligible_case": "at least 3 runs in both first and later",
+    "otherwise": "case 2 is not advanced"
+  },
+  "result": {
+    "decision": "not_advanced (no eligible case; within-case comparison impossible)",
+    "eligible_cases": 0,
+    "kinds": {
+      "first": 16,
+      "later": 32,
+      "none": 12
+    },
+    "later_only_runs": 32,
+    "later_only_runs_with_existence_check_in_first_response": 32
+  },
+  "runs": [
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 5,
+      "run_id": "03fdf7a7832d4efe96a8a1cc1b4a6425",
+      "total_tokens": 83242
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 5,
+      "run_id": "051c5a9fdc4a4a618fda5be1f01f8bc6",
+      "total_tokens": 121782
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 5,
+      "run_id": "07da5d9cf79542499c1ab0cd142141d6",
+      "total_tokens": 103648
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": false,
+      "iteration": 3,
+      "requests": 4,
+      "run_id": "0b59475f045146c299a697a22b2b75b3",
+      "total_tokens": 68140
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 4,
+      "run_id": "0c45135aa8f64dc7971bd7add31bf179",
+      "total_tokens": 76265
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 3,
+      "requests": 4,
+      "run_id": "0d9afc5203e542be93dc57ac8e138b25",
+      "total_tokens": 74963
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": false,
+      "iteration": 5,
+      "requests": 5,
+      "run_id": "0debc6bc336f4b74b52492a9f3513913",
+      "total_tokens": 93731
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 5,
+      "requests": 5,
+      "run_id": "1acede609b264721a51033f031e5a0e0",
+      "total_tokens": 92649
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 3,
+      "requests": 3,
+      "run_id": "1ae7dd67ad8341208db9374757cabf15",
+      "total_tokens": 56391
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 6,
+      "run_id": "1dd3666de4324fd182d97121fed22bd5",
+      "total_tokens": 99758
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 4,
+      "run_id": "20336ef099f8408a861c1f6c9947d27e",
+      "total_tokens": 86985
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 6,
+      "run_id": "203ceef740234e398f375f11e1ce37dc",
+      "total_tokens": 104250
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 6,
+      "requests": 6,
+      "run_id": "212b89698a2743378ab15d173a4344d3",
+      "total_tokens": 123077
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 4,
+      "run_id": "2a1ac0787cc24b9f98a3540beffac8a3",
+      "total_tokens": 89750
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 6,
+      "requests": 4,
+      "run_id": "372106230bae4681bea23e579bd99e28",
+      "total_tokens": 84052
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 5,
+      "requests": 3,
+      "run_id": "3953496082f24b7db1320cb9fe3e8c3b",
+      "total_tokens": 50665
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 6,
+      "run_id": "3a6b2d85dc454eb1b11134b602881191",
+      "total_tokens": 129044
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 5,
+      "run_id": "3c761c5f525343f7a4de4c478c1b2de7",
+      "total_tokens": 102063
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 5,
+      "run_id": "4f4a32f901ee4d3485cd794ce9d29fb8",
+      "total_tokens": 104425
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 5,
+      "run_id": "589bdbc93261469c99b07f5ca6f6d567",
+      "total_tokens": 93983
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 5,
+      "run_id": "59027ba1b1ba4473b3d54516517081aa",
+      "total_tokens": 97582
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 4,
+      "run_id": "6189dea733ad44a38e1a4d3780df6b9a",
+      "total_tokens": 69148
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 4,
+      "run_id": "65bd5fd82f894eb0a96ea42c3eb1da11",
+      "total_tokens": 82661
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 5,
+      "run_id": "670bbf84649b49c086a1b1a1da2c40b8",
+      "total_tokens": 92763
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 2,
+      "requests": 4,
+      "run_id": "68371d8a8fd5498dad1b96c22582d0db",
+      "total_tokens": 81261
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 6,
+      "requests": 4,
+      "run_id": "732ed2a605784f09b6d444fd4be8b539",
+      "total_tokens": 74296
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 2,
+      "requests": 3,
+      "run_id": "73a8b36eecc644519203a9d3f05aeea8",
+      "total_tokens": 56198
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 5,
+      "run_id": "770b792d49db449092cfd5dfdb08558f",
+      "total_tokens": 100322
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 3,
+      "run_id": "786c05f48ad146dab6a570ffb62076a2",
+      "total_tokens": 60154
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 3,
+      "requests": 4,
+      "run_id": "786f8979bdce48e5b19725de1ec2ed93",
+      "total_tokens": 81550
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 9,
+      "requests": 2,
+      "run_id": "7a1019f993f34068978026ffe18d1474",
+      "total_tokens": 42624
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": false,
+      "iteration": 2,
+      "requests": 5,
+      "run_id": "7af48e5f20df4ae0956d69a24d198b3b",
+      "total_tokens": 89639
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 3,
+      "run_id": "7dd89763745f4fc39cbb3182466edb5a",
+      "total_tokens": 57791
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": false,
+      "iteration": 6,
+      "requests": 5,
+      "run_id": "7e22726cca8c4d268a01f6c702c630a6",
+      "total_tokens": 94654
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 3,
+      "run_id": "83b6301a9a614235980a44e043a95acd",
+      "total_tokens": 57972
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 5,
+      "run_id": "8cc7026e44ba41acac7c4f9127c6575b",
+      "total_tokens": 93922
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 6,
+      "requests": 3,
+      "run_id": "9a009170de824130b11289942f4daf4f",
+      "total_tokens": 50745
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 3,
+      "run_id": "9c4fe55f341c44c99811afcbdbe502c4",
+      "total_tokens": 56528
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 6,
+      "run_id": "9dc896ed5228480db6983a0800ab22ab",
+      "total_tokens": 111350
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 5,
+      "requests": 5,
+      "run_id": "9f44f229904642bc8a31d7772952bc35",
+      "total_tokens": 115643
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 3,
+      "run_id": "a008135abe5b4d1dabf2793c7b4d2b73",
+      "total_tokens": 67365
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 5,
+      "requests": 3,
+      "run_id": "a009bf6af272411ea8f9abdff56679be",
+      "total_tokens": 60016
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 3,
+      "requests": 4,
+      "run_id": "a15f66840aed4c21ab1d810d90db245a",
+      "total_tokens": 88697
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 2,
+      "requests": 3,
+      "run_id": "ac3d058dcb00400eb26921edc52b0df2",
+      "total_tokens": 56892
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 3,
+      "run_id": "ad891dc72a4c4e2aba216a704e1373ed",
+      "total_tokens": 55476
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 8,
+      "requests": 5,
+      "run_id": "b52aae27b03241b1a7cb5ee916579896",
+      "total_tokens": 101748
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 6,
+      "requests": 3,
+      "run_id": "b6fa5be1ff1245b0a5861a25476922f0",
+      "total_tokens": 57365
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 5,
+      "run_id": "bf82ff50ca77412ab86aa01179b2af6c",
+      "total_tokens": 82711
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 2,
+      "run_id": "c079c47138f94db3b6c51ca42171c003",
+      "total_tokens": 43757
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 1,
+      "requests": 5,
+      "run_id": "c16ff015d1cc47c996746b4403501273",
+      "total_tokens": 99821
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 4,
+      "run_id": "c90184550f584c93b77928f408b1d5d6",
+      "total_tokens": 81918
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 3,
+      "run_id": "cdc1f3302c414ee291327b8dfe07694b",
+      "total_tokens": 56169
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 4,
+      "requests": 4,
+      "run_id": "d11ea6d05a3a4379be3678e7233b4e8b",
+      "total_tokens": 76915
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "existence_check_in_first_response": false,
+      "iteration": 2,
+      "requests": 5,
+      "run_id": "dcb993a2e05d4a3992435efef679e57c",
+      "total_tokens": 95623
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 2,
+      "run_id": "dd394526f30e44e4ae103141271ca684",
+      "total_tokens": 44025
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "none",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 3,
+      "requests": 4,
+      "run_id": "dd59cf0b9fc74463ab745cbdcb5acfec",
+      "total_tokens": 67793
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "existence_check_in_first_response": true,
+      "iteration": 7,
+      "requests": 5,
+      "run_id": "e5da0716897f4aea807a7b00769d4698",
+      "total_tokens": 95962
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "existence_check_in_first_response": true,
+      "iteration": 2,
+      "requests": 5,
+      "run_id": "ea5f375a715f4ccf9e6f9bce280ae026",
+      "total_tokens": 90879
+    },
+    {
+      "body_command_in_first_response": true,
+      "body_retrieval": "first",
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "existence_check_in_first_response": true,
+      "iteration": 10,
+      "requests": 3,
+      "run_id": "f182edb5018c46d380976a61f56ce150",
+      "total_tokens": 59200
+    },
+    {
+      "body_command_in_first_response": false,
+      "body_retrieval": "later",
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "existence_check_in_first_response": true,
+      "iteration": 5,
+      "requests": 6,
+      "run_id": "ff06058926074e1e9a7ca5dd51c30fe3",
+      "total_tokens": 137138
+    }
+  ],
+  "schema_version": "c291-existence-check-probe/v1"
+}

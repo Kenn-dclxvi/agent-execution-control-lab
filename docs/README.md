@@ -87,6 +87,7 @@
 - [Candidate289 検索と限定本文の初回受領を一体化する](candidate289-scoped-first-return-design.md)：C288を直接の親に、検索位置だけを返す追加のモデル応答を閉じる新しい候補の設計と評価条件を固定する。[Sol Low・Standard14 N=5](../evaluations/results/c289-sol61-low-standard14-n5_2026-10-08.md)は有効70件すべて4点。[累積N=20](../evaluations/results/c289-sol61-low-standard14-n20_2026-10-08.md)は有効280件すべて4点で、C288累積N=20比トークン-3.14%、経過時間-3.96%。採用は未判断。
 - [Opus 5.5でC289がC280より多くのトークンを使った理由](claude-opus55-c289-c280-token-analysis-r1.md)：Opus 5.5 medium・Standard14 N=5の保存transcriptをリクエスト単位で分解。増加の約3分の2は、自動で読み込まれるルート指示ファイルの増量と、開始時の指示ファイルの読み直しによる重複で説明できる。
 - [Candidate290・Candidate291 ルート指示の再取得と検証呼び出しの終了コードを閉じる](candidate290-candidate291-root-instruction-validation-exit-design.md)：C289を親に、ルートの指示ファイルの重複取得を閉じるC290と、検証の呼び出しの終了コードを各コマンドの結果に一致させるC291を設計。Opus 5.5ではC291だけを測り、二段階の差として扱う。
+- [C291の改善の検討 固定コストと読み取り規則の段階別の対応](c291-improvement-review-r1.md)：C291がSol Lowで−36%、Claude lowで+2〜30%と逆になる理由を、ルートの指示ファイルの大きさ（増加の36〜64%）と序盤の読み取りの持ち越しに分解し、C284〜C291の段階別の台帳、改善案の成立性、案2（指示ファイルの存在確認の依存）の事前固定した測定を記録。Candidateは未作成
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。

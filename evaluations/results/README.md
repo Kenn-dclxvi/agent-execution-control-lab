@@ -34,6 +34,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 - [Claude Code Sonnet 5.5 low C280（2026-10-08）](#claude-sonnet55-low-c280-20261008)
 
+- [C291の指示ファイル取得の診断測定 Opus 5.5 low（2026-10-08）](#claude-opus55-low-c291-probe-20261008)
+
 - [Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）](#claude-opus55-low-c280-20261008)
 
 - [Claude Code Opus 5.5 low C291（2026-10-08）](#claude-opus55-low-c291-20261008)
@@ -167,6 +169,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 ## Claude Code Sonnet 5.5 low C280（2026-10-08）
 
 [計測記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[登録結果](c84fd22753d248e588e586cb8022ea1e.json)、[品質監査](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-preflight.json)、[機序の診断](claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08-mechanism-diagnostics.json)。比較相手のない単独計測。有効70件、全件4点。品質中央値100、全エージェントトークン中央値832,616、経過時間中央値297.94秒。採用は未判断。
+
+<a id="claude-opus55-low-c291-probe-20261008"></a>
+## C291の指示ファイル取得の診断測定 Opus 5.5 low（2026-10-08）
+
+[計測記録](claude-opus55-low-c291-existence-check-probe-n10-cli2288_2026-10-08.md)、[分析](claude-opus55-low-c291-existence-check-probe-n10-cli2288_2026-10-08-analysis.json)、[品質監査](claude-opus55-low-c291-existence-check-probe-n10-cli2288_2026-10-08-quality-audit.json)、[発行前の記録](claude-opus55-low-c291-existence-check-probe-n10-cli2288_2026-10-08-preflight.json)、[設計記録](../../docs/c291-improvement-review-r1.md)。結果としては登録していない診断。6ケース各10回の60件が有効で、全件4点。事前に固定した判定に必要な同じケース内の比較が成り立たず、案2は進めない（効果の有無は未測定で、保留）。採用は未判断。
 
 <a id="claude-opus55-low-c280-20261008"></a>
 ## Claude Code Opus 5.5 low C280とC291 lowの比較（2026-10-08）
