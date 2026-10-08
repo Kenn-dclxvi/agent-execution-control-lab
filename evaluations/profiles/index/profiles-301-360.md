@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json)
+- [`candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate220-review-observable-output-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate221-review-source-authority-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate221-review-source-authority-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate222-review-source-observation-view-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json`](../candidate223-review-scope-exact-carrier-adr9-r4-medium-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json)
-- [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json)
-- [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)

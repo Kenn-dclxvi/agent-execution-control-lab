@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C296のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c296-sol-sonnet-low-std14-20261009)
+
 - [C295のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c295-sol-sonnet-low-std14-20261009)
 
 - [C294のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-08）](#c294-sol-sonnet-low-std14-20261008)
@@ -164,6 +166,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c296-sol-sonnet-low-std14-20261009"></a>
+## C296のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
+
+[計測記録](c296-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](d385f85f09a14819918d6a5efcf0e050.json)、[atomic集計](c296-sol61-low-standard14-n5_2026-10-09-atomic-analysis.json)、[選択記録](c296-sol61-low-standard14-n5_2026-10-09-selection.json)、[C280比較](c296-sol61-low-standard14-n5_2026-10-09-c280-comparison.json)、[C289比較](c296-sol61-low-standard14-n5_2026-10-09-c289-comparison.json)、[C291比較](c296-sol61-low-standard14-n5_2026-10-09-c291-comparison.json)、[品質監査](c296-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c296-sol61-low-standard14-n5_2026-10-09-preflight.json)、[機序の診断](c296-sol61-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)。Sonnet lowは[登録結果](5382bc7ec8e940bcaa6dd27211bbc0a7.json)、[C280比較](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-c280-comparison.json)、[C284比較](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-c284-comparison.json)、[C295比較](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-c295-comparison.json)、[品質監査](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-preflight.json)、[機序の診断](claude-sonnet55-low-c296-standard14-n5-cli2288_2026-10-09-mechanism-diagnostics.json)。両セルとも有効70件すべてが4点。C280比でSol Lowはトークン中央値−13.41%・経過時間+40.37%、Sonnet lowはトークン+12.87%・経過時間+37.84%（経過時間は時間帯の影響が大きい）。採用は未判断。
 
 <a id="c295-sol-sonnet-low-std14-20261009"></a>
 ## C295のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
