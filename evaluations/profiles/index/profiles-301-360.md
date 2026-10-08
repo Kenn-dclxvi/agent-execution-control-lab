@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate227-c147-direct-human-translation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate227-c147-direct-human-translation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate228-c147-direct-human-permission-boundaries-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json`](../candidate228-c147-direct-human-permission-boundaries-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json)
 - [`candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json`](../candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json)
-- [`candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json)
