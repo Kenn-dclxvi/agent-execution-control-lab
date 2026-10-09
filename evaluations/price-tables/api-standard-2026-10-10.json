@@ -1,0 +1,51 @@
+{
+  "schema_version": "the-caption-prompt.price-table/v1",
+  "revision": "api-standard-2026-10-10",
+  "unit": "USD per 1M tokens",
+  "source": "Standard API prices as of 2026-10-09 provided by the user (OpenAI GPT-6.1 Sol and Anthropic Claude Sonnet 5.5 pricing pages). Claude Opus 5.5 added on 2026-10-10 from the Claude API documentation bundled with Claude Code (claude-api skill: models.md, prompt-caching.md): input $4, output $20, cache read $0.20, cache write 1.25x (5m) and 2x (1h) of input.",
+  "notes": [
+    "Codex does not report cache writes; input not read from cache is priced as uncached input.",
+    "GPT-6.1 Sol bills the whole request at the long-context price when one request's input exceeds 272K tokens. The long-context cache read price was not given and stays null, so such tokens fail closed.",
+    "Claude Code reports cache writes with a 1h or 5m split; an unsplit write has no price and fails closed."
+  ],
+  "models": {
+    "gpt-6.1-sol": {
+      "standard": {
+        "uncached_input": 2.0,
+        "cache_read": 0.1,
+        "cache_write_5m": null,
+        "cache_write_1h": null,
+        "cache_write_unsplit": null,
+        "output": 10.0
+      },
+      "long_context": {
+        "uncached_input": 4.0,
+        "cache_read": null,
+        "cache_write_5m": null,
+        "cache_write_1h": null,
+        "cache_write_unsplit": null,
+        "output": 15.0
+      }
+    },
+    "claude-sonnet-5-5": {
+      "standard": {
+        "uncached_input": 2.0,
+        "cache_read": 0.1,
+        "cache_write_5m": 2.5,
+        "cache_write_1h": 4.0,
+        "cache_write_unsplit": null,
+        "output": 10.0
+      }
+    },
+    "claude-opus-5-5": {
+      "standard": {
+        "uncached_input": 4.0,
+        "cache_read": 0.2,
+        "cache_write_5m": 5.0,
+        "cache_write_1h": 8.0,
+        "cache_write_unsplit": null,
+        "output": 20.0
+      }
+    }
+  }
+}
