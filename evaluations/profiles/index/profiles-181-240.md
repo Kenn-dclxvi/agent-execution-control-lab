@@ -2,6 +2,11 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate146-consumer-closure-evidence-operation-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate146-consumer-closure-evidence-operation-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
+- [`candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-autonomous-routing-r1-medium-m24-n5-cli0146.json)
+- [`candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-heldout-r1-medium-m24-n5-cli0146.json)
+- [`candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-sa-r1-medium-m24-n5-cli0146.json)
+- [`candidate147-information-closure-document-task-development-r1-medium-m24-n3-cli0146.json`](../candidate147-information-closure-document-task-development-r1-medium-m24-n3-cli0146.json)
 - [`candidate147-information-closure-document-task-development-r2-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-task-development-r2-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-document-task-development-r3-medium-m24-n5-cli0146.json`](../candidate147-information-closure-document-task-development-r3-medium-m24-n5-cli0146.json)
 - [`candidate147-information-closure-heldout-r1-medium-m24-n5-cli0146.json`](../candidate147-information-closure-heldout-r1-medium-m24-n5-cli0146.json)
@@ -57,8 +62,3 @@
 - [`candidate166-prechange-repair-contract-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate166-prechange-repair-contract-problem-qualification-r1-medium-m24-n5-cli0146.json)
 - [`candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json`](../candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json)
 - [`candidate166-review-behavior-r1-medium-m24-n5-cli0146.json`](../candidate166-review-behavior-r1-medium-m24-n5-cli0146.json)
-- [`candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json`](../candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json)
-- [`candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json`](../candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json)
-- [`candidate169-repair-decision-evidence-closure-r1-medium-m24-n5-cli0146.json`](../candidate169-repair-decision-evidence-closure-r1-medium-m24-n5-cli0146.json)
-- [`candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json`](../candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json)
-- [`candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1.json`](../candidate17-operation-qualified-evidence-f10-boundary-v1-global-m5-n5-r1.json)

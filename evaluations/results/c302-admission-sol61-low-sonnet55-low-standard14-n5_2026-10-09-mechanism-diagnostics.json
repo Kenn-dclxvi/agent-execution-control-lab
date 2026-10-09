@@ -1,0 +1,91 @@
+{
+ "schema_version": "the-caption-prompt.c302-r2-mechanism-diagnostics/v1",
+ "note": "診断のみ。KPIや合否に使わない。数え方はC302の診断と同じ。",
+ "cells": {
+  "sol": {
+   "C302-r2": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 2,
+     "2": 0,
+     "3": 2,
+     "4": 3,
+     "5": 3
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "short_wait_specifications_per_iteration": {},
+    "wait_only_calls_per_iteration": {
+     "1": 1,
+     "3": 1,
+     "4": 1
+    }
+   }
+  },
+  "sonnet": {
+   "C302-r2": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 4,
+     "2": 4,
+     "3": 4,
+     "4": 2,
+     "5": 4
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "9/10",
+    "main_verify_command_forms": {
+     "full_output": 13,
+     "redirect_or_tail": 7
+    },
+    "persisted_outputs": 13,
+    "reads_of_persisted_outputs": 12,
+    "characters_read_from_persisted_outputs": 44229
+   }
+  }
+ },
+ "sonnet_main_verify_forms_in_related_runs": {
+  "C301-r5（負荷を見て始める）": {
+   "full_output": 4,
+   "redirect_or_tail": 17
+  },
+  "C304-r2（負荷を見て始める）": {
+   "full_output": 2,
+   "redirect_or_tail": 18
+  },
+  "C301-r3": {
+   "full_output": 5,
+   "redirect_or_tail": 15
+  },
+  "C303": {
+   "full_output": 7,
+   "redirect_or_tail": 13
+  },
+  "C302-r1": {
+   "full_output": 14,
+   "redirect_or_tail": 6
+  }
+ },
+ "sonnet_runs_reporting_without_taskspec_check": [
+  {
+   "case": "TC-F07-CANONICAL-V4-RUNNER",
+   "iteration": 4,
+   "run_id": "6d3a55778f1d4f18bf67de5675f4a461",
+   "missing": "git diff --check と変更path確認（F07-C3）",
+   "stated_reason": "確認コマンドが成功した後はコマンドを発行せず報告する、というCLAUDE.mdの指示に従った"
+  }
+ ],
+ "sonnet_runs_ending_without_reading_persisted_output": [
+  {
+   "case": "TC-F07-CANONICAL-V4-RUNNER",
+   "iteration": 4
+  },
+  {
+   "case": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+   "iteration": 3,
+   "run_id": "c6d0e449399a486e91702e6488deb939"
+  }
+ ],
+ "sol_cold_first_request_runs": {
+  "C301-r3": "14/70",
+  "C302-r1": "10/70",
+  "C303": "3/70",
+  "C302-r2": "20/70"
+ }
+}

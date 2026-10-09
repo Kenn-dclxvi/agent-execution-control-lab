@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "534ea36b8bff407f80afd8e6de9a18bb",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c305-standard14-n5-admission-20261009-r1/sonnet/round-3/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "169a39cfc0a1674ab45318c4f4456e32e2c57c6186586d3bbda9b8395bdfa15e",
+      "name": "the-caption-3ce91a4-uniform-wait-time-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "9a8a20f08116f17364dc26c335f25e7e13f48746f41e9a5974e2b70df31feaca",
+  "cost_band": {
+    "candidate_median": 0.6908902,
+    "position": "within_range",
+    "reference_max": 0.6937999,
+    "reference_min": 0.6633759
+  },
+  "differences": {
+    "cost_usd": 0.009800000000000031,
+    "elapsed_seconds": 39.57912425266113,
+    "quality_score": 0.0,
+    "total_tokens": 9921
+  },
+  "generated_at": "2026-10-09T15:09:07.392653+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": 0.009800000000000031,
+        "elapsed_seconds": 39.57912425266113,
+        "quality_score": 0.0,
+        "total_tokens": 9921
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-09",
+    "sha256": "dce6c9d6ff1c6f6ae807b6cda215b8fcb8041b2868382e1dfd5d4fc84c5628b1"
+  },
+  "reference": {
+    "analysis_id": "3ac07668e91a48c59f3b2a9cc2d764a0",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c301-standard14-n5-admission-20261009-r2/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "ba025ba64b54ec8d7fc9fb5cf244168f9fd0ec0ed613737f557bb164c349b7a2",
+      "name": "the-caption-3ce91a4-outcome-binding-uniform-markdown-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "4efbc95b25de471887642751bc5ec66e",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c306-standard14-n5-admission-20261009-r1/sonnet/round-3/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "aed8a362427e9213a927db473a8e6bfaf0827b16a2da38dae33621bd91a0d7d0",
+      "name": "the-caption-3ce91a4-taskspec-scoped-success-closure-and-wait-time-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "9a8a20f08116f17364dc26c335f25e7e13f48746f41e9a5974e2b70df31feaca",
+  "cost_band": {
+    "candidate_median": 0.7157668,
+    "position": "above_range",
+    "reference_max": 0.6937999,
+    "reference_min": 0.6633759
+  },
+  "differences": {
+    "cost_usd": 0.03467660000000006,
+    "elapsed_seconds": 12.762619960005395,
+    "quality_score": 0.0,
+    "total_tokens": 44688
+  },
+  "generated_at": "2026-10-09T15:09:07.581744+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": 0.03467660000000006,
+        "elapsed_seconds": 12.762619960005395,
+        "quality_score": 0.0,
+        "total_tokens": 44688
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-09",
+    "sha256": "dce6c9d6ff1c6f6ae807b6cda215b8fcb8041b2868382e1dfd5d4fc84c5628b1"
+  },
+  "reference": {
+    "analysis_id": "3ac07668e91a48c59f3b2a9cc2d764a0",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c301-standard14-n5-admission-20261009-r2/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "ba025ba64b54ec8d7fc9fb5cf244168f9fd0ec0ed613737f557bb164c349b7a2",
+      "name": "the-caption-3ce91a4-outcome-binding-uniform-markdown-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}
