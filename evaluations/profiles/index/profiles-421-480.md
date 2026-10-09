@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate3-expanded12-global-m24-n5-r1.json`](../candidate3-expanded12-global-m24-n5-r1.json)
+- [`candidate30-runtime-owner-result-binding-owner-producer-v2-targeted5-global-m24-n5-r1.json`](../candidate30-runtime-owner-result-binding-owner-producer-v2-targeted5-global-m24-n5-r1.json)
 - [`candidate30-runtime-owner-result-binding-owner-producer-v3-expanded12-global-m24-n5-r1.json`](../candidate30-runtime-owner-result-binding-owner-producer-v3-expanded12-global-m24-n5-r1.json)
 - [`candidate31-operation-terminal-closure-owner-producer-v4-expanded12-global-m24-n5-r1.json`](../candidate31-operation-terminal-closure-owner-producer-v4-expanded12-global-m24-n5-r1.json)
 - [`candidate31-operation-terminal-closure-owner-producer-v4-targeted3-global-m15-n5-r1.json`](../candidate31-operation-terminal-closure-owner-producer-v4-targeted3-global-m15-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate54-evidence-backed-control-core-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate54-evidence-backed-control-core-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-route-gate-r2.json`](../candidate55-prebound-operation-graph-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-route-gate-r2.json)
-- [`candidate55-prebound-operation-graph-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json`](../candidate55-prebound-operation-graph-v10-operation-method-capsule-boundary-targeted2-global-m2-n1-catalog-fixed-r1.json)
-- [`candidate56-resolved-fixed-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate56-resolved-fixed-read-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
