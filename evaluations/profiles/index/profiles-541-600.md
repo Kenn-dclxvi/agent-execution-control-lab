@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate71-validation-closure-v13-reasoning-xhigh-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-reasoning-xhigh-standard14-global-m24-n5-r1.json)
+- [`candidate71-validation-closure-v13-standard14-global-m24-n5-r1.json`](../candidate71-validation-closure-v13-standard14-global-m24-n5-r1.json)
 - [`candidate71-validation-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate71-validation-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate72-closed-validation-state-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate72-closed-validation-state-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
 - [`candidate73-terminal-closure-preserving-compression-v12-closure-abstraction-targeted4-global-m24-n5-r1.json`](../candidate73-terminal-closure-preserving-compression-v12-closure-abstraction-targeted4-global-m24-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate9-remaining10-global-m24-n5-r1.json`](../candidate9-remaining10-global-m24-n5-r1.json)
 - [`candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f04-global-m5-n5-r1.json)
-- [`candidate90-tool-output-ingress-boundary-v14-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate90-tool-output-ingress-boundary-v14-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`candidate91-concise-output-ingress-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate91-concise-output-ingress-v14-reasoning-medium-f02-global-m5-n5-r1.json)

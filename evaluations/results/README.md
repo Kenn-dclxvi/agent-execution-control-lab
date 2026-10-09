@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C309のGPT-6.1 Sol Low、Standard14 N=5（基準C301 `-r5`とともに、2026-10-10）](#c309-sol-low-20261010)
 - [C309のSonnet 5.5 low、Standard14 N=5（2026-10-10）](#c309-sonnet-low-20261010)
 - [C308のSonnet 5.5 low、Standard14 N=5（2026-10-10）](#c308-sonnet-low-20261010)
 - [C305・C306・C307のSonnet 5.5 low（ベースC302の弱点を潰す、2026-10-10）](#c305-c307-sonnet-low-20261010)
@@ -188,6 +189,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c309-sol-low-20261010"></a>
+## C309のGPT-6.1 Sol Low、Standard14 N=5（基準C301 `-r5`とともに、2026-10-10）
+
+[計測記録](c309-sol61-low-standard14-n5_2026-10-10.md)、[診断の記録](c309-sol61-low-standard14-n5_2026-10-10-diagnostics.json)。C301 `-r5`は[登録結果](bd33080352e946cab00e8c2b80e4d122.json)、[analysis](c301-admission-r5-sol61-low-standard14-n5_2026-10-10-analysis.json)、[selection](c301-admission-r5-sol61-low-standard14-n5_2026-10-10-selection.json)、[品質監査](c301-admission-r5-sol61-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](c301-admission-r5-sol61-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](c301-admission-r5-sol61-low-standard14-n5_2026-10-10-dispatch-summary.json)。C309は[登録結果](fa95c5cb5fd346479ae6dfbb7261bfb0.json)、[analysis](c309-sol61-low-standard14-n5_2026-10-10-analysis.json)、[selection](c309-sol61-low-standard14-n5_2026-10-10-selection.json)、[品質監査](c309-sol61-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](c309-sol61-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](c309-sol61-low-standard14-n5_2026-10-10-dispatch-summary.json)、[C301 `-r5`との比較](c309-sol61-low-standard14-n5_2026-10-10-c301-r5-comparison.json)。C302 `-r2`とC301 `-r5`の[比較](c302-admission-sol61-low-standard14-n5_2026-10-09-c301-r5-comparison.json)。両方とも4点70件。C309はC301 `-r5`比で費用−15.67%、経過時間−10.39%（どちらも幅より下）。最後の確認の後の呼び出しは0件、遵守は35/35。基準は最初のリクエストがキャッシュに乗らないrunが多く（31/70）、その揺れを差し引いた見積もりでは費用−8.3%。採用は未判断。
 
 <a id="c309-sonnet-low-20261010"></a>
 ## C309のSonnet 5.5 low、Standard14 N=5（2026-10-10）
