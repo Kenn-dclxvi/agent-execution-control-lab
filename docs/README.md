@@ -744,6 +744,7 @@
 | [`claude-code-opus55-standard14-series-plan.md`](claude-code-opus55-standard14-series-plan.md) | Claude Code条件でStandard14のControl-Free・C147・C276を測る系列の、対象、固定条件、token・品質の計測規則、正式発行前のゲートを実行前に固定した方針 |
 | [`comparison-condition-identity-redesign.md`](comparison-condition-identity-redesign.md) | 比較条件の互換キーを、結果の値を変えうる条件（モデルに見えるもの、動き方、KPIの数え方）に限り、評価コードのハッシュ値や置き場所を記録へ移す設計と実装範囲（`effective-v1`、atomic経路は対象外） |
 | [`claude-runtime-surface-plugin-policy.md`](claude-runtime-surface-plugin-policy.md) | Claude Code評価の起動時照合で、動きを変えない組み込みプラグイン（telemetry、sec-default）と契約プランを識別条件から外す方針と、既存系列との互換性 |
+| [`agent-runtime-venv-isolation-plan-r1.md`](agent-runtime-venv-isolation-plan-r1.md) | CodexとClaude Codeの実行環境を個人のシェル設定から切り離し、評価の起動処理で作業ツリーの`.venv`を明示的に有効にする計画。次のタスクで行う確認、変更、テスト、新しい評価系列、停止条件を固定した（未実施） |
 | [`claude-code-2.1.284-evaluation-surface-probe-result.md`](claude-code-2.1.284-evaluation-surface-probe-result.md) | 正式ケースを使わないprobeで、実行ファイルの選定、設定の混入範囲、使用tool、背景実行の完了判定、全エージェントusageの照合を確認した記録 |
 | [`pr-review-measurement-environment-design.md`](pr-review-measurement-environment-design.md) | `agent-execution-control-lab` namespacedインスタンスでClaude Code Actionの実行経路を比較するPRレビュー測定設計。仕様監査で既存PRR-C01 runをdiagnosticへ再分類し、Core Baselineは未qualification |
 
