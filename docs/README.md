@@ -108,6 +108,7 @@
 - [Candidate298 必須の確認がすべて成功した後のコマンドを禁止する](candidate298-post-validation-success-command-closure-design.md)：候補の洗い出しで両セルに見込みがあった候補1aを、C280に一項目（132バイト）を加えて測る設計。禁止だけを述べ、新しい操作の発行を求めない形でC297の誤りを直した。
 - [Candidate299 既定値より短い待機時間を指定しない](candidate299-no-short-wait-time-design.md)：候補の洗い出しの候補2（Sol Lowの待機、9.2回/反復）を、ツールの既定値との比較で定めた一項目（117バイト）としてC280に加えて測る設計。Codexの待機時間の既定値（実行10秒、待機5秒以上）と、Sol Lowが1秒を自分で指定していたことを確かめた。
 - [Candidate300 C298とC299の二項目をC280へ同時に加える](candidate300-c298-c299-combined-design.md)：単独で閉じる対象の応答の減少を確かめた二項目を、原文どおり統合して測る設計。効果が足し合わされるか、互いに打ち消すかを確かめる。
+- [Candidate301 C280のrootの`AGENTS.md`のMarkdownの書式を揃える](candidate301-c280-uniform-markdown-design.md)：見出しの階層、箇条書きの記号、強調を他の`AGENTS.md`と揃える設計。制御は変えず、実行環境を切り離した新しい評価系列の基準にする。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 
