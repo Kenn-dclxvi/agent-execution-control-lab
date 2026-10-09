@@ -1,0 +1,50 @@
+# C297のGPT-6.1 Sol Low・Claude Code Sonnet 5.5 low、Standard14 N=5試験
+
+2026-10-09。[C297の設計記録](../../docs/candidate297-post-change-status-with-validation-design.md)に従い、C280に「変更後の作業ツリーの状態と差分の確認は、必須の確認コマンドと同じ応答で発行する」一項目を加えたC297（`the-caption-3ce91a4-post-change-status-with-validation-r1`）を、二つのセルで、それぞれ全14ケース各5回、計140件測った。**両セルとも有効70件すべてが4点だった。C280比で、Sonnet lowはトークン中央値+9.13%・経過時間中央値+15.11%、Sol Lowはトークン中央値−6.23%・経過時間中央値+0.87%だった。どちらのセルも、C280比のcost改善の方向にはならなかった。狙った応答（必須の確認の直後の、状態と差分の確認だけの応答）は、両セルとも減らず、増えた。** 外部失敗による除外は0件である。
+
+## 結果
+
+| セル | 条件 | 4点 | 全エージェントトークン中央値 | 経過時間中央値（秒） |
+| --- | --- | ---: | ---: | ---: |
+| Sol Low | C280（保存済み） | 70 / 70 | 2,071,746 | 537.75 |
+| Sol Low | C297 | 70 / 70 | 1,942,592 | 542.41 |
+| Sonnet low | C280（保存済み） | 70 / 70 | 832,616 | 297.94 |
+| Sonnet low | C297 | 70 / 70 | 908,618 | 342.97 |
+
+| セル | 比較 | トークン中央値の差 | 経過時間中央値の差 |
+| --- | --- | ---: | ---: |
+| Sol Low | C297 − C280 | −129,154（−6.23%） | +4.66秒（+0.87%） |
+| Sonnet low | C297 − C280 | +76,002（+9.13%） | +45.02秒（+15.11%） |
+
+中央値は、各反復の14ケース合算値を5回分集計したものである。比較相手は再実行していない。二つのセルは同じ時刻に並行して発行した。時刻が異なるため、経過時間の差を本文だけの因果効果とは断定しない。Sol Lowは経過時間が、Sonnet lowはトークンと経過時間の両方が、cost退行である。
+
+## 条件
+
+C293〜C296と同じ。Sol LowはC289の保存済み登録結果`e6110c90222b4110ae062cfbac1317ab`を基準にした比較互換preflightで70枠が許可され（[プロファイル](../profiles/c297-sol61-low-standard14-n5-cli0159-isolated-20261009-r1.json)）、Sonnet lowは実起動の照合と評価コードのSHA-256の一致を確かめた（[プロファイル](../profiles/c297-claude-sonnet55-low-standard14-n5-cli2288-r1.json)、互換キー`d4911ea4…`）。変えた実験変数はprompt identityだけである（bundle SHA-256 `f5852ae12232db01f4eda4f22080b41c63e1e761f68a19f439af90050962be77`）。
+
+## 機序の診断
+
+C280の分析と同じ方法で、A01とF05を除き、最初の変更より後で必須以外の確認（`git status`、`git diff`、`git diff --check`など）だけを含む応答を数えた（1反復あたり、[診断](c297-sol61-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)）。
+
+| 指標 | Sonnet C280 | Sonnet C297 | Sol C280 | Sol C297 |
+| --- | ---: | ---: | ---: | ---: |
+| 変更後の確認だけの応答 | 3.4 | 4.8 | 7.0 | 10.8 |
+| 　うち必須の確認の直後 | 2.2 | 2.4 | 2.6 | 3.6 |
+| 　うち変更の直後 | 1.0 | 1.8 | 0.4 | 1.6 |
+| 　うちその他の直後 | 0.2 | 0.6 | 4.0 | 5.6 |
+| 要求/反復 | 64.6 | 66.2 | 88.0 | 82.4 |
+| 固定分（最初の文脈×要求数） | 611,731 | 632,855 | 1,424,051 | 1,341,590 |
+| 持ち越し | 212,085 | 250,913 | 638,876 | 594,013 |
+
+- 加えた項目が狙った応答は、両セルとも減らず、増えた。状態と差分の確認を名指しした文が、確認そのものを増やした可能性がある。設計原則の「処理方法を指定できる条件」の3（遵守率の実証）を満たさなかった。
+- Sonnet lowでは、要求が1反復あたり1.6回増え、持ち越しが約3.9万トークン増えた。トークン増加の大きいケースは、A02（C280比+15千）、F04（+15千）、F07正規ランナー（+16千）だった。
+- Sol Lowのトークン減少は、A02（C280比−96千）、F07出所の対（−52千）、F01（−33千）などによる。狙った応答は増えており、この減少を加えた項目の効果とは扱わない。
+
+## 判断
+
+品質は両セルで維持した（各70件すべて4点）。加えた項目は、狙った経路を閉じず、両セルで状態確認の応答を増やした。どちらのセルも、C280比のcost改善の方向にはならなかった。採用、追加反復、release、本体反映は行っていない。品質は既存の自動契約による採点であり、独立した人間の盲検採点ではない。非公開の実行証拠は`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/`の`c297-sol61-low-standard14-n5-20261009-r1`と`claude-sonnet55-low-c297-standard14-n5-cli2288-20261009-r1`に保持し、生ログと認証情報を公開結果へ入れていない。
+
+## 一次アーティファクト
+
+- Sol Low：[登録結果](e56496ff94ee4393832ece0a19b028d9.json)、[atomic集計](c297-sol61-low-standard14-n5_2026-10-09-atomic-analysis.json)、[選択記録](c297-sol61-low-standard14-n5_2026-10-09-selection.json)、比較（[C280](c297-sol61-low-standard14-n5_2026-10-09-c280-comparison.json)、[C289](c297-sol61-low-standard14-n5_2026-10-09-c289-comparison.json)、[C291](c297-sol61-low-standard14-n5_2026-10-09-c291-comparison.json)）、[品質監査](c297-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c297-sol61-low-standard14-n5_2026-10-09-preflight.json)、[機序の診断](c297-sol61-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)
+- Sonnet low：[登録結果](464ceb5202294a25a911a0ca761a7548.json)、[C280比較](claude-sonnet55-low-c297-standard14-n5-cli2288_2026-10-09-c280-comparison.json)、[品質監査](claude-sonnet55-low-c297-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c297-standard14-n5-cli2288_2026-10-09-preflight.json)、[機序の診断](claude-sonnet55-low-c297-standard14-n5-cli2288_2026-10-09-mechanism-diagnostics.json)

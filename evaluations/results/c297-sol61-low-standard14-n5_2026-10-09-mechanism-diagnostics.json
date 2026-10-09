@@ -1,0 +1,50 @@
+{
+  "schema_version": "c297-mechanism-diagnostics/v1",
+  "method": "A01とF05を除く各runで、最初の変更より後に必須以外の確認（git status、git diff、git diff --checkなど）だけを含む応答を数え、直前の応答の種類で分けた。値は1反復（14ケース分）あたり。要求数はリクエスト（Codexはtoken_usage_record、Claudeはtranscriptのusage）の数。",
+  "per_iteration": {
+    "Sonnet low": {
+      "C280": {
+        "post_change_check_only_responses": 3.4,
+        "after_required_validation": 2.2,
+        "after_change": 1.0,
+        "after_other": 0.2,
+        "requests": 64.6,
+        "fixed": 611731,
+        "carried": 212085,
+        "output": 18811
+      },
+      "C297": {
+        "post_change_check_only_responses": 4.8,
+        "after_required_validation": 2.4,
+        "after_change": 1.8,
+        "after_other": 0.6,
+        "requests": 66.2,
+        "fixed": 632855,
+        "carried": 250913,
+        "output": 19630
+      }
+    },
+    "Sol Low": {
+      "C280": {
+        "post_change_check_only_responses": 7.0,
+        "after_required_validation": 2.6,
+        "after_change": 0.4,
+        "after_other": 4.0,
+        "requests": 88.0,
+        "fixed": 1424051,
+        "carried": 638876,
+        "output": 13330
+      },
+      "C297": {
+        "post_change_check_only_responses": 10.8,
+        "after_required_validation": 3.6,
+        "after_change": 1.6,
+        "after_other": 5.6,
+        "requests": 82.4,
+        "fixed": 1341590,
+        "carried": 594013,
+        "output": 13392
+      }
+    }
+  }
+}
