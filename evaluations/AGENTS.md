@@ -111,7 +111,7 @@ all-agent `total_tokens`は引き続き各runで記録し、試験の間で並�
 
 compatibility keyが異なるresultを同一比較へ混ぜない。
 単一ケースまたは少数反復の結果を、評価範囲外へ一般化しない。
-このホストの新規試験はプロファイルの`max_workers`をqualification済み上限`24`へ固定する。readyなスロット数が24未満でも設定値をスロット数へ合わせて変更せず、実際の同時実行数とプロファイルへ固定した並列上限を区別する。同じ計測で複数のセル（エージェントやモデル）を流す場合も、全セルのスロットを一つの待ち行列へ入れ、同時実行の合計を24以内にする（`campaign_runner.py`）。セルごとの待ち行列を同時に流すと合計が上限を超え、コマンドの実行が遅くなって経過時間が変わる（2026-10-09のC301の測り直しで確認）。発行のしかたは経過時間を変えうるため、プロファイルの比較条件（`executor_parameters.campaign_dispatch`）へ固定する。
+このホストの新規試験はプロファイルの`max_workers`をqualification済み上限`24`へ固定する。readyなスロット数が24未満でも設定値をスロット数へ合わせて変更せず、実際の同時実行数とプロファイルへ固定した並列上限を区別する。同じ計測で複数のセル（エージェントやモデル）を流す場合も、全セルのスロットを一つの待ち行列へ入れ、同時実行の合計を24以内にする（`campaign_runner.py`）。セルごとの待ち行列を同時に流すと合計が上限を超え、コマンドの実行が遅くなって経過時間が変わる（2026-10-09のC301の測り直しで確認）。発行のしかたは経過時間を変えうるため、プロファイルの比較条件（`executor_parameters.campaign_dispatch`）へ固定する。本数の上限だけでは、どのセルが混ざるかで負荷が変わる（2026-10-09のC304で、Sonnet lowだけを流すとSonnetの同時実行が平均7.6本から21.6本になり、テストを実行するケースの経過時間が14〜35%延びた）。このため新しい計測では、上限24の内側で、実行中の負荷を見て空きがあるときだけ次のrunを始める（`campaign_dispatch.admission`、`cpu_busy_below` r1）。直近のCPU使用率（user＋sys）が上限以下のとき、または実行中のrunがないときだけ次を始め、始める間隔を空ける。判断の記録は`admissions.jsonl`に残す。この条件のある計測とない計測は、比較条件が異なる。実装は`layer2/extensions/parallel_execution/parallel_runner.py`の`AdmissionGate`を正本とする。
 
 上記は履歴のprompt-set resultの完全一致条件である。atomic run経路では、プロンプト以外のEvaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、token accountingを実効互換条件とする。`N`、coverage、iteration集合、計画順序、`max_workers`はexecution provenanceへ分離し、run poolのmember identityにしない。異なる`max_workers`のrunを同じプールで再利用する場合も、分析はexecution stratum別の件数と差分を保持する。
 
