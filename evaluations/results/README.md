@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Sol Lowの費用を要素に分けた分析（2026-10-09）](#sol-cost-element-decomposition-20261009)
 - [C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c303-sol-sonnet-low-std14-20261009)
 - [C302のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c302-sol-sonnet-low-std14-20261009)
 - [C301、全セルを一つの待ち行列で測った系列の基準（2026-10-09）](#c301-onequeue-std14-20261009)
@@ -181,6 +182,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="sol-cost-element-decomposition-20261009"></a>
+## Sol Lowの費用を要素に分けた分析（2026-10-09）
+
+[機械可読の記録](sol-cost-element-decomposition_2026-10-09.json)。分析の本文は[`docs/sol-cost-element-decomposition-r1.md`](../../docs/sol-cost-element-decomposition-r1.md)。旧系列のSol Low（C280、C284〜C300）を新しい系列と同じ単価で数え直した値と、C301などのキャッシュに乗らない入力の出どころの分解。登録済みのKPIではなく、新しい計測はしていない。
 
 <a id="c303-sol-sonnet-low-std14-20261009"></a>
 ## C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
