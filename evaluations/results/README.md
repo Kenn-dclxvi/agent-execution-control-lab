@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C300のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c300-sol-sonnet-low-std14-20261009)
 - [C299のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c299-sol-sonnet-low-std14-20261009)
 - [C298のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c298-sol-sonnet-low-std14-20261009)
 - [C297のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c297-sol-sonnet-low-std14-20261009)
@@ -172,6 +173,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c300-sol-sonnet-low-std14-20261009"></a>
+## C300のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
+
+[計測記録](c300-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](f163a542932047fb8f48c754a35df53c.json)、[atomic集計](c300-sol61-low-standard14-n5_2026-10-09-atomic-analysis.json)、[選択記録](c300-sol61-low-standard14-n5_2026-10-09-selection.json)、[C280比較](c300-sol61-low-standard14-n5_2026-10-09-c280-comparison.json)、[C289比較](c300-sol61-low-standard14-n5_2026-10-09-c289-comparison.json)、[C291比較](c300-sol61-low-standard14-n5_2026-10-09-c291-comparison.json)、[品質監査](c300-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c300-sol61-low-standard14-n5_2026-10-09-preflight.json)。Sonnet lowは[登録結果](5f515aa613cc47f5bd1890121f345c2c.json)、[C280比較](claude-sonnet55-low-c300-standard14-n5-cli2288_2026-10-09-c280-comparison.json)、[品質監査](claude-sonnet55-low-c300-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c300-standard14-n5-cli2288_2026-10-09-preflight.json)。両セルの[機序の診断](c300-sol61-low-sonnet55-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)。両セルとも有効70件すべてが4点。C280比でSol Lowはトークン中央値−20.94%・経過時間+15.16%、Sonnet lowはトークン+2.07%・経過時間−3.43%。Sol LowではC298とC299の効果がほぼ足し合わされた。Sonnet lowの増加は反復5のF03の1件などの上振れによる。採用は未判断。
 
 <a id="c299-sol-sonnet-low-std14-20261009"></a>
 ## C299のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
