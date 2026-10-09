@@ -99,6 +99,7 @@
 - [Candidate294 C293で欠落した開始時の検索と範囲の一項を戻す](candidate294-shared-mechanism-carrier-restore-design.md)：C293のSol Lowで戻った変更前の呼び出しとリポジトリ外の読み取りに対し、供給源（C285、C289・C291）から転記し損ねた二点を原文どおりに戻す。範囲の一項は、機序ではなく保護として扱う。Candidateは未評価
 - [Candidate295 開始時の義務を「名指しした対象の読み取り」から「位置を特定する検索」へ置き換える](candidate295-start-search-not-read-design.md)：Sonnet lowで最初の応答の全文ReadがC288から増えた（C280の7回からC294の34回）経路を、開始時の義務の置き換えで閉じる。Candidateは未評価
 - [Candidate296 両セルで成立した機序だけを残し、指示文を短くする](candidate296-and-only-compact-design.md)：Sol LowとSonnet lowの両方で成立した機序（検索と本文を同じ呼び出しで返す、検証の一括化）だけを残し、Sonnetで成立しない開始時のまとめ読みと、Sonnetで判定できない範囲の一項を外す。残す項目も述語を保って短くし、全文はC295の4,894バイトから3,223バイトになる。Candidateは未作成
+- [C280の指示文を短くする案の検討（r1）](c280-compaction-review-r1.md)：C280を意味を保って縮めても65バイト（Sonnet lowで0.16%）にとどまり、項目を外すとA01の誤経路の閉鎖など確かめた働きを失うため、どちらもCandidateにしない。Sonnet lowでC280を上回った主因はC281以降に足した文だったことと、残る課題（主なセルの見直し、Sonnet lowで機序が成立しない理由の分解）を記録。Candidateは未作成
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
