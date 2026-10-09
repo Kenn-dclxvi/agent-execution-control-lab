@@ -12,13 +12,16 @@ import sys
 import threading
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 try:
     from .parallel_runner import (
+        AdmissionGate,
         OsMonitor,
         ParallelRunError,
-        execute_job,
+        cpu_busy_percent,
+        execute_admitted_job,
+        plan_admission_config,
         load_object,
         require_positive_integer,
         run_plan,
@@ -29,9 +32,12 @@ try:
     from .prepare_global_plan import DEFAULT_MAX_WORKERS
 except ImportError:  # Direct script execution.
     from parallel_runner import (
+        AdmissionGate,
         OsMonitor,
         ParallelRunError,
-        execute_job,
+        cpu_busy_percent,
+        execute_admitted_job,
+        plan_admission_config,
         load_object,
         require_positive_integer,
         utc_now,
@@ -163,10 +169,15 @@ def run_campaign(
     runner_outputs: list[Path],
     campaign_output: Path,
     max_workers: int = DEFAULT_MAX_WORKERS,
+    cpu_sampler: Callable[[int], float] = cpu_busy_percent,
 ) -> dict[str, Any]:
     plans, pending = prepare_campaign(
         plan_paths, runner_outputs, campaign_output, max_workers
     )
+    admissions = [plan_admission_config(plan) for plan in plans]
+    if any(admission != admissions[0] for admission in admissions):
+        raise ParallelRunError("campaign plans must have identical campaign_dispatch.admission values")
+    admission = admissions[0]
     campaign_output = campaign_output.resolve()
     campaign_output.mkdir(parents=True)
     group_document = {
@@ -192,6 +203,11 @@ def run_campaign(
     write_json_once(campaign_output / "plan-group.json", group_document)
     monitor_path = campaign_output / "os-samples.jsonl"
     monitor_path.touch(exist_ok=False)
+    gate = None
+    if admission is not None:
+        admission_path = campaign_output / "admissions.jsonl"
+        admission_path.touch(exist_ok=False)
+        gate = AdmissionGate(admission, admission_path, sampler=cpu_sampler)
 
     for plan in plans:
         output = plan["runner_output"]
@@ -216,7 +232,9 @@ def run_campaign(
             for item in pending:
                 plan = item["plan"]
                 future = pool.submit(
-                    execute_job,
+                    execute_admitted_job,
+                    gate,
+                    gate.register() if gate is not None else None,
                     item["job"],
                     plan["cycle"],
                     plan["evaluation_loop"],
@@ -239,6 +257,8 @@ def run_campaign(
     for plan in plans:
         output = plan["runner_output"]
         shutil.copyfile(monitor_path, output / "os-samples.jsonl")
+        if admission is not None:
+            shutil.copyfile(campaign_output / "admissions.jsonl", output / "admissions.jsonl")
         attempts = [
             json.loads(line)
             for line in (output / "attempts.jsonl").read_text(encoding="utf-8").splitlines()
@@ -263,6 +283,8 @@ def run_campaign(
             "errors": plan["errors"],
             "campaign_output": str(campaign_output),
         }
+        if admission is not None:
+            summary["admission"] = admission
         write_json_once(output / "summary.json", summary)
         plan_summaries.append(summary)
 
@@ -281,6 +303,8 @@ def run_campaign(
         "errors": errors,
         "plan_summaries": plan_summaries,
     }
+    if admission is not None:
+        summary["admission"] = admission
     write_json_once(campaign_output / "summary.json", summary)
     if summary["status"] != "complete":
         raise ParallelRunError("parallel campaign did not complete every requested slot")
