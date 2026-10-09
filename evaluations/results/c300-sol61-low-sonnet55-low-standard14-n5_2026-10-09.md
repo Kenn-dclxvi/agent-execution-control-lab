@@ -63,6 +63,10 @@ C293〜C299と同じ。Sol LowはC289の保存済み登録結果`e6110c90222b411
 
 品質は両セルで維持した（各70件すべて4点）。Sol Lowでは、二項目の効果がほぼ足し合わされ、トークンはC280比−20.94%だった。Sonnet lowでは、トークン中央値がC280比+2.07%で、判定基準のもとではコスト退行として記録する。増加は、反復5のF03の1件と反復1の広い上振れによるもので、反復間の揺れの中にあり、加えた項目の効果とは区別できない。経過時間は、Sol Lowで増え、Sonnet lowで減ったが、計測の時間帯の影響と区別できない。採用、追加反復、release、本体反映は行っていない。品質は既存の自動契約による採点であり、独立した人間の盲検採点ではない。非公開の実行証拠は`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/`の`c300-sol61-low-standard14-n5-20261009-r1`と`claude-sonnet55-low-c300-standard14-n5-cli2288-20261009-r1`に保持し、生ログと認証情報を公開結果へ入れていない。
 
+## 追記（訂正、2026-10-09）
+
+この記録の機序の診断は、F06とF07正規ランナーで必須の確認の後に出したと変更pathの確認を、「成功後の状態・差分の確認だけの応答」に含めていた。F06のTaskSpec（F06-C3）とF07正規ランナーのTaskSpec（F07-C3）は、これらを確認として明示的に求めており、余分な操作ではない。TaskSpecの確認を基準にした分類は、[処理の適切さの分類](../../docs/c280-c300-processing-appropriateness-audit-r1.md)にある。上の表と本文の値は、当時の分類のまま残す。
+
 ## 一次アーティファクト
 
 - Sol Low：[登録結果](f163a542932047fb8f48c754a35df53c.json)、[atomic集計](c300-sol61-low-standard14-n5_2026-10-09-atomic-analysis.json)、[選択記録](c300-sol61-low-standard14-n5_2026-10-09-selection.json)、比較（[C280](c300-sol61-low-standard14-n5_2026-10-09-c280-comparison.json)、[C289](c300-sol61-low-standard14-n5_2026-10-09-c289-comparison.json)、[C291](c300-sol61-low-standard14-n5_2026-10-09-c291-comparison.json)）、[品質監査](c300-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c300-sol61-low-standard14-n5_2026-10-09-preflight.json)

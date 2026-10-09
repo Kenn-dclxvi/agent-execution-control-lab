@@ -1,0 +1,499 @@
+{
+ "schema_version": "c280-c300-processing-appropriateness-audit/v1",
+ "method": "docs/c280-c300-processing-appropriateness-audit-r1.mdの方法。TaskSpecが確認するコマンドとして明示するものを、最後の変更より後に成功させたかを、出力の簡易な文字列判定で調べた。Sol Lowの自動判定の未完了は、評価条件の必須コマンドの組（採点で成功を確認済み）を除き、残りを実物で確かめてすべて取りこぼしと判断した。",
+ "sonnet_low": {
+  "Sonnet low C280": {
+   "runs": 70,
+   "incomplete_runs": [
+    {
+     "case": "A02",
+     "iteration": 3,
+     "run": "37190e1e",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "4b66a94c",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 5,
+     "run": "772e472d",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "96b46067",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ],
+   "a02_runs_with_method_fail": 3,
+   "post_success_responses_by_case": {
+    "F01": 3,
+    "F03": 2,
+    "F04": 2
+   }
+  },
+  "Sonnet low C297": {
+   "runs": 70,
+   "incomplete_runs": [
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "0b59f70c",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "23aec04e",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 5,
+     "run": "845f101b",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "eb9185eb",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ],
+   "a02_runs_with_method_fail": 5,
+   "post_success_responses_by_case": {
+    "F01": 2,
+    "F03": 3,
+    "F04": 5,
+    "F07C": 1
+   }
+  },
+  "Sonnet low C298": {
+   "runs": 70,
+   "incomplete_runs": [],
+   "a02_runs_with_method_fail": 4,
+   "post_success_responses_by_case": {
+    "F04": 3
+   }
+  },
+  "Sonnet low C299": {
+   "runs": 70,
+   "incomplete_runs": [
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "118570a6",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 3,
+     "run": "3becc6a9",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "40593353",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "b4880652",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ],
+   "a02_runs_with_method_fail": 4,
+   "post_success_responses_by_case": {
+    "F01": 1,
+    "F03": 1
+   }
+  },
+  "Sonnet low C300X20": {
+   "runs": 280,
+   "incomplete_runs": [
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "5e54b04b",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "c3712faf",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F10E",
+     "iteration": 2,
+     "run": "7cc6cbc9",
+     "missing": [
+      "final_status"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "ab3bf224",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F10M",
+     "iteration": 1,
+     "run": "bab7e388",
+     "missing": [
+      "final_status"
+     ]
+    },
+    {
+     "case": "F10M",
+     "iteration": 2,
+     "run": "3f511055",
+     "missing": [
+      "final_status"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "b15cb4ce",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 5,
+     "run": "de5d8c49",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 3,
+     "run": "09b77747",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "2bacb496",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "f09e9b77",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ],
+   "a02_runs_with_method_fail": 17,
+   "post_success_responses_by_case": {
+    "F01": 3,
+    "F04": 5,
+    "F10E": 2
+   }
+  }
+ },
+ "sonnet_low_a02_breakdown": {
+  "C280": {
+   "gave_up_on_environment": 3,
+   "complete_after_edit": 1,
+   "tests_only_before_edit": 1
+  },
+  "C297": {
+   "gave_up_on_environment": 4,
+   "complete_after_edit": 1
+  },
+  "C298": {
+   "complete_after_edit": 5
+  },
+  "C299": {
+   "complete_after_edit": 1,
+   "gave_up_on_environment": 4
+  },
+  "C300x20": {
+   "gave_up_on_environment": 7,
+   "complete_after_edit": 12,
+   "tests_only_before_edit": 1
+  }
+ },
+ "sol_low": {
+  "Sol Low C280": {
+   "post_success_responses_total": 46,
+   "incomplete_after_manual_check": 0,
+   "auto_flagged_incomplete": [
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "10d066d0",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F02",
+     "iteration": 5,
+     "run": "1dce95fd",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "F02",
+     "iteration": 1,
+     "run": "274b64a7",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 3,
+     "run": "2fbc8d79",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 4,
+     "run": "4185f21e",
+     "missing": [
+      "full"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 1,
+     "run": "6939fed8",
+     "missing": [
+      "full"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 2,
+     "run": "d11233a4",
+     "missing": [
+      "full"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "e5cd5fdc",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ]
+  },
+  "Sol Low C297": {
+   "post_success_responses_total": 36,
+   "incomplete_after_manual_check": 0,
+   "auto_flagged_incomplete": [
+    {
+     "case": "F06",
+     "iteration": 2,
+     "run": "22167e98",
+     "missing": [
+      "focused",
+      "full"
+     ]
+    },
+    {
+     "case": "F02",
+     "iteration": 1,
+     "run": "265ce1f5",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "F02",
+     "iteration": 2,
+     "run": "2cb3eeb8",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 2,
+     "run": "309c010f",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F02",
+     "iteration": 4,
+     "run": "81ade052",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 4,
+     "run": "c0d8bc87",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 3,
+     "run": "f0d873b2",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 5,
+     "run": "f3cb0b51",
+     "missing": [
+      "focused",
+      "full"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 3,
+     "run": "f7c2a7f2",
+     "missing": [
+      "full"
+     ]
+    }
+   ]
+  },
+  "Sol Low C298": {
+   "post_success_responses_total": 21,
+   "incomplete_after_manual_check": 0,
+   "auto_flagged_incomplete": [
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "14c14036",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 5,
+     "run": "4029ca4e",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "A02",
+     "iteration": 4,
+     "run": "6cc0205a",
+     "missing": [
+      "existing_test"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 2,
+     "run": "7c84bdfd",
+     "missing": [
+      "full"
+     ]
+    },
+    {
+     "case": "F03",
+     "iteration": 3,
+     "run": "ad810f99",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "F01",
+     "iteration": 4,
+     "run": "d0c274ec",
+     "missing": [
+      "focused"
+     ]
+    },
+    {
+     "case": "F06",
+     "iteration": 5,
+     "run": "f38e7556",
+     "missing": [
+      "focused"
+     ]
+    }
+   ]
+  },
+  "Sol Low C299": {
+   "post_success_responses_total": 33,
+   "incomplete_after_manual_check": 0,
+   "auto_flagged_incomplete": []
+  },
+  "Sol Low C300": {
+   "post_success_responses_total": 3,
+   "incomplete_after_manual_check": 0,
+   "auto_flagged_incomplete": [
+    {
+     "case": "A02",
+     "iteration": 1,
+     "run": "3ae76692",
+     "missing": [
+      "existing_test"
+     ]
+    }
+   ]
+  }
+ },
+ "correction": "C298とC300の診断で「成功後の状態・差分の確認だけの応答」と数えたF06とF07正規ランナーのgit diff --checkと変更pathの確認は、TaskSpec（F06-C3、F07-C3）が求める確認であり、余分な操作ではない。"
+}
