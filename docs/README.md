@@ -100,6 +100,7 @@
 - [Candidate295 開始時の義務を「名指しした対象の読み取り」から「位置を特定する検索」へ置き換える](candidate295-start-search-not-read-design.md)：Sonnet lowで最初の応答の全文ReadがC288から増えた（C280の7回からC294の34回）経路を、開始時の義務の置き換えで閉じる。Candidateは未評価
 - [Candidate296 両セルで成立した機序だけを残し、指示文を短くする](candidate296-and-only-compact-design.md)：Sol LowとSonnet lowの両方で成立した機序（検索と本文を同じ呼び出しで返す、検証の一括化）だけを残し、Sonnetで成立しない開始時のまとめ読みと、Sonnetで判定できない範囲の一項を外す。残す項目も述語を保って短くし、全文はC295の4,894バイトから3,223バイトになる。Candidateは未作成
 - [C280の指示文を短くする案の検討（r1）](c280-compaction-review-r1.md)：C280を意味を保って縮めても65バイト（Sonnet lowで0.16%）にとどまり、項目を外すとA01の誤経路の閉鎖など確かめた働きを失うため、どちらもCandidateにしない。Sonnet lowでC280を上回った主因はC281以降に足した文だったことと、残る課題（主なセルの見直し、Sonnet lowで機序が成立しない理由の分解）を記録。Candidateは未作成
+- [Sonnet 5.5 lowで検証の一括化が成立しない理由（r1）](sonnet-low-validation-split-cause-r1.md)：Sonnet lowで検証が分かれた実行は、すべてTaskSpecの必須コマンドの境目で分かれていた（C280・C296とも20/20）。Claude用の課題文が必須コマンドを個別のBash呼び出しで実行するよう指定しており、一つの外側の呼び出しで実行する検証の項目と両立しないことを記録。指定と両立する対応（同じ応答の中で個別の呼び出しを並べる）を設計の候補として記録。Candidateは未作成
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
