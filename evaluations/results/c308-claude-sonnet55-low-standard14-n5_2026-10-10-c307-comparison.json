@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "96e955e618334b5996aa350fc3cd7551",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c308-standard14-n5-admission-20261010-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "9b37becb0c0e0e3937fb573ab2421fa2837d48ba4fb9a58b2e63a3fa709f515a",
+      "name": "the-caption-3ce91a4-done-condition-scoped-closure-output-trim-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "9a8a20f08116f17364dc26c335f25e7e13f48746f41e9a5974e2b70df31feaca",
+  "cost_band": {
+    "candidate_median": 0.6479278,
+    "position": "within_range",
+    "reference_max": 0.7124539,
+    "reference_min": 0.6199006
+  },
+  "differences": {
+    "cost_usd": 0.0018529999999999935,
+    "elapsed_seconds": 2.8858861250337213,
+    "quality_score": 0.0,
+    "total_tokens": -3946
+  },
+  "generated_at": "2026-10-09T15:35:55.096142+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": 0.0018529999999999935,
+        "elapsed_seconds": 2.8858861250337213,
+        "quality_score": 0.0,
+        "total_tokens": -3946
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-09",
+    "sha256": "dce6c9d6ff1c6f6ae807b6cda215b8fcb8041b2868382e1dfd5d4fc84c5628b1"
+  },
+  "reference": {
+    "analysis_id": "f60c1fa4292c4d32b421945f6b168614",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c307-standard14-n5-admission-20261010-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "6129c27cb04193a70135e67263281552d78ae50a3266d7d3e0fd1bcbebf3e976",
+      "name": "the-caption-3ce91a4-taskspec-scoped-closure-output-trim-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

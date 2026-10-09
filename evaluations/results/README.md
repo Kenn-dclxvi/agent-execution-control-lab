@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C308のSonnet 5.5 low、Standard14 N=5（2026-10-10）](#c308-sonnet-low-20261010)
 - [C305・C306・C307のSonnet 5.5 low（ベースC302の弱点を潰す、2026-10-10）](#c305-c307-sonnet-low-20261010)
 - [C302のGPT-6.1 Sol Low・Sonnet 5.5 low、負荷を見て始める条件（2026-10-09）](#c302-admission-std14-20261009)
 - [C304のSonnet 5.5 low、Standard14 N=5（2026-10-09）](#c304-sonnet-low-std14-20261009)
@@ -186,6 +187,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c308-sonnet-low-20261010"></a>
+## C308のSonnet 5.5 low、Standard14 N=5（2026-10-10）
+
+[計測記録](c308-claude-sonnet55-low-standard14-n5_2026-10-10.md)。[登録結果](12c78e90697c41a6bd1d1cfaaf6da6b9.json)、[analysis](c308-claude-sonnet55-low-standard14-n5_2026-10-10-analysis.json)、[selection](c308-claude-sonnet55-low-standard14-n5_2026-10-10-selection.json)、[品質監査](c308-claude-sonnet55-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](c308-claude-sonnet55-low-standard14-n5_2026-10-10-prepare-receipt.json)、[C307との比較](c308-claude-sonnet55-low-standard14-n5_2026-10-10-c307-comparison.json)、[C301 `-r5`との比較](c308-claude-sonnet55-low-standard14-n5_2026-10-10-c301-r5-comparison.json)。4点70件。C307比で費用+0.29%（幅の中）、C301 `-r5`比で−4.87%（幅より下）。最後の変更の後に状態を確かめずに報告したrunは41件中12件で、C307からほとんど減らなかった。Solは未計測。採用は未判断。
 
 <a id="c305-c307-sonnet-low-20261010"></a>
 ## C305・C306・C307のSonnet 5.5 low（ベースC302の弱点を潰す、2026-10-10）
