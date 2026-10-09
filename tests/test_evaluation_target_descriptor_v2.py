@@ -70,5 +70,9 @@ def test_v1_descriptors_remain_repository_bound_and_v2_descriptors_are_semantic(
             assert descriptor["target_kind"] == "semantic_protocol"
             assert "target_repository" not in descriptor
             continue
+        if descriptor["schema_version"] == f"{descriptor['target_id']}-target/v1":
+            # Instance-owned runtime and rating contracts (evaluations/targets/README.md).
+            assert descriptor["target_kind"] == "repository_fixture_corpus"
+            continue
         assert descriptor["schema_version"] == "the-caption-prompt.evaluation-target/v1"
         assert "target_repository" in descriptor

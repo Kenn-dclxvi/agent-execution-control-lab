@@ -116,10 +116,11 @@ class EvaluationLoopTest(unittest.TestCase):
         completed = subprocess.run(
             [sys.executable, str(CLI), *args],
             cwd=ROOT,
-            check=True,
+            check=False,
             capture_output=True,
             text=True,
         )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
         return json.loads(completed.stdout)
 
     def cli_failure(self, *args: str) -> subprocess.CompletedProcess[str]:
@@ -216,160 +217,214 @@ class EvaluationLoopTest(unittest.TestCase):
             encoding="utf-8",
         )
 
-    def test_explicit_quality_rating_is_required(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            cycle = root / "cycle"
-            manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-            conditions = self.conditions(1)
-            conditions.pop("quality_rating")
-            capsule = root / "missing-quality-rating.json"
-            capsule.write_text(
+    def store(self, root: Path) -> Path:
+        return root / "store"
+
+    def price_table(self, root: Path) -> Path:
+        path = root / "price-table.json"
+        if not path.exists():
+            prices = {
+                "uncached_input": 2.0,
+                "cache_read": 0.1,
+                "cache_write_5m": 2.5,
+                "cache_write_1h": 4.0,
+                "cache_write_unsplit": None,
+                "output": 10.0,
+            }
+            path.write_text(
                 json.dumps(
                     {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "prompt", "revision": "r1"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
+                        "schema_version": "the-caption-prompt.price-table/v1",
+                        "revision": "test-prices-r1",
+                        "models": {
+                            "test-model": {"standard": prices},
+                            "other-model": {"standard": prices},
                         },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
                     }
                 ),
                 encoding="utf-8",
             )
+        return path
+
+    def usage_code(self, tokens: int, model: str = "test-model") -> str:
+        components = {
+            "schema_version": "the-caption-prompt.usage-components/v1",
+            "provider": "test",
+            "by_model": {
+                model: {
+                    "standard": {
+                        "uncached_input": tokens,
+                        "cache_read": 0,
+                        "cache_write_5m": 0,
+                        "cache_write_1h": 0,
+                        "cache_write_unsplit": 0,
+                        "output": 0,
+                    }
+                }
+            },
+            "total_tokens": tokens,
+        }
+        usage = {
+            "schema_version": "the-caption-prompt.token-usage/v3",
+            "token_accounting": TOKEN_ACCOUNTING,
+            "total_tokens": tokens,
+            "usage_components": components,
+        }
+        return f"pathlib.Path(os.environ['EVAL_USAGE_FILE']).write_text(json.dumps({usage!r}))"
+
+    def write_capsule(
+        self,
+        path: Path,
+        identity: dict,
+        iteration: int,
+        conditions: dict,
+        command: str,
+        case_id: str = "TEST-CASE",
+        sample_id: str | None = None,
+        parameters: dict | None = None,
+    ) -> Path:
+        binding = {"prompt_set_identity": identity, "case_id": case_id, "iteration": iteration}
+        capsule = {
+            "schema_version": "the-caption-prompt.execution-capsule/v2",
+            "binding": binding,
+            "comparison_conditions": conditions,
+            "adapter": {"argv": [sys.executable, "-c", command]},
+        }
+        if sample_id is not None:
+            binding["sample_id"] = sample_id
+        if parameters is not None:
+            capsule["parameters"] = parameters
+        path.write_text(json.dumps(capsule), encoding="utf-8")
+        return path
+
+    def install(
+        self,
+        root: Path,
+        manifest: Path,
+        cycle: Path,
+        identity: dict,
+        conditions: dict,
+        case_ids: tuple[str, ...] = ("TEST-CASE",),
+    ) -> Path:
+        """Freeze the set into the store once, write the profile and install Layer 1 into the cycle."""
+        store = self.store(root)
+        source = json.loads(manifest.read_text(encoding="utf-8"))
+        if not (store / source["set_id"] / source["revision"]).exists():
+            frozen = self.cli("freeze-set", "--set", str(manifest), "--store", str(store))
+            self.assertEqual(frozen["revision"], "r1")
+        profile = cycle.parent / f"{cycle.name}-profile.json"
+        profile.write_text(
+            json.dumps(
+                {
+                    "profile_id": f"{cycle.name}-profile",
+                    "prompt_set_identity": identity,
+                    "evaluation_set": {"set_id": source["set_id"], "revision": source["revision"]},
+                    "cases": [{"id": case_id, "revision": "r1"} for case_id in case_ids],
+                    "iterations": conditions["repetition_condition"]["iterations"],
+                    "execution": {"max_workers": 24},
+                    "comparison_conditions": conditions,
+                }
+            ),
+            encoding="utf-8",
+        )
+        self.cli("install-layer1", "--store", str(store), "--profile", str(profile), "--cycle", str(cycle))
+        return profile
+
+    def global_plan(self, cycle: Path, capsules: list[Path], extra: dict | None = None) -> Path:
+        path = cycle.parent / f"{cycle.name}-global-plan.json"
+        path.write_text(
+            json.dumps(
+                {
+                    "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
+                    "cycle": str(cycle),
+                    "max_workers": 24,
+                    "jobs": [{"capsule": str(capsule), "sequence": index} for index, capsule in enumerate(capsules, 1)],
+                    **(extra or {}),
+                }
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    def authorize(self, cycle: Path, profile: Path, capsules: list[Path]) -> dict:
+        plan = self.global_plan(cycle, capsules)
+        return self.cli("preflight-execution", "--cycle", str(cycle), "--profile", str(profile), "--global-plan", str(plan))
+
+    def prepared_single_capsule(self, root: Path, conditions: dict, command: str, identity: dict | None = None) -> tuple[Path, Path, Path]:
+        cycle = root / "cycle"
+        manifest = self.make_set(root)
+        identity = identity or {"name": "prompt", "revision": "r1"}
+        capsule = self.write_capsule(root / "capsule.json", identity, 1, conditions, command)
+        profile = self.install(root, manifest, cycle, identity, conditions)
+        return cycle, profile, capsule
+
+    def test_explicit_quality_rating_is_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            conditions = self.conditions(1)
+            conditions.pop("quality_rating")
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), "pass")
+            self.write_capsule(capsule, {"name": "prompt", "revision": "r1"}, 1, conditions, "pass")
             completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
+                "preflight-execution", "--cycle", str(cycle), "--profile", str(profile),
+                "--global-plan", str(self.global_plan(cycle, [capsule])),
             )
             self.assertIn("comparison_conditions.quality_rating is required", completed.stderr)
 
     def test_legacy_quality_rating_remains_supported(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            cycle = root / "cycle"
-            manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
             conditions = self.conditions(1)
             conditions["quality_rating"] = LEGACY_QUALITY_RATING
-            capsule = root / "legacy-quality-rating.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "prompt", "revision": "r1"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
-                    }
-                ),
-                encoding="utf-8",
-            )
-            completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
-            )
+            cycle, profile, capsule = self.prepared_single_capsule(root, conditions, "pass")
+            self.authorize(cycle, profile, [capsule])
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
             self.assertNotIn("unsupported contract revision", completed.stderr)
 
     def test_quality_rating_v2_remains_supported(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            cycle = root / "cycle"
-            manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
             conditions = self.conditions(1)
             conditions["quality_rating"] = QUALITY_RATING_V2
-            capsule = root / "quality-rating-v2.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "prompt", "revision": "r1"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
-                    }
-                ),
-                encoding="utf-8",
-            )
-            completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
-            )
+            cycle, profile, capsule = self.prepared_single_capsule(root, conditions, "pass")
+            self.authorize(cycle, profile, [capsule])
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
             self.assertNotIn("unsupported contract revision", completed.stderr)
 
     def test_nonzero_adapter_exit_without_exclusion_is_not_valid(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            cycle = root / "cycle"
-            manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-            capsule = root / "nonzero-exit.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "prompt", "revision": "r1"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": self.conditions(1),
-                        "adapter": {"argv": [sys.executable, "-c", "raise SystemExit(2)"]},
-                    }
-                ),
-                encoding="utf-8",
-            )
-            completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
-            )
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), "raise SystemExit(2)")
+            self.authorize(cycle, profile, [capsule])
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
             self.assertIn("adapter exited without an external-failure exclusion: 2", completed.stderr)
             self.assertEqual(list((cycle / "layer2" / "bindings").glob("*.json")), [])
 
     def test_missing_usage_is_not_valid(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            cycle = root / "cycle"
-            manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-            capsule = root / "missing-usage.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "prompt", "revision": "r1"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": self.conditions(1),
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
-                    }
-                ),
-                encoding="utf-8",
-            )
-            completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
-            )
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), "pass")
+            self.authorize(cycle, profile, [capsule])
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
             self.assertIn("valid run requires all-agent token usage", completed.stderr)
             self.assertEqual(list((cycle / "layer2" / "bindings").glob("*.json")), [])
 
-    def execute(
-        self,
-        cycle: Path,
-        identity: dict,
-        iteration: int,
-        tokens: int,
-        conditions: dict,
-        case_id: str = "TEST-CASE",
-        sample_id: str | None = None,
-    ) -> str:
-        command = (
+    def test_installed_cycle_rejects_usage_without_components(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            command = (
+                "import json,os,pathlib; "
+                "pathlib.Path(os.environ['EVAL_USAGE_FILE']).write_text(json.dumps({"
+                "'schema_version':'the-caption-prompt.token-usage/v2',"
+                f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':100}}))"
+            )
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), command)
+            self.authorize(cycle, profile, [capsule])
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
+            self.assertIn("requires usage components", completed.stderr)
+
+    def execution_command(self, tokens: int, model: str = "test-model") -> str:
+        return (
             "import json,os,pathlib; "
             "case=json.loads(pathlib.Path(os.environ['EVAL_CASE_FILE']).read_text()); "
             "capsule=json.loads(pathlib.Path(os.environ['EVAL_RUN_CAPSULE_FILE']).read_text()); "
@@ -379,47 +434,44 @@ class EvaluationLoopTest(unittest.TestCase):
             "extension=pathlib.Path(os.environ['EVAL_EXTENSION_DIR'])/'token-analysis'; "
             "extension.mkdir(); "
             "(extension/'provider-usage.json').write_text(json.dumps({'future_detail': 42})); "
-            f"pathlib.Path(os.environ['EVAL_USAGE_FILE']).write_text(json.dumps({{"
-            "'schema_version':'the-caption-prompt.token-usage/v2',"
-            f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':{tokens}}}))"
+            + self.usage_code(tokens, model)
         )
-        capsule = cycle.parent / f"{cycle.name}-{identity['name']}-{case_id}-{iteration}.json"
-        binding = {
-            "prompt_set_identity": identity,
-            "case_id": case_id,
-            "iteration": iteration,
-        }
-        if sample_id is not None:
-            binding["sample_id"] = sample_id
-        capsule.write_text(
-            json.dumps(
-                {
-                    "schema_version": "the-caption-prompt.execution-capsule/v2",
-                    "binding": binding,
-                    "comparison_conditions": conditions,
-                    "adapter": {"argv": [sys.executable, "-c", command]},
-                    "parameters": {"future_parameter": 42},
-                }
-            ),
-            encoding="utf-8",
+
+    def execution_capsule(
+        self,
+        cycle: Path,
+        identity: dict,
+        iteration: int,
+        tokens: int,
+        conditions: dict,
+        case_id: str = "TEST-CASE",
+        sample_id: str | None = None,
+    ) -> Path:
+        return self.write_capsule(
+            cycle.parent / f"{cycle.name}-{identity['name']}-{case_id}-{iteration}.json",
+            identity,
+            iteration,
+            conditions,
+            self.execution_command(tokens, conditions["model"]),
+            case_id=case_id,
+            sample_id=sample_id,
+            parameters={"future_parameter": 42},
         )
-        result = self.cli("run", "--cycle", str(cycle), "--capsule", str(capsule))
-        return result["run_id"]
+
+    def run_capsule(self, cycle: Path, capsule: Path) -> str:
+        return self.cli("run", "--cycle", str(cycle), "--capsule", str(capsule))["run_id"]
 
     def test_run_binding_preserves_optional_atomic_sample_id(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             cycle = root / "cycle"
             manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-            run_id = self.execute(
-                cycle,
-                {"name": "prompt", "revision": "r1"},
-                1,
-                100,
-                self.conditions(1),
-                sample_id="planned:test:sample-1",
-            )
+            identity = {"name": "prompt", "revision": "r1"}
+            conditions = self.conditions(1)
+            capsule = self.execution_capsule(cycle, identity, 1, 100, conditions, sample_id="planned:test:sample-1")
+            profile = self.install(root, manifest, cycle, identity, conditions)
+            self.authorize(cycle, profile, [capsule])
+            run_id = self.run_capsule(cycle, capsule)
             binding = json.loads(
                 (cycle / "layer2" / "bindings" / f"{run_id}.json").read_text()
             )
@@ -444,28 +496,22 @@ class EvaluationLoopTest(unittest.TestCase):
         model: str = "test-model",
     ) -> dict:
         cycle = root / f"cycle-{name}-{model}"
-        frozen = self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-        self.assertEqual(frozen["revision"], "r1")
         identity = {"name": name, "revision": "r1"}
         conditions = self.conditions(2, model)
-        run_ids = [
-            self.execute(cycle, identity, iteration, tokens, conditions)
-            for iteration in (1, 2)
-        ]
+        capsules = [self.execution_capsule(cycle, identity, iteration, tokens, conditions) for iteration in (1, 2)]
+        profile = self.install(root, manifest, cycle, identity, conditions)
+        self.authorize(cycle, profile, capsules)
+        run_ids = [self.run_capsule(cycle, capsule) for capsule in capsules]
         for run_id in run_ids:
             evidence = cycle / "layer2" / "evidence" / run_id
             self.assertTrue((evidence / "workspace" / "input-link.txt").is_symlink())
             execution = json.loads((evidence / "execution.json").read_text())
             self.assertNotIn("prompt_set_identity", execution)
             self.assertNotIn("condition", execution)
-            self.assertEqual(
-                json.loads((evidence / "usage.json").read_text()),
-                {
-                    "schema_version": "the-caption-prompt.token-usage/v2",
-                    "token_accounting": TOKEN_ACCOUNTING,
-                    "total_tokens": tokens,
-                },
-            )
+            usage = json.loads((evidence / "usage.json").read_text())
+            self.assertEqual(usage["schema_version"], "the-caption-prompt.token-usage/v3")
+            self.assertEqual(usage["total_tokens"], tokens)
+            self.assertEqual(usage["usage_components"]["total_tokens"], tokens)
             self.assertTrue(
                 (cycle / "layer2" / "extensions" / run_id / "token-analysis" / "provider-usage.json").exists()
             )
@@ -487,7 +533,8 @@ class EvaluationLoopTest(unittest.TestCase):
                 "test rating",
             )
         return self.cli(
-            "record-result", "--cycle", str(cycle), "--registry", str(registry)
+            "record-result", "--cycle", str(cycle), "--registry", str(registry),
+            "--price-table", str(self.price_table(root)),
         )
 
     def test_bound_subset_is_enforced_and_registered_without_changing_the_set(self) -> None:
@@ -496,9 +543,14 @@ class EvaluationLoopTest(unittest.TestCase):
             cycle = root / "cycle"
             registry = root / "registry"
             manifest = self.make_two_case_set(root)
-            frozen = self.cli(
-                "freeze-set", "--set", str(manifest), "--cycle", str(cycle)
-            )
+            identity = {"name": "subset-prompt", "revision": "r1"}
+            conditions = self.conditions(2)
+            capsules = [
+                self.execution_capsule(cycle, identity, iteration, 100 + iteration, conditions)
+                for iteration in (1, 2)
+            ]
+            profile = self.install(root, manifest, cycle, identity, conditions)
+            installation = json.loads((cycle / "layer1" / "installation.json").read_text())
             coverage = self.cli(
                 "bind-coverage",
                 "--cycle",
@@ -510,16 +562,10 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertEqual(coverage["case_ids"], ["TEST-CASE"])
             self.assertEqual(coverage["iterations"], [1, 2])
-            self.assertEqual(
-                coverage["evaluation_set_identity_sha256"], frozen["identity_sha256"]
-            )
-
-            identity = {"name": "subset-prompt", "revision": "r1"}
-            conditions = self.conditions(2)
-            for iteration in (1, 2):
-                run_id = self.execute(
-                    cycle, identity, iteration, 100 + iteration, conditions
-                )
+            self.assertEqual(coverage["evaluation_set_identity_sha256"], installation["identity_sha256"])
+            self.authorize(cycle, profile, capsules)
+            for capsule in capsules:
+                run_id = self.run_capsule(cycle, capsule)
                 self.write_command_evidence(cycle, run_id)
                 self.cli(
                     "rate",
@@ -533,29 +579,15 @@ class EvaluationLoopTest(unittest.TestCase):
                     "subset rating",
                 )
 
-            outside_capsule = root / "outside.json"
-            outside_capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": identity,
-                            "case_id": "TEST-CASE-2",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
-                    }
-                ),
-                encoding="utf-8",
-            )
+            outside_capsule = self.write_capsule(root / "outside.json", identity, 1, conditions, "pass", case_id="TEST-CASE-2")
             rejected = self.cli_failure(
                 "run", "--cycle", str(cycle), "--capsule", str(outside_capsule)
             )
-            self.assertIn("outside the bound evaluation coverage", rejected.stderr)
+            self.assertIn("not authorized by the preflight", rejected.stderr)
 
             receipt = self.cli(
-                "record-result", "--cycle", str(cycle), "--registry", str(registry)
+                "record-result", "--cycle", str(cycle), "--registry", str(registry),
+                "--price-table", str(self.price_table(root)),
             )
             result = json.loads(Path(receipt["artifact"]).read_text(encoding="utf-8"))
             self.assertEqual(
@@ -564,11 +596,29 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertEqual(
                 result["compatibility"]["evaluation_set"]["identity_sha256"],
-                frozen["identity_sha256"],
+                installation["identity_sha256"],
             )
             self.assertEqual(
                 {item["case_id"] for item in result["case_results"]}, {"TEST-CASE"}
             )
+
+    def test_installed_cycle_result_requires_a_price_table(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / "registry"
+            manifest = self.make_set(root)
+            cycle = root / "cycle-prompt-test-model"
+            identity = {"name": "prompt", "revision": "r1"}
+            conditions = self.conditions(2)
+            capsules = [self.execution_capsule(cycle, identity, iteration, 100, conditions) for iteration in (1, 2)]
+            profile = self.install(root, manifest, cycle, identity, conditions)
+            self.authorize(cycle, profile, capsules)
+            for capsule in capsules:
+                run_id = self.run_capsule(cycle, capsule)
+                self.write_command_evidence(cycle, run_id)
+                self.cli("rate", "--cycle", str(cycle), "--run-id", run_id, "--score", "4", "--reason", "ok")
+            completed = self.cli_failure("record-result", "--cycle", str(cycle), "--registry", str(registry))
+            self.assertIn("requires --price-table", completed.stderr)
 
     def test_three_prompt_sets_are_stored_independently_and_compared_as_a_view(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -592,8 +642,10 @@ class EvaluationLoopTest(unittest.TestCase):
             baseline_result = json.loads(Path(baseline["artifact"]).read_text())
             self.assertEqual(
                 baseline_result["schema_version"],
-                "the-caption-prompt.prompt-set-result/v2",
+                "the-caption-prompt.prompt-set-result/v3",
             )
+            self.assertEqual(baseline_result["price_table"]["revision"], "test-prices-r1")
+            self.assertAlmostEqual(baseline_result["median"]["cost_usd"], 2 * 120 / 1_000_000)
             self.assertEqual(baseline_result["token_accounting"], TOKEN_ACCOUNTING)
             self.assertEqual(len(baseline_result["result_content_sha256"]), 64)
             self.assertEqual(
@@ -635,9 +687,10 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             view = json.loads(view_path.read_text())
             self.assertEqual(
-                view["schema_version"], "the-caption-prompt.prompt-set-comparison-view/v2"
+                view["schema_version"], "the-caption-prompt.prompt-set-comparison-view/v3"
             )
             self.assertEqual(view["token_accounting"], TOKEN_ACCOUNTING)
+            self.assertEqual(view["price_table"]["revision"], "test-prices-r1")
             self.assertEqual(len(view["prompt_sets"]), 3)
             self.assertEqual(len(view["differences"]), 2)
             candidate2_difference = next(
@@ -648,6 +701,8 @@ class EvaluationLoopTest(unittest.TestCase):
             self.assertEqual(candidate2_difference["subtrahend_result_id"], baseline["result_id"])
             self.assertEqual(candidate2_difference["kpis"]["quality_score"], 50.0)
             self.assertEqual(candidate2_difference["kpis"]["total_tokens"], -20.0)
+            self.assertAlmostEqual(candidate2_difference["kpis"]["cost_usd"], -40 / 1_000_000)
+            self.assertEqual(candidate2_difference["cost_band"]["position"], "below_range")
             self.assertNotIn("winner", view)
             self.assertEqual(before, {path: path.read_bytes() for path in result_paths})
             repeated_view = self.cli_failure(
@@ -673,7 +728,8 @@ class EvaluationLoopTest(unittest.TestCase):
             recorded = self.record_prompt_set(manifest, root, registry, "prompt", 3, 100)
             cycle = root / "cycle-prompt-test-model"
             repeated = self.cli_failure(
-                "record-result", "--cycle", str(cycle), "--registry", str(registry)
+                "record-result", "--cycle", str(cycle), "--registry", str(registry),
+                "--price-table", str(self.price_table(root)),
             )
             self.assertIn("already registered", repeated.stderr)
             view = root / "view.json"
@@ -692,7 +748,6 @@ class EvaluationLoopTest(unittest.TestCase):
                 str(view),
             )
             self.assertIn("must be unique", compare.stderr)
-
     def test_root_only_result_is_reaccounted_append_only_as_all_agent_v2(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -810,33 +865,23 @@ class EvaluationLoopTest(unittest.TestCase):
             cycle = root / "cycle"
             registry = root / "registry"
             manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
             identity = {"name": "prompt", "revision": "r1"}
             conditions = self.conditions(1)
-            excluded_command = (
+            marker = root / "first-attempt-done"
+            command = (
                 "import json,os,pathlib,sys; "
-                "pathlib.Path(os.environ['EVAL_RUN_STATUS_FILE']).write_text(json.dumps({"
+                f"marker=pathlib.Path({str(marker)!r}); "
+                "first=not marker.exists(); marker.touch(); "
+                "first and pathlib.Path(os.environ['EVAL_RUN_STATUS_FILE']).write_text(json.dumps({"
                 "'schema_version':'the-caption-prompt.run-status/v1',"
                 "'status':'excluded','category':'external_failure',"
                 "'reason_code':'codex_collab_parent_thread_missing'})); "
-                "sys.exit(75)"
+                "first and sys.exit(75); "
+                + self.usage_code(120)
             )
-            capsule = root / "excluded.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": identity,
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", excluded_command]},
-                    }
-                ),
-                encoding="utf-8",
-            )
+            capsule = self.write_capsule(root / "retried.json", identity, 1, conditions, command)
+            profile = self.install(root, manifest, cycle, identity, conditions)
+            self.authorize(cycle, profile, [capsule])
             excluded = self.cli("run", "--cycle", str(cycle), "--capsule", str(capsule))
             self.assertEqual(excluded["status"], "excluded")
             rate = self.cli_failure(
@@ -852,7 +897,7 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertIn("excluded run cannot be quality-rated", rate.stderr)
 
-            valid = self.execute(cycle, identity, 1, 120, conditions)
+            valid = self.run_capsule(cycle, capsule)
             self.write_command_evidence(cycle, valid)
             self.cli(
                 "rate",
@@ -866,7 +911,8 @@ class EvaluationLoopTest(unittest.TestCase):
                 "valid",
             )
             recorded = self.cli(
-                "record-result", "--cycle", str(cycle), "--registry", str(registry)
+                "record-result", "--cycle", str(cycle), "--registry", str(registry),
+                "--price-table", str(self.price_table(root)),
             )
             result = json.loads(
                 (registry / "results" / f"{recorded['result_id']}.json").read_text()
@@ -883,310 +929,129 @@ class EvaluationLoopTest(unittest.TestCase):
             root = Path(tmp)
             cycle = root / "cycle"
             manifest = self.make_set(root)
-            self.cli("freeze-set", "--set", str(manifest), "--cycle", str(cycle))
-            capsule = root / "invalid-identity.json"
-            capsule.write_text(
+            identity = {"name": "mutable-name-only"}
+            completed = subprocess.run(
+                [sys.executable, str(CLI), "freeze-set", "--set", str(manifest), "--store", str(self.store(root))],
+                cwd=ROOT, check=True, capture_output=True, text=True,
+            )
+            self.assertEqual(json.loads(completed.stdout)["revision"], "r1")
+            profile = root / "profile.json"
+            profile.write_text(
                 json.dumps(
                     {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": {"name": "mutable-name-only"},
-                            "case_id": "TEST-CASE",
-                            "iteration": 1,
-                        },
+                        "prompt_set_identity": identity,
+                        "evaluation_set": {"set_id": "test-set", "revision": "r1"},
+                        "cases": [{"id": "TEST-CASE", "revision": "r1"}],
+                        "iterations": 1,
+                        "execution": {"max_workers": 24},
                         "comparison_conditions": self.conditions(1),
-                        "adapter": {"argv": [sys.executable, "-c", "pass"]},
                     }
                 ),
                 encoding="utf-8",
             )
+            self.cli("install-layer1", "--store", str(self.store(root)), "--profile", str(profile), "--cycle", str(cycle))
+            capsule = self.write_capsule(root / "invalid-identity.json", identity, 1, self.conditions(1), "pass")
             completed = self.cli_failure(
-                "run", "--cycle", str(cycle), "--capsule", str(capsule)
+                "preflight-execution", "--cycle", str(cycle), "--profile", str(profile),
+                "--global-plan", str(self.global_plan(cycle, [capsule])),
             )
             self.assertIn("needs revision or bundle_sha256", completed.stderr)
 
-    def write_comparison_plan(
-        self,
-        root: Path,
-        cycle: Path,
-        conditions: dict,
-    ) -> tuple[Path, Path, list[Path]]:
-        prompt_identity = {"name": "candidate", "revision": "r1"}
-        profile = root / "candidate-profile.json"
-        profile.write_text(
-            json.dumps(
-                {
-                    "profile_id": "candidate-profile",
-                    "prompt_set_identity": prompt_identity,
-                    "evaluation_set": {"set_id": "test-set", "revision": "r1"},
-                    "cases": [{"id": "TEST-CASE", "revision": "r1"}],
-                    "iterations": 2,
-                    "execution": {"max_workers": 24},
-                    "comparison_conditions": conditions,
-                }
-            ),
-            encoding="utf-8",
-        )
-        capsules: list[Path] = []
-        jobs: list[dict] = []
-        adapter_command = (
-            "import json,os,pathlib; "
-            "pathlib.Path('result.txt').write_text('result\\n', encoding='utf-8'); "
-            f"pathlib.Path(os.environ['EVAL_USAGE_FILE']).write_text(json.dumps({{"
-            "'schema_version':'the-caption-prompt.token-usage/v2',"
-            f"'token_accounting':{TOKEN_ACCOUNTING!r},'total_tokens':100}}))"
-        )
-        for iteration in (1, 2):
-            capsule = root / f"candidate-i{iteration}.json"
-            capsule.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.execution-capsule/v2",
-                        "binding": {
-                            "prompt_set_identity": prompt_identity,
-                            "case_id": "TEST-CASE",
-                            "iteration": iteration,
-                        },
-                        "comparison_conditions": conditions,
-                        "adapter": {"argv": [sys.executable, "-c", adapter_command]},
-                    }
-                ),
-                encoding="utf-8",
-            )
-            capsules.append(capsule)
-            jobs.append({"capsule": str(capsule), "sequence": iteration})
-        global_plan = root / "global-plan.json"
-        global_plan.write_text(
-            json.dumps(
-                {
-                    "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
-                    "cycle": str(cycle),
-                    "max_workers": 24,
-                    "jobs": jobs,
-                }
-            ),
-            encoding="utf-8",
-        )
-        return profile, global_plan, capsules
-
-    def prepare_reference_comparison(
-        self,
-        root: Path,
-    ) -> tuple[Path, Path, dict, dict, Path, Path, list[Path]]:
-        registry = root / "registry"
-        manifest = self.make_set(root)
-        (root / "fixture" / "input.txt").chmod(0o600)
-        reference = self.record_prompt_set(
-            manifest,
-            root,
-            registry,
-            "reference",
-            4,
-            100,
-        )
-        reference_layer1 = root / "cycle-reference-test-model" / "layer1"
-        candidate_cycle = root / "candidate-cycle"
-        prepared = self.cli(
-            "prepare-comparison-layer1",
-            "--registry",
-            str(registry),
-            "--reference-result-id",
-            reference["result_id"],
-            "--reference-layer1",
-            str(reference_layer1),
-            "--cycle",
-            str(candidate_cycle),
-        )
-        conditions = self.conditions(2)
-        profile, global_plan, capsules = self.write_comparison_plan(
-            root,
-            candidate_cycle,
-            conditions,
-        )
-        return (
-            registry,
-            candidate_cycle,
-            reference,
-            prepared,
-            profile,
-            global_plan,
-            capsules,
-        )
-
-    def test_comparison_layer1_is_generated_from_exact_reference_modes(self) -> None:
+    def test_store_keeps_fixture_modes_and_install_verifies_them(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (
-                _,
-                candidate_cycle,
-                reference,
-                prepared,
-                _,
-                _,
-                _,
-            ) = self.prepare_reference_comparison(root)
-            self.assertEqual(prepared["reference_result_id"], reference["result_id"])
-            candidate_file = candidate_cycle / "layer1/fixtures/TEST-CASE/input.txt"
-            self.assertEqual(candidate_file.stat().st_mode & 0o777, 0o600)
-            generation = json.loads(
-                (candidate_cycle / "layer1/comparison-generation.json").read_text()
-            )
-            self.assertEqual(generation["status"], "ready")
-            self.assertEqual(len(generation["receipt_content_sha256"]), 64)
-
-    def test_comparison_layer1_rejects_same_content_with_different_modes(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            registry = root / "registry"
             manifest = self.make_set(root)
-            (root / "fixture/input.txt").chmod(0o600)
-            reference = self.record_prompt_set(
-                manifest,
-                root,
-                registry,
-                "reference",
-                4,
-                100,
-            )
-            wrong_root = root / "wrong"
-            wrong_root.mkdir()
-            wrong_manifest = self.make_set(wrong_root)
-            (wrong_root / "fixture/input.txt").chmod(0o644)
-            wrong_cycle = wrong_root / "cycle"
-            self.cli(
-                "freeze-set",
-                "--set",
-                str(wrong_manifest),
-                "--cycle",
-                str(wrong_cycle),
-            )
-            completed = self.cli_failure(
-                "prepare-comparison-layer1",
-                "--registry",
-                str(registry),
-                "--reference-result-id",
-                reference["result_id"],
-                "--reference-layer1",
-                str(wrong_cycle / "layer1"),
-                "--cycle",
-                str(root / "candidate-cycle"),
-            )
-            self.assertIn("Layer 1 does not match reference result", completed.stderr)
-            self.assertFalse((root / "candidate-cycle/layer1").exists())
+            (root / "fixture" / "input.txt").chmod(0o600)
+            cycle = root / "cycle"
+            identity = {"name": "prompt", "revision": "r1"}
+            self.install(root, manifest, cycle, identity, self.conditions(1))
+            installed = cycle / "layer1" / "fixtures" / "TEST-CASE" / "input.txt"
+            self.assertEqual(installed.stat().st_mode & 0o777, 0o600)
+            installation = json.loads((cycle / "layer1" / "installation.json").read_text())
+            self.assertEqual(installation["schema_version"], "the-caption-prompt.layer1-installation/v1")
+            self.assertEqual(len(installation["receipt_content_sha256"]), 64)
 
-    def test_comparison_run_requires_preflight_before_adapter_execution(self) -> None:
+            stored = self.store(root) / "test-set" / "r1" / "layer1" / "fixtures" / "TEST-CASE" / "input.txt"
+            stored.chmod(0o644)
+            other = root / "other-cycle"
+            completed = self.cli_failure(
+                "install-layer1", "--store", str(self.store(root)),
+                "--profile", str(root / "cycle-profile.json"), "--cycle", str(other),
+            )
+            self.assertIn("frozen fixture identity does not match", completed.stderr)
+            self.assertFalse((other / "layer1").exists())
+
+    def test_publish_layer1_keeps_an_existing_frozen_layer1(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (
-                _,
-                candidate_cycle,
-                _,
-                _,
-                _,
-                _,
-                capsules,
-            ) = self.prepare_reference_comparison(root)
-            completed = self.cli_failure(
-                "run",
-                "--cycle",
-                str(candidate_cycle),
-                "--capsule",
-                str(capsules[0]),
+            manifest = self.make_set(root)
+            (root / "fixture" / "input.txt").chmod(0o600)
+            source_store = root / "source-store"
+            frozen = self.cli("freeze-set", "--set", str(manifest), "--store", str(source_store))
+            published = self.cli(
+                "publish-layer1", "--source-layer1", str(source_store / "test-set" / "r1" / "layer1"),
+                "--store", str(self.store(root)),
             )
-            self.assertIn("comparison-preflight.json", completed.stderr)
-            self.assertFalse((candidate_cycle / "layer2").exists())
+            self.assertEqual(published["identity_sha256"], frozen["identity_sha256"])
+            again = self.cli_failure(
+                "publish-layer1", "--source-layer1", str(source_store / "test-set" / "r1" / "layer1"),
+                "--store", str(self.store(root)),
+            )
+            self.assertIn("already in the store", again.stderr)
 
-    def test_comparison_preflight_is_reverified_and_tamper_evident(self) -> None:
+    def test_cycle_without_installed_layer1_cannot_run(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (
-                registry,
-                candidate_cycle,
-                reference,
-                _,
-                profile,
-                global_plan,
-                capsules,
-            ) = self.prepare_reference_comparison(root)
-            preflight = self.cli(
-                "preflight-comparison",
-                "--cycle",
-                str(candidate_cycle),
-                "--profile",
-                str(profile),
-                "--global-plan",
-                str(global_plan),
-                "--registry",
-                str(registry),
-                "--reference-result-id",
-                reference["result_id"],
-            )
-            self.assertEqual(preflight["authorized_slot_count"], 2)
-            verified = self.cli(
-                "verify-comparison-preflight",
-                "--cycle",
-                str(candidate_cycle),
-            )
-            self.assertEqual(verified["status"], "ready")
-            run = self.cli(
-                "run",
-                "--cycle",
-                str(candidate_cycle),
-                "--capsule",
-                str(capsules[0]),
-            )
-            self.assertEqual(run["status"], "valid")
-            verified_after_run = self.cli(
-                "verify-comparison-preflight",
-                "--cycle",
-                str(candidate_cycle),
-            )
-            self.assertEqual(verified_after_run["status"], "ready")
+            manifest = self.make_set(root)
+            cycle = root / "manual-cycle"
+            frozen_root = self.store(root)
+            self.cli("freeze-set", "--set", str(manifest), "--store", str(frozen_root))
+            (cycle / "layer1").mkdir(parents=True)
+            source = frozen_root / "test-set" / "r1" / "layer1"
+            (cycle / "layer1" / "set.json").write_bytes((source / "set.json").read_bytes())
+            capsule = self.write_capsule(root / "capsule.json", {"name": "prompt", "revision": "r1"}, 1, self.conditions(1), "pass")
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
+            self.assertIn("cycle has no installed Layer 1", completed.stderr)
+            self.assertFalse((cycle / "layer2").exists())
 
-            receipt_path = candidate_cycle / "layer1/comparison-preflight.json"
+    def test_installed_cycle_requires_execution_preflight_before_adapter_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cycle, _, capsule = self.prepared_single_capsule(root, self.conditions(1), self.usage_code(100))
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
+            self.assertIn("execution-preflight.json", completed.stderr)
+            self.assertFalse((cycle / "layer2").exists())
+
+    def test_execution_preflight_is_reverified_and_tamper_evident(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            command = "import json,os,pathlib; " + self.usage_code(100)
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), command)
+            preflight = self.authorize(cycle, profile, [capsule])
+            self.assertEqual(preflight["authorized_slot_count"], 1)
+            self.assertEqual(self.cli("verify-execution-preflight", "--cycle", str(cycle))["status"], "ready")
+            self.assertEqual(self.cli("run", "--cycle", str(cycle), "--capsule", str(capsule))["status"], "valid")
+            self.assertEqual(self.cli("verify-execution-preflight", "--cycle", str(cycle))["status"], "ready")
+
+            receipt_path = cycle / "layer1" / "execution-preflight.json"
             receipt = json.loads(receipt_path.read_text())
             receipt["max_workers"] = 5
             receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
-            completed = self.cli_failure(
-                "verify-comparison-preflight",
-                "--cycle",
-                str(candidate_cycle),
-            )
+            completed = self.cli_failure("verify-execution-preflight", "--cycle", str(cycle))
             self.assertIn("receipt content SHA-256 does not match", completed.stderr)
 
-    def test_effective_preflight_accepts_only_provenance_differences(self) -> None:
+    def test_execution_preflight_rejects_capsules_that_differ_from_the_profile(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry, candidate_cycle, reference, _, _, _, _ = self.prepare_reference_comparison(root)
-            conditions = self.conditions(2)
-            conditions["executor_parameters"]["max_attempts"] = 3
-            profile, global_plan, capsules = self.write_comparison_plan(root, candidate_cycle, conditions)
-            args = [
-                "preflight-comparison", "--cycle", str(candidate_cycle), "--profile", str(profile),
-                "--global-plan", str(global_plan), "--registry", str(registry),
-                "--reference-result-id", reference["result_id"],
-            ]
-            self.assertIn("comparison compatibility mismatch", self.cli_failure(*args).stderr)
-            self.cli(*args, "--compatibility-rule", "effective-v1")
-            receipt = json.loads((candidate_cycle / "layer1/comparison-preflight.json").read_text())
-            self.assertEqual(receipt["compatibility_rule"], "effective-v1")
-            self.assertEqual(receipt["candidate_provenance"]["executor_parameters.max_attempts"], 3)
-            self.assertEqual(self.cli("verify-comparison-preflight", "--cycle", str(candidate_cycle))["status"], "ready")
-            self.assertEqual(self.cli("run", "--cycle", str(candidate_cycle), "--capsule", str(capsules[0]))["status"], "valid")
-
-    def test_effective_preflight_rejects_result_changing_differences(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            registry, candidate_cycle, reference, _, _, _, _ = self.prepare_reference_comparison(root)
-            conditions = self.conditions(2)
-            conditions["executor_parameters"]["reasoning_effort"] = "low"
-            profile, global_plan, _ = self.write_comparison_plan(root, candidate_cycle, conditions)
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), "pass")
+            different = self.conditions(1)
+            different["executor_parameters"]["reasoning_effort"] = "low"
+            self.write_capsule(capsule, {"name": "prompt", "revision": "r1"}, 1, different, "pass")
             completed = self.cli_failure(
-                "preflight-comparison", "--cycle", str(candidate_cycle), "--profile", str(profile),
-                "--global-plan", str(global_plan), "--registry", str(registry),
-                "--reference-result-id", reference["result_id"], "--compatibility-rule", "effective-v1",
+                "preflight-execution", "--cycle", str(cycle), "--profile", str(profile),
+                "--global-plan", str(self.global_plan(cycle, [capsule])),
             )
-            self.assertIn("reasoning_effort", completed.stderr)
+            self.assertIn("capsule comparison conditions do not match profile", completed.stderr)
 
     def write_task_sha256(self, cycle: Path, value: str) -> None:
         for path in (cycle / "layer2" / "bindings").glob("*.json"):
@@ -1240,29 +1105,26 @@ class EvaluationLoopTest(unittest.TestCase):
             )
             self.assertIn("effective compatibility mismatch: $.model", completed.stderr)
 
-    def test_atomic_comparison_preflight_authorizes_v3_capsules(self) -> None:
+    def test_atomic_execution_preflight_authorizes_v3_capsules(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (
-                registry,
-                candidate_cycle,
-                reference,
-                _,
-                profile,
-                _,
-                legacy_capsules,
-            ) = self.prepare_reference_comparison(root)
+            cycle = root / "cycle"
+            manifest = self.make_set(root)
+            identity = {"name": "candidate", "revision": "r1"}
+            conditions = self.conditions(2)
+            profile = self.install(root, manifest, cycle, identity, conditions)
+            atomic_conditions = json.loads(json.dumps(conditions))
+            atomic_conditions.pop("repetition_condition")
             atomic_capsules = []
             missing_slots = []
-            jobs = []
-            for iteration, legacy_path in zip((95, 96), legacy_capsules, strict=True):
-                capsule = json.loads(legacy_path.read_text())
+            for iteration in (95, 96):
                 sample_id = f"planned:test:{iteration}"
+                path = self.write_capsule(
+                    root / f"atomic-i{iteration}.json", identity, iteration, atomic_conditions,
+                    "import json,os,pathlib; " + self.usage_code(100), sample_id=sample_id,
+                )
+                capsule = json.loads(path.read_text())
                 capsule["schema_version"] = "the-caption-prompt.execution-capsule/v3"
-                capsule["binding"]["iteration"] = iteration
-                capsule["binding"]["sample_id"] = sample_id
-                capsule["comparison_conditions"].pop("repetition_condition")
-                path = root / f"atomic-i{iteration}.json"
                 path.write_text(json.dumps(capsule), encoding="utf-8")
                 atomic_capsules.append(path)
                 missing_slots.append(
@@ -1273,7 +1135,6 @@ class EvaluationLoopTest(unittest.TestCase):
                         "comparison_block_key": "a" * 64,
                     }
                 )
-                jobs.append({"capsule": str(path), "sequence": iteration})
             dispatch = {
                 "schema_version": "the-caption-prompt.atomic-dispatch-plan/v2",
                 "plan_id": "test-plan",
@@ -1289,49 +1150,21 @@ class EvaluationLoopTest(unittest.TestCase):
             dispatch["plan_content_sha256"] = identity_sha256(dispatch)
             dispatch_path = root / "dispatch.json"
             dispatch_path.write_text(json.dumps(dispatch), encoding="utf-8")
-            global_plan = root / "atomic-global-plan.json"
-            global_plan.write_text(
-                json.dumps(
-                    {
-                        "schema_version": "the-caption-prompt.parallel-execution-plan/v3",
-                        "cycle": str(candidate_cycle),
-                        "max_workers": 24,
-                        "dispatch_plan": str(dispatch_path),
-                        "dispatch_plan_sha256": dispatch["plan_content_sha256"],
-                        "jobs": jobs,
-                    }
-                ),
-                encoding="utf-8",
+            global_plan = self.global_plan(
+                cycle,
+                atomic_capsules,
+                {"dispatch_plan": str(dispatch_path), "dispatch_plan_sha256": dispatch["plan_content_sha256"]},
             )
             preflight = self.cli(
-                "preflight-comparison",
-                "--cycle",
-                str(candidate_cycle),
-                "--profile",
-                str(profile),
-                "--global-plan",
-                str(global_plan),
-                "--registry",
-                str(registry),
-                "--reference-result-id",
-                reference["result_id"],
+                "preflight-execution", "--cycle", str(cycle), "--profile", str(profile),
+                "--global-plan", str(global_plan),
             )
             self.assertEqual(preflight["authorized_slot_count"], 2)
-            receipt = json.loads(
-                (candidate_cycle / "layer1/comparison-preflight.json").read_text()
-            )
+            receipt = json.loads((cycle / "layer1" / "execution-preflight.json").read_text())
             self.assertEqual(receipt["dispatch_mode"], "atomic")
-            run = self.cli(
-                "run",
-                "--cycle",
-                str(candidate_cycle),
-                "--capsule",
-                str(atomic_capsules[0]),
-            )
+            run = self.cli("run", "--cycle", str(cycle), "--capsule", str(atomic_capsules[0]))
             self.assertEqual(run["status"], "valid")
-            binding = json.loads(
-                (candidate_cycle / "layer2/bindings" / f"{run['run_id']}.json").read_text()
-            )
+            binding = json.loads((cycle / "layer2/bindings" / f"{run['run_id']}.json").read_text())
             self.assertEqual(binding["iteration"], 95)
             self.assertEqual(binding["sample_id"], "planned:test:95")
 

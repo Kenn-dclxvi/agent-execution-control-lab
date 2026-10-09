@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -14,6 +15,18 @@ SCHEMA_VERSION_V1 = "the-caption-prompt.evaluation-target/v1"
 SCHEMA_VERSION_V2 = "the-caption-prompt.evaluation-target/v2"
 SCHEMA_VERSIONS = {SCHEMA_VERSION_V1, SCHEMA_VERSION_V2}
 LAYOUTS = ("legacy_root", "namespaced")
+# Instances that run their own runtime and rating contracts outside the kernel name their
+# descriptor schema after themselves (evaluations/targets/README.md, ディスクリプタの種類).
+INSTANCE_OWNED_SCHEMA = re.compile(r"^(?P<target_id>[a-z0-9-]+)-target/v[1-9][0-9]*$")
+
+
+def instance_owned(descriptor: dict) -> bool:
+    return INSTANCE_OWNED_SCHEMA.match(descriptor.get("schema_version", "")) is not None
+
+
+def rating_contracts_root(descriptor: dict) -> str:
+    roots = descriptor["artifact_roots"]
+    return roots["rating-contracts"] if instance_owned(descriptor) else roots["rating_contracts"]
 LEGACY_ROOT_TARGET_ID = "the-caption"
 V2_RATING_REQUIREMENTS = {
     "portable-instruction-semantic-conformance": (
@@ -41,11 +54,19 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
     def test_descriptor_identity_and_layout(self) -> None:
         for directory, descriptor in descriptors():
             with self.subTest(target=directory):
-                self.assertIn(descriptor["schema_version"], SCHEMA_VERSIONS)
+                if instance_owned(descriptor):
+                    match = INSTANCE_OWNED_SCHEMA.match(descriptor["schema_version"])
+                    self.assertEqual(match.group("target_id"), directory)
+                    self.assertEqual(descriptor["layout"], "namespaced")
+                    # Third-party reproducibility may still be unconfirmed for these instances.
+                    if "third_party_reproducible" in descriptor:
+                        self.assertIsInstance(descriptor["third_party_reproducible"], bool)
+                else:
+                    self.assertIn(descriptor["schema_version"], SCHEMA_VERSIONS)
+                    self.assertIsInstance(descriptor["third_party_reproducible"], bool)
                 self.assertEqual(descriptor["target_id"], directory)
                 self.assertIn(descriptor["layout"], LAYOUTS)
                 self.assertIn(descriptor["visibility"], ("private", "public"))
-                self.assertIsInstance(descriptor["third_party_reproducible"], bool)
 
     def test_legacy_root_layout_is_reserved_for_the_caption(self) -> None:
         for directory, descriptor in descriptors():
@@ -87,7 +108,14 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
                 self.assertIn("current_rating_contract", descriptor)
                 if contract is None:
                     continue
-                roots = descriptor["artifact_roots"]["rating_contracts"]
+                if instance_owned(descriptor):
+                    contract_ids = [
+                        json.loads(path.read_text(encoding="utf-8")).get("contract_id")
+                        for path in (ROOT / rating_contracts_root(descriptor)).glob("*.json")
+                    ]
+                    self.assertEqual(contract_ids.count(contract), 1)
+                    continue
+                roots = rating_contracts_root(descriptor)
                 contract_path = ROOT / roots / f"{contract}.json"
                 self.assertTrue(contract_path.is_file())
                 if descriptor["schema_version"] == SCHEMA_VERSION_V1:
@@ -153,6 +181,16 @@ class EvaluationTargetRegistryTest(unittest.TestCase):
                         (cases_root / used_by / "private/case-data.json").read_text(encoding="utf-8")
                     )
                     self.assertEqual(data["fixture"]["target_identity"]["commit"], entry["commit"])
+
+    def test_instance_owned_targets_carry_runtime_subject_and_kind(self) -> None:
+        for directory, descriptor in descriptors():
+            if not instance_owned(descriptor):
+                continue
+            with self.subTest(target=directory):
+                self.assertEqual(descriptor["target_kind"], "repository_fixture_corpus")
+                self.assertIn("runtime", descriptor["artifact_roots"])
+                self.assertTrue((ROOT / descriptor["artifact_roots"]["runtime"]).is_dir())
+                self.assertTrue((TARGETS / directory / descriptor["subject_authority"]).is_file())
 
 
 if __name__ == "__main__":

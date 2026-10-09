@@ -46,6 +46,7 @@ try:
         version_from_conditions,
     )
     import agent_shell_environment
+    from usage_components import UsageComponentsError, codex_components, validate_components
 except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests.
     from scripts.export_prompt_bundle import (
         BundleError,
@@ -74,6 +75,7 @@ except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests
         version_from_conditions,
     )
     from scripts import agent_shell_environment
+    from scripts.usage_components import UsageComponentsError, codex_components, validate_components
 
 
 class AdapterError(Exception):
@@ -1537,13 +1539,38 @@ def execute() -> int:
                 if external_failure is not None:
                     write_json(status_path, external_failure)
                     total_tokens = None
+            usage_components = None
+            if external_failure is None:
+                try:
+                    usage_components = validate_components(
+                        codex_components(
+                            [Path(session["rollout_file"]) for session in all_agent_usage["sessions"]],
+                            model,
+                        ),
+                        total_tokens,
+                    )
+                except (UsageComponentsError, KeyError, ValueError) as exc:
+                    external_failure = {
+                        "schema_version": "the-caption-prompt.run-status/v1",
+                        "status": "excluded",
+                        "category": "external_failure",
+                        "reason_code": "codex_usage_components_incomplete",
+                        "detector": "codex-rollout-request-usage/v1",
+                    }
+                    write_json(
+                        adapter_extension / "usage-components-error.json",
+                        {"schema_version": "the-caption-prompt.usage-components-error/v1", "reason": str(exc)},
+                    )
+                    write_json(status_path, external_failure)
+                    total_tokens = None
             if external_failure is None:
                 write_json(
                     usage_path,
                     {
-                        "schema_version": "the-caption-prompt.token-usage/v2",
+                        "schema_version": "the-caption-prompt.token-usage/v3",
                         "token_accounting": TOKEN_ACCOUNTING,
                         "total_tokens": total_tokens,
+                        "usage_components": usage_components,
                     },
                 )
             if external_failure is None and declared_command_protocol is not None:
