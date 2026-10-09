@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json`](../candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json`](../candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json`](../candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate2-expanded12-global-m24-n1-r1.json`](../candidate2-expanded12-global-m24-n1-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate241-result-issuance-frontier-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate241-result-issuance-frontier-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate242-start-check-only-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
-- [`candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)

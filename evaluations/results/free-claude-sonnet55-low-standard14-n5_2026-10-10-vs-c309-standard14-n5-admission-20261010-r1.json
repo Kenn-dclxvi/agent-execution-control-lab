@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "ef220d798f2e4885b3be6956b2ed3fdf",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-sonnet-admission-20261010-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+      "name": "the-caption-3ce91a4-control-free-repository-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "9a8a20f08116f17364dc26c335f25e7e13f48746f41e9a5974e2b70df31feaca",
+  "cost_band": {
+    "candidate_median": 0.6997059,
+    "position": "above_range",
+    "reference_max": 0.6918285000000001,
+    "reference_min": 0.6443213
+  },
+  "differences": {
+    "cost_usd": 0.036021300000000034,
+    "elapsed_seconds": -40.81973058299627,
+    "quality_score": -7.142857142857139,
+    "total_tokens": 82105
+  },
+  "generated_at": "2026-10-09T16:53:13.802227+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": 0.036021300000000034,
+        "elapsed_seconds": -40.81973058299627,
+        "quality_score": -7.142857142857139,
+        "total_tokens": 82105
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-09",
+    "sha256": "dce6c9d6ff1c6f6ae807b6cda215b8fcb8041b2868382e1dfd5d4fc84c5628b1"
+  },
+  "reference": {
+    "analysis_id": "7cbf31386a14473eb491c1b16ad9db64",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c309-standard14-n5-admission-20261010-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "9c5bdd6ae72cb9157b276a6019b07c9205a765e67969207daf3a7aa4b8ca97c5",
+      "name": "the-caption-3ce91a4-final-check-unit-output-trim-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

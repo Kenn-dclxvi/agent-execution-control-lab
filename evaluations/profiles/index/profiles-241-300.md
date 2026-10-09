@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate165-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate165-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate166-prechange-repair-contract-problem-qualification-r1-medium-m24-n5-cli0146.json`](../candidate166-prechange-repair-contract-problem-qualification-r1-medium-m24-n5-cli0146.json)
 - [`candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json`](../candidate166-prior-evaluation-review-admission-r1-medium-m24-n5-cli0146.json)
 - [`candidate166-review-behavior-r1-medium-m24-n5-cli0146.json`](../candidate166-review-behavior-r1-medium-m24-n5-cli0146.json)
 - [`candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json`](../candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json)
@@ -60,5 +62,3 @@
 - [`candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json`](../candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json`](../candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate195-operation-ticketed-review-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate195-operation-ticketed-review-control-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json`](../candidate196-materialized-adjudication-control-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json`](../candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json)
