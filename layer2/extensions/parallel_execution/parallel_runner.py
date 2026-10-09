@@ -91,6 +91,10 @@ def os_sample(disk_path: Path) -> dict[str, Any]:
     except OSError as exc:
         errors.append(f"load_average: {exc}")
     try:
+        sample["cpu_busy_percent"] = cpu_busy_percent(1)
+    except OSError as exc:
+        errors.append(f"cpu_busy_percent: {exc}")
+    try:
         usage = shutil.disk_usage(disk_path)
         sample["disk"] = {
             "path": str(disk_path),
@@ -365,7 +369,183 @@ def execute_job(
     )
 
 
-def run_plan(plan_path: Path, output: Path) -> dict[str, Any]:
+# 実行中の負荷を見て、空きがあるときだけ次のrunを始める（発行の条件、r1）。
+# max_workersは同時実行の上限として残し、その内側で、CPUの使用率が上限以下のときだけ
+# 次のrunを始める。条件はプロファイルの比較条件
+# executor_parameters.campaign_dispatch.admissionへ固定し、実際の判断はadmissions.jsonlへ残す。
+LOAD_ADMISSION_POLICY = "cpu_busy_below"
+LOAD_ADMISSION_REVISION = "r1"
+CPU_USAGE_PATTERN = re.compile(
+    r"CPU usage:\s*([0-9.]+)% user,\s*([0-9.]+)% sys,\s*([0-9.]+)% idle"
+)
+
+
+def cpu_busy_percent(window_seconds: int) -> float:
+    """Return the host CPU busy percentage (user + sys) over one sampling window."""
+    text = command_text(["top", "-l", "2", "-n", "0", "-s", str(window_seconds)])
+    matches = CPU_USAGE_PATTERN.findall(text)
+    if not matches:
+        raise OSError("top did not report CPU usage")
+    user, system, _idle = (float(value) for value in matches[-1])
+    return user + system
+
+
+def admission_config(conditions: dict[str, Any]) -> dict[str, Any] | None:
+    executor = conditions.get("executor_parameters")
+    if not isinstance(executor, dict):
+        return None
+    dispatch = executor.get("campaign_dispatch")
+    if not isinstance(dispatch, dict) or "admission" not in dispatch:
+        return None
+    raw = dispatch["admission"]
+    if not isinstance(raw, dict):
+        raise ParallelRunError("campaign_dispatch.admission must be an object")
+    expected = {
+        "policy",
+        "revision",
+        "busy_percent_max",
+        "min_interval_seconds",
+        "sample_window_seconds",
+        "poll_interval_seconds",
+        "max_sample_failures",
+    }
+    if set(raw) != expected:
+        raise ParallelRunError(f"campaign_dispatch.admission keys must be {sorted(expected)}")
+    if raw["policy"] != LOAD_ADMISSION_POLICY or raw["revision"] != LOAD_ADMISSION_REVISION:
+        raise ParallelRunError("unsupported campaign_dispatch.admission policy or revision")
+    busy = require_positive_number(raw["busy_percent_max"], "admission.busy_percent_max")
+    if busy > 100:
+        raise ParallelRunError("admission.busy_percent_max must be at most 100")
+    min_interval = raw["min_interval_seconds"]
+    if not isinstance(min_interval, (int, float)) or isinstance(min_interval, bool) or min_interval < 0:
+        raise ParallelRunError("admission.min_interval_seconds must be a non-negative number")
+    return {
+        "policy": LOAD_ADMISSION_POLICY,
+        "revision": LOAD_ADMISSION_REVISION,
+        "busy_percent_max": busy,
+        "min_interval_seconds": float(min_interval),
+        "sample_window_seconds": require_positive_integer(
+            raw["sample_window_seconds"], "admission.sample_window_seconds"
+        ),
+        "poll_interval_seconds": require_positive_number(
+            raw["poll_interval_seconds"], "admission.poll_interval_seconds"
+        ),
+        "max_sample_failures": require_positive_integer(
+            raw["max_sample_failures"], "admission.max_sample_failures"
+        ),
+    }
+
+
+def plan_admission_config(plan: dict[str, Any]) -> dict[str, Any] | None:
+    conditions = load_object(plan["jobs"][0]["capsule"]).get("comparison_conditions")
+    if not isinstance(conditions, dict):
+        raise ParallelRunError("capsule comparison_conditions must be an object")
+    return admission_config(conditions)
+
+
+class AdmissionGate:
+    """Start the next run only while the host CPU has headroom.
+
+    A run is admitted when no run is active, or when the sampled CPU busy percentage is
+    at or below the configured maximum. Admissions are spaced by min_interval_seconds so
+    that the load of the previous admission shows up before the next decision.
+    """
+
+    def __init__(
+        self,
+        config: dict[str, Any],
+        record_path: Path,
+        sampler: Callable[[int], float] = cpu_busy_percent,
+        clock: Callable[[], float] = time.monotonic,
+        sleep: Callable[[float], None] = time.sleep,
+    ) -> None:
+        self.config = config
+        self.record_path = record_path
+        self.sampler = sampler
+        self.clock = clock
+        self.sleep = sleep
+        self.admit_lock = threading.Lock()
+        self.state_lock = threading.Lock()
+        self.record_lock = threading.Lock()
+        self.active = 0
+        self.last_admitted: float | None = None
+
+    def admit(self, job: dict[str, Any]) -> None:
+        with self.admit_lock:
+            waits = 0
+            failures = 0
+            while True:
+                if self.last_admitted is not None:
+                    remaining = self.config["min_interval_seconds"] - (
+                        self.clock() - self.last_admitted
+                    )
+                    if remaining > 0:
+                        self.sleep(remaining)
+                with self.state_lock:
+                    active = self.active
+                busy: float | None = None
+                error: str | None = None
+                try:
+                    busy = self.sampler(self.config["sample_window_seconds"])
+                except OSError as exc:
+                    error = str(exc)
+                if active == 0 or (busy is not None and busy <= self.config["busy_percent_max"]):
+                    with self.state_lock:
+                        self.active += 1
+                        active_after = self.active
+                    self.last_admitted = self.clock()
+                    append_jsonl(
+                        self.record_path,
+                        {
+                            "admitted_at": utc_now(),
+                            "case_id": job["binding"]["case_id"],
+                            "iteration": job["binding"]["iteration"],
+                            "dispatch_sequence": job.get("sequence"),
+                            "cpu_busy_percent": busy,
+                            "sample_error": error,
+                            "active_before": active,
+                            "active_after": active_after,
+                            "waits": waits,
+                            "reason": "no_active_run" if active == 0 else "below_busy_max",
+                        },
+                        self.record_lock,
+                    )
+                    return
+                if error is not None:
+                    failures += 1
+                    if failures >= self.config["max_sample_failures"]:
+                        raise ParallelRunError(f"CPU sampling failed repeatedly: {error}")
+                waits += 1
+                self.sleep(self.config["poll_interval_seconds"])
+
+    def release(self) -> None:
+        with self.state_lock:
+            self.active -= 1
+
+
+def execute_admitted_job(
+    gate: AdmissionGate | None,
+    job: dict[str, Any],
+    cycle: Path,
+    evaluator: Path,
+    max_attempts: int,
+    attempt_path: Path,
+    log_lock: threading.Lock,
+) -> dict[str, Any]:
+    if gate is None:
+        return execute_job(job, cycle, evaluator, max_attempts, attempt_path, log_lock)
+    gate.admit(job)
+    try:
+        return execute_job(job, cycle, evaluator, max_attempts, attempt_path, log_lock)
+    finally:
+        gate.release()
+
+
+def run_plan(
+    plan_path: Path,
+    output: Path,
+    cpu_sampler: Callable[[int], float] = cpu_busy_percent,
+) -> dict[str, Any]:
     plan = validate_plan(plan_path.resolve())
     output = output.resolve()
     if output.exists():
@@ -378,6 +558,12 @@ def run_plan(plan_path: Path, output: Path) -> dict[str, Any]:
     monitor_path = output / "os-samples.jsonl"
     monitor_path.touch(exist_ok=False)
     log_lock = threading.Lock()
+    admission = plan_admission_config(plan)
+    gate = None
+    if admission is not None:
+        admission_path = output / "admissions.jsonl"
+        admission_path.touch(exist_ok=False)
+        gate = AdmissionGate(admission, admission_path, sampler=cpu_sampler)
     monitor = OsMonitor(
         monitor_path,
         plan["cycle"],
@@ -400,7 +586,8 @@ def run_plan(plan_path: Path, output: Path) -> dict[str, Any]:
             for jobs in job_groups:
                 futures = [
                     pool.submit(
-                        execute_job,
+                        execute_admitted_job,
+                        gate,
                         job,
                         plan["cycle"],
                         plan["evaluation_loop"],
@@ -440,6 +627,8 @@ def run_plan(plan_path: Path, output: Path) -> dict[str, Any]:
         "status": "complete" if not errors and len(results) == len(plan["jobs"]) else "failed",
         "errors": errors,
     }
+    if admission is not None:
+        summary["admission"] = admission
     write_json_once(output / "summary.json", summary)
     if summary["status"] != "complete":
         raise ParallelRunError("parallel execution did not complete every requested slot")
