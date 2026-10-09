@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n20-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n20-cli0146-r1.json)
+- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-r2-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-autonomous-review-r2-global-m24-n5-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json)
 - [`candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
-- [`candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-f01-f02-f03-global-m24-n5-cli0146-r1.json)
-- [`candidate147-result-effect-scope-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate147-result-effect-scope-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)

@@ -45,6 +45,7 @@ try:
         verify_codex_runtime_binding,
         version_from_conditions,
     )
+    import agent_shell_environment
 except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests.
     from scripts.export_prompt_bundle import (
         BundleError,
@@ -72,6 +73,7 @@ except ModuleNotFoundError:  # Imported as scripts.run_codex_evaluation in tests
         verify_codex_runtime_binding,
         version_from_conditions,
     )
+    from scripts import agent_shell_environment
 
 
 class AdapterError(Exception):
@@ -109,6 +111,40 @@ def codex_runtime_from_environment(
     except CodexRuntimeBindingError as exc:
         raise AdapterError(str(exc)) from exc
     return executable, runtime_binding
+
+
+def shell_environment_from_conditions(conditions: dict[str, Any]) -> dict[str, Any] | None:
+    try:
+        return agent_shell_environment.shell_environment_from_conditions(conditions)
+    except agent_shell_environment.ShellEnvironmentError as exc:
+        raise AdapterError(str(exc)) from exc
+
+
+def codex_command_environment(
+    shell_environment: dict[str, Any],
+    workspace: Path,
+    zdotdir: Path,
+    success_delivery_runtime: dict[str, Any] | None,
+    source: dict[str, str] | None = None,
+) -> dict[str, str]:
+    """Fixed Codex environment: account identity, CODEX_HOME and the workspace .venv."""
+    source = os.environ if source is None else source
+    passthrough = {"CODEX_HOME": require_string(source.get("CODEX_HOME"), "CODEX_HOME")}
+    if success_delivery_runtime is not None:
+        passthrough["CODEX_SUCCESS_COMMAND_POLICY"] = str(success_delivery_runtime["policy_path"])
+        passthrough["CODEX_SUCCESS_COMMAND_EVIDENCE_DIR"] = str(
+            success_delivery_runtime["evidence_dir"]
+        )
+    try:
+        return agent_shell_environment.agent_environment(
+            shell_environment,
+            workspace,
+            zdotdir,
+            shell=agent_shell_environment.account_shell(),
+            passthrough=passthrough,
+        )
+    except agent_shell_environment.ShellEnvironmentError as exc:
+        raise AdapterError(str(exc)) from exc
 
 
 EXTERNAL_FAILURE_EXIT_CODE = 75
@@ -1240,6 +1276,7 @@ def execute() -> int:
     codex_executable, runtime_binding = codex_runtime_from_environment(conditions)
     agents_max_threads = agents_max_threads_from_conditions(conditions)
     capability_catalog_policy = capability_catalog_policy_from_conditions(conditions)
+    shell_environment = shell_environment_from_conditions(conditions)
     executor_parameters = require_object(
         conditions.get("executor_parameters"), "comparison_conditions.executor_parameters"
     )
@@ -1320,19 +1357,48 @@ def execute() -> int:
             "--disable",
             "plugin_sharing",
         ]
-    session_started_at = time.time()
-    command_environment = os.environ.copy()
-    if success_delivery_runtime is not None:
-        command_environment.update(
-            {
-                "CODEX_SUCCESS_COMMAND_POLICY": str(
-                    success_delivery_runtime["policy_path"]
-                ),
-                "CODEX_SUCCESS_COMMAND_EVIDENCE_DIR": str(
-                    success_delivery_runtime["evidence_dir"]
-                ),
-            }
+    zdotdir_holder = None
+    if shell_environment is None:
+        command_environment = os.environ.copy()
+        if success_delivery_runtime is not None:
+            command_environment.update(
+                {
+                    "CODEX_SUCCESS_COMMAND_POLICY": str(
+                        success_delivery_runtime["policy_path"]
+                    ),
+                    "CODEX_SUCCESS_COMMAND_EVIDENCE_DIR": str(
+                        success_delivery_runtime["evidence_dir"]
+                    ),
+                }
+            )
+    else:
+        # Codex runs commands in the OS account shell, not $SHELL; a non-login shell
+        # with an empty ZDOTDIR reads no user startup files and keeps the fixed PATH.
+        command[command.index("-m"):command.index("-m")] = [
+            "-c",
+            "allow_login_shell=false",
+        ]
+        zdotdir_holder = agent_shell_environment.empty_zdotdir()
+        command_environment = codex_command_environment(
+            shell_environment,
+            workspace,
+            Path(zdotdir_holder.name),
+            success_delivery_runtime,
         )
+        shell_receipt = agent_shell_environment.probe_receipt(
+            command_environment,
+            workspace,
+            agent="codex",
+            shell=command_environment["SHELL"],
+            agent_shell_arguments=["-c"],
+        )
+        agent_shell_environment.write_receipt(
+            extension_root / "shell-environment" / "receipt.json", shell_receipt
+        )
+        if not shell_receipt["ok"]:
+            zdotdir_holder.cleanup()
+            raise AdapterError("agent shell environment does not match the comparison condition")
+    session_started_at = time.time()
     cli_clock_started = time.perf_counter()
     try:
         completed = subprocess.run(
@@ -1345,6 +1411,8 @@ def execute() -> int:
         )
     finally:
         cli_clock_ended = time.perf_counter()
+        if zdotdir_holder is not None:
+            zdotdir_holder.cleanup()
         timing_dir = extension_root / "execution-time"
         timing_dir.mkdir(parents=True, exist_ok=True)
         with (timing_dir / "adapter-clock.json").open("x") as timing_stream:

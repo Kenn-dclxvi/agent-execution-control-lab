@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-a01-three-choice-variation-r2-global-m24-n5-r1.json)
+- [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-explicit-producer-d01-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-f04-global-m10-n10-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-fixed-evidence-review-f10-global-m10-n5-catalog-fixed-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-fixed-evidence-review-f10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-test-deduplication-r6-n2-20261003.json)
 - [`control-free-astra-low-old-a01-current-env-n2-20261003-r1.json`](../control-free-astra-low-old-a01-current-env-n2-20261003-r1.json)
 - [`control-free-astra-low-old-a01-exact-input-projection-r2-n2-20261003.json`](../control-free-astra-low-old-a01-exact-input-projection-r2-n2-20261003.json)
-- [`control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json`](../control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json)
-- [`control-free-astra-low-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-low-old-a01-isolated-n20-20261003-r1.json)
