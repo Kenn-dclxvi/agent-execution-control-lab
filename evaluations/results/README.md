@@ -172,7 +172,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 <a id="c280-sol-sonnet-low-decomposition-20261009"></a>
 ## C280のSol Low・Sonnet lowの操作別の分解（2026-10-09）
 
-[分析記録](../../docs/c280-test-required-vs-excess-r1.md)、[操作の種類ごとの分解](c280-sol61-low-sonnet55-low-token-decomposition-by-operation_2026-10-09.json)、[最小の流れとの差](c280-sol61-low-sonnet55-low-minimal-path-excess_2026-10-09.json)。保存済みのC280（Sol Low `794d02ab…`、Sonnet low `c84fd227…`、各70件）を、新しい実行なしに分解した。14ケースのリクエスト数（中央値）の和は、試験が求める最小の流れより、Sonnet lowで10回、Sol Lowで41回多い。
+[分析記録](../../docs/c280-test-required-vs-excess-r1.md)、[操作の種類ごとの分解](c280-sol61-low-sonnet55-low-token-decomposition-by-operation_2026-10-09.json)、[最小の流れとの差](c280-sol61-low-sonnet55-low-minimal-path-excess_2026-10-09.json)。[余分な応答の内訳](c280-sol61-low-sonnet55-low-excess-response-detail_2026-10-09.json)。保存済みのC280（Sol Low `794d02ab…`、Sonnet low `c84fd227…`、各70件）を、新しい実行なしに分解した。14ケースのリクエスト数（中央値）の和は、試験が求める最小の流れより、Sonnet lowで10回、Sol Lowで41回多い。
 
 <a id="c296-sol-sonnet-low-std14-20261009"></a>
 ## C296のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
