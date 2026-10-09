@@ -78,7 +78,7 @@
 ### 揺れの幅
 
 - 幅は、基準のN=5の反復の最小と最大とする。結果を見る前に固定する。
-- C301の費用の幅は、Sol Lowが$0.857〜1.007、Sonnet lowが$0.645〜0.714だった（[試算](../evaluations/results/kpi-cost-weighting-trial_2026-10-09.json)）。
+- C301の費用の幅は、Sol Lowが$0.857〜1.007、Sonnet lowが$0.645〜0.714だった（[試算](../evaluations/results/kpi-cost-weighting-trial_2026-10-09.json)）。同日、#361の経路でC301を[測り直した](../evaluations/results/c301-singlepath-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。以後の比較の基準はこの測り直しとし、費用の幅はSol Lowが$0.9261〜1.0331、Sonnet lowが$0.6656〜0.7005である。
 
 ### 記録を読む順序
 
