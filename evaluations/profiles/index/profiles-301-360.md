@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate206-admitted-evidence-current-adr9-r2-medium-m24-n20-cli0146.json`](../candidate206-admitted-evidence-current-adr9-r2-medium-m24-n20-cli0146.json)
+- [`candidate206-admitted-evidence-current-adr9-r2-medium-m24-n5-cli0146.json`](../candidate206-admitted-evidence-current-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate206-admitted-evidence-current-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json`](../candidate206-admitted-evidence-current-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json)
 - [`candidate206-admitted-evidence-current-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate206-admitted-evidence-current-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate207-c147-review-boundary-recomposition-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate207-c147-review-boundary-recomposition-adr9-r2-medium-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate254-independent-check-same-model-step-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate254-independent-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate254-independent-check-same-model-step-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json)
-- [`candidate254-independent-check-same-model-step-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate254-independent-check-same-model-step-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate255-partial-evidence-result-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate255-partial-evidence-result-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)

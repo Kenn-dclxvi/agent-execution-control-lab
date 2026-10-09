@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c303-sol-sonnet-low-std14-20261009)
 - [C302のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c302-sol-sonnet-low-std14-20261009)
 - [C301、全セルを一つの待ち行列で測った系列の基準（2026-10-09）](#c301-onequeue-std14-20261009)
 - [C301の測り直し、一つのプロンプトを計測する経路（2026-10-09）](#c301-singlepath-std14-20261009)
@@ -180,6 +181,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c303-sol-sonnet-low-std14-20261009"></a>
+## C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
+
+[計測記録](c303-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](056402b9980941bdabca92766a2d56aa.json)、[analysis](c303-sol61-low-standard14-n5_2026-10-09-analysis.json)、[selection](c303-sol61-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c303-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c303-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)、[C301との比較](c303-sol61-low-standard14-n5_2026-10-09-c301-comparison.json)。Sonnet lowは[登録結果](23f793aa4201406ba13ca73de77f4d9b.json)、[analysis](c303-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c303-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c303-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c303-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[C301との比較](c303-claude-sonnet55-low-standard14-n5_2026-10-09-c301-comparison.json)。両セルの[待ち行列の記録](c303-sol61-low-sonnet55-low-standard14-n5_2026-10-09-campaign-summary.json)と[機序の診断](c303-sol61-low-sonnet55-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)。両セルとも有効70件すべてが4点。基準C301と比べ、Sol Lowは費用−8.07%（幅より下）・経過時間+4.86%（幅の中）、Sonnet lowは費用+0.71%（幅の中）・経過時間−8.36%（幅より下）。Sonnet lowで`main_verify.sh`の出力をそのまま返す実行は7件で、C302の14件ほど増えなかった。採用は未判断。
 
 <a id="c302-sol-sonnet-low-std14-20261009"></a>
 ## C302のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）

@@ -1,0 +1,124 @@
+{
+ "schema_version": "the-caption-prompt.c303-mechanism-diagnostics/v1",
+ "note": "診断のみ。KPIや合否に使わない。数え方はC302の診断と同じ。",
+ "cells": {
+  "sol": {
+   "C301": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 10,
+     "2": 10,
+     "3": 10,
+     "4": 11,
+     "5": 10
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "short_wait_specifications_per_iteration": {
+     "1": 18,
+     "2": 16,
+     "3": 13,
+     "4": 16,
+     "5": 15
+    },
+    "wait_only_calls_per_iteration": {
+     "1": 6,
+     "2": 4,
+     "3": 8,
+     "4": 5,
+     "5": 7
+    }
+   },
+   "C302": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 1,
+     "2": 6,
+     "3": 1,
+     "4": 1,
+     "5": 0
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "short_wait_specifications_per_iteration": {},
+    "wait_only_calls_per_iteration": {
+     "2": 2,
+     "3": 1
+    }
+   },
+   "C303": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 2,
+     "2": 6,
+     "3": 8,
+     "4": 2,
+     "5": 5
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "short_wait_specifications_per_iteration": {
+     "1": 16,
+     "2": 14,
+     "3": 12,
+     "4": 9,
+     "5": 14
+    },
+    "wait_only_calls_per_iteration": {
+     "1": 3,
+     "2": 6,
+     "3": 8,
+     "4": 3,
+     "5": 4
+    }
+   }
+  },
+  "sonnet": {
+   "C301": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 4,
+     "2": 3,
+     "3": 3,
+     "4": 3,
+     "5": 3
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "main_verify_command_forms": {
+     "redirect_or_tail": 15,
+     "full_output": 5
+    },
+    "persisted_outputs": 5,
+    "reads_of_persisted_outputs": 5,
+    "characters_read_from_persisted_outputs": 1916
+   },
+   "C302": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 4,
+     "2": 5,
+     "3": 5,
+     "4": 4,
+     "5": 4
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "main_verify_command_forms": {
+     "full_output": 14,
+     "redirect_or_tail": 6
+    },
+    "persisted_outputs": 14,
+    "reads_of_persisted_outputs": 18,
+    "characters_read_from_persisted_outputs": 81271
+   },
+   "C303": {
+    "commands_after_last_successful_full_gate_per_iteration": {
+     "1": 2,
+     "2": 4,
+     "3": 3,
+     "4": 4,
+     "5": 2
+    },
+    "f06_f07_runs_with_successful_git_diff_check": "10/10",
+    "main_verify_command_forms": {
+     "full_output": 7,
+     "redirect_or_tail": 13
+    },
+    "persisted_outputs": 7,
+    "reads_of_persisted_outputs": 6,
+    "characters_read_from_persisted_outputs": 2237
+   }
+  }
+ }
+}

@@ -111,6 +111,7 @@
 - [Candidate300 C298とC299の二項目をC280へ同時に加える](candidate300-c298-c299-combined-design.md)：単独で閉じる対象の応答の減少を確かめた二項目を、原文どおり統合して測る設計。効果が足し合わされるか、互いに打ち消すかを確かめる。
 - [Candidate301 C280のrootの`AGENTS.md`のMarkdownの書式を揃える](candidate301-c280-uniform-markdown-design.md)：見出しの階層、箇条書きの記号、強調を他の`AGENTS.md`と揃える設計。制御は変えず、実行環境を切り離した新しい評価系列の基準にする。
 - [Candidate302 C301の書式でC298とC299の二項目を加える](candidate302-c301-success-closure-and-wait-time-design.md)：実行環境を切り離した系列で29x系を一度計測するため、旧系列で両セルとも費用が下がったC300の二項目を、C301の書式でC301へ加える設計。C301の保存traceで二項目が閉じる操作が残っていることを確認した。
+- [Candidate303 C301の書式でC298の一項目だけを加える](candidate303-c301-success-closure-design.md)：C302でSonnet lowの確認コマンドの出力の形が変わったため、二項目のどちらに伴うかを切り分ける材料として、C298の一項目だけをC301へ加えて測る設計。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 

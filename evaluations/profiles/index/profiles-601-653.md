@@ -1,7 +1,9 @@
-# Profile index 601-651
+# Profile index 601-653
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-high-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-high-old-a01-assets-reduced-n2-20261003-r1.json)
+- [`control-free-astra-high-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-high-old-a01-isolated-n20-20261003-r1.json)
 - [`control-free-astra-high-standard14-n5-cli0153-r1.json`](../control-free-astra-high-standard14-n5-cli0153-r1.json)
 - [`control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json)
 - [`control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json)
