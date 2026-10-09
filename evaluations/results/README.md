@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [KPIを料金で重みづけした試算（2026-10-09）](#kpi-cost-weighting-trial-20261009)
 - [C301のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（実行環境を切り離した系列の基準、2026-10-09）](#c301-sol-sonnet-low-std14-shellenv-20261009)
 - [C280〜C300の処理の適切さの分類（2026-10-09）](#c280-c300-appropriateness-20261009)
 - [C300のSonnet 5.5 low、Standard14 累積N=20（2026-10-09）](#c300-sonnet-low-std14-n20-20261009)
@@ -176,6 +177,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="kpi-cost-weighting-trial-20261009"></a>
+## KPIを料金で重みづけした試算（2026-10-09）
+
+[試算の記録](kpi-cost-weighting-trial_2026-10-09.json)。新しい実行はなく、C280・C298・C299・C300（旧系列）とC301（新しい系列）の両セルの保存済みの使用量を、単価表`api-standard-2026-10-09`で米ドルに換算した。C280比で、Sol LowはC298とC299が生のトークンでは減、費用では増（+2.6%、+6.4%）、C300は費用で−5.7%。Sonnet lowはC300の向きが逆になる（生+2.1%、費用−2.1%）。旧系列の判定は書き換えない。[判定基準r2の改訂案](../../docs/shared-instruction-evaluation-criteria-r2.md)の根拠。
 
 <a id="c301-sol-sonnet-low-std14-shellenv-20261009"></a>
 ## C301のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（実行環境を切り離した系列の基準、2026-10-09）
