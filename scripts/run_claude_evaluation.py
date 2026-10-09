@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 try:
+    import agent_shell_environment
     from comparison_identity import behavior_plugins
     from export_prompt_bundle import BundleError, verify_bundle
     from all_agent_command_evidence import (
@@ -52,6 +53,7 @@ try:
         write_json,
     )
 except ModuleNotFoundError:  # Imported as scripts.run_claude_evaluation in tests.
+    from scripts import agent_shell_environment
     from scripts.comparison_identity import behavior_plugins
     from scripts.export_prompt_bundle import BundleError, verify_bundle
     from scripts.all_agent_command_evidence import (
@@ -168,6 +170,26 @@ def minimal_environment(claude: dict[str, Any]) -> dict[str, str]:
     }
     environment.update(claude["process_environment"])
     return environment
+
+
+def claude_agent_environment(
+    claude: dict[str, Any], shell_environment: dict[str, Any], workspace: Path, zdotdir: Path
+) -> dict[str, str]:
+    """Fixed Claude Code environment with the workspace .venv on PATH."""
+    process_environment = dict(claude["process_environment"])
+    shell = require_string(
+        process_environment.pop("SHELL", None), "agent_environment.claude_code.process_environment.SHELL"
+    )
+    try:
+        return agent_shell_environment.agent_environment(
+            shell_environment,
+            workspace,
+            zdotdir,
+            shell=shell,
+            passthrough={"CLAUDE_CONFIG_DIR": claude["config_dir"], **process_environment},
+        )
+    except agent_shell_environment.ShellEnvironmentError as exc:
+        raise AdapterError(str(exc)) from exc
 
 
 def config_isolation_receipt(claude: dict[str, Any]) -> dict[str, Any]:
@@ -317,6 +339,10 @@ def execute() -> int:
     if executor_parameters.get("command_protocol_text_revision") != CLAUDE_COMMAND_PROTOCOL_TEXT_REVISION:
         raise AdapterError("unsupported Claude command protocol text revision")
     claude = claude_environment_from_conditions(conditions)
+    try:
+        shell_environment = agent_shell_environment.shell_environment_from_conditions(conditions)
+    except agent_shell_environment.ShellEnvironmentError as exc:
+        raise AdapterError(str(exc)) from exc
     bundle = Path(require_string(parameters.get("prompt_bundle"), "parameters.prompt_bundle")).resolve()
     expected_hash = require_string(parameters.get("bundle_sha256"), "parameters.bundle_sha256")
     expected_dirty = set(require_string_array(parameters.get("expected_initial_dirty_paths"), "expected_initial_dirty_paths"))
@@ -371,7 +397,27 @@ def execute() -> int:
         "--settings",
         json.dumps(claude["flag_settings"], sort_keys=True, separators=(",", ":")),
     ]
-    environment = minimal_environment(claude)
+    zdotdir_holder = None
+    if shell_environment is None:
+        environment = minimal_environment(claude)
+    else:
+        zdotdir_holder = agent_shell_environment.empty_zdotdir()
+        environment = claude_agent_environment(
+            claude, shell_environment, workspace, Path(zdotdir_holder.name)
+        )
+        shell_receipt = agent_shell_environment.probe_receipt(
+            environment,
+            workspace,
+            agent="claude-code",
+            shell=environment["SHELL"],
+            agent_shell_arguments=["-c"],
+        )
+        agent_shell_environment.write_receipt(
+            extension_root / "shell-environment" / "receipt.json", shell_receipt
+        )
+        if not shell_receipt["ok"]:
+            zdotdir_holder.cleanup()
+            raise AdapterError("agent shell environment does not match the comparison condition")
     cli_clock_started = time.perf_counter()
     try:
         completed = subprocess.run(
@@ -384,6 +430,8 @@ def execute() -> int:
         )
     finally:
         cli_clock_ended = time.perf_counter()
+        if zdotdir_holder is not None:
+            zdotdir_holder.cleanup()
         timing_dir = extension_root / "execution-time"
         timing_dir.mkdir(parents=True, exist_ok=True)
         with (timing_dir / "adapter-clock.json").open("x") as timing_stream:

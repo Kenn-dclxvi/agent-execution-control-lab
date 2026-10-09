@@ -20,6 +20,7 @@ from scripts.run_codex_evaluation import (
     capability_catalog_external_failure,
     capability_catalog_identity,
     capability_catalog_policy_from_conditions,
+    codex_command_environment,
     codex_runtime_from_environment,
     command_protocol_for_case,
     command_evidence_external_failure,
@@ -34,8 +35,10 @@ from scripts.run_codex_evaluation import (
     prompt_set_identity_from_binding,
     remove_adapter_owned_outputs,
     render_task,
+    shell_environment_from_conditions,
     validate_boundary_evidence_compatibility,
 )
+from scripts import agent_shell_environment
 
 
 class RunCodexEvaluationTest(unittest.TestCase):
@@ -770,6 +773,55 @@ class RunCodexEvaluationTest(unittest.TestCase):
         capsule["comparison_conditions"]["executor_parameters"].pop("boundary_evidence")
         with self.assertRaisesRegex(AdapterError, "do not bind"):
             validate_boundary_evidence_compatibility(capsule, [{}])
+
+
+class CodexShellEnvironmentTest(unittest.TestCase):
+    def declared(self):
+        return {
+            "schema_version": agent_shell_environment.SHELL_ENVIRONMENT_SCHEMA_VERSION,
+            "revision": agent_shell_environment.SHELL_ENVIRONMENT_REVISION,
+            "base_path": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+            "workspace_venv": ".venv",
+            "venv_activation": agent_shell_environment.VENV_ACTIVATION,
+            "user_startup_files": agent_shell_environment.USER_STARTUP_FILES,
+        }
+
+    def test_command_environment_does_not_copy_the_measuring_process(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory).resolve()
+            (workspace / ".venv" / "bin").mkdir(parents=True)
+            (workspace / ".venv" / "bin" / "python").write_text("")
+            source = {
+                "CODEX_HOME": "/eval/codex-home",
+                "PATH": "/personal/bin:/usr/bin",
+                "EVAL_CODEX_EXECUTABLE": "/eval/codex",
+                "SSH_AUTH_SOCK": "/personal/agent",
+            }
+            runtime = {"policy_path": Path("/eval/policy.json"), "evidence_dir": Path("/eval/evidence")}
+            environment = codex_command_environment(
+                self.declared(), workspace, workspace / "zdotdir", runtime, source
+            )
+        self.assertEqual(environment["CODEX_HOME"], "/eval/codex-home")
+        self.assertEqual(environment["CODEX_SUCCESS_COMMAND_POLICY"], "/eval/policy.json")
+        self.assertEqual(environment["CODEX_SUCCESS_COMMAND_EVIDENCE_DIR"], "/eval/evidence")
+        self.assertEqual(environment["PATH"], f"{workspace}/.venv/bin:{self.declared()['base_path']}")
+        self.assertEqual(environment["VIRTUAL_ENV"], f"{workspace}/.venv")
+        self.assertEqual(environment["SHELL"], agent_shell_environment.account_shell())
+        self.assertNotIn("EVAL_CODEX_EXECUTABLE", environment)
+        self.assertNotIn("SSH_AUTH_SOCK", environment)
+        for value in environment.values():
+            self.assertNotIn("/personal", value)
+
+    def test_command_environment_requires_codex_home(self):
+        with self.assertRaises(AdapterError):
+            codex_command_environment(self.declared(), Path("/w"), Path("/z"), None, {})
+
+    def test_declaration_errors_are_adapter_errors(self):
+        self.assertIsNone(shell_environment_from_conditions({"agent_environment": {}}))
+        with self.assertRaises(AdapterError):
+            shell_environment_from_conditions(
+                {"agent_environment": {"shell_environment": {**self.declared(), "revision": "x"}}}
+            )
 
 
 if __name__ == "__main__":

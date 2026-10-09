@@ -321,6 +321,43 @@ class ClaudeAdapterTest(unittest.TestCase):
                 adapter.config_isolation_receipt(claude)
 
 
+    def test_agent_environment_puts_the_workspace_venv_first(self):
+        from scripts import agent_shell_environment
+
+        declared = {
+            "schema_version": agent_shell_environment.SHELL_ENVIRONMENT_SCHEMA_VERSION,
+            "revision": agent_shell_environment.SHELL_ENVIRONMENT_REVISION,
+            "base_path": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+            "workspace_venv": ".venv",
+            "venv_activation": agent_shell_environment.VENV_ACTIVATION,
+            "user_startup_files": agent_shell_environment.USER_STARTUP_FILES,
+        }
+        process_environment = {
+            "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+            "DISABLE_AUTOUPDATER": "1",
+            "LANG": "en_US.UTF-8",
+            "SHELL": "/bin/bash",
+            "TMPDIR": "/private/tmp",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory).resolve()
+            (workspace / ".venv" / "bin").mkdir(parents=True)
+            (workspace / ".venv" / "bin" / "python").write_text("")
+            claude = {"config_dir": "/eval/claude-config", "process_environment": process_environment}
+            environment = adapter.claude_agent_environment(claude, declared, workspace, workspace / "z")
+            self.assertEqual(environment["PATH"], f"{workspace}/.venv/bin:{declared['base_path']}")
+            self.assertEqual(environment["VIRTUAL_ENV"], f"{workspace}/.venv")
+            self.assertEqual(environment["SHELL"], "/bin/bash")
+            self.assertEqual(environment["CLAUDE_CONFIG_DIR"], "/eval/claude-config")
+            self.assertEqual(environment["TMPDIR"], "/private/tmp")
+            self.assertEqual(
+                set(environment),
+                {*process_environment, "HOME", "USER", "LOGNAME", "CLAUDE_CONFIG_DIR", "PATH", "VIRTUAL_ENV", "ZDOTDIR"},
+            )
+            claude["process_environment"] = {**process_environment, "PATH": "/usr/bin"}
+            with self.assertRaises(adapter.AdapterError):
+                adapter.claude_agent_environment(claude, declared, workspace, workspace / "z")
+
 class ClaudeAuditTest(unittest.TestCase):
     def test_owner_report_marks_every_run_unavailable(self):
         with tempfile.TemporaryDirectory() as directory:
