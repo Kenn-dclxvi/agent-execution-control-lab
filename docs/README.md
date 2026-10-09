@@ -99,6 +99,11 @@
 - [Candidate294 C293で欠落した開始時の検索と範囲の一項を戻す](candidate294-shared-mechanism-carrier-restore-design.md)：C293のSol Lowで戻った変更前の呼び出しとリポジトリ外の読み取りに対し、供給源（C285、C289・C291）から転記し損ねた二点を原文どおりに戻す。範囲の一項は、機序ではなく保護として扱う。Candidateは未評価
 - [Candidate295 開始時の義務を「名指しした対象の読み取り」から「位置を特定する検索」へ置き換える](candidate295-start-search-not-read-design.md)：Sonnet lowで最初の応答の全文ReadがC288から増えた（C280の7回からC294の34回）経路を、開始時の義務の置き換えで閉じる。Candidateは未評価
 - [Candidate296 両セルで成立した機序だけを残し、指示文を短くする](candidate296-and-only-compact-design.md)：Sol LowとSonnet lowの両方で成立した機序（検索と本文を同じ呼び出しで返す、検証の一括化）だけを残し、Sonnetで成立しない開始時のまとめ読みと、Sonnetで判定できない範囲の一項を外す。残す項目も述語を保って短くし、全文はC295の4,894バイトから3,223バイトになる。Candidateは未作成
+- [C280の指示文を短くする案の検討（r1）](c280-compaction-review-r1.md)：C280を意味を保って縮めても65バイト（Sonnet lowで0.16%）にとどまり、項目を外すとA01の誤経路の閉鎖など確かめた働きを失うため、どちらもCandidateにしない。Sonnet lowでC280を上回った主因はC281以降に足した文だったことと、残る課題（主なセルの見直し、Sonnet lowで機序が成立しない理由の分解）を記録。Candidateは未作成
+- [Sonnet 5.5 lowで検証の一括化が成立しない理由（r1）](sonnet-low-validation-split-cause-r1.md)：Sonnet lowで検証が分かれた実行は、すべてTaskSpecの必須コマンドの境目で分かれていた（C280・C296とも20/20）。Claude用の課題文が必須コマンドを個別のBash呼び出しで実行するよう指定しており、一つの外側の呼び出しで実行する検証の項目と両立しないことを記録。指定と両立する対応（同じ応答の中で個別の呼び出しを並べる）を設計の候補として記録。Candidateは未作成
+- [共通の指示文を改善する判定基準と、変更を考える範囲（r1）](shared-instruction-evaluation-criteria-r1.md)：機序の成立を目標にしていたずれを正し、品質を保ってSol LowとSonnet lowの両方でC280よりトークンと経過時間を増やさないことを判定の基準に固定。試験の条件と食い違う指定を書かず、保存traceから試験が求める操作以外のコストを特定して変更を考える。以後の設計と判定はこの基準に従う
+- [C280のトークンを、試験が求める操作とそれ以外に分ける（r1）](c280-test-required-vs-excess-r1.md)：判定基準に従い、Sol LowとSonnet lowのC280を、TaskSpecが求める最小の流れと比べた。Sonnet lowは最小に近く（14ケースで超過10回）、Sol Lowは41回超過。両セルに共通する超過は、変更前の読み取りの追加回、変更後の必須以外の確認、変更後の読み取り。次の設計の対象と、加える文の固定分の上限の目安を記録。Candidateは未作成
+- [Candidate297 変更後の状態と差分の確認を、必須の確認と同じ応答で発行する](candidate297-post-change-status-with-validation-design.md)：判定基準のもとで、両セルに共通して減らせると分かった、必須の確認の直後に状態と差分の確認だけを別の応答で出す流れ（Sonnet low 2.2回、Sol Low 2.6回/反復）を、C280に一項目（288バイト）を加えて閉じる設計。Claudeの課題文の指定（必須コマンドは個別のBash呼び出し）と両立する。Candidateは未作成
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。

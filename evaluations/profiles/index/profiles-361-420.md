@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n10-cli0146-r1.json)
+- [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n15-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n20-cli0146-r1.json)
 - [`candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate269-natural-language-validation-carrier-closure-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate39-owner-aligned-result-unit-owner-producer-v8-targeted2-global-m10-n5-r1.json`](../candidate39-owner-aligned-result-unit-owner-producer-v8-targeted2-global-m10-n5-r1.json)
 - [`candidate4-expanded12-global-m24-n5-r1.json`](../candidate4-expanded12-global-m24-n5-r1.json)
 - [`candidate40-operation-result-projection-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate40-operation-result-projection-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)

@@ -1,7 +1,9 @@
-# Profile index 601-633
+# Profile index 601-635
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json`](../control-free-astra-medium-remeasure-standard14-n5-cli0153-r1.json)
+- [`control-free-generic-expanded12-global-m24-n5-r1.json`](../control-free-generic-expanded12-global-m24-n5-r1.json)
 - [`control-free-luna6-high-standard14-n5-cli0156-r1.json`](../control-free-luna6-high-standard14-n5-cli0156-r1.json)
 - [`control-free-luna6-medium-standard14-n5-cli0156-r1.json`](../control-free-luna6-medium-standard14-n5-cli0156-r1.json)
 - [`control-free-luna6-xhigh-standard14-n5-cli0156-r1.json`](../control-free-luna6-xhigh-standard14-n5-cli0156-r1.json)

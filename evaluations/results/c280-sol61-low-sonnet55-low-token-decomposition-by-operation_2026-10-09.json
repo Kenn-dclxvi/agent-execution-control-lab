@@ -1,0 +1,175 @@
+{
+  "schema_version": "c280-token-decomposition-by-operation/v1",
+  "method": "応答ごとの使用量（Codexはtoken_usage_record、Claudeはtranscriptのusage）から、各応答の後に生じた次のリクエストの固定分（最初のリクエストの文脈）と、増えた文脈が以後のリクエストへ持ち越された量を、その応答で発行した操作の種類へ等分して割り当てた。一つのコマンドに;や&&でつないだ操作は、部分ごとに分けた。種類はコマンド文字列による簡易な判定。最初のリクエストと出力は種類に割り当てない。",
+  "cells": [
+    {
+      "cell": "GPT-6.1 Sol Low C280",
+      "result": "794d02abe894456686eea22e9b6f0fed.json",
+      "total_per_iteration": 2076256,
+      "first_request_per_iteration": 226130,
+      "output_per_iteration": 13330,
+      "matched_runs": 70,
+      "runs": 70,
+      "by_kind": {
+        "本文の読み取り": {
+          "request_fixed": 150795,
+          "carried": 211420,
+          "total": 362216,
+          "share": 17.4,
+          "requests": 9.3
+        },
+        "開始時の確認": {
+          "request_fixed": 225417,
+          "carried": 40993,
+          "total": 266410,
+          "share": 12.8,
+          "requests": 13.9
+        },
+        "必須の確認": {
+          "request_fixed": 170440,
+          "carried": 58695,
+          "total": 229135,
+          "share": 11.0,
+          "requests": 10.5
+        },
+        "指示ファイル（ルート）": {
+          "request_fixed": 62202,
+          "carried": 137893,
+          "total": 200095,
+          "share": 9.6,
+          "requests": 3.8
+        },
+        "待機": {
+          "request_fixed": 148991,
+          "carried": 42514,
+          "total": 191505,
+          "share": 9.2,
+          "requests": 9.2
+        },
+        "検索・一覧": {
+          "request_fixed": 70002,
+          "carried": 56422,
+          "total": 126424,
+          "share": 6.1,
+          "requests": 4.3
+        },
+        "変更": {
+          "request_fixed": 89687,
+          "carried": 33980,
+          "total": 123667,
+          "share": 6.0,
+          "requests": 5.5
+        },
+        "変更後の状態確認": {
+          "request_fixed": 103994,
+          "carried": 10392,
+          "total": 114386,
+          "share": 5.5,
+          "requests": 6.4
+        },
+        "その他": {
+          "request_fixed": 93343,
+          "carried": 16403,
+          "total": 109746,
+          "share": 5.3,
+          "requests": 5.8
+        },
+        "指示ファイル（ルート以外）": {
+          "request_fixed": 49494,
+          "carried": 16460,
+          "total": 65954,
+          "share": 3.2,
+          "requests": 3.1
+        },
+        "必須以外の確認": {
+          "request_fixed": 33555,
+          "carried": 13704,
+          "total": 47259,
+          "share": 2.3,
+          "requests": 2.1
+        }
+      }
+    },
+    {
+      "cell": "Sonnet 5.5 low C280",
+      "result": "c84fd22753d248e588e586cb8022ea1e.json",
+      "total_per_iteration": 842627,
+      "first_request_per_iteration": 132043,
+      "output_per_iteration": 18811,
+      "matched_runs": 70,
+      "runs": 70,
+      "by_kind": {
+        "開始時の確認": {
+          "request_fixed": 119078,
+          "carried": 71475,
+          "total": 190553,
+          "share": 22.6,
+          "requests": 12.6
+        },
+        "必須の確認": {
+          "request_fixed": 121005,
+          "carried": 20917,
+          "total": 141922,
+          "share": 16.8,
+          "requests": 12.7
+        },
+        "本文の読み取り": {
+          "request_fixed": 66406,
+          "carried": 59029,
+          "total": 125435,
+          "share": 14.9,
+          "requests": 7.0
+        },
+        "変更": {
+          "request_fixed": 62707,
+          "carried": 17661,
+          "total": 80368,
+          "share": 9.5,
+          "requests": 6.6
+        },
+        "検索・一覧": {
+          "request_fixed": 46405,
+          "carried": 30740,
+          "total": 77145,
+          "share": 9.2,
+          "requests": 4.9
+        },
+        "変更後の状態確認": {
+          "request_fixed": 31315,
+          "carried": 1013,
+          "total": 32328,
+          "share": 3.8,
+          "requests": 3.3
+        },
+        "必須以外の確認": {
+          "request_fixed": 18872,
+          "carried": 1128,
+          "total": 20000,
+          "share": 2.4,
+          "requests": 2.0
+        },
+        "指示ファイル（ルート以外）": {
+          "request_fixed": 6878,
+          "carried": 6023,
+          "total": 12900,
+          "share": 1.5,
+          "requests": 0.7
+        },
+        "指示ファイル（ルート）": {
+          "request_fixed": 3690,
+          "carried": 3273,
+          "total": 6963,
+          "share": 0.8,
+          "requests": 0.4
+        },
+        "その他": {
+          "request_fixed": 3333,
+          "carried": 827,
+          "total": 4159,
+          "share": 0.5,
+          "requests": 0.3
+        }
+      }
+    }
+  ]
+}
