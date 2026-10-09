@@ -1,0 +1,973 @@
+{
+  "batch": "round-1",
+  "case_rule_contract": "outcome-terminal-state-evidence-owner-diagnostic-v14",
+  "diagnostic_counts": {
+    "command_protocol_violations": 0,
+    "owner_producer_evidence_unavailable": 70
+  },
+  "failure_counts": {},
+  "quality_rating_contract": "outcome-terminal-state-evidence-claude-collector-v2",
+  "rateable_runs": 70,
+  "run_count": 70,
+  "runs": [
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "0251b39dce194239b0dd0e9af8af43e5",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "0251b39dce194239b0dd0e9af8af43e5"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "0849a90582284684a03d789de2a6d7df"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "リポジトリから正規の起動先を解決し、run.shだけを修正して必要な試験を成功させた。",
+      "run_id": "0e76164f85aa4170b708e05bf81f4630"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "12596b86f45a4f56a95f3e23292ca3ac",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "12596b86f45a4f56a95f3e23292ca3ac"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "138e30d44f24482e9a04bd911d8245a3"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "monthly_review_numeric_location": {
+          "affects_quality_score": false,
+          "expected": "src/app/entrypoints/monthly_main.py:25",
+          "observed": [
+            "monthly_main.py:14",
+            "monthly_main.py:16",
+            "src/app/entrypoints/monthly_main.py:25"
+          ],
+          "status": "exact"
+        },
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "1813ffabc9f54e758bbb63241f1172d9"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "monthly_review_numeric_location": {
+          "affects_quality_score": false,
+          "expected": "src/app/entrypoints/monthly_main.py:25",
+          "observed": [
+            "src/app/entrypoints/monthly_main.py:25"
+          ],
+          "status": "exact"
+        },
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "189aff274d9340e68c91bd113d8d8d27"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "1a46a99aa8cb487e8177bc39d89abe49"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "1bcf54d619434399aa49975bac4d0192"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "219c276e5912427689f9d4e1de9a3b27"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "22a24d4d720449abbd872ae174cf30e4"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "2797d766742140eab3d52becdcd8cd8b"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "2930bc6353234fa3b01528826544860c"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "29a9f8c4342a4baab95a3eaf7ec9ee51"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "2aa368c6480c49b4a1eaf1c46ee8badf",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "2aa368c6480c49b4a1eaf1c46ee8badf"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "2e72a99918d24695a163de5aadd4581a"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "301af1183c074851bed859d535f32e2c"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "33a1dbf36655495c9d998b0d3cadc22d"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "monthly_review_numeric_location": {
+          "affects_quality_score": false,
+          "expected": "src/app/entrypoints/monthly_main.py:25",
+          "observed": [
+            "monthly_main.py:14",
+            "monthly_main.py:16",
+            "src/app/entrypoints/monthly_main.py:25"
+          ],
+          "status": "exact"
+        },
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "390502b84d37423f8f7acdbf05f65f5e"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "3f6c499d362d4d22aa0fb13efe5500ed"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "45e017789db24f20b550a1fbfa87b15e"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "リポジトリから正規の起動先を解決し、run.shだけを修正して必要な試験を成功させた。",
+      "run_id": "46a9e5e5372d4d69ba7ac588075f0a05"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "482f744cc62e43e495d67ed684089b6c"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "リポジトリから正規の起動先を解決し、run.shだけを修正して必要な試験を成功させた。",
+      "run_id": "4944bc3371b345c5bb253fce63059861"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "4c7f3b30a886482296894a13c0cb5652"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "52cc6cb4e80c4db88d0297ebf298f169"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "monthly_review_numeric_location": {
+          "affects_quality_score": false,
+          "expected": "src/app/entrypoints/monthly_main.py:25",
+          "observed": [
+            "src/app/entrypoints/monthly_main.py:25"
+          ],
+          "status": "exact"
+        },
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "58e6157e8d074d9d9b8d11bbe3590bd3"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "リポジトリから正規の起動先を解決し、run.shだけを修正して必要な試験を成功させた。",
+      "run_id": "6723cc22cfbc4e5cbb067b9b8507eb0c"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "69eb3ddcbe644bfa9aa8a0d8f676abe1"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "737363f675c74e66bf268cc0a0b164f6"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "793b6190c4544e699c65a7be63f538cd"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "7959bf6e4bfa4f7695d895b12fcd17d4"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "7c5685ff82b0479ab7aebf9dfb22f237"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "7e448a2b6f0146729785310dd39265f4"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "7ef1bb8ea24f4331882e7a2e32c16b13"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "8222532e87f042e4bd47ec6b860098d7"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "834149a8f88347fc8802b5848ce44047",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "834149a8f88347fc8802b5848ce44047"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "866bbe3fe32744859078a6da4d7cbc57"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "87ec597e3c6c455291011e1deec7ee5f"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "88062216baa04cf19f5692a88e6808e7"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "89cc75fa5dd944998bfb0d2b2fbe960c"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "8f4f640c22344ae4b136d637de0e6b30"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "91585cdfc3b143c4b8b35af4166255b5"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface",
+        "terminal_state_evidence": {
+          "artifact_state": "unchanged",
+          "case_id": "TC-A01-LATENT-MODE-POLICY",
+          "mutating_operation_started": false,
+          "operation_state": "read_only",
+          "outcome_state": "awaiting_required_value",
+          "required_value_state": "unresolved",
+          "required_value_state_source": "evaluation_case_oracle",
+          "response_text_affects_outcome_state": false,
+          "run_id": "98f9b10a3f684f44b6743a56608e19d8",
+          "schema_version": "the-caption-prompt.terminal-state-evidence/v1",
+          "terminal_response_state": "present",
+          "test_operation_started": false
+        }
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "変更後の値を推測せず、変更と試験の前に一度の確認を返して停止した。",
+      "run_id": "98f9b10a3f684f44b6743a56608e19d8"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "a319ec345b6742d5b0e165099d32f7ac"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "リポジトリから正規の起動先を解決し、run.shだけを修正して必要な試験を成功させた。",
+      "run_id": "a36d254b556949c98ebdfe9ef4167cda"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "a6622b06a2274f358809a84a8d97a7ea"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "af6b4e3f444a430d816bb07391ac80d9"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "af844484ada647368c1981d750905d11"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "b6cf8aaace3a4650ac03bc09c0941c1f"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "bb40ced8fdc74a9e8ff3deb292710141"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "bb950b0145364ca0a04a35d54a68dcdf"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "bcf0fa708e16486187b82a57873cf8d4"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "bdbb78aadd854298a14991e294e2adfb"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "be3a2e72086044bdac3024b75b3212f4"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "monthly_review_numeric_location": {
+          "affects_quality_score": false,
+          "expected": "src/app/entrypoints/monthly_main.py:25",
+          "observed": [
+            "monthly_main.py:16",
+            "src/app/entrypoints/monthly_main.py:25"
+          ],
+          "status": "exact"
+        },
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "c33c70ea8ef14eeb81c9e59e194a9ade"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "c99bc5b882db45fb819a736ea29f84b0"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "cc00b2fa48e0433d99b54e22c26c423a"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "ccf950e17dc94261aaff0f40b29568e8"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "ce119ec4aa9a4ea0af26a5f215297694"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "d55ab63f1f0243749062af051fc9b954"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "de235839520f48899a17c7b0889278c5"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "e03604eb41c0484cabb912b3bce25a32"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "e1aa33e526674ffea902c897a43fb119"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 5,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "e55dca6fba5c4b8e8ff29410a404ed46"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "f33e6d70d43d43a1bec424922540d968"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 2,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "f5f37cf5e00647059a851ebcea43be32"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 1,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "fc8e53d3bead40b299349b5a15c7fab9"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 4,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "fd5d04672b22435d952a18fd4ad3e412"
+    },
+    {
+      "candidate_score": 4,
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "diagnostics": {
+        "command_protocol_violation_count": 0,
+        "owner_producer_evidence_status": "unavailable_on_claude_surface"
+      },
+      "failures": [],
+      "iteration": 3,
+      "rating_reason": "所定成果、必須試験、許可範囲、終了条件を満たした。",
+      "run_id": "fdf95f49cf394c80ad9693fe0704a53f"
+    }
+  ],
+  "schema_version": "the-caption-prompt.standard14-claude-quality-audit/v1",
+  "score_counts": {
+    "4": 70
+  }
+}
