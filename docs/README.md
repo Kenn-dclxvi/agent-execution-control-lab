@@ -116,6 +116,7 @@
 - [Candidate305 C301の書式でC299の一項目だけを加える](candidate305-c301-wait-time-design.md)：ベースC302でSonnet lowが確認コマンドの出力をそのまま返す形が多かったため、C299の一項目が関わるかをSonnet lowで切り分ける設計。
 - [Candidate306 C302の成功後の一項目を、TaskSpecが求める確認で区切る](candidate306-c302-taskspec-scoped-success-closure-design.md)：C302のC298の一項目がTaskSpecの求める確認まで止めていたため、止める時点と禁止の対象をTaskSpecの列挙で区切る一文に置き換える設計。
 - [Candidate307 C306に、確認コマンドの出力を絞ってよいとする一項目を加える](candidate307-c306-validation-output-trim-design.md)：C306のSonnet lowで確認コマンドの出力を絞らなくなりF01の費用が増えたため、C293の一句を元に、出力を絞ってよいとし終了コードはコマンド自身のものとする一項目を加える設計。
+- [Candidate308 C307の成功後の一項目に、完了条件の確認を含める](candidate308-c307-done-condition-scope-design.md)：C306・C307の成功後の一文が、TaskSpecの完了条件（許可外driftがないこと）の確認まで止めていたため、「TaskSpecが求める確認」に完了条件の確認を含めることを明示する設計。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 - [Sol Lowの費用を要素に分ける（r1）](sol-cost-element-decomposition-r1.md)：旧系列のSol Lowを費用で数え直し、生のトークンで31〜39%減ったCandidateが費用では1〜8%減にとどまることを確かめた。戻る回数を減らす機序は主にキャッシュ読み取りを減らし、キャッシュに乗らない入力は増えていた。プロンプトで減らせる最大の要素は、指示ファイル以外のファイルの全文取得（C301のSolで約230KB/反復）。Candidateは未作成
