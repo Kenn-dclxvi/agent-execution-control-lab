@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C280〜C300の処理の適切さの分類（2026-10-09）](#c280-c300-appropriateness-20261009)
+- [C300のSonnet 5.5 low、Standard14 累積N=20（2026-10-09）](#c300-sonnet-low-std14-n20-20261009)
 - [C300のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c300-sol-sonnet-low-std14-20261009)
 - [C299のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c299-sol-sonnet-low-std14-20261009)
 - [C298のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c298-sol-sonnet-low-std14-20261009)
@@ -173,6 +175,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c280-c300-appropriateness-20261009"></a>
+## C280〜C300の処理の適切さの分類（2026-10-09）
+
+[分類の記録](../../docs/c280-c300-processing-appropriateness-audit-r1.md)と[機械可読の記録](c280-c300-processing-appropriateness-audit_2026-10-09.json)。新しい実行はなく、保存traceを、TaskSpecが求める確認を終えてから報告したかで分類した。Sonnet lowのA02でテストを成功させずに報告した実行は、C280 4/5、C297 4/5、C298 0/5、C299 4/5、C300 8/20。Sol Lowでは0件。関連して、#351の候補の洗い出しの[機械可読の記録](c280-short-closing-sentence-candidates_2026-10-09.json)もここから参照する。
+
+<a id="c300-sonnet-low-std14-n20-20261009"></a>
+## C300のSonnet 5.5 low、Standard14 累積N=20（2026-10-09）
+
+[計測記録](claude-sonnet55-low-c300-standard14-n20-cli2288_2026-10-09.md)。追加の3試験の登録結果（[b2](21d4e650c6714d7ea32aa3690ce275b7.json)、[b3](22beb2fd0ce04ebc999254c471f1517f.json)、[b4](a1c7dc9a09f54e4fb189da588bea180a.json)）、品質監査（[b2](claude-sonnet55-low-c300-b2-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[b3](claude-sonnet55-low-c300-b3-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[b4](claude-sonnet55-low-c300-b4-standard14-n5-cli2288_2026-10-09-quality-audit.json)）、[発行前の記録](claude-sonnet55-low-c300-n20ext-cli2288_2026-10-09-preflight.json)、[診断](claude-sonnet55-low-c300-n20-cli2288_2026-10-09-diagnostics.json)。累積280件すべてが4点。累積20反復の合算トークン中央値887,858で、保存済みC280（N=5）比+6.63%。A02で確認を成功させてから報告する実行が増えた（C280 0/5、C300 12/20）。採用は未判断。
 
 <a id="c300-sol-sonnet-low-std14-20261009"></a>
 ## C300のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）

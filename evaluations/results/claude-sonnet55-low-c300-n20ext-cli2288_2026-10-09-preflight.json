@@ -1,0 +1,103 @@
+{
+  "checks": [
+    {
+      "condition": "c300-b2",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b2/plan/parallel-plan.json",
+      "plan_sha256": "7261d430a13dc0845b74d14d0ae2cf83066d91f601fda891017b37a4d2fd95b2",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b2/profile.json",
+      "profile_sha256": "86b569116e83e6099d8b29263fbb36f048a19733d350c87c80c6a210662d46ee",
+      "prompt_identity": {
+        "bundle_sha256": "25041a2df22b73858abea2a659b7fdd6688b2f9d99bcf9c699d829ebbd2fd62a",
+        "name": "the-caption-3ce91a4-success-closure-and-wait-time-r1",
+        "revision": "r1"
+      }
+    },
+    {
+      "condition": "c300-b3",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b3/plan/parallel-plan.json",
+      "plan_sha256": "461463fdc46e04cacc591813e46e7121d033588407b3fceb2ada034afd98fbc2",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b3/profile.json",
+      "profile_sha256": "86b569116e83e6099d8b29263fbb36f048a19733d350c87c80c6a210662d46ee",
+      "prompt_identity": {
+        "bundle_sha256": "25041a2df22b73858abea2a659b7fdd6688b2f9d99bcf9c699d829ebbd2fd62a",
+        "name": "the-caption-3ce91a4-success-closure-and-wait-time-r1",
+        "revision": "r1"
+      }
+    },
+    {
+      "condition": "c300-b4",
+      "plan": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b4/plan/parallel-plan.json",
+      "plan_sha256": "9ca30437364a75fdc272a27f2b48eeeeef8477891229489b48a64607f3aa317d",
+      "profile": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/claude-sonnet55-low-c300-standard14-n20ext-cli2288-20261009-r1/c300-b4/profile.json",
+      "profile_sha256": "86b569116e83e6099d8b29263fbb36f048a19733d350c87c80c6a210662d46ee",
+      "prompt_identity": {
+        "bundle_sha256": "25041a2df22b73858abea2a659b7fdd6688b2f9d99bcf9c699d829ebbd2fd62a",
+        "name": "the-caption-3ce91a4-success-closure-and-wait-time-r1",
+        "revision": "r1"
+      }
+    }
+  ],
+  "claude_runtime": {
+    "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+    "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+    "version_output": "2.1.288 (Claude Code)"
+  },
+  "code_commit": "978bcf413791e89286bbec149a5f783cd5a31a7a",
+  "code_sha256": {
+    "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+    "scripts/atomic_run_registry.py": "1bc3cf241485dcbeb478458eaac2a4f5b3007fe2331b3657cc630727c1d80609",
+    "scripts/claude_all_agent_evidence.py": "357ce75a035d552c45b78fc9cb8f8b0b82a2e1cea901f44d6a88fac8149703d7",
+    "scripts/evaluation_loop.py": "1395c6b8de40f170d90f46d872b87b6c77561ce066389556647a05e359c8d312",
+    "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+    "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+    "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+    "scripts/run_claude_evaluation.py": "1a3c850591baa7d1419ed89aa753eaba4c2d9c5e97453cb090d5230568cf5a56",
+    "scripts/run_codex_evaluation.py": "28728c2284550f227a5c24f40f4751e2654bc7598b8d9cf68ddef9eae162d80c",
+    "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+    "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+    "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+  },
+  "compared_with": {
+    "sonnet_c280_low": "c84fd22753d248e588e586cb8022ea1e",
+    "sonnet_c291_low": "42391c16154646c3a63b206abfb033c2"
+  },
+  "config_isolation": {
+    "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+    "credential_values_recorded": false,
+    "forbidden_entries_checked": [
+      "CLAUDE.md",
+      "settings.json",
+      "settings.local.json",
+      "agents",
+      "commands",
+      "skills",
+      "plugins",
+      "output-styles",
+      "hooks",
+      "rules"
+    ],
+    "forbidden_entries_present": [],
+    "schema_version": "the-caption-prompt.claude-config-isolation/v1",
+    "top_level_entry_names": [
+      ".claude.json",
+      ".credentials.json",
+      ".last-cleanup",
+      "backups",
+      "cache",
+      "projects",
+      "session-env",
+      "sessions",
+      "shell-snapshots"
+    ]
+  },
+  "design_record": "docs/candidate300-sonnet-low-n20-extension-design.md",
+  "extends_result": "5f515aa613cc47f5bd1890121f345c2c",
+  "kind": "C300 Sonnet low cumulative N=20 extension (3 x 5 iterations)",
+  "max_workers": 24,
+  "model": "claude-sonnet-5-5",
+  "reasoning_effort": "low",
+  "requested_slots_per_condition": 70,
+  "schema_version": "the-caption-prompt.claude-series-preflight/v1",
+  "status": "ready",
+  "variable": "prompt identity only"
+}

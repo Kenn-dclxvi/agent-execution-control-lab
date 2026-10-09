@@ -1,0 +1,121 @@
+{
+  "schema_version": "c300-sonnet-low-n20-diagnostics/v1",
+  "method": "C300のSonnet lowのN=5（5f515aa6…）と追加の3試験（21d4e650…、22beb2fd…、a1c7dc9a…）を合わせた累積20反復を、保存済みのC280 Sonnet low（N=5）と比べた。応答の分類はC298・C300の診断と同じ方法。A02の実行し直しは、最初のpytestの実行が.venv/bin/pythonを使わず、その後に.venv/bin/pythonでpytestを実行した実行を数えた。",
+  "source_results": {
+    "C280": "c84fd22753d248e588e586cb8022ea1e",
+    "C300 N=5": "5f515aa613cc47f5bd1890121f345c2c",
+    "C300 b2": "21d4e650c6714d7ea32aa3690ce275b7",
+    "C300 b3": "22beb2fd0ce04ebc999254c471f1517f",
+    "C300 b4": "a1c7dc9a09f54e4fb189da588bea180a"
+  },
+  "iteration_totals": {
+    "C280": [
+      819393,
+      930027,
+      797727,
+      832616,
+      833370
+    ],
+    "C300 N=5": [
+      963889,
+      820419,
+      809440,
+      849891,
+      1101251
+    ],
+    "C300 b2": [
+      872871,
+      887421,
+      903495,
+      883193,
+      785936
+    ],
+    "C300 b3": [
+      888294,
+      821366,
+      950241,
+      925960,
+      906304
+    ],
+    "C300 b4": [
+      815259,
+      902317,
+      913794,
+      781792,
+      956854
+    ]
+  },
+  "median_total_tokens": {
+    "C280 N=5": 832616,
+    "C300 cumulative N=20": 887857.5,
+    "difference": 55241.5,
+    "difference_percent": 6.63
+  },
+  "iterations_above_c280_median": "14/20",
+  "iterations_above_c280_max": "4/20",
+  "median_elapsed_seconds": {
+    "C280 N=5": 297.94,
+    "C300 cumulative N=20": 243.6
+  },
+  "quality": "280/280 score 4",
+  "case_mean_total_tokens_delta_vs_c280": {
+    "A01": 255,
+    "A02": 19574,
+    "F01": 10426,
+    "F02": 2814,
+    "F03": 12437,
+    "F04": 2005,
+    "F05-CLARIFY": -323,
+    "F05-OUT-OF-SCOPE": 134,
+    "F06": -6048,
+    "F07-CANONICAL": -543,
+    "F07-DEPENDENCY": 7629,
+    "F08": -4066,
+    "F10-ENTRYPOINT": 612,
+    "F10-MONTHLY": -534
+  },
+  "runs_over_150k_tokens": {
+    "C300 cumulative N=20": [
+      [
+        "F03",
+        5,
+        352289,
+        "C300 N=5"
+      ]
+    ]
+  },
+  "a02_retry_until_venv_pytest": {
+    "C280": "0/5",
+    "C297": "1/5",
+    "C298": "4/5",
+    "C299": "0/5",
+    "C300 cumulative N=20": "12/20"
+  },
+  "a02_note": "A02で最初のpytestがpythonの未検出やpytestの未導入で失敗したとき、C280ではそのまま報告していた（例：C280の反復2と3）。C298の一項目を含むC298とC300では、python3、.venvの確認を経て.venv/bin/pythonでテストを通してから報告する実行が多かった。A02は評価条件の必須コマンドの組を持たず、採点はテストの成功を求めない。",
+  "f07_dependency_note": "F07出所の対は、必須の確認を一つの応答に並べる型（4応答、約4.3万トークン）と、順に出す型（6応答、約6.5万トークン）に分かれる。並べる型は、C280で3/5、C300で6/20だった。",
+  "per_batch_after_last_required": {
+    "C300 b2": {
+      "status_diff_only": 1.4,
+      "reads_persisted_output": 2.0
+    },
+    "C300 b3": {
+      "status_diff_only": 1.8,
+      "reads_persisted_output": 2.6
+    },
+    "C300 b4": {
+      "status_diff_only": 1.6,
+      "reads_persisted_output": 1.8
+    }
+  },
+  "per_batch_responses": {
+    "C300 b2": 65.0,
+    "C300 b3": 66.2,
+    "C300 b4": 65.6
+  },
+  "per_batch_bash_timeout_600000": {
+    "C300 b2": 3.8,
+    "C300 b3": 3.8,
+    "C300 b4": 5.0
+  },
+  "command_timeouts": 0
+}
