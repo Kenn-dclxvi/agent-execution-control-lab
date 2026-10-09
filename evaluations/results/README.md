@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C301、全セルを一つの待ち行列で測った系列の基準（2026-10-09）](#c301-onequeue-std14-20261009)
 - [C301の測り直し、一つのプロンプトを計測する経路（2026-10-09）](#c301-singlepath-std14-20261009)
 - [KPIを料金で重みづけした試算（2026-10-09）](#kpi-cost-weighting-trial-20261009)
 - [C301のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（実行環境を切り離した系列の基準、2026-10-09）](#c301-sol-sonnet-low-std14-shellenv-20261009)
@@ -179,10 +180,15 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
+<a id="c301-onequeue-std14-20261009"></a>
+## C301、全セルを一つの待ち行列で測った系列の基準（2026-10-09）
+
+[計測記録](c301-onequeue-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](4349caed06d34a2b83c26281e3280475.json)、[analysis](c301-onequeue-sol61-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-onequeue-sol61-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-onequeue-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-onequeue-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)。Sonnet lowは[登録結果](6d3c16ebd3f34dbda5563c0e6f201dfc.json)、[analysis](c301-onequeue-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-onequeue-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-onequeue-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-onequeue-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)。両セルの[待ち行列の記録](c301-onequeue-sol61-low-sonnet55-low-standard14-n5_2026-10-09-campaign-summary.json)。両セル140スロットを一つの待ち行列（合計24本）で発行した、実行環境を切り離した系列の基準。両セルとも有効70件すべてが4点。中央値はSol Lowが費用$0.8851（幅$0.8704〜0.9324）・経過時間583.89秒、Sonnet lowが費用$0.6578（幅$0.6380〜0.6878）・経過時間291.60秒。以後のCandidateはこのanalysisと比べる。採用は未判断。
+
 <a id="c301-singlepath-std14-20261009"></a>
 ## C301の測り直し、一つのプロンプトを計測する経路（2026-10-09）
 
-[計測記録](c301-singlepath-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](99f8d1a27247474ea0499f2b9ca1f1e2.json)、[analysis](c301-singlepath-sol61-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-singlepath-sol61-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-singlepath-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-singlepath-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)。Sonnet lowは[登録結果](566d77654eca42989398951c77927e58.json)、[analysis](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)。#361の経路で測り直した、実行環境を切り離した系列の基準。Sol Lowは4点69件・3点1件（F02の反復5、モデルが追加したテストの失敗を再検証せずに報告）、Sonnet lowは4点70件。費用の中央値はSol Low $1.0003（幅$0.9261〜1.0331）、Sonnet low $0.6820（幅$0.6656〜0.7005）。以後のCandidateはこのanalysisと比べる。採用は未判断。
+[計測記録](c301-singlepath-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](99f8d1a27247474ea0499f2b9ca1f1e2.json)、[analysis](c301-singlepath-sol61-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-singlepath-sol61-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-singlepath-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-singlepath-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)。Sonnet lowは[登録結果](566d77654eca42989398951c77927e58.json)、[analysis](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-singlepath-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)。#361の経路で測り直した、実行環境を切り離した系列の基準。Sol Lowは4点69件・3点1件（F02の反復5、モデルが追加したテストの失敗を再検証せずに報告）、Sonnet lowは4点70件。費用の中央値はSol Low $1.0003（幅$0.9261〜1.0331）、Sonnet low $0.6820（幅$0.6656〜0.7005）。以後のCandidateはこのanalysisと比べる。採用は未判断。（同日追記）両セルを別々の待ち行列で同時に流したため、同時実行が最大48本となりホストの上限24を超えていた。基準は[一つの待ち行列で測り直したC301](#c301-onequeue-std14-20261009)へ移し、この計測は比較に使わない。
 
 <a id="kpi-cost-weighting-trial-20261009"></a>
 ## KPIを料金で重みづけした試算（2026-10-09）

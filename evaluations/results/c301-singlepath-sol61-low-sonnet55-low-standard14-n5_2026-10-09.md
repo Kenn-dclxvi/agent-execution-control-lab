@@ -47,6 +47,8 @@ Sol LowのF02の反復5（run `5b0c2c04…`）は3点だった。モデルが追
 
 採用、追加反復、release、本体反映は行っていない。
 
+（同日追記）この計測は、両セルをそれぞれ並列上限24の待ち行列で同時に流したため、同時に動いたrunが最大48本（平均35.7本）となり、このホストの上限24を超えていた。コマンドを実行するケースの経過時間が延びている。系列の基準は、両セルを一つの待ち行列（合計24本）で測り直した[C301](c301-onequeue-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)へ移し、この計測は比較に使わない。
+
 ## 一次アーティファクト
 
 - Sol Low：[登録結果](99f8d1a27247474ea0499f2b9ca1f1e2.json)・[analysis](c301-singlepath-sol61-low-standard14-n5_2026-10-09-analysis.json)・[selection](c301-singlepath-sol61-low-standard14-n5_2026-10-09-selection.json)・[品質監査](c301-singlepath-sol61-low-standard14-n5_2026-10-09-quality-audit.json)・[発行前の記録](c301-singlepath-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)
