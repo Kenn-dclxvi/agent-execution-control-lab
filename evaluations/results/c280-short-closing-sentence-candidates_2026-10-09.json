@@ -1,0 +1,177 @@
+{
+  "schema_version": "c280-short-closing-sentence-candidates/v1",
+  "method": "Codexはtoken_usage_record、Claudeはmessage.idを一応答とし、使用量の合計が登録値と一致することを全280件で確認した。コマンドは引用符を考慮して分割し、Codexの外側の呼び出し内のループから変数経由で発行したコマンドは文字列リテラルから取り出した。最後に必須の確認を含んだ応答より後の応答を種類で分類した。1応答をなくした場合の見込みは、次のリクエスト1回分（入力と出力）と、その応答で増えた文脈の以降への持ち越しの和（上限側）。値は1反復（14ケース）あたり。",
+  "source_results": {
+    "Sol Low C280": "794d02abe894456686eea22e9b6f0fed",
+    "Sonnet low C280": "c84fd22753d248e588e586cb8022ea1e",
+    "Sol Low C297": "e56496ff94ee4393832ece0a19b028d9",
+    "Sonnet low C297": "464ceb5202294a25a911a0ca761a7548"
+  },
+  "usage_reconciliation": {
+    "responses_per_iteration": {
+      "Sol Low C280": 88.0,
+      "Sonnet low C280": 64.6,
+      "Sol Low C297": 82.8,
+      "Sonnet low C297": 66.2
+    },
+    "runs_matching_registered_total": "280/280"
+  },
+  "fixed_cost_tokens_per_byte_per_iteration": {
+    "Sonnet low": 21.0,
+    "Sol Low": 29.9
+  },
+  "c280_total_tokens_median": {
+    "Sonnet low": 832616,
+    "Sol Low": 2071746
+  },
+  "after_last_required_responses": {
+    "Sonnet low C280": {
+      "status_diff_only": 2.4,
+      "reads_persisted_required_output": 1.2
+    },
+    "Sonnet low C297": {
+      "status_diff_only": 2.8,
+      "reads_persisted_required_output": 1.2
+    },
+    "Sol Low C280": {
+      "status_diff_only": 4.8,
+      "status_and_start_check": 0.6,
+      "wait_and_status": 1.6,
+      "wait_only_for_required": 4.8
+    },
+    "Sol Low C297": {
+      "status_diff_only": 0.2,
+      "wait_and_status": 7.4,
+      "wait_only_for_required": 1.8
+    }
+  },
+  "wait_only_responses": {
+    "Sol Low C280": 9.2,
+    "Sol Low C297": 4.4,
+    "Sonnet low C280": 0,
+    "Sonnet low C297": 0,
+    "Sol Low C280_per_iteration": [
+      12,
+      9,
+      10,
+      8,
+      7
+    ],
+    "Sol Low C280_originating_exec_yield_time_ms": {
+      "1000": 29,
+      "unspecified": 17
+    },
+    "Sol Low C280_wait_call_yield_time_ms": {
+      "1000": 47
+    },
+    "Sol Low C284_to_C297_wait_only": {
+      "C292": 6.2,
+      "C293": 1.2,
+      "C294": 1.0,
+      "C295": 0.6,
+      "C296": 2.2,
+      "C297": 4.4
+    }
+  },
+  "truncated_full_read": {
+    "Sol Low C280_rereads_before_change_of_whole_read_files": 15,
+    "of_which_initial_output_truncated": 14,
+    "truncated_read_responses_per_iteration": 3.6,
+    "carry_over_of_those_responses_tokens_per_iteration": 190406,
+    "Sonnet low C280_multi_file_cat_per_iteration": 0.2
+  },
+  "candidates": [
+    {
+      "id": "1a",
+      "text": "* 必須の確認コマンドがすべて成功した結果を受け取った後は、コマンドを発行せずに報告する。",
+      "bytes": 132,
+      "kind": "禁止・限定のみ",
+      "fixed_cost": {
+        "Sonnet low": 2769,
+        "Sol Low": 3949
+      },
+      "closed_responses": {
+        "Sonnet low": 2.4,
+        "Sol Low": 5.4
+      },
+      "upper_bound_saving": {
+        "Sonnet low": 41821,
+        "Sol Low": 159792
+      }
+    },
+    {
+      "id": "1b",
+      "text": "* 必須の確認コマンドがすべて成功した結果を受け取った後は、`git status`や`git diff`を含め、コマンドを発行せずに報告する。",
+      "bytes": 169,
+      "kind": "禁止・限定のみ（名指しあり）",
+      "fixed_cost": {
+        "Sonnet low": 3545,
+        "Sol Low": 5056
+      },
+      "closed_responses": {
+        "Sonnet low": 2.4,
+        "Sol Low": 5.4
+      },
+      "upper_bound_saving": {
+        "Sonnet low": 41821,
+        "Sol Low": 159792
+      }
+    },
+    {
+      "id": "2a",
+      "text": "* 実行中のコマンドの終了を、短い待機時間の呼び出しを繰り返して待たない。",
+      "bytes": 108,
+      "kind": "既存の待機の限定",
+      "fixed_cost": {
+        "Sonnet low": 2265,
+        "Sol Low": 3231
+      },
+      "closed_responses": {
+        "Sonnet low": 0,
+        "Sol Low": 9.2
+      },
+      "upper_bound_saving": {
+        "Sonnet low": 0,
+        "Sol Low": 299040
+      }
+    },
+    {
+      "id": "2b",
+      "text": "* コマンドの実行とその終了を待つ呼び出しでは、待機時間を30秒以上にする。",
+      "bytes": 107,
+      "kind": "既存の呼び出しのパラメータの指定",
+      "fixed_cost": {
+        "Sonnet low": 2244,
+        "Sol Low": 3201
+      },
+      "closed_responses": {
+        "Sonnet low": 0,
+        "Sol Low": 9.2
+      },
+      "upper_bound_saving": {
+        "Sonnet low": 0,
+        "Sol Low": 299040
+      }
+    },
+    {
+      "id": "3",
+      "text": "* 一つのコマンドで、複数のファイルの全文を続けて出力しない。",
+      "bytes": 90,
+      "kind": "禁止",
+      "fixed_cost": {
+        "Sonnet low": 1888,
+        "Sol Low": 2693
+      },
+      "closed_responses": {
+        "Sonnet low": 0.2,
+        "Sol Low": 3.6
+      },
+      "upper_bound_saving": {
+        "Sonnet low": 0,
+        "Sol Low": null
+      },
+      "note": "切り詰められた内容は別の読み取りで取得されるため、向きが定まらない"
+    }
+  ],
+  "decision": "Candidateは作成していない。採用、release、本体反映は決めない。"
+}
