@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C301のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（実行環境を切り離した系列の基準、2026-10-09）](#c301-sol-sonnet-low-std14-shellenv-20261009)
 - [C280〜C300の処理の適切さの分類（2026-10-09）](#c280-c300-appropriateness-20261009)
 - [C300のSonnet 5.5 low、Standard14 累積N=20（2026-10-09）](#c300-sonnet-low-std14-n20-20261009)
 - [C300のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c300-sol-sonnet-low-std14-20261009)
@@ -175,6 +176,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c301-sol-sonnet-low-std14-shellenv-20261009"></a>
+## C301のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（実行環境を切り離した系列の基準、2026-10-09）
+
+[計測記録](c301-sol61-low-sonnet55-low-standard14-n5-shellenv_2026-10-09.md)。Sol Lowは[登録結果](822c2115d5ca41c684039db0a3900894.json)、[品質監査](c301-sol61-low-standard14-n5-shellenv_2026-10-09-quality-audit.json)。Sonnet lowは[登録結果](a4fe6d1acb4246489c6901409efd8acf.json)、[品質監査](claude-sonnet55-low-c301-standard14-n5-cli2288-shellenv_2026-10-09-quality-audit.json)。両セルの[発行前の記録](c301-sol61-low-sonnet55-low-standard14-n5-shellenv_2026-10-09-preflight.json)。実行環境を切り離した新しい系列（`fixed-path-workspace-venv-r1`）の基準で、比較相手を持たない単独の計測。両セルとも有効70件すべてが4点。全エージェントトークン中央値はSol Low 2,041,902、Sonnet low 794,780、経過時間中央値はSol Low 658.29秒、Sonnet low 271.86秒。旧系列の結果とは比較しない。採用は未判断。
 
 <a id="c280-c300-appropriateness-20261009"></a>
 ## C280〜C300の処理の適切さの分類（2026-10-09）

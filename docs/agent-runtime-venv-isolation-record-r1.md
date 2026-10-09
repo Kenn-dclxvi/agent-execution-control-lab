@@ -76,6 +76,10 @@ A02だけを、上の条件で両エージェント各N=2実行した（計測�
 
 計画の6として、新しい系列の基準を、Sol LowとSonnet lowで各Standard14 N=5測る。利用者の指示（2026-10-09）により、基準はC280そのものではなく、C280のrootの`AGENTS.md`のMarkdownの書式（見出しの階層、箇条書きの記号、強調）を他の`AGENTS.md`と揃えたCandidateとし、このPRのマージ後にCandidateを作ってから測る。C300以降のCandidateも、書式を揃えたものにする。その後にどのCandidateを測るかは、基準の結果を見てから利用者が決める。
 
+### 追記（同日）：6の実施
+
+計画の6を、書式を揃えた[C301](candidate301-c280-uniform-markdown-design.md)で実施した。両セルとも有効70件すべてが4点で、全エージェントトークン中央値はSol Low 2,041,902、Sonnet low 794,780だった（[計測記録](../evaluations/results/c301-sol61-low-sonnet55-low-standard14-n5-shellenv_2026-10-09.md)）。140件すべてで起動前の確認が通り、A02は10件すべてでテストを成功させてから報告した。C280の新しい系列のプロファイル（4の二件）は、条件の出所として残し、計測には使っていない。
+
 ## 参照
 
 [計画](agent-runtime-venv-isolation-plan-r1.md)、[処理の適切さの分類](c280-c300-processing-appropriateness-audit-r1.md)、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)。
