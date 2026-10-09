@@ -4,17 +4,19 @@
 
 固定条件下の各runを独立して保存し、後から実効互換条件を満たす任意のrun集合を固定して集計・比較する。`N`はrunのidentityではなく、分析時に選択したsample件数とする。
 
-扱うKPIは次の3つだけとする。
+扱うKPIは次の3つだけとする（2026-10-09改訂）。
 
 - `quality_score`: case成果全体の0〜4 scoreから算出した値
-- `total_tokens`: root agentと、そのrunから起動された全SA sessionの最終token usageの合計
+- `cost_usd`: root agentと、そのrunから起動された全SA sessionの使用量を、版を固定した単価表で米ドルに換算した値
 - `elapsed_seconds`: task開始から終了までの時間
+
+`total_tokens`（root agentと全SA sessionの最終token usageの合計）は参考値として引き続き記録し、試験の間で並べるが、取り組みの成否には使わない。2026-10-09より前のresultは`total_tokens`をKPIとした当時の記録である。
 
 時間の内訳は[実行時間の記録規則 r1](execution-time-recording-contract-r1.md)に従う診断として扱う。現行elapsedと3 KPIは保持し、開始・終了の境界が未確認の値を作業時間へ昇格させない。実装状況と取得不能な境界は同規則の「実装追記」に記録する。
 
 Worker routing、child session数、root / child token内訳、並列／逐次実行、再割当てはdiagnosticであり、KPIへ追加しない。比較viewはこれらの診断値をKPI差の説明に使えるが、Worker起動の有無だけで品質またはコスト判定を反転させない。
 
-選択した各sampleの`total_tokens`と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は選択sampleの中央値である。数値差は明示したcandidate analysisからreference analysisを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。
+選択した各sampleの`total_tokens`、`cost_usd`（単価表を指定した場合）と`elapsed_seconds`は全caseの合計、`quality_score`は全case scoreを0〜100へ正規化した値とする。代表値は選択sampleの中央値である。数値差は明示したcandidate analysisからreference analysisを引くが、優先順位、閾値、`winner`、改善・悪化を出力しない。
 
 このworkflowはpromptの作成、改善、採用、release判断、THE-CAPTION本体反映を行わない。
 
@@ -43,8 +45,8 @@ Worker routing、child session数、root / child token内訳、並列／逐次�
 
 | Layer | 役割 | 出力 | 禁止 |
 | --- | --- | --- | --- |
-| 1. Evaluation set | 外部setとfixtureを固定する | revision、set identity、case別fixture identityを含むcapsule | 結果を見た後のin-place変更、prompt変更 |
-| 2. Execution | 1 prompt setの1 case / 1 iterationを実行する | 成果、`total_tokens`、時間、model-invisible binding | 採点、比較、prompt変更 |
+| 1. Evaluation set | 外部setとfixtureを版ごとにstoreへ固定し、各cycleへ複製して発行を許可する | revision、set identity、case別fixture identity、installation、execution preflight | 結果を見た後のin-place変更、prompt変更、比較の相手の要求 |
+| 2. Execution | 1 prompt setの1 case / 1 iterationを実行する | 成果、`total_tokens`と使用量の内訳、時間、model-invisible binding | 採点、比較、prompt変更 |
 | 3. Quality rating | 各成果をblindで採点する | 0〜4のscoreと短い事実根拠 | prompt identityの参照、比較、改善提案 |
 | 4. KPI comparison | prompt set resultを登録し、保存resultからviewを作る | append-only result、任意個の一覧・中央値・明示差分 | 一次結果の変更、優劣判定、改善提案 |
 
@@ -79,7 +81,7 @@ Agentがmodelへ提示するskill、app、plugin catalogが変わり得る実行
 
 Layer 1は`.git`内部を除くfixtureのpath、type、mode、contentまたはsymlink targetからcase別fixture identityを計算する。atomic runの実効条件にはEvaluation set identity、対象case、case別fixture identity、TaskSpec、model、Agent/runtime/CLI、permission、executor挙動、rating、token accountingを含める。`N`、coverage、iteration集合、計画順序、`max_workers`は実効条件へ含めず、完全なexecution provenanceとstratumとしてrunへ保存する。
 
-保存済みresultを基準にする比較では、fixtureを同じsourceから再生成しない。基準resultと対応する保存済みLayer 1を`prepare-comparison-layer1`で検証・複製し、candidate capsuleとglobal planの生成後に`preflight-comparison`で全互換条件を照合する。比較用Layer 1の生成receiptがあるcycleでは、Layer 2がpreflight receiptを実行直前に再検証する。
+評価セットは版ごとに一度だけ評価セットの保管場所（store）へ固定し、各試験は`install-layer1`でそこから複製する。fixtureを試験ごとに同じsourceから再生成しない。capsuleとglobal planの生成後に`preflight-execution`でprofileと複製したLayer 1との一致を照合し、Layer 2は実行直前にそのreceiptを再検証する。試験の実行に比較の相手（基準result、基準pool）を要求しない（2026-10-09改訂）。2026-10-09より前に`prepare-comparison-layer1`と`preflight-comparison`で基準resultから作ったcycleは、検証だけを行う。
 
 ## `quality_score`
 
@@ -123,6 +125,7 @@ v14が維持するv13の要点は次のとおりである。
 
 - **v1 / v2 → v3**: v1 cycle、result、profileは2026-07-15までに作成した。同日中にv3 registry resultの登録も始まっているため、result file名だけでは世代を分離できない。個々のresultの世代は、当該resultが宣言するschema fieldを正とする。
 - **v3内のtoken accounting改訂**: 2026-07-16までに保存した`prompt-set-result/v1`は`total_tokens`へroot agentだけを数えている。all-agent revisionは`execution-capsule/v2`、`evaluation-set/v2`、`execution/v3`、`prompt-set-result/v2`、`prompt-set-comparison-view/v2`を使う。詳細は「旧artifactの扱い」節を正本とする。
+- **v4内の改訂（2026-10-09）**: 実行の前に比較の相手（基準result、基準pool）を要求する経路（`prepare-comparison-layer1`、`preflight-comparison`、`seed-pool`）を削除し、評価セットの保管場所（`freeze-set --store`、`publish-layer1`、`install-layer1`）と`preflight-execution`、`create-pool`へ置き換えた。あわせて費用のKPIを加え、`atomic-run/v2`、`atomic-run-analysis/v2`、`atomic-run-comparison/v2`、`prompt-set-result/v3`、`prompt-set-comparison-view/v3`を追加した。既存のartifactは変更しない。
 - **v3 → v4**: 2026-07-31に[`scripts/atomic_run_registry.py`](../scripts/atomic_run_registry.py)を追加した時点で切り替わった。`evaluations/results/`でv4経路の最初のresultは[`Candidate106 / Candidate107 Standard14 atomic N=5`](../evaluations/results/candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)である。以降のfile名は`-atomic-n<N>-`または`-atomic-reuse-`を持つ。
 
 世代間の扱いは次に限定する。
@@ -196,6 +199,8 @@ viewには選択した全prompt setのidentity、iteration別KPI、中央値、�
 差分の符号を有利・不利へ変換しない。referenceは基準線にすぎず、baseline、採用状態、順位を意味しない。
 
 ## Token accountingとextension boundary
+
+2026-10-09の改訂で、tokenのKPIを費用（`cost_usd`）へ改めた（[計測と記録の基準r2](shared-instruction-evaluation-criteria-r2.md)、[`evaluations/AGENTS.md`](../evaluations/AGENTS.md)の「3 KPI」）。adapterは`token-usage/v3`で、all-agentの`total_tokens`と、その使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告する。Layer 4は、版を固定した単価表（`evaluations/price-tables/`）を集計の時点で掛けて費用を求める。`total_tokens`は参考値として引き続き記録する。以下の記述は`total_tokens`の数え方であり、内訳の合計はこの値と一致しなければならない。
 
 評価基盤が解釈するtoken値はall-agentの`total_tokens`だけである。adapterはrootの`codex exec` sessionを起点に、同じevaluation workspaceを持つ全descendant sessionの最終`total_tokens`を合算する。cached inputを含む各sessionのprovider報告値を使用し、親子間の重複を補正しない。
 

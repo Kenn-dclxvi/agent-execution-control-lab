@@ -63,11 +63,13 @@
 
 ## 3 KPI
 
-評価基盤が扱うKPIは次の3つだけとする。
+評価基盤が扱うKPIは次の3つだけとする（2026-10-09改訂、[判定基準r2](../docs/shared-instruction-evaluation-criteria-r2.md)）。
 
 - `quality_score`
-- all-agent `total_tokens`
+- `cost_usd`：all-agentの使用量を、版を固定した単価表（`evaluations/price-tables/`）で米ドルに換算した値。アダプタは`token-usage/v3`で使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告し、Layer 4は集計の時点で単価表を掛ける。比べるresult同士は同じ単価表で計算する。単価表は版として追加し、既存の版を書き換えない。
 - `elapsed_seconds`
+
+all-agent `total_tokens`は引き続き各runで記録し、試験の間で並べて比べる値として出力するが、取り組みの成否には使わない参考値とする。2026-10-09より前のresultは`total_tokens`をKPIとした当時の記録であり、書き換えない。
 
 次は診断情報として扱い、KPIへ追加しない。
 
@@ -75,6 +77,7 @@
 - model step
 - worker routing
 - root／worker別token
+- 使用量の内訳（費用の内訳）
 - session情報
 - context継承
 - command内訳
@@ -116,20 +119,22 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 
 - 評価コードのSHA-256の代わりに、実際にモデルへ渡した課題文の一致を、各runの`task_sha256`でケースごとに確かめる。`task_sha256`がないcycleを含む比較では、評価コードのSHA-256の一致を求める。
 - KPIの数え方を変えるコード変更では、`token_accounting.revision`、`time_recording.contract`、または採点契約を上げる。`tests/test_kpi_revision_guard.py`が版ごとの出力を固定する。
-- この規則を使うのは、`preflight-comparison --compatibility-rule effective-v1`、`compare-effective`、および`seed-pool --compatibility-rule effective-v1`で作ったatomic run pool（`run-pool/v2`）である。既定の`exact`、既存の`compare`、既存のatomic run pool（`run-pool/v1`）は、従来の完全一致を維持する。
-- `run-pool/v2`は、ケースごとの条件キーを実効互換条件から計算し、ケースごとの課題文の`task_sha256`を持つ。既存のrun記録は書き換えず、保存済みの条件からキーを計算して所属を判定する。課題文の記録がないrunは、評価コードのSHA-256がpoolの基準と一致する場合だけ所属する。基準側の課題文は、`--task-sha256-cycle`で基準runのcycleを渡して記録する。比較する二つのanalysisは、どちらも`run-pool/v2`から作る。
+- この規則を使うのは、`compare-effective`と、`create-pool --compatibility-rule effective-v1`で作ったatomic run pool（`run-pool/v2`）である。既定の`exact`、既存の`compare`、`run-pool/v1`は、従来の完全一致を維持する。
+- `run-pool/v2`は、ケースごとの条件キーを、プロファイルと評価セットから実効互換条件で計算する。課題文を記録したrunはこのキーで所属し、課題文の一致は、選択したrun同士（`aggregate-selection`）と、比べるanalysis同士（`compare-analyses`）で確かめる。課題文の記録がないrunは、評価コードのSHA-256がpoolと一致する場合だけ所属する。比較する二つのanalysisは、どちらも`run-pool/v2`から作る。2026-10-09より前に`seed-pool`で基準poolから作ったpoolは、履歴として読み取りだけを行う。
 - 既存のresult、互換キー、比較viewは書き換えない。`effective-v1`の比較は、別schemaのview（`effective-comparison-view/v1`）として追加する。
 
-## 比較試験の実行前ゲート
+## 試験の実行前ゲート
 
-ルートの`AGENTS.md`が定めるゲートの内訳をこの節の正本とする。
+ルートの`AGENTS.md`が定めるゲートの内訳をこの節の正本とする（2026-10-09改訂）。試験は一つのプロンプトを計測するものであり、実行前に比較の相手（基準result、基準pool）を要求しない。
 
-- 実行予定条件から、Evaluation set identity、全ケースのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合を確定し、基準resultの互換条件と機械照合する。atomic run経路で実効互換条件へ含めない項目は`互換条件`の規定に従う。
-- プロンプト比較では、事前に宣言したprompt identity以外の互換条件が完全一致することを実行前ゲートとする。完全一致を証明するpreflight receiptを保存してから実行する。`effective-v1`を使う比較では、ここでの互換条件は`互換条件`の節が定める実効互換条件とし、記録だけの項目の違いはreceiptへ残す。課題文の一致は、実行後に`compare-effective`で確かめる。
-- Layer 4へ登録する試験では、発行予定のケース / iteration集合が固定Layer 1の全case coverageとresult schemaの登録条件を満たすこともpreflightで機械検証する。満たさない試験を非登録の診断として実施する場合は、その状態と再利用不能なゲートを一件目の発行前に明示する。
-- 試験ごとにfixture、file mode、ランタイム、設定上の並列上限などの実行環境を最適化しない。保存済み基準resultと比較する場合は、その基準で固定したLayer 1を再利用する。複数条件を新規実行する場合は、一つのLayer 1を先に固定して全条件へ複製する。
-- 保存済みprompt-set resultとの履歴互換サイクルは`prepare-comparison-layer1`で基準Layer 1から生成し、capsuleとglobal planの生成後に`preflight-comparison`を通す。比較用Layer 1を`freeze-set`で再生成しない。`comparison-preflight.json`がない、失効した、または改ざんされた旧経路サイクルの`run`は禁止する。
-- atomic run経路では、既存resultを`atomic_run_registry.py import-result`でrun単位へ索引化し、`plan-missing`で要求サンプル数との差だけをwrite-onceのdispatch planへ固定する。`prepare_atomic_plan.py`でpool identity、dispatch plan hash、プロンプト、Evaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、設定上の`M`を機械照合してから不足runだけを発行する。既存runを再実行せず、完了・採点後は各runを個別登録する。
+- **Layer 1の保管と複製**：評価セットは版ごとに一度だけ、評価セットの保管場所（store）へ固定する。新しい評価セットは`freeze-set --store`で、既に固定済みのLayer 1は`publish-layer1`でそのまま（file modeを含めて）保管する。各試験は`install-layer1`で、プロファイルが指定する評価セットを保管場所からcycleへ複製し、`layer1/installation.json`を残す。cycleへLayer 1を直接作らない。
+- **発行の許可**：`preflight-execution`で、プロファイル、複製したLayer 1、発行計画、capsuleが一致することを確かめ、`layer1/execution-preflight.json`を保存してから発行する。`run`は、この記録がないcycle、または記録が失効したcycleを実行しない。
+- **照合する項目**：Evaluation set identity、全ケースのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合。一項目でも不一致、未固定、未確認があれば一件も発行しない。
+- **使用量の内訳**：複製したLayer 1のcycleでは、内訳（`token-usage/v3`）のない有効runを認めない。resultとanalysisは単価表を指定して作り、単価表のないresultを新しく作らない。
+- **atomic run経路**：`create-pool`で、プロファイルと複製したLayer 1からpoolを作る。既存runは`register-run`で個別に登録し、`plan-missing`で要求サンプル数との差だけをwrite-onceのdispatch planへ固定する。`prepare_atomic_plan.py`でpool identity、dispatch plan hash、プロンプト、Evaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、設定上の`M`を機械照合してから不足runだけを発行する。既存runを再実行しない。
+- **比較**：比較は保存後に行う。`compare`、`compare-effective`、`compare-analyses`は、互換条件と単価表が一致するresultまたはanalysisだけを受け付ける。指定する基準は差を取るときの引く側にすぎず、実行の前提にしない。費用の差は、基準の反復の最小と最大に対する位置（幅より下、幅の中、幅より上）も記録する。
+- **Layer 4へ登録する試験**：発行予定のケース / iteration集合が、固定Layer 1の全case coverageとresult schemaの登録条件を満たすことも、発行前に確かめる。満たさない試験を非登録の診断として実施する場合は、その状態と再利用不能なゲートを一件目の発行前に明示する。
+- **履歴**：2026-10-09より前に`prepare-comparison-layer1`と`preflight-comparison`で基準resultから作ったcycleは、`verify-comparison-preflight`による検証だけを行う。これらのコマンドと`seed-pool`は削除しており、新しく作らない。
 
 ## Model-visible境界
 

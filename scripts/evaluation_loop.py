@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import statistics
 import subprocess
 import sys
@@ -29,6 +30,14 @@ if __package__:
         version_from_conditions,
     )
     from .storage_copy import StorageCopyError, materialize_tree
+    from .usage_components import (
+        UsageComponentsError,
+        load_price_table,
+        price_table_identity,
+        run_cost,
+        summed_components,
+        validate_components,
+    )
 else:
     from comparison_identity import code_sha256 as condition_code_sha256, effective_key, split_effective
     from execution_time_recording import collect as collect_execution_time
@@ -41,6 +50,14 @@ else:
         version_from_conditions,
     )
     from storage_copy import StorageCopyError, materialize_tree
+    from usage_components import (
+        UsageComponentsError,
+        load_price_table,
+        price_table_identity,
+        run_cost,
+        summed_components,
+        validate_components,
+    )
 
 
 class EvaluationError(Exception):
@@ -273,9 +290,15 @@ OWNER_PATTERN = re.compile(r"owner\s*=\s*([^\u3002\n;,]+)", re.IGNORECASE)
 EXECUTION_SCHEMA_V3 = "the-caption-prompt.execution/v3"
 RESULT_SCHEMA_V1 = "the-caption-prompt.prompt-set-result/v1"
 RESULT_SCHEMA_V2 = "the-caption-prompt.prompt-set-result/v2"
+RESULT_SCHEMA_V3 = "the-caption-prompt.prompt-set-result/v3"
 VIEW_SCHEMA_V1 = "the-caption-prompt.prompt-set-comparison-view/v1"
 VIEW_SCHEMA_V2 = "the-caption-prompt.prompt-set-comparison-view/v2"
+VIEW_SCHEMA_V3 = "the-caption-prompt.prompt-set-comparison-view/v3"
 TOKEN_USAGE_SCHEMA_V2 = "the-caption-prompt.token-usage/v2"
+TOKEN_USAGE_SCHEMA_V3 = "the-caption-prompt.token-usage/v3"
+LAYER1_STORE_ENTRY_SCHEMA = "the-caption-prompt.evaluation-set-store-entry/v1"
+LAYER1_INSTALLATION_SCHEMA = "the-caption-prompt.layer1-installation/v1"
+EXECUTION_PREFLIGHT_SCHEMA = "the-caption-prompt.execution-preflight/v1"
 SUPPORTED_TOKEN_ACCOUNTINGS = (TOKEN_ACCOUNTING, CLAUDE_TOKEN_ACCOUNTING)
 ROOT_ONLY_ACCOUNTING = {
     "scope": "root_agent",
@@ -415,16 +438,61 @@ def validate_set(source: Path, manifest: dict[str, Any]) -> list[dict[str, Any]]
     return validated
 
 
+def store_layer1(store: Path, set_id: str, revision: str) -> Path:
+    for value, name in ((set_id, "set_id"), (revision, "revision")):
+        if "/" in value or value in {"", ".", ".."}:
+            raise EvaluationError(f"evaluation set {name} cannot name a store directory: {value!r}")
+    return store / set_id / revision / "layer1"
+
+
+def write_store_entry(store: Path, layer1: Path, manifest: dict[str, Any], source: dict[str, Any]) -> dict[str, Any]:
+    fixtures = actual_layer1_fixtures(layer1, manifest)
+    payload = {
+        "schema_version": LAYER1_STORE_ENTRY_SCHEMA,
+        "set_id": manifest["set_id"],
+        "revision": manifest["revision"],
+        "identity_sha256": manifest["identity_sha256"],
+        "fixtures": fixtures,
+        "source": source,
+        "stored_at": utc_now(),
+    }
+    entry = receipt_with_hash(payload)
+    write_json_once(layer1.parent / "entry.json", entry)
+    return entry
+
+
+def load_store_entry(store: Path, set_id: str, revision: str) -> tuple[Path, dict[str, Any], dict[str, Any]]:
+    layer1 = store_layer1(store, set_id, revision)
+    entry = load_json(layer1.parent / "entry.json")
+    validate_receipt_hash(entry, "evaluation set store entry")
+    if entry.get("schema_version") != LAYER1_STORE_ENTRY_SCHEMA:
+        raise EvaluationError("evaluation set store entry has an unsupported schema_version")
+    manifest = load_json(layer1 / "set.json")
+    actual = {
+        "set_id": manifest.get("set_id"),
+        "revision": manifest.get("revision"),
+        "identity_sha256": manifest.get("identity_sha256"),
+        "fixtures": actual_layer1_fixtures(layer1, manifest),
+    }
+    expected = {key: entry.get(key) for key in actual}
+    difference = first_value_difference(expected, actual)
+    if difference is not None:
+        raise EvaluationError(f"evaluation set store entry does not match its Layer 1: {difference}")
+    return layer1, entry, manifest
+
+
 def layer1_freeze(args: argparse.Namespace) -> dict[str, Any]:
+    """Freeze a new evaluation set once into the store; cycles install it from there."""
     source = Path(args.set).resolve()
-    cycle = Path(args.cycle).resolve()
+    store = Path(args.store).resolve()
     manifest = load_json(source)
     cases = validate_set(source, manifest)
-    if cycle.exists() and any(cycle.iterdir()):
-        raise EvaluationError(f"cycle directory is not empty: {cycle}")
+    layer1 = store_layer1(store, manifest["set_id"], manifest["revision"])
+    if layer1.parent.exists():
+        raise EvaluationError(f"evaluation set is already in the store: {layer1.parent}")
 
     frozen_cases: list[dict[str, Any]] = []
-    fixture_root = cycle / "layer1" / "fixtures"
+    fixture_root = layer1 / "fixtures"
     for case in cases:
         destination = fixture_root / case["id"]
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -452,13 +520,94 @@ def layer1_freeze(args: argparse.Namespace) -> dict[str, Any]:
         "identity_sha256": identity_sha256(identity_document),
         "frozen_at": utc_now(),
     }
-    write_json_once(cycle / "layer1" / "set.json", frozen)
+    write_json_once(layer1 / "set.json", frozen)
+    entry = write_store_entry(store, layer1, frozen, {"kind": "freeze-set", "set_source": str(source)})
     return {
         "layer": 1,
+        "store_entry": str(layer1.parent / "entry.json"),
         "set_id": frozen["set_id"],
         "revision": frozen["revision"],
         "identity_sha256": frozen["identity_sha256"],
         "case_count": len(frozen_cases),
+        "entry_content_sha256": entry["receipt_content_sha256"],
+    }
+
+
+def layer1_publish(args: argparse.Namespace) -> dict[str, Any]:
+    """Put an already frozen Layer 1 into the store unchanged (file modes included)."""
+    source_layer1 = Path(args.source_layer1).resolve()
+    store = Path(args.store).resolve()
+    manifest = load_json(source_layer1 / "set.json")
+    actual_layer1_fixtures(source_layer1, manifest)
+    layer1 = store_layer1(store, require_non_empty_string(manifest.get("set_id"), "set_id"),
+                          require_non_empty_string(manifest.get("revision"), "revision"))
+    if layer1.parent.exists():
+        raise EvaluationError(f"evaluation set is already in the store: {layer1.parent}")
+    layer1.mkdir(parents=True)
+    shutil.copy2(source_layer1 / "set.json", layer1 / "set.json")
+    for case in manifest["cases"]:
+        try:
+            (layer1 / case["fixture"]).parent.mkdir(parents=True, exist_ok=True)
+            materialize_tree(source_layer1 / case["fixture"], layer1 / case["fixture"])
+        except StorageCopyError as exc:
+            raise EvaluationError(f"failed to materialize fixture: {exc}") from exc
+    entry = write_store_entry(store, layer1, manifest, {"kind": "publish-layer1", "source_layer1": str(source_layer1)})
+    return {
+        "layer": 1,
+        "store_entry": str(layer1.parent / "entry.json"),
+        "set_id": manifest["set_id"],
+        "revision": manifest["revision"],
+        "identity_sha256": manifest["identity_sha256"],
+        "entry_content_sha256": entry["receipt_content_sha256"],
+    }
+
+
+def layer1_install(args: argparse.Namespace) -> dict[str, Any]:
+    """Copy the profile's evaluation set from the store into an empty cycle."""
+    store = Path(args.store).resolve()
+    cycle = Path(args.cycle).resolve()
+    profile = load_json(Path(args.profile).resolve())
+    profile_set = profile.get("evaluation_set")
+    if not isinstance(profile_set, dict):
+        raise EvaluationError("profile evaluation_set must be an object")
+    source_layer1, entry, manifest = load_store_entry(
+        store,
+        require_non_empty_string(profile_set.get("set_id"), "profile evaluation_set.set_id"),
+        require_non_empty_string(profile_set.get("revision"), "profile evaluation_set.revision"),
+    )
+    if cycle.exists() and any(cycle.iterdir()):
+        raise EvaluationError(f"cycle directory is not empty: {cycle}")
+    destination = cycle / "layer1"
+    destination.mkdir(parents=True)
+    shutil.copy2(source_layer1 / "set.json", destination / "set.json")
+    for case in manifest["cases"]:
+        try:
+            (destination / case["fixture"]).parent.mkdir(parents=True, exist_ok=True)
+            materialize_tree(source_layer1 / case["fixture"], destination / case["fixture"])
+        except StorageCopyError as exc:
+            raise EvaluationError(f"failed to install fixture: {exc}") from exc
+    installed_fixtures = actual_layer1_fixtures(destination, load_json(destination / "set.json"))
+    if installed_fixtures != entry["fixtures"]:
+        raise EvaluationError("installed Layer 1 differs from the store entry")
+    payload = {
+        "schema_version": LAYER1_INSTALLATION_SCHEMA,
+        "store": str(store),
+        "store_entry_content_sha256": entry["receipt_content_sha256"],
+        "set_id": entry["set_id"],
+        "revision": entry["revision"],
+        "identity_sha256": entry["identity_sha256"],
+        "fixtures": entry["fixtures"],
+        "installed_at": utc_now(),
+    }
+    receipt = receipt_with_hash(payload)
+    write_json_once(destination / "installation.json", receipt)
+    return {
+        "layer": 1,
+        "artifact": str(destination / "installation.json"),
+        "set_id": entry["set_id"],
+        "revision": entry["revision"],
+        "identity_sha256": entry["identity_sha256"],
+        "case_count": len(manifest["cases"]),
     }
 
 
@@ -489,11 +638,11 @@ def layer1_bind_coverage(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
-def parse_usage(path: Path) -> tuple[int, dict[str, str]] | None:
+def parse_usage(path: Path) -> tuple[int, dict[str, str], dict[str, Any] | None] | None:
     if not path.exists():
         return None
     usage = load_json(path)
-    if usage.get("schema_version") != TOKEN_USAGE_SCHEMA_V2:
+    if usage.get("schema_version") not in {TOKEN_USAGE_SCHEMA_V2, TOKEN_USAGE_SCHEMA_V3}:
         raise EvaluationError("usage has an unsupported schema_version")
     accounting = usage.get("token_accounting")
     if accounting not in SUPPORTED_TOKEN_ACCOUNTINGS:
@@ -501,7 +650,13 @@ def parse_usage(path: Path) -> tuple[int, dict[str, str]] | None:
     total = usage.get("total_tokens")
     if not isinstance(total, int) or isinstance(total, bool) or total < 0:
         raise EvaluationError("usage must contain a non-negative integer total_tokens")
-    return total, accounting
+    components = None
+    if usage["schema_version"] == TOKEN_USAGE_SCHEMA_V3:
+        try:
+            components = validate_components(usage.get("usage_components"), total)
+        except UsageComponentsError as exc:
+            raise EvaluationError(str(exc)) from exc
+    return total, accounting, components
 
 
 def parse_run_status(path: Path) -> dict[str, Any] | None:
@@ -679,36 +834,43 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     iteration = binding_input["iteration"]
     atomic_preflight_authorized = False
     runtime_binding: dict[str, Any] | None = None
-    generation_receipt = cycle / "layer1" / "comparison-generation.json"
-    if generation_receipt.exists():
-        preflight = verify_comparison_preflight(cycle)
-        raw_runtime_binding = preflight.get("codex_runtime_binding")
-        if raw_runtime_binding is not None:
-            if not isinstance(raw_runtime_binding, dict):
-                raise EvaluationError("comparison preflight runtime binding is invalid")
-            runtime_binding = raw_runtime_binding
-        if preflight.get("schema_version") == ATOMIC_COMPARISON_PREFLIGHT_SCHEMA:
-            sample_id = require_non_empty_string(
-                binding_input.get("sample_id"), "binding.sample_id"
-            )
-            authorized = {
-                (item["case_id"], item["iteration"], item["sample_id"]): item
-                for item in preflight["authorized_slots"]
-            }
-            slot = authorized.get((case_id, iteration, sample_id))
-            atomic_preflight_authorized = slot is not None
-        else:
-            authorized = {
-                (item["case_id"], item["iteration"]): item
-                for item in preflight["authorized_slots"]
-            }
-            slot = authorized.get((case_id, iteration))
-        if slot is None:
-            raise EvaluationError("run is not authorized by comparison preflight")
-        if Path(slot["capsule"]).resolve() != capsule_source:
-            raise EvaluationError("run capsule path does not match comparison preflight")
-        if slot["capsule_sha256"] != file_sha256(capsule_source):
-            raise EvaluationError("run capsule content does not match comparison preflight")
+    installed = (cycle / "layer1" / "installation.json").exists()
+    legacy_comparison = (cycle / "layer1" / "comparison-generation.json").exists()
+    if not installed and not legacy_comparison:
+        raise EvaluationError(
+            "cycle has no installed Layer 1: install it from the evaluation set store with "
+            "install-layer1 and authorize the plan with preflight-execution"
+        )
+    # Cycles prepared from a reference result before the single-prompt preflight
+    # (comparison-generation.json) are only re-verified, never created any more.
+    preflight = verify_execution_preflight(cycle) if installed else verify_comparison_preflight(cycle)
+    raw_runtime_binding = preflight.get("codex_runtime_binding")
+    if raw_runtime_binding is not None:
+        if not isinstance(raw_runtime_binding, dict):
+            raise EvaluationError("preflight runtime binding is invalid")
+        runtime_binding = raw_runtime_binding
+    if preflight.get("dispatch_mode") == "atomic":
+        sample_id = require_non_empty_string(
+            binding_input.get("sample_id"), "binding.sample_id"
+        )
+        authorized = {
+            (item["case_id"], item["iteration"], item["sample_id"]): item
+            for item in preflight["authorized_slots"]
+        }
+        slot = authorized.get((case_id, iteration, sample_id))
+        atomic_preflight_authorized = slot is not None
+    else:
+        authorized = {
+            (item["case_id"], item["iteration"]): item
+            for item in preflight["authorized_slots"]
+        }
+        slot = authorized.get((case_id, iteration))
+    if slot is None:
+        raise EvaluationError("run is not authorized by the preflight")
+    if Path(slot["capsule"]).resolve() != capsule_source:
+        raise EvaluationError("run capsule path does not match the preflight")
+    if slot["capsule_sha256"] != file_sha256(capsule_source):
+        raise EvaluationError("run capsule content does not match the preflight")
     coverage = bound_coverage(cycle)
     if coverage is not None:
         if case_id not in coverage["case_ids"]:
@@ -781,22 +943,25 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
         )
     if exclusion is None and usage is None:
         raise EvaluationError("valid run requires all-agent token usage")
+    if installed and exclusion is None and usage is not None and usage[2] is None:
+        raise EvaluationError("valid run in an installed cycle requires usage components (token-usage/v3)")
     if usage is not None and usage[1] != conditions["executor_parameters"]["token_accounting"]:
         raise EvaluationError("usage token accounting differs from the run capsule")
     total_tokens = None if usage is None else usage[0]
     token_accounting = None if usage is None else usage[1]
+    usage_components = None if usage is None else usage[2]
     if usage_report_path.exists():
         usage_report_path.unlink()
     status = "excluded" if exclusion is not None else "valid"
     if total_tokens is not None:
-        write_json_once(
-            evidence / "usage.json",
-            {
-                "schema_version": TOKEN_USAGE_SCHEMA_V2,
-                "token_accounting": token_accounting,
-                "total_tokens": total_tokens,
-            },
-        )
+        usage_record: dict[str, Any] = {
+            "schema_version": TOKEN_USAGE_SCHEMA_V2 if usage_components is None else TOKEN_USAGE_SCHEMA_V3,
+            "token_accounting": token_accounting,
+            "total_tokens": total_tokens,
+        }
+        if usage_components is not None:
+            usage_record["usage_components"] = usage_components
+        write_json_once(evidence / "usage.json", usage_record)
     if exclusion is not None:
         write_json_once(evidence / "exclusion.json", exclusion)
 
@@ -980,16 +1145,36 @@ def collect_runs(
         ].get("token_accounting") or execution.get("token_accounting") not in SUPPORTED_TOKEN_ACCOUNTINGS:
             raise EvaluationError("valid run must use all-agent token accounting v1")
         rating = load_json(cycle / "layer3" / "ratings" / f"{run_id}.json")
-        runs.append({**binding, "execution": execution, "rating": rating})
+        usage_path = cycle / "layer2" / "evidence" / run_id / "usage.json"
+        usage_record = load_json(usage_path) if usage_path.exists() else {}
+        runs.append(
+            {
+                **binding,
+                "execution": execution,
+                "rating": rating,
+                "usage_components": usage_record.get("usage_components"),
+            }
+        )
     if not runs:
         raise EvaluationError("no rated runs found")
     return manifest, runs, excluded_attempts
+
+
+def run_cost_usd(item: dict[str, Any], price_table: dict[str, Any]) -> float:
+    components = item.get("usage_components")
+    if components is None:
+        raise EvaluationError(f"run has no usage components for the cost KPI: {item['run_id']}")
+    try:
+        return run_cost(components, price_table)
+    except UsageComponentsError as exc:
+        raise EvaluationError(str(exc)) from exc
 
 
 def aggregate_prompt_set(
     cases: list[str],
     iterations: list[int],
     index: dict[tuple[str, int], dict[str, Any]],
+    price_table: dict[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     case_results: list[dict[str, Any]] = []
     per_iteration: list[dict[str, Any]] = []
@@ -998,28 +1183,34 @@ def aggregate_prompt_set(
         tokens = [item["execution"]["total_tokens"] for item in selected]
         if any(value is None for value in tokens):
             raise EvaluationError("all runs need token usage before result registration")
-        for item in selected:
-            case_results.append(
-                {
-                    "run_id": item["run_id"],
-                    "case_id": item["case_id"],
-                    "iteration": item["iteration"],
-                    "quality_score": item["rating"]["score"],
-                    "total_tokens": item["execution"]["total_tokens"],
-                    "elapsed_seconds": item["execution"]["elapsed_seconds"],
-                }
-            )
-        quality = sum(item["rating"]["score"] for item in selected) / (4 * len(cases)) * 100
-        per_iteration.append(
-            {
-                "iteration": iteration,
-                "quality_score": quality,
-                "total_tokens": sum(tokens),
-                "elapsed_seconds": sum(
-                    item["execution"]["elapsed_seconds"] for item in selected
-                ),
+        costs = [run_cost_usd(item, price_table) for item in selected] if price_table else None
+        for position, item in enumerate(selected):
+            row = {
+                "run_id": item["run_id"],
+                "case_id": item["case_id"],
+                "iteration": item["iteration"],
+                "quality_score": item["rating"]["score"],
+                "total_tokens": item["execution"]["total_tokens"],
+                "elapsed_seconds": item["execution"]["elapsed_seconds"],
             }
-        )
+            if costs is not None:
+                row["cost_usd"] = costs[position]
+            case_results.append(row)
+        quality = sum(item["rating"]["score"] for item in selected) / (4 * len(cases)) * 100
+        iteration_row = {
+            "iteration": iteration,
+            "quality_score": quality,
+            "total_tokens": sum(tokens),
+            "elapsed_seconds": sum(
+                item["execution"]["elapsed_seconds"] for item in selected
+            ),
+        }
+        if costs is not None:
+            iteration_row["cost_usd"] = sum(costs)
+            iteration_row["usage_components"] = summed_components(
+                item["usage_components"] for item in selected
+            )
+        per_iteration.append(iteration_row)
     median = {
         "quality_score": statistics.median(item["quality_score"] for item in per_iteration),
         "total_tokens": statistics.median(item["total_tokens"] for item in per_iteration),
@@ -1027,6 +1218,8 @@ def aggregate_prompt_set(
             item["elapsed_seconds"] for item in per_iteration
         ),
     }
+    if price_table:
+        median["cost_usd"] = statistics.median(item["cost_usd"] for item in per_iteration)
     return case_results, per_iteration, median
 
 
@@ -1180,70 +1373,6 @@ def validate_receipt_hash(receipt: dict[str, Any], name: str) -> dict[str, Any]:
     return payload
 
 
-def prepare_comparison_layer1(args: argparse.Namespace) -> dict[str, Any]:
-    registry = Path(args.registry).resolve()
-    source_layer1 = Path(args.reference_layer1).resolve()
-    cycle = Path(args.cycle).resolve()
-    destination_layer1 = cycle / "layer1"
-    reference = load_reference_result(registry, args.reference_result_id)
-    if cycle.exists() and any(cycle.iterdir()):
-        raise EvaluationError(f"comparison cycle directory is not empty: {cycle}")
-    validate_layer1_against_reference(source_layer1, reference)
-    try:
-        materialization = materialize_tree(source_layer1, destination_layer1)
-    except StorageCopyError as exc:
-        raise EvaluationError(f"failed to materialize reference Layer 1: {exc}") from exc
-    manifest = validate_layer1_against_reference(destination_layer1, reference)
-
-    expected_coverage = reference["compatibility"].get("coverage")
-    if not isinstance(expected_coverage, dict):
-        raise EvaluationError("reference result coverage must be an object")
-    coverage_path = destination_layer1 / "coverage.json"
-    if coverage_path.exists():
-        coverage = load_json(coverage_path)
-        actual_coverage = {
-            "case_ids": coverage.get("case_ids"),
-            "iterations": coverage.get("iterations"),
-        }
-        difference = first_value_difference(expected_coverage, actual_coverage)
-        if difference is not None:
-            raise EvaluationError(f"reference Layer 1 coverage mismatch: {difference}")
-    else:
-        coverage = {
-            "schema_version": "the-caption-prompt.evaluation-coverage/v1",
-            "evaluation_set_identity_sha256": manifest["identity_sha256"],
-            "case_ids": expected_coverage["case_ids"],
-            "iterations": expected_coverage["iterations"],
-            "bound_at": utc_now(),
-        }
-        write_json_once(coverage_path, coverage)
-
-    payload = {
-        "schema_version": COMPARISON_GENERATION_SCHEMA,
-        "status": "ready",
-        "reference_result_id": reference["result_id"],
-        "reference_result_content_sha256": reference["result_content_sha256"],
-        "reference_compatibility_key": reference["compatibility_key"],
-        "reference_layer1": str(source_layer1),
-        "registry": str(registry),
-        "materialization": materialization,
-        "evaluation_set_identity_sha256": manifest["identity_sha256"],
-        "fixtures": reference["compatibility"]["fixtures"],
-        "coverage": expected_coverage,
-    }
-    receipt = receipt_with_hash(payload)
-    receipt_path = destination_layer1 / "comparison-generation.json"
-    write_json_once(receipt_path, receipt)
-    return {
-        "layer": 1,
-        "artifact": str(receipt_path),
-        "reference_result_id": reference["result_id"],
-        "evaluation_set_identity_sha256": manifest["identity_sha256"],
-        "case_count": len(expected_coverage["case_ids"]),
-        "iterations": expected_coverage["iterations"],
-    }
-
-
 def profile_coverage(profile: dict[str, Any]) -> dict[str, Any]:
     raw_cases = profile.get("cases")
     if not isinstance(raw_cases, list) or not raw_cases:
@@ -1259,30 +1388,10 @@ def profile_coverage(profile: dict[str, Any]) -> dict[str, Any]:
     return {"case_ids": case_ids, "iterations": list(range(1, iterations + 1))}
 
 
-def build_comparison_preflight_payload(
-    cycle: Path,
-    profile_path: Path,
-    global_plan_path: Path,
-    registry: Path,
-    reference_result_id: str,
-    require_pristine: bool,
-    bound_codex_runtime: dict[str, Any] | None = None,
-    compatibility_rule: str = "exact",
-) -> dict[str, Any]:
-    if compatibility_rule not in COMPATIBILITY_RULES:
-        raise EvaluationError(f"unsupported compatibility rule: {compatibility_rule}")
-    layer1 = cycle / "layer1"
-    generation_receipt = load_json(layer1 / "comparison-generation.json")
-    generation_payload = validate_receipt_hash(generation_receipt, "generation")
-    if generation_payload.get("schema_version") != COMPARISON_GENERATION_SCHEMA:
-        raise EvaluationError("comparison generation receipt has an unsupported schema_version")
-    if generation_payload.get("reference_result_id") != reference_result_id:
-        raise EvaluationError("comparison generation reference result does not match")
-    reference = load_reference_result(registry, reference_result_id)
-    manifest = validate_layer1_against_reference(layer1, reference)
-    profile = load_json(profile_path)
-    prompt_identity = validate_prompt_set_identity(profile.get("prompt_set_identity"))
-    conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+def profile_runtime_binding(
+    conditions: dict[str, Any],
+    bound_codex_runtime: dict[str, Any] | None,
+) -> dict[str, Any] | None:
     try:
         if bound_codex_runtime is None:
             codex_runtime_binding = resolve_runtime_from_conditions(conditions)
@@ -1300,41 +1409,30 @@ def build_comparison_preflight_payload(
             codex_runtime_binding = bound_codex_runtime
     except CodexRuntimeBindingError as exc:
         raise EvaluationError(str(exc)) from exc
-    coverage = profile_coverage(profile)
-    profile_set = profile.get("evaluation_set")
-    expected_profile_set = {
-        "set_id": manifest.get("set_id"),
-        "revision": manifest.get("revision"),
-    }
-    if profile_set != expected_profile_set:
-        difference = first_value_difference(expected_profile_set, profile_set)
-        raise EvaluationError(f"profile evaluation set mismatch: {difference}")
-    candidate_compatibility = build_compatibility(
-        manifest,
-        conditions,
-        coverage["case_ids"],
-        coverage["iterations"],
-    )
-    if compatibility_rule == "exact":
-        difference = first_value_difference(reference["compatibility"], candidate_compatibility)
-    else:
-        difference = first_value_difference(
-            split_effective(reference["compatibility"])[0], split_effective(candidate_compatibility)[0]
-        )
-    if difference is not None:
-        raise EvaluationError(f"comparison compatibility mismatch: {difference}")
+    return codex_runtime_binding
 
+
+def authorize_plan(
+    cycle: Path,
+    profile: dict[str, Any],
+    prompt_identity: dict[str, Any],
+    conditions: dict[str, Any],
+    coverage: dict[str, Any],
+    global_plan_path: Path,
+    require_pristine: bool,
+) -> dict[str, Any]:
+    """Check the dispatch plan and capsules against the profile and list the authorized slots."""
     execution = profile.get("execution")
     if not isinstance(execution, dict):
         raise EvaluationError("profile execution must be an object")
     max_workers = require_positive(execution.get("max_workers"), "profile max_workers")
-    reference_max_workers = conditions["executor_parameters"].get("max_workers")
-    if max_workers != reference_max_workers:
+    condition_max_workers = conditions["executor_parameters"].get("max_workers")
+    if max_workers != condition_max_workers:
         raise EvaluationError("profile max_workers does not match comparison conditions")
 
     global_plan = load_json(global_plan_path)
     if Path(require_non_empty_string(global_plan.get("cycle"), "global plan cycle")).resolve() != cycle:
-        raise EvaluationError("global plan cycle does not match comparison cycle")
+        raise EvaluationError("global plan cycle does not match the cycle")
     if global_plan.get("max_workers") != max_workers:
         raise EvaluationError("global plan max_workers does not match profile")
     jobs = global_plan.get("jobs")
@@ -1420,9 +1518,75 @@ def build_comparison_preflight_payload(
         extra = sorted(observed_slots - expected_slots)
         raise EvaluationError(f"global plan coverage mismatch: missing={missing}, extra={extra}")
     if require_pristine and (cycle / "layer2").exists() and any((cycle / "layer2").iterdir()):
-        raise EvaluationError("comparison cycle already contains Layer 2 state")
+        raise EvaluationError("cycle already contains Layer 2 state")
 
     authorized_slots.sort(key=lambda item: (item["case_id"], item["iteration"]))
+    return {
+        "max_workers": max_workers,
+        "authorized_slots": authorized_slots,
+        "atomic_dispatch": atomic_dispatch,
+        "dispatch_plan_path": dispatch_plan_path,
+        "dispatch_plan_sha256": dispatch_plan_sha256,
+    }
+
+
+def build_comparison_preflight_payload(
+    cycle: Path,
+    profile_path: Path,
+    global_plan_path: Path,
+    registry: Path,
+    reference_result_id: str,
+    require_pristine: bool,
+    bound_codex_runtime: dict[str, Any] | None = None,
+    compatibility_rule: str = "exact",
+) -> dict[str, Any]:
+    if compatibility_rule not in COMPATIBILITY_RULES:
+        raise EvaluationError(f"unsupported compatibility rule: {compatibility_rule}")
+    layer1 = cycle / "layer1"
+    generation_receipt = load_json(layer1 / "comparison-generation.json")
+    generation_payload = validate_receipt_hash(generation_receipt, "generation")
+    if generation_payload.get("schema_version") != COMPARISON_GENERATION_SCHEMA:
+        raise EvaluationError("comparison generation receipt has an unsupported schema_version")
+    if generation_payload.get("reference_result_id") != reference_result_id:
+        raise EvaluationError("comparison generation reference result does not match")
+    reference = load_reference_result(registry, reference_result_id)
+    manifest = validate_layer1_against_reference(layer1, reference)
+    profile = load_json(profile_path)
+    prompt_identity = validate_prompt_set_identity(profile.get("prompt_set_identity"))
+    conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+    codex_runtime_binding = profile_runtime_binding(conditions, bound_codex_runtime)
+    coverage = profile_coverage(profile)
+    profile_set = profile.get("evaluation_set")
+    expected_profile_set = {
+        "set_id": manifest.get("set_id"),
+        "revision": manifest.get("revision"),
+    }
+    if profile_set != expected_profile_set:
+        difference = first_value_difference(expected_profile_set, profile_set)
+        raise EvaluationError(f"profile evaluation set mismatch: {difference}")
+    candidate_compatibility = build_compatibility(
+        manifest,
+        conditions,
+        coverage["case_ids"],
+        coverage["iterations"],
+    )
+    if compatibility_rule == "exact":
+        difference = first_value_difference(reference["compatibility"], candidate_compatibility)
+    else:
+        difference = first_value_difference(
+            split_effective(reference["compatibility"])[0], split_effective(candidate_compatibility)[0]
+        )
+    if difference is not None:
+        raise EvaluationError(f"comparison compatibility mismatch: {difference}")
+
+    authorization = authorize_plan(
+        cycle, profile, prompt_identity, conditions, coverage, global_plan_path, require_pristine
+    )
+    max_workers = authorization["max_workers"]
+    authorized_slots = authorization["authorized_slots"]
+    atomic_dispatch = authorization["atomic_dispatch"]
+    dispatch_plan_path = authorization["dispatch_plan_path"]
+    dispatch_plan_sha256 = authorization["dispatch_plan_sha256"]
     result = {
         "schema_version": (
             ATOMIC_COMPARISON_PREFLIGHT_SCHEMA
@@ -1464,30 +1628,125 @@ def build_comparison_preflight_payload(
     return result
 
 
-def preflight_comparison(args: argparse.Namespace) -> dict[str, Any]:
+def load_installation(cycle: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    layer1 = cycle / "layer1"
+    installation = load_json(layer1 / "installation.json")
+    validate_receipt_hash(installation, "Layer 1 installation")
+    if installation.get("schema_version") != LAYER1_INSTALLATION_SCHEMA:
+        raise EvaluationError("Layer 1 installation has an unsupported schema_version")
+    manifest = load_json(layer1 / "set.json")
+    actual = {
+        "set_id": manifest.get("set_id"),
+        "revision": manifest.get("revision"),
+        "identity_sha256": manifest.get("identity_sha256"),
+        "fixtures": actual_layer1_fixtures(layer1, manifest),
+    }
+    difference = first_value_difference({key: installation.get(key) for key in actual}, actual)
+    if difference is not None:
+        raise EvaluationError(f"installed Layer 1 changed after installation: {difference}")
+    return installation, manifest
+
+
+def build_execution_preflight_payload(
+    cycle: Path,
+    profile_path: Path,
+    global_plan_path: Path,
+    require_pristine: bool,
+    bound_codex_runtime: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Authorize one prompt's plan against its profile and the installed evaluation set only."""
+    installation, manifest = load_installation(cycle)
+    profile = load_json(profile_path)
+    prompt_identity = validate_prompt_set_identity(profile.get("prompt_set_identity"))
+    conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+    codex_runtime_binding = profile_runtime_binding(conditions, bound_codex_runtime)
+    coverage = profile_coverage(profile)
+    expected_profile_set = {"set_id": manifest.get("set_id"), "revision": manifest.get("revision")}
+    if profile.get("evaluation_set") != expected_profile_set:
+        difference = first_value_difference(expected_profile_set, profile.get("evaluation_set"))
+        raise EvaluationError(f"profile evaluation set mismatch: {difference}")
+    unknown = sorted(set(coverage["case_ids"]) - {case["id"] for case in manifest["cases"]})
+    if unknown:
+        raise EvaluationError(f"profile case is not in the evaluation set: {unknown[0]}")
+    authorization = authorize_plan(
+        cycle, profile, prompt_identity, conditions, coverage, global_plan_path, require_pristine
+    )
+    payload: dict[str, Any] = {
+        "schema_version": EXECUTION_PREFLIGHT_SCHEMA,
+        "status": "ready",
+        "installation_content_sha256": installation["receipt_content_sha256"],
+        "profile": str(profile_path),
+        "profile_sha256": file_sha256(profile_path),
+        "global_plan": str(global_plan_path),
+        "global_plan_sha256": file_sha256(global_plan_path),
+        "prompt_set_identity": prompt_identity,
+        "evaluation_set_identity_sha256": manifest["identity_sha256"],
+        "compatibility_key": identity_sha256(
+            build_compatibility(manifest, conditions, coverage["case_ids"], coverage["iterations"])
+        ),
+        "coverage": coverage,
+        "max_workers": authorization["max_workers"],
+        "authorized_slots": authorization["authorized_slots"],
+    }
+    if codex_runtime_binding is not None:
+        payload["codex_runtime_binding"] = codex_runtime_binding
+    if authorization["atomic_dispatch"]:
+        payload.update(
+            {
+                "dispatch_mode": "atomic",
+                "dispatch_plan": str(authorization["dispatch_plan_path"]),
+                "dispatch_plan_sha256": authorization["dispatch_plan_sha256"],
+            }
+        )
+    return payload
+
+
+def preflight_execution(args: argparse.Namespace) -> dict[str, Any]:
     cycle = Path(args.cycle).resolve()
-    profile_path = Path(args.profile).resolve()
-    global_plan_path = Path(args.global_plan).resolve()
-    registry = Path(args.registry).resolve()
-    payload = build_comparison_preflight_payload(
+    payload = build_execution_preflight_payload(
         cycle,
-        profile_path,
-        global_plan_path,
-        registry,
-        args.reference_result_id,
+        Path(args.profile).resolve(),
+        Path(args.global_plan).resolve(),
         require_pristine=True,
-        compatibility_rule=args.compatibility_rule,
     )
     receipt = receipt_with_hash(payload)
-    receipt_path = cycle / "layer1" / "comparison-preflight.json"
+    receipt_path = cycle / "layer1" / "execution-preflight.json"
     write_json_once(receipt_path, receipt)
     return {
         "layer": 1,
         "artifact": str(receipt_path),
-        "reference_result_id": payload["reference_result_id"],
         "compatibility_key": payload["compatibility_key"],
         "authorized_slot_count": len(payload["authorized_slots"]),
         "max_workers": payload["max_workers"],
+    }
+
+
+def verify_execution_preflight(cycle: Path) -> dict[str, Any]:
+    receipt_path = cycle / "layer1" / "execution-preflight.json"
+    payload = validate_receipt_hash(load_json(receipt_path), "execution preflight")
+    if payload.get("schema_version") != EXECUTION_PREFLIGHT_SCHEMA:
+        raise EvaluationError("execution preflight has an unsupported schema_version")
+    expected = build_execution_preflight_payload(
+        cycle,
+        Path(payload["profile"]).resolve(),
+        Path(payload["global_plan"]).resolve(),
+        require_pristine=False,
+        bound_codex_runtime=payload.get("codex_runtime_binding"),
+    )
+    difference = first_value_difference(expected, payload)
+    if difference is not None:
+        raise EvaluationError(f"execution preflight receipt is stale: {difference}")
+    return payload
+
+
+def verify_execution_preflight_command(args: argparse.Namespace) -> dict[str, Any]:
+    cycle = Path(args.cycle).resolve()
+    payload = verify_execution_preflight(cycle)
+    return {
+        "layer": 1,
+        "artifact": str(cycle / "layer1" / "execution-preflight.json"),
+        "authorized_slot_count": len(payload["authorized_slots"]),
+        "status": "ready",
     }
 
 
@@ -1569,13 +1828,21 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
     if len(iterations) != expected_iterations:
         raise EvaluationError("observed iterations do not match repetition_condition.iterations")
 
-    case_results, per_iteration, median = aggregate_prompt_set(cases, iterations, index)
+    price_table = None
+    if getattr(args, "price_table", None):
+        try:
+            price_table = load_price_table(Path(args.price_table).resolve())
+        except (UsageComponentsError, OSError, ValueError) as exc:
+            raise EvaluationError(f"invalid price table: {exc}") from exc
+    elif (cycle / "layer1" / "installation.json").exists():
+        raise EvaluationError("record-result for an installed cycle requires --price-table (cost KPI)")
+    case_results, per_iteration, median = aggregate_prompt_set(cases, iterations, index, price_table)
     compatibility = build_compatibility(manifest, conditions, cases, iterations)
     compatibility_key = identity_sha256(compatibility)
     result_id = uuid.uuid4().hex
     token_accounting = conditions["executor_parameters"]["token_accounting"]
     result = {
-        "schema_version": RESULT_SCHEMA_V2,
+        "schema_version": RESULT_SCHEMA_V2 if price_table is None else RESULT_SCHEMA_V3,
         "result_id": result_id,
         "token_accounting": token_accounting,
         "prompt_set_identity": prompt_set_identity,
@@ -1588,6 +1855,8 @@ def layer4_record_result(args: argparse.Namespace) -> dict[str, Any]:
         "excluded_attempts": excluded_attempts,
         "created_at": utc_now(),
     }
+    if price_table is not None:
+        result["price_table"] = price_table_identity(price_table)
     result["result_content_sha256"] = identity_sha256(result)
     artifact = registry / "results" / f"{result_id}.json"
     write_json_once(artifact, result)
@@ -1737,7 +2006,7 @@ def registry_results(registry: Path) -> list[tuple[Path, dict[str, Any]]]:
     results: list[tuple[Path, dict[str, Any]]] = []
     for path in sorted((registry / "results").glob("*.json")):
         result = load_json(path)
-        if result.get("schema_version") not in {RESULT_SCHEMA_V1, RESULT_SCHEMA_V2}:
+        if result.get("schema_version") not in {RESULT_SCHEMA_V1, RESULT_SCHEMA_V2, RESULT_SCHEMA_V3}:
             raise EvaluationError(f"unsupported registry result schema: {path}")
         if result.get("result_id") != path.stem:
             raise EvaluationError(f"registry result id does not match filename: {path}")
@@ -1792,11 +2061,31 @@ def query_results(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def kpi_difference(minuend: dict[str, Any], subtrahend: dict[str, Any]) -> dict[str, Any]:
-    return {
+    difference = {
         "quality_score": minuend["quality_score"] - subtrahend["quality_score"],
         "total_tokens": minuend["total_tokens"] - subtrahend["total_tokens"],
         "elapsed_seconds": minuend["elapsed_seconds"] - subtrahend["elapsed_seconds"],
     }
+    if "cost_usd" in minuend and "cost_usd" in subtrahend:
+        difference["cost_usd"] = minuend["cost_usd"] - subtrahend["cost_usd"]
+    return difference
+
+
+def cost_band(result: dict[str, Any], reference: dict[str, Any]) -> dict[str, Any] | None:
+    """Where the result's median cost falls against the reference's iteration range."""
+    if "cost_usd" not in result["median"] or "cost_usd" not in reference["median"]:
+        return None
+    values = [item["cost_usd"] for item in reference["iterations"]]
+    low, high = min(values), max(values)
+    median = result["median"]["cost_usd"]
+    position = "below_range" if median < low else "above_range" if median > high else "within_range"
+    return {"reference_min": low, "reference_max": high, "median": median, "position": position}
+
+
+def require_same_price_table(selected: list[dict[str, Any]], reference: dict[str, Any]) -> None:
+    for result in selected:
+        if result.get("price_table") != reference.get("price_table"):
+            raise EvaluationError("results use different price tables for the cost KPI")
 
 
 def compare_results(args: argparse.Namespace) -> dict[str, Any]:
@@ -1824,15 +2113,16 @@ def compare_results(args: argparse.Namespace) -> dict[str, Any]:
             raise EvaluationError("result compatibility keys do not match")
         if result["compatibility"] != reference["compatibility"]:
             raise EvaluationError("result compatibility conditions do not match")
+    require_same_price_table(selected, reference)
 
     view = {
-        "schema_version": (
-            VIEW_SCHEMA_V2
-            if reference["schema_version"] == RESULT_SCHEMA_V2
-            else VIEW_SCHEMA_V1
-        ),
+        "schema_version": {
+            RESULT_SCHEMA_V3: VIEW_SCHEMA_V3,
+            RESULT_SCHEMA_V2: VIEW_SCHEMA_V2,
+        }.get(reference["schema_version"], VIEW_SCHEMA_V1),
         "compatibility_key": reference["compatibility_key"],
         "token_accounting": token_accounting_for_result(reference),
+        **({"price_table": reference["price_table"]} if "price_table" in reference else {}),
         "reference_result_id": reference["result_id"],
         "prompt_sets": [
             {
@@ -1849,6 +2139,7 @@ def compare_results(args: argparse.Namespace) -> dict[str, Any]:
                 "minuend_result_id": result["result_id"],
                 "subtrahend_result_id": reference["result_id"],
                 "kpis": kpi_difference(result["median"], reference["median"]),
+                **({"cost_band": band} if (band := cost_band(result, reference)) else {}),
             }
             for result in selected
             if result["result_id"] != reference["result_id"]
@@ -1922,6 +2213,7 @@ def compare_effective(args: argparse.Namespace) -> dict[str, Any]:
         difference = first_value_difference(reference_effective, split_effective(result["compatibility"])[0])
         if difference is not None:
             raise EvaluationError(f"effective compatibility mismatch: {difference}")
+    require_same_price_table(selected, reference)
     if all(value is not None for value in tasks.values()):
         expected = tasks[reference["result_id"]]
         for result_id, value in tasks.items():
@@ -1941,6 +2233,7 @@ def compare_effective(args: argparse.Namespace) -> dict[str, Any]:
         "task_text_check": task_check,
         "task_sha256_by_case": tasks[reference["result_id"]],
         "token_accounting": token_accounting_for_result(reference),
+        **({"price_table": reference["price_table"]} if "price_table" in reference else {}),
         "reference_result_id": reference["result_id"],
         "prompt_sets": [
             {
@@ -1960,6 +2253,7 @@ def compare_effective(args: argparse.Namespace) -> dict[str, Any]:
                 "minuend_result_id": result["result_id"],
                 "subtrahend_result_id": reference["result_id"],
                 "kpis": kpi_difference(result["median"], reference["median"]),
+                **({"cost_band": band} if (band := cost_band(result, reference)) else {}),
             }
             for result in selected
             if result["result_id"] != reference["result_id"]
@@ -1980,10 +2274,29 @@ def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description=__doc__)
     commands = root.add_subparsers(dest="subcommand", required=True)
 
-    freeze = commands.add_parser("freeze-set", help="Layer 1: freeze an evaluation set")
+    freeze = commands.add_parser(
+        "freeze-set", help="Layer 1: freeze a new evaluation set once into the evaluation set store"
+    )
     freeze.add_argument("--set", required=True)
-    freeze.add_argument("--cycle", required=True)
+    freeze.add_argument("--store", required=True)
     freeze.set_defaults(handler=layer1_freeze)
+
+    publish = commands.add_parser(
+        "publish-layer1",
+        help="Layer 1: put an already frozen Layer 1 into the evaluation set store unchanged",
+    )
+    publish.add_argument("--source-layer1", required=True)
+    publish.add_argument("--store", required=True)
+    publish.set_defaults(handler=layer1_publish)
+
+    install = commands.add_parser(
+        "install-layer1",
+        help="Layer 1: copy the profile's evaluation set from the store into an empty cycle",
+    )
+    install.add_argument("--store", required=True)
+    install.add_argument("--profile", required=True)
+    install.add_argument("--cycle", required=True)
+    install.set_defaults(handler=layer1_install)
 
     coverage = commands.add_parser(
         "bind-coverage",
@@ -1994,31 +2307,25 @@ def parser() -> argparse.ArgumentParser:
     coverage.add_argument("--iterations", type=int, required=True)
     coverage.set_defaults(handler=layer1_bind_coverage)
 
-    prepare_comparison = commands.add_parser(
-        "prepare-comparison-layer1",
-        help="Layer 1: copy and verify the frozen Layer 1 from a reference result",
+    execution_preflight = commands.add_parser(
+        "preflight-execution",
+        help="Layer 1: authorize one prompt's plan against its profile and the installed evaluation set",
     )
-    prepare_comparison.add_argument("--registry", required=True)
-    prepare_comparison.add_argument("--reference-result-id", required=True)
-    prepare_comparison.add_argument("--reference-layer1", required=True)
-    prepare_comparison.add_argument("--cycle", required=True)
-    prepare_comparison.set_defaults(handler=prepare_comparison_layer1)
+    execution_preflight.add_argument("--cycle", required=True)
+    execution_preflight.add_argument("--profile", required=True)
+    execution_preflight.add_argument("--global-plan", required=True)
+    execution_preflight.set_defaults(handler=preflight_execution)
 
-    comparison_preflight = commands.add_parser(
-        "preflight-comparison",
-        help="Layer 1: authorize a compatible comparison plan before dispatch",
+    verify_execution = commands.add_parser(
+        "verify-execution-preflight",
+        help="Layer 1: revalidate a stored execution preflight receipt",
     )
-    comparison_preflight.add_argument("--cycle", required=True)
-    comparison_preflight.add_argument("--profile", required=True)
-    comparison_preflight.add_argument("--global-plan", required=True)
-    comparison_preflight.add_argument("--registry", required=True)
-    comparison_preflight.add_argument("--reference-result-id", required=True)
-    comparison_preflight.add_argument("--compatibility-rule", choices=COMPATIBILITY_RULES, default="exact")
-    comparison_preflight.set_defaults(handler=preflight_comparison)
+    verify_execution.add_argument("--cycle", required=True)
+    verify_execution.set_defaults(handler=verify_execution_preflight_command)
 
     verify_preflight = commands.add_parser(
         "verify-comparison-preflight",
-        help="Layer 1: revalidate a stored comparison preflight receipt",
+        help="Layer 1 (history): revalidate a comparison preflight receipt stored before 2026-10-09",
     )
     verify_preflight.add_argument("--cycle", required=True)
     verify_preflight.set_defaults(handler=verify_comparison_preflight_command)
@@ -2040,6 +2347,7 @@ def parser() -> argparse.ArgumentParser:
     )
     record.add_argument("--cycle", required=True)
     record.add_argument("--registry", required=True)
+    record.add_argument("--price-table", help="versioned price table for the cost KPI (required for installed cycles)")
     record.set_defaults(handler=layer4_record_result)
 
     reaccount = commands.add_parser(

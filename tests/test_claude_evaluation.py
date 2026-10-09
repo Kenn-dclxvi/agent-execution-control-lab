@@ -122,6 +122,22 @@ class ClaudeUsageTest(unittest.TestCase):
         self.assertEqual(report["auxiliary_model_usage_excluded_from_kpi"][0]["model"], "claude-haiku-4-5")
         self.assertEqual(report["token_accounting"], evidence.TOKEN_ACCOUNTING)
         self.assertEqual([item["actor"] for item in report["sessions"]], ["root", "subagent"])
+        components = report["usage_components"]
+        self.assertEqual(components["total_tokens"], report["all_agent_total_tokens"])
+        buckets = components["by_model"][MODEL]["standard"]
+        self.assertEqual(buckets["cache_write_unsplit"], totals["cache_creation_input_tokens"])
+        self.assertEqual(buckets["cache_read"], totals["cache_read_input_tokens"])
+        self.assertEqual(buckets["output"], totals["output_tokens"])
+
+    def test_cache_write_split_feeds_the_cost_buckets(self):
+        values = usage(2, 30, 100, 5)
+        values["cache_creation"] = {"ephemeral_1h_input_tokens": 20, "ephemeral_5m_input_tokens": 10}
+        write_jsonl(self.root, [assistant("msg_1", [{"type": "text", "text": "x"}], values=values)])
+        parsed = evidence.parse_stream(stream({MODEL: model_usage_entry(usage(2, 30, 100, 5))}))
+        report = evidence.collect_usage(self.config, parsed)
+        buckets = report["usage_components"]["by_model"][MODEL]["standard"]
+        self.assertEqual((buckets["cache_write_1h"], buckets["cache_write_5m"], buckets["cache_write_unsplit"]), (20, 10, 0))
+        self.assertEqual(report["usage_components"]["total_tokens"], 137)
 
     def test_model_usage_mismatch_is_incomplete(self):
         self.write_session()
@@ -240,7 +256,7 @@ class ClaudeKernelAcceptanceTest(unittest.TestCase):
             path = Path(directory) / "usage.json"
             for accounting in (evaluation_loop.TOKEN_ACCOUNTING, evidence.TOKEN_ACCOUNTING):
                 path.write_text(json.dumps({"schema_version": evaluation_loop.TOKEN_USAGE_SCHEMA_V2, "token_accounting": accounting, "total_tokens": 5}))
-                self.assertEqual(evaluation_loop.parse_usage(path), (5, accounting))
+                self.assertEqual(evaluation_loop.parse_usage(path), (5, accounting, None))
             path.write_text(json.dumps({"schema_version": evaluation_loop.TOKEN_USAGE_SCHEMA_V2, "token_accounting": {"scope": "root_agent"}, "total_tokens": 5}))
             with self.assertRaises(evaluation_loop.EvaluationError):
                 evaluation_loop.parse_usage(path)

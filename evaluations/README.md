@@ -9,6 +9,7 @@
 - `sets/`: `the-caption` legacy-rootのEvaluation set revision
 - [`profiles/`](profiles/README.md): `the-caption` legacy-rootのexecution profileと索引
 - [`rating-contracts/`](rating-contracts/README.md): `the-caption` legacy-rootのquality rating contract revision
+- `price-tables/`: KPIの費用（`cost_usd`）を計算する単価表の版。版を追加し、既存の版を書き換えない
 - [`results/`](results/README.md): `the-caption` legacy-rootのwrite-once evaluation resultと索引
 - `examples/`: 現行のschemaとfixture境界の説明用アーティファクト
 

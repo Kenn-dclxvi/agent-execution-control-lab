@@ -15,6 +15,11 @@ import re
 from pathlib import Path
 from typing import Any, Iterable
 
+try:
+    from usage_components import claude_components
+except ModuleNotFoundError:  # Imported as scripts.claude_all_agent_evidence in tests.
+    from scripts.usage_components import claude_components
+
 
 class ClaudeEvidenceError(Exception):
     pass
@@ -154,12 +159,22 @@ def transcript_messages(path: Path) -> dict[str, dict[str, Any]]:
         previous = messages.get(message_id)
         if previous is not None and previous["model"] != model:
             raise ClaudeEvidenceError(f"message id reused across models: {message_id}")
+        split = None
+        cache_creation = usage.get("cache_creation")
+        if isinstance(cache_creation, dict):
+            split = {
+                key: cache_creation.get(key, 0)
+                for key in ("ephemeral_1h_input_tokens", "ephemeral_5m_input_tokens")
+            }
+            if not all(isinstance(value, int) and not isinstance(value, bool) and value >= 0 for value in split.values()):
+                raise ClaudeEvidenceError(f"invalid cache write split: {path}")
         # Streaming writes one record per content block; the last record of a
         # response carries the final usage of that response.
         messages[message_id] = {
             "model": model,
             "request_id": item.get("requestId"),
             "usage": values,
+            "cache_creation_split": split,
         }
     return messages
 
@@ -289,6 +304,7 @@ def collect_usage(config_dir: Path, stream: dict[str, Any]) -> dict[str, Any]:
             field: root_usage.get(field) for field in USAGE_FIELDS
         },
         "all_agent_total_tokens": all_agent_total,
+        "usage_components": claude_components(merged.values()),
     }
 
 

@@ -92,3 +92,53 @@ def test_claude_token_counting_matches_its_revision():
 def test_time_recording_matches_its_contract():
     assert TIME_CONTRACT in TIME_OUTPUTS, f"add a pinned row for {TIME_CONTRACT}"
     assert time_output() == TIME_OUTPUTS[TIME_CONTRACT]
+
+
+COST_OUTPUTS = {
+    "the-caption-prompt.usage-components/v1": {
+        "codex": {"uncached_input": 10_200, "cache_read": 290_800, "output": 30, "long_context_tokens": 300_020},
+        "claude": {"cache_write_1h": 20, "cache_write_5m": 10, "cache_read": 100, "output": 5},
+        "cost_micro_usd": 2_000 * 2 + 1_000 * 0.1 * 10 + 100,
+    },
+}
+
+
+def cost_output():
+    from scripts import usage_components as uc
+
+    with tempfile.TemporaryDirectory() as directory:
+        first = {"input_tokens": 1000, "cached_input_tokens": 800, "output_tokens": 10, "reasoning_output_tokens": 0, "total_tokens": 1010}
+        second = {"input_tokens": 300_000, "cached_input_tokens": 290_000, "output_tokens": 20, "reasoning_output_tokens": 0, "total_tokens": 300_020}
+        total = {key: first[key] + second[key] for key in first}
+        events = [
+            {"payload": {"type": "token_count", "info": {"total_token_usage": first, "last_token_usage": first}}},
+            {"payload": {"type": "token_count", "info": {"total_token_usage": first, "last_token_usage": first}}},
+            {"payload": {"type": "token_count", "info": {"total_token_usage": total, "last_token_usage": second}}},
+        ]
+        rollout = Path(directory) / "rollout.jsonl"
+        rollout.write_text("".join(json.dumps(item) + "\n" for item in events), encoding="utf-8")
+        codex = uc.summed_components([uc.codex_components([rollout], "m")])
+    claude = uc.claude_components(
+        [
+            {
+                "model": "m",
+                "usage": {"input_tokens": 0, "cache_creation_input_tokens": 30, "cache_read_input_tokens": 100, "output_tokens": 5},
+                "cache_creation_split": {"ephemeral_1h_input_tokens": 20, "ephemeral_5m_input_tokens": 10},
+            }
+        ]
+    )["by_model"]["m"]["standard"]
+    prices = {"uncached_input": 2.0, "cache_read": 0.1, "cache_write_5m": 2.5, "cache_write_1h": 4.0, "cache_write_unsplit": None, "output": 10.0}
+    table = {"models": {"m": {"standard": prices}}}
+    components = uc.components_document({"m": {"standard": {**uc.empty_buckets(), "uncached_input": 2_000, "cache_read": 10_000, "output": 10}}}, "test")
+    return {
+        "codex": {key: codex[key] for key in ("uncached_input", "cache_read", "output", "long_context_tokens")},
+        "claude": {key: claude[key] for key in ("cache_write_1h", "cache_write_5m", "cache_read", "output")},
+        "cost_micro_usd": round(uc.run_cost(components, table) * 1_000_000, 6),
+    }
+
+
+def test_cost_counting_matches_its_revision():
+    from scripts.usage_components import USAGE_COMPONENTS_SCHEMA
+
+    assert USAGE_COMPONENTS_SCHEMA in COST_OUTPUTS, f"add a pinned row for {USAGE_COMPONENTS_SCHEMA}"
+    assert cost_output() == COST_OUTPUTS[USAGE_COMPONENTS_SCHEMA]

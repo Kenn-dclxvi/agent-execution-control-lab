@@ -549,9 +549,10 @@ def execute() -> int:
                 write_json(
                     usage_path,
                     {
-                        "schema_version": "the-caption-prompt.token-usage/v2",
+                        "schema_version": "the-caption-prompt.token-usage/v3",
                         "token_accounting": TOKEN_ACCOUNTING,
                         "total_tokens": usage["all_agent_total_tokens"],
+                        "usage_components": usage["usage_components"],
                     },
                 )
     if failure is None and stream is None:

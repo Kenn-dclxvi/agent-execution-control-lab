@@ -22,22 +22,25 @@
 
 | Layer | subcommand | 役割 |
 | --- | --- | --- |
-| 1. Evaluation set | `freeze-set` | set revisionとfixtureをcycleへ固定する |
+| 1. Evaluation set | `freeze-set` | 新しいset revisionとfixtureを、評価セットの保管場所（store）へ一度だけ固定する |
+| 1. Evaluation set | `publish-layer1` | 既に固定済みのLayer 1を、file modeを含めてそのままstoreへ保管する |
+| 1. Evaluation set | `install-layer1` | profileが指定する評価セットをstoreから空のcycleへ複製し、`installation.json`を残す |
 | 1. Evaluation coverage | `bind-coverage` | このcycleで発行・登録するcaseとiterationを実行前に固定する |
-| 1. Comparison generation | `prepare-comparison-layer1` | 保存済み基準resultのLayer 1を検証し、比較cycleへ複製する |
-| 1. Comparison preflight | `preflight-comparison` | profile、capsule、global planを基準resultへ照合して発行を許可する |
+| 1. Execution preflight | `preflight-execution` | profile、複製したLayer 1、global plan、capsuleを照合して発行を許可する |
 | 2. Execution | `run` | 1 prompt setの1 case / 1 iterationを実行する |
 | 3. Quality rating | `rate` | 1 runへ0〜4のscoreを記録する |
 | 4. Atomic registration | `atomic_run_registry.py register-run` | 採点済み1 runをregistryへ追記する |
 | 4. Legacy import | `atomic_run_registry.py import-result` | 既存prompt-set resultのrunを元result不変のまま索引化する |
-| 1. Atomic pool seed | `atomic_run_registry.py seed-pool` | 基準poolの実効条件から、run 0件の新prompt poolを固定する |
+| 1. Atomic pool | `atomic_run_registry.py create-pool` | profileと複製したLayer 1から、run 0件のprompt poolを固定する |
 | 4. Missing dispatch | `atomic_run_registry.py plan-missing` | poolの既存runをcase別に数え、不足runだけを固定する |
 | 4. Selection | `atomic_run_registry.py select-runs` | 分析に用いるrun ID集合をwrite-onceで固定する |
-| 4. KPI analysis | `atomic_run_registry.py aggregate-selection` | selectionから3 KPIを集計する |
+| 4. KPI analysis | `atomic_run_registry.py aggregate-selection` | selectionから3 KPI（品質、単価表で換算した費用、経過時間）と参考のtokenを集計する |
 | 4. KPI comparison | `atomic_run_registry.py compare-analyses` | 実効互換な2 analysisの差分viewを作る |
 | 4. 履歴互換 | `record-result` / `compare` | 従来のprompt-set resultを登録・比較する |
 
 `reaccount-result`はroot-only v3 resultを変更せずall-agent resultを追記する履歴補正interface、`query-results`はregistryのread-only取得interfaceである。各書込subcommandは既存artifactを上書きしない。
+
+試験は一つのプロンプトを、固定したprofileと評価セットで計測する。実行の前に比較の相手（基準result、基準pool）を要求しない。比較は保存後に、互換条件と単価表が一致するresultまたはanalysisを選んで行う。2026-10-09より前に使っていた`prepare-comparison-layer1`、`preflight-comparison`、`seed-pool`は削除した。これらで作ったcycleは、`verify-comparison-preflight`で検証だけできる。
 
 ## 3. 必要なもの
 
@@ -49,7 +52,7 @@
 
 capsuleへsecretやcredentialを直接保存しない。非公開のraw run evidenceをrepositoryへcommitしない。
 
-新規のCodex CLI試験では、Profileの`comparison_conditions.agent_environment.codex_cli`へ`x.y.z`形式のexact versionを固定する。`preflight-comparison`は`codex-runtime-infrastructure`のfixed alias（例: `codex-0.146`）をhost-local registryから検証し、absolute executable path、runtime ID、versionおよびentrypoint SHA-256を`comparison-preflight.json`へ保存する。各runはreceiptに固定されたabsolute pathだけを起動し、`PATH`の`codex`または`codex-current`へfallbackしない。
+新規のCodex CLI試験では、Profileの`comparison_conditions.agent_environment.codex_cli`へ`x.y.z`形式のexact versionを固定する。`preflight-execution`は`codex-runtime-infrastructure`のfixed alias（例: `codex-0.146`）をhost-local registryから検証し、absolute executable path、runtime ID、versionおよびentrypoint SHA-256を`execution-preflight.json`へ保存する。各runはreceiptに固定されたabsolute pathだけを起動し、`PATH`の`codex`または`codex-current`へfallbackしない。
 
 runtime managerは通常、同じ`repos/`直下の`codex-runtime-infrastructure/bin/codex-runtime`から検出する。別配置の場合だけ`CODEX_RUNTIME_MANAGER`へabsolute pathを指定する。fixed aliasが未登録、bundle検証が失敗、Profile versionと観測versionが不一致、またはpreflight後にentrypoint hashが変化した場合は、評価slotを発行せず停止する。
 
@@ -85,7 +88,22 @@ runtime managerは通常、同じ`repos/`直下の`codex-runtime-infrastructure/
 
 `freeze-set`はcase別fixture identityとset content identityを計算する。fixture identityは`.git`内部を除くpath、type、mode、file content、symlink targetに結び付く。
 
-保存済みresultとの比較では`freeze-set`を使わない。`git clone`等による再生成はprocessの`umask`によってfile / directory modeが変わり得るためである。基準resultと対応する保存済みLayer 1を`prepare-comparison-layer1`へ渡し、検証済みの実体から比較cycleを生成する。
+評価セットは版ごとに一度だけstoreへ固定し、各試験はそこから複製する。`git clone`等による再生成はprocessの`umask`によってfile / directory modeが変わり得るため、同じ版を試験ごとに固定し直さない。既に固定済みのLayer 1（過去のcycleの`layer1/`など）は`publish-layer1`でそのまま保管する。
+
+```bash
+STORE=/path/to/evaluation-set-store
+
+# 新しい評価セット
+python3 "$CLI" freeze-set --set /path/to/evaluation/set.json --store "$STORE"
+
+# 既に固定済みのLayer 1
+python3 "$CLI" publish-layer1 --source-layer1 /path/to/frozen/layer1 --store "$STORE"
+
+# 試験ごとに、profileの評価セットを空のcycleへ複製する
+python3 "$CLI" install-layer1 --store "$STORE" --profile /path/to/profile.json --cycle "$CYCLE"
+```
+
+storeは`<store>/<set_id>/<revision>/layer1/`と、その識別値を記録した`entry.json`を持つ。`install-layer1`は複製の前後でfixture identityを照合し、`layer1/installation.json`を残す。内容が同じでもmodeが異なれば拒否する。
 
 固定setの一部だけを対象試験として発行する場合は、一件目の`run`より前に`bind-coverage`でcaseとiteration数を固定する。これによりset identityとTaskSpecを変えず、coverageだけをresultの互換条件として分離できる。coverage外の`run`は拒否し、`record-result`はbound coverage全件が揃わなければ停止する。
 
@@ -107,11 +125,11 @@ python3 "$ATOMIC" import-result \
   --registry "$REGISTRY" \
   --result-id <n5-result-id>
 
-# 新しいpromptを初めて実行する場合は、基準poolの実効条件から空poolを作る
-python3 "$ATOMIC" seed-pool \
+# 新しいpromptを初めて実行する場合は、profileと複製したLayer 1から空poolを作る
+python3 "$ATOMIC" create-pool \
   --registry "$REGISTRY" \
-  --reference-pool-key <reference-pool-key> \
-  --prompt-identity /path/to/candidate-profile.json
+  --profile /path/to/profile.json \
+  --cycle "$CYCLE"
 
 # 各caseの保存run数から不足slotだけをplanへ出す
 python3 "$ATOMIC" plan-missing \
@@ -123,7 +141,7 @@ python3 "$ATOMIC" plan-missing \
 
 `plan-missing`の`desired-count`は各caseへ要求する件数であり、runまたはpool identityへ含めない。各missing slotは独立した`sample_id`、case ID、dispatch用の局所iterationを持つ。case間で同じ`sample_id`へ束ねない。`prepare_atomic_plan.py`はこのplanから不足capsuleだけを生成する。
 
-`seed-pool`はrunを捏造せず、基準poolのcase別実効条件とcomparison keyだけを新しいprompt identityへbindする。生成したv3 global planも`preflight-comparison`へ渡し、基準resultとの完全なprofile互換性、dispatch plan hash、全capsule path / hash / sample IDを`comparison-preflight/v2`へ固定してから発行する。
+`create-pool`はrunを捏造せず、profileの条件と複製したLayer 1のfixture identityから、`register-run`がrunへ付けるのと同じcase別実効条件とcomparison keyを作る。同じ条件の別プロンプトのpoolとは、comparison keyが一致するため、保存後に比較できる。生成したv3 global planは`preflight-execution`へ渡し、profileとの一致、dispatch plan hash、全capsule path / hash / sample IDを`execution-preflight.json`へ固定してから発行する。
 
 ```bash
 python3 layer2/extensions/parallel_execution/prepare_atomic_plan.py \
@@ -160,12 +178,15 @@ python3 "$ATOMIC" select-runs \
 python3 "$ATOMIC" aggregate-selection \
   --registry "$REGISTRY" \
   --selection /new/path/selection.json \
+  --price-table evaluations/price-tables/api-standard-2026-10-09.json \
   --output /new/path/analysis.json
 ```
 
+使用量の内訳を持つrun（`atomic-run/v2`）を含むselectionは、`--price-table`がなければ集計しない。analysisは費用（`cost_usd`）の中央値、反復ごとの費用と内訳、使った単価表の版とSHA-256を持つ。単価表に価格のない区分へ使用量があれば、推定せず停止する。
+
 `select-runs`はcaseごとに要求件数を選び、selection iterationへ組み合わせる。selection iterationはKPI集計上の対応付けであり、実行時の束または共通sample identityではない。
 
-poolの一部caseだけを比較へ再利用する場合は`--case-id`を繰り返す。選択済みatomic runを後続の`prepare-comparison-layer1`へ渡せる基準resultにする場合は、同じ条件を固定したprofileで`register-selection-result`を実行する。新しいrunは発行せず、selection内のrun identityとprofile条件が完全一致する場合だけimmutable resultを登録する。
+poolの一部caseだけを比較へ再利用する場合は`--case-id`を繰り返す。選択済みatomic runをprompt-set resultとして登録する場合は、同じ条件を固定したprofileと単価表で`register-selection-result`を実行する。新しいrunは発行せず、selection内のrun identityとprofile条件が完全一致する場合だけimmutable resultを登録する。
 
 ```bash
 python3 "$ATOMIC" select-runs \
@@ -179,41 +200,32 @@ python3 "$ATOMIC" select-runs \
 python3 "$ATOMIC" register-selection-result \
   --registry "$REGISTRY" \
   --selection /new/path/reference-selection.json \
-  --profile /path/to/matching-reference-profile.json
+  --profile /path/to/matching-profile.json \
+  --price-table evaluations/price-tables/api-standard-2026-10-09.json
 ```
 
 candidate固有のquality・mechanism gateがある場合はcandidate slotだけを先に実行する。candidate resultが有効かつ採点可能になった後は、mechanismの成否と分離して、保存済み互換baselineがある場合は3 KPI比較を主結果へ含める。mechanism不通過はKPI比較を止める条件にしない。
 
-mechanismへ100％成立を要求するのは、そのmechanismの成立・不成立と品質再現性の成否が常に一致し、相関が100％であることを互換する証拠で確認した場合だけとする。この対応が確認されていないcost経路のmechanism成立率は原因診断に使う観測値であり、1件の不成立を追加NまたはStandard14の自動停止条件にしない。品質を維持したうえで、all-agent `total_tokens`と`elapsed_seconds`がともに減った場合はcost改善方向とする。一方が増えた場合は、その増加をまずcost退行として記録し、追加costが品質、必要な正常経路または明示された制約を維持するために必要だったかをtraceで監査する。必要性を確認できない場合は`unjustified_cost_regression`とし、減少した別指標で相殺しない。必要性を確認できた場合だけ`tradeoff_requires_human_judgement`として人間へ交換条件を提示する。保存済み互換baselineがない場合はKPI比較未完了を明示し、baseline slotを新規発行するかを別途固定する。この扱いは[Candidate110で固定した訂正](candidate110-validation-ticket-decision-boundary-design.md)に従う。
+mechanismへ100％成立を要求するのは、そのmechanismの成立・不成立と品質再現性の成否が常に一致し、相関が100％であることを互換する証拠で確認した場合だけとする。この対応が確認されていないcost経路のmechanism成立率は原因診断に使う観測値であり、1件の不成立を追加NまたはStandard14の自動停止条件にしない。品質を維持したうえで、all-agent `total_tokens`と`elapsed_seconds`がともに減った場合はcost改善方向とする。一方が増えた場合は、その増加をまずcost退行として記録し、追加costが品質、必要な正常経路または明示された制約を維持するために必要だったかをtraceで監査する。必要性を確認できない場合は`unjustified_cost_regression`とし、減少した別指標で相殺しない。必要性を確認できた場合だけ`tradeoff_requires_human_judgement`として人間へ交換条件を提示する。保存済み互換baselineがない場合はKPI比較未完了を明示し、baseline slotを新規発行するかを別途固定する。この扱いは[Candidate110で固定した訂正](candidate110-validation-ticket-decision-boundary-design.md)に従う。2026-10-09以降の実行環境を切り離した系列では、[計測と記録の基準r2](shared-instruction-evaluation-criteria-r2.md)に従い、費用を主な指標とし、Candidateごとの成否を自動で判定しない。
 
-保存済みresultを基準にする比較cycleは、次の順序で準備する。
+各試験のcycleは、次の順序で準備する。比較の相手は要求しない。
 
 ```bash
-python3 "$CLI" prepare-comparison-layer1 \
-  --registry "$REGISTRY" \
-  --reference-result-id <result_id> \
-  --reference-layer1 /path/to/reference/cycle/layer1 \
-  --cycle "$CYCLE"
+python3 "$CLI" install-layer1 --store "$STORE" --profile /path/to/profile.json --cycle "$CYCLE"
 ```
 
-このcommandは、基準resultのcontent SHA-256、compatibility key、Evaluation set identity、全fixture identityと保存Layer 1の実体を照合する。照合後にLayer 1をcopyし、基準resultのcase / iteration coverageを固定する。内容が同じでもmodeが異なるLayer 1は生成前に拒否する。
-
-target固有の手順でcandidate profile、Run capsule、global planを生成した後、最初のslotより前に次を実行する。
+target固有の手順でRun capsuleとglobal planを生成した後、最初のslotより前に次を実行する。
 
 ```bash
-python3 "$CLI" preflight-comparison \
+python3 "$CLI" preflight-execution \
   --cycle "$CYCLE" \
-  --profile /path/to/candidate-profile.json \
-  --global-plan /path/to/global-plan.json \
-  --registry "$REGISTRY" \
-  --reference-result-id <result_id>
+  --profile /path/to/profile.json \
+  --global-plan /path/to/global-plan.json
 
-python3 "$CLI" verify-comparison-preflight --cycle "$CYCLE"
+python3 "$CLI" verify-execution-preflight --cycle "$CYCLE"
 ```
 
-preflightは、prompt identity以外の全compatibility、設定上の`M`、発行対象case / iteration、各capsuleのidentityとcomparison conditionsに加え、Profileが要求するfixed Codex runtimeのabsolute path、runtime ID、versionおよびentrypoint SHA-256を照合する。legacy planではprofileの全coverage、atomic planではhash固定したdispatch planの不足slot集合との一致を要求する。成功時だけ`comparison-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、profile、global plan、capsuleとruntime bindingを再検証するため、receipt欠落、改ざん、準備後の条件変更またはruntime driftはadapter起動前に停止する。
-
-複数prompt setの新規slotは、prompt setごとのcycleを維持したまま[`campaign_runner.py`](../layer2/extensions/parallel_execution/campaign_runner.py)の一つのglobal queueへ入れる。明示した`resource_class`が一致すれば、analysis condition、coverage、局所反復数が異なるplanも同じqueueへ入れられる。queueは同一case / sampleの比較対象を近接配置したうえでworkerを空けず、このhostでは`M=24`を上限とする。
+preflightは、複製したLayer 1の識別値、profileの評価セットとcase、全comparison conditions、設定上の`M`、発行対象case / iteration、各capsuleのidentityとcomparison conditionsに加え、Profileが要求するfixed Codex runtimeのabsolute path、runtime ID、versionおよびentrypoint SHA-256を照合する。legacy planではprofileの全coverage、atomic planではhash固定したdispatch planの不足slot集合との一致を要求する。成功時だけ`execution-preflight.json`をwrite-onceで作る。`run`も実行直前にreceipt、installation、profile、global plan、capsuleとruntime bindingを再検証するため、receipt欠落、改ざん、準備後の条件変更またはruntime driftはadapter起動前に停止する。`installation.json`のないcycle（Layer 1を手で作ったcycleなど）は実行しない。
 
 ## 5. Run capsule v2
 
@@ -386,17 +398,16 @@ CYCLE=/tmp/prompt-set-baseline-r3
 REGISTRY=/tmp/the-caption-prompt-result-registry
 ```
 
-### Layer 1: setを固定する
+### Layer 1: storeから評価セットを複製する
 
 ```bash
-python3 "$CLI" freeze-set \
-  --set /path/to/evaluation/set.json \
+python3 "$CLI" install-layer1 \
+  --store "$STORE" \
+  --profile /path/to/profile.json \
   --cycle "$CYCLE"
 ```
 
-cycleは空でなければならない。固定後にsource setやfixtureを変更してもcycleへ反映されない。
-
-この`freeze-set`経路は新規Evaluation setまたは基準resultを持たない単独評価用である。保存済みresultとの比較には前節の`prepare-comparison-layer1`経路を使う。
+cycleは空でなければならない。評価セットがまだstoreにない場合は、先に`freeze-set --store`または`publish-layer1`で保管する（4節）。続けてRun capsuleとglobal planを作り、`preflight-execution`を通してから実行する（4節の「実行前のresult再利用とcampaign scheduling」の手順と同じ）。
 
 固定setの一部だけを発行する場合は、続けてcoverageを固定する。
 
@@ -480,10 +491,11 @@ scoreは0、1、2、3、4のいずれかとする。excluded runは採点しな�
 ```bash
 python3 "$CLI" record-result \
   --cycle "$CYCLE" \
-  --registry "$REGISTRY"
+  --registry "$REGISTRY" \
+  --price-table evaluations/price-tables/api-standard-2026-10-09.json
 ```
 
-全caseと`1..N`、全rating、all-agentの`total_tokens`、単一identity、単一`comparison_conditions`を検証し、次を新規作成する。
+全caseと`1..N`、全rating、all-agentの`total_tokens`と使用量の内訳、単一identity、単一`comparison_conditions`を検証し、次を新規作成する。複製したLayer 1のcycleでは`--price-table`を必須とし、resultは費用を持つ`prompt-set-result/v3`になる。
 
 ```text
 $REGISTRY/results/<result_id>.json
@@ -550,7 +562,10 @@ python3 "$CLI" compare \
 - 選択した全prompt setのidentity
 - 各prompt setのiteration別3 KPIと中央値
 - 各prompt setの除外attempt
-- 各非reference resultをminuend、reference resultをsubtrahendとする3 KPI差分
+- 各非reference resultをminuend、reference resultをsubtrahendとするKPI差分（費用を持つresultでは`cost_usd`を含む）
+- 費用を持つresultでは、referenceの反復の最小と最大に対する中央値の位置（`cost_band`）
+
+費用を持つresult同士は、同じ単価表で計算したものだけを比べる。
 
 `minuend_result_id`と`subtrahend_result_id`を各差分に明記する。referenceは採用状態や順位を意味しない。互換条件が1項目でも異なる場合はviewを作らない。
 
@@ -569,30 +584,36 @@ python3 "$CLI" compare-effective \
 
 各resultのcycleから、validなrunの`task_sha256`をケースごとに集め、全resultで一致することを確かめる。viewの`task_text_check`は、`task_sha256`で確かめた場合は`task_sha256`、どれかのcycleに記録がなく評価コードのSHA-256の一致で代えた場合は`code_sha256_fallback`になる。viewには、各resultの記録だけの項目（`provenance`）も残す。
 
-atomic run経路では、基準と候補の両方について、同じ基準poolから`run-pool/v2`を作る。
+atomic run経路では、各プロンプトのpoolを、それぞれのprofileと複製したLayer 1から`run-pool/v2`として作る。
 
 ```bash
-python3 "$ATOMIC" seed-pool \
+python3 "$ATOMIC" create-pool \
   --registry "$REGISTRY" \
-  --reference-pool-key <reference pool key> \
-  --prompt-identity <reference or candidate profile> \
-  --compatibility-rule effective-v1 \
-  --task-sha256-cycle <cycle of the reference runs>
+  --profile <profile> \
+  --cycle <installed cycle> \
+  --compatibility-rule effective-v1
 ```
 
-基準のprompt identityで作ったpoolには、基準の既存runが保存済みの条件から所属する。候補のpoolには、記録だけの項目が違うrunも、課題文が一致すれば所属する。`plan-missing`、`prepare_atomic_plan.py`、`select-runs`、`aggregate-selection`、`register-selection-result`、`compare-analyses`は、poolの規則に従って照合する。
-
-発行前に同じ規則で照合する場合は、`preflight-comparison`へ`--compatibility-rule effective-v1`を付ける。receiptには規則名、実効互換キー、候補側の記録だけの項目が残り、`verify-comparison-preflight`と`run`は同じ規則で再検証する。
+poolには、記録だけの項目が違うrunも所属する。課題文を記録したrunは、選んだrun同士で課題文が一致することを`aggregate-selection`が、比べるanalysis同士で一致することを`compare-analyses`が確かめる。`plan-missing`、`prepare_atomic_plan.py`、`select-runs`、`register-selection-result`は、poolの規則に従って照合する。
 
 ## 10. Directory
 
 ```text
+<store>/<set_id>/<revision>/
+├── entry.json                        # 識別値とreceipt hash
+└── layer1/
+    ├── set.json
+    └── fixtures/
+
 <cycle>/
 ├── layer1/
 │   ├── set.json
-│   └── fixtures/
+│   ├── fixtures/
+│   ├── installation.json             # storeから複製した記録
+│   └── execution-preflight.json      # 発行の許可
 ├── layer2/
 │   ├── evidence/<run_id>/
+│   │   ├── usage.json                # token-usage/v3は使用量の内訳を含む
 │   │   └── exclusion.json            # excluded attemptだけ
 │   ├── capsules/<run_id>.json
 │   ├── bindings/<run_id>.json
@@ -625,6 +646,12 @@ selection、analysis、comparisonは利用者が指定した新規pathへ作る�
 | `observed iterations do not match...` | 実行数と反復条件が不一致 | `1..N`を揃えるか新しい条件で別cycleを作る |
 | `compatibility keys do not match` | 固定条件が異なるresultを選択 | 同じkeyのresultをqueryする |
 | `refusing to overwrite` | resultまたはview pathが既存 | 新規path / 新規cycleを使う |
+| `cycle has no installed Layer 1` | Layer 1をstoreから複製していない | `install-layer1`で複製し、`preflight-execution`を通す |
+| `execution-preflight.json`がない / `receipt is stale` | 発行の許可がない、または準備後に条件が変わった | `preflight-execution`を通す。条件を変えた場合は新しいcycleで準備し直す |
+| `requires usage components` | adapterが使用量の内訳（`token-usage/v3`）を報告していない | adapterを現行版にする。推定で補わない |
+| `requires --price-table` / `need --price-table` | 単価表を指定していない | 版を固定した単価表を指定する |
+| `no price for used bucket` | 単価表に価格のない区分へ使用量がある | 単価表の新しい版を追加する。推定で補わない |
+| `different price tables` | 比べるresultの単価表が違う | 同じ単価表で集計し直したanalysisまたはresultを比べる |
 
 ## 12. v1 / v2 / v3との境界
 

@@ -13,6 +13,13 @@ from typing import Any
 
 if __package__:
     from .comparison_identity import code_sha256, effective_block_key, split_effective, task_sha256_by_run
+    from .usage_components import (
+        UsageComponentsError,
+        load_price_table,
+        price_table_identity,
+        run_cost,
+        summed_components,
+    )
     from .evaluation_loop import (
         EXECUTION_SCHEMA_V3,
         SUPPORTED_TOKEN_ACCOUNTINGS,
@@ -21,9 +28,11 @@ if __package__:
         canonical_json,
         frozen_set,
         identity_sha256,
+        load_installation,
         load_json,
         load_reference_result,
         require_non_empty_string,
+        validate_comparison_conditions,
         require_positive,
         token_accounting_for_result,
         utc_now,
@@ -31,6 +40,13 @@ if __package__:
     )
 else:
     from comparison_identity import code_sha256, effective_block_key, split_effective, task_sha256_by_run
+    from usage_components import (
+        UsageComponentsError,
+        load_price_table,
+        price_table_identity,
+        run_cost,
+        summed_components,
+    )
     from evaluation_loop import (
         EXECUTION_SCHEMA_V3,
         SUPPORTED_TOKEN_ACCOUNTINGS,
@@ -39,9 +55,11 @@ else:
         canonical_json,
         frozen_set,
         identity_sha256,
+        load_installation,
         load_json,
         load_reference_result,
         require_non_empty_string,
+        validate_comparison_conditions,
         require_positive,
         token_accounting_for_result,
         utc_now,
@@ -50,6 +68,7 @@ else:
 
 
 ATOMIC_RUN_SCHEMA = "the-caption-prompt.atomic-run/v1"
+ATOMIC_RUN_SCHEMA_V2 = "the-caption-prompt.atomic-run/v2"
 RUN_POOL_SCHEMA = "the-caption-prompt.run-pool/v1"
 EFFECTIVE_RUN_POOL_SCHEMA = "the-caption-prompt.run-pool/v2"
 EFFECTIVE_RULE = "effective-v1"
@@ -58,7 +77,9 @@ DISPATCH_PLAN_SCHEMA = "the-caption-prompt.atomic-dispatch-plan/v2"
 LEGACY_SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v1"
 SELECTION_SCHEMA = "the-caption-prompt.atomic-run-selection/v2"
 ANALYSIS_SCHEMA = "the-caption-prompt.atomic-run-analysis/v1"
+ANALYSIS_SCHEMA_V2 = "the-caption-prompt.atomic-run-analysis/v2"
 COMPARISON_SCHEMA = "the-caption-prompt.atomic-run-comparison/v1"
+COMPARISON_SCHEMA_V2 = "the-caption-prompt.atomic-run-comparison/v2"
 
 
 def split_conditions(compatibility: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -107,6 +128,7 @@ def build_record(
     total_tokens: int,
     elapsed_seconds: float,
     source: dict[str, Any],
+    usage_components: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     effective = {
         **effective_common,
@@ -119,7 +141,7 @@ def build_record(
     )
     stratum = {"max_workers": provenance.get("max_workers")}
     record = {
-        "schema_version": ATOMIC_RUN_SCHEMA,
+        "schema_version": ATOMIC_RUN_SCHEMA if usage_components is None else ATOMIC_RUN_SCHEMA_V2,
         "atomic_run_id": atomic_id(run_id, accounting),
         "run_id": run_id,
         "sample_id": sample_id,
@@ -139,13 +161,15 @@ def build_record(
         "source": source,
         "registered_at": utc_now(),
     }
+    if usage_components is not None:
+        record["usage_components"] = usage_components
     record["record_content_sha256"] = identity_sha256(record)
     return record
 
 
 def load_atomic_run(registry: Path, record_id: str) -> dict[str, Any]:
     record = load_json(registry / "runs" / f"{record_id}.json")
-    if record.get("schema_version") != ATOMIC_RUN_SCHEMA:
+    if record.get("schema_version") not in {ATOMIC_RUN_SCHEMA, ATOMIC_RUN_SCHEMA_V2}:
         raise EvaluationError("atomic run has an unsupported schema_version")
     if record.get("atomic_run_id") != record_id:
         raise EvaluationError("atomic run identity does not match its path")
@@ -211,112 +235,76 @@ def store_records_and_pool(registry: Path, records: list[dict[str, Any]]) -> dic
     return pool
 
 
-def effective_pool_document(
-    registry: Path,
-    reference: dict[str, Any],
-    prompt_identity: dict[str, Any],
-    case_ids: list[str],
-    task_cycles: list[str],
-) -> dict[str, Any]:
-    """Build an effective-v1 pool whose per-case keys ignore provenance-only conditions."""
-    reference_is_effective = pool_rule(reference) == EFFECTIVE_RULE
-    effective: dict[str, Any] = {}
-    blocks: dict[str, str] = {}
-    code_by_case: dict[str, Any] = {}
-    task_by_case: dict[str, str] = {}
+def profile_case_conditions(profile: dict[str, Any], manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Per-case effective run conditions, built exactly as register-run builds them for a run."""
+    conditions = validate_comparison_conditions(profile.get("comparison_conditions"))
+    raw_cases = profile.get("cases")
+    if not isinstance(raw_cases, list) or not raw_cases:
+        raise EvaluationError("profile cases must be a non-empty array")
+    case_ids = sorted(require_non_empty_string(item.get("id"), "profile case id") for item in raw_cases)
+    if len(set(case_ids)) != len(case_ids):
+        raise EvaluationError("profile case ids must be unique")
+    frozen = {case["id"]: case for case in manifest["cases"]}
+    unknown = sorted(set(case_ids) - set(frozen))
+    if unknown:
+        raise EvaluationError(f"profile case is not in the evaluation set: {unknown[0]}")
+    by_case: dict[str, dict[str, Any]] = {}
     for case_id in case_ids:
-        conditions = reference["effective_conditions_by_case"][case_id]
-        effective[case_id] = split_effective(conditions)[0]
-        blocks[case_id] = effective_block_key(conditions)
-        if reference_is_effective:
-            code_by_case[case_id] = reference["code_sha256_by_case"].get(case_id)
-            if case_id in reference["task_sha256_by_case"]:
-                task_by_case[case_id] = reference["task_sha256_by_case"][case_id]
-        else:
-            code_by_case[case_id] = code_sha256(conditions)
-    observed: dict[str, str] = {}
-    for cycle in task_cycles:
-        observed.update(task_sha256_by_run(Path(cycle).resolve()))
-    found: dict[str, set[str]] = {}
-    for record in runs_for_pool(registry, reference):
-        task = record["source"].get("task_sha256") or observed.get(record["run_id"])
-        if task is not None and record["case_id"] in blocks:
-            found.setdefault(record["case_id"], set()).add(task)
-    for case_id, values in sorted(found.items()):
-        values = values | ({task_by_case[case_id]} if case_id in task_by_case else set())
-        if len(values) != 1:
-            raise EvaluationError(f"reference runs rendered different task text for a case: {case_id}")
-        task_by_case[case_id] = next(iter(values))
-    pool_key = identity_sha256(
-        {
-            "compatibility_rule": EFFECTIVE_RULE,
-            "prompt_set_identity": prompt_identity,
-            "comparison_block_keys": blocks,
+        compatibility = {
+            "evaluation_set": {
+                "set_id": manifest["set_id"],
+                "revision": manifest["revision"],
+                "identity_sha256": manifest["identity_sha256"],
+            },
+            "fixtures": {case_id: frozen[case_id]["fixture_identity"]},
+            **conditions,
+            "coverage": {"case_ids": [case_id], "iterations": [1]},
         }
-    )
-    return {
-        "schema_version": EFFECTIVE_RUN_POOL_SCHEMA,
-        "compatibility_rule": EFFECTIVE_RULE,
-        "pool_key": pool_key,
-        "prompt_set_identity": prompt_identity,
-        "prompt_set_identity_sha256": identity_sha256(prompt_identity),
-        "case_ids": case_ids,
-        "comparison_block_keys": blocks,
-        "comparison_key": identity_sha256({"compatibility_rule": EFFECTIVE_RULE, "effective_conditions_by_case": effective}),
-        "effective_conditions_by_case": effective,
-        "task_sha256_by_case": task_by_case,
-        "code_sha256_by_case": code_by_case,
-        "seeded_from_pool_key": reference["pool_key"],
-        "created_at": utc_now(),
-    }
+        effective, _ = split_conditions(compatibility)
+        fixtures = effective.pop("fixtures")
+        by_case[case_id] = {**effective, "case_id": case_id, "fixture": fixtures[case_id]}
+    return by_case
 
 
-def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
-    """Create an empty prompt-specific pool from a compatible reference pool."""
+def create_pool(args: argparse.Namespace) -> dict[str, Any]:
+    """Create an empty pool for one prompt from its profile and the installed evaluation set."""
     registry = Path(args.registry).resolve()
-    reference = load_pool(registry, args.reference_pool_key)
-    identity_source = load_json(Path(args.prompt_identity).resolve())
-    prompt_identity = identity_source.get("prompt_set_identity", identity_source)
-    if not isinstance(prompt_identity, dict):
-        raise EvaluationError("prompt identity source must be an object")
-    name = require_non_empty_string(prompt_identity.get("name"), "prompt identity name")
-    if not any(prompt_identity.get(key) for key in ("revision", "bundle_sha256")):
-        raise EvaluationError("prompt identity needs revision or bundle_sha256")
-    prompt_identity = json.loads(json.dumps(prompt_identity))
-    prompt_identity["name"] = name
-    requested_cases = identity_source.get("cases")
-    case_ids = reference["case_ids"]
-    if requested_cases is not None:
-        case_ids = sorted(
-            require_non_empty_string(item.get("id"), "prompt identity case id")
-            for item in requested_cases
-        )
-        if len(set(case_ids)) != len(case_ids):
-            raise EvaluationError("seed pool case ids must be unique")
-        unknown = sorted(set(case_ids) - set(reference["case_ids"]))
-        if unknown:
-            raise EvaluationError(f"seed pool has cases outside the reference pool: {unknown}")
+    profile = load_json(Path(args.profile).resolve())
+    _, manifest = load_installation(Path(args.cycle).resolve())
+    profile_set = profile.get("evaluation_set")
+    if profile_set != {"set_id": manifest["set_id"], "revision": manifest["revision"]}:
+        raise EvaluationError("profile evaluation set does not match the installed Layer 1")
+    prompt_identity = profile.get("prompt_set_identity")
+    if not isinstance(prompt_identity, dict) or not any(prompt_identity.get(key) for key in ("revision", "bundle_sha256")):
+        raise EvaluationError("profile prompt identity needs revision or bundle_sha256")
+    require_non_empty_string(prompt_identity.get("name"), "prompt identity name")
+    by_case = profile_case_conditions(profile, manifest)
+    case_ids = sorted(by_case)
     rule = getattr(args, "compatibility_rule", None) or "exact"
     if rule == EFFECTIVE_RULE:
-        pool = effective_pool_document(registry, reference, prompt_identity, case_ids, getattr(args, "task_sha256_cycle", None) or [])
-        pool_key = pool["pool_key"]
-    else:
-        if getattr(args, "task_sha256_cycle", None):
-            raise EvaluationError("--task-sha256-cycle is used only with --compatibility-rule effective-v1")
-        if pool_rule(reference) != "exact":
-            raise EvaluationError("an exact pool cannot be seeded from an effective-v1 pool")
-        blocks = {case_id: reference["comparison_block_keys"][case_id] for case_id in case_ids}
-        effective = {
-            case_id: reference["effective_conditions_by_case"][case_id]
-            for case_id in case_ids
-        }
-        comparison_key = identity_sha256(effective)
+        effective = {case_id: split_effective(conditions)[0] for case_id, conditions in by_case.items()}
+        blocks = {case_id: effective_block_key(conditions) for case_id, conditions in by_case.items()}
         pool_key = identity_sha256(
-            {
-                "prompt_set_identity": prompt_identity,
-                "comparison_block_keys": blocks,
-            }
+            {"compatibility_rule": EFFECTIVE_RULE, "prompt_set_identity": prompt_identity, "comparison_block_keys": blocks}
         )
+        pool = {
+            "schema_version": EFFECTIVE_RUN_POOL_SCHEMA,
+            "compatibility_rule": EFFECTIVE_RULE,
+            "pool_key": pool_key,
+            "prompt_set_identity": prompt_identity,
+            "prompt_set_identity_sha256": identity_sha256(prompt_identity),
+            "case_ids": case_ids,
+            "comparison_block_keys": blocks,
+            "comparison_key": identity_sha256({"compatibility_rule": EFFECTIVE_RULE, "effective_conditions_by_case": effective}),
+            "effective_conditions_by_case": effective,
+            "task_sha256_by_case": {},
+            "code_sha256_by_case": {case_id: code_sha256(conditions) for case_id, conditions in by_case.items()},
+            "created_from_profile_sha256": identity_sha256(profile),
+            "created_at": utc_now(),
+        }
+    elif rule == "exact":
+        blocks = {case_id: identity_sha256(conditions) for case_id, conditions in by_case.items()}
+        pool_key = identity_sha256({"prompt_set_identity": prompt_identity, "comparison_block_keys": blocks})
         pool = {
             "schema_version": RUN_POOL_SCHEMA,
             "pool_key": pool_key,
@@ -324,11 +312,13 @@ def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
             "prompt_set_identity_sha256": identity_sha256(prompt_identity),
             "case_ids": case_ids,
             "comparison_block_keys": blocks,
-            "comparison_key": comparison_key,
-            "effective_conditions_by_case": effective,
-            "seeded_from_pool_key": reference["pool_key"],
+            "comparison_key": identity_sha256(by_case),
+            "effective_conditions_by_case": by_case,
+            "created_from_profile_sha256": identity_sha256(profile),
             "created_at": utc_now(),
         }
+    else:
+        raise EvaluationError(f"unsupported compatibility rule: {rule}")
     pool["pool_content_sha256"] = identity_sha256(pool)
     write_or_verify(
         registry / "pools" / f"{pool_key}.json",
@@ -339,11 +329,11 @@ def seed_pool(args: argparse.Namespace) -> dict[str, Any]:
         "layer": 1,
         "pool_key": pool_key,
         "comparison_key": pool["comparison_key"],
-        "case_count": len(pool["case_ids"]),
+        "case_count": len(case_ids),
         "existing_sample_count_by_case": {
-            case_id: 0 for case_id in pool["case_ids"]
+            case_id: len([record for record in runs_for_pool(registry, load_pool(registry, pool_key)) if record["case_id"] == case_id])
+            for case_id in case_ids
         },
-        "seeded_from_pool_key": reference["pool_key"],
     }
 
 
@@ -390,6 +380,14 @@ def import_result(args: argparse.Namespace) -> dict[str, Any]:
         "comparison_key": pool["comparison_key"],
         "registered_run_count": len(records),
     }
+
+
+def cycle_usage_components(cycle: Path, run_id: str) -> dict[str, Any] | None:
+    usage_path = cycle / "layer2" / "evidence" / run_id / "usage.json"
+    components = load_json(usage_path).get("usage_components") if usage_path.exists() else None
+    if components is None and (cycle / "layer1" / "installation.json").exists():
+        raise EvaluationError("runs of an installed cycle need usage components for the cost KPI")
+    return components
 
 
 def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
@@ -440,6 +438,7 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         quality_score=rating["score"],
         total_tokens=execution["total_tokens"],
         elapsed_seconds=execution["elapsed_seconds"],
+        usage_components=cycle_usage_components(cycle, run_id),
         source={
             "kind": "cycle_run",
             "cycle_layer1_identity_sha256": manifest["identity_sha256"],
@@ -523,8 +522,10 @@ def record_pool_mismatch(pool: dict[str, Any], record: dict[str, Any]) -> str | 
         return "effective conditions differ"
     expected_task = pool["task_sha256_by_case"].get(case_id)
     task = record["source"].get("task_sha256")
-    if expected_task is not None and task is not None:
-        return None if task == expected_task else "rendered task text differs"
+    if task is not None:
+        # Pools created from a profile carry no task text; runs that record it are checked
+        # against each other when they are selected and compared.
+        return None if expected_task in (None, task) else "rendered task text differs"
     if code_sha256(record["effective_conditions"]) != pool["code_sha256_by_case"].get(case_id):
         return "task text is unrecorded and the harness code differs"
     return None
@@ -657,6 +658,41 @@ def select_runs(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def optional_price_table(args: argparse.Namespace, records: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    path = getattr(args, "price_table", None)
+    if not path:
+        if any(record.get("usage_components") is not None for record in records.values()):
+            raise EvaluationError("runs with usage components need --price-table for the cost KPI")
+        return None
+    try:
+        return load_price_table(Path(path).resolve())
+    except (UsageComponentsError, OSError, ValueError) as exc:
+        raise EvaluationError(f"invalid price table: {exc}") from exc
+
+
+def record_cost(record: dict[str, Any], price_table: dict[str, Any]) -> float:
+    components = record.get("usage_components")
+    if components is None:
+        raise EvaluationError(f"atomic run has no usage components for the cost KPI: {record['atomic_run_id']}")
+    try:
+        return run_cost(components, price_table)
+    except UsageComponentsError as exc:
+        raise EvaluationError(str(exc)) from exc
+
+
+def selection_task_sha256(records: Any) -> dict[str, str]:
+    """The rendered task text per case; selected runs of one case must agree when recorded."""
+    by_case: dict[str, set[str]] = {}
+    for record in records:
+        task = record["source"].get("task_sha256")
+        if task is not None:
+            by_case.setdefault(record["case_id"], set()).add(task)
+    mixed = sorted(case_id for case_id, values in by_case.items() if len(values) != 1)
+    if mixed:
+        raise EvaluationError(f"selected runs rendered different task text for a case: {mixed[0]}")
+    return {case_id: next(iter(values)) for case_id, values in sorted(by_case.items())}
+
+
 def load_selection(path: Path) -> dict[str, Any]:
     selection = load_json(path)
     if selection.get("schema_version") not in {LEGACY_SELECTION_SCHEMA, SELECTION_SCHEMA}:
@@ -677,6 +713,9 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
         record_id: load_atomic_run(registry, record_id)
         for record_id in selection["atomic_run_ids"]
     }
+    price_table = optional_price_table(args, records)
+    metrics = ("quality_score", "total_tokens", "elapsed_seconds") + (("cost_usd",) if price_table else ())
+    task_sha256_by_case = selection_task_sha256(records.values())
     per_sample = []
     strata: dict[str, list[dict[str, Any]]] = {}
     if selection["schema_version"] == LEGACY_SELECTION_SCHEMA:
@@ -710,17 +749,17 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
             "total_tokens": sum(record["total_tokens"] for record in selected),
             "elapsed_seconds": sum(record["elapsed_seconds"] for record in selected),
         }
+        if price_table:
+            row["cost_usd"] = sum(record_cost(record, price_table) for record in selected)
+            row["usage_components"] = summed_components(record["usage_components"] for record in selected)
         per_sample.append(row)
         stratum_keys = {record["execution_stratum_key"] for record in selected}
         if len(stratum_keys) == 1:
             strata.setdefault(next(iter(stratum_keys)), []).append(row)
-    median = {
-        key: statistics.median(row[key] for row in per_sample)
-        for key in ("quality_score", "total_tokens", "elapsed_seconds")
-    }
+    median = {key: statistics.median(row[key] for row in per_sample) for key in metrics}
     analysis_id = uuid.uuid4().hex
     analysis = {
-        "schema_version": ANALYSIS_SCHEMA,
+        "schema_version": ANALYSIS_SCHEMA_V2 if price_table else ANALYSIS_SCHEMA,
         "analysis_id": analysis_id,
         "selection": {
             "path": str(selection_path),
@@ -733,6 +772,7 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
         "case_ids": selection["case_ids"],
         "sample_count": len(per_sample),
         "run_count": len(records),
+        "task_sha256_by_case": task_sha256_by_case,
         "samples": per_sample,
         "median": median,
         "strata": [
@@ -741,13 +781,15 @@ def aggregate_selection(args: argparse.Namespace) -> dict[str, Any]:
                 "sample_count": len(rows),
                 "median": {
                     metric: statistics.median(row[metric] for row in rows)
-                    for metric in ("quality_score", "total_tokens", "elapsed_seconds")
+                    for metric in metrics
                 },
             }
             for key, rows in sorted(strata.items())
         ],
         "created_at": utc_now(),
     }
+    if price_table:
+        analysis["price_table"] = price_table_identity(price_table)
     analysis["analysis_content_sha256"] = identity_sha256(analysis)
     output = Path(args.output).resolve()
     write_json_once(output, analysis)
@@ -792,10 +834,6 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
         case_id: conditions["fixture"]
         for case_id, conditions in pool["effective_conditions_by_case"].items()
     }
-    if getattr(args, "reference_result_id", None):
-        reference = load_reference_result(registry, args.reference_result_id)
-        evaluation_set = reference["compatibility"]["evaluation_set"]
-        fixtures = reference["compatibility"]["fixtures"]
     for case_id in case_ids:
         values = {
             canonical_json(record["effective_conditions"]["fixture"])
@@ -831,36 +869,39 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
                 f"selected atomic run does not match profile conditions: {record['atomic_run_id']}"
             )
 
+    price_table = optional_price_table(args, records)
     case_results = []
     iterations = []
     for slot in selection["slots"]:
         selected = [records[slot["runs_by_case"][case_id]] for case_id in case_ids]
         iteration = slot["selection_iteration"]
-        for record in selected:
-            case_results.append(
-                {
-                    "run_id": record["run_id"],
-                    "case_id": record["case_id"],
-                    "iteration": iteration,
-                    "quality_score": record["quality_score"],
-                    "total_tokens": record["total_tokens"],
-                    "elapsed_seconds": record["elapsed_seconds"],
-                }
-            )
-        iterations.append(
-            {
+        costs = [record_cost(record, price_table) for record in selected] if price_table else None
+        for position, record in enumerate(selected):
+            row = {
+                "run_id": record["run_id"],
+                "case_id": record["case_id"],
                 "iteration": iteration,
-                "quality_score": sum(item["quality_score"] for item in selected)
-                / (4 * len(selected))
-                * 100,
-                "total_tokens": sum(item["total_tokens"] for item in selected),
-                "elapsed_seconds": sum(item["elapsed_seconds"] for item in selected),
+                "quality_score": record["quality_score"],
+                "total_tokens": record["total_tokens"],
+                "elapsed_seconds": record["elapsed_seconds"],
             }
-        )
-    median = {
-        key: statistics.median(item[key] for item in iterations)
-        for key in ("quality_score", "total_tokens", "elapsed_seconds")
-    }
+            if costs is not None:
+                row["cost_usd"] = costs[position]
+            case_results.append(row)
+        iteration_row = {
+            "iteration": iteration,
+            "quality_score": sum(item["quality_score"] for item in selected)
+            / (4 * len(selected))
+            * 100,
+            "total_tokens": sum(item["total_tokens"] for item in selected),
+            "elapsed_seconds": sum(item["elapsed_seconds"] for item in selected),
+        }
+        if costs is not None:
+            iteration_row["cost_usd"] = sum(costs)
+            iteration_row["usage_components"] = summed_components(record["usage_components"] for record in selected)
+        iterations.append(iteration_row)
+    metrics = ("quality_score", "total_tokens", "elapsed_seconds") + (("cost_usd",) if price_table else ())
+    median = {key: statistics.median(item[key] for item in iterations) for key in metrics}
     accountings = {canonical_json(record["token_accounting"]) for record in records.values()}
     if len(accountings) != 1:
         raise EvaluationError("selected atomic runs use different token accounting")
@@ -869,7 +910,9 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
         raise EvaluationError("selected atomic runs do not match profile token accounting")
     result_id = uuid.uuid4().hex
     result = {
-        "schema_version": "the-caption-prompt.prompt-set-result/v2",
+        "schema_version": (
+            "the-caption-prompt.prompt-set-result/v3" if price_table else "the-caption-prompt.prompt-set-result/v2"
+        ),
         "result_id": result_id,
         "token_accounting": token_accounting,
         "prompt_set_identity": pool["prompt_set_identity"],
@@ -886,6 +929,8 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
         },
         "created_at": utc_now(),
     }
+    if price_table:
+        result["price_table"] = price_table_identity(price_table)
     result["result_content_sha256"] = identity_sha256(result)
     artifact = registry / "results" / f"{result_id}.json"
     write_json_once(artifact, result)
@@ -915,7 +960,7 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
 
 def load_analysis(path: Path) -> dict[str, Any]:
     analysis = load_json(path)
-    if analysis.get("schema_version") != ANALYSIS_SCHEMA:
+    if analysis.get("schema_version") not in {ANALYSIS_SCHEMA, ANALYSIS_SCHEMA_V2}:
         raise EvaluationError("atomic analysis has an unsupported schema_version")
     content = dict(analysis)
     stored = content.pop("analysis_content_sha256", None)
@@ -935,10 +980,16 @@ def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
         raise EvaluationError("atomic analyses have different case coverage")
     if candidate["sample_count"] != reference["sample_count"]:
         raise EvaluationError("atomic analyses have different selected sample counts")
-    differences = {
-        key: candidate["median"][key] - reference["median"][key]
-        for key in ("quality_score", "total_tokens", "elapsed_seconds")
-    }
+    if candidate.get("price_table") != reference.get("price_table"):
+        raise EvaluationError("atomic analyses use different price tables for the cost KPI")
+    reference_tasks = reference.get("task_sha256_by_case", {})
+    for case_id, task in candidate.get("task_sha256_by_case", {}).items():
+        if case_id in reference_tasks and reference_tasks[case_id] != task:
+            raise EvaluationError(f"atomic analyses rendered different task text for a case: {case_id}")
+    metrics = ("quality_score", "total_tokens", "elapsed_seconds")
+    if "price_table" in reference:
+        metrics += ("cost_usd",)
+    differences = {key: candidate["median"][key] - reference["median"][key] for key in metrics}
     ref_strata = {item["execution_stratum_key"]: item for item in reference["strata"]}
     cand_strata = {item["execution_stratum_key"]: item for item in candidate["strata"]}
     matched_strata = []
@@ -952,12 +1003,12 @@ def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
                 "candidate_sample_count": right["sample_count"],
                 "differences": {
                     metric: right["median"][metric] - left["median"][metric]
-                    for metric in ("quality_score", "total_tokens", "elapsed_seconds")
+                    for metric in metrics
                 },
             }
         )
     comparison = {
-        "schema_version": COMPARISON_SCHEMA,
+        "schema_version": COMPARISON_SCHEMA_V2 if "price_table" in reference else COMPARISON_SCHEMA,
         "reference": {
             "path": str(reference_path),
             "analysis_id": reference["analysis_id"],
@@ -980,6 +1031,17 @@ def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
         ),
         "generated_at": utc_now(),
     }
+    if "price_table" in reference:
+        values = [row["cost_usd"] for row in reference["samples"]]
+        median = candidate["median"]["cost_usd"]
+        low, high = min(values), max(values)
+        comparison["price_table"] = reference["price_table"]
+        comparison["cost_band"] = {
+            "reference_min": low,
+            "reference_max": high,
+            "candidate_median": median,
+            "position": "below_range" if median < low else "above_range" if median > high else "within_range",
+        }
     output = Path(args.output).resolve()
     write_json_once(output, comparison)
     return {
@@ -1024,17 +1086,15 @@ def parser() -> argparse.ArgumentParser:
     imported.add_argument("--result-id", required=True)
     imported.set_defaults(handler=import_result)
 
-    seeded = commands.add_parser("seed-pool")
-    seeded.add_argument("--registry", required=True)
-    seeded.add_argument("--reference-pool-key", required=True)
-    seeded.add_argument("--prompt-identity", required=True)
-    seeded.add_argument("--compatibility-rule", choices=("exact", EFFECTIVE_RULE), default="exact")
-    seeded.add_argument(
-        "--task-sha256-cycle",
-        action="append",
-        help="cycle of reference runs whose adapter recorded task_sha256 (effective-v1 only)",
+    created = commands.add_parser(
+        "create-pool",
+        help="create an empty pool for one prompt from its profile and the installed evaluation set",
     )
-    seeded.set_defaults(handler=seed_pool)
+    created.add_argument("--registry", required=True)
+    created.add_argument("--profile", required=True)
+    created.add_argument("--cycle", required=True, help="cycle whose Layer 1 was installed from the store")
+    created.add_argument("--compatibility-rule", choices=("exact", EFFECTIVE_RULE), default="exact")
+    created.set_defaults(handler=create_pool)
 
     registered = commands.add_parser("register-run")
     registered.add_argument("--registry", required=True)
@@ -1068,13 +1128,14 @@ def parser() -> argparse.ArgumentParser:
     aggregate.add_argument("--registry", required=True)
     aggregate.add_argument("--selection", required=True)
     aggregate.add_argument("--output", required=True)
+    aggregate.add_argument("--price-table", help="versioned price table for the cost KPI (required for runs with usage components)")
     aggregate.set_defaults(handler=aggregate_selection)
 
     register_selection = commands.add_parser("register-selection-result")
     register_selection.add_argument("--registry", required=True)
     register_selection.add_argument("--selection", required=True)
     register_selection.add_argument("--profile", required=True)
-    register_selection.add_argument("--reference-result-id")
+    register_selection.add_argument("--price-table", help="versioned price table for the cost KPI (required for runs with usage components)")
     register_selection.add_argument("--cycle")
     register_selection.set_defaults(handler=register_selection_result)
 

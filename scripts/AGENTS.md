@@ -11,7 +11,8 @@
 
 - `scripts/evaluation_loop.py`をevaluation foundation v3の固定点として扱う。
 - `scripts/atomic_run_registry.py`をcount-freeなatomic保存・選択・集計の固定点とする。プールへrunのメンバー一覧または`N`を保存せず、要求件数はdispatch plan、使用run集合はselection receiptへだけ固定する。
-- 新しいプロンプトのrunが0件でも、互換な基準プールから`seed-pool`でケース別の実効条件を固定してから不足runを計画する。空のプール作成のために架空のrunを登録しない。
+- 新しいプロンプトのrunが0件でも、プロファイルと評価セットの保管場所から複製したLayer 1から`create-pool`でケース別の実効条件を固定してから不足runを計画する。基準プールや基準resultを実行の前提にしない。空のプール作成のために架空のrunを登録しない。
+- KPIの費用は、アダプタが報告する使用量の内訳（`token-usage/v3`）に、版を固定した単価表を集計の時点で掛けて求める。単価表がないとき、または内訳に単価のない区分があるときは推定せず失敗させる。
 - 再現可能な不具合または明示要件なしに、Layer、KPI、出力schemaを拡張しない。
 - 書込処理はappend-onlyを維持する。
 - 既存アーティファクトを上書きしない。
