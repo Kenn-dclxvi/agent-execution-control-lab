@@ -74,7 +74,7 @@ A02だけを、上の条件で両エージェント各N=2実行した（計測�
 
 ## 次に行うこと
 
-計画の6として、新しい系列の基準となるC280を、Sol LowとSonnet lowで各Standard14 N=5測る。その後にどのCandidateを測るかは、基準の結果を見てから利用者が決める。
+計画の6として、新しい系列の基準を、Sol LowとSonnet lowで各Standard14 N=5測る。利用者の指示（2026-10-09）により、基準はC280そのものではなく、C280のrootの`AGENTS.md`のMarkdownの書式（見出しの階層、箇条書きの記号、強調）を他の`AGENTS.md`と揃えたCandidateとし、このPRのマージ後にCandidateを作ってから測る。C300以降のCandidateも、書式を揃えたものにする。その後にどのCandidateを測るかは、基準の結果を見てから利用者が決める。
 
 ## 参照
 
