@@ -15,6 +15,18 @@
 
 制御プロンプト本文をインスタンス間の出発点として流用することはできるが、バンドルのtarget mapはターゲット側のディレクトリ構造に依存する。したがってプロンプトバンドルを含む評価アーティファクトはインスタンス固有アーティファクトとして扱う。
 
+## ディスクリプタの種類
+
+各インスタンスの`target.json`は、次のどれかの形式で書く。台帳のテスト（`tests/test_evaluation_target_registry.py`）は、この区分に従って検査する。
+
+| 種類 | `schema_version` | 対象 | 実行処理と採点規則 |
+| --- | --- | --- | --- |
+| kernel・リポジトリ | `the-caption-prompt.evaluation-target/v1` | repository snapshot（`target_repository`を持つ） | kernelの実行経路と、kernelが扱う採点契約（`evaluation_loop.py`の`SUPPORTED_QUALITY_RATINGS`） |
+| kernel・semantic protocol | `the-caption-prompt.evaluation-target/v2` | semantic protocol（[schema](schemas/evaluation-target-v2.schema.json)） | kernelの実行経路と、インスタンス側の採点契約 |
+| インスタンス独自の実行処理 | `<target_id>-target/vN` | repository fixture corpus（`target_kind: repository_fixture_corpus`） | インスタンスの`runtime/`と`rating-contracts/`に閉じる。kernelの3 KPIや互換条件の規則をそのまま適用したものとして扱わない |
+
+インスタンス独自の実行処理を持つ種類は、`layout: namespaced`とし、`artifact_roots`に`runtime`と`rating-contracts`を持ち、`subject_authority`（ターゲットの固定記録）と、`current_rating_contract`の`contract_id`を持つ採点規則のファイルを、インスタンスのディレクトリ内に置く。第三者再現の可否が未確認の場合は`third_party_reproducible`を省き、下の表で「未確認」と記す。`compact-repository-control`と`standard14-dedicated-control`がこの種類である。
+
 ## 登録済みインスタンス
 
 | target_id | layout | visibility | 第三者再現 | ディスクリプタ | 状態 |
