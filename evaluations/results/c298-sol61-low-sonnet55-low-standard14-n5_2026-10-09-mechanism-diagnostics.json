@@ -1,0 +1,118 @@
+{
+  "schema_version": "c298-mechanism-diagnostics/v1",
+  "method": "各runで、評価条件のrequired_command_groups_by_caseと一致するコマンドを含む最後の応答より後の応答を、種類で分けて数えた（C280に加える短い閉鎖文の候補の洗い出しと同じ分類。C280の値は同記録と一致することを確認した）。Codexはrolloutのtoken_usage_record、Claudeはtranscriptのmessage.idを一応答とした。Codexは最初に開始したrollout（root）だけを数えた。値は1反復（14ケース）あたり。status_diff_onlyは、git status・git diff・git log・git show・echo・cdだけからなる応答。",
+  "source_results": {
+    "Sol Low C280": "794d02abe894456686eea22e9b6f0fed",
+    "Sol Low C298": "310e5af1d53e408791d1504b1f04b907",
+    "Sonnet low C280": "c84fd22753d248e588e586cb8022ea1e",
+    "Sonnet low C298": "d4d9078efc7249e0bd65da2b20c6523f"
+  },
+  "per_iteration": {
+    "Sonnet low": {
+      "C280": {
+        "responses": 64.6,
+        "after_last_required": {
+          "status_diff_only": 2.4,
+          "reads_persisted_output": 1.2
+        }
+      },
+      "C298": {
+        "responses": 65.0,
+        "after_last_required": {
+          "status_diff_only": 1.8,
+          "reads_persisted_output": 1.4
+        }
+      }
+    },
+    "Sol Low": {
+      "C280": {
+        "responses": 88.0,
+        "after_last_required": {
+          "status_diff_only": 4.8,
+          "status_and_start": 0.6,
+          "wait_and_status": 1.6,
+          "wait_only": 4.8
+        }
+      },
+      "C298": {
+        "responses": 78.4,
+        "after_last_required": {
+          "status_diff_only": 0.4,
+          "wait_and_status": 2.6,
+          "wait_only": 2.6
+        }
+      }
+    }
+  },
+  "status_diff_only_by_case_total": {
+    "Sonnet low": {
+      "C280": {
+        "F01": 3,
+        "F03": 2,
+        "F04": 2,
+        "F06": 4,
+        "F07-CANONICAL": 1
+      },
+      "C298": {
+        "F04": 3,
+        "F06": 5,
+        "F07-CANONICAL": 1
+      }
+    },
+    "Sol Low": {
+      "C280": {
+        "F01": 5,
+        "F02": 3,
+        "F03": 2,
+        "F04": 3,
+        "F06": 4,
+        "F07-CANONICAL": 3,
+        "F07-DEPENDENCY": 4
+      },
+      "C298": {
+        "F02": 1,
+        "F06": 1
+      }
+    }
+  },
+  "notes": [
+    "Sonnet lowのF06の5件は、すべてgit diff --checkとgit status --shortを一つのコマンドで実行した応答である。F06のTaskSpecはF06-C3の確認としてgit diff --checkを挙げており、評価条件の必須コマンドの組には含まれないが、モデルにとっては課題文が求める確認の一部である。",
+    "Sonnet lowのF04の3件とF07正規ランナーの1件は、必須の確認がすべて成功した後に状態・差分の確認だけを出した応答で、加えた項目に反する。",
+    "wait_and_statusとwait_onlyは、必須の確認の終了を待つ応答であり、成功の結果を受け取る前の操作なので、加えた項目の対象ではない。"
+  ],
+  "case_mean_total_tokens_delta_vs_c280": {
+    "Sonnet low": {
+      "A01": 146,
+      "A02": 32293,
+      "F01": 6370,
+      "F02": -4220,
+      "F03": -12787,
+      "F04": -525,
+      "F05-CLARIFY": 19,
+      "F05-OUT-OF-SCOPE": 14,
+      "F06": -5551,
+      "F07-CANONICAL": 276,
+      "F07-DEPENDENCY": -6784,
+      "F08": -1827,
+      "F10-ENTRYPOINT": 2324,
+      "F10-MONTHLY": 1196
+    },
+    "Sol Low": {
+      "A01": 55,
+      "A02": -41364,
+      "F01": -35037,
+      "F02": 32439,
+      "F03": -48768,
+      "F04": -45987,
+      "F05-CLARIFY": 153,
+      "F05-OUT-OF-SCOPE": 815,
+      "F06": -12241,
+      "F07-CANONICAL": -80197,
+      "F07-DEPENDENCY": -16679,
+      "F08": -11872,
+      "F10-ENTRYPOINT": 4495,
+      "F10-MONTHLY": 1165
+    }
+  },
+  "sonnet_a02_note": "Sonnet lowのA02で増えた3件（106,653〜120,535トークン）は、いずれもテストの実行で`python`が見つからず、`python3`、`.venv`の確認、`.venv/bin/python`での再実行へ進んだ流れだった。A02は必須コマンドの組を持たないため、加えた項目の対象外である。C297のA02にも同じ大きさの実行（122,953）があるが、その内訳は確かめていない。"
+}

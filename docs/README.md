@@ -105,6 +105,7 @@
 - [C280のトークンを、試験が求める操作とそれ以外に分ける（r1）](c280-test-required-vs-excess-r1.md)：判定基準に従い、Sol LowとSonnet lowのC280を、TaskSpecが求める最小の流れと比べた。Sonnet lowは最小に近く（14ケースで超過10回）、Sol Lowは41回超過。両セルに共通する超過は、変更前の読み取りの追加回、変更後の必須以外の確認、変更後の読み取り。次の設計の対象と、加える文の固定分の上限の目安を記録。Candidateは未作成
 - [Candidate297 変更後の状態と差分の確認を、必須の確認と同じ応答で発行する](candidate297-post-change-status-with-validation-design.md)：判定基準のもとで、両セルに共通して減らせると分かった、必須の確認の直後に状態と差分の確認だけを別の応答で出す流れ（Sonnet low 2.2回、Sol Low 2.6回/反復）を、C280に一項目（288バイト）を加えて閉じる設計。Claudeの課題文の指定（必須コマンドは個別のBash呼び出し）と両立する。Candidateは未作成
 - [C280に加える短い閉鎖文の候補の洗い出し（r1）](c280-short-closing-sentence-candidates-r1.md)：保存traceの読み取りだけで、C297の誤りを直した形を含む短い文の候補を、閉じる経路、件数、バイト数と固定分、見込みの削減で比べた。両セルで減らせる見込みがあるのは、必須の確認がすべて成功した後のコマンドを禁止する文だけ。Sol Lowの待機（9.2回/反復）は大きいが、Sonnet lowでは固定分だけ増える。Candidateは未作成
+- [Candidate298 必須の確認がすべて成功した後のコマンドを禁止する](candidate298-post-validation-success-command-closure-design.md)：候補の洗い出しで両セルに見込みがあった候補1aを、C280に一項目（132バイト）を加えて測る設計。禁止だけを述べ、新しい操作の発行を求めない形でC297の誤りを直した。
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。
