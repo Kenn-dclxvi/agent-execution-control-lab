@@ -1,0 +1,161 @@
+{
+  "schema_version": "c300-mechanism-diagnostics/v1",
+  "method": "C298とC299の診断と同じ方法。必須の確認コマンドを含む最後の応答より後の応答を種類で分け、待機だけの応答と待機時間・timeoutの指定を数えた。値は1反復（14ケース）あたり。",
+  "source_results": {
+    "Sol Low C280": "794d02abe894456686eea22e9b6f0fed",
+    "Sol Low C300": "f163a542932047fb8f48c754a35df53c",
+    "Sonnet low C280": "c84fd22753d248e588e586cb8022ea1e",
+    "Sonnet low C300": "5f515aa613cc47f5bd1890121f345c2c"
+  },
+  "per_iteration": {
+    "Sol Low": {
+      "C280": {
+        "responses": 88.0,
+        "after_last_required": {
+          "status_diff_only": 4.8,
+          "status_and_start": 0.6,
+          "wait_and_status": 1.6,
+          "wait_only": 4.8
+        },
+        "wait_only_responses": 9.2
+      },
+      "C298": {
+        "responses": 78.4,
+        "after_last_required": {
+          "status_diff_only": 0.4,
+          "wait_and_status": 2.6,
+          "wait_only": 2.6
+        }
+      },
+      "C299": {
+        "responses": 79.8,
+        "wait_only_responses": 0.0
+      },
+      "C300": {
+        "responses": 71.2,
+        "after_last_required": {
+          "status_diff_only": 0.2,
+          "wait_and_status": 0.2
+        },
+        "wait_only_responses": 0.0,
+        "exec_command_yield_1000": 0.0,
+        "write_stdin_calls": 0.2
+      }
+    },
+    "Sonnet low": {
+      "C280": {
+        "responses": 64.6,
+        "after_last_required": {
+          "status_diff_only": 2.4,
+          "reads_persisted_output": 1.2
+        },
+        "bash_timeout_600000": 1.6
+      },
+      "C298": {
+        "responses": 65.0,
+        "after_last_required": {
+          "status_diff_only": 1.8,
+          "reads_persisted_output": 1.4
+        }
+      },
+      "C299": {
+        "responses": 63.2,
+        "bash_timeout_600000": 0.2
+      },
+      "C300": {
+        "responses": 66.2,
+        "after_last_required": {
+          "status_diff_only": 1.4,
+          "reads_persisted_output": 3.0
+        },
+        "bash_timeout_600000": 3.8
+      }
+    }
+  },
+  "status_diff_only_by_case_total": {
+    "Sonnet low C300": {
+      "F01": 1,
+      "F06": 5,
+      "F07-CANONICAL": 1
+    },
+    "Sol Low C300": {
+      "F07-CANONICAL": 1
+    }
+  },
+  "reads_persisted_output_by_case_total": {
+    "Sonnet low C300": {
+      "F01": 1,
+      "F03": 9,
+      "F07-CANONICAL": 5
+    }
+  },
+  "sonnet_command_timeouts_in_c300": 0,
+  "sonnet_iteration_totals": {
+    "C280": [
+      819393,
+      930027,
+      797727,
+      832616,
+      833370
+    ],
+    "C300": [
+      963889,
+      820419,
+      809440,
+      849891,
+      1101251
+    ]
+  },
+  "sonnet_large_deviations_vs_c280_case_median": {
+    "iteration_1": {
+      "A02": 29841,
+      "F01": 28994,
+      "F02": 25448,
+      "F04": 29586,
+      "F07-DEPENDENCY": 22316
+    },
+    "iteration_5": {
+      "A02": 29589,
+      "F01": -38874,
+      "F03": 268702,
+      "F07-CANONICAL": 15079,
+      "F07-DEPENDENCY": 22346,
+      "F08": -16107
+    }
+  },
+  "sonnet_f03_iteration_5_note": "F03の反復5（352,289トークン）は、main_verify.shの出力（155.2KB）がファイルへ保存され、モデルがそのファイルをReadで6回に分けて読んだ。同じケースの反復4では、同じ保存ファイルをtail -c 600で一度読むだけだった。",
+  "case_mean_total_tokens_delta_vs_c280": {
+    "Sonnet low": {
+      "A01": 265,
+      "A02": 20955,
+      "F01": -1582,
+      "F02": -961,
+      "F03": 52669,
+      "F04": -1402,
+      "F05-CLARIFY": -1898,
+      "F05-OUT-OF-SCOPE": 143,
+      "F06": -7568,
+      "F07-CANONICAL": 230,
+      "F07-DEPENDENCY": 4744,
+      "F08": -2384,
+      "F10-ENTRYPOINT": 2128,
+      "F10-MONTHLY": 1011
+    },
+    "Sol Low": {
+      "A01": -2847,
+      "A02": -70306,
+      "F01": -42919,
+      "F02": -22535,
+      "F03": -57725,
+      "F04": -34562,
+      "F05-CLARIFY": 139,
+      "F05-OUT-OF-SCOPE": -3233,
+      "F06": -48056,
+      "F07-CANONICAL": -106732,
+      "F07-DEPENDENCY": -30007,
+      "F08": -10866,
+      "F10-ENTRYPOINT": -226,
+      "F10-MONTHLY": 62
+    }
+  }
+}
