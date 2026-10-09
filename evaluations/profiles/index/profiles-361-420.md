@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
+- [`candidate247-start-result-read-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate247-start-result-read-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate248-start-check-read-separation-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate248-start-check-read-separation-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate249-start-check-read-interposed-boundary-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate249-start-check-read-interposed-boundary-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate250-start-check-only-issuance-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate250-start-check-only-issuance-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json`](../candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156-r1.json`](../candidate279-empty-root-agents-no-user-global-standard14-n5-cli0156-r1.json)
 - [`candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v1-expanded12-global-m24-n5-r1.json)
-- [`candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate28-single-producer-operation-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
-- [`candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json`](../candidate29-owner-role-identity-binding-owner-producer-v2-expanded12-global-m24-n5-r1.json)
