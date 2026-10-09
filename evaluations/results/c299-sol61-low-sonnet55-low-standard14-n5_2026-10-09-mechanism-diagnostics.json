@@ -1,0 +1,92 @@
+{
+  "schema_version": "c299-mechanism-diagnostics/v1",
+  "method": "Codexはrollout（最初に開始したroot）のtoken_usage_recordを一応答とし、空入力のwrite_stdinだけを含みexec_commandとapply_patchを含まない応答を、待機だけの応答として数えた。exec_commandとwrite_stdinの呼び出しを入力の文字列から取り出し、yield_time_msの指定値で分けた（変数経由の指定は数えていない）。Claudeはtranscriptのmessage.idを一応答とし、Bashの呼び出しのtimeoutの指定を数えた。値は1反復（14ケース）あたり。",
+  "source_results": {
+    "Sol Low C280": "794d02abe894456686eea22e9b6f0fed",
+    "Sol Low C299": "fdeda9a36ba64163944f5d3e0568934f",
+    "Sonnet low C280": "c84fd22753d248e588e586cb8022ea1e",
+    "Sonnet low C299": "c75ce22223b648d69a61a323c0b904c3"
+  },
+  "per_iteration": {
+    "Sol Low": {
+      "C280": {
+        "responses": 88.0,
+        "wait_only_responses": 9.2,
+        "exec_command_yield_unspecified": 98.0,
+        "exec_command_yield_1000": 4.6,
+        "write_stdin_yield_1000": 7.2,
+        "write_stdin_yield_not_found_in_literal": 5.2
+      },
+      "C299": {
+        "responses": 79.8,
+        "wait_only_responses": 0.0,
+        "exec_command_yield_unspecified": 108.4,
+        "exec_command_yield_1000": 0.0,
+        "write_stdin_calls": 0.0
+      }
+    },
+    "Sonnet low": {
+      "C280": {
+        "responses": 64.6,
+        "bash_calls": 60.2,
+        "bash_timeout_600000": 1.6
+      },
+      "C299": {
+        "responses": 63.2,
+        "bash_calls": 56.0,
+        "bash_timeout_600000": 0.2
+      }
+    }
+  },
+  "wait_only_by_iteration": {
+    "Sol Low C280": [
+      12,
+      9,
+      10,
+      8,
+      7
+    ],
+    "Sol Low C299": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "sonnet_command_timeouts_in_c299": 0,
+  "case_mean_total_tokens_delta_vs_c280": {
+    "Sonnet low": {
+      "A01": 116,
+      "A02": 2906,
+      "F01": 499,
+      "F02": 1965,
+      "F03": -6298,
+      "F04": -3808,
+      "F05-CLARIFY": 131,
+      "F05-OUT-OF-SCOPE": -278,
+      "F06": -8859,
+      "F07-CANONICAL": -3103,
+      "F07-DEPENDENCY": 260,
+      "F08": -4533,
+      "F10-ENTRYPOINT": -798,
+      "F10-MONTHLY": 1355
+    },
+    "Sol Low": {
+      "A01": 66,
+      "A02": -70922,
+      "F01": -25424,
+      "F02": -20455,
+      "F03": -56950,
+      "F04": -3142,
+      "F05-CLARIFY": 152,
+      "F05-OUT-OF-SCOPE": 9689,
+      "F06": -5339,
+      "F07-CANONICAL": -62551,
+      "F07-DEPENDENCY": 16502,
+      "F08": 4855,
+      "F10-ENTRYPOINT": -3945,
+      "F10-MONTHLY": 482
+    }
+  }
+}
