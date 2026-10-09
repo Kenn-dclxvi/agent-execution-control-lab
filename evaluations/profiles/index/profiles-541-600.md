@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
+- [`candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json)
 - [`candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json)
 - [`candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
@@ -60,5 +62,3 @@
 - [`control-free-astra-high-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-high-old-a01-isolated-n20-20261003-r1.json)
 - [`control-free-astra-high-standard14-n5-cli0153-r1.json`](../control-free-astra-high-standard14-n5-cli0153-r1.json)
 - [`control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-low-old-a01-assets-reduced-n2-20261003-r1.json)
-- [`control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-ledger-separation-r8-n2-20261003.json)
-- [`control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2-20261003.json`](../control-free-astra-low-old-a01-cumulative-snapshot-test-r7-n2-20261003.json)
