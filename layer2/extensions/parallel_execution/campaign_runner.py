@@ -234,6 +234,7 @@ def run_campaign(
                 future = pool.submit(
                     execute_admitted_job,
                     gate,
+                    gate.register() if gate is not None else None,
                     item["job"],
                     plan["cycle"],
                     plan["evaluation_loop"],

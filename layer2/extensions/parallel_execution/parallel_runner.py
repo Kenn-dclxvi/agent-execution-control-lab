@@ -448,7 +448,9 @@ class AdmissionGate:
 
     A run is admitted when no run is active, or when the sampled CPU busy percentage is
     at or below the configured maximum. Admissions are spaced by min_interval_seconds so
-    that the load of the previous admission shows up before the next decision.
+    that the load of the previous admission shows up before the next decision. Runs are
+    admitted strictly in the order they were registered, so the plan's longest-first
+    dispatch order is kept while runs wait for headroom.
     """
 
     def __init__(
@@ -464,59 +466,77 @@ class AdmissionGate:
         self.sampler = sampler
         self.clock = clock
         self.sleep = sleep
-        self.admit_lock = threading.Lock()
+        self.turn = threading.Condition()
+        self.next_ticket = 0
+        self.serving = 0
         self.state_lock = threading.Lock()
         self.record_lock = threading.Lock()
         self.active = 0
         self.last_admitted: float | None = None
 
-    def admit(self, job: dict[str, Any]) -> None:
-        with self.admit_lock:
-            waits = 0
-            failures = 0
-            while True:
-                if self.last_admitted is not None:
-                    remaining = self.config["min_interval_seconds"] - (
-                        self.clock() - self.last_admitted
-                    )
-                    if remaining > 0:
-                        self.sleep(remaining)
+    def register(self) -> int:
+        """Reserve the job's place in the admission order (call in dispatch order)."""
+        with self.turn:
+            ticket = self.next_ticket
+            self.next_ticket += 1
+            return ticket
+
+    def admit(self, job: dict[str, Any], ticket: int) -> None:
+        with self.turn:
+            self.turn.wait_for(lambda: self.serving == ticket)
+        try:
+            self._admit(job)
+        finally:
+            with self.turn:
+                self.serving += 1
+                self.turn.notify_all()
+
+    def _admit(self, job: dict[str, Any]) -> None:
+        waits = 0
+        failures = 0
+        while True:
+            if self.last_admitted is not None:
+                remaining = self.config["min_interval_seconds"] - (
+                    self.clock() - self.last_admitted
+                )
+                if remaining > 0:
+                    self.sleep(remaining)
+            with self.state_lock:
+                active = self.active
+            busy: float | None = None
+            error: str | None = None
+            try:
+                busy = self.sampler(self.config["sample_window_seconds"])
+            except OSError as exc:
+                error = str(exc)
+            if active == 0 or (busy is not None and busy <= self.config["busy_percent_max"]):
                 with self.state_lock:
-                    active = self.active
-                busy: float | None = None
-                error: str | None = None
-                try:
-                    busy = self.sampler(self.config["sample_window_seconds"])
-                except OSError as exc:
-                    error = str(exc)
-                if active == 0 or (busy is not None and busy <= self.config["busy_percent_max"]):
-                    with self.state_lock:
-                        self.active += 1
-                        active_after = self.active
-                    self.last_admitted = self.clock()
-                    append_jsonl(
-                        self.record_path,
-                        {
-                            "admitted_at": utc_now(),
-                            "case_id": job["binding"]["case_id"],
-                            "iteration": job["binding"]["iteration"],
-                            "dispatch_sequence": job.get("sequence"),
-                            "cpu_busy_percent": busy,
-                            "sample_error": error,
-                            "active_before": active,
-                            "active_after": active_after,
-                            "waits": waits,
-                            "reason": "no_active_run" if active == 0 else "below_busy_max",
-                        },
-                        self.record_lock,
-                    )
-                    return
-                if error is not None:
-                    failures += 1
-                    if failures >= self.config["max_sample_failures"]:
-                        raise ParallelRunError(f"CPU sampling failed repeatedly: {error}")
-                waits += 1
-                self.sleep(self.config["poll_interval_seconds"])
+                    self.active += 1
+                    active_after = self.active
+                self.last_admitted = self.clock()
+                append_jsonl(
+                    self.record_path,
+                    {
+                        "admitted_at": utc_now(),
+                        "case_id": job["binding"]["case_id"],
+                        "iteration": job["binding"]["iteration"],
+                        "dispatch_sequence": job.get("sequence"),
+                        "cpu_busy_percent": busy,
+                        "sample_error": error,
+                        "active_before": active,
+                        "active_after": active_after,
+                        "waits": waits,
+                        "reason": "no_active_run" if active == 0 else "below_busy_max",
+                    },
+                    self.record_lock,
+                )
+                return
+            if error is not None:
+                failures += 1
+                if failures >= self.config["max_sample_failures"]:
+                    raise ParallelRunError(f"CPU sampling failed repeatedly: {error}")
+            waits += 1
+            self.sleep(self.config["poll_interval_seconds"])
 
     def release(self) -> None:
         with self.state_lock:
@@ -525,6 +545,7 @@ class AdmissionGate:
 
 def execute_admitted_job(
     gate: AdmissionGate | None,
+    ticket: int | None,
     job: dict[str, Any],
     cycle: Path,
     evaluator: Path,
@@ -534,7 +555,7 @@ def execute_admitted_job(
 ) -> dict[str, Any]:
     if gate is None:
         return execute_job(job, cycle, evaluator, max_attempts, attempt_path, log_lock)
-    gate.admit(job)
+    gate.admit(job, ticket)
     try:
         return execute_job(job, cycle, evaluator, max_attempts, attempt_path, log_lock)
     finally:
@@ -588,6 +609,7 @@ def run_plan(
                     pool.submit(
                         execute_admitted_job,
                         gate,
+                        gate.register() if gate is not None else None,
                         job,
                         plan["cycle"],
                         plan["evaluation_loop"],

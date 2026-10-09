@@ -71,7 +71,8 @@ class AdmissionGateTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             clock = FakeClock()
-            self.gate(root, [99.0], clock).admit(self.job("CASE-1"))
+            gate = self.gate(root, [99.0], clock)
+            gate.admit(self.job("CASE-1"), gate.register())
             record = self.records(root)[0]
             self.assertEqual(record["reason"], "no_active_run")
             self.assertEqual(record["active_after"], 1)
@@ -82,8 +83,8 @@ class AdmissionGateTest(unittest.TestCase):
             root = Path(tmp)
             clock = FakeClock()
             gate = self.gate(root, [10.0, 95.0, 90.0, 50.0], clock)
-            gate.admit(self.job("CASE-1"))
-            gate.admit(self.job("CASE-2"))
+            gate.admit(self.job("CASE-1"), gate.register())
+            gate.admit(self.job("CASE-2"), gate.register())
             second = self.records(root)[1]
             self.assertEqual(second["reason"], "below_busy_max")
             self.assertEqual(second["cpu_busy_percent"], 50.0)
@@ -95,9 +96,9 @@ class AdmissionGateTest(unittest.TestCase):
             root = Path(tmp)
             clock = FakeClock()
             gate = self.gate(root, [10.0, 99.0], clock)
-            gate.admit(self.job("CASE-1"))
+            gate.admit(self.job("CASE-1"), gate.register())
             gate.release()
-            gate.admit(self.job("CASE-2"))
+            gate.admit(self.job("CASE-2"), gate.register())
             self.assertEqual(self.records(root)[1]["reason"], "no_active_run")
 
     def test_repeated_sampling_failure_stops_admission(self) -> None:
@@ -105,9 +106,40 @@ class AdmissionGateTest(unittest.TestCase):
             root = Path(tmp)
             clock = FakeClock()
             gate = self.gate(root, [10.0] + [OSError("top failed")] * 3, clock)
-            gate.admit(self.job("CASE-1"))
+            gate.admit(self.job("CASE-1"), gate.register())
             with self.assertRaisesRegex(ParallelRunError, "CPU sampling failed repeatedly"):
-                gate.admit(self.job("CASE-2"))
+                gate.admit(self.job("CASE-2"), gate.register())
+
+    def test_admits_in_registration_order_even_when_threads_arrive_reversed(self) -> None:
+        import threading
+        import time as real_time
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "admissions.jsonl"
+            path.touch()
+            gate = AdmissionGate(
+                admission_config(
+                    {"executor_parameters": {"campaign_dispatch": {"admission": {**ADMISSION, "min_interval_seconds": 0}}}}
+                ),
+                path,
+                sampler=lambda _window: 10.0,
+            )
+            tickets = [gate.register() for _ in range(3)]
+            threads = []
+            for index in reversed(range(3)):
+                thread = threading.Thread(
+                    target=gate.admit, args=(self.job(f"CASE-{index}"), tickets[index])
+                )
+                thread.start()
+                threads.append(thread)
+                real_time.sleep(0.02)
+            for thread in threads:
+                thread.join(timeout=5)
+            self.assertEqual(
+                [record["case_id"] for record in self.records(root)],
+                ["CASE-0", "CASE-1", "CASE-2"],
+            )
 
     def test_config_requires_exact_keys_and_known_policy(self) -> None:
         self.assertIsNone(admission_config({"executor_parameters": {"max_workers": 24}}))
