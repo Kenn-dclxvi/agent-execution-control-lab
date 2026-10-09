@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C302のGPT-6.1 Sol Low・Sonnet 5.5 low、負荷を見て始める条件（2026-10-09）](#c302-admission-std14-20261009)
 - [C304のSonnet 5.5 low、Standard14 N=5（2026-10-09）](#c304-sonnet-low-std14-20261009)
 - [負荷を見て次のrunを始める発行の条件の試行（2026-10-09）](#load-admission-trials-20261009)
 - [Sol Lowの費用を要素に分けた分析（2026-10-09）](#sol-cost-element-decomposition-20261009)
@@ -184,6 +185,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c302-admission-std14-20261009"></a>
+## C302のGPT-6.1 Sol Low・Sonnet 5.5 low、負荷を見て始める条件（2026-10-09）
+
+[計測記録](c302-admission-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](5fa14d7a0c5b48a1ae891181525f4b98.json)、[analysis](c302-admission-sol61-low-standard14-n5_2026-10-09-analysis.json)、[selection](c302-admission-sol61-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c302-admission-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c302-admission-sol61-low-standard14-n5_2026-10-09-prepare-receipt.json)。Sonnet lowは[登録結果](d1caad9ba39e496ab7e10bdf4095094a.json)、[analysis](c302-admission-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c302-admission-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c302-admission-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c302-admission-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[C301 `-r5`との比較](c302-admission-claude-sonnet55-low-standard14-n5_2026-10-09-c301-r5-comparison.json)。両セルの[発行の記録](c302-admission-sol61-low-sonnet55-low-standard14-n5_2026-10-09-campaign-summary.json)と[機序の診断](c302-admission-sol61-low-sonnet55-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)。ベースのC302を負荷を見て始める条件で測り直した。両セルとも4点70件。Sonnet lowはC301 `-r5`比で費用+8.10%（幅より上）、経過時間+3.63%（幅の中）。Sol Lowは同じ条件の基準がなく比べていない。弱点として、成功後の一項目がTaskSpecの求める確認を止めたrun（F07）と、出力をそのまま返す実行（20件中13件）を記録した。採用は未判断。
 
 <a id="c304-sonnet-low-std14-20261009"></a>
 ## C304のSonnet 5.5 low、Standard14 N=5（2026-10-09）
