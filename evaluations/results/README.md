@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C299のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c299-sol-sonnet-low-std14-20261009)
 - [C298のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c298-sol-sonnet-low-std14-20261009)
 - [C297のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c297-sol-sonnet-low-std14-20261009)
 
@@ -171,6 +172,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c299-sol-sonnet-low-std14-20261009"></a>
+## C299のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
+
+[計測記録](c299-sol61-low-sonnet55-low-standard14-n5_2026-10-09.md)。Sol Lowは[登録結果](fdeda9a36ba64163944f5d3e0568934f.json)、[atomic集計](c299-sol61-low-standard14-n5_2026-10-09-atomic-analysis.json)、[選択記録](c299-sol61-low-standard14-n5_2026-10-09-selection.json)、[C280比較](c299-sol61-low-standard14-n5_2026-10-09-c280-comparison.json)、[C289比較](c299-sol61-low-standard14-n5_2026-10-09-c289-comparison.json)、[C291比較](c299-sol61-low-standard14-n5_2026-10-09-c291-comparison.json)、[品質監査](c299-sol61-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c299-sol61-low-standard14-n5_2026-10-09-preflight.json)。Sonnet lowは[登録結果](c75ce22223b648d69a61a323c0b904c3.json)、[C280比較](claude-sonnet55-low-c299-standard14-n5-cli2288_2026-10-09-c280-comparison.json)、[品質監査](claude-sonnet55-low-c299-standard14-n5-cli2288_2026-10-09-quality-audit.json)、[発行前の記録](claude-sonnet55-low-c299-standard14-n5-cli2288_2026-10-09-preflight.json)。両セルの[機序の診断](c299-sol61-low-sonnet55-low-standard14-n5_2026-10-09-mechanism-diagnostics.json)。両セルとも有効70件すべてが4点。C280比でSol Lowはトークン中央値−11.67%・経過時間+8.15%、Sonnet lowはトークン−1.82%・経過時間−15.88%。Sol Lowの待機だけの応答は1反復あたり9.2回から0回。採用は未判断。
 
 <a id="c298-sol-sonnet-low-std14-20261009"></a>
 ## C298のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
