@@ -1,0 +1,128 @@
+{
+ "schema_version": "the-caption-prompt.dispatch-load-diagnostics/v1",
+ "note": "診断のみ。経過時間の内訳は、transcriptの時刻からモデルの応答（tool結果→次のassistant）とコマンドの実行（assistant→tool結果）に分けた1反復あたりの中央値。",
+ "runs": {
+  "C301-r3（Solと一緒、本数の上限だけ）": {
+   "run_directory": "c301-standard14-n5-onequeue-20261009-r1",
+   "sonnet_concurrency": {
+    "max": 12,
+    "mean": 7.6
+   },
+   "load_average_one_mean": 10.7,
+   "wall_seconds": 199.8,
+   "per_iteration_median_seconds": {
+    "model_response": 205.3,
+    "command_execution": 26.4
+   }
+  },
+  "C304（Sonnetだけ、本数の上限だけ）": {
+   "run_directory": "c304-standard14-n5-onequeue-20261009-r1",
+   "sonnet_concurrency": {
+    "max": 24,
+    "mean": 21.6
+   },
+   "load_average_one_mean": 16.3,
+   "wall_seconds": 77.3,
+   "per_iteration_median_seconds": {
+    "model_response": 212.9,
+    "command_execution": 38.3
+   }
+  },
+  "C301-r4（70%・3秒）": {
+   "run_directory": "c301-standard14-n5-admission-20261009-r1",
+   "sonnet_concurrency": {
+    "max": 7,
+    "mean": 3.9
+   },
+   "cpu_busy_percent": {
+    "mean": 32.2,
+    "p90": 63.2,
+    "max": 76.0
+   },
+   "load_average_one_mean": 5.5,
+   "admissions": {
+    "count": 70,
+    "waited_runs": 1,
+    "waits": 2,
+    "in_dispatch_order": true
+   },
+   "wall_seconds": 329.4,
+   "per_iteration_median_seconds": {
+    "model_response": 182.1,
+    "command_execution": 21.2
+   }
+  },
+  "C301-r5（70%・1秒）": {
+   "run_directory": "c301-standard14-n5-admission-20261009-r2",
+   "sonnet_concurrency": {
+    "max": 13,
+    "mean": 8.1
+   },
+   "cpu_busy_percent": {
+    "mean": 42.8,
+    "p90": 62.5,
+    "max": 68.9
+   },
+   "load_average_one_mean": 6.5,
+   "admissions": {
+    "count": 70,
+    "waited_runs": 2,
+    "waits": 2,
+    "in_dispatch_order": true
+   },
+   "wall_seconds": 190.7,
+   "per_iteration_median_seconds": {
+    "model_response": 225.5,
+    "command_execution": 22.7
+   }
+  },
+  "C301-r6（40%・1秒）": {
+   "run_directory": "c301-standard14-n5-admission-20261009-r3",
+   "sonnet_concurrency": {
+    "max": 12,
+    "mean": 6.2
+   },
+   "cpu_busy_percent": {
+    "mean": 41.0,
+    "p90": 62.1,
+    "max": 82.9
+   },
+   "load_average_one_mean": 8.6,
+   "admissions": {
+    "count": 70,
+    "waited_runs": 9,
+    "waits": 23,
+    "in_dispatch_order": true
+   },
+   "wall_seconds": 266.2,
+   "per_iteration_median_seconds": {
+    "model_response": 249.9,
+    "command_execution": 22.2
+   }
+  },
+  "C304（70%・1秒）": {
+   "run_directory": "c304-standard14-n5-admission-20261009-r1",
+   "sonnet_concurrency": {
+    "max": 14,
+    "mean": 7.9
+   },
+   "cpu_busy_percent": {
+    "mean": 40.0,
+    "p90": 67.6,
+    "max": 87.1
+   },
+   "load_average_one_mean": 6.9,
+   "admissions": {
+    "count": 70,
+    "waited_runs": 1,
+    "waits": 2,
+    "in_dispatch_order": true
+   },
+   "wall_seconds": 192.4,
+   "per_iteration_median_seconds": {
+    "model_response": 224.1,
+    "command_execution": 22.5
+   }
+  }
+ }
+}

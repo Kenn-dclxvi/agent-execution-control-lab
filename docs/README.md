@@ -112,8 +112,10 @@
 - [Candidate301 C280のrootの`AGENTS.md`のMarkdownの書式を揃える](candidate301-c280-uniform-markdown-design.md)：見出しの階層、箇条書きの記号、強調を他の`AGENTS.md`と揃える設計。制御は変えず、実行環境を切り離した新しい評価系列の基準にする。
 - [Candidate302 C301の書式でC298とC299の二項目を加える](candidate302-c301-success-closure-and-wait-time-design.md)：実行環境を切り離した系列で29x系を一度計測するため、旧系列で両セルとも費用が下がったC300の二項目を、C301の書式でC301へ加える設計。C301の保存traceで二項目が閉じる操作が残っていることを確認した。
 - [Candidate303 C301の書式でC298の一項目だけを加える](candidate303-c301-success-closure-design.md)：C302でSonnet lowの確認コマンドの出力の形が変わったため、二項目のどちらに伴うかを切り分ける材料として、C298の一項目だけをC301へ加えて測る設計。
+- [Candidate304 1回の取得で一つのファイルから300行を超えて受け取らない](candidate304-c301-file-read-line-cap-design.md)：Sol Lowの費用で最大の要素だった長いファイルの全文取得を、受け取る行数の上限として禁止する一項目をC301へ加えて測る設計。C301でSol Lowは70件中14件、Sonnet lowは1件が該当した。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
+- [Sol Lowの費用を要素に分ける（r1）](sol-cost-element-decomposition-r1.md)：旧系列のSol Lowを費用で数え直し、生のトークンで31〜39%減ったCandidateが費用では1〜8%減にとどまることを確かめた。戻る回数を減らす機序は主にキャッシュ読み取りを減らし、キャッシュに乗らない入力は増えていた。プロンプトで減らせる最大の要素は、指示ファイル以外のファイルの全文取得（C301のSolで約230KB/反復）。Candidateは未作成
 
 
 - [制御文の作り方とC147移植案の再判定r2](c280-c147-control-group-transfer-reassessment-r2.md)：禁止行動と許可境界から設計し、r1の単一呼び出し指定による閉鎖の主張を撤回。方式を指定しない文案と未解決の分割コストを分離する。

@@ -28,6 +28,9 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C304のSonnet 5.5 low、Standard14 N=5（2026-10-09）](#c304-sonnet-low-std14-20261009)
+- [負荷を見て次のrunを始める発行の条件の試行（2026-10-09）](#load-admission-trials-20261009)
+- [Sol Lowの費用を要素に分けた分析（2026-10-09）](#sol-cost-element-decomposition-20261009)
 - [C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c303-sol-sonnet-low-std14-20261009)
 - [C302のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）](#c302-sol-sonnet-low-std14-20261009)
 - [C301、全セルを一つの待ち行列で測った系列の基準（2026-10-09）](#c301-onequeue-std14-20261009)
@@ -181,6 +184,21 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c304-sonnet-low-std14-20261009"></a>
+## C304のSonnet 5.5 low、Standard14 N=5（2026-10-09）
+
+[計測記録](c304-claude-sonnet55-low-standard14-n5_2026-10-09.md)。負荷を見て始める条件での計測は[登録結果](fbf325e77fd741dc86c6b58a73bdc9ee.json)、[analysis](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[発行の記録](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-dispatch-summary.json)、[C301 `-r5`との比較](c304-admission-claude-sonnet55-low-standard14-n5_2026-10-09-c301-r5-comparison.json)。4点70件。C301 `-r5`比で費用−1.20%（幅の中）、経過時間−1.54%（幅の中）。Sonnetだけを本数の上限24で流した1回目の計測（[登録結果](0b60599d3063460a8713a98b6be4b948.json)、[analysis](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[発行の記録](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-campaign-summary.json)、[比較](c304-sonnetonly-claude-sonnet55-low-standard14-n5_2026-10-09-c301-comparison.json)）は、Sonnetの同時実行が基準と違ったため比較に使わない。Solは未計測。採用は未判断。
+
+<a id="load-admission-trials-20261009"></a>
+## 負荷を見て次のrunを始める発行の条件の試行（2026-10-09）
+
+[計測記録](c301-sonnet55-low-load-admission-trials_2026-10-09.md)、[診断の記録](c301-c304-sonnet-dispatch-load-diagnostics_2026-10-09.json)。C301のSonnet lowを、CPU使用率の上限と始める間隔を変えて3回測った。r4（70%・3秒）は[登録結果](dc92e875543f4803b357f5e3f469255a.json)、[analysis](c301-admission-r4-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-admission-r4-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-admission-r4-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-admission-r4-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[発行の記録](c301-admission-r4-claude-sonnet55-low-standard14-n5_2026-10-09-dispatch-summary.json)。r5（70%・1秒）は[登録結果](c1738e0016864d5095f408be6805e9b0.json)、[analysis](c301-admission-r5-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-admission-r5-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-admission-r5-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-admission-r5-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[発行の記録](c301-admission-r5-claude-sonnet55-low-standard14-n5_2026-10-09-dispatch-summary.json)。r6（40%・1秒）は[登録結果](05cc6cd7d4ef4511a04390c14ae8430c.json)、[analysis](c301-admission-r6-claude-sonnet55-low-standard14-n5_2026-10-09-analysis.json)、[selection](c301-admission-r6-claude-sonnet55-low-standard14-n5_2026-10-09-selection.json)、[品質監査](c301-admission-r6-claude-sonnet55-low-standard14-n5_2026-10-09-quality-audit.json)、[発行前の記録](c301-admission-r6-claude-sonnet55-low-standard14-n5_2026-10-09-prepare-receipt.json)、[発行の記録](c301-admission-r6-claude-sonnet55-low-standard14-n5_2026-10-09-dispatch-summary.json)。三つとも4点70件。費用はr4 $0.6692、r5 $0.6811、r6 $0.6565、経過時間は245.91秒、286.68秒、317.92秒。コマンドの実行時間は21〜23秒に揃い、経過時間の揺れの大部分はモデルの応答時間だった。系列の発行の条件はr5とする。
+
+<a id="sol-cost-element-decomposition-20261009"></a>
+## Sol Lowの費用を要素に分けた分析（2026-10-09）
+
+[機械可読の記録](sol-cost-element-decomposition_2026-10-09.json)。分析の本文は[`docs/sol-cost-element-decomposition-r1.md`](../../docs/sol-cost-element-decomposition-r1.md)。旧系列のSol Low（C280、C284〜C300）を新しい系列と同じ単価で数え直した値と、C301などのキャッシュに乗らない入力の出どころの分解。登録済みのKPIではなく、新しい計測はしていない。
 
 <a id="c303-sol-sonnet-low-std14-20261009"></a>
 ## C303のGPT-6.1 Sol Low・Sonnet 5.5 low、Standard14 N=5（2026-10-09）
