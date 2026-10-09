@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json`](../candidate167-prechange-repair-contract-admission-r1-medium-m24-n5-cli0146.json)
 - [`candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json`](../candidate168-repair-evidence-burden-r1-medium-m24-n5-cli0146.json)
 - [`candidate169-repair-decision-evidence-closure-r1-medium-m24-n5-cli0146.json`](../candidate169-repair-decision-evidence-closure-r1-medium-m24-n5-cli0146.json)
 - [`candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json`](../candidate17-operation-qualified-evidence-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json`](../candidate197-local-review-application-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json`](../candidate198-minimal-operation-selection-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json`](../candidate199-structured-prechange-review-adr9-r2-medium-m24-n5-cli0146.json)
-- [`candidate2-expanded12-global-m24-n1-r1.json`](../candidate2-expanded12-global-m24-n1-r1.json)

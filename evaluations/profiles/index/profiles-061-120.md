@@ -32,6 +32,7 @@
 - [`c304-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r2.json`](../c304-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r2.json)
 - [`c305-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r1.json`](../c305-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r1.json)
 - [`c306-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r1.json`](../c306-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261009-r1.json)
+- [`c307-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../c307-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
 - [`candidate1-expanded12-global-m24-n5-r1.json`](../candidate1-expanded12-global-m24-n5-r1.json)
 - [`candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json`](../candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate113-explicit-authority-delegation-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate113-explicit-authority-delegation-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
 - [`candidate114-spec-ready-evidence-phase-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate114-spec-ready-evidence-phase-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)
 - [`candidate115-authority-location-discovery-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate115-authority-location-discovery-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
-- [`candidate116-outcome-implementation-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json`](../candidate116-outcome-implementation-boundary-v14-reasoning-medium-a01-a02-f01-global-m24-n5-cli0146-r1.json)

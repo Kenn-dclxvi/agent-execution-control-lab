@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "4efbc95b25de471887642751bc5ec66e",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c306-standard14-n5-admission-20261009-r1/sonnet/round-3/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "aed8a362427e9213a927db473a8e6bfaf0827b16a2da38dae33621bd91a0d7d0",
+      "name": "the-caption-3ce91a4-taskspec-scoped-success-closure-and-wait-time-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "9a8a20f08116f17364dc26c335f25e7e13f48746f41e9a5974e2b70df31feaca",
+  "cost_band": {
+    "candidate_median": 0.7157668,
+    "position": "within_range",
+    "reference_max": 0.8138378000000001,
+    "reference_min": 0.7119353
+  },
+  "differences": {
+    "cost_usd": -0.020502299999999973,
+    "elapsed_seconds": 2.3702370843384415,
+    "quality_score": 0.0,
+    "total_tokens": 17188
+  },
+  "generated_at": "2026-10-09T15:09:07.486688+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.020502299999999973,
+        "elapsed_seconds": 2.3702370843384415,
+        "quality_score": 0.0,
+        "total_tokens": 17188
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-09",
+    "sha256": "dce6c9d6ff1c6f6ae807b6cda215b8fcb8041b2868382e1dfd5d4fc84c5628b1"
+  },
+  "reference": {
+    "analysis_id": "b449fd0ac7dd4abc8a57de96891c9017",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c302-standard14-n5-admission-20261009-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "d5601a80de209dcab041a2c875084ebb9b64e6803c41fb463490b6dec8fb5a31",
+      "name": "the-caption-3ce91a4-uniform-success-closure-and-wait-time-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}
