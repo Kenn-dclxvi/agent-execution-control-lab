@@ -196,9 +196,9 @@ class AtomicRunRegistryTest(unittest.TestCase):
             "total_tokens": tokens,
         }
 
-    def price_table(self, root: Path, revision: str = "test-prices-r1") -> Path:
+    def price_table(self, root: Path, revision: str = "test-prices-r1", scale: float = 1.0) -> Path:
         path = root / f"{revision}.json"
-        prices = {"uncached_input": 2.0, "cache_read": 0.1, "cache_write_5m": 2.5, "cache_write_1h": 4.0, "cache_write_unsplit": None, "output": 10.0}
+        prices = {"uncached_input": 2.0 * scale, "cache_read": 0.1 * scale, "cache_write_5m": 2.5 * scale, "cache_write_1h": 4.0 * scale, "cache_write_unsplit": None, "output": 10.0 * scale}
         path.write_text(
             json.dumps({"schema_version": "the-caption-prompt.price-table/v1", "revision": revision, "models": {"test-model": {"standard": prices}}}),
             encoding="utf-8",
@@ -485,6 +485,23 @@ class AtomicRunRegistryTest(unittest.TestCase):
             )
             with self.assertRaisesRegex(Exception, "different price tables"):
                 self.call(compare_analyses, reference=str(analyses["reference"]), candidate=str(other), output=str(root / "mixed.json"))
+
+            # 単価表は比較のときに選ぶもので、集計したときの版が違っても、同じ単価表で数え直して比べられる。
+            doubled = self.price_table(root, "doubled-prices", scale=2.0)
+            with self.assertRaisesRegex(Exception, "needs --registry"):
+                self.call(compare_analyses, reference=str(analyses["reference"]), candidate=str(other), output=str(root / "no-registry.json"), price_table=str(doubled), registry=None)
+            self.call(
+                compare_analyses, reference=str(analyses["reference"]), candidate=str(other),
+                output=str(root / "repriced.json"), price_table=str(doubled), registry=str(registry),
+            )
+            repriced = json.loads((root / "repriced.json").read_text())
+            self.assertEqual(repriced["price_table"]["revision"], "doubled-prices")
+            self.assertTrue(repriced["cost_repriced_at_comparison"])
+            self.assertAlmostEqual(repriced["differences"]["cost_usd"], 2 * comparison["differences"]["cost_usd"])
+            self.assertEqual(repriced["cost_band"]["position"], "below_range")
+            self.assertAlmostEqual(repriced["cost_band"]["reference_min"], 2 * comparison["cost_band"]["reference_min"])
+            self.assertEqual(len(repriced["cost_samples"]["reference"]), 1)
+            self.assertAlmostEqual(repriced["cost_samples"]["candidate"][0], 2 * comparison["cost_samples"]["candidate"][0])
 
     def test_missing_dispatch_plan_materializes_only_missing_atomic_slots(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

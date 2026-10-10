@@ -969,29 +969,86 @@ def load_analysis(path: Path) -> dict[str, Any]:
     return analysis
 
 
+def repriced_costs(
+    registry: Path, analysis: dict[str, Any], price_table: dict[str, Any]
+) -> tuple[list[float], dict[str, list[float]]]:
+    """Recompute each selected sample's cost from the stored usage components.
+
+    The price table is a lens chosen at comparison time, not a condition of the
+    measurement: both sides of a comparison are priced with the same table here,
+    whichever table priced them when they were aggregated.
+    """
+    selection = load_selection(Path(analysis["selection"]["path"]))
+    if selection["selection_content_sha256"] != analysis["selection"]["content_sha256"]:
+        raise EvaluationError("analysis selection content SHA-256 does not match the selection file")
+    records = [load_atomic_run(registry, record_id) for record_id in selection["atomic_run_ids"]]
+    by_sample = {(record["case_id"], record["sample_id"]): record for record in records}
+    costs: list[float] = []
+    strata: dict[str, list[float]] = {}
+    for row in analysis["samples"]:
+        selected = []
+        for case_id, sample_id in row["source_sample_ids_by_case"].items():
+            record = by_sample.get((case_id, sample_id))
+            if record is None:
+                raise EvaluationError(f"analysis sample is missing from the selection: {case_id} {sample_id}")
+            selected.append(record)
+        cost = sum(record_cost(record, price_table) for record in selected)
+        costs.append(cost)
+        stratum_keys = {record["execution_stratum_key"] for record in selected}
+        if len(stratum_keys) == 1:
+            strata.setdefault(next(iter(stratum_keys)), []).append(cost)
+    return costs, strata
+
+
 def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
     reference_path = Path(args.reference).resolve()
     candidate_path = Path(args.candidate).resolve()
     reference = load_analysis(reference_path)
     candidate = load_analysis(candidate_path)
+    price_table = None
+    if getattr(args, "price_table", None):
+        if not getattr(args, "registry", None):
+            raise EvaluationError("--price-table needs --registry to reprice the selected runs")
+        try:
+            price_table = load_price_table(Path(args.price_table).resolve())
+        except (UsageComponentsError, OSError, ValueError) as exc:
+            raise EvaluationError(f"invalid price table: {exc}") from exc
     if candidate["comparison_key"] != reference["comparison_key"]:
         raise EvaluationError("atomic analyses have different effective comparison conditions")
     if candidate["case_ids"] != reference["case_ids"]:
         raise EvaluationError("atomic analyses have different case coverage")
     if candidate["sample_count"] != reference["sample_count"]:
         raise EvaluationError("atomic analyses have different selected sample counts")
-    if candidate.get("price_table") != reference.get("price_table"):
-        raise EvaluationError("atomic analyses use different price tables for the cost KPI")
+    if price_table is None and candidate.get("price_table") != reference.get("price_table"):
+        raise EvaluationError(
+            "atomic analyses were priced with different price tables; "
+            "pass --price-table and --registry to reprice both with one table"
+        )
     reference_tasks = reference.get("task_sha256_by_case", {})
     for case_id, task in candidate.get("task_sha256_by_case", {}).items():
         if case_id in reference_tasks and reference_tasks[case_id] != task:
             raise EvaluationError(f"atomic analyses rendered different task text for a case: {case_id}")
+    priced = price_table is not None or "price_table" in reference
     metrics = ("quality_score", "total_tokens", "elapsed_seconds")
-    if "price_table" in reference:
+    if priced:
         metrics += ("cost_usd",)
-    differences = {key: candidate["median"][key] - reference["median"][key] for key in metrics}
     ref_strata = {item["execution_stratum_key"]: item for item in reference["strata"]}
     cand_strata = {item["execution_stratum_key"]: item for item in candidate["strata"]}
+    if price_table is not None:
+        registry = Path(args.registry).resolve()
+        # Reprice both sides with the chosen table; medians and strata use the repriced costs.
+        for analysis, strata_view in ((reference, ref_strata), (candidate, cand_strata)):
+            costs, cost_strata = repriced_costs(registry, analysis, price_table)
+            for row, cost in zip(analysis["samples"], costs):
+                row["cost_usd"] = cost
+            analysis["median"] = dict(analysis["median"], cost_usd=statistics.median(costs))
+            for key, values in cost_strata.items():
+                if key in strata_view:
+                    strata_view[key] = dict(
+                        strata_view[key],
+                        median=dict(strata_view[key]["median"], cost_usd=statistics.median(values)),
+                    )
+    differences = {key: candidate["median"][key] - reference["median"][key] for key in metrics}
     matched_strata = []
     for key in sorted(set(ref_strata).intersection(cand_strata)):
         left = ref_strata[key]
@@ -1008,7 +1065,7 @@ def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
             }
         )
     comparison = {
-        "schema_version": COMPARISON_SCHEMA_V2 if "price_table" in reference else COMPARISON_SCHEMA,
+        "schema_version": COMPARISON_SCHEMA_V2 if priced else COMPARISON_SCHEMA,
         "reference": {
             "path": str(reference_path),
             "analysis_id": reference["analysis_id"],
@@ -1031,11 +1088,19 @@ def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
         ),
         "generated_at": utc_now(),
     }
-    if "price_table" in reference:
+    if priced:
         values = [row["cost_usd"] for row in reference["samples"]]
         median = candidate["median"]["cost_usd"]
         low, high = min(values), max(values)
-        comparison["price_table"] = reference["price_table"]
+        comparison["cost_samples"] = {
+            "reference": [row["cost_usd"] for row in reference["samples"]],
+            "candidate": [row["cost_usd"] for row in candidate["samples"]],
+        }
+        if price_table is not None:
+            comparison["price_table"] = price_table_identity(price_table)
+            comparison["cost_repriced_at_comparison"] = True
+        else:
+            comparison["price_table"] = reference["price_table"]
         comparison["cost_band"] = {
             "reference_min": low,
             "reference_max": high,
@@ -1143,6 +1208,8 @@ def parser() -> argparse.ArgumentParser:
     compare.add_argument("--reference", required=True)
     compare.add_argument("--candidate", required=True)
     compare.add_argument("--output", required=True)
+    compare.add_argument("--price-table", help="price both analyses with this table from the stored usage components")
+    compare.add_argument("--registry", help="registry holding the selected runs (required with --price-table)")
     compare.set_defaults(handler=compare_analyses)
     return root
 

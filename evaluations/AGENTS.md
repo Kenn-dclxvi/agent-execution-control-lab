@@ -66,7 +66,7 @@
 評価基盤が扱うKPIは次の3つだけとする（2026-10-09改訂、[判定基準r2](../docs/shared-instruction-evaluation-criteria-r2.md)）。
 
 - `quality_score`
-- `cost_usd`：all-agentの使用量を、版を固定した単価表（`evaluations/price-tables/`）で米ドルに換算した値。アダプタは`token-usage/v3`で使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告し、Layer 4は集計の時点で単価表を掛ける。比べるresult同士は同じ単価表で計算する。単価表は版として追加し、既存の版を書き換えない。
+- `cost_usd`：all-agentの使用量を、版を固定した単価表（`evaluations/price-tables/`）で米ドルに換算した値。アダプタは`token-usage/v3`で使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告し、Layer 4は集計の時点で単価表を掛ける。単価表は計測の条件ではなく、費用を数えるときに選ぶものとする。比較では、比べる両方を同じ単価表で数え直す（`compare-analyses --price-table`）。料金の改定や単価表へのモデルの追加で版が変わっても、測り直さない。単価表は版として追加し、既存の版を書き換えない（2026-10-10改訂）。
 - `elapsed_seconds`
 
 all-agent `total_tokens`は引き続き各runで記録し、試験の間で並べて比べる値として出力するが、取り組みの成否には使わない参考値とする。2026-10-09より前のresultは`total_tokens`をKPIとした当時の記録であり、書き換えない。
@@ -132,7 +132,7 @@ compatibility keyが異なるresultを同一比較へ混ぜない。
 - **照合する項目**：Evaluation set identity、全ケースのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合。一項目でも不一致、未固定、未確認があれば一件も発行しない。
 - **使用量の内訳**：複製したLayer 1のcycleでは、内訳（`token-usage/v3`）のない有効runを認めない。resultとanalysisは単価表を指定して作り、単価表のないresultを新しく作らない。
 - **atomic run経路**：`create-pool`で、プロファイルと複製したLayer 1からpoolを作る。既存runは`register-run`で個別に登録し、`plan-missing`で要求サンプル数との差だけをwrite-onceのdispatch planへ固定する。`prepare_atomic_plan.py`でpool identity、dispatch plan hash、プロンプト、Evaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、設定上の`M`を機械照合してから不足runだけを発行する。既存runを再実行しない。
-- **比較**：比較は保存後に行う。`compare`、`compare-effective`、`compare-analyses`は、互換条件と単価表が一致するresultまたはanalysisだけを受け付ける。指定する基準は差を取るときの引く側にすぎず、実行の前提にしない。費用の差は、基準の反復の最小と最大に対する位置（幅より下、幅の中、幅より上）も記録する。
+- **比較**：比較は保存後に行う。`compare`、`compare-effective`、`compare-analyses`は、互換条件が一致するresultまたはanalysisだけを受け付ける。費用は、`compare-analyses`に単価表と`--registry`を指定し、各runの使用量の内訳から比べる両方を同じ単価表で数え直す。集計したときの版が同じなら指定しなくてもよい。prompt-set resultを比べる`compare`と`compare-effective`は数え直しに対応しておらず、同じ単価表で集計したresultだけを受け付ける。指定する基準は差を取るときの引く側にすぎず、実行の前提にしない。費用の差は、基準の反復の最小と最大に対する位置（幅より下、幅の中、幅より上）も記録する。
 - **Layer 4へ登録する試験**：発行予定のケース / iteration集合が、固定Layer 1の全case coverageとresult schemaの登録条件を満たすことも、発行前に確かめる。満たさない試験を非登録の診断として実施する場合は、その状態と再利用不能なゲートを一件目の発行前に明示する。
 - **履歴**：2026-10-09より前に`prepare-comparison-layer1`と`preflight-comparison`で基準resultから作ったcycleは、`verify-comparison-preflight`による検証だけを行う。これらのコマンドと`seed-pool`は削除しており、新しく作らない。
 
