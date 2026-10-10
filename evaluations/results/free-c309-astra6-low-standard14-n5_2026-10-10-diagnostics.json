@@ -1,0 +1,140 @@
+{
+  "schema_version": "the-caption-prompt.diagnostics/astra-free-c309-r1",
+  "generated_on": "2026-10-10",
+  "note": "診断であり合否やKPIに使わない。費用は単価表api-standard-2026-10-10-r2で各runの使用量の内訳から数えたケースごとの中央値。",
+  "price_table": "api-standard-2026-10-10-r2",
+  "long_context_runs": {
+    "free": 0,
+    "c309": 0
+  },
+  "free_non_full_score_runs": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 1,
+      "failures": [
+        "a01_forbidden_test_operation"
+      ]
+    },
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "iteration": 3,
+      "failures": [
+        "a01_forbidden_test_operation"
+      ]
+    }
+  ],
+  "cost_by_case": [
+    {
+      "case_id": "TC-A01-LATENT-MODE-POLICY",
+      "free_cost_usd_median": 0.3923,
+      "c309_cost_usd_median": 0.0799,
+      "difference_percent": -79.6,
+      "free_uncached_input_median": 22820,
+      "c309_uncached_input_median": 3926
+    },
+    {
+      "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "free_cost_usd_median": 0.9245,
+      "c309_cost_usd_median": 0.3578,
+      "difference_percent": -61.3,
+      "free_uncached_input_median": 36279,
+      "c309_uncached_input_median": 18946
+    },
+    {
+      "case_id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "free_cost_usd_median": 0.6598,
+      "c309_cost_usd_median": 0.4362,
+      "difference_percent": -33.9,
+      "free_uncached_input_median": 39966,
+      "c309_uncached_input_median": 31521
+    },
+    {
+      "case_id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "free_cost_usd_median": 0.7827,
+      "c309_cost_usd_median": 0.5562,
+      "difference_percent": -28.9,
+      "free_uncached_input_median": 44551,
+      "c309_uncached_input_median": 36664
+    },
+    {
+      "case_id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "free_cost_usd_median": 0.4705,
+      "c309_cost_usd_median": 0.2862,
+      "difference_percent": -39.2,
+      "free_uncached_input_median": 28620,
+      "c309_uncached_input_median": 15302
+    },
+    {
+      "case_id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "free_cost_usd_median": 0.5718,
+      "c309_cost_usd_median": 0.4174,
+      "difference_percent": -27.0,
+      "free_uncached_input_median": 31219,
+      "c309_uncached_input_median": 19084
+    },
+    {
+      "case_id": "TC-F05-CLARIFY-UNITS-MODE",
+      "free_cost_usd_median": 0.0777,
+      "c309_cost_usd_median": 0.0852,
+      "difference_percent": 9.7,
+      "free_uncached_input_median": 3674,
+      "c309_uncached_input_median": 4391
+    },
+    {
+      "case_id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "free_cost_usd_median": 0.0783,
+      "c309_cost_usd_median": 0.0859,
+      "difference_percent": 9.6,
+      "free_uncached_input_median": 3717,
+      "c309_uncached_input_median": 4492
+    },
+    {
+      "case_id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "free_cost_usd_median": 0.4933,
+      "c309_cost_usd_median": 0.3757,
+      "difference_percent": -23.8,
+      "free_uncached_input_median": 29030,
+      "c309_uncached_input_median": 16473
+    },
+    {
+      "case_id": "TC-F07-CANONICAL-V4-RUNNER",
+      "free_cost_usd_median": 0.4049,
+      "c309_cost_usd_median": 0.34,
+      "difference_percent": -16.0,
+      "free_uncached_input_median": 26149,
+      "c309_uncached_input_median": 16029
+    },
+    {
+      "case_id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "free_cost_usd_median": 0.3886,
+      "c309_cost_usd_median": 0.2038,
+      "difference_percent": -47.6,
+      "free_uncached_input_median": 20251,
+      "c309_uncached_input_median": 8169
+    },
+    {
+      "case_id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "free_cost_usd_median": 0.396,
+      "c309_cost_usd_median": 0.3728,
+      "difference_percent": -5.9,
+      "free_uncached_input_median": 19508,
+      "c309_uncached_input_median": 19818
+    },
+    {
+      "case_id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "free_cost_usd_median": 0.297,
+      "c309_cost_usd_median": 0.2087,
+      "difference_percent": -29.7,
+      "free_uncached_input_median": 20652,
+      "c309_uncached_input_median": 9481
+    },
+    {
+      "case_id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "free_cost_usd_median": 0.2148,
+      "c309_cost_usd_median": 0.2054,
+      "difference_percent": -4.4,
+      "free_uncached_input_median": 9160,
+      "c309_uncached_input_median": 10209
+    }
+  ]
+}

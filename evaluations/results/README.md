@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC309のGPT-6 Astra Low（2026-10-10）](#free-c309-astra-low-20261010)
 - [FreeとC309のOpus 5.5 low（2026-10-10）](#free-c309-opus-low-20261010)
 - [Free・C301・C309の比較（2026-10-10）](#free-c301-c309-20261010)
 - [C309のGPT-6.1 Sol Low、Standard14 N=5（基準C301 `-r5`とともに、2026-10-10）](#c309-sol-low-20261010)
@@ -191,6 +192,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c309-astra-low-20261010"></a>
+## FreeとC309のGPT-6 Astra Low（2026-10-10）
+
+[計測記録](free-c309-astra6-low-standard14-n5_2026-10-10.md)、[診断の記録](free-c309-astra6-low-standard14-n5_2026-10-10-diagnostics.json)。Freeは[登録結果](3f92ebb6c83d43d5ac1b3f5499a145d4.json)、[analysis](free-astra6-low-standard14-n5_2026-10-10-analysis.json)、[selection](free-astra6-low-standard14-n5_2026-10-10-selection.json)、[品質監査](free-astra6-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](free-astra6-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](free-astra6-low-standard14-n5_2026-10-10-dispatch-summary.json)。C309は[登録結果](3a8d37f16e104f89b77e4597d7be502a.json)、[analysis](c309-astra6-low-standard14-n5_2026-10-10-analysis.json)、[selection](c309-astra6-low-standard14-n5_2026-10-10-selection.json)、[品質監査](c309-astra6-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](c309-astra6-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](c309-astra6-low-standard14-n5_2026-10-10-dispatch-summary.json)、[Freeとの比較](c309-astra6-low-standard14-n5_2026-10-10-free-comparison.json)。単価表は`api-standard-2026-10-10-r2`。Freeは4点68件・0点2件（A01）、C309は4点70件。C309はFree比で費用−32.09%、経過時間−25.55%（どちらも幅より下）。採用は未判断。
 
 <a id="free-c309-opus-low-20261010"></a>
 ## FreeとC309のOpus 5.5 low（2026-10-10）
