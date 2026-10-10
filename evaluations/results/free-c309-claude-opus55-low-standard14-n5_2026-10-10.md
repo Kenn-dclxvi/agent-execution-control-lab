@@ -38,6 +38,10 @@
 
 採用、追加反復、release、本体反映は行っていない。
 
+## 追記（2026-10-10）：流した順番とキャッシュ
+
+Codexの計測（Sol Low、Astra Low）では、一本ずつ順に流すと、先に流した計測の最初のリクエストがキャッシュに乗らず費用で不利になっていた。Opus lowでは、FreeとC309の140件すべてで最初のリクエストがキャッシュに乗っており（共通の先頭部分6,039トークン）、この影響はなかった。[診断の記録](codex-first-request-cache-order-diagnostics_2026-10-10.json)。
+
 ## 一次アーティファクト
 
 - Free：[登録結果](616b1cf5c6ed46e8bc40f0a36f944cb2.json)・[analysis](free-claude-opus55-low-standard14-n5_2026-10-10-analysis.json)・[selection](free-claude-opus55-low-standard14-n5_2026-10-10-selection.json)・[品質監査](free-claude-opus55-low-standard14-n5_2026-10-10-quality-audit.json)・[発行前の記録](free-claude-opus55-low-standard14-n5_2026-10-10-prepare-receipt.json)・[発行の記録](free-claude-opus55-low-standard14-n5_2026-10-10-dispatch-summary.json)

@@ -1,0 +1,163 @@
+{
+  "schema_version": "the-caption-prompt.diagnostics/codex-first-request-cache-order-r1",
+  "generated_on": "2026-10-10",
+  "note": "診断であり、登録済みのresultとKPIは書き換えない。保存済みのrolloutのtoken_count（Codex）とclaude-stream.jsonl（Claude Code）から、各runのリクエストごとのキャッシュの当たり外れを数えた。",
+  "finding": "Codexの共通の先頭部分（12,288トークン）は、別のrunや別のプロンプトの間でもキャッシュが共有される。FreeとC309を一本ずつ順に流した計測では、先に流した計測の序盤のrunで最初のリクエストがキャッシュに乗らず、費用で不利になった。Claude Codeでは最初のリクエストがすべてキャッシュに乗っており、この影響はなかった。",
+  "codex": {
+    "uncached_input_breakdown_definition": {
+      "first_request_uncached": "最初のリクエストのキャッシュを使わない入力",
+      "new_input": "前のリクエストより増えた入力（ツールの出力など）",
+      "mid_run_miss": "前のリクエストの入力のうち、次のリクエストでキャッシュに乗らなかった分"
+    },
+    "measurements": {
+      "sol_low_c301_r5": {
+        "run_dir": "runs/c301-sol-admission-20261010-r1",
+        "started_at": "2026-10-09T16:26:19Z",
+        "order": 1,
+        "first_request_cold_runs": "31/70",
+        "cold_runs_by_first_request_time_in_14s": [
+          10,
+          8,
+          7,
+          5,
+          1
+        ],
+        "first_request_uncached": 663069,
+        "new_input": 678917,
+        "mid_run_miss": 284945
+      },
+      "sol_low_c309": {
+        "run_dir": "runs/c309-sol-admission-20261010-r1",
+        "started_at": "2026-10-09T16:29:57Z",
+        "order": 2,
+        "first_request_cold_runs": "12/70",
+        "cold_runs_by_first_request_time_in_14s": [
+          4,
+          1,
+          4,
+          2,
+          1
+        ],
+        "first_request_uncached": 424416,
+        "new_input": 651680,
+        "mid_run_miss": 317028
+      },
+      "sol_low_free": {
+        "run_dir": "runs/free-sol-admission-20261010-r1",
+        "started_at": "2026-10-09T16:49:02Z",
+        "order": 3,
+        "first_request_cold_runs": "7/70",
+        "cold_runs_by_first_request_time_in_14s": [
+          3,
+          0,
+          4,
+          0,
+          0
+        ],
+        "first_request_uncached": 315479,
+        "new_input": 793917,
+        "mid_run_miss": 359793
+      },
+      "astra_low_free": {
+        "run_dir": "runs/free-astra-admission-20261010-r1",
+        "started_at": "2026-10-10T13:03:03Z",
+        "order": 1,
+        "first_request_cold_runs": "36/70",
+        "cold_runs_by_first_request_time_in_14s": [
+          13,
+          7,
+          8,
+          6,
+          2
+        ],
+        "first_request_uncached": 670909,
+        "new_input": 802122,
+        "mid_run_miss": 213802
+      },
+      "astra_low_c309": {
+        "run_dir": "runs/c309-astra-admission-20261010-r1",
+        "started_at": "2026-10-10T13:08:05Z",
+        "order": 2,
+        "first_request_cold_runs": "13/70",
+        "cold_runs_by_first_request_time_in_14s": [
+          5,
+          3,
+          3,
+          2,
+          0
+        ],
+        "first_request_uncached": 451295,
+        "new_input": 625445,
+        "mid_run_miss": 64830
+      }
+    },
+    "first_request_cached_tokens_when_hit": 12288,
+    "cache_neutral_cost_estimate": {
+      "method": "途中のリクエストの外れと、最初のリクエストの外れ（同じ条件・同じケースで当たったrunの最初のキャッシュ量の中央値。当たったrunがないケースは同じ条件の全ケースの中央値）を、キャッシュ読み取りの単価で数え直した。単価表api-standard-2026-10-10-r2。登録済みのKPIとは計算経路が違う参考値。Astra FreeのF01とF02は5件すべて外れで、全ケースの中央値で代用した。",
+      "sol_low": {
+        "free": {
+          "registered_median": 0.9344,
+          "estimate_median": 0.76,
+          "estimate_range": [
+            0.7288,
+            0.7821
+          ]
+        },
+        "c309": {
+          "registered_median": 0.7809,
+          "estimate_median": 0.6186,
+          "estimate_range": [
+            0.5691,
+            0.6393
+          ]
+        },
+        "c309_vs_free_registered_percent": -16.42,
+        "c309_vs_free_estimate_percent": -18.6,
+        "c301_r5": {
+          "registered_median": 0.926,
+          "estimate_median": 0.6756,
+          "estimate_range": [
+            0.6399,
+            0.7233
+          ]
+        },
+        "c309_vs_c301_r5_registered_percent": -15.67,
+        "c309_vs_c301_r5_estimate_percent": -8.44
+      },
+      "astra_low": {
+        "free": {
+          "registered_median": 6.1484,
+          "estimate_median": 4.7874,
+          "estimate_range": [
+            4.5424,
+            5.3391
+          ]
+        },
+        "c309": {
+          "registered_median": 4.1757,
+          "estimate_median": 3.6287,
+          "estimate_range": [
+            3.6005,
+            3.922
+          ]
+        },
+        "c309_vs_free_registered_percent": -32.09,
+        "c309_vs_free_estimate_percent": -24.2
+      }
+    }
+  },
+  "claude_code": {
+    "checked": [
+      "runs/free-sonnet-admission-20261010-r1",
+      "runs/c309-standard14-n5-admission-20261010-r1 (sonnet)",
+      "runs/free-opus-admission-20261010-r1",
+      "runs/c309-opus-admission-20261010-r1"
+    ],
+    "first_request_cache_read_zero_runs": "0/280",
+    "first_request_cache_read_tokens": {
+      "sonnet": 6155,
+      "opus": 6039
+    }
+  },
+  "follow_up": "比べるプロンプトを一つの待ち行列に混ぜて流す発行（campaign_dispatch.queue: one_queue_across_cells_and_prompts）を用意した（evaluations/AGENTS.md）。この発行での測り直しは、2026-10-10時点で行っていない。"
+}
