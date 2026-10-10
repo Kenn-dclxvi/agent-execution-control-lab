@@ -40,7 +40,7 @@
 
 `reaccount-result`はroot-only v3 resultを変更せずall-agent resultを追記する履歴補正interface、`query-results`はregistryのread-only取得interfaceである。各書込subcommandは既存artifactを上書きしない。
 
-試験は一つのプロンプトを、固定したprofileと評価セットで計測する。実行の前に比較の相手（基準result、基準pool）を要求しない。比較は保存後に、互換条件と単価表が一致するresultまたはanalysisを選んで行う。2026-10-09より前に使っていた`prepare-comparison-layer1`、`preflight-comparison`、`seed-pool`は削除した。これらで作ったcycleは、`verify-comparison-preflight`で検証だけできる。
+試験は一つのプロンプトを、固定したprofileと評価セットで計測する。実行の前に比較の相手（基準result、基準pool）を要求しない。比較は保存後に、互換条件が一致するresultまたはanalysisを選んで行う。費用は、比べる両方を同じ単価表で数え直す（`compare-analyses --price-table --registry`）。2026-10-09より前に使っていた`prepare-comparison-layer1`、`preflight-comparison`、`seed-pool`は削除した。これらで作ったcycleは、`verify-comparison-preflight`で検証だけできる。
 
 ## 3. 必要なもの
 
@@ -565,7 +565,7 @@ python3 "$CLI" compare \
 - 各非reference resultをminuend、reference resultをsubtrahendとするKPI差分（費用を持つresultでは`cost_usd`を含む）
 - 費用を持つresultでは、referenceの反復の最小と最大に対する中央値の位置（`cost_band`）
 
-費用を持つresult同士は、同じ単価表で計算したものだけを比べる。
+費用を持つanalysis同士は、`compare-analyses`に`--price-table`と`--registry`を指定すれば、集計したときの単価表の版が違っても、指定した単価表で両方を数え直して比べる。prompt-set resultを比べる`compare`は、同じ単価表で計算したresultだけを受け付ける。
 
 `minuend_result_id`と`subtrahend_result_id`を各差分に明記する。referenceは採用状態や順位を意味しない。互換条件が1項目でも異なる場合はviewを作らない。
 
@@ -651,7 +651,7 @@ selection、analysis、comparisonは利用者が指定した新規pathへ作る�
 | `requires usage components` | adapterが使用量の内訳（`token-usage/v3`）を報告していない | adapterを現行版にする。推定で補わない |
 | `requires --price-table` / `need --price-table` | 単価表を指定していない | 版を固定した単価表を指定する |
 | `no price for used bucket` | 単価表に価格のない区分へ使用量がある | 単価表の新しい版を追加する。推定で補わない |
-| `different price tables` | 比べるresultの単価表が違う | 同じ単価表で集計し直したanalysisまたはresultを比べる |
+| `different price tables` | 比べるanalysisまたはresultの単価表が違う | `compare-analyses`に`--price-table`と`--registry`を指定して、両方を同じ単価表で数え直す |
 
 ## 12. v1 / v2 / v3との境界
 

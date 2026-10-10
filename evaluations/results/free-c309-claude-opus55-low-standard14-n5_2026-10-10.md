@@ -5,7 +5,7 @@
 ## 条件
 
 - プロファイル：[Free](../profiles/free-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)、[C309](../profiles/c309-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)。Sonnet lowの同名のプロファイルとは、モデル名（`claude-opus-5-5`）だけが違う。旧系列のC280でも、Opus lowとSonnet lowのプロファイルの違いはモデル名だけだった。並び順の見積もり時間は、Opusの実測がないためSonnet lowの値を使った（記録の項目で、比較条件ではない）。
-- 単価表：Claude Opus 5.5を加えた新しい版[`api-standard-2026-10-10`](../price-tables/api-standard-2026-10-10.json)。既存の版`api-standard-2026-10-09`は書き換えていない。Opus 5.5の単価は、Claude Codeに同梱のClaude APIの資料による（入力$4、出力$20、キャッシュ読み取り$0.20、キャッシュ書き込みは入力の1.25倍（5分）と2倍（1時間）、いずれも100万トークンあたり）。最初の集計は、単価表にOpus 5.5がなかったため止まり、この版で集計し直した。Sol LowとSonnet lowの他の計測（`api-standard-2026-10-09`）と、費用の値を混ぜて比べない。
+- 単価表：Claude Opus 5.5を加えた新しい版[`api-standard-2026-10-10`](../price-tables/api-standard-2026-10-10.json)。既存の版`api-standard-2026-10-09`は書き換えていない。Opus 5.5の単価は、Claude Codeに同梱のClaude APIの資料による（入力$4、出力$20、キャッシュ読み取り$0.20、キャッシュ書き込みは入力の1.25倍（5分）と2倍（1時間）、いずれも100万トークンあたり）。最初の集計は、単価表にOpus 5.5がなかったため止まり、この版で集計し直した。Sol LowとSonnet lowの他の計測（`api-standard-2026-10-09`）と、費用の値を混ぜて比べない。（同日追記）この記述は改めた。単価表は計測の条件ではなく比較のときに選ぶもので、比べる両方を同じ単価表で各runの使用量の内訳から数え直せば比べられる（`compare-analyses --price-table --registry`、[`evaluations/AGENTS.md`](../AGENTS.md)の「3 KPI」）。版の違いを理由に測り直さない。`api-standard-2026-10-10`のSol LowとSonnet lowの単価は`api-standard-2026-10-09`と同じで、両方を新しい版で数え直しても費用は変わらない。
 
 ## 結果
 
