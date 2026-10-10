@@ -53,6 +53,10 @@ Freeの経過時間が短いのは、A01で方針の確認をせずに編集や�
 
 採用、release、本体反映は行っていない。
 
+## 追記（2026-10-10）：流した順番とキャッシュ
+
+Sol Lowの費用の差は、流した順番の影響を含む。三つは一本ずつ順に（C301、C309、Freeの順に）流しており、Codexの共通の先頭部分（12,288トークン）のキャッシュは、別のrunや別のプロンプトの間でも共有される。最初のリクエストがキャッシュに乗らなかったrunは、最初に流したC301が70件中31件（序盤に集中）、C309が12件、Freeが7件だった。キャッシュの当たり外れを揃えた見積もりでは、C309のFree比の費用の差は−18.6%（登録済みのKPIでは−16.42%）になる。この見積もりは登録済みのKPIとは計算経路が違う参考値であり、上の結果と登録済みのresultは書き換えていない。Sonnet lowでは、最初のリクエストがすべてキャッシュに乗っており、この影響はなかった。[診断の記録](codex-first-request-cache-order-diagnostics_2026-10-10.json)。
+
 ## 一次アーティファクト
 
 - Free Sonnet low：[登録結果](be6db20a751a4c7f92fc905ebba9773e.json)・[analysis](free-claude-sonnet55-low-standard14-n5_2026-10-10-analysis.json)・[selection](free-claude-sonnet55-low-standard14-n5_2026-10-10-selection.json)・[品質監査](free-claude-sonnet55-low-standard14-n5_2026-10-10-quality-audit.json)・[発行前の記録](free-claude-sonnet55-low-standard14-n5_2026-10-10-prepare-receipt.json)・[発行の記録](free-claude-sonnet55-low-standard14-n5_2026-10-10-dispatch-summary.json)・[C301 `-r5`との比較](free-claude-sonnet55-low-standard14-n5_2026-10-10-vs-c301-standard14-n5-admission-20261009-r2.json)・[C309との比較](free-claude-sonnet55-low-standard14-n5_2026-10-10-vs-c309-standard14-n5-admission-20261010-r1.json)

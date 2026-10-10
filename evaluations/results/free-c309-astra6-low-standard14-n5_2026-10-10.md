@@ -48,6 +48,10 @@
 
 採用、追加反復、release、本体反映は行っていない。
 
+## 追記（2026-10-10）：流した順番とキャッシュ
+
+この計測の費用の差は、流した順番の影響を大きく含む。FreeとC309は一本ずつ順に流しており、Codexの共通の先頭部分（12,288トークン）のキャッシュは、別のrunや別のプロンプトの間でも共有される。先に流したFreeでは、最初のリクエストがキャッシュに乗らなかったrunが70件中36件あり、序盤に集中した（時刻順に14件ずつ13、7、8、6、2件）。後のC309は13件だった。キャッシュの当たり外れを揃えた見積もりでは、C309のFree比の費用の差は−24.2%（登録済みのKPIでは−32.09%）になる。この見積もりは登録済みのKPIとは計算経路が違う参考値であり、上の結果と登録済みのresultは書き換えていない。[診断の記録](codex-first-request-cache-order-diagnostics_2026-10-10.json)。比べるプロンプトを一つの待ち行列に混ぜて流す発行を用意したが（[`evaluations/AGENTS.md`](../AGENTS.md)の「互換条件」）、その発行での測り直しはしていない。
+
 ## 一次アーティファクト
 
 - Free：[登録結果](3f92ebb6c83d43d5ac1b3f5499a145d4.json)・[analysis](free-astra6-low-standard14-n5_2026-10-10-analysis.json)・[selection](free-astra6-low-standard14-n5_2026-10-10-selection.json)・[品質監査](free-astra6-low-standard14-n5_2026-10-10-quality-audit.json)・[発行前の記録](free-astra6-low-standard14-n5_2026-10-10-prepare-receipt.json)・[発行の記録](free-astra6-low-standard14-n5_2026-10-10-dispatch-summary.json)

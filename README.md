@@ -63,6 +63,7 @@ C309はC301に対し、費用が−2.56%、経過時間が+1.18%で、どちら�
 - Freeの0点は、どのモデルでもA01で方針を確認する前に編集や試験へ進んだもので、C309ではどのモデルでも起きませんでした。
 - C309は4つのモデルすべてでFreeより費用が下がりました。下がり方はCodexの2モデル（Sol Low、Astra Low）で大きく、Claude Codeの2モデルでは小さくなっています。
 - Sonnet lowでC309の経過時間が長いのは、FreeがA01で方針の確認を省いた分が短く出ているためです（上の節を参照）。
+- **注意（2026-10-10追記）：** Codexの2モデル（Sol Low、Astra Low）の費用の差は、流した順番の影響を含みます。FreeとC309を一本ずつ順に流しており、Codexの共通の先頭部分のキャッシュは別のrunや別のプロンプトの間でも共有されるため、先に流した計測の序盤のrunがキャッシュを温める費用を負担しました（最初のリクエストが外れたrunは、Astra Lowで先に流したFreeが36件・後のC309が13件、Sol Lowで先に流したC309が12件・後のFreeが7件）。キャッシュの当たり外れを揃えた見積もりでは、C309のFree比の費用の差はSol Lowで−18.6%、Astra Lowで−24.2%です（参考値。表は登録済みのKPIのまま）。Claude Codeの2モデルにはこの影響がありませんでした。[診断の記録](evaluations/results/codex-first-request-cache-order-diagnostics_2026-10-10.json)。
 - 費用はモデルごとに単価が違うため、モデル間の金額の大小はモデルの優劣を示しません。Opus lowとAstra Lowは、そのモデルを加えた単価表（`api-standard-2026-10-10`、`api-standard-2026-10-10-r2`）で数えています。Sol LowとSonnet lowの単価は、どの版でも同じです。
 
 記録：[Sol LowとSonnet low](evaluations/results/free-c301-c309-sol61-low-sonnet55-low-standard14-n5_2026-10-10.md)、[Opus low](evaluations/results/free-c309-claude-opus55-low-standard14-n5_2026-10-10.md)、[Astra Low](evaluations/results/free-c309-astra6-low-standard14-n5_2026-10-10.md)。
