@@ -37,6 +37,7 @@
 - [`c308-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../c308-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
 - [`c309-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json`](../c309-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json)
 - [`c309-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../c309-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
+- [`c309-claude-sonnet55-low-standard14-n20-cli2288-shellenv-20261010-r1.json`](../c309-claude-sonnet55-low-standard14-n20-cli2288-shellenv-20261010-r1.json)
 - [`c309-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../c309-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
 - [`c309-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json`](../c309-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
 - [`candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate108-validation-ticket-terminal-closure-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate109-validation-ticket-outer-wait-closure-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
-- [`candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json`](../candidate11-sa-context-boundary-expanded12-global-m24-n5-r1.json)
