@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC309のOpus 5.5 low（2026-10-10）](#free-c309-opus-low-20261010)
 - [Free・C301・C309の比較（2026-10-10）](#free-c301-c309-20261010)
 - [C309のGPT-6.1 Sol Low、Standard14 N=5（基準C301 `-r5`とともに、2026-10-10）](#c309-sol-low-20261010)
 - [C309のSonnet 5.5 low、Standard14 N=5（2026-10-10）](#c309-sonnet-low-20261010)
@@ -190,6 +191,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c309-opus-low-20261010"></a>
+## FreeとC309のOpus 5.5 low（2026-10-10）
+
+[計測記録](free-c309-claude-opus55-low-standard14-n5_2026-10-10.md)、[診断の記録](free-c309-claude-opus55-low-standard14-n5_2026-10-10-diagnostics.json)。Freeは[登録結果](616b1cf5c6ed46e8bc40f0a36f944cb2.json)、[analysis](free-claude-opus55-low-standard14-n5_2026-10-10-analysis.json)、[selection](free-claude-opus55-low-standard14-n5_2026-10-10-selection.json)、[品質監査](free-claude-opus55-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](free-claude-opus55-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](free-claude-opus55-low-standard14-n5_2026-10-10-dispatch-summary.json)。C309は[登録結果](8378d3c9a0414c81a180f3f8fd33a8b8.json)、[analysis](c309-claude-opus55-low-standard14-n5_2026-10-10-analysis.json)、[selection](c309-claude-opus55-low-standard14-n5_2026-10-10-selection.json)、[品質監査](c309-claude-opus55-low-standard14-n5_2026-10-10-quality-audit.json)、[発行前の記録](c309-claude-opus55-low-standard14-n5_2026-10-10-prepare-receipt.json)、[発行の記録](c309-claude-opus55-low-standard14-n5_2026-10-10-dispatch-summary.json)、[Freeとの比較](c309-claude-opus55-low-standard14-n5_2026-10-10-free-comparison.json)。単価表は`api-standard-2026-10-10`。Freeは4点69件・0点1件（A01）、C309は4点70件。C309はFree比で費用−6.64%（幅より下）、経過時間−1.09%（幅の中）。C309の状態の確認の置き場所の遵守は16/27。採用は未判断。
 
 <a id="free-c301-c309-20261010"></a>
 ## Free・C301・C309の比較（2026-10-10）

@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "analysis_id": "3d23aed590e14fb5b6224cceed7b1562",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c309-opus-admission-20261010-r1/opus/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "9c5bdd6ae72cb9157b276a6019b07c9205a765e67969207daf3a7aa4b8ca97c5",
+      "name": "the-caption-3ce91a4-final-check-unit-output-trim-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "0451a9297c765039a8d0c4774acaf00c66593f46aca1c69c3e697b22c09c47f6",
+  "cost_band": {
+    "candidate_median": 1.1886064,
+    "position": "below_range",
+    "reference_max": 1.3125552,
+    "reference_min": 1.2379162
+  },
+  "differences": {
+    "cost_usd": -0.08446219999999993,
+    "elapsed_seconds": -2.9431596687063575,
+    "quality_score": 0.0,
+    "total_tokens": -52549
+  },
+  "generated_at": "2026-10-09T19:37:01.752966+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.08446219999999993,
+        "elapsed_seconds": -2.9431596687063575,
+        "quality_score": 0.0,
+        "total_tokens": -52549
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-10",
+    "sha256": "6e46ba390a9f130075ba298fa1a908012a6c9808384ad990ac6ae68411fa82a7"
+  },
+  "reference": {
+    "analysis_id": "99c68cb9e77d48099f150731f88ac550",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-opus-admission-20261010-r1/opus/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+      "name": "the-caption-3ce91a4-control-free-repository-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

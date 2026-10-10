@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate243-unstarted-read-completion-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate244-validation-result-dependency-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate245-validation-result-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
 - [`candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json`](../candidate246-validation-result-ai-return-exclusion-v14-reasoning-medium-f04-m24-n5-cli0146-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate277-no-user-global-standard14-n5-cli0156-r1.json`](../candidate277-no-user-global-standard14-n5-cli0156-r1.json)
 - [`candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json`](../candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate278-heading-only-luna6-high-standard14-n5-cli0156-r1.json`](../candidate278-heading-only-luna6-high-standard14-n5-cli0156-r1.json)
-- [`candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json`](../candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json)
