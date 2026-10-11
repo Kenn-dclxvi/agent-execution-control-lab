@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate191-explicit-review-operation-applicability-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate191-explicit-review-operation-applicability-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate192-consumer-bound-coissuance-standard14-affected9-f04-control-n5-cli0146.json`](../candidate192-consumer-bound-coissuance-standard14-affected9-f04-control-n5-cli0146.json)
 - [`candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json`](../candidate193-frontier-bound-dispatch-transition-adr9-r2-medium-m24-n5-cli0146.json)
 - [`candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json`](../candidate194-c147-direct-review-control-reconstruction-adr9-r2-medium-m24-n5-cli0146.json)
@@ -61,4 +62,3 @@
 - [`candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
-- [`candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate24-control-free-owner-result-gate-owner-producer-v1-expanded12-global-m24-n5-r1.json)
