@@ -1,0 +1,71 @@
+{
+  "candidate": {
+    "analysis_id": "1c7508c3c6dc4fb693917c53b4acffdf",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c312-sonnet-admission-20261012-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "72cbcbf583eb482a752b5bec775fbc4f9c8a8a5b39749862c2afc3274dd6d595",
+      "name": "the-caption-3ce91a4-final-check-unit-receive-form-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "f103b3551284155782122e3c71716aea839ee0535e21894a07bda395464b2923",
+  "cost_band": {
+    "candidate_median": 0.6757192,
+    "position": "within_range",
+    "reference_max": 0.6918285000000001,
+    "reference_min": 0.6443213
+  },
+  "cost_repriced_at_comparison": true,
+  "cost_samples": {
+    "candidate": [
+      0.6323842000000001,
+      0.6775965,
+      0.6631151000000001,
+      0.6757192,
+      0.6833742
+    ],
+    "reference": [
+      0.6508415,
+      0.6669659,
+      0.6918285000000001,
+      0.6636846,
+      0.6443213
+    ]
+  },
+  "differences": {
+    "cost_usd": 0.012034600000000006,
+    "elapsed_seconds": -65.84416129300371,
+    "quality_score": 0.0,
+    "total_tokens": 3064
+  },
+  "generated_at": "2026-10-11T16:48:24.535426+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": 0.012034600000000006,
+        "elapsed_seconds": -65.84416129300371,
+        "quality_score": 0.0,
+        "total_tokens": 3064
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-10-r2",
+    "sha256": "52c65fb43e2068489c38c9da6e3194268dd2c42b39293130e61a406972bebe58"
+  },
+  "reference": {
+    "analysis_id": "65d035173d534560a980cb51adc91249",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c309-standard14-n5-admission-20261010-r1/sonnet/round-1/analysis-effective-v1.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "9c5bdd6ae72cb9157b276a6019b07c9205a765e67969207daf3a7aa4b8ca97c5",
+      "name": "the-caption-3ce91a4-final-check-unit-output-trim-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}
