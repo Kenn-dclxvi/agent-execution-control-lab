@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C312のGPT-6.1 Sol Low（2026-10-12）](#c312-sol-low-20261012)
+- [C310・C311・C312のSonnet 5.5 low（2026-10-12）](#c310-c312-sonnet-low-20261012)
 - [C309のGPT-6.1 Sol Low、Standard14 累積N=20（2026-10-10）](#c309-sol-low-n20-20261010)
 - [C309のSonnet 5.5 low、Standard14 累積N=20（2026-10-10）](#c309-sonnet-low-n20-20261010)
 - [FreeとC309のGPT-6 Astra Low（2026-10-10）](#free-c309-astra-low-20261010)
@@ -194,6 +196,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c312-sol-low-20261012"></a>
+## C312のGPT-6.1 Sol Low（2026-10-12）
+
+[計測記録](c312-sol61-low-standard14-n5_2026-10-12.md)。[登録結果](abde97562e82475e898699dac132d857.json)、[analysis](c312-sol61-low-standard14-n5_2026-10-12-analysis.json)、[selection](c312-sol61-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c312-sol61-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c312-sol61-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c312-sol61-low-standard14-n5_2026-10-12-dispatch-summary.json)、[C309との比較](c312-sol61-low-standard14-n5_2026-10-12-c309-comparison.json)、[診断の記録](c312-sol61-low-standard14-n5_2026-10-12-diagnostics.json)。C309の実効互換の規則での集計は[analysis](c309-sol61-low-standard14-n5_2026-10-10-analysis-effective-v1.json)と[selection](c309-sol61-low-standard14-n5_2026-10-10-selection-effective-v1.json)。4点70件。C309比で費用−5.81%（幅の中）、経過時間+7.61%（幅より上、計測の始めにテストの起動が重なって遅れた分を含む）。状態の確認の置き場所は35/35、確認の後の呼び出しは0。採用は未判断。
+
+<a id="c310-c312-sonnet-low-20261012"></a>
+## C310・C311・C312のSonnet 5.5 low（2026-10-12）
+
+[計測記録](c310-c312-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[診断の記録](c310-c312-claude-sonnet55-low-standard14-n5_2026-10-12-diagnostics.json)。C310は[登録結果](df5c9cb9b6314d599bd5045a04b45525.json)、[analysis](c310-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c310-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c310-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c310-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C309との比較](c310-claude-sonnet55-low-standard14-n5_2026-10-12-c309-comparison.json)。C311は[登録結果](28b6929192d642d1ba6d887287843de5.json)、[analysis](c311-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c311-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c311-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c311-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C309との比較](c311-claude-sonnet55-low-standard14-n5_2026-10-12-c309-comparison.json)、[C310との比較](c311-claude-sonnet55-low-standard14-n5_2026-10-12-c310-comparison.json)。C312は[登録結果](4f2d26c95e784ef1a1922ac971fe4fe7.json)、[analysis](c312-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c312-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c312-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c312-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C309との比較](c312-claude-sonnet55-low-standard14-n5_2026-10-12-c309-comparison.json)、[C311との比較](c312-claude-sonnet55-low-standard14-n5_2026-10-12-c311-comparison.json)。C309の実効互換の規則での集計は[analysis](c309-claude-sonnet55-low-standard14-n5_2026-10-10-analysis-effective-v1.json)と[selection](c309-claude-sonnet55-low-standard14-n5_2026-10-10-selection-effective-v1.json)。三つとも4点70件。C312はC309比で費用+1.81%（幅の中）、確認コマンドの終了コードの表示が79/81、出力そのままの`main_verify.sh`が0件。Solは未計測。採用は未判断。
 
 <a id="c309-sol-low-n20-20261010"></a>
 ## C309のGPT-6.1 Sol Low、Standard14 累積N=20（2026-10-10）
