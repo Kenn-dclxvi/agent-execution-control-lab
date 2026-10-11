@@ -1,0 +1,71 @@
+{
+  "candidate": {
+    "analysis_id": "4b6da11ec26a47b78c7bd2aaacc3e736",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c313-sonnet-admission-20261012-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "229dc858b8d883e0295464fbd7ab814ee453f5f306bb5432a330bb27f5b327ec",
+      "name": "the-caption-3ce91a4-receive-form-without-plan-item-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "f103b3551284155782122e3c71716aea839ee0535e21894a07bda395464b2923",
+  "cost_band": {
+    "candidate_median": 0.672961,
+    "position": "within_range",
+    "reference_max": 0.6833742,
+    "reference_min": 0.6323842000000001
+  },
+  "cost_repriced_at_comparison": true,
+  "cost_samples": {
+    "candidate": [
+      0.6744608,
+      0.6989617,
+      0.6463719,
+      0.672961,
+      0.6492217
+    ],
+    "reference": [
+      0.6323842000000001,
+      0.6775965,
+      0.6631151000000001,
+      0.6757192,
+      0.6833742
+    ]
+  },
+  "differences": {
+    "cost_usd": -0.002758199999999933,
+    "elapsed_seconds": 8.715361999813467,
+    "quality_score": 0.0,
+    "total_tokens": 19669
+  },
+  "generated_at": "2026-10-11T17:20:50.656253+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.002758199999999933,
+        "elapsed_seconds": 8.715361999813467,
+        "quality_score": 0.0,
+        "total_tokens": 19669
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-10-r2",
+    "sha256": "52c65fb43e2068489c38c9da6e3194268dd2c42b39293130e61a406972bebe58"
+  },
+  "reference": {
+    "analysis_id": "1c7508c3c6dc4fb693917c53b4acffdf",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c312-sonnet-admission-20261012-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "72cbcbf583eb482a752b5bec775fbc4f9c8a8a5b39749862c2afc3274dd6d595",
+      "name": "the-caption-3ce91a4-final-check-unit-receive-form-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}
