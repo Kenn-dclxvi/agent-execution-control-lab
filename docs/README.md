@@ -721,7 +721,7 @@
 | 文書 | 役割 |
 |---|---|
 | [`01_why-prompt-writing-changes-your-bill.md`](01_why-prompt-writing-changes-your-bill.md) | **実務者向けExecution Controlシリーズ 1 / 8**（2026-10-12改版）。6行の指示（C316）で4つのAIすべてのAPI料金換算がFree比11〜33%下がった計測を入口に、削るべきものは文字数ではなく迷う余地と受け取らなくていい出力だと説明する。 |
-| [`02_how-to-write-prompts-that-cut-api-cost.md`](02_how-to-write-prompts-that-cut-api-cost.md) | **シリーズ 2 / 8**。成果、変更開始、担当と結果、調査、完了という5つの判断条件を、推測・手戻り・過剰な探索や検証と対応づける。 |
+| [`02_how-to-write-prompts-that-cut-api-cost.md`](02_how-to-write-prompts-that-cut-api-cost.md) | **シリーズ 2 / 8**（2026-10-12改版）。最新版の6行（C316）を1行ずつ取り上げ、成果、調査、完了、待ち方、受け取り方の各場所で止める無駄と、作業記録から無駄を見つけ、させたい形を事実で書くという書き方の学びを説明する。 |
 | [`03_what-not-to-write-in-ai-prompts.md`](03_what-not-to-write-in-ai-prompts.md) | **シリーズ 3 / 8**。索引追加、表面的な短文化、抽象的なmeta判断など、無条件に足さない7項目と代替を書く。 |
 | [`04_what-prompts-can-and-cannot-control.md`](04_what-prompts-can-and-cannot-control.md) | **シリーズ 4 / 8**。AIが観測後に選ぶ行動と、executorやtool adapterが担う配送・原子性などの境界を説明する。 |
 | [`05_review-roles-vs-decision-conditions.md`](05_review-roles-vs-decision-conditions.md) | **シリーズ 5 / 8**。レビュー工程と品質責務を分離し、別担当を増やす前に固定する判定対象と結果を示す。 |
