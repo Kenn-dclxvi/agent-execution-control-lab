@@ -107,7 +107,7 @@ Rating v14 Medium / Standard14 / atomic N=5。同一環境内だけの互換比�
 | --- | --- |
 | 全体像・用語・評価基盤・現状を知る | [`docs/repository-overview.md`](docs/repository-overview.md) |
 | 研究の問い・測定方法・結果・限界を読む | [`docs/execution-control-measurement-report.md`](docs/execution-control-measurement-report.md) |
-| 実務の観点から読む | [「AIへの指示は、短いほど安いのか？」](docs/01_why-prompt-writing-changes-your-bill.md)（全8本のExecution Controlシリーズ。単体でも読め、ファイル名の`01`〜`08`が推奨順） |
+| 実務の観点から読む | [実務ガイド](docs/practical-guide/README.md)（全3本。指示で料金が変わる理由、書き方、人間の開発工程の移し方）。前に書いた[Execution Controlシリーズ](docs/01_why-prompt-writing-changes-your-bill.md)（全8本）も残しています |
 | 今後の方針を知る（改善サイクル、評価セットの育て方、モデル / ランタイム更新時の扱い、ランタイム制御への発展、採用判断） | [`docs/future-roadmap.md`](docs/future-roadmap.md) |
 
 作業を始める場所は次のとおりです。
