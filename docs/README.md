@@ -720,7 +720,7 @@
 
 | 文書 | 役割 |
 |---|---|
-| [`01_why-prompt-writing-changes-your-bill.md`](01_why-prompt-writing-changes-your-bill.md) | **実務者向けExecution Controlシリーズ 1 / 8**。Free比のAPI料金換算`-39.95%`を入口に、削るべきものは文字数ではなく迷う余地だと説明する。 |
+| [`01_why-prompt-writing-changes-your-bill.md`](01_why-prompt-writing-changes-your-bill.md) | **実務者向けExecution Controlシリーズ 1 / 8**（2026-10-12改版）。6行の指示（C316）で4つのAIすべてのAPI料金換算がFree比11〜33%下がった計測を入口に、削るべきものは文字数ではなく迷う余地と受け取らなくていい出力だと説明する。 |
 | [`02_how-to-write-prompts-that-cut-api-cost.md`](02_how-to-write-prompts-that-cut-api-cost.md) | **シリーズ 2 / 8**。成果、変更開始、担当と結果、調査、完了という5つの判断条件を、推測・手戻り・過剰な探索や検証と対応づける。 |
 | [`03_what-not-to-write-in-ai-prompts.md`](03_what-not-to-write-in-ai-prompts.md) | **シリーズ 3 / 8**。索引追加、表面的な短文化、抽象的なmeta判断など、無条件に足さない7項目と代替を書く。 |
 | [`04_what-prompts-can-and-cannot-control.md`](04_what-prompts-can-and-cannot-control.md) | **シリーズ 4 / 8**。AIが観測後に選ぶ行動と、executorやtool adapterが担う配送・原子性などの境界を説明する。 |
