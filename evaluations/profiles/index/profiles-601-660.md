@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate9-f03-f06-global-m24-n5-r1.json`](../candidate9-f03-f06-global-m24-n5-r1.json)
 - [`candidate9-remaining10-global-m24-n5-r1.json`](../candidate9-remaining10-global-m24-n5-r1.json)
 - [`candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f04-global-m5-n5-r1.json`](../candidate90-tool-output-ingress-boundary-v14-reasoning-medium-f04-global-m5-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json`](../free-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json)
 - [`free-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../free-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
-- [`free-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2284-r1.json)

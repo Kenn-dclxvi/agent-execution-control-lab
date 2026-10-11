@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate277-no-user-global-standard14-n5-cli0156-r1.json`](../candidate277-no-user-global-standard14-n5-cli0156-r1.json)
 - [`candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json`](../candidate277-remove-upfront-plan-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate278-heading-only-luna6-high-standard14-n5-cli0156-r1.json`](../candidate278-heading-only-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json`](../candidate279-empty-root-agents-luna6-high-standard14-n5-cli0156-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json`](../candidate5-completion-persistence-v13-standard14-global-m24-n5-r1.json)
 - [`candidate5-expanded12-global-m24-n5-r1.json`](../candidate5-expanded12-global-m24-n5-r1.json)
-- [`candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate50-root-read-batch-ambiguity-targeted2-v10-global-m10-n5-r1.json)
