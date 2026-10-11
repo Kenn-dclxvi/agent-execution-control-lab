@@ -1,0 +1,71 @@
+{
+  "candidate": {
+    "analysis_id": "7a356201a6b6430eabbc69090a64da54",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c313-sol-admission-20261012-r1/sol/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "229dc858b8d883e0295464fbd7ab814ee453f5f306bb5432a330bb27f5b327ec",
+      "name": "the-caption-3ce91a4-receive-form-without-plan-item-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "ddffeb4cf9af609998cd83cad4968385298d10b89346e2796b2cbde5f616fc94",
+  "cost_band": {
+    "candidate_median": 0.7125644,
+    "position": "within_range",
+    "reference_max": 0.8094748,
+    "reference_min": 0.6586948
+  },
+  "cost_repriced_at_comparison": true,
+  "cost_samples": {
+    "candidate": [
+      0.7125644,
+      0.6853435999999999,
+      0.6638892,
+      0.7291908,
+      0.7418956
+    ],
+    "reference": [
+      0.7051784,
+      0.6586948,
+      0.7382836,
+      0.7355208,
+      0.8094748
+    ]
+  },
+  "differences": {
+    "cost_usd": -0.022956399999999988,
+    "elapsed_seconds": -40.20459516637493,
+    "quality_score": 0.0,
+    "total_tokens": 53680
+  },
+  "generated_at": "2026-10-11T17:35:44.038132+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.022956399999999988,
+        "elapsed_seconds": -40.20459516637493,
+        "quality_score": 0.0,
+        "total_tokens": 53680
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-10-r2",
+    "sha256": "52c65fb43e2068489c38c9da6e3194268dd2c42b39293130e61a406972bebe58"
+  },
+  "reference": {
+    "analysis_id": "83e40664b0174f68a31d3f5def3448ae",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c312-sol-admission-20261012-r1/sol/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "72cbcbf583eb482a752b5bec775fbc4f9c8a8a5b39749862c2afc3274dd6d595",
+      "name": "the-caption-3ce91a4-final-check-unit-receive-form-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

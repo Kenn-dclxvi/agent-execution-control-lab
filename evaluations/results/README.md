@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C313・C314のGPT-6.1 Sol Low（2026-10-12）](#c313-c314-sol-low-20261012)
 - [C313・C314のSonnet 5.5 low（2026-10-12）](#c313-c314-sonnet-low-20261012)
 - [C312のGPT-6.1 Sol Low（2026-10-12）](#c312-sol-low-20261012)
 - [C310・C311・C312のSonnet 5.5 low（2026-10-12）](#c310-c312-sonnet-low-20261012)
@@ -197,6 +198,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c313-c314-sol-low-20261012"></a>
+## C313・C314のGPT-6.1 Sol Low（2026-10-12）
+
+[計測記録](c313-c314-sol61-low-standard14-n5_2026-10-12.md)、[診断の記録](c313-c314-sol61-low-standard14-n5_2026-10-12-diagnostics.json)。C313は[登録結果](e16a8b7e2f7144bca9dd9f94c8009028.json)、[analysis](c313-sol61-low-standard14-n5_2026-10-12-analysis.json)、[selection](c313-sol61-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c313-sol61-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c313-sol61-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c313-sol61-low-standard14-n5_2026-10-12-dispatch-summary.json)、[C312との比較](c313-sol61-low-standard14-n5_2026-10-12-c312-comparison.json)。C314は[登録結果](988f6207186e4fd68d4a9e023d1fd6be.json)、[analysis](c314-sol61-low-standard14-n5_2026-10-12-analysis.json)、[selection](c314-sol61-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c314-sol61-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c314-sol61-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c314-sol61-low-standard14-n5_2026-10-12-dispatch-summary.json)、[C312との比較](c314-sol61-low-standard14-n5_2026-10-12-c312-comparison.json)。両方とも4点70件。C312比で費用はC313が−3.12%、C314が−5.16%（どちらも幅の中、C312は最初のリクエストのキャッシュの揺れで高めに出ている）。C314では変更前の読み取りが145から172へ増えた。採用は未判断。
 
 <a id="c313-c314-sonnet-low-20261012"></a>
 ## C313・C314のSonnet 5.5 low（2026-10-12）
