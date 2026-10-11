@@ -1,0 +1,71 @@
+{
+  "candidate": {
+    "analysis_id": "d3c60866d8e24522bd0a3c1fdb85a0f4",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c316-sonnet-admission-20261012-r1/sonnet/round-1/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "0a1cbfe43a0333230a81d42a746d94c3f0375e5786e0d864fba9686c39b9651a",
+      "name": "the-caption-3ce91a4-receive-form-file-read-range-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "f103b3551284155782122e3c71716aea839ee0535e21894a07bda395464b2923",
+  "cost_band": {
+    "candidate_median": 0.6215771,
+    "position": "below_range",
+    "reference_max": 0.7322648,
+    "reference_min": 0.6776156
+  },
+  "cost_repriced_at_comparison": true,
+  "cost_samples": {
+    "candidate": [
+      0.6313562,
+      0.6202607,
+      0.6097023,
+      0.6469007,
+      0.6215771
+    ],
+    "reference": [
+      0.6997059,
+      0.6911277,
+      0.7024061,
+      0.6776156,
+      0.7322648
+    ]
+  },
+  "differences": {
+    "cost_usd": -0.0781288,
+    "elapsed_seconds": -16.495568501064554,
+    "quality_score": 7.142857142857139,
+    "total_tokens": -55087
+  },
+  "generated_at": "2026-10-11T19:10:42.445182+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.0781288,
+        "elapsed_seconds": -16.495568501064554,
+        "quality_score": 7.142857142857139,
+        "total_tokens": -55087
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-10-10-r2",
+    "sha256": "52c65fb43e2068489c38c9da6e3194268dd2c42b39293130e61a406972bebe58"
+  },
+  "reference": {
+    "analysis_id": "90953da011494541b5719a123eefb8f1",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-sonnet-admission-20261010-r1/sonnet/round-1/analysis-effective-v1.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+      "name": "the-caption-3ce91a4-control-free-repository-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

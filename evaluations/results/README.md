@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC316の4モデル比較（2026-10-12）](#free-c316-four-models-20261012)
 - [C316の累積N=20（2026-10-12）](#c316-n20-20261012)
 - [C316のGPT-6.1 Sol Low（2026-10-12）](#c316-sol-low-20261012)
 - [C316のSonnet 5.5 low（2026-10-12）](#c316-sonnet-low-20261012)
@@ -201,6 +202,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c316-four-models-20261012"></a>
+## FreeとC316の4モデル比較（2026-10-12）
+
+[計測記録](free-c316-four-models-standard14-n5_2026-10-12.md)。Opus lowは[登録結果](85740d6fa5004bc9aa4abab14d0a4855.json)、[analysis](c316-claude-opus55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c316-claude-opus55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c316-claude-opus55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c316-claude-opus55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c316-claude-opus55-low-standard14-n5_2026-10-12-dispatch-summary.json)、[Freeとの比較](c316-claude-opus55-low-standard14-n5_2026-10-12-free-comparison.json)。Astra Lowは[登録結果](9dd8bfdc985543e4aca15c6656ddcd60.json)、[analysis](c316-astra6-low-standard14-n5_2026-10-12-analysis.json)、[selection](c316-astra6-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c316-astra6-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c316-astra6-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c316-astra6-low-standard14-n5_2026-10-12-dispatch-summary.json)、[Freeとの比較](c316-astra6-low-standard14-n5_2026-10-12-free-comparison.json)。Sol LowとSonnet lowのFreeとの比較は[Sol](c316-sol61-low-standard14-n5_2026-10-12-free-comparison.json)、[Sonnet](c316-claude-sonnet55-low-standard14-n5_2026-10-12-free-comparison.json)。Freeを実効互換の規則で登録し直した集計は[sol61のanalysis](free-sol61-low-standard14-n5_2026-10-10-analysis-effective-v1.json)・[selection](free-sol61-low-standard14-n5_2026-10-10-selection-effective-v1.json)、[astra6のanalysis](free-astra6-low-standard14-n5_2026-10-10-analysis-effective-v1.json)・[selection](free-astra6-low-standard14-n5_2026-10-10-selection-effective-v1.json)、[claude-sonnet55のanalysis](free-claude-sonnet55-low-standard14-n5_2026-10-10-analysis-effective-v1.json)・[selection](free-claude-sonnet55-low-standard14-n5_2026-10-10-selection-effective-v1.json)、[claude-opus55のanalysis](free-claude-opus55-low-standard14-n5_2026-10-10-analysis-effective-v1.json)・[selection](free-claude-opus55-low-standard14-n5_2026-10-10-selection-effective-v1.json)。C316は4モデルとも4点70件。Free比の費用はSol Low −31.28%、Astra Low −32.94%、Sonnet low −11.17%、Opus low −11.64%で、すべてFreeの幅より下。採用は未判断。
 
 <a id="c316-n20-20261012"></a>
 ## C316の累積N=20（2026-10-12）
