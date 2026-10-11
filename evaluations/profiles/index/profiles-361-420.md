@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json`](../candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json)
+- [`candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
@@ -60,5 +62,3 @@
 - [`candidate274-astra-time-recording-standard14-low-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-low-m24-n5-cli0153-r1.json)
 - [`candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json)
 - [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json)
-- [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json)
-- [`candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json)

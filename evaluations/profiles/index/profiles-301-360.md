@@ -2,6 +2,8 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate190-current-prior-review-result-admission-adr9-r2-medium-m24-n5-cli0146.json`](../candidate190-current-prior-review-result-admission-adr9-r2-medium-m24-n5-cli0146.json)
+- [`candidate190-current-prior-review-result-admission-standard14-f02-f03-f04-reference-n5-cli0146.json`](../candidate190-current-prior-review-result-admission-standard14-f02-f03-f04-reference-n5-cli0146.json)
 - [`candidate190-current-prior-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate190-current-prior-review-result-admission-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
 - [`candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-medium-m24-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-n20-medium-m24-cli0146.json)
 - [`candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json`](../candidate191-explicit-review-operation-applicability-adr05-adr07-adr09-reference-n5-medium-m24-cli0146.json)
@@ -60,5 +62,3 @@
 - [`candidate228-c147-direct-human-permission-boundaries-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json`](../candidate228-c147-direct-human-permission-boundaries-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json)
 - [`candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
-- [`candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json`](../candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json)
-- [`candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
