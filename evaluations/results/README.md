@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C316のGPT-6.1 Sol Low（2026-10-12）](#c316-sol-low-20261012)
 - [C316のSonnet 5.5 low（2026-10-12）](#c316-sonnet-low-20261012)
 - [C313・C314のGPT-6.1 Sol Low（2026-10-12）](#c313-c314-sol-low-20261012)
 - [C313・C314のSonnet 5.5 low（2026-10-12）](#c313-c314-sonnet-low-20261012)
@@ -200,10 +201,15 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
 
+<a id="c316-sol-low-20261012"></a>
+## C316のGPT-6.1 Sol Low（2026-10-12）
+
+[計測記録](c316-sol61-low-standard14-n5_2026-10-12.md)、[診断の記録](c316-sol61-low-standard14-n5_2026-10-12-diagnostics.json)、[登録結果](7046a3cb60364af2a2b1760cf434a39f.json)、[analysis](c316-sol61-low-standard14-n5_2026-10-12-analysis.json)、[selection](c316-sol61-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c316-sol61-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c316-sol61-low-standard14-n5_2026-10-12-prepare-receipt.json)、[発行の記録](c316-sol61-low-standard14-n5_2026-10-12-dispatch-summary.json)、[C313との比較](c316-sol61-low-standard14-n5_2026-10-12-c313-comparison.json)。4点70件。C313比で費用−9.89%（幅より下）、経過時間−0.96%（幅の中）。300行を超えるファイルの全文取得は16回から0回。採用は未判断。
+
 <a id="c316-sonnet-low-20261012"></a>
 ## C316のSonnet 5.5 low（2026-10-12）
 
-[計測記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[診断の記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12-diagnostics.json)、[登録結果](4114f20d0e0540b186a9cfc240bc8fe5.json)、[analysis](c316-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c316-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c316-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C313との比較](c316-claude-sonnet55-low-standard14-n5_2026-10-12-c313-comparison.json)。4点70件。C313比で費用−7.64%（幅より下）、経過時間−0.08%（幅の中）。範囲を指定した読み取りが40から69へ増え、ツールの結果のバイトは−25%。Solは未計測。採用は未判断。
+[計測記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[診断の記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12-diagnostics.json)、[登録結果](4114f20d0e0540b186a9cfc240bc8fe5.json)、[analysis](c316-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c316-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c316-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c316-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C313との比較](c316-claude-sonnet55-low-standard14-n5_2026-10-12-c313-comparison.json)。4点70件。C313比で費用−7.64%（幅より下）、経過時間−0.08%（幅の中）。範囲を指定した読み取りが40から69へ増え、ツールの結果のバイトは−25%。採用は未判断。
 
 <a id="c313-c314-sol-low-20261012"></a>
 ## C313・C314のGPT-6.1 Sol Low（2026-10-12）
