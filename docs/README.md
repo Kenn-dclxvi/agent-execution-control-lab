@@ -716,7 +716,17 @@
 
 ## 5. 実務者向け解説
 
-研究成果を実務から読むためのExecution Controlシリーズ。研究アーティファクトや一次資料の代替ではない。
+研究成果を実務から読むための解説。研究アーティファクトや一次資料の代替ではない。
+
+**実務ガイド（3本、2026-10-12）**：[`practical-guide/`](practical-guide/README.md)。FreeとC316の4モデル比較を入口に、料金の理由、指示の書き方、人間の開発工程の移し方を、平易な語り口でまとめた新しいシリーズ。
+
+| 文書 | 役割 |
+|---|---|
+| [`practical-guide/01_why-instructions-change-your-bill.md`](practical-guide/01_why-instructions-change-your-bill.md) | **実務ガイド 1 / 3**。6行の指示で4つのAIすべての料金が1〜3割下がった計測と、料金を決めるのは作業中の一手の数と受け取る量だという説明。依頼と制御の違い。 |
+| [`practical-guide/02_how-to-write-instructions-that-cut-cost.md`](practical-guide/02_how-to-write-instructions-that-cut-cost.md) | **実務ガイド 2 / 3**。6行を1行ずつ取り上げ、止める無駄と書き方のねらい、書かないほうがよいこと、指示で扱えることの見分け方（AIが自分で選ぶ行動か）。 |
+| [`practical-guide/03_moving-human-processes-to-ai.md`](practical-guide/03_moving-human-processes-to-ai.md) | **実務ガイド 3 / 3**。担当ではなく守りたいことを残し、壊れ方から条件を考える。担当を分ける項目を外した経緯。 |
+
+**Execution Controlシリーズ（8本）**：実務ガイドより前に書いたシリーズ。01と02は2026-10-12に改版し、03〜08は旧系列の計測にもとづく当時の内容を保持する。
 
 | 文書 | 役割 |
 |---|---|
