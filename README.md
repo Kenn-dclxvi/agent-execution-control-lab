@@ -15,7 +15,7 @@ AIエージェントにソフトウェア開発を任せるにあたり、人間
 
 計測は評価対象リポジトリ（ターゲット）ごとのインスタンスとして管理します。プロンプト設計、比較、評価、反映可能な形へのまとめを実行している現行インスタンスはTHE-CAPTION（`the-caption`）です。インスタンス台帳は[`evaluations/targets/README.md`](evaluations/targets/README.md)を正本とします。
 
-## 直近の計測（2026-10-09〜10、新しい基準）
+## 直近の計測（2026-10-09〜12、新しい基準）
 
 THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（N=5、各条件70件）計測した結果です。2026-10-09から、次の条件で測る系列に切り替えました。それ以前の計測とは比較条件が違うため、数値を直接比べません。
 
@@ -70,6 +70,31 @@ C309はC301に対し、費用が−2.56%、経過時間が+1.18%で、どちら�
 ※ Codexの2モデルでは、FreeとC309を一本ずつ順に流したため、先に流した計測ほど最初のリクエストがキャッシュに乗らず、費用が高めに出ていました（外れたrunは、Astra Lowで先に流したFreeが36件・後のC309が13件、Sol Lowで先に流したC309が12件・後のFreeが7件）。Codexの共通の先頭部分のキャッシュは、別のrunや別のプロンプトの間でも共有されるためです。表の費用は、最初のリクエストと途中のリクエストの外れの分をキャッシュ読み取りの単価で数え直した想定です。実測（登録済みのKPI）の中央値は、Sol LowがFree 0.9344・C309 0.7809（−16.42%）、Astra LowがFree 6.1484・C309 4.1757（−32.09%）で、どちらもFreeの幅より下です。Claude Codeの2モデルは最初のリクエストがすべてキャッシュに乗っており、実測のままです（[診断の記録](evaluations/results/codex-first-request-cache-order-diagnostics_2026-10-10.json)）。
 
 記録：[Sol LowとSonnet low](evaluations/results/free-c301-c309-sol61-low-sonnet55-low-standard14-n5_2026-10-10.md)、[Opus low](evaluations/results/free-c309-claude-opus55-low-standard14-n5_2026-10-10.md)、[Astra Low](evaluations/results/free-c309-astra6-low-standard14-n5_2026-10-10.md)。
+
+### C309からC316への改良（2026-10-12）
+
+C309を基に、言葉を実際の使い方でも通じる形にそろえ、判断に頼る項目を外し、ファイルの読み方を一文で指定しました。条件は上と同じで、費用は単価表`api-standard-2026-10-10-r2`で数えています（Sol LowとSonnet lowの単価は`api-standard-2026-10-09`と同じです）。費用は実測のままで、キャッシュの外れを数え直していません。
+
+- **C312：** C309の言葉を汎用の言い方にそろえ、確認のコマンドを、終了コードと判断に必要な出力だけを受け取る形で実行するとした版（[設計記録](docs/candidate312-c311-validation-receive-form-design.md)）。
+- **C313：** C312から、方針を一つにまとめる項目を外した版。外しても変わらなかったため、これを基にしました（[設計記録](docs/candidate313-candidate314-c312-judgment-item-ablation-design.md)）。
+- **C316：** C313から担当を分ける項目を外し、「ファイルの本文は、判断に必要な範囲だけを受け取る形で読む。」を加えた版（[設計記録](docs/candidate315-candidate316-c313-file-read-receive-form-design.md)）。
+
+| モデル | プロンプト | 点数分布 | 費用中央値（USD） | 経過時間中央値（秒） | 生のトークン中央値（参考） |
+| --- | --- | --- | ---: | ---: | ---: |
+| GPT-6.1 Sol Low | C312 | 4点70件 | 0.7355（0.6587〜0.8095） | 550.75（534.54〜574.43） | 1,556,759 |
+| GPT-6.1 Sol Low | C313 | 4点70件 | 0.7126（0.6639〜0.7419） | 510.54（488.78〜512.61） | 1,610,439 |
+| GPT-6.1 Sol Low | C316 | 4点70件 | 0.6421（0.5709〜0.6803） | 505.65（505.30〜546.89） | 1,419,555 |
+| GPT-6.1 Sol Low | C316 累積N=20 | 4点280件 | 0.6310（0.5709〜0.6803） | 490.15（466.09〜593.78） | 1,435,830 |
+| Claude Code Sonnet 5.5 low | C312 | 4点70件 | 0.6757（0.6324〜0.6834） | 224.22（216.13〜230.33） | 780,484 |
+| Claude Code Sonnet 5.5 low | C313 | 4点70件 | 0.6730（0.6464〜0.6990） | 232.93（218.42〜237.14） | 800,153 |
+| Claude Code Sonnet 5.5 low | C316 | 4点70件 | 0.6216（0.6097〜0.6469） | 232.75（227.61〜239.83） | 804,438 |
+| Claude Code Sonnet 5.5 low | C316 累積N=20 | 4点280件 | 0.6246（0.5901〜0.6553） | 234.74（223.82〜248.98） | 787,721 |
+
+- C316は、C313（N=5）に対して、費用がSol Lowで−9.89%、Sonnet lowで−7.64%で、どちらもC313の5反復の幅より下でした。累積N=20の中央値でも、Sol Lowで−11.45%、Sonnet lowで−7.18%と、幅より下にとどまっています。経過時間は両セルとも幅の中でした。
+- Sol Lowで、300行を超えるファイルの本文を一度に全部読むことが、C313の16回から0回になりました（累積N=20の追加分でも0回）。両モデルとも、小さいファイルも範囲を指定して読むようになり、読み取りの回数は増えましたが、受け取る量が25〜27%減り、費用が下がりました。
+- Sol LowのC312は、最初のリクエストがキャッシュに乗らなかったrunが9件あり、費用が高めに出ています（C313は1件、C316は2件）。
+
+記録：[C312のSol Low](evaluations/results/c312-sol61-low-standard14-n5_2026-10-12.md)、[C310〜C312のSonnet low](evaluations/results/c310-c312-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[C313・C314のSonnet low](evaluations/results/c313-c314-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[C313・C314のSol Low](evaluations/results/c313-c314-sol61-low-standard14-n5_2026-10-12.md)、[C316のSonnet low](evaluations/results/c316-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[C316のSol Low](evaluations/results/c316-sol61-low-standard14-n5_2026-10-12.md)、[C316の累積N=20](evaluations/results/c316-sonnet55-sol61-low-standard14-n20_2026-10-12.md)。
 
 ### 分かったこと
 

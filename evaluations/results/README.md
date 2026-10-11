@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C316の累積N=20（2026-10-12）](#c316-n20-20261012)
 - [C316のGPT-6.1 Sol Low（2026-10-12）](#c316-sol-low-20261012)
 - [C316のSonnet 5.5 low（2026-10-12）](#c316-sonnet-low-20261012)
 - [C313・C314のGPT-6.1 Sol Low（2026-10-12）](#c313-c314-sol-low-20261012)
@@ -200,6 +201,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c316-n20-20261012"></a>
+## C316の累積N=20（2026-10-12）
+
+[計測記録](c316-sonnet55-sol61-low-standard14-n20_2026-10-12.md)。Sonnet lowは[登録結果](d76222e17f09429cafd4e83bb8ccf9a2.json)、[analysis](c316-claude-sonnet55-low-standard14-n20_2026-10-12-analysis.json)、[selection](c316-claude-sonnet55-low-standard14-n20_2026-10-12-selection.json)、[追加分の品質監査](c316-claude-sonnet55-low-standard14-n20_2026-10-12-added-runs-quality-audit.json)、[発行前の記録](c316-claude-sonnet55-low-standard14-n20_2026-10-12-prepare-receipt.json)。Sol Lowは[登録結果](068ffa7341ca47d6b27e2579a3ecef2a.json)、[analysis](c316-sol61-low-standard14-n20_2026-10-12-analysis.json)、[selection](c316-sol61-low-standard14-n20_2026-10-12-selection.json)、[追加分の品質監査](c316-sol61-low-standard14-n20_2026-10-12-added-runs-quality-audit.json)、[発行前の記録](c316-sol61-low-standard14-n20_2026-10-12-prepare-receipt.json)。各セル4点280件。費用の中央値はSonnet low 0.6246、Sol Low 0.6310で、どちらもC313（N=5）の幅より下。採用は未判断。
 
 <a id="c316-sol-low-20261012"></a>
 ## C316のGPT-6.1 Sol Low（2026-10-12）
