@@ -2,6 +2,14 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json)
+- [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json)
+- [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json)
+- [`candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json)
+- [`candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json)
+- [`candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json)
+- [`candidate274-luna6-high-standard14-n5-cli0156-r1.json`](../candidate274-luna6-high-standard14-n5-cli0156-r1.json)
+- [`candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json`](../candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json)
 - [`candidate276-execution-control-luna6-high-standard14-n5-cli0156-r1.json`](../candidate276-execution-control-luna6-high-standard14-n5-cli0156-r1.json)
 - [`candidate276-execution-control-luna6-medium-standard14-n5-cli0156-r1.json`](../candidate276-execution-control-luna6-medium-standard14-n5-cli0156-r1.json)
 - [`candidate276-execution-control-sol6-low-standard14-n5-cli0156-r1.json`](../candidate276-execution-control-sol6-low-standard14-n5-cli0156-r1.json)
@@ -54,11 +62,3 @@
 - [`candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
-- [`candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v10-standard14-global-m24-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v11-standard14-global-m24-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json`](../candidate43-outcome-authority-boundary-v13-standard14-global-m24-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate43-outcome-authority-boundary-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate44-complete-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate49-explicit-delegation-control-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)

@@ -2,6 +2,14 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate134-syntactic-lexeme-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate134-syntactic-lexeme-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
+- [`candidate135-criterion-span-request-authority-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate135-criterion-span-request-authority-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
+- [`candidate136-effect-local-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate136-effect-local-change-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
+- [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json)
+- [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
+- [`candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n53-cli0146-r1.json`](../candidate137-pending-effect-validation-admission-v14-reasoning-medium-f04-global-m24-n53-cli0146-r1.json)
+- [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
+- [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n29-cli0146-r1.json)
 - [`candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate138-continuation-effect-change-handoff-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate139-single-target-continuation-handoff-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
 - [`candidate14-validation-authority-expanded12-global-m24-n5-r1.json`](../candidate14-validation-authority-expanded12-global-m24-n5-r1.json)
@@ -54,11 +62,3 @@
 - [`candidate15-ambiguity-boundaries-global-m10-n3-r1.json`](../candidate15-ambiguity-boundaries-global-m10-n3-r1.json)
 - [`candidate15-selected-role-control-input-expanded12-global-m24-n5-r1.json`](../candidate15-selected-role-control-input-expanded12-global-m24-n5-r1.json)
 - [`candidate150-required-outcome-bind-readable-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate150-required-outcome-bind-readable-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate151-evidence-consumer-boundary-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate151-evidence-consumer-boundary-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-a01-a02-f01-f02-f04-f07-global-m24-n5-cli0146-r1.json)
-- [`candidate152-four-decision-rules-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-f03-global-m24-n5-cli0146-r1.json)
-- [`candidate152-four-decision-rules-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json`](../candidate152-four-decision-rules-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json)
-- [`candidate156-five-prompt-conditions-readable-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate156-five-prompt-conditions-readable-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate157-focused-prechange-research-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json`](../candidate157-focused-prechange-research-readable-v14-reasoning-medium-f08-global-m24-n5-cli0146-r1.json)
-- [`candidate158-outcome-method-readable-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json`](../candidate158-outcome-method-readable-v14-reasoning-medium-a01-a02-global-m24-n5-cli0146-r1.json)
-- [`candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json`](../candidate159-change-start-readable-v14-reasoning-medium-f02-global-m24-n5-cli0146-r1.json)

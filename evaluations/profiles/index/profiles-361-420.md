@@ -2,6 +2,14 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate229-c147-direct-human-wait-permission-closure-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
+- [`candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json`](../candidate23-control-free-operation-boundary-expanded12-global-m24-n5-r1.json)
+- [`candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json`](../candidate230-reader-ai-plain-japanese-translation-v14-reasoning-medium-a02-f02-f03-m24-n5-cli0146-r1.json)
+- [`candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate231-compact-evidence-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
+- [`candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate232-compact-owner-admission-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
+- [`candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate233-owner-field-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
+- [`candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate235-observed-value-reread-exclusion-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
+- [`candidate236-taskspec-output-boundary-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate236-taskspec-output-boundary-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json`](../candidate237-taskspec-progress-suppression-v14-reasoning-medium-f02-m24-n5-cli0146-r1.json)
 - [`candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate238-independent-result-prerequisite-exclusion-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
 - [`candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json`](../candidate239-plain-result-dependency-boundary-v14-reasoning-medium-a02-m24-n5-cli0146-r1.json)
@@ -54,11 +62,3 @@
 - [`candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json`](../candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json)
 - [`candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json)
 - [`candidate274-astra-time-recording-standard14-low-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-low-m24-n5-cli0153-r1.json)
-- [`candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-max-m24-n5-cli0153-r1.json)
-- [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r1.json)
-- [`candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json`](../candidate274-astra-time-recording-standard14-medium-m24-n5-cli0153-r2.json)
-- [`candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-xhigh-m24-n5-cli0153-r1.json)
-- [`candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-six-case-astra-m24-n5-cli0153-r1.json)
-- [`candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json`](../candidate274-execution-boundary-core-v14-medium-standard14-astra-m24-n5-cli0153-r1.json)
-- [`candidate274-luna6-high-standard14-n5-cli0156-r1.json`](../candidate274-luna6-high-standard14-n5-cli0156-r1.json)
-- [`candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json`](../candidate274-sol6-time-recording-standard14-medium-m24-n5-cli0156-r1.json)
