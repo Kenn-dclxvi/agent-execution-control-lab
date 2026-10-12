@@ -1,6 +1,6 @@
 # 今後の使い方と発展方針
 
-このリポジトリは、プロンプト文面の良し悪しを感覚的に決める場所ではなく、AIエージェントの実行制御が成果品質、token、最終結果までの時間、実行経路へ与える影響を再現可能に測る実験基盤として使う。改善対象は文章量そのものではなく、worker起動、context継承、model再入、read、validation、停止、result bindingなどの実行上の判断点である。
+このリポジトリは、プロンプト文面の良し悪しを感覚的に決める場所ではなく、AIエージェントの実行制御が成果品質、費用、最終結果までの時間、実行経路へ与える影響を再現可能に測る実験基盤として使う。改善対象は文章量そのものではなく、worker起動、context継承、model再入、read、validation、停止、result bindingなどの実行上の判断点である。
 
 この文書は恒久的な方針を扱う。現在未完了の個別項目（label監査の再測定、`P3`削除candidate、A01 variation、未解決riskなど）は[`research-backlog.md`](research-backlog.md)へ集約する。
 
@@ -11,7 +11,7 @@
 3. 既存のTaskSpec、repository authority、repository stateでは防げない理由と、残す最短正常経路を定義する。
 4. 一つのcandidateで一つのpredicateだけを追加、置換、削除する。prompt変更と評価条件変更を同じ比較単位へ混ぜない。
 5. まず対象control pathのtargeted試験を行い、成果品質と狙った実行経路の変化を確認する。成立した場合だけ標準評価と継続反復へ進む。
-6. 3 KPIの`quality_score`、all-agent `total_tokens`、`elapsed_seconds`を保存する。tool call、model step、worker routing、context継承、失敗traceはdiagnosticとして確認し、KPIを増やさない。
+6. 3 KPIの`quality_score`、`cost_usd`（all-agentの使用量を版を固定した単価表で米ドルに換算した値）、`elapsed_seconds`を保存する。all-agent `total_tokens`は参考値として記録し、成否には使わない（2026-10-09改訂、[判定基準r2](shared-instruction-evaluation-criteria-r2.md)）。tool call、model step、worker routing、context継承、失敗traceはdiagnosticとして確認し、KPIを増やさない。
 7. 評価結果、採用、release、本体反映を別のgateとして記録する。評価基盤はwinnerまたは採用可否を出さない。
 
 ### 評価setの役割と育て方
