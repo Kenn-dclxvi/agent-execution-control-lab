@@ -33,7 +33,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `compact-repository-control` | `namespaced` | public | 可 | [`compact-repository-control/target-r3.json`](compact-repository-control/target-r3.json) | [実コードA01のFree独立二回](compact-repository-control/results/free-sol61-low-latent-mode-code-n2_2026-10-01.md)は2 / 2件が0点、測定成立。旧20件の採点不備は留保 |
 | `standard14-dedicated-control` | `namespaced` | public | 未確認 | [`standard14-dedicated-control/target.json`](standard14-dedicated-control/target.json) | [専用素材](standard14-dedicated-control/README.md)の旧新各84件を保存。[全体計画第2版](../../docs/standard14-dedicated-evaluation-plan-r2.md)で現行系列は代替不認定として保存。履歴修正の自動実装を取り下げ、難しさ・低コスト認定は未成立 |
-| `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行インスタンス |
+| `the-caption` | `legacy_root` | private | 不可 | [`the-caption/target.json`](the-caption/target.json) | 既存計測系列。実行可能な現行インスタンス。2026-10-12から本体へのリリース反映を休止（下記） |
 | `click` | `namespaced` | public | 可 | [`click/target.json`](click/target.json) | Bundle A Std14とCandidate125水平適用N=5完了。採用は未実施 |
 | `agent-execution-control-lab` | `namespaced` | public | 可 | [`agent-execution-control-lab/target.json`](agent-execution-control-lab/target.json) | PRレビュー測定系列。機能仕様r1固定、Core Baseline未qualification、正式result 0件 |
 | `portable-instruction-semantic-conformance` | `namespaced` | public | 可 | [`portable-instruction-semantic-conformance/target.json`](portable-instruction-semantic-conformance/target.json) | control-freeで測定成立。portable full-agent N=1は14 / 14 valid、7 / 14 score 4でquality停止し、C147 referenceは未発行 |
@@ -41,6 +41,8 @@
 | `general-chat-response-control` | `namespaced` | public | 可 | [`general-chat-response-control/target.json`](general-chat-response-control/target.json) | 一般チャット8 Caseの局所評価は通過。C147チャットcoverage未完了、統合Candidate未作成、総合評価未開始、採用資格なし |
 
 `the-caption`のvisibilityは、計測が固定した移行前treeの可視性を指す。2026-08-01〜08-03の移行で公開された[`Kenn-dclxvi/the-caption`](https://github.com/Kenn-dclxvi/the-caption)は履歴を切り出し直しており、このインスタンスが固定するcommit / treeを含まない。したがって公開版は既存インスタンスの現在状態ではなく、`click`と同格の別インスタンスとして登録する。登録時期はrelease計測が必要になった時点とし、それまでこの表へ追加しない。時間境界は[`docs/repository-overview.md`](../../docs/repository-overview.md)の「対象リポジトリの公開移行」を正本とする。
+
+`the-caption`の本体（THE-CAPTIONリポジトリ）へのリリース反映（runtime projection）は、2026-10-12の利用者の判断で休止している。最新のC316は、[リリース記録](../../prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)で`released` / `approved`とし、本体へは`not_projected`のまま、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いている。今後のCandidateも、評価やリリースの記録までにとどめ、本体へのPRや反映は提案・準備しない。THE-CAPTIONのプロジェクト指示で問題が出た場合だけ、反映を検討する。計測系列としての`the-caption`インスタンスは、この休止に関係なく引き続き使う。
 
 `click`（`pallets/click`、BSD-3-Clause）はターゲット選定と14項目coverageを[`docs/public-target-selection-phase0.md`](../../docs/public-target-selection-phase0.md)で固定したpublicインスタンスである。Bundle AのStd14 baselineは[`click Std14 result`](click/results/click-control-free-standard14-n5_2026-07-26.md)を一次resultとする。後続アーティファクトの所在は[`click/`](click/)配下の各索引を参照する。
 
