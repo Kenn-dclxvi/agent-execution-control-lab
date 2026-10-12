@@ -48,7 +48,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 - Codexの2モデルでは、共通の先頭部分のキャッシュが別のrunの間でも共有されるため、計測の始めのrunで最初のリクエストがキャッシュに乗らないことがあります。乗らなかったrunは、Astra LowでFree 36件・C316 34件（どちらも単独で最初に流した計測）、Sol LowでFree 7件・C316 2件でした。費用は実測のままです（[診断の記録](evaluations/results/codex-first-request-cache-order-diagnostics_2026-10-10.json)）。
 - 費用はモデルごとに単価が違うため、モデル間の金額の大小はモデルの優劣を示しません。
 - 経過時間のうちモデルの応答時間は計測の時間帯で揺れるため、時間差をプロンプトだけの効果とは断定しません。
-- 固定STD14内の観測であり、採用・本体反映は実施していません。
+- 固定STD14内の観測です。C316は2026-10-12にリリースし、承認しました。THE-CAPTION本体へは反映していません（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。
 
 記録：[4モデルの比較](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)。C316に至る経過（C301〜C316）は[results索引](evaluations/results/README.md)と[docs索引](docs/README.md)にあります。
 
@@ -66,7 +66,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 2026-10-08までの旧系列（全エージェント合算トークンを指標とした計測）では、人間の組織を模した出発点（Baseline）からCandidate147までに、不要なワーカー起動の抑制、結論が変わらない場面の再判断の停止、検証の一括化によってトークンを約9割減らしました。その要点は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)にあります。
 
-構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は計測した段階で、採用・本体反映はしていません。
+構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は、2026-10-12にリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いています（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。
 
 | 知りたいこと | 正本 |
 | --- | --- |
