@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C317のSonnet 5.5 low（2026-10-12）](#c317-sonnet-low-20261012)
 - [FreeとC316の4モデル比較（2026-10-12）](#free-c316-four-models-20261012)
 - [C316の累積N=20（2026-10-12）](#c316-n20-20261012)
 - [C316のGPT-6.1 Sol Low（2026-10-12）](#c316-sol-low-20261012)
@@ -202,6 +203,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c317-sonnet-low-20261012"></a>
+## C317のSonnet 5.5 low（2026-10-12）
+
+[計測記録](c317-claude-sonnet55-low-standard14-n5_2026-10-12.md)、[診断の記録](c317-claude-sonnet55-low-standard14-n5_2026-10-12-diagnostics.json)、[登録結果](fa9ebeeae3f74d5bb28cfd6dc118aeb8.json)、[analysis](c317-claude-sonnet55-low-standard14-n5_2026-10-12-analysis.json)、[selection](c317-claude-sonnet55-low-standard14-n5_2026-10-12-selection.json)、[品質監査](c317-claude-sonnet55-low-standard14-n5_2026-10-12-quality-audit.json)、[発行前の記録](c317-claude-sonnet55-low-standard14-n5_2026-10-12-prepare-receipt.json)、[C316との比較](c317-claude-sonnet55-low-standard14-n5_2026-10-12-c316-comparison.json)。4点70件。C316比で費用+0.18%（幅の中）。報告の字数は11,425字から11,176字で、狙った短縮は起きなかった。採用は未判断。
 
 <a id="free-c316-four-models-20261012"></a>
 ## FreeとC316の4モデル比較（2026-10-12）
