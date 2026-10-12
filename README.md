@@ -82,6 +82,31 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 | 全バンドルの現在状態と識別子 | [`prompts/candidates/README.md`](prompts/candidates/README.md) |
 | release / approval / projection状態と投影の実変更範囲 | [`prompts/releases/README.md`](prompts/releases/README.md) |
 
+## モデルが更新されたときの評価
+
+STD14は、課題、作業の材料、採点を固定したまま、モデルだけを差し替えて測れます。新しいモデルが出たときにこの試験を流すと、次の三つを確かめられます。
+
+- **既知の弱点が新しいモデルでも出るか。** 結果が決まる前に作業へ進むA01の失敗は、これまで測ったどのモデルでも、指示を空にしたFreeで出ています。出る件数はモデルと推論設定で変わります。
+- **新しい弱点が出ていないか。** GPT-6 Luna mediumでは実装と検証を完了しない失点、Claude Code Opus 5.5 mediumでは確認すべき論点を確認しない失点が、A01以外で現れました。
+- **今の指示がそのモデルでも効くか。** C147はGPT系のモデルでは品質を満点まで戻しましたが、Opus 5.5では戻りませんでした。これが、特定のモデルの流れに合わせない汎用指示（C316）へ進むきっかけになりました。
+
+これまでのモデル別の結果は次のとおりです。数字は各条件70件のうち4点だった件数です。CLIの版、採点契約の版、計測の基準は時期によって違うため、比べるのは同じ行の中だけにしてください。
+
+| 時期 | モデル（推論設定） | Free | 指示あり | 分かったこと |
+| --- | --- | --- | --- | --- |
+| 2026-07〜08 | GPT-5.6 Sol（high・medium） | 65（A01で0点5件） | Baseline 62〜65、C147 70 | 組織を模したBaselineは品質を上げず、C147で満点になった。mediumのN=100でもFree 1,300 / 1,400件、C147 1,400 / 1,400件（[記録](evaluations/results/control-free-candidate147-v14-medium-standard14-atomic-n100-cli0146_2026-08-03.md)） |
+| 2026-09-05〜08 | GPT-6 Astra（low・medium・high） | low 70、medium 68、high 66（失点はすべてA01） | C147・C274 70（medium） | 推論を強くするほどA01で先へ進んでしまう件数が増えた（[Free](evaluations/results/control-free-astra-low-medium-high-standard14-n5_2026-09-08.md)、[指示あり](evaluations/results/candidate274-c147-astra-medium-standard14-n5_2026-09-05.md)） |
+| 2026-09-24 | GPT-6 Sol（low・medium・high） | 各65（A01で0点5件） | — | 推論設定によらず、A01だけで失点した（[記録](evaluations/results/control-free-sol6-low-medium-high-standard14-n5-cli0156_2026-09-24.md)） |
+| 2026-09-24 | GPT-6 Luna（medium・high・xhigh） | medium 62、high・xhigh 65 | C147・C274 70（high） | mediumでは、A01に加えてF02・F07で実装や検証を完了しない失点が出た（[Free](evaluations/results/control-free-luna6-medium-high-xhigh-standard14-n5-cli0156_2026-09-24.md)、[指示あり](evaluations/results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md)） |
+| 2026-09-30 | GPT-6.1 Sol（low・medium） | 各65（A01で0点5件） | C147 low 70・medium 69 | GPT系では、C147がモデルの更新後も効き続けた（[記録](evaluations/results/sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30.md)） |
+| 2026-10-01 | Claude Code Opus 5.5（medium） | 67 | C147 67、C276 67 | C147を入れても品質が上がらず、確認すべき論点を確認しない失点（F05）はむしろ増えた（[記録](evaluations/results/claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)） |
+| 2026-10-06 | GPT-6 Astra（low） | 65 | C276 70 | 9月には満点だったlowのFreeでも失点が出た（[記録](evaluations/results/astra6-c276-free-low-standard14-new-n5_2026-10-06.md)） |
+| 2026-10-08〜10 | Claude Code Sonnet 5.5（low） | 65（A01で0点5件） | C280 70、C301・C309 70 | Freeで、A01の失点が測ったモデルの中で最も多かった。結果が決まるまで作業を始めない規則を入れると満点になった（[C280](evaluations/results/claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[Free](evaluations/results/free-c301-c309-sol61-low-sonnet55-low-standard14-n5_2026-10-10.md)） |
+| 2026-10-08 | Claude Code Haiku 5.5（low） | 未計測 | C280 69、C291 69 | 同じ規則を入れても、A01で0点が1件ずつ残った。同じ指示のOpus 5.5とSonnet 5.5では起きていない（[記録](evaluations/results/claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08.md)） |
+| 2026-10-10〜12 | GPT-6.1 Sol、GPT-6 Astra、Claude Code Sonnet 5.5、Opus 5.5（いずれもlow） | 65〜69 | C316 すべて70 | 新しい基準で、汎用指示C316が4つのモデルすべてで満点になった。FreeのA01の失点はSonnet 5.5で最も多かった（[記録](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)） |
+
+モデルが変わっても、Freeの失点の中心はA01でした。そのため、結果が決まるまで作業を始めないという判断は、モデルの更新を越えて残す必要がある制御だと言えます。一方、ほかの失点はモデルごとに現れ方が違います。新しいモデルでは、まずこの試験で、Freeと今の指示の両方を測り直すのがよいと考えています。
+
 ## 構成
 
 | パス | 役割 |
