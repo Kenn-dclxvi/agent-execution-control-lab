@@ -49,6 +49,7 @@
 - [`c313-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json`](../c313-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json)
 - [`c314-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261012-r1.json`](../c314-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261012-r1.json)
 - [`c314-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json`](../c314-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json)
+- [`c316-astra6-low-standard14-n20-cli0159-isolated-shellenv-20261013-r1.json`](../c316-astra6-low-standard14-n20-cli0159-isolated-shellenv-20261013-r1.json)
 - [`c316-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json`](../c316-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261012-r1.json)
 - [`c316-claude-opus55-low-standard14-n5-cli2288-shellenv-20261012-r1.json`](../c316-claude-opus55-low-standard14-n5-cli2288-shellenv-20261012-r1.json)
 - [`c316-claude-sonnet55-low-standard14-n20-cli2288-shellenv-20261012-r1.json`](../c316-claude-sonnet55-low-standard14-n20-cli2288-shellenv-20261012-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json`](../candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json)
 - [`candidate100-outcome-source-closure-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate100-outcome-source-closure-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
 - [`candidate101-additional-investigation-trigger-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate101-additional-investigation-trigger-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
-- [`candidate102-prechange-evidence-freeze-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json`](../candidate102-prechange-evidence-freeze-v14-reasoning-medium-f07-canonical-global-m24-n5-cli0146-r1.json)
