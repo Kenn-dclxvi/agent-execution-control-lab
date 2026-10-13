@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C316の累積N=20、3モデルのケース別分析（2026-10-13）](#c316-n20-per-case-20261013)
 - [C316のGPT-6 Astra Low 累積N=20（2026-10-13）](#c316-astra-n20-20261013)
 - [C317のSonnet 5.5 low（2026-10-12）](#c317-sonnet-low-20261012)
 - [FreeとC316の4モデル比較（2026-10-12）](#free-c316-four-models-20261012)
@@ -204,6 +205,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c316-n20-per-case-20261013"></a>
+## C316の累積N=20、3モデルのケース別分析（2026-10-13）
+
+[計測記録](c316-three-models-n20-per-case_2026-10-13.md)、[診断の記録](c316-three-models-n20-per-case_2026-10-13-diagnostics.json)。Sol Low・Astra Low・Sonnet lowのFree（N=5）とC316（累積N=20）を14ケースごとに比べた。新しい計測はない。A01はどのモデルでも費用が約−76〜79%で、Sonnet lowの削減の約8割を占める。F05の2ケースの増加（+7〜20%）は指示文の固定の負担、Sol LowのF10の2ケースの増加（+11〜14%）は確認を二段に分ける流れによる往復の増加だった。採用は未判断。
 
 <a id="c316-astra-n20-20261013"></a>
 ## C316のGPT-6 Astra Low 累積N=20（2026-10-13）
