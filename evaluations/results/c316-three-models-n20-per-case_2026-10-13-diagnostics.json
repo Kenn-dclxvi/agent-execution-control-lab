@@ -1,0 +1,1624 @@
+{
+  "schema_version": "the-caption-prompt.c316-n20-per-case-diagnostics/v1",
+  "price_table": "evaluations/price-tables/api-standard-2026-10-10-r2.json",
+  "note": "Free N=5とC316累積N=20のケース別比較と、短いケースの増加の診断。合否に使わない。",
+  "cells": {
+    "gpt-6.1-sol-low": {
+      "free_selection": "free-sol61-low-standard14-n5_2026-10-10-selection-effective-v1.json",
+      "c316_selection": "c316-sol61-low-standard14-n20_2026-10-12-selection.json",
+      "cases": {
+        "TC-A01-LATENT-MODE-POLICY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 4,
+              "0": 1
+            },
+            "cost_usd_median": 0.055488,
+            "elapsed_seconds_median": 33.341223,
+            "uncached_input_median": 19991,
+            "cache_read_median": 98304,
+            "cache_write_median": 0,
+            "output_median": 557,
+            "cost_usd_min": 0.051204,
+            "cost_usd_max": 0.095263,
+            "elapsed_seconds_min": 23.25,
+            "elapsed_seconds_max": 41.5
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.013185,
+            "elapsed_seconds_median": 14.221147,
+            "uncached_input_median": 3947.5,
+            "cache_read_median": 27904.0,
+            "cache_write_median": 0.0,
+            "output_median": 241.5,
+            "cost_usd_min": 0.012808,
+            "cost_usd_max": 0.03918,
+            "elapsed_seconds_min": 11.84,
+            "elapsed_seconds_max": 16.7
+          },
+          "cost_change_percent": -76.24,
+          "elapsed_change_percent": -57.35
+        },
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.089708,
+            "elapsed_seconds_median": 74.458834,
+            "uncached_input_median": 23031,
+            "cache_read_median": 188544,
+            "cache_write_median": 0,
+            "output_median": 2463,
+            "cost_usd_min": 0.07171,
+            "cost_usd_max": 0.102573,
+            "elapsed_seconds_min": 60.02,
+            "elapsed_seconds_max": 84.11
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.051377,
+            "elapsed_seconds_median": 36.884239,
+            "uncached_input_median": 16075.0,
+            "cache_read_median": 94016.0,
+            "cache_write_median": 0.0,
+            "output_median": 907.5,
+            "cost_usd_min": 0.040677,
+            "cost_usd_max": 0.091658,
+            "elapsed_seconds_min": 32.58,
+            "elapsed_seconds_max": 42.12
+          },
+          "cost_change_percent": -42.73,
+          "elapsed_change_percent": -50.46
+        },
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.088795,
+            "elapsed_seconds_median": 59.833381,
+            "uncached_input_median": 26253,
+            "cache_read_median": 180736,
+            "cache_write_median": 0,
+            "output_median": 1563,
+            "cost_usd_min": 0.082502,
+            "cost_usd_max": 0.108908,
+            "elapsed_seconds_min": 57.66,
+            "elapsed_seconds_max": 66.24
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.060999,
+            "elapsed_seconds_median": 49.388925,
+            "uncached_input_median": 17802.5,
+            "cache_read_median": 116160.0,
+            "cache_write_median": 0.0,
+            "output_median": 1364.5,
+            "cost_usd_min": 0.055925,
+            "cost_usd_max": 0.069334,
+            "elapsed_seconds_min": 41.01,
+            "elapsed_seconds_max": 58.85
+          },
+          "cost_change_percent": -31.3,
+          "elapsed_change_percent": -17.46
+        },
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.1141,
+            "elapsed_seconds_median": 70.781444,
+            "uncached_input_median": 36300,
+            "cache_read_median": 213376,
+            "cache_write_median": 0,
+            "output_median": 1605,
+            "cost_usd_min": 0.07005,
+            "cost_usd_max": 0.138342,
+            "elapsed_seconds_min": 58.23,
+            "elapsed_seconds_max": 75.98
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.076125,
+            "elapsed_seconds_median": 57.383901,
+            "uncached_input_median": 22065.5,
+            "cache_read_median": 148544.0,
+            "cache_write_median": 0.0,
+            "output_median": 1538.0,
+            "cost_usd_min": 0.066426,
+            "cost_usd_max": 0.123875,
+            "elapsed_seconds_min": 49.72,
+            "elapsed_seconds_max": 82.21
+          },
+          "cost_change_percent": -33.28,
+          "elapsed_change_percent": -18.93
+        },
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.074402,
+            "elapsed_seconds_median": 55.121831,
+            "uncached_input_median": 23458,
+            "cache_read_median": 139392,
+            "cache_write_median": 0,
+            "output_median": 1307,
+            "cost_usd_min": 0.059998,
+            "cost_usd_max": 0.105291,
+            "elapsed_seconds_min": 48.67,
+            "elapsed_seconds_max": 58.49
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.050355,
+            "elapsed_seconds_median": 42.254461,
+            "uncached_input_median": 13994.5,
+            "cache_read_median": 102400.0,
+            "cache_write_median": 0.0,
+            "output_median": 1081.0,
+            "cost_usd_min": 0.041499,
+            "cost_usd_max": 0.09204,
+            "elapsed_seconds_min": 33.7,
+            "elapsed_seconds_max": 58.25
+          },
+          "cost_change_percent": -32.32,
+          "elapsed_change_percent": -23.34
+        },
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.075011,
+            "elapsed_seconds_median": 56.151152,
+            "uncached_input_median": 20681,
+            "cache_read_median": 243200,
+            "cache_write_median": 0,
+            "output_median": 1182,
+            "cost_usd_min": 0.053877,
+            "cost_usd_max": 0.086806,
+            "elapsed_seconds_min": 50.06,
+            "elapsed_seconds_max": 60.76
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.046609,
+            "elapsed_seconds_median": 43.019702,
+            "uncached_input_median": 11602.5,
+            "cache_read_median": 127872.0,
+            "cache_write_median": 0.0,
+            "output_median": 1036.0,
+            "cost_usd_min": 0.039274,
+            "cost_usd_max": 0.086198,
+            "elapsed_seconds_min": 34.26,
+            "elapsed_seconds_max": 140.92
+          },
+          "cost_change_percent": -37.86,
+          "elapsed_change_percent": -23.39
+        },
+        "TC-F05-CLARIFY-UNITS-MODE": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.012475,
+            "elapsed_seconds_median": 13.823773,
+            "uncached_input_median": 3746,
+            "cache_read_median": 27648,
+            "cache_write_median": 0,
+            "output_median": 227,
+            "cost_usd_min": 0.00664,
+            "cost_usd_max": 0.012867,
+            "elapsed_seconds_min": 12.1,
+            "elapsed_seconds_max": 19.89,
+            "requests_median": 2,
+            "requests_total": 10,
+            "first_request_input_tokens_median": 15548
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.014354,
+            "elapsed_seconds_median": 13.593128,
+            "uncached_input_median": 4357.0,
+            "cache_read_median": 28160.0,
+            "cache_write_median": 0.0,
+            "output_median": 267.0,
+            "cost_usd_min": 0.013482,
+            "cost_usd_max": 0.021032,
+            "elapsed_seconds_min": 11.8,
+            "elapsed_seconds_max": 16.85,
+            "requests_median": 2.0,
+            "requests_total": 40,
+            "first_request_input_tokens_median": 16098.0
+          },
+          "cost_change_percent": 15.06,
+          "elapsed_change_percent": -1.67
+        },
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.012589,
+            "elapsed_seconds_median": 15.31153,
+            "uncached_input_median": 3774,
+            "cache_read_median": 27648,
+            "cache_write_median": 0,
+            "output_median": 232,
+            "cost_usd_min": 0.012493,
+            "cost_usd_max": 0.017928,
+            "elapsed_seconds_min": 12.57,
+            "elapsed_seconds_max": 21.82,
+            "requests_median": 2,
+            "requests_total": 11,
+            "first_request_input_tokens_median": 15549
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.014848,
+            "elapsed_seconds_median": 14.429864,
+            "uncached_input_median": 4444.0,
+            "cache_read_median": 28224.0,
+            "cache_write_median": 0.0,
+            "output_median": 283.5,
+            "cost_usd_min": 0.013627,
+            "cost_usd_max": 0.044857,
+            "elapsed_seconds_min": 12.41,
+            "elapsed_seconds_max": 24.62,
+            "requests_median": 2.0,
+            "requests_total": 42,
+            "first_request_input_tokens_median": 16122.0
+          },
+          "cost_change_percent": 17.94,
+          "elapsed_change_percent": -5.76
+        },
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.068924,
+            "elapsed_seconds_median": 50.395677,
+            "uncached_input_median": 19206,
+            "cache_read_median": 164224,
+            "cache_write_median": 0,
+            "output_median": 1195,
+            "cost_usd_min": 0.057663,
+            "cost_usd_max": 0.095356,
+            "elapsed_seconds_min": 43.38,
+            "elapsed_seconds_max": 60.75
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.054638,
+            "elapsed_seconds_median": 39.663733,
+            "uncached_input_median": 17762.5,
+            "cache_read_median": 90880.0,
+            "cache_write_median": 0.0,
+            "output_median": 932.5,
+            "cost_usd_min": 0.042121,
+            "cost_usd_max": 0.108285,
+            "elapsed_seconds_min": 36.17,
+            "elapsed_seconds_max": 54.19
+          },
+          "cost_change_percent": -20.73,
+          "elapsed_change_percent": -21.3
+        },
+        "TC-F07-CANONICAL-V4-RUNNER": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.068436,
+            "elapsed_seconds_median": 48.498708,
+            "uncached_input_median": 23909,
+            "cache_read_median": 145152,
+            "cache_write_median": 0,
+            "output_median": 1047,
+            "cost_usd_min": 0.051696,
+            "cost_usd_max": 0.116359,
+            "elapsed_seconds_min": 43.0,
+            "elapsed_seconds_max": 55.97
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.048342,
+            "elapsed_seconds_median": 36.810356,
+            "uncached_input_median": 14063.0,
+            "cache_read_median": 105856.0,
+            "cache_write_median": 0.0,
+            "output_median": 827.0,
+            "cost_usd_min": 0.03626,
+            "cost_usd_max": 0.070474,
+            "elapsed_seconds_min": 30.02,
+            "elapsed_seconds_max": 47.53
+          },
+          "cost_change_percent": -29.36,
+          "elapsed_change_percent": -24.1
+        },
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.073609,
+            "elapsed_seconds_median": 44.471115,
+            "uncached_input_median": 25451,
+            "cache_read_median": 139776,
+            "cache_write_median": 0,
+            "output_median": 943,
+            "cost_usd_min": 0.048225,
+            "cost_usd_max": 0.09288,
+            "elapsed_seconds_min": 43.11,
+            "elapsed_seconds_max": 47.7
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.036964,
+            "elapsed_seconds_median": 32.199026,
+            "uncached_input_median": 10937.0,
+            "cache_read_median": 92288.0,
+            "cache_write_median": 0.0,
+            "output_median": 738.0,
+            "cost_usd_min": 0.027821,
+            "cost_usd_max": 0.043856,
+            "elapsed_seconds_min": 27.36,
+            "elapsed_seconds_max": 44.4
+          },
+          "cost_change_percent": -49.78,
+          "elapsed_change_percent": -27.6
+        },
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.093413,
+            "elapsed_seconds_median": 46.103331,
+            "uncached_input_median": 32038,
+            "cache_read_median": 220288,
+            "cache_write_median": 0,
+            "output_median": 976,
+            "cost_usd_min": 0.071587,
+            "cost_usd_max": 0.143299,
+            "elapsed_seconds_min": 44.33,
+            "elapsed_seconds_max": 50.92
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.04647,
+            "elapsed_seconds_median": 37.643828,
+            "uncached_input_median": 11094.0,
+            "cache_read_median": 105600.0,
+            "cache_write_median": 0.0,
+            "output_median": 979.5,
+            "cost_usd_min": 0.036118,
+            "cost_usd_max": 0.057977,
+            "elapsed_seconds_min": 30.86,
+            "elapsed_seconds_max": 44.69
+          },
+          "cost_change_percent": -50.25,
+          "elapsed_change_percent": -18.35
+        },
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.03259,
+            "elapsed_seconds_median": 35.67213,
+            "uncached_input_median": 8559,
+            "cache_read_median": 62464,
+            "cache_write_median": 0,
+            "output_median": 952,
+            "cost_usd_min": 0.032179,
+            "cost_usd_max": 0.054646,
+            "elapsed_seconds_min": 33.67,
+            "elapsed_seconds_max": 42.78,
+            "requests_median": 4,
+            "requests_total": 22,
+            "first_request_input_tokens_median": 15684,
+            "search_then_range_read_runs": 0,
+            "whole_file_read_runs": 5
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.036228,
+            "elapsed_seconds_median": 35.112972,
+            "uncached_input_median": 9112.5,
+            "cache_read_median": 77632.0,
+            "cache_write_median": 0.0,
+            "output_median": 1006.5,
+            "cost_usd_min": 0.032687,
+            "cost_usd_max": 0.047208,
+            "elapsed_seconds_min": 29.76,
+            "elapsed_seconds_max": 40.63,
+            "requests_median": 5.0,
+            "requests_total": 95,
+            "first_request_input_tokens_median": 16238.0,
+            "search_then_range_read_runs": 14,
+            "whole_file_read_runs": 9
+          },
+          "cost_change_percent": 11.16,
+          "elapsed_change_percent": -1.57
+        },
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.034519,
+            "elapsed_seconds_median": 31.532668,
+            "uncached_input_median": 9257,
+            "cache_read_median": 64256,
+            "cache_write_median": 0,
+            "output_median": 734,
+            "cost_usd_min": 0.031634,
+            "cost_usd_max": 0.046462,
+            "elapsed_seconds_min": 29.69,
+            "elapsed_seconds_max": 32.89,
+            "requests_median": 4,
+            "requests_total": 22,
+            "first_request_input_tokens_median": 15828,
+            "code_read_in_diff_request": 3,
+            "code_read_in_later_request": 2,
+            "no_code_read": 0
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.039254,
+            "elapsed_seconds_median": 32.052301,
+            "uncached_input_median": 11282.5,
+            "cache_read_median": 84608.0,
+            "cache_write_median": 0.0,
+            "output_median": 823.0,
+            "cost_usd_min": 0.034172,
+            "cost_usd_max": 0.059261,
+            "elapsed_seconds_min": 28.61,
+            "elapsed_seconds_max": 43.2,
+            "requests_median": 5.0,
+            "requests_total": 101,
+            "first_request_input_tokens_median": 16392.0,
+            "code_read_in_diff_request": 1,
+            "code_read_in_later_request": 19,
+            "no_code_read": 0
+          },
+          "cost_change_percent": 13.72,
+          "elapsed_change_percent": 1.65
+        }
+      }
+    },
+    "gpt-6-astra-low": {
+      "free_selection": "free-astra6-low-standard14-n5_2026-10-10-selection-effective-v1.json",
+      "c316_selection": "c316-astra6-low-standard14-n20_2026-10-13-selection.json",
+      "cases": {
+        "TC-A01-LATENT-MODE-POLICY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 3,
+              "0": 2
+            },
+            "cost_usd_median": 0.39227,
+            "elapsed_seconds_median": 25.311923,
+            "uncached_input_median": 22820,
+            "cache_read_median": 69120,
+            "cache_write_median": 0,
+            "output_median": 507,
+            "cost_usd_min": 0.27624,
+            "cost_usd_max": 0.542498,
+            "elapsed_seconds_min": 20.44,
+            "elapsed_seconds_max": 47.98
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.083516,
+            "elapsed_seconds_median": 16.509132,
+            "uncached_input_median": 4056.5,
+            "cache_read_median": 27776.0,
+            "cache_write_median": 0.0,
+            "output_median": 273.0,
+            "cost_usd_min": 0.051208,
+            "cost_usd_max": 0.196178,
+            "elapsed_seconds_min": 11.15,
+            "elapsed_seconds_max": 20.82
+          },
+          "cost_change_percent": -78.71,
+          "elapsed_change_percent": -34.78
+        },
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.924486,
+            "elapsed_seconds_median": 91.503783,
+            "uncached_input_median": 36279,
+            "cache_read_median": 279296,
+            "cache_write_median": 0,
+            "output_median": 2983,
+            "cost_usd_min": 0.41574,
+            "cost_usd_max": 1.15681,
+            "elapsed_seconds_min": 47.21,
+            "elapsed_seconds_max": 113.05
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.320194,
+            "elapsed_seconds_median": 40.955125,
+            "uncached_input_median": 19094.5,
+            "cache_read_median": 85696.0,
+            "cache_write_median": 0.0,
+            "output_median": 874.5,
+            "cost_usd_min": 0.238232,
+            "cost_usd_max": 0.46001,
+            "elapsed_seconds_min": 35.15,
+            "elapsed_seconds_max": 62.05
+          },
+          "cost_change_percent": -65.37,
+          "elapsed_change_percent": -55.24
+        },
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.65981,
+            "elapsed_seconds_median": 58.098323,
+            "uncached_input_median": 39966,
+            "cache_read_median": 179200,
+            "cache_write_median": 0,
+            "output_median": 1461,
+            "cost_usd_min": 0.532916,
+            "cost_usd_max": 0.784478,
+            "elapsed_seconds_min": 51.72,
+            "elapsed_seconds_max": 74.43
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.356844,
+            "elapsed_seconds_median": 50.77646,
+            "uncached_input_median": 17120.0,
+            "cache_read_median": 103424.0,
+            "cache_write_median": 0.0,
+            "output_median": 1236.5,
+            "cost_usd_min": 0.28228,
+            "cost_usd_max": 0.45957,
+            "elapsed_seconds_min": 35.29,
+            "elapsed_seconds_max": 67.54
+          },
+          "cost_change_percent": -45.92,
+          "elapsed_change_percent": -12.6
+        },
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.782664,
+            "elapsed_seconds_median": 70.899728,
+            "uncached_input_median": 44551,
+            "cache_read_median": 209280,
+            "cache_write_median": 0,
+            "output_median": 1641,
+            "cost_usd_min": 0.639682,
+            "cost_usd_max": 0.86809,
+            "elapsed_seconds_min": 58.32,
+            "elapsed_seconds_max": 76.27
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.498158,
+            "elapsed_seconds_median": 62.114051,
+            "uncached_input_median": 23968.0,
+            "cache_read_median": 121344.0,
+            "cache_write_median": 0.0,
+            "output_median": 1507.0,
+            "cost_usd_min": 0.397642,
+            "cost_usd_max": 0.762532,
+            "elapsed_seconds_min": 41.88,
+            "elapsed_seconds_max": 82.76
+          },
+          "cost_change_percent": -36.35,
+          "elapsed_change_percent": -12.39
+        },
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.470464,
+            "elapsed_seconds_median": 42.28742,
+            "uncached_input_median": 28620,
+            "cache_read_median": 141056,
+            "cache_write_median": 0,
+            "output_median": 893,
+            "cost_usd_min": 0.299138,
+            "cost_usd_max": 0.482986,
+            "elapsed_seconds_min": 37.62,
+            "elapsed_seconds_max": 50.0
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.296329,
+            "elapsed_seconds_median": 42.7231,
+            "uncached_input_median": 13793.5,
+            "cache_read_median": 104896.0,
+            "cache_write_median": 0.0,
+            "output_median": 831.5,
+            "cost_usd_min": 0.27003,
+            "cost_usd_max": 0.54817,
+            "elapsed_seconds_min": 33.89,
+            "elapsed_seconds_max": 60.77
+          },
+          "cost_change_percent": -37.01,
+          "elapsed_change_percent": 1.03
+        },
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.571848,
+            "elapsed_seconds_median": 55.132179,
+            "uncached_input_median": 31219,
+            "cache_read_median": 203392,
+            "cache_write_median": 0,
+            "output_median": 1283,
+            "cost_usd_min": 0.510572,
+            "cost_usd_max": 0.712646,
+            "elapsed_seconds_min": 49.37,
+            "elapsed_seconds_max": 67.53
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.403288,
+            "elapsed_seconds_median": 49.61619,
+            "uncached_input_median": 23520.0,
+            "cache_read_median": 116672.0,
+            "cache_write_median": 0.0,
+            "output_median": 1017.0,
+            "cost_usd_min": 0.295216,
+            "cost_usd_max": 0.599608,
+            "elapsed_seconds_min": 41.32,
+            "elapsed_seconds_max": 66.11
+          },
+          "cost_change_percent": -29.48,
+          "elapsed_change_percent": -10.01
+        },
+        "TC-F05-CLARIFY-UNITS-MODE": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.077668,
+            "elapsed_seconds_median": 15.241291,
+            "uncached_input_median": 3674,
+            "cache_read_median": 27648,
+            "cache_write_median": 0,
+            "output_median": 277,
+            "cost_usd_min": 0.076638,
+            "cost_usd_max": 0.18903,
+            "elapsed_seconds_min": 14.73,
+            "elapsed_seconds_max": 17.97,
+            "requests_median": 2,
+            "requests_total": 10,
+            "first_request_input_tokens_median": 15484
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.08321,
+            "elapsed_seconds_median": 15.770678,
+            "uncached_input_median": 4284.5,
+            "cache_read_median": 28160.0,
+            "cache_write_median": 0.0,
+            "output_median": 244.0,
+            "cost_usd_min": 0.0794,
+            "cost_usd_max": 0.193702,
+            "elapsed_seconds_min": 10.76,
+            "elapsed_seconds_max": 20.29,
+            "requests_median": 2.0,
+            "requests_total": 40,
+            "first_request_input_tokens_median": 16049.0
+          },
+          "cost_change_percent": 7.14,
+          "elapsed_change_percent": 3.47
+        },
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.078318,
+            "elapsed_seconds_median": 16.274464,
+            "uncached_input_median": 3717,
+            "cache_read_median": 27648,
+            "cache_write_median": 0,
+            "output_median": 251,
+            "cost_usd_min": 0.077008,
+            "cost_usd_max": 0.104706,
+            "elapsed_seconds_min": 15.32,
+            "elapsed_seconds_max": 18.51,
+            "requests_median": 2,
+            "requests_total": 10,
+            "first_request_input_tokens_median": 15512
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.085275,
+            "elapsed_seconds_median": 16.789374,
+            "uncached_input_median": 4362.5,
+            "cache_read_median": 28160.0,
+            "cache_write_median": 0.0,
+            "output_median": 266.5,
+            "cost_usd_min": 0.08224,
+            "cost_usd_max": 0.198762,
+            "elapsed_seconds_min": 12.56,
+            "elapsed_seconds_max": 20.56,
+            "requests_median": 2.0,
+            "requests_total": 40,
+            "first_request_input_tokens_median": 16058.0
+          },
+          "cost_change_percent": 8.88,
+          "elapsed_change_percent": 3.16
+        },
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.493308,
+            "elapsed_seconds_median": 49.963031,
+            "uncached_input_median": 29030,
+            "cache_read_median": 140544,
+            "cache_write_median": 0,
+            "output_median": 1129,
+            "cost_usd_min": 0.441304,
+            "cost_usd_max": 0.537486,
+            "elapsed_seconds_min": 44.51,
+            "elapsed_seconds_max": 59.34
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.288126,
+            "elapsed_seconds_median": 45.886951,
+            "uncached_input_median": 13009.0,
+            "cache_read_median": 109440.0,
+            "cache_write_median": 0.0,
+            "output_median": 927.0,
+            "cost_usd_min": 0.251294,
+            "cost_usd_max": 0.398246,
+            "elapsed_seconds_min": 35.71,
+            "elapsed_seconds_max": 71.78
+          },
+          "cost_change_percent": -41.59,
+          "elapsed_change_percent": -8.16
+        },
+        "TC-F07-CANONICAL-V4-RUNNER": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.404932,
+            "elapsed_seconds_median": 42.44383,
+            "uncached_input_median": 26149,
+            "cache_read_median": 106624,
+            "cache_write_median": 0,
+            "output_median": 977,
+            "cost_usd_min": 0.290794,
+            "cost_usd_max": 0.659228,
+            "elapsed_seconds_min": 39.98,
+            "elapsed_seconds_max": 49.96
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.371954,
+            "elapsed_seconds_median": 43.682096,
+            "uncached_input_median": 24023.5,
+            "cache_read_median": 115392.0,
+            "cache_write_median": 0.0,
+            "output_median": 795.0,
+            "cost_usd_min": 0.211306,
+            "cost_usd_max": 0.523584,
+            "elapsed_seconds_min": 30.71,
+            "elapsed_seconds_max": 57.56
+          },
+          "cost_change_percent": -8.14,
+          "elapsed_change_percent": 2.92
+        },
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.38862,
+            "elapsed_seconds_median": 49.319244,
+            "uncached_input_median": 20251,
+            "cache_read_median": 135808,
+            "cache_write_median": 0,
+            "output_median": 983,
+            "cost_usd_min": 0.246242,
+            "cost_usd_max": 0.402696,
+            "elapsed_seconds_min": 40.32,
+            "elapsed_seconds_max": 160.25
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 19,
+              "2": 1
+            },
+            "cost_usd_median": 0.217635,
+            "elapsed_seconds_median": 37.654726,
+            "uncached_input_median": 9486.5,
+            "cache_read_median": 74048.0,
+            "cache_write_median": 0.0,
+            "output_median": 829.0,
+            "cost_usd_min": 0.189112,
+            "cost_usd_max": 0.33485,
+            "elapsed_seconds_min": 27.29,
+            "elapsed_seconds_max": 51.85
+          },
+          "cost_change_percent": -44.0,
+          "elapsed_change_percent": -23.65
+        },
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.396028,
+            "elapsed_seconds_median": 38.564,
+            "uncached_input_median": 19508,
+            "cache_read_median": 147200,
+            "cache_write_median": 0,
+            "output_median": 830,
+            "cost_usd_min": 0.360364,
+            "cost_usd_max": 0.51249,
+            "elapsed_seconds_min": 37.25,
+            "elapsed_seconds_max": 41.89
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.295065,
+            "elapsed_seconds_median": 44.270876,
+            "uncached_input_median": 11543.0,
+            "cache_read_median": 112320.0,
+            "cache_write_median": 0.0,
+            "output_median": 957.0,
+            "cost_usd_min": 0.251654,
+            "cost_usd_max": 0.496086,
+            "elapsed_seconds_min": 33.51,
+            "elapsed_seconds_max": 57.96
+          },
+          "cost_change_percent": -25.49,
+          "elapsed_change_percent": 14.8
+        },
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.297018,
+            "elapsed_seconds_median": 34.726973,
+            "uncached_input_median": 20652,
+            "cache_read_median": 70400,
+            "cache_write_median": 0,
+            "output_median": 877,
+            "cost_usd_min": 0.212004,
+            "cost_usd_max": 0.32771,
+            "elapsed_seconds_min": 32.4,
+            "elapsed_seconds_max": 37.59,
+            "requests_median": 5,
+            "requests_total": 24,
+            "first_request_input_tokens_median": 15629,
+            "search_then_range_read_runs": 0,
+            "whole_file_read_runs": 5
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.218528,
+            "elapsed_seconds_median": 41.136509,
+            "uncached_input_median": 8715.0,
+            "cache_read_median": 80640.0,
+            "cache_write_median": 0.0,
+            "output_median": 1005.5,
+            "cost_usd_min": 0.197124,
+            "cost_usd_max": 0.324386,
+            "elapsed_seconds_min": 32.92,
+            "elapsed_seconds_max": 62.4,
+            "requests_median": 5.0,
+            "requests_total": 102,
+            "first_request_input_tokens_median": 16194.0,
+            "search_then_range_read_runs": 18,
+            "whole_file_read_runs": 1
+          },
+          "cost_change_percent": -26.43,
+          "elapsed_change_percent": 18.46
+        },
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.21479,
+            "elapsed_seconds_median": 34.587797,
+            "uncached_input_median": 9160,
+            "cache_read_median": 80768,
+            "cache_write_median": 0,
+            "output_median": 826,
+            "cost_usd_min": 0.209958,
+            "cost_usd_max": 0.32474,
+            "elapsed_seconds_min": 30.28,
+            "elapsed_seconds_max": 37.13,
+            "requests_median": 5,
+            "requests_total": 25,
+            "first_request_input_tokens_median": 15782,
+            "code_read_in_diff_request": 4,
+            "code_read_in_later_request": 1,
+            "no_code_read": 0
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.231016,
+            "elapsed_seconds_median": 35.566327,
+            "uncached_input_median": 10539.5,
+            "cache_read_median": 84352.0,
+            "cache_write_median": 0.0,
+            "output_median": 826.0,
+            "cost_usd_min": 0.222324,
+            "cost_usd_max": 0.340368,
+            "elapsed_seconds_min": 30.3,
+            "elapsed_seconds_max": 47.87,
+            "requests_median": 5.0,
+            "requests_total": 101,
+            "first_request_input_tokens_median": 16328.0,
+            "code_read_in_diff_request": 0,
+            "code_read_in_later_request": 20,
+            "no_code_read": 0
+          },
+          "cost_change_percent": 7.55,
+          "elapsed_change_percent": 2.83
+        }
+      }
+    },
+    "claude-sonnet-5-5-low": {
+      "free_selection": "free-claude-sonnet55-low-standard14-n5_2026-10-10-selection-effective-v1.json",
+      "c316_selection": "c316-claude-sonnet55-low-standard14-n20_2026-10-12-selection.json",
+      "cases": {
+        "TC-A01-LATENT-MODE-POLICY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "0": 5
+            },
+            "cost_usd_median": 0.080561,
+            "elapsed_seconds_median": 29.168409,
+            "uncached_input_median": 18,
+            "cache_read_median": 106430,
+            "cache_write_median": 11074,
+            "output_median": 2246,
+            "cost_usd_min": 0.057877,
+            "cost_usd_max": 0.082054,
+            "elapsed_seconds_min": 23.45,
+            "elapsed_seconds_max": 34.61
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.019022,
+            "elapsed_seconds_median": 8.395573,
+            "uncached_input_median": 4.0,
+            "cache_read_median": 15053.0,
+            "cache_write_median": 3146.0,
+            "output_median": 497.5,
+            "cost_usd_min": 0.01452,
+            "cost_usd_max": 0.020604,
+            "elapsed_seconds_min": 5.5,
+            "elapsed_seconds_max": 10.09
+          },
+          "cost_change_percent": -76.39,
+          "elapsed_change_percent": -71.22
+        },
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.046431,
+            "elapsed_seconds_median": 15.92195,
+            "uncached_input_median": 10,
+            "cache_read_median": 50954,
+            "cache_write_median": 7405,
+            "output_median": 1206,
+            "cost_usd_min": 0.043048,
+            "cost_usd_max": 0.048031,
+            "elapsed_seconds_min": 14.9,
+            "elapsed_seconds_max": 21.82
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.039363,
+            "elapsed_seconds_median": 17.086849,
+            "uncached_input_median": 10.0,
+            "cache_read_median": 46846.0,
+            "cache_write_median": 5885.5,
+            "output_median": 1078.0,
+            "cost_usd_min": 0.031699,
+            "cost_usd_max": 0.056729,
+            "elapsed_seconds_min": 12.58,
+            "elapsed_seconds_max": 23.04
+          },
+          "cost_change_percent": -15.22,
+          "elapsed_change_percent": 7.32
+        },
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.073468,
+            "elapsed_seconds_median": 20.47983,
+            "uncached_input_median": 12,
+            "cache_read_median": 77664,
+            "cache_write_median": 12388,
+            "output_median": 1777,
+            "cost_usd_min": 0.05654,
+            "cost_usd_max": 0.085885,
+            "elapsed_seconds_min": 16.81,
+            "elapsed_seconds_max": 27.57
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.055715,
+            "elapsed_seconds_median": 19.856871,
+            "uncached_input_median": 12.0,
+            "cache_read_median": 66839.0,
+            "cache_write_median": 8667.5,
+            "output_median": 1366.5,
+            "cost_usd_min": 0.047143,
+            "cost_usd_max": 0.074687,
+            "elapsed_seconds_min": 18.16,
+            "elapsed_seconds_max": 23.74
+          },
+          "cost_change_percent": -24.16,
+          "elapsed_change_percent": -3.04
+        },
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.05014,
+            "elapsed_seconds_median": 19.139198,
+            "uncached_input_median": 10,
+            "cache_read_median": 57695,
+            "cache_write_median": 7799,
+            "output_median": 1477,
+            "cost_usd_min": 0.048944,
+            "cost_usd_max": 0.061561,
+            "elapsed_seconds_min": 17.38,
+            "elapsed_seconds_max": 21.26
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.060567,
+            "elapsed_seconds_median": 20.671562,
+            "uncached_input_median": 12.0,
+            "cache_read_median": 68928.5,
+            "cache_write_median": 9574.0,
+            "output_median": 1487.0,
+            "cost_usd_min": 0.053776,
+            "cost_usd_max": 0.07887,
+            "elapsed_seconds_min": 18.14,
+            "elapsed_seconds_max": 24.2
+          },
+          "cost_change_percent": 20.8,
+          "elapsed_change_percent": 8.01
+        },
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.058487,
+            "elapsed_seconds_median": 20.828448,
+            "uncached_input_median": 12,
+            "cache_read_median": 67827,
+            "cache_write_median": 8868,
+            "output_median": 1542,
+            "cost_usd_min": 0.049652,
+            "cost_usd_max": 0.064907,
+            "elapsed_seconds_min": 19.85,
+            "elapsed_seconds_max": 21.4
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.052161,
+            "elapsed_seconds_median": 19.41566,
+            "uncached_input_median": 12.0,
+            "cache_read_median": 64592.0,
+            "cache_write_median": 8162.0,
+            "output_median": 1399.0,
+            "cost_usd_min": 0.046374,
+            "cost_usd_max": 0.058509,
+            "elapsed_seconds_min": 17.43,
+            "elapsed_seconds_max": 21.35
+          },
+          "cost_change_percent": -10.82,
+          "elapsed_change_percent": -6.78
+        },
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.053741,
+            "elapsed_seconds_median": 22.288976,
+            "uncached_input_median": 12,
+            "cache_read_median": 64633,
+            "cache_write_median": 7970,
+            "output_median": 1622,
+            "cost_usd_min": 0.052638,
+            "cost_usd_max": 0.0646,
+            "elapsed_seconds_min": 20.83,
+            "elapsed_seconds_max": 24.8
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.059083,
+            "elapsed_seconds_median": 22.48567,
+            "uncached_input_median": 12.0,
+            "cache_read_median": 68778.5,
+            "cache_write_median": 8600.5,
+            "output_median": 1683.0,
+            "cost_usd_min": 0.052631,
+            "cost_usd_max": 0.070195,
+            "elapsed_seconds_min": 20.09,
+            "elapsed_seconds_max": 29.35
+          },
+          "cost_change_percent": 9.94,
+          "elapsed_change_percent": 0.88
+        },
+        "TC-F05-CLARIFY-UNITS-MODE": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.019094,
+            "elapsed_seconds_median": 8.360853,
+            "uncached_input_median": 4,
+            "cache_read_median": 14784,
+            "cache_write_median": 3042,
+            "output_median": 544,
+            "cost_usd_min": 0.018398,
+            "cost_usd_max": 0.019738,
+            "elapsed_seconds_min": 8.01,
+            "elapsed_seconds_max": 8.87,
+            "requests_median": 2,
+            "tool_calls_median": 4
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.022896,
+            "elapsed_seconds_median": 8.419433,
+            "uncached_input_median": 4.0,
+            "cache_read_median": 15542.0,
+            "cache_write_median": 3857.5,
+            "output_median": 592.0,
+            "cost_usd_min": 0.02087,
+            "cost_usd_max": 0.025212,
+            "elapsed_seconds_min": 7.88,
+            "elapsed_seconds_max": 9.84,
+            "requests_median": 2.0,
+            "tool_calls_median": 4.0
+          },
+          "cost_change_percent": 19.91,
+          "elapsed_change_percent": 0.7
+        },
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.020243,
+            "elapsed_seconds_median": 8.902676,
+            "uncached_input_median": 4,
+            "cache_read_median": 14812,
+            "cache_write_median": 3065,
+            "output_median": 659,
+            "cost_usd_min": 0.019789,
+            "cost_usd_max": 0.020859,
+            "elapsed_seconds_min": 7.99,
+            "elapsed_seconds_max": 9.56,
+            "requests_median": 2,
+            "tool_calls_median": 4
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.02225,
+            "elapsed_seconds_median": 8.348695,
+            "uncached_input_median": 4.0,
+            "cache_read_median": 15569.0,
+            "cache_write_median": 3756.0,
+            "output_median": 549.5,
+            "cost_usd_min": 0.018937,
+            "cost_usd_max": 0.025199,
+            "elapsed_seconds_min": 7.19,
+            "elapsed_seconds_max": 8.87,
+            "requests_median": 2.0,
+            "tool_calls_median": 3.0
+          },
+          "cost_change_percent": 9.91,
+          "elapsed_change_percent": -6.22
+        },
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.067346,
+            "elapsed_seconds_median": 19.441775,
+            "uncached_input_median": 10,
+            "cache_read_median": 55075,
+            "cache_write_median": 10188,
+            "output_median": 1813,
+            "cost_usd_min": 0.058443,
+            "cost_usd_max": 0.071442,
+            "elapsed_seconds_min": 18.47,
+            "elapsed_seconds_max": 26.93
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.071397,
+            "elapsed_seconds_median": 26.131636,
+            "uncached_input_median": 14.0,
+            "cache_read_median": 83455.5,
+            "cache_write_median": 9506.0,
+            "output_median": 2312.5,
+            "cost_usd_min": 0.057495,
+            "cost_usd_max": 0.082247,
+            "elapsed_seconds_min": 21.65,
+            "elapsed_seconds_max": 36.52
+          },
+          "cost_change_percent": 6.02,
+          "elapsed_change_percent": 34.41
+        },
+        "TC-F07-CANONICAL-V4-RUNNER": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.052318,
+            "elapsed_seconds_median": 18.761866,
+            "uncached_input_median": 10,
+            "cache_read_median": 55656,
+            "cache_write_median": 8145,
+            "output_median": 1318,
+            "cost_usd_min": 0.04386,
+            "cost_usd_max": 0.057878,
+            "elapsed_seconds_min": 14.42,
+            "elapsed_seconds_max": 25.33
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.042172,
+            "elapsed_seconds_median": 18.523643,
+            "uncached_input_median": 12.0,
+            "cache_read_median": 62052.0,
+            "cache_write_median": 5880.5,
+            "output_median": 1153.5,
+            "cost_usd_min": 0.036111,
+            "cost_usd_max": 0.049781,
+            "elapsed_seconds_min": 16.1,
+            "elapsed_seconds_max": 22.06
+          },
+          "cost_change_percent": -19.39,
+          "elapsed_change_percent": -1.27
+        },
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.033799,
+            "elapsed_seconds_median": 12.463174,
+            "uncached_input_median": 8,
+            "cache_read_median": 34292,
+            "cache_write_median": 4280,
+            "output_median": 1324,
+            "cost_usd_min": 0.03221,
+            "cost_usd_max": 0.036447,
+            "elapsed_seconds_min": 11.86,
+            "elapsed_seconds_max": 15.25
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.036015,
+            "elapsed_seconds_median": 13.285797,
+            "uncached_input_median": 8.0,
+            "cache_read_median": 36537.5,
+            "cache_write_median": 5040.0,
+            "output_median": 1219.5,
+            "cost_usd_min": 0.035365,
+            "cost_usd_max": 0.038173,
+            "elapsed_seconds_min": 12.92,
+            "elapsed_seconds_max": 16.98
+          },
+          "cost_change_percent": 6.56,
+          "elapsed_change_percent": 6.6
+        },
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.047341,
+            "elapsed_seconds_median": 15.420464,
+            "uncached_input_median": 10,
+            "cache_read_median": 49469,
+            "cache_write_median": 6762,
+            "output_median": 1536,
+            "cost_usd_min": 0.04565,
+            "cost_usd_max": 0.048993,
+            "elapsed_seconds_min": 15.02,
+            "elapsed_seconds_max": 17.07
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.043394,
+            "elapsed_seconds_median": 14.715908,
+            "uncached_input_median": 10.0,
+            "cache_read_median": 48650.0,
+            "cache_write_median": 6203.5,
+            "output_median": 1357.0,
+            "cost_usd_min": 0.039493,
+            "cost_usd_max": 0.048843,
+            "elapsed_seconds_min": 13.04,
+            "elapsed_seconds_max": 21.77
+          },
+          "cost_change_percent": -8.34,
+          "elapsed_change_percent": -4.57
+        },
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.044272,
+            "elapsed_seconds_median": 17.591054,
+            "uncached_input_median": 8,
+            "cache_read_median": 34898,
+            "cache_write_median": 5434,
+            "output_median": 1903,
+            "cost_usd_min": 0.039068,
+            "cost_usd_max": 0.055019,
+            "elapsed_seconds_min": 15.42,
+            "elapsed_seconds_max": 17.99,
+            "requests_median": 4,
+            "tool_calls_median": 6
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.04412,
+            "elapsed_seconds_median": 17.592916,
+            "uncached_input_median": 8.0,
+            "cache_read_median": 37172.5,
+            "cache_write_median": 5775.5,
+            "output_median": 1701.0,
+            "cost_usd_min": 0.036531,
+            "cost_usd_max": 0.049028,
+            "elapsed_seconds_min": 13.53,
+            "elapsed_seconds_max": 19.41,
+            "requests_median": 4.0,
+            "tool_calls_median": 5.0
+          },
+          "cost_change_percent": -0.34,
+          "elapsed_change_percent": 0.01
+        },
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": {
+          "free": {
+            "n": 5,
+            "quality_score_counts": {
+              "4": 5
+            },
+            "cost_usd_median": 0.052787,
+            "elapsed_seconds_median": 18.560146,
+            "uncached_input_median": 10,
+            "cache_read_median": 48947,
+            "cache_write_median": 7321,
+            "output_median": 1932,
+            "cost_usd_min": 0.049644,
+            "cost_usd_max": 0.054787,
+            "elapsed_seconds_min": 17.52,
+            "elapsed_seconds_max": 20.87,
+            "requests_median": 5,
+            "tool_calls_median": 11
+          },
+          "c316": {
+            "n": 20,
+            "quality_score_counts": {
+              "4": 20
+            },
+            "cost_usd_median": 0.052936,
+            "elapsed_seconds_median": 18.203612,
+            "uncached_input_median": 10.0,
+            "cache_read_median": 50798.5,
+            "cache_write_median": 7729.5,
+            "output_median": 1717.5,
+            "cost_usd_min": 0.04195,
+            "cost_usd_max": 0.062071,
+            "elapsed_seconds_min": 14.62,
+            "elapsed_seconds_max": 21.84,
+            "requests_median": 5.0,
+            "tool_calls_median": 7.5
+          },
+          "cost_change_percent": 0.28,
+          "elapsed_change_percent": -1.92
+        }
+      }
+    }
+  }
+}
