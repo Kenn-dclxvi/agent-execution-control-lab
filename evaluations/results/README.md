@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C316のGPT-6 Astra Low 累積N=20（2026-10-13）](#c316-astra-n20-20261013)
 - [C317のSonnet 5.5 low（2026-10-12）](#c317-sonnet-low-20261012)
 - [FreeとC316の4モデル比較（2026-10-12）](#free-c316-four-models-20261012)
 - [C316の累積N=20（2026-10-12）](#c316-n20-20261012)
@@ -203,6 +204,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c316-astra-n20-20261013"></a>
+## C316のGPT-6 Astra Low 累積N=20（2026-10-13）
+
+[計測記録](c316-astra6-low-standard14-n20_2026-10-13.md)、[登録結果](4a4f945c7f2e4517b80f225971ac0afb.json)、[analysis](c316-astra6-low-standard14-n20_2026-10-13-analysis.json)、[selection](c316-astra6-low-standard14-n20_2026-10-13-selection.json)、[追加分の品質監査](c316-astra6-low-standard14-n20_2026-10-13-added-runs-quality-audit.json)、[発行前の記録](c316-astra6-low-standard14-n20_2026-10-13-prepare-receipt.json)。累積280件で4点279件・2点1件（F07の反復12、編集ツールへ誤った絶対パスを渡して未完了で停止）。費用の中央値3.8695でFree（N=5）の幅より下。採用は未判断。
 
 <a id="c317-sonnet-low-20261012"></a>
 ## C317のSonnet 5.5 low（2026-10-12）
