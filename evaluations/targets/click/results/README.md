@@ -22,5 +22,6 @@
 | [`click 制御なし Sonnet 5.5 low Std14 r4 N=5`](click-free-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 現行のSonnet基準。A01 r3は0 / 5（推測して編集・試験）、ほかの13ケースは65 / 65 score 4 |
 | [`click C316 Sonnet 5.5 low Std14 r4 N=5`](click-c316-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 制御なし比で品質+7.69%（A01 0 / 5 → 5 / 5、F06に1件score 1）、費用+16.57%（幅より上）、経過時間−14.48%（幅より下） |
 | [`click C316 Sonnet 5.5 low 費用の内訳分析`](click-c316-sonnet55-low-standard14-r4-n5_2026-10-14-cost-analysis.md) | `click-standard14-r4` | 70 + 70 | 作業部分は−11.4%。増加は最初のリクエストで、制御なしだけが課題文をrun間でキャッシュから読めていた差が中心 |
+| [`click 制御なし（空のCLAUDE.md）Sonnet 5.5 low Std14 r4 N=5`](click-free-claude-md-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 空のCLAUDE.mdは読み込まれず、キャッシュのふるまいは制御なしと同じ。C316比は費用+11.87% |
 
 この表は所在と要約だけを示す。評価resultの存在を採用、release、runtime projectionの根拠にしない。

@@ -44,5 +44,6 @@ profileの`agent_environment.runtime_identity_sha256`が指す共有ランタイ
 | [`free-click-claude-sonnet55-low-standard14-r3-n5-cli2288-shellenv-20261014-r1`](free-click-claude-sonnet55-low-standard14-r3-n5-cli2288-shellenv-20261014-r1.json) | `click-standard14-r3` | 14 | 5 | 1 | 24 | Claude Code 2.1.288・Sonnet 5.5 lowで完了（70 / 70 valid、score 4 × 70） |
 | [`free-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1`](free-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1.json) | `click-standard14-r4` | 14 | 5 | 1 | 24 | Claude Code 2.1.288・Sonnet 5.5 lowで完了（70 / 70 valid、score 4 × 65 / score 0 × 5） |
 | [`c316-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1`](c316-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1.json) | `click-standard14-r4` | 14 | 5 | 1 | 24 | C316、Claude Code 2.1.288・Sonnet 5.5 lowで完了（70 / 70 valid、score 4 × 69 / score 1 × 1） |
+| [`free-claude-md-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1`](free-claude-md-click-claude-sonnet55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1.json) | `click-standard14-r4` | 14 | 5 | 1 | 24 | 空のCLAUDE.mdを置いた制御なし（70 / 70 valid、score 4 × 65 / score 0 × 5） |
 
 `B`はprofile fieldではなく、同一プロファイルを変更せず独立resultとして反復した回数を表す。プロファイルの存在や表の状態要約だけを評価完了の根拠にせず、該当する一次resultで確認する。
