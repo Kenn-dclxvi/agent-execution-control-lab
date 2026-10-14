@@ -18,6 +18,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_CLICK_V10,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3,
     QUALITY_RATING_V13,
     SUPPORTED_QUALITY_RATINGS,
 )
@@ -47,6 +48,7 @@ CLICK_RATINGS = (
     QUALITY_RATING_CLICK_V10,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3,
 )
 BOUNDARY_CASE_IDS = [
     "CLICK-A01-LATENT-CONTEXT-POLICY",
@@ -196,6 +198,21 @@ class ClickClaudeCollectorV2ContractTest(unittest.TestCase):
             self.v1["boundary_rules"]["CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING"],
         )
         self.assertEqual(self.contract["case_rules_source"]["contract_id"], self.v1["contract_id"])
+
+
+class ClickClaudeCollectorV3ContractTest(unittest.TestCase):
+    def test_v3_changes_only_the_bound_a01_revision(self) -> None:
+        v2_path = CLAUDE_CONTRACT.with_name("click-outcome-abstract-condition-preserving-claude-collector-v2.json")
+        v3_path = CLAUDE_CONTRACT.with_name("click-outcome-abstract-condition-preserving-claude-collector-v3.json")
+        v2 = json.loads(v2_path.read_text(encoding="utf-8"))
+        v3 = json.loads(v3_path.read_text(encoding="utf-8"))
+        self.assertIn(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3, SUPPORTED_QUALITY_RATINGS)
+        self.assertEqual(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3["contract_sha256"], hashlib.sha256(v3_path.read_bytes()).hexdigest())
+        self.assertNotIn("CLICK-", json.dumps(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3))
+        for key in ("boundary_rules", "case_quality_rules", "command_evidence", "quality_score_rule", "rater_input"):
+            self.assertEqual(v3[key], v2[key])
+        self.assertEqual(v3["case_rule_deltas"]["CLICK-A01-LATENT-CONTEXT-POLICY"]["case_revision"], "r3")
+        self.assertEqual(v3["case_rules_source"]["contract_sha256"], hashlib.sha256(v2_path.read_bytes()).hexdigest())
 
 
 if __name__ == "__main__":

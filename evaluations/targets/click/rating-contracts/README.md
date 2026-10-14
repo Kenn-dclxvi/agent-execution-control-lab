@@ -18,6 +18,7 @@
 | [`click-outcome-abstract-condition-preserving-v10`](click-outcome-abstract-condition-preserving-v10.json) | `the-caption-prompt.quality-rating-contract/v13` | `ad5ca3b4ba526fe0fb9c9ec079231d5b7476335b00d540ff8cf67b9e95cd5929` | Click標準14項目（現行） |
 | [`click-outcome-abstract-condition-preserving-claude-collector-v1`](click-outcome-abstract-condition-preserving-claude-collector-v1.json) | `the-caption-prompt.quality-rating-contract/claude-collector-v1` | `df2ef01c79d5bdea3156d4518f89161836bd55c9fcfd3981dd295e21596c6c15` | Click標準14項目のClaude Code実行。v10のケース規則をそのまま使い、証跡の収集だけを差し替える |
 | [`click-outcome-abstract-condition-preserving-claude-collector-v2`](click-outcome-abstract-condition-preserving-claude-collector-v2.json) | `the-caption-prompt.quality-rating-contract/claude-collector-v2` | `1e6185ac332469e14bc85c28b5d2c7076074450f75d8b1417d9dbf5dc8c08c7a` | `click-standard14-r3`のClaude Code実行。A01 r2を終了時の状態で判定し、F10 r3はv10のinventory要件で判定する |
+| [`click-outcome-abstract-condition-preserving-claude-collector-v3`](click-outcome-abstract-condition-preserving-claude-collector-v3.json) | `the-caption-prompt.quality-rating-contract/claude-collector-v3` | `52bc930478afc91175490dee9a75485be121a91e5d7a1eb5c2b86fe47dcc0ecf` | `click-standard14-r4`のClaude Code実行。規則はv2と同じで、A01 r3へbindする |
 
 Click contractは`the-caption`側と同じschemaを利用するrevisionを含むが、case rule、working-directory contract、forbidden rater input、diagnostic observationはClickインスタンスへbindした別アーティファクトである。schema一致をcontract identityの共有と読み替えない。
 
