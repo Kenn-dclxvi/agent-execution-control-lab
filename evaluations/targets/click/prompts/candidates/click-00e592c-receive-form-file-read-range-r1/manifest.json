@@ -1,0 +1,76 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-control-free-r1",
+    "change_reason": "THE-CAPTION Candidate316（リリース済み）のroot AGENTS.md（「# 実行制御」の6項目、1,687バイト）と、それを指すroot CLAUDE.mdのリンクを、Clickのrootへバイト単位で同一のまま水平適用し、Click Standard14 r4で品質と費用を測る。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "Candidate316内の個別項目への因果帰属",
+      "Click case、TaskSpec、rating、target runtime、model、reasoning effortの変更",
+      "Click固有の指示またはrepository authorityの追加",
+      "採用判断",
+      "release判断",
+      "pallets/click本体への反映"
+    ],
+    "problem": "Candidate316の品質と費用の効果が、THE-CAPTION以外の公開リポジトリ（Click Standard14 r4）でも成り立つか未確認である。",
+    "scope": "制御なしのroot AGENTS.md（空）をC316の本文へ置き換え、Claude Codeが読むroot CLAUDE.mdをAGENTS.mdへのリンクとして加える一つの構成軸。THE-CAPTIONのC316と同じ構造である。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "78546c434411c0450974f4757edc8bf013ae56e21f3cbebe32ee330e25ae6b74",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "click-00e592c-control-free-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "4fe93673746af67677b17dfbabd98901906c6849",
+      "mode": "100644",
+      "sha256": "e4b120f8fd872134a9ce72acd5a8a9a7491b62fb6f0eaae98f781f0c25c7b6da",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "added_targets": [
+      "CLAUDE.md"
+    ],
+    "kind": "expanded_path_set",
+    "source_prompt_identity": "click-00e592c-control-free-r1"
+  },
+  "prompt_identity": "click-00e592c-receive-form-file-read-range-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "design_inputs": [
+      "prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md",
+      "docs/candidate315-candidate316-c313-file-read-receive-form-design.md",
+      "evaluations/targets/click/results/click-free-sonnet55-low-standard14-r4-n5_2026-10-14.md"
+    ],
+    "design_status": "complete",
+    "donor_prompt_identity": "the-caption-3ce91a4-receive-form-file-read-range-r1",
+    "donor_targets": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "Click向けtarget mapはroot AGENTS.mdとroot CLAUDE.md（AGENTS.mdへのリンク）の2件とし、donorの同じ2件をbyte-identicalに保持する。donorの他17対象はTHE-CAPTION固有の内容なので含めない。"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}
