@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "clickのrunner-verifiedなisolated checkoutを対象とする。最初の調査前にcheckout identityを記録し、git status --shortが空であることを確認する。開始identity gateがfailed、または未コミット変更があれば調査せず停止する。",
+  "task_kind_goal_and_done_condition": "task_kind=read-only authority inventory。src/AGENTS.mdをrepository authorityとして確認した後、Clickのcommand構築APIについて、正規のpublic decorators、対応するcore classes、collection class、public export位置をpath根拠付きで一覧化する。[CLICK-F10-C1] authorityが指定するcommand/group decoratorsとCommand/Group/CommandCollectionを列挙する。[CLICK-F10-C2] authorityの指定とsrc/click/decorators.py、core.py、__init__.pyの直接確認が一致し、public export位置を示す。[CLICK-F10-C3] zero driftで終了する。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "編集許可pathはない。read対象はAGENTS.md、src/AGENTS.md、src/click/__init__.py、src/click/decorators.py、src/click/core.pyと必要なdirectory listingだけに限定する。test、file作成、dependency操作、external operationは禁止する。",
+  "validation_conditions_and_non_machine_risk": "最初にsrc/AGENTS.mdの存在、non-empty、repository authority節を確認する。authority確認後だけ3 source fileを読み、symbol、定義path、public export pathを照合する。開始時と終了時のgit status --shortを一致させる。non_machine_risk=response-quality、owner=independent response check。",
+  "read_edit_test_commit_push_merge_authorization": "repositoryと適用されるAGENTS.mdのread-only確認、指定sourceのread、file listing、git status確認を許可する。edit、test、application実行、dependency操作、commit、push、PR、merge、deploy、network、external_sendは許可しない。",
+  "constraints_and_required_recovery": "src/AGENTS.mdが存在しない、空、repository authority節を持たない、または指定sourceと矛盾する場合は、sourceだけから正解を推測せず、authority_unavailableと未完了criterion IDを報告して停止する。authorityが成立する場合だけ指定3 sourceを直接確認し、一覧を返して停止する。"
+}

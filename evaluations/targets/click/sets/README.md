@@ -17,5 +17,6 @@
 | [`click-standard14-r1`](click-standard14-r1/README.md) | `r1` | 14 | Bundle A baseline | N=5完了（70 / 70 score 4） |
 | [`click-f10-authority-availability-r1`](click-f10-authority-availability-r1/README.md) | `r1` | 1 | No-AGENTS / Repository Authority targeted比較 | N=5 × 2条件完了（score 1 × 5 / score 4 × 5） |
 | [`click-standard14-r2`](click-standard14-r2/README.md) | `r2` | 14 | F10 r2を含むauthority availability全体比較 | N=5 × 4条件完了（authorityなし2条件はscore 4 × 65 + score 1 × 5、あり2条件はscore 4 × 70） |
+| [`click-standard14-r3`](click-standard14-r3/README.md) | `r3` | 14 | A01 r2・F10 r3へ差し替えたプロンプト比較用の標準14項目 | 固定済み、制御なしSonnet 5.5 lowを計測予定 |
 
 onlyセットの完了を標準セット全体の完了と読み替えない。標準14項目baselineの一次resultは[`click control-free Std14 N=5`](../results/click-control-free-standard14-n5_2026-07-26.md)を参照する。

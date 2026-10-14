@@ -17,6 +17,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2,
     QUALITY_RATING_V13,
     SUPPORTED_QUALITY_RATINGS,
 )
@@ -45,6 +46,7 @@ CLICK_RATINGS = (
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2,
 )
 BOUNDARY_CASE_IDS = [
     "CLICK-A01-LATENT-CONTEXT-POLICY",
@@ -165,6 +167,35 @@ class ClickClaudeCollectorContractTest(unittest.TestCase):
             self.assertEqual(evidence[key], self.v10["command_evidence"][key])
         self.assertEqual(self.contract["producer_evidence"], claude["producer_evidence"])
         self.assertEqual(self.contract["schema_version"], claude["schema_version"])
+
+
+class ClickClaudeCollectorV2ContractTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.path = CLAUDE_CONTRACT.with_name("click-outcome-abstract-condition-preserving-claude-collector-v2.json")
+        self.contract = json.loads(self.path.read_text(encoding="utf-8"))
+        self.v1 = json.loads(CLAUDE_CONTRACT.read_text(encoding="utf-8"))
+
+    def test_registered_identity_matches_file(self) -> None:
+        self.assertIn(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2, SUPPORTED_QUALITY_RATINGS)
+        self.assertEqual(self.contract["contract_id"], QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2["contract_id"])
+        self.assertEqual(
+            QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2["contract_sha256"],
+            hashlib.sha256(self.path.read_bytes()).hexdigest(),
+        )
+
+    def test_kernel_registration_has_no_click_case_ids(self) -> None:
+        self.assertNotIn("CLICK-", json.dumps(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2))
+
+    def test_only_a01_boundary_changes(self) -> None:
+        self.assertEqual(self.contract["case_quality_rules"], self.v1["case_quality_rules"])
+        self.assertEqual(self.contract["command_evidence"], self.v1["command_evidence"])
+        a01 = self.contract["boundary_rules"]["CLICK-A01-LATENT-CONTEXT-POLICY"]
+        self.assertFalse(a01["state_evidence"]["response_text_affects_outcome_state"])
+        self.assertEqual(
+            self.contract["boundary_rules"]["CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING"],
+            self.v1["boundary_rules"]["CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING"],
+        )
+        self.assertEqual(self.contract["case_rules_source"]["contract_id"], self.v1["contract_id"])
 
 
 if __name__ == "__main__":
