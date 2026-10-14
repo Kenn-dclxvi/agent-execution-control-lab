@@ -30,7 +30,7 @@ Claude Codeで制御なしとCandidateの費用を比べるときは、制御な
 
 - 比較元の1文は、事実だけを述べ、作業の進め方の指示を含めない。文面を変えるときは新しいbundleとして固定する。
 - 制御なしとCandidateの費用の比較には、この比較元を使う。読み込まない比較元（`click-00e592c-control-free-r1`など）との比較は、10-14以降の計測では課題文のキャッシュが偏るので、費用の比較に使わない。
-- THE-CAPTIONの系列でも、10-14以降に測るときは同じ偏りが生じる。THE-CAPTIONの制御なし（`the-caption-3ce91a4-control-free-repository-r1`）もroot `CLAUDE.md`は空のリンクで、読み込まれない。
+- THE-CAPTIONの系列でも、10-14以降に測るときは同じ偏りが生じる。THE-CAPTIONの制御なし（`the-caption-3ce91a4-control-free-repository-r1`）もroot `CLAUDE.md`は空のリンクで、読み込まれない。THE-CAPTIONでは、ControlFreeRepositoryのroot `AGENTS.md`だけを同じ1文へ置き換えた[`the-caption-3ce91a4-control-free-repository-loaded-instruction-r1`](../prompts/candidates/the-caption-3ce91a4-control-free-repository-loaded-instruction-r1/manifest.json)を比較元とする。単発の診断（`runs/the-caption-free-loaded-path-check-20261014-r1`、Sonnet、F05を2回）で、2件ともroot `CLAUDE.md`が読み込まれ、最初のリクエストの読み取りが6,155で止まることを確かめた。
 
 ## 限界
 
