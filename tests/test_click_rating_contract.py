@@ -16,6 +16,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_CLICK_V8,
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
+    QUALITY_RATING_CLICK_V11,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V2,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V3,
@@ -213,6 +214,24 @@ class ClickClaudeCollectorV3ContractTest(unittest.TestCase):
             self.assertEqual(v3[key], v2[key])
         self.assertEqual(v3["case_rule_deltas"]["CLICK-A01-LATENT-CONTEXT-POLICY"]["case_revision"], "r3")
         self.assertEqual(v3["case_rules_source"]["contract_sha256"], hashlib.sha256(v2_path.read_bytes()).hexdigest())
+
+
+class ClickV11ContractTest(unittest.TestCase):
+    def test_v11_is_v10_with_the_claude_v3_case_deltas(self) -> None:
+        path = CONTRACT.with_name("click-outcome-abstract-condition-preserving-v11.json")
+        v11 = json.loads(path.read_text(encoding="utf-8"))
+        v10 = json.loads(CONTRACT.read_text(encoding="utf-8"))
+        c3 = json.loads(CLAUDE_CONTRACT.with_name("click-outcome-abstract-condition-preserving-claude-collector-v3.json").read_text(encoding="utf-8"))
+        self.assertIn(QUALITY_RATING_CLICK_V11, SUPPORTED_QUALITY_RATINGS)
+        self.assertEqual(QUALITY_RATING_CLICK_V11["contract_sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
+        self.assertNotIn("CLICK-", json.dumps(QUALITY_RATING_CLICK_V11))
+        for key in ("case_quality_rules", "command_evidence", "producer_evidence", "schema_version"):
+            self.assertEqual(v11[key], v10[key])
+        self.assertEqual(v11["case_rule_deltas"], c3["case_rule_deltas"])
+        self.assertEqual(
+            v11["boundary_rules"]["CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING"],
+            v10["boundary_rules"]["CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING"],
+        )
 
 
 if __name__ == "__main__":
