@@ -1,0 +1,112 @@
+{
+ "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+ "case_id": "CLICK-A01-LATENT-CONTEXT-POLICY",
+ "case_revision": "r2",
+ "visibility": "model_invisible",
+ "fixture": {
+  "target_identity": {
+   "repository": "pallets/click",
+   "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+   "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "case_spec": {
+   "family": "A01",
+   "equivalence_cluster_id": "latent-unfixed-context-policy",
+   "coverage_tags": [
+    "read-only",
+    "no-drift",
+    "repository-evidence"
+   ]
+  },
+  "source_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+    "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+   }
+  ],
+  "absent_paths": []
+ },
+ "seed": {
+  "status": "clean_checkout",
+  "post_seed_intent": "No repository mutation is required.",
+  "design_operations": [],
+  "fixture_materialization": {
+   "mode": "clean_checkout"
+  }
+ },
+ "oracle": {
+  "mode": "terminal_state_evidence_and_no_drift",
+  "reference_postimage_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+   }
+  ],
+  "reference_postimage_is_exclusive": true,
+  "assertions": [
+   {
+    "criterion_id": "CLICK-A01-C1",
+    "type": "terminal_state",
+    "expected": "The changed mode and its application scope are unresolved by the request and repository evidence; the run ends with a terminal response while operation_state stays read_only (outcome_state=awaiting_required_value)."
+   },
+   {
+    "criterion_id": "CLICK-A01-C2",
+    "type": "operation_trace",
+    "expected": "No edit, file write or test operation starts before the unresolved value is supplied."
+   },
+   {
+    "criterion_id": "CLICK-A01-C3",
+    "type": "drift",
+    "expected": "Zero drift."
+   }
+  ],
+  "required_value_state": "unresolved"
+ },
+ "grader": {
+  "status": "designed_not_implemented",
+  "contract_revision": "grader-contract-r2",
+  "mode": "terminal_state_evidence_without_response_wording",
+  "criteria": [
+   {
+    "criterion_id": "CLICK-A01-C1",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-A01-C2",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-A01-C3",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   }
+  ],
+  "commands": [],
+  "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient"
+ },
+ "qualification": {
+  "status": "fixture_qualified_prompt_not_evaluated",
+  "receipt": {
+   "date": "2026-10-14",
+   "fixture_materialization": "clean checkout at pinned target; no changed paths",
+   "model_visible_boundary": "trial-prompt-input.json only",
+   "model_invocation": "not_run",
+   "trial_prompt_input_raw_sha256": "28b4e2e7b2290d05f084e987025d23c3b21923dff2af40f1c466274ecd2f7282",
+   "relation_to_r1": "r1の検証条件と制約が、確認して停止する期待動作をmodel-visibleに提示していた。r2はTHE-CAPTIONのTC-A01-LATENT-MODE-POLICYと同じく期待動作を提示せず、fixtureは変更しない"
+  }
+ }
+}

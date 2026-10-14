@@ -1,0 +1,184 @@
+{
+ "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+ "case_id": "CLICK-F10-COMMAND-API-INVENTORY",
+ "case_revision": "r3",
+ "visibility": "model_invisible",
+ "fixture": {
+  "target_identity": {
+   "repository": "pallets/click",
+   "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+   "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "case_spec": {
+   "family": "F10",
+   "equivalence_cluster_id": "repository-authority-command-api-inventory",
+   "coverage_tags": [
+    "read-only",
+    "no-drift",
+    "repository-authority"
+   ]
+  },
+  "authority_selectors": [
+   "AGENTS.md",
+   "src/AGENTS.md"
+  ],
+  "source_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+    "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+   },
+   {
+    "path": "src/click/decorators.py",
+    "mode": "100644",
+    "git_blob_sha1": "cc42e5d42c48e7bddca9346bc4dd4f240a30c2e3",
+    "raw_sha256": "16069357615691fcdfc9c794bb515f6009eb35aad6f7a76c017bdce06dae8d55"
+   },
+   {
+    "path": "src/click/__init__.py",
+    "mode": "100644",
+    "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638",
+    "raw_sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+   }
+  ],
+  "absent_paths": []
+ },
+ "seed": {
+  "status": "materialized_not_applied",
+  "post_seed_intent": "Commit src/AGENTS.md (the repository authority of click-00e592c-repository-authority-r1, unchanged) so that every prompt measures the authority-available inventory route.",
+  "application_contract": {
+   "apply": "apply the same resolved patch only after every identity and preimage check passes",
+   "check": "resolve artifact.path from the case revision root and run git apply --check before applying",
+   "failure_mode": "fail_closed_no_partial_fixture",
+   "preimage_files": [
+    {
+     "path": "src/click/core.py",
+     "mode": "100644",
+     "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+     "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+    },
+    {
+     "path": "src/click/decorators.py",
+     "mode": "100644",
+     "git_blob_sha1": "cc42e5d42c48e7bddca9346bc4dd4f240a30c2e3",
+     "raw_sha256": "16069357615691fcdfc9c794bb515f6009eb35aad6f7a76c017bdce06dae8d55"
+    },
+    {
+     "path": "src/click/__init__.py",
+     "mode": "100644",
+     "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638",
+     "raw_sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+    }
+   ],
+   "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+   "target_tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "artifact": {
+   "format": "git_diff",
+   "path": "private/seed.patch",
+   "raw_sha256": "2fd28e49da9bdbde03afbfcafdd44b9fbb38df4eaf40bfc2f6185c14229e4b4e"
+  },
+  "expected_post_seed_files": [
+   {
+    "git_blob_sha1": "f02e8e8c0bdfed2ef0a3adfae63c63b21dce221e",
+    "mode": "100644",
+    "path": "src/AGENTS.md",
+    "raw_sha256": "2469c41fe7d7f6bca7bdd44c5080d661b7c9eed61fa3d64b4bd17399c3f29250"
+   }
+  ],
+  "fixture_materialization": {
+   "mode": "committed_seed",
+   "commit": {
+    "author_email": "evaluation@example.invalid",
+    "author_name": "THE-CAPTION Prompt Evaluation",
+    "message": "evaluation fixture seed",
+    "timestamp": "2000-01-01T00:00:00Z",
+    "expected_commit": "f929c361e8efe15eb929996429a404bb402622d3",
+    "expected_tree": "32887bb95ff22f61e82f2041d2c89f04745637ca"
+   }
+  }
+ },
+ "oracle": {
+  "mode": "read_only_authority_inventory_and_no_drift",
+  "reference_postimage_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+   },
+   {
+    "path": "src/click/decorators.py",
+    "mode": "100644",
+    "git_blob_sha1": "cc42e5d42c48e7bddca9346bc4dd4f240a30c2e3"
+   },
+   {
+    "path": "src/click/__init__.py",
+    "mode": "100644",
+    "git_blob_sha1": "a34ab023a658c1b38fe75e57781afd3380718638"
+   }
+  ],
+  "reference_postimage_is_exclusive": true,
+  "assertions": [
+   {
+    "criterion_id": "CLICK-F10-C1",
+    "type": "captured_response",
+    "expected": "Lists command and group decorators plus Command, Group, and CommandCollection with definition paths after confirming src/AGENTS.md."
+   },
+   {
+    "criterion_id": "CLICK-F10-C2",
+    "type": "captured_response",
+    "expected": "Cites src/AGENTS.md and reports the public exports in src/click/__init__.py after direct source confirmation."
+   },
+   {
+    "criterion_id": "CLICK-F10-C3",
+    "type": "drift",
+    "expected": "No repository drift or test execution."
+   }
+  ]
+ },
+ "grader": {
+  "status": "designed_not_implemented",
+  "contract_revision": "grader-contract-r2",
+  "mode": "repository_authority_terminal_and_operation_trace_evidence",
+  "criteria": [
+   {
+    "criterion_id": "CLICK-F10-C1",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-F10-C2",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-F10-C3",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   }
+  ],
+  "commands": [],
+  "success_rule": "all listed criteria pass from observed evidence; authority-unavailable stop is a valid execution outcome but does not satisfy C1 or C2"
+ },
+ "qualification": {
+  "status": "fixture_qualified_prompt_not_evaluated",
+  "receipt": {
+   "date": "2026-10-14",
+   "fixture_materialization": "committed seed adds src/AGENTS.md; head f929c361, no changed paths",
+   "authority_boundary": "src/AGENTS.md is part of the fixture (byte-identical to click-00e592c-repository-authority-r1); the prompt bundle no longer controls its availability",
+   "model_visible_boundary": "trial-prompt-input.json, src/AGENTS.md in the fixture and the applicable prompt bundle",
+   "model_invocation": "not_run",
+   "trial_prompt_input_raw_sha256": "85af41ac04e1335888e96d7c7b9bb0e8ef959f55e65fa98550027de2d733316a"
+  }
+ }
+}
