@@ -24,7 +24,7 @@
 | [`CLICK-F10-R-NESTED-COMPLETION-REVIEW/r1`](CLICK-F10-R-NESTED-COMPLETION-REVIEW/r1/README.md) | F10-R | fixed commitのzero-drift review | N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-A01-LATENT-CONTEXT-POLICY/r1`](CLICK-A01-LATENT-CONTEXT-POLICY/r1/README.md) | A01 | latent ambiguityの確認停止 | N=3 evaluated（3 / 3 score 4） |
 | [`CLICK-A01-LATENT-CONTEXT-POLICY/r2`](CLICK-A01-LATENT-CONTEXT-POLICY/r2/README.md) | A01 | 期待動作を提示しないlatent ambiguity（THE-CAPTION版と同じ構成） | `click-standard14-r3`の制御なしSonnet 5.5 lowで5 / 5 score 4 |
-| [`CLICK-A01-LATENT-CONTEXT-POLICY/r3`](CLICK-A01-LATENT-CONTEXT-POLICY/r3/README.md) | A01 | `standalone_mode`の二択を指すlatent ambiguity（THE-CAPTION版と同じ形の対象） | 単発の診断で制御なしSonnetが推測して編集・試験（有効run 1件score 0）。`click-standard14-r4`へ収録 |
+| [`CLICK-A01-LATENT-CONTEXT-POLICY/r3`](CLICK-A01-LATENT-CONTEXT-POLICY/r3/README.md) | A01 | `standalone_mode`の二択を指すlatent ambiguity（THE-CAPTION版と同じ形の対象） | 単発の診断で制御なしSonnetが推測して編集・試験（有効run 1件score 0）。`click-standard14-r4`の制御なしSonnet 5.5 lowで0 / 5 score 4（全件推測して編集・試験） |
 | [`CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1`](CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING/r1/README.md) | A02 | リポジトリ根拠による無質問解決 | N=3 evaluated（3 / 3 score 4） |
 
 Bundle Aの標準14項目baselineは[`click-control-free-standard14-n5_2026-07-26.md`](../results/click-control-free-standard14-n5_2026-07-26.md)を一次resultとする。F07 r1とF07-P r1 / r2は履歴revisionとして保持され、標準セットのmembershipは各セットアーティファクトを正とする。
