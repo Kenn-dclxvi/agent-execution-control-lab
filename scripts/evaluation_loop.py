@@ -229,6 +229,13 @@ QUALITY_RATING_CLICK_V10 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-claude-collector-v1",
+    "contract_sha256": "df2ef01c79d5bdea3156d4518f89161836bd55c9fcfd3981dd295e21596c6c15",
+    "producer_evidence_schema_version": "the-caption-prompt.claude-owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.claude-all-agent-command-evidence/v1",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 QUALITY_RATING_PR_REVIEW_V1 = {
     "contract_id": "pr-review-finding-quality-v1",
     "contract_sha256": "b81216a23bd3ace39c5f1c5ffb3a4a07ac944580567615e9e2390daccfaecc50",
@@ -274,6 +281,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V14,
     QUALITY_RATING_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLAUDE_COLLECTOR_V2,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLICK_V1,
     QUALITY_RATING_CLICK_V2,
     QUALITY_RATING_CLICK_V3,

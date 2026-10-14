@@ -16,6 +16,7 @@
 | [`click-outcome-abstract-condition-preserving-v8`](click-outcome-abstract-condition-preserving-v8.json) | `the-caption-prompt.quality-rating-contract/v13` | `6be7e5816c764cd5651f6f9a89f3632da228fef659d3f34a98d7e54cd2ec7c8a` | F01〜F08（履歴） |
 | [`click-outcome-abstract-condition-preserving-v9`](click-outcome-abstract-condition-preserving-v9.json) | `the-caption-prompt.quality-rating-contract/v13` | `acefd9f032146d6b685203bd38f19263b5189e69f5cd08119d7b62d2d1c42557` | F01〜A01（履歴） |
 | [`click-outcome-abstract-condition-preserving-v10`](click-outcome-abstract-condition-preserving-v10.json) | `the-caption-prompt.quality-rating-contract/v13` | `ad5ca3b4ba526fe0fb9c9ec079231d5b7476335b00d540ff8cf67b9e95cd5929` | Click標準14項目（現行） |
+| [`click-outcome-abstract-condition-preserving-claude-collector-v1`](click-outcome-abstract-condition-preserving-claude-collector-v1.json) | `the-caption-prompt.quality-rating-contract/claude-collector-v1` | `df2ef01c79d5bdea3156d4518f89161836bd55c9fcfd3981dd295e21596c6c15` | Click標準14項目のClaude Code実行。v10のケース規則をそのまま使い、証跡の収集だけを差し替える |
 
 Click contractは`the-caption`側と同じschemaを利用するrevisionを含むが、case rule、working-directory contract、forbidden rater input、diagnostic observationはClickインスタンスへbindした別アーティファクトである。schema一致をcontract identityの共有と読み替えない。
 

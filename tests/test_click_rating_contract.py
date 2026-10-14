@@ -16,6 +16,7 @@ from scripts.evaluation_loop import (
     QUALITY_RATING_CLICK_V8,
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_V13,
     SUPPORTED_QUALITY_RATINGS,
 )
@@ -25,6 +26,10 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_ID = "click-outcome-abstract-condition-preserving-v10"
 CONTRACT = ROOT / f"evaluations/targets/click/rating-contracts/{CONTRACT_ID}.json"
 CONTRACT_V1 = ROOT / "evaluations/targets/click/rating-contracts/click-outcome-abstract-condition-preserving-v1.json"
+CLAUDE_CONTRACT = (
+    ROOT / "evaluations/targets/click/rating-contracts/click-outcome-abstract-condition-preserving-claude-collector-v1.json"
+)
+THE_CAPTION_CLAUDE_V1 = ROOT / "evaluations/rating-contracts/outcome-terminal-state-evidence-claude-collector-v1.json"
 THE_CAPTION_V13 = (
     ROOT / "evaluations/rating-contracts/outcome-abstract-condition-preserving-owner-diagnostic-v13.json"
 )
@@ -39,6 +44,7 @@ CLICK_RATINGS = (
     QUALITY_RATING_CLICK_V8,
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
+    QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
 )
 BOUNDARY_CASE_IDS = [
     "CLICK-A01-LATENT-CONTEXT-POLICY",
@@ -125,6 +131,40 @@ class ClickRatingContractTest(unittest.TestCase):
         ).read_text(encoding="utf-8")
         for rating in CLICK_RATINGS:
             self.assertIn(rating["contract_sha256"], index)
+
+
+class ClickClaudeCollectorContractTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.contract = json.loads(CLAUDE_CONTRACT.read_text(encoding="utf-8"))
+        self.v10 = json.loads(CONTRACT.read_text(encoding="utf-8"))
+
+    def test_registered_identity_matches_file(self) -> None:
+        self.assertIn(QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1, SUPPORTED_QUALITY_RATINGS)
+        self.assertEqual(self.contract["contract_id"], QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1["contract_id"])
+        self.assertEqual(
+            QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1["contract_sha256"],
+            hashlib.sha256(CLAUDE_CONTRACT.read_bytes()).hexdigest(),
+        )
+
+    def test_case_rules_are_v10_unchanged(self) -> None:
+        for key in ("boundary_rules", "case_quality_rules", "quality_score_rule", "rater_input", "diagnostic_observations"):
+            self.assertEqual(self.contract[key], self.v10[key])
+        source = self.contract["case_rules_source"]
+        self.assertEqual(source["contract_id"], CONTRACT_ID)
+        self.assertEqual(source["contract_sha256"], QUALITY_RATING_CLICK_V10["contract_sha256"])
+
+    def test_only_the_collector_is_replaced(self) -> None:
+        claude = json.loads(THE_CAPTION_CLAUDE_V1.read_text(encoding="utf-8"))
+        evidence = self.contract["command_evidence"]
+        self.assertEqual(evidence["collector_schema_version"], claude["command_evidence"]["collector_schema_version"])
+        self.assertEqual(
+            QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1["command_evidence_schema_version"],
+            evidence["collector_schema_version"],
+        )
+        for key in ("measurement_failure_policy", "quality_failure_policy", "working_directory_contract"):
+            self.assertEqual(evidence[key], self.v10["command_evidence"][key])
+        self.assertEqual(self.contract["producer_evidence"], claude["producer_evidence"])
+        self.assertEqual(self.contract["schema_version"], claude["schema_version"])
 
 
 if __name__ == "__main__":
