@@ -229,6 +229,13 @@ QUALITY_RATING_CLICK_V10 = {
     "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_CLICK_V11 = {
+    "contract_id": "click-outcome-abstract-condition-preserving-v11",
+    "contract_sha256": "5ef3cb7ad4d8ed4da5693595512b6f32b0140aad924ccb4e74c8b9b926297999",
+    "producer_evidence_schema_version": "the-caption-prompt.owner-producer-evidence/v1",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+    "owner_producer_evidence_policy": "diagnostic_only",
+}
 QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1 = {
     "contract_id": "click-outcome-abstract-condition-preserving-claude-collector-v1",
     "contract_sha256": "df2ef01c79d5bdea3156d4518f89161836bd55c9fcfd3981dd295e21596c6c15",
@@ -308,6 +315,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_CLICK_V8,
     QUALITY_RATING_CLICK_V9,
     QUALITY_RATING_CLICK_V10,
+    QUALITY_RATING_CLICK_V11,
     QUALITY_RATING_PR_REVIEW_V1,
 )
 OWNER_PATTERN = re.compile(r"owner\s*=\s*([^\u3002\n;,]+)", re.IGNORECASE)
