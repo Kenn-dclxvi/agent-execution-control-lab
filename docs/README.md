@@ -1025,6 +1025,7 @@ C107〜C116の設計記録は「7b. 比較・診断・段階記録」へ掲載�
 | [`click-c81-full-portability-design.md`](click-c81-full-portability-design.md) | THE-CAPTION C81全文をClick root 1 targetへ改変なく水平適用する比較設計（外部妥当性の検証） |
 | [`click-c125-full-portability-design.md`](click-c125-full-portability-design.md) | 同様にC125全文をClickへ水平適用し、Click Standard14 r2を各case`N=5`で実施する設計 |
 | [`click-c316-portability-design.md`](click-c316-portability-design.md) | THE-CAPTIONでリリースしたC316をClickのrootへ改変なく置き、Click Standard14 r4をSonnet 5.5 lowで制御なしと比べる設計 |
+| [`claude-instruction-cache-parity-design.md`](claude-instruction-cache-parity-design.md) | Claude Codeの計測で、root `CLAUDE.md`を読み込む条件と読み込まない条件の最初のリクエストのキャッシュの偏りを、制御なしにも指示を含まない1文の`CLAUDE.md`を置いて揃える比較方法 |
 | [`click-c81-repository-authority-standard14-r2-design.md`](click-c81-repository-authority-standard14-r2-design.md) | C81全文のみと、C81全文＋Click repository authorityを`click-standard14-r2`で比較する設計 |
 | [`click-repository-authority-availability-design.md`](click-repository-authority-availability-design.md) | repository authorityの可用性差を、THE-CAPTIONで差が出たF10と同じ観点でClickへ移す比較設計 |
 | [`click-repository-subagents-comparison-design.md`](click-repository-subagents-comparison-design.md) | Clickの階層別repository instructionの影響を、root制御プロンプトと分離して確認する比較設計 |

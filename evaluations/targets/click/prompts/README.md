@@ -9,6 +9,7 @@
 | [`click-00e592c-control-free-r1`](baselines/click-00e592c-control-free-r1/manifest.json) | 1 | `7806831a2dae4e9c4debdd6d8316c12a76699012992cf8360f756da87e1797a9` | 制御プロンプト不在。root `AGENTS.md`を空のファイルへ固定する |
 | [`click-00e592c-no-agents-r1`](baselines/click-00e592c-no-agents-r1/manifest.json) | 0 | `62570c22091a0e5c3431c5be416222987c6d4251fa634d633c6c6ebcee8ab82c` | root・subとも`AGENTS.md`を配置しない空のバンドル |
 | [`click-00e592c-control-free-claude-md-r1`](baselines/click-00e592c-control-free-claude-md-r1/manifest.json) | 2 | `6a824a8c70711269c43e40b33e1b21e6196746dce63427d31c7057e676a7b9e0` | 空のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンク。空の`CLAUDE.md`はClaude Codeに読み込まれなかった |
+| [`click-00e592c-control-free-loaded-instruction-r1`](baselines/click-00e592c-control-free-loaded-instruction-r1/manifest.json) | 2 | `c5437e5f5eaac8222896893ecb322903106aa57ff3c79777ff76270de59a0aa2` | root `AGENTS.md`に指示を含まない1文、`CLAUDE.md`はそのリンク。Claude Codeが必ず読み込み、`CLAUDE.md`を置くCandidateとキャッシュの条件を揃える費用比較用の制御なし |
 
 ## candidates
 
