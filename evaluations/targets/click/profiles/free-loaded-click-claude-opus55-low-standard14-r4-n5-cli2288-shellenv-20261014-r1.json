@@ -1,0 +1,339 @@
+{
+  "cases": [
+    {
+      "id": "CLICK-A01-LATENT-CONTEXT-POLICY",
+      "revision": "r3"
+    },
+    {
+      "id": "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F01-ANSI-SEQUENCE-STRIP",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F02-STREAM-DEPRECATION-CONTRACT",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F04-NESTED-GROUP-COMPLETION",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F05-CLARIFY-COMMAND-ORDER",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F05-OS-PYPI-PUBLISH-BOUNDARY",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F06-RESTORE-ECHO-COLOR-REGRESSION",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F07-CANONICAL-TOX-RUNNER",
+      "revision": "r2"
+    },
+    {
+      "id": "CLICK-F07-P-DEPENDENCY-LOCK-PAIR",
+      "revision": "r3"
+    },
+    {
+      "id": "CLICK-F08-SHELL-COMPLETION-DOC-SYNC",
+      "revision": "r1"
+    },
+    {
+      "id": "CLICK-F10-COMMAND-API-INVENTORY",
+      "revision": "r3"
+    },
+    {
+      "id": "CLICK-F10-R-NESTED-COMPLETION-REVIEW",
+      "revision": "r1"
+    }
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agent": "claude-code",
+      "claude_code": {
+        "agents": [
+          "claude",
+          "Explore",
+          "general-purpose",
+          "Plan",
+          "statusline-setup"
+        ],
+        "authentication": {
+          "api_key_source": "none",
+          "credential_values_recorded": false,
+          "method": "claude.ai_oauth"
+        },
+        "auto_memory": "disabled",
+        "code_signature_team_identifier": "Q6L2SF6YDW",
+        "config_dir": "/Volumes/SN7100/_verification/claude-eval-config",
+        "executable": "/Volumes/SN7100/_verification/claude-runtime/2.1.288/claude.app/Contents/MacOS/claude",
+        "executable_sha256": "73f026687db856fafd7a7e1723c22199da021bd9067d92298685b24b73dae775",
+        "flag_settings": {
+          "enabledPlugins": {
+            "agents-md@builtin": false,
+            "claude-test@builtin": false,
+            "diff@builtin": false,
+            "mermaid@builtin": false,
+            "mods-guide@builtin": false,
+            "plugin-authoring@builtin": false,
+            "responsive-mode@builtin": false,
+            "tips@builtin": false,
+            "you-should-know@builtin": false
+          }
+        },
+        "mcp": "strict_empty",
+        "output_format": "stream-json --verbose",
+        "plugins": [
+          {
+            "name": "cc-plugin-telemetry",
+            "path": "builtin",
+            "source": "cc-plugin-telemetry@builtin"
+          }
+        ],
+        "process_environment": {
+          "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+          "DISABLE_AUTOUPDATER": "1",
+          "LANG": "en_US.UTF-8",
+          "SHELL": "/bin/bash",
+          "TMPDIR": "/private/tmp"
+        },
+        "schema_version": "the-caption-prompt.claude-code-environment/v1",
+        "session_persistence": "persisted_in_config_dir",
+        "setting_sources": "project,local",
+        "skills": "disabled_by_disable_slash_commands",
+        "tools": [
+          "Task",
+          "Bash",
+          "Edit",
+          "NotebookEdit",
+          "Read",
+          "TaskStop",
+          "Write"
+        ],
+        "version_output": "2.1.288 (Claude Code)"
+      },
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "0a30733685c5fb3bb69abf136d6a8cdb04c4ec323f52dc6d1488f8d49a7cc952",
+      "session_mode": "persisted",
+      "shell_environment": {
+        "base_path": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "revision": "fixed-path-workspace-venv-r1",
+        "schema_version": "the-caption-prompt.agent-shell-environment/v1",
+        "user_startup_files": "suppressed_by_empty_zdotdir_and_non_login_shell",
+        "venv_activation": "path_prefix_and_virtual_env",
+        "workspace_venv": ".venv"
+      }
+    },
+    "executor_parameters": {
+      "campaign_dispatch": {
+        "admission": {
+          "busy_percent_max": 70,
+          "max_sample_failures": 5,
+          "min_interval_seconds": 1,
+          "policy": "cpu_busy_below",
+          "poll_interval_seconds": 2,
+          "revision": "r1",
+          "sample_window_seconds": 1
+        },
+        "max_workers_total": 24,
+        "queue": "one_queue_across_cells"
+      },
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [],
+        "required_command_groups_by_case": {
+          "CLICK-A01-LATENT-CONTEXT-POLICY": [],
+          "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING": [],
+          "CLICK-F01-ANSI-SEQUENCE-STRIP": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_compat.py tests/test_utils/test_style.py -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F02-STREAM-DEPRECATION-CONTRACT": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_deprecations.py tests/test_testing.py -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_testing.py::test_isolated_runner tests/test_testing.py::test_isolated_runner_custom_tempdir -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F04-NESTED-GROUP-COMPLETION": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py::test_nested_group -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ]
+          ],
+          "CLICK-F05-CLARIFY-COMMAND-ORDER": [],
+          "CLICK-F05-OS-PYPI-PUBLISH-BOUNDARY": [],
+          "CLICK-F06-RESTORE-ECHO-COLOR-REGRESSION": [
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_utils/test_echo.py::test_echo_color_flag -q"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F07-CANONICAL-TOX-RUNNER": [
+            [
+              "rg -n 'pytest.*-v.*--tb=short' pyproject.toml"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F07-P-DEPENDENCY-LOCK-PAIR": [
+            [
+              "UV_CACHE_DIR=.uv-cache .venv/bin/python -m uv lock --check --offline"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F08-SHELL-COMPLETION-DOC-SYNC": [
+            [
+              "rg -n 'Bash .*Zsh, Fish, and PowerShell' docs/shell-completion.md"
+            ],
+            [
+              "PYTHONPATH=src .venv/bin/python -m pytest tests/test_shell_completion.py -q"
+            ],
+            [
+              "git diff --check"
+            ]
+          ],
+          "CLICK-F10-COMMAND-API-INVENTORY": [],
+          "CLICK-F10-R-NESTED-COMPLETION-REVIEW": []
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "command_protocol_text_revision": "claude-bash-separate-command-r1",
+      "duration_hint_method": "click_c125_codex_medium_elapsed_median_per_case",
+      "environment_adjustment": "none",
+      "max_attempts": 3,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "low",
+      "schedule_policy": "wave_barrier",
+      "time_recording": {
+        "code_sha256": {
+          "scripts/agent_shell_environment.py": "6489b8e6b2f2d765599b6d1461982ced7fae577297003d6d40c1510907115823",
+          "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+          "scripts/atomic_run_registry.py": "ccb57571f079f7b93e215784830ac0c30b297e8564a76cc653062517d530e2a1",
+          "scripts/claude_all_agent_evidence.py": "a80660a141385087b9a09981dd00ee5f786c9325c7c467f384f99391201ae35e",
+          "scripts/evaluation_loop.py": "ca50395b5a86642b0454a9615e7ea5a21c481f9822f9fbb1e68a223413657100",
+          "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+          "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+          "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+          "scripts/run_claude_evaluation.py": "a1862aa85fa1599b1c1dc7f53a98b82f63f98dd606536f5168eee579c2ee48cb",
+          "scripts/run_codex_evaluation.py": "37b65b3fe0d5da56e87c8042c36452a7ca70ca7bc686287d54a7ae41b3a83c02",
+          "scripts/standard14_claude_quality_audit.py": "a43ca81e3bb29506cfdbe268b5de52379ade7421467409986e4f729077ec2e03",
+          "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+          "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+        },
+        "contract": "execution-time-recording/r1"
+      },
+      "token_accounting": {
+        "revision": "claude-v1",
+        "scope": "all_agents",
+        "source": "claude_code_transcript_request_usage_dedup_by_message"
+      }
+    },
+    "model": "claude-opus-5-5",
+    "permission": {
+      "mode": "bypassPermissions",
+      "sandbox": "none"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.claude-all-agent-command-evidence/v1",
+      "contract_id": "click-outcome-abstract-condition-preserving-claude-collector-v3",
+      "contract_sha256": "52bc930478afc91175490dee9a75485be121a91e5d7a1eb5c2b86fe47dcc0ecf",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.claude-owner-producer-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "repository": "https://github.com/pallets/click.git",
+      "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+    },
+    "task_spec": {
+      "evaluation_set_id": "click-standard14-r4",
+      "evaluation_set_revision": "r4",
+      "source": "case revision and model-visible trial_prompt_input frozen by Layer 1"
+    }
+  },
+  "evaluation_set": {
+    "revision": "r4",
+    "set_id": "click-standard14-r4"
+  },
+  "execution": {
+    "duration_hints_seconds": {
+      "CLICK-A01-LATENT-CONTEXT-POLICY": 23.625,
+      "CLICK-A02-REPOSITORY-RESOLVABLE-TOX-ROUTING": 89.249,
+      "CLICK-F01-ANSI-SEQUENCE-STRIP": 58.573,
+      "CLICK-F02-STREAM-DEPRECATION-CONTRACT": 86.134,
+      "CLICK-F03-ISOLATED-FILESYSTEM-CLEANUP": 78.417,
+      "CLICK-F04-NESTED-GROUP-COMPLETION": 73.566,
+      "CLICK-F05-CLARIFY-COMMAND-ORDER": 27.271,
+      "CLICK-F05-OS-PYPI-PUBLISH-BOUNDARY": 21.869,
+      "CLICK-F06-RESTORE-ECHO-COLOR-REGRESSION": 61.796,
+      "CLICK-F07-CANONICAL-TOX-RUNNER": 48.379,
+      "CLICK-F07-P-DEPENDENCY-LOCK-PAIR": 67.611,
+      "CLICK-F08-SHELL-COMPLETION-DOC-SYNC": 51.539,
+      "CLICK-F10-COMMAND-API-INVENTORY": 43.825,
+      "CLICK-F10-R-NESTED-COMPLETION-REVIEW": 50.076
+    },
+    "max_attempts": 3,
+    "max_workers": 24,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "iterations": 5,
+  "profile_id": "free-loaded-click-claude-opus55-low-standard14-r4-n5-cli2288-shellenv-20261014-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "c5437e5f5eaac8222896893ecb322903106aa57ff3c79777ff76270de59a0aa2",
+    "name": "click-00e592c-control-free-loaded-instruction-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}
