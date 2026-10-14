@@ -18,7 +18,7 @@
 | [`click-00e592c-repository-authority-r1`](candidates/click-00e592c-repository-authority-r1/manifest.json) | 3 | `fc81314aec37546950daf623509e8b423db32bcff696ee6f7d33bc6342458c3f` | rootなし。既存3 sub本文を維持し、`src/AGENTS.md`へcommand API authorityを追加。F10 Medium N=5評価済み |
 | [`click-00e592c-c81-repository-authority-r1`](candidates/click-00e592c-c81-repository-authority-r1/manifest.json) | 4 | `e3aa97e5417fdcf75cf93480136537fa2f31fda6bb6611b59e97de3e2cc6d277` | C81 root本文とRepository Authority 3本文をbyte-identicalに合成。Std14 r2 Medium評価済み |
 | [`click-00e592c-criterion-complete-single-target-continuation-r1`](candidates/click-00e592c-criterion-complete-single-target-continuation-r1/manifest.json) | 1 | `2a94d070a9f2a4f130f50b33e341d45ece09eeb38113c486acc4bae71a513e3c` | THE-CAPTION Candidate125のroot本文をbyte-identicalに水平適用。Std14 r2 Medium N=5をCLI 0.146.0で評価済み |
-| [`click-00e592c-receive-form-file-read-range-r1`](candidates/click-00e592c-receive-form-file-read-range-r1/manifest.json) | 2 | `78546c434411c0450974f4757edc8bf013ae56e21f3cbebe32ee330e25ae6b74` | THE-CAPTION C316（リリース済み）のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンクを水平適用。Std14 r4をSonnet 5.5 lowで計測 |
+| [`click-00e592c-receive-form-file-read-range-r1`](candidates/click-00e592c-receive-form-file-read-range-r1/manifest.json) | 2 | `78546c434411c0450974f4757edc8bf013ae56e21f3cbebe32ee330e25ae6b74` | THE-CAPTION C316（リリース済み）のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンクを水平適用。Std14 r4をSonnet 5.5 lowで評価済み |
 
 状態列相当の説明は索引用の要約であり、評価状態は[`results/`](../results/README.md)の一次resultを正とする。donor側Candidateの採用・release・projection状態はClickへ継承しない。
 

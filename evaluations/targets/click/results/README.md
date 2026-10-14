@@ -20,5 +20,6 @@
 | [`click 制御なし Sonnet 5.5 low Std14 r2 N=5`](click-free-sonnet55-low-standard14-r2-n5_2026-10-14.md) | `click-standard14-r2` | 70 | Claude Codeでの最初の基準。13ケースは65 / 65 score 4、authorityなしF10はscore 1 × 5。C316と同じ経路と単価表で費用を集計 |
 | [`click 制御なし Sonnet 5.5 low Std14 r3 N=5`](click-free-sonnet55-low-standard14-r3-n5_2026-10-14.md) | `click-standard14-r3` | 70 | A01 r2・F10 r3での基準。70 / 70 score 4。F10はauthorityを読んで一覧を返し、A01は確認して停止した |
 | [`click 制御なし Sonnet 5.5 low Std14 r4 N=5`](click-free-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 現行のSonnet基準。A01 r3は0 / 5（推測して編集・試験）、ほかの13ケースは65 / 65 score 4 |
+| [`click C316 Sonnet 5.5 low Std14 r4 N=5`](click-c316-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 制御なし比で品質+7.69%（A01 0 / 5 → 5 / 5、F06に1件score 1）、費用+16.57%（幅より上）、経過時間−14.48%（幅より下） |
 
 この表は所在と要約だけを示す。評価resultの存在を採用、release、runtime projectionの根拠にしない。
