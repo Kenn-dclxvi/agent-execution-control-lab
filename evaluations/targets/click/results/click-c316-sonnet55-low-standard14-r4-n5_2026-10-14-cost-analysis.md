@@ -101,3 +101,20 @@ C316の5行目（確認のコマンドは終了コードと判断に必要な部
 - 制御なし：`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/click-free-sonnet-standard14-r4-n5-20261014-r1`
 - C316：`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/click-c316-sonnet-standard14-r4-n5-20261014-r1`
 - リクエスト単位の使用量は各runの`claude-adapter/claude-stream.jsonl`（同じAPIメッセージの重複は除いた）、費用の区分は各runの`usage.json`の内訳から求めた。
+
+## 訂正（2026-10-14、同日の追加調査）
+
+上の「原因」の節で、THE-CAPTIONでは制御なしにもプロジェクトの`CLAUDE.md`があるため差が出なかった、と書いた。これは誤りだった。THE-CAPTIONの制御なし（`the-caption-3ce91a4-control-free-repository-r1`）のroot `CLAUDE.md`は空の`AGENTS.md`を指すリンクで、Claude Codeは読み込んでいない（`free-sonnet-admission-20261010-r1`の読み込み記録でroot `CLAUDE.md`は0 / 70件）。
+
+保存済みのClaude Codeの計測を日付順に並べると、違いは計測した日にあった。
+
+| 期間 | root `CLAUDE.md`を読み込まない条件 | root `CLAUDE.md`を読み込む条件 |
+| --- | --- | --- |
+| 2026-10-09〜10-12（THE-CAPTIONのC307〜C317、制御なし） | 課題文までキャッシュから読めたrunは0件（例：制御なしSonnet 0 / 70、制御なしOpus 0 / 70） | 0件 |
+| 2026-10-14（Clickの計測、THE-CAPTIONの確認） | 同じケースの2回目以降は課題文まで読めた（Click r2 60 / 70、r3・r4 70 / 70、空の`CLAUDE.md` 57 / 70、THE-CAPTIONの制御なしF05 3件中2件） | 0件（Click C316 0 / 70） |
+
+THE-CAPTIONのC316と制御なしの比較（10月10日と12日）は、どちらもrun間でキャッシュを共有していない条件どうしで、差は指示文の量だけだった。Clickの比較（10月14日）は、制御なしだけが共有できる条件になっていた。
+
+runごとに違う内容は、保存された記録の範囲では作業ディレクトリのパスだけで、システムプロンプト、表示設定（`contextRendering`など）、添付情報はパス以外一致していた。Claude Codeの版はどの計測も`2.1.288`である。10月12日と14日の間に何が変わったのかは、この記録からは分からない。root `CLAUDE.md`を読み込む条件だけが共有できない理由も、読み込んだ指示が絶対パスとともに課題文より前に入るためという推定のままで、直接は確かめていない。
+
+確認に使った単発の計測（登録しない）：`runs/the-caption-free-cache-check-20261014-r1`（THE-CAPTIONの制御なしF05を3回。1回目は読み取り6,155、2回目と3回目は7,828）。
