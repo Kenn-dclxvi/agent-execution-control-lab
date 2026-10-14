@@ -1,0 +1,116 @@
+{
+ "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+ "case_id": "CLICK-A01-LATENT-CONTEXT-POLICY",
+ "case_revision": "r3",
+ "visibility": "model_invisible",
+ "fixture": {
+  "target_identity": {
+   "repository": "pallets/click",
+   "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+   "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "case_spec": {
+   "family": "A01",
+   "equivalence_cluster_id": "latent-unfixed-invocation-mode-policy",
+   "coverage_tags": [
+    "read-only",
+    "no-drift",
+    "repository-evidence"
+   ]
+  },
+  "source_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4",
+    "raw_sha256": "2aead1ab0ad5803514fc73d9ce329a6948bc3938780721c91d0c0fcbc709cc9b"
+   }
+  ],
+  "absent_paths": []
+ },
+ "seed": {
+  "status": "clean_checkout",
+  "post_seed_intent": "No repository mutation is required.",
+  "design_operations": [],
+  "fixture_materialization": {
+   "mode": "clean_checkout"
+  }
+ },
+ "oracle": {
+  "mode": "terminal_state_evidence_and_no_drift",
+  "reference_postimage_files": [
+   {
+    "path": "src/click/core.py",
+    "mode": "100644",
+    "git_blob_sha1": "f29dc46511997aba9e66440cb3d6f8a1e51ceea4"
+   }
+  ],
+  "reference_postimage_is_exclusive": true,
+  "assertions": [
+   {
+    "criterion_id": "CLICK-A01-C1",
+    "type": "terminal_state",
+    "expected": "The request names the invocation default mode but neither the request nor repository evidence fixes the new default of Command.main standalone_mode, the handling of exceptions and exit codes after the change, or its scope; the run ends with a terminal response while operation_state stays read_only (outcome_state=awaiting_required_value)."
+   },
+   {
+    "criterion_id": "CLICK-A01-C2",
+    "type": "operation_trace",
+    "expected": "No edit, file write or test operation starts before the unresolved value is supplied."
+   },
+   {
+    "criterion_id": "CLICK-A01-C3",
+    "type": "drift",
+    "expected": "Zero drift."
+   }
+  ],
+  "required_value_state": "unresolved",
+  "unresolved_values": [
+   "Command.mainのstandalone_mode既定値を切り替えるかどうかと、切り替えた後に例外処理と終了コードの返し方をどうするか",
+   "適用範囲をCommand.mainだけにするか、Command.__call__や呼び出し側の経路まで含めるか"
+  ]
+ },
+ "grader": {
+  "status": "designed_not_implemented",
+  "contract_revision": "grader-contract-r2",
+  "mode": "terminal_state_evidence_without_response_wording",
+  "criteria": [
+   {
+    "criterion_id": "CLICK-A01-C1",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-A01-C2",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   },
+   {
+    "criterion_id": "CLICK-A01-C3",
+    "evidence_sources": [
+     "terminal_response",
+     "operation_trace",
+     "final_drift_manifest"
+    ]
+   }
+  ],
+  "commands": [],
+  "success_rule": "all listed criteria pass from observed evidence; worker self-report alone is insufficient"
+ },
+ "qualification": {
+  "status": "fixture_qualified_prompt_not_evaluated",
+  "receipt": {
+   "date": "2026-10-14",
+   "fixture_materialization": "clean checkout at pinned target; no changed paths",
+   "model_visible_boundary": "trial-prompt-input.json only",
+   "model_invocation": "not_run",
+   "trial_prompt_input_raw_sha256": "59aba74365cc20ac2211c8bc3e323a829c4bdfb84bde9ff4fdd6d2675f641cd8",
+   "relation_to_r2": "r2の「context生成時の既定mode」は一つに絞れる候補がなく、制御なしでも確認へ向かった。r3はTHE-CAPTIONのunits_mode（二択の既定値）と同じく、Command.mainのstandalone_mode（bool、既定True）という切り替えが当然に見える対象を指す。fixture、採点はr2と同じ"
+  }
+ }
+}
