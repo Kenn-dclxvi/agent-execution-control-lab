@@ -2,6 +2,10 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
+- [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n20-cli0146-r1.json)
+- [`candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate270-natural-language-predicate-bound-validation-result-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
+- [`candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate271-natural-language-validation-ticket-terminal-return-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate272-natural-language-issued-result-permission-removal-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json`](../candidate273-outcome-evidence-core-v14-medium-six-case-astra-m24-n5-cli0153-r2.json)
 - [`candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json`](../candidate274-astra-time-recording-standard14-high-m24-n5-cli0153-r1.json)
@@ -58,7 +62,3 @@
 - [`candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-ambiguity-targeted2-v10-global-m10-n5-r1.json)
 - [`candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-expanded12-f04r2-global-m24-n5-r1.json)
 - [`candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-r1.json)
-- [`candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json`](../candidate41-owner-metadata-delegation-boundary-v10-standard14-global-m24-n5-r1.json)
-- [`candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate42-spec-readiness-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-global-m10-n5-r1.json)
-- [`candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate43-outcome-authority-boundary-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
