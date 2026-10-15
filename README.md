@@ -54,6 +54,24 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 記録：[4モデルの比較](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)。C316に至る経過（C301〜C316）は[results索引](evaluations/results/README.md)と[docs索引](docs/README.md)にあります。
 
+### 別の公開リポジトリ（Click）での確認（2026-10-14〜15）
+
+C316の本文を変えずに[`pallets/click`](https://github.com/pallets/click)のrootへ置き、ClickのStandard14（評価セット`click-standard14-r4`、各5回）で同じ4つのモデルを測りました。THE-CAPTIONとはケース、採点、作業の量が違うため、数値をTHE-CAPTIONの表と直接比べません。
+
+| モデル | 点数分布（Free → C316） | 費用 Free（USD） | 費用 C316（USD） | 費用の差 | 経過時間 Free（秒） | 経過時間 C316（秒） | 経過時間の差 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| GPT-6.1 Sol Low | 4点67件・0点3件 → 4点66件・1点4件 | 0.7288（0.6221〜0.8898） | 0.6362（0.6059〜0.7623） | −12.71%（幅の中） | 414.88 | 344.39 | −16.99%（幅より下） |
+| GPT-6 Astra Low | 4点69件・0点1件 → 4点65件・1点5件 | 4.3002（3.4656〜4.3063） | 3.3927（3.1070〜3.4935） | −21.10%（幅より下） | 458.33 | 385.51 | −15.89%（幅より下） |
+| Claude Code Sonnet 5.5 low | 4点65件・0点5件 → 4点69件・1点1件 | 0.5502（0.5355〜0.6189） | 0.5233（0.5093〜0.5406） | −4.88%（幅より下） | 288.11 | 234.65 | −18.56%（幅より下） |
+| Claude Code Opus 5.5 low | 4点70件 → 4点70件 | 1.0023（0.9967〜1.0137） | 0.9935（0.9648〜1.0123） | −0.88%（幅より下） | 276.02 | 253.38 | −8.20%（幅より下） |
+
+- **A01：** Freeの0点はすべてA01（結果が決まる前に編集や試験へ進んだ）で、C316ではどのモデルでも起きませんでした。ClickのA01は、THE-CAPTIONと同じく二択の既定値（`Command.main`の`standalone_mode`）を指す形にしています。
+- **費用と経過時間：** 4つのモデルすべてで下がりました。費用の下がり方はTHE-CAPTIONより小さく、Clickは1件あたりの作業が小さいため、毎回読み込む指示文の負担が相対的に大きくなります。
+- **C316の1点：** CodexのSol LowとAstra LowのF07-P（計7件）は、TaskSpecが「既存のlockと隣接するgroupから意図を解決する」と指示しているのに、C316の1行目（既存の状態は結果を決める根拠にならない）を理由に利用者へ確認して止まったものです。Claude Codeでは起きませんでした。ほかはAstra LowのF06の2件（自分で実行した探索の失敗で停止）と、Sonnet lowのF06の1件（必要なテストを足さずに終了）です。
+- **Freeの置き方：** Claude Codeは`CLAUDE.md`を読み込むと、同じ課題文のキャッシュを別のrunと共有しなくなります。2026-10-14からは読み込まない条件だけが共有するようになったため、Freeにも指示を含まない1文の`CLAUDE.md`を置いて条件を揃えています（[比較方法](docs/claude-instruction-cache-parity-design.md)）。Claude Codeの2モデルは計測ごとに別の待ち行列、Codexの2モデルはFreeとC316を一つの待ち行列に混ぜて流しました。
+
+記録：[Sonnet](evaluations/targets/click/results/click-free-loaded-c316-sonnet55-low-standard14-r4-n5_2026-10-14.md)、[Opus](evaluations/targets/click/results/click-free-loaded-c316-opus55-low-standard14-r4-n5_2026-10-14.md)、[Sol・Astra](evaluations/targets/click/results/click-free-loaded-c316-sol61-astra6-low-standard14-r4-n5_2026-10-15.md)、[費用の内訳分析](evaluations/targets/click/results/click-c316-sonnet55-low-standard14-r4-n5_2026-10-14-cost-analysis.md)。ケースと評価セットを直した経緯は[Click results索引](evaluations/targets/click/results/README.md)にあります。
+
 ## 実行制御で何が変わったか
 
 新しい基準（2026-10-09以降）で、項目を一つずつ足したり外したりして測り直した結果、分かったことは次のとおりです。
