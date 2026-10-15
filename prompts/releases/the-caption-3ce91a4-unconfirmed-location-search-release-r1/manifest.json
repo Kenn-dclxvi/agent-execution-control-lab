@@ -1,0 +1,200 @@
+{
+  "artifact": {
+    "applied_outside_repository": {
+      "applied_by": "Claude（利用者の指示による）",
+      "applied_on": "2026-10-15",
+      "note": "利用者の個人の共通指示への適用。THE-CAPTION本体へのruntime projectionではない。",
+      "targets": [
+        "~/.claude/CLAUDE.md（「# 実行制御」の節）",
+        "~/.codex/AGENTS.md（全文）"
+      ]
+    },
+    "approval_status": "approved",
+    "artifact_role": "release",
+    "candidate_identity": "the-caption-3ce91a4-unconfirmed-location-search-r1",
+    "evaluation_evidence": [
+      "evaluations/results/c319-four-models-standard14-n5_2026-10-15.md",
+      "evaluations/targets/click/results/click-c319-four-models-standard14-r4-n5_2026-10-15.md",
+      "evaluations/targets/click/results/click-c316-codex-failure-mechanism-analysis_2026-10-15.md",
+      "evaluations/targets/click/results/click-f06-failure-analysis_2026-10-15.md"
+    ],
+    "evaluation_status": "the_caption_and_click_four_models_n5_evaluated",
+    "release_identity": "the-caption-3ce91a4-unconfirmed-location-search-release-r1",
+    "release_status": "released",
+    "scope": "C319のroot AGENTS.mdをそのままreleaseする。C316 release（the-caption-3ce91a4-receive-form-file-read-range-release-r1）の後継。THE-CAPTION本体へは投影しない。",
+    "supersedes_release": "the-caption-3ce91a4-receive-form-file-read-range-release-r1",
+    "unresolved_risks": [
+      "固定Standard14（THE-CAPTION）とClick Standard14 r4の範囲で、各4モデルN=5。",
+      "C316からの変更2文の効果は、ClickのF07-P（既存の状態から結果を決めるよう依頼が指定する場合）と、Codexの存在しない場所の探索で確認した。THE-CAPTIONのStandard14には依頼が結果を既存の状態に委ねるケースがない。",
+      "C316との費用と経過時間の比較は、計測の時間帯が違う。CodexではTHE-CAPTIONのSolで、時間帯のキャッシュの状態によりC316より高く見えたが、作業の量はC316より少なかった。",
+      "ClickのF06でSonnetがテストを足さずに終える判断の落とし穴は、Freeでも起きており、この変更では扱っていない。",
+      "個人の共通指示（全プロジェクト）として置いた場合の効果は計測していない。"
+    ]
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "516945120d2952c0508da76e715c7ea01446f9917175a0be0c0572ccfafb450c",
+  "content_relation": {
+    "changed_targets": [],
+    "kind": "release_snapshot_of_candidate",
+    "source_prompt_identity": "the-caption-3ce91a4-unconfirmed-location-search-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "2b0f02208da5c43c44eded4db51ff9a0504663cb",
+      "mode": "100644",
+      "sha256": "3af855df2a7df39fc0d950ddb0e48ff540a9fe9813900a7b2b86c665274cbafc",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "dc7446eae35eda9f0be9e162f9e81fb2dedcd97b",
+      "mode": "100644",
+      "sha256": "5b11d8b79b2ed9718d0a213ab5dbe5ea45a16ad03f1bfe93c625038d0041f8c8",
+      "target": "docs/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "docs/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "14bf17c23b6b233ceae58800de18ef1844cd1108",
+      "mode": "100644",
+      "sha256": "ce861b947e0c5181b22aa553cb431fd50d356864db228f3283ae7e376de96d3d",
+      "target": "docs/glossary.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "4a85298ded65e9db8bb7c8428f47cf370bdb3297",
+      "mode": "100644",
+      "sha256": "bfd13c7c8e2dd11e3dc1777bf78d9c530d8d5c39fc81a25f13b30fdacb6aad4f",
+      "target": "docs/how-to/index.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "1a25c4600d2e5221fae1a5d25bb2c2b0ac13aa87",
+      "mode": "100644",
+      "sha256": "0bac08fb39548ac35e2b0ba2f6822d760dfc939914b2c0f6da0a21450909a34c",
+      "target": "docs/orchestration-process.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "835aebcdf1b595a42eccb8ed0ab4458cfba54039",
+      "mode": "100644",
+      "sha256": "00424e0cd356dfdf050d59427e591e81d2466b73485045897a6f2e02c27bc414",
+      "target": "docs/prompt-guide.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "b81e630c09d5d06a87b31e19efc4d2163971dd9b",
+      "mode": "100644",
+      "sha256": "12155b2c64e3259e1774d2761ca87162df66b2d548dc3d040fe3ac0beb672ecb",
+      "target": "docs/reference/project-contexts/the-caption.txt",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "8193bba57f46d478c666b43b2192e731af0b2f36",
+      "mode": "100644",
+      "sha256": "6a2f4c67e28ee88f3f67e9b0ed5e4ff51c880c3a0e8f77f1fa50713f9259fb45",
+      "target": "prompts/audit.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "0c55692c42b43125b1e6c605aa4027b75ea24035",
+      "mode": "100644",
+      "sha256": "85257eaae5558461e943bbc93bd0846d5f7db66ef2b6df1692ad574922492bdd",
+      "target": "prompts/implement.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "0d8231ebd32e2fe63269540f6d4f790a52da8d78",
+      "mode": "100644",
+      "sha256": "397c1a47f3236b4249d05dc0127943ceb3b3a5860f906839d96ad55b9b79a885",
+      "target": "prompts/plan.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "17aef2fcea36e7aeac81334fbdaab08754c42906",
+      "mode": "100644",
+      "sha256": "40b4b51def80b54aa035927e95221875ef7ceba2f0cdd0ea77c11ebbc028c200",
+      "target": "prompts/review.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "fa7943fe3d687bc81cb7b1a46fe20ed95c3643c6",
+      "mode": "100644",
+      "sha256": "9ef019f1fda229b56c0c1f0180f8117b91071d83aaaf165608bd59f2d069f897",
+      "target": "scripts/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "scripts/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+      "mode": "100644",
+      "sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377",
+      "target": "src/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "src/CLAUDE.md",
+      "type": "symlink"
+    },
+    {
+      "git_blob_sha1": "062c1ded63a981f88aaf0c22c4d15089ef8d0417",
+      "mode": "100644",
+      "sha256": "d6eb6100a9125256136c3cf928b55aaa2cd7f0dc28f8208defbf654dad8e7bcd",
+      "target": "tests/AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "tests/CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "same_target_map_direct_child",
+    "source_prompt_identity": "the-caption-3ce91a4-outcome-binding-uniform-markdown-r1"
+  },
+  "prompt_identity": "the-caption-3ce91a4-unconfirmed-location-search-release-r1",
+  "provenance": {
+    "candidate_source_commit": "98cad61929b2429beac45ab8f54b5e6480a4a0d5",
+    "design_inputs": [
+      "docs/candidate318-c316-delegated-state-source-design.md",
+      "docs/candidate319-c318-unconfirmed-location-search-design.md",
+      "docs/shared-instruction-evaluation-criteria-r2.md"
+    ],
+    "design_sha256": "f7e4326c04a6dd6ec209348b472a7b57654c5b39d4f23c493bf16a5a74ae36db",
+    "design_status": "complete",
+    "evaluation_status": "evaluated",
+    "runtime_projection_status": "not_projected"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+    "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+    "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

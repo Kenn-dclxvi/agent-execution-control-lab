@@ -28,7 +28,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 比べたプロンプトは次の2つです。中央値は各反復の14ケース合算値を5反復分から算出し、括弧内は5反復の最小〜最大です。
 
 - **Free：** rootの指示（`AGENTS.md`、Claude Codeでは`CLAUDE.md`）だけを空にしたもの。THE-CAPTIONのほかの指示や文書（`src/`・`tests/`などの局所の`AGENTS.md`、`docs/`、`prompts/`）は、C316を含むどの条件でも同じものを置いています。C316との違いは、rootに置いた6行だけです。
-- **C316：** 現在の汎用指示。結果が決まるまで作業を始めない規則、事前調査を絞る規則、完了条件の確認を最後の確認と同じ応答で行いその後は戻らない規則、既定値より短い待機時間を指定しない規則、確認のコマンドを終了コードと判断に必要な出力だけを受け取る形で実行する規則、ファイルの本文を判断に必要な範囲だけ受け取る形で読む規則の6項目です（[設計記録](docs/candidate315-candidate316-c313-file-read-receive-form-design.md)、[本文](prompts/candidates/the-caption-3ce91a4-receive-form-file-read-range-r1/files/AGENTS.md.txt)）。
+- **C316：** 2026-10-12にリリースした汎用指示（2026-10-15からは後継のC319を使っています。下記）。結果が決まるまで作業を始めない規則、事前調査を絞る規則、完了条件の確認を最後の確認と同じ応答で行いその後は戻らない規則、既定値より短い待機時間を指定しない規則、確認のコマンドを終了コードと判断に必要な出力だけを受け取る形で実行する規則、ファイルの本文を判断に必要な範囲だけ受け取る形で読む規則の6項目です（[設計記録](docs/candidate315-candidate316-c313-file-read-receive-form-design.md)、[本文](prompts/candidates/the-caption-3ce91a4-receive-form-file-read-range-r1/files/AGENTS.md.txt)）。
 
 | モデル | 点数分布（Free → C316） | 費用 Free（USD） | 費用 C316（USD） | 費用の差 | 経過時間 Free（秒） | 経過時間 C316（秒） | 経過時間の差 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -97,7 +97,7 @@ C316の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 
 2026-10-08までの旧系列（全エージェント合算トークンを指標とした計測）では、人間の組織を模した出発点（Baseline）からCandidate147までに、不要なワーカー起動の抑制、結論が変わらない場面の再判断の停止、検証の一括化によってトークンを約9割減らしました。その要点は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)にあります。
 
-構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は、2026-10-12にリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いています（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。
+構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は、2026-10-12にリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いています（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。2026-10-15に、C316の後継のC319をリリースして承認し、個人の共通指示をC319に置き換えました。C319は、C316の1行目で依頼が既存の状態から結果を決めるよう指定した場合を除き、2行目に、存在を確かめていない場所へ指示や正本を探しに行かない1文を加えたものです（[リリース記録](prompts/releases/the-caption-3ce91a4-unconfirmed-location-search-release-r1/README.md)）。
 
 | 知りたいこと | 正本 |
 | --- | --- |
