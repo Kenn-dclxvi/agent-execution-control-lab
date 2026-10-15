@@ -30,5 +30,6 @@
 | [`click 制御なし（1文）とC316 4モデル Std14 r4 累積N=20`](click-free-loaded-c316-four-models-standard14-r4-n20_2026-10-15.md) | `click-standard14-r4` | 280 × 8 | C316は4モデルでA01の失敗を0件、費用はSol −16.62%・Astra −16.29%（幅より下）、Sonnet −5.85%・Opus −2.88%（幅の中）。CodexのF07-Pの停止はSol 11 / 20、Astra 10 / 20 |
 | [`click C318 4モデル Std14 r4 N=5`](click-c318-four-models-standard14-r4-n5_2026-10-15.md) | `click-standard14-r4` | 280 | CodexのF07-Pの誤った停止が0件に（C316はSol 4 / 5、Astra 3 / 5）。4点未満はAstraのF06 1件だけ。A01の失敗は4モデルとも0件 |
 | [`ClickのF06で起きた失敗の分析`](click-f06-failure-analysis_2026-10-15.md) | `click-standard14-r4` | 250 | 変更なしで終了（Sonnetだけ、Freeでも発生）はケースの判断の落とし穴。探索の失敗で停止（Astraだけ）は、C316・C318で増えた存在しない`.agents`・`.codex`の探索が前段 |
+| [`click C319 4モデル Std14 r4 N=5`](click-c319-four-models-standard14-r4-n5_2026-10-15.md) | `click-standard14-r4` | 280 + 140 | 失敗する存在しない場所の探索が減り（同時に流したC318比でSol 7 → 3、Astra 11 → 2）、F06の停止は0件（C318の追加分は2件）。費用は同時に流したC318比で約+5〜6% |
 
 この表は所在と要約だけを示す。評価resultの存在を採用、release、runtime projectionの根拠にしない。

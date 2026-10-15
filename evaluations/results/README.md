@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C319の4モデル（2026-10-15）](#c319-four-models-20261015)
 - [C318の4モデル（2026-10-15）](#c318-four-models-20261015)
 - [C316の累積N=20、3モデルのケース別分析（2026-10-13）](#c316-n20-per-case-20261013)
 - [C316のGPT-6 Astra Low 累積N=20（2026-10-13）](#c316-astra-n20-20261013)
@@ -206,6 +207,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c319-four-models-20261015"></a>
+## C319の4モデル（2026-10-15）
+
+[計測記録](c319-four-models-standard14-n5_2026-10-15.md)。C318の2行目に、指示や正本は依頼が名指ししたものと作業ツリーで見つかったものだけを使い、存在を確かめていない場所を指定して探さない1文を加えたCandidate319（[設計記録](../../docs/candidate319-c318-unconfirmed-location-search-design.md)）。4モデルとも4点70件。Codexで存在しない`.agents`・`.codex`を指定して失敗する探索が、SolでC318の15 / 70件から1 / 70件、Astraで4 / 70件から0 / 70件に減った（Freeでは20 / 70件、7 / 70件）。費用と経過時間はC318より増えたが、別の時間帯の比較で、同じ時間帯に流したClickのCodexでは約+5〜6%だった。採用は未判断。
 
 <a id="c318-four-models-20261015"></a>
 ## C318の4モデル（2026-10-15）
