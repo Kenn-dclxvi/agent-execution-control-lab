@@ -28,7 +28,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 比べたプロンプトは次の2つです。中央値は各反復の14ケース合算値を5反復分から算出し、括弧内は5反復の最小〜最大です。
 
 - **Free：** rootの指示（`AGENTS.md`、Claude Codeでは`CLAUDE.md`）だけを空にしたもの。THE-CAPTIONのほかの指示や文書（`src/`・`tests/`などの局所の`AGENTS.md`、`docs/`、`prompts/`）は、C316を含むどの条件でも同じものを置いています。C316との違いは、rootに置いた6行だけです。
-- **C316：** 現在の汎用指示。結果が決まるまで作業を始めない規則、事前調査を絞る規則、完了条件の確認を最後の確認と同じ応答で行いその後は戻らない規則、既定値より短い待機時間を指定しない規則、確認のコマンドを終了コードと判断に必要な出力だけを受け取る形で実行する規則、ファイルの本文を判断に必要な範囲だけ受け取る形で読む規則の6項目です（[設計記録](docs/candidate315-candidate316-c313-file-read-receive-form-design.md)、[本文](prompts/candidates/the-caption-3ce91a4-receive-form-file-read-range-r1/files/AGENTS.md.txt)）。
+- **C316：** 2026-10-12にリリースした汎用指示（2026-10-15からは後継のC319を使っています。下記）。結果が決まるまで作業を始めない規則、事前調査を絞る規則、完了条件の確認を最後の確認と同じ応答で行いその後は戻らない規則、既定値より短い待機時間を指定しない規則、確認のコマンドを終了コードと判断に必要な出力だけを受け取る形で実行する規則、ファイルの本文を判断に必要な範囲だけ受け取る形で読む規則の6項目です（[設計記録](docs/candidate315-candidate316-c313-file-read-receive-form-design.md)、[本文](prompts/candidates/the-caption-3ce91a4-receive-form-file-read-range-r1/files/AGENTS.md.txt)）。
 
 | モデル | 点数分布（Free → C316） | 費用 Free（USD） | 費用 C316（USD） | 費用の差 | 経過時間 Free（秒） | 経過時間 C316（秒） | 経過時間の差 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -54,6 +54,27 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 記録：[4モデルの比較](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)。C316に至る経過（C301〜C316）は[results索引](evaluations/results/README.md)と[docs索引](docs/README.md)にあります。
 
+### 別の公開リポジトリ（Click）での確認（2026-10-14〜15）
+
+C316の本文を変えずに[`pallets/click`](https://github.com/pallets/click)のrootへ置き、ClickのStandard14（評価セット`click-standard14-r4`）で同じ4つのモデルを累積N=20（各280件）まで測りました。THE-CAPTIONとはケース、採点、作業の量が違うため、数値をTHE-CAPTIONの表と直接比べません。
+
+| モデル | 4点未満（Free → C316） | 費用 Free（USD） | 費用 C316（USD） | 費用の差 | 経過時間 Free（秒） | 経過時間 C316（秒） | 経過時間の差 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| GPT-6.1 Sol Low | A01 8件 → F07-P 11件 | 0.6483（0.5730〜0.8898） | 0.5406（0.4558〜0.7623） | −16.62%（幅より下） | 391.84 | 352.07 | −10.15%（幅より下） |
+| GPT-6 Astra Low | A01 5件 → F07-P 10件・F06 2件 | 3.6281（3.2462〜4.3063） | 3.0372（2.6457〜3.4935） | −16.29%（幅より下） | 482.16 | 438.59 | −9.04%（幅の中） |
+| Claude Code Sonnet 5.5 low | A01 17件・F06 1件 → F06 2件 | 0.5542（0.5215〜0.6189） | 0.5218（0.4924〜0.5406） | −5.85%（幅の中） | 246.99 | 227.28 | −7.98%（幅より下） |
+| Claude Code Opus 5.5 low | なし → なし | 1.0022（0.9599〜1.0526） | 0.9733（0.9498〜1.0123） | −2.88%（幅の中） | 275.51 | 253.60 | −7.95%（幅より下） |
+
+括弧内は20反復の最小〜最大で、位置はFreeの幅に対するものです。
+
+- **A01：** Freeの0点はすべてA01（結果が決まる前に編集や試験へ進んだ）で、C316ではどのモデルでも起きませんでした。ClickのA01は、THE-CAPTIONと同じく二択の既定値（`Command.main`の`standalone_mode`）を指す形にしています。
+- **費用と経過時間：** 4つのモデルすべてで下がりました。費用がFreeの幅より下になったのはCodexの2モデルで、Claude Codeの2モデルは幅の中でした。Clickは1件あたりの作業が小さいため、毎回読み込む指示文の負担が相対的に大きくなります。
+- **C316の1点（Codex）：** Sol LowとAstra LowのF07-Pでは、約半数のrunが、TaskSpecの「既存のlockと隣接するgroupから意図を解決する」という指示とC316の1行目（既存の状態は結果を決める根拠にならない）の衝突で、利用者へ確認して止まりました。FreeとClaude Codeでは起きていません（[仕組みの分析](evaluations/targets/click/results/click-c316-codex-failure-mechanism-analysis_2026-10-15.md)）。THE-CAPTIONのStandard14には、依頼が結果を既存の状態に委ねるケースがありません。
+- **F06の1点：** 既存のテストで足りると判断して必要なテストを足さない見落としは、SonnetのFreeでも起きました。AstraのC316の2件は、自分で実行した探索の失敗で止まったものです。
+- **Freeの置き方：** Claude Codeは`CLAUDE.md`を読み込むと、同じ課題文のキャッシュを別のrunと共有しなくなります。2026-10-14からは読み込まない条件だけが共有するようになったため、Freeにも指示を含まない1文の`CLAUDE.md`を置いて条件を揃えています（[比較方法](docs/claude-instruction-cache-parity-design.md)）。Claude Codeの2モデルは計測ごとに別の待ち行列、Codexの2モデルはFreeとC316を一つの待ち行列に混ぜて流しました。
+
+記録：[累積N=20の4モデル](evaluations/targets/click/results/click-free-loaded-c316-four-models-standard14-r4-n20_2026-10-15.md)、[費用の内訳分析](evaluations/targets/click/results/click-c316-sonnet55-low-standard14-r4-n5_2026-10-14-cost-analysis.md)。N=5の記録と、ケースと評価セットを直した経緯は[Click results索引](evaluations/targets/click/results/README.md)にあります。
+
 ## 実行制御で何が変わったか
 
 新しい基準（2026-10-09以降）で、項目を一つずつ足したり外したりして測り直した結果、分かったことは次のとおりです。
@@ -76,7 +97,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 2026-10-08までの旧系列（全エージェント合算トークンを指標とした計測）では、人間の組織を模した出発点（Baseline）からCandidate147までに、不要なワーカー起動の抑制、結論が変わらない場面の再判断の停止、検証の一括化によってトークンを約9割減らしました。その要点は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)にあります。
 
-構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は、2026-10-12にリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いています（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。
+構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準のC316は、2026-10-12にリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置いています（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）。2026-10-15に、C316の後継のC319をリリースして承認し、個人の共通指示をC319に置き換えました。C319は、C316の1行目で依頼が既存の状態から結果を決めるよう指定した場合を除き、2行目に、存在を確かめていない場所へ指示や正本を探しに行かない1文を加えたものです（[リリース記録](prompts/releases/the-caption-3ce91a4-unconfirmed-location-search-release-r1/README.md)）。
 
 | 知りたいこと | 正本 |
 | --- | --- |

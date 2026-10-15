@@ -1,0 +1,70 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-receive-form-file-read-range-r1",
+    "change_reason": "C316の1行目の2文目を、依頼や指示が既存の状態などから結果を決めるよう指定していない場合に限る。ClickのF07-Pで、TaskSpecが既存lockと隣接groupから意図を解決するよう指定しているのに、Codexが2文目を理由に利用者へ確認して止まった（累積N=20でSol 11 / 20、Astra 10 / 20）。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "C316のほかの項目の変更",
+      "TaskSpec、case、評価セット、採点の変更",
+      "採用判断",
+      "release判断",
+      "本体への反映"
+    ],
+    "problem": "1行目の2文目が既存の状態を例外なく結果の根拠にならないと言い切っており、依頼が結果の決め方を既存の状態に指定した場合と衝突する。",
+    "scope": "root AGENTS.mdの1行目の2文目だけを変える。ほかの5項目、1行目のほかの文、ほかのtargetはC316と同一。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "24a1f47997809da7aeb5ae522ee075f25a9cec1a9c014e4009f4fdfb0f679cab",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "click-00e592c-receive-form-file-read-range-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "21e5b72920e99a90817fab3356fa28b506391d92",
+      "mode": "100644",
+      "sha256": "377d44a336dd67ee20db59ddd243c6e65e7d961c32c608b4cb0bfdff51f9ff67",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "same_path_set",
+    "source_prompt_identity": "click-00e592c-receive-form-file-read-range-r1"
+  },
+  "prompt_identity": "click-00e592c-delegated-state-source-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "design_inputs": [
+      "docs/candidate318-c316-delegated-state-source-design.md"
+    ],
+    "design_status": "complete",
+    "donor_prompt_identity": "the-caption-3ce91a4-delegated-state-source-r1",
+    "donor_targets": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "Click向けtarget mapはroot AGENTS.mdとroot CLAUDE.md（AGENTS.mdへのリンク）の2件とし、THE-CAPTION C318の同じ2件の本文をbyte-identicalに保持する。"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

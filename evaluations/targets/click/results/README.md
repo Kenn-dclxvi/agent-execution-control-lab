@@ -25,5 +25,11 @@
 | [`click 制御なし（空のCLAUDE.md）Sonnet 5.5 low Std14 r4 N=5`](click-free-claude-md-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 | 空のCLAUDE.mdは読み込まれず、キャッシュのふるまいは制御なしと同じ。C316比は費用+11.87% |
 | [`click 制御なし（読み込まれる1文）とC316 Sonnet 5.5 low Std14 r4 N=5`](click-free-loaded-c316-sonnet55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 + 70 | キャッシュの条件を揃えた比較。C316は品質+7.69%、費用−4.88%、経過時間−18.56%（いずれも基準の幅の外で良い側） |
 | [`click 制御なし（読み込まれる1文）とC316 Opus 5.5 low Std14 r4 N=5`](click-free-loaded-c316-opus55-low-standard14-r4-n5_2026-10-14.md) | `click-standard14-r4` | 70 + 70 | 両条件とも70 / 70 score 4（OpusはFreeでもA01で確認停止）。C316は費用−0.88%、経過時間−8.20%（ともに幅より下） |
+| [`click 制御なし（1文）とC316 Sol Low・Astra Low Std14 r4 N=5`](click-free-loaded-c316-sol61-astra6-low-standard14-r4-n5_2026-10-15.md) | `click-standard14-r4` | 280 | C316は両モデルでA01の失敗を0件にし経過時間−16〜17%、費用はSol −12.71%（幅の中）・Astra −21.10%（幅より下）。F07-P・F06でC316だけの誤った停止が計9件 |
+| [`ClickのCodexでC316だけに出た失敗の分析`](click-c316-codex-failure-mechanism-analysis_2026-10-15.md) | `click-standard14-r4` | 140 + 140 | F07-Pの停止（7件）はC316の1行目とTaskSpecの指示の衝突による変化。F06の停止（2件）は、C316で約20倍に増えた存在しない場所の探索が、まれに停止へつながったもの |
+| [`click 制御なし（1文）とC316 4モデル Std14 r4 累積N=20`](click-free-loaded-c316-four-models-standard14-r4-n20_2026-10-15.md) | `click-standard14-r4` | 280 × 8 | C316は4モデルでA01の失敗を0件、費用はSol −16.62%・Astra −16.29%（幅より下）、Sonnet −5.85%・Opus −2.88%（幅の中）。CodexのF07-Pの停止はSol 11 / 20、Astra 10 / 20 |
+| [`click C318 4モデル Std14 r4 N=5`](click-c318-four-models-standard14-r4-n5_2026-10-15.md) | `click-standard14-r4` | 280 | CodexのF07-Pの誤った停止が0件に（C316はSol 4 / 5、Astra 3 / 5）。4点未満はAstraのF06 1件だけ。A01の失敗は4モデルとも0件 |
+| [`ClickのF06で起きた失敗の分析`](click-f06-failure-analysis_2026-10-15.md) | `click-standard14-r4` | 250 | 変更なしで終了（Sonnetだけ、Freeでも発生）はケースの判断の落とし穴。探索の失敗で停止（Astraだけ）は、C316・C318で増えた存在しない`.agents`・`.codex`の探索が前段 |
+| [`click C319 4モデル Std14 r4 N=5`](click-c319-four-models-standard14-r4-n5_2026-10-15.md) | `click-standard14-r4` | 280 + 140 | 費用はFree比で4モデルとも幅より下、C316比は4モデルとも幅の中（−3.21%〜−0.07%）。C316で起きたF07-Pの停止と探索の失敗による停止は0件。4点未満はSonnetのF06の判断の落とし穴1件 |
 
 この表は所在と要約だけを示す。評価resultの存在を採用、release、runtime projectionの根拠にしない。

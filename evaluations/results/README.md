@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C319の4モデル（2026-10-15）](#c319-four-models-20261015)
+- [C318の4モデル（2026-10-15）](#c318-four-models-20261015)
 - [C316の累積N=20、3モデルのケース別分析（2026-10-13）](#c316-n20-per-case-20261013)
 - [C316のGPT-6 Astra Low 累積N=20（2026-10-13）](#c316-astra-n20-20261013)
 - [C317のSonnet 5.5 low（2026-10-12）](#c317-sonnet-low-20261012)
@@ -205,6 +207,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c319-four-models-20261015"></a>
+## C319の4モデル（2026-10-15）
+
+[計測記録](c319-four-models-standard14-n5_2026-10-15.md)。C316に、1行目の1文（C318）と2行目の1文（指示や正本は依頼が名指ししたものと作業ツリーで見つかったものだけを使い、存在を確かめていない場所を指定して探さない）を加えたCandidate319（[設計記録](../../docs/candidate319-c318-unconfirmed-location-search-design.md)）。4モデルとも4点70件。費用はFree比で4モデルとも幅より下（−9.66%〜−35.11%）、C316比はSol以外の3モデルで幅の中。SolのC316比+29.34%は、測った時間帯にキャッシュに乗らなかったrunが多かったためで、作業の量はC316より少なかった。Codexで存在しない`.agents`・`.codex`を指定して失敗する探索がほぼなくなった（Sol：Free 20、C316 13、C319 1 / 70件）。採用は未判断。
+
+<a id="c318-four-models-20261015"></a>
+## C318の4モデル（2026-10-15）
+
+[計測記録](c318-four-models-standard14-n5_2026-10-15.md)。C316の1行目の2文目を、依頼や指示が既存の状態などから結果を決めるよう指定していない場合に限るCandidate318（[設計記録](../../docs/candidate318-c316-delegated-state-source-design.md)）。Sol Low、Astra Low、Sonnet low、Opus lowの4モデルとも4点70件で、保存済みのC316と同じだった。費用はC316比でSol +2.92%（幅の中）、Astra −15.62%（幅より下）、Sonnet −3.21%（幅より下）、Opus +0.39%（幅の中）。Clickでの結果は[ClickのC318](../targets/click/results/click-c318-four-models-standard14-r4-n5_2026-10-15.md)。採用は未判断。
 
 <a id="c316-n20-per-case-20261013"></a>
 ## C316の累積N=20、3モデルのケース別分析（2026-10-13）
