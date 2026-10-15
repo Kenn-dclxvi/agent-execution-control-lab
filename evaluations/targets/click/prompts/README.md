@@ -22,6 +22,7 @@
 | [`click-00e592c-criterion-complete-single-target-continuation-r1`](candidates/click-00e592c-criterion-complete-single-target-continuation-r1/manifest.json) | 1 | `2a94d070a9f2a4f130f50b33e341d45ece09eeb38113c486acc4bae71a513e3c` | THE-CAPTION Candidate125のroot本文をbyte-identicalに水平適用。Std14 r2 Medium N=5をCLI 0.146.0で評価済み |
 | [`click-00e592c-receive-form-file-read-range-r1`](candidates/click-00e592c-receive-form-file-read-range-r1/manifest.json) | 2 | `78546c434411c0450974f4757edc8bf013ae56e21f3cbebe32ee330e25ae6b74` | THE-CAPTION C316（リリース済み）のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンクを水平適用。Std14 r4をSonnet 5.5 lowで評価済み |
 | [`click-00e592c-delegated-state-source-r1`](candidates/click-00e592c-delegated-state-source-r1/manifest.json) | 2 | `24a1f47997809da7aeb5ae522ee075f25a9cec1a9c014e4009f4fdfb0f679cab` | THE-CAPTION C318のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンクを水平適用。Std14 r4を4モデルで評価済み |
+| [`click-00e592c-unconfirmed-location-search-r1`](candidates/click-00e592c-unconfirmed-location-search-r1/manifest.json) | 2 | `6fa96f2d6b72c4b0b9f3c2955e26dc4875ef36ca9152f6b605714a3d8b0cb462` | THE-CAPTION C319のroot `AGENTS.md`と、それを指す`CLAUDE.md`のリンクを水平適用。未評価 |
 
 状態列相当の説明は索引用の要約であり、評価状態は[`results/`](../results/README.md)の一次resultを正とする。donor側Candidateの採用・release・projection状態はClickへ継承しない。
 

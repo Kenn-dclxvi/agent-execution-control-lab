@@ -1,0 +1,70 @@
+{
+  "artifact": {
+    "artifact_role": "candidate",
+    "baseline_identity": "click-00e592c-delegated-state-source-r1",
+    "change_reason": "C318の2行目（事前調査）に、指示や正本は依頼が名指ししたものと作業ツリーで見つかったものだけを使い、存在を確かめていない場所を指定して探さない、という1文を加える。ClickのF06で、Codexが存在しない.agents・.codexを指定して探し、その失敗を環境failureと見なして停止した（C316 2 / 20、C318 1 / 5）。同じ探索はTHE-CAPTIONのFreeでも起きていた。",
+    "evaluation_status": "not_evaluated",
+    "non_goals": [
+      "C318のほかの項目の変更",
+      "TaskSpec、case、評価セット、採点の変更",
+      "採用判断",
+      "release判断",
+      "本体への反映"
+    ],
+    "problem": "指示や正本をどこに探してよいかが限られておらず、Codexがエージェントの決まった場所を、存在を確かめないまま指定して探す。",
+    "scope": "root AGENTS.mdの2行目に1文を加える。ほかの項目と文、ほかのtargetはC318と同一。",
+    "state": "draft"
+  },
+  "bundle_hash_algorithm": "sha256(canonical-json({schema_version,files}))",
+  "bundle_sha256": "6fa96f2d6b72c4b0b9f3c2955e26dc4875ef36ca9152f6b605714a3d8b0cb462",
+  "content_relation": {
+    "changed_targets": [
+      "AGENTS.md"
+    ],
+    "kind": "direct_child_full_bundle",
+    "source_prompt_identity": "click-00e592c-delegated-state-source-r1"
+  },
+  "files": [
+    {
+      "git_blob_sha1": "2b0f02208da5c43c44eded4db51ff9a0504663cb",
+      "mode": "100644",
+      "sha256": "3af855df2a7df39fc0d950ddb0e48ff540a9fe9813900a7b2b86c665274cbafc",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "git_blob_sha1": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "link_target": "AGENTS.md",
+      "mode": "120000",
+      "target": "CLAUDE.md",
+      "type": "symlink"
+    }
+  ],
+  "manifest_relation": {
+    "kind": "same_path_set",
+    "source_prompt_identity": "click-00e592c-delegated-state-source-r1"
+  },
+  "prompt_identity": "click-00e592c-unconfirmed-location-search-r1",
+  "provenance": {
+    "construction_repository": "https://github.com/Kenn-dclxvi/agent-execution-control-lab.git",
+    "design_inputs": [
+      "docs/candidate319-c318-unconfirmed-location-search-design.md"
+    ],
+    "design_status": "complete",
+    "donor_prompt_identity": "the-caption-3ce91a4-unconfirmed-location-search-r1",
+    "donor_targets": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "evaluation_status": "not_evaluated",
+    "runtime_projection_status": "not_projected",
+    "source_interpretation": "Click向けtarget mapはroot AGENTS.mdとroot CLAUDE.md（AGENTS.mdへのリンク）の2件とし、THE-CAPTION C319の同じ2件の本文をbyte-identicalに保持する。"
+  },
+  "schema_version": "the-caption-prompt.bundle/v1",
+  "source": {
+    "commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+    "repository": "https://github.com/pallets/click.git",
+    "tree": "c6aa87f15f2e44a6fcab33714e1eb91e2552d816"
+  },
+  "storage_format": "instruction-suffixed/v1"
+}

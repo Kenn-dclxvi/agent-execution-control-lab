@@ -125,6 +125,7 @@
 - [Candidate315・Candidate316 C313から担当の項目を外し、ファイルの本文を判断に必要な範囲だけ受け取る形で読む](candidate315-candidate316-c313-file-read-receive-form-design.md)：試験で測れない担当の項目を外し（C315）、Solの長いファイルの全文取得を、C312の書き方で扱う一項目を加える（C316）設計。
 - [Candidate317 C316に、完了の報告の形を加える](candidate317-c316-report-form-design.md)：Sonnet lowの出力で最も大きい完了の報告を、依頼が示した条件ごとの結果と確認の結果だけにする設計。
 - [Candidate318 C316の1行目で、依頼が既存の状態から結果を決めるよう指定した場合を除く](candidate318-c316-delegated-state-source-design.md)：ClickのF07-Pで、TaskSpecが既存lockと隣接groupから意図を解決するよう指定しているのに、Codexが1行目の2文目を理由に止まった誤りに対応する。
+- [Candidate319 C318に、存在を確かめていない場所へ指示や正本を探しに行かないことを加える](candidate319-c318-unconfirmed-location-search-design.md)：ClickのF06で、Codexが存在しない`.agents`・`.codex`を探し、その失敗を環境failureと見なして停止した劣化に対応する。同じ探索はTHE-CAPTIONのFreeでも起きていた。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 - [Sol Lowの費用を要素に分ける（r1）](sol-cost-element-decomposition-r1.md)：旧系列のSol Lowを費用で数え直し、生のトークンで31〜39%減ったCandidateが費用では1〜8%減にとどまることを確かめた。戻る回数を減らす機序は主にキャッシュ読み取りを減らし、キャッシュに乗らない入力は増えていた。プロンプトで減らせる最大の要素は、指示ファイル以外のファイルの全文取得（C301のSolで約230KB/反復）。Candidateは未作成
