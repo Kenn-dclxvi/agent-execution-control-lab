@@ -69,3 +69,7 @@ C316で探索が増えた理由は、1行目の「それが従うよう求めて
 
 - 計測ディレクトリ：`/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/click-free-loaded-codex-standard14-r4-n5-20261015-r1`、`runs/click-c316-codex-standard14-r4-n5-20261015-r1`
 - 集計には、各runの`rating-view/final-response.txt`と`all-agent-command-evidence/evidence.json`の`attempted_commands`・`failed_commands`を使った。
+
+## 累積N=20での確認（2026-10-15追記）
+
+[累積N=20](click-free-loaded-c316-four-models-standard14-r4-n20_2026-10-15.md)では、F07-Pの停止はC316でSol 11 / 20、Astra 10 / 20、制御なしは0 / 40だった。止まった21件はすべて最終応答でC316の1行目を理由に挙げた。AstraのF06の停止は追加の15回では起きず、20回中2件だった。F06でテストを足さずに終わる見落としはSonnetの制御なしでも1件起きており、F06のこの見落としは制御なしでも起こりうる。
