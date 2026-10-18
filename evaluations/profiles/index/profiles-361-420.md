@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate217-review-proposition-operand-closure-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate217-review-proposition-operand-closure-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate218-review-input-carrier-ownership-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate218-review-input-carrier-ownership-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json`](../candidate219-review-evidence-consumer-admission-adr9-r2-medium-m24-n5-cli0146-r1.json)
 - [`candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json`](../candidate22-owner-worker-lifecycle-owner-producer-v1-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate265-instruction-result-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate265-instruction-result-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate266-declared-instruction-descendant-read-dependency-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate266-declared-instruction-descendant-read-dependency-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
 - [`candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate267-declared-instruction-read-permission-restoration-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
-- [`candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json`](../candidate268-natural-language-result-read-boundary-v14-reasoning-medium-f01-f02-f03-f10-entrypoint-global-m24-n5-cli0146-r1.json)
