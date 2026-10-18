@@ -57,9 +57,9 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 記録：[C319の4モデル](evaluations/results/c319-four-models-standard14-n5_2026-10-15.md)、[FreeとC316の4モデル](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)。C319に至る経過（C301〜C319）は[results索引](evaluations/results/README.md)と[docs索引](docs/README.md)にあります。
 
-### 別の公開リポジトリ（Click）での確認（2026-10-14〜15）
+### 別の公開リポジトリ（Click）での確認（2026-10-14〜18）
 
-C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)のrootへ置き、ClickのStandard14（評価セット`click-standard14-r4`）で同じ4つのモデルを各N=5で測りました。THE-CAPTIONとはケース、採点、作業の量が違うため、数値をTHE-CAPTIONの表と直接比べません。
+C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)のrootへ置き、ClickのStandard14（評価セット`click-standard14-r4`）で同じ4つのモデルを各N=5で測りました。2026-10-18には、Claude Code Fable 5.1 lowでもFreeとC319を各N=5で測りました。THE-CAPTIONとはケース、採点、作業の量が違うため、数値をTHE-CAPTIONの表と直接比べません。
 
 | モデル | 4点未満（Free → C319） | 費用 Free（USD） | 費用 C319（USD） | 費用の差 | 経過時間 Free（秒） | 経過時間 C319（秒） | 経過時間の差 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -67,11 +67,12 @@ C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 | GPT-6 Astra Low | A01 1件 → なし | 4.3002（3.4656〜4.3063） | 3.2875（3.0134〜3.3295） | −23.55%（幅より下） | 458.33 | 594.45 | +29.70%（幅より上） |
 | Claude Code Sonnet 5.5 low | A01 5件 → F06 1件 | 0.5502（0.5355〜0.6189） | 0.5229（0.5049〜0.5396） | −4.95%（幅より下） | 288.11 | 236.73 | −17.83%（幅より下） |
 | Claude Code Opus 5.5 low | なし → なし | 1.0023（0.9967〜1.0137） | 0.9768（0.9582〜1.0221） | −2.55%（幅より下） | 276.02 | 241.12 | −12.64%（幅より下） |
+| Claude Code Fable 5.1 low | A01 4件 → なし | 3.5322（3.3770〜3.8801） | 3.2055（3.0069〜3.3460） | −9.25%（幅より下） | 625.28 | 467.34 | −25.26%（幅より下） |
 
-括弧内は5反復の最小〜最大で、位置はFreeの幅に対するものです。
+括弧内は5反復の最小〜最大で、位置はFreeの幅に対するものです。Fable 5.1の費用は、Fable 5.1の単価を加えた単価表`api-standard-2026-10-18`で数えた値です（ほかのモデルの単価は前の版と同じです）。
 
-- **A01：** Freeの0点はすべてA01（結果が決まる前に編集や試験へ進んだ）で、C319ではどのモデルでも起きませんでした。ClickのA01は、THE-CAPTIONと同じく二択の既定値（`Command.main`の`standalone_mode`）を指す形にしています。
-- **費用：** 4つのモデルすべてでFreeの幅より下になりました。Clickは1件あたりの作業が小さいため、Claude Codeの2モデルでは下がり方が小さくなっています。CodexはC319を別の時間帯に測っており、経過時間の延びを変更による差とは断定しません。
+- **A01：** Freeの0点はすべてA01（結果が決まる前に編集や試験へ進んだ）で、C319ではFable 5.1を含むどのモデルでも起きませんでした。ClickのA01は、THE-CAPTIONと同じく二択の既定値（`Command.main`の`standalone_mode`）を指す形にしています。
+- **費用：** Fable 5.1を含む5つのモデルすべてでFreeの幅より下になりました。Clickは1件あたりの作業が小さいため、Claude Codeの2モデルでは下がり方が小さくなっています。CodexはC319を別の時間帯に測っており、経過時間の延びを変更による差とは断定しません。
 - **C316で起きていた失敗：** C316では、CodexのF07-Pで、TaskSpecの「既存のlockと隣接するgroupから意図を解決する」という指示とC316の1行目の衝突で、約半数のrunが利用者へ確認して止まりました（[仕組みの分析](evaluations/targets/click/results/click-c316-codex-failure-mechanism-analysis_2026-10-15.md)）。AstraのF06では、存在しない場所の探索の失敗で止まったrunもありました（[分析](evaluations/targets/click/results/click-f06-failure-analysis_2026-10-15.md)）。C319では、どちらも0件でした。
 - **F06の1点（Sonnet）：** 既存のテストで足りると判断して必要なテストを足さない見落としで、SonnetのFreeでも起きています。
 - **Freeの置き方：** Claude Codeは`CLAUDE.md`を読み込むと、同じ課題文のキャッシュを別のrunと共有しなくなります。2026-10-14からは読み込まない条件だけが共有するようになったため、Freeにも指示を含まない1文の`CLAUDE.md`を置いて条件を揃えています（[比較方法](docs/claude-instruction-cache-parity-design.md)）。
