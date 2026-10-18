@@ -1,4 +1,4 @@
-# Profile index 661-699
+# Profile index 661-700
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
@@ -25,6 +25,7 @@
 - [`four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json`](../four-verified-lines-ablation-sol6-medium-standard14-n5-cli0156-r1.json)
 - [`free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-astra6-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json`](../free-astra6-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json)
+- [`free-claude-fable51-low-standard14-n5-cli2288-shellenv-20261018-r1.json`](../free-claude-fable51-low-standard14-n5-cli2288-shellenv-20261018-r1.json)
 - [`free-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../free-claude-opus55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
 - [`free-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 - [`free-claude-opus55-medium-standard14-n5-cli2288-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2288-r1.json)
