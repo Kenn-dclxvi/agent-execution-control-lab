@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate66-topology-preserving-compression-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json`](../candidate66-topology-preserving-compression-fixed-evidence-review-f10-v9-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate66-topology-preserving-compression-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate66-topology-preserving-compression-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate67-cross-label-predicate-deduplication-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate67-cross-label-predicate-deduplication-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate67-cross-label-predicate-deduplication-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate67-cross-label-predicate-deduplication-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-fixed-evidence-review-f10-global-m10-n5-catalog-fixed-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-fixed-evidence-review-f10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate81-validation-wrapper-precedence-v13-reasoning-medium-standard14-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v13-reasoning-medium-standard14-global-m24-n5-r1.json)
 - [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-a01-global-m24-n5-r1.json)
-- [`candidate81-validation-wrapper-precedence-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json`](../candidate81-validation-wrapper-precedence-v14-reasoning-medium-a02-global-m5-n5-cli0146-r1.json)
