@@ -61,7 +61,7 @@ THE-CAPTIONを対象にしたStandard14（STD14、全14ケース）を各5回（
 
 記録：[C319の4モデル](evaluations/results/c319-four-models-standard14-n5_2026-10-15.md)、[FreeとC316の4モデル](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)。C319に至る経過（C301〜C319）は[results索引](evaluations/results/README.md)と[docs索引](docs/README.md)にあります。
 
-### 別の公開リポジトリ（Click）での確認（2026-10-14〜18）
+### 別の公開リポジトリ（Click）での確認（2026-10-14〜28）
 
 C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)のrootへ置き、ClickのStandard14（評価セット`click-standard14-r4`）で同じ4つのモデルを各N=5で測りました。2026-10-18には、Claude Code Fable 5.1 lowでもFreeとC319を各N=5で測りました。2026-10-27〜28には、GPT-6.1 Terra LowでもFreeとC319を各N=5で測りました。THE-CAPTIONとはケース、採点、作業の量が違うため、数値をTHE-CAPTIONの表と直接比べません。
 
@@ -83,6 +83,22 @@ C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 - **Freeの置き方：** Claude Codeは`CLAUDE.md`を読み込むと、同じ課題文のキャッシュを別のrunと共有しなくなります。2026-10-14からは読み込まない条件だけが共有するようになったため、Freeにも指示を含まない1文の`CLAUDE.md`を置いて条件を揃えています（[比較方法](docs/claude-instruction-cache-parity-design.md)）。
 
 記録：[ClickのC319の4モデル](evaluations/targets/click/results/click-c319-four-models-standard14-r4-n5_2026-10-15.md)。C316を累積N=20まで測った記録（[4モデル](evaluations/targets/click/results/click-free-loaded-c316-four-models-standard14-r4-n20_2026-10-15.md)）と、ケースと評価セットを直した経緯は[Click results索引](evaluations/targets/click/results/README.md)にあります。
+
+### GPT-6.1 TerraとGPT-6.1 Solの比較（参考）
+
+同じCodexのGPT-6.1 Terra LowとGPT-6.1 Sol Lowを、上の2つの表の計測から並べたものです。測った日が違い、比較の道具はモデルの違う計測を比べないため、集計値を並べた参考比較です。Codexのキャッシュの効き方と応答の速さは計測の時間帯で揺れるため、費用と経過時間の差の一部は時間帯によるものかもしれません。
+
+| 対象 | 条件 | 品質 Sol → Terra | 費用 Sol → Terra（USD） | 費用の差 | 経過時間 Sol → Terra（秒） | 経過時間の差 | 生のトークンの差（参考） |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+| THE-CAPTION | Free | 100.00 → 92.86 | 0.9344 → 0.4336 | −53.6% | 636.90 → 410.50 | −35.5% | −0.9% |
+| THE-CAPTION | C319 | 100.00 → 100.00 | 0.8305 → 0.3228 | −61.1% | 463.32 → 341.92 | −26.2% | +8.2% |
+| Click | Free | 92.86 → 100.00 | 0.7288 → 0.3509 | −51.9% | 414.88 → 359.92 | −13.2% | +28.1% |
+| Click | C319 | 100.00 → 100.00 | 0.6158 → 0.2961 | −51.9% | 431.86 → 336.47 | −22.1% | +18.6% |
+
+品質、費用、経過時間は5反復の中央値です。Solの計測日は、THE-CAPTIONのFreeが2026-10-10、C319が2026-10-15、ClickはFreeとC319のどちらも2026-10-15です。Terraはどちらの対象も2026-10-27〜28に測りました。
+
+- **費用：** Terraの単価はSolのちょうど半分です。トークンの量はTHE-CAPTIONでほぼ同じ、ClickではTerraのほうが2〜3割多いものの、費用はどの条件でも約5〜6割低くなりました。THE-CAPTIONのC319で差が単価の差より大きいのは、SolのC319を測った時間帯に、キャッシュに乗らないrunが多かったためです。
+- **品質：** Freeでの差は、対象によって向きが変わりました。THE-CAPTIONではTerraの失点が多く（Sol 1件、Terra 6件）、Clickでは少なくなりました（Sol 3件、Terra 1件）。C319では、どちらのモデルもどちらの対象でも、70件すべてが4点でした。
 
 ## 実行制御で何が変わったか
 
