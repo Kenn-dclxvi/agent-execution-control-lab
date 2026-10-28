@@ -6,6 +6,7 @@
 - [`c319-claude-opus55-low-standard14-n5-cli2288-shellenv-20261015-r1.json`](../c319-claude-opus55-low-standard14-n5-cli2288-shellenv-20261015-r1.json)
 - [`c319-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261015-r1.json`](../c319-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261015-r1.json)
 - [`c319-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261015-r1.json`](../c319-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261015-r1.json)
+- [`c319-terra61-high-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json`](../c319-terra61-high-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json)
 - [`c319-terra61-low-standard14-n5-cli0159-isolated-shellenv-20261027-r1.json`](../c319-terra61-low-standard14-n5-cli0159-isolated-shellenv-20261027-r1.json)
 - [`c319-terra61-medium-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json`](../c319-terra61-medium-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f07-dependency-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
-- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-standard14-luna-global-m24-n5-cli0146-r1.json)
