@@ -1,7 +1,8 @@
-# Profile index 661-705
+# Profile index 661-707
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-low-old-a01-unread-artifact-projection-r3-n2-20261003.json`](../control-free-astra-low-old-a01-unread-artifact-projection-r3-n2-20261003.json)
 - [`control-free-astra-low-standard14-n5-cli0153-r1.json`](../control-free-astra-low-standard14-n5-cli0153-r1.json)
 - [`control-free-astra-medium-old-a01-assets-reduced-n2-20261003-r1.json`](../control-free-astra-medium-old-a01-assets-reduced-n2-20261003-r1.json)
 - [`control-free-astra-medium-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-medium-old-a01-isolated-n20-20261003-r1.json)
@@ -39,6 +40,7 @@
 - [`free-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261010-r1.json)
 - [`free-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-sol61-medium-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-sol61-medium-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-medium-standard14-n5-cli0159-isolated-r1.json)
+- [`free-terra61-high-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json`](../free-terra61-high-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json)
 - [`free-terra61-low-standard14-n5-cli0159-isolated-shellenv-20261027-r1.json`](../free-terra61-low-standard14-n5-cli0159-isolated-shellenv-20261027-r1.json)
 - [`free-terra61-medium-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json`](../free-terra61-medium-standard14-n5-cli0159-isolated-shellenv-20261028-r1.json)
 - [`p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json`](../p001-the-caption-standard14-projection-v14-reasoning-medium-standard14-global-m24-n5-cli0146-r1.json)
