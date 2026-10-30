@@ -28,6 +28,7 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C320のClaude Code 2モデル（2026-10-30）](#c320-claude-two-models-20261030)
 - [C319の4モデル（2026-10-15）](#c319-four-models-20261015)
 - [C318の4モデル（2026-10-15）](#c318-four-models-20261015)
 - [C316の累積N=20、3モデルのケース別分析（2026-10-13）](#c316-n20-per-case-20261013)
@@ -207,6 +208,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c320-claude-two-models-20261030"></a>
+## C320のClaude Code 2モデル（2026-10-30）
+
+[計測記録](c320-claude-opus55-sonnet55-low-standard14-n5_2026-10-30.md)。利用者が示した「先に計画を出して確認を取る」プロンプトを本文を変えずにrootの指示へ置いたCandidate320（[設計記録](../../docs/candidate320-user-supplied-confirm-plan-first-design.md)）。各70件。Opus 5.5 lowは4点34件・2点31件・1点5件（品質69.64、費用$1.1783、経過260.76秒）、Sonnet 5.5 lowは4点25件・2点40件・1点4件・0点1件（品質66.07、費用$0.5661、経過206.96秒）。2点はすべて求められた変更をしないまま終えたもの。採用は未判断。
 
 <a id="c319-four-models-20261015"></a>
 ## C319の4モデル（2026-10-15）
