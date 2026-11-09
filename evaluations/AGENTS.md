@@ -39,8 +39,6 @@
 
 - 実行前にmodel、reasoning、Agent/runtime/CLI、permission、environment、実行ポリシー、対象セット / ケース、rating contract、repetition、停止条件を固定する。結果確認後に条件を変える場合は新しいprofile revisionとする。
 - 実行順はexecution provenanceとして保存するが、プロンプトセット間のKPI補正には使わない。実測のトークンと経過時間を環境補正して比較値へ変換しない。
-- candidate固有のquality / mechanismのゲートでは対象プロンプトだけを先に実行する。ゲート前に比較相手の再実行を必須化しない。
-- 比較resultが必要になった時点で保存済み互換resultを優先し、不足スロットだけを新規のdispatchへ固定する。既存runを習慣的に再実行しない。
 - `evaluations/profiles/README.md`はprofile identity、用途、条件要約、対応resultへの導線を示す索引とする。score、KPI、停止判断の正本はresult本体または対応する研究記録とし、READMEの要約を判定根拠へ格上げしない。
 - `evaluations/profiles/`直下の全profile JSONは、ファイル名を知らなくても`evaluations/profiles/README.md`から到達できるよう、README本体またはREADMEが直接リンクする`evaluations/profiles/index/*.md`で少なくとも1回は直接リンクする。索引シャードはプロファイル名と所在だけを持ち、評価史を複製しない。
 - プロファイル索引を変更した場合は、ディレクトリ直下の全profile JSONがREADMEまたはREADME直結のシャードから被参照であること、READMEが全シャードを参照すること、profile JSONとシャードのリンクに実体不存在がないことを機械確認する。
@@ -66,7 +64,7 @@
 評価基盤が扱うKPIは次の3つだけとする（2026-10-09改訂、[判定基準r2](../docs/shared-instruction-evaluation-criteria-r2.md)）。
 
 - `quality_score`
-- `cost_usd`：all-agentの使用量を、版を固定した単価表（`evaluations/price-tables/`）で米ドルに換算した値。アダプタは`token-usage/v3`で使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告し、Layer 4は集計の時点で単価表を掛ける。単価表は計測の条件ではなく、費用を数えるときに選ぶものとする。比較では、比べる両方を同じ単価表で数え直す（`compare-analyses --price-table`）。料金の改定や単価表へのモデルの追加で版が変わっても、測り直さない。単価表は版として追加し、既存の版を書き換えない（2026-10-10改訂）。
+- `cost_usd`：all-agentの使用量を、版を固定した単価表（`evaluations/price-tables/`）で米ドルに換算した値。アダプタは`token-usage/v3`で使用量の内訳（キャッシュを使わない入力、キャッシュ読み取り、キャッシュ書き込み、出力、長文の区分）を報告し、Layer 4は集計の時点で単価表を掛ける。単価表は計測の条件ではなく、費用を数えるときに選ぶものとする。料金の改定や単価表へのモデルの追加で版が変わっても、測り直さない。単価表は版として追加し、既存の版を書き換えない（2026-10-10改訂）。
 - `elapsed_seconds`
 
 all-agent `total_tokens`は引き続き各runで記録し、試験の間で並べて比べる値として出力するが、取り組みの成否には使わない参考値とする。2026-10-09より前のresultは`total_tokens`をKPIとした当時の記録であり、書き換えない。
@@ -91,50 +89,25 @@ all-agent `total_tokens`は引き続き各runで記録し、試験の間で並�
 - release判断
 - projection判断
 
-## 互換条件
+## 実行条件と記録
 
-比較可能な結果は、次の条件が一致するものに限定する。
-
-- evaluation set revision
-- target repository ref
-- prompt set以外のcomparison conditions
-- model
-- Agent環境
-- TaskSpec
-- permission
-- fixture
-- executor parameter
-- case
-- iteration
-- repetition condition
-- token accounting revision
-
-compatibility keyが異なるresultを同一比較へ混ぜない。
 単一ケースまたは少数反復の結果を、評価範囲外へ一般化しない。
-このホストの新規試験はプロファイルの`max_workers`をqualification済み上限`24`へ固定する。readyなスロット数が24未満でも設定値をスロット数へ合わせて変更せず、実際の同時実行数とプロファイルへ固定した並列上限を区別する。同じ計測で複数のセル（エージェントやモデル）を流す場合も、全セルのスロットを一つの待ち行列へ入れ、同時実行の合計を24以内にする（`campaign_runner.py`）。セルごとの待ち行列を同時に流すと合計が上限を超え、コマンドの実行が遅くなって経過時間が変わる（2026-10-09のC301の測り直しで確認）。発行のしかたは経過時間を変えうるため、プロファイルの比較条件（`executor_parameters.campaign_dispatch`）へ固定する。本数の上限だけでは、どのセルが混ざるかで負荷が変わる（2026-10-09のC304で、Sonnet lowだけを流すとSonnetの同時実行が平均7.6本から21.6本になり、テストを実行するケースの経過時間が14〜35%延びた）。このため新しい計測では、上限24の内側で、実行中の負荷を見て空きがあるときだけ次のrunを始める（`campaign_dispatch.admission`、`cpu_busy_below` r1）。直近のCPU使用率（user＋sys）が上限以下のとき、または実行中のrunがないときだけ次を始め、始める間隔を空ける。判断の記録は`admissions.jsonl`に残す。この条件のある計測とない計測は、比較条件が異なる。実装は`layer2/extensions/parallel_execution/parallel_runner.py`の`AdmissionGate`を正本とする。比べるプロンプトの計測を一本ずつ順に流すと、先に流した計測が費用で不利になる。Codexの共通の先頭部分は、別のrunや別のプロンプトの間でもキャッシュが共有され、先に流した計測の序盤のrunがそのキャッシュを温める費用を負担するためである（2026-10-10、Astra LowのFreeとC309で、先に流したFreeの最初のリクエストは70件中36件キャッシュに乗らず、後のC309は13件だった。[記録](results/free-c309-astra6-low-standard14-n5_2026-10-10.md)）。このため、費用を比べるプロンプトは、同じケース・同じ反復のrunを計画ごとに交互に並べた一つの待ち行列に混ぜて流せる（`campaign_runner.py`）。混ぜたことは`campaign_dispatch.queue`の`one_queue_across_cells_and_prompts`として比較条件へ固定し、一本ずつ流した計測とは比較条件が異なるものとして扱う。混ぜる相手のプロンプトはプロファイルへ書かず、待ち行列の記録（`plan-group.json`）に残す。各試験は引き続き一つのプロンプトを計測するものであり、混ぜる相手の存在を試験の成立や比較の前提にしない。
+このホストの新規試験は`max_workers`を固定値`24`とする。実際に実行できる件数に合わせて設定値を下げない。複数のセルを実行する場合も`campaign_runner.py`の一つの待ち行列へ入れ、同時実行の合計を24以内にする。
+`campaign_dispatch.admission`の`cpu_busy_below` r1を固定し、直近のCPU使用率（user＋sys）が上限以下の場合、または実行中のrunがない場合だけ、指定した間隔を空けて次のrunを開始する。判断を`admissions.jsonl`へ記録する。実装の正本は`layer2/extensions/parallel_execution/parallel_runner.py`の`AdmissionGate`とする。発行条件は`executor_parameters.campaign_dispatch`へ固定し、実際の計画の構成は`plan-group.json`へ残す。
 
-上記は履歴のprompt-set resultの完全一致条件である。atomic run経路では、プロンプト以外のEvaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、token accountingを実効互換条件とする。`N`、coverage、iteration集合、計画順序、`max_workers`はexecution provenanceへ分離し、run poolのmember identityにしない。異なる`max_workers`のrunを同じプールで再利用する場合も、分析はexecution stratum別の件数と差分を保持する。
-
-実効互換規則`effective-v1`（2026-10-08追加、[設計](../docs/comparison-condition-identity-redesign.md)）では、比較条件を「結果の値を変えうる条件」と「記録だけの項目」に分け、前者だけを照合する。記録だけの項目は、評価コードのSHA-256（`time_recording.code_sha256`）、実行ファイルと設定フォルダのパス、署名者、認証方式と契約プラン、評価側のPython環境、発行方式（`schedule_policy`、`max_attempts`、`monitor_interval_seconds`、`duration_hint_method`、`max_workers`）、動きを変えない組み込みプラグイン（`cc-plugin-telemetry@builtin`、`cc-plugin-sec-default@builtin`）である。分類の正本は`scripts/comparison_identity.py`とする。
-
-- 評価コードのSHA-256の代わりに、実際にモデルへ渡した課題文の一致を、各runの`task_sha256`でケースごとに確かめる。`task_sha256`がないcycleを含む比較では、評価コードのSHA-256の一致を求める。
-- KPIの数え方を変えるコード変更では、`token_accounting.revision`、`time_recording.contract`、または採点契約を上げる。`tests/test_kpi_revision_guard.py`が版ごとの出力を固定する。
-- この規則を使うのは、`compare-effective`と、`create-pool --compatibility-rule effective-v1`で作ったatomic run pool（`run-pool/v2`）である。既定の`exact`、既存の`compare`、`run-pool/v1`は、従来の完全一致を維持する。
-- `run-pool/v2`は、ケースごとの条件キーを、プロファイルと評価セットから実効互換条件で計算する。課題文を記録したrunはこのキーで所属し、課題文の一致は、選択したrun同士（`aggregate-selection`）と、比べるanalysis同士（`compare-analyses`）で確かめる。課題文の記録がないrunは、評価コードのSHA-256がpoolと一致する場合だけ所属する。比較する二つのanalysisは、どちらも`run-pool/v2`から作る。2026-10-09より前に`seed-pool`で基準poolから作ったpoolは、履歴として読み取りだけを行う。
-- 既存のresult、互換キー、比較viewは書き換えない。`effective-v1`の比較は、別schemaのview（`effective-comparison-view/v1`）として追加する。
+runの所属を決める実効条件と、計画・実行状況の記録を区別する。`run-pool/v2`のケース別条件キーはプロファイルと評価セットから作る。課題文を記録したrunは選択・集計時に`task_sha256`の一致を確かめ、記録がないrunは評価コードのSHA-256がpoolと一致する場合だけ所属させる。`N`、coverage、iteration集合、計画順序、`max_workers`はrunの記録と実行条件別の集計に残す。
+KPIの数え方を変える場合は、`token_accounting.revision`、`time_recording.contract`または採点契約の版を更新する。既存の結果と識別値を上書きしない。
 
 ## 試験の実行前ゲート
 
-ルートの`AGENTS.md`が定めるゲートの内訳をこの節の正本とする（2026-10-09改訂）。試験は一つのプロンプトを計測するものであり、実行前に比較の相手（基準result、基準pool）を要求しない。
+ルートの`AGENTS.md`が定めるゲートの内訳をこの節の正本とする（2026-10-09改訂）。試験は一つのプロンプトを、固定したプロファイルと評価セットで計測する。
 
 - **Layer 1の保管と複製**：評価セットは版ごとに一度だけ、評価セットの保管場所（store）へ固定する。新しい評価セットは`freeze-set --store`で、既に固定済みのLayer 1は`publish-layer1`でそのまま（file modeを含めて）保管する。各試験は`install-layer1`で、プロファイルが指定する評価セットを保管場所からcycleへ複製し、`layer1/installation.json`を残す。cycleへLayer 1を直接作らない。
 - **発行の許可**：`preflight-execution`で、プロファイル、複製したLayer 1、発行計画、capsuleが一致することを確かめ、`layer1/execution-preflight.json`を保存してから発行する。`run`は、この記録がないcycle、または記録が失効したcycleを実行しない。
 - **照合する項目**：Evaluation set identity、全ケースのfixture identity（path、type、mode、content、symlink targetを含む）、TaskSpec、case revision、rating、model、reasoning、Agent/runtime/CLI、permission、executor parameter、設定上の`M`、`N`とiteration集合。一項目でも不一致、未固定、未確認があれば一件も発行しない。
 - **使用量の内訳**：複製したLayer 1のcycleでは、内訳（`token-usage/v3`）のない有効runを認めない。resultとanalysisは単価表を指定して作り、単価表のないresultを新しく作らない。
 - **atomic run経路**：`create-pool`で、プロファイルと複製したLayer 1からpoolを作る。既存runは`register-run`で個別に登録し、`plan-missing`で要求サンプル数との差だけをwrite-onceのdispatch planへ固定する。`prepare_atomic_plan.py`でpool identity、dispatch plan hash、プロンプト、Evaluation set、ケース、fixture、TaskSpec、rating、model、reasoning、Agent/runtime/CLI、permission、executor挙動、設定上の`M`を機械照合してから不足runだけを発行する。既存runを再実行しない。
-- **比較**：比較は保存後に行う。`compare`、`compare-effective`、`compare-analyses`は、互換条件が一致するresultまたはanalysisだけを受け付ける。費用は、`compare-analyses`に単価表と`--registry`を指定し、各runの使用量の内訳から比べる両方を同じ単価表で数え直す。集計したときの版が同じなら指定しなくてもよい。prompt-set resultを比べる`compare`と`compare-effective`は数え直しに対応しておらず、同じ単価表で集計したresultだけを受け付ける。指定する基準は差を取るときの引く側にすぎず、実行の前提にしない。費用の差は、基準の反復の最小と最大に対する位置（幅より下、幅の中、幅より上）も記録する。
 - **Layer 4へ登録する試験**：発行予定のケース / iteration集合が、固定Layer 1の全case coverageとresult schemaの登録条件を満たすことも、発行前に確かめる。満たさない試験を非登録の診断として実施する場合は、その状態と再利用不能なゲートを一件目の発行前に明示する。
-- **履歴**：2026-10-09より前に`prepare-comparison-layer1`と`preflight-comparison`で基準resultから作ったcycleは、`verify-comparison-preflight`による検証だけを行う。これらのコマンドと`seed-pool`は削除しており、新しく作らない。
 
 ## Model-visible境界
 

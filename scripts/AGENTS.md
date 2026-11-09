@@ -6,13 +6,13 @@
 
 - バンドル形式、マニフェスト、識別子、保存時の格納、オーバーレイの正本は`docs/prompt-file-bundle.md`。prompt identity、`bundle_sha256`、`files`エントリ、格納形式(`storage_format`)の不変条件を保つ。
 - baseline / candidate / route / releaseのライフサイクルと不変性による分離は`prompts/AGENTS.md`と`docs/repository-contract.md`。既存バンドルをその場で改訂しない。
-- model-visible / model-invisible境界、評価の互換条件、4 Layer / 3 KPIの境界は`docs/prompt-comparison-workflow.md`と`evaluations/AGENTS.md`。オーバーレイでmodel-invisibleな情報をワークスペースへ流入させない。
+- model-visible / model-invisible境界、実行条件の記録、4 Layer / 3 KPIの境界は`docs/prompt-comparison-workflow.md`と`evaluations/AGENTS.md`。オーバーレイでmodel-invisibleな情報をワークスペースへ流入させない。
 - composition sourceはmodel-invisibleかつevaluation-ineligibleとし、構成結果が検証済みfull bundleのtarget、content SHA-256およびprompt identityへ一致するまで評価経路へ渡さない。composition identityをbundle identity、profile prompt identityまたはcompatibility conditionへ昇格させない。
 
 - `scripts/evaluation_loop.py`をevaluation foundation v3の固定点として扱う。
 - `scripts/atomic_run_registry.py`をcount-freeなatomic保存・選択・集計の固定点とする。プールへrunのメンバー一覧または`N`を保存せず、要求件数はdispatch plan、使用run集合はselection receiptへだけ固定する。
-- 新しいプロンプトのrunが0件でも、プロファイルと評価セットの保管場所から複製したLayer 1から`create-pool`でケース別の実効条件を固定してから不足runを計画する。基準プールや基準resultを実行の前提にしない。空のプール作成のために架空のrunを登録しない。
-- KPIの費用は、アダプタが報告する使用量の内訳（`token-usage/v3`）に、版を固定した単価表を集計の時点で掛けて求める。単価表がないとき、または内訳に単価のない区分があるときは推定せず失敗させる。単価表は計測の条件ではなく、比較のときに両方を同じ単価表で数え直せるようにする。
+- 新しいプロンプトのrunが0件でも、プロファイルと評価セットの保管場所から複製したLayer 1から`create-pool`でケース別の実効条件を固定してから不足runを計画する。空のプール作成のために架空のrunを登録しない。
+- KPIの費用は、アダプタが報告する使用量の内訳（`token-usage/v3`）に、版を固定した単価表を集計の時点で掛けて求める。単価表がないとき、または内訳に単価のない区分があるときは推定せず失敗させる。使用量の内訳と単価表の版を残し、費用の計算を再現できるようにする。
 - 再現可能な不具合または明示要件なしに、Layer、KPI、出力schemaを拡張しない。
 - 書込処理はappend-onlyを維持する。
 - 既存アーティファクトを上書きしない。

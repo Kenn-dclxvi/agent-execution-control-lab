@@ -867,15 +867,12 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     atomic_preflight_authorized = False
     runtime_binding: dict[str, Any] | None = None
     installed = (cycle / "layer1" / "installation.json").exists()
-    legacy_comparison = (cycle / "layer1" / "comparison-generation.json").exists()
-    if not installed and not legacy_comparison:
+    if not installed:
         raise EvaluationError(
             "cycle has no installed Layer 1: install it from the evaluation set store with "
             "install-layer1 and authorize the plan with preflight-execution"
         )
-    # Cycles prepared from a reference result before the single-prompt preflight
-    # (comparison-generation.json) are only re-verified, never created any more.
-    preflight = verify_execution_preflight(cycle) if installed else verify_comparison_preflight(cycle)
+    preflight = verify_execution_preflight(cycle)
     raw_runtime_binding = preflight.get("codex_runtime_binding")
     if raw_runtime_binding is not None:
         if not isinstance(raw_runtime_binding, dict):

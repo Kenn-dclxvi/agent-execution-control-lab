@@ -81,7 +81,7 @@ Agentがmodelへ提示するskill、app、plugin catalogが変わり得る実行
 
 Layer 1は`.git`内部を除くfixtureのpath、type、mode、contentまたはsymlink targetからcase別fixture identityを計算する。atomic runの実効条件にはEvaluation set identity、対象case、case別fixture identity、TaskSpec、model、Agent/runtime/CLI、permission、executor挙動、rating、token accountingを含める。`N`、coverage、iteration集合、計画順序、`max_workers`は実効条件へ含めず、完全なexecution provenanceとstratumとしてrunへ保存する。
 
-評価セットは版ごとに一度だけ評価セットの保管場所（store）へ固定し、各試験は`install-layer1`でそこから複製する。fixtureを試験ごとに同じsourceから再生成しない。capsuleとglobal planの生成後に`preflight-execution`でprofileと複製したLayer 1との一致を照合し、Layer 2は実行直前にそのreceiptを再検証する。試験の実行に比較の相手（基準result、基準pool）を要求しない（2026-10-09改訂）。2026-10-09より前に`prepare-comparison-layer1`と`preflight-comparison`で基準resultから作ったcycleは、検証だけを行う。
+評価セットは版ごとに一度だけ評価セットの保管場所（store）へ固定し、各試験は`install-layer1`でそこから複製する。fixtureを試験ごとに同じsourceから再生成しない。capsuleとglobal planの生成後に`preflight-execution`でprofileと複製したLayer 1との一致を照合し、Layer 2は実行直前にそのreceiptを再検証する。
 
 ## `quality_score`
 
