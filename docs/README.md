@@ -767,7 +767,7 @@
 | 文書 | 役割 |
 |---|---|
 | [`THE-CAPTION_execution-control_revision-instructions.md`](THE-CAPTION_execution-control_revision-instructions.md) | execution control修正指示（invocation_status等の定義） |
-| [`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md) | 評価ストレージの維持・GC、最小容量方式の検証結果と次回適用条件（通常経路への実装は未完了） |
+| [`evaluation-storage-maintenance.md`](evaluation-storage-maintenance.md) | 評価ストレージの維持・GC、最小容量方式の実装・検証結果と適用手順 |
 | [`desktop-evaluation-slot.md`](desktop-evaluation-slot.md) | desktop評価スロットの前提条件 |
 | [`shared-python-runtime.md`](shared-python-runtime.md) | 共有Pythonランタイム |
 | [`typed-boundary-evidence.md`](typed-boundary-evidence.md) | typed boundary evidenceの仕様 |

@@ -753,6 +753,20 @@ def build_parser() -> argparse.ArgumentParser:
     archived.add_argument("--zstd-level", type=zstd_level, default=3)
     archived.add_argument("--preserve-existing", action="store_true",
                           help="停止済み履歴を未登録・証拠欠落も含めて現状のまま保存する")
+    minimal = subparsers.add_parser("archive-minimal", help="内容を共有して逐次復元検証する")
+    minimal.add_argument("--batch", type=Path, required=True)
+    minimal.add_argument("--store", type=Path, required=True)
+    minimal.add_argument("--output", type=Path, required=True)
+    minimal.add_argument("--cycle-path", type=Path, default=Path("cycle"))
+    minimal.add_argument("--preserve-existing", action="store_true")
+    minimal.add_argument("--prune-workspaces", action="store_true")
+    restore = subparsers.add_parser("restore-minimal", help="最小容量形式から復元する")
+    restore.add_argument("--archive", type=Path, required=True)
+    restore.add_argument("--store", type=Path, required=True)
+    restore.add_argument("--output", type=Path, required=True)
+    scope = restore.add_mutually_exclusive_group()
+    scope.add_argument("--workspace", help="保存済みの作業コピーパス")
+    scope.add_argument("--evidence-only", action="store_true")
     homes = subparsers.add_parser("archive-homes", help="試験終了後の実行別ホームを復元照合してから削除する")
     homes.add_argument("--source", type=Path, required=True)
     homes.add_argument("--zstd-level", type=zstd_level, default=3)
@@ -793,6 +807,18 @@ def main() -> int:
                         "status": "warning",
                         "error": str(exc),
                     }
+        elif args.command in {"archive-minimal", "restore-minimal"}:
+            from layer2.extensions.long_run_storage.minimal_archive import archive_minimal, restore_minimal
+            from layer2.extensions.long_run_storage.long_run_storage import LongRunStorageError as ArchiveError
+            try:
+                if args.command == "archive-minimal":
+                    result = archive_minimal(args.batch, args.store, args.output, args.cycle_path,
+                                             args.preserve_existing, args.prune_workspaces)
+                else:
+                    result = restore_minimal(args.archive, args.store, args.output,
+                                             args.workspace, args.evidence_only)
+            except ArchiveError as exc:
+                raise LongRunStorageError(str(exc)) from exc
         elif args.command in {"archive-batch", "archive-homes"}:
             from layer2.extensions.long_run_storage.batch_archive import archive_batch, archive_homes
             from layer2.extensions.long_run_storage.long_run_storage import LongRunStorageError as ArchiveError
