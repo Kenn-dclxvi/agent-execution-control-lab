@@ -119,12 +119,12 @@ class Candidate260Test(unittest.TestCase):
             5,
         )
 
-    def test_mechanism_failure_does_not_suppress_kpi_comparison(self) -> None:
+    def test_trial_manual_does_not_require_comparison_and_historical_result_is_preserved(self) -> None:
         manual = EVALUATION_MANUAL.read_text(encoding="utf-8")
         result_doc = RESULT_DOC.read_text(encoding="utf-8")
         self.assertNotIn("mechanism gate不通過時はbaseline KPI比較へ進まない", manual)
-        self.assertIn("mechanism不通過はKPI比較を止める条件にしない", manual)
-        self.assertIn("必要性を確認できない場合は`unjustified_cost_regression`", manual)
+        self.assertNotIn("3 KPI比較を主結果へ含める", manual)
+        self.assertNotIn("baseline slotを新規発行", manual)
         self.assertNotIn("KPI比較は行わない", result_doc)
         self.assertIn("+24,933（+16.49%）", result_doc)
         self.assertIn("-26.235秒（-28.69%）", result_doc)

@@ -1022,6 +1022,20 @@ class EvaluationLoopTest(unittest.TestCase):
             self.assertIn("execution-preflight.json", completed.stderr)
             self.assertFalse((cycle / "layer2").exists())
 
+    def test_legacy_comparison_receipt_cannot_authorize_new_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cycle, profile, capsule = self.prepared_single_capsule(root, self.conditions(1), "pass")
+            self.authorize(cycle, profile, [capsule])
+            (cycle / "layer1" / "installation.json").unlink()
+            legacy = cycle / "layer1" / "comparison-generation.json"
+            legacy.write_text('{"legacy": true}\n', encoding="utf-8")
+            before = legacy.read_bytes()
+            completed = self.cli_failure("run", "--cycle", str(cycle), "--capsule", str(capsule))
+            self.assertIn("cycle has no installed Layer 1", completed.stderr)
+            self.assertFalse((cycle / "layer2").exists())
+            self.assertEqual(legacy.read_bytes(), before)
+
     def test_execution_preflight_is_reverified_and_tamper_evident(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

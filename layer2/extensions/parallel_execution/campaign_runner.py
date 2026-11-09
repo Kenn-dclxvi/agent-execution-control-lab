@@ -68,8 +68,8 @@ def prepare_campaign(
     campaign_output: Path,
     max_workers: int,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    if len(plan_paths) < 2:
-        raise ParallelRunError("campaign requires at least two prompt-set plans")
+    if not plan_paths:
+        raise ParallelRunError("campaign requires at least one prompt-set plan")
     if len(plan_paths) != len(runner_outputs):
         raise ParallelRunError("plan and runner output counts must match")
     max_workers = require_positive_integer(max_workers, "max_workers")

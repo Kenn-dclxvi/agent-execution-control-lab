@@ -26,6 +26,7 @@
 | [`repository-contract.md`](repository-contract.md) | リポジトリ契約の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-comparison-workflow.md`](prompt-comparison-workflow.md) | 評価基盤のレイヤーと境界の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`evaluation-loop-manual.md`](evaluation-loop-manual.md) | 評価実行方法の正本 | [`docs/AGENTS.md`](AGENTS.md) |
+| [`saved-result-comparison-manual.md`](saved-result-comparison-manual.md) | 保存済み結果の一覧・観測差分の表示方法の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`reproducibility-decision-policy.md`](reproducibility-decision-policy.md) | 保存実績に基づく再現性判断と累積N=5・20・50の打ち切り基準 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-control-design-principles.md`](prompt-control-design-principles.md) | プロンプト制御の原因分析、成功・失敗比較、Candidate設計および再構成へ進む前に全文を読む設計原則の正本 | [`docs/AGENTS.md`](AGENTS.md) |
 | [`prompt-file-bundle.md`](prompt-file-bundle.md) | prompt file bundle形式・manifest・格納の正本 | [`scripts/AGENTS.md`](../scripts/AGENTS.md) |

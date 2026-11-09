@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import statistics
 import sys
 import uuid
@@ -1000,6 +1001,60 @@ def repriced_costs(
     return costs, strata
 
 
+def compare_observations(args: argparse.Namespace) -> dict[str, Any]:
+    """Display stored observations without asserting experimental equivalence."""
+    paths = [Path(value).resolve() for value in args.input]
+    if len(paths) < 2:
+        raise EvaluationError("compare-observations needs at least two inputs")
+    observations = []
+    for path in paths:
+        document = load_json(path)
+        if document.get("schema_version") in {ANALYSIS_SCHEMA, ANALYSIS_SCHEMA_V2}:
+            document = load_analysis(path)
+        else:
+            content = dict(document)
+            stored = content.pop("result_content_sha256", None)
+            if not stored or identity_sha256(content) != stored:
+                raise EvaluationError("stored result content SHA-256 does not match")
+        if not isinstance(document.get("median"), dict):
+            raise EvaluationError("stored observation needs a median object")
+        observations.append({"path": str(path), "record": document})
+    metrics = getattr(args, "difference_metric", None) or []
+    reference = observations[0]["record"]
+    differences = []
+    for observation in observations[1:]:
+        values = {}
+        for metric in metrics:
+            left = reference["median"].get(metric)
+            right = observation["record"]["median"].get(metric)
+            numeric = all(type(value) in (int, float) and math.isfinite(value)
+                          for value in (left, right))
+            values[metric] = {"value": right - left if numeric else None,
+                              "status": "observed_difference" if numeric else "unavailable"}
+        differences.append({"path": observation["path"], "metrics": values})
+    fields = ("comparison_key", "compatibility_key", "case_ids", "sample_count",
+              "price_table", "task_sha256_by_case", "compatibility", "strata",
+              "token_accounting")
+    context = {}
+    for field in fields:
+        values = [item["record"].get(field) for item in observations]
+        context[field] = {"values": values, "status": (
+            "unknown" if any(value is None for value in values)
+            else "same" if all(value == values[0] for value in values) else "different")}
+    output = Path(args.output).resolve()
+    write_json_once(output, {
+        "schema_version": "stored-observation-comparison/v1",
+        "observations": observations,
+        "context": context,
+        "reference_path": str(paths[0]),
+        "differences": differences,
+        "interpretation": "保存された観測値の比較。差の原因や優劣は断定しない。",
+        "difference_metric_basis": "利用者が数値の意味の対応を確認して指定した項目",
+        "generated_at": utc_now(),
+    })
+    return {"artifact": str(output), "observation_count": len(observations)}
+
+
 def compare_analyses(args: argparse.Namespace) -> dict[str, Any]:
     reference_path = Path(args.reference).resolve()
     candidate_path = Path(args.candidate).resolve()
@@ -1203,6 +1258,14 @@ def parser() -> argparse.ArgumentParser:
     register_selection.add_argument("--price-table", help="versioned price table for the cost KPI (required for runs with usage components)")
     register_selection.add_argument("--cycle")
     register_selection.set_defaults(handler=register_selection_result)
+
+    observed = commands.add_parser("compare-observations", help="保存済み結果を条件不一致でも並べる")
+    observed.add_argument("--input", action="append", required=True, help="保存済みanalysisまたはresult。先頭が差分の基準")
+    observed.add_argument("--output", required=True)
+    observed.add_argument("--difference-metric", action="append",
+                          choices=("quality_score", "total_tokens", "elapsed_seconds", "cost_usd"),
+                          help="意味の対応を確認した数値だけ差分を算出する。省略時は一覧のみ")
+    observed.set_defaults(handler=compare_observations)
 
     compare = commands.add_parser("compare-analyses")
     compare.add_argument("--reference", required=True)

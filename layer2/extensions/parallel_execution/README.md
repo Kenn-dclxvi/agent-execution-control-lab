@@ -1,5 +1,7 @@
 # parallel execution拡張
 
+`campaign_runner.py`は1件以上の計画を受け付ける。単独試験も同じ実行器を使い、固定した並列上限と発行条件を維持する。
+
 ## 目的
 
 独立したLayer 2 runを外側並列度`M`で実行する。wave barrierとグローバルキューを提供する。複数プロンプトセット、異なるcoverage、異なるdispatch件数の新規runも、cycleを分離したまま同じ`resource_class`のcampaignグローバルキューへ統合できる。

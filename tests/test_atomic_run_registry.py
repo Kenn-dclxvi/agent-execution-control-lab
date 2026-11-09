@@ -9,6 +9,8 @@ from pathlib import Path
 from scripts.atomic_run_registry import (
     aggregate_selection,
     compare_analyses,
+    compare_observations,
+    ANALYSIS_SCHEMA,
     import_result,
     plan_missing,
     register_cycle_run,
@@ -307,6 +309,45 @@ class AtomicRunRegistryTest(unittest.TestCase):
             document = json.loads(analysis_path.read_text())
             self.assertEqual(document["sample_count"], 5)
             self.assertEqual({item["sample_count"] for item in document["strata"]}, {2, 3})
+
+    def test_observed_comparison_accepts_different_conditions_and_preserves_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = []
+            for index in range(2):
+                record = {
+                    "schema_version": ANALYSIS_SCHEMA,
+                    "analysis_id": str(index),
+                    "comparison_key": str(index),
+                    "case_ids": [f"CASE-{index}"],
+                    "sample_count": index + 1,
+                    "price_table": {"revision": str(index)},
+                    "median": {"quality_score": 4 - index, "cost_usd": 2 + index},
+                    "samples": [{"quality_score": 4 - index}],
+                }
+                record["analysis_content_sha256"] = identity_sha256(record)
+                path = root / f"analysis-{index}.json"
+                path.write_text(json.dumps(record))
+                paths.append(path)
+            originals = [p.read_bytes() for p in paths]
+            output = root / "observed.json"
+            self.call(compare_observations, input=[str(p) for p in paths],
+                      output=str(output), difference_metric=["cost_usd", "elapsed_seconds"])
+            result = json.loads(output.read_text())
+            self.assertEqual(result["context"]["sample_count"]["status"], "different")
+            self.assertEqual(result["context"]["price_table"]["status"], "different")
+            self.assertEqual(result["context"]["token_accounting"]["status"], "unknown")
+            self.assertEqual(result["differences"][0]["metrics"]["cost_usd"]["value"], 1)
+            self.assertIsNone(result["differences"][0]["metrics"]["elapsed_seconds"]["value"])
+            self.assertNotIn("quality_score", result["differences"][0]["metrics"])
+            self.assertEqual([p.read_bytes() for p in paths], originals)
+            with self.assertRaises(Exception):
+                self.call(compare_observations, input=[str(p) for p in paths],
+                          output=str(output), difference_metric=[])
+            paths[0].write_text(paths[0].read_text().replace('"cost_usd": 2', '"cost_usd": 99'))
+            with self.assertRaisesRegex(Exception, "SHA-256"):
+                self.call(compare_observations, input=[str(p) for p in paths],
+                          output=str(root / "tampered.json"), difference_metric=[])
 
     def test_prompt_pools_share_comparison_key_and_can_be_compared(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
