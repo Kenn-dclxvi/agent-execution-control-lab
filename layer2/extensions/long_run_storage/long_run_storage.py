@@ -746,6 +746,16 @@ def build_parser() -> argparse.ArgumentParser:
     compact.add_argument("--batch", type=Path, required=True)
     compact.add_argument("--cycle-path", type=Path, default=Path("cycle"))
     compact.add_argument("--zstd-level", type=zstd_level, default=9)
+
+    archived = subparsers.add_parser("archive-batch", help="登録済み試験を一括圧縮し、復元照合後に作業コピーを削除する")
+    archived.add_argument("--batch", type=Path, required=True)
+    archived.add_argument("--cycle-path", type=Path, default=Path("cycle"))
+    archived.add_argument("--zstd-level", type=zstd_level, default=3)
+    archived.add_argument("--preserve-existing", action="store_true",
+                          help="停止済み履歴を未登録・証拠欠落も含めて現状のまま保存する")
+    homes = subparsers.add_parser("archive-homes", help="試験終了後の実行別ホームを復元照合してから削除する")
+    homes.add_argument("--source", type=Path, required=True)
+    homes.add_argument("--zstd-level", type=zstd_level, default=3)
     return parser
 
 
@@ -783,6 +793,18 @@ def main() -> int:
                         "status": "warning",
                         "error": str(exc),
                     }
+        elif args.command in {"archive-batch", "archive-homes"}:
+            from layer2.extensions.long_run_storage.batch_archive import archive_batch, archive_homes
+            from layer2.extensions.long_run_storage.long_run_storage import LongRunStorageError as ArchiveError
+
+            try:
+                if args.command == "archive-homes":
+                    result = archive_homes(args.source, args.zstd_level)
+                else:
+                    result = archive_batch(args.batch, args.zstd_level, args.cycle_path,
+                                           preserve_existing=args.preserve_existing)
+            except ArchiveError as exc:
+                raise LongRunStorageError(str(exc)) from exc
         else:
             result = compact_batch(args.batch, args.zstd_level, args.cycle_path)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))

@@ -2,11 +2,77 @@
 
 ## 目的
 
-通常の複数run試験と8時間程度の反復実行でストレージ枯渇を起こさないため、dispatch前の容量ガード、Layer 1のclonefile必須化、実行後のevidence seal、登録後の最終圧縮を提供する。評価基盤のLayer、KPI、schema、比較条件は変更しない。directory名とCLIの`batch`表記は履歴互換のため保持するが、直下に`cycle/`を持つ通常の試験rootにも同じsealとcompactを適用できる。
+通常試験と長期実行でストレージ枯渇を起こさないため、発行前の容量ガード、Layer 1のclonefile必須化、採点・登録後の検証付き一括圧縮を提供する。旧二段階保存の互換経路も保持する。評価基盤のLayer、KPI、schema、比較条件は変更しない。directory名とCLIの`batch`表記は履歴互換のため保持するが、直下に`cycle/`を持つ通常の試験rootにも同じsealとcompactを適用できる。
 
 この拡張が作るアーカイブとreceiptは生のエビデンスであり、評価済み、採用済み、release済みを意味しない。非公開の生アーカイブはcommitしない。
 
-## 試験controllerへの組み込み順
+## 新しい通常試験の標準経路
+
+2026-11-09から、新しい通常試験と長期実行の各バッチでは、採点・結果登録後の一括圧縮を標準とする。以下の旧二段階処理は既存試験の継続・復元用の互換経路として維持する。
+
+次回試験に向けた、固定済みLayer 1と作業コピーの内容・属性を分離して重複を除く方式は、[最小容量方式の登録](../../../docs/evaluation-storage-maintenance.md#次回試験に向けた最小容量方式の登録2026-11-09)にまとめている。保存済み70実行で検証済みだが、通常経路への実装は未完了である。以下の`archive-batch`は現行の一括圧縮であり、新方式へ切り替わったとは扱わない。次回適用前の実装・検証と、利用者への試験内容の確認は登録文書の手順に従う。
+
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py archive-batch \
+  --batch /absolute/path/to/trial-root
+```
+
+全実行が終了し、valid runの使用量・採点・採点証拠、および`cycle/layer4/result-registration.json`があることを確認する。`--cycle-path`は同じ試験内の別名cycleを指定できる。一括圧縮の前に`seal-batch`を実行して作業コピーを消さない。
+
+使用量記録はCodexの`all-agent-usage/v1`とClaudeの`claude-all-agent-usage/v1`に対応し、どちらも非負の整数の合計値と空でないセッション記録を必要とする。保存済みの記録形式は変更しない。
+
+`compact/`を除く試験一式を通常のtarとzstd（既定level 3、窓128 MiB）で圧縮する。`zstd -t`と別の一時領域への展開後の照合を行い、パス集合・種類・内容・リンク先・権限・ACL・所有者・ファイルフラグ・更新時刻・拡張属性が一致することを確認する。`com.apple.provenance`と格納用最上位ディレクトリの更新時刻だけを一致条件から除く。ファイルや作業コピー内の更新時刻、他の拡張属性は除外しない。これらの例外はマニフェストに記録する。
+
+元データの同時変更、復元不一致、未採点、登録記録の欠落、容量不足では削除を開始しない。成功時だけ`cycle/layer2/evidence/<run_id>/workspace`を削除する。共通環境へのリンクはリンクとして保存し、削除時にもリンク先をたどらない。共通環境・固定済みLayer 1・結果の登録記録・その他の実行証拠は残す。利用者のCodex設定を変更する処理は呼び出さない。
+
+出力は`compact/batch-evidence.tar.zst`、`batch-archive-manifest.json`、`batch-prune-receipt.json`。既存出力を上書きせず、旧形式の記録がある試験は拒否する。削除記録の`status: complete`を通常試験の完了条件とする。失敗時は元データを保持し、残った圧縮記録を確認してから再開方法を決める。
+
+復元は新しい空のディレクトリへ行う。
+
+```bash
+mkdir /absolute/path/to/restored-batch
+zstd -dc /absolute/path/to/batch-evidence.tar.zst \
+  | tar --acls --xattrs -xpf - -C /absolute/path/to/restored-batch
+```
+
+固定済み評価セットの保管場所と結果の外部registryは引き続き保持する。アーカイブ内の参照先を勝手に変更せず、再集計には保存済みの選択記録と単価表を使う。この処理は保存方法の変更であり、実行条件・採点・KPIを変更しない。
+
+### 停止済みの既存試験を現状のまま保存する
+
+結果登録・採点・使用量記録の完全性は、評価結果として扱うための条件であり、既存ファイルを復元するための条件ではない。履歴保持と評価状態の区別はルートの`AGENTS.md`、結果登録の条件は[`prompt-comparison-workflow.md`](../../../docs/prompt-comparison-workflow.md)に従う。欠落した証拠や未完了の状態は補完せず、そのまま保存する。
+
+既存試験の保守を明示的に依頼された場合は、対象へ書き込む試験プロセスが停止していることを確認し、次を使う。複数の試験が親ディレクトリを共有する場合も、対象cycleそのものを圧縮単位にすることで、兄弟の試験や親の記録を変更しない。
+
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py archive-batch \
+  --batch /absolute/path/to/cycle --cycle-path . --preserve-existing
+```
+
+この指定では、実在する`layer2/evidence/*/workspace`を保存対象とし、登録・採点・実行終了記録の欠落を拒否理由にしない。通常の一括圧縮と同じ完全復元・属性照合・元データ不変の確認を必須とし、検証後に作業コピーだけを削除する。Layer 1とその他の証拠、存在する登録記録は残す。圧縮用記録には`preserved-batch-archive/v1`と`preserved-batch-prune/v1`を使い、欠けている登録記録のハッシュは`null`とする。圧縮の完了を試験・採点・結果登録の完了へ読み替えない。通常試験の完了手順にはこの指定を使わない。
+
+### 試験終了時の実行別ホームの保存
+
+`workspace`だけでは、別の場所に生成される`codex-homes`内のキャッシュや実行記録は片付かない。今後の試験では、そのホームを使う全実行・再試行・関連バッチが終了し、書き込むプロセスが停止した後、作業コピーの圧縮に加えて次を必ず実行する。配置を推測せず、試験時に使った実際の`codex-homes`を指定する。複数ある場合はそれぞれを処理する。
+
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py archive-homes \
+  --source /absolute/path/to/model/codex-homes
+```
+
+実行ID（32桁の16進数）別の実ディレクトリだけを含む`codex-homes`を受け付ける。共通環境や利用者の`~/.codex`は対象にしない。キャッシュ、プラグイン、設定、セッションを省略せず、全体を隣の`codex-homes.archive/homes.tar.zst`へ保存する。完全復元時の照合項目と2項目の除外条件は通常の一括圧縮と同じとし、削除直前の元データ不変とアーカイブのSHA-256も確認してから、指定された`codex-homes`だけを削除する。リンク先へは書き込まない。Layer 1、結果登録記録、共通環境は対象外のまま保持する。
+
+`codex-homes.archive/manifest.json`にパス・内容・属性・実行ID・アーカイブのハッシュを保存し、`prune-receipt.json`の`status: complete`をホーム保存の完了条件とする。既存出力は上書きしない。復元不一致や同時変更では削除せず、残された出力と元データを確認する。新しい試験の終了条件には、作業コピー側の削除記録と、使用した全ホームの削除記録の両方を含める。ホームを使わない試験には後者を要求しない。
+
+復元時はマニフェストのSHA-256とアーカイブを照合し、空の元パスへ展開する。実行ID別ディレクトリが復元され、設定やセッション内の元パスは書き換えない。アーカイブは非公開の設定やログを含むためcommitしない。
+
+```bash
+mkdir /absolute/path/to/model/codex-homes
+zstd -dc /absolute/path/to/model/codex-homes.archive/homes.tar.zst | \
+  tar --acls --xattrs -xpf - -C /absolute/path/to/model/codex-homes
+```
+
+## 旧二段階処理と長期実行への組み込み順
+
 
 通常試験では試験root、長期runでは各batchについて、次の順序を固定する。
 
