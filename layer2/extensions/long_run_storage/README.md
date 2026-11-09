@@ -6,11 +6,48 @@
 
 この拡張が作るアーカイブとreceiptは生のエビデンスであり、評価済み、採用済み、release済みを意味しない。非公開の生アーカイブはcommitしない。
 
-## 新しい通常試験の標準経路
+## 新しい通常試験の最小容量保存
 
-2026-11-09から、新しい通常試験と長期実行の各バッチでは、採点・結果登録後の一括圧縮を標準とする。以下の旧二段階処理は既存試験の継続・復元用の互換経路として維持する。
+採点・結果登録後は、次の経路で固定内容と試験ごとの差分を保存する。元のファイルから直接作成し、一度に1実行分だけ復元して内容・属性を照合する。固定済みLayer 1の正本、共通環境、結果の登録記録は残す。計測中の試験と圧縮を競合させない。
 
-次回試験に向けた、固定済みLayer 1と作業コピーの内容・属性を分離して重複を除く方式は、[最小容量方式の登録](../../../docs/evaluation-storage-maintenance.md#次回試験に向けた最小容量方式の登録2026-11-09)にまとめている。保存済み70実行で検証済みだが、通常経路への実装は未完了である。以下の`archive-batch`は現行の一括圧縮であり、新方式へ切り替わったとは扱わない。次回適用前の実装・検証と、利用者への試験内容の確認は登録文書の手順に従う。
+```bash
+python3 layer2/extensions/long_run_storage/long_run_storage.py archive-minimal \
+  --batch /absolute/path/to/trial-root \
+  --store /absolute/path/to/shared-content-store \
+  --output /absolute/path/to/trial-root.archive \
+  --prune-workspaces
+```
+
+保存先と共有内容の保管場所は元の試験ディレクトリの外へ分離する。`--prune-workspaces`を省略すれば元データは削除しない。通常試験は終了記録、使用量、採点証拠、結果登録を確認する。停止済み履歴の現状保存だけは`--preserve-existing`を指定できる。`--cycle-path`も指定可能である。
+
+共有保管場所にはLayer 1のファイル内容をハッシュ付き圧縮ファイルとして一度保存し、試験側には追加内容とパス・権限・所有者・リンク・時刻・ACL・拡張属性・フラグを記録する。共有内容への参照も残す。保管場所は追加専用であり、参照と共有圧縮ファイルを削除する機能は提供しない。移動・バックアップ時は試験側の記録と共有保管場所を一緒に保持する。
+
+`manifest.json.zst`の内容ハッシュ、両圧縮ファイルと各内容のハッシュを確認し、属性を含めて復元照合する。除外は`com.apple.provenance`と格納用最上位ディレクトリの更新時刻だけである。未対応属性・欠落・改変・元データの変化があれば削除しない。macOSでは独立して書き込める`clonefile`で復元し、共有内容へ書き込まない。
+
+途中で停止した場合は同じ引数で再開する。完成済みマニフェストは上書きせず、圧縮内容と残っている元データを再検証する。削除中断時に欠けてよいのは記録済みの作業コピー内だけで、残存ファイルの変更は拒否する。元のLayer 1・登録記録・その他の証拠は削除しない。`verification.json`が復元検証の記録、`prune-receipt.json`の`status: complete`が削除完了の記録である。
+
+### 最小容量形式の復元
+
+```bash
+# 固定入力と採点・集計の証拠だけを復元する
+python3 layer2/extensions/long_run_storage/long_run_storage.py restore-minimal \
+  --archive /absolute/path/to/trial-root.archive \
+  --store /absolute/path/to/shared-content-store \
+  --output /new/path/round-2 --evidence-only
+
+# 必要な1実行だけを別の空ディレクトリへ復元する
+python3 layer2/extensions/long_run_storage/long_run_storage.py restore-minimal \
+  --archive /absolute/path/to/trial-root.archive \
+  --store /absolute/path/to/shared-content-store \
+  --output /new/path/workspace \
+  --workspace cycle/layer2/evidence/RUN_ID/workspace
+```
+
+対象指定を省略すれば全体を復元できるが、その分の展開容量が必要になる。通常の再採点では1実行ごとに復元し、既存の採点器で観測後に一時コピーを片付ける。既存の復元先は上書きしない。実行別ホームは引き続き後述の`archive-homes`で保存する。
+
+## 既存の一括圧縮経路
+
+`archive-batch`は従来形式の保存・復元用に保持する。既存アーカイブを新形式へ自動変換しない。旧二段階処理も履歴互換として維持する。
 
 ```bash
 python3 layer2/extensions/long_run_storage/long_run_storage.py archive-batch \

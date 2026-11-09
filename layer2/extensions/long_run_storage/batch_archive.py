@@ -93,11 +93,11 @@ def mac_metadata(path: Path) -> tuple[dict[str, str], str | None]:
         lib.acl_free(acl)
 
 
-def tree_snapshot(root: Path) -> dict[str, dict[str, Any]]:
+def tree_snapshot(root: Path, exclude_compact: bool = True) -> dict[str, dict[str, Any]]:
     """共通環境へのリンクをたどらず、復元に必要な内容と属性を記録する。"""
     paths = [root]
     for directory, dirs, files in os.walk(root, followlinks=False):
-        if Path(directory) == root:
+        if exclude_compact and Path(directory) == root:
             dirs[:] = [name for name in dirs if name != "compact"]
             files = [name for name in files if name != "compact"]
         paths.extend(Path(directory) / name for name in sorted(dirs + files))

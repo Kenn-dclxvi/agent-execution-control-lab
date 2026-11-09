@@ -607,35 +607,30 @@ v3 resultは`import-result`でcase rowごとのatomic runへ索引化できる�
 
 ## 13. Storage maintenance
 
-次回試験に向けた保存方式は、[最小容量方式の登録](evaluation-storage-maintenance.md#次回試験に向けた最小容量方式の登録2026-11-09)を参照する。固定済みLayer 1と作業コピーの内容・属性を分離する方式は保存済み70実行で検証済みだが、通常経路への実装は未完了である。適用前の実装・検証項目を完了し、新しいモデル試験はモデルと試験内容を利用者へ提示して確認を得てから開始する。以下のコマンドは現行の一括圧縮方式であり、新方式の実装完了を意味しない。
+ローカルの新規試験では`THE_CAPTION_EVAL_COPY_MODE=clonefile`を指定し、固定済みLayer 1から独立した作業コピーを作る。複製できない場合は停止する。モデル、並列上限、採点、集計の条件は保存方式のために変更しない。
 
-ローカルの新規試験では、Layer 1とLayer 2の物理複製を通常copyへ退避させないため、実行controllerへ`THE_CAPTION_EVAL_COPY_MODE=clonefile`を渡す。clonefileを使用できなければ、その試験はworkspaceを作らず停止する。別filesystemでの通常copyは、必要容量を別途確認して明示的に許可した試験だけで使う。
-
-新しい通常試験と長期実行の各バッチは、全実行の終了、採点、使用量の確定、結果登録を終えた後に、次の一括圧縮を必ず行う。実行中の並列数、モデル、採点、集計の条件は変更しない。圧縮処理を計測中の試験と同時に走らせない。
+全実行の終了、使用量の確定、採点・結果登録後は、[最小容量保存の手順](../layer2/extensions/long_run_storage/README.md#新しい通常試験の最小容量保存)を実施する。
 
 ```bash
-python3 layer2/extensions/long_run_storage/long_run_storage.py archive-batch \
-  --batch /absolute/path/to/trial-root
+python3 layer2/extensions/long_run_storage/long_run_storage.py archive-minimal \
+  --batch /absolute/path/to/trial-root \
+  --store /absolute/path/to/shared-content-store \
+  --output /absolute/path/to/trial-root.archive \
+  --prune-workspaces
 ```
 
-直下の`cycle/`を対象にする。正本cycleが別名なら`--cycle-path <relative-cycle-path>`を指定する。各試験・バッチの完了条件は、結果登録に加え、`compact/batch-prune-receipt.json`の`status`が`complete`であることとする。登録処理と圧縮処理は責務を分離し、登録コマンド自体には削除を組み込まない。
+共有内容と試験ごとの差分・属性を保存し、1実行ずつ完全復元照合した後、削除直前の不変確認を通過した作業コピーだけを削除する。保存先の`prune-receipt.json`の`status: complete`を終了条件とする。共通環境、固定済みLayer 1、結果の登録記録は保持する。記録・圧縮・削除の責務を分離し、登録コマンドへ削除を組み込まない。
 
-実行別の`codex-homes`を使った試験は、そのホームを使う全実行・再試行・関連バッチの終了後に、次も必ず実行する。使用したホームが複数あればそれぞれを指定し、各`codex-homes.archive/prune-receipt.json`の`status: complete`も試験終了の条件に含める。共有している別バッチが計測中のホームは処理しない。
+実行別ホームを使った場合は、そのホームを使う全実行・再試行・関連バッチが終了した後、次も実行する。
 
 ```bash
 python3 layer2/extensions/long_run_storage/long_run_storage.py archive-homes \
   --source /absolute/path/to/model/codex-homes
 ```
 
-設定・セッション・キャッシュを丸ごと圧縮し、完全復元照合後に指定ホームだけを削除する。共通環境、固定済みLayer 1、結果の登録記録は保持する。復元手順は[実行別ホームの保存](../layer2/extensions/long_run_storage/README.md#試験終了時の実行別ホームの保存)に従う。
+各ホームの`codex-homes.archive/prune-receipt.json`の`status: complete`も終了条件とする。別試験が利用中のホームは処理せず、計測中の試験と圧縮を競合させない。停止済み履歴を現状保存する場合の`--preserve-existing`、中断再開、復元方法、共有内容の保持は[保存処理の正本](../layer2/extensions/long_run_storage/README.md)に従う。
 
-停止済みの既存試験を保存する保守では、未登録や採点証拠不足の状態もそのまま復元できれば圧縮できる。[既存履歴の保存手順](../layer2/extensions/long_run_storage/README.md#停止済みの既存試験を現状のまま保存する)の`--preserve-existing`を使い、圧縮の完了と試験・結果登録の完了を区別する。
-
-一式を`compact/batch-evidence.tar.zst`へ保存し、一時的な別ディレクトリへ完全展開して照合する。パス集合、種類、ファイル内容、リンク先、権限、ACL、所有者、ファイルフラグ、更新時刻、拡張属性を確認する。除外するのは`com.apple.provenance`の値と、試験一式を格納する最上位ディレクトリの更新時刻だけである。元データの変更や復元差分、容量不足、未採点があれば、作業コピーを削除しない。
-
-照合後に削除するのは、その試験の終了済み実行に属する`cycle/layer2/evidence/<run_id>/workspace`だけである。共通環境、固定済みLayer 1、結果の登録記録、採点・集計・使用量の記録は保持する。リンク先の共通環境や利用者のCodex設定は変更しない。
-
-旧`seal-batch`・`compact-batch`は既存の二段階保存を扱う互換経路として残す。既に旧形式で保存した試験に新形式を重ねず、履歴のアーカイブ・識別子・登録記録を上書きしない。新しい試験では採点前の`seal-batch`を挟まない。復元手順と保持範囲は[圧縮処理の正本](../layer2/extensions/long_run_storage/README.md)を参照する。
+保存容量・一時使用量・空き容量の前後差を区別して記録する。[保存済み1試験での検証](evaluation-storage-maintenance.md#次回試験に向けた最小容量方式の登録2026-11-09)の容量をモデル実行中の最大容量と扱わない。新しいモデル試験はモデル・内容・件数を利用者へ提示し、確認を得て開始する。既存の一括圧縮と二段階保存は履歴の復元用として保持する。
 
 ## 14. Self-test
 
