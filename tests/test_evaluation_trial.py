@@ -248,3 +248,30 @@ def test_group_checks_every_trial_before_starting_runner(space):
         with pytest.raises(trial.TrialError, match='Layer 1'):
             trial.run_group(directories)
         start.assert_not_called()
+
+
+@pytest.mark.skipif(not shutil.which('zstd'), reason='zstdが必要です')
+def test_group_reuses_complete_samples_without_starting_runner(space):
+    reused = []
+    for name in ('a', 'b'):
+        root = space / name
+        root.mkdir()
+        directory, args = setup_trial(root)
+        trial.prepare(directory, args)
+        cycle = Path(trial.run(directory)['cycle'])
+        finalize_usage_and_rate(cycle)
+        assert trial.finish(directory)['status'] == 'complete'
+        directory = root / 'reuse-trial'
+        args.archive_root = root / 'reuse-archives'
+        assert trial.prepare(directory, args)['missing_slots'] == 0
+        reused.append(directory)
+    with mock.patch.object(trial.subprocess, 'Popen') as start:
+        result = trial.run_group(reused)
+        start.assert_not_called()
+    assert result['runner_return_code'] == 0
+    for directory in reused:
+        receipt = trial.load(directory / 'receipts/0001-executed.json')
+        assert receipt['status'] == 'executed'
+        assert receipt['campaign'] is None
+        assert not (directory / 'rounds/0001/runner.log').exists()
+        assert trial.finish(directory)['status'] == 'complete'

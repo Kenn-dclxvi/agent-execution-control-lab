@@ -298,6 +298,12 @@ def run_group(trials):
                 raise TrialError("発行計画が変更されています")
             call("scripts/evaluation_loop.py", "verify-execution-preflight", "--cycle", directory / "cycle")
         entries.append((trial, config, directory, prepared, receipt))
+    if not any(entry[3]["missing_slot_count"] for entry in entries):
+        for _, config, _, _, receipt in entries:
+            write_once(receipt, {"return_code": 0, "status": "executed", "campaign": None})
+            check_protected(config)
+        return {"status": "awaiting_ratings", "runner_return_code": 0,
+                "cycles": [str(entry[2] / "cycle") for entry in entries]}
     first = entries[0][2]
     command = [sys.executable, str(ROOT / "layer2/extensions/parallel_execution/campaign_runner.py")]
     for _, _, directory, prepared, _ in entries:

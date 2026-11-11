@@ -41,6 +41,15 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def require_runtime_surface(parsed, runtime):
+    expected_tools = runtime.get('tools')
+    observed = parsed['init']
+    if (not isinstance(expected_tools, list)
+            or observed.get('tools') != expected_tools
+            or observed.get('permission_mode') != 'always-proceed'):
+        raise RecollectionError('元の実行のツール・権限が固定条件と一致しません')
+
+
 def recollect_commands(usage, run_id, output_directory):
     attempted, successful, failed, violations, sources = [], [], [], [], []
     for session in usage['sessions']:
@@ -109,6 +118,7 @@ def recover(cycle, source_id):
     conditions = binding['comparison_conditions']
     config = Path(conditions['agent_environment']['antigravity_cli']['config_dir'])
     parsed = parse_stream((source_extension / 'antigravity-adapter/stream.jsonl').read_bytes())
+    require_runtime_surface(parsed, conditions['agent_environment']['antigravity_cli'])
     usage = collect_saved_usage(parsed, config, conditions['model'], source_id)
     if usage['token_accounting'] != TOKEN_ACCOUNTING:
         raise RecollectionError('計数方法が一致しません')
@@ -161,10 +171,35 @@ def recover(cycle, source_id):
         write_json_once(recovery / 'receipt.json', receipt)
         if original != (tree_snapshot(source_evidence), tree_snapshot(source_extension), digest(binding_path)):
             raise RecollectionError('元の記録が変化しています')
-        evidence.rename(cycle / 'layer2/evidence' / new_id)
-        extension.rename(cycle / 'layer2/extensions' / new_id)
-        write_json_once(cycle / 'layer2/capsules' / f'{new_id}.json', capsule)
-        write_json_once(cycle / 'layer2/bindings' / f'{new_id}.json', {**binding, 'run_id': new_id, 'status': 'valid', 'source_run_id': source_id})
+        staged_capsule = staging / 'capsule.json'
+        staged_binding = staging / 'binding.json'
+        write_json_once(staged_capsule, capsule)
+        write_json_once(staged_binding, {**binding, 'run_id': new_id, 'status': 'valid', 'source_run_id': source_id})
+        destinations = [cycle / 'layer2' / name / (new_id + suffix)
+                        for name, suffix in [('evidence', ''), ('extensions', ''), ('capsules', '.json'), ('bindings', '.json')]]
+        if any(path.exists() or path.is_symlink() for path in destinations):
+            raise RecollectionError('追記先が既に存在します')
+        published = []
+        try:
+            destination = cycle / 'layer2/evidence' / new_id
+            evidence.rename(destination)
+            published.append(destination)
+            destination = cycle / 'layer2/extensions' / new_id
+            extension.rename(destination)
+            published.append(destination)
+            destination = cycle / 'layer2/capsules' / f'{new_id}.json'
+            os.link(staged_capsule, destination)
+            published.append(destination)
+            # 完成した識別記録を最後に一度だけ公開し、部分的なJSONを残さない。
+            os.link(staged_binding, cycle / 'layer2/bindings' / f'{new_id}.json')
+        except BaseException:
+            # 今回追加した未公開の記録だけを戻し、元の実行記録は保持する。
+            for destination in reversed(published):
+                if destination.is_dir():
+                    shutil.rmtree(destination)
+                else:
+                    destination.unlink()
+            raise
     return receipt
 
 

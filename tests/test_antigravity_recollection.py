@@ -69,7 +69,8 @@ def test_unbound_output_is_not_accepted(tmp_path, change):
 
 
 @pytest.mark.skipif(sys.platform != 'darwin', reason='clonefileの照合にはmacOSが必要です')
-def test_recovery_appends_preserves_source_elapsed_and_sample_identity(tmp_path, monkeypatch):
+@pytest.mark.parametrize('failure', [None, 'surface', 'publication'])
+def test_recovery_appends_preserves_source_elapsed_and_sample_identity(tmp_path, monkeypatch, failure):
     monkeypatch.setenv('THE_CAPTION_EVAL_COPY_MODE', 'clonefile')
     usage, _ = saved_usage(tmp_path)
     monkeypatch.setattr(repair, 'collect_saved_usage', lambda *args: usage)
@@ -86,7 +87,7 @@ def test_recovery_appends_preserves_source_elapsed_and_sample_identity(tmp_path,
     put(evidence / 'exclusion.json', {'reason_code': 'command_evidence_incomplete'})
     put(extension / 'antigravity-adapter/execution.json', {'antigravity_exit_code': 0, 'terminal': 'SUCCESS', 'external_failure': {}})
     (extension / 'antigravity-adapter/stream.jsonl').write_text('\n'.join(map(json.dumps, [
-        {'event': 'init', 'conversation_id': SID, 'init': {}},
+        {'event': 'init', 'conversation_id': SID, 'init': {'tools': [], 'permission_mode': 'request-review' if failure == 'surface' else 'always-proceed'}},
         {'event': 'result', 'result': {'conversation_id': SID, 'status': 'SUCCESS'}}])))
     put(extension / 'all-agent-usage/usage.json', usage)
     put(extension / 'all-agent-command-evidence/evidence.json', {'run_id': 'old'})
@@ -96,11 +97,28 @@ def test_recovery_appends_preserves_source_elapsed_and_sample_identity(tmp_path,
                 'required_command_groups_by_case': {'CASE': [['pytest']]}, 'omit_for_cases': []}
     binding = {'run_id': 'old', 'status': 'excluded', 'sample_id': 'planned:once', 'case_id': 'CASE',
                'comparison_conditions': {'model': 'gemini-4-argon-low',
-                   'agent_environment': {'antigravity_cli': {'config_dir': str(tmp_path / 'runtime')}},
+                   'agent_environment': {'antigravity_cli': {'config_dir': str(tmp_path / 'runtime'), 'tools': []}},
                    'executor_parameters': {'command_evidence_protocol': protocol}}}
     put(cycle / 'layer2/bindings/old.json', binding)
     put(cycle / 'layer2/capsules/old.json', {'fixed': True})
     before = repair.tree_snapshot(evidence), repair.tree_snapshot(extension), repair.digest(cycle / 'layer2/bindings/old.json')
+    if failure:
+        if failure == 'publication':
+            original_link = repair.os.link
+            def fail_publication(source, destination):
+                if destination.parent.name == 'bindings':
+                    raise OSError('追記中断')
+                return original_link(source, destination)
+            monkeypatch.setattr(repair.os, 'link', fail_publication)
+        expected_error = repair.RecollectionError if failure == 'surface' else OSError
+        with pytest.raises(expected_error):
+            repair.recover(cycle, 'old')
+        for name in ['evidence', 'extensions']:
+            assert {p.name for p in (cycle / 'layer2' / name).iterdir()} == {'old'}
+        for name in ['capsules', 'bindings']:
+            assert {p.name for p in (cycle / 'layer2' / name).iterdir()} == {'old.json'}
+        assert before == (repair.tree_snapshot(evidence), repair.tree_snapshot(extension), repair.digest(cycle / 'layer2/bindings/old.json'))
+        return
     receipt = repair.recover(cycle, 'old')
     new_id = receipt['recovered_run_id']
     assert receipt['model_invocations'] == 0
