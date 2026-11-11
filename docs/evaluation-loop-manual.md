@@ -18,6 +18,43 @@
 
 旧12項目の評価集合と結果は履歴として保持する。
 
+### 準備から保存・後片付けまでの標準入口
+
+新しい試験は、リポジトリ内の`scripts/evaluation_trial.py`を入口とする。以下の各部品を別々に呼んだ成功や、外部の補助スクリプトが結果登録で終了したことだけでは、試験全体の完了にしない。
+
+モデル・試験内容・件数について利用者の確認を得た後、確認済みのプロファイル、既存の固定済みLayer 1の保管場所、capsuleのひな型、単価表、実行環境の識別情報を指定する。試験用領域と、この試験専用のアーカイブ出力先は新しい場所を使う。共通環境は`runtime_links.source`から保護対象へ自動追加され、それ以外の共通入力は`--protect`で指定する。実行別ホームを使う場合は、試験用領域の配下に配置し、最初に`--homes`で全て指定する。利用者の認証情報や共通ホームの複製・変更は行わない。
+
+```bash
+python3 scripts/evaluation_trial.py prepare \
+  --trial /absolute/path/to/new-trial \
+  --profile /absolute/path/to/profile.json \
+  --store /absolute/path/to/fixed-layer1-store \
+  --registry /absolute/path/to/atomic-registry \
+  --template /absolute/path/to/capsule-template.json \
+  --price-table /absolute/path/to/price-table.json \
+  --resource-class /absolute/path/to/resource-class.json \
+  --protect /absolute/path/to/shared-environment \
+  --archive-store /absolute/path/to/shared-content-store \
+  --archive-root /absolute/path/to/new-trial-archives
+python3 scripts/evaluation_trial.py run --trial /absolute/path/to/new-trial
+```
+
+`--template`、`--protect`、`--homes`は複数指定できる。ひな型とプロファイルには確認済みの実行条件を用い、プロファイルの`execution.duration_hints_seconds`にはケース別の所要時間を指定する。共通環境の構築やLayer 1の再固定はこの入口では行わない。既存の固定済みLayer 1を複製し、互換な既存runを照合して不足分だけの計画を作る。並列上限24と事前照合は既存基盤へ委譲する。準備・実行では`clonefile`を必須とし、通常コピーへの自動切替は行わない。未対応のファイルシステムでは発行前に停止する。
+
+実行が終わったら、既存の採点契約に従って使用量を確定し、採点用証拠を整え、`evaluation_loop.py rate`で採点する。その後、同じ入口で終了処理を行う。
+
+```bash
+python3 scripts/evaluation_trial.py finish --trial /absolute/path/to/new-trial
+```
+
+終了処理は、有効runの使用量・採点・採点用証拠を確認してatomic登録し、要求件数が揃ったときだけ選択・集計・結果登録を行う。続いて最小容量保存、内容と属性を含む逐次復元照合、元データの不変確認、作業コピー削除を行う。使用した実行別ホームも保存・復元照合して削除する。共通環境と固定済みLayer 1は変更せず、registryは既存内容を保持して追記だけを許す。保存形式・照合項目・削除範囲の正本はこの文書の「Storage maintenance」と[保存拡張の説明](../layer2/extensions/long_run_storage/README.md)を参照する。
+
+件数が不足する場合は、その時点の証拠を保存して作業コピーを片付け、`incomplete_saved`を返す。全体の完了記録は作らない。再開するときは同じ`--trial`で`prepare`、`run`、採点、`finish`を繰り返し、不足分だけを追加する。発行済みの計画を再発行しない。準備が発行許可前に失敗した場合は、実行証拠がないことを確認したうえで、その未完了の準備領域だけを作り直す。
+
+最小容量保存または復元照合に失敗した場合も、`finish`を再実行する。元データが変わっていない場合に限り、保存拡張が中断箇所から再開する。実行別ホームの保存中断で出力が残った場合は、保存拡張の手順に従って残存出力と元データを確認する。失敗を成功として扱ったり、未検証のデータを削除したりしない。
+
+最終的な終了条件は`trial/complete.json`の`status: complete`である。結果登録の参照、各回の復元検証と削除の記録、使用したホームの削除記録、保護入力の不変確認をまとめて残す。回ごとの処理記録はアーカイブ対象の外側の`receipts/`へ置き、保存済み証拠を後から書き換えない。新規runが0件でも、選択した既存runの結果登録と、今回の固定入力・選択記録の保存検証を省略しない。
+
 ## 2. 4 Layerとsubcommand
 
 | Layer | subcommand | 役割 |

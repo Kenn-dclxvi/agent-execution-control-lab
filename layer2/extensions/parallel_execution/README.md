@@ -1,5 +1,7 @@
 # parallel execution拡張
 
+試験全体の標準入口は[`evaluation_trial.py`](../../../scripts/evaluation_trial.py)とし、準備から保存・復元検証・後片付けまでの手順は[実行マニュアル](../../../docs/evaluation-loop-manual.md#準備から保存後片付けまでの標準入口)に従う。この拡張の実行終了だけでは試験全体の完了にしない。
+
 `campaign_runner.py`は1件以上の計画を受け付ける。単独試験も同じ実行器を使い、固定した並列上限と発行条件を維持する。
 
 ## 目的

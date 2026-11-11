@@ -9,6 +9,7 @@
 - model-visible / model-invisible境界、実行条件の記録、4 Layer / 3 KPIの境界は`docs/prompt-comparison-workflow.md`と`evaluations/AGENTS.md`。オーバーレイでmodel-invisibleな情報をワークスペースへ流入させない。
 - composition sourceはmodel-invisibleかつevaluation-ineligibleとし、構成結果が検証済みfull bundleのtarget、content SHA-256およびprompt identityへ一致するまで評価経路へ渡さない。composition identityをbundle identity、profile prompt identityまたはcompatibility conditionへ昇格させない。
 
+- 試験全体の標準入口は`scripts/evaluation_trial.py`とし、準備から最小容量保存・復元検証・後片付けまでの使い方と終了条件は`docs/evaluation-loop-manual.md`を正本とする。
 - `scripts/evaluation_loop.py`をevaluation foundation v3の固定点として扱う。
 - `scripts/atomic_run_registry.py`をcount-freeなatomic保存・選択・集計の固定点とする。プールへrunのメンバー一覧または`N`を保存せず、要求件数はdispatch plan、使用run集合はselection receiptへだけ固定する。
 - 新しいプロンプトのrunが0件でも、プロファイルと評価セットの保管場所から複製したLayer 1から`create-pool`でケース別の実効条件を固定してから不足runを計画する。空のプール作成のために架空のrunを登録しない。
