@@ -305,7 +305,10 @@ def validate_source(batch, cycle_path, preserve_existing):
         registration = load_object(cycle / 'layer4/result-registration.json')
         if not registration.get('result_id') or not registration.get('result_content_sha256'):
             raise LongRunStorageError('結果の登録記録が不完全です')
-        valid, excluded = completed_executions(cycle)
+        # 既存atomic runだけを選択した試験には、新規の実行・作業コピーがない。
+        # 結果登録の確認後に限り、この空の実行集合を保存できる。
+        valid, excluded = (completed_executions(cycle)
+                           if list((cycle / 'layer2/evidence').glob('*/execution.json')) else ([], []))
         for binding in (cycle / 'layer2/bindings').glob('*.json'):
             if load_object(binding).get('run_id') not in valid + excluded:
                 raise LongRunStorageError('終了記録のない実行があります')
@@ -318,8 +321,6 @@ def validate_source(batch, cycle_path, preserve_existing):
                 if not (cycle / 'layer2/evidence' / run_id / 'rating-view' / name).is_file():
                     raise LongRunStorageError('採点証拠が不足しています')
         paths = [cycle / 'layer2/evidence' / run_id / 'workspace' for run_id in valid + excluded]
-    if not paths:
-        raise LongRunStorageError('作業コピーがありません')
     for path in paths:
         real_directory(path)
     return prefix, [p.relative_to(batch).as_posix() for p in paths]
