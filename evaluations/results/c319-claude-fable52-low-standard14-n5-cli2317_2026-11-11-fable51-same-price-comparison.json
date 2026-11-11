@@ -1,0 +1,93 @@
+{
+  "interpretation": "C319同士の保存済み観測値。モデル・CLI・計測時刻が異なる。元のresultを変更せず、5.2の使用量を5.1の単価で数え直した補足比較。",
+  "models": {
+    "5.1": {
+      "all70_usage_components": {
+        "cache_read": 5223421,
+        "cache_write_1h": 590983,
+        "cache_write_5m": 0,
+        "cache_write_unsplit": 0,
+        "output": 107402,
+        "uncached_input": 10252
+      },
+      "analysis_sha256": "6c5ba06eaf3b94b5d178145e44a421d8e7c429923ebda5488e713bc950e060cc",
+      "analysis_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c319-fable51-standard14-n5-20261019-r1/fable/round-1/analysis.json",
+      "model": "claude-fable-5-1",
+      "observed_median": {
+        "cost_usd": 3.7825845,
+        "elapsed_seconds": 480.39424591488205,
+        "quality_score": 100.0,
+        "total_tokens": 1198335
+      },
+      "run_count": 70,
+      "same_51_price_cost_median": 3.782584500000002,
+      "same_51_price_cost_samples": [
+        3.4914090000000004,
+        3.787547000000001,
+        3.922703250000001,
+        3.6138915,
+        3.782584500000002
+      ],
+      "score_counts": {
+        "4": 70
+      },
+      "selection_sha256": "3cd088ab990e9f9202eb5235756054bd3304bb4c52dc5e674bc0bfa664b9eacf",
+      "selection_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c319-fable51-standard14-n5-20261019-r1/fable/round-1/selection.json"
+    },
+    "5.2": {
+      "all70_usage_components": {
+        "cache_read": 3415389,
+        "cache_write_1h": 614220,
+        "cache_write_5m": 0,
+        "cache_write_unsplit": 0,
+        "output": 121614,
+        "uncached_input": 666
+      },
+      "analysis_sha256": "d3410ae7421461c0b03982b8df82e644c368183de08cb93d6f6d33a5a4c6357a",
+      "analysis_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c319-fable52-standard14-n5-cli2317-20261110-r1/fable/round-3/analysis.json",
+      "model": "claude-fable-5-2",
+      "observed_median": {
+        "cost_usd": 3.0694472,
+        "elapsed_seconds": 391.2889906219207,
+        "quality_score": 100.0,
+        "total_tokens": 814023
+      },
+      "run_count": 70,
+      "same_51_price_cost_median": 3.8368089999999997,
+      "same_51_price_cost_samples": [
+        3.6106845000000005,
+        3.8446935,
+        3.8368089999999997,
+        4.180646500000002,
+        3.75277375
+      ],
+      "score_counts": {
+        "4": 70
+      },
+      "selection_sha256": "d2c7efd20892510029a3046bba8889be2b4fcf56352ee56a9037decf9af0c82a",
+      "selection_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/c319-fable52-standard14-n5-cli2317-20261110-r1/fable/round-3/selection.json"
+    }
+  },
+  "price_table_sha256": "5e1e0895dc789a07b059f640a140f3b683d7c92e1e575cb6cce59d0e4156ca9b",
+  "same_price_cost_change_pct": 1.4335304340193256,
+  "same_price_reference_model": "claude-fable-5-1",
+  "schema_version": "the-caption-prompt.same-price-observation-note/v1",
+  "unit_prices_usd_per_million_tokens": {
+    "claude-fable-5-1": {
+      "cache_read": 0.25,
+      "cache_write_1h": 20.0,
+      "cache_write_5m": 12.5,
+      "cache_write_unsplit": null,
+      "output": 50.0,
+      "uncached_input": 10.0
+    },
+    "claude-fable-5-2": {
+      "cache_read": 0.2,
+      "cache_write_1h": 16.0,
+      "cache_write_5m": 10.0,
+      "cache_write_unsplit": null,
+      "output": 40.0,
+      "uncached_input": 8.0
+    }
+  }
+}
