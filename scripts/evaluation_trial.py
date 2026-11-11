@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import contextmanager
+from contextlib import contextmanager, ExitStack
 import fcntl
 import hashlib
 import json
@@ -277,6 +277,60 @@ def run(trial):
     return {"status": "awaiting_ratings", "runner_return_code": code, "cycle": str(directory / "cycle")}
 
 
+def run_group(trials):
+    """事前照合済みの試験を一つの待ち行列へ入れ、合計24件以内で実行する。"""
+    if len(trials) < 2 or len(set(trials)) != len(trials):
+        raise TrialError("異なる試験を二つ以上指定してください")
+    entries = []
+    for trial in trials:
+        config = load(trial / "trial.json")
+        check_protected(config)
+        directory, prepared = latest(trial)
+        receipt = trial / "receipts" / f"{directory.name}-executed.json"
+        if receipt.exists():
+            raise TrialError("発行済みの試験が含まれています")
+        if snapshot(directory / "cycle/layer1") != prepared["layer1_snapshot"]:
+            raise TrialError("複製したLayer 1が変更されています")
+        if not capacity_guard(trial, trial / "capacity.jsonl")["dispatch_allowed"]:
+            raise TrialError("発行前の空き容量が不足しています")
+        if prepared["missing_slot_count"]:
+            if sha(prepared["plan"]) != prepared["plan_sha256"]:
+                raise TrialError("発行計画が変更されています")
+            call("scripts/evaluation_loop.py", "verify-execution-preflight", "--cycle", directory / "cycle")
+        entries.append((trial, config, directory, prepared, receipt))
+    if not any(entry[3]["missing_slot_count"] for entry in entries):
+        for _, config, _, _, receipt in entries:
+            write_once(receipt, {"return_code": 0, "status": "executed", "campaign": None})
+            check_protected(config)
+        return {"status": "awaiting_ratings", "runner_return_code": 0,
+                "cycles": [str(entry[2] / "cycle") for entry in entries]}
+    first = entries[0][2]
+    command = [sys.executable, str(ROOT / "layer2/extensions/parallel_execution/campaign_runner.py")]
+    for _, _, directory, prepared, _ in entries:
+        if prepared["missing_slot_count"]:
+            command += ["--plan", prepared["plan"], "--runner-output", str(directory / "parallel-run")]
+    command += ["--campaign-output", str(first / "campaign"), "--max-workers", "24"]
+    with (first / "runner.log").open("x") as log:
+        process = subprocess.Popen(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,
+                                   start_new_session=True, env={**os.environ, "THE_CAPTION_EVAL_COPY_MODE": "clonefile"})
+        try:
+            code = process.wait()
+        except KeyboardInterrupt:
+            os.killpg(process.pid, signal.SIGTERM)
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                os.killpg(process.pid, signal.SIGKILL)
+                process.wait()
+            code = 130
+    for trial, config, directory, _, receipt in entries:
+        write_once(receipt, {"return_code": code, "status": "executed" if code == 0 else "interrupted",
+                             "campaign": str(first / "campaign")})
+        check_protected(config)
+    return {"status": "awaiting_ratings", "runner_return_code": code,
+            "cycles": [str(entry[2] / "cycle") for entry in entries]}
+
+
 def ensure_quiet(trial):
     processes = {}
     for line in subprocess.check_output(["ps", "-axo", "pid=,ppid=,args="], text=True).splitlines():
@@ -443,14 +497,21 @@ def parser():
     for name in ("run", "finish"):
         p = commands.add_parser(name)
         p.add_argument("--trial", required=True, type=Path)
+    p = commands.add_parser("run-group", help="複数試験を一つの待ち行列で実行する")
+    p.add_argument("--trial", required=True, type=Path, action="append")
     return result
 
 
 def main():
     args = parser().parse_args()
     try:
-        with locked(args.trial) as trial:
-            value = prepare(trial, args) if args.command == "prepare" else run(trial) if args.command == "run" else finish(trial)
+        if args.command == "run-group":
+            with ExitStack() as stack:
+                trials = [stack.enter_context(locked(path)) for path in sorted(args.trial)]
+                value = run_group(trials)
+        else:
+            with locked(args.trial) as trial:
+                value = prepare(trial, args) if args.command == "prepare" else run(trial) if args.command == "run" else finish(trial)
         print(json.dumps(value, ensure_ascii=False))
         return value.get("runner_return_code", 0)
     except (TrialError, LongRunStorageError, OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:

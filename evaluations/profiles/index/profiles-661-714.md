@@ -1,7 +1,8 @@
-# Profile index 661-712
+# Profile index 661-714
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json`](../control-free-astra-low-old-a01-exact-input-projection-r2-n20-20261003.json)
 - [`control-free-astra-low-old-a01-isolated-n20-20261003-r1.json`](../control-free-astra-low-old-a01-isolated-n20-20261003-r1.json)
 - [`control-free-astra-low-old-a01-source-separation-r5-n2-20261003.json`](../control-free-astra-low-old-a01-source-separation-r5-n2-20261003.json)
 - [`control-free-astra-low-old-a01-token-preserving-compaction-r4-n2-20261003.json`](../control-free-astra-low-old-a01-token-preserving-compaction-r4-n2-20261003.json)
@@ -39,6 +40,7 @@
 - [`free-claude-opus55-medium-standard14-n5-cli2284-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2284-r1.json)
 - [`free-claude-opus55-medium-standard14-n5-cli2288-r1.json`](../free-claude-opus55-medium-standard14-n5-cli2288-r1.json)
 - [`free-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json`](../free-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261010-r1.json)
+- [`free-gemini4-argon-low-standard14-n5-agy155-20261111-r1.json`](../free-gemini4-argon-low-standard14-n5-agy155-20261111-r1.json)
 - [`free-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-new-20261003-r1.json)
 - [`free-sol61-low-standard14-n5-cli0159-isolated-new-20261006-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-new-20261006-r1.json)
 - [`free-sol61-low-standard14-n5-cli0159-isolated-r1.json`](../free-sol61-low-standard14-n5-cli0159-isolated-r1.json)

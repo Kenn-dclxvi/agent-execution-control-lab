@@ -28,6 +28,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC319・Gemini 4 Argon LowのSTD14 N=5（2026-11-11）](#free-c319-argon-20261111)
+
 - [C319・Fable 5.2 lowの完了結果（2026-11-11）](#c319-fable52-completed-20261111)
 
 - [C319・Fable 5.2 lowの途中経過（2026-11-10）](#c319-fable52-20261110)
@@ -216,6 +218,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c319-argon-20261111"></a>
+## FreeとC319・Gemini 4 Argon LowのSTD14 N=5（2026-11-11）
+
+[FreeとC319・Gemini 4 Argon LowのSTD14 N=5](free-c319-gemini4-argon-low-standard14-n5_2026-11-11.md)。各70件の実行・採点・登録・保存・復元照合・後片付けを完了した。Freeは4点69件・3点1件、C319は4点67件・3点3件。14ケース合計の5反復の中央値は、Freeが品質100%、費用1.2285051 USD、経過時間986.484秒、C319が品質98.2143%、費用0.9980612 USD、経過時間898.225秒。Freeの[登録結果](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-result.json)・[選択](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-selection.json)・[集計](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-analysis.json)・[採点](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-quality-audit.json)・[発行前確認](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-preflight.json)・[完了記録](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-free-complete.json)、C319の[登録結果](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-result.json)・[選択](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-selection.json)・[集計](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-analysis.json)・[採点](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-quality-audit.json)・[発行前確認](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-preflight.json)・[完了記録](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-c319-complete.json)、[比較](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-comparison.json)、[追加のモデル実行を伴わない55件の証跡再収集](free-c319-gemini4-argon-low-standard14-n5_2026-11-11-recollection.json)を保存した。
 
 <a id="c319-fable52-completed-20261111"></a>
 ## C319・Fable 5.2 lowの完了結果（2026-11-11）

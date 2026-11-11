@@ -23,6 +23,8 @@ if __package__:
     from .execution_time_recording import collect as collect_execution_time
     from .all_agent_usage import TOKEN_ACCOUNTING
     from .claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
+    from .antigravity_evidence import TOKEN_ACCOUNTING as ANTIGRAVITY_TOKEN_ACCOUNTING
+    from .antigravity_runtime import AntigravityRuntimeError, verify_from_conditions as verify_antigravity_runtime
     from .codex_runtime_binding import (
         CodexRuntimeBindingError,
         resolve_runtime_from_conditions,
@@ -43,6 +45,8 @@ else:
     from execution_time_recording import collect as collect_execution_time
     from all_agent_usage import TOKEN_ACCOUNTING
     from claude_all_agent_evidence import TOKEN_ACCOUNTING as CLAUDE_TOKEN_ACCOUNTING
+    from antigravity_evidence import TOKEN_ACCOUNTING as ANTIGRAVITY_TOKEN_ACCOUNTING
+    from antigravity_runtime import AntigravityRuntimeError, verify_from_conditions as verify_antigravity_runtime
     from codex_runtime_binding import (
         CodexRuntimeBindingError,
         resolve_runtime_from_conditions,
@@ -285,7 +289,9 @@ QUALITY_RATING_CLAUDE_COLLECTOR_V2 = {
     "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_ANTIGRAVITY_COLLECTOR_V1 = {'contract_id': 'outcome-terminal-state-evidence-antigravity-collector-v1', 'contract_sha256': '8a1efdb50567e88146a1290b9797af6113d3f1481d3857fac7ff216e8b6b97db', 'producer_evidence_schema_version': 'the-caption-prompt.antigravity-owner-producer-evidence/v1', 'command_evidence_schema_version': 'the-caption-prompt.antigravity-command-evidence/v1', 'terminal_state_evidence_schema_version': 'the-caption-prompt.terminal-state-evidence/v1', 'terminal_state_evidence_required_cases': ['TC-A01-LATENT-MODE-POLICY'], 'owner_producer_evidence_policy': 'diagnostic_only'}
 SUPPORTED_QUALITY_RATINGS = (
+    QUALITY_RATING_ANTIGRAVITY_COLLECTOR_V1,
     LEGACY_QUALITY_RATING,
     QUALITY_RATING_V2,
     QUALITY_RATING_V3,
@@ -331,7 +337,7 @@ TOKEN_USAGE_SCHEMA_V3 = "the-caption-prompt.token-usage/v3"
 LAYER1_STORE_ENTRY_SCHEMA = "the-caption-prompt.evaluation-set-store-entry/v1"
 LAYER1_INSTALLATION_SCHEMA = "the-caption-prompt.layer1-installation/v1"
 EXECUTION_PREFLIGHT_SCHEMA = "the-caption-prompt.execution-preflight/v1"
-SUPPORTED_TOKEN_ACCOUNTINGS = (TOKEN_ACCOUNTING, CLAUDE_TOKEN_ACCOUNTING)
+SUPPORTED_TOKEN_ACCOUNTINGS = (TOKEN_ACCOUNTING, CLAUDE_TOKEN_ACCOUNTING, ANTIGRAVITY_TOKEN_ACCOUNTING)
 ROOT_ONLY_ACCOUNTING = {
     "scope": "root_agent",
     "revision": "legacy_v1",
@@ -1421,6 +1427,10 @@ def profile_runtime_binding(
     conditions: dict[str, Any],
     bound_codex_runtime: dict[str, Any] | None,
 ) -> dict[str, Any] | None:
+    try:
+        verify_antigravity_runtime(conditions)
+    except AntigravityRuntimeError as exc:
+        raise EvaluationError(str(exc)) from exc
     try:
         if bound_codex_runtime is None:
             codex_runtime_binding = resolve_runtime_from_conditions(conditions)
