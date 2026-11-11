@@ -216,3 +216,35 @@ def test_layer1_drift_blocks_dispatch(space):
     (directory / 'rounds/0001/cycle/layer1/fixtures/TEST-CASE/input.txt').write_text('改変')
     with pytest.raises(trial.TrialError, match='Layer 1'):
         trial.run(directory)
+
+
+def test_group_uses_one_queue_and_records_both_trials(space):
+    directories = []
+    for name in ('a', 'b'):
+        root = space / name
+        root.mkdir()
+        directory, args = setup_trial(root)
+        trial.prepare(directory, args)
+        directories.append(directory)
+    result = trial.run_group(directories)
+    assert result['runner_return_code'] == 0
+    assert len(result['cycles']) == 2
+    receipts = [trial.load(p / 'receipts/0001-executed.json') for p in directories]
+    assert receipts[0]['campaign'] == receipts[1]['campaign']
+    with pytest.raises(trial.TrialError, match='発行済み'):
+        trial.run_group(directories)
+
+
+def test_group_checks_every_trial_before_starting_runner(space):
+    directories = []
+    for name in ('a', 'b'):
+        root = space / name
+        root.mkdir()
+        directory, args = setup_trial(root)
+        trial.prepare(directory, args)
+        directories.append(directory)
+    (directories[-1] / 'rounds/0001/cycle/layer1/fixtures/TEST-CASE/input.txt').write_text('改変')
+    with mock.patch.object(trial, 'call', return_value={}), mock.patch.object(trial.subprocess, 'Popen') as start:
+        with pytest.raises(trial.TrialError, match='Layer 1'):
+            trial.run_group(directories)
+        start.assert_not_called()

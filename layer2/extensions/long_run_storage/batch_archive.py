@@ -25,11 +25,12 @@ IGNORED_XATTR = "com.apple.provenance"
 
 
 def require_usage(cycle: Path, run_id: str) -> None:
-    """CodexとClaudeの正式な使用量記録を、元の形式のまま確認する。"""
+    """各実行環境の正式な使用量記録を、元の形式のまま確認する。"""
     usage = load_object(cycle / "layer2/extensions" / run_id / "all-agent-usage/usage.json")
     if usage.get("schema_version") not in {
         "the-caption-prompt.all-agent-usage/v1",
         "the-caption-prompt.claude-all-agent-usage/v1",
+        "the-caption-prompt.antigravity-usage/v1",
     }:
         raise LongRunStorageError(f"未対応の使用量記録です: {run_id}")
     total = usage.get("all_agent_total_tokens")

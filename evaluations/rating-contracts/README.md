@@ -21,6 +21,7 @@
 | [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](outcome-abstract-condition-preserving-owner-diagnostic-v13.json) | 抽象成果条件を非公開の特定commandへ具体化して必須化することを禁止 | 履歴互換 |
 | [`outcome-terminal-state-evidence-owner-diagnostic-v14`](outcome-terminal-state-evidence-owner-diagnostic-v14.json) | v13を維持し、A01をresponse文面分類から`terminal-state-evidence/v1`へ切替 | 現行 |
 | [`outcome-terminal-state-evidence-claude-collector-v1`](outcome-terminal-state-evidence-claude-collector-v1.json) | v14のケース規則を変えず、command証跡とproducer証跡のcollectorだけをClaude Code transcript用へ差し替える | Claude Code系列専用 |
+| [`outcome-terminal-state-evidence-antigravity-collector-v1`](outcome-terminal-state-evidence-antigravity-collector-v1.json) | v14のケース規則を変えず、親と全子会話のSQLite・会話記録に対応する収集器へ差し替える | Antigravity CLI 1.5.5・Gemini 4 Argon Low系列専用 |
 | [`outcome-terminal-state-evidence-claude-collector-v2`](outcome-terminal-state-evidence-claude-collector-v2.json) | v1を維持し、F05 clarifyのfallback確認として英語の動詞形`fall back`系も受け付ける | Claude Code系列専用（現行） |
 
 v14はv13以前と異なる互換条件であり、過去resultをv14で再採点したものとして扱わない。既存のv10〜v13プロファイルは履歴再現用として保持する。

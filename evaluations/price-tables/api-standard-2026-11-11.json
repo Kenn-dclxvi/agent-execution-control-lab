@@ -1,0 +1,120 @@
+{
+  "models": {
+    "claude-fable-5-1": {
+      "standard": {
+        "cache_read": 0.25,
+        "cache_write_1h": 20.0,
+        "cache_write_5m": 12.5,
+        "cache_write_unsplit": null,
+        "output": 50.0,
+        "uncached_input": 10.0
+      }
+    },
+    "claude-fable-5-2": {
+      "standard": {
+        "cache_read": 0.2,
+        "cache_write_1h": 16.0,
+        "cache_write_5m": 10.0,
+        "cache_write_unsplit": null,
+        "output": 40.0,
+        "uncached_input": 8.0
+      }
+    },
+    "claude-opus-5-5": {
+      "standard": {
+        "cache_read": 0.2,
+        "cache_write_1h": 8.0,
+        "cache_write_5m": 5.0,
+        "cache_write_unsplit": null,
+        "output": 20.0,
+        "uncached_input": 4.0
+      }
+    },
+    "claude-sonnet-5-5": {
+      "standard": {
+        "cache_read": 0.1,
+        "cache_write_1h": 4.0,
+        "cache_write_5m": 2.5,
+        "cache_write_unsplit": null,
+        "output": 10.0,
+        "uncached_input": 2.0
+      }
+    },
+    "gemini-4-argon-low": {
+      "standard": {
+        "cache_read": 0.1,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 10.0,
+        "uncached_input": 2.0
+      }
+    },
+    "gpt-6-astra": {
+      "long_context": {
+        "cache_read": 2.0,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 75.0,
+        "uncached_input": 20.0
+      },
+      "standard": {
+        "cache_read": 1.0,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 50.0,
+        "uncached_input": 10.0
+      }
+    },
+    "gpt-6.1-sol": {
+      "long_context": {
+        "cache_read": null,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 15.0,
+        "uncached_input": 4.0
+      },
+      "standard": {
+        "cache_read": 0.1,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 10.0,
+        "uncached_input": 2.0
+      }
+    },
+    "gpt-6.1-terra": {
+      "long_context": {
+        "cache_read": 0.1,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 7.5,
+        "uncached_input": 2.0
+      },
+      "standard": {
+        "cache_read": 0.05,
+        "cache_write_1h": null,
+        "cache_write_5m": null,
+        "cache_write_unsplit": null,
+        "output": 5.0,
+        "uncached_input": 1.0
+      }
+    }
+  },
+  "notes": [
+    "Codex does not report cache writes; input not read from cache is priced as uncached input.",
+    "GPT-6.1 Sol bills the whole request at the long-context price when one request's input exceeds 272K tokens. The long-context cache read price was not given and stays null, so such tokens fail closed.",
+    "Claude Code reports cache writes with a 1h or 5m split; an unsplit write has no price and fails closed.",
+    "GPT-6 Astra uses the same 272K long-context rule as GPT-6.1 Sol. Codex does not report cache writes, so the Astra cache write prices are not used and stay null like Sol's.",
+    "GPT-6.1 Terra uses the same 272K long-context rule as GPT-6.1 Sol. Codex does not report cache writes, so the Terra cache write prices are not used and stay null like Sol's.",
+    "ArgonのCLI total_tokensはキャッシュ読み取りを除く。一次記録の未キャッシュ入力・キャッシュ読み取り・思考を内包した出力を合算する。"
+  ],
+  "revision": "api-standard-2026-11-11",
+  "schema_version": "the-caption-prompt.price-table/v1",
+  "source": "Standard API prices as of 2026-10-09 provided by the user (OpenAI GPT-6.1 Sol and Anthropic Claude Sonnet 5.5 pricing pages). Claude Opus 5.5 added on 2026-10-10 from the Claude API documentation bundled with Claude Code (claude-api skill: models.md, prompt-caching.md): input $4, output $20, cache read $0.20, cache write 1.25x (5m) and 2x (1h) of input. GPT-6 Astra added on 2026-10-10 from the OpenAI API pricing page (developers.openai.com/api/docs/pricing, standard tier): input $10, cached input $1, cache write $12.50, output $50; over 272K input tokens: input $20, cached input $2, cache write $25, output $75. Claude Fable 5.1 added on 2026-10-18 from the Claude API documentation bundled with Claude Code (claude-api skill: SKILL.md, models.md, prompt-caching.md): input $10, output $50, cache read $0.25 (0.025x), cache write 1.25x (5m) and 2x (1h) of input. GPT-6.1 Terra added on 2026-10-27 from the OpenAI API pricing page (developers.openai.com/api/docs/pricing, standard tier): input $1, cached input $0.05, 30m cache write $1.25, output $5; over 272K input tokens: input $2, cached input $0.10, 30m cache write $2.50, output $7.50. Claude Fable 5.2の追加根拠（2026-11-10確認）: https://platform.claude.com/docs/en/models/fable-5-2/overview 。100万トークン当たり入力8 USD、出力40 USD、キャッシュ読み取り0.20 USD、5分書き込み10 USD、1時間書き込み16 USD。 Gemini 4 Argon追加根拠（2026-11-11）: https://aistudio.google.com/docs/pricing#gemini-4-argon 。2026-11-30までの標準API換算単価。入力2 USD、キャッシュ読み取り0.10 USD、思考を含む出力10 USD/100万トークン。Antigravityのサブスクリプション請求額ではない。CLIのgemini-4-argon-lowは同じAPIモデルの低推論設定として対応づける。",
+  "unit": "USD per 1M tokens"
+}

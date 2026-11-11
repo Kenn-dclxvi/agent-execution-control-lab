@@ -39,6 +39,8 @@ python3 scripts/evaluation_trial.py prepare \
 python3 scripts/evaluation_trial.py run --trial /absolute/path/to/new-trial
 ```
 
+FreeとCandidateなど、複数の試験を同時に比較する場合は、各試験を`prepare`した後に`evaluation_trial.py run-group --trial <試験A> --trial <試験B>`で一つの待ち行列へ入れる。全試験の事前照合が成功してから、合計24件以内で発行する。採点と`finish`は各試験で行う。Gemini 4 Argon Lowの固定条件と証拠収集は[専用の説明](gemini-argon-standard14-measurement.md)を参照する。
+
 `--template`、`--protect`、`--homes`は複数指定できる。ひな型とプロファイルには確認済みの実行条件を用い、プロファイルの`execution.duration_hints_seconds`にはケース別の所要時間を指定する。共通環境の構築やLayer 1の再固定はこの入口では行わない。既存の固定済みLayer 1を複製し、互換な既存runを照合して不足分だけの計画を作る。並列上限24と事前照合は既存基盤へ委譲する。準備・実行では`clonefile`を必須とし、通常コピーへの自動切替は行わない。未対応のファイルシステムでは発行前に停止する。
 
 実行が終わったら、既存の採点契約に従って使用量を確定し、採点用証拠を整え、`evaluation_loop.py rate`で採点する。その後、同じ入口で終了処理を行う。

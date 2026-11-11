@@ -1,0 +1,392 @@
+{
+  "cases": [
+    {
+      "id": "TC-A01-LATENT-MODE-POLICY",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY",
+      "revision": "r3"
+    },
+    {
+      "id": "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F03-ATOMIC-CONTEXT-CLEANUP",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-F05-CLARIFY-UNITS-MODE",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-F07-CANONICAL-V4-RUNNER",
+      "revision": "r2"
+    },
+    {
+      "id": "TC-F07-DEPENDENCY-PROVENANCE-PAIR",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F08-CANONICAL-CLI-REFERENCE-SYNC",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
+      "revision": "r1"
+    },
+    {
+      "id": "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
+      "revision": "r3"
+    }
+  ],
+  "comparison_conditions": {
+    "agent_environment": {
+      "agent": "antigravity-cli",
+      "antigravity_cli": {
+        "absent_customizations": [
+          "/Users/kenn/.gemini/AGENTS.md",
+          "/Users/kenn/.gemini/GEMINI.md",
+          "/Users/kenn/.gemini/config/AGENTS.md",
+          "/Users/kenn/.gemini/config/GEMINI.md",
+          "/Users/kenn/.gemini/config/rules",
+          "/Users/kenn/.gemini/config/skills",
+          "/Users/kenn/.gemini/config/agents",
+          "/Users/kenn/.gemini/config/plugins",
+          "/Users/kenn/.gemini/config/hooks.json"
+        ],
+        "builtin_plugins": "swarm enabled; configuration hash fixed",
+        "config_dir": "/Users/kenn/.gemini/antigravity-cli",
+        "configuration_files": {
+          "/Users/kenn/.gemini/antigravity-cli/settings.json": "46f07f66245f8acd7299082afc60c35c6f6d9e3f965330bc68dd20dd611ee5e5",
+          "/Users/kenn/.gemini/config/config.json": "7d2ed9f26a1d21f4d6c4f2b085cabd550d50127ca0596ef94b8a0ee24d98ca75",
+          "/Users/kenn/.gemini/config/mcp_config.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "executable": "/Users/kenn/.local/bin/agy",
+        "executable_sha256": "42b591f206a868dd0b924d5b6b396638a108539367695a5dbe2f7dcfdbf4d6f3",
+        "flag_settings": {
+          "artifactReviewPolicy": "always-proceed",
+          "useG1Credits": false
+        },
+        "model_enum": 1419,
+        "schema_version": "the-caption-prompt.antigravity-cli-environment/v1",
+        "tools": [
+          "ask_custom_permission",
+          "ask_permission",
+          "ask_question",
+          "browser_click_element",
+          "browser_drag_pixel_to_pixel",
+          "browser_get_dom",
+          "browser_get_network_request",
+          "browser_input",
+          "browser_list_network_requests",
+          "browser_mouse_down",
+          "browser_mouse_up",
+          "browser_move_mouse",
+          "browser_press_key",
+          "browser_refresh_page",
+          "browser_resize_window",
+          "browser_scroll",
+          "browser_scroll_dom",
+          "browser_select_option",
+          "browser_subagent",
+          "call_mcp_tool",
+          "capture_browser_console_logs",
+          "capture_browser_screenshot",
+          "click_browser_pixel",
+          "command_status",
+          "define_subagent",
+          "delete_knowledge",
+          "execute_browser_javascript",
+          "find_by_name",
+          "finish",
+          "generate_image",
+          "grep_search",
+          "invoke_subagent",
+          "list_browser_pages",
+          "list_dir",
+          "list_permissions",
+          "list_plugin_accounts",
+          "list_resources",
+          "manage_inbox",
+          "manage_subagents",
+          "manage_task",
+          "multi_replace_file_content",
+          "notebook_edit",
+          "notebook_execution",
+          "open_browser_url",
+          "read_browser_page",
+          "read_resource",
+          "read_url_content",
+          "replace_file_content",
+          "run_command",
+          "run_workflow",
+          "schedule",
+          "search_marketplace",
+          "search_web",
+          "sed_file",
+          "send_command_input",
+          "send_message",
+          "view_file",
+          "wait",
+          "wait_5_seconds",
+          "write_to_file"
+        ],
+        "version": "1.5.5"
+      },
+      "python_version": "3.14.5",
+      "runtime_identity_sha256": "61b26e617ae49be1858b6645d0280ba09c1211702cba6983e51475afec669a73",
+      "session_mode": "persisted",
+      "shell_environment": {
+        "base_path": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "revision": "fixed-path-workspace-venv-r1",
+        "schema_version": "the-caption-prompt.agent-shell-environment/v1",
+        "user_startup_files": "suppressed_by_empty_zdotdir_and_non_login_shell",
+        "venv_activation": "path_prefix_and_virtual_env",
+        "workspace_venv": ".venv"
+      }
+    },
+    "executor_parameters": {
+      "adapter_owned_teardown": {
+        "failure_policy": "exclude_as_external_failure",
+        "paths_by_case": {
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            "src/web/market_units_editor/node_modules",
+            "src/web/market_units_editor/dist"
+          ]
+        },
+        "schema_version": "the-caption-prompt.adapter-owned-teardown/v1"
+      },
+      "campaign_dispatch": {
+        "admission": {
+          "busy_percent_max": 70,
+          "max_sample_failures": 5,
+          "min_interval_seconds": 1,
+          "policy": "cpu_busy_below",
+          "poll_interval_seconds": 2,
+          "revision": "r1",
+          "sample_window_seconds": 1
+        },
+        "max_workers_total": 24,
+        "queue": "one_queue_across_cells_and_prompts"
+      },
+      "command_evidence_protocol": {
+        "mode": "separate_required_commands_with_structured_exit",
+        "omit_for_cases": [
+          "TC-A01-LATENT-MODE-POLICY",
+          "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
+        ],
+        "required_command_groups_by_case": {
+          "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": [
+            [
+              "pytest",
+              "tests/unit/test_collection_history_updater.py",
+              "tests/unit/test_v4_engine.py"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F03-ATOMIC-CONTEXT-CLEANUP": [
+            [
+              "pytest",
+              "TestContextRepositoryAtomicSave"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": [
+            [
+              "npm",
+              "ci"
+            ],
+            [
+              "npm",
+              "run",
+              "lint"
+            ],
+            [
+              "npm",
+              "run",
+              "build"
+            ]
+          ],
+          "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": [
+            [
+              "pytest",
+              "tests/unit/test_market_units_snapshot.py"
+            ],
+            [
+              "pytest",
+              "tests/"
+            ]
+          ],
+          "TC-F07-CANONICAL-V4-RUNNER": [
+            [
+              "bash",
+              "-n",
+              "run.sh"
+            ],
+            [
+              "bash",
+              "scripts/dev/main_verify.sh"
+            ]
+          ],
+          "TC-F07-DEPENDENCY-PROVENANCE-PAIR": [
+            [
+              "python3",
+              "PyYAML>=6.0.1",
+              "pyyaml==6.0.3"
+            ],
+            [
+              "git",
+              "diff",
+              "--check"
+            ],
+            [
+              "git",
+              "diff",
+              "--name-only"
+            ]
+          ]
+        },
+        "schema_version": "the-caption-prompt.command-evidence-protocol/v1"
+      },
+      "command_protocol_text_revision": "antigravity-run-command-separate-r1",
+      "duration_hint_method": "max_per_case_from_existing_f12_and_a01_a02_history",
+      "environment_adjustment": "none",
+      "max_attempts": 1,
+      "max_workers": 24,
+      "monitor_interval_seconds": 5,
+      "reasoning_effort": "low",
+      "schedule_policy": "global_queue",
+      "time_recording": {
+        "code_sha256": {
+          "layer2/extensions/long_run_storage/batch_archive.py": "5c00dabda6c63d9f6455b2bf6756bc1c8f3456c7602044edf43a05cb17702823",
+          "scripts/agent_shell_environment.py": "6489b8e6b2f2d765599b6d1461982ced7fae577297003d6d40c1510907115823",
+          "scripts/all_agent_command_evidence.py": "aa9f66b757be0684ada2e2a31cdca394349bbd688c7cc8042539129516389a31",
+          "scripts/antigravity_evidence.py": "7937f6a87b40f1bfac0c0a62bccffaf195976f71cc0b5b633a2cd4dbe60b11ce",
+          "scripts/antigravity_runtime.py": "0864d7fbbd682610c06f30389bd45f7baafecee15897c79620a78e8052042dcc",
+          "scripts/atomic_run_registry.py": "a97701d8207c727567830bbe434b9861f138ca1f68112ea3862cbdf56f138a20",
+          "scripts/evaluation_loop.py": "bc44101f4019162ea975b3053d9ff5c9ebd7c8a3287bccf9ff98818cc257241e",
+          "scripts/evaluation_trial.py": "4e9bf1a8bfada48e2bb11956cd20de36fa75324fcf68c1975ee66b6fd530ccb0",
+          "scripts/execution_time_recording.py": "313648da1351049ff39ca9324d25060e5c10183953485b52f116ed83d2ee5f60",
+          "scripts/export_prompt_bundle.py": "4133bf5c2a10ce25ea2054a849de2795951bc57b25569a9d78a44cc7b4025d78",
+          "scripts/quality_audit_policy.py": "cf9d950d8e3cb4248f7e60647c009067debb454e855722e842a41026e45a8fbc",
+          "scripts/run_antigravity_evaluation.py": "139175b191856e990c751831f729254c9f4298699210c6bc17e242f3deb0e441",
+          "scripts/run_codex_evaluation.py": "37b65b3fe0d5da56e87c8042c36452a7ca70ca7bc686287d54a7ae41b3a83c02",
+          "scripts/standard14_antigravity_quality_audit.py": "8b73072fa5532aac50debfbb31925fac7c718e0e2b1b28160d84fb67790ab528",
+          "scripts/standard14_quality_audit.py": "af431b57b6cb19eefb62a0b87eb2a8d2b00d473a1543cd84b97ca11e47ca3d32",
+          "scripts/terminal_state_evidence.py": "846dfa200513dfe7e885e1021a81e3803efc57580b4b30ccea52b6a66de8d39c"
+        },
+        "contract": "execution-time-recording/r1"
+      },
+      "token_accounting": {
+        "revision": "antigravity-v1",
+        "scope": "all_agents",
+        "source": "antigravity_155_database_model_usage_reconciled_with_transcripts_and_root_stream"
+      }
+    },
+    "model": "gemini-4-argon-low",
+    "permission": {
+      "artifactReviewPolicy": "always-proceed",
+      "terminal_sandbox": false,
+      "toolPermission": "always-proceed"
+    },
+    "quality_rating": {
+      "command_evidence_schema_version": "the-caption-prompt.antigravity-command-evidence/v1",
+      "contract_id": "outcome-terminal-state-evidence-antigravity-collector-v1",
+      "contract_sha256": "8a1efdb50567e88146a1290b9797af6113d3f1481d3857fac7ff216e8b6b97db",
+      "owner_producer_evidence_policy": "diagnostic_only",
+      "producer_evidence_schema_version": "the-caption-prompt.antigravity-owner-producer-evidence/v1",
+      "terminal_state_evidence_required_cases": [
+        "TC-A01-LATENT-MODE-POLICY"
+      ],
+      "terminal_state_evidence_schema_version": "the-caption-prompt.terminal-state-evidence/v1"
+    },
+    "repetition_condition": {
+      "external_failure_policy": "exclude_and_repeat_same_slot",
+      "iterations": 5,
+      "order": "estimated_seconds_descending"
+    },
+    "target_repository_ref": {
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "repository": "https://github.com/Kenn-dclxvi/THE-CAPTION.git",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "task_spec": {
+      "evaluation_set_id": "the-caption-standard14-r1",
+      "evaluation_set_revision": "r1",
+      "source": "各項目の版と実行役へ提示するTaskSpecを第1段階で固定する"
+    }
+  },
+  "evaluation_set": {
+    "revision": "r1",
+    "set_id": "the-caption-standard14-r1"
+  },
+  "execution": {
+    "duration_hints_seconds": {
+      "TC-A01-LATENT-MODE-POLICY": 9.7,
+      "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": 24.3,
+      "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": 23.4,
+      "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": 27.5,
+      "TC-F03-ATOMIC-CONTEXT-CLEANUP": 25.6,
+      "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": 27.5,
+      "TC-F05-CLARIFY-UNITS-MODE": 11.7,
+      "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": 8.9,
+      "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": 23.0,
+      "TC-F07-CANONICAL-V4-RUNNER": 28.0,
+      "TC-F07-DEPENDENCY-PROVENANCE-PAIR": 18.6,
+      "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": 19.1,
+      "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": 22.8,
+      "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": 22.8
+    },
+    "max_attempts": 1,
+    "max_workers": 24,
+    "monitor_interval_seconds": 5,
+    "schedule_policy": "global_queue"
+  },
+  "iterations": 5,
+  "profile_id": "free-gemini4-argon-low-standard14-n5-agy155-20261111-r1",
+  "prompt_set_identity": {
+    "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+    "name": "the-caption-3ce91a4-control-free-repository-r1",
+    "revision": "r1"
+  },
+  "schema_version": "the-caption-prompt.evaluation-profile/v3",
+  "scope": {
+    "adoption": "not_decided",
+    "release": "not_decided",
+    "runtime_projection": "not_authorized"
+  }
+}
