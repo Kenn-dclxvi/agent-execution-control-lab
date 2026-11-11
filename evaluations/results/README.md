@@ -28,6 +28,14 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C319・Fable 5.2 lowの完了結果（2026-11-11）](#c319-fable52-completed-20261111)
+
+- [C319・Fable 5.2 lowの途中経過（2026-11-10）](#c319-fable52-20261110)
+
+- [Fable 5.2 low・Freeの途中経過（2026-11-10）](#free-fable52-cli2317-20261110)
+
+- [Fable 5.2 lowのFree計測中断（2026-11-10）](#free-fable52-20261110)
+
 - [C320のClaude Code 2モデル（2026-10-30）](#c320-claude-two-models-20261030)
 - [C319の4モデル（2026-10-15）](#c319-four-models-20261015)
 - [C318の4モデル（2026-10-15）](#c318-four-models-20261015)
@@ -208,6 +216,28 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c319-fable52-completed-20261111"></a>
+## C319・Fable 5.2 lowの完了結果（2026-11-11）
+
+[C319・Fable 5.2 low・STD14 N=5の完了結果](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11.md)。[result](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-result.json)、[選択](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-selection.json)、[集計](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-analysis.json)、[採点の要約](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-quality-audit.json)、[発行前確認の要約](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-preflight.json)、[Freeとの比較](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-free-comparison.json)、[トークン合計と内訳](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-token-comparison.json)を保存した。 [Fable 5.1との同単価比較](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-fable51-same-price-comparison.json)を追記した。
+
+<a id="c319-fable52-20261110"></a>
+## C319・Fable 5.2 lowの途中経過（2026-11-10）
+
+[C319・Fable 5.2 low・STD14 N=5の途中経過](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-10.md)。[機械可読の記録](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-10-partial.json)を保存した。 [19:50再開後の記録](c319-claude-fable52-low-standard14-n5-cli2317_2026-11-10-partial-r2.json)を追記した。
+
+<a id="free-fable52-cli2317-20261110"></a>
+## Fable 5.2 low・Freeの途中経過（2026-11-10）
+
+[Fable 5.2 low・Free・STD14 N=5の途中経過](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10.md)。[機械可読の記録](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-partial.json)を保存した。
+
+全70件を完了した[Fable 5.2 low・Free・STD14 N=5](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed.md)。[result](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-result.json)、[選択](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-selection.json)、[集計](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-analysis.json)、[採点の要約](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-quality-audit.json)、[発行前確認の要約](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-preflight.json)、[Opus 5.5・Fable 5.1との時間比較](free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed-time-comparison.json)を保存した。
+
+<a id="free-fable52-20261110"></a>
+## Fable 5.2 lowのFree計測中断（2026-11-10）
+
+[Fable 5.2 low・Free・STD14 N=5](free-claude-fable52-low-standard14-n5_2026-11-10.md)は認証エラーで中断した。[中断記録](free-claude-fable52-low-standard14-n5_2026-11-10-interruption.json)を保存した。 [後続の認証復旧記録](free-claude-fable52-low-standard14-n5_2026-11-10-authentication-recovery.json)を保存した。
 
 <a id="c320-claude-two-models-20261030"></a>
 ## C320のClaude Code 2モデル（2026-10-30）

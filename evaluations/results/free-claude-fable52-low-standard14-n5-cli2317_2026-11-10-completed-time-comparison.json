@@ -1,0 +1,132 @@
+{
+  "fable52_difference_from": {
+    "Fable 5.1": {
+      "elapsed_change_pct": -16.04982599536391,
+      "elapsed_difference_seconds": -89.59851911989972
+    },
+    "Opus 5.5": {
+      "elapsed_change_pct": 73.9562047390731,
+      "elapsed_difference_seconds": 199.24470841849688
+    }
+  },
+  "interpretation": "モデルとCLIの版、組み込み構成、計測日時が異なる保存済み観測値の比較。モデルだけの因果効果を示さない。",
+  "metric": "各反復の14課題のelapsed_seconds合算を5反復から求めた中央値。並列待ち行列全体の経過時間ではない。",
+  "models": {
+    "Fable 5.1": {
+      "analysis_sha256": "611106009ec3a2bc137ff325e37228d23b7b3d853f840bd4c45292da8f2a2603",
+      "analysis_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-fable51-standard14-n5-20261018-r1/fable/round-2/analysis.json",
+      "cli_version": "2.1.288",
+      "dates": "2026-10-18〜19",
+      "elapsed_range": [
+        489.1759135413449,
+        602.0552010426763
+      ],
+      "median": {
+        "cost_usd": 4.37173375,
+        "elapsed_seconds": 558.2522772881202,
+        "quality_score": 92.85714285714286,
+        "total_tokens": 1425105
+      },
+      "score_counts": {
+        "0": 5,
+        "4": 65
+      },
+      "selection_sha256": "87d43de8b803ad6b87b20bbe35c8223a4b4229985a76c461fa59f379365cd05d",
+      "selection_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-fable51-standard14-n5-20261018-r1/fable/round-2/selection.json",
+      "task_sha256_by_case": {
+        "TC-A01-LATENT-MODE-POLICY": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": "522e8d8cb63fa1664ae4c54f0a0e5c124c27a6d1f58513d2d18212b180a5b398",
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": "8fbca3b12d79f37484ac6fa3d23381f68c343e60edba66616857ca6f3472eb2a",
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": "08d1ac9800488a7551d561d4009b5ff1309c8f2d5730a236340d7ad473e8671f",
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": "889e5d42482beaa2a1351744c192441ce917ff7375259cc472255187af8bbbef",
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": "98d1448468b7cc94dca886cd37f7d07474803613a7f4b22cc85ca83bd3bf947e",
+        "TC-F05-CLARIFY-UNITS-MODE": "838c268bcf9a5324b946cb60c424f3c34ecc99694bbc5dd20e5a348478672b04",
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": "bb770084a13b4d0392205ea82903020642799933fc7983bfd1dd788cba1fa658",
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": "27a69d0700da072ef24153332540d72961802467e55786e4a346fe38a91fcab7",
+        "TC-F07-CANONICAL-V4-RUNNER": "08c2a597c9c8d3cd16a4707601bba5ebe24562b3da6cb7956c9fd8fbb7413fac",
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": "6093ed04359681edcccb85bf40c10543f78a7757f6d953ec3a086b707abc20bc",
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": "8f93bde01d23434e8a722e0eb1041bd7d12bb0802abdfbfa97b42d6d485d1c61",
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": "ec0a0fc77c8c91f17f9dd9fe2393fe51073586858e19d3273590ff0105e84200",
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": "639b9422558241b731d4d41e77e682ba49d641b39e6957c5a5e0b1e12e4bdb13"
+      }
+    },
+    "Fable 5.2": {
+      "analysis_sha256": "9fcb7ad822a1c2915dbf873f9939fbdde08d9bd15aaf191200c4c19347b65bdc",
+      "analysis_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-fable52-standard14-n5-cli2317-20261110-r1/fable/round-2/analysis.json",
+      "cli_version": "2.1.317",
+      "dates": "2026-11-10",
+      "elapsed_range": [
+        440.37910616677254,
+        474.5130510837771
+      ],
+      "median": {
+        "cost_usd": 4.0234764,
+        "elapsed_seconds": 468.6537581682205,
+        "quality_score": 92.85714285714286,
+        "total_tokens": 1145815
+      },
+      "score_counts": {
+        "0": 3,
+        "4": 67
+      },
+      "selection_sha256": "bdc8d40de170f52a79b4538d1b57a367b7de9ab23da1a03b76a5a301bd6c67bd",
+      "selection_source": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-fable52-standard14-n5-cli2317-20261110-r1/fable/round-2/selection.json",
+      "task_sha256_by_case": {
+        "TC-A01-LATENT-MODE-POLICY": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": "522e8d8cb63fa1664ae4c54f0a0e5c124c27a6d1f58513d2d18212b180a5b398",
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": "8fbca3b12d79f37484ac6fa3d23381f68c343e60edba66616857ca6f3472eb2a",
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": "08d1ac9800488a7551d561d4009b5ff1309c8f2d5730a236340d7ad473e8671f",
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": "889e5d42482beaa2a1351744c192441ce917ff7375259cc472255187af8bbbef",
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": "98d1448468b7cc94dca886cd37f7d07474803613a7f4b22cc85ca83bd3bf947e",
+        "TC-F05-CLARIFY-UNITS-MODE": "838c268bcf9a5324b946cb60c424f3c34ecc99694bbc5dd20e5a348478672b04",
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": "bb770084a13b4d0392205ea82903020642799933fc7983bfd1dd788cba1fa658",
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": "27a69d0700da072ef24153332540d72961802467e55786e4a346fe38a91fcab7",
+        "TC-F07-CANONICAL-V4-RUNNER": "08c2a597c9c8d3cd16a4707601bba5ebe24562b3da6cb7956c9fd8fbb7413fac",
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": "6093ed04359681edcccb85bf40c10543f78a7757f6d953ec3a086b707abc20bc",
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": "8f93bde01d23434e8a722e0eb1041bd7d12bb0802abdfbfa97b42d6d485d1c61",
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": "ec0a0fc77c8c91f17f9dd9fe2393fe51073586858e19d3273590ff0105e84200",
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": "639b9422558241b731d4d41e77e682ba49d641b39e6957c5a5e0b1e12e4bdb13"
+      }
+    },
+    "Opus 5.5": {
+      "analysis_sha256": "e831e942909c9669853098c2e4d6026c225990f5d48836e297b8697adacafc7c",
+      "analysis_source": "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/free-claude-opus55-low-standard14-n5_2026-10-10-analysis-effective-v1.json",
+      "cli_version": "2.1.288",
+      "dates": "2026-10-10",
+      "elapsed_range": [
+        261.4269334990531,
+        292.21156675112434
+      ],
+      "median": {
+        "cost_usd": 1.2730686,
+        "elapsed_seconds": 269.40904974972364,
+        "quality_score": 100.0,
+        "total_tokens": 750215
+      },
+      "score_counts": {
+        "0": 1,
+        "4": 69
+      },
+      "selection_sha256": "9beac6b93776dc29ef8605139862fcfb4bf8471fd6b142ec78051529651d0276",
+      "selection_source": "/Users/kenn/repos/agent-execution-control-lab/evaluations/results/free-claude-opus55-low-standard14-n5_2026-10-10-selection-effective-v1.json",
+      "task_sha256_by_case": {
+        "TC-A01-LATENT-MODE-POLICY": "7f5587bd29a2b85b7f020d3a82c1590589c2476ca5cb233698adf62fa346d34e",
+        "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING": "522e8d8cb63fa1664ae4c54f0a0e5c124c27a6d1f58513d2d18212b180a5b398",
+        "TC-F01-DOMAIN-DUPLICATE-ASSET-KEY": "8fbca3b12d79f37484ac6fa3d23381f68c343e60edba66616857ca6f3472eb2a",
+        "TC-F02-CROSS-LAYER-HISTORY-DATE-BOUND": "08d1ac9800488a7551d561d4009b5ff1309c8f2d5730a236340d7ad473e8671f",
+        "TC-F03-ATOMIC-CONTEXT-CLEANUP": "889e5d42482beaa2a1351744c192441ce917ff7375259cc472255187af8bbbef",
+        "TC-F04-WEB-AUDIT-COLUMN-VISIBILITY": "98d1448468b7cc94dca886cd37f7d07474803613a7f4b22cc85ca83bd3bf947e",
+        "TC-F05-CLARIFY-UNITS-MODE": "838c268bcf9a5324b946cb60c424f3c34ecc99694bbc5dd20e5a348478672b04",
+        "TC-F05-OUT-OF-SCOPE-PRODUCTION-DEPLOY": "bb770084a13b4d0392205ea82903020642799933fc7983bfd1dd788cba1fa658",
+        "TC-F06-RESTORE-EMPTY-SNAPSHOT-CONTRACT": "27a69d0700da072ef24153332540d72961802467e55786e4a346fe38a91fcab7",
+        "TC-F07-CANONICAL-V4-RUNNER": "08c2a597c9c8d3cd16a4707601bba5ebe24562b3da6cb7956c9fd8fbb7413fac",
+        "TC-F07-DEPENDENCY-PROVENANCE-PAIR": "6093ed04359681edcccb85bf40c10543f78a7757f6d953ec3a086b707abc20bc",
+        "TC-F08-CANONICAL-CLI-REFERENCE-SYNC": "8f93bde01d23434e8a722e0eb1041bd7d12bb0802abdfbfa97b42d6d485d1c61",
+        "TC-F10-ENTRYPOINT-INVENTORY-REVIEW": "ec0a0fc77c8c91f17f9dd9fe2393fe51073586858e19d3273590ff0105e84200",
+        "TC-F10-MONTHLY-FORMAT-TEST-REVIEW": "639b9422558241b731d4d41e77e682ba49d641b39e6957c5a5e0b1e12e4bdb13"
+      }
+    }
+  },
+  "same_task_sha256_by_case_verified": true,
+  "schema_version": "the-caption-prompt.observed-runtime-comparison-note/v1"
+}
