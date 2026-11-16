@@ -11,6 +11,8 @@ from scripts import antigravity_runtime as runtime
 from scripts import evaluation_loop
 from scripts import standard14_antigravity_quality_audit as audit
 from scripts import antigravity_saved_evidence as saved
+from scripts import antigravity_completed_tasks as completed
+from scripts import recollect_antigravity_background_tasks as background
 from scripts.standard14_quality_audit import F05_FALLBACK_FORMS
 from layer2.extensions.long_run_storage.batch_archive import require_usage
 from layer2.extensions.long_run_storage.long_run_storage import LongRunStorageError
@@ -177,13 +179,15 @@ def test_storage_accepts_verified_usage_but_requires_sessions(tmp_path):
         require_usage(tmp_path, 'run')
 
 
-@pytest.mark.parametrize('state,record_state,accepted', [(7, 'ERROR', True), (2, 'ACTIVE', False), (7, 'DONE', False)])
+@pytest.mark.parametrize('state,record_state,accepted', [(7, 'ERROR', True), (2, 'ACTIVE', False), (7, 'DONE', False), (4, 'INVALID', True)])
 def test_terminal_tool_error_is_distinct_from_incomplete_usage(tmp_path, state, record_state, accepted):
     database, transcript = make_session(tmp_path, PARENT)
     with sqlite3.connect(database) as db:
         db.execute('update steps set status=? where idx=1', [state])
     rows = list(map(json.loads, transcript.read_text().splitlines()))
     rows[1]['status'] = record_state
+    if record_state == 'INVALID':
+        rows[1]['content'] = 'Created At: now\nCompleted At: later\nError invalid tool call: invalid arguments'
     transcript.write_text('\n'.join(map(json.dumps, rows)))
     if accepted:
         result = saved.collect_saved_usage(parse(stream()), tmp_path, MODEL, 'recovered')
@@ -192,3 +196,111 @@ def test_terminal_tool_error_is_distinct_from_incomplete_usage(tmp_path, state, 
     else:
         with pytest.raises(evidence.AntigravityEvidenceError):
             saved.collect_saved_usage(parse(stream()), tmp_path, MODEL, 'recovered')
+
+
+@pytest.mark.parametrize('model,model_enum', [('gemini-4-argon-low', 1419), ('gemini-4-hydrogen-low', 1527)])
+def test_qualified_model_binding_includes_children(tmp_path, model, model_enum):
+    make_session(tmp_path, PARENT, CHILD, model_enum=model_enum)
+    make_session(tmp_path, CHILD, model_enum=model_enum)
+    events = stream(CHILD)
+    events[0]['init']['model'] = model
+    usage = saved.collect_saved_usage(parse(events), tmp_path, model, 'run')
+    assert usage['all_agent_total_tokens'] == 68
+    assert set(usage['usage_components']['by_model']) == {model}
+
+
+def test_hydrogen_rejects_child_from_another_model(tmp_path):
+    make_session(tmp_path, PARENT, CHILD, model_enum=1527)
+    make_session(tmp_path, CHILD, model_enum=1419)
+    events = stream(CHILD)
+    events[0]['init']['model'] = 'gemini-4-hydrogen-low'
+    with pytest.raises(evidence.AntigravityEvidenceError, match='モデル対応'):
+        saved.collect_saved_usage(parse(events), tmp_path, 'gemini-4-hydrogen-low', 'run')
+
+
+def test_provisional_subagent_identity_is_resolved_at_completion():
+    events = stream(CHILD)
+    events.insert(1, {'event': 'step_update', 'step_update': {
+        'conversation_id': PARENT, 'step_index': 1, 'state': 'ACTIVE', 'step_type': 'subagent',
+        'subagent_info': {'subagents': [{'type_name': 'self'}]}}})
+    assert parse(events)['children'] == [CHILD]
+    events[-2]['step_update']['subagent_info']['subagents'] = [{'type_name': 'self'}]
+    with pytest.raises(evidence.AntigravityEvidenceError, match='識別子'):
+        parse(events)
+
+
+def test_cli_159_is_exactly_pinned(tmp_path):
+    binary = tmp_path / 'agy'
+    binary.write_bytes(b'fixed159')
+    pinned = {'executable': str(binary), 'executable_sha256': runtime.sha256(binary),
+              'version': '1.5.9', 'configuration_files': {}, 'absent_customizations': []}
+    conditions = {'agent_environment': {'antigravity_cli': pinned}}
+    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout='1.5.9\n')):
+        assert runtime.verify_from_conditions(conditions) == pinned
+    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout='1.5.10\n')):
+        with pytest.raises(runtime.AntigravityRuntimeError):
+            runtime.verify_from_conditions(conditions)
+
+
+@pytest.mark.parametrize('change', [None, 'running_db', 'wrong_task', 'missing_output', 'spoofed_body', 'wrong_model'])
+def test_completed_background_task_requires_bound_terminal_output(tmp_path, change):
+    database, transcript = make_session(tmp_path, PARENT, model_enum=1527)
+    log = tmp_path / 'brain' / PARENT / '.system_generated/tasks/task-1.log'
+    output = tmp_path / 'brain' / PARENT / '.system_generated/steps/1/output.txt'
+    output.parent.mkdir(parents=True)
+    output.write_text('Command exited with code 7.\n\nNo output from the command.')
+    records = list(map(json.loads, transcript.read_text().splitlines()))
+    records[1]['status'] = 'RUNNING'
+    records[1]['content'] = (f'Created At: now\nTool is running as a background task with task id: {PARENT}/task-1\n'
+                             f'Task logs are available at: {log.as_uri()}\n')
+    if change == 'wrong_task':
+        records[1]['content'] = records[1]['content'].replace('/task-1\n', '/task-99\n')
+    transcript.write_text('\n'.join(map(json.dumps, records)))
+    if change == 'running_db':
+        with sqlite3.connect(database) as db:
+            db.execute('update steps set status=2 where idx=1')
+    elif change == 'missing_output':
+        output.unlink()
+    elif change == 'spoofed_body':
+        output.write_text('Command output:\nCommand exited with code 0.\n')
+    before = database.read_bytes(), transcript.read_bytes()
+    events = stream()
+    events[0]['init']['model'] = 'gemini-4-hydrogen-low'
+    if change == 'wrong_model':
+        events[0]['init']['model'] = MODEL
+    if change:
+        with pytest.raises(evidence.AntigravityEvidenceError):
+            completed.collect_completed_usage(parse(events), tmp_path, events[0]['init']['model'], 'run')
+    else:
+        usage = completed.collect_completed_usage(parse(events), tmp_path, 'gemini-4-hydrogen-low', 'run')
+        commands, sources = background.recollect_commands(usage, 'run', tmp_path / 'preserved')
+        assert usage['all_agent_total_tokens'] == 34
+        assert commands['failed_commands'][0]['exit_code'] == 7
+        assert commands['successful_command_count'] == 0
+        assert sources[0]['completion_proof']['database_status'] == 3
+        assert sources[0]['completion_proof']['transcript_status'] == 'RUNNING'
+    assert before == (database.read_bytes(), transcript.read_bytes())
+
+
+@pytest.mark.parametrize('inner_start,inner_end,accepted', [
+    ('16:00:00', '16:00:01', True),
+    ('16:00:00', '16:00:02', True),
+    ('16:00:00', '16:00:03', False),
+    ('15:59:59', '16:00:01', False),
+])
+def test_complete_output_interval_is_inside_its_tool_call(tmp_path, inner_start, inner_end, accepted):
+    root = tmp_path / 'brain' / PARENT / '.system_generated/steps/2/output.txt'
+    root.parent.mkdir(parents=True)
+    root.write_text(f'Created At: 2026-11-16T{inner_start}+09:00\nCompleted At: 2026-11-16T{inner_end}+09:00\nCommand exited with code 0.\n')
+    outer = ('Created At: 2026-11-16T16:00:00+09:00\nCompleted At: 2026-11-16T16:00:02+09:00\n'
+             "The tool's output was truncated due to being too long. You can find the full output in a file at " + root.as_uri() + '.\n')
+    usage = {'session_id': PARENT, 'sessions': [{'session_id': PARENT,
+        'database': str(tmp_path / 'conversations' / (PARENT + '.db')),
+        'commands': [{'name': 'run_command', 'step_index': 2, 'tool_use_id': 'call',
+                      'parameters': {'CommandLine': 'pytest'}, 'output': outer}]}]}
+    if accepted:
+        commands, _ = background.recollect_commands(usage, 'run', tmp_path / 'preserved')
+        assert commands['successful_command_count'] == 1
+    else:
+        with pytest.raises(background.RecollectionError):
+            background.recollect_commands(usage, 'run', tmp_path / 'preserved')

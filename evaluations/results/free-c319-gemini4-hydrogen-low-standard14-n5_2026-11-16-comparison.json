@@ -1,0 +1,71 @@
+{
+  "candidate": {
+    "analysis_id": "c7402ed412a54adfb7b85345cf94d790",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-c319-hydrogen-low-standard14-n5-agy159-20261116-r1/trials/c319/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "516945120d2952c0508da76e715c7ea01446f9917175a0be0c0572ccfafb450c",
+      "name": "the-caption-3ce91a4-unconfirmed-location-search-r1",
+      "revision": "r1"
+    }
+  },
+  "comparison_key": "d4689c9197b40907b157d7528460de981ef0b65e3e9cab0265cdb0080ff304a0",
+  "cost_band": {
+    "candidate_median": 0.81213255,
+    "position": "below_range",
+    "reference_max": 0.96185175,
+    "reference_min": 0.869424825
+  },
+  "cost_repriced_at_comparison": true,
+  "cost_samples": {
+    "candidate": [
+      0.828519225,
+      0.81213255,
+      0.768748575,
+      0.7666737,
+      0.91777995
+    ],
+    "reference": [
+      0.9427266,
+      0.96185175,
+      0.9054734249999999,
+      0.953662575,
+      0.869424825
+    ]
+  },
+  "differences": {
+    "cost_usd": -0.13059405000000002,
+    "elapsed_seconds": -164.0522133759223,
+    "quality_score": 7.142857142857139,
+    "total_tokens": -466708
+  },
+  "generated_at": "2026-11-16T07:51:20.228539+00:00",
+  "matched_strata": [
+    {
+      "candidate_sample_count": 5,
+      "differences": {
+        "cost_usd": -0.13059405000000002,
+        "elapsed_seconds": -164.0522133759223,
+        "quality_score": 7.142857142857139,
+        "total_tokens": -466708
+      },
+      "execution_stratum_key": "8bfe05e33d5be7c99143a918b0542a49f18cb1c5ab57bf8b8cace5fcc704e56c",
+      "reference_sample_count": 5
+    }
+  ],
+  "price_table": {
+    "revision": "api-standard-2026-11-16",
+    "sha256": "55be7353368524d12a845bd305fc2cc5e884b6f01d6f5058592a70fa6d48ff92"
+  },
+  "reference": {
+    "analysis_id": "130a270a812646679f1c6234940b918e",
+    "path": "/Volumes/SN7100/_verification/THE-CAPTION-prompt-ab-measurement/runs/free-c319-hydrogen-low-standard14-n5-agy159-20261116-r1/trials/free/analysis.json",
+    "prompt_set_identity": {
+      "bundle_sha256": "999769800af5a5b4f986a0589d8527d6b4f74ace7a56eb6b19b16e3ebaf43f0d",
+      "name": "the-caption-3ce91a4-control-free-repository-r1",
+      "revision": "r1"
+    }
+  },
+  "sample_count": 5,
+  "schema_version": "the-caption-prompt.atomic-run-comparison/v2",
+  "strata_balance": "matched"
+}

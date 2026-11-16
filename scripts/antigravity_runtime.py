@@ -23,8 +23,8 @@ def verify_from_conditions(conditions):
     if sha256(executable) != runtime["executable_sha256"]:
         raise AntigravityRuntimeError("CLIのSHA-256が変わっています")
     result = subprocess.run([str(executable), "--version"], capture_output=True, text=True)
-    if result.returncode or result.stdout.strip() != runtime["version"] or runtime["version"] != "1.5.5":
-        raise AntigravityRuntimeError("照合済みのCLI 1.5.5と一致しません")
+    if result.returncode or result.stdout.strip() != runtime["version"] or runtime["version"] not in {"1.5.5", "1.5.9"}:
+        raise AntigravityRuntimeError("照合済みの固定CLIバージョンと一致しません")
     for name, expected in runtime["configuration_files"].items():
         path = Path(name)
         observed = sha256(path) if path.is_file() else None

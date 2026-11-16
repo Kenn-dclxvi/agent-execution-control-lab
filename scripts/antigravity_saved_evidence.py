@@ -1,16 +1,20 @@
-"""CLI 1.5.5の保存記録を再照合する。ツールの終端エラーと未完了を区別する。"""
+"""検証済みCLIの保存記録を再照合し、モデルと終端状態を確認する。"""
 
 import json
 from pathlib import Path
 import re
 import sqlite3
+from typing import Any
 
 from scripts.antigravity_evidence import (
     AntigravityEvidenceError, TOKEN_ACCOUNTING, wire_fields, one, collect_usage,
 )
 from scripts.usage_components import components_document, empty_buckets
 
-def read_session(config: Path, session_id: str) -> dict[str, Any]:
+MODEL_ENUMS = {"gemini-4-argon-low": 1419, "gemini-4-hydrogen-low": 1527}
+
+
+def read_session(config: Path, session_id: str, expected_model_enum: int = 1419) -> dict[str, Any]:
     if re.fullmatch(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", session_id) is None:
         raise AntigravityEvidenceError("会話識別子が不正です")
     database = config / "conversations" / f"{session_id}.db"
@@ -35,15 +39,17 @@ def read_session(config: Path, session_id: str) -> dict[str, Any]:
     for index, kind, status, has_subtrajectory, metadata in rows:
         record = records[index]
         terminal_tool_error = status == 7 and kind == 132 and record.get("status") == "ERROR"
-        if not ((status == 3 and record.get("status") == "DONE") or terminal_tool_error) or has_subtrajectory:
+        terminal_invalid_call = (status == 4 and kind == 132 and record.get("status") == "INVALID"
+                                 and re.match(r'\ACreated At: [^\n]+\nCompleted At: [^\n]+\nError invalid tool call:', record.get("content", "")) is not None)
+        if not ((status == 3 and record.get("status") == "DONE") or terminal_tool_error or terminal_invalid_call) or has_subtrajectory:
             raise AntigravityEvidenceError("未完了または未対応の子軌跡があります")
         fields = wire_fields(metadata or b"")
         raw_usage = one(fields, 9)
         if raw_usage is not None:
             values = wire_fields(raw_usage)
             model_id = one(values, 1)
-            # 1419とArgon Lowの対応は、固定バイナリのinit・実DB・model一覧で照合済み。
-            if model_id != 1419:
+            # モデル一覧・開始記録・親子の実DBで照合した識別値だけを受け付ける。
+            if model_id != expected_model_enum:
                 raise AntigravityEvidenceError(f"単価とモデル対応が未固定です: model enum {model_id}")
             item = {"input_tokens": one(values, 2, 0), "output_tokens": one(values, 3, 0),
                     "cache_read_tokens": one(values, 5, 0)}
@@ -80,7 +86,7 @@ def read_session(config: Path, session_id: str) -> dict[str, Any]:
 
 
 def collect_saved_usage(stream, config, model, run_id):
-    if stream["init"].get("model") != model or model != "gemini-4-argon-low":
+    if stream["init"].get("model") != model or model not in MODEL_ENUMS:
         raise AntigravityEvidenceError("固定したモデルと開始記録が一致しません")
     if stream["result"].get("status") != "SUCCESS":
         raise AntigravityEvidenceError("親会話が正常に終了していません")
@@ -90,7 +96,7 @@ def collect_saved_usage(stream, config, model, run_id):
         sid = pending.pop()
         if sid in sessions:
             raise AntigravityEvidenceError("会話の帰属が重複しています")
-        session = read_session(config, sid)
+        session = read_session(config, sid, MODEL_ENUMS[model])
         sessions[sid] = session
         pending.extend(session["children"])
     root = sessions[stream["session_id"]]

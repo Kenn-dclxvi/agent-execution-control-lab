@@ -52,14 +52,14 @@ def parse_stream(raw: bytes) -> dict[str, Any]:
         step = event.get("step_update")
         if not isinstance(step, dict):
             raise AntigravityEvidenceError("ステップの記録が不正です")
+        if step.get("state") != "DONE":
+            continue
         child_info = step.get("subagent_info") or {}
         for child in child_info.get("subagents", []):
             child_id = child.get("conversation_id")
             if not isinstance(child_id, str) or not child_id:
                 raise AntigravityEvidenceError("子エージェントの識別子がありません")
             children.add(child_id)
-        if step.get("state") != "DONE":
-            continue
         index = step.get("step_index")
         owner = step.get("conversation_id")
         if type(index) is not int or index < 0 or not isinstance(owner, str) or not owner:
