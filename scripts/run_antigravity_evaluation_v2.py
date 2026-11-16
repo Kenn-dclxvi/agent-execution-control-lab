@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 from scripts import agent_shell_environment
 from scripts.antigravity_evidence import AntigravityEvidenceError, TOKEN_ACCOUNTING, collect_all, parse_stream
 from scripts.antigravity_runtime import AntigravityRuntimeError, verify_from_conditions
-from scripts.antigravity_saved_evidence import collect_saved_usage
+from scripts.antigravity_saved_evidence import MODEL_ENUMS, collect_saved_usage
 from scripts.recollect_antigravity_commands import recollect_commands
 from scripts.all_agent_command_evidence import adapter_owned_cleanup_attempts, command_requirement_statuses
 from scripts.export_prompt_bundle import BundleError, verify_bundle
@@ -67,8 +67,8 @@ def execute():
     if parameters["model"] != conditions["model"] or parameters["reasoning_effort"] != executor["reasoning_effort"]:
         raise AdapterError("モデル・推論設定が一致しません")
     model = parameters["model"]
-    if model != "gemini-4-argon-low" or parameters["reasoning_effort"] != "low":
-        raise AdapterError("この収集器はArgon Lowだけを検証済みです")
+    if model not in MODEL_ENUMS or parameters["reasoning_effort"] != "low":
+        raise AdapterError("この収集器は登録済みモデルのLowだけを検証済みです")
     bundle = Path(parameters["prompt_bundle"])
     manifest = verify_bundle(bundle)
     identity = prompt_set_identity_from_binding(binding, manifest, parameters["bundle_sha256"])
