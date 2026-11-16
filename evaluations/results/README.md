@@ -30,6 +30,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 - [FreeとC319・Gemini 4 Hydrogen LowのSTD14 N=5（2026-11-16）](#free-c319-hydrogen-20261116)
 
+- [C321・GPT-6.1 Sol lowのSTD14 N=5（2026-11-13）](#c321gpt-61-sol-lowのstd14-n52026-11-13)
+
 - [FreeとC319・Gemini 4 Argon LowのSTD14 N=5（2026-11-11）](#free-c319-argon-20261111)
 
 - [C319・Fable 5.2 lowの完了結果（2026-11-11）](#c319-fable52-completed-20261111)
@@ -225,6 +227,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 ## FreeとC319・Gemini 4 Hydrogen LowのSTD14 N=5（2026-11-16）
 
 [FreeとC319・Gemini 4 Hydrogen LowのSTD14 N=5](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16.md)。各70件の実行・採点・登録・保存・復元照合・後片付けを完了した。Freeは4点64件・1点1件・0点5件、C319は4点69件・0点1件。14ケース合計の5反復中央値は、Freeが品質92.8571%、費用0.9427266 USD、経過時間939.711秒、C319が品質100%、費用0.81213255 USD、経過時間775.659秒。Freeの[登録結果](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-result.json)・[選択](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-selection.json)・[集計](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-analysis.json)・[採点](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-quality-audit.json)・[発行前確認](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-preflight.json)・[完了記録](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-free-complete.json)、C319の[登録結果](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-result.json)・[選択](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-selection.json)・[集計](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-analysis.json)・[採点](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-quality-audit.json)・[発行前確認](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-preflight.json)・[完了記録](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-c319-complete.json)、[比較](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-comparison.json)、[追加モデル実行なしの証跡再収集2件](free-c319-gemini4-hydrogen-low-standard14-n5_2026-11-16-recollection.json)を保存した。
+
+## C321・GPT-6.1 Sol lowのSTD14 N=5（2026-11-13）
+
+[計測結果](c321-sol61-low-standard14-n5_2026-11-13.md)。利用者指定の個人共通AGENTS.mdを本文変更なしで固定したCandidate321を、Sol low・STD14各N=5で実行した。4点70件、外部失敗0件。14課題合計の中央値は品質100%、費用0.7260908 USD、経過時間489.68秒、参考トークン1,399,111。[登録結果](e669d425d8af4d31b81911c4ee740f52.json)、[集計](c321-sol61-low-standard14-n5_2026-11-13.analysis.json)、[完了記録](c321-sol61-low-standard14-n5_2026-11-13.completion.json)を保存し、最小容量保存・復元照合・作業コピーと実行別ホームの後片付けまで完了した。採用は未判断。
 
 <a id="free-c319-argon-20261111"></a>
 ## FreeとC319・Gemini 4 Argon LowのSTD14 N=5（2026-11-11）

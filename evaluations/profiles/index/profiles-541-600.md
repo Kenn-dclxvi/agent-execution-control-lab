@@ -2,6 +2,7 @@
 
 このファイルは`evaluations/profiles/README.md`から辿る機械的なprofile索引である。profileの用途・結果・状態の正本ではない。
 
+- [`candidate64-self-contained-execution-paths-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-explicit-producer-d01-v9-global-m5-n5-catalog-fixed-r1.json)
 - [`candidate64-self-contained-execution-paths-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json`](../candidate64-self-contained-execution-paths-outcome-quality-owner-diagnostic-v9-targeted2-global-m10-n5-catalog-fixed-r1.json)
 - [`candidate65-shared-operation-core-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json`](../candidate65-shared-operation-core-ambiguity-targeted2-v10-global-m10-n5-catalog-fixed-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-pytest-allowlist-success-delivery-v14-reasoning-medium-f06-global-m5-n5-r1.json)
 - [`candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-sealed-observation-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
 - [`candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json`](../candidate81-success-delivery-control-v14-reasoning-medium-f06-global-m5-n5-r1.json)
-- [`candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json`](../candidate81-success-silent-delivery-v14-reasoning-medium-f02-global-m5-n5-r1.json)
