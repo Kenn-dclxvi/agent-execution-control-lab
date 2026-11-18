@@ -1,5 +1,7 @@
 # result索引
 
+[A02 r2 全件の再採点と条件別の満点件数](a02-r2-behavioral-rescore-v1.md)
+
 THE-CAPTION投影系列の最新Standard14 resultはP006の[`THE-CAPTION投影14項目各N=5`](p006-the-caption-standard14-projection-n5_2026-08-19.md)である。P005の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP006へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP005比token `-10.57%`、elapsed `-3.90%`、Candidate147比token `+21.75%`、elapsed `+13.86%`である。F08の分割5 / 5件は後続再監査で既存`FRONTIER`へのnonconformanceと再分類し、独立mechanism gateを撤回した。現在状態は`quality_gate_passed / p005_cost_both_lower / p006_delta_causal_attribution_not_established / n20_eligible_not_started / adoption_not_decided`とする。[登録result](684cb3c380bc4b28a65680f415ecb8e6.json)を保存した。
 
 直前のStandard14 resultはP005の[`THE-CAPTION投影14項目各N=5`](p005-the-caption-standard14-projection-n5_2026-08-19.md)である。C147の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP005へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP001比token `-36.30%`、elapsed `+1.23%`、Candidate147比token `+36.14%`、elapsed `+18.48%`である。現在状態は`standard14_n5_completed / quality_gate_passed / p001_token_cost_recovered_partially / p001_elapsed_not_improved / c147_cost_regression_persists / p005_canonical_unchanged / adoption_not_decided`とし、N=20へ自動拡張しない。[登録result](28082254ecc6447f8d76d63e85062299.json)を保存した。
@@ -25,6 +27,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 節タイトルと本文には系統の異なる版番号が出てくる。**単独の`v1` / `v2` / `v3` / `v4`は評価基盤（evaluation foundation）の世代を指す。世代の定義と遷移は[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)の「Evaluation foundation世代」節を正本とする。** 採点契約は`Rating v13` / `Rating v14`のように`Rating`を付け、result schemaは`prompt-set-result/v1`のようにschema名を付け、command evidence protocolは`command evidence v3`のように対象名を付ける。
 
 このディレクトリ内では、ファイル名に`-atomic-n<N>-`または`-atomic-reuse-`を持つ62件がv4（atomic run）経路である。v4経路の最初のresultは2026-07-31の[`Candidate106 / Candidate107 Standard14 atomic N=5`](candidate106-candidate107-validation-wrapper-reentry-closure-v14-medium-standard14-atomic-n5-cli0146_2026-07-31.md)（第5節）で、第4節のCandidate108以降はすべてv4経路である。それより前のresultはv3以前の経路であり、履歴として保持する。
+
+[A02 r2 の旧4点未満39件の再採点](a02-r2-clarification-review-39.md)
 
 ## 目次
 

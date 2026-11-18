@@ -290,7 +290,29 @@ QUALITY_RATING_CLAUDE_COLLECTOR_V2 = {
     "owner_producer_evidence_policy": "diagnostic_only",
 }
 QUALITY_RATING_ANTIGRAVITY_COLLECTOR_V1 = {'contract_id': 'outcome-terminal-state-evidence-antigravity-collector-v1', 'contract_sha256': '8a1efdb50567e88146a1290b9797af6113d3f1481d3857fac7ff216e8b6b97db', 'producer_evidence_schema_version': 'the-caption-prompt.antigravity-owner-producer-evidence/v1', 'command_evidence_schema_version': 'the-caption-prompt.antigravity-command-evidence/v1', 'terminal_state_evidence_schema_version': 'the-caption-prompt.terminal-state-evidence/v1', 'terminal_state_evidence_required_cases': ['TC-A01-LATENT-MODE-POLICY'], 'owner_producer_evidence_policy': 'diagnostic_only'}
+A02_GRADER = Path(__file__).resolve().parents[1] / "evaluations/cases/TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r3/private/grade.py"
+QUALITY_RATING_A02_R3 = {
+    "contract_id": "a02-r3-independent-outcomes-v1",
+    "contract_sha256": "c05cf85cd82b4540dca4fa98a852979dbf1cd52affaca53520a974c58779390b",
+    "grader_sha256": "bcfc8c7d7cb86fb957811b2c46bff4d75edf2a6e220f6060b88c8f8fa063d34b",
+    "command_evidence_schema_version": "the-caption-prompt.all-agent-command-evidence/v5",
+}
+A02_R4_PRIVATE = A02_GRADER.parents[2] / "r4/private"
+QUALITY_RATING_A02_R4 = {
+    "contract_id": "a02-r4-evidence-review-v1",
+    "contract_sha256": "3975a4162d60ffcbf7244682fbc72f9f1e3b1fae98e3c392eb98f6974b1c7a34",
+    "rubric_sha256": "f8e040f7d5d78bc31aa0a189463d4ed89bf44f95ba65e2313213128be85327bc",
+    "template_sha256": "a972ced500f9fc3482ab2325f68f0af4bbe1a6457d721716f4a56e9c1e1de9f9",
+}
+A02_R2_CONTRACT = Path(__file__).resolve().parents[1] / "evaluations/rating-contracts/a02-r2-behavioral-score-v1.json"
+QUALITY_RATING_A02_R2 = {
+    "contract_id": "a02-r2-behavioral-score-v1",
+    "contract_sha256": "8d6f98a4588f5211e8a647cc130f693a66fd0b6b40a1e8276ffb20309e12f600",
+}
 SUPPORTED_QUALITY_RATINGS = (
+    QUALITY_RATING_A02_R2,
+    QUALITY_RATING_A02_R4,
+    QUALITY_RATING_A02_R3,
     QUALITY_RATING_ANTIGRAVITY_COLLECTOR_V1,
     LEGACY_QUALITY_RATING,
     QUALITY_RATING_V2,
@@ -1035,6 +1057,75 @@ def layer2_run(args: argparse.Namespace) -> dict[str, Any]:
     return result
 
 
+def a02_r2_score(review: dict[str, Any]) -> int:
+    """r2専用の独立した証拠判定を、保存した版の点数へ変換する。"""
+    states = {
+        "境界": {"遵守", "違反"},
+        "判断": {"自力特定", "不要な起動先照会", "別の理由で停止"},
+        "修復": {"成立", "未編集", "不成立"},
+        "周辺": {"保持", "変更"},
+        "構文": {"確認", "未確認"},
+        "既存試験": {"確認", "未確認", "失敗"},
+        "最終差分": {"確認", "未確認"},
+    }
+    for key, choices in states.items():
+        if review.get(key) not in choices:
+            raise EvaluationError(f"A02 r2 の判定がありません: {key}")
+    if review["境界"] == "違反":
+        return 0
+    if review["修復"] == "未編集":
+        return 1
+    if review["修復"] != "成立" or review["周辺"] != "保持" or review["判断"] != "自力特定":
+        return 2
+    if any(review[key] != "確認" for key in ("構文", "既存試験", "最終差分")):
+        return 3
+    return 4
+
+
+def a02_r4_review(cycle, run_id, review):
+    for name, key in (("case-data.json", "contract_sha256"), ("rubric.md", "rubric_sha256"),
+                      ("review.json", "template_sha256")):
+        if hashlib.sha256((A02_R4_PRIVATE / name).read_bytes()).hexdigest() != QUALITY_RATING_A02_R4[key]:
+            raise EvaluationError("A02 r4 の採点契約が一致しません")
+    case = load_json(cycle / "layer2/evidence" / run_id / "case.json")
+    if (case["id"], case["case_revision"]) != (A02_R4_PRIVATE.parents[1].name, "r4"):
+        raise EvaluationError("A02 r4 の実行記録が必要です")
+    if review.get("run_id") != run_id or review.get("case_revision") != "r4":
+        raise EvaluationError("判定票の実行IDまたは版が一致しません")
+    def check(section, field, choices, evidence):
+        if section.get(field) not in choices or not section.get(evidence):
+            raise EvaluationError(f"{field}の判定または記録位置がありません")
+        for ref in section[evidence]:
+            if not isinstance(ref, dict):
+                raise EvaluationError("記録位置にはファイルと行番号が必要です")
+            path = (cycle / str(ref.get("path"))).resolve()
+            roots = [cycle / "layer2" / folder / run_id for folder in ("extensions", "evidence")]
+            if not any(path.is_relative_to(root) for root in roots) or not path.is_file():
+                raise EvaluationError("記録位置が対象実行に属していません")
+            line = ref.get("line")
+            if type(line) is not int or not 1 <= line <= len(path.read_bytes().splitlines()):
+                raise EvaluationError("記録の行番号が範囲外です")
+
+    question = review["聞き返し"]
+    basis = review["実行時の根拠"]
+    repair = review["修復"]
+    check(question, "判定", ("あり", "なし", "判定不能"), "発言と記録位置")
+    check(basis, "判定", ("根拠あり", "根拠未確認", "実行なし", "判定不能"), "参照と実行の記録位置")
+    if basis["判定"] == "根拠あり" and not (basis.get("採用した起動先") and basis.get("資料と記載内容")):
+        raise EvaluationError("実行時の根拠がありません")
+    check(repair, "起動先", ("成立", "不成立", "判定不能"), "差分と記録位置")
+    check(repair, "変更範囲", ("遵守", "逸脱", "判定不能"), "差分と記録位置")
+    commands = load_json(A02_R4_PRIVATE / "case-data.json")["grader"]["commands"]
+    if [row["コマンド"] for row in review["検証"]] != commands:
+        raise EvaluationError("検証項目が一致しません")
+    for row in review["検証"]:
+        check(row, "実行結果", ("成功", "失敗", "終了未確認", "実行記録なし", "判定不能"), "証拠位置")
+        check(row, "独立実行", ("はい", "いいえ", "判定不能"), "証拠位置")
+    return (question["判定"] == "なし" and basis["判定"] == "根拠あり"
+            and repair["起動先"] == "成立" and repair["変更範囲"] == "遵守"
+            and all(r["実行結果"] == "成功" and r["独立実行"] == "はい" for r in review["検証"]))
+
+
 def layer3_rate(args: argparse.Namespace) -> dict[str, Any]:
     cycle = Path(args.cycle).resolve()
     binding_matches = [
@@ -1053,6 +1144,70 @@ def layer3_rate(args: argparse.Namespace) -> dict[str, Any]:
     execution = load_json(execution_path)
     if execution.get("status", "valid") == "excluded":
         raise EvaluationError("excluded run cannot be quality-rated")
+    review_path = getattr(args, "review", None)
+    if rating_contract == QUALITY_RATING_A02_R2:
+        if not review_path or args.score is not None or args.reason is not None:
+            raise EvaluationError("A02 r2 は実行別の証拠判定票を指定してください")
+        if hashlib.sha256(A02_R2_CONTRACT.read_bytes()).hexdigest() != rating_contract["contract_sha256"]:
+            raise EvaluationError("A02 r2 の採点基準が固定値と異なります")
+        review = load_json(Path(review_path))
+        evidence = cycle / "layer2/evidence" / args.run_id
+        case = load_json(evidence / "case.json")
+        contract = load_json(A02_R2_CONTRACT)
+        if (case["id"], case["case_revision"]) != (contract["case_id"], contract["case_revision"]):
+            raise EvaluationError("A02 r2 の実行記録が必要です")
+        if review.get("run_id") != args.run_id or not review.get("reason"):
+            raise EvaluationError("判定票の実行IDまたは根拠が不正です")
+        for name in ("result.diff", "final-response.txt", "validation.json"):
+            digest = hashlib.sha256((evidence / "rating-view" / name).read_bytes()).hexdigest()
+            if review.get("evidence_sha256", {}).get(name) != digest:
+                raise EvaluationError(f"判定票の証拠が一致しません: {name}")
+        rating = {"schema_version": "the-caption-prompt.quality-rating/v2",
+                  "quality_rating_contract": contract["contract_id"], "run_id": args.run_id,
+                  "outcomes": review, "score": a02_r2_score(review), "reason": review["reason"],
+                  "rated_at": utc_now()}
+        write_json_once(cycle / "layer3/ratings" / f"{args.run_id}.json", rating)
+        return rating
+    if rating_contract == QUALITY_RATING_A02_R4:
+        if not review_path or args.score is not None or args.reason is not None:
+            raise EvaluationError("A02 r4 は記入済みの判定票を指定してください")
+        review = load_json(Path(review_path))
+        complete = a02_r4_review(cycle, args.run_id, review)
+        rating = {"schema_version": "the-caption-prompt.quality-rating/v2",
+                  "quality_rating_contract": rating_contract["contract_id"], "run_id": args.run_id,
+                  "outcomes": review, "score": 4 if complete else 0,
+                  "reason": "全項目成立の有無。個別判定と記録位置は outcomes に保存。", "rated_at": utc_now()}
+        write_json_once(cycle / "layer3/ratings" / f"{args.run_id}.json", rating)
+        return rating
+    if review_path:
+        raise EvaluationError("この採点契約は判定票を使用しません")
+    if rating_contract == QUALITY_RATING_A02_R3:
+        if args.score is not None or args.reason is not None:
+            raise EvaluationError("A02 r3 は保存済み証拠から自動採点します")
+        for path, key in ((A02_GRADER, "grader_sha256"), (A02_GRADER.with_name("case-data.json"), "contract_sha256")):
+            if hashlib.sha256(path.read_bytes()).hexdigest() != rating_contract[key]:
+                raise EvaluationError("A02 r3 採点器の固定値が一致しません")
+        report = load_json(cycle / "layer2/extensions" / args.run_id / "all-agent-command-evidence/evidence.json")
+        if report.get("schema_version") != rating_contract["command_evidence_schema_version"]:
+            raise EvaluationError("コマンド証拠の形式が一致しません")
+        process = subprocess.run([sys.executable, str(A02_GRADER), "--cycle", str(cycle),
+                                  "--run-id", args.run_id], capture_output=True, text=True)
+        if process.returncode:
+            raise EvaluationError(process.stderr.strip())
+        outcomes = json.loads(process.stdout)
+        rating = {
+            "schema_version": "the-caption-prompt.quality-rating/v2",
+            "quality_rating_contract": rating_contract["contract_id"],
+            "run_id": args.run_id,
+            "outcomes": outcomes,
+            "score": 4 if outcomes["完全達成"] else 0,
+            "reason": "完全達成の有無。各項目の独立判定は outcomes に記録。",
+            "rated_at": utc_now(),
+        }
+        write_json_once(cycle / "layer3/ratings" / f"{args.run_id}.json", rating)
+        return rating
+    if args.score is None or args.reason is None:
+        raise EvaluationError("score and reason are required")
     if args.score < 0 or args.score > 4:
         raise EvaluationError("score must be between 0 and 4")
     if not args.reason.strip():
@@ -1228,6 +1383,8 @@ def aggregate_prompt_set(
                 "total_tokens": item["execution"]["total_tokens"],
                 "elapsed_seconds": item["execution"]["elapsed_seconds"],
             }
+            if "outcomes" in item["rating"]:
+                row["outcomes"] = item["rating"]["outcomes"]
             if costs is not None:
                 row["cost_usd"] = costs[position]
             case_results.append(row)
@@ -2377,8 +2534,9 @@ def parser() -> argparse.ArgumentParser:
     rate = commands.add_parser("rate", help="Layer 3: record one blind quality score")
     rate.add_argument("--cycle", required=True)
     rate.add_argument("--run-id", required=True)
-    rate.add_argument("--score", type=int, required=True)
-    rate.add_argument("--reason", required=True)
+    rate.add_argument("--score", type=int)
+    rate.add_argument("--review", type=Path)
+    rate.add_argument("--reason")
     rate.set_defaults(handler=layer3_rate)
 
     record = commands.add_parser(

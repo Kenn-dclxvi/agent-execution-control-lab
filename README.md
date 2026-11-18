@@ -21,25 +21,27 @@ AIエージェントにソフトウェア開発を任せるにあたり、人間
 
 固定した14ケースを各5反復し、各条件70件を採点しました。Freeではルートの指示だけを空にし、C319では同じ場所に6行の汎用指示を置き、C321ではその指示を利用者指定の個人共通指示に差し替えます。費用は全エージェントの使用量を標準API単価で換算した値です。費用と時間は、各反復で14ケース分を合計した値の中央値です。 [C319の指示本文](prompts/releases/the-caption-3ce91a4-unconfirmed-location-search-release-r1/files/AGENTS.md.txt) · [C321の設計記録](docs/candidate321-user-supplied-personal-agents-design.md) · [計測基準](docs/shared-instruction-evaluation-criteria-r2.md)
 
-| モデル | 点数分布（Free → C319 → C321） | API換算費用（USD、Free → C319 → C321） | 実行時間の合計（秒、Free → C319 → C321） |
-| --- | --- | ---: | ---: |
-| GPT-6.1 Sol Low | 4点69件・0点1件 → 4点70件 → 4点70件 | 0.9344 → 0.8305 → 0.7261 | 636.90 → 463.32 → 489.68 |
-| GPT-6.2 Sol Low | 4点62件・1点3件・0点5件 → 4点70件 → 4点68件・1点2件 | 0.9397 → 0.7447 → 0.7795 | 615.97 → 520.86 → 461.77 |
-| GPT-6.0 Astra Low | 4点68件・0点2件 → 4点70件 → — | 6.1484 → 3.9898 → — | 634.75 → 658.16 → — |
-| GPT-6.2 Astra Low | 4点66件・0点4件 → 4点70件 → 4点70件 | 2.2651 → 1.9620 → 1.7709 | 1187.31 → 1348.39 → 1338.21 |
-| Claude Code Sonnet 5.5 low | 4点65件・0点5件 → 4点70件 → — | 0.6997 → 0.6321 → — | 249.24 → 264.53 → — |
-| Claude Code Opus 5.5 low | 4点69件・0点1件 → 4点70件 → — | 1.2731 → 1.1275 → — | 269.41 → 257.93 → — |
-| Claude Code Fable 5.1 low | 4点65件・0点5件 → 4点70件 → — | 4.3717 → 3.7826 → — | 558.25 → 480.39 → — |
-| GPT-6.1 Terra Low | 4点64件・1点3件・0点3件 → 4点70件 → — | 0.4336 → 0.3228 → — | 410.50 → 341.92 → — |
-| GPT-6.1 Terra medium | 4点64件・1点3件・0点3件 → 4点70件 → — | 0.5033 → 0.3360 → — | 382.51 → 301.67 → — |
-| GPT-6.1 Terra high | 4点67件・0点3件 → 4点70件 → — | 0.5044 → 0.3577 → — | 442.42 → 365.58 → — |
-| Claude Code Fable 5.2 low | 4点67件・0点3件 → 4点70件 → — | 4.0235 → 3.0694 → — | 468.65 → 391.29 → — |
-| Gemini 4 Argon Low | 4点69件・3点1件 → 4点67件・3点3件 → — | 1.2285 → 0.9981 → — | 986.48 → 898.23 → — |
-| Gemini 4 Hydrogen Low | 4点64件・1点1件・0点5件 → 4点69件・0点1件 → — | 0.9427 → 0.8121 → — | 939.71 → 775.66 → — |
+| モデル | 点数分布（Free → C319 → C321） | A02 自力で進んだ件数／満点件数（各5件、同順） | API換算費用（USD、Free → C319 → C321） | 実行時間の合計（秒、Free → C319 → C321） |
+| --- | --- | --- | ---: | ---: |
+| GPT-6.1 Sol Low | 4点69件・0点1件 → 4点70件 → 4点70件 | 5／5 → 5／5 → 5／5 | 0.9344 → 0.8305 → 0.7261 | 636.90 → 463.32 → 489.68 |
+| GPT-6.2 Sol Low | 4点64件・2点1件・0点5件 → 4点70件 → 4点70件 | 5／4 → 5／5 → 5／5 | 0.9397 → 0.7447 → 0.7795 | 615.97 → 520.86 → 461.77 |
+| GPT-6.0 Astra Low | 4点67件・3点1件・0点2件 → 4点70件 → — | 5／4 → 5／5 → — | 6.1484 → 3.9898 → — | 634.75 → 658.16 → — |
+| GPT-6.2 Astra Low | 4点66件・0点4件 → 4点70件 → 4点70件 | 5／5 → 5／5 → 5／5 | 2.2651 → 1.9620 → 1.7709 | 1187.31 → 1348.39 → 1338.21 |
+| Claude Code Sonnet 5.5 low | 4点65件・0点5件 → 4点70件 → — | 5／5 → 5／5 → — | 0.6997 → 0.6321 → — | 249.24 → 264.53 → — |
+| Claude Code Opus 5.5 low | 4点69件・0点1件 → 4点70件 → — | 5／5 → 5／5 → — | 1.2731 → 1.1275 → — | 269.41 → 257.93 → — |
+| Claude Code Fable 5.1 low | 4点65件・0点5件 → 4点70件 → — | 5／5 → 5／5 → — | 4.3717 → 3.7826 → — | 558.25 → 480.39 → — |
+| GPT-6.1 Terra Low | 4点67件・0点3件 → 4点70件 → — | 5／5 → 5／5 → — | 0.4336 → 0.3228 → — | 410.50 → 341.92 → — |
+| GPT-6.1 Terra medium | 4点67件・0点3件 → 4点70件 → — | 5／5 → 5／5 → — | 0.5033 → 0.3360 → — | 382.51 → 301.67 → — |
+| GPT-6.1 Terra high | 4点67件・0点3件 → 4点70件 → — | 5／5 → 5／5 → — | 0.5044 → 0.3577 → — | 442.42 → 365.58 → — |
+| Claude Code Fable 5.2 low | 4点67件・0点3件 → 4点70件 → — | 5／5 → 5／5 → — | 4.0235 → 3.0694 → — | 468.65 → 391.29 → — |
+| Gemini 4 Argon Low | 4点70件 → 4点70件 → — | 5／5 → 5／5 → — | 1.2285 → 0.9981 → — | 986.48 → 898.23 → — |
+| Gemini 4 Hydrogen Low | 4点64件・1点1件・0点5件 → 4点69件・0点1件 → — | 5／5 → 5／5 → — | 0.9427 → 0.8121 → — | 939.71 → 775.66 → — |
+
+点数分布は全モデルでA02 r2に新基準を適用し、ほかの13課題には登録時の点数を用いました。A02で起動先を聞き返さず自力で特定して修復へ進んだ件数は、表中のすべての計測条件で5件中5件です。A02の満点件数も各条件5件ですが、FreeのAstra 6.0 Lowは既存テストの失敗、Sol 6.2 Lowは明示的な空引数の扱いを変えたため、それぞれ4件です。Terra 6.1のFreeで旧1点だった6件は、引数省略時に不要な `shift` を避けて正規の起動先を保ち、検証も完了しました。Argonの旧3点4件も必要な検証を確認できました。[再採点結果](evaluations/results/a02-r2-behavioral-rescore-v1.md)・[判定が変わった実行と理由](evaluations/results/a02-r2-behavioral-rescore-v1-changes.md)
 
 表の「—」はC321の計測結果がない条件です。Sol 6.1のC321は11月13日にCodex CLI 0.159.0で測りました。 [Sol 6.1のC321結果](evaluations/results/c321-sol61-low-standard14-n5_2026-11-13.md)
 
-GPT-6.2は11月18日にCodex CLI 0.169.1で測りました。Free／C319の4条件280件と、C321の2条件140件は、各試験内で共通の待ち行列を使用し、採点・登録・保存・復元照合・作業コピーの削除まで完了しました。C319は旧世代を含むCodexの4モデルで全70件が満点でした。Freeでは6.2のA01でAstraが4件、Solが5件の0点となり、SolはA02も3件が1点でした。C321ではAstraが満点を維持し、SolではA02の2件が1点でした。
+GPT-6.2は11月18日にCodex CLI 0.169.1で測りました。Free／C319の4条件280件と、C321の2条件140件は、各試験内で共通の待ち行列を使用し、採点・登録・保存・復元照合・作業コピーの削除まで完了しました。C319は旧世代を含むCodexの4モデルで全70件が満点でした。Freeでは6.2のA01でAstraが4件、Solが5件の0点となりました。A02ではFreeのSolだけが周辺への影響で1件が2点となり、C321では両モデルとも全70件が満点でした。
 
 旧世代のFree／C319はCodex CLI 0.159.0で、10月10日と15日に測りました。旧世代に対する6.2の時間は、AstraでFreeが1.87倍、C319が2.05倍、SolでFreeが0.97倍、C319が1.12倍でした。計測日とCLIの版が異なり、費用には各モデルの単価と実測のキャッシュ使用量が反映されています。
 
@@ -84,7 +86,7 @@ C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 品質、費用、経過時間は5反復の中央値です。Solの計測日は、THE-CAPTIONのFreeが2026-10-10、C319が2026-10-15、ClickはFreeとC319のどちらも2026-10-15です。Terraはどちらの対象も2026-10-27〜28に測りました。
 
 - **費用：** Terraの単価はSolのちょうど半分です。トークンの量はTHE-CAPTIONでほぼ同じ、ClickではTerraのほうが2〜3割多いものの、費用はどの条件でも約5〜6割低くなりました。THE-CAPTIONのC319で差が単価の差より大きいのは、SolのC319を測った時間帯に、キャッシュに乗らないrunが多かったためです。
-- **品質：** Freeでの差は、対象によって向きが変わりました。THE-CAPTIONではTerraの失点が多く（Sol 1件、Terra 6件）、Clickでは少なくなりました（Sol 3件、Terra 1件）。C319では、どちらのモデルもどちらの対象でも、70件すべてが4点でした。
+- **品質：** Freeでの差は、対象によって向きが変わりました。THE-CAPTIONではTerraの失点が多く（Sol 1件、Terra 3件、いずれもA01）、Clickでは少なくなりました（Sol 3件、Terra 1件）。C319では、どちらのモデルもどちらの対象でも、70件すべてが4点でした。
 
 ## 実行制御で何が変わったか
 
@@ -93,7 +95,7 @@ C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 - **固定したSTD14の品質を満たすうえで、人間の組織を模した役割分担（複数のエージェントによる分業やレビュー）は必須ではありませんでした。** 根拠は、組織を模した出発点（Baseline）と、rootの指示を空にしたFreeを、同じ条件のSTD14で並べた比較です。BaselineはrootのAGENTS.mdで、親エージェントは管理だけを行い、実装・監査・レビューをサブエージェントへ任せるよう定めています。Freeはこのroot指示だけを空にしており、ほかの文書は同じです（[2026-07-26](evaluations/results/baseline-control-free-repository-c5-c35-c43-c71-v13-standard14-n5_2026-07-26.md)、[2026-08-03](evaluations/results/baseline-control-free-candidate147-v14-medium-standard14-atomic-n5-cli0146_2026-08-03.md)、どちらも旧系列のCodex）。
   - STD14は、この問いを確かめられるように組んだ14課題です（[課題集合](evaluations/sets/the-caption-standard14-r1/README.md)）。F01〜F10の12課題は、THE-CAPTIONの実際のリポジトリで、組織の役割が守ろうとしていた仕事（実装と必要な検証、レビュー、確認して止まる判断、範囲外の操作を断る判断、正しい手順の選択）を一つずつ課します。ただしF課題は、どう振る舞えばよいかを作業指示に書いてあるため、エージェント自身が不足に気づけるかは測れません。そこで、求める結果がリポジトリから決まらず確認して止まるべきA01と、リポジトリの規則から一意に決まり質問せずに進むべきA02を対にして加えました。止まりすぎても進みすぎても減点されるため、常に止まる指示や常に進む指示では満点になりません。
   - 採点は、最終的な成果物と、成果を確かめた証拠だけを0〜4点で見ます。どの役割が作業したか、レビューを経たかは点数に入りません。このため、役割分担のある指示とない指示を、同じ物差しで比べられます。
-  - 組織の枠組みを置いても、品質は上がっていませんでした。70件中4点だった件数は、2026-07-26がBaseline 62件・Free 65件、2026-08-03がどちらも65件です。
+  - 組織の枠組みを置いても、品質は上がっていませんでした。70件中4点だった件数は、2026-07-26がBaseline 63件・Free 65件、2026-08-03がどちらも65件です。
   - Freeが失敗したのは、どちらの計測でもA01（求める結果が決まっていないケース）だけでした。結果が決まる前に編集や試験へ進んだものです。
   - Baselineも、A01では5件中3件で同じ失敗をしていました。さらに、Freeが一度も落とさなかったA02（リポジトリ内で経路を決めるケース）やF07（依存関係の出どころを確かめるケース）でも失敗しています。組織の枠組みは、Freeの失敗を確実には防がず、Freeにはなかった失敗を増やしていました。
   - A01の失敗は、分業ではなく、結果が決まるまで作業を始めないという一つの判断の誤りです。この判断を指示に書いたCandidate147と、現在のC319では、70件すべてが4点になりました。新しい基準でも、Freeの0点は4つのモデルすべてでA01だけで、C319では起きていません。
@@ -129,21 +131,21 @@ STD14は、課題、作業の材料、採点の考え方を固定したまま、
 
 | 時期 | モデル（推論設定） | Free | 指示あり | 分かったこと |
 | --- | --- | --- | --- | --- |
-| 2026-07〜08 | GPT-5.6 Sol（high・medium） | 65（A01で0点5件） | Baseline 62〜65、C147 70 | 組織を模したBaselineは品質を上げず、C147で満点になった。mediumのN=100でもFree 1,300 / 1,400件、C147 1,400 / 1,400件（[記録](evaluations/results/control-free-candidate147-v14-medium-standard14-atomic-n100-cli0146_2026-08-03.md)） |
-| 2026-09-05〜08 | GPT-6 Astra（low・medium・high） | low 70、medium 68、high 66（失点はすべてA01） | C147・C274 70（medium） | 推論を強くするほどA01で先へ進んでしまう件数が増えた（[Free](evaluations/results/control-free-astra-low-medium-high-standard14-n5_2026-09-08.md)、[指示あり](evaluations/results/candidate274-c147-astra-medium-standard14-n5_2026-09-05.md)） |
+| 2026-07〜08 | GPT-5.6 Sol（high・medium） | 65（A01で0点5件） | Baseline 63〜65、C147 70 | 組織を模したBaselineは品質を上げず、C147で満点になった。mediumのN=100でもFree 1,300 / 1,400件、C147 1,400 / 1,400件（[記録](evaluations/results/control-free-candidate147-v14-medium-standard14-atomic-n100-cli0146_2026-08-03.md)） |
+| 2026-09-05〜08 | GPT-6 Astra（low・medium・high） | low 69、medium 68、high 66（lowはA02の検証、medium・highはA01で失点） | C147・C274 70（medium） | 推論を強くするほどA01で先へ進んでしまう件数が増えた（[Free](evaluations/results/control-free-astra-low-medium-high-standard14-n5_2026-09-08.md)、[指示あり](evaluations/results/candidate274-c147-astra-medium-standard14-n5_2026-09-05.md)） |
 | 2026-09-24 | GPT-6 Sol（low・medium・high） | 各65（A01で0点5件） | — | 推論設定によらず、A01だけで失点した（[記録](evaluations/results/control-free-sol6-low-medium-high-standard14-n5-cli0156_2026-09-24.md)） |
 | 2026-09-24 | GPT-6 Luna（medium・high・xhigh） | medium 62、high・xhigh 65 | C147・C274 70（high） | mediumでは、A01に加えてF02・F07で実装や検証を完了しない失点が出た（[Free](evaluations/results/control-free-luna6-medium-high-xhigh-standard14-n5-cli0156_2026-09-24.md)、[指示あり](evaluations/results/candidate147-candidate274-luna6-high-standard14-n5-cli0156_2026-09-24.md)） |
 | 2026-09-30 | GPT-6.1 Sol（low・medium） | 各65（A01で0点5件） | C147 low 70・medium 69 | GPT系では、C147がモデルの更新後も効き続けた（[記録](evaluations/results/sol61-c147-c276-free-low-medium-standard14-n5-cli0159_2026-09-30.md)） |
 | 2026-10-01 | Claude Code Opus 5.5（medium） | 67（再判定 68） | C147 67（再判定 70）、C276 67（再判定 69） | 当初の採点ではF05の失点でC147が改善しないように見えたが、採点器が正しい確認を取りこぼしていた。2026-10-06に直した採点で再判定すると、残った失点はA01だけで、C147は70件すべて4点だった（[記録](evaluations/results/claude-opus55-free-c147-c276-standard14-n5-cli2284_2026-10-01.md)） |
-| 2026-10-06 | GPT-6 Astra（low） | 65 | C276 70 | 9月には満点だったlowのFreeでも失点が出た（[記録](evaluations/results/astra6-c276-free-low-standard14-new-n5_2026-10-06.md)） |
-| 2026-10-08〜10 | Claude Code Sonnet 5.5（low） | 65（A01で0点5件） | C280 70、C301・C309 70 | Freeで、A01の失点が測ったモデルの中で最も多かった。結果が決まるまで作業を始めない規則を入れると満点になった（[C280](evaluations/results/claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[Free](evaluations/results/free-c301-c309-sol61-low-sonnet55-low-standard14-n5_2026-10-10.md)） |
+| 2026-10-06 | GPT-6 Astra（low） | 64 | C276 70 | FreeではA01の5件に加え、A02の1件で修復後の既存テストが失敗した（[記録](evaluations/results/astra6-c276-free-low-standard14-new-n5_2026-10-06.md)） |
+| 2026-10-08〜10 | Claude Code Sonnet 5.5（low） | 65（A01で0点5件） | C280 67、C301・C309 70 | Freeで、A01の失点が測ったモデルの中で最も多かった。C280ではA02の3件で検証の成功を確認できず、C301・C309では全70件が満点になった（[C280](evaluations/results/claude-sonnet55-low-c280-standard14-n5-cli2288_2026-10-08.md)、[Free](evaluations/results/free-c301-c309-sol61-low-sonnet55-low-standard14-n5_2026-10-10.md)） |
 | 2026-10-08 | Claude Code Haiku 5.5（low） | 未計測 | C280 69、C291 69 | 同じ規則を入れても、A01で0点が1件ずつ残った。同じ指示のOpus 5.5とSonnet 5.5では起きていない（[記録](evaluations/results/claude-haiku55-low-c280-c291-standard14-n5-cli2288_2026-10-08.md)） |
 | 2026-10-10〜12 | GPT-6.1 Sol、GPT-6 Astra、Claude Code Sonnet 5.5、Opus 5.5（いずれもlow） | 65〜69 | C316 すべて70 | 新しい基準で、汎用指示C316が4つのモデルすべてで満点になった。FreeのA01の失点はSonnet 5.5で最も多かった（[記録](evaluations/results/free-c316-four-models-standard14-n5_2026-10-12.md)） |
 | 2026-10-15 | GPT-6.1 Sol、GPT-6 Astra、Claude Code Sonnet 5.5、Opus 5.5（いずれもlow） | 65〜69（2026-10-10の計測） | C319 すべて70 | C316の後継のC319も4つのモデルすべてで満点だった。Codexが存在しない場所へ指示を探しに行く失敗は、ほぼなくなった（[記録](evaluations/results/c319-four-models-standard14-n5_2026-10-15.md)） |
-| 2026-10-18〜19 | Claude Code Fable 5.1（low） | 65（A01で0点5件） | C319 70 | ほかの4モデルと同じく、Freeの失点はA01だけで、C319では満点だった |
-| 2026-10-27〜28 | GPT-6.1 Terra（low） | 64（A01で0点3件、A02で1点3件） | C319 70 | FreeではA01に加えて、リポジトリから決まる対象を質問して止まる失点が出た。C319ではどちらも起きず満点だった |
-| 2026-10-28 | GPT-6.1 Terra（medium） | 64（A01で0点3件、A02で1点3件） | C319 70 | 推論を強くしても、失点の形はlowと同じだった。C319では満点だった |
-| 2026-10-28 | GPT-6.1 Terra（high） | 67（A01で0点3件） | C319 70 | A02の失点は消えたが、A01の失点は残った。C319では満点だった |
+| 2026-10-18〜19 | Claude Code Fable 5.1（low） | 65（A01で0点5件） | C319 70 | この計測ではFreeの失点はA01だけで、C319では満点だった |
+| 2026-10-27〜28 | GPT-6.1 Terra（low） | 67（旧64、A01で0点3件） | C319 70 | A02はFree・C319とも5件すべてで起動先を自力で特定し、修復と検証を完了した |
+| 2026-10-28 | GPT-6.1 Terra（medium） | 67（旧64、A01で0点3件） | C319 70 | A02はFree・C319とも5件すべてで自力で修復と検証を完了した |
+| 2026-10-28 | GPT-6.1 Terra（high） | 67（A01で0点3件） | C319 70 | A02は両条件とも5件すべてが満点。確認の要否の判断はlow・mediumでも同じだった |
 | 2026-11-10〜11 | Claude Code Fable 5.2（low） | 67（A01で0点3件） | C319 70 | Freeでは方針確認前に進む失敗が残り、C319では全70件が4点だった（[Free](evaluations/results/free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed.md)、[C319](evaluations/results/c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11.md)） |
 
 Fable 5.2 lowでは、同じ実行条件のFreeからC319へ替えると、品質の中央値が92.86から100.00となり、費用は23.7%、経過時間は16.5%、生のトークンは29.0%減った（各14課題×5反復の中央値、[結果と比較](evaluations/results/c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11.md)）。

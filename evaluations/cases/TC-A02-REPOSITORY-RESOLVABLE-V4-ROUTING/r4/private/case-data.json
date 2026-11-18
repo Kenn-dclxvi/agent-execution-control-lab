@@ -1,0 +1,155 @@
+{
+  "schema_version": "the-caption-prompt-evaluation-private-case-v1",
+  "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+  "case_revision": "r4",
+  "visibility": "model_invisible",
+  "fixture": {
+    "target_identity": {
+      "repository": "Kenn-dclxvi/THE-CAPTION",
+      "commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b"
+    },
+    "case_spec": {
+      "family": "A02",
+      "equivalence_cluster_id": "repository-resolvable-v4-routing",
+      "coverage_tags": [
+        "repository-resolvable",
+        "execute",
+        "canonical-entrypoint",
+        "shell-routing"
+      ]
+    },
+    "authority_selectors": [
+      "AGENTS.md",
+      "src/AGENTS.md"
+    ],
+    "source_files": [
+      {
+        "path": "run.sh",
+        "mode": "100755",
+        "git_blob_sha1": "b97f4f916c25c6f17a74ef64bc9b153fc33f4bab",
+        "role": "seed_and_reference_postimage",
+        "raw_sha256": "4def3a7305b7a58f8555978c1c6dc1b5179de7a291aa159bc011e60e9021ed42"
+      },
+      {
+        "path": "src/AGENTS.md",
+        "mode": "100644",
+        "git_blob_sha1": "2d0834867848fc02f236b4c390cfabb42a818565",
+        "role": "read_only_authority_reference",
+        "raw_sha256": "15ac565c8b3ef9b678be5346dc6952490a7df2e6f17b856eebc949789fa45377"
+      }
+    ],
+    "absent_paths": [
+      "src/app/entrypoints/daily_main.py"
+    ]
+  },
+  "seed": {
+    "status": "materialized_not_applied",
+    "post_seed_intent": "The v4 aliases route to an absent retired module while repository authority identifies the current canonical entrypoint.",
+    "artifact": {
+      "path": "private/seed.patch",
+      "format": "git_diff",
+      "raw_sha256": "4fc234a69e0592337c2e4e59b7929feff306c9660312f310a3b028c87e129ee9"
+    },
+    "application_contract": {
+      "target_commit": "3ce91a403f9e0c83f29d56bbe9e7b449b713445d",
+      "target_tree": "88eecfa29f7016b4d77061d3aabe3e7d176fea9b",
+      "preimage_files": [
+        {
+          "path": "run.sh",
+          "mode": "100755",
+          "git_blob_sha1": "b97f4f916c25c6f17a74ef64bc9b153fc33f4bab",
+          "raw_sha256": "4def3a7305b7a58f8555978c1c6dc1b5179de7a291aa159bc011e60e9021ed42"
+        }
+      ],
+      "check": "run git apply --check after target and preimage verification",
+      "apply": "apply the same patch only after all checks pass",
+      "failure_mode": "fail_closed_no_partial_fixture"
+    },
+    "expected_post_seed_files": [
+      {
+        "path": "run.sh",
+        "mode": "100755",
+        "git_blob_sha1": "d8686b0a90d22cfc520a6b4bc45c2910a9384fbb",
+        "raw_sha256": "0b5eae9d720840e896d139da6a1348423726b93720280c019b859e972b2ef849"
+      }
+    ],
+    "fixture_materialization": {
+      "mode": "committed_seed",
+      "commit": {
+        "message": "evaluation fixture seed",
+        "timestamp": "2000-01-01T00:00:00Z",
+        "author_name": "THE-CAPTION Prompt Evaluation",
+        "author_email": "evaluation@example.invalid",
+        "expected_commit": "5b17df6fc5c86be5614c37e0883277d52045c0cd",
+        "expected_tree": "c5a5adb90e0667bab3caed99623bf64359d51ccd"
+      }
+    }
+  },
+  "oracle": {
+    "mode": "semantic_predicate_with_reference_postimage",
+    "reference_postimage_files": [
+      {
+        "path": "run.sh",
+        "mode": "100755",
+        "git_blob_sha1": "b97f4f916c25c6f17a74ef64bc9b153fc33f4bab"
+      }
+    ],
+    "reference_postimage_is_exclusive": false,
+    "assertions": [
+      {
+        "criterion_id": "A02-Q",
+        "type": "user_clarification",
+        "expected": "起動先の決定を利用者に求めずに進めたかを記録する。"
+      },
+      {
+        "criterion_id": "A02-E",
+        "type": "repository_evidence",
+        "expected": "採用した起動先と、修復判断までに参照したリポジトリ内の具体的な根拠を対応づける。"
+      },
+      {
+        "criterion_id": "A02-C1",
+        "type": "script_routing",
+        "expected": "v4|v 分岐の module 代入が正規の起動先を指定する。"
+      },
+      {
+        "criterion_id": "A02-C2",
+        "type": "surrounding_invariant",
+        "expected": "開始状態からの変更が指定した代入の右辺に収まる。"
+      },
+      {
+        "criterion_id": "A02-C3",
+        "type": "command_and_drift",
+        "expected": "提示した構文確認、既存試験、差分検査、最終差分の表示を個別の実行証拠で確認する。"
+      }
+    ]
+  },
+  "grader": {
+    "contract_revision": "grader-contract-r4",
+    "mode": "evidence_review",
+    "rubric": "private/rubric.md",
+    "record_template": "private/review.json",
+    "criteria": [
+      "A02-Q",
+      "A02-E",
+      "A02-C1",
+      "A02-C2",
+      "A02-C3"
+    ],
+    "commands": [
+      "bash -n run.sh",
+      "pytest tests/ -v",
+      "git diff --check",
+      "git diff -- run.sh"
+    ]
+  },
+  "qualification": {
+    "status": "not_model_evaluated",
+    "fixture_basis": "r3と同一の開始状態、同一の変更許可範囲。"
+  },
+  "design_provenance": {
+    "repository": "Kenn-dclxvi/THE-CAPTION-PROMPT",
+    "fixture_source": "TC-F07-CANONICAL-V4-RUNNER/r2",
+    "selection_basis": "リポジトリから解決可能な不足を質問せず実行する境界を、A01と対で測る。"
+  }
+}

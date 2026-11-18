@@ -1,0 +1,13 @@
+diff --git a/run.sh b/run.sh
+index b97f4f916c25c6f17a74ef64bc9b153fc33f4bab..d8686b0a90d22cfc520a6b4bc45c2910a9384fbb 100755
+--- a/run.sh
++++ b/run.sh
+@@ -185,7 +185,7 @@ module=""
+ 
+ case "${target}" in
+   v4|v)
+-    module="src.app.entrypoints.v4_daily_main"
++    module="src.app.entrypoints.daily_main"
+     shift
+     ;;
+   daily|d|legacy|monex|collection|c)

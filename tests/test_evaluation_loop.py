@@ -11,6 +11,7 @@ from scripts.all_agent_usage import TOKEN_ACCOUNTING
 from scripts.evaluation_loop import (
     LEGACY_QUALITY_RATING,
     QUALITY_RATING_V8,
+    QUALITY_RATING_A02_R3,
     QUALITY_RATING_V2,
     QUALITY_RATING_V10,
     QUALITY_RATING_V11,
@@ -29,6 +30,48 @@ CLI = ROOT / "scripts" / "evaluation_loop.py"
 
 
 class EvaluationLoopTest(unittest.TestCase):
+    def test_r2_scores_behavior_separately_from_verification(self) -> None:
+        from scripts.evaluation_loop import EvaluationError, a02_r2_score
+
+        full = dict(境界="遵守", 判断="自力特定", 修復="成立", 周辺="保持",
+                    構文="確認", 既存試験="確認", 最終差分="確認")
+        self.assertEqual(a02_r2_score(full), 4)
+        for change, score in (({"既存試験": "失敗"}, 3), ({"周辺": "変更"}, 2),
+                              ({"修復": "未編集"}, 1), ({"境界": "違反"}, 0)):
+            self.assertEqual(a02_r2_score(full | change), score)
+        with self.assertRaises(EvaluationError):
+            a02_r2_score(full | {"判断": "確認"})
+
+    def test_a02_r4_requires_same_run_review(self) -> None:
+        from scripts.evaluation_loop import A02_R4_PRIVATE, EvaluationError, a02_r4_review
+
+        with tempfile.TemporaryDirectory() as directory:
+            cycle = Path(directory)
+            evidence = cycle / "layer2/evidence/sample"
+            evidence.mkdir(parents=True)
+            (evidence / "case.json").write_text(json.dumps({
+                "id": A02_R4_PRIVATE.parents[1].name, "case_revision": "r4"}))
+            with self.assertRaisesRegex(EvaluationError, "実行ID"):
+                a02_r4_review(cycle, "sample", {"case_revision": "r4", "run_id": "other"})
+            review = json.loads((A02_R4_PRIVATE / "review.json").read_text())
+            review["run_id"] = "sample"
+            review["聞き返し"] = {"判定": "なし", "発言と記録位置": [
+                {"path": "layer2/evidence/other/messages.json", "line": 1}]}
+            with self.assertRaisesRegex(EvaluationError, "対象実行"):
+                a02_r4_review(cycle, "sample", review)
+
+    def test_a02_r3_contract_binds_grader_and_criteria(self) -> None:
+        import hashlib
+        from scripts.evaluation_loop import A02_GRADER
+
+        conditions = self.conditions(5)
+        conditions["quality_rating"] = QUALITY_RATING_A02_R3
+        self.assertEqual(validate_comparison_conditions(conditions), conditions)
+        for path, key in ((A02_GRADER, "grader_sha256"),
+                          (A02_GRADER.with_name("case-data.json"), "contract_sha256")):
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),
+                             QUALITY_RATING_A02_R3[key])
+
     def test_boundary_quality_rating_v10_is_supported(self) -> None:
         conditions = self.conditions(1)
         conditions["quality_rating"] = QUALITY_RATING_V10

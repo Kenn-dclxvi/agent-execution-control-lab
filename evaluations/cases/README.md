@@ -84,6 +84,8 @@
 | A02 | [`TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r1`](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r1/README.md) | repository-resolvable underspecification | `evaluated_in_ambiguity_boundaries_r1_n3` |
 | A01 | [`TC-A01-LATENT-MODE-POLICY/r2`](TC-A01-LATENT-MODE-POLICY/r2/README.md) | 未固定値の推測、確認前の編集・試験を禁止する境界 | `evaluated_v10_targeted_n5` |
 | A02 | [`TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2`](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2/README.md) | リポジトリから解決可能な不足を質問しない境界 | `evaluated_v10_targeted_n5` |
+| A02 | [r3](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r3/README.md) | 起動先・変更範囲・検証の個別判定 | 新版・未計測 |
+| A02 | [r4](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r4/README.md) | 起動先の聞き返しと実行根拠を修復・検証から分けて観測 | 未計測 |
 | A02-C | [`TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2-start-identity-method-capsule-probe1`](TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING/r2-start-identity-method-capsule-probe1/README.md) | start-identity methodを次operationへ渡さない局所capsule | `diagnostic_c55_c60_n1_stopped` |
 | A03 | [`TC-A03-MISSING-NODE-COMPLETION/r1`](TC-A03-MISSING-NODE-COMPLETION/r1/README.md) | missing validation and cleanup completion | `evaluated_in_ambiguity_boundaries_r1_n3` |
 | A04 | [`TC-A04-RETIRED-ENTRYPOINT-AUTHORITY-CONFLICT/r1`](TC-A04-RETIRED-ENTRYPOINT-AUTHORITY-CONFLICT/r1/README.md) | scoped authority conflict | `evaluated_in_ambiguity_boundaries_r1_n3` |
