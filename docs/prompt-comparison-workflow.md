@@ -94,7 +94,9 @@ quality_score = median(quality_score[1], ..., quality_score[N])
 
 quality raterへ渡すのはmodel-visible caseとblindなexecution evidenceだけである。`layer2/bindings/`、Run capsule、oracle、grader、expected resultをmodel-visible入力へ混ぜない。raterはscoreと短い事実根拠だけを返し、promptの選択や改善提案を行わない。
 
-現行rating contractは[`outcome-terminal-state-evidence-owner-diagnostic-v14`](../evaluations/rating-contracts/outcome-terminal-state-evidence-owner-diagnostic-v14.json)とする。v14は第13版の条件をすべて維持し、A01だけを応答文面の分類からversioned terminal-state evidenceへ切り替える。`required_value_state=unresolved`、terminal responseあり、final changed path 0件、試験・変更operation未開始を合わせて`outcome_state=awaiting_required_value`とする。疑問符、質問語、文末表現、応答本文はこの状態の導出とquality scoreに使用しない。本文は表示証拠として保持する。command evidenceは`all-agent-command-evidence/v5` collectorを要求し、A01には`terminal-state-evidence/v1`も要求する。revision別要求の正本は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)とする。
+Codex STD14の現行採点契約は[v15](../evaluations/rating-contracts/outcome-a02-behavioral-owner-diagnostic-v15.json)である。A02 r2は、不要な起動先照会、修復、周辺への影響、検証を実行別の証拠判定票で採点する。他の13課題はv14を継承する。
+
+旧版は[`outcome-terminal-state-evidence-owner-diagnostic-v14`](../evaluations/rating-contracts/outcome-terminal-state-evidence-owner-diagnostic-v14.json)である。v14は第13版の条件をすべて維持し、A01だけを応答文面の分類からversioned terminal-state evidenceへ切り替える。`required_value_state=unresolved`、terminal responseあり、final changed path 0件、試験・変更operation未開始を合わせて`outcome_state=awaiting_required_value`とする。疑問符、質問語、文末表現、応答本文はこの状態の導出とquality scoreに使用しない。本文は表示証拠として保持する。command evidenceは`all-agent-command-evidence/v5` collectorを要求し、A01には`terminal-state-evidence/v1`も要求する。revision別要求の正本は[`evaluations/rating-contracts/README.md`](../evaluations/rating-contracts/README.md)とする。
 
 v14が維持するv13の要点は次のとおりである。
 
