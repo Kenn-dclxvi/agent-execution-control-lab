@@ -110,6 +110,23 @@ class EvaluationLoopTest(unittest.TestCase):
             "diagnostic_only",
         )
 
+    def test_v15_binds_behavioral_rubric_and_keeps_a01_contract(self) -> None:
+        import hashlib
+        from scripts.evaluation_loop import QUALITY_RATING_V15, QUALITY_RATING_A02_R2
+        from scripts.standard14_quality_audit import SUPPORTED_STANDARD14_RATING_CONTRACTS
+
+        conditions = self.conditions(1)
+        conditions["quality_rating"] = QUALITY_RATING_V15
+        rating = validate_comparison_conditions(conditions)["quality_rating"]
+        self.assertIn(rating["contract_id"], SUPPORTED_STANDARD14_RATING_CONTRACTS)
+        contract = ROOT / "evaluations/rating-contracts" / (rating["contract_id"] + ".json")
+        self.assertEqual(hashlib.sha256(contract.read_bytes()).hexdigest(), rating["contract_sha256"])
+        rules = json.loads(contract.read_text())["boundary_rules"]
+        self.assertEqual(rules["TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"]["contract_sha256"],
+                         QUALITY_RATING_A02_R2["contract_sha256"])
+        self.assertEqual(rating["terminal_state_evidence_required_cases"],
+                         QUALITY_RATING_V14["terminal_state_evidence_required_cases"])
+
     def test_terminal_state_quality_rating_v14_is_supported(self) -> None:
         conditions = self.conditions(1)
         conditions["quality_rating"] = QUALITY_RATING_V14

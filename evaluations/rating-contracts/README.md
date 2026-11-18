@@ -23,7 +23,8 @@
 | [`outcome-semantic-location-owner-diagnostic-v11`](outcome-semantic-location-owner-diagnostic-v11.json) | F10 Monthlyの数値lineをquality必須条件からdiagnosticへ分離 | 履歴 |
 | [`outcome-semantic-evidence-normalized-owner-diagnostic-v12`](outcome-semantic-evidence-normalized-owner-diagnostic-v12.json) | A01 / A02 / F10で再現したsemantic evidenceの偽陰性を正規化 | 履歴 |
 | [`outcome-abstract-condition-preserving-owner-diagnostic-v13`](outcome-abstract-condition-preserving-owner-diagnostic-v13.json) | 抽象成果条件を非公開の特定commandへ具体化して必須化することを禁止 | 履歴互換 |
-| [`outcome-terminal-state-evidence-owner-diagnostic-v14`](outcome-terminal-state-evidence-owner-diagnostic-v14.json) | v13を維持し、A01をresponse文面分類から`terminal-state-evidence/v1`へ切替 | 現行 |
+| [`outcome-terminal-state-evidence-owner-diagnostic-v14`](outcome-terminal-state-evidence-owner-diagnostic-v14.json) | v13を維持し、A01をresponse文面分類から`terminal-state-evidence/v1`へ切替 | 履歴再現用 |
+| [`outcome-a02-behavioral-owner-diagnostic-v15`](outcome-a02-behavioral-owner-diagnostic-v15.json) | A02 r2に[行動基準](a02-r2-behavioral-score-v1.json)を適用し、他の13課題はv14を継承 | Codex STD14の現行 |
 | [`outcome-terminal-state-evidence-claude-collector-v1`](outcome-terminal-state-evidence-claude-collector-v1.json) | v14のケース規則を変えず、command証跡とproducer証跡のcollectorだけをClaude Code transcript用へ差し替える | Claude Code系列専用 |
 | [`outcome-terminal-state-evidence-antigravity-collector-v1`](outcome-terminal-state-evidence-antigravity-collector-v1.json) | v14のケース規則を変えず、親と全子会話のSQLite・会話記録に対応する収集器へ差し替える | Antigravity CLI 1.5.5・Gemini 4 Argon Low系列専用 |
 | [`outcome-terminal-state-evidence-claude-collector-v2`](outcome-terminal-state-evidence-claude-collector-v2.json) | v1を維持し、F05 clarifyのfallback確認として英語の動詞形`fall back`系も受け付ける | Claude Code系列専用（現行） |
@@ -35,3 +36,5 @@ v14はv13以前と異なる互換条件であり、過去resultをv14で再採�
 `outcome-terminal-state-evidence-claude-collector-v2`は、Claude Codeが英語で応答したときにF05の確認を取りこぼしていた採点規則の欠陥を直す。v14（Codex条件）の受理形は変更せず、Codexの判定はそのまま残す。v1で採点済みのClaude resultとLayer 3 ratingは書き換えず、v2での再判定は別の監査記録として保存する。v1とv2は別の互換条件である。
 
 command / producer / terminal-state evidenceのcollector schemaとLayer 3実行手順は[`docs/evaluation-loop-manual.md`](../../docs/evaluation-loop-manual.md)および実装側のversioned contractを参照する。このREADMEへcollector実装の詳細を複製しない。
+
+新規のCodex STD14では、プロファイルとカプセルの `comparison_conditions.quality_rating` に `scripts.evaluation_loop.QUALITY_RATING_V15` を固定する。A02は採点前に各実行の差分・最終応答・コマンド結果を確認し、既存のr2判定票（7項目、reason、run_id、evidence_sha256）を試験ラウンドの `a02-reviews/<run_id>.json` に保存する。通常の `standard14_quality_audit.py collect/apply` で登録する。旧版の結果は当時の契約のまま保持する。

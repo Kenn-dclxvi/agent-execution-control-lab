@@ -163,6 +163,11 @@ QUALITY_RATING_V14 = {
     "terminal_state_evidence_required_cases": ["TC-A01-LATENT-MODE-POLICY"],
     "owner_producer_evidence_policy": "diagnostic_only",
 }
+QUALITY_RATING_V15 = {
+    **QUALITY_RATING_V14,
+    "contract_id": "outcome-a02-behavioral-owner-diagnostic-v15",
+    "contract_sha256": "1c6c2fb1ff4612d18e1fe553a8afb2ebb6e772deecf9f908ba5ad6bd205726b2",
+}
 QUALITY_RATING_CLICK_V1 = {
     "contract_id": "click-outcome-abstract-condition-preserving-v1",
     "contract_sha256": "7057dd0790a62a636f7de4b389d2f3e8526c4b578819842472d92ff49a93747d",
@@ -328,6 +333,7 @@ SUPPORTED_QUALITY_RATINGS = (
     QUALITY_RATING_V12,
     QUALITY_RATING_V13,
     QUALITY_RATING_V14,
+    QUALITY_RATING_V15,
     QUALITY_RATING_CLAUDE_COLLECTOR_V1,
     QUALITY_RATING_CLAUDE_COLLECTOR_V2,
     QUALITY_RATING_CLICK_CLAUDE_COLLECTOR_V1,
@@ -1126,6 +1132,23 @@ def a02_r4_review(cycle, run_id, review):
             and all(r["実行結果"] == "成功" and r["独立実行"] == "はい" for r in review["検証"]))
 
 
+def checked_a02_review(cycle: Path, run_id: str, review: dict[str, Any]) -> int:
+    if hashlib.sha256(A02_R2_CONTRACT.read_bytes()).hexdigest() != QUALITY_RATING_A02_R2["contract_sha256"]:
+        raise EvaluationError("A02 r2 の採点基準が固定値と異なります")
+    evidence = cycle / "layer2/evidence" / run_id
+    case = load_json(evidence / "case.json")
+    contract = load_json(A02_R2_CONTRACT)
+    if (case["id"], case["case_revision"]) != (contract["case_id"], contract["case_revision"]):
+        raise EvaluationError("A02 r2 の実行記録が必要です")
+    if review.get("run_id") != run_id or not review.get("reason"):
+        raise EvaluationError("判定票の実行IDまたは根拠が不正です")
+    for name in ("result.diff", "final-response.txt", "validation.json"):
+        digest = hashlib.sha256((evidence / "rating-view" / name).read_bytes()).hexdigest()
+        if review.get("evidence_sha256", {}).get(name) != digest:
+            raise EvaluationError(f"判定票の証拠が一致しません: {name}")
+    return a02_r2_score(review)
+
+
 def layer3_rate(args: argparse.Namespace) -> dict[str, Any]:
     cycle = Path(args.cycle).resolve()
     binding_matches = [
@@ -1145,26 +1168,16 @@ def layer3_rate(args: argparse.Namespace) -> dict[str, Any]:
     if execution.get("status", "valid") == "excluded":
         raise EvaluationError("excluded run cannot be quality-rated")
     review_path = getattr(args, "review", None)
-    if rating_contract == QUALITY_RATING_A02_R2:
+    if rating_contract == QUALITY_RATING_A02_R2 or (
+        rating_contract == QUALITY_RATING_V15 and binding["case_id"] == "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING"
+    ):
         if not review_path or args.score is not None or args.reason is not None:
             raise EvaluationError("A02 r2 は実行別の証拠判定票を指定してください")
-        if hashlib.sha256(A02_R2_CONTRACT.read_bytes()).hexdigest() != rating_contract["contract_sha256"]:
-            raise EvaluationError("A02 r2 の採点基準が固定値と異なります")
         review = load_json(Path(review_path))
-        evidence = cycle / "layer2/evidence" / args.run_id
-        case = load_json(evidence / "case.json")
-        contract = load_json(A02_R2_CONTRACT)
-        if (case["id"], case["case_revision"]) != (contract["case_id"], contract["case_revision"]):
-            raise EvaluationError("A02 r2 の実行記録が必要です")
-        if review.get("run_id") != args.run_id or not review.get("reason"):
-            raise EvaluationError("判定票の実行IDまたは根拠が不正です")
-        for name in ("result.diff", "final-response.txt", "validation.json"):
-            digest = hashlib.sha256((evidence / "rating-view" / name).read_bytes()).hexdigest()
-            if review.get("evidence_sha256", {}).get(name) != digest:
-                raise EvaluationError(f"判定票の証拠が一致しません: {name}")
+        score = checked_a02_review(cycle, args.run_id, review)
         rating = {"schema_version": "the-caption-prompt.quality-rating/v2",
-                  "quality_rating_contract": contract["contract_id"], "run_id": args.run_id,
-                  "outcomes": review, "score": a02_r2_score(review), "reason": review["reason"],
+                  "quality_rating_contract": rating_contract["contract_id"], "run_id": args.run_id,
+                  "outcomes": review, "score": score, "reason": review["reason"],
                   "rated_at": utc_now()}
         write_json_once(cycle / "layer3/ratings" / f"{args.run_id}.json", rating)
         return rating

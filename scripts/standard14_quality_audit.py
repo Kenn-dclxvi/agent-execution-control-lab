@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 if __package__:
+    from .evaluation_loop import QUALITY_RATING_V15, checked_a02_review
     from .all_agent_command_evidence import (
         SCHEMA_VERSION as COMMAND_EVIDENCE_SCHEMA_VERSION,
         collect as collect_command_evidence,
@@ -37,6 +38,7 @@ if __package__:
         build_a01_terminal_state_evidence,
     )
 else:
+    from evaluation_loop import QUALITY_RATING_V15, checked_a02_review
     from all_agent_command_evidence import (
         SCHEMA_VERSION as COMMAND_EVIDENCE_SCHEMA_VERSION,
         collect as collect_command_evidence,
@@ -81,7 +83,9 @@ F_CASES = {
     "TC-F10-ENTRYPOINT-INVENTORY-REVIEW",
     "TC-F10-MONTHLY-FORMAT-TEST-REVIEW",
 }
+V15 = QUALITY_RATING_V15["contract_id"]
 SUPPORTED_STANDARD14_RATING_CONTRACTS = {
+    V15,
     MONTHLY_REVIEW_RATING_V10,
     MONTHLY_REVIEW_RATING_V11,
     MONTHLY_REVIEW_RATING_V12,
@@ -236,7 +240,8 @@ def collect(batch: Path, expected_run_count: int = EXPECTED_RUN_COUNT) -> dict[s
                 "run_id": run_id,
                 "case_id": case_id,
                 "iteration": binding["iteration"],
-                "workspace_failures": workspace_failures(case_id, workspace),
+                "workspace_failures": ([] if case_id == A02 and binding["comparison_conditions"]["quality_rating"]["contract_id"] == V15
+                                       else workspace_failures(case_id, workspace)),
             }
         )
     if len(observations) != expected_run_count:
@@ -497,6 +502,7 @@ def a_rating(case_id: str, final: str, failures: list[str]) -> tuple[int, str]:
 def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
     cycle = batch / "cycle"
     rating_contract_id = quality_rating_contract_id(cycle)
+    case_rules = MONTHLY_REVIEW_RATING_V14 if rating_contract_id == V15 else rating_contract_id
     owner_evidence = load_json(cycle / "layer3/owner-producer-evidence.json")
     owner_by_run = {item["run_id"]: item for item in owner_evidence["runs"]}
     if len(owner_by_run) != len(observations["runs"]):
@@ -539,11 +545,11 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             if command_audit.get("run_id") != run_id:
                 raise RuntimeError(f"invalid command protocol audit: {run_id}")
             failures.extend(command_quality_failures(command_audit["requirements"]))
-            failures.extend(f_response_failures(case_id, final, rating_contract_id))
-            score, reason = f_rating(case_id, final, failures, rating_contract_id)
+            failures.extend(f_response_failures(case_id, final, case_rules))
+            score, reason = f_rating(case_id, final, failures, case_rules)
         elif case_id == A01:
             terminal_state_evidence = None
-            if rating_contract_id == MONTHLY_REVIEW_RATING_V14:
+            if case_rules == MONTHLY_REVIEW_RATING_V14:
                 terminal_state_evidence = build_a01_terminal_state_evidence(
                     run_id=run_id,
                     final_response_present=bool(final.strip()),
@@ -556,13 +562,19 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
                     final,
                     final_changed_paths,
                     command_evidence,
-                    rating_contract_id,
+                    case_rules,
                 )
             )
             score, reason = a_rating(case_id, final, failures)
+        elif case_id == A02 and rating_contract_id == V15:
+            review = load_json(batch / "a02-reviews" / f"{run_id}.json")
+            score = checked_a02_review(cycle, run_id, review)
+            reason = review["reason"]
+            if any(f in failures for f in ("execution_not_valid", "usage_missing", "adapter_failure")):
+                raise RuntimeError(f"invalid v15 execution: {run_id}: {failures}")
         elif case_id == A02:
             failures.extend(
-                a02_failures(final_changed_paths, command_evidence, rating_contract_id)
+                a02_failures(final_changed_paths, command_evidence, case_rules)
             )
             score, reason = a_rating(case_id, final, failures)
         else:
@@ -578,13 +590,15 @@ def evaluate(batch: Path, observations: dict[str, Any]) -> dict[str, Any]:
             ),
             "owner_producer_evidence_status": owner_item.get("status"),
         }
-        if case_id == A01 and rating_contract_id == MONTHLY_REVIEW_RATING_V14:
+        if case_id == A01 and case_rules == MONTHLY_REVIEW_RATING_V14:
             diagnostics["terminal_state_evidence"] = terminal_state_evidence
         if case_id == "TC-F10-MONTHLY-FORMAT-TEST-REVIEW":
             diagnostics["monthly_review_numeric_location"] = (
                 monthly_review_location_diagnostic(final)
             )
-        if case_id == A02 and rating_contract_id in {
+        if case_id == A02 and rating_contract_id == V15:
+            diagnostics["behavioral_review"] = review
+        elif case_id == A02 and case_rules in {
             MONTHLY_REVIEW_RATING_V13,
             MONTHLY_REVIEW_RATING_V14,
         }:
@@ -657,6 +671,9 @@ def apply_ratings(
             if existing.get("score") != item["candidate_score"] or existing.get("reason") != item["rating_reason"]:
                 raise RuntimeError(f"existing rating differs: {item['run_id']}")
             continue
+        rating_args = ["--score", str(item["candidate_score"]), "--reason", item["rating_reason"]]
+        if report["quality_rating_contract"] == V15 and item["case_id"] == A02:
+            rating_args = ["--review", str(batch / "a02-reviews" / f"{item['run_id']}.json")]
         completed = subprocess.run(
             [
                 sys.executable,
@@ -666,10 +683,7 @@ def apply_ratings(
                 str(cycle),
                 "--run-id",
                 item["run_id"],
-                "--score",
-                str(item["candidate_score"]),
-                "--reason",
-                item["rating_reason"],
+                *rating_args,
             ],
             capture_output=True,
             text=True,
@@ -708,7 +722,7 @@ def main() -> int:
         print(json.dumps({"artifact": str(observations_path), "run_count": report["run_count"]}))
         return 0
     report = evaluate(batch, load_json(observations_path))
-    if report["quality_rating_contract"] == MONTHLY_REVIEW_RATING_V14:
+    if report["quality_rating_contract"] in {MONTHLY_REVIEW_RATING_V14, V15}:
         write_once(
             batch / "cycle/layer3/terminal-state-evidence.json",
             terminal_state_report(report),
