@@ -1,0 +1,8 @@
+{
+  "target_repository_ref_and_start_identity": "THE-CAPTIONの現在のisolated checkoutを対象とする。最初のeditまたはrequired command前にpwd、branch、HEAD、git status --shortを確認する。",
+  "task_kind_goal_and_done_condition": "壊れている ./run.sh v4 と別名 ./run.sh v の起動先を修復してください。正規のモジュールはリポジトリ内の規則と現在のエントリーポイントから特定してください。",
+  "target_artifacts_allowed_paths_and_forbidden_changes": "変更してよいのは run.sh の v4|v 分岐にある module 代入の右辺だけです。シェル変数の展開を使わず、モジュール名を文字列リテラルで指定してください。引数省略時の既定値と shift を含む引数処理、周辺の分岐、ファイル属性、他のファイルは開始時の状態を維持してください。",
+  "validation_conditions_and_non_machine_risk": "最終変更後に構文確認 bash -n run.sh、既存試験 pytest tests/ -v、差分検査 git diff --check をそれぞれ独立したコマンドとして実行し、各終了コードを確認してください。git diff -- run.sh で最終差分を確認してください。",
+  "read_edit_test_commit_push_merge_authorization": "read=true、edit=true（run.shだけ）、test=true。commit=false、push=false、merge=false、deploy=false、external_send=false。",
+  "constraints_and_required_recovery": "canonical targetはrepository authorityと現行entrypoint実体を根拠に決める。新しいshimやlegacy entrypointを作らない。許可外変更が必要なら停止する。"
+}

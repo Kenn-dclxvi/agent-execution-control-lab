@@ -1,6 +1,10 @@
 # quality rating contract索引
 
+[A02 r2 の設計意図に基づく0〜4点の採点基準](a02-r2-behavioral-score-v1.json)
+
 `the-caption` legacy-rootのquality rating contract revisionを引くための索引である。revision固定、model-visible境界、過去resultの再採点禁止は[`evaluations/AGENTS.md`](../AGENTS.md)を正本とし、各revisionの採点条件は対応するcontract JSONを正とする。現行のプロファイルで使用するcontractは[`docs/prompt-comparison-workflow.md`](../../docs/prompt-comparison-workflow.md)と各profile identityで確認する。
+
+[A02 r2 の判断・修復・周辺影響・検証の独立採点](a02-r2-clarification-review-v1.json)
 
 ## revision一覧
 

@@ -126,6 +126,7 @@ def build_record(
     sample_id: str,
     accounting: dict[str, str],
     quality_score: int,
+    outcomes: dict[str, Any] | None = None,
     total_tokens: int,
     elapsed_seconds: float,
     source: dict[str, Any],
@@ -164,13 +165,16 @@ def build_record(
     }
     if usage_components is not None:
         record["usage_components"] = usage_components
+    if outcomes is not None:
+        record["schema_version"] = "the-caption-prompt.atomic-run/v3"
+        record["outcomes"] = outcomes
     record["record_content_sha256"] = identity_sha256(record)
     return record
 
 
 def load_atomic_run(registry: Path, record_id: str) -> dict[str, Any]:
     record = load_json(registry / "runs" / f"{record_id}.json")
-    if record.get("schema_version") not in {ATOMIC_RUN_SCHEMA, ATOMIC_RUN_SCHEMA_V2}:
+    if record.get("schema_version") not in {ATOMIC_RUN_SCHEMA, ATOMIC_RUN_SCHEMA_V2, "the-caption-prompt.atomic-run/v3"}:
         raise EvaluationError("atomic run has an unsupported schema_version")
     if record.get("atomic_run_id") != record_id:
         raise EvaluationError("atomic run identity does not match its path")
@@ -364,6 +368,7 @@ def import_result(args: argparse.Namespace) -> dict[str, Any]:
                 sample_id=sample_id,
                 accounting=accounting,
                 quality_score=row["quality_score"],
+                outcomes=row.get("outcomes"),
                 total_tokens=row["total_tokens"],
                 elapsed_seconds=row["elapsed_seconds"],
                 source={
@@ -437,6 +442,7 @@ def register_cycle_run(args: argparse.Namespace) -> dict[str, Any]:
         sample_id=sample_id,
         accounting=accounting,
         quality_score=rating["score"],
+        outcomes=rating.get("outcomes"),
         total_tokens=execution["total_tokens"],
         elapsed_seconds=execution["elapsed_seconds"],
         usage_components=cycle_usage_components(cycle, run_id),
@@ -883,6 +889,7 @@ def register_selection_result(args: argparse.Namespace) -> dict[str, Any]:
                 "case_id": record["case_id"],
                 "iteration": iteration,
                 "quality_score": record["quality_score"],
+                **({"outcomes": record["outcomes"]} if "outcomes" in record else {}),
                 "total_tokens": record["total_tokens"],
                 "elapsed_seconds": record["elapsed_seconds"],
             }
