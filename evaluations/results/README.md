@@ -40,6 +40,10 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [Astra 6.2 LowのFree・STD14各N=5の再計測（2026-11-19）](#free-astra62-low-remeasurement-20261119)
+
+- [Astra 6.2 LowのFree・STD14各N=5の参考記録（2026-11-18）](#free-astra62-low-reference-20261118)
+
 - [FreeとC319・Gemini 4 Hydrogen LowのSTD14 N=5（2026-11-16）](#free-c319-hydrogen-20261116)
 
 - [C321・GPT-6.1 Sol lowのSTD14 N=5（2026-11-13）](#c321gpt-61-sol-lowのstd14-n52026-11-13)
@@ -234,6 +238,16 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-astra62-low-remeasurement-20261119"></a>
+## Astra 6.2 LowのFree・STD14各N=5の再計測（2026-11-19）
+
+[再計測の記録](free-astra62-low-standard14-n5_2026-11-19.md)と[登録結果](8849285a158c40238edb3a2901b63454.json)。有効70件、4点67件・0点3件。14課題合計の中央値は品質92.8571%、API換算費用2.4487872 USD、経過時間974.80秒。保存・復元照合・後片付けまで完了した。
+
+<a id="free-astra62-low-reference-20261118"></a>
+## Astra 6.2 LowのFree・STD14各N=5の参考記録（2026-11-18）
+
+[前回の登録結果](b36eb047bca241fab40e35c97679bc0b.json)は有効70件（4点66件、0点4件）。2026-11-19の再計測とは別の参考記録として扱う。登録結果の内容と70件の実行IDは初回登録時のもの。
 
 <a id="free-c319-hydrogen-20261116"></a>
 ## FreeとC319・Gemini 4 Hydrogen LowのSTD14 N=5（2026-11-16）
