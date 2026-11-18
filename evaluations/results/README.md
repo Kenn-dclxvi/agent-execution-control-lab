@@ -1,5 +1,11 @@
 # result索引
 
+[C324のAstra 6.2 Low・STD14各N=5試験](c324-astra62-low-standard14-n5_2026-11-18.md)
+
+[C323のAstra 6.2 Low・STD14各N=5試験](c323-astra62-low-standard14-n5_2026-11-18.md)
+
+[C321とC322 r2のGPT-6.2 Low・STD14各N=5比較](c322r2-gpt62-low-standard14-n5-combined_2026-11-18.md)
+
 [A02 r2 全件の再採点と条件別の満点件数](a02-r2-behavioral-rescore-v1.md)
 
 THE-CAPTION投影系列の最新Standard14 resultはP006の[`THE-CAPTION投影14項目各N=5`](p006-the-caption-standard14-projection-n5_2026-08-19.md)である。P005の非root 18 targetをbyte一致で保持し、root `AGENTS.md`だけをP006へ置換した。70 / 70件が`valid`かつScore `4`だった。互換比較はP005比token `-10.57%`、elapsed `-3.90%`、Candidate147比token `+21.75%`、elapsed `+13.86%`である。F08の分割5 / 5件は後続再監査で既存`FRONTIER`へのnonconformanceと再分類し、独立mechanism gateを撤回した。現在状態は`quality_gate_passed / p005_cost_both_lower / p006_delta_causal_attribution_not_established / n20_eligible_not_started / adoption_not_decided`とする。[登録result](684cb3c380bc4b28a65680f415ecb8e6.json)を保存した。
