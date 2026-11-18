@@ -110,7 +110,11 @@ C319の本文を変えずに[`pallets/click`](https://github.com/pallets/click)�
 
 2026-10-08までの旧系列（全エージェント合算トークンを指標とした計測）では、人間の組織を模した出発点（Baseline）からCandidate147までに、不要なワーカー起動の抑制、結論が変わらない場面の再判断の停止、検証の一括化によってトークンを約9割減らしました。その要点は[`docs/control-mechanisms.md`](docs/control-mechanisms.md)にあります。
 
-2026-11-18にC324を正式リリースし、個人用Codexの共通指示へ適用しました。[リリース記録](prompts/releases/the-caption-3ce91a4-without-investigation-rule-release-r1/README.md)
+2026-11-18にC324を正式リリースし、個人用Codexの共通指示（`~/.codex/AGENTS.md`）へ適用しました。採用にあたり、GPT-6.2 Astra LowでSTD14の全14課題を各5回比較しました。[リリース記録](prompts/releases/the-caption-3ce91a4-without-investigation-rule-release-r1/README.md)
+
+C322 r2は70件すべて満点でした。第3・4・6項だけを残したC323は66件に減り、失点はすべてA01でした。変更先が未指定のまま事前調査や変更に進まず、利用者に確認して止まれた実行も5件中0件でした。[C323の試験結果](evaluations/results/c323-astra62-low-standard14-n5_2026-11-18.md)
+
+そこでC322 r2に戻り、事前調査の範囲と打ち切りを定める第2項だけを外したC324を試しました。70件すべてが満点で、A01も5件すべてが指定の開始確認だけで止まり、変更先を質問しました。F08では資料を読む順序や回数に差が出たものの、両条件各5件の最終差分はすべて一致しました。この試験範囲で品質と確認判断を維持できたことを根拠にC324を採用しました。API換算費用の中央値はC322 r2比で18.4%増でした。[C324の試験結果と探索行動の比較](evaluations/results/c324-astra62-low-standard14-n5_2026-11-18.md)
 
 構築したCandidateのバンドルは300件を超えます。本体への投影はCandidate41・43・71・81・125・147・274の7件で、公開版のTHE-CAPTIONには2026-08-03にCandidate147（[PR #13](https://github.com/Kenn-dclxvi/the-caption/pull/13)）、2026-09-08にCandidate274（[PR #27](https://github.com/Kenn-dclxvi/the-caption/pull/27)）を反映しました。新しい基準では、2026-10-15にC319をリリースして承認しました。THE-CAPTION本体へは反映しておらず、利用者の個人の共通指示（`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`）に置きました（[リリース記録](prompts/releases/the-caption-3ce91a4-unconfirmed-location-search-release-r1/README.md)）。C319は、2026-10-12にリリースしたC316（[リリース記録](prompts/releases/the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md)）の後継で、1行目で依頼が既存の状態から結果を決めるよう指定した場合を除き、2行目に、存在を確かめていない場所へ指示や正本を探しに行かない1文を加えたものです。
 
