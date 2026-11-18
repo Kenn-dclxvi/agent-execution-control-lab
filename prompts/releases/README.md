@@ -6,6 +6,7 @@
 
 | release identity | source candidate | 評価 | release status | approval | runtime projection |
 | --- | --- | --- | --- | --- | --- |
+| [the-caption-3ce91a4-without-investigation-rule-release-r1](the-caption-3ce91a4-without-investigation-rule-release-r1/README.md) | the-caption-3ce91a4-without-investigation-rule-r1 | Astra 6.2 Low・STD14各5回、70/70件が4点。個人用Codexへ適用 | `released` | `approved` | `not_projected` |
 | [`the-caption-3ce91a4-unconfirmed-location-search-release-r1`](the-caption-3ce91a4-unconfirmed-location-search-release-r1/README.md) | `the-caption-3ce91a4-unconfirmed-location-search-r1` | C316の後継。THE-CAPTIONとClickのStandard14で4モデル各N=5。費用はFree比で全8セル幅より下。ClickでC316が起こしたF07-Pの停止と探索の失敗による停止が0件 | `released` | `approved` | `not_projected` |
 | [`the-caption-3ce91a4-receive-form-file-read-range-release-r1`](the-caption-3ce91a4-receive-form-file-read-range-release-r1/README.md) | `the-caption-3ce91a4-receive-form-file-read-range-r1` | Free比（N=5、4モデル各70件）で全件4点、費用はSol Low −31.28%・Astra Low −32.94%・Sonnet low −11.17%・Opus low −11.64%。Sol LowとSonnet lowは累積N=20で各280件4点 | `released` | `approved` | `not_projected` |
 | [`the-caption-3ce91a4-execution-boundary-core-release-r1`](the-caption-3ce91a4-execution-boundary-core-release-r1/README.md) | `the-caption-3ce91a4-execution-boundary-core-r1` | Astra medium Standard14 N=5 70/70 Score 4、別計測系列の再計測も70/70 Score 4 | `projected` | `approved` | `projected` |
