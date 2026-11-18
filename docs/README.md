@@ -129,6 +129,10 @@
 - [Candidate319 C318に、存在を確かめていない場所へ指示や正本を探しに行かないことを加える](candidate319-c318-unconfirmed-location-search-design.md)：ClickのF06で、Codexが存在しない`.agents`・`.codex`を探し、その失敗を環境failureと見なして停止した劣化に対応する。同じ探索はTHE-CAPTIONのFreeでも起きていた。
 - [Candidate320 利用者が示した「先に計画を出して確認を取る」プロンプトをそのまま測る](candidate320-user-supplied-confirm-plan-first-design.md)：保存traceの分析から導いた制御ではなく、利用者の本文をrootの指示へそのまま置き、STD14をOpus 5.5 lowとSonnet 5.5 lowで測る。traceに由来する確認事項は該当なしとした。
 - [Candidate321 個人共通AGENTS.mdの本文をそのまま測る](candidate321-user-supplied-personal-agents-design.md)：利用者指定ファイルを変更せず取り込み、Sol low・STD14 N=5の条件と終了条件を固定する。[計測結果](../evaluations/results/c321-sol61-low-standard14-n5_2026-11-13.md)は4点70件で保存・後片付けまで完了。
+- [Candidate322 個人共通指示の短縮](candidate322-c321-reduction-design.md)：C321からまとめて削る三か所と比較時に維持すべき条件。
+- [Candidate322 r2 原文に戻す範囲](candidate322-r2-original-wording-design.md)：C321との一文の差と評価時の確認事項。
+- [Candidate323 三項を残す比較](candidate323-three-retained-rules-design.md)：最終確認・待機・読み取りの三項でSTD14を測る。
+- [Candidate324 第2項のみ削除](candidate324-investigation-rule-removal.md)：方針決定後の探索を比較する。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 - [Sol Lowの費用を要素に分ける（r1）](sol-cost-element-decomposition-r1.md)：旧系列のSol Lowを費用で数え直し、生のトークンで31〜39%減ったCandidateが費用では1〜8%減にとどまることを確かめた。戻る回数を減らす機序は主にキャッシュ読み取りを減らし、キャッシュに乗らない入力は増えていた。プロンプトで減らせる最大の要素は、指示ファイル以外のファイルの全文取得（C301のSolで約230KB/反復）。Candidateは未作成
