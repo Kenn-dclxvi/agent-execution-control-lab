@@ -11,7 +11,11 @@ from scripts.antigravity_evidence import (
 )
 from scripts.usage_components import components_document, empty_buckets
 
-MODEL_ENUMS = {"gemini-4-argon-low": 1419, "gemini-4-hydrogen-low": 1527}
+MODEL_ENUMS = {
+    "gemini-4-argon-low": 1419,
+    "gemini-4-hydrogen-low": 1527,
+    "gemini-4-neon-low": 1534,
+}
 
 
 def read_session(config: Path, session_id: str, expected_model_enum: int = 1419) -> dict[str, Any]:

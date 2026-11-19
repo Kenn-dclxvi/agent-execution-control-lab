@@ -15,6 +15,7 @@
 - [`c320-claude-opus55-low-standard14-n5-cli2288-shellenv-20261030-r1.json`](../c320-claude-opus55-low-standard14-n5-cli2288-shellenv-20261030-r1.json)
 - [`c320-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261030-r1.json`](../c320-claude-sonnet55-low-standard14-n5-cli2288-shellenv-20261030-r1.json)
 - [`c321-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261113-r1.json`](../c321-sol61-low-standard14-n5-cli0159-isolated-shellenv-20261113-r1.json)
+- [`c324-gemini4-neon-low-standard14-n5-agy1512-20261119-r1.json`](../c324-gemini4-neon-low-standard14-n5-agy1512-20261119-r1.json)
 - [`candidate1-expanded12-global-m24-n1-r1.json`](../candidate1-expanded12-global-m24-n1-r1.json)
 - [`candidate1-expanded12-global-m24-n5-r1.json`](../candidate1-expanded12-global-m24-n5-r1.json)
 - [`candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json`](../candidate10-c1-counter-boundary-expanded12-global-m24-n5-r1.json)
@@ -61,4 +62,3 @@
 - [`candidate123-preterminal-result-round-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json`](../candidate123-preterminal-result-round-closure-v14-reasoning-medium-a01-a02-f01-f02-global-m24-n5-cli0146-r1.json)
 - [`candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate124-incomplete-content-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
 - [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-a01-a02-f01-f02-f04-global-m24-n5-cli0146-r1.json)
-- [`candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json`](../candidate125-criterion-complete-single-target-continuation-v14-reasoning-medium-f02-f04-f07-global-m24-n5-cli0146-r1.json)
