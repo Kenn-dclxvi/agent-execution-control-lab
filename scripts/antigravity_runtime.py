@@ -1,6 +1,7 @@
 """Antigravity CLIと個人設定の識別値を発行前・実行直前に照合する。"""
 
 import hashlib
+import os
 from pathlib import Path
 import subprocess
 
@@ -22,8 +23,13 @@ def verify_from_conditions(conditions):
         raise AntigravityRuntimeError("CLIは絶対パスの通常ファイルで固定してください")
     if sha256(executable) != runtime["executable_sha256"]:
         raise AntigravityRuntimeError("CLIのSHA-256が変わっています")
-    result = subprocess.run([str(executable), "--version"], capture_output=True, text=True)
-    if result.returncode or result.stdout.strip() != runtime["version"] or runtime["version"] not in {"1.5.5", "1.5.9"}:
+    result = subprocess.run(
+        [str(executable), "--version"],
+        capture_output=True,
+        text=True,
+        env={**os.environ, "AGY_CLI_DISABLE_AUTO_UPDATE": "1"},
+    )
+    if result.returncode or result.stdout.strip() != runtime["version"] or runtime["version"] not in {"1.5.5", "1.5.9", "1.5.12"}:
         raise AntigravityRuntimeError("照合済みの固定CLIバージョンと一致しません")
     for name, expected in runtime["configuration_files"].items():
         path = Path(name)

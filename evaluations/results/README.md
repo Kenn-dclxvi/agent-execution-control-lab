@@ -40,6 +40,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [FreeとC324・Gemini 4 Neon LowのSTD14 N=5（2026-11-19）](#free-c324-neon-20261119)
+
 - [Astra 6.2 LowのFree・STD14各N=5の再計測（2026-11-19）](#free-astra62-low-remeasurement-20261119)
 
 - [Astra 6.2 LowのFree・STD14各N=5の参考記録（2026-11-18）](#free-astra62-low-reference-20261118)
@@ -238,6 +240,15 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="free-c324-neon-20261119"></a>
+## FreeとC324・Gemini 4 Neon LowのSTD14 N=5（2026-11-19）
+
+Freeの[登録結果](20e70e57abd9480dbc4bc14726077cf6.json)。4点65件、0点5件。品質中央値92.86%、API換算費用中央値2.7718 USD。実行・採点・登録・復元照合・後片付けを完了した。
+
+C324の[登録結果](42c68b19f02844a1a33102b68b16d335.json)。4点70件。品質中央値100%、API換算費用中央値2.3655 USD。実行・採点・登録・復元照合・後片付けを完了した。[比較報告](free-c324-gemini4-neon-low-standard14-n5_2026-11-19.md)
+
+[A02のv15再採点](free-c324-gemini4-neon-low-a02-v15-reassessment_2026-11-19.json)では、FreeとC324の各5件すべてで満点を確認した。
 
 <a id="free-astra62-low-remeasurement-20261119"></a>
 ## Astra 6.2 LowのFree・STD14各N=5の再計測（2026-11-19）

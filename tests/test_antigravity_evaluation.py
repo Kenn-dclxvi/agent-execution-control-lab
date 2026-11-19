@@ -198,7 +198,11 @@ def test_terminal_tool_error_is_distinct_from_incomplete_usage(tmp_path, state, 
             saved.collect_saved_usage(parse(stream()), tmp_path, MODEL, 'recovered')
 
 
-@pytest.mark.parametrize('model,model_enum', [('gemini-4-argon-low', 1419), ('gemini-4-hydrogen-low', 1527)])
+@pytest.mark.parametrize('model,model_enum', [
+    ('gemini-4-argon-low', 1419),
+    ('gemini-4-hydrogen-low', 1527),
+    ('gemini-4-neon-low', 1534),
+])
 def test_qualified_model_binding_includes_children(tmp_path, model, model_enum):
     make_session(tmp_path, PARENT, CHILD, model_enum=model_enum)
     make_session(tmp_path, CHILD, model_enum=model_enum)
@@ -209,13 +213,14 @@ def test_qualified_model_binding_includes_children(tmp_path, model, model_enum):
     assert set(usage['usage_components']['by_model']) == {model}
 
 
-def test_hydrogen_rejects_child_from_another_model(tmp_path):
-    make_session(tmp_path, PARENT, CHILD, model_enum=1527)
+@pytest.mark.parametrize('model,model_enum', [('gemini-4-hydrogen-low', 1527), ('gemini-4-neon-low', 1534)])
+def test_rejects_child_from_another_model(tmp_path, model, model_enum):
+    make_session(tmp_path, PARENT, CHILD, model_enum=model_enum)
     make_session(tmp_path, CHILD, model_enum=1419)
     events = stream(CHILD)
-    events[0]['init']['model'] = 'gemini-4-hydrogen-low'
+    events[0]['init']['model'] = model
     with pytest.raises(evidence.AntigravityEvidenceError, match='モデル対応'):
-        saved.collect_saved_usage(parse(events), tmp_path, 'gemini-4-hydrogen-low', 'run')
+        saved.collect_saved_usage(parse(events), tmp_path, model, 'run')
 
 
 def test_provisional_subagent_identity_is_resolved_at_completion():
@@ -229,15 +234,18 @@ def test_provisional_subagent_identity_is_resolved_at_completion():
         parse(events)
 
 
-def test_cli_159_is_exactly_pinned(tmp_path):
+@pytest.mark.parametrize('version', ['1.5.9', '1.5.12'])
+def test_cli_is_exactly_pinned(tmp_path, version):
     binary = tmp_path / 'agy'
-    binary.write_bytes(b'fixed159')
+    binary.write_bytes(b'fixed')
     pinned = {'executable': str(binary), 'executable_sha256': runtime.sha256(binary),
-              'version': '1.5.9', 'configuration_files': {}, 'absent_customizations': []}
+              'version': version, 'configuration_files': {}, 'absent_customizations': []}
     conditions = {'agent_environment': {'antigravity_cli': pinned}}
-    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout='1.5.9\n')):
+    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout=f'{version}\n')) as run:
         assert runtime.verify_from_conditions(conditions) == pinned
-    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout='1.5.10\n')):
+        assert run.call_args.kwargs['env']['AGY_CLI_DISABLE_AUTO_UPDATE'] == '1'
+    other_supported_version = '1.5.12' if version == '1.5.9' else '1.5.9'
+    with mock.patch.object(runtime.subprocess, 'run', return_value=mock.Mock(returncode=0, stdout=f'{other_supported_version}\n')):
         with pytest.raises(runtime.AntigravityRuntimeError):
             runtime.verify_from_conditions(conditions)
 

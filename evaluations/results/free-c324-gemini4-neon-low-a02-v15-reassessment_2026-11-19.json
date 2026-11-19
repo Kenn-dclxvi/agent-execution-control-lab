@@ -1,0 +1,434 @@
+{
+  "evaluated_on": "2026-11-19",
+  "model": "gemini-4-neon-low",
+  "case_id": "TC-A02-REPOSITORY-RESOLVABLE-V4-ROUTING",
+  "case_revision": "r2",
+  "rating_contract": "outcome-a02-behavioral-owner-diagnostic-v15",
+  "behavioral_contract_sha256": "8d6f98a4588f5211e8a647cc130f693a66fd0b6b40a1e8276ffb20309e12f600",
+  "new_model_invocations": 0,
+  "conditions": {
+    "Free": {
+      "registered_result_id": "20e70e57abd9480dbc4bc14726077cf6",
+      "registered_result_content_sha256": "458a2a641a493e7ffb907204b6a7a0e486f0486fa4f14954fdf51bf5d6048f79",
+      "a02_self_resolved": 5,
+      "a02_full_score": 5,
+      "std14_score_counts": {
+        "4": 65,
+        "0": 5
+      },
+      "reviews": [
+        {
+          "run_id": "40353fcb282b45cba4732a55f7768813",
+          "execution_iteration": 2,
+          "result_iteration": 1,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_1202337646739617942",
+              "step_index": 9,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_12106603893221024225",
+              "step_index": 11,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_1202337646739617942",
+              "step_index": 9,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "db4a9f0b561de093576c188d6723c45d1c903d6792817574112f297468d1a976",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "1efb00e0f8cb6d8af6502140fbf6c44d18e3a371aec607913f5bdea40de388c3",
+            "all-agent-command-evidence/evidence.json": "a2f769e6463b92dd28d483f8bd69d336808edad99df125a3af924926e4a4ee81",
+            "all-agent-usage/usage.json": "2a6a3a46d27b30bc49ec561a87adf3d21bd8d3653a743f4f8884d482c79e61fa"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "5e6227f696554a959dbd63f33111fb6c",
+          "execution_iteration": 4,
+          "result_iteration": 2,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_7655775153344984582",
+              "step_index": 13,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_7655775153344984361",
+              "step_index": 14,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_14237843615513842436",
+              "step_index": 16,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "6c7317eb78a43bf205fa9cdccc896578adb034e77b45e653ba1733ded349e649",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "d39a662aefe9b0f4d0bcf97034cc4efb7b0b6516d076b3b075e1db601a0a57c0",
+            "all-agent-command-evidence/evidence.json": "e87fe1438ad0abe69af8e639b83bdb7e8a57ee5b7a757f2258ad5971d5aa999b",
+            "all-agent-usage/usage.json": "931698748c209bb81717508e53cb3d980d8a413197b7b55214cdaf411156a746"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "be7bbfdd5da64cdf99ea107011fe10e7",
+          "execution_iteration": 1,
+          "result_iteration": 3,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_5026458739505052343",
+              "step_index": 16,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_5026458739505052040",
+              "step_index": 17,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_12359986168898638277",
+              "step_index": 19,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "d1a52b322eaaec9d676319706ef6edff995d4654ac00f44f6f623ebb6dc4d46c",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "bb42de46858553d0c22f18ffc0e797a60811d550a7f61ace13002f981dee9f84",
+            "all-agent-command-evidence/evidence.json": "f7264d5811d99f7c1f4eb7fe546b86d04359fa31dc62be33a743b2668641b1ee",
+            "all-agent-usage/usage.json": "c97ee11d0923f079ad4d5a5cfefb254661b7e2d97d65862c324bb3f0384e5eb1"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "bffff3334a914432aba79da9e74cd875",
+          "execution_iteration": 3,
+          "result_iteration": 4,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験6件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_10492736387748930468",
+              "step_index": 12,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_10492736387748930468",
+              "step_index": 12,
+              "exit_code": 0,
+              "passed_count": 6
+            },
+            "最終差分": {
+              "tool_use_id": "call_10492736387748929829",
+              "step_index": 13,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "9de030bcd08fdf97b82d6f826413d2a0c0677461e627b29c4b52a417b706106f",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "ed7811afb520cf9c02f77e5ff161ebfde1d9dc9f7da0d993b65bbec2b50e0086",
+            "all-agent-command-evidence/evidence.json": "ea551baab93c28c3ae15e3e2656e3d96bbf46dbe09c061a1599a6adc746ce51c",
+            "all-agent-usage/usage.json": "0c4cfe54734dfdc6fd4ea32dda35e684ecf69418d6d67730090842c3a68b6e50"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "eeea63267b8b4f238ddbad988a799c89",
+          "execution_iteration": 5,
+          "result_iteration": 5,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験6件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_9952819563573220255",
+              "step_index": 12,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_9952819563573221432",
+              "step_index": 13,
+              "exit_code": 0,
+              "passed_count": 6
+            },
+            "最終差分": {
+              "tool_use_id": "call_902601139800885156",
+              "step_index": 15,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "13f0b756a96837155fc39e245e3e54a103d2e7a764ca3038807297e3fbd1b70f",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "14d32a9c44cc29b235284d5d7c7b4da7cafb71b14125ab34c2c96355673bfc2e",
+            "all-agent-command-evidence/evidence.json": "11143ae9a575468c990d7e35f5bf0eb26a47bf5f7d9212fddb3a06a3db3a54d0",
+            "all-agent-usage/usage.json": "69e9c9ed6e6b233c586449408371e925eb0da92fb2cbaf62e9cf1fb7e0da74c7"
+          },
+          "v15_score": 4
+        }
+      ]
+    },
+    "C324": {
+      "registered_result_id": "42c68b19f02844a1a33102b68b16d335",
+      "registered_result_content_sha256": "d3bdd3646389cb6ce347cea489bc5a8e0be9e9db8b9ca48707235d7de0507287",
+      "a02_self_resolved": 5,
+      "a02_full_score": 5,
+      "std14_score_counts": {
+        "4": 70
+      },
+      "reviews": [
+        {
+          "run_id": "392c441a27af4b049a911c062a9763ff",
+          "execution_iteration": 3,
+          "result_iteration": 1,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_10207229505868734347",
+              "step_index": 11,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_10207229505868733286",
+              "step_index": 12,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_10207229505868732225",
+              "step_index": 13,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "2aac6ac5a4d8694e1e3745818ae25b738fa10adbf4ec78e268ce772bec7c060d",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "9c7e5ffd80967ff44869c446a58e350664407bdfbc9c4c5d64661c0f378fdb09",
+            "all-agent-command-evidence/evidence.json": "248145de44c3a738270e6f42f5248d5efb88af256348bc8aa5e5fff38cd0a044",
+            "all-agent-usage/usage.json": "4a635a7e362500746ade0a1cf2ab558bad21c1d255d5e9ab36c558462525b499"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "5307b170ba024228bb6347f4bb10164f",
+          "execution_iteration": 5,
+          "result_iteration": 2,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_4481281281687610410",
+              "step_index": 13,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_4481281281687610381",
+              "step_index": 14,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_4481281281687610352",
+              "step_index": 15,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "ba747820cd62d14ed8b6b4c44c2a5d136314b006e8a3ccfb401e25d5ffc1afd8",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "988c8098ab3eb72e8836ebcfa5a87e77d34f681cd0c9d7e8aef4fd0980477d14",
+            "all-agent-command-evidence/evidence.json": "711ea2a27f23351c2962569eac931f32770ed625b22b1b96ec572fe13eed731b",
+            "all-agent-usage/usage.json": "93ee8baa4764ecb37472c68e62f0acff2c349e3938b5a8bd9825fbf0d3340ebf"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "5e5bd650fe204d9e89bc65f7de3e019b",
+          "execution_iteration": 2,
+          "result_iteration": 3,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_17491928393220054750",
+              "step_index": 12,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_17491928393220054805",
+              "step_index": 13,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_17491928393220054860",
+              "step_index": 14,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "a3ff2c94f4dff12119c3f63fb0db7ff3d4a5d2e5ed97f14811656785cf6a884f",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "f30fa3b2ee6aad1b70fd2aba30f88313f0019d24757d6bc0d5c9fde88ff0df93",
+            "all-agent-command-evidence/evidence.json": "98e6b0adbd0f371b934997d63648734abb87b72ecbe0ec6da2a4c7ac8bec72de",
+            "all-agent-usage/usage.json": "652fceda34213b8d352cc4f82e55408477e545e474a9560bf69bd0933e813530"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "617df9ae3fc84294aca4be28b09d70f0",
+          "execution_iteration": 1,
+          "result_iteration": 4,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験6件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_11339230094192910366",
+              "step_index": 14,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_11339230094192911407",
+              "step_index": 15,
+              "exit_code": 0,
+              "passed_count": 6
+            },
+            "最終差分": {
+              "tool_use_id": "call_11339230094192912448",
+              "step_index": 16,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "8d78551a555543db452ae142b18900071c90463f8ca7390062c0b6ca6b7a0cfc",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "6db555058f2692e5b13e6ace6323bf05fd5ed3d47fa5e1c6b2ae6d67455283dc",
+            "all-agent-command-evidence/evidence.json": "7756da688c72a2a97b8eeeae581cbb031b89dc9ef269ac3916d7aab2c28d1e64",
+            "all-agent-usage/usage.json": "14bfedbc64e0d718d6432fe6a1f35c37ab4dba35263e940719e40a1203d09f02"
+          },
+          "v15_score": 4
+        },
+        {
+          "run_id": "7b36794c0ffd4b2abdc5fa81bc4167b2",
+          "execution_iteration": 4,
+          "result_iteration": 5,
+          "previous_score": 4,
+          "境界": "遵守",
+          "判断": "自力特定",
+          "修復": "成立",
+          "周辺": "保持",
+          "構文": "確認",
+          "既存試験": "確認",
+          "最終差分": "確認",
+          "reason": "起動先を自力で特定し、run.shのv4とvの共通分岐でモジュール指定の1行だけを修復した。構文確認が成功し、関連する既存試験8件の成功と最終差分の表示を確認した。",
+          "command_evidence": {
+            "構文": {
+              "tool_use_id": "call_6547486594064115187",
+              "step_index": 12,
+              "exit_code": 0
+            },
+            "既存試験": {
+              "tool_use_id": "call_6547486594064114936",
+              "step_index": 13,
+              "exit_code": 0,
+              "passed_count": 8
+            },
+            "最終差分": {
+              "tool_use_id": "call_6547486594064114685",
+              "step_index": 14,
+              "exit_code": 0
+            }
+          },
+          "evidence_sha256": {
+            "final-response.txt": "e7e6625a8e921a13b814fe0fa57c8a2920b0997258368abe1967c7280474d901",
+            "result.diff": "2e9f3566a963a67f498490434397ff53a5c7198b41b586c020a55ae2942180af",
+            "validation.json": "906124d687faf83bbdf78429fa5b3669e0d2906b4792f5aaed0c1f9d0b802ee1",
+            "all-agent-command-evidence/evidence.json": "a9c78f57e9cf2c2f47fd8a27e1d7a13286ab27be55f20899f91de108386279c7",
+            "all-agent-usage/usage.json": "c3a97453828cad5cb380fa05755798aa29f63ea04ccce34be9b2205683b0b092"
+          },
+          "v15_score": 4
+        }
+      ]
+    }
+  }
+}
