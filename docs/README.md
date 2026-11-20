@@ -133,6 +133,9 @@
 - [Candidate322 r2 原文に戻す範囲](candidate322-r2-original-wording-design.md)：C321との一文の差と評価時の確認事項。
 - [Candidate323 三項を残す比較](candidate323-three-retained-rules-design.md)：最終確認・待機・読み取りの三項でSTD14を測る。
 - [Candidate324 第2項のみ削除](candidate324-investigation-rule-removal.md)：方針決定後の探索を比較する。
+- [Candidate325 第一項を利用者指定の文面に差し替え](candidate325-request-authority-first-design.md)：適用中の指示と正本の確認を冒頭に置く。
+- [Candidate325 r2 確定済み条件の引き継ぎ](candidate325-r2-retained-conditions.md)：C324の第一項に、後続の依頼で省略された条件の扱いを加える。
+- [Candidate325 r3 先行する依頼の効力](candidate325-r3-request-scope.md)は、結果を決める根拠の時間的範囲を明確にする設計を記録する。
 - [Candidate300 Sonnet lowの累積N=20への延長](candidate300-sonnet-low-n20-extension-design.md)：Sonnet lowだけ、C300のN=5と同じプロファイルの5反復の試験を3回追加して累積N=20にする計画。観測対象、上限、判定の条件、基準のC280がN=5のままである非対称を発行前に固定した。
 - [C280〜C300の処理の適切さの分類（r1）](c280-c300-processing-appropriateness-audit-r1.md)：トークンではなく、TaskSpecが求める確認を適切に終えたかで保存traceを分類し直した。不適切な処理の大部分はSonnet lowのA02で、確かめていない環境の制約を理由にテストをやめる経路だった（C280から存在）。C298・C300の診断の、F06とF07正規ランナーの数え方の誤りを訂正した。Candidateは未作成
 - [Sol Lowの費用を要素に分ける（r1）](sol-cost-element-decomposition-r1.md)：旧系列のSol Lowを費用で数え直し、生のトークンで31〜39%減ったCandidateが費用では1〜8%減にとどまることを確かめた。戻る回数を減らす機序は主にキャッシュ読み取りを減らし、キャッシュに乗らない入力は増えていた。プロンプトで減らせる最大の要素は、指示ファイル以外のファイルの全文取得（C301のSolで約230KB/反復）。Candidateは未作成
