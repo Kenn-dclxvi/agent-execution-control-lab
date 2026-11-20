@@ -1,5 +1,11 @@
 # result索引
 
+[C325 r3のAstra 6.2 Low・A01とA02各N=5の再計測](c325r3-astra62-low-a01-a02-n5_2026-11-20.md)
+
+[C325 r2のAstra 6.2 Low・A01とA02各N=5の再計測](c325r2-astra62-low-a01-a02-n5_2026-11-20.md)
+
+[C325のAstra 6.2 Low・A01とA02各N=5診断](c325-astra62-low-a01-a02-n5_2026-11-20.md)
+
 [C324のSol 6.2 Low・STD14各N=5試験](c324-sol62-low-standard14-n5_2026-11-18.md)
 
 [C324のAstra 6.2 Low・STD14各N=5試験](c324-astra62-low-standard14-n5_2026-11-18.md)
@@ -39,6 +45,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 [A02 r2 の旧4点未満39件の再採点](a02-r2-clarification-review-39.md)
 
 ## 目次
+
+- [C325 r3・GPT-6.2 Astra LowのSTD14 N=5（2026-11-20）](#c325r3-astra62-low-20261120)
 
 - [FreeとC324・Gemini 4 Neon LowのSTD14 N=5（2026-11-19）](#free-c324-neon-20261119)
 
@@ -240,6 +248,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c325r3-astra62-low-20261120"></a>
+## C325 r3・GPT-6.2 Astra LowのSTD14 N=5（2026-11-20）
+
+[登録結果](8d6055c247d44c5aa159295b1a93eb4e.json)は全70件が4点。品質中央値100%、トークン中央値1,507,934、費用中央値2.0282 USD、時間中央値517.45秒。復元照合と後片付けを完了した。[C324との比較](c325r3-astra62-low-standard14-n5_2026-11-20.md)
 
 <a id="free-c324-neon-20261119"></a>
 ## FreeとC324・Gemini 4 Neon LowのSTD14 N=5（2026-11-19）

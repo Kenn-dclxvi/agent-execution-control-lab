@@ -16,6 +16,7 @@ Freeはルートに実行指示を置かない比較条件です。C319はルー
 | Codex CLI | GPT-6.2 Sol Low | C324 | 4点70件 | 5／5 | 1,719,316 | 0.6918 | 477.95 |
 | Codex CLI | GPT-6.2 Astra Low | Free | 4点67件・0点3件 | 5／5 | 1,859,240 | 2.4488 | 974.80 |
 | Codex CLI | GPT-6.2 Astra Low | C324 | 4点70件 | 5／5 | 1,525,168 | 2.1173 | 590.28 |
+| Codex CLI | GPT-6.2 Astra Low | [C325 r3](evaluations/results/8d6055c247d44c5aa159295b1a93eb4e.json) | 4点70件 | 5／5 | 1,507,934 | 2.0282 | 517.45 |
 | Codex CLI | GPT-6.1 Sol Low | Free | 4点69件・0点1件 | 5／5 | 2,218,847 | 0.9344 | 636.90 |
 | Codex CLI | GPT-6.0 Astra Low | Free | 4点67件・3点1件・0点2件 | 5／4 | 2,256,298 | 6.1484 | 634.75 |
 | Codex CLI | GPT-6.1 Terra Low | Free | 4点67件・0点3件 | 5／5 | 2,198,845 | 0.4336 | 410.50 |
@@ -37,6 +38,8 @@ Freeはルートに実行指示を置かない比較条件です。C319はルー
 | Claude Code | Fable 5.2 Low | [C319](evaluations/results/c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11.md) | 4点70件 | 5／5 | 814,023 | 3.0694 | 391.29 |
 
 GPT-6.2 Lowでは、C324の満点がSolでFreeより6件、Astraで3件多くなりました。A01ではFreeのSolが5件、Astraが3件、変更先が未確定のまま進んで0点でした。C324では両モデルとも5件すべてで開始状態だけを確認し、変更先を利用者に質問しました。FreeのSolに残るA02の失点は、明示的な空引数の扱いを変えた1件です。AstraのFreeは11月19日の再計測結果です。[AstraのFree再計測](evaluations/results/free-astra62-low-standard14-n5_2026-11-19.md)
+
+C325 r3は、以前の依頼で決めた条件のうち、今回の対象と作業にも効力があるものを引き継ぐ候補です。Astra LowではC324と同じく70件すべてが満点で、トークン数の中央値は1.13%、API換算費用の中央値は4.21%減りました。依頼をまたいで条件を引き継げたかは、今回のSTD14では直接測っていません。[C325 r3の本文](prompts/candidates/the-caption-3ce91a4-request-authority-first-r3/files/AGENTS.md.txt)・[C324との比較](evaluations/results/c325r3-astra62-low-standard14-n5_2026-11-20.md)
 
 C324のSolは登録時のv14で68件が4点、2件が1点でした。この2件は引数なしの場合だけ `shift` を省き、正規の起動先・周辺経路を保って検証も完了したため、v15では4点です。[C324のSol実行記録](evaluations/results/c324-sol62-low-standard14-n5_2026-11-18.md)・[C324のAstra実行記録](evaluations/results/c324-astra62-low-standard14-n5_2026-11-18.md)
 
