@@ -32,6 +32,7 @@ Freeはルートに実行指示を置かない比較条件です。C319はルー
 | Claude Code | Sonnet 5.5 Low | [C319](evaluations/results/c319-four-models-standard14-n5_2026-10-15.md) | 4点70件 | 5／5 | 786,811 | 0.6321 | 264.53 |
 | Claude Code | Opus 5.5 Low | [Free](evaluations/results/616b1cf5c6ed46e8bc40f0a36f944cb2.json) | 4点69件・0点1件 | 5／5 | 750,215 | 1.2731 | 269.41 |
 | Claude Code | Opus 5.5 Low | [C319](evaluations/results/c319-four-models-standard14-n5_2026-10-15.md) | 4点70件 | 5／5 | 712,222 | 1.1275 | 257.93 |
+| Claude Code | Opus 5.5 Low | [C325 r3](evaluations/results/c325r3-claude-opus55-low-standard14-n5_2026-11-24.md) | 4点70件 | 5／5 | 688,788 | 1.1372 | 233.62 |
 | Claude Code | Fable 5.1 Low | Free | 4点65件・0点5件 | 5／5 | 1,425,105 | 4.3717 | 558.25 |
 | Claude Code | Fable 5.1 Low | [C319](evaluations/results/c319-claude-fable52-low-standard14-n5-cli2317_2026-11-11-fable51-same-price-comparison.json) | 4点70件 | 5／5 | 1,198,335 | 3.7826 | 480.39 |
 | Claude Code | Fable 5.2 Low | [Free](evaluations/results/free-claude-fable52-low-standard14-n5-cli2317_2026-11-10-completed.md) | 4点67件・0点3件 | 5／5 | 1,145,815 | 4.0235 | 468.65 |
@@ -40,6 +41,8 @@ Freeはルートに実行指示を置かない比較条件です。C319はルー
 GPT-6.2 Lowでは、C324の満点がSolでFreeより6件、Astraで3件多くなりました。A01ではFreeのSolが5件、Astraが3件、変更先が未確定のまま進んで0点でした。C324では両モデルとも5件すべてで開始状態だけを確認し、変更先を利用者に質問しました。FreeのSolに残るA02の失点は、明示的な空引数の扱いを変えた1件です。AstraのFreeは11月19日の再計測結果です。[AstraのFree再計測](evaluations/results/free-astra62-low-standard14-n5_2026-11-19.md)
 
 C325 r3は、以前の依頼で決めた条件のうち、今回の対象と作業にも効力があるものを引き継ぐ候補です。Astra LowではC324と同じく70件すべてが満点で、トークン数の中央値は1.13%、API換算費用の中央値は4.21%減りました。依頼をまたいで条件を引き継げたかは、今回のSTD14では直接測っていません。[C325 r3の本文](prompts/candidates/the-caption-3ce91a4-request-authority-first-r3/files/AGENTS.md.txt)・[C324との比較](evaluations/results/c325r3-astra62-low-standard14-n5_2026-11-20.md)
+
+C325 r3はOpus 5.5 Lowでも70件すべてが満点でした。この試験は、組み込みエージェント `web-fetch` を含む環境で実施したため、過去のOpus試験との数値差には利用可能なエージェントの違いも含まれます。[Opus 5.5 Lowの計測報告](evaluations/results/c325r3-claude-opus55-low-standard14-n5_2026-11-24.md)
 
 C324のSolは登録時のv14で68件が4点、2件が1点でした。この2件は引数なしの場合だけ `shift` を省き、正規の起動先・周辺経路を保って検証も完了したため、v15では4点です。[C324のSol実行記録](evaluations/results/c324-sol62-low-standard14-n5_2026-11-18.md)・[C324のAstra実行記録](evaluations/results/c324-astra62-low-standard14-n5_2026-11-18.md)
 

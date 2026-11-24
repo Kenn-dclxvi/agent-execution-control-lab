@@ -46,6 +46,8 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 
 ## 目次
 
+- [C325 r3・Opus 5.5 LowのSTD14 N=5（2026-11-24）](#c325r3-opus55-low-20261124)
+
 - [C325 r3・GPT-6.2 Astra LowのSTD14 N=5（2026-11-20）](#c325r3-astra62-low-20261120)
 
 - [FreeとC324・Gemini 4 Neon LowのSTD14 N=5（2026-11-19）](#free-c324-neon-20261119)
@@ -248,6 +250,11 @@ Candidate269のtargeted resultは[`F01・F02・F03・F10 entrypoint N=5`](candid
 10. Candidate16〜Candidate41（owner-producer系、2026-07-17〜07-19）
 11. 評価基盤v1 / v2の履歴と評価基盤v3の初期（Baseline〜Candidate15、2026-07-15〜07-16）
 12. この索引に要約を持たないresult
+
+<a id="c325r3-opus55-low-20261124"></a>
+## C325 r3・Opus 5.5 LowのSTD14 N=5（2026-11-24）
+
+[登録結果](764852ba194f491abbd22dfe3d7b6932.json)は全70件が4点。品質中央値100%、トークン中央値688,788、費用中央値1.1372 USD、時間中央値233.62秒。復元照合と後片付けを完了した。[計測報告](c325r3-claude-opus55-low-standard14-n5_2026-11-24.md)
 
 <a id="c325r3-astra62-low-20261120"></a>
 ## C325 r3・GPT-6.2 Astra LowのSTD14 N=5（2026-11-20）
